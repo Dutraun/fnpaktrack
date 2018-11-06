@@ -6,8 +6,10 @@ Name table:
 	/Game/Items/Alteration_v2/GameplayAlterations/OnKill_SpawnHealthPickUp/P_Pickup_CandyCorn_PickUp
 	/Game/Items/Alteration_v2/GameplayAlterations/OnKill_SpawnHealthPickUp/P_Pickup_CandyCorn_Spawn
 	/Game/Items/Alteration_v2/ParentAssets/B_Prj_Base_PickUp_ApplyGE
+	/Game/Sounds/Foley_Loot/Ingredients/Items/CandyCorn_Health_Collect_Cue
 	/Script/CoreUObject
 	/Script/Engine
+	/Script/FortniteGame
 	/Script/GameplayTags
 	AllNodes
 	ArrayIndex
@@ -21,6 +23,8 @@ Name table:
 	BlueprintCookedComponentInstancingData
 	BlueprintGeneratedClass
 	BoolProperty
+	CallFunc_K2_GetComponentLocation_ReturnValue
+	CandyCorn_Health_Collect_Cue
 	CapsuleComponent
 	ChangedPropertyList
 	Class
@@ -33,19 +37,26 @@ Name table:
 	Default__B_Prj_Base_PickUp_ApplyGE_C
 	Default__BlueprintGeneratedClass
 	Default__Function
+	Default__GameplayStatics
 	Default__GE_Alteration_HealPickUp_Candy_C
 	Default__InheritableComponentHandler
+	Default__IntProperty
 	Default__ObjectProperty
 	Default__ParticleSystemComponent
 	Default__SceneComponent
 	Default__SCS_Node
 	Default__SimpleConstructionScript
+	Default__StructProperty
 	DefaultSceneRoot
 	DefaultSceneRoot_GEN_VARIABLE
 	DefaultSceneRootNode
 	Engine
+	EntryPoint
+	ExecuteUbergraph_B_Prj_Alteration_PickUp_Heal_Candy
 	FloatProperty
+	FortProjectileBase
 	Function
+	GameplayStatics
 	GameplayTag
 	GameplayTagContainer
 	GE to Apply On Pick Up
@@ -55,6 +66,7 @@ Name table:
 	InitialLifeSpan
 	InternalVariableName
 	IntProperty
+	K2_GetComponentLocation
 	NameProperty
 	None
 	Object
@@ -73,10 +85,14 @@ Name table:
 	ParticleSystem
 	ParticleSystemComponent
 	Pawn Tags
+	Pickup_Sound
+	PlaySoundAtLocation
+	PointerToUberGraphFrame
 	ProjectileComp0
 	ProjectileMovementComponent
 	PropertyName
 	PropertyScope
+	ReceiveDestroyed
 	RelativeLocation
 	RootComponent
 	RootNodes
@@ -84,73 +100,96 @@ Name table:
 	ScriptStruct
 	SCS_Node
 	SimpleConstructionScript
+	SoundBase
+	SoundCue
 	Sphere_GEN_VARIABLE
 	SphereComponent
 	StaticMesh_GEN_VARIABLE
 	StaticMeshComponent
 	StructProperty
 	Template
+	UberGraphFrame
+	UberGraphFramePointerProperty
+	UberGraphFunction
 	UserConstructionScript
 	VariableGuid
 	Vector
 	Z
 Import table:
-	Default__B_Prj_Base_PickUp_ApplyGE_C (B_Prj_Base_PickUp_ApplyGE_C) of /Game/Items/Alteration_v2/ParentAssets/B_Prj_Base_PickUp_ApplyGE (-27)
-	GE_Alteration_HealPickUp_Candy_C (BlueprintGeneratedClass) of /Script/Engine (-22)
-	B_Prj_Base_PickUp_ApplyGE_C (BlueprintGeneratedClass) of /Script/Engine (-27)
-	Default__BlueprintGeneratedClass (BlueprintGeneratedClass) of /Script/Engine (-29)
+	Default__B_Prj_Base_PickUp_ApplyGE_C (B_Prj_Base_PickUp_ApplyGE_C) of /Game/Items/Alteration_v2/ParentAssets/B_Prj_Base_PickUp_ApplyGE (-38)
+	GE_Alteration_HealPickUp_Candy_C (BlueprintGeneratedClass) of /Script/Engine (-33)
+	B_Prj_Base_PickUp_ApplyGE_C (BlueprintGeneratedClass) of /Script/Engine (-38)
+	Default__BlueprintGeneratedClass (BlueprintGeneratedClass) of /Script/Engine (-41)
 	CollisionCapsule0 (CapsuleComponent) of /Script/Engine (-1)
-	Function (Class) of /Script/CoreUObject (-28)
-	Object (Class) of /Script/CoreUObject (-28)
-	ObjectProperty (Class) of /Script/CoreUObject (-28)
-	BlueprintGeneratedClass (Class) of /Script/CoreUObject (-29)
-	CapsuleComponent (Class) of /Script/CoreUObject (-29)
-	InheritableComponentHandler (Class) of /Script/CoreUObject (-29)
-	ParticleSystemComponent (Class) of /Script/CoreUObject (-29)
-	ProjectileMovementComponent (Class) of /Script/CoreUObject (-29)
-	SceneComponent (Class) of /Script/CoreUObject (-29)
-	SCS_Node (Class) of /Script/CoreUObject (-29)
-	SimpleConstructionScript (Class) of /Script/CoreUObject (-29)
+	Function (Class) of /Script/CoreUObject (-40)
+	IntProperty (Class) of /Script/CoreUObject (-40)
+	Object (Class) of /Script/CoreUObject (-40)
+	ObjectProperty (Class) of /Script/CoreUObject (-40)
+	StructProperty (Class) of /Script/CoreUObject (-40)
+	BlueprintGeneratedClass (Class) of /Script/CoreUObject (-41)
+	CapsuleComponent (Class) of /Script/CoreUObject (-41)
+	GameplayStatics (Class) of /Script/CoreUObject (-41)
+	InheritableComponentHandler (Class) of /Script/CoreUObject (-41)
+	ParticleSystemComponent (Class) of /Script/CoreUObject (-41)
+	ProjectileMovementComponent (Class) of /Script/CoreUObject (-41)
+	SceneComponent (Class) of /Script/CoreUObject (-41)
+	SCS_Node (Class) of /Script/CoreUObject (-41)
+	SimpleConstructionScript (Class) of /Script/CoreUObject (-41)
+	SoundBase (Class) of /Script/CoreUObject (-41)
+	FortProjectileBase (Class) of /Script/CoreUObject (-42)
+	ReceiveDestroyed (Function) of /Script/CoreUObject (-3)
 	UserConstructionScript (Function) of /Script/CoreUObject (-3)
-	Default__Function (Function) of /Script/CoreUObject (-28)
-	Default__GE_Alteration_HealPickUp_Candy_C (GE_Alteration_HealPickUp_Candy_C) of /Game/Items/Alteration_v2/GameplayAlterations/OnKill_SpawnHealthPickUp/GE_Alteration_HealPickUp_Candy (-22)
-	Default__InheritableComponentHandler (InheritableComponentHandler) of /Script/Engine (-29)
-	Default__ObjectProperty (ObjectProperty) of /Script/CoreUObject (-28)
+	Default__Function (Function) of /Script/CoreUObject (-40)
+	PlaySoundAtLocation (Function) of /Script/CoreUObject (-13)
+	K2_GetComponentLocation (Function) of /Script/CoreUObject (-17)
+	Default__GameplayStatics (GameplayStatics) of /Script/Engine (-41)
+	Default__GE_Alteration_HealPickUp_Candy_C (GE_Alteration_HealPickUp_Candy_C) of /Game/Items/Alteration_v2/GameplayAlterations/OnKill_SpawnHealthPickUp/GE_Alteration_HealPickUp_Candy (-33)
+	Default__InheritableComponentHandler (InheritableComponentHandler) of /Script/Engine (-41)
+	Default__IntProperty (IntProperty) of /Script/CoreUObject (-40)
+	Default__ObjectProperty (ObjectProperty) of /Script/CoreUObject (-40)
+	CapsuleComponent (ObjectProperty) of /Script/CoreUObject (-21)
 	/Game/Items/Alteration_v2/GameplayAlterations/OnKill_SpawnHealthPickUp/GE_Alteration_HealPickUp_Candy (Package) of /Script/CoreUObject (0)
 	/Game/Items/Alteration_v2/GameplayAlterations/OnKill_SpawnHealthPickUp/P_Pickup_CandyCorn_Despawn (Package) of /Script/CoreUObject (0)
 	/Game/Items/Alteration_v2/GameplayAlterations/OnKill_SpawnHealthPickUp/P_Pickup_CandyCorn_Loop (Package) of /Script/CoreUObject (0)
 	/Game/Items/Alteration_v2/GameplayAlterations/OnKill_SpawnHealthPickUp/P_Pickup_CandyCorn_PickUp (Package) of /Script/CoreUObject (0)
 	/Game/Items/Alteration_v2/GameplayAlterations/OnKill_SpawnHealthPickUp/P_Pickup_CandyCorn_Spawn (Package) of /Script/CoreUObject (0)
 	/Game/Items/Alteration_v2/ParentAssets/B_Prj_Base_PickUp_ApplyGE (Package) of /Script/CoreUObject (0)
+	/Game/Sounds/Foley_Loot/Ingredients/Items/CandyCorn_Health_Collect_Cue (Package) of /Script/CoreUObject (0)
 	/Script/CoreUObject (Package) of /Script/CoreUObject (0)
 	/Script/Engine (Package) of /Script/CoreUObject (0)
+	/Script/FortniteGame (Package) of /Script/CoreUObject (0)
 	/Script/GameplayTags (Package) of /Script/CoreUObject (0)
-	P_Pickup_CandyCorn_Despawn (ParticleSystem) of /Script/Engine (-23)
-	P_Pickup_CandyCorn_Loop (ParticleSystem) of /Script/Engine (-24)
-	P_Pickup_CandyCorn_PickUp (ParticleSystem) of /Script/Engine (-25)
-	P_Pickup_CandyCorn_Spawn (ParticleSystem) of /Script/Engine (-26)
-	Default__ParticleSystemComponent (ParticleSystemComponent) of /Script/Engine (-29)
+	P_Pickup_CandyCorn_Despawn (ParticleSystem) of /Script/Engine (-34)
+	P_Pickup_CandyCorn_Loop (ParticleSystem) of /Script/Engine (-35)
+	P_Pickup_CandyCorn_PickUp (ParticleSystem) of /Script/Engine (-36)
+	P_Pickup_CandyCorn_Spawn (ParticleSystem) of /Script/Engine (-37)
+	Default__ParticleSystemComponent (ParticleSystemComponent) of /Script/Engine (-41)
 	ProjectileComp0 (ProjectileMovementComponent) of /Script/Engine (-1)
 	DefaultSceneRoot_GEN_VARIABLE (SceneComponent) of /Script/Engine (-3)
-	Default__SceneComponent (SceneComponent) of /Script/Engine (-29)
-	Vector (ScriptStruct) of /Script/CoreUObject (-28)
-	GameplayTag (ScriptStruct) of /Script/CoreUObject (-30)
-	Default__SCS_Node (SCS_Node) of /Script/Engine (-29)
-	Default__SimpleConstructionScript (SimpleConstructionScript) of /Script/Engine (-29)
+	Default__SceneComponent (SceneComponent) of /Script/Engine (-41)
+	Vector (ScriptStruct) of /Script/CoreUObject (-40)
+	PointerToUberGraphFrame (ScriptStruct) of /Script/CoreUObject (-41)
+	GameplayTag (ScriptStruct) of /Script/CoreUObject (-43)
+	Default__SCS_Node (SCS_Node) of /Script/Engine (-41)
+	Default__SimpleConstructionScript (SimpleConstructionScript) of /Script/Engine (-41)
+	CandyCorn_Health_Collect_Cue (SoundCue) of /Script/Engine (-39)
 	Sphere_GEN_VARIABLE (SphereComponent) of /Script/Engine (-3)
 	StaticMesh_GEN_VARIABLE (StaticMeshComponent) of /Script/Engine (-3)
+	Default__StructProperty (StructProperty) of /Script/CoreUObject (-40)
 Serialized exports:
-	P_CandyCorn (0-0-0-0): classindex -8 size 36 (cls: P_CandyCorn>ObjectProperty>/Script/CoreUObject) :
+	UberGraphFrame (0-0-0-0): classindex -10 size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	UserConstructionScript (0-0-0-0): classindex -6 size 49 (cls: UserConstructionScript>Function>/Script/CoreUObject) :
-		Tag array:
-	B_Prj_Alteration_PickUp_Heal_Candy_C (0-0-0-0): classindex -9 size 180 (cls: B_Prj_Alteration_PickUp_Heal_Candy_C>BlueprintGeneratedClass>/Script/Engine) :
+	B_Prj_Alteration_PickUp_Heal_Candy_C (0-0-0-0): classindex -11 size 278 (cls: B_Prj_Alteration_PickUp_Heal_Candy_C>BlueprintGeneratedClass>/Script/Engine) :
 		Tag array:
 			bHasCookedComponentInstancingData(BoolProperty)=True 
 			SimpleConstructionScript(ObjectProperty)=SimpleConstructionScript_0=B_Prj_Alteration_PickUp_Heal_Candy_C 
 			InheritableComponentHandler(ObjectProperty)=InheritableComponentHandler=B_Prj_Alteration_PickUp_Heal_Candy_C 
-	Default__B_Prj_Alteration_PickUp_Heal_Candy_C (0-0-0-0): classindex 3 size 330 (cls: Default__B_Prj_Alteration_PickUp_Heal_Candy_C>B_Prj_Alteration_PickUp_Heal_Candy_C) :
+			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=B_Prj_Alteration_PickUp_Heal_Candy_C 
+			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_B_Prj_Alteration_PickUp_Heal_Candy=B_Prj_Alteration_PickUp_Heal_Candy_C 
+	Default__B_Prj_Alteration_PickUp_Heal_Candy_C (0-0-0-0): classindex 2 size 416 (cls: Default__B_Prj_Alteration_PickUp_Heal_Candy_C>B_Prj_Alteration_PickUp_Heal_Candy_C) :
 		Tag array:
+			UberGraphFrame(StructProperty)=System.Byte[] 
+			Pickup_Sound(ObjectProperty)=CandyCorn_Health_Collect_Cue=/Game/Sounds/Foley_Loot/Ingredients/Items/CandyCorn_Health_Collect_Cue 
 			Pawn Tags(StructProperty)=GameplayTagContainer:Class 
 			GE to Apply On Pick Up(ObjectProperty)=GE_Alteration_HealPickUp_Candy_C=/Game/Items/Alteration_v2/GameplayAlterations/OnKill_SpawnHealthPickUp/GE_Alteration_HealPickUp_Candy 
 			P_PickUp(ObjectProperty)=P_Pickup_CandyCorn_PickUp=/Game/Items/Alteration_v2/GameplayAlterations/OnKill_SpawnHealthPickUp/P_Pickup_CandyCorn_PickUp 
@@ -161,25 +200,39 @@ Serialized exports:
 			CollisionComponent(ObjectProperty)=[object] 
 			InitialLifeSpan(FloatProperty)=60 
 			RootComponent(ObjectProperty)=[object] 
-	CollisionCapsule0 (0-0-0-0): classindex -10 size 12 (cls: CollisionCapsule0>CapsuleComponent>/Script/Engine) :
+	CollisionCapsule0 (0-0-0-0): classindex -12 size 12 (cls: CollisionCapsule0>CapsuleComponent>/Script/Engine) :
 		Tag array:
-	InheritableComponentHandler (0-0-0-0): classindex -11 size 12 (cls: InheritableComponentHandler>InheritableComponentHandler>/Script/Engine) :
+	Pickup_Sound (0-0-0-0): classindex -9 size 36 (cls: Pickup_Sound>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	P_CandyCorn_GEN_VARIABLE (0-0-0-0): classindex -12 size 102 (cls: P_CandyCorn_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	CallFunc_K2_GetComponentLocation_ReturnValue (0-0-0-0): classindex -10 size 36 (cls: CallFunc_K2_GetComponentLocation_ReturnValue>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	EntryPoint (0-0-0-0): classindex -7 size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject) :
+		Tag array:
+	ExecuteUbergraph_B_Prj_Alteration_PickUp_Heal_Candy (0-0-0-0): classindex -6 size 149 (cls: ExecuteUbergraph_B_Prj_Alteration_PickUp_Heal_Candy>Function>/Script/CoreUObject) :
+		Tag array:
+	ReceiveDestroyed (0-0-0-0): classindex -6 size 58 (cls: ReceiveDestroyed>Function>/Script/CoreUObject) :
+		Tag array:
+	UserConstructionScript (0-0-0-0): classindex -6 size 49 (cls: UserConstructionScript>Function>/Script/CoreUObject) :
+		Tag array:
+	InheritableComponentHandler (0-0-0-0): classindex -14 size 12 (cls: InheritableComponentHandler>InheritableComponentHandler>/Script/Engine) :
+		Tag array:
+	P_CandyCorn (0-0-0-0): classindex -9 size 36 (cls: P_CandyCorn>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	P_CandyCorn_GEN_VARIABLE (0-0-0-0): classindex -15 size 102 (cls: P_CandyCorn_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_Pickup_CandyCorn_Loop=/Game/Items/Alteration_v2/GameplayAlterations/OnKill_SpawnHealthPickUp/P_Pickup_CandyCorn_Loop 
 			RelativeLocation(StructProperty)=Vector(0,0,35 
-	ProjectileComp0 (0-0-0-0): classindex -13 size 12 (cls: ProjectileComp0>ProjectileMovementComponent>/Script/Engine) :
+	ProjectileComp0 (0-0-0-0): classindex -16 size 12 (cls: ProjectileComp0>ProjectileMovementComponent>/Script/Engine) :
 		Tag array:
-	DefaultSceneRoot_GEN_VARIABLE (0-0-0-0): classindex -14 size 12 (cls: DefaultSceneRoot_GEN_VARIABLE>SceneComponent>/Script/Engine) :
+	DefaultSceneRoot_GEN_VARIABLE (0-0-0-0): classindex -17 size 12 (cls: DefaultSceneRoot_GEN_VARIABLE>SceneComponent>/Script/Engine) :
 		Tag array:
-	SCS_Node_0 (0-0-0-0): classindex -15 size 168 (cls: SCS_Node_0>SCS_Node>/Script/Engine) :
+	SCS_Node_0 (0-0-0-0): classindex -18 size 168 (cls: SCS_Node_0>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=SceneComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=DefaultSceneRoot_GEN_VARIABLE=B_Prj_Alteration_PickUp_Heal_Candy_C 
 			VariableGuid(StructProperty)=Guid: 1948017078-1179790437-1679072413-1810286068 
 			InternalVariableName(NameProperty)=DefaultSceneRoot 
-	SCS_Node_1 (0-0-0-0): classindex -15 size 693 (cls: SCS_Node_1>SCS_Node>/Script/Engine) :
+	SCS_Node_1 (0-0-0-0): classindex -18 size 693 (cls: SCS_Node_1>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=P_CandyCorn_GEN_VARIABLE=B_Prj_Alteration_PickUp_Heal_Candy_C 
@@ -188,7 +241,7 @@ Serialized exports:
 			bIsParentComponentNative(BoolProperty)=True 
 			VariableGuid(StructProperty)=Guid: 2765602923-1116990509-524337578-4043334256 
 			InternalVariableName(NameProperty)=P_CandyCorn 
-	SimpleConstructionScript_0 (0-0-0-0): classindex -16 size 123 (cls: SimpleConstructionScript_0>SimpleConstructionScript>/Script/Engine) :
+	SimpleConstructionScript_0 (0-0-0-0): classindex -19 size 123 (cls: SimpleConstructionScript_0>SimpleConstructionScript>/Script/Engine) :
 		Tag array:
 			RootNodes(ArrayProperty)=[object] (inner: ObjectProperty)
 			AllNodes(ArrayProperty)=[object] (inner: ObjectProperty)

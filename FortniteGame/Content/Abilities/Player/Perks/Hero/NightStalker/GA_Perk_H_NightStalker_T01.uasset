@@ -19,12 +19,14 @@ Name table:
 	AbilityTriggerData
 	AbilityTriggers
 	ActiveGameplayEffectHandle
+	ActorInfo
 	Add_FloatFloat
 	AppliedRunSpeedHandle
 	ArrayProperty
 	AssignTagSetByCallerMagnitude
 	BlueprintGameplayTagLibrary
 	BlueprintGeneratedClass
+	BooleanOR
 	BoolProperty
 	BP_RemoveGameplayEffectFromOwnerWithHandle
 	bPassedFiltersAndWasExecuted
@@ -32,11 +34,14 @@ Name table:
 	CallFunc_Add_FloatFloat_ReturnValue
 	CallFunc_AssignTagSetByCallerMagnitude_ReturnValue
 	CallFunc_AssignTagSetByCallerMagnitude_ReturnValue1
+	CallFunc_BooleanOR_ReturnValue
 	CallFunc_GetAbilitySystemComponent_ReturnValue
 	CallFunc_GetValueAtLevel_ReturnValue
 	CallFunc_GetValueAtLevel_ReturnValue1
 	CallFunc_GetValueAtLevel_ReturnValue2
 	CallFunc_HasAllMatchingGameplayTags_ReturnValue
+	CallFunc_HasAllMatchingGameplayTags_ReturnValue1
+	CallFunc_HasAllMatchingGameplayTags_TagContainerInterface1_CastInput
 	CallFunc_HasAllMatchingGameplayTags_TagContainerInterface_CastInput
 	CallFunc_K2_ApplyGameplayEffectSpecToOwner_ReturnValue
 	CallFunc_MakeOutgoingGameplayEffectSpec_ReturnValue
@@ -82,6 +87,7 @@ Name table:
 	Function
 	GA_Perk_H_NightStalker_T01_C
 	GameplayAbility
+	GameplayAbilityActorInfo
 	GameplayEffect
 	GameplayEffectSpecHandle
 	GameplayEventData
@@ -96,15 +102,18 @@ Name table:
 	GE_Perk_H_NightStalker_AppliedBuff_C
 	GetAbilitySystemComponent
 	GetValueAtLevel
+	Granted.Perk.NightStalker.T01
 	Granted.Perk.NightStalker.T02
 	Handle
 	HasAllMatchingGameplayTags
+	Instigator
 	InterfaceProperty
 	IntProperty
 	IsUpgraded
 	K2_ActivateAbilityFromEvent
 	K2_ApplyGameplayEffectSpecToOwner
 	K2_EndAbility
+	K2_ShouldAbilityRespondToEvent
 	K2Node_Event_EventData
 	K2Node_Select1_Default
 	K2Node_Select_Default
@@ -116,10 +125,12 @@ Name table:
 	Object
 	ObjectProperty
 	Package
+	Payload
 	Perk.NightStalker.T01.Movespeed
 	Perk.NightStalker.T02.Movespeed
 	Perk.NightStalker.T02.StaminaCostMult
 	PointerToUberGraphFrame
+	ReturnValue
 	RowName
 	ScalableFloat
 	ScriptStruct
@@ -132,6 +143,7 @@ Name table:
 	StructProperty
 	Subtract_FloatFloat
 	TagName
+	TC_NightStalker
 	TC_NightStalker+
 	Temp_bool_Variable
 	Temp_bool_Variable1
@@ -144,58 +156,61 @@ Name table:
 	UberGraphFunction
 	Value
 Import table:
-	Default__AbilitySystemBlueprintLibrary (AbilitySystemBlueprintLibrary) of /Script/GameplayAbilities (-61)
-	Default__BlueprintGameplayTagLibrary (BlueprintGameplayTagLibrary) of /Script/GameplayTags (-62)
-	GAT_GenericTriggeredAbility_C (BlueprintGeneratedClass) of /Script/Engine (-53)
-	GAT_GenericTriggeredAbility_Perk_C (BlueprintGeneratedClass) of /Script/Engine (-54)
-	GAT_TriggeredAbility_C (BlueprintGeneratedClass) of /Script/Engine (-55)
-	GE_Perk_H_NightStalker_AppliedBuff_C (BlueprintGeneratedClass) of /Script/Engine (-56)
-	Default__BlueprintGeneratedClass (BlueprintGeneratedClass) of /Script/Engine (-59)
-	Default__BoolProperty (BoolProperty) of /Script/CoreUObject (-58)
-	BoolProperty (Class) of /Script/CoreUObject (-58)
-	Class (Class) of /Script/CoreUObject (-58)
-	ClassProperty (Class) of /Script/CoreUObject (-58)
-	FloatProperty (Class) of /Script/CoreUObject (-58)
-	Function (Class) of /Script/CoreUObject (-58)
-	InterfaceProperty (Class) of /Script/CoreUObject (-58)
-	IntProperty (Class) of /Script/CoreUObject (-58)
-	Object (Class) of /Script/CoreUObject (-58)
-	ObjectProperty (Class) of /Script/CoreUObject (-58)
-	StructProperty (Class) of /Script/CoreUObject (-58)
-	BlueprintGeneratedClass (Class) of /Script/CoreUObject (-59)
-	KismetMathLibrary (Class) of /Script/CoreUObject (-59)
-	FortScalableFloatUtils (Class) of /Script/CoreUObject (-60)
-	AbilitySystemBlueprintLibrary (Class) of /Script/CoreUObject (-61)
-	AbilitySystemComponent (Class) of /Script/CoreUObject (-61)
-	GameplayAbility (Class) of /Script/CoreUObject (-61)
-	GameplayEffect (Class) of /Script/CoreUObject (-61)
-	BlueprintGameplayTagLibrary (Class) of /Script/CoreUObject (-62)
-	GameplayTagAssetInterface (Class) of /Script/CoreUObject (-62)
-	Default__ClassProperty (ClassProperty) of /Script/CoreUObject (-58)
-	CombatEffects_HeroAbilities (CurveTable) of /Script/Engine (-57)
-	Default__FloatProperty (FloatProperty) of /Script/CoreUObject (-58)
-	Default__FortScalableFloatUtils (FortScalableFloatUtils) of /Script/FortniteGame (-60)
+	Default__AbilitySystemBlueprintLibrary (AbilitySystemBlueprintLibrary) of /Script/GameplayAbilities (-64)
+	Default__BlueprintGameplayTagLibrary (BlueprintGameplayTagLibrary) of /Script/GameplayTags (-65)
+	GAT_GenericTriggeredAbility_C (BlueprintGeneratedClass) of /Script/Engine (-56)
+	GAT_GenericTriggeredAbility_Perk_C (BlueprintGeneratedClass) of /Script/Engine (-57)
+	GAT_TriggeredAbility_C (BlueprintGeneratedClass) of /Script/Engine (-58)
+	GE_Perk_H_NightStalker_AppliedBuff_C (BlueprintGeneratedClass) of /Script/Engine (-59)
+	Default__BlueprintGeneratedClass (BlueprintGeneratedClass) of /Script/Engine (-62)
+	Default__BoolProperty (BoolProperty) of /Script/CoreUObject (-61)
+	BoolProperty (Class) of /Script/CoreUObject (-61)
+	Class (Class) of /Script/CoreUObject (-61)
+	ClassProperty (Class) of /Script/CoreUObject (-61)
+	FloatProperty (Class) of /Script/CoreUObject (-61)
+	Function (Class) of /Script/CoreUObject (-61)
+	InterfaceProperty (Class) of /Script/CoreUObject (-61)
+	IntProperty (Class) of /Script/CoreUObject (-61)
+	Object (Class) of /Script/CoreUObject (-61)
+	ObjectProperty (Class) of /Script/CoreUObject (-61)
+	StructProperty (Class) of /Script/CoreUObject (-61)
+	BlueprintGeneratedClass (Class) of /Script/CoreUObject (-62)
+	KismetMathLibrary (Class) of /Script/CoreUObject (-62)
+	FortScalableFloatUtils (Class) of /Script/CoreUObject (-63)
+	AbilitySystemBlueprintLibrary (Class) of /Script/CoreUObject (-64)
+	AbilitySystemComponent (Class) of /Script/CoreUObject (-64)
+	GameplayAbility (Class) of /Script/CoreUObject (-64)
+	GameplayEffect (Class) of /Script/CoreUObject (-64)
+	BlueprintGameplayTagLibrary (Class) of /Script/CoreUObject (-65)
+	GameplayTagAssetInterface (Class) of /Script/CoreUObject (-65)
+	Default__ClassProperty (ClassProperty) of /Script/CoreUObject (-61)
+	CombatEffects_HeroAbilities (CurveTable) of /Script/Engine (-60)
+	Default__FloatProperty (FloatProperty) of /Script/CoreUObject (-61)
+	Default__FortScalableFloatUtils (FortScalableFloatUtils) of /Script/FortniteGame (-63)
 	K2_ActivateAbilityFromEvent (Function) of /Script/CoreUObject (-4)
 	TriggeredAbilitySetup (Function) of /Script/CoreUObject (-5)
-	Default__Function (Function) of /Script/CoreUObject (-58)
+	Default__Function (Function) of /Script/CoreUObject (-61)
 	Add_FloatFloat (Function) of /Script/CoreUObject (-20)
+	BooleanOR (Function) of /Script/CoreUObject (-20)
 	Subtract_FloatFloat (Function) of /Script/CoreUObject (-20)
 	GetValueAtLevel (Function) of /Script/CoreUObject (-21)
 	AssignTagSetByCallerMagnitude (Function) of /Script/CoreUObject (-22)
 	GetAbilitySystemComponent (Function) of /Script/CoreUObject (-22)
 	BP_RemoveGameplayEffectFromOwnerWithHandle (Function) of /Script/CoreUObject (-24)
 	K2_ApplyGameplayEffectSpecToOwner (Function) of /Script/CoreUObject (-24)
+	K2_ShouldAbilityRespondToEvent (Function) of /Script/CoreUObject (-24)
 	MakeOutgoingGameplayEffectSpec (Function) of /Script/CoreUObject (-24)
 	HasAllMatchingGameplayTags (Function) of /Script/CoreUObject (-26)
 	NotEqual_TagTag (Function) of /Script/CoreUObject (-26)
-	Default__GAT_GenericTriggeredAbility_C (GAT_GenericTriggeredAbility_C) of /Game/Abilities/Player/Parents/GAT_GenericTriggeredAbility (-53)
-	Default__GAT_GenericTriggeredAbility_Perk_C (GAT_GenericTriggeredAbility_Perk_C) of /Game/Abilities/Player/Parents/GAT_GenericTriggeredAbility_Perk (-54)
-	Default__GAT_TriggeredAbility_C (GAT_TriggeredAbility_C) of /Game/Abilities/Player/Parents/GAT_TriggeredAbility (-55)
-	Default__GE_Perk_H_NightStalker_AppliedBuff_C (GE_Perk_H_NightStalker_AppliedBuff_C) of /Game/Abilities/Player/Perks/Hero/NightStalker/GE_Perk_H_NightStalker_AppliedBuff (-56)
-	Default__InterfaceProperty (InterfaceProperty) of /Script/CoreUObject (-58)
-	Default__IntProperty (IntProperty) of /Script/CoreUObject (-58)
+	Default__GAT_GenericTriggeredAbility_C (GAT_GenericTriggeredAbility_C) of /Game/Abilities/Player/Parents/GAT_GenericTriggeredAbility (-56)
+	Default__GAT_GenericTriggeredAbility_Perk_C (GAT_GenericTriggeredAbility_Perk_C) of /Game/Abilities/Player/Parents/GAT_GenericTriggeredAbility_Perk (-57)
+	Default__GAT_TriggeredAbility_C (GAT_TriggeredAbility_C) of /Game/Abilities/Player/Parents/GAT_TriggeredAbility (-58)
+	Default__GE_Perk_H_NightStalker_AppliedBuff_C (GE_Perk_H_NightStalker_AppliedBuff_C) of /Game/Abilities/Player/Perks/Hero/NightStalker/GE_Perk_H_NightStalker_AppliedBuff (-59)
+	Default__InterfaceProperty (InterfaceProperty) of /Script/CoreUObject (-61)
+	Default__IntProperty (IntProperty) of /Script/CoreUObject (-61)
 	FortPlayerPawn (ObjectProperty) of /Script/CoreUObject (-3)
-	Default__ObjectProperty (ObjectProperty) of /Script/CoreUObject (-58)
+	Default__ObjectProperty (ObjectProperty) of /Script/CoreUObject (-61)
+	Instigator (ObjectProperty) of /Script/CoreUObject (-70)
 	/Game/Abilities/Player/Parents/GAT_GenericTriggeredAbility (Package) of /Script/CoreUObject (0)
 	/Game/Abilities/Player/Parents/GAT_GenericTriggeredAbility_Perk (Package) of /Script/CoreUObject (0)
 	/Game/Abilities/Player/Parents/GAT_TriggeredAbility (Package) of /Script/CoreUObject (0)
@@ -206,23 +221,24 @@ Import table:
 	/Script/FortniteGame (Package) of /Script/CoreUObject (0)
 	/Script/GameplayAbilities (Package) of /Script/CoreUObject (0)
 	/Script/GameplayTags (Package) of /Script/CoreUObject (0)
-	PointerToUberGraphFrame (ScriptStruct) of /Script/CoreUObject (-59)
-	ActiveGameplayEffectHandle (ScriptStruct) of /Script/CoreUObject (-61)
-	GameplayEffectSpecHandle (ScriptStruct) of /Script/CoreUObject (-61)
-	GameplayEventData (ScriptStruct) of /Script/CoreUObject (-61)
-	ScalableFloat (ScriptStruct) of /Script/CoreUObject (-61)
-	GameplayTag (ScriptStruct) of /Script/CoreUObject (-62)
-	GameplayTagContainer (ScriptStruct) of /Script/CoreUObject (-62)
-	Default__StructProperty (StructProperty) of /Script/CoreUObject (-58)
-	EventTag (StructProperty) of /Script/CoreUObject (-66)
+	PointerToUberGraphFrame (ScriptStruct) of /Script/CoreUObject (-62)
+	ActiveGameplayEffectHandle (ScriptStruct) of /Script/CoreUObject (-64)
+	GameplayAbilityActorInfo (ScriptStruct) of /Script/CoreUObject (-64)
+	GameplayEffectSpecHandle (ScriptStruct) of /Script/CoreUObject (-64)
+	GameplayEventData (ScriptStruct) of /Script/CoreUObject (-64)
+	ScalableFloat (ScriptStruct) of /Script/CoreUObject (-64)
+	GameplayTag (ScriptStruct) of /Script/CoreUObject (-65)
+	GameplayTagContainer (ScriptStruct) of /Script/CoreUObject (-65)
+	Default__StructProperty (StructProperty) of /Script/CoreUObject (-61)
+	EventTag (StructProperty) of /Script/CoreUObject (-70)
 Serialized exports:
 	UberGraphFrame (0-0-0-0): classindex -18 size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	GA_Perk_H_NightStalker_T01_C (0-0-0-0): classindex -19 size 238 (cls: GA_Perk_H_NightStalker_T01_C>BlueprintGeneratedClass>/Script/Engine) :
+	GA_Perk_H_NightStalker_T01_C (0-0-0-0): classindex -19 size 258 (cls: GA_Perk_H_NightStalker_T01_C>BlueprintGeneratedClass>/Script/Engine) :
 		Tag array:
 			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=GA_Perk_H_NightStalker_T01_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_GA_Perk_H_NightStalker_T01=GA_Perk_H_NightStalker_T01_C 
-	Default__GA_Perk_H_NightStalker_T01_C (0-0-0-0): classindex 2 size 1307 (cls: Default__GA_Perk_H_NightStalker_T01_C>GA_Perk_H_NightStalker_T01_C) :
+	Default__GA_Perk_H_NightStalker_T01_C (0-0-0-0): classindex 2 size 1368 (cls: Default__GA_Perk_H_NightStalker_T01_C>GA_Perk_H_NightStalker_T01_C) :
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			AppliedRunSpeedHandle(StructProperty)=System.Byte[] 
@@ -231,6 +247,7 @@ Serialized exports:
 			sRunSpeedModifier01(StructProperty)=System.Byte[] 
 			SStaminaCostModifier01(StructProperty)=System.Byte[] 
 			sRunSpeedModifier02(StructProperty)=System.Byte[] 
+			TC_NightStalker(StructProperty)=GameplayTagContainer:Granted.Perk.NightStalker.T01 
 			AbilityTags(StructProperty)=GameplayTagContainer:Ability.Perk.NightStalker 
 			AbilityTriggers(ArrayProperty)=[object] (inner: StructProperty)
 	AppliedRunSpeedHandle (0-0-0-0): classindex -18 size 36 (cls: AppliedRunSpeedHandle>StructProperty>/Script/CoreUObject) :
@@ -251,9 +268,21 @@ Serialized exports:
 		Tag array:
 	TriggeredAbilitySetup (0-0-0-0): classindex -13 size 167 (cls: TriggeredAbilitySetup>Function>/Script/CoreUObject) :
 		Tag array:
+	Temp_bool_Variable (0-0-0-0): classindex -9 size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject) :
+		Tag array:
 	SetupBuffValues (0-0-0-0): classindex -13 size 386 (cls: SetupBuffValues>Function>/Script/CoreUObject) :
 		Tag array:
-	Temp_bool_Variable (0-0-0-0): classindex -9 size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject) :
+	ActorInfo (0-0-0-0): classindex -18 size 36 (cls: ActorInfo>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	K2_ShouldAbilityRespondToEvent (0-0-0-0): classindex -13 size 264 (cls: K2_ShouldAbilityRespondToEvent>Function>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_BooleanOR_ReturnValue (0-0-0-0): classindex -9 size 34 (cls: CallFunc_BooleanOR_ReturnValue>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_HasAllMatchingGameplayTags_ReturnValue (0-0-0-0): classindex -9 size 34 (cls: CallFunc_HasAllMatchingGameplayTags_ReturnValue>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_HasAllMatchingGameplayTags_ReturnValue1 (0-0-0-0): classindex -9 size 34 (cls: CallFunc_HasAllMatchingGameplayTags_ReturnValue1>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	ReturnValue (0-0-0-0): classindex -9 size 34 (cls: ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	Temp_bool_Variable1 (0-0-0-0): classindex -9 size 34 (cls: Temp_bool_Variable1>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -281,11 +310,17 @@ Serialized exports:
 		Tag array:
 	Temp_float_Variable (0-0-0-0): classindex -12 size 32 (cls: Temp_float_Variable>FloatProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_HasAllMatchingGameplayTags_TagContainerInterface1_CastInput (0-0-0-0): classindex -14 size 36 (cls: CallFunc_HasAllMatchingGameplayTags_TagContainerInterface1_CastInput>InterfaceProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_HasAllMatchingGameplayTags_TagContainerInterface_CastInput (0-0-0-0): classindex -14 size 36 (cls: CallFunc_HasAllMatchingGameplayTags_TagContainerInterface_CastInput>InterfaceProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_HasAllMatchingGameplayTags_TagContainerInterface_CastInput (0-0-0-0): classindex -14 size 36 (cls: CallFunc_HasAllMatchingGameplayTags_TagContainerInterface_CastInput>InterfaceProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_GetAbilitySystemComponent_ReturnValue (0-0-0-0): classindex -17 size 36 (cls: CallFunc_GetAbilitySystemComponent_ReturnValue>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_TriggeredAbilitySetup_AbilitySystemOut (0-0-0-0): classindex -17 size 36 (cls: CallFunc_TriggeredAbilitySetup_AbilitySystemOut>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_GetAbilitySystemComponent_ReturnValue (0-0-0-0): classindex -17 size 36 (cls: CallFunc_GetAbilitySystemComponent_ReturnValue>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	AbilitySystemOut (0-0-0-0): classindex -17 size 36 (cls: AbilitySystemOut>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
@@ -301,11 +336,15 @@ Serialized exports:
 		Tag array:
 	K2Node_Event_EventData (0-0-0-0): classindex -18 size 36 (cls: K2Node_Event_EventData>StructProperty>/Script/CoreUObject) :
 		Tag array:
+	Payload (0-0-0-0): classindex -18 size 36 (cls: Payload>StructProperty>/Script/CoreUObject) :
+		Tag array:
 	sRunSpeedModifier01 (0-0-0-0): classindex -18 size 36 (cls: sRunSpeedModifier01>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	sRunSpeedModifier02 (0-0-0-0): classindex -18 size 36 (cls: sRunSpeedModifier02>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	SStaminaCostModifier01 (0-0-0-0): classindex -18 size 36 (cls: SStaminaCostModifier01>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	TC_NightStalker (0-0-0-0): classindex -18 size 36 (cls: TC_NightStalker>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	TC_NightStalker+ (0-0-0-0): classindex -18 size 36 (cls: TC_NightStalker+>StructProperty>/Script/CoreUObject) :
 		Tag array:

@@ -1,8 +1,6 @@
 Name table:
 	/Game/Athena/Deimos/Abilities/NPC/Fiend/FX/P_Deimos_Monster_Death
-	/Game/Athena/Deimos/Mission/BP_DeimosMissionTarget
-	/Game/Athena/Deimos/Pawns/Deimos_Brute
-	/Game/Athena/Deimos/Pawns/Deimos_Fiend
+	/Game/Athena/Deimos/DeimosTypeInfo
 	/Game/Athena/GameplayCueNotifies/Deimos/GC_Deimos_Monster_Death
 	/Game/Sounds/Fort_Monster_Husk/SFX/Husk_Body_DeathDematerial_Cue
 	/Script/CoreUObject
@@ -10,7 +8,6 @@ Name table:
 	/Script/FortniteGame
 	/Script/GameplayAbilities
 	/Script/GameplayTags
-	AbilitySystemComponent
 	Actor
 	AllowedSurfaces
 	Array_Get
@@ -26,11 +23,12 @@ Name table:
 	bIgnoreRotation
 	bIgnoreScale
 	BlueprintGeneratedClass
+	BooleanOR
 	BoolProperty
 	bOverrideAttachment
 	bOverrideCondition
-	BP_DeimosMissionTarget_C
 	bRequireVisible
+	BruteTags
 	BurstCameraShakeInstance
 	BurstDecalInstance
 	BurstEffectData
@@ -39,17 +37,16 @@ Name table:
 	bUseUnsmoothedNetworkPosition
 	ByteProperty
 	CallFunc_Array_Get_Item
+	CallFunc_BooleanOR_ReturnValue
 	CallFunc_Conv_BoolToFloat_ReturnValue
 	CallFunc_Conv_LinearColorToVector_ReturnValue
+	CallFunc_GetEnemyColor_Color
+	CallFunc_HasAnyMatchingGameplayTags_ReturnValue
+	CallFunc_HasAnyMatchingGameplayTags_ReturnValue1
 	CallFunc_K2_SetRelativeLocation_SweepHitResult
 	CameraShake
-	CapsuleComponent
 	ChanceToPlay
-	CharacterMesh0
-	CharMoveComp
-	ChildActorComponent
 	Class
-	CollisionCylinder
 	ComponentClass
 	ComponentTemplate
 	Condition
@@ -59,47 +56,40 @@ Name table:
 	Default__ArrayProperty
 	Default__BlueprintGeneratedClass
 	Default__BoolProperty
-	Default__Deimos_Brute_C
-	Default__Deimos_Fiend_C
+	Default__DeimosTypeInfo_C
 	Default__FloatProperty
 	Default__FortGameplayCueNotify_BurstLatent
 	Default__Function
 	Default__GC_Deimos_Monster_Death_C
+	Default__InterfaceProperty
 	Default__KismetArrayLibrary
 	Default__ObjectProperty
 	Default__SceneComponent
 	Default__SCS_Node
 	Default__SimpleConstructionScript
 	Default__StructProperty
-	Default_Colour
 	DefaultSceneRoot
 	DefaultSceneRoot_GEN_VARIABLE
 	DefaultSceneRootNode
-	Deimos_Brute_C
-	Deimos_Fiend_C
+	DeimosTypeInfo_C
 	DelayBeforePlayInSeconds
 	EFortGameplayCueAttachType
 	EFortGameplayCueAttachType::AttachToTarget
 	EFortGameplayCueAttachType::DoNotAttach
 	EFortGameplayCueSourceCondition
 	EFortGameplayCueSourceCondition::AnySource
-	Elemental_Layer_Audio_Loop_GEN_VARIABLE
-	EnemyColor
 	Engine
 	EnumProperty
 	EParticleSignificanceLevel
 	EParticleSignificanceLevel::High
-	FeedbackAudioComp0
+	FiendTags
 	FloatProperty
-	FortAbilitySystemComponent
 	FortBurstEffectData
 	FortGameplayCueAttachInfo
 	FortGameplayCueAudioInfo
 	FortGameplayCueNotify_BurstLatent
 	FortGameplayCueParticleInfo
 	FortGameplayCueSpawnCondition
-	FortMovementComp_AIChar
-	FortPooledSkelMeshComponent
 	Function
 	FX_Chest
 	GameplayCue.Deimos.Monster.Death
@@ -107,32 +97,34 @@ Name table:
 	GameplayCueParameters
 	GameplayCueTag
 	GameplayTag
+	GameplayTagAssetInterface
+	GameplayTagContainer
+	GameplayTags
 	GC_Deimos_Monster_Death_C
-	GoldColour
+	GetEnemyColor
 	Guid
+	HasAnyMatchingGameplayTags
 	HitResult
 	Husk_Body_DeathDematerial_Cue
+	InterfaceProperty
 	InternalVariableName
 	IntProperty
 	K2_SetRelativeLocation
-	K2Node_DynamicCast_AsDeimos_Brute
-	K2Node_DynamicCast_AsDeimos_Fiend
+	K2Node_DynamicCast_AsDeimos_Type_Info
+	K2Node_DynamicCast_AsGameplay_Tag_Asset_Interface
+	K2Node_DynamicCast_AsGameplay_Tag_Asset_Interface1
 	K2Node_DynamicCast_bSuccess
 	K2Node_DynamicCast_bSuccess1
+	K2Node_DynamicCast_bSuccess2
 	KismetArrayLibrary
 	KismetMathLibrary
 	LinearColor
-	Monster0_Fiend
-	Monster1_FiendRed
-	Monster2_Brute
-	Monster3_BruteRed
-	Monster4_BruteGold
 	MonsterColor
 	MyTarget
 	NameProperty
-	NODE_AddChildActorComponent-0
-	NODE_AddChildActorComponent-0_BP_DeimosMissionTarget_C_CAT
 	None
+	NPC.CharacterType.Brute
+	NPC.CharacterType.Fiend
 	Object
 	ObjectProperty
 	OnBurst
@@ -144,7 +136,6 @@ Name table:
 	ParticleComponents
 	ParticleSystem
 	ParticleSystemComponent
-	RedColour
 	RequiredDetailMode
 	RootComponent
 	Rotator
@@ -160,168 +151,152 @@ Name table:
 	SourceCondition
 	StructProperty
 	TagName
+	Temp_bool_Variable
+	Temp_bool_Variable1
 	UserConstructionScript
 	VariableGuid
 	Vector
-	WeaponCapsuleCollision_GEN_VARIABLE
 Import table:
-	Default__ArrayProperty (ArrayProperty) of /Script/CoreUObject (-59)
-	FeedbackAudioComp0 (AudioComponent) of /Script/Engine (-34)
-	FeedbackAudioComp0 (AudioComponent) of /Script/Engine (-35)
-	Elemental_Layer_Audio_Loop_GEN_VARIABLE (AudioComponent) of /Script/Engine (-6)
-	Deimos_Brute_C (BlueprintGeneratedClass) of /Script/Engine (-56)
-	Deimos_Fiend_C (BlueprintGeneratedClass) of /Script/Engine (-57)
-	Default__BlueprintGeneratedClass (BlueprintGeneratedClass) of /Script/Engine (-60)
-	Default__BoolProperty (BoolProperty) of /Script/CoreUObject (-59)
-	NODE_AddChildActorComponent-0_BP_DeimosMissionTarget_C_CAT (BP_DeimosMissionTarget_C) of /Game/Athena/Deimos/Mission/BP_DeimosMissionTarget (-14)
-	CollisionCylinder (CapsuleComponent) of /Script/Engine (-34)
-	WeaponCapsuleCollision_GEN_VARIABLE (CapsuleComponent) of /Script/Engine (-5)
-	CollisionCylinder (CapsuleComponent) of /Script/Engine (-35)
-	WeaponCapsuleCollision_GEN_VARIABLE (CapsuleComponent) of /Script/Engine (-6)
-	NODE_AddChildActorComponent-0 (ChildActorComponent) of /Script/Engine (-5)
-	ArrayProperty (Class) of /Script/CoreUObject (-59)
-	BoolProperty (Class) of /Script/CoreUObject (-59)
-	FloatProperty (Class) of /Script/CoreUObject (-59)
-	Function (Class) of /Script/CoreUObject (-59)
-	Object (Class) of /Script/CoreUObject (-59)
-	ObjectProperty (Class) of /Script/CoreUObject (-59)
-	StructProperty (Class) of /Script/CoreUObject (-59)
-	Actor (Class) of /Script/CoreUObject (-60)
-	AudioComponent (Class) of /Script/CoreUObject (-60)
-	BlueprintGeneratedClass (Class) of /Script/CoreUObject (-60)
-	CameraShake (Class) of /Script/CoreUObject (-60)
-	DecalActor (Class) of /Script/CoreUObject (-60)
-	KismetArrayLibrary (Class) of /Script/CoreUObject (-60)
-	KismetMathLibrary (Class) of /Script/CoreUObject (-60)
-	ParticleSystemComponent (Class) of /Script/CoreUObject (-60)
-	SceneComponent (Class) of /Script/CoreUObject (-60)
-	SCS_Node (Class) of /Script/CoreUObject (-60)
-	SimpleConstructionScript (Class) of /Script/CoreUObject (-60)
-	FortGameplayCueNotify_BurstLatent (Class) of /Script/CoreUObject (-61)
-	Default__Deimos_Brute_C (Deimos_Brute_C) of /Game/Athena/Deimos/Pawns/Deimos_Brute (-56)
-	Default__Deimos_Fiend_C (Deimos_Fiend_C) of /Game/Athena/Deimos/Pawns/Deimos_Fiend (-57)
-	Default__FloatProperty (FloatProperty) of /Script/CoreUObject (-59)
-	AbilitySystemComponent (FortAbilitySystemComponent) of /Script/FortniteGame (-34)
-	AbilitySystemComponent (FortAbilitySystemComponent) of /Script/FortniteGame (-35)
-	Default__FortGameplayCueNotify_BurstLatent (FortGameplayCueNotify_BurstLatent) of /Script/FortniteGame (-61)
-	CharMoveComp (FortMovementComp_AIChar) of /Script/FortniteGame (-34)
-	CharMoveComp (FortMovementComp_AIChar) of /Script/FortniteGame (-35)
-	CharacterMesh0 (FortPooledSkelMeshComponent) of /Script/FortniteGame (-34)
-	CharacterMesh0 (FortPooledSkelMeshComponent) of /Script/FortniteGame (-35)
-	Default__Function (Function) of /Script/CoreUObject (-59)
-	UserConstructionScript (Function) of /Script/CoreUObject (-22)
-	Array_Get (Function) of /Script/CoreUObject (-27)
-	Conv_BoolToFloat (Function) of /Script/CoreUObject (-28)
-	Conv_LinearColorToVector (Function) of /Script/CoreUObject (-28)
-	SetFloatParameter (Function) of /Script/CoreUObject (-29)
-	SetVectorParameter (Function) of /Script/CoreUObject (-29)
-	K2_SetRelativeLocation (Function) of /Script/CoreUObject (-30)
-	OnBurst (Function) of /Script/CoreUObject (-33)
-	Default__KismetArrayLibrary (KismetArrayLibrary) of /Script/Engine (-60)
-	Default__ObjectProperty (ObjectProperty) of /Script/CoreUObject (-59)
+	Default__ArrayProperty (ArrayProperty) of /Script/CoreUObject (-46)
+	GameplayTags (ArrayProperty) of /Script/CoreUObject (-59)
+	DeimosTypeInfo_C (BlueprintGeneratedClass) of /Script/Engine (-44)
+	Default__BlueprintGeneratedClass (BlueprintGeneratedClass) of /Script/Engine (-47)
+	Default__BoolProperty (BoolProperty) of /Script/CoreUObject (-46)
+	ArrayProperty (Class) of /Script/CoreUObject (-46)
+	BoolProperty (Class) of /Script/CoreUObject (-46)
+	FloatProperty (Class) of /Script/CoreUObject (-46)
+	Function (Class) of /Script/CoreUObject (-46)
+	InterfaceProperty (Class) of /Script/CoreUObject (-46)
+	Object (Class) of /Script/CoreUObject (-46)
+	ObjectProperty (Class) of /Script/CoreUObject (-46)
+	StructProperty (Class) of /Script/CoreUObject (-46)
+	Actor (Class) of /Script/CoreUObject (-47)
+	AudioComponent (Class) of /Script/CoreUObject (-47)
+	BlueprintGeneratedClass (Class) of /Script/CoreUObject (-47)
+	CameraShake (Class) of /Script/CoreUObject (-47)
+	DecalActor (Class) of /Script/CoreUObject (-47)
+	KismetArrayLibrary (Class) of /Script/CoreUObject (-47)
+	KismetMathLibrary (Class) of /Script/CoreUObject (-47)
+	ParticleSystemComponent (Class) of /Script/CoreUObject (-47)
+	SceneComponent (Class) of /Script/CoreUObject (-47)
+	SCS_Node (Class) of /Script/CoreUObject (-47)
+	SimpleConstructionScript (Class) of /Script/CoreUObject (-47)
+	FortGameplayCueNotify_BurstLatent (Class) of /Script/CoreUObject (-48)
+	GameplayTagAssetInterface (Class) of /Script/CoreUObject (-50)
+	Default__DeimosTypeInfo_C (DeimosTypeInfo_C) of /Game/Athena/Deimos/DeimosTypeInfo (-44)
+	Default__FloatProperty (FloatProperty) of /Script/CoreUObject (-46)
+	Default__FortGameplayCueNotify_BurstLatent (FortGameplayCueNotify_BurstLatent) of /Script/FortniteGame (-48)
+	Default__Function (Function) of /Script/CoreUObject (-46)
+	UserConstructionScript (Function) of /Script/CoreUObject (-14)
+	Array_Get (Function) of /Script/CoreUObject (-19)
+	BooleanOR (Function) of /Script/CoreUObject (-20)
+	Conv_BoolToFloat (Function) of /Script/CoreUObject (-20)
+	Conv_LinearColorToVector (Function) of /Script/CoreUObject (-20)
+	SetFloatParameter (Function) of /Script/CoreUObject (-21)
+	SetVectorParameter (Function) of /Script/CoreUObject (-21)
+	K2_SetRelativeLocation (Function) of /Script/CoreUObject (-22)
+	OnBurst (Function) of /Script/CoreUObject (-25)
+	Default__InterfaceProperty (InterfaceProperty) of /Script/CoreUObject (-46)
+	Default__KismetArrayLibrary (KismetArrayLibrary) of /Script/Engine (-47)
+	Default__ObjectProperty (ObjectProperty) of /Script/CoreUObject (-46)
 	/Game/Athena/Deimos/Abilities/NPC/Fiend/FX/P_Deimos_Monster_Death (Package) of /Script/CoreUObject (0)
-	/Game/Athena/Deimos/Pawns/Deimos_Brute (Package) of /Script/CoreUObject (0)
-	/Game/Athena/Deimos/Pawns/Deimos_Fiend (Package) of /Script/CoreUObject (0)
+	/Game/Athena/Deimos/DeimosTypeInfo (Package) of /Script/CoreUObject (0)
 	/Game/Sounds/Fort_Monster_Husk/SFX/Husk_Body_DeathDematerial_Cue (Package) of /Script/CoreUObject (0)
 	/Script/CoreUObject (Package) of /Script/CoreUObject (0)
 	/Script/Engine (Package) of /Script/CoreUObject (0)
 	/Script/FortniteGame (Package) of /Script/CoreUObject (0)
 	/Script/GameplayAbilities (Package) of /Script/CoreUObject (0)
 	/Script/GameplayTags (Package) of /Script/CoreUObject (0)
-	P_Deimos_Monster_Death (ParticleSystem) of /Script/Engine (-55)
-	SceneComponent_58 (SceneComponent) of /Script/Engine (-5)
-	SceneComponent_5 (SceneComponent) of /Script/Engine (-6)
-	Default__SceneComponent (SceneComponent) of /Script/Engine (-60)
-	RootComponent (SceneComponent) of /Script/Engine (-39)
-	LinearColor (ScriptStruct) of /Script/CoreUObject (-59)
-	Vector (ScriptStruct) of /Script/CoreUObject (-59)
-	HitResult (ScriptStruct) of /Script/CoreUObject (-60)
-	GameplayCueParameters (ScriptStruct) of /Script/CoreUObject (-62)
-	GameplayTag (ScriptStruct) of /Script/CoreUObject (-63)
-	Default__SCS_Node (SCS_Node) of /Script/Engine (-60)
-	Default__SimpleConstructionScript (SimpleConstructionScript) of /Script/Engine (-60)
-	Husk_Body_DeathDematerial_Cue (SoundCue) of /Script/Engine (-58)
-	EnemyColor (StructProperty) of /Script/CoreUObject (-6)
-	Default__StructProperty (StructProperty) of /Script/CoreUObject (-59)
+	P_Deimos_Monster_Death (ParticleSystem) of /Script/Engine (-43)
+	Default__SceneComponent (SceneComponent) of /Script/Engine (-47)
+	RootComponent (SceneComponent) of /Script/Engine (-29)
+	LinearColor (ScriptStruct) of /Script/CoreUObject (-46)
+	Vector (ScriptStruct) of /Script/CoreUObject (-46)
+	HitResult (ScriptStruct) of /Script/CoreUObject (-47)
+	GameplayCueParameters (ScriptStruct) of /Script/CoreUObject (-49)
+	GameplayTag (ScriptStruct) of /Script/CoreUObject (-50)
+	GameplayTagContainer (ScriptStruct) of /Script/CoreUObject (-50)
+	Default__SCS_Node (SCS_Node) of /Script/Engine (-47)
+	Default__SimpleConstructionScript (SimpleConstructionScript) of /Script/Engine (-47)
+	Husk_Body_DeathDematerial_Cue (SoundCue) of /Script/Engine (-45)
+	Default__StructProperty (StructProperty) of /Script/CoreUObject (-46)
+	GameplayTags (StructProperty) of /Script/CoreUObject (-2)
 Serialized exports:
-	Default_Colour (0-0-0-0): classindex -21 size 36 (cls: Default_Colour>StructProperty>/Script/CoreUObject) :
+	UserConstructionScript (0-0-0-0): classindex -9 size 43 (cls: UserConstructionScript>Function>/Script/CoreUObject) :
 		Tag array:
-	UserConstructionScript (0-0-0-0): classindex -18 size 43 (cls: UserConstructionScript>Function>/Script/CoreUObject) :
+	MyTarget (0-0-0-0): classindex -12 size 36 (cls: MyTarget>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	MyTarget (0-0-0-0): classindex -20 size 36 (cls: MyTarget>ObjectProperty>/Script/CoreUObject) :
+	OnBurst (0-0-0-0): classindex -9 size 863 (cls: OnBurst>Function>/Script/CoreUObject) :
 		Tag array:
-	OnBurst (0-0-0-0): classindex -18 size 452 (cls: OnBurst>Function>/Script/CoreUObject) :
-		Tag array:
-	GC_Deimos_Monster_Death_C (0-0-0-0): classindex -24 size 169 (cls: GC_Deimos_Monster_Death_C>BlueprintGeneratedClass>/Script/Engine) :
+	GC_Deimos_Monster_Death_C (0-0-0-0): classindex -16 size 137 (cls: GC_Deimos_Monster_Death_C>BlueprintGeneratedClass>/Script/Engine) :
 		Tag array:
 			SimpleConstructionScript(ObjectProperty)=SimpleConstructionScript_0=GC_Deimos_Monster_Death_C 
-	Default__GC_Deimos_Monster_Death_C (0-0-0-0): classindex 5 size 2219 (cls: Default__GC_Deimos_Monster_Death_C>GC_Deimos_Monster_Death_C) :
+	Default__GC_Deimos_Monster_Death_C (0-0-0-0): classindex 4 size 1908 (cls: Default__GC_Deimos_Monster_Death_C>GC_Deimos_Monster_Death_C) :
 		Tag array:
-			Default_Colour(StructProperty)=System.Byte[] 
-			RedColour(StructProperty)=System.Byte[] 
-			GoldColour(StructProperty)=System.Byte[] 
-			Monster1_FiendRed(FloatProperty)=1 
-			Monster2_Brute(FloatProperty)=2 
-			Monster3_BruteRed(FloatProperty)=3 
-			Monster4_BruteGold(FloatProperty)=4 
 			BurstEffectData(StructProperty)=System.Byte[] 
 			GameplayCueTag(StructProperty)=System.Byte[] 
 			GameplayCueName(NameProperty)=GameplayCue.Deimos.Monster.Death 
 			RootComponent(ObjectProperty)=[object] 
-	AudioComponents (0-0-0-0): classindex -20 size 36 (cls: AudioComponents>ObjectProperty>/Script/CoreUObject) :
+	AudioComponents (0-0-0-0): classindex -12 size 36 (cls: AudioComponents>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	AudioComponents (0-0-0-0): classindex -15 size 36 (cls: AudioComponents>ArrayProperty>/Script/CoreUObject) :
+	AudioComponents (0-0-0-0): classindex -6 size 36 (cls: AudioComponents>ArrayProperty>/Script/CoreUObject) :
 		Tag array:
-	ParticleComponents (0-0-0-0): classindex -20 size 36 (cls: ParticleComponents>ObjectProperty>/Script/CoreUObject) :
+	ParticleComponents (0-0-0-0): classindex -12 size 36 (cls: ParticleComponents>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	ParticleComponents (0-0-0-0): classindex -15 size 36 (cls: ParticleComponents>ArrayProperty>/Script/CoreUObject) :
+	ParticleComponents (0-0-0-0): classindex -6 size 36 (cls: ParticleComponents>ArrayProperty>/Script/CoreUObject) :
 		Tag array:
-	K2Node_DynamicCast_bSuccess (0-0-0-0): classindex -16 size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject) :
+	CallFunc_BooleanOR_ReturnValue (0-0-0-0): classindex -7 size 34 (cls: CallFunc_BooleanOR_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
-	K2Node_DynamicCast_bSuccess1 (0-0-0-0): classindex -16 size 34 (cls: K2Node_DynamicCast_bSuccess1>BoolProperty>/Script/CoreUObject) :
+	CallFunc_HasAnyMatchingGameplayTags_ReturnValue (0-0-0-0): classindex -7 size 34 (cls: CallFunc_HasAnyMatchingGameplayTags_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
-	Monster0_Fiend (0-0-0-0): classindex -17 size 32 (cls: Monster0_Fiend>FloatProperty>/Script/CoreUObject) :
+	CallFunc_HasAnyMatchingGameplayTags_ReturnValue1 (0-0-0-0): classindex -7 size 34 (cls: CallFunc_HasAnyMatchingGameplayTags_ReturnValue1>BoolProperty>/Script/CoreUObject) :
 		Tag array:
-	Monster1_FiendRed (0-0-0-0): classindex -17 size 32 (cls: Monster1_FiendRed>FloatProperty>/Script/CoreUObject) :
+	K2Node_DynamicCast_bSuccess (0-0-0-0): classindex -7 size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject) :
 		Tag array:
-	Monster2_Brute (0-0-0-0): classindex -17 size 32 (cls: Monster2_Brute>FloatProperty>/Script/CoreUObject) :
+	K2Node_DynamicCast_bSuccess1 (0-0-0-0): classindex -7 size 34 (cls: K2Node_DynamicCast_bSuccess1>BoolProperty>/Script/CoreUObject) :
 		Tag array:
-	Monster3_BruteRed (0-0-0-0): classindex -17 size 32 (cls: Monster3_BruteRed>FloatProperty>/Script/CoreUObject) :
+	K2Node_DynamicCast_bSuccess2 (0-0-0-0): classindex -7 size 34 (cls: K2Node_DynamicCast_bSuccess2>BoolProperty>/Script/CoreUObject) :
 		Tag array:
-	Monster4_BruteGold (0-0-0-0): classindex -17 size 32 (cls: Monster4_BruteGold>FloatProperty>/Script/CoreUObject) :
+	Temp_bool_Variable (0-0-0-0): classindex -7 size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject) :
 		Tag array:
-	CallFunc_Conv_BoolToFloat_ReturnValue (0-0-0-0): classindex -17 size 32 (cls: CallFunc_Conv_BoolToFloat_ReturnValue>FloatProperty>/Script/CoreUObject) :
+	Temp_bool_Variable1 (0-0-0-0): classindex -7 size 34 (cls: Temp_bool_Variable1>BoolProperty>/Script/CoreUObject) :
 		Tag array:
-	BurstCameraShakeInstance (0-0-0-0): classindex -20 size 36 (cls: BurstCameraShakeInstance>ObjectProperty>/Script/CoreUObject) :
+	CallFunc_Conv_BoolToFloat_ReturnValue (0-0-0-0): classindex -8 size 32 (cls: CallFunc_Conv_BoolToFloat_ReturnValue>FloatProperty>/Script/CoreUObject) :
 		Tag array:
-	BurstDecalInstance (0-0-0-0): classindex -20 size 36 (cls: BurstDecalInstance>ObjectProperty>/Script/CoreUObject) :
+	K2Node_DynamicCast_AsDeimos_Type_Info (0-0-0-0): classindex -10 size 36 (cls: K2Node_DynamicCast_AsDeimos_Type_Info>InterfaceProperty>/Script/CoreUObject) :
 		Tag array:
-	CallFunc_Array_Get_Item (0-0-0-0): classindex -20 size 36 (cls: CallFunc_Array_Get_Item>ObjectProperty>/Script/CoreUObject) :
+	K2Node_DynamicCast_AsGameplay_Tag_Asset_Interface (0-0-0-0): classindex -10 size 36 (cls: K2Node_DynamicCast_AsGameplay_Tag_Asset_Interface>InterfaceProperty>/Script/CoreUObject) :
 		Tag array:
-	K2Node_DynamicCast_AsDeimos_Brute (0-0-0-0): classindex -20 size 36 (cls: K2Node_DynamicCast_AsDeimos_Brute>ObjectProperty>/Script/CoreUObject) :
+	K2Node_DynamicCast_AsGameplay_Tag_Asset_Interface1 (0-0-0-0): classindex -10 size 36 (cls: K2Node_DynamicCast_AsGameplay_Tag_Asset_Interface1>InterfaceProperty>/Script/CoreUObject) :
 		Tag array:
-	K2Node_DynamicCast_AsDeimos_Fiend (0-0-0-0): classindex -20 size 36 (cls: K2Node_DynamicCast_AsDeimos_Fiend>ObjectProperty>/Script/CoreUObject) :
+	BurstCameraShakeInstance (0-0-0-0): classindex -12 size 36 (cls: BurstCameraShakeInstance>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	RootComponent (0-0-0-0): classindex -30 size 12 (cls: RootComponent>SceneComponent>/Script/Engine) :
+	BurstDecalInstance (0-0-0-0): classindex -12 size 36 (cls: BurstDecalInstance>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	DefaultSceneRoot_GEN_VARIABLE (0-0-0-0): classindex -30 size 12 (cls: DefaultSceneRoot_GEN_VARIABLE>SceneComponent>/Script/Engine) :
+	CallFunc_Array_Get_Item (0-0-0-0): classindex -12 size 36 (cls: CallFunc_Array_Get_Item>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	SCS_Node_0 (0-0-0-0): classindex -31 size 168 (cls: SCS_Node_0>SCS_Node>/Script/Engine) :
+	RootComponent (0-0-0-0): classindex -22 size 12 (cls: RootComponent>SceneComponent>/Script/Engine) :
+		Tag array:
+	DefaultSceneRoot_GEN_VARIABLE (0-0-0-0): classindex -22 size 12 (cls: DefaultSceneRoot_GEN_VARIABLE>SceneComponent>/Script/Engine) :
+		Tag array:
+	SCS_Node_0 (0-0-0-0): classindex -23 size 168 (cls: SCS_Node_0>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=SceneComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=DefaultSceneRoot_GEN_VARIABLE=GC_Deimos_Monster_Death_C 
 			VariableGuid(StructProperty)=Guid: 1837191350-1279924713-1066109849-2265119036 
 			InternalVariableName(NameProperty)=DefaultSceneRoot 
-	SimpleConstructionScript_0 (0-0-0-0): classindex -32 size 41 (cls: SimpleConstructionScript_0>SimpleConstructionScript>/Script/Engine) :
+	SimpleConstructionScript_0 (0-0-0-0): classindex -24 size 41 (cls: SimpleConstructionScript_0>SimpleConstructionScript>/Script/Engine) :
 		Tag array:
 			DefaultSceneRootNode(ObjectProperty)=SCS_Node_0=GC_Deimos_Monster_Death_C 
-	GoldColour (0-0-0-0): classindex -21 size 36 (cls: GoldColour>StructProperty>/Script/CoreUObject) :
+	BruteTags (0-0-0-0): classindex -13 size 36 (cls: BruteTags>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	CallFunc_Conv_LinearColorToVector_ReturnValue (0-0-0-0): classindex -21 size 36 (cls: CallFunc_Conv_LinearColorToVector_ReturnValue>StructProperty>/Script/CoreUObject) :
+	CallFunc_Conv_LinearColorToVector_ReturnValue (0-0-0-0): classindex -13 size 36 (cls: CallFunc_Conv_LinearColorToVector_ReturnValue>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	CallFunc_K2_SetRelativeLocation_SweepHitResult (0-0-0-0): classindex -21 size 36 (cls: CallFunc_K2_SetRelativeLocation_SweepHitResult>StructProperty>/Script/CoreUObject) :
+	CallFunc_GetEnemyColor_Color (0-0-0-0): classindex -13 size 36 (cls: CallFunc_GetEnemyColor_Color>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	Parameters (0-0-0-0): classindex -21 size 36 (cls: Parameters>StructProperty>/Script/CoreUObject) :
+	CallFunc_K2_SetRelativeLocation_SweepHitResult (0-0-0-0): classindex -13 size 36 (cls: CallFunc_K2_SetRelativeLocation_SweepHitResult>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	RedColour (0-0-0-0): classindex -21 size 36 (cls: RedColour>StructProperty>/Script/CoreUObject) :
+	FiendTags (0-0-0-0): classindex -13 size 36 (cls: FiendTags>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	Parameters (0-0-0-0): classindex -13 size 36 (cls: Parameters>StructProperty>/Script/CoreUObject) :
 		Tag array:

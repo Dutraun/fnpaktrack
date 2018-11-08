@@ -21,12 +21,12 @@ these property tag types are explicitly supported:
 * IntProperty  
 
 supported StructProperty types:
-FFortMcpQuestObjectiveInfo (arrays too)
-FortItemQuantityPair (arrays too)
-Vector
-Vector2D
-Rotator
-Guid
-GameplayTagContainer
+* FFortMcpQuestObjectiveInfo (arrays too)
+* FortItemQuantityPair (arrays too)
+* Vector
+* Vector2D
+* Rotator
+* Guid
+* GameplayTagContainer  
   
 non-uasset/uexp/ubulk/umap files are stored raw (excluding ushaderbytecode)

@@ -1,18 +1,32 @@
 ### tracking fortnite pak changes
 
-.uexp files are concatenated to .uasset files and are then serialized
+.uexp files are concatenated to .uasset (or .umap) files and are then serialized
 currently stored is:
 * name table
 * import table
-* export table
-* serialized property tags for exports
+* serialized information for exports with some other information
 
-these property tags are serialized to the proper type:
+these property tag types are explicitly supported:
 * SoftObjectProperty
+* some ObjectProperty's
 * TextProperty (only HistoryType 0 is shown properly)
 * BoolProperty
 * FloatProperty
+* EnumProperty
+* NameProperty
+* StrProperty
+* some ByteProperty's
+* ArrayProperty's of type NameProperty, or FloatProperty with support for _some_ StructProperty's (listed below)
+* some StructProperty's (also listed below)
 * IntProperty  
-other's are stored with an [xxHash](https://cyan4973.github.io/xxHash/)  
+
+supported StructProperty types:
+* FFortMcpQuestObjectiveInfo (arrays too)
+* FortItemQuantityPair (arrays too)
+* Vector
+* Vector2D
+* Rotator
+* Guid
+* GameplayTagContainer  
   
-non-uasset/uexp/ubulk files are stored raw
+non-uasset/uexp/ubulk/umap files are stored raw (excluding ushaderbytecode)

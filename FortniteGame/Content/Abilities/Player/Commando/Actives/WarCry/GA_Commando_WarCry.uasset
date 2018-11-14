@@ -11,6 +11,7 @@ Name table:
 	/Game/Abilities/Player/Commando/Perks/ThereAreManyLikeItButThisOneIsMine/GE_Commando_ThereAreManyLikeItButThisOneIsMine_Buff
 	/Game/Abilities/Player/Ninja/TacticalPerks/WarCryMaxShield/GE_Ninja_Tactical_WarCryMaxShield_Buff
 	/Game/Abilities/Player/Parents/GAT_ActiveAbility
+	/Game/Abilities/Player/Parents/GAT_ActiveAbility_Hero
 	/Game/Abilities/Player/Parents/GAT_CommandoActiveAbility
 	/Game/Abilities/Player/Perks/Leader/AllTogetherNow/GE_Perk_L_AllTogetherNow_DurationPerStack
 	/Game/Animation/Game/MainPlayer/Combat/Gadgets/Medium/Male/WarCry
@@ -19,6 +20,7 @@ Name table:
 	/Game/CharClasses/Soldier/Traits/AdvancedTactics/Abilities/WarCry/P_Commando_Warcry
 	/Game/CharClasses/Soldier/Traits/AdvancedTactics/Abilities/WarCry/P_Warcry_BuffAdd
 	/Game/CharClasses/Soldier/Traits/AdvancedTactics/Abilities/WarCry/P_Warcry_BuffAmbient
+	/Game/Macros/Abilities/AbilityFunctions
 	/Script/CoreUObject
 	/Script/Engine
 	/Script/FortniteGame
@@ -42,6 +44,7 @@ Name table:
 	Ability.Commando.WarCry.Duration
 	Ability.Commando.WarCry.Radius
 	AbilityCosts
+	AbilityFunctions_C
 	AbilitySystem
 	AbilitySystemBlueprintLibrary
 	AbilitySystemComponent
@@ -54,6 +57,7 @@ Name table:
 	ActorTypeFilter
 	Add_FloatFloat
 	Add_IntInt
+	AddDynamicGameplayEffectContainer
 	AllTogetherNow_T01
 	AmbientSystem
 	AnimMontage
@@ -92,6 +96,7 @@ Name table:
 	bOnlyApplyCostOnHit
 	BooleanOR
 	BoolProperty
+	BP_GetGameplayEffectContainer
 	bShouldAttachedActorsObstructTarget
 	bTraceComplexCollision
 	bUseProjectileRotationForDamageZones
@@ -107,9 +112,13 @@ Name table:
 	CallFunc_AssignTagSetByCallerMagnitude_ReturnValue
 	CallFunc_AssignTagSetByCallerMagnitude_ReturnValue1
 	CallFunc_BooleanOR_ReturnValue
+	CallFunc_BP_GetGameplayEffectContainer_ReturnValue
+	CallFunc_CommitAbilityWithEvent_Passed
+	CallFunc_EvaluatePerkTierBalanceValue_Balance_Value
 	CallFunc_GetAbilitySystemComponent_ReturnValue
 	CallFunc_GetAllLinkedGameplayEffectSpecHandles_ReturnValue
 	CallFunc_GetGameplayEffectCount_ReturnValue
+	CallFunc_GetRangeFromGameplayEffectContainer_Range
 	CallFunc_GetValueAtLevel_ReturnValue
 	CallFunc_GetValueAtLevel_ReturnValue1
 	CallFunc_GetValueAtLevel_ReturnValue2
@@ -136,11 +145,13 @@ Name table:
 	CallFunc_IsValid_ReturnValue
 	CallFunc_IsValid_ReturnValue1
 	CallFunc_K2_ApplyGameplayEffectSpecToTarget_ReturnValue
-	CallFunc_K2_CommitAbility_ReturnValue
 	CallFunc_Less_IntInt_ReturnValue
 	CallFunc_MakeOutgoingGameplayEffectSpec_ReturnValue
+	CallFunc_Multiply_FloatFloat_ReturnValue
+	CallFunc_Multiply_FloatFloat_ReturnValue1
 	CallFunc_Multiply_IntFloat_ReturnValue
 	CallFunc_PlayMontageWaitTarget_ReturnValue
+	CallFunc_ReplaceRangeInGameplayEffectContainer_ReturnValue
 	CallFunc_SetDurationOfEffects_WarCryEffectToApply
 	CallFunc_WaitTargetSelection_ReturnValue
 	Cancelled
@@ -153,6 +164,7 @@ Name table:
 	CombatEffects_Abilities
 	CombatEffects_HeroAbilities
 	CommandoPlayerPawn
+	CommitAbilityWithEvent
 	Completed
 	Completed_4369BE244C316BA9BBF2E8A4DA9FFD18
 	ConeMinRadius
@@ -167,6 +179,7 @@ Name table:
 	CurveTable
 	CurveTableRowHandle
 	CustomShapeComponentName
+	Default__AbilityFunctions_C
 	Default__AbilitySystemBlueprintLibrary
 	Default__ArrayProperty
 	Default__BlueprintGameplayTagLibrary
@@ -177,10 +190,12 @@ Name table:
 	Default__FloatProperty
 	Default__FortAbilityTask_PlayMontageWaitTarget
 	Default__FortAbilityTask_WaitTargetSelection
+	Default__FortKismetLibrary
 	Default__FortScalableFloatUtils
 	Default__Function
 	Default__GA_Commando_WarCry_C
 	Default__GAT_ActiveAbility_C
+	Default__GAT_ActiveAbility_Hero_C
 	Default__GAT_CommandoActiveAbility_C
 	Default__GE_Commando_Blitz_Buff_C
 	Default__GE_Commando_FightOrFlight_Buff_C
@@ -223,6 +238,7 @@ Name table:
 	Engine
 	EntryPoint
 	EnumProperty
+	EvaluatePerkTierBalanceValue
 	Event Data
 	Event.Ability.Commando.Warcry.Activate
 	Event.Ability.Commando.Warcry.Deactivate
@@ -236,6 +252,7 @@ Name table:
 	FortAbilityTask_PlayMontageWaitTarget
 	FortAbilityTask_WaitTargetSelection
 	FortGameplayEffectContainer
+	FortKismetLibrary
 	FortScalableFloatUtils
 	FortTargetFilter
 	Function
@@ -253,6 +270,7 @@ Name table:
 	GameplayTags
 	GameplayTask
 	GAT_ActiveAbility_C
+	GAT_ActiveAbility_Hero_C
 	GAT_CommandoActiveAbility_C
 	GE_AllTogetherNow_DurationPerStack
 	GE_AttackSpeed
@@ -276,9 +294,12 @@ Name table:
 	GetAbilitySystemComponent
 	GetAllLinkedGameplayEffectSpecHandles
 	GetGameplayEffectCount
+	GetRangeFromGameplayEffectContainer
 	GetValueAtLevel
 	Granted.Abilities.Commando.Perks.Tactical.PracticedInCombat
 	Granted.Perk.AllTogetherNow.T01
+	Granted.Perk.MightyRoar.T01
+	Granted.Perk.MightyRoar.T02
 	Granted.Perk.PracticedInCombat.T01
 	Granted.Perk.PracticedInCombat.T02
 	GrantedSystem
@@ -287,12 +308,10 @@ Name table:
 	HasAllMatchingGameplayTags
 	InterfaceProperty
 	IntProperty
-	isAutoCommitted
 	IsValid
 	ItemDefinition
 	K2_ActivateAbility
 	K2_ApplyGameplayEffectSpecToTarget
-	K2_CommitAbility
 	K2_EndAbility
 	K2_OnEndAbility
 	K2Node_CreateDelegate_OutputDelegate
@@ -311,6 +330,9 @@ Name table:
 	K2Node_CustomEvent_TargetData3
 	K2Node_CustomEvent_TargetData4
 	K2Node_Event_bWasCancelled
+	K2Node_MakeStruct_ScalableFloat
+	K2Node_MakeStruct_ScalableFloat1
+	K2Node_MakeStruct_ScalableFloat2
 	K2Node_Select1_Default
 	K2Node_Select_Default
 	KismetArrayLibrary
@@ -322,7 +344,10 @@ Name table:
 	MakeOutgoingGameplayEffectSpec
 	MaxTargets
 	MightyRoar
+	MightyRoar_T01
+	MightyRoar_T02
 	MulticastDelegateProperty
+	Multiply_FloatFloat
 	Multiply_IntFloat
 	NameProperty
 	None
@@ -345,8 +370,11 @@ Name table:
 	Range
 	RangeWithMightRoar
 	ReadyForActivation
+	ReplaceRangeInGameplayEffectContainer
 	Row_AllTogetherNow_DurationPerStack
 	Row_DefaultDuration
+	Row_MightyRoarT01_Radius
+	Row_MightyRoarT02_Radius
 	Row_PracticedInCombat_T01_Duration
 	Row_PracticedInCombat_T02_Duration
 	RowBaseDuration
@@ -355,15 +383,18 @@ Name table:
 	ScriptStruct
 	SecondarySource
 	SendGameplayEvent
+	SendHeroAbilityActivationEvent
 	SetByCaller.Duration
 	SetDurationOfEffects
 	SetupAbility
 	SetupAllTogetherNowDuration
+	SetupMightyRoarRange
 	Shape
 	Soldier.Ability.WarCry_Duration
 	SpoilsOfWar
 	StrProperty
 	StructProperty
+	T_EffectContainer_Buff
 	T_Event_Activate
 	T_Event_Deactivate
 	TagName
@@ -381,6 +412,8 @@ Name table:
 	TC_FightOrFlight
 	TC_Leadership
 	TC_MightyRoar
+	TC_MightyRoar_T01
+	TC_MightyRoar_T02
 	TC_PracticedInCombat
 	TC_PracticedInCombat_T01
 	TC_PracticedInCombat_T02
@@ -407,7 +440,7 @@ Name table:
 	UberGraphFrame
 	UberGraphFramePointerProperty
 	UberGraphFunction
-	UseNewPerkSystem
+	UseHeroLoadoutSystem
 	Value
 	Vector
 	WaitTargetSelection
@@ -420,6 +453,7 @@ Name table:
 	WarCryMaxShieldPercentIncrease
 	WarCryMontage
 Import table:
+	Default__AbilityFunctions_C (AbilityFunctions_C)
 	Default__AbilitySystemBlueprintLibrary (AbilitySystemBlueprintLibrary)
 	WarCry (AnimMontage)
 	Default__ArrayProperty (ArrayProperty)
@@ -436,9 +470,11 @@ Import table:
 	GE_Commando_ThereAreManyLikeItButThisOneIsMine_Buff_C (BlueprintGeneratedClass)
 	GE_Ninja_Tactical_WarCryMaxShield_Buff_C (BlueprintGeneratedClass)
 	GAT_ActiveAbility_C (BlueprintGeneratedClass)
+	GAT_ActiveAbility_Hero_C (BlueprintGeneratedClass)
 	GAT_CommandoActiveAbility_C (BlueprintGeneratedClass)
 	GE_Perk_L_AllTogetherNow_DurationPerStack_C (BlueprintGeneratedClass)
 	Default__BlueprintGeneratedClass (BlueprintGeneratedClass)
+	UseHeroLoadoutSystem (BoolProperty)
 	Default__BoolProperty (BoolProperty)
 	ArrayProperty (Class)
 	BoolProperty (Class)
@@ -460,6 +496,7 @@ Import table:
 	ParticleSystem (Class)
 	FortAbilityTask_PlayMontageWaitTarget (Class)
 	FortAbilityTask_WaitTargetSelection (Class)
+	FortKismetLibrary (Class)
 	FortScalableFloatUtils (Class)
 	AbilitySystemBlueprintLibrary (Class)
 	AbilitySystemComponent (Class)
@@ -474,8 +511,10 @@ Import table:
 	WaitTargetSelectionDelegate__DelegateSignature (DelegateFunction)
 	Default__DelegateProperty (DelegateProperty)
 	Default__FloatProperty (FloatProperty)
+	Value (FloatProperty)
 	Default__FortAbilityTask_PlayMontageWaitTarget (FortAbilityTask_PlayMontageWaitTarget)
 	Default__FortAbilityTask_WaitTargetSelection (FortAbilityTask_WaitTargetSelection)
+	Default__FortKismetLibrary (FortKismetLibrary)
 	Default__FortScalableFloatUtils (FortScalableFloatUtils)
 	ActiveAbilitySetup (Function)
 	K2_ActivateAbility (Function)
@@ -486,10 +525,12 @@ Import table:
 	Add_IntInt (Function)
 	BooleanOR (Function)
 	Less_IntInt (Function)
+	Multiply_FloatFloat (Function)
 	Multiply_IntFloat (Function)
 	IsValid (Function)
 	PlayMontageWaitTarget (Function)
 	WaitTargetSelection (Function)
+	ReplaceRangeInGameplayEffectContainer (Function)
 	GetValueAtLevel (Function)
 	AssignTagSetByCallerMagnitude (Function)
 	GetAbilitySystemComponent (Function)
@@ -501,6 +542,7 @@ Import table:
 	HasAllMatchingGameplayTags (Function)
 	ReadyForActivation (Function)
 	Default__GAT_ActiveAbility_C (GAT_ActiveAbility_C)
+	Default__GAT_ActiveAbility_Hero_C (GAT_ActiveAbility_Hero_C)
 	Default__GAT_CommandoActiveAbility_C (GAT_CommandoActiveAbility_C)
 	Default__GE_Commando_Blitz_Buff_C (GE_Commando_Blitz_Buff_C)
 	Default__GE_Commando_FightOrFlight_Buff_C (GE_Commando_FightOrFlight_Buff_C)
@@ -534,6 +576,7 @@ Import table:
 	/Game/Abilities/Player/Commando/Perks/ThereAreManyLikeItButThisOneIsMine/GE_Commando_ThereAreManyLikeItButThisOneIsMine_Buff (Package)
 	/Game/Abilities/Player/Ninja/TacticalPerks/WarCryMaxShield/GE_Ninja_Tactical_WarCryMaxShield_Buff (Package)
 	/Game/Abilities/Player/Parents/GAT_ActiveAbility (Package)
+	/Game/Abilities/Player/Parents/GAT_ActiveAbility_Hero (Package)
 	/Game/Abilities/Player/Parents/GAT_CommandoActiveAbility (Package)
 	/Game/Abilities/Player/Perks/Leader/AllTogetherNow/GE_Perk_L_AllTogetherNow_DurationPerStack (Package)
 	/Game/Animation/Game/MainPlayer/Combat/Gadgets/Medium/Male/WarCry (Package)
@@ -542,6 +585,7 @@ Import table:
 	/Game/CharClasses/Soldier/Traits/AdvancedTactics/Abilities/WarCry/P_Commando_Warcry (Package)
 	/Game/CharClasses/Soldier/Traits/AdvancedTactics/Abilities/WarCry/P_Warcry_BuffAdd (Package)
 	/Game/CharClasses/Soldier/Traits/AdvancedTactics/Abilities/WarCry/P_Warcry_BuffAmbient (Package)
+	/Game/Macros/Abilities/AbilityFunctions (Package)
 	/Script/CoreUObject (Package)
 	/Script/Engine (Package)
 	/Script/FortniteGame (Package)
@@ -551,7 +595,9 @@ Import table:
 	P_Commando_Warcry (ParticleSystem)
 	P_Warcry_BuffAdd (ParticleSystem)
 	P_Warcry_BuffAmbient (ParticleSystem)
+	CurveTableRowHandle (ScriptStruct)
 	PointerToUberGraphFrame (ScriptStruct)
+	FortGameplayEffectContainer (ScriptStruct)
 	ActiveGameplayEffectHandle (ScriptStruct)
 	GameplayAbilityTargetDataHandle (ScriptStruct)
 	GameplayEffectContextHandle (ScriptStruct)
@@ -562,16 +608,17 @@ Import table:
 	GameplayTagContainer (ScriptStruct)
 	Event Data (StructProperty)
 	Default__StructProperty (StructProperty)
+	Curve (StructProperty)
 	GameplayTags (StructProperty)
 	Default__TT_Commando_WarCry_C (TT_Commando_WarCry_C)
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	GA_Commando_WarCry_C (0-0-0-0): size 590 (cls: GA_Commando_WarCry_C>BlueprintGeneratedClass>/Script/Engine) :
+	GA_Commando_WarCry_C (0-0-0-0): size 630 (cls: GA_Commando_WarCry_C>BlueprintGeneratedClass>/Script/Engine) :
 		Tag array:
 			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=GA_Commando_WarCry_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_GA_Commando_WarCry=GA_Commando_WarCry_C 
-	Default__GA_Commando_WarCry_C (0-0-0-0): size 7966 (cls: Default__GA_Commando_WarCry_C>GA_Commando_WarCry_C) :
+	Default__GA_Commando_WarCry_C (0-0-0-0): size 8562 (cls: Default__GA_Commando_WarCry_C>GA_Commando_WarCry_C) :
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			TC_MightyRoar(StructProperty)=GameplayTagContainer:Abilities.Commando.Perks.WarCry.MightyRoar 
@@ -616,7 +663,11 @@ Serialized exports:
 			TC_AllTogetherNow_T01(StructProperty)=GameplayTagContainer:Granted.Perk.AllTogetherNow.T01 
 			GE_AllTogetherNow_DurationPerStack(ObjectProperty)=GE_Perk_L_AllTogetherNow_DurationPerStack_C=/Game/Abilities/Player/Perks/Leader/AllTogetherNow/GE_Perk_L_AllTogetherNow_DurationPerStack 
 			Row_AllTogetherNow_DurationPerStack(StructProperty)=System.Byte[] 
-			isAutoCommitted(BoolProperty)=False 
+			TC_MightyRoar_T01(StructProperty)=GameplayTagContainer:Granted.Perk.MightyRoar.T01 
+			TC_MightyRoar_T02(StructProperty)=GameplayTagContainer:Granted.Perk.MightyRoar.T02 
+			T_EffectContainer_Buff(StructProperty)=System.Byte[] 
+			Row_MightyRoarT01_Radius(StructProperty)=System.Byte[] 
+			Row_MightyRoarT02_Radius(StructProperty)=System.Byte[] 
 			EffectContainers(StructProperty)=System.Byte[] 
 			EffectContainers(StructProperty)=System.Byte[] 
 			AbilityCosts(ArrayProperty)=[object] (inner: StructProperty)
@@ -627,7 +678,7 @@ Serialized exports:
 		Tag array:
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject) :
 		Tag array:
-	ExecuteUbergraph_GA_Commando_WarCry (0-0-0-0): size 1260 (cls: ExecuteUbergraph_GA_Commando_WarCry>Function>/Script/CoreUObject) :
+	ExecuteUbergraph_GA_Commando_WarCry (0-0-0-0): size 1330 (cls: ExecuteUbergraph_GA_Commando_WarCry>Function>/Script/CoreUObject) :
 		Tag array:
 	K2_ActivateAbility (0-0-0-0): size 58 (cls: K2_ActivateAbility>Function>/Script/CoreUObject) :
 		Tag array:
@@ -685,13 +736,17 @@ Serialized exports:
 		Tag array:
 	AbilitySystemIn (0-0-0-0): size 36 (cls: AbilitySystemIn>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	ActiveAbilitySetup (0-0-0-0): size 669 (cls: ActiveAbilitySetup>Function>/Script/CoreUObject) :
+	ActiveAbilitySetup (0-0-0-0): size 839 (cls: ActiveAbilitySetup>Function>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_HasAllMatchingGameplayTags_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasAllMatchingGameplayTags_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_HasAllMatchingGameplayTags_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_HasAllMatchingGameplayTags_ReturnValue1>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_HasAllMatchingGameplayTags_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_HasAllMatchingGameplayTags_ReturnValue2>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_HasAllMatchingGameplayTags_ReturnValue3 (0-0-0-0): size 34 (cls: CallFunc_HasAllMatchingGameplayTags_ReturnValue3>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_HasAllMatchingGameplayTags_ReturnValue4 (0-0-0-0): size 34 (cls: CallFunc_HasAllMatchingGameplayTags_ReturnValue4>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -703,19 +758,25 @@ Serialized exports:
 		Tag array:
 	CombatantsMight (0-0-0-0): size 34 (cls: CombatantsMight>BoolProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_CommitAbilityWithEvent_Passed (0-0-0-0): size 34 (cls: CallFunc_CommitAbilityWithEvent_Passed>BoolProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_IsValid_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue1>BoolProperty>/Script/CoreUObject) :
 		Tag array:
-	CallFunc_K2_CommitAbility_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_K2_CommitAbility_ReturnValue>BoolProperty>/Script/CoreUObject) :
-		Tag array:
 	K2Node_Event_bWasCancelled (0-0-0-0): size 34 (cls: K2Node_Event_bWasCancelled>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	FightOrFlight (0-0-0-0): size 34 (cls: FightOrFlight>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	Leadership (0-0-0-0): size 34 (cls: Leadership>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	MightyRoar (0-0-0-0): size 34 (cls: MightyRoar>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	MightyRoar_T01 (0-0-0-0): size 34 (cls: MightyRoar_T01>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	MightyRoar_T02 (0-0-0-0): size 34 (cls: MightyRoar_T02>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	PracticedInCombat (0-0-0-0): size 34 (cls: PracticedInCombat>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -750,8 +811,6 @@ Serialized exports:
 	SpoilsOfWar (0-0-0-0): size 34 (cls: SpoilsOfWar>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	ThereAreManyLikeItButThisOneIsMine (0-0-0-0): size 34 (cls: ThereAreManyLikeItButThisOneIsMine>BoolProperty>/Script/CoreUObject) :
-		Tag array:
-	UseNewPerkSystem (0-0-0-0): size 34 (cls: UseNewPerkSystem>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	WarCryMaxShield (0-0-0-0): size 34 (cls: WarCryMaxShield>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -829,6 +888,20 @@ Serialized exports:
 		Tag array:
 	CallFunc_Multiply_IntFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Multiply_IntFloat_ReturnValue>FloatProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_GetValueAtLevel_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetValueAtLevel_ReturnValue>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	SetupMightyRoarRange (0-0-0-0): size 595 (cls: SetupMightyRoarRange>Function>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Add_FloatFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Add_FloatFloat_ReturnValue>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_GetRangeFromGameplayEffectContainer_Range (0-0-0-0): size 32 (cls: CallFunc_GetRangeFromGameplayEffectContainer_Range>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_GetValueAtLevel_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_GetValueAtLevel_ReturnValue1>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Multiply_FloatFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Multiply_FloatFloat_ReturnValue>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Multiply_FloatFloat_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Multiply_FloatFloat_ReturnValue1>FloatProperty>/Script/CoreUObject) :
+		Tag array:
 	WarCryHandOffset (0-0-0-0): size 32 (cls: WarCryHandOffset>FloatProperty>/Script/CoreUObject) :
 		Tag array:
 	WarCryMaxShieldPercentIncrease (0-0-0-0): size 32 (cls: WarCryMaxShieldPercentIncrease>FloatProperty>/Script/CoreUObject) :
@@ -836,6 +909,10 @@ Serialized exports:
 	CallFunc_HasAllMatchingGameplayTags_TagContainerInterface1_CastInput (0-0-0-0): size 36 (cls: CallFunc_HasAllMatchingGameplayTags_TagContainerInterface1_CastInput>InterfaceProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_HasAllMatchingGameplayTags_TagContainerInterface2_CastInput (0-0-0-0): size 36 (cls: CallFunc_HasAllMatchingGameplayTags_TagContainerInterface2_CastInput>InterfaceProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_HasAllMatchingGameplayTags_TagContainerInterface3_CastInput (0-0-0-0): size 36 (cls: CallFunc_HasAllMatchingGameplayTags_TagContainerInterface3_CastInput>InterfaceProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_HasAllMatchingGameplayTags_TagContainerInterface4_CastInput (0-0-0-0): size 36 (cls: CallFunc_HasAllMatchingGameplayTags_TagContainerInterface4_CastInput>InterfaceProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_HasAllMatchingGameplayTags_TagContainerInterface_CastInput (0-0-0-0): size 36 (cls: CallFunc_HasAllMatchingGameplayTags_TagContainerInterface_CastInput>InterfaceProperty>/Script/CoreUObject) :
 		Tag array:
@@ -925,6 +1002,8 @@ Serialized exports:
 		Tag array:
 	K2Node_CustomEvent_TargetData4 (0-0-0-0): size 36 (cls: K2Node_CustomEvent_TargetData4>StructProperty>/Script/CoreUObject) :
 		Tag array:
+	K2Node_Select_Default (0-0-0-0): size 36 (cls: K2Node_Select_Default>StructProperty>/Script/CoreUObject) :
+		Tag array:
 	Temp_struct_Variable (0-0-0-0): size 36 (cls: Temp_struct_Variable>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	Temp_struct_Variable1 (0-0-0-0): size 36 (cls: Temp_struct_Variable1>StructProperty>/Script/CoreUObject) :
@@ -936,6 +1015,10 @@ Serialized exports:
 	Row_AllTogetherNow_DurationPerStack (0-0-0-0): size 36 (cls: Row_AllTogetherNow_DurationPerStack>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	Row_DefaultDuration (0-0-0-0): size 36 (cls: Row_DefaultDuration>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	Row_MightyRoarT01_Radius (0-0-0-0): size 36 (cls: Row_MightyRoarT01_Radius>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	Row_MightyRoarT02_Radius (0-0-0-0): size 36 (cls: Row_MightyRoarT02_Radius>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	Row_PracticedInCombat_T01_Duration (0-0-0-0): size 36 (cls: Row_PracticedInCombat_T01_Duration>StructProperty>/Script/CoreUObject) :
 		Tag array:
@@ -950,6 +1033,20 @@ Serialized exports:
 	CallFunc_AssignTagSetByCallerMagnitude_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_AssignTagSetByCallerMagnitude_ReturnValue1>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	WarCryEffectToApply (0-0-0-0): size 36 (cls: WarCryEffectToApply>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_BP_GetGameplayEffectContainer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_BP_GetGameplayEffectContainer_ReturnValue>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_EvaluatePerkTierBalanceValue_Balance_Value (0-0-0-0): size 36 (cls: CallFunc_EvaluatePerkTierBalanceValue_Balance_Value>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_ReplaceRangeInGameplayEffectContainer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_ReplaceRangeInGameplayEffectContainer_ReturnValue>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	K2Node_MakeStruct_ScalableFloat (0-0-0-0): size 36 (cls: K2Node_MakeStruct_ScalableFloat>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	K2Node_MakeStruct_ScalableFloat1 (0-0-0-0): size 36 (cls: K2Node_MakeStruct_ScalableFloat1>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	K2Node_MakeStruct_ScalableFloat2 (0-0-0-0): size 36 (cls: K2Node_MakeStruct_ScalableFloat2>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	T_EffectContainer_Buff (0-0-0-0): size 36 (cls: T_EffectContainer_Buff>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	T_Event_Activate (0-0-0-0): size 36 (cls: T_Event_Activate>StructProperty>/Script/CoreUObject) :
 		Tag array:
@@ -968,6 +1065,10 @@ Serialized exports:
 	TC_FightOrFlight (0-0-0-0): size 36 (cls: TC_FightOrFlight>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	TC_Leadership (0-0-0-0): size 36 (cls: TC_Leadership>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	TC_MightyRoar_T01 (0-0-0-0): size 36 (cls: TC_MightyRoar_T01>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	TC_MightyRoar_T02 (0-0-0-0): size 36 (cls: TC_MightyRoar_T02>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	TC_PracticedInCombat (0-0-0-0): size 36 (cls: TC_PracticedInCombat>StructProperty>/Script/CoreUObject) :
 		Tag array:

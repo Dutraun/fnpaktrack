@@ -50,6 +50,7 @@ Name table:
 	Activation_Radius
 	Actor
 	ActorComponent
+	ActorComponentTickFunction
 	ActorDestroyedSignature__DelegateSignature
 	Add_IntInt
 	AllNodes
@@ -111,6 +112,7 @@ Name table:
 	BoolProperty
 	BreakVector
 	bReplicateMovement
+	bStartWithTickEnabled
 	bSurpressHealthBar
 	BuildingActor
 	BuildingActorSpecification
@@ -577,6 +579,7 @@ Name table:
 	PlaySoundAtLocation
 	PlayWorldCameraShake
 	PointerToUberGraphFrame
+	PrimaryComponentTick
 	PrimarySurfaceType
 	PrimitiveComponent
 	PropertyName
@@ -935,6 +938,7 @@ Import table:
 	LinearColor (ScriptStruct)
 	Rotator (ScriptStruct)
 	Vector (ScriptStruct)
+	ActorComponentTickFunction (ScriptStruct)
 	BodyInstance (ScriptStruct)
 	CollisionResponse (ScriptStruct)
 	HitResult (ScriptStruct)
@@ -1482,25 +1486,29 @@ Serialized exports:
 		Tag array:
 	CallFunc_GetPlayerController_ReturnValue6 (0-0-0-0): size 36 (cls: CallFunc_GetPlayerController_ReturnValue6>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	CreationFX_GEN_VARIABLE (0-0-0-0): size 214 (cls: CreationFX_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	CreationFX_GEN_VARIABLE (0-0-0-0): size 297 (cls: CreationFX_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_Proxy_Mine_Land=/Game/Gadgets/Assets/ProximityMine/Effects/P_Proxy_Mine_Land 
 			BodyInstance(StructProperty)=System.Byte[] 
 			RelativeRotation(StructProperty)=Rotator(33.40134,0,0) 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
-	P_ProximityMine_Beacon_01DDFE60AF41B5CBEA7AF7609E860176FD (0-0-0-0): size 153 (cls: P_ProximityMine_Beacon_01DDFE60AF41B5CBEA7AF7609E860176FD>ParticleSystemComponent>/Script/Engine) :
+	P_ProximityMine_Beacon_01DDFE60AF41B5CBEA7AF7609E860176FD (0-0-0-0): size 236 (cls: P_ProximityMine_Beacon_01DDFE60AF41B5CBEA7AF7609E860176FD>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_ProximityMine_Beacon_01=/Game/Gadgets/Assets/ProximityMine/Effects/P_ProximityMine_Beacon_01 
 			BodyInstance(StructProperty)=System.Byte[] 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
-	ParticleSystemComponent_76 (0-0-0-0): size 67 (cls: ParticleSystemComponent_76>ParticleSystemComponent>/Script/Engine) :
+	ParticleSystemComponent_76 (0-0-0-0): size 150 (cls: ParticleSystemComponent_76>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_Proxy_Mine_Explosion_New=/Game/Gadgets/Assets/ProximityMine/Effects/P_Proxy_Mine_Explosion_New 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
-	ParticleSystemComponent_818 (0-0-0-0): size 153 (cls: ParticleSystemComponent_818>ParticleSystemComponent>/Script/Engine) :
+	ParticleSystemComponent_818 (0-0-0-0): size 236 (cls: ParticleSystemComponent_818>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_ProximityMine_AoE_Reticle_01=/Game/Gadgets/Assets/ProximityMine/Effects/P_ProximityMine_AoE_Reticle_01 
 			BodyInstance(StructProperty)=System.Byte[] 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
 	RotatingMovement_GEN_VARIABLE (0-0-0-0): size 99 (cls: RotatingMovement_GEN_VARIABLE>RotatingMovementComponent>/Script/Engine) :
 		Tag array:
@@ -1521,7 +1529,7 @@ Serialized exports:
 			ComponentTemplate(ObjectProperty)=SceneComponent_7=BGA_GM_Miniboss_MineLayerProximityMine_C 
 			VariableGuid(StructProperty)=Guid: 1936454195-1075374130-360597671-1253880230 
 			InternalVariableName(NameProperty)=DefaultSceneRoot 
-	SCS_Node_10 (0-0-0-0): size 733 (cls: SCS_Node_10>SCS_Node>/Script/Engine) :
+	SCS_Node_10 (0-0-0-0): size 931 (cls: SCS_Node_10>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=ParticleSystemComponent_818=BGA_GM_Miniboss_MineLayerProximityMine_C 
@@ -1578,7 +1586,7 @@ Serialized exports:
 			CookedComponentInstancingData(StructProperty)=System.Byte[] 
 			VariableGuid(StructProperty)=Guid: 3515034999-1101255608-1405150364-464718309 
 			InternalVariableName(NameProperty)=Collision_HalfSphere__1_Unit 
-	SCS_Node_2 (0-0-0-0): size 535 (cls: SCS_Node_2>SCS_Node>/Script/Engine) :
+	SCS_Node_2 (0-0-0-0): size 733 (cls: SCS_Node_2>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=ParticleSystemComponent_76=BGA_GM_Miniboss_MineLayerProximityMine_C 
@@ -1600,14 +1608,14 @@ Serialized exports:
 			ChildNodes(ArrayProperty)=[object] (inner: ObjectProperty)
 			VariableGuid(StructProperty)=Guid: 1142262429-1075656596-3343315621-4061081894 
 			InternalVariableName(NameProperty)=ProxyMine_Mesh 
-	SCS_Node_5 (0-0-0-0): size 931 (cls: SCS_Node_5>SCS_Node>/Script/Engine) :
+	SCS_Node_5 (0-0-0-0): size 1129 (cls: SCS_Node_5>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=CreationFX_GEN_VARIABLE=BGA_GM_Miniboss_MineLayerProximityMine_C 
 			CookedComponentInstancingData(StructProperty)=System.Byte[] 
 			VariableGuid(StructProperty)=Guid: 2457729733-1220387825-2279342477-1822042104 
 			InternalVariableName(NameProperty)=CreationFX 
-	SCS_Node_6 (0-0-0-0): size 733 (cls: SCS_Node_6>SCS_Node>/Script/Engine) :
+	SCS_Node_6 (0-0-0-0): size 931 (cls: SCS_Node_6>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=P_ProximityMine_Beacon_01DDFE60AF41B5CBEA7AF7609E860176FD=BGA_GM_Miniboss_MineLayerProximityMine_C 

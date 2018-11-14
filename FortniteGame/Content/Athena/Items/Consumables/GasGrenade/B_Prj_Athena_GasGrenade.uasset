@@ -17,6 +17,7 @@ Name table:
 	/Script/GameplayAbilities
 	Activate
 	Actor
+	ActorComponentTickFunction
 	Add_FloatFloat
 	AllNodes
 	ArrayIndex
@@ -59,6 +60,7 @@ Name table:
 	BreakHitResult
 	bRenderCustomDepth
 	bReturnMaterialOnMove
+	bStartWithTickEnabled
 	bStopSimulatingOnHit
 	bUnbound
 	bValidatedAsWired
@@ -303,6 +305,7 @@ Name table:
 	PostProcessParentShape_GEN_VARIABLE
 	PostProcessSettings
 	PreviousTargetArray
+	PrimaryComponentTick
 	PrimitiveComponent
 	Priority
 	ProjectileComp0
@@ -533,6 +536,7 @@ Import table:
 	Rotator (ScriptStruct)
 	Vector (ScriptStruct)
 	Vector4 (ScriptStruct)
+	ActorComponentTickFunction (ScriptStruct)
 	BodyInstance (ScriptStruct)
 	CollisionResponse (ScriptStruct)
 	HitResult (ScriptStruct)
@@ -771,21 +775,24 @@ Serialized exports:
 		Tag array:
 	CallFunc_CreateDynamicMaterialInstance_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_CreateDynamicMaterialInstance_ReturnValue>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	P_GasGrenade_InnerSmoke_GEN_VARIABLE (0-0-0-0): size 151 (cls: P_GasGrenade_InnerSmoke_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	P_GasGrenade_InnerSmoke_GEN_VARIABLE (0-0-0-0): size 234 (cls: P_GasGrenade_InnerSmoke_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_GasGrenade_Smoke_Loop=/Game/Athena/Items/Consumables/GasGrenade/P_GasGrenade_Smoke_Loop 
 			WarmupTime(FloatProperty)=2 
 			TranslucencySortPriority(IntProperty)=-1 
 			bAbsoluteScale(BoolProperty)=True 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
-	ParticleSystemComponent_2306__DE3CC847 (0-0-0-0): size 67 (cls: ParticleSystemComponent_2306__DE3CC847>ParticleSystemComponent>/Script/Engine) :
+	ParticleSystemComponent_2306__DE3CC847 (0-0-0-0): size 150 (cls: ParticleSystemComponent_2306__DE3CC847>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_Grenade_Distance=/Game/Gadgets/Assets/Grenade/P_Grenade_Distance 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
-	SmokeTrail_Particle_GEN_VARIABLE (0-0-0-0): size 102 (cls: SmokeTrail_Particle_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	SmokeTrail_Particle_GEN_VARIABLE (0-0-0-0): size 185 (cls: SmokeTrail_Particle_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_GasGrenade_Ribbon_SmokeTrail=/Game/Athena/Items/Consumables/GasGrenade/P_GasGrenade_Ribbon_SmokeTrail 
 			RelativeLocation(StructProperty)=Vector(0,8.28856E-05,11.15985) 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 	PostProcessComponent_GEN_VARIABLE (0-0-0-0): size 536 (cls: PostProcessComponent_GEN_VARIABLE>PostProcessComponent>/Script/Engine) :
 		Tag array:
 			Settings(StructProperty)=System.Byte[] 
@@ -829,7 +836,7 @@ Serialized exports:
 			bIsParentComponentNative(BoolProperty)=True 
 			VariableGuid(StructProperty)=Guid: 4188497119-0-0-0 
 			InternalVariableName(NameProperty)=GrenadeFuse_AudioComponent 
-	SCS_Node_2 (0-0-0-0): size 594 (cls: SCS_Node_2>SCS_Node>/Script/Engine) :
+	SCS_Node_2 (0-0-0-0): size 792 (cls: SCS_Node_2>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=ParticleSystemComponent_2306__DE3CC847=B_Prj_Athena_GasGrenade_C 
@@ -865,7 +872,7 @@ Serialized exports:
 			ChildNodes(ArrayProperty)=[object] (inner: ObjectProperty)
 			VariableGuid(StructProperty)=Guid: 2805181809-0-0-0 
 			InternalVariableName(NameProperty)=Mesh 
-	SCS_Node_6 (0-0-0-0): size 733 (cls: SCS_Node_6>SCS_Node>/Script/Engine) :
+	SCS_Node_6 (0-0-0-0): size 931 (cls: SCS_Node_6>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=SmokeTrail_Particle_GEN_VARIABLE=B_Prj_Athena_GasGrenade_C 
@@ -889,7 +896,7 @@ Serialized exports:
 			ChildNodes(ArrayProperty)=[object] (inner: ObjectProperty)
 			VariableGuid(StructProperty)=Guid: 1925552673-1220799214-609038271-2115156231 
 			InternalVariableName(NameProperty)=SmokeVolumeMesh 
-	SCS_Node_9 (0-0-0-0): size 832 (cls: SCS_Node_9>SCS_Node>/Script/Engine) :
+	SCS_Node_9 (0-0-0-0): size 1030 (cls: SCS_Node_9>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=P_GasGrenade_InnerSmoke_GEN_VARIABLE=B_Prj_Athena_GasGrenade_C 

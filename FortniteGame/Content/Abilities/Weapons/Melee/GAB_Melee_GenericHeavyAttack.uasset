@@ -4,7 +4,9 @@ Name table:
 	/Game/Abilities/Weapons/Melee/GE_Melee_GenericDamage
 	/Script/CoreUObject
 	/Script/Engine
+	/Script/GameplayAbilities
 	/Script/GameplayTags
+	Ability.HeavyAttack
 	AbilityCosts
 	AbilityTags
 	AbilityTriggerData
@@ -45,6 +47,7 @@ Name table:
 	bUseProjectileRotationForDamageZones
 	bUseTrapsOwningPawnAsInstigator
 	bUseWeaponRanges
+	bWasCancelled
 	ByteProperty
 	Class
 	ConeMinRadius
@@ -57,9 +60,13 @@ Name table:
 	CurveTableRowHandle
 	CustomShapeComponentName
 	Default__BlueprintGeneratedClass
+	Default__BoolProperty
+	Default__Function
 	Default__GAB_Melee_Generic_EventGraph_C
 	Default__GAB_Melee_GenericHeavyAttack_C
 	Default__GE_Melee_GenericDamage_C
+	Default__IntProperty
+	Default__StructProperty
 	EffectContainers
 	EFortAbilityCostSource
 	EFortAbilityCostSource::Durability
@@ -78,14 +85,19 @@ Name table:
 	EGameplayAbilityTriggerSource
 	EGameplayAbilityTriggerSource::GameplayEvent
 	Engine
+	EntryPoint
 	EnumProperty
+	Event.Ability.HeavyAttack.Activate
+	Event.Ability.HeavyAttack.Deactivate
 	ExclusionGameplayTags
+	ExecuteUbergraph_GAB_Melee_GenericHeavyAttack
 	FloatProperty
 	FortAbilityCost
 	FortAbilityTargetSelection
 	FortAbilityTargetSelectionList
 	FortGameplayEffectContainer
 	FortTargetFilter
+	Function
 	GAB_Melee_Generic_EventGraph_C
 	GAB_Melee_GenericHeavyAttack_C
 	Gameplay.Action.Player.Heavy
@@ -96,14 +108,22 @@ Name table:
 	Gameplay.Melee.Combo4
 	Gameplay.Melee.EnableHeavyAttack
 	Gameplay.Melee.Hit1
+	GameplayAbility
+	GameplayAbilityTargetDataHandle
 	GameplayCue.Impact.Physical
+	GameplayEffectContextHandle
+	GameplayEventData
 	GameplayTag
 	GameplayTagContainer
+	GameplayTags
 	GE_Melee_GenericDamage_C
 	HalfExtents
 	ImpactCues
 	IntProperty
 	ItemDefinition
+	K2_ActivateAbility
+	K2_OnEndAbility
+	K2Node_Event_bWasCancelled
 	List
 	MaxTargets
 	NameProperty
@@ -111,16 +131,20 @@ Name table:
 	Object
 	ObjectProperty
 	Package
+	PointerToUberGraphFrame
 	PrimarySource
 	Range
 	RowName
 	ScalableFloat
 	ScriptStruct
 	SecondarySource
+	SendGameplayEvent
 	Shape
 	Stamina Lockout
 	StrProperty
 	StructProperty
+	T_Event_Activate
+	T_Event_Deactivate
 	TagName
 	TargetFilter
 	TargetGameplayEffectClasses
@@ -129,30 +153,75 @@ Name table:
 	TestType
 	TriggerSource
 	TriggerTag
+	UberGraphFrame
+	UberGraphFramePointerProperty
+	UberGraphFunction
 	Value
 	Vector
 Import table:
+	GameplayTags (ArrayProperty)
 	GAB_Melee_Generic_EventGraph_C (BlueprintGeneratedClass)
 	GE_Melee_GenericDamage_C (BlueprintGeneratedClass)
 	Default__BlueprintGeneratedClass (BlueprintGeneratedClass)
+	Default__BoolProperty (BoolProperty)
+	BoolProperty (Class)
+	Function (Class)
+	IntProperty (Class)
 	Object (Class)
+	StructProperty (Class)
 	BlueprintGeneratedClass (Class)
+	GameplayAbility (Class)
+	K2_ActivateAbility (Function)
+	Default__Function (Function)
+	K2_OnEndAbility (Function)
 	Default__GAB_Melee_Generic_EventGraph_C (GAB_Melee_Generic_EventGraph_C)
 	Default__GE_Melee_GenericDamage_C (GE_Melee_GenericDamage_C)
+	Default__IntProperty (IntProperty)
 	/Game/Abilities/Weapons/Melee/GAB_Melee_Generic_EventGraph (Package)
 	/Game/Abilities/Weapons/Melee/GE_Melee_GenericDamage (Package)
 	/Script/CoreUObject (Package)
 	/Script/Engine (Package)
+	/Script/GameplayAbilities (Package)
 	/Script/GameplayTags (Package)
+	PointerToUberGraphFrame (ScriptStruct)
+	GameplayAbilityTargetDataHandle (ScriptStruct)
+	GameplayEffectContextHandle (ScriptStruct)
+	GameplayEventData (ScriptStruct)
 	GameplayTag (ScriptStruct)
+	GameplayTagContainer (ScriptStruct)
+	Default__StructProperty (StructProperty)
+	GameplayTags (StructProperty)
 Serialized exports:
-	GAB_Melee_GenericHeavyAttack_C (0-0-0-0): size 76 (cls: GAB_Melee_GenericHeavyAttack_C>BlueprintGeneratedClass>/Script/Engine) :
+	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	Default__GAB_Melee_GenericHeavyAttack_C (0-0-0-0): size 3962 (cls: Default__GAB_Melee_GenericHeavyAttack_C>GAB_Melee_GenericHeavyAttack_C) :
+	GAB_Melee_GenericHeavyAttack_C (0-0-0-0): size 194 (cls: GAB_Melee_GenericHeavyAttack_C>BlueprintGeneratedClass>/Script/Engine) :
 		Tag array:
+			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=GAB_Melee_GenericHeavyAttack_C 
+			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_GAB_Melee_GenericHeavyAttack=GAB_Melee_GenericHeavyAttack_C 
+	Default__GAB_Melee_GenericHeavyAttack_C (0-0-0-0): size 4207 (cls: Default__GAB_Melee_GenericHeavyAttack_C>GAB_Melee_GenericHeavyAttack_C) :
+		Tag array:
+			UberGraphFrame(StructProperty)=System.Byte[] 
+			T_Event_Activate(StructProperty)=System.Byte[] 
+			T_Event_Deactivate(StructProperty)=System.Byte[] 
 			Stamina Lockout(BoolProperty)=True 
 			EffectContainers(StructProperty)=System.Byte[] 
 			AbilityCosts(ArrayProperty)=[object] (inner: StructProperty)
-			AbilityTags(StructProperty)=GameplayTagContainer:Gameplay.Action.Player.Heavy,Gameplay.Effect.HarvestResources 
+			AbilityTags(StructProperty)=GameplayTagContainer:Gameplay.Action.Player.Heavy,Gameplay.Effect.HarvestResources,Ability.HeavyAttack 
 			AbilityTriggers(ArrayProperty)=[object] (inner: StructProperty)
 			ActivationRequiredTags(StructProperty)=GameplayTagContainer:Gameplay.Melee.EnableHeavyAttack 
+	T_Event_Activate (0-0-0-0): size 36 (cls: T_Event_Activate>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject) :
+		Tag array:
+	ExecuteUbergraph_GAB_Melee_GenericHeavyAttack (0-0-0-0): size 315 (cls: ExecuteUbergraph_GAB_Melee_GenericHeavyAttack>Function>/Script/CoreUObject) :
+		Tag array:
+	K2Node_Event_bWasCancelled (0-0-0-0): size 34 (cls: K2Node_Event_bWasCancelled>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	K2_ActivateAbility (0-0-0-0): size 58 (cls: K2_ActivateAbility>Function>/Script/CoreUObject) :
+		Tag array:
+	K2_OnEndAbility (0-0-0-0): size 72 (cls: K2_OnEndAbility>Function>/Script/CoreUObject) :
+		Tag array:
+	bWasCancelled (0-0-0-0): size 34 (cls: bWasCancelled>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	T_Event_Deactivate (0-0-0-0): size 36 (cls: T_Event_Deactivate>StructProperty>/Script/CoreUObject) :
+		Tag array:

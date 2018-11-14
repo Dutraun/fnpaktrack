@@ -40,6 +40,7 @@ Name table:
 	/Script/MovieSceneTracks
 	/Script/SlateCore
 	/Script/UMG
+	AbilityIconSizeBox
 	ActiveEntities
 	ActiveSequences
 	AnimationBindings
@@ -71,6 +72,7 @@ Name table:
 	bIncludeName
 	BindingName
 	Bindings
+	bInShowBadges
 	bIsDynamicallyLoaded
 	bIsRootWidget
 	bIsVariable
@@ -90,14 +92,19 @@ Name table:
 	bOverride_HeightOverride
 	bOverride_WidthOverride
 	Box2D
+	BreakVector2D
 	Brush
 	BrushColor
+	bShowBadges
 	bUseLargeFormatName
+	bUseLegacyFixedSizeIcons
 	bValidTemplate
 	ByteProperty
 	CachedFunction
 	CachedTooltipDescription
 	CallFunc_BooleanAND_ReturnValue
+	CallFunc_BreakVector2D_X
+	CallFunc_BreakVector2D_Y
 	CallFunc_Conv_IntToText_ReturnValue
 	CallFunc_Create_Basic_Tooltip_Output
 	CallFunc_EqualEqual_ByteByte_ReturnValue
@@ -129,6 +136,8 @@ Name table:
 	CallFunc_Not_PreBool_ReturnValue
 	CallFunc_Not_PreBool_ReturnValue1
 	CallFunc_NotEqual_ByteByte_ReturnValue
+	CallFunc_PlayAnimationAtTime_ReturnValue
+	CallFunc_ResizeBrush_ResizedBrush
 	CallFunc_ShouldFadePerk_Result
 	ChildTemplates
 	Class
@@ -165,7 +174,6 @@ Name table:
 	Default__HorizontalBox
 	Default__HorizontalBoxSlot
 	Default__Image
-	Default__InterfaceProperty
 	Default__IntProperty
 	Default__KismetTextLibrary
 	Default__MovieScene
@@ -257,6 +265,7 @@ Name table:
 	ESlateVisibility::Visible
 	ETextJustify
 	ETextJustify::Center
+	EvalOptions
 	EvaluationField
 	EvaluationGroup
 	EvaluationIndex
@@ -274,7 +283,6 @@ Name table:
 	ForcedTime
 	Format
 	FormatArgumentData
-	FortClientAnnouncement_TutorialInterface
 	FortInventoryContext
 	FortMultiSizeBrush
 	FortPerkWidget_NUI
@@ -341,8 +349,10 @@ Name table:
 	IsPerkUnlocked
 	IsTierPerk
 	Justification
-	K2Node_DynamicCast_AsFort_Client_Announcement_Tutorial_Interface
+	K2Node_DynamicCast_AsScale_Box_Slot
+	K2Node_DynamicCast_AsVertical_Box_Slot
 	K2Node_DynamicCast_bSuccess
+	K2Node_DynamicCast_bSuccess1
 	K2Node_Event_Description
 	K2Node_Event_IsDesignTime
 	K2Node_MakeArray_Array
@@ -403,6 +413,7 @@ Name table:
 	MovieSceneOrderedEvaluationKey
 	MovieScenePossessable
 	MovieScenePropertySectionData
+	MovieSceneSectionEvalOptions
 	MovieSceneSegment
 	MovieSceneSegmentIdentifier
 	MovieSceneSequenceID
@@ -440,8 +451,9 @@ Name table:
 	Parent
 	ParentGuid
 	Perk
+	PerkIconSizeBox
 	PerkWidgetNew_C
-	PlayAnimation
+	PlayAnimationAtTime
 	PlaybackRange
 	PlayerController
 	PointerToUberGraphFrame
@@ -463,6 +475,7 @@ Name table:
 	RCTWM_WeightedNone
 	RenderOpacity
 	RequestCombinedTooltipDescription
+	ResizeBrush
 	ResourceName
 	ResourceObject
 	Result
@@ -486,12 +499,14 @@ Name table:
 	SetAutoWrapText
 	SetBrush
 	SetColorAndOpacity
-	SetDescriptionWrapTextAt
+	SetDescriptionWraptTextAt
+	SetHeightOverride
 	SetStyle
 	SetText
 	SetupBadge
-	SetVAlign
+	SetVerticalAlignment
 	SetVisibility
+	SetWidthOverride
 	SetWrapTextWidth
 	ShouldFadePerk
 	ShowMouseTooltips
@@ -553,6 +568,7 @@ Name table:
 	Temp_byte_Variable4
 	Temp_byte_Variable5
 	Temp_float_Variable
+	Temp_float_Variable1
 	Temp_object_Variable
 	Temp_object_Variable1
 	Temp_object_Variable10
@@ -596,6 +612,7 @@ Name table:
 	UberGraphFunction
 	UInt16Property
 	UInt32Property
+	UMGSequencePlayer
 	UnderlyingType
 	UpdatePerk
 	UserDefinedStruct
@@ -662,7 +679,6 @@ Import table:
 	EnumProperty (Class)
 	FloatProperty (Class)
 	Function (Class)
-	InterfaceProperty (Class)
 	IntProperty (Class)
 	Object (Class)
 	ObjectProperty (Class)
@@ -672,7 +688,6 @@ Import table:
 	KismetMathLibrary (Class)
 	KismetTextLibrary (Class)
 	PlayerController (Class)
-	FortClientAnnouncement_TutorialInterface (Class)
 	FortInventoryContext (Class)
 	FortPerkWidget_NUI (Class)
 	MovieScene (Class)
@@ -692,6 +707,7 @@ Import table:
 	SizeBoxSlot (Class)
 	Spacer (Class)
 	TextBlock (Class)
+	UMGSequencePlayer (Class)
 	UserWidget (Class)
 	VerticalBox (Class)
 	VerticalBoxSlot (Class)
@@ -724,6 +740,7 @@ Import table:
 	SetWrapTextWidth (Function)
 	Default__Function (Function)
 	BooleanAND (Function)
+	BreakVector2D (Function)
 	EqualEqual_ByteByte (Function)
 	FTrunc (Function)
 	GreaterEqual_FloatFloat (Function)
@@ -744,15 +761,18 @@ Import table:
 	OnCombinedTooltipDescriptionReady (Function)
 	RequestCombinedTooltipDescription (Function)
 	SetColorAndOpacity (Function)
+	SetVerticalAlignment (Function)
+	SetHeightOverride (Function)
+	SetWidthOverride (Function)
 	SetAutoWrapText (Function)
 	SetColorAndOpacity (Function)
-	PlayAnimation (Function)
+	PlayAnimationAtTime (Function)
 	PreConstruct (Function)
+	SetVerticalAlignment (Function)
 	NoResourceBrush (Function)
 	Default__HorizontalBox (HorizontalBox)
 	Default__HorizontalBoxSlot (HorizontalBoxSlot)
 	Default__Image (Image)
-	Default__InterfaceProperty (InterfaceProperty)
 	Default__IntProperty (IntProperty)
 	ArgumentValueInt (IntProperty)
 	Default__KismetTextLibrary (KismetTextLibrary)
@@ -763,6 +783,7 @@ Import table:
 	Default__MovieSceneFloatTrack (MovieSceneFloatTrack)
 	Default__ObjectProperty (ObjectProperty)
 	ResourceObject (ObjectProperty)
+	Slot (ObjectProperty)
 	Default__Overlay (Overlay)
 	Default__OverlaySlot (OverlaySlot)
 	/Game/UI/Foundation/Border/Border_Solid_DkBlue (Package)
@@ -868,7 +889,7 @@ Import table:
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	PerkWidgetNew_C (0-0-0-0): size 1255 (cls: PerkWidgetNew_C>WidgetBlueprintGeneratedClass>/Script/UMG) :
+	PerkWidgetNew_C (0-0-0-0): size 1271 (cls: PerkWidgetNew_C>WidgetBlueprintGeneratedClass>/Script/UMG) :
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
@@ -879,16 +900,18 @@ Serialized exports:
 			TemplateAsset(SoftObjectProperty)=/Game/UI/Foundation/Perks/PerkWidgetNew.WidgetArchetype 
 			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=PerkWidgetNew_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_PerkWidgetNew=PerkWidgetNew_C 
-	Default__PerkWidgetNew_C (0-0-0-0): size 1215 (cls: Default__PerkWidgetNew_C>PerkWidgetNew_C) :
+	Default__PerkWidgetNew_C (0-0-0-0): size 1267 (cls: Default__PerkWidgetNew_C>PerkWidgetNew_C) :
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			DemoImage(StructProperty)=System.Byte[] 
+			bUseLegacyFixedSizeIcons(BoolProperty)=True 
 			IconSize(ByteProperty)=EFortBrushSize::Large 
 			Locked Text Style(ObjectProperty)=TextStyle-Base-XS-B-70pc_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B-70pc 
 			Locked Description Style(ObjectProperty)=TextStyle-Base-XS-70pc_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-70pc 
 			ListPadding(StructProperty)=System.Byte[] 
 			Default Description Style(ObjectProperty)=TextStyle-Base-XS_C=/Game/UI/Foundation/Text/TextStyle-Base-XS 
 			Default Text Style(ObjectProperty)=TextStyle-Base-XS-B_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B 
+			bShowBadges(BoolProperty)=True 
 			bHasScriptImplementedTick(BoolProperty)=False 
 			bHasScriptImplementedPaint(BoolProperty)=False 
 	Intro (0-0-0-0): size 36 (cls: Intro>ObjectProperty>/Script/CoreUObject) :
@@ -905,13 +928,13 @@ Serialized exports:
 		Tag array:
 	PreConstruct (0-0-0-0): size 72 (cls: PreConstruct>Function>/Script/CoreUObject) :
 		Tag array:
-	CallFunc_NoResourceBrush_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_NoResourceBrush_ReturnValue>StructProperty>/Script/CoreUObject) :
+	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject) :
 		Tag array:
-	InitializeBasicPerk (0-0-0-0): size 260 (cls: InitializeBasicPerk>Function>/Script/CoreUObject) :
+	InitializeBasicPerk (0-0-0-0): size 979 (cls: InitializeBasicPerk>Function>/Script/CoreUObject) :
 		Tag array:
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject) :
 		Tag array:
-	InitializeAbilityPerk (0-0-0-0): size 395 (cls: InitializeAbilityPerk>Function>/Script/CoreUObject) :
+	InitializeAbilityPerk (0-0-0-0): size 1636 (cls: InitializeAbilityPerk>Function>/Script/CoreUObject) :
 		Tag array:
 	SlateBrush (0-0-0-0): size 36 (cls: SlateBrush>StructProperty>/Script/CoreUObject) :
 		Tag array:
@@ -927,7 +950,7 @@ Serialized exports:
 		Tag array:
 	DescriptionText (0-0-0-0): size 32 (cls: DescriptionText>StrProperty>/Script/CoreUObject) :
 		Tag array:
-	InitializeText (0-0-0-0): size 617 (cls: InitializeText>Function>/Script/CoreUObject) :
+	InitializeText (0-0-0-0): size 774 (cls: InitializeText>Function>/Script/CoreUObject) :
 		Tag array:
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject) :
 		Tag array:
@@ -939,7 +962,7 @@ Serialized exports:
 		Tag array:
 	SupportPerkType (0-0-0-0): size 40 (cls: SupportPerkType>EnumProperty>/Script/CoreUObject) :
 		Tag array:
-	SetupBadge (0-0-0-0): size 294 (cls: SetupBadge>Function>/Script/CoreUObject) :
+	SetupBadge (0-0-0-0): size 416 (cls: SetupBadge>Function>/Script/CoreUObject) :
 		Tag array:
 	ShowTierImage (0-0-0-0): size 43 (cls: ShowTierImage>Function>/Script/CoreUObject) :
 		Tag array:
@@ -961,7 +984,11 @@ Serialized exports:
 		Tag array:
 	bIncludeName (0-0-0-0): size 34 (cls: bIncludeName>BoolProperty>/Script/CoreUObject) :
 		Tag array:
+	bShowBadges (0-0-0-0): size 34 (cls: bShowBadges>BoolProperty>/Script/CoreUObject) :
+		Tag array:
 	bUseLargeFormatName (0-0-0-0): size 34 (cls: bUseLargeFormatName>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	bUseLegacyFixedSizeIcons (0-0-0-0): size 34 (cls: bUseLegacyFixedSizeIcons>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	K2Node_Event_IsDesignTime (0-0-0-0): size 34 (cls: K2Node_Event_IsDesignTime>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -971,7 +998,7 @@ Serialized exports:
 		Tag array:
 	bIncludeName (0-0-0-0): size 34 (cls: bIncludeName>BoolProperty>/Script/CoreUObject) :
 		Tag array:
-	InitializeSettings (0-0-0-0): size 246 (cls: InitializeSettings>Function>/Script/CoreUObject) :
+	InitializeSettings (0-0-0-0): size 298 (cls: InitializeSettings>Function>/Script/CoreUObject) :
 		Tag array:
 	ReturnValue (0-0-0-0): size 36 (cls: ReturnValue>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
@@ -991,19 +1018,35 @@ Serialized exports:
 		Tag array:
 	CallFunc_GetIcon_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_GetIcon_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
+	Temp_bool_Variable1 (0-0-0-0): size 34 (cls: Temp_bool_Variable1>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	Temp_bool_Variable2 (0-0-0-0): size 34 (cls: Temp_bool_Variable2>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	Temp_bool_Variable3 (0-0-0-0): size 34 (cls: Temp_bool_Variable3>BoolProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_GetIcon_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_GetIcon_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
-	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject) :
+	Temp_bool_Variable1 (0-0-0-0): size 34 (cls: Temp_bool_Variable1>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	Temp_bool_Variable2 (0-0-0-0): size 34 (cls: Temp_bool_Variable2>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	Temp_bool_Variable3 (0-0-0-0): size 34 (cls: Temp_bool_Variable3>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_EqualEqual_ByteByte_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ByteByte_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	bIncludeDescription (0-0-0-0): size 34 (cls: bIncludeDescription>BoolProperty>/Script/CoreUObject) :
 		Tag array:
+	bInShowBadges (0-0-0-0): size 34 (cls: bInShowBadges>BoolProperty>/Script/CoreUObject) :
+		Tag array:
 	bUseLargeFormatName (0-0-0-0): size 34 (cls: bUseLargeFormatName>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	bUseLegacyFixedSizeIcons (0-0-0-0): size 34 (cls: bUseLegacyFixedSizeIcons>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	ShowMouseTooltips (0-0-0-0): size 34 (cls: ShowMouseTooltips>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	K2Node_DynamicCast_bSuccess1 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess1>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1017,7 +1060,7 @@ Serialized exports:
 		Tag array:
 	WrapTextAt (0-0-0-0): size 32 (cls: WrapTextAt>FloatProperty>/Script/CoreUObject) :
 		Tag array:
-	SetDescriptionWrapTextAt (0-0-0-0): size 265 (cls: SetDescriptionWrapTextAt>Function>/Script/CoreUObject) :
+	SetDescriptionWraptTextAt (0-0-0-0): size 265 (cls: SetDescriptionWraptTextAt>Function>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_GreaterEqual_FloatFloat_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_GreaterEqual_FloatFloat_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1028,6 +1071,8 @@ Serialized exports:
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_IsTierPerk_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsTierPerk_ReturnValue>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_BooleanAND_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1082,7 +1127,7 @@ Serialized exports:
 			HorizontalAlignment(ByteProperty)=HAlign_Center 
 			VerticalAlignment(ByteProperty)=VAlign_Center 
 			Parent(ObjectProperty)=BorderAbility=WidgetArchetype 
-			Content(ObjectProperty)=SizeBox_2=WidgetArchetype 
+			Content(ObjectProperty)=AbilityIconSizeBox=WidgetArchetype 
 	BorderSlot_1 (0-0-0-0): size 243 (cls: BorderSlot_1>BorderSlot>/Script/UMG) :
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
@@ -1104,11 +1149,7 @@ Serialized exports:
 		Tag array:
 	IconSize (0-0-0-0): size 36 (cls: IconSize>ByteProperty>/Script/CoreUObject) :
 		Tag array:
-	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject) :
-		Tag array:
-	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject) :
-		Tag array:
-	K2Node_Select_Default (0-0-0-0): size 36 (cls: K2Node_Select_Default>ByteProperty>/Script/CoreUObject) :
+	K2Node_Select1_Default (0-0-0-0): size 36 (cls: K2Node_Select1_Default>ByteProperty>/Script/CoreUObject) :
 		Tag array:
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1116,9 +1157,19 @@ Serialized exports:
 		Tag array:
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject) :
 		Tag array:
-	Temp_byte_Variable3 (0-0-0-0): size 36 (cls: Temp_byte_Variable3>ByteProperty>/Script/CoreUObject) :
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject) :
+		Tag array:
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject) :
+		Tag array:
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject) :
 		Tag array:
 	Temp_byte_Variable4 (0-0-0-0): size 36 (cls: Temp_byte_Variable4>ByteProperty>/Script/CoreUObject) :
+		Tag array:
+	Temp_byte_Variable5 (0-0-0-0): size 36 (cls: Temp_byte_Variable5>ByteProperty>/Script/CoreUObject) :
+		Tag array:
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject) :
+		Tag array:
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject) :
 		Tag array:
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1207,9 +1258,9 @@ Serialized exports:
 		Tag array:
 	Temp_byte_Variable (0-0-0-0): size 40 (cls: Temp_byte_Variable>EnumProperty>/Script/CoreUObject) :
 		Tag array:
-	K2Node_Select1_Default (0-0-0-0): size 40 (cls: K2Node_Select1_Default>EnumProperty>/Script/CoreUObject) :
-		Tag array:
 	K2Node_Select2_Default (0-0-0-0): size 40 (cls: K2Node_Select2_Default>EnumProperty>/Script/CoreUObject) :
+		Tag array:
+	K2Node_Select_Default (0-0-0-0): size 40 (cls: K2Node_Select_Default>EnumProperty>/Script/CoreUObject) :
 		Tag array:
 	Temp_byte_Variable (0-0-0-0): size 40 (cls: Temp_byte_Variable>EnumProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1217,7 +1268,13 @@ Serialized exports:
 		Tag array:
 	Temp_byte_Variable2 (0-0-0-0): size 40 (cls: Temp_byte_Variable2>EnumProperty>/Script/CoreUObject) :
 		Tag array:
-	Temp_byte_Variable5 (0-0-0-0): size 40 (cls: Temp_byte_Variable5>EnumProperty>/Script/CoreUObject) :
+	Temp_byte_Variable3 (0-0-0-0): size 40 (cls: Temp_byte_Variable3>EnumProperty>/Script/CoreUObject) :
+		Tag array:
+	K2Node_Select_Default (0-0-0-0): size 40 (cls: K2Node_Select_Default>EnumProperty>/Script/CoreUObject) :
+		Tag array:
+	Temp_byte_Variable (0-0-0-0): size 40 (cls: Temp_byte_Variable>EnumProperty>/Script/CoreUObject) :
+		Tag array:
+	Temp_byte_Variable1 (0-0-0-0): size 40 (cls: Temp_byte_Variable1>EnumProperty>/Script/CoreUObject) :
 		Tag array:
 	K2Node_Select3_Default (0-0-0-0): size 40 (cls: K2Node_Select3_Default>EnumProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1230,6 +1287,30 @@ Serialized exports:
 	Temp_byte_Variable2 (0-0-0-0): size 40 (cls: Temp_byte_Variable2>EnumProperty>/Script/CoreUObject) :
 		Tag array:
 	Temp_byte_Variable3 (0-0-0-0): size 40 (cls: Temp_byte_Variable3>EnumProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_BreakVector2D_X (0-0-0-0): size 32 (cls: CallFunc_BreakVector2D_X>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_BreakVector2D_Y (0-0-0-0): size 32 (cls: CallFunc_BreakVector2D_Y>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	K2Node_Select2_Default (0-0-0-0): size 32 (cls: K2Node_Select2_Default>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	K2Node_Select3_Default (0-0-0-0): size 32 (cls: K2Node_Select3_Default>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	Temp_float_Variable (0-0-0-0): size 32 (cls: Temp_float_Variable>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	Temp_float_Variable1 (0-0-0-0): size 32 (cls: Temp_float_Variable1>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_BreakVector2D_X (0-0-0-0): size 32 (cls: CallFunc_BreakVector2D_X>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_BreakVector2D_Y (0-0-0-0): size 32 (cls: CallFunc_BreakVector2D_Y>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	K2Node_Select2_Default (0-0-0-0): size 32 (cls: K2Node_Select2_Default>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	K2Node_Select3_Default (0-0-0-0): size 32 (cls: K2Node_Select3_Default>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	Temp_float_Variable (0-0-0-0): size 32 (cls: Temp_float_Variable>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	Temp_float_Variable1 (0-0-0-0): size 32 (cls: Temp_float_Variable1>FloatProperty>/Script/CoreUObject) :
 		Tag array:
 	WrapTextAt (0-0-0-0): size 32 (cls: WrapTextAt>FloatProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1292,8 +1373,6 @@ Serialized exports:
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
 			Slot(ObjectProperty)=VerticalBoxSlot_0=WidgetArchetype 
-	K2Node_DynamicCast_AsFort_Client_Announcement_Tutorial_Interface (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Client_Announcement_Tutorial_Interface>InterfaceProperty>/Script/CoreUObject) :
-		Tag array:
 	CallFunc_GetRequiredLevel_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetRequiredLevel_ReturnValue>IntProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_FTrunc_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_FTrunc_ReturnValue>IntProperty>/Script/CoreUObject) :
@@ -1306,46 +1385,26 @@ Serialized exports:
 			ObjectBindings(ArrayProperty)=[object] (inner: StructProperty)
 			PlaybackRange(StructProperty)=System.Byte[] 
 			DisplayRate(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 1980682920-1107770366-1292795582-2630475104 
-	Intro (0-0-0-0): size 798 (cls: Intro>MovieScene>/Script/MovieScene) :
-		Tag array:
-			Possessables(ArrayProperty)=[object] (inner: StructProperty)
-			ObjectBindings(ArrayProperty)=[object] (inner: StructProperty)
-			PlaybackRange(StructProperty)=System.Byte[] 
-			DisplayRate(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 1980682920-1107770366-1292795582-2630475104 
+			Signature(StructProperty)=Guid: 204034768-1274839706-96738733-3523509328 
 	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene) :
 		Tag array:
 	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene) :
 		Tag array:
-	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene) :
-		Tag array:
-	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene) :
-		Tag array:
-	MovieSceneFloatSection_0 (0-0-0-0): size 1154 (cls: MovieSceneFloatSection_0>MovieSceneFloatSection>/Script/MovieSceneTracks) :
+	MovieSceneFloatSection_0 (0-0-0-0): size 1252 (cls: MovieSceneFloatSection_0>MovieSceneFloatSection>/Script/MovieSceneTracks) :
 		Tag array:
 			FloatCurve(StructProperty)=System.Byte[] 
+			EvalOptions(StructProperty)=System.Byte[] 
 			Easing(StructProperty)=System.Byte[] 
 			SectionRange(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 3657943396-1174307892-3641792932-104556776 
-	MovieSceneFloatSection_0 (0-0-0-0): size 1154 (cls: MovieSceneFloatSection_0>MovieSceneFloatSection>/Script/MovieSceneTracks) :
-		Tag array:
-			FloatCurve(StructProperty)=System.Byte[] 
-			Easing(StructProperty)=System.Byte[] 
-			SectionRange(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 3657943396-1174307892-3641792932-104556776 
+			Signature(StructProperty)=Guid: 1762238832-1074273050-3211135678-3814287084 
 	MovieSceneFloatTrack_0 (0-0-0-0): size 194 (cls: MovieSceneFloatTrack_0>MovieSceneFloatTrack>/Script/MovieSceneTracks) :
 		Tag array:
 			PropertyName(NameProperty)=RenderOpacity 
 			PropertyPath(StrProperty)=RenderOpacity 
 			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
-			Signature(StructProperty)=Guid: 1289158153-1213663294-2218951854-1747953882 
-	MovieSceneFloatTrack_0 (0-0-0-0): size 194 (cls: MovieSceneFloatTrack_0>MovieSceneFloatTrack>/Script/MovieSceneTracks) :
+			Signature(StructProperty)=Guid: 758921818-1313679935-2645653130-2418367193 
+	AbilityIconSizeBox (0-0-0-0): size 36 (cls: AbilityIconSizeBox>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-			PropertyName(NameProperty)=RenderOpacity 
-			PropertyPath(StrProperty)=RenderOpacity 
-			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
-			Signature(StructProperty)=Guid: 1289158153-1213663294-2218951854-1747953882 
 	BorderAbility (0-0-0-0): size 36 (cls: BorderAbility>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	BorderHighlightBorder (0-0-0-0): size 36 (cls: BorderHighlightBorder>ObjectProperty>/Script/CoreUObject) :
@@ -1412,6 +1471,12 @@ Serialized exports:
 		Tag array:
 	Temp_object_Variable2 (0-0-0-0): size 36 (cls: Temp_object_Variable2>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_PlayAnimationAtTime_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlayAnimationAtTime_ReturnValue>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	K2Node_DynamicCast_AsScale_Box_Slot (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsScale_Box_Slot>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	K2Node_DynamicCast_AsVertical_Box_Slot (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsVertical_Box_Slot>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
 	LargeInfo (0-0-0-0): size 36 (cls: LargeInfo>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	LevelText_0 (0-0-0-0): size 36 (cls: LevelText_0>ObjectProperty>/Script/CoreUObject) :
@@ -1427,6 +1492,8 @@ Serialized exports:
 	OverlayImagePerk (0-0-0-0): size 36 (cls: OverlayImagePerk>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	OverlayLevel (0-0-0-0): size 36 (cls: OverlayLevel>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	PerkIconSizeBox (0-0-0-0): size 36 (cls: PerkIconSizeBox>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	SkillDescription (0-0-0-0): size 36 (cls: SkillDescription>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1540,7 +1607,7 @@ Serialized exports:
 			HorizontalAlignment(ByteProperty)=HAlign_Center 
 			VerticalAlignment(ByteProperty)=VAlign_Center 
 			Parent(ObjectProperty)=OverlayBasicPerk=WidgetArchetype 
-			Content(ObjectProperty)=SizeBox_1=WidgetArchetype 
+			Content(ObjectProperty)=PerkIconSizeBox=WidgetArchetype 
 	OverlaySlot_3 (0-0-0-0): size 70 (cls: OverlaySlot_3>OverlaySlot>/Script/UMG) :
 		Tag array:
 			Parent(ObjectProperty)=OverlayImagePerk=WidgetArchetype 
@@ -1557,9 +1624,9 @@ Serialized exports:
 			HorizontalAlignment(ByteProperty)=HAlign_Center 
 			Parent(ObjectProperty)=OverlayLevel=WidgetArchetype 
 			Content(ObjectProperty)=HorizontalBox_2=WidgetArchetype 
-	WidgetArchetype (0-0-0-0): size 821 (cls: WidgetArchetype>PerkWidgetNew_C) :
+	WidgetArchetype (0-0-0-0): size 850 (cls: WidgetArchetype>PerkWidgetNew_C) :
 		Tag array:
-			Intro(ObjectProperty)=Intro_INST=WidgetArchetype 
+			AbilityIconSizeBox(ObjectProperty)=AbilityIconSizeBox=WidgetArchetype 
 			BorderAbility(ObjectProperty)=BorderAbility=WidgetArchetype 
 			BorderHighlightBorder(ObjectProperty)=BorderHighlightBorder=WidgetArchetype 
 			BorderHightlightBackground(ObjectProperty)=BorderHightlightBackground=WidgetArchetype 
@@ -1580,6 +1647,7 @@ Serialized exports:
 			OverlayBasicPerk(ObjectProperty)=OverlayBasicPerk=WidgetArchetype 
 			OverlayImagePerk(ObjectProperty)=OverlayImagePerk=WidgetArchetype 
 			OverlayLevel(ObjectProperty)=OverlayLevel=WidgetArchetype 
+			PerkIconSizeBox(ObjectProperty)=PerkIconSizeBox=WidgetArchetype 
 			SkillDescription(ObjectProperty)=SkillDescription=WidgetArchetype 
 			SkillName(ObjectProperty)=SkillName=WidgetArchetype 
 			SmallInfo(ObjectProperty)=SmallInfo=WidgetArchetype 
@@ -1597,22 +1665,7 @@ Serialized exports:
 			VerticalAlignment(ByteProperty)=VAlign_Fill 
 			Parent(ObjectProperty)=ScaleBoxHoldingBox=WidgetArchetype 
 			Content(ObjectProperty)=OverlayImagePerk=WidgetArchetype 
-	SizeBox_0 (0-0-0-0): size 166 (cls: SizeBox_0>SizeBox>/Script/UMG) :
-		Tag array:
-			bOverride_HeightOverride(BoolProperty)=True 
-			WidthOverride(FloatProperty)=40 
-			HeightOverride(FloatProperty)=40 
-			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-			Slot(ObjectProperty)=HorizontalBoxSlot_3=WidgetArchetype 
-	SizeBox_1 (0-0-0-0): size 192 (cls: SizeBox_1>SizeBox>/Script/UMG) :
-		Tag array:
-			bOverride_WidthOverride(BoolProperty)=True 
-			bOverride_HeightOverride(BoolProperty)=True 
-			WidthOverride(FloatProperty)=56 
-			HeightOverride(FloatProperty)=56 
-			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-			Slot(ObjectProperty)=OverlaySlot_2=WidgetArchetype 
-	SizeBox_2 (0-0-0-0): size 192 (cls: SizeBox_2>SizeBox>/Script/UMG) :
+	AbilityIconSizeBox (0-0-0-0): size 218 (cls: AbilityIconSizeBox>SizeBox>/Script/UMG) :
 		Tag array:
 			bOverride_WidthOverride(BoolProperty)=True 
 			bOverride_HeightOverride(BoolProperty)=True 
@@ -1620,19 +1673,36 @@ Serialized exports:
 			HeightOverride(FloatProperty)=56 
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=BorderSlot_0=WidgetArchetype 
+			bIsVariable(BoolProperty)=True 
+	PerkIconSizeBox (0-0-0-0): size 218 (cls: PerkIconSizeBox>SizeBox>/Script/UMG) :
+		Tag array:
+			bOverride_WidthOverride(BoolProperty)=True 
+			bOverride_HeightOverride(BoolProperty)=True 
+			WidthOverride(FloatProperty)=56 
+			HeightOverride(FloatProperty)=56 
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=OverlaySlot_2=WidgetArchetype 
+			bIsVariable(BoolProperty)=True 
+	SizeBox_0 (0-0-0-0): size 166 (cls: SizeBox_0>SizeBox>/Script/UMG) :
+		Tag array:
+			bOverride_HeightOverride(BoolProperty)=True 
+			WidthOverride(FloatProperty)=40 
+			HeightOverride(FloatProperty)=40 
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=HorizontalBoxSlot_3=WidgetArchetype 
+	SizeBoxSlot_2 (0-0-0-0): size 70 (cls: SizeBoxSlot_2>SizeBoxSlot>/Script/UMG) :
+		Tag array:
+			Parent(ObjectProperty)=AbilityIconSizeBox=WidgetArchetype 
+			Content(ObjectProperty)=Overlay_1=WidgetArchetype 
+	SizeBoxSlot_1 (0-0-0-0): size 70 (cls: SizeBoxSlot_1>SizeBoxSlot>/Script/UMG) :
+		Tag array:
+			Parent(ObjectProperty)=PerkIconSizeBox=WidgetArchetype 
+			Content(ObjectProperty)=Overlay_0=WidgetArchetype 
 	SizeBoxSlot_1 (0-0-0-0): size 111 (cls: SizeBoxSlot_1>SizeBoxSlot>/Script/UMG) :
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Center 
 			Parent(ObjectProperty)=SizeBox_0=WidgetArchetype 
 			Content(ObjectProperty)=OverlayBadge=WidgetArchetype 
-	SizeBoxSlot_1 (0-0-0-0): size 70 (cls: SizeBoxSlot_1>SizeBoxSlot>/Script/UMG) :
-		Tag array:
-			Parent(ObjectProperty)=SizeBox_1=WidgetArchetype 
-			Content(ObjectProperty)=Overlay_0=WidgetArchetype 
-	SizeBoxSlot_2 (0-0-0-0): size 70 (cls: SizeBoxSlot_2>SizeBoxSlot>/Script/UMG) :
-		Tag array:
-			Parent(ObjectProperty)=SizeBox_2=WidgetArchetype 
-			Content(ObjectProperty)=Overlay_1=WidgetArchetype 
 	Spacer_0 (0-0-0-0): size 98 (cls: Spacer_0>Spacer>/Script/UMG) :
 		Tag array:
 			Size(StructProperty)=Vector2D(1,4) 
@@ -1669,11 +1739,21 @@ Serialized exports:
 		Tag array:
 	CallFunc_GetIcon_Brush (0-0-0-0): size 36 (cls: CallFunc_GetIcon_Brush>StructProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_ResizeBrush_ResizedBrush (0-0-0-0): size 36 (cls: CallFunc_ResizeBrush_ResizedBrush>StructProperty>/Script/CoreUObject) :
+		Tag array:
 	K2Node_MakeStruct_SlateBrush (0-0-0-0): size 36 (cls: K2Node_MakeStruct_SlateBrush>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	K2Node_Select1_Default (0-0-0-0): size 36 (cls: K2Node_Select1_Default>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	K2Node_Select_Default (0-0-0-0): size 36 (cls: K2Node_Select_Default>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_GetIcon_Brush (0-0-0-0): size 36 (cls: CallFunc_GetIcon_Brush>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_NoResourceBrush_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_NoResourceBrush_ReturnValue>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_ResizeBrush_ResizedBrush (0-0-0-0): size 36 (cls: CallFunc_ResizeBrush_ResizedBrush>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	K2Node_Select1_Default (0-0-0-0): size 36 (cls: K2Node_Select1_Default>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	K2Node_Select_Default (0-0-0-0): size 36 (cls: K2Node_Select_Default>StructProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1761,13 +1841,7 @@ Serialized exports:
 			MovieScene(ObjectProperty)=Intro=PerkWidgetNew_C 
 			AnimationBindings(ArrayProperty)=[object] (inner: StructProperty)
 			PrecompiledEvaluationTemplate(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 3621907278-1263937244-3974275762-2649483985 
-	Intro_INST (0-0-0-0): size 5383 (cls: Intro_INST>WidgetAnimation>/Script/UMG) :
-		Tag array:
-			MovieScene(ObjectProperty)=Intro=WidgetArchetype 
-			AnimationBindings(ArrayProperty)=[object] (inner: StructProperty)
-			PrecompiledEvaluationTemplate(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 3621907278-1263937244-3974275762-2649483985 
+			Signature(StructProperty)=Guid: 2524776966-1184162050-566985380-4066416411 
 	WidgetSwitcherBasicPerkOrAbilityPerk (0-0-0-0): size 86 (cls: WidgetSwitcherBasicPerkOrAbilityPerk>WidgetSwitcher>/Script/UMG) :
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)

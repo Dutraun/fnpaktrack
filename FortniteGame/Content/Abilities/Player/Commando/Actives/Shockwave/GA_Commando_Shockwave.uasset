@@ -7,14 +7,13 @@ Name table:
 	/Game/Abilities/Player/Ninja/TacticalPerks/EscapeArtist/GE_Ninja_Tactical_EscapeArtist_Applied
 	/Game/Abilities/Player/Outlander/TacticalPerks/ShockPhase/GE_Outlander_Tactical_ShockPhase_Applied
 	/Game/Abilities/Player/Parents/GAT_ActiveAbility
+	/Game/Abilities/Player/Parents/GAT_ActiveAbility_Hero
 	/Game/Abilities/Player/Parents/GAT_CommandoActiveAbility
 	/Game/Animation/Game/MainPlayer/Combat/Gadgets/Medium/Male/Shockwave/Shockwave_Jump_IntroToLoop_M
 	/Game/Animation/Game/MainPlayer/Combat/Gadgets/Medium/Male/Shockwave/Shockwave_Jump_Outro_M
 	/Game/Balance/DataTables/CombatEffects_HeroAbilities
 	/Game/Balance/DataTables/GadgetScaling
 	/Game/Macros/Abilities/AbilityFunctions
-	/Game/Sounds/Fort_Gadgets/Soldier/Soldier_Shockwave_Activate_Cue
-	/Game/Sounds/Fort_Gadgets/Soldier/Soldier_Shockwave_Cue
 	/Script/CoreUObject
 	/Script/Engine
 	/Script/FortniteGame
@@ -54,6 +53,7 @@ Name table:
 	ActorTypeFilter
 	Add_FloatFloat
 	Add_IntInt
+	AddDynamicGameplayEffectContainer
 	AggregatedSourceTags
 	AggregatedTargetTags
 	AnimMontage
@@ -94,6 +94,7 @@ Name table:
 	bOnlyApplyCostOnHit
 	BoolProperty
 	BP_ApplyGameplayEffectToOwner
+	BP_GetGameplayEffectContainer
 	BreakVector
 	bShouldAttachedActorsObstructTarget
 	bStopAtFirstSuccess
@@ -115,6 +116,7 @@ Name table:
 	CallFunc_Array_Length_ReturnValue1
 	CallFunc_BP_ApplyGameplayEffectToOwner_ReturnValue
 	CallFunc_BP_ApplyGameplayEffectToOwner_ReturnValue1
+	CallFunc_BP_GetGameplayEffectContainer_ReturnValue
 	CallFunc_BreakVector_X
 	CallFunc_BreakVector_X1
 	CallFunc_BreakVector_X2
@@ -130,18 +132,23 @@ Name table:
 	CallFunc_BreakVector_Z2
 	CallFunc_BreakVector_Z3
 	CallFunc_BreakVector_Z4
+	CallFunc_CommitAbilityWithEvent_Passed
 	CallFunc_Conv_RotatorToVector_ReturnValue
 	CallFunc_DoesTagAssetInterfaceHaveTag_ReturnValue
 	CallFunc_DoesTagAssetInterfaceHaveTag_ReturnValue1
 	CallFunc_DoesTagAssetInterfaceHaveTag_TagContainerInterface1_CastInput
 	CallFunc_DoesTagAssetInterfaceHaveTag_TagContainerInterface_CastInput
+	CallFunc_EvaluatePerkTierBalanceValue_Balance_Value
 	CallFunc_GetAbilitySystemComponent_ReturnValue
 	CallFunc_GetActorForwardVector_ReturnValue
 	CallFunc_GetActorsFromTargetData_ReturnValue
 	CallFunc_GetDataCountFromTargetData_ReturnValue
+	CallFunc_GetRangeFromGameplayEffectContainer_Range
 	CallFunc_GetRangeFromGameplayEffectContainerSpec_Range
 	CallFunc_GetSocketLocation_ReturnValue
 	CallFunc_GetSocketRotation_ReturnValue
+	CallFunc_GetValueAtLevel_ReturnValue
+	CallFunc_GetValueAtLevel_ReturnValue1
 	CallFunc_Greater_IntInt_ReturnValue
 	CallFunc_HasAllMatchingGameplayTags_ReturnValue
 	CallFunc_HasAllMatchingGameplayTags_ReturnValue1
@@ -163,10 +170,7 @@ Name table:
 	CallFunc_IsValid_ReturnValue2
 	CallFunc_IsValid_ReturnValue3
 	CallFunc_K2_ApplyGameplayEffectSpecToTarget_ReturnValue
-	CallFunc_K2_CommitAbility_ReturnValue
 	CallFunc_K2_GetActorLocation_ReturnValue
-	CallFunc_K2_GetActorLocation_ReturnValue1
-	CallFunc_K2_GetActorLocation_ReturnValue2
 	CallFunc_K2_SetTimerDelegate_ReturnValue
 	CallFunc_K2_SetTimerDelegate_ReturnValue1
 	CallFunc_K2_SetTimerDelegate_ReturnValue2
@@ -179,11 +183,14 @@ Name table:
 	CallFunc_MakeVector_ReturnValue
 	CallFunc_MakeVector_ReturnValue1
 	CallFunc_MakeVector_ReturnValue2
+	CallFunc_Multiply_FloatFloat_ReturnValue
+	CallFunc_Multiply_FloatFloat_ReturnValue1
 	CallFunc_Multiply_VectorFloat_ReturnValue
 	CallFunc_Not_PreBool_ReturnValue
 	CallFunc_Not_PreBool_ReturnValue1
 	CallFunc_PlayMontageWaitTarget_ReturnValue
 	CallFunc_PlayMontageWaitTarget_ReturnValue1
+	CallFunc_ReplaceRangeInGameplayEffectContainer_ReturnValue
 	CallFunc_SelectInt_ReturnValue
 	CallFunc_SetHolsterWeaponWithName_IsWeaponHolstered
 	CallFunc_SetHolsterWeaponWithName_IsWeaponHolstered1
@@ -203,6 +210,7 @@ Name table:
 	CombatEffects_HeroAbilities
 	Commando_Shockwave
 	CommandoPlayerPawn
+	CommitAbilityWithEvent
 	Completed
 	Completed_60F6207840ECA0EA5707139982AC6691
 	Completed_B5B79B9E486803E3CAA59BBC1F091E10
@@ -232,10 +240,12 @@ Name table:
 	Default__FloatProperty
 	Default__FortAbilityTask_PlayMontageWaitTarget
 	Default__FortAbilityTask_WaitTargetSelection
+	Default__FortKismetLibrary
+	Default__FortScalableFloatUtils
 	Default__Function
 	Default__GA_Commando_Shockwave_C
-	Default__GameplayStatics
 	Default__GAT_ActiveAbility_C
+	Default__GAT_ActiveAbility_Hero_C
 	Default__GAT_CommandoActiveAbility_C
 	Default__GE_Commando_ShockAndAwe_Applied_C
 	Default__GE_Commando_ShockwaveCooldown_C
@@ -276,6 +286,7 @@ Name table:
 	EntryPoint
 	EnumProperty
 	EscapeArtist
+	EvaluatePerkTierBalanceValue
 	Event Activation
 	Event Complete
 	Event Data
@@ -298,7 +309,9 @@ Name table:
 	FortAbilityTask_WaitTargetSelection
 	FortGameplayEffectContainer
 	FortGameplayEffectContainerSpec
+	FortKismetLibrary
 	FortPawn
+	FortScalableFloatUtils
 	FortTargetFilter
 	Function
 	GA_Commando_Shockwave_C
@@ -308,21 +321,25 @@ Name table:
 	GameplayAbility
 	GameplayAbilityTargetDataHandle
 	GameplayCue.Abilities.Activation.Commando.Shockwave
+	GameplayCue.Ability.Commando.Shockwave.Activate
+	GameplayCue.Ability.Commando.Shockwave.Explosion
 	GameplayCueParameters
 	GameplayEffect
 	GameplayEffectContextHandle
 	GameplayEffectLevel
 	GameplayEffectSpecHandle
 	GameplayEventData
-	GameplayStatics
 	GameplayTag
 	GameplayTagAssetInterface
 	GameplayTagContainer
 	GameplayTags
 	GameplayTask
 	GAT_ActiveAbility_C
+	GAT_ActiveAbility_Hero_C
 	GAT_CommandoActiveAbility_C
 	GC_AbilitiesActivationCommandoShockwave
+	GC_Activate
+	GC_Explosion
 	GE_Commando_ShockAndAwe_Applied_C
 	GE_Commando_ShockwaveCooldown_C
 	GE_Commando_ShockwaveDamage_C
@@ -335,16 +352,17 @@ Name table:
 	GetActorForwardVector
 	GetActorsFromTargetData
 	GetDataCountFromTargetData
+	GetRangeFromGameplayEffectContainer
 	GetRangeFromGameplayEffectContainerSpec
 	GetSocketLocation
 	GetSocketRotation
+	GetValueAtLevel
 	Granted.Perk.PowerImpact.T01
 	Granted.Perk.PowerImpact.T02
 	Greater_IntInt
 	HalfExtents
 	Handle
 	HasAllMatchingGameplayTags
-	Hero Loadout System
 	Hit
 	HitResult
 	Instigator
@@ -352,7 +370,6 @@ Name table:
 	InterfaceProperty
 	IntProperty
 	Intro
-	isAutoCommitted
 	IsDBNO
 	IsValid
 	ItemDefinition
@@ -361,8 +378,8 @@ Name table:
 	K2_ActivateAbility
 	K2_ApplyGameplayEffectSpecToTarget
 	K2_ClearAndInvalidateTimerHandle
-	K2_CommitAbility
 	K2_EndAbility
+	K2_ExecuteGameplayCue
 	K2_ExecuteGameplayCueWithParams
 	K2_GetActorLocation
 	K2_OnEndAbility
@@ -400,6 +417,9 @@ Name table:
 	K2Node_MakeArray_Array
 	K2Node_MakeStruct_GameplayCueParameters
 	K2Node_MakeStruct_GameplayEventData
+	K2Node_MakeStruct_ScalableFloat
+	K2Node_MakeStruct_ScalableFloat1
+	K2Node_MakeStruct_ScalableFloat2
 	K2Node_MakeStruct_Vector_NetQuantize10
 	K2Node_MakeStruct_Vector_NetQuantizeNormal
 	KismetArrayLibrary
@@ -423,6 +443,7 @@ Name table:
 	Mesh
 	MontageStop
 	MulticastDelegateProperty
+	Multiply_FloatFloat
 	Multiply_VectorFloat
 	NameProperty
 	None
@@ -440,9 +461,10 @@ Name table:
 	PawnLanded
 	PawnLandedSignature__DelegateSignature
 	PerfectEngineering
+	Perk.PowerImpact.T01.Radius
+	Perk.PowerImpact.T02.Radius
 	PhysicalMaterial
 	PlayMontageWaitTarget
-	PlaySoundAtLocation
 	PointerToUberGraphFrame
 	PowerImpact
 	PowerImpact_T01
@@ -454,6 +476,7 @@ Name table:
 	Range
 	RawMagnitude
 	ReadyForActivation
+	ReplaceRangeInGameplayEffectContainer
 	Root_Effect
 	Rotator
 	RowName
@@ -462,27 +485,29 @@ Name table:
 	SecondarySource
 	SelectInt
 	SendGameplayEvent
+	SendHeroAbilityActivationEvent
 	SetHolsterWeaponWithName
 	SetKnockbackImmunity
 	SetPawnCollision
 	SetupAbility
+	SetupPowerImpact
+	SF_PowerImpactT01_Radius
+	SF_PowerImpactT02_Radius
 	Shape
 	ShockAndAwe
 	ShockAndAweSpec
 	ShockPhase
 	Shockwave_Jump_IntroToLoop_M
 	Shockwave_Jump_Outro_M
-	Soldier_Shockwave_Activate_Cue
-	Soldier_Shockwave_Cue
-	SoundCue
 	SourceObject
 	StrProperty
 	StructProperty
 	Subtract_IntInt
+	T_EffectContainer_Damage
 	T_Event_Activate
 	T_Event_Deactivate
-	Tag_PowerImpact_T01
-	Tag_PowerImpact_T02
+	T_PowerImpact_T01
+	T_PowerImpact_T02
 	Tag_VulnerabilityEvent
 	TagName
 	TakeDamageTimerHandle
@@ -526,6 +551,7 @@ Name table:
 	UberGraphFramePointerProperty
 	UberGraphFunction
 	UInt64Property
+	UseHeroLoadoutSystem
 	Value
 	Vector
 	Vector_NetQuantize10
@@ -551,8 +577,10 @@ Import table:
 	GE_Ninja_Tactical_EscapeArtist_Applied_C (BlueprintGeneratedClass)
 	GE_Outlander_Tactical_ShockPhase_Applied_C (BlueprintGeneratedClass)
 	GAT_ActiveAbility_C (BlueprintGeneratedClass)
+	GAT_ActiveAbility_Hero_C (BlueprintGeneratedClass)
 	GAT_CommandoActiveAbility_C (BlueprintGeneratedClass)
 	Default__BlueprintGeneratedClass (BlueprintGeneratedClass)
+	UseHeroLoadoutSystem (BoolProperty)
 	Default__BoolProperty (BoolProperty)
 	ArrayProperty (Class)
 	BoolProperty (Class)
@@ -571,13 +599,14 @@ Import table:
 	BlueprintGeneratedClass (Class)
 	CapsuleComponent (Class)
 	Character (Class)
-	GameplayStatics (Class)
 	KismetArrayLibrary (Class)
 	KismetMathLibrary (Class)
 	KismetSystemLibrary (Class)
 	FortAbilityTask_PlayMontageWaitTarget (Class)
 	FortAbilityTask_WaitTargetSelection (Class)
+	FortKismetLibrary (Class)
 	FortPawn (Class)
+	FortScalableFloatUtils (Class)
 	AbilitySystemBlueprintLibrary (Class)
 	AbilitySystemComponent (Class)
 	GameplayAbility (Class)
@@ -600,14 +629,16 @@ Import table:
 	NormalizedMagnitude (FloatProperty)
 	RawMagnitude (FloatProperty)
 	EventMagnitude (FloatProperty)
+	Value (FloatProperty)
 	Default__FortAbilityTask_PlayMontageWaitTarget (FortAbilityTask_PlayMontageWaitTarget)
 	Default__FortAbilityTask_WaitTargetSelection (FortAbilityTask_WaitTargetSelection)
+	Default__FortKismetLibrary (FortKismetLibrary)
+	Default__FortScalableFloatUtils (FortScalableFloatUtils)
 	ActiveAbilitySetup (Function)
 	K2_ActivateAbility (Function)
 	Default__Function (Function)
 	GetActorForwardVector (Function)
 	K2_GetActorLocation (Function)
-	PlaySoundAtLocation (Function)
 	Array_Add (Function)
 	Array_Clear (Function)
 	Array_Get (Function)
@@ -620,6 +651,7 @@ Import table:
 	Less_IntInt (Function)
 	LessEqual_IntInt (Function)
 	MakeVector (Function)
+	Multiply_FloatFloat (Function)
 	Multiply_VectorFloat (Function)
 	Not_PreBool (Function)
 	SelectInt (Function)
@@ -630,8 +662,10 @@ Import table:
 	LineTraceSingle (Function)
 	PlayMontageWaitTarget (Function)
 	WaitTargetSelection (Function)
+	ReplaceRangeInGameplayEffectContainer (Function)
 	IsDBNO (Function)
 	LaunchCharacterJump (Function)
+	GetValueAtLevel (Function)
 	GetAbilitySystemComponent (Function)
 	GetActorsFromTargetData (Function)
 	GetDataCountFromTargetData (Function)
@@ -643,8 +677,8 @@ Import table:
 	DoesTagAssetInterfaceHaveTag (Function)
 	HasAllMatchingGameplayTags (Function)
 	ReadyForActivation (Function)
-	Default__GameplayStatics (GameplayStatics)
 	Default__GAT_ActiveAbility_C (GAT_ActiveAbility_C)
+	Default__GAT_ActiveAbility_Hero_C (GAT_ActiveAbility_Hero_C)
 	Default__GAT_CommandoActiveAbility_C (GAT_CommandoActiveAbility_C)
 	Default__GE_Commando_ShockAndAwe_Applied_C (GE_Commando_ShockAndAwe_Applied_C)
 	Default__GE_Commando_ShockwaveCooldown_C (GE_Commando_ShockwaveCooldown_C)
@@ -678,14 +712,13 @@ Import table:
 	/Game/Abilities/Player/Ninja/TacticalPerks/EscapeArtist/GE_Ninja_Tactical_EscapeArtist_Applied (Package)
 	/Game/Abilities/Player/Outlander/TacticalPerks/ShockPhase/GE_Outlander_Tactical_ShockPhase_Applied (Package)
 	/Game/Abilities/Player/Parents/GAT_ActiveAbility (Package)
+	/Game/Abilities/Player/Parents/GAT_ActiveAbility_Hero (Package)
 	/Game/Abilities/Player/Parents/GAT_CommandoActiveAbility (Package)
 	/Game/Animation/Game/MainPlayer/Combat/Gadgets/Medium/Male/Shockwave/Shockwave_Jump_IntroToLoop_M (Package)
 	/Game/Animation/Game/MainPlayer/Combat/Gadgets/Medium/Male/Shockwave/Shockwave_Jump_Outro_M (Package)
 	/Game/Balance/DataTables/CombatEffects_HeroAbilities (Package)
 	/Game/Balance/DataTables/GadgetScaling (Package)
 	/Game/Macros/Abilities/AbilityFunctions (Package)
-	/Game/Sounds/Fort_Gadgets/Soldier/Soldier_Shockwave_Activate_Cue (Package)
-	/Game/Sounds/Fort_Gadgets/Soldier/Soldier_Shockwave_Cue (Package)
 	/Script/CoreUObject (Package)
 	/Script/Engine (Package)
 	/Script/FortniteGame (Package)
@@ -695,11 +728,13 @@ Import table:
 	LinearColor (ScriptStruct)
 	Rotator (ScriptStruct)
 	Vector (ScriptStruct)
+	CurveTableRowHandle (ScriptStruct)
 	HitResult (ScriptStruct)
 	PointerToUberGraphFrame (ScriptStruct)
 	TimerHandle (ScriptStruct)
 	Vector_NetQuantize10 (ScriptStruct)
 	Vector_NetQuantizeNormal (ScriptStruct)
+	FortGameplayEffectContainer (ScriptStruct)
 	FortGameplayEffectContainerSpec (ScriptStruct)
 	ActiveGameplayEffectHandle (ScriptStruct)
 	GameplayAbilityTargetDataHandle (ScriptStruct)
@@ -707,10 +742,9 @@ Import table:
 	GameplayEffectContextHandle (ScriptStruct)
 	GameplayEffectSpecHandle (ScriptStruct)
 	GameplayEventData (ScriptStruct)
+	ScalableFloat (ScriptStruct)
 	GameplayTag (ScriptStruct)
 	GameplayTagContainer (ScriptStruct)
-	Soldier_Shockwave_Activate_Cue (SoundCue)
-	Soldier_Shockwave_Cue (SoundCue)
 	Event Data (StructProperty)
 	Default__StructProperty (StructProperty)
 	AggregatedSourceTags (StructProperty)
@@ -725,6 +759,7 @@ Import table:
 	InstigatorTags (StructProperty)
 	TargetData (StructProperty)
 	TargetTags (StructProperty)
+	Curve (StructProperty)
 	GameplayTags (StructProperty)
 	Default__TT_Commando_Shockwave_C (TT_Commando_Shockwave_C)
 	EffectCauser (WeakObjectProperty)
@@ -735,11 +770,11 @@ Import table:
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	GA_Commando_Shockwave_C (0-0-0-0): size 618 (cls: GA_Commando_Shockwave_C>BlueprintGeneratedClass>/Script/Engine) :
+	GA_Commando_Shockwave_C (0-0-0-0): size 650 (cls: GA_Commando_Shockwave_C>BlueprintGeneratedClass>/Script/Engine) :
 		Tag array:
 			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=GA_Commando_Shockwave_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_GA_Commando_Shockwave=GA_Commando_Shockwave_C 
-	Default__GA_Commando_Shockwave_C (0-0-0-0): size 7551 (cls: Default__GA_Commando_Shockwave_C>GA_Commando_Shockwave_C) :
+	Default__GA_Commando_Shockwave_C (0-0-0-0): size 8205 (cls: Default__GA_Commando_Shockwave_C>GA_Commando_Shockwave_C) :
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			Event Activation(StructProperty)=System.Byte[] 
@@ -769,11 +804,15 @@ Serialized exports:
 			LandingTimerHandle(StructProperty)=System.Byte[] 
 			FailsafeTimerHandle(StructProperty)=System.Byte[] 
 			TakeDamageTimerHandle(StructProperty)=System.Byte[] 
-			Tag_PowerImpact_T01(StructProperty)=System.Byte[] 
-			Tag_PowerImpact_T02(StructProperty)=System.Byte[] 
+			T_PowerImpact_T01(StructProperty)=System.Byte[] 
+			T_PowerImpact_T02(StructProperty)=System.Byte[] 
 			T_Event_Activate(StructProperty)=System.Byte[] 
 			T_Event_Deactivate(StructProperty)=System.Byte[] 
-			isAutoCommitted(BoolProperty)=False 
+			T_EffectContainer_Damage(StructProperty)=System.Byte[] 
+			SF_PowerImpactT01_Radius(StructProperty)=System.Byte[] 
+			SF_PowerImpactT02_Radius(StructProperty)=System.Byte[] 
+			GC_Activate(StructProperty)=System.Byte[] 
+			GC_Explosion(StructProperty)=System.Byte[] 
 			EffectContainers(StructProperty)=System.Byte[] 
 			EffectContainers(StructProperty)=System.Byte[] 
 			DamageStatHandle(StructProperty)=System.Byte[] 
@@ -789,7 +828,7 @@ Serialized exports:
 		Tag array:
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject) :
 		Tag array:
-	ExecuteUbergraph_GA_Commando_Shockwave (0-0-0-0): size 5014 (cls: ExecuteUbergraph_GA_Commando_Shockwave>Function>/Script/CoreUObject) :
+	ExecuteUbergraph_GA_Commando_Shockwave (0-0-0-0): size 4871 (cls: ExecuteUbergraph_GA_Commando_Shockwave>Function>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_ApplyGameplayEffectContainer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_ApplyGameplayEffectContainer_ReturnValue>StructProperty>/Script/CoreUObject) :
 		Tag array:
@@ -865,7 +904,7 @@ Serialized exports:
 		Tag array:
 	AbilitySystemIn (0-0-0-0): size 36 (cls: AbilitySystemIn>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	ActiveAbilitySetup (0-0-0-0): size 232 (cls: ActiveAbilitySetup>Function>/Script/CoreUObject) :
+	ActiveAbilitySetup (0-0-0-0): size 252 (cls: ActiveAbilitySetup>Function>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_DoesTagAssetInterfaceHaveTag_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_DoesTagAssetInterfaceHaveTag_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -876,6 +915,8 @@ Serialized exports:
 	DopplerEffect (0-0-0-0): size 34 (cls: DopplerEffect>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	EscapeArtist (0-0-0-0): size 34 (cls: EscapeArtist>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_CommitAbilityWithEvent_Passed (0-0-0-0): size 34 (cls: CallFunc_CommitAbilityWithEvent_Passed>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_Greater_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Greater_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -888,8 +929,6 @@ Serialized exports:
 	CallFunc_IsValid_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue2>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_IsValid_ReturnValue3 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue3>BoolProperty>/Script/CoreUObject) :
-		Tag array:
-	CallFunc_K2_CommitAbility_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_K2_CommitAbility_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_Less_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -912,8 +951,6 @@ Serialized exports:
 	K2Node_Event_bWasCancelled (0-0-0-0): size 34 (cls: K2Node_Event_bWasCancelled>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	ExplosiveOptimization (0-0-0-0): size 34 (cls: ExplosiveOptimization>BoolProperty>/Script/CoreUObject) :
-		Tag array:
-	Hero Loadout System (0-0-0-0): size 34 (cls: Hero Loadout System>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	PerfectEngineering (0-0-0-0): size 34 (cls: PerfectEngineering>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1010,6 +1047,20 @@ Serialized exports:
 	JumpDistance (0-0-0-0): size 32 (cls: JumpDistance>FloatProperty>/Script/CoreUObject) :
 		Tag array:
 	JumpHeight (0-0-0-0): size 32 (cls: JumpHeight>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_GetValueAtLevel_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetValueAtLevel_ReturnValue>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	SetupPowerImpact (0-0-0-0): size 595 (cls: SetupPowerImpact>Function>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Add_FloatFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Add_FloatFloat_ReturnValue>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_GetRangeFromGameplayEffectContainer_Range (0-0-0-0): size 32 (cls: CallFunc_GetRangeFromGameplayEffectContainer_Range>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_GetValueAtLevel_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_GetValueAtLevel_ReturnValue1>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Multiply_FloatFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Multiply_FloatFloat_ReturnValue>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Multiply_FloatFloat_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Multiply_FloatFloat_ReturnValue1>FloatProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_DoesTagAssetInterfaceHaveTag_TagContainerInterface1_CastInput (0-0-0-0): size 36 (cls: CallFunc_DoesTagAssetInterfaceHaveTag_TagContainerInterface1_CastInput>InterfaceProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1111,10 +1162,6 @@ Serialized exports:
 		Tag array:
 	CallFunc_K2_GetActorLocation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_GetActorLocation_ReturnValue>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	CallFunc_K2_GetActorLocation_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_K2_GetActorLocation_ReturnValue1>StructProperty>/Script/CoreUObject) :
-		Tag array:
-	CallFunc_K2_GetActorLocation_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_K2_GetActorLocation_ReturnValue2>StructProperty>/Script/CoreUObject) :
-		Tag array:
 	CallFunc_K2_SetTimerDelegate_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_SetTimerDelegate_ReturnValue>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_K2_SetTimerDelegate_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_K2_SetTimerDelegate_ReturnValue1>StructProperty>/Script/CoreUObject) :
@@ -1193,17 +1240,39 @@ Serialized exports:
 		Tag array:
 	GC_AbilitiesActivationCommandoShockwave (0-0-0-0): size 36 (cls: GC_AbilitiesActivationCommandoShockwave>StructProperty>/Script/CoreUObject) :
 		Tag array:
+	GC_Activate (0-0-0-0): size 36 (cls: GC_Activate>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	GC_Explosion (0-0-0-0): size 36 (cls: GC_Explosion>StructProperty>/Script/CoreUObject) :
+		Tag array:
 	LandingTimerHandle (0-0-0-0): size 36 (cls: LandingTimerHandle>StructProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_BP_GetGameplayEffectContainer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_BP_GetGameplayEffectContainer_ReturnValue>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_EvaluatePerkTierBalanceValue_Balance_Value (0-0-0-0): size 36 (cls: CallFunc_EvaluatePerkTierBalanceValue_Balance_Value>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_ReplaceRangeInGameplayEffectContainer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_ReplaceRangeInGameplayEffectContainer_ReturnValue>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	K2Node_MakeStruct_ScalableFloat (0-0-0-0): size 36 (cls: K2Node_MakeStruct_ScalableFloat>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	K2Node_MakeStruct_ScalableFloat1 (0-0-0-0): size 36 (cls: K2Node_MakeStruct_ScalableFloat1>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	K2Node_MakeStruct_ScalableFloat2 (0-0-0-0): size 36 (cls: K2Node_MakeStruct_ScalableFloat2>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	SF_PowerImpactT01_Radius (0-0-0-0): size 36 (cls: SF_PowerImpactT01_Radius>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	SF_PowerImpactT02_Radius (0-0-0-0): size 36 (cls: SF_PowerImpactT02_Radius>StructProperty>/Script/CoreUObject) :
+		Tag array:
 	ShockAndAweSpec (0-0-0-0): size 36 (cls: ShockAndAweSpec>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	T_EffectContainer_Damage (0-0-0-0): size 36 (cls: T_EffectContainer_Damage>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	T_Event_Activate (0-0-0-0): size 36 (cls: T_Event_Activate>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	T_Event_Deactivate (0-0-0-0): size 36 (cls: T_Event_Deactivate>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	Tag_PowerImpact_T01 (0-0-0-0): size 36 (cls: Tag_PowerImpact_T01>StructProperty>/Script/CoreUObject) :
+	T_PowerImpact_T01 (0-0-0-0): size 36 (cls: T_PowerImpact_T01>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	Tag_PowerImpact_T02 (0-0-0-0): size 36 (cls: Tag_PowerImpact_T02>StructProperty>/Script/CoreUObject) :
+	T_PowerImpact_T02 (0-0-0-0): size 36 (cls: T_PowerImpact_T02>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	Tag_VulnerabilityEvent (0-0-0-0): size 36 (cls: Tag_VulnerabilityEvent>StructProperty>/Script/CoreUObject) :
 		Tag array:

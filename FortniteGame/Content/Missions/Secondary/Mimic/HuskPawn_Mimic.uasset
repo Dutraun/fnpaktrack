@@ -42,6 +42,7 @@ Name table:
 	ActiveGameplayCues
 	Actor
 	ActorComponent
+	ActorComponentTickFunction
 	Addressee
 	AIBlueprintHelperLibrary
 	AIController
@@ -84,6 +85,7 @@ Name table:
 	BrainComponent
 	BroadcastFilter
 	bShouldBecomeChest
+	bStartWithTickEnabled
 	BT_Mimic
 	ByteProperty
 	CachedMaxDrawDistance
@@ -335,10 +337,11 @@ Name table:
 	NameProperty
 	NewController
 	NODE_AddFXSkeletonMeshComponent-2
+	NODE_AddFXSkeletonMeshComponent-6
 	NODE_AddFXStaticMeshComponent-0
+	NODE_AddFXStaticMeshComponent-2
 	NODE_AddParticleSystemComponent-3
 	NODE_AddPointLightComponent-0
-	NODE_AddSkeletalMeshComponent-0
 	NODE_AddSkeletalMeshComponent-1
 	NODE_AddSkeletalMeshComponent-3
 	NODE_AddStaticMeshComponent-4
@@ -379,6 +382,7 @@ Name table:
 	PredictionKey
 	PredictionKeys
 	PredictiveConnection
+	PrimaryComponentTick
 	PrimitiveComponent
 	PropertyName
 	PropertyScope
@@ -387,7 +391,7 @@ Name table:
 	R
 	ReceiveBeginPlay
 	ReceivePossessed
-	RegisterBuildingHitStaticMesh
+	RegisterEffectStaticMesh
 	RelativeLocation
 	RelativeRotation
 	RelativeScale3D
@@ -589,7 +593,9 @@ Import table:
 	ForceKill (Function)
 	IsDead (Function)
 	NODE_AddFXSkeletonMeshComponent-2 (FXSkeletonMeshComponent_C)
+	NODE_AddFXSkeletonMeshComponent-6 (FXSkeletonMeshComponent_C)
 	NODE_AddFXStaticMeshComponent-0 (FXStaticMeshComponent_C)
+	NODE_AddFXStaticMeshComponent-2 (FXStaticMeshComponent_C)
 	Default__GameplayStatics (GameplayStatics)
 	Default__Gen_Interact_UnregisterFocus_C (Gen_Interact_UnregisterFocus_C)
 	Default__HuskPawn_C (HuskPawn_C)
@@ -651,6 +657,7 @@ Import table:
 	Rotator (ScriptStruct)
 	Vector (ScriptStruct)
 	Vector2D (ScriptStruct)
+	ActorComponentTickFunction (ScriptStruct)
 	BodyInstance (ScriptStruct)
 	CollisionResponse (ScriptStruct)
 	HitResult (ScriptStruct)
@@ -666,7 +673,6 @@ Import table:
 	Default__SCS_Node (SCS_Node)
 	Default__SimpleConstructionScript (SimpleConstructionScript)
 	SK_Husk_Female_V2 (SkeletalMesh)
-	NODE_AddSkeletalMeshComponent-0 (SkeletalMeshComponent)
 	NODE_AddSkeletalMeshComponent-1 (SkeletalMeshComponent)
 	NODE_AddSkeletalMeshComponent-3 (SkeletalMeshComponent)
 	Husk_Mimic_Death_Cue (SoundCue)
@@ -916,18 +922,20 @@ Serialized exports:
 		Tag array:
 	CallFunc_SpawnObject_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_SpawnObject_ReturnValue>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	P_Mimic_Trail_Left_GEN_VARIABLE (0-0-0-0): size 99 (cls: P_Mimic_Trail_Left_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	P_Mimic_Trail_Left_GEN_VARIABLE (0-0-0-0): size 182 (cls: P_Mimic_Trail_Left_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_Mimic_Trail=/Game/Missions/Secondary/Mimic/Effects/P_Mimic_Trail 
 			LDMaxDrawDistance(FloatProperty)=3500 
 			CachedMaxDrawDistance(FloatProperty)=3500 
-	P_Mimic_Trail_Right_GEN_VARIABLE (0-0-0-0): size 160 (cls: P_Mimic_Trail_Right_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
+	P_Mimic_Trail_Right_GEN_VARIABLE (0-0-0-0): size 243 (cls: P_Mimic_Trail_Right_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_Mimic_Trail=/Game/Missions/Secondary/Mimic/Effects/P_Mimic_Trail 
 			LDMaxDrawDistance(FloatProperty)=3500 
 			CachedMaxDrawDistance(FloatProperty)=3500 
 			RelativeScale3D(StructProperty)=Vector(0.9999788,0.9999707,0.9999707) 
-	ParticleSystemComponent_352 (0-0-0-0): size 272 (cls: ParticleSystemComponent_352>ParticleSystemComponent>/Script/Engine) :
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
+	ParticleSystemComponent_352 (0-0-0-0): size 355 (cls: ParticleSystemComponent_352>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_Mimic_Mouth=/Game/Missions/Secondary/Mimic/Effects/P_Mimic_Mouth 
 			LDMaxDrawDistance(FloatProperty)=3500 
@@ -935,9 +943,10 @@ Serialized exports:
 			BodyInstance(StructProperty)=System.Byte[] 
 			RelativeLocation(StructProperty)=Vector(0,0,22.58709) 
 			bAbsoluteRotation(BoolProperty)=True 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 	SceneComponent_67 (0-0-0-0): size 12 (cls: SceneComponent_67>SceneComponent>/Script/Engine) :
 		Tag array:
-	SCS_Node_0 (0-0-0-0): size 726 (cls: SCS_Node_0>SCS_Node>/Script/Engine) :
+	SCS_Node_0 (0-0-0-0): size 924 (cls: SCS_Node_0>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=P_Mimic_Trail_Left_GEN_VARIABLE=HuskPawn_Mimic_C 
@@ -965,7 +974,7 @@ Serialized exports:
 			ChildNodes(ArrayProperty)=[object] (inner: ObjectProperty)
 			VariableGuid(StructProperty)=Guid: 1078195899-0-0-0 
 			InternalVariableName(NameProperty)=ChestBottom 
-	SCS_Node_3 (0-0-0-0): size 1129 (cls: SCS_Node_3>SCS_Node>/Script/Engine) :
+	SCS_Node_3 (0-0-0-0): size 1327 (cls: SCS_Node_3>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=ParticleSystemComponent_352=HuskPawn_Mimic_C 
@@ -991,7 +1000,7 @@ Serialized exports:
 			bIsParentComponentNative(BoolProperty)=True 
 			VariableGuid(StructProperty)=Guid: 3705039005-1160087588-3741606581-3163377419 
 			InternalVariableName(NameProperty)=Troll_Fleeing_Loop 
-	SCS_Node_6 (0-0-0-0): size 1122 (cls: SCS_Node_6>SCS_Node>/Script/Engine) :
+	SCS_Node_6 (0-0-0-0): size 1320 (cls: SCS_Node_6>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=P_Mimic_Trail_Right_GEN_VARIABLE=HuskPawn_Mimic_C 

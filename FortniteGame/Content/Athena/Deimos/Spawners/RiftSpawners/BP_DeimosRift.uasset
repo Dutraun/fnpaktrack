@@ -33,6 +33,7 @@ Name table:
 	ActiveGameplayEffectHandle
 	Actor
 	ActorComponent
+	ActorComponentTickFunction
 	AggregatedSourceTags
 	AggregatedTargetTags
 	AllNodes
@@ -86,6 +87,7 @@ Name table:
 	BreakVector
 	bReceivesDecals
 	bSendMissionEvents
+	bStartWithTickEnabled
 	BuildingActor
 	BuildingDamagedSignature__DelegateSignature
 	BuildingRift
@@ -415,6 +417,7 @@ Name table:
 	PointLight
 	PointLight_GEN_VARIABLE
 	PointLightComponent
+	PrimaryComponentTick
 	PrimarySurfaceType
 	PrimitiveComponent
 	PropertyName
@@ -643,6 +646,7 @@ Import table:
 	Color (ScriptStruct)
 	Rotator (ScriptStruct)
 	Vector (ScriptStruct)
+	ActorComponentTickFunction (ScriptStruct)
 	BodyInstance (ScriptStruct)
 	CollisionResponse (ScriptStruct)
 	HitResult (ScriptStruct)
@@ -942,7 +946,7 @@ Serialized exports:
 		Tag array:
 	CallFunc_CreateDynamicMaterialInstance_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_CreateDynamicMaterialInstance_ReturnValue2>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	P_Deimos_Rift_Dying_GEN_VARIABLE (0-0-0-0): size 275 (cls: P_Deimos_Rift_Dying_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	P_Deimos_Rift_Dying_GEN_VARIABLE (0-0-0-0): size 358 (cls: P_Deimos_Rift_Dying_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_Deimos_Rift_Dying=/Game/Athena/Deimos/Spawners/RiftSpawners/Assets/FX/P_Deimos_Rift_Dying 
 			bAutoManageAttachment(BoolProperty)=True 
@@ -951,8 +955,9 @@ Serialized exports:
 			AutoAttachRotationRule(EnumProperty)=EAttachmentRule::SnapToTarget 
 			AutoAttachScaleRule(EnumProperty)=EAttachmentRule::KeepWorld 
 			bAbsoluteScale(BoolProperty)=True 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
-	P_Deimos_RiftSpawn_DamageState_GEN_VARIABLE (0-0-0-0): size 275 (cls: P_Deimos_RiftSpawn_DamageState_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	P_Deimos_RiftSpawn_DamageState_GEN_VARIABLE (0-0-0-0): size 358 (cls: P_Deimos_RiftSpawn_DamageState_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_Deimos_RiftSpawn_Dmg_02=/Game/Athena/Deimos/Spawners/RiftSpawners/Assets/FX/P_Deimos_RiftSpawn_Dmg_02 
 			bAutoManageAttachment(BoolProperty)=True 
@@ -961,13 +966,15 @@ Serialized exports:
 			AutoAttachRotationRule(EnumProperty)=EAttachmentRule::SnapToTarget 
 			AutoAttachScaleRule(EnumProperty)=EAttachmentRule::KeepWorld 
 			bAbsoluteScale(BoolProperty)=True 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
-	P_Rift_IdleFog_GEN_VARIABLE (0-0-0-0): size 140 (cls: P_Rift_IdleFog_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	P_Rift_IdleFog_GEN_VARIABLE (0-0-0-0): size 223 (cls: P_Rift_IdleFog_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_Rift_IdleFog=/Game/Athena/Deimos/Spawners/RiftSpawners/Assets/FX/P_Rift_IdleFog 
 			LDMaxDrawDistance(FloatProperty)=5500 
 			CachedMaxDrawDistance(FloatProperty)=5500 
 			DetailMode(ByteProperty)=DM_High 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 	PointLight_GEN_VARIABLE (0-0-0-0): size 399 (cls: PointLight_GEN_VARIABLE>PointLightComponent>/Script/Engine) :
 		Tag array:
 			bUseInverseSquaredFalloff(BoolProperty)=False 
@@ -1007,7 +1014,7 @@ Serialized exports:
 			bIsParentComponentNative(BoolProperty)=True 
 			VariableGuid(StructProperty)=Guid: 2757758436-1230109117-449892003-2172448332 
 			InternalVariableName(NameProperty)=PointLight 
-	SCS_Node_2 (0-0-0-0): size 1162 (cls: SCS_Node_2>SCS_Node>/Script/Engine) :
+	SCS_Node_2 (0-0-0-0): size 1360 (cls: SCS_Node_2>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=P_Deimos_RiftSpawn_DamageState_GEN_VARIABLE=BP_DeimosRift_C 
@@ -1022,7 +1029,7 @@ Serialized exports:
 			CookedComponentInstancingData(StructProperty)=System.Byte[] 
 			VariableGuid(StructProperty)=Guid: 3783619774-1115757683-2264744070-2938526445 
 			InternalVariableName(NameProperty)=CosmeticBaseMesh 
-	SCS_Node_4 (0-0-0-0): size 1162 (cls: SCS_Node_4>SCS_Node>/Script/Engine) :
+	SCS_Node_4 (0-0-0-0): size 1360 (cls: SCS_Node_4>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=P_Deimos_Rift_Dying_GEN_VARIABLE=BP_DeimosRift_C 
@@ -1064,7 +1071,7 @@ Serialized exports:
 			CookedComponentInstancingData(StructProperty)=System.Byte[] 
 			VariableGuid(StructProperty)=Guid: 4091025727-1284010660-462528172-3778919875 
 			InternalVariableName(NameProperty)=SM_CubeRunes 
-	SCS_Node_9 (0-0-0-0): size 792 (cls: SCS_Node_9>SCS_Node>/Script/Engine) :
+	SCS_Node_9 (0-0-0-0): size 990 (cls: SCS_Node_9>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=P_Rift_IdleFog_GEN_VARIABLE=BP_DeimosRift_C 

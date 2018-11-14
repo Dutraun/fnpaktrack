@@ -2,7 +2,10 @@ Name table:
 	/Game/Abilities/Player/Outlander/Actives/Fragment/Bear/B_BGA_Outlander_Fragment_Bear_Default
 	/Game/Abilities/Player/Outlander/Actives/Fragment/Bear/GA_Bear_Target
 	/Game/Abilities/Player/Outlander/Actives/Fragment/Bear/GE_Bear_Damage
+	/Game/Abilities/Player/Perks/Hero/Overbearing/GE_Perk_H_Overbearing_T02_DamageMult
+	/Game/Balance/DataTables/CombatEffects_HeroAbilities
 	/Game/Balance/DataTables/GadgetScaling
+	/Game/Macros/Abilities/AbilityFunctions
 	/Script/CoreUObject
 	/Script/Engine
 	/Script/FortniteGame
@@ -13,6 +16,8 @@ Name table:
 	Abilities.Outlander.Bear.Target.Normal
 	Abilities.Outlander.Bear.Target.UpgradeRange
 	Abilities.Outlander.BearFragment.TargetAbilityActivate
+	Ability.Outlander.TEDDY.Range
+	AbilityFunctions_C
 	AbilityLevel
 	AbilitySystemBlueprintLibrary
 	AbilityTags
@@ -23,17 +28,22 @@ Name table:
 	Actor
 	ActorClassFilter
 	ActorTypeFilter
+	Add_FloatFloat
 	Add_IntInt
 	Add_VectorVector
+	AddDynamicGameplayEffectContainer
 	AggregatedSourceTags
 	AggregatedTargetTags
 	ApplicationTag
 	ApplyEffectToPawn
+	ApplyOverbearingDamageMult
 	Array_Add
 	Array_Clear
 	Array_Get
 	Array_Length
 	ArrayProperty
+	Asset.PerkEffect.Overbearing.DamageMult
+	AssignTagSetByCallerMagnitude
 	B_BGA_Outlander_Fragment_Bear_Default_C
 	bConsiderFriendlyFireWhenExcludingFriends
 	bCreateHitResultWhenNoTargetsFound
@@ -58,12 +68,15 @@ Name table:
 	bExcludeRequester
 	bExcludeWaterVolumes
 	bExcludeWithoutNavigationCorridor
+	bFirstActivation
 	bFoundAcceptableTarget
 	BlueprintGameplayTagLibrary
 	BlueprintGeneratedClass
 	BooleanAND
 	BoolProperty
 	BP_ApplyGameplayEffectToTarget
+	BP_GetGameplayEffectContainer
+	BP_RemoveGameplayEffectFromOwnerWithAssetTags
 	Break
 	BreakGameplayTagContainer
 	BreakHitResult
@@ -77,7 +90,9 @@ Name table:
 	bWasCancelled
 	ByteProperty
 	CalculateNewImpactPointForExistingPawn
+	CalculateOverbearingDamageMult
 	CallFunc_AbilityTargetDataFromActor_ReturnValue
+	CallFunc_Add_FloatFloat_ReturnValue
 	CallFunc_Add_IntInt_ReturnValue
 	CallFunc_Add_IntInt_ReturnValue1
 	CallFunc_Add_VectorVector_ReturnValue
@@ -87,8 +102,10 @@ Name table:
 	CallFunc_Array_Length_ReturnValue
 	CallFunc_Array_Length_ReturnValue1
 	CallFunc_Array_Length_ReturnValue2
+	CallFunc_AssignTagSetByCallerMagnitude_ReturnValue
 	CallFunc_BooleanAND_ReturnValue
 	CallFunc_BP_ApplyGameplayEffectToTarget_ReturnValue
+	CallFunc_BP_GetGameplayEffectContainer_ReturnValue
 	CallFunc_BreakGameplayTagContainer_GameplayTags
 	CallFunc_BreakHitResult_bBlockingHit
 	CallFunc_BreakHitResult_bInitialOverlap
@@ -109,13 +126,21 @@ Name table:
 	CallFunc_BreakVector_X
 	CallFunc_BreakVector_Y
 	CallFunc_BreakVector_Z
+	CallFunc_CalculateOverbearingDamageMult_DamageMult
+	CallFunc_Divide_FloatFloat_ReturnValue
+	CallFunc_DoesTagAssetInterfaceHaveTag_ReturnValue
+	CallFunc_DoesTagAssetInterfaceHaveTag_TagContainerInterface_CastInput
+	CallFunc_FClamp_ReturnValue
 	CallFunc_GetActorsFromTargetData_ReturnValue
 	CallFunc_GetDataCountFromTargetData_ReturnValue
+	CallFunc_GetDistanceBetweenActors_Distance
 	CallFunc_GetEyeLocationAndRotation_Location
 	CallFunc_GetEyeLocationAndRotation_Rotation
 	CallFunc_GetHitResultFromTargetData_ReturnValue
+	CallFunc_GetRangeFromGameplayEffectContainer_Range
 	CallFunc_GetSocketLocation_ReturnValue
 	CallFunc_GetSocketLocation_ReturnValue1
+	CallFunc_GetValueAtLevel_ReturnValue
 	CallFunc_Greater_IntInt_ReturnValue
 	CallFunc_Greater_IntInt_ReturnValue1
 	CallFunc_IsDead_ReturnValue
@@ -123,16 +148,20 @@ Name table:
 	CallFunc_IsValid_ReturnValue
 	CallFunc_IsValid_ReturnValue1
 	CallFunc_IsValid_ReturnValue2
+	CallFunc_K2_ApplyGameplayEffectSpecToOwner_ReturnValue
 	CallFunc_K2_GetActorLocation_ReturnValue
+	CallFunc_Lerp_ReturnValue
 	CallFunc_Less_IntInt_ReturnValue
 	CallFunc_LessEqual_IntInt_ReturnValue
 	CallFunc_LineTraceSingle_OutHit
 	CallFunc_LineTraceSingle_ReturnValue
+	CallFunc_MakeOutgoingGameplayEffectSpec_ReturnValue
 	CallFunc_MakeTransform_ReturnValue
 	CallFunc_Not_PreBool_ReturnValue
 	CallFunc_Not_PreBool_ReturnValue1
 	CallFunc_Not_PreBool_ReturnValue2
 	CallFunc_Not_PreBool_ReturnValue3
+	CallFunc_ReplaceRangeInGameplayEffectContainer_ReturnValue
 	CallFunc_Subtract_IntInt_ReturnValue
 	CallFunc_ValidPawn_ReturnValue
 	CallFunc_WaitTargetSelection_ReturnValue
@@ -141,6 +170,7 @@ Name table:
 	Character
 	Class
 	ClassProperty
+	CombatEffects_HeroAbilities
 	ConeMinRadius
 	ConePitchAngle
 	ConeYawAngle
@@ -148,9 +178,11 @@ Name table:
 	CurveTable
 	CurveTableRowHandle
 	CustomShapeComponentName
+	DamageMult
 	DamageStatHandle
 	DataTable
 	DataTableRowHandle
+	Default__AbilityFunctions_C
 	Default__AbilitySystemBlueprintLibrary
 	Default__ArrayProperty
 	Default__B_BGA_Outlander_Fragment_Bear_Default_C
@@ -162,10 +194,14 @@ Name table:
 	Default__FloatProperty
 	Default__FortAbilityTask_WaitTargetSelection
 	Default__FortGameplayAbility
+	Default__FortKismetLibrary
+	Default__FortScalableFloatUtils
 	Default__Function
 	Default__GA_Bear_Target_C
 	Default__GameplayStatics
 	Default__GE_Bear_Damage_C
+	Default__GE_Perk_H_Overbearing_T02_DamageMult_C
+	Default__InterfaceProperty
 	Default__IntProperty
 	Default__KismetArrayLibrary
 	Default__KismetSystemLibrary
@@ -175,6 +211,8 @@ Name table:
 	DefaultSceneRoot_GEN_VARIABLE
 	DelegateFunction
 	DelegateProperty
+	Divide_FloatFloat
+	DoesTagAssetInterfaceHaveTag
 	EffectCauser
 	EffectContainers
 	EffectContext
@@ -201,6 +239,7 @@ Name table:
 	EventData
 	ExclusionGameplayTags
 	ExecuteUbergraph_GA_Bear_Target
+	FClamp
 	FloatProperty
 	FortAbilityTargetSelection
 	FortAbilityTargetSelectionList
@@ -208,7 +247,9 @@ Name table:
 	FortAIPawn
 	FortGameplayAbility
 	FortGameplayEffectContainer
+	FortKismetLibrary
 	FortPawn
+	FortScalableFloatUtils
 	FortTargetFilter
 	Function
 	GA_Bear_Target_C
@@ -223,35 +264,47 @@ Name table:
 	GameplayEffect
 	GameplayEffectContextHandle
 	GameplayEffectLevel
+	GameplayEffectSpecHandle
 	GameplayEventData
 	GameplayStatics
 	GameplayTag
+	GameplayTagAssetInterface
 	GameplayTagContainer
 	GameplayTags
 	GameplayTask
 	GE_Bear_Damage_C
 	GE_BearDamage
+	GE_Overbearing_DamageMult
+	GE_Perk_H_Overbearing_T02_DamageMult_C
+	GEC_Default
 	GetActorsFromTargetData
 	GetCustomAbilitySourceTransform
 	GetDataCountFromTargetData
+	GetDistanceBetweenActors
 	GetEyeLocationAndRotation
 	GetHitResultFromTargetData
+	GetRangeFromGameplayEffectContainer
 	GetSocketLocation
+	GetValueAtLevel
+	Granted.Perk.Overbearing.T01
+	Granted.Perk.Overbearing.T02
 	Greater_IntInt
 	HalfExtents
+	HandleOverbearingRange
 	HitActors
 	HitResult
 	ImpactCues
 	ImpactLocation
 	InPawn
-	InputPin
 	InstancingPolicy
 	InstigatingBear
 	Instigator
+	InterfaceProperty
 	IntProperty
 	IsDead
 	IsValid
 	K2_ActivateAbilityFromEvent
+	K2_ApplyGameplayEffectSpecToOwner
 	K2_EndAbility
 	K2_ExecuteGameplayCue
 	K2_ExecuteGameplayCueWithParams
@@ -271,18 +324,22 @@ Name table:
 	K2Node_Event_EventData
 	K2Node_MakeArray_Array
 	K2Node_MakeStruct_GameplayCueParameters
+	K2Node_MakeStruct_ScalableFloat
 	K2Node_MakeStruct_Vector_NetQuantize10
 	K2Node_MakeStruct_Vector_NetQuantizeNormal
+	K2Node_Select_Default
 	KismetArrayLibrary
 	KismetMathLibrary
 	KismetSystemLibrary
 	LastHitPawn
+	Lerp
 	Less_IntInt
 	LessEqual_IntInt
 	LinearColor
 	LineTraceSingle
 	List
 	Location
+	MakeOutgoingGameplayEffectSpec
 	MakeTransform
 	MatchedTagName
 	MaxTargets
@@ -300,6 +357,8 @@ Name table:
 	OriginalTag
 	Outlander_BearTower
 	Package
+	Perk.Overbearing.T01.Range
+	Perk.Overbearing.T02.MaxDamageMult
 	PhysicalMaterial
 	PointerToUberGraphFrame
 	PrimarySource
@@ -308,6 +367,7 @@ Name table:
 	Range
 	RawMagnitude
 	ReadyForActivation
+	ReplaceRangeInGameplayEffectContainer
 	ReturnValue
 	Rotation
 	Rotator
@@ -317,24 +377,32 @@ Name table:
 	SceneComponent
 	ScriptStruct
 	SecondarySource
+	SetByCaller.AbilityDamage
 	SetNewTargettingPawn
+	SF_Overbearing_MaxDamageMult
+	SF_Overbearing_Range
 	Shape
 	SourceObject
 	spine_01
 	StrProperty
 	StructProperty
 	Subtract_IntInt
+	T_Overbearing_T01
+	T_Overbearing_T02
 	TagName
 	TargetAttachComponent
 	TargetData
 	Targeted
 	Targeted_8B9123334683D93CB5787DA31EF6F668
 	TargetFilter
+	Targeting.ApplicationTag.0
+	TargetPawn
 	TargetSelection
 	TargetSelectionUsage
 	TargetTags
 	TargetTransform
 	Temp_bool_True_if_break_was_hit_Variable
+	Temp_bool_Variable
 	Temp_int_Array_Index_Variable
 	Temp_int_Loop_Counter_Variable
 	Temp_int_Variable
@@ -360,6 +428,7 @@ Name table:
 	Y
 	Z
 Import table:
+	Default__AbilityFunctions_C (AbilityFunctions_C)
 	Default__AbilitySystemBlueprintLibrary (AbilitySystemBlueprintLibrary)
 	Default__ArrayProperty (ArrayProperty)
 	GameplayTags (ArrayProperty)
@@ -367,6 +436,7 @@ Import table:
 	Default__BlueprintGameplayTagLibrary (BlueprintGameplayTagLibrary)
 	B_BGA_Outlander_Fragment_Bear_Default_C (BlueprintGeneratedClass)
 	GE_Bear_Damage_C (BlueprintGeneratedClass)
+	GE_Perk_H_Overbearing_T02_DamageMult_C (BlueprintGeneratedClass)
 	Default__BlueprintGeneratedClass (BlueprintGeneratedClass)
 	Default__BoolProperty (BoolProperty)
 	ArrayProperty (Class)
@@ -376,6 +446,7 @@ Import table:
 	DelegateProperty (Class)
 	FloatProperty (Class)
 	Function (Class)
+	InterfaceProperty (Class)
 	IntProperty (Class)
 	NameProperty (Class)
 	Object (Class)
@@ -393,13 +464,17 @@ Import table:
 	FortAbilityTask_WaitTargetSelection (Class)
 	FortAIPawn (Class)
 	FortGameplayAbility (Class)
+	FortKismetLibrary (Class)
 	FortPawn (Class)
+	FortScalableFloatUtils (Class)
 	AbilitySystemBlueprintLibrary (Class)
 	GameplayAbility (Class)
 	GameplayEffect (Class)
 	BlueprintGameplayTagLibrary (Class)
+	GameplayTagAssetInterface (Class)
 	GameplayTask (Class)
 	Default__ClassProperty (ClassProperty)
+	CombatEffects_HeroAbilities (CurveTable)
 	GadgetScaling (DataTable)
 	WaitTargetSelectionDelegate__DelegateSignature (DelegateFunction)
 	Default__DelegateProperty (DelegateProperty)
@@ -409,8 +484,11 @@ Import table:
 	Z (FloatProperty)
 	NormalizedMagnitude (FloatProperty)
 	RawMagnitude (FloatProperty)
+	Value (FloatProperty)
 	Default__FortAbilityTask_WaitTargetSelection (FortAbilityTask_WaitTargetSelection)
 	Default__FortGameplayAbility (FortGameplayAbility)
+	Default__FortKismetLibrary (FortKismetLibrary)
+	Default__FortScalableFloatUtils (FortScalableFloatUtils)
 	Default__Function (Function)
 	K2_GetActorLocation (Function)
 	BreakHitResult (Function)
@@ -418,11 +496,15 @@ Import table:
 	Array_Clear (Function)
 	Array_Get (Function)
 	Array_Length (Function)
+	Add_FloatFloat (Function)
 	Add_IntInt (Function)
 	Add_VectorVector (Function)
 	BooleanAND (Function)
 	BreakVector (Function)
+	Divide_FloatFloat (Function)
+	FClamp (Function)
 	Greater_IntInt (Function)
+	Lerp (Function)
 	Less_IntInt (Function)
 	LessEqual_IntInt (Function)
 	MakeTransform (Function)
@@ -432,18 +514,27 @@ Import table:
 	LineTraceSingle (Function)
 	WaitTargetSelection (Function)
 	GetCustomAbilitySourceTransform (Function)
+	ReplaceRangeInGameplayEffectContainer (Function)
 	IsDead (Function)
+	GetValueAtLevel (Function)
 	AbilityTargetDataFromActor (Function)
+	AssignTagSetByCallerMagnitude (Function)
 	GetActorsFromTargetData (Function)
 	GetDataCountFromTargetData (Function)
 	GetHitResultFromTargetData (Function)
 	BP_ApplyGameplayEffectToTarget (Function)
+	BP_RemoveGameplayEffectFromOwnerWithAssetTags (Function)
 	K2_ActivateAbilityFromEvent (Function)
+	K2_ApplyGameplayEffectSpecToOwner (Function)
 	K2_OnEndAbility (Function)
+	MakeOutgoingGameplayEffectSpec (Function)
 	BreakGameplayTagContainer (Function)
+	DoesTagAssetInterfaceHaveTag (Function)
 	ReadyForActivation (Function)
 	Default__GameplayStatics (GameplayStatics)
 	Default__GE_Bear_Damage_C (GE_Bear_Damage_C)
+	Default__GE_Perk_H_Overbearing_T02_DamageMult_C (GE_Perk_H_Overbearing_T02_DamageMult_C)
+	Default__InterfaceProperty (InterfaceProperty)
 	Default__IntProperty (IntProperty)
 	AbilityLevel (IntProperty)
 	GameplayEffectLevel (IntProperty)
@@ -457,7 +548,10 @@ Import table:
 	Instigator (ObjectProperty)
 	/Game/Abilities/Player/Outlander/Actives/Fragment/Bear/B_BGA_Outlander_Fragment_Bear_Default (Package)
 	/Game/Abilities/Player/Outlander/Actives/Fragment/Bear/GE_Bear_Damage (Package)
+	/Game/Abilities/Player/Perks/Hero/Overbearing/GE_Perk_H_Overbearing_T02_DamageMult (Package)
+	/Game/Balance/DataTables/CombatEffects_HeroAbilities (Package)
 	/Game/Balance/DataTables/GadgetScaling (Package)
+	/Game/Macros/Abilities/AbilityFunctions (Package)
 	/Script/CoreUObject (Package)
 	/Script/Engine (Package)
 	/Script/FortniteGame (Package)
@@ -469,15 +563,19 @@ Import table:
 	Rotator (ScriptStruct)
 	Transform (ScriptStruct)
 	Vector (ScriptStruct)
+	CurveTableRowHandle (ScriptStruct)
 	HitResult (ScriptStruct)
 	PointerToUberGraphFrame (ScriptStruct)
 	Vector_NetQuantize10 (ScriptStruct)
 	Vector_NetQuantizeNormal (ScriptStruct)
+	FortGameplayEffectContainer (ScriptStruct)
 	ActiveGameplayEffectHandle (ScriptStruct)
 	GameplayAbilityTargetDataHandle (ScriptStruct)
 	GameplayCueParameters (ScriptStruct)
 	GameplayEffectContextHandle (ScriptStruct)
+	GameplayEffectSpecHandle (ScriptStruct)
 	GameplayEventData (ScriptStruct)
+	ScalableFloat (ScriptStruct)
 	GameplayTag (ScriptStruct)
 	GameplayTagContainer (ScriptStruct)
 	Default__StructProperty (StructProperty)
@@ -489,6 +587,7 @@ Import table:
 	Normal (StructProperty)
 	OriginalTag (StructProperty)
 	TargetTags (StructProperty)
+	Curve (StructProperty)
 	GameplayTags (StructProperty)
 	EffectCauser (WeakObjectProperty)
 	Instigator (WeakObjectProperty)
@@ -498,16 +597,24 @@ Import table:
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	GA_Bear_Target_C (0-0-0-0): size 330 (cls: GA_Bear_Target_C>BlueprintGeneratedClass>/Script/Engine) :
+	GA_Bear_Target_C (0-0-0-0): size 406 (cls: GA_Bear_Target_C>BlueprintGeneratedClass>/Script/Engine) :
 		Tag array:
 			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=GA_Bear_Target_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_GA_Bear_Target=GA_Bear_Target_C 
-	Default__GA_Bear_Target_C (0-0-0-0): size 5742 (cls: Default__GA_Bear_Target_C>GA_Bear_Target_C) :
+	Default__GA_Bear_Target_C (0-0-0-0): size 8888 (cls: Default__GA_Bear_Target_C>GA_Bear_Target_C) :
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			TargetTransform(StructProperty)=System.Byte[] 
 			GE_BearDamage(ObjectProperty)=GE_Bear_Damage_C=/Game/Abilities/Player/Outlander/Actives/Fragment/Bear/GE_Bear_Damage 
 			ImpactLocation(StructProperty)=Vector(0,0,0) 
+			T_Overbearing_T02(StructProperty)=System.Byte[] 
+			T_Overbearing_T01(StructProperty)=System.Byte[] 
+			SF_Overbearing_Range(StructProperty)=System.Byte[] 
+			GEC_Default(StructProperty)=System.Byte[] 
+			bFirstActivation(BoolProperty)=True 
+			GE_Overbearing_DamageMult(ObjectProperty)=GE_Perk_H_Overbearing_T02_DamageMult_C=/Game/Abilities/Player/Perks/Hero/Overbearing/GE_Perk_H_Overbearing_T02_DamageMult 
+			SF_Overbearing_MaxDamageMult(StructProperty)=System.Byte[] 
+			EffectContainers(StructProperty)=System.Byte[] 
 			EffectContainers(StructProperty)=System.Byte[] 
 			EffectContainers(StructProperty)=System.Byte[] 
 			DamageStatHandle(StructProperty)=System.Byte[] 
@@ -520,7 +627,7 @@ Serialized exports:
 		Tag array:
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject) :
 		Tag array:
-	ExecuteUbergraph_GA_Bear_Target (0-0-0-0): size 2809 (cls: ExecuteUbergraph_GA_Bear_Target>Function>/Script/CoreUObject) :
+	ExecuteUbergraph_GA_Bear_Target (0-0-0-0): size 2939 (cls: ExecuteUbergraph_GA_Bear_Target>Function>/Script/CoreUObject) :
 		Tag array:
 	Break (0-0-0-0): size 58 (cls: Break>Function>/Script/CoreUObject) :
 		Tag array:
@@ -548,9 +655,9 @@ Serialized exports:
 		Tag array:
 	ValidPawn (0-0-0-0): size 174 (cls: ValidPawn>Function>/Script/CoreUObject) :
 		Tag array:
-	InputPin (0-0-0-0): size 36 (cls: InputPin>ObjectProperty>/Script/CoreUObject) :
+	TargetPawn (0-0-0-0): size 36 (cls: TargetPawn>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	ApplyEffectToPawn (0-0-0-0): size 126 (cls: ApplyEffectToPawn>Function>/Script/CoreUObject) :
+	ApplyEffectToPawn (0-0-0-0): size 329 (cls: ApplyEffectToPawn>Function>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_BP_ApplyGameplayEffectToTarget_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_BP_ApplyGameplayEffectToTarget_ReturnValue>StructProperty>/Script/CoreUObject) :
 		Tag array:
@@ -574,6 +681,14 @@ Serialized exports:
 		Tag array:
 	HitActors (0-0-0-0): size 36 (cls: HitActors>ArrayProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_BooleanAND_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_DoesTagAssetInterfaceHaveTag_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_DoesTagAssetInterfaceHaveTag_ReturnValue>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	bFirstActivation (0-0-0-0): size 34 (cls: bFirstActivation>BoolProperty>/Script/CoreUObject) :
+		Tag array:
 	bFoundAcceptableTarget (0-0-0-0): size 34 (cls: bFoundAcceptableTarget>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_BreakHitResult_bBlockingHit (0-0-0-0): size 34 (cls: CallFunc_BreakHitResult_bBlockingHit>BoolProperty>/Script/CoreUObject) :
@@ -587,6 +702,8 @@ Serialized exports:
 	CallFunc_BreakHitResult_bBlockingHit (0-0-0-0): size 34 (cls: CallFunc_BreakHitResult_bBlockingHit>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_BreakHitResult_bInitialOverlap (0-0-0-0): size 34 (cls: CallFunc_BreakHitResult_bInitialOverlap>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_DoesTagAssetInterfaceHaveTag_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_DoesTagAssetInterfaceHaveTag_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_Greater_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Greater_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -624,6 +741,8 @@ Serialized exports:
 		Tag array:
 	Temp_bool_True_if_break_was_hit_Variable (0-0-0-0): size 34 (cls: Temp_bool_True_if_break_was_hit_Variable>BoolProperty>/Script/CoreUObject) :
 		Tag array:
+	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_IsDead_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsDead_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject) :
@@ -634,13 +753,35 @@ Serialized exports:
 		Tag array:
 	GE_BearDamage (0-0-0-0): size 40 (cls: GE_BearDamage>ClassProperty>/Script/CoreUObject) :
 		Tag array:
+	GE_Overbearing_DamageMult (0-0-0-0): size 40 (cls: GE_Overbearing_DamageMult>ClassProperty>/Script/CoreUObject) :
+		Tag array:
 	K2Node_CreateDelegate_OutputDelegate (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate>DelegateProperty>/Script/CoreUObject) :
 		Tag array:
 	K2Node_CreateDelegate_OutputDelegate1 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate1>DelegateProperty>/Script/CoreUObject) :
 		Tag array:
+	DamageMult (0-0-0-0): size 32 (cls: DamageMult>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CalculateOverbearingDamageMult (0-0-0-0): size 328 (cls: CalculateOverbearingDamageMult>Function>/Script/CoreUObject) :
+		Tag array:
+	ApplyOverbearingDamageMult (0-0-0-0): size 180 (cls: ApplyOverbearingDamageMult>Function>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_CalculateOverbearingDamageMult_DamageMult (0-0-0-0): size 32 (cls: CallFunc_CalculateOverbearingDamageMult_DamageMult>FloatProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_BreakHitResult_Distance (0-0-0-0): size 32 (cls: CallFunc_BreakHitResult_Distance>FloatProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_BreakHitResult_Time (0-0-0-0): size 32 (cls: CallFunc_BreakHitResult_Time>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Divide_FloatFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Divide_FloatFloat_ReturnValue>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_FClamp_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_FClamp_ReturnValue>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_GetDistanceBetweenActors_Distance (0-0-0-0): size 32 (cls: CallFunc_GetDistanceBetweenActors_Distance>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_GetRangeFromGameplayEffectContainer_Range (0-0-0-0): size 32 (cls: CallFunc_GetRangeFromGameplayEffectContainer_Range>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_GetValueAtLevel_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetValueAtLevel_ReturnValue>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Lerp_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Lerp_ReturnValue>FloatProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_BreakHitResult_Distance (0-0-0-0): size 32 (cls: CallFunc_BreakHitResult_Distance>FloatProperty>/Script/CoreUObject) :
 		Tag array:
@@ -651,6 +792,20 @@ Serialized exports:
 	CallFunc_BreakVector_Y (0-0-0-0): size 32 (cls: CallFunc_BreakVector_Y>FloatProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_BreakVector_Z (0-0-0-0): size 32 (cls: CallFunc_BreakVector_Z>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_BP_GetGameplayEffectContainer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_BP_GetGameplayEffectContainer_ReturnValue>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	HandleOverbearingRange (0-0-0-0): size 318 (cls: HandleOverbearingRange>Function>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Add_FloatFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Add_FloatFloat_ReturnValue>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_GetRangeFromGameplayEffectContainer_Range (0-0-0-0): size 32 (cls: CallFunc_GetRangeFromGameplayEffectContainer_Range>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_GetValueAtLevel_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetValueAtLevel_ReturnValue>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_DoesTagAssetInterfaceHaveTag_TagContainerInterface_CastInput (0-0-0-0): size 36 (cls: CallFunc_DoesTagAssetInterfaceHaveTag_TagContainerInterface_CastInput>InterfaceProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_DoesTagAssetInterfaceHaveTag_TagContainerInterface_CastInput (0-0-0-0): size 36 (cls: CallFunc_DoesTagAssetInterfaceHaveTag_TagContainerInterface_CastInput>InterfaceProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_BreakHitResult_FaceIndex (0-0-0-0): size 32 (cls: CallFunc_BreakHitResult_FaceIndex>IntProperty>/Script/CoreUObject) :
 		Tag array:
@@ -716,6 +871,12 @@ Serialized exports:
 		Tag array:
 	CallFunc_AbilityTargetDataFromActor_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_AbilityTargetDataFromActor_ReturnValue>StructProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_AssignTagSetByCallerMagnitude_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_AssignTagSetByCallerMagnitude_ReturnValue>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_K2_ApplyGameplayEffectSpecToOwner_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_ApplyGameplayEffectSpecToOwner_ReturnValue>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_MakeOutgoingGameplayEffectSpec_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_MakeOutgoingGameplayEffectSpec_ReturnValue>StructProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_Add_VectorVector_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_Add_VectorVector_ReturnValue>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_BreakHitResult_ImpactNormal (0-0-0-0): size 36 (cls: CallFunc_BreakHitResult_ImpactNormal>StructProperty>/Script/CoreUObject) :
@@ -737,6 +898,8 @@ Serialized exports:
 	CallFunc_K2_GetActorLocation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_GetActorLocation_ReturnValue>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_LineTraceSingle_OutHit (0-0-0-0): size 36 (cls: CallFunc_LineTraceSingle_OutHit>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_BP_GetGameplayEffectContainer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_BP_GetGameplayEffectContainer_ReturnValue>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	ApplicationTag (0-0-0-0): size 36 (cls: ApplicationTag>StructProperty>/Script/CoreUObject) :
 		Tag array:
@@ -776,11 +939,27 @@ Serialized exports:
 		Tag array:
 	K2Node_MakeStruct_Vector_NetQuantizeNormal (0-0-0-0): size 36 (cls: K2Node_MakeStruct_Vector_NetQuantizeNormal>StructProperty>/Script/CoreUObject) :
 		Tag array:
+	K2Node_Select_Default (0-0-0-0): size 36 (cls: K2Node_Select_Default>StructProperty>/Script/CoreUObject) :
+		Tag array:
 	Temp_struct_Variable (0-0-0-0): size 36 (cls: Temp_struct_Variable>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	Temp_struct_Variable1 (0-0-0-0): size 36 (cls: Temp_struct_Variable1>StructProperty>/Script/CoreUObject) :
 		Tag array:
+	GEC_Default (0-0-0-0): size 36 (cls: GEC_Default>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_ReplaceRangeInGameplayEffectContainer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_ReplaceRangeInGameplayEffectContainer_ReturnValue>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	K2Node_MakeStruct_ScalableFloat (0-0-0-0): size 36 (cls: K2Node_MakeStruct_ScalableFloat>StructProperty>/Script/CoreUObject) :
+		Tag array:
 	ImpactLocation (0-0-0-0): size 36 (cls: ImpactLocation>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	SF_Overbearing_MaxDamageMult (0-0-0-0): size 36 (cls: SF_Overbearing_MaxDamageMult>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	SF_Overbearing_Range (0-0-0-0): size 36 (cls: SF_Overbearing_Range>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	T_Overbearing_T01 (0-0-0-0): size 36 (cls: T_Overbearing_T01>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	T_Overbearing_T02 (0-0-0-0): size 36 (cls: T_Overbearing_T02>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	ApplicationTag (0-0-0-0): size 36 (cls: ApplicationTag>StructProperty>/Script/CoreUObject) :
 		Tag array:

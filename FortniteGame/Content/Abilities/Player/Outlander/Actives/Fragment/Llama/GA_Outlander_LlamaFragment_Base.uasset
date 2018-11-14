@@ -6,6 +6,7 @@ Name table:
 	/Game/Abilities/Player/Outlander/Actives/Fragment/Llama/GE_Outlander_HoldingChargeFragment
 	/Game/Abilities/Player/Outlander/Actives/Fragment/Llama/Prop_Outlander_Fragment_Llama
 	/Game/Abilities/Player/Outlander/Actives/Fragment/Llama/TT_Outlander_LlamaFragment
+	/Game/Abilities/Player/Parents/GAT_ActiveAbility_Hero
 	/Game/Abilities/Player/Parents/GAT_OutlanderActiveAbility
 	/Game/Abilities/Player/Pawns/PlayerPawn_Outlander
 	/Game/Animation/Game/MainPlayer/Combat/Gadgets/Medium/Male/Grenade/grenade_throw_Montage
@@ -91,6 +92,7 @@ Name table:
 	CallFunc_BreakTransform_Rotation1
 	CallFunc_BreakTransform_Scale
 	CallFunc_BreakTransform_Scale1
+	CallFunc_CommitAbilityWithEvent_Passed
 	CallFunc_Conv_IntToFloat_ReturnValue
 	CallFunc_Conv_VectorToRotator_ReturnValue
 	CallFunc_CreatePlayMontageAndWaitProxy_ReturnValue
@@ -111,6 +113,7 @@ Name table:
 	CallFunc_GetOwnedGameplayTags_self_CastInput
 	CallFunc_GetOwnedGameplayTags_TagContainer
 	CallFunc_GetSpawnParameters_OutSpawnParamters
+	CallFunc_GetValueAtLevel_ReturnValue
 	CallFunc_Greater_FloatFloat_ReturnValue
 	CallFunc_Greater_IntInt_ReturnValue
 	CallFunc_GreaterEqual_IntInt_ReturnValue
@@ -132,7 +135,6 @@ Name table:
 	CallFunc_HasAuthority_ReturnValue
 	CallFunc_IsValid_ReturnValue
 	CallFunc_K2_ApplyGameplayEffectSpecToOwner_ReturnValue
-	CallFunc_K2_CommitAbility_ReturnValue
 	CallFunc_K2_GetItemQuantityOnPlayer_ReturnValue
 	CallFunc_K2_RemoveItemFromPlayer_ReturnValue
 	CallFunc_MakeLiteralGameplayTagContainer_ReturnValue
@@ -153,6 +155,7 @@ Name table:
 	ClientPlayForceFeedback
 	CollisionCapsule0
 	CollisionCylinder
+	CommitAbilityWithEvent
 	Controller
 	Conv_IntToFloat
 	Conv_VectorToRotator
@@ -176,8 +179,10 @@ Name table:
 	Default__DelegateProperty
 	Default__FloatProperty
 	Default__FortKismetLibrary
+	Default__FortScalableFloatUtils
 	Default__Function
 	Default__GA_Outlander_LlamaFragment_Base_C
+	Default__GAT_ActiveAbility_Hero_C
 	Default__GAT_OutlanderActiveAbility_C
 	Default__GE_Outlander_FragmentCooldown_C
 	Default__GE_Outlander_HackDamageResist_C
@@ -238,6 +243,7 @@ Name table:
 	FortPlayerController
 	FortPlayerPawn
 	FortProjectileBase
+	FortScalableFloatUtils
 	FragmentAmmoData
 	FragmentOrbProjectile
 	FragmentPlacement
@@ -262,6 +268,7 @@ Name table:
 	GameplayTagContainer
 	GameplayTags
 	GameplayTask
+	GAT_ActiveAbility_Hero_C
 	GAT_OutlanderActiveAbility_C
 	GCN_ActivateFragment
 	GE_Hack_Llama_AntiMaterialResist
@@ -278,6 +285,7 @@ Name table:
 	GetFortPlayerControllerFromActor
 	GetOwnedGameplayTags
 	GetSpawnParameters
+	GetValueAtLevel
 	Granted.Abilities.Outlander.HoldingChargeFragment
 	Greater_FloatFloat
 	Greater_IntInt
@@ -294,7 +302,6 @@ Name table:
 	InitTarget
 	InterfaceProperty
 	IntProperty
-	isAutoCommitted
 	IsValid
 	ItemDefinition
 	ItemMaxStack
@@ -303,7 +310,6 @@ Name table:
 	K2_ActivateAbility
 	K2_ApplyGameplayEffectSpecToOwner
 	K2_CanActivateAbility
-	K2_CommitAbility
 	K2_EndAbility
 	K2_ExecuteGameplayCue
 	K2_GetItemQuantityOnPlayer
@@ -354,7 +360,6 @@ Name table:
 	MontageWaitSimpleDelegate__DelegateSignature
 	MulticastDelegateProperty
 	NameProperty
-	NewHeroSystem
 	NODE_AddStaticMeshComponent-0
 	NODE_AddStaticMeshComponent-1
 	None
@@ -452,6 +457,7 @@ Name table:
 	UberGraphFrame
 	UberGraphFramePointerProperty
 	UberGraphFunction
+	UseHeroLoadoutSystem
 	Value
 	Vector
 	WeakObjectProperty
@@ -473,11 +479,13 @@ Import table:
 	GE_Outlander_HoldingChargeFragment_C (BlueprintGeneratedClass)
 	Prop_Outlander_Fragment_Llama_C (BlueprintGeneratedClass)
 	TT_Outlander_LlamaFragment_C (BlueprintGeneratedClass)
+	GAT_ActiveAbility_Hero_C (BlueprintGeneratedClass)
 	GAT_OutlanderActiveAbility_C (BlueprintGeneratedClass)
 	PlayerPawn_Outlander_C (BlueprintGeneratedClass)
 	Default__BlueprintGeneratedClass (BlueprintGeneratedClass)
 	LlamaDropsAmmo (BoolProperty)
 	LlamaDropsAmmoTactical (BoolProperty)
+	UseHeroLoadoutSystem (BoolProperty)
 	Default__BoolProperty (BoolProperty)
 	AntiMaterialHitBox_GEN_VARIABLE (BoxComponent)
 	PhaseShiftHitBox_GEN_VARIABLE (BoxComponent)
@@ -517,6 +525,7 @@ Import table:
 	FortPlayerController (Class)
 	FortPlayerPawn (Class)
 	FortProjectileBase (Class)
+	FortScalableFloatUtils (Class)
 	AbilitySystemBlueprintLibrary (Class)
 	AbilitySystemComponent (Class)
 	AbilityTask_PlayMontageAndWait (Class)
@@ -531,12 +540,12 @@ Import table:
 	MontageWaitSimpleDelegate__DelegateSignature (DelegateFunction)
 	Default__DelegateProperty (DelegateProperty)
 	Default__FloatProperty (FloatProperty)
-	RegenCooldown (FloatProperty)
 	FF_Outlander_FragmentPlacement (ForceFeedbackEffect)
 	AmmoDataFragments (FortAmmoItemDefinition)
 	Outlander_Female_Feedback (FortFeedbackBank)
 	Default__FortKismetLibrary (FortKismetLibrary)
 	CharMoveComp (FortMovementComp_Character)
+	Default__FortScalableFloatUtils (FortScalableFloatUtils)
 	K2_ActivateAbility (Function)
 	Default__Function (Function)
 	FlushNetDormancy (Function)
@@ -568,6 +577,7 @@ Import table:
 	K2_RemoveItemFromPlayer (Function)
 	SpawnProjectile (Function)
 	TriggerFeedbackEvent (Function)
+	GetValueAtLevel (Function)
 	AbilityTargetDataFromActor (Function)
 	EvaluateAttributeValueWithTagsAndBase (Function)
 	GetAbilitySystemComponent (Function)
@@ -582,6 +592,7 @@ Import table:
 	HasAllMatchingGameplayTags (Function)
 	MakeLiteralGameplayTagContainer (Function)
 	ReadyForActivation (Function)
+	Default__GAT_ActiveAbility_Hero_C (GAT_ActiveAbility_Hero_C)
 	Default__GAT_OutlanderActiveAbility_C (GAT_OutlanderActiveAbility_C)
 	Default__GE_Outlander_FragmentCooldown_C (GE_Outlander_FragmentCooldown_C)
 	Default__GE_Outlander_HackDamageResist_C (GE_Outlander_HackDamageResist_C)
@@ -607,6 +618,7 @@ Import table:
 	/Game/Abilities/Player/Outlander/Actives/Fragment/Llama/GE_Outlander_HoldingChargeFragment (Package)
 	/Game/Abilities/Player/Outlander/Actives/Fragment/Llama/Prop_Outlander_Fragment_Llama (Package)
 	/Game/Abilities/Player/Outlander/Actives/Fragment/Llama/TT_Outlander_LlamaFragment (Package)
+	/Game/Abilities/Player/Parents/GAT_ActiveAbility_Hero (Package)
 	/Game/Abilities/Player/Parents/GAT_OutlanderActiveAbility (Package)
 	/Game/Abilities/Player/Pawns/PlayerPawn_Outlander (Package)
 	/Game/Animation/Game/MainPlayer/Combat/Gadgets/Medium/Male/Grenade/grenade_throw_Montage (Package)
@@ -660,6 +672,7 @@ Import table:
 	Location (StructProperty)
 	Rotation (StructProperty)
 	List (StructProperty)
+	RegenCooldown (StructProperty)
 	OwnerGameplayEffectSpecs (StructProperty)
 	TargetGameplayEffectSpecs (StructProperty)
 	ItemMaxStack (StructProperty)
@@ -672,11 +685,11 @@ Import table:
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	GA_Outlander_LlamaFragment_Base_C (0-0-0-0): size 586 (cls: GA_Outlander_LlamaFragment_Base_C>BlueprintGeneratedClass>/Script/Engine) :
+	GA_Outlander_LlamaFragment_Base_C (0-0-0-0): size 582 (cls: GA_Outlander_LlamaFragment_Base_C>BlueprintGeneratedClass>/Script/Engine) :
 		Tag array:
 			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=GA_Outlander_LlamaFragment_Base_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_GA_Outlander_LlamaFragment_Base=GA_Outlander_LlamaFragment_Base_C 
-	Default__GA_Outlander_LlamaFragment_Base_C (0-0-0-0): size 3002 (cls: Default__GA_Outlander_LlamaFragment_Base_C>GA_Outlander_LlamaFragment_Base_C) :
+	Default__GA_Outlander_LlamaFragment_Base_C (0-0-0-0): size 2976 (cls: Default__GA_Outlander_LlamaFragment_Base_C>GA_Outlander_LlamaFragment_Base_C) :
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			M_GrenadeThrow(ObjectProperty)=grenade_throw_Montage=/Game/Animation/Game/MainPlayer/Combat/Gadgets/Medium/Male/Grenade/grenade_throw_Montage 
@@ -710,7 +723,6 @@ Serialized exports:
 			TC_FragmentCooldowns(StructProperty)=GameplayTagContainer:Abilities.Explorer.Cooldowns.Fragment 
 			TC_OutlanderHoldingFragment(StructProperty)=GameplayTagContainer:Granted.Abilities.Outlander.HoldingChargeFragment 
 			GE_HoldingFragment(ObjectProperty)=GE_Outlander_HoldingChargeFragment_C=/Game/Abilities/Player/Outlander/Actives/Fragment/Llama/GE_Outlander_HoldingChargeFragment 
-			isAutoCommitted(BoolProperty)=False 
 			OwnerPreviewImageOverrideTags(StructProperty)=GameplayTagContainer:Gameplay.Explorer.Fragment 
 			AbilityCosts(ArrayProperty)=[object] (inner: StructProperty)
 			MontageInfo(StructProperty)=System.Byte[] 
@@ -721,7 +733,7 @@ Serialized exports:
 		Tag array:
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject) :
 		Tag array:
-	ExecuteUbergraph_GA_Outlander_LlamaFragment_Base (0-0-0-0): size 1904 (cls: ExecuteUbergraph_GA_Outlander_LlamaFragment_Base>Function>/Script/CoreUObject) :
+	ExecuteUbergraph_GA_Outlander_LlamaFragment_Base (0-0-0-0): size 1903 (cls: ExecuteUbergraph_GA_Outlander_LlamaFragment_Base>Function>/Script/CoreUObject) :
 		Tag array:
 	SpawnProjectile (0-0-0-0): size 58 (cls: SpawnProjectile>Function>/Script/CoreUObject) :
 		Tag array:
@@ -767,7 +779,7 @@ Serialized exports:
 		Tag array:
 	AbilitySystem (0-0-0-0): size 36 (cls: AbilitySystem>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	SetupAbility (0-0-0-0): size 1014 (cls: SetupAbility>Function>/Script/CoreUObject) :
+	SetupAbility (0-0-0-0): size 1058 (cls: SetupAbility>Function>/Script/CoreUObject) :
 		Tag array:
 	Authority (0-0-0-0): size 88 (cls: Authority>Function>/Script/CoreUObject) :
 		Tag array:
@@ -781,9 +793,9 @@ Serialized exports:
 		Tag array:
 	CallFunc_BooleanAND_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
-	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject) :
+	CallFunc_CommitAbilityWithEvent_Passed (0-0-0-0): size 34 (cls: CallFunc_CommitAbilityWithEvent_Passed>BoolProperty>/Script/CoreUObject) :
 		Tag array:
-	CallFunc_K2_CommitAbility_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_K2_CommitAbility_ReturnValue>BoolProperty>/Script/CoreUObject) :
+	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -875,8 +887,6 @@ Serialized exports:
 		Tag array:
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject) :
 		Tag array:
-	NewHeroSystem (0-0-0-0): size 34 (cls: NewHeroSystem>BoolProperty>/Script/CoreUObject) :
-		Tag array:
 	PlayerIsCurrentlyHoldingLlamaFragment (0-0-0-0): size 34 (cls: PlayerIsCurrentlyHoldingLlamaFragment>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_EvaluateAttributeValueWithTagsAndBase_bSuccess (0-0-0-0): size 34 (cls: CallFunc_EvaluateAttributeValueWithTagsAndBase_bSuccess>BoolProperty>/Script/CoreUObject) :
@@ -928,6 +938,8 @@ Serialized exports:
 	CallFunc_EvaluateAttributeValueWithTagsAndBase_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_EvaluateAttributeValueWithTagsAndBase_ReturnValue>FloatProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_EvaluateAttributeValueWithTagsAndBase_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_EvaluateAttributeValueWithTagsAndBase_ReturnValue1>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_GetValueAtLevel_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetValueAtLevel_ReturnValue>FloatProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_HasAllMatchingGameplayTags_TagContainerInterface_CastInput (0-0-0-0): size 36 (cls: CallFunc_HasAllMatchingGameplayTags_TagContainerInterface_CastInput>InterfaceProperty>/Script/CoreUObject) :
 		Tag array:

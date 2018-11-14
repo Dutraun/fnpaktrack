@@ -68,6 +68,7 @@ Name table:
 	bHasScriptImplementedPaint
 	BindEndOfDayHeaderText
 	BindingName
+	BindToAnimationFinished
 	bIsRootWidget
 	bIsVariable
 	bLegacyFinishOnStop
@@ -109,6 +110,7 @@ Name table:
 	CallFunc_GetXpInfo_OutXpInfo
 	CallFunc_GetXpInfo_ReturnValue
 	CallFunc_Less_IntInt_ReturnValue
+	CallFunc_PlayAnimationAtTime_ReturnValue
 	CallFunc_SpawnSound2D_ReturnValue
 	CallFunc_Subtract_FloatFloat_ReturnValue
 	CallFunc_Subtract_FloatFloat_ReturnValue1
@@ -381,13 +383,11 @@ Name table:
 	ObjectBindings
 	ObjectGuid
 	ObjectProperty
-	OnAnimationFinished
 	OnEndOfDayRecap
 	OnEndOfDayRecap__DelegateSignature
 	OnEndOfDayRecapEnded
 	OnEndOfDayRecapEnded__DelegateSignature
 	OnScoreTweenEndEvent
-	OnWidgetAnimationPlaybackStatusChanged__DelegateSignature
 	OnXPTweenEndEvent
 	OutlineColor
 	OutlineMaterial
@@ -403,7 +403,7 @@ Name table:
 	Parent
 	ParentGuid
 	Percent
-	PlayAnimation
+	PlayAnimationAtTime
 	PlaybackRange
 	PlayerController
 	PlayerName
@@ -534,6 +534,7 @@ Name table:
 	UberGraphFunction
 	UInt16Property
 	UInt32Property
+	UMGSequencePlayer
 	UniqueNetIdRepl
 	Update Contribution LERP
 	Update XP LERP
@@ -556,6 +557,7 @@ Name table:
 	Widget
 	WidgetAnimation
 	WidgetAnimationBinding
+	WidgetAnimationDynamicEvent__DelegateSignature
 	WidgetArchetype
 	WidgetBlueprintGeneratedClass
 	WidgetBlueprintLibrary
@@ -633,6 +635,7 @@ Import table:
 	ProgressBar (Class)
 	SizeBox (Class)
 	SizeBoxSlot (Class)
+	UMGSequencePlayer (Class)
 	UserWidget (Class)
 	VerticalBox (Class)
 	VerticalBoxSlot (Class)
@@ -645,7 +648,7 @@ Import table:
 	Default__CommonNumericTextBlock (CommonNumericTextBlock)
 	Default__CommonTextBlock (CommonTextBlock)
 	OnEndOfDayRecap__DelegateSignature (DelegateFunction)
-	OnWidgetAnimationPlaybackStatusChanged__DelegateSignature (DelegateFunction)
+	WidgetAnimationDynamicEvent__DelegateSignature (DelegateFunction)
 	Default__DelegateProperty (DelegateProperty)
 	ArgumentValueGender (EnumProperty)
 	Default__FloatProperty (FloatProperty)
@@ -681,13 +684,14 @@ Import table:
 	GetScoreReportIndex (Function)
 	GetXpInfo (Function)
 	Construct (Function)
-	PlayAnimation (Function)
+	PlayAnimationAtTime (Function)
 	Tick (Function)
 	AddChildToVerticalBox (Function)
 	SetHorizontalAlignment (Function)
 	SetPadding (Function)
 	SetSize (Function)
 	ForceVolatile (Function)
+	BindToAnimationFinished (Function)
 	Create (Function)
 	Default__GameplayStatics (GameplayStatics)
 	Default__HorizontalBox (HorizontalBox)
@@ -715,7 +719,6 @@ Import table:
 	Default__MovieSceneColorTrack (MovieSceneColorTrack)
 	Default__MulticastDelegateProperty (MulticastDelegateProperty)
 	OnEndOfDayRecap (MulticastDelegateProperty)
-	OnAnimationFinished (MulticastDelegateProperty)
 	IntroAnim (ObjectProperty)
 	Default__ObjectProperty (ObjectProperty)
 	PlayerState (ObjectProperty)
@@ -823,7 +826,7 @@ Serialized exports:
 		Tag array:
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject) :
 		Tag array:
-	ExecuteUbergraph_ZoneScoreWidget (0-0-0-0): size 1610 (cls: ExecuteUbergraph_ZoneScoreWidget>Function>/Script/CoreUObject) :
+	ExecuteUbergraph_ZoneScoreWidget (0-0-0-0): size 1621 (cls: ExecuteUbergraph_ZoneScoreWidget>Function>/Script/CoreUObject) :
 		Tag array:
 	EndOfDayRecap (0-0-0-0): size 36 (cls: EndOfDayRecap>StructProperty>/Script/CoreUObject) :
 		Tag array:
@@ -859,11 +862,11 @@ Serialized exports:
 		Tag array:
 	ScoreReport (0-0-0-0): size 36 (cls: ScoreReport>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	ShowXPReward (0-0-0-0): size 439 (cls: ShowXPReward>Function>/Script/CoreUObject) :
+	ShowXPReward (0-0-0-0): size 449 (cls: ShowXPReward>Function>/Script/CoreUObject) :
 		Tag array:
 	Temp_int_Array_Index_Variable (0-0-0-0): size 32 (cls: Temp_int_Array_Index_Variable>IntProperty>/Script/CoreUObject) :
 		Tag array:
-	ShowTeamScoreContributions (0-0-0-0): size 852 (cls: ShowTeamScoreContributions>Function>/Script/CoreUObject) :
+	ShowTeamScoreContributions (0-0-0-0): size 862 (cls: ShowTeamScoreContributions>Function>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_Add_IntInt_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue>IntProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1137,40 +1140,6 @@ Serialized exports:
 			PlaybackRange(StructProperty)=System.Byte[] 
 			DisplayRate(StructProperty)=System.Byte[] 
 			Signature(StructProperty)=Guid: 240196419-1128478882-3956260755-4177382765 
-	Intro_EndOfDayRecapAnim (0-0-0-0): size 794 (cls: Intro_EndOfDayRecapAnim>MovieScene>/Script/MovieScene) :
-		Tag array:
-			Possessables(ArrayProperty)=[object] (inner: StructProperty)
-			ObjectBindings(ArrayProperty)=[object] (inner: StructProperty)
-			PlaybackRange(StructProperty)=System.Byte[] 
-			DisplayRate(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 2543591249-1171544986-1776125343-1871484867 
-	XPIntroAnim (0-0-0-0): size 1226 (cls: XPIntroAnim>MovieScene>/Script/MovieScene) :
-		Tag array:
-			Possessables(ArrayProperty)=[object] (inner: StructProperty)
-			ObjectBindings(ArrayProperty)=[object] (inner: StructProperty)
-			PlaybackRange(StructProperty)=System.Byte[] 
-			DisplayRate(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 240196419-1128478882-3956260755-4177382765 
-	MovieScene2DTransformSection_1 (0-0-0-0): size 1252 (cls: MovieScene2DTransformSection_1>MovieScene2DTransformSection>/Script/UMG) :
-		Tag array:
-			Translation(StructProperty)=System.Byte[] 
-			EvalOptions(StructProperty)=System.Byte[] 
-			Easing(StructProperty)=System.Byte[] 
-			SectionRange(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 1049540335-1168627745-2071430067-1217531032 
-	MovieScene2DTransformSection_0 (0-0-0-0): size 2628 (cls: MovieScene2DTransformSection_0>MovieScene2DTransformSection>/Script/UMG) :
-		Tag array:
-			Translation(StructProperty)=System.Byte[] 
-			Translation(StructProperty)=System.Byte[] 
-			Rotation(StructProperty)=System.Byte[] 
-			Scale(StructProperty)=System.Byte[] 
-			Scale(StructProperty)=System.Byte[] 
-			Shear(StructProperty)=System.Byte[] 
-			Shear(StructProperty)=System.Byte[] 
-			EvalOptions(StructProperty)=System.Byte[] 
-			Easing(StructProperty)=System.Byte[] 
-			SectionRange(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 4089394997-1252267159-4274715019-3853633814 
 	MovieScene2DTransformSection_1 (0-0-0-0): size 1252 (cls: MovieScene2DTransformSection_1>MovieScene2DTransformSection>/Script/UMG) :
 		Tag array:
 			Translation(StructProperty)=System.Byte[] 
@@ -1205,32 +1174,6 @@ Serialized exports:
 			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
 			EvalOptions(StructProperty)=System.Byte[] 
 			Signature(StructProperty)=Guid: 1089299878-1285913702-1381709455-3155974935 
-	MovieScene2DTransformTrack_1 (0-0-0-0): size 279 (cls: MovieScene2DTransformTrack_1>MovieScene2DTransformTrack>/Script/UMG) :
-		Tag array:
-			PropertyName(NameProperty)=RenderTransform 
-			PropertyPath(StrProperty)=RenderTransform 
-			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
-			EvalOptions(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 1282932593-1149696263-1492960418-829897863 
-	MovieScene2DTransformTrack_0 (0-0-0-0): size 279 (cls: MovieScene2DTransformTrack_0>MovieScene2DTransformTrack>/Script/UMG) :
-		Tag array:
-			PropertyName(NameProperty)=RenderTransform 
-			PropertyPath(StrProperty)=RenderTransform 
-			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
-			EvalOptions(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 1089299878-1285913702-1381709455-3155974935 
-	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene) :
-		Tag array:
-	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene) :
-		Tag array:
-	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene) :
-		Tag array:
-	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene) :
-		Tag array:
-	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene) :
-		Tag array:
-	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene) :
-		Tag array:
 	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene) :
 		Tag array:
 	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene) :
@@ -1253,23 +1196,6 @@ Serialized exports:
 			Easing(StructProperty)=System.Byte[] 
 			SectionRange(StructProperty)=System.Byte[] 
 			Signature(StructProperty)=Guid: 1701975132-1239750811-1555770789-3971807586 
-	MovieSceneColorSection_0 (0-0-0-0): size 1588 (cls: MovieSceneColorSection_0>MovieSceneColorSection>/Script/MovieSceneTracks) :
-		Tag array:
-			RedCurve(StructProperty)=System.Byte[] 
-			GreenCurve(StructProperty)=System.Byte[] 
-			BlueCurve(StructProperty)=System.Byte[] 
-			AlphaCurve(StructProperty)=System.Byte[] 
-			EvalOptions(StructProperty)=System.Byte[] 
-			Easing(StructProperty)=System.Byte[] 
-			SectionRange(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 1701975132-1239750811-1555770789-3971807586 
-	MovieSceneColorTrack_0 (0-0-0-0): size 279 (cls: MovieSceneColorTrack_0>MovieSceneColorTrack>/Script/MovieSceneTracks) :
-		Tag array:
-			PropertyName(NameProperty)=ColorAndOpacity 
-			PropertyPath(StrProperty)=ColorAndOpacity 
-			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
-			EvalOptions(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 2666632879-1332929202-2108425600-1547205023 
 	MovieSceneColorTrack_0 (0-0-0-0): size 279 (cls: MovieSceneColorTrack_0>MovieSceneColorTrack>/Script/MovieSceneTracks) :
 		Tag array:
 			PropertyName(NameProperty)=ColorAndOpacity 
@@ -1285,6 +1211,8 @@ Serialized exports:
 		Tag array:
 	CallFunc_GetContext_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue1>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_PlayAnimationAtTime_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlayAnimationAtTime_ReturnValue>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_SpawnSound2D_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_SpawnSound2D_ReturnValue>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_AddChildToVerticalBox_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_AddChildToVerticalBox_ReturnValue>ObjectProperty>/Script/CoreUObject) :
@@ -1293,11 +1221,15 @@ Serialized exports:
 		Tag array:
 	CallFunc_GetOwningPlayer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetOwningPlayer_ReturnValue>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_PlayAnimationAtTime_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlayAnimationAtTime_ReturnValue>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_GetOwningPlayer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetOwningPlayer_ReturnValue>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_GetScoreReport_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetScoreReport_ReturnValue>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_PlayAnimationAtTime_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlayAnimationAtTime_ReturnValue>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	K2Node_DynamicCast_AsFort_Player_State (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Player_State>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1630,20 +1562,6 @@ Serialized exports:
 			Content(ObjectProperty)=OverlayTotalScore=WidgetArchetype 
 	Intro_EndOfDayRecapAnim_INST (0-0-0-0): size 9598 (cls: Intro_EndOfDayRecapAnim_INST>WidgetAnimation>/Script/UMG) :
 		Tag array:
-			MovieScene(ObjectProperty)=Intro_EndOfDayRecapAnim=WidgetArchetype 
-			AnimationBindings(ArrayProperty)=[object] (inner: StructProperty)
-			bLegacyFinishOnStop(BoolProperty)=False 
-			PrecompiledEvaluationTemplate(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 2739106743-1132079315-1965067653-561916778 
-	XPIntroAnim_INST (0-0-0-0): size 15845 (cls: XPIntroAnim_INST>WidgetAnimation>/Script/UMG) :
-		Tag array:
-			MovieScene(ObjectProperty)=XPIntroAnim=WidgetArchetype 
-			AnimationBindings(ArrayProperty)=[object] (inner: StructProperty)
-			bLegacyFinishOnStop(BoolProperty)=False 
-			PrecompiledEvaluationTemplate(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 1939684337-1125749699-4070519967-1901512851 
-	Intro_EndOfDayRecapAnim_INST (0-0-0-0): size 9598 (cls: Intro_EndOfDayRecapAnim_INST>WidgetAnimation>/Script/UMG) :
-		Tag array:
 			MovieScene(ObjectProperty)=Intro_EndOfDayRecapAnim=ZoneScoreWidget_C 
 			AnimationBindings(ArrayProperty)=[object] (inner: StructProperty)
 			bLegacyFinishOnStop(BoolProperty)=False 
@@ -1672,10 +1590,8 @@ Serialized exports:
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=VerticalBoxSlot_8=WidgetArchetype 
-	WidgetArchetype (0-0-0-0): size 270 (cls: WidgetArchetype>ZoneScoreWidget_C) :
+	WidgetArchetype (0-0-0-0): size 212 (cls: WidgetArchetype>ZoneScoreWidget_C) :
 		Tag array:
-			Intro_EndOfDayRecapAnim(ObjectProperty)=Intro_EndOfDayRecapAnim_INST=WidgetArchetype 
-			XPIntroAnim(ObjectProperty)=XPIntroAnim_INST=WidgetArchetype 
 			TeamScoreToPlayerXPRewardWidget(ObjectProperty)=TeamScoreToPlayerXPRewardWidget=WidgetArchetype 
 			TextEndOfDayHeader(ObjectProperty)=TextEndOfDayHeader=WidgetArchetype 
 			VerticalBoxPlayerScoreContributions(ObjectProperty)=VerticalBoxPlayerScoreContributions=WidgetArchetype 

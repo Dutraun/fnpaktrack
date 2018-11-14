@@ -51,6 +51,7 @@ Name table:
 	bHasScriptImplementedPaint
 	bHasScriptImplementedTick
 	BindingName
+	BindToAnimationFinished
 	bIsRootWidget
 	bIsVariable
 	bLegacyFinishOnStop
@@ -103,6 +104,7 @@ Name table:
 	CallFunc_IsUsingBattlEye_ReturnValue
 	CallFunc_K2_SetTimerDelegate_ReturnValue
 	CallFunc_Less_IntInt_ReturnValue
+	CallFunc_PlayAnimationAtTime_ReturnValue
 	CaptureEndPoint
 	ChildTemplates
 	Class
@@ -353,7 +355,6 @@ Name table:
 	MovieSceneTrackEvalOptions
 	MovieSceneTrackIdentifier
 	MovieSceneTrackImplementationPtr
-	MulticastDelegateProperty
 	MyGeometry
 	Name
 	NamedSlot
@@ -371,12 +372,10 @@ Name table:
 	ObjectGuid
 	ObjectProperty
 	OnActivated
-	OnAnimationFinished
 	OnButtonClicked
 	OnDeactivated
 	OnMouseButtonDown
 	OnMouseButtonUp
-	OnWidgetAnimationPlaybackStatusChanged__DelegateSignature
 	Overlay
 	OverlaySlot
 	Package
@@ -386,7 +385,7 @@ Name table:
 	Parent
 	ParentGuid
 	PassThrough
-	PlayAnimation
+	PlayAnimationAtTime
 	PlaybackRange
 	PointerEvent
 	PointerToUberGraphFrame
@@ -508,6 +507,7 @@ Name table:
 	UInt16Property
 	UInt32Property
 	UInt64Property
+	UMGSequencePlayer
 	UnderlyingType
 	UserDefinedStruct
 	UserWidget
@@ -525,6 +525,7 @@ Name table:
 	Widget
 	WidgetAnimation
 	WidgetAnimationBinding
+	WidgetAnimationDynamicEvent__DelegateSignature
 	WidgetArchetype
 	WidgetBlueprintGeneratedClass
 	WidgetBlueprintLibrary
@@ -593,6 +594,7 @@ Import table:
 	SizeBox (Class)
 	SizeBoxSlot (Class)
 	Spacer (Class)
+	UMGSequencePlayer (Class)
 	UserWidget (Class)
 	VerticalBox (Class)
 	VerticalBoxSlot (Class)
@@ -612,7 +614,7 @@ Import table:
 	Default__DataTableFunctionLibrary (DataTableFunctionLibrary)
 	CommonActionCommited__DelegateSignature (DelegateFunction)
 	TimerDynamicDelegate__DelegateSignature (DelegateFunction)
-	OnWidgetAnimationPlaybackStatusChanged__DelegateSignature (DelegateFunction)
+	WidgetAnimationDynamicEvent__DelegateSignature (DelegateFunction)
 	Default__DelegateProperty (DelegateProperty)
 	ESlateVisibility (Enum)
 	Default__EnumProperty (EnumProperty)
@@ -651,8 +653,9 @@ Import table:
 	Construct (Function)
 	OnMouseButtonDown (Function)
 	OnMouseButtonUp (Function)
-	PlayAnimation (Function)
+	PlayAnimationAtTime (Function)
 	GetDesiredSize (Function)
+	BindToAnimationFinished (Function)
 	Handled (Function)
 	Default__Image (Image)
 	Default__IntProperty (IntProperty)
@@ -670,7 +673,6 @@ Import table:
 	Default__MovieSceneColorTrack (MovieSceneColorTrack)
 	Default__MovieSceneMarginSection (MovieSceneMarginSection)
 	Default__MovieSceneMarginTrack (MovieSceneMarginTrack)
-	OnAnimationFinished (MulticastDelegateProperty)
 	Default__NamedSlot (NamedSlot)
 	Default__NameProperty (NameProperty)
 	Default__ObjectProperty (ObjectProperty)
@@ -759,7 +761,7 @@ Serialized exports:
 		Tag array:
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject) :
 		Tag array:
-	ExecuteUbergraph_Credits (0-0-0-0): size 588 (cls: ExecuteUbergraph_Credits>Function>/Script/CoreUObject) :
+	ExecuteUbergraph_Credits (0-0-0-0): size 594 (cls: ExecuteUbergraph_Credits>Function>/Script/CoreUObject) :
 		Tag array:
 	Button (0-0-0-0): size 36 (cls: Button>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
@@ -789,7 +791,9 @@ Serialized exports:
 		Tag array:
 	CaptureEndPoint (0-0-0-0): size 121 (cls: CaptureEndPoint>Function>/Script/CoreUObject) :
 		Tag array:
-	Reset (0-0-0-0): size 96 (cls: Reset>Function>/Script/CoreUObject) :
+	CallFunc_PlayAnimationAtTime_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlayAnimationAtTime_ReturnValue>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	Reset (0-0-0-0): size 106 (cls: Reset>Function>/Script/CoreUObject) :
 		Tag array:
 	Temp_int_Array_Index_Variable (0-0-0-0): size 32 (cls: Temp_int_Array_Index_Variable>IntProperty>/Script/CoreUObject) :
 		Tag array:
@@ -908,9 +912,8 @@ Serialized exports:
 	ComponentDelegateBinding_0 (0-0-0-0): size 205 (cls: ComponentDelegateBinding_0>ComponentDelegateBinding>/Script/Engine) :
 		Tag array:
 			ComponentDelegateBindings(ArrayProperty)=[object] (inner: StructProperty)
-	WidgetArchetype (0-0-0-0): size 270 (cls: WidgetArchetype>Credits_C) :
+	WidgetArchetype (0-0-0-0): size 241 (cls: WidgetArchetype>Credits_C) :
 		Tag array:
-			FadeMask-Show(ObjectProperty)=FadeMask-Show_INST=WidgetArchetype 
 			BacchusCloseButton(ObjectProperty)=BacchusCloseButton=WidgetArchetype 
 			FortRichTextBlock_0(ObjectProperty)=FortRichTextBlock_0=WidgetArchetype 
 			ImageMask(ObjectProperty)=ImageMask=WidgetArchetype 
@@ -1011,21 +1014,6 @@ Serialized exports:
 			PlaybackRange(StructProperty)=System.Byte[] 
 			DisplayRate(StructProperty)=System.Byte[] 
 			Signature(StructProperty)=Guid: 2947382714-1223873796-1079723150-2207057972 
-	FadeMask-Show (0-0-0-0): size 1584 (cls: FadeMask-Show>MovieScene>/Script/MovieScene) :
-		Tag array:
-			Possessables(ArrayProperty)=[object] (inner: StructProperty)
-			ObjectBindings(ArrayProperty)=[object] (inner: StructProperty)
-			PlaybackRange(StructProperty)=System.Byte[] 
-			DisplayRate(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 2947382714-1223873796-1079723150-2207057972 
-	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene) :
-		Tag array:
-	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene) :
-		Tag array:
-	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene) :
-		Tag array:
-	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene) :
-		Tag array:
 	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene) :
 		Tag array:
 	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene) :
@@ -1044,23 +1032,6 @@ Serialized exports:
 			Easing(StructProperty)=System.Byte[] 
 			SectionRange(StructProperty)=System.Byte[] 
 			Signature(StructProperty)=Guid: 2322538865-1122643216-915972996-2199207075 
-	MovieSceneColorSection_1 (0-0-0-0): size 3287 (cls: MovieSceneColorSection_1>MovieSceneColorSection>/Script/MovieSceneTracks) :
-		Tag array:
-			RedCurve(StructProperty)=System.Byte[] 
-			GreenCurve(StructProperty)=System.Byte[] 
-			BlueCurve(StructProperty)=System.Byte[] 
-			AlphaCurve(StructProperty)=System.Byte[] 
-			EvalOptions(StructProperty)=System.Byte[] 
-			Easing(StructProperty)=System.Byte[] 
-			SectionRange(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 2322538865-1122643216-915972996-2199207075 
-	MovieSceneColorTrack_2 (0-0-0-0): size 279 (cls: MovieSceneColorTrack_2>MovieSceneColorTrack>/Script/MovieSceneTracks) :
-		Tag array:
-			PropertyName(NameProperty)=ColorAndOpacity 
-			PropertyPath(StrProperty)=ColorAndOpacity 
-			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
-			EvalOptions(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 1329284306-1118893469-2593940644-4281260520 
 	MovieSceneColorTrack_2 (0-0-0-0): size 279 (cls: MovieSceneColorTrack_2>MovieSceneColorTrack>/Script/MovieSceneTracks) :
 		Tag array:
 			PropertyName(NameProperty)=ColorAndOpacity 
@@ -1074,19 +1045,6 @@ Serialized exports:
 			Easing(StructProperty)=System.Byte[] 
 			SectionRange(StructProperty)=System.Byte[] 
 			Signature(StructProperty)=Guid: 1224041761-1289332728-159412911-3885117787 
-	MovieSceneMarginSection_0 (0-0-0-0): size 817 (cls: MovieSceneMarginSection_0>MovieSceneMarginSection>/Script/UMG) :
-		Tag array:
-			BottomCurve(StructProperty)=System.Byte[] 
-			Easing(StructProperty)=System.Byte[] 
-			SectionRange(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 1224041761-1289332728-159412911-3885117787 
-	MovieSceneMarginTrack_0 (0-0-0-0): size 271 (cls: MovieSceneMarginTrack_0>MovieSceneMarginTrack>/Script/UMG) :
-		Tag array:
-			PropertyName(NameProperty)=Padding 
-			PropertyPath(StrProperty)=Padding 
-			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
-			EvalOptions(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 1218077737-1242192020-573455275-511920013 
 	MovieSceneMarginTrack_0 (0-0-0-0): size 271 (cls: MovieSceneMarginTrack_0>MovieSceneMarginTrack>/Script/UMG) :
 		Tag array:
 			PropertyName(NameProperty)=Padding 
@@ -1446,13 +1404,6 @@ Serialized exports:
 	FadeMask-Show_INST (0-0-0-0): size 16049 (cls: FadeMask-Show_INST>WidgetAnimation>/Script/UMG) :
 		Tag array:
 			MovieScene(ObjectProperty)=FadeMask-Show=Credits_C 
-			AnimationBindings(ArrayProperty)=[object] (inner: StructProperty)
-			bLegacyFinishOnStop(BoolProperty)=False 
-			PrecompiledEvaluationTemplate(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 339010656-1141610425-3756440224-177539743 
-	FadeMask-Show_INST (0-0-0-0): size 16049 (cls: FadeMask-Show_INST>WidgetAnimation>/Script/UMG) :
-		Tag array:
-			MovieScene(ObjectProperty)=FadeMask-Show=WidgetArchetype 
 			AnimationBindings(ArrayProperty)=[object] (inner: StructProperty)
 			bLegacyFinishOnStop(BoolProperty)=False 
 			PrecompiledEvaluationTemplate(StructProperty)=System.Byte[] 

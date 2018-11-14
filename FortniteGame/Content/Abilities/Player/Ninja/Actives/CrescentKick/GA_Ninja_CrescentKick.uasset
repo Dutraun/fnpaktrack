@@ -6,6 +6,7 @@ Name table:
 	/Game/Abilities/Player/Ninja/Actives/CrescentKick/TT_Ninja_CrescentKick
 	/Game/Abilities/Player/Ninja/Perks/CrescentKickEnergyReturn/GE_Ninja_CrescentKick_EnergyRegen
 	/Game/Abilities/Player/Parents/GAT_ActiveAbility
+	/Game/Abilities/Player/Parents/GAT_ActiveAbility_Hero
 	/Game/Abilities/Player/Parents/GAT_NinjaActiveAbility
 	/Game/Abilities/Player/Perks/Hero/Rebound/GE_Perk_H_Rebound_StaminaGrant
 	/Game/Animation/Game/MainPlayer/Combat/Gadgets/Small/Male/CrescentKick/CrescentKick_M
@@ -88,7 +89,6 @@ Name table:
 	BlueprintGameplayTagLibrary
 	BlueprintGeneratedClass
 	bOnlyApplyCostOnHit
-	BooleanAND
 	BoolProperty
 	BP_ApplyGameplayEffectToOwner
 	bPlayRandomSection
@@ -113,8 +113,8 @@ Name table:
 	CallFunc_Array_Length_ReturnValue1
 	CallFunc_Array_Length_ReturnValue2
 	CallFunc_Array_Length_ReturnValue3
-	CallFunc_BooleanAND_ReturnValue
 	CallFunc_BP_ApplyGameplayEffectToOwner_ReturnValue
+	CallFunc_CommitAbilityWithEvent_Passed
 	CallFunc_GetAbilitySystemComponent_ReturnValue
 	CallFunc_GetActorsFromTargetData_ReturnValue
 	CallFunc_GetActorsFromTargetData_ReturnValue1
@@ -142,13 +142,11 @@ Name table:
 	CallFunc_HasAllMatchingGameplayTags_TagContainerInterface8_CastInput
 	CallFunc_HasAllMatchingGameplayTags_TagContainerInterface9_CastInput
 	CallFunc_HasAllMatchingGameplayTags_TagContainerInterface_CastInput
-	CallFunc_HasAuthority_ReturnValue
 	CallFunc_IsValid_ReturnValue
 	CallFunc_IsValid_ReturnValue1
 	CallFunc_IsValid_ReturnValue2
 	CallFunc_IsValid_ReturnValue3
 	CallFunc_K2_ApplyGameplayEffectSpecToTarget_ReturnValue
-	CallFunc_K2_CommitAbility_ReturnValue
 	CallFunc_K2_GetRootComponent_ReturnValue
 	CallFunc_Less_IntInt_ReturnValue
 	CallFunc_LessEqual_IntInt_ReturnValue
@@ -166,6 +164,7 @@ Name table:
 	Class
 	ClassProperty
 	CombatEffects_HeroAbilities
+	CommitAbilityWithEvent
 	Completed
 	Completed_42A51001471CEA3BA1319BB63160CEEB
 	ConeMinRadius
@@ -204,6 +203,7 @@ Name table:
 	Default__GA_Ninja_CrescentKick_C
 	Default__GameplayStatics
 	Default__GAT_ActiveAbility_C
+	Default__GAT_ActiveAbility_Hero_C
 	Default__GAT_NinjaActiveAbility_C
 	Default__GE_Ninja_CrescentKick_BaseDamage_C
 	Default__GE_Ninja_CrescentKick_Cooldown_C
@@ -278,6 +278,7 @@ Name table:
 	GameplayTagContainer
 	GameplayTask
 	GAT_ActiveAbility_C
+	GAT_ActiveAbility_Hero_C
 	GAT_NinjaActiveAbility_C
 	GE_EnergyReturn
 	GE_Ninja_CrescentKick_BaseDamage_C
@@ -294,19 +295,15 @@ Name table:
 	Greater_IntInt
 	HalfExtents
 	HasAllMatchingGameplayTags
-	HasAuthority
-	HeroLoadoutSystem
 	HitActors
 	HotFoot_T02
 	ImpactCues
 	InterfaceProperty
 	IntProperty
-	isAutoCommitted
 	IsValid
 	ItemDefinition
 	K2_ActivateAbility
 	K2_ApplyGameplayEffectSpecToTarget
-	K2_CommitAbility
 	K2_EndAbility
 	K2_GetRootComponent
 	K2_OnEndAbility
@@ -412,6 +409,7 @@ Name table:
 	UberGraphFrame
 	UberGraphFramePointerProperty
 	UberGraphFunction
+	UseHeroLoadoutSystem
 	Value
 	Vector
 	WaitTargetSelection
@@ -427,9 +425,11 @@ Import table:
 	TT_Ninja_CrescentKick_C (BlueprintGeneratedClass)
 	GE_Ninja_CrescentKick_EnergyRegen_C (BlueprintGeneratedClass)
 	GAT_ActiveAbility_C (BlueprintGeneratedClass)
+	GAT_ActiveAbility_Hero_C (BlueprintGeneratedClass)
 	GAT_NinjaActiveAbility_C (BlueprintGeneratedClass)
 	GE_Perk_H_Rebound_StaminaGrant_C (BlueprintGeneratedClass)
 	Default__BlueprintGeneratedClass (BlueprintGeneratedClass)
+	UseHeroLoadoutSystem (BoolProperty)
 	Default__BoolProperty (BoolProperty)
 	ArrayProperty (Class)
 	BoolProperty (Class)
@@ -471,7 +471,6 @@ Import table:
 	ActiveAbilitySetup (Function)
 	K2_ActivateAbility (Function)
 	Default__Function (Function)
-	HasAuthority (Function)
 	K2_GetRootComponent (Function)
 	SpawnSoundAttached (Function)
 	Array_Add (Function)
@@ -479,7 +478,6 @@ Import table:
 	Array_Get (Function)
 	Array_Length (Function)
 	Add_IntInt (Function)
-	BooleanAND (Function)
 	Greater_IntInt (Function)
 	Less_IntInt (Function)
 	LessEqual_IntInt (Function)
@@ -499,6 +497,7 @@ Import table:
 	ReadyForActivation (Function)
 	Default__GameplayStatics (GameplayStatics)
 	Default__GAT_ActiveAbility_C (GAT_ActiveAbility_C)
+	Default__GAT_ActiveAbility_Hero_C (GAT_ActiveAbility_Hero_C)
 	Default__GAT_NinjaActiveAbility_C (GAT_NinjaActiveAbility_C)
 	Default__GE_Ninja_CrescentKick_BaseDamage_C (GE_Ninja_CrescentKick_BaseDamage_C)
 	Default__GE_Ninja_CrescentKick_Cooldown_C (GE_Ninja_CrescentKick_Cooldown_C)
@@ -522,6 +521,7 @@ Import table:
 	/Game/Abilities/Player/Ninja/Actives/CrescentKick/TT_Ninja_CrescentKick (Package)
 	/Game/Abilities/Player/Ninja/Perks/CrescentKickEnergyReturn/GE_Ninja_CrescentKick_EnergyRegen (Package)
 	/Game/Abilities/Player/Parents/GAT_ActiveAbility (Package)
+	/Game/Abilities/Player/Parents/GAT_ActiveAbility_Hero (Package)
 	/Game/Abilities/Player/Parents/GAT_NinjaActiveAbility (Package)
 	/Game/Abilities/Player/Perks/Hero/Rebound/GE_Perk_H_Rebound_StaminaGrant (Package)
 	/Game/Animation/Game/MainPlayer/Combat/Gadgets/Small/Male/CrescentKick/CrescentKick_M (Package)
@@ -551,11 +551,11 @@ Import table:
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	GA_Ninja_CrescentKick_C (0-0-0-0): size 458 (cls: GA_Ninja_CrescentKick_C>BlueprintGeneratedClass>/Script/Engine) :
+	GA_Ninja_CrescentKick_C (0-0-0-0): size 454 (cls: GA_Ninja_CrescentKick_C>BlueprintGeneratedClass>/Script/Engine) :
 		Tag array:
 			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=GA_Ninja_CrescentKick_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_GA_Ninja_CrescentKick=GA_Ninja_CrescentKick_C 
-	Default__GA_Ninja_CrescentKick_C (0-0-0-0): size 8275 (cls: Default__GA_Ninja_CrescentKick_C>GA_Ninja_CrescentKick_C) :
+	Default__GA_Ninja_CrescentKick_C (0-0-0-0): size 8249 (cls: Default__GA_Ninja_CrescentKick_C>GA_Ninja_CrescentKick_C) :
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			EventCompleteOld(StructProperty)=System.Byte[] 
@@ -584,7 +584,6 @@ Serialized exports:
 			TC_Rebound_T01(StructProperty)=GameplayTagContainer:Granted.Perk.Rebound.T01 
 			TC_HotFoot_T02(StructProperty)=GameplayTagContainer:Granted.Perk.HotFoot.T02 
 			GE_Rebound_StaminaReturn(ObjectProperty)=GE_Perk_H_Rebound_StaminaGrant_C=/Game/Abilities/Player/Perks/Hero/Rebound/GE_Perk_H_Rebound_StaminaGrant 
-			isAutoCommitted(BoolProperty)=False 
 			EffectContainers(StructProperty)=System.Byte[] 
 			EffectContainers(StructProperty)=System.Byte[] 
 			DamageStatHandle(StructProperty)=System.Byte[] 
@@ -597,7 +596,7 @@ Serialized exports:
 		Tag array:
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject) :
 		Tag array:
-	ExecuteUbergraph_GA_Ninja_CrescentKick (0-0-0-0): size 2741 (cls: ExecuteUbergraph_GA_Ninja_CrescentKick>Function>/Script/CoreUObject) :
+	ExecuteUbergraph_GA_Ninja_CrescentKick (0-0-0-0): size 2694 (cls: ExecuteUbergraph_GA_Ninja_CrescentKick>Function>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_ApplyGameplayEffectContainer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_ApplyGameplayEffectContainer_ReturnValue>StructProperty>/Script/CoreUObject) :
 		Tag array:
@@ -679,13 +678,11 @@ Serialized exports:
 		Tag array:
 	EnergyReturn (0-0-0-0): size 34 (cls: EnergyReturn>BoolProperty>/Script/CoreUObject) :
 		Tag array:
-	CallFunc_BooleanAND_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue>BoolProperty>/Script/CoreUObject) :
+	CallFunc_CommitAbilityWithEvent_Passed (0-0-0-0): size 34 (cls: CallFunc_CommitAbilityWithEvent_Passed>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_Greater_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Greater_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_Greater_IntInt_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_Greater_IntInt_ReturnValue1>BoolProperty>/Script/CoreUObject) :
-		Tag array:
-	CallFunc_HasAuthority_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasAuthority_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -695,8 +692,6 @@ Serialized exports:
 		Tag array:
 	CallFunc_IsValid_ReturnValue3 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue3>BoolProperty>/Script/CoreUObject) :
 		Tag array:
-	CallFunc_K2_CommitAbility_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_K2_CommitAbility_ReturnValue>BoolProperty>/Script/CoreUObject) :
-		Tag array:
 	CallFunc_Less_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_LessEqual_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_LessEqual_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject) :
@@ -704,8 +699,6 @@ Serialized exports:
 	CallFunc_LessEqual_IntInt_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_LessEqual_IntInt_ReturnValue1>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	K2Node_Event_bWasCancelled (0-0-0-0): size 34 (cls: K2Node_Event_bWasCancelled>BoolProperty>/Script/CoreUObject) :
-		Tag array:
-	HeroLoadoutSystem (0-0-0-0): size 34 (cls: HeroLoadoutSystem>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	HotFoot_T02 (0-0-0-0): size 34 (cls: HotFoot_T02>BoolProperty>/Script/CoreUObject) :
 		Tag array:

@@ -8,6 +8,7 @@ Name table:
 	/Game/Abilities/Player/Constructor/Actives/Decoy/P_Constructor_Decoy_Radius
 	/Game/AI/GoalSelection/AssignmentSettings/PrimaryWorldAssignment
 	/Game/AI/HotSpots/BuildingActorHotSpot_Constructor_Decoy
+	/Game/Balance/DataTables/CombatEffects_HeroAbilities
 	/Game/CharClasses/Soldier/Traits/AdvancedTactics/Abilities/Shockwave/P_Commando_Shockwave_01
 	/Game/Effects/Fort_Effects/Effects/Explosion/P_PropaneTankFuse
 	/Game/Effects/Fort_Effects/World/Destruction/Base_Effects/P_General_Deco_Destruction_Medium
@@ -33,6 +34,7 @@ Name table:
 	Abs
 	Activate
 	Actor
+	ActorComponentTickFunction
 	AddGoalToWorldAssignment
 	AddImpulseAtLocation
 	AggregatedSourceTags
@@ -60,6 +62,7 @@ Name table:
 	bIsDynamic
 	bIsDynamicOnDedicatedServer
 	bIsNavigationModifier
+	bIsNavigationRelevant
 	bIsValid
 	BlueprintComponentChangedPropertyInfo
 	BlueprintCookedComponentInstancingData
@@ -73,6 +76,7 @@ Name table:
 	bSelfMoved
 	bSimulatePhysics
 	bStartPenetrating
+	bStartWithTickEnabled
 	bSurpressHealthBar
 	BuildingActor
 	BuildingActorHotSpot_Constructor_Decoy
@@ -114,6 +118,8 @@ Name table:
 	CallFunc_GetInstigator_ReturnValue
 	CallFunc_GetInstigator_ReturnValue1
 	CallFunc_GetInstigator_ReturnValue2
+	CallFunc_GetInstigator_ReturnValue3
+	CallFunc_GetValueAtLevel_ReturnValue
 	CallFunc_GetVelocity_ReturnValue
 	CallFunc_Greater_FloatFloat_ReturnValue
 	CallFunc_GreaterEqual_FloatFloat_ReturnValue
@@ -134,6 +140,7 @@ Name table:
 	CallFunc_K2_SetTimer_ReturnValue
 	CallFunc_K2_SetTimer_ReturnValue1
 	CallFunc_K2_SetTimer_ReturnValue2
+	CallFunc_K2_SetTimer_ReturnValue3
 	CallFunc_MakeGoalFromActor_Goal
 	CallFunc_MakeVector_ReturnValue
 	CallFunc_MakeVector_ReturnValue1
@@ -162,6 +169,7 @@ Name table:
 	CollisionProfileName
 	CollisionResponse
 	CollisionResponses
+	CombatEffects_HeroAbilities
 	Component
 	ComponentClass
 	ComponentTemplate
@@ -173,6 +181,9 @@ Name table:
 	Cratebot_Decoy_Random_Taunts_Dialogue_Cue
 	Cratebot_Decoy_YouHaveBeen_010_Dialogue_Cue
 	CreateWorldAssignment
+	Curve
+	CurveTable
+	CurveTableRowHandle
 	Custom
 	Damage
 	DamageCauser
@@ -223,6 +234,7 @@ Name table:
 	Default__FloatProperty
 	Default__FortAIGoalManager
 	Default__FortKismetLibrary
+	Default__FortScalableFloatUtils
 	Default__Function
 	Default__GameplayStatics
 	Default__IntProperty
@@ -273,8 +285,10 @@ Name table:
 	EnumProperty
 	EPhysicalSurface
 	EqualEqual_NameName
+	Event.Ability.Perk.YourMoveCreep.Triggered
 	Event_AbilitiesOutlanderTacticalDecoyDoTFire
 	Event_NPCAbilityAttackAOEExplosion
+	Event_YourMoveCreep
 	EventMagnitude
 	EventTag
 	EventType
@@ -302,6 +316,7 @@ Name table:
 	FortKismetLibrary
 	FortNavArea_CheapObstacle
 	FortPawn
+	FortScalableFloatUtils
 	Function
 	Game
 	GameplayAbilityTargetDataHandle
@@ -319,6 +334,7 @@ Name table:
 	GetAIGoalManager
 	GetGameTimeInSeconds
 	GetInstigator
+	GetValueAtLevel
 	GetVelocity
 	GoalOverrideRadius
 	Greater_FloatFloat
@@ -356,6 +372,7 @@ Name table:
 	K2Node_CustomEvent_DecoyReflectDamage
 	K2Node_CustomEvent_DecoyStun
 	K2Node_CustomEvent_LifeSpan
+	K2Node_CustomEvent_YourMoveCreep
 	K2Node_Event_bSelfMoved
 	K2Node_Event_Damage
 	K2Node_Event_Damage1
@@ -392,6 +409,7 @@ Name table:
 	K2Node_MakeStruct_GameplayEventData
 	K2Node_MakeStruct_GameplayEventData1
 	K2Node_MakeStruct_GameplayEventData2
+	K2Node_MakeStruct_GameplayEventData3
 	K2Node_Select1_Default
 	K2Node_Select2_Default
 	K2Node_Select3_Default
@@ -461,12 +479,14 @@ Name table:
 	Pawn
 	Pelvis
 	PenetrationDepth
+	Perk.YourMoveCreep.T01.TimeBetweenShots
 	PhysicalMaterial
 	PhysMaterial
 	Pitch
 	PlaySound
 	PlaySoundAtLocation
 	PointerToUberGraphFrame
+	PrimaryComponentTick
 	PrimarySurfaceType
 	PrimaryWorldAssignment
 	PrimitiveComponent
@@ -488,6 +508,8 @@ Name table:
 	Roll
 	RootNodes
 	Rotator
+	RowName
+	ScalableFloat
 	SceneComponent
 	ScriptStruct
 	SCS_Node
@@ -498,6 +520,7 @@ Name table:
 	SetDecoyHasDamagePerks
 	SetDecoyHasRadiusPerk
 	SetDecoyHasTacticalDoTPerk
+	SetDecoyHasYourMoveCreep
 	SetDecoyLifespan
 	SetLifeSpan
 	SetSkeletalMesh
@@ -561,6 +584,7 @@ Name table:
 	UberGraphFunction
 	UnderlyingType
 	UserConstructionScript
+	Value
 	VariableGuid
 	Vector
 	Vector_NetQuantize
@@ -575,6 +599,9 @@ Name table:
 	X
 	Y
 	Yaw
+	YourMoveCreep
+	YourMoveCreepGCFire
+	YourMoveCreepTimeBetweenShots
 	Z
 Import table:
 	Default__AbilitySystemBlueprintLibrary (AbilitySystemBlueprintLibrary)
@@ -626,7 +653,9 @@ Import table:
 	FortKismetLibrary (Class)
 	FortNavArea_CheapObstacle (Class)
 	FortPawn (Class)
+	FortScalableFloatUtils (Class)
 	AbilitySystemBlueprintLibrary (Class)
+	CombatEffects_HeroAbilities (CurveTable)
 	Default__DecoyActor (DecoyActor)
 	EAssignmentCreationResult (Enum)
 	EGameplayCueEvent (Enum)
@@ -640,6 +669,7 @@ Import table:
 	PrimaryWorldAssignment (FortAIAssignmentSettings)
 	Default__FortAIGoalManager (FortAIGoalManager)
 	Default__FortKismetLibrary (FortKismetLibrary)
+	Default__FortScalableFloatUtils (FortScalableFloatUtils)
 	Default__Function (Function)
 	FlushNetDormancy (Function)
 	GetInstigator (Function)
@@ -685,6 +715,7 @@ Import table:
 	CreateWorldAssignment (Function)
 	MakeGoalFromActor (Function)
 	GetAIGoalManager (Function)
+	GetValueAtLevel (Function)
 	SendGameplayEventToActor (Function)
 	Default__GameplayStatics (GameplayStatics)
 	Default__IntProperty (IntProperty)
@@ -707,6 +738,7 @@ Import table:
 	/Game/Abilities/Player/Constructor/Actives/Decoy/P_Constructor_Decoy_Radius (Package)
 	/Game/AI/GoalSelection/AssignmentSettings/PrimaryWorldAssignment (Package)
 	/Game/AI/HotSpots/BuildingActorHotSpot_Constructor_Decoy (Package)
+	/Game/Balance/DataTables/CombatEffects_HeroAbilities (Package)
 	/Game/CharClasses/Soldier/Traits/AdvancedTactics/Abilities/Shockwave/P_Commando_Shockwave_01 (Package)
 	/Game/Effects/Fort_Effects/Effects/Explosion/P_PropaneTankFuse (Package)
 	/Game/Effects/Fort_Effects/World/Destruction/Base_Effects/P_General_Deco_Destruction_Medium (Package)
@@ -736,6 +768,7 @@ Import table:
 	LinearColor (ScriptStruct)
 	Rotator (ScriptStruct)
 	Vector (ScriptStruct)
+	ActorComponentTickFunction (ScriptStruct)
 	BodyInstance (ScriptStruct)
 	CollisionResponse (ScriptStruct)
 	HitResult (ScriptStruct)
@@ -750,6 +783,7 @@ Import table:
 	GameplayCueParameters (ScriptStruct)
 	GameplayEffectContextHandle (ScriptStruct)
 	GameplayEventData (ScriptStruct)
+	ScalableFloat (ScriptStruct)
 	GameplayTag (ScriptStruct)
 	GameplayTagContainer (ScriptStruct)
 	Default__SCS_Node (SCS_Node)
@@ -790,14 +824,14 @@ Import table:
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	B_BGA_Constructor_Decoy_C (0-0-0-0): size 762 (cls: B_BGA_Constructor_Decoy_C>BlueprintGeneratedClass>/Script/Engine) :
+	B_BGA_Constructor_Decoy_C (0-0-0-0): size 806 (cls: B_BGA_Constructor_Decoy_C>BlueprintGeneratedClass>/Script/Engine) :
 		Tag array:
 			NumReplicatedProperties(IntProperty)=5 
 			bHasCookedComponentInstancingData(BoolProperty)=True 
 			SimpleConstructionScript(ObjectProperty)=SimpleConstructionScript_0=B_BGA_Constructor_Decoy_C 
 			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=B_BGA_Constructor_Decoy_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_B_BGA_Constructor_Decoy=B_BGA_Constructor_Decoy_C 
-	Default__B_BGA_Constructor_Decoy_C (0-0-0-0): size 3120 (cls: Default__B_BGA_Constructor_Decoy_C>B_BGA_Constructor_Decoy_C) :
+	Default__B_BGA_Constructor_Decoy_C (0-0-0-0): size 3441 (cls: Default__B_BGA_Constructor_Decoy_C>B_BGA_Constructor_Decoy_C) :
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			SoundDecoyPlaced(ObjectProperty)=Decoy_Deploy_Cue=/Game/Sounds/Fort_Gadgets/Decoy/Decoy_Deploy_Cue 
@@ -826,6 +860,8 @@ Serialized exports:
 			DecoyMeshTNT(ObjectProperty)=SK_Constructor_Decoy_TNT=/Game/Abilities/Player/Constructor/Actives/Decoy/Meshes/SK_Constructor_Decoy_TNT 
 			DecoyStunActivate(StructProperty)=System.Byte[] 
 			SoundDecoyStun(ObjectProperty)=Decoy_Stun_Pulse_Cue=/Game/Sounds/Fort_Gadgets/ConstructionWorker/Decoy_Stun_Pulse_Cue 
+			Event_YourMoveCreep(StructProperty)=System.Byte[] 
+			YourMoveCreepTimeBetweenShots(StructProperty)=System.Byte[] 
 			InherentAbilitySets(ObjectProperty)=GAS_Constructor_Decoy=/Game/Abilities/Player/Constructor/Actives/Decoy/GAS_Constructor_Decoy 
 			AttributeInitKeys(StructProperty)=System.Byte[] 
 			AttributeInitKeys(StructProperty)=System.Byte[] 
@@ -835,6 +871,7 @@ Serialized exports:
 			bSurpressHealthBar(BoolProperty)=True 
 			bIsNavigationModifier(BoolProperty)=True 
 			bCanExportNavigationCollisions(BoolProperty)=True 
+			bIsNavigationRelevant(BoolProperty)=True 
 			bUseHotSpotAsMoveGoalReplacement(BoolProperty)=True 
 			bIsDynamic(BoolProperty)=True 
 			bIsDynamicOnDedicatedServer(BoolProperty)=True 
@@ -846,7 +883,7 @@ Serialized exports:
 		Tag array:
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject) :
 		Tag array:
-	ExecuteUbergraph_B_BGA_Constructor_Decoy (0-0-0-0): size 5144 (cls: ExecuteUbergraph_B_BGA_Constructor_Decoy>Function>/Script/CoreUObject) :
+	ExecuteUbergraph_B_BGA_Constructor_Decoy (0-0-0-0): size 5541 (cls: ExecuteUbergraph_B_BGA_Constructor_Decoy>Function>/Script/CoreUObject) :
 		Tag array:
 	K2Node_MakeArray_Array (0-0-0-0): size 32 (cls: K2Node_MakeArray_Array>NameProperty>/Script/CoreUObject) :
 		Tag array:
@@ -904,6 +941,8 @@ Serialized exports:
 		Tag array:
 	K2Node_CustomEvent_DecoyStun (0-0-0-0): size 34 (cls: K2Node_CustomEvent_DecoyStun>BoolProperty>/Script/CoreUObject) :
 		Tag array:
+	K2Node_CustomEvent_YourMoveCreep (0-0-0-0): size 34 (cls: K2Node_CustomEvent_YourMoveCreep>BoolProperty>/Script/CoreUObject) :
+		Tag array:
 	K2Node_Event_bSelfMoved (0-0-0-0): size 34 (cls: K2Node_Event_bSelfMoved>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	K2Node_SwitchEnum_CmpSuccess (0-0-0-0): size 34 (cls: K2Node_SwitchEnum_CmpSuccess>BoolProperty>/Script/CoreUObject) :
@@ -927,6 +966,12 @@ Serialized exports:
 	Temp_bool_Variable2 (0-0-0-0): size 34 (cls: Temp_bool_Variable2>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	Temp_bool_Variable3 (0-0-0-0): size 34 (cls: Temp_bool_Variable3>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	YourMoveCreepGCFire (0-0-0-0): size 58 (cls: YourMoveCreepGCFire>Function>/Script/CoreUObject) :
+		Tag array:
+	YourMoveCreep (0-0-0-0): size 34 (cls: YourMoveCreep>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	SetDecoyHasYourMoveCreep (0-0-0-0): size 72 (cls: SetDecoyHasYourMoveCreep>Function>/Script/CoreUObject) :
 		Tag array:
 	Damage (0-0-0-0): size 32 (cls: Damage>FloatProperty>/Script/CoreUObject) :
 		Tag array:
@@ -994,6 +1039,8 @@ Serialized exports:
 		Tag array:
 	DecoyHasRadiusUpgrade (0-0-0-0): size 34 (cls: DecoyHasRadiusUpgrade>BoolProperty>/Script/CoreUObject) :
 		Tag array:
+	YourMoveCreep (0-0-0-0): size 34 (cls: YourMoveCreep>BoolProperty>/Script/CoreUObject) :
+		Tag array:
 	K2Node_GameplayCueEvent_EventType (0-0-0-0): size 36 (cls: K2Node_GameplayCueEvent_EventType>ByteProperty>/Script/CoreUObject) :
 		Tag array:
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject) :
@@ -1036,6 +1083,8 @@ Serialized exports:
 	CallFunc_GetGameTimeInSeconds_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetGameTimeInSeconds_ReturnValue>FloatProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_GetGameTimeInSeconds_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_GetGameTimeInSeconds_ReturnValue1>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_GetValueAtLevel_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetValueAtLevel_ReturnValue>FloatProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_Subtract_FloatFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Subtract_FloatFloat_ReturnValue>FloatProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1112,6 +1161,8 @@ Serialized exports:
 	CallFunc_GetInstigator_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetInstigator_ReturnValue1>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_GetInstigator_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_GetInstigator_ReturnValue2>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_GetInstigator_ReturnValue3 (0-0-0-0): size 36 (cls: CallFunc_GetInstigator_ReturnValue3>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_SpawnEmitterAtLocation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_SpawnEmitterAtLocation_ReturnValue>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1191,28 +1242,32 @@ Serialized exports:
 		Tag array:
 	SpawnedAmbientSoundPlaying (0-0-0-0): size 36 (cls: SpawnedAmbientSoundPlaying>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	P_Constructor_Decoy_Radius_GEN_VARIABLE (0-0-0-0): size 128 (cls: P_Constructor_Decoy_Radius_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	P_Constructor_Decoy_Radius_GEN_VARIABLE (0-0-0-0): size 211 (cls: P_Constructor_Decoy_Radius_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_Constructor_Decoy_Radius=/Game/Abilities/Player/Constructor/Actives/Decoy/P_Constructor_Decoy_Radius 
 			RelativeLocation(StructProperty)=Vector(0,0,-85) 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
-	P_PropaneTankFuse1_GEN_VARIABLE (0-0-0-0): size 189 (cls: P_PropaneTankFuse1_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	P_PropaneTankFuse1_GEN_VARIABLE (0-0-0-0): size 272 (cls: P_PropaneTankFuse1_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_PropaneTankFuse=/Game/Effects/Fort_Effects/Effects/Explosion/P_PropaneTankFuse 
 			RelativeLocation(StructProperty)=Vector(-8.17065,26.76814,59.03994) 
 			RelativeRotation(StructProperty)=Rotator(81.92663,-53.90265,-110.6819) 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
-	P_PropaneTankFuse2_GEN_VARIABLE (0-0-0-0): size 189 (cls: P_PropaneTankFuse2_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	P_PropaneTankFuse2_GEN_VARIABLE (0-0-0-0): size 272 (cls: P_PropaneTankFuse2_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_PropaneTankFuse=/Game/Effects/Fort_Effects/Effects/Explosion/P_PropaneTankFuse 
 			RelativeLocation(StructProperty)=Vector(7.925131,-26.64515,57.2534) 
 			RelativeRotation(StructProperty)=Rotator(90,0,-0.0003051758) 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
-	P_PropaneTankFuse3_GEN_VARIABLE (0-0-0-0): size 189 (cls: P_PropaneTankFuse3_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	P_PropaneTankFuse3_GEN_VARIABLE (0-0-0-0): size 272 (cls: P_PropaneTankFuse3_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_PropaneTankFuse=/Game/Effects/Fort_Effects/Effects/Explosion/P_PropaneTankFuse 
 			RelativeLocation(StructProperty)=Vector(7.613888,23.33836,54.05605) 
 			RelativeRotation(StructProperty)=Rotator(8.051105,27.23396,-70.98502) 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
 	DecoyPivot_GEN_VARIABLE (0-0-0-0): size 12 (cls: DecoyPivot_GEN_VARIABLE>SceneComponent>/Script/Engine) :
 		Tag array:
@@ -1224,21 +1279,21 @@ Serialized exports:
 			ComponentTemplate(ObjectProperty)=DefaultSceneRoot_REMOVED_7A3C045645033A00C33204B98F015672=B_BGA_Constructor_Decoy_C 
 			VariableGuid(StructProperty)=Guid: 2655362393-1117710731-2713938611-1981745593 
 			InternalVariableName(NameProperty)=DefaultSceneRoot 
-	SCS_Node_11 (0-0-0-0): size 1327 (cls: SCS_Node_11>SCS_Node>/Script/Engine) :
+	SCS_Node_11 (0-0-0-0): size 1525 (cls: SCS_Node_11>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=P_PropaneTankFuse1_GEN_VARIABLE=B_BGA_Constructor_Decoy_C 
 			CookedComponentInstancingData(StructProperty)=System.Byte[] 
 			VariableGuid(StructProperty)=Guid: 3394222330-1271187476-3966602901-3603234812 
 			InternalVariableName(NameProperty)=P_PropaneTankFuse1 
-	SCS_Node_12 (0-0-0-0): size 1228 (cls: SCS_Node_12>SCS_Node>/Script/Engine) :
+	SCS_Node_12 (0-0-0-0): size 1426 (cls: SCS_Node_12>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=P_PropaneTankFuse2_GEN_VARIABLE=B_BGA_Constructor_Decoy_C 
 			CookedComponentInstancingData(StructProperty)=System.Byte[] 
 			VariableGuid(StructProperty)=Guid: 250654429-1267345330-2636918461-4091704067 
 			InternalVariableName(NameProperty)=P_PropaneTankFuse2 
-	SCS_Node_13 (0-0-0-0): size 1327 (cls: SCS_Node_13>SCS_Node>/Script/Engine) :
+	SCS_Node_13 (0-0-0-0): size 1525 (cls: SCS_Node_13>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=P_PropaneTankFuse3_GEN_VARIABLE=B_BGA_Constructor_Decoy_C 
@@ -1268,7 +1323,7 @@ Serialized exports:
 			ChildNodes(ArrayProperty)=[object] (inner: ObjectProperty)
 			VariableGuid(StructProperty)=Guid: 2268257019-1293860660-1123418777-3184189975 
 			InternalVariableName(NameProperty)=DecoyPivot 
-	SCS_Node_5 (0-0-0-0): size 733 (cls: SCS_Node_5>SCS_Node>/Script/Engine) :
+	SCS_Node_5 (0-0-0-0): size 931 (cls: SCS_Node_5>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=P_Constructor_Decoy_Radius_GEN_VARIABLE=B_BGA_Constructor_Decoy_C 
@@ -1296,6 +1351,8 @@ Serialized exports:
 	Event_AbilitiesOutlanderTacticalDecoyDoTFire (0-0-0-0): size 36 (cls: Event_AbilitiesOutlanderTacticalDecoyDoTFire>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	Event_NPCAbilityAttackAOEExplosion (0-0-0-0): size 36 (cls: Event_NPCAbilityAttackAOEExplosion>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	Event_YourMoveCreep (0-0-0-0): size 36 (cls: Event_YourMoveCreep>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_BreakHitResult_ImpactNormal (0-0-0-0): size 36 (cls: CallFunc_BreakHitResult_ImpactNormal>StructProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1330,6 +1387,8 @@ Serialized exports:
 	CallFunc_K2_SetTimer_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_K2_SetTimer_ReturnValue1>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_K2_SetTimer_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_K2_SetTimer_ReturnValue2>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_K2_SetTimer_ReturnValue3 (0-0-0-0): size 36 (cls: CallFunc_K2_SetTimer_ReturnValue3>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_MakeVector_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_MakeVector_ReturnValue>StructProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1379,6 +1438,8 @@ Serialized exports:
 		Tag array:
 	K2Node_MakeStruct_GameplayEventData2 (0-0-0-0): size 36 (cls: K2Node_MakeStruct_GameplayEventData2>StructProperty>/Script/CoreUObject) :
 		Tag array:
+	K2Node_MakeStruct_GameplayEventData3 (0-0-0-0): size 36 (cls: K2Node_MakeStruct_GameplayEventData3>StructProperty>/Script/CoreUObject) :
+		Tag array:
 	Parameters (0-0-0-0): size 36 (cls: Parameters>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	GameplayCueAbilitiesOutlanderTacticalDecoyDoTFire (0-0-0-0): size 36 (cls: GameplayCueAbilitiesOutlanderTacticalDecoyDoTFire>StructProperty>/Script/CoreUObject) :
@@ -1422,4 +1483,6 @@ Serialized exports:
 	CallFunc_K2_SetTimer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_SetTimer_ReturnValue>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	WorldAssignmentIdentifier (0-0-0-0): size 36 (cls: WorldAssignmentIdentifier>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	YourMoveCreepTimeBetweenShots (0-0-0-0): size 36 (cls: YourMoveCreepTimeBetweenShots>StructProperty>/Script/CoreUObject) :
 		Tag array:

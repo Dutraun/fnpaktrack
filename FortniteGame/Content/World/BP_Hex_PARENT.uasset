@@ -33,6 +33,7 @@ Name table:
 	/Script/UMG
 	Activate
 	Actor
+	ActorComponentTickFunction
 	ActorTickFunction
 	Add_IntInt
 	AddComponent
@@ -123,6 +124,7 @@ Name table:
 	CallFunc_GetContext_ReturnValue9
 	CallFunc_GetCurrentInputType_ReturnValue
 	CallFunc_GetCurrentInputType_ReturnValue1
+	CallFunc_GetCurrentlyViewedAccountInfo_Result
 	CallFunc_GetGameAccountId_ReturnValue
 	CallFunc_GetHomeBaseInfoForPlayer_Result
 	CallFunc_GetLocalFortPlayerControllers_ReturnValue
@@ -139,7 +141,6 @@ Name table:
 	CallFunc_GetTileMissionDetails_MissionDetails1
 	CallFunc_GetTileMissionDetails_ReturnValue
 	CallFunc_GetTileMissionDetails_ReturnValue1
-	CallFunc_GetTotalSkillPointsEarned_ReturnValue
 	CallFunc_GetUserWidgetObject_ReturnValue
 	CallFunc_Greater_FloatFloat_ReturnValue
 	CallFunc_Greater_IntInt_ReturnValue
@@ -288,6 +289,7 @@ Name table:
 	Fortnite_UI_Map_Hover_01_Low_Cue
 	FortPartyContext
 	FortPlayerController
+	FortPublicAccountInfo
 	FortQuestItem
 	FortQuestItemDefinition
 	FortQuestManager
@@ -295,7 +297,6 @@ Name table:
 	FortTheaterMapTile
 	FortUITeamInfo
 	Function
-	GameDifficultyInfo
 	GameplayStatics
 	GameplayTag
 	GameplayTagContainer
@@ -309,6 +310,7 @@ Name table:
 	GetBannerLargeIconAssetFromRowName
 	GetContext
 	GetCurrentInputType
+	GetCurrentlyViewedAccountInfo
 	GetGameAccountId
 	GetHomeBaseInfoForPlayer
 	GetLocalFortPlayerControllers
@@ -318,7 +320,6 @@ Name table:
 	GetPlayerController
 	GetQuestManager
 	GetTileMissionDetails
-	GetTotalSkillPointsEarned
 	GetUserWidgetObject
 	Greater_FloatFloat
 	Greater_IntInt
@@ -342,7 +343,6 @@ Name table:
 	HexDecoMesh
 	HexMapSound
 	HexTileSound
-	HomeBaseContext
 	Icon-Mission-Unknown-XL
 	IconSizeMultiplier
 	IconTexture
@@ -406,6 +406,7 @@ Name table:
 	KismetSystemLibrary
 	LatentActionInfo
 	Less_IntInt
+	Level
 	LightningStrength
 	LinearColor
 	LoadAsset
@@ -528,6 +529,7 @@ Name table:
 	PlaySound2D
 	PointerToUberGraphFrame
 	PrimaryActorTick
+	PrimaryComponentTick
 	PrintString
 	PropertyName
 	QueryTokenStream
@@ -579,8 +581,6 @@ Name table:
 	StaticMeshComponent0
 	Stop
 	StormChance
-	StormLevel1
-	StormLevel2
 	StormModLightningStrength
 	StormZoneIndicator
 	StormZoneIndicator_GEN_VARIABLE
@@ -732,7 +732,6 @@ Import table:
 	FortQuestManager (Class)
 	FortTheaterMapTile (Class)
 	FortUITeamInfo (Class)
-	HomeBaseContext (Class)
 	FortFrontEndContext (Class)
 	FortGlobalUIContext (Class)
 	BlueprintGameplayTagLibrary (Class)
@@ -806,6 +805,7 @@ Import table:
 	GetBannerColorSecondaryColorFromRowName (Function)
 	GetBannerLargeIconAssetFromRowName (Function)
 	GetLocalFortPlayerControllers (Function)
+	GetCurrentlyViewedAccountInfo (Function)
 	GetHomeBaseInfoForPlayer (Function)
 	GetLocalPlayerTeam (Function)
 	GetNumPlayersInLocalParty (Function)
@@ -828,13 +828,13 @@ Import table:
 	OnInitializeTile (Function)
 	OnMarkedQuestChanged (Function)
 	OnMissionDataUpdated (Function)
-	GetTotalSkillPointsEarned (Function)
 	GetTileMissionDetails (Function)
 	DoesContainerMatchTagQuery (Function)
 	MakeGameplayTagQuery (Function)
 	GetUserWidgetObject (Function)
 	Default__GameplayStatics (GameplayStatics)
 	Default__IntProperty (IntProperty)
+	Level (IntProperty)
 	ContentDifficultyLevel (IntProperty)
 	Default__KismetArrayLibrary (KismetArrayLibrary)
 	Default__KismetStringLibrary (KismetStringLibrary)
@@ -903,8 +903,8 @@ Import table:
 	PointerToUberGraphFrame (ScriptStruct)
 	UniqueNetIdRepl (ScriptStruct)
 	FortHomeBaseInfo (ScriptStruct)
+	FortPublicAccountInfo (ScriptStruct)
 	FortTeamMemberInfo (ScriptStruct)
-	GameDifficultyInfo (ScriptStruct)
 	FortMissionDetails (ScriptStruct)
 	GameplayTag (ScriptStruct)
 	GameplayTagContainer (ScriptStruct)
@@ -939,7 +939,7 @@ Import table:
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	BP_Hex_PARENT_C (0-0-0-0): size 1113 (cls: BP_Hex_PARENT_C>BlueprintGeneratedClass>/Script/Engine) :
+	BP_Hex_PARENT_C (0-0-0-0): size 1105 (cls: BP_Hex_PARENT_C>BlueprintGeneratedClass>/Script/Engine) :
 		Tag array:
 			ComponentTemplates(ArrayProperty)=[object] (inner: ObjectProperty)
 			Timelines(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -969,7 +969,7 @@ Serialized exports:
 		Tag array:
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject) :
 		Tag array:
-	ExecuteUbergraph_BP_Hex_PARENT (0-0-0-0): size 6181 (cls: ExecuteUbergraph_BP_Hex_PARENT>Function>/Script/CoreUObject) :
+	ExecuteUbergraph_BP_Hex_PARENT (0-0-0-0): size 6080 (cls: ExecuteUbergraph_BP_Hex_PARENT>Function>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_GetAllActorsOfClass_OutActors (0-0-0-0): size 36 (cls: CallFunc_GetAllActorsOfClass_OutActors>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
@@ -977,9 +977,9 @@ Serialized exports:
 		Tag array:
 	HandleTeamMemberPromoted (0-0-0-0): size 58 (cls: HandleTeamMemberPromoted>Function>/Script/CoreUObject) :
 		Tag array:
-	HandlePartyChanged (0-0-0-0): size 58 (cls: HandlePartyChanged>Function>/Script/CoreUObject) :
-		Tag array:
 	RefreshTile (0-0-0-0): size 58 (cls: RefreshTile>Function>/Script/CoreUObject) :
+		Tag array:
+	HandlePartyChanged (0-0-0-0): size 58 (cls: HandlePartyChanged>Function>/Script/CoreUObject) :
 		Tag array:
 	PlayerIndex (0-0-0-0): size 32 (cls: PlayerIndex>IntProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1205,10 +1205,6 @@ Serialized exports:
 		Tag array:
 	RenderHexWithClouds (0-0-0-0): size 34 (cls: RenderHexWithClouds>BoolProperty>/Script/CoreUObject) :
 		Tag array:
-	StormLevel1 (0-0-0-0): size 34 (cls: StormLevel1>BoolProperty>/Script/CoreUObject) :
-		Tag array:
-	StormLevel2 (0-0-0-0): size 34 (cls: StormLevel2>BoolProperty>/Script/CoreUObject) :
-		Tag array:
 	TileIsBeingInitialized (0-0-0-0): size 34 (cls: TileIsBeingInitialized>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	TileIsHidden (0-0-0-0): size 34 (cls: TileIsHidden>BoolProperty>/Script/CoreUObject) :
@@ -1334,8 +1330,6 @@ Serialized exports:
 	CallFunc_Get_Conning_Color_From_Difficulty_Value_DifficultyValue (0-0-0-0): size 32 (cls: CallFunc_Get_Conning_Color_From_Difficulty_Value_DifficultyValue>IntProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_GetNumPlayersInLocalParty_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetNumPlayersInLocalParty_ReturnValue>IntProperty>/Script/CoreUObject) :
-		Tag array:
-	CallFunc_GetTotalSkillPointsEarned_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetTotalSkillPointsEarned_ReturnValue>IntProperty>/Script/CoreUObject) :
 		Tag array:
 	K2Node_CustomEvent_ParticleTime (0-0-0-0): size 32 (cls: K2Node_CustomEvent_ParticleTime>IntProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1483,21 +1477,24 @@ Serialized exports:
 		Tag array:
 	CallFunc_CreateDynamicMaterialInstance_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_CreateDynamicMaterialInstance_ReturnValue1>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	P_CloudTwister_RandomLightning_01_GEN_VARIABLE (0-0-0-0): size 279 (cls: P_CloudTwister_RandomLightning_01_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	P_CloudTwister_RandomLightning_01_GEN_VARIABLE (0-0-0-0): size 362 (cls: P_CloudTwister_RandomLightning_01_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_CloudTwister_RandomLightning_01=/Game/VisualThreatManager/StormVisuals/Particles/P_CloudTwister_RandomLightning_01 
 			CustomTimeDilation(FloatProperty)=0.55 
 			RelativeLocation(StructProperty)=Vector(1E-06,0.000213623,1) 
 			RelativeRotation(StructProperty)=Rotator(0,0,90) 
 			RelativeScale3D(StructProperty)=Vector(0.021,0.021,0.021) 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
-	P_StormAffected_GEN_VARIABLE (0-0-0-0): size 67 (cls: P_StormAffected_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	P_StormAffected_GEN_VARIABLE (0-0-0-0): size 150 (cls: P_StormAffected_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_StormAffected=/Game/Effects/Fort_Effects/UI/HexMapStormAffected/P_StormAffected 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
-	P_StrongStormAffected_GEN_VARIABLE (0-0-0-0): size 67 (cls: P_StrongStormAffected_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	P_StrongStormAffected_GEN_VARIABLE (0-0-0-0): size 150 (cls: P_StrongStormAffected_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_StrongStormAffected=/Game/Effects/Fort_Effects/UI/HexMapStormAffected/P_StrongStormAffected 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
 	SceneComponent_60 (0-0-0-0): size 12 (cls: SceneComponent_60>SceneComponent>/Script/Engine) :
 		Tag array:
@@ -1541,6 +1538,14 @@ Serialized exports:
 			bIsParentComponentNative(BoolProperty)=True 
 			VariableGuid(StructProperty)=Guid: 1870426074-1075961491-2820506511-1749574069 
 			InternalVariableName(NameProperty)=P_CloudTwister_RandomLightning_01 
+	SCS_Node_3 (0-0-0-0): size 227 (cls: SCS_Node_3>SCS_Node>/Script/Engine) :
+		Tag array:
+			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
+			ComponentTemplate(ObjectProperty)=P_StrongStormAffected_GEN_VARIABLE=BP_Hex_PARENT_C 
+			ParentComponentOrVariableName(NameProperty)=StaticMeshComponent0 
+			bIsParentComponentNative(BoolProperty)=True 
+			VariableGuid(StructProperty)=Guid: 325243937-1075327297-1506795404-3845018735 
+			InternalVariableName(NameProperty)=P_StrongStormAffected 
 	SCS_Node_30 (0-0-0-0): size 227 (cls: SCS_Node_30>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=StaticMeshComponent=/Script/Engine 
@@ -1571,14 +1576,6 @@ Serialized exports:
 			ComponentTemplate(ObjectProperty)=SceneComponent_60=BP_Hex_PARENT_C 
 			VariableGuid(StructProperty)=Guid: 1295648158-0-0-0 
 			InternalVariableName(NameProperty)=DefaultSceneRoot 
-	SCS_Node_7 (0-0-0-0): size 227 (cls: SCS_Node_7>SCS_Node>/Script/Engine) :
-		Tag array:
-			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
-			ComponentTemplate(ObjectProperty)=P_StrongStormAffected_GEN_VARIABLE=BP_Hex_PARENT_C 
-			ParentComponentOrVariableName(NameProperty)=StaticMeshComponent0 
-			bIsParentComponentNative(BoolProperty)=True 
-			VariableGuid(StructProperty)=Guid: 1446462873-1241920005-1383093897-1230639832 
-			InternalVariableName(NameProperty)=P_StrongStormAffected 
 	SimpleConstructionScript_17 (0-0-0-0): size 187 (cls: SimpleConstructionScript_17>SimpleConstructionScript>/Script/Engine) :
 		Tag array:
 			RootNodes(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -1586,7 +1583,7 @@ Serialized exports:
 			DefaultSceneRootNode(ObjectProperty)=SCS_Node_67=BP_Hex_PARENT_C 
 	CallFunc_GetBannerLargeIconAssetFromRowName_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetBannerLargeIconAssetFromRowName_ReturnValue>SoftObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	MissionIconMesh_GEN_VARIABLE (0-0-0-0): size 953 (cls: MissionIconMesh_GEN_VARIABLE>StaticMeshComponent>/Script/Engine) :
+	MissionIconMesh_GEN_VARIABLE (0-0-0-0): size 927 (cls: MissionIconMesh_GEN_VARIABLE>StaticMeshComponent>/Script/Engine) :
 		Tag array:
 			StaticMesh(ObjectProperty)=S_plane_01=/Game/Environments/World/Backgrounds/Universal/TechContent/S_plane_01 
 			OverrideMaterials(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -1601,7 +1598,6 @@ Serialized exports:
 			BodyInstance(StructProperty)=System.Byte[] 
 			RelativeLocation(StructProperty)=Vector(0,0,16.12794) 
 			RelativeRotation(StructProperty)=Rotator(0,90.0001,0) 
-			bVisible(BoolProperty)=False 
 	MouseoverMesh_GEN_VARIABLE (0-0-0-0): size 820 (cls: MouseoverMesh_GEN_VARIABLE>StaticMeshComponent>/Script/Engine) :
 		Tag array:
 			StaticMesh(ObjectProperty)=S_HexMouseover01=/Game/Environments/Hexmap/HexSelection/S_HexMouseover01 
@@ -1665,6 +1661,8 @@ Serialized exports:
 	CallFunc_GetBannerColorPrimaryColorFromRowName_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetBannerColorPrimaryColorFromRowName_ReturnValue>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_GetBannerColorSecondaryColorFromRowName_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetBannerColorSecondaryColorFromRowName_ReturnValue>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_GetCurrentlyViewedAccountInfo_Result (0-0-0-0): size 36 (cls: CallFunc_GetCurrentlyViewedAccountInfo_Result>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_GetHomeBaseInfoForPlayer_Result (0-0-0-0): size 36 (cls: CallFunc_GetHomeBaseInfoForPlayer_Result>StructProperty>/Script/CoreUObject) :
 		Tag array:

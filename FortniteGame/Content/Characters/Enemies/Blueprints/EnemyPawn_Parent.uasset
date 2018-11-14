@@ -12,7 +12,6 @@ Name table:
 	/Game/Characters/Enemies/Husk/Effects/P_Husk_Death_LQ_01
 	/Game/Characters/Enemies/Husk/Effects/P_Husk_Sleeping_Effect
 	/Game/Characters/Enemies/Husk/Effects/P_Husk_Sleeping_Wake_Effect
-	/Game/Characters/Enemies/Husk/Materials/M_EnemyAwokenThroughWalls_01
 	/Game/Packages/Fortress_SharedMaterials/GlobalMaterialParameters/FortniteMaterialParameters
 	/Game/Sounds/Fort_Impact_Sounds/Flesh/Husk_Headshot_cue
 	/Game/Sounds/Fort_Monster_Husk/Husk_Efforts/Husk_SFX_Death_Normal_Cue
@@ -35,6 +34,7 @@ Name table:
 	ActiveGameplayEffectHandle
 	Actor
 	ActorComponent
+	ActorComponentTickFunction
 	Add_FloatFloat
 	Add_IntInt
 	Add_VectorVector
@@ -48,6 +48,9 @@ Name table:
 	Anim Montage
 	AnimMontage
 	AnimSequence
+	ApplyAwakenEffect
+	ApplyAwakenEffectToSkeletalMesh
+	ApplyAwakenEffectToStaticMesh
 	ApplyBuildingHitEffect
 	ApplyBuildingHitEffectToSkeletalMesh
 	ApplyBuildingHitEffectToStaticMesh
@@ -55,9 +58,11 @@ Name table:
 	Array to Check
 	Array to Store
 	Array_Add
+	Array_Clear
 	Array_Get
 	Array_LastIndex
 	Array_Length
+	Array_RemoveItem
 	Array_Set
 	ArrayIndex
 	ArrayOfColors
@@ -72,12 +77,12 @@ Name table:
 	AutoActivate
 	AutoDestroy
 	Auxillary Objects
-	AwokenDuration
-	AwokenFadeInTime
-	AwokenFadeOutTime
+	AwakenDuration
+	AwakenFXSkeletalMeshes
+	AwakenFXSkeletalMeshes_Value
+	AwakenFXStaticMeshes
+	AwakenFXStaticMeshes_Value
 	AwokenMaxDistance
-	AwokenSkeletalMesh
-	AwokenSkelMeshMID
 	Back
 	bCanBeInterrupted
 	bCanEverAffectNavigation
@@ -110,13 +115,14 @@ Name table:
 	BreakVector
 	BroadcastFilter
 	bShouldUseSpecialEventGE
+	bStartWithTickEnabled
 	BuildingHitDuration
 	BuildingHitFXSkeletalMeshes
+	BuildingHitFXSkeletalMeshes_Value
 	BuildingHitFXStaticMeshes
+	BuildingHitFXStaticMeshes_Value
 	BuildingHitMaxDistanceToHitLocation
 	BuildingHitMaxDistanceToPlayer
-	BuildingHitSkeletalMeshes
-	BuildingHitStaticMeshes
 	BuildingRift
 	bUseInverseSquaredFalloff
 	bValidatedAsWired
@@ -124,13 +130,14 @@ Name table:
 	CallFunc_Add_FloatFloat_ReturnValue
 	CallFunc_Add_FloatFloat_ReturnValue1
 	CallFunc_Add_FloatFloat_ReturnValue2
-	CallFunc_Add_FloatFloat_ReturnValue3
 	CallFunc_Add_IntInt_ReturnValue
 	CallFunc_Add_IntInt_ReturnValue1
 	CallFunc_Add_IntInt_ReturnValue2
 	CallFunc_Add_IntInt_ReturnValue3
 	CallFunc_Add_IntInt_ReturnValue4
 	CallFunc_Add_IntInt_ReturnValue5
+	CallFunc_Add_IntInt_ReturnValue6
+	CallFunc_Add_IntInt_ReturnValue7
 	CallFunc_Add_VectorVector_ReturnValue
 	CallFunc_Add_VectorVector_ReturnValue1
 	CallFunc_AddComponent_ReturnValue
@@ -144,12 +151,18 @@ Name table:
 	CallFunc_Array_Get_Item3
 	CallFunc_Array_Get_Item4
 	CallFunc_Array_Get_Item5
+	CallFunc_Array_Get_Item6
+	CallFunc_Array_Get_Item7
 	CallFunc_Array_LastIndex_ReturnValue
 	CallFunc_Array_Length_ReturnValue
 	CallFunc_Array_Length_ReturnValue1
 	CallFunc_Array_Length_ReturnValue2
 	CallFunc_Array_Length_ReturnValue3
 	CallFunc_Array_Length_ReturnValue4
+	CallFunc_Array_Length_ReturnValue5
+	CallFunc_Array_Length_ReturnValue6
+	CallFunc_Array_Length_ReturnValue7
+	CallFunc_Array_RemoveItem_ReturnValue
 	CallFunc_BooleanAND_ReturnValue
 	CallFunc_BooleanAND_ReturnValue1
 	CallFunc_BooleanOR_ReturnValue
@@ -210,14 +223,11 @@ Name table:
 	CallFunc_GetDamageZone_ReturnValue
 	CallFunc_GetDamageZone_ReturnValue1
 	CallFunc_GetFloatValue_ReturnValue
-	CallFunc_GetGameTimeInSeconds_ReturnValue
-	CallFunc_GetGameTimeInSeconds_ReturnValue1
 	CallFunc_GetGameUserSettings_ReturnValue
 	CallFunc_GetMaterials_ReturnValue
 	CallFunc_GetMaterials_ReturnValue1
 	CallFunc_GetMaterials_ReturnValue2
 	CallFunc_GetMIDForSkeletalMeshComponent_ReturnValue
-	CallFunc_GetNumMaterials_ReturnValue
 	CallFunc_GetPhysicalMaterial_ReturnValue
 	CallFunc_GetPlayerCameraManager_ReturnValue
 	CallFunc_GetRefPosePosition_ReturnValue
@@ -251,6 +261,8 @@ Name table:
 	CallFunc_IsValid_ReturnValue14
 	CallFunc_IsValid_ReturnValue15
 	CallFunc_IsValid_ReturnValue16
+	CallFunc_IsValid_ReturnValue17
+	CallFunc_IsValid_ReturnValue18
 	CallFunc_IsValid_ReturnValue2
 	CallFunc_IsValid_ReturnValue3
 	CallFunc_IsValid_ReturnValue4
@@ -269,12 +281,11 @@ Name table:
 	CallFunc_K2_GetComponentLocation_ReturnValue3
 	CallFunc_K2_GetComponentRotation_ReturnValue
 	CallFunc_K2_GetComponentToWorld_ReturnValue
-	CallFunc_K2_GetTextureParameterValue_ReturnValue
-	CallFunc_K2_GetTextureParameterValue_ReturnValue1
 	CallFunc_K2_SetTimer_ReturnValue
 	CallFunc_K2_SetTimer_ReturnValue1
 	CallFunc_K2_SetTimerDelegate_ReturnValue
 	CallFunc_K2_SetTimerDelegate_ReturnValue1
+	CallFunc_K2_SetTimerDelegate_ReturnValue2
 	CallFunc_Lerp_ReturnValue
 	CallFunc_Less_IntInt_ReturnValue
 	CallFunc_Less_IntInt_ReturnValue1
@@ -286,12 +297,25 @@ Name table:
 	CallFunc_LessEqual_IntInt_ReturnValue2
 	CallFunc_LessEqual_IntInt_ReturnValue3
 	CallFunc_LessEqual_IntInt_ReturnValue4
+	CallFunc_LessEqual_IntInt_ReturnValue5
+	CallFunc_LessEqual_IntInt_ReturnValue6
+	CallFunc_LessEqual_IntInt_ReturnValue7
 	CallFunc_LineTraceSingle_OutHit
 	CallFunc_LineTraceSingle_ReturnValue
 	CallFunc_MakeTransform_ReturnValue
 	CallFunc_MakeVector_ReturnValue
 	CallFunc_MakeVector_ReturnValue1
+	CallFunc_Map_Find_ReturnValue
+	CallFunc_Map_Find_ReturnValue1
+	CallFunc_Map_Find_ReturnValue2
+	CallFunc_Map_Find_ReturnValue3
+	CallFunc_Map_Find_Value
+	CallFunc_Map_Find_Value1
+	CallFunc_Map_Find_Value2
+	CallFunc_Map_Find_Value3
 	CallFunc_Map_Keys_Keys
+	CallFunc_Map_Remove_ReturnValue
+	CallFunc_Map_Remove_ReturnValue1
 	CallFunc_Map_Values_Values
 	CallFunc_Multiply_FloatFloat_ReturnValue
 	CallFunc_Multiply_FloatFloat_ReturnValue1
@@ -327,12 +351,14 @@ Name table:
 	CallFunc_SpawnSoundAttached_ReturnValue1
 	CallFunc_SpawnSoundAttached_ReturnValue2
 	CallFunc_Subtract_FloatFloat_ReturnValue
-	CallFunc_Subtract_FloatFloat_ReturnValue1
 	CallFunc_Subtract_IntInt_ReturnValue
 	CallFunc_Subtract_IntInt_ReturnValue1
 	CallFunc_Subtract_IntInt_ReturnValue2
 	CallFunc_Subtract_IntInt_ReturnValue3
 	CallFunc_Subtract_IntInt_ReturnValue4
+	CallFunc_Subtract_IntInt_ReturnValue5
+	CallFunc_Subtract_IntInt_ReturnValue6
+	CallFunc_Subtract_IntInt_ReturnValue7
 	CallFunc_Subtract_VectorVector_ReturnValue
 	CallFunc_TransformHitLocationWorldSpaceToPreskinnedLocalSpace_PreskinnedLS
 	CallFunc_VSize_ReturnValue
@@ -448,13 +474,14 @@ Name table:
 	DelegateFunction
 	DelegateProperty
 	DeleteDuplicateCharacterElements
+	DeregisterEffectSkeletalMesh
+	DeregisterEffectStaticMesh
 	DespawnEnemy
-	DestroyAwokenSkeletalMesh
+	DestroyAwakenEffect
+	DestroyAwakenFXTimer
 	DestroyBuildingHitEffect
 	DestroyBuildingHitFXTimer
 	Destructible
-	Diffuse
-	Diffuse Map
 	DirectionPropertyName
 	Divide_FloatFloat
 	Duplicate Auxillary Objects
@@ -467,10 +494,7 @@ Name table:
 	ECR_Block
 	ECR_Ignore
 	ECR_Overlap
-	Effect MID
 	EffectContext
-	EffectMesh
-	EffectMID
 	EFortDamageZone
 	EFortFeedbackBroadcastFilter
 	Elemental FXs
@@ -545,8 +569,9 @@ Name table:
 	Function
 	FunctionName
 	FX_Feet
-	FXSkeletalMeshes
+	FXSkeletalMesh
 	FXSkeletonMeshComponent_C
+	FXStaticMesh
 	FXStaticMeshComponent_C
 	G
 	Game
@@ -565,11 +590,9 @@ Name table:
 	GetComponentBounds
 	GetDamageZone
 	GetFloatValue
-	GetGameTimeInSeconds
 	GetGameUserSettings
 	GetMaterials
 	GetMIDForSkeletalMeshComponent
-	GetNumMaterials
 	GetPhysicalMaterial
 	GetPlayerCameraManager
 	GetRefPosePosition
@@ -634,11 +657,11 @@ Name table:
 	K2_GetComponentLocation
 	K2_GetComponentRotation
 	K2_GetComponentToWorld
-	K2_GetTextureParameterValue
 	K2_SetTimer
 	K2_SetTimerDelegate
 	K2Node_CreateDelegate_OutputDelegate
 	K2Node_CreateDelegate_OutputDelegate1
+	K2Node_CreateDelegate_OutputDelegate2
 	K2Node_CustomEvent_Delay_Amount
 	K2Node_CustomEvent_RiftLocationWS
 	K2Node_CustomEvent_RiftLocationWS1
@@ -717,7 +740,6 @@ Name table:
 	LQ_DeathFX_CylinderHeight
 	LQ_DeathFX_CylinderRadius
 	LQ_DeathFX_SpawnRateScale
-	M_EnemyAwokenThroughWalls_01
 	MakeTransform
 	MakeVector
 	MaleHuskHairColors
@@ -727,7 +749,10 @@ Name table:
 	ManualDespawnEnemy
 	ManualEnemySpawnIn
 	Map
+	Map_Add
+	Map_Find
 	Map_Keys
+	Map_Remove
 	Map_Value
 	Map_Values
 	MapProperty
@@ -752,15 +777,15 @@ Name table:
 	New Material
 	New Material To Apply
 	NODE_AddFXSkeletonMeshComponent-2
+	NODE_AddFXSkeletonMeshComponent-6
 	NODE_AddFXStaticMeshComponent-0
+	NODE_AddFXStaticMeshComponent-2
 	NODE_AddParticleSystemComponent-3
 	NODE_AddPointLightComponent-0
-	NODE_AddSkeletalMeshComponent-0
 	NODE_AddSkeletalMeshComponent-1
 	NODE_AddSkeletalMeshComponent-3
 	NODE_AddStaticMeshComponent-4
 	None
-	Normal Map
 	Not_PreBool
 	NotEqual_ByteByte
 	NotEqual_IntInt
@@ -789,6 +814,7 @@ Name table:
 	Pant Color Parameter
 	Parameter Name
 	ParamType
+	Parent
 	ParentComponentOrVariableName
 	ParticleSysParam
 	ParticleSystem
@@ -826,6 +852,7 @@ Name table:
 	PreskinnedLS
 	Previous MID
 	Previous MID_AuxObjs
+	PrimaryComponentTick
 	PrimitiveComponent
 	PrintString
 	Propagate to Auxiliary Meshes
@@ -847,8 +874,10 @@ Name table:
 	RandomizeMeshScale
 	RandomStream
 	ReceiveBeginPlay
-	RegisterBuildingHitSkeletalMesh
-	RegisterBuildingHitStaticMesh
+	RegisteredSkeletalMeshesForEffects
+	RegisteredStaticMeshesForEffects
+	RegisterEffectSkeletalMesh
+	RegisterEffectStaticMesh
 	RelativeLocation
 	RelativeRotation
 	RemoveActiveGameplayEffectBySourceEffect
@@ -905,7 +934,6 @@ Name table:
 	SetSound
 	SetSource
 	SetStaticMesh
-	SetTextureParameterValue
 	SetVectorParameterOnAllCharacterMIDs
 	SetVectorParameterOnAllCharacterMIDsByMap
 	SetVectorParameterValue
@@ -983,13 +1011,15 @@ Name table:
 	Temp_int_Variable2
 	Temp_int_Variable3
 	Temp_int_Variable4
+	Temp_int_Variable5
+	Temp_int_Variable6
+	Temp_int_Variable7
 	Temp_object_Variable
 	Temp_struct_Variable
 	Temp_struct_Variable1
 	Temp_struct_Variable2
-	Temp_struct_Variable3
+	TempFXSkeletalMesh
 	Template
-	Texture
 	TimelineComponent
 	TimelineGuid
 	TimelineLength
@@ -997,13 +1027,9 @@ Name table:
 	TimelineTemplate
 	TimerDynamicDelegate__DelegateSignature
 	TimerHandle
-	TimestampA
-	TimestampB
 	TrackName
 	Transform
 	TransformHitLocationWorldSpaceToPreskinnedLocalSpace
-	TransitionLength_In
-	TransitionLength_Out
 	Translation
 	TTEventTrack
 	TTFloatTrack
@@ -1109,7 +1135,6 @@ Import table:
 	SkinnedMeshComponent (Class)
 	SoundBase (Class)
 	StaticMeshComponent (Class)
-	Texture (Class)
 	TimelineComponent (Class)
 	TimelineTemplate (Class)
 	BuildingRift (Class)
@@ -1142,7 +1167,9 @@ Import table:
 	Intensity (FloatProperty)
 	Scalar (FloatProperty)
 	Scalar_Low (FloatProperty)
+	AwakenDuration (FloatProperty)
 	BuildingHitDuration (FloatProperty)
+	AwakenDuration (FloatProperty)
 	BuildingHitDuration (FloatProperty)
 	AbilitySystemComponent (FortAbilitySystemComponent)
 	Default__FortAIPawn (FortAIPawn)
@@ -1157,7 +1184,10 @@ Import table:
 	UserConstructionScript (Function)
 	K2_DestroyComponent (Function)
 	SetSound (Function)
+	Map_Add (Function)
+	Map_Find (Function)
 	Map_Keys (Function)
+	Map_Remove (Function)
 	Map_Values (Function)
 	GetFloatValue (Function)
 	BreakHitResult (Function)
@@ -1169,9 +1199,11 @@ Import table:
 	GetGameUserSettings (Function)
 	GetVisualEffectQuality (Function)
 	Array_Add (Function)
+	Array_Clear (Function)
 	Array_Get (Function)
 	Array_LastIndex (Function)
 	Array_Length (Function)
+	Array_RemoveItem (Function)
 	Array_Set (Function)
 	CreateDynamicMaterialInstance (Function)
 	GetScalarParameterValue (Function)
@@ -1212,7 +1244,6 @@ Import table:
 	VSize (Function)
 	Delay (Function)
 	GetComponentBounds (Function)
-	GetGameTimeInSeconds (Function)
 	IsDedicatedServer (Function)
 	IsValid (Function)
 	K2_ClearAndInvalidateTimerHandle (Function)
@@ -1222,9 +1253,7 @@ Import table:
 	PrintString (Function)
 	SetIntensity (Function)
 	K2_CopyMaterialInstanceParameters (Function)
-	K2_GetTextureParameterValue (Function)
 	SetScalarParameterValue (Function)
-	SetTextureParameterValue (Function)
 	SetVectorParameterValue (Function)
 	SetScalarParameterValueOnMaterials (Function)
 	SetVectorParameterValueOnMaterials (Function)
@@ -1280,7 +1309,6 @@ Import table:
 	Default__KismetMathLibrary (KismetMathLibrary)
 	Default__KismetSystemLibrary (KismetSystemLibrary)
 	Default__MapProperty (MapProperty)
-	M_EnemyAwokenThroughWalls_01 (Material)
 	FortniteMaterialParameters (MaterialParameterCollection)
 	Default__NameProperty (NameProperty)
 	Name (NameProperty)
@@ -1288,6 +1316,7 @@ Import table:
 	Default__ObjectProperty (ObjectProperty)
 	CapsuleComponent (ObjectProperty)
 	Mesh (ObjectProperty)
+	Parent (ObjectProperty)
 	PhysMaterial (ObjectProperty)
 	Actor (ObjectProperty)
 	Material (ObjectProperty)
@@ -1309,7 +1338,6 @@ Import table:
 	/Game/Characters/Enemies/Husk/Effects/P_Husk_Death_LQ_01 (Package)
 	/Game/Characters/Enemies/Husk/Effects/P_Husk_Sleeping_Effect (Package)
 	/Game/Characters/Enemies/Husk/Effects/P_Husk_Sleeping_Wake_Effect (Package)
-	/Game/Characters/Enemies/Husk/Materials/M_EnemyAwokenThroughWalls_01 (Package)
 	/Game/Packages/Fortress_SharedMaterials/GlobalMaterialParameters/FortniteMaterialParameters (Package)
 	/Game/Sounds/Fort_Impact_Sounds/Flesh/Husk_Headshot_cue (Package)
 	/Game/Sounds/Fort_Monster_Husk/Husk_Efforts/Husk_SFX_Death_Normal_Cue (Package)
@@ -1336,6 +1364,7 @@ Import table:
 	Rotator (ScriptStruct)
 	Transform (ScriptStruct)
 	Vector (ScriptStruct)
+	ActorComponentTickFunction (ScriptStruct)
 	BodyInstance (ScriptStruct)
 	CollisionResponse (ScriptStruct)
 	HitResult (ScriptStruct)
@@ -1365,7 +1394,7 @@ Import table:
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	EnemyPawn_Parent_C (0-0-0-0): size 4064 (cls: EnemyPawn_Parent_C>BlueprintGeneratedClass>/Script/Engine) :
+	EnemyPawn_Parent_C (0-0-0-0): size 4355 (cls: EnemyPawn_Parent_C>BlueprintGeneratedClass>/Script/Engine) :
 		Tag array:
 			bHasCookedComponentInstancingData(BoolProperty)=True 
 			ComponentTemplates(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -1374,7 +1403,7 @@ Serialized exports:
 			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=EnemyPawn_Parent_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_EnemyPawn_Parent=EnemyPawn_Parent_C 
 			CookedComponentInstancingData(MapProperty)=[object] (inner: NameProperty)
-	Default__EnemyPawn_Parent_C (0-0-0-0): size 5648 (cls: Default__EnemyPawn_Parent_C>EnemyPawn_Parent_C) :
+	Default__EnemyPawn_Parent_C (0-0-0-0): size 5680 (cls: Default__EnemyPawn_Parent_C>EnemyPawn_Parent_C) :
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			HQ Death Particle System(ObjectProperty)=P_Husk_Death_HQ_01=/Game/Characters/Enemies/Husk/Effects/P_Husk_Death_HQ_01 
@@ -1411,9 +1440,8 @@ Serialized exports:
 			Headshot FX Socket(NameProperty)=Headshot 
 			Husk_Sleeping_Sound(ObjectProperty)=Husk_Sleep_BreathLoop_Cue=/Game/Sounds/Fort_Monster_Husk/Husk_Efforts/Husk_Sleep_BreathLoop_Cue 
 			AwokenMaxDistance(FloatProperty)=2048 
-			AwokenFadeInTime(FloatProperty)=0.15 
-			AwokenFadeOutTime(FloatProperty)=0.5 
-			AwokenDuration(FloatProperty)=1.8 
+			AwakenDuration(FloatProperty)=1.8 
+			DestroyAwakenFXTimer(StructProperty)=System.Byte[] 
 			BuildingHitDuration(FloatProperty)=2.8 
 			DestroyBuildingHitFXTimer(StructProperty)=System.Byte[] 
 			CharacterSpawnInSafetyCheckHandle(StructProperty)=System.Byte[] 
@@ -1454,27 +1482,11 @@ Serialized exports:
 		Tag array:
 	Auxillary Objects (0-0-0-0): size 36 (cls: Auxillary Objects>ArrayProperty>/Script/CoreUObject) :
 		Tag array:
-	BuildingHitFXSkeletalMeshes (0-0-0-0): size 36 (cls: BuildingHitFXSkeletalMeshes>ObjectProperty>/Script/CoreUObject) :
-		Tag array:
-	BuildingHitFXSkeletalMeshes (0-0-0-0): size 36 (cls: BuildingHitFXSkeletalMeshes>ArrayProperty>/Script/CoreUObject) :
-		Tag array:
-	BuildingHitFXStaticMeshes (0-0-0-0): size 36 (cls: BuildingHitFXStaticMeshes>ObjectProperty>/Script/CoreUObject) :
-		Tag array:
-	BuildingHitFXStaticMeshes (0-0-0-0): size 36 (cls: BuildingHitFXStaticMeshes>ArrayProperty>/Script/CoreUObject) :
-		Tag array:
-	BuildingHitSkeletalMeshes (0-0-0-0): size 36 (cls: BuildingHitSkeletalMeshes>ObjectProperty>/Script/CoreUObject) :
-		Tag array:
-	BuildingHitSkeletalMeshes (0-0-0-0): size 36 (cls: BuildingHitSkeletalMeshes>ArrayProperty>/Script/CoreUObject) :
-		Tag array:
-	BuildingHitStaticMeshes (0-0-0-0): size 36 (cls: BuildingHitStaticMeshes>ObjectProperty>/Script/CoreUObject) :
-		Tag array:
-	BuildingHitStaticMeshes (0-0-0-0): size 36 (cls: BuildingHitStaticMeshes>ArrayProperty>/Script/CoreUObject) :
-		Tag array:
 	WeaponCapsuleCollision (0-0-0-0): size 36 (cls: WeaponCapsuleCollision>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject) :
 		Tag array:
-	ExecuteUbergraph_EnemyPawn_Parent (0-0-0-0): size 10056 (cls: ExecuteUbergraph_EnemyPawn_Parent>Function>/Script/CoreUObject) :
+	ExecuteUbergraph_EnemyPawn_Parent (0-0-0-0): size 10898 (cls: ExecuteUbergraph_EnemyPawn_Parent>Function>/Script/CoreUObject) :
 		Tag array:
 	Damage (0-0-0-0): size 32 (cls: Damage>FloatProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1493,6 +1505,8 @@ Serialized exports:
 	RestorePreviousMaterialDelayCompleted (0-0-0-0): size 58 (cls: RestorePreviousMaterialDelayCompleted>Function>/Script/CoreUObject) :
 		Tag array:
 	OnEndSleepEffects (0-0-0-0): size 58 (cls: OnEndSleepEffects>Function>/Script/CoreUObject) :
+		Tag array:
+	DestroyAwakenEffect (0-0-0-0): size 58 (cls: DestroyAwakenEffect>Function>/Script/CoreUObject) :
 		Tag array:
 	OnBeginSleepEffects (0-0-0-0): size 58 (cls: OnBeginSleepEffects>Function>/Script/CoreUObject) :
 		Tag array:
@@ -1588,10 +1602,6 @@ Serialized exports:
 		Tag array:
 	OverrideMaterialAndCopyParametersOnCharacterElements (0-0-0-0): size 991 (cls: OverrideMaterialAndCopyParametersOnCharacterElements>Function>/Script/CoreUObject) :
 		Tag array:
-	CallFunc_IsDedicatedServer_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsDedicatedServer_ReturnValue>BoolProperty>/Script/CoreUObject) :
-		Tag array:
-	DestroyAwokenSkeletalMesh (0-0-0-0): size 155 (cls: DestroyAwokenSkeletalMesh>Function>/Script/CoreUObject) :
-		Tag array:
 	Physical Material Override (0-0-0-0): size 36 (cls: Physical Material Override>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	OverridePhysicalMaterialOnCharacterMesh (0-0-0-0): size 488 (cls: OverridePhysicalMaterialOnCharacterMesh>Function>/Script/CoreUObject) :
@@ -1604,7 +1614,7 @@ Serialized exports:
 		Tag array:
 	Delay in Seconds (0-0-0-0): size 32 (cls: Delay in Seconds>FloatProperty>/Script/CoreUObject) :
 		Tag array:
-	RestorePreviousMaterialOnCharacterElements (0-0-0-0): size 2870 (cls: RestorePreviousMaterialOnCharacterElements>Function>/Script/CoreUObject) :
+	RestorePreviousMaterialOnCharacterElements (0-0-0-0): size 2895 (cls: RestorePreviousMaterialOnCharacterElements>Function>/Script/CoreUObject) :
 		Tag array:
 	ApplyPumpkinHeadMesh (0-0-0-0): size 34 (cls: ApplyPumpkinHeadMesh>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1674,7 +1684,7 @@ Serialized exports:
 		Tag array:
 	DeleteDuplicateCharacterElements (0-0-0-0): size 586 (cls: DeleteDuplicateCharacterElements>Function>/Script/CoreUObject) :
 		Tag array:
-	DynamicMaterialArraySetup (0-0-0-0): size 802 (cls: DynamicMaterialArraySetup>Function>/Script/CoreUObject) :
+	DynamicMaterialArraySetup (0-0-0-0): size 853 (cls: DynamicMaterialArraySetup>Function>/Script/CoreUObject) :
 		Tag array:
 	Array to Check (0-0-0-0): size 36 (cls: Array to Check>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1699,10 +1709,6 @@ Serialized exports:
 	Temp_object_Variable (0-0-0-0): size 36 (cls: Temp_object_Variable>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	Temp_object_Variable (0-0-0-0): size 36 (cls: Temp_object_Variable>ArrayProperty>/Script/CoreUObject) :
-		Tag array:
-	FXSkeletalMeshes (0-0-0-0): size 36 (cls: FXSkeletalMeshes>ObjectProperty>/Script/CoreUObject) :
-		Tag array:
-	FXSkeletalMeshes (0-0-0-0): size 36 (cls: FXSkeletalMeshes>ArrayProperty>/Script/CoreUObject) :
 		Tag array:
 	MaleHuskHairColors (0-0-0-0): size 36 (cls: MaleHuskHairColors>StructProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1748,6 +1754,14 @@ Serialized exports:
 		Tag array:
 	Previous MID_AuxObjs (0-0-0-0): size 36 (cls: Previous MID_AuxObjs>ArrayProperty>/Script/CoreUObject) :
 		Tag array:
+	RegisteredSkeletalMeshesForEffects (0-0-0-0): size 36 (cls: RegisteredSkeletalMeshesForEffects>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	RegisteredSkeletalMeshesForEffects (0-0-0-0): size 36 (cls: RegisteredSkeletalMeshesForEffects>ArrayProperty>/Script/CoreUObject) :
+		Tag array:
+	RegisteredStaticMeshesForEffects (0-0-0-0): size 36 (cls: RegisteredStaticMeshesForEffects>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	RegisteredStaticMeshesForEffects (0-0-0-0): size 36 (cls: RegisteredStaticMeshesForEffects>ArrayProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_GetMaterials_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetMaterials_ReturnValue>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_GetMaterials_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetMaterials_ReturnValue>ArrayProperty>/Script/CoreUObject) :
@@ -1785,19 +1799,51 @@ Serialized exports:
 		Tag array:
 	Mesh (0-0-0-0): size 36 (cls: Mesh>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	ApplyBuildingHitEffectToSkeletalMesh (0-0-0-0): size 331 (cls: ApplyBuildingHitEffectToSkeletalMesh>Function>/Script/CoreUObject) :
-		Tag array:
-	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject) :
-		Tag array:
-	CallFunc_IsValid_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue1>BoolProperty>/Script/CoreUObject) :
+	ApplyBuildingHitEffectToSkeletalMesh (0-0-0-0): size 473 (cls: ApplyBuildingHitEffectToSkeletalMesh>Function>/Script/CoreUObject) :
 		Tag array:
 	Mesh (0-0-0-0): size 36 (cls: Mesh>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	ApplyBuildingHitEffectToStaticMesh (0-0-0-0): size 331 (cls: ApplyBuildingHitEffectToStaticMesh>Function>/Script/CoreUObject) :
+	ApplyBuildingHitEffectToStaticMesh (0-0-0-0): size 473 (cls: ApplyBuildingHitEffectToStaticMesh>Function>/Script/CoreUObject) :
+		Tag array:
+	Mesh (0-0-0-0): size 36 (cls: Mesh>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	RegisterEffectSkeletalMesh (0-0-0-0): size 270 (cls: RegisterEffectSkeletalMesh>Function>/Script/CoreUObject) :
+		Tag array:
+	Mesh (0-0-0-0): size 36 (cls: Mesh>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	RegisterEffectStaticMesh (0-0-0-0): size 268 (cls: RegisterEffectStaticMesh>Function>/Script/CoreUObject) :
+		Tag array:
+	Mesh (0-0-0-0): size 36 (cls: Mesh>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	ApplyAwakenEffectToSkeletalMesh (0-0-0-0): size 473 (cls: ApplyAwakenEffectToSkeletalMesh>Function>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_IsValid_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue1>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Map_Find_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Map_Find_ReturnValue>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	Mesh (0-0-0-0): size 36 (cls: Mesh>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	ApplyAwakenEffectToStaticMesh (0-0-0-0): size 473 (cls: ApplyAwakenEffectToStaticMesh>Function>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_IsValid_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue1>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Map_Find_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Map_Find_ReturnValue>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_IsValid_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue1>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Map_Find_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Map_Find_ReturnValue>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_IsValid_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue1>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Map_Find_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Map_Find_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_Greater_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Greater_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1847,7 +1893,47 @@ Serialized exports:
 		Tag array:
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject) :
 		Tag array:
+	Mesh (0-0-0-0): size 36 (cls: Mesh>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	DeregisterEffectStaticMesh (0-0-0-0): size 626 (cls: DeregisterEffectStaticMesh>Function>/Script/CoreUObject) :
+		Tag array:
+	Mesh (0-0-0-0): size 36 (cls: Mesh>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	DeregisterEffectSkeletalMesh (0-0-0-0): size 626 (cls: DeregisterEffectSkeletalMesh>Function>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Array_RemoveItem_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Array_RemoveItem_ReturnValue>BoolProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_IsValid_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue1>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_IsValid_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue2>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Map_Find_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Map_Find_ReturnValue>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Map_Find_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_Map_Find_ReturnValue1>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Map_Remove_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Map_Remove_ReturnValue>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Map_Remove_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_Map_Remove_ReturnValue1>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Array_RemoveItem_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Array_RemoveItem_ReturnValue>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_IsValid_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue1>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_IsValid_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue2>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Map_Find_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Map_Find_ReturnValue>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Map_Find_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_Map_Find_ReturnValue1>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Map_Remove_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Map_Remove_ReturnValue>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Map_Remove_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_Map_Remove_ReturnValue1>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_EqualEqual_ObjectObject_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ObjectObject_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1909,6 +1995,10 @@ Serialized exports:
 		Tag array:
 	CallFunc_IsValid_ReturnValue16 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue16>BoolProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_IsValid_ReturnValue17 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue17>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_IsValid_ReturnValue18 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue18>BoolProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_IsValid_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue2>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_IsValid_ReturnValue3 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue3>BoolProperty>/Script/CoreUObject) :
@@ -1927,8 +2017,6 @@ Serialized exports:
 		Tag array:
 	CallFunc_K2_AttachToComponent_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_K2_AttachToComponent_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
-	CallFunc_K2_AttachToComponent_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_K2_AttachToComponent_ReturnValue1>BoolProperty>/Script/CoreUObject) :
-		Tag array:
 	CallFunc_LessEqual_FloatFloat_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_LessEqual_FloatFloat_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_LessEqual_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_LessEqual_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject) :
@@ -1941,7 +2029,21 @@ Serialized exports:
 		Tag array:
 	CallFunc_LessEqual_IntInt_ReturnValue4 (0-0-0-0): size 34 (cls: CallFunc_LessEqual_IntInt_ReturnValue4>BoolProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_LessEqual_IntInt_ReturnValue5 (0-0-0-0): size 34 (cls: CallFunc_LessEqual_IntInt_ReturnValue5>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_LessEqual_IntInt_ReturnValue6 (0-0-0-0): size 34 (cls: CallFunc_LessEqual_IntInt_ReturnValue6>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_LessEqual_IntInt_ReturnValue7 (0-0-0-0): size 34 (cls: CallFunc_LessEqual_IntInt_ReturnValue7>BoolProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_LineTraceSingle_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_LineTraceSingle_ReturnValue>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Map_Find_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Map_Find_ReturnValue>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Map_Find_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_Map_Find_ReturnValue1>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Map_Find_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_Map_Find_ReturnValue2>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Map_Find_ReturnValue3 (0-0-0-0): size 34 (cls: CallFunc_Map_Find_ReturnValue3>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_Not_PreBool_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1988,14 +2090,6 @@ Serialized exports:
 	IsMiniBoss (0-0-0-0): size 34 (cls: IsMiniBoss>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	bPlayerPlaced (0-0-0-0): size 34 (cls: bPlayerPlaced>BoolProperty>/Script/CoreUObject) :
-		Tag array:
-	Mesh (0-0-0-0): size 36 (cls: Mesh>ObjectProperty>/Script/CoreUObject) :
-		Tag array:
-	RegisterBuildingHitSkeletalMesh (0-0-0-0): size 270 (cls: RegisterBuildingHitSkeletalMesh>Function>/Script/CoreUObject) :
-		Tag array:
-	Mesh (0-0-0-0): size 36 (cls: Mesh>ObjectProperty>/Script/CoreUObject) :
-		Tag array:
-	RegisterBuildingHitStaticMesh (0-0-0-0): size 268 (cls: RegisterBuildingHitStaticMesh>Function>/Script/CoreUObject) :
 		Tag array:
 	Orphaned (0-0-0-0): size 65 (cls: Orphaned>Function>/Script/CoreUObject) :
 		Tag array:
@@ -2225,11 +2319,9 @@ Serialized exports:
 		Tag array:
 	K2Node_CreateDelegate_OutputDelegate1 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate1>DelegateProperty>/Script/CoreUObject) :
 		Tag array:
-	AwokenDuration (0-0-0-0): size 32 (cls: AwokenDuration>FloatProperty>/Script/CoreUObject) :
+	K2Node_CreateDelegate_OutputDelegate2 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate2>DelegateProperty>/Script/CoreUObject) :
 		Tag array:
-	AwokenFadeInTime (0-0-0-0): size 32 (cls: AwokenFadeInTime>FloatProperty>/Script/CoreUObject) :
-		Tag array:
-	AwokenFadeOutTime (0-0-0-0): size 32 (cls: AwokenFadeOutTime>FloatProperty>/Script/CoreUObject) :
+	AwakenDuration (0-0-0-0): size 32 (cls: AwakenDuration>FloatProperty>/Script/CoreUObject) :
 		Tag array:
 	AwokenMaxDistance (0-0-0-0): size 32 (cls: AwokenMaxDistance>FloatProperty>/Script/CoreUObject) :
 		Tag array:
@@ -2269,8 +2361,6 @@ Serialized exports:
 		Tag array:
 	CallFunc_Add_FloatFloat_ReturnValue2 (0-0-0-0): size 32 (cls: CallFunc_Add_FloatFloat_ReturnValue2>FloatProperty>/Script/CoreUObject) :
 		Tag array:
-	CallFunc_Add_FloatFloat_ReturnValue3 (0-0-0-0): size 32 (cls: CallFunc_Add_FloatFloat_ReturnValue3>FloatProperty>/Script/CoreUObject) :
-		Tag array:
 	CallFunc_BreakHitResult_Distance (0-0-0-0): size 32 (cls: CallFunc_BreakHitResult_Distance>FloatProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_BreakHitResult_Time (0-0-0-0): size 32 (cls: CallFunc_BreakHitResult_Time>FloatProperty>/Script/CoreUObject) :
@@ -2290,10 +2380,6 @@ Serialized exports:
 	CallFunc_Divide_FloatFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Divide_FloatFloat_ReturnValue>FloatProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_GetFloatValue_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetFloatValue_ReturnValue>FloatProperty>/Script/CoreUObject) :
-		Tag array:
-	CallFunc_GetGameTimeInSeconds_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetGameTimeInSeconds_ReturnValue>FloatProperty>/Script/CoreUObject) :
-		Tag array:
-	CallFunc_GetGameTimeInSeconds_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_GetGameTimeInSeconds_ReturnValue1>FloatProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_Multiply_FloatFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Multiply_FloatFloat_ReturnValue>FloatProperty>/Script/CoreUObject) :
 		Tag array:
@@ -2316,8 +2402,6 @@ Serialized exports:
 	CallFunc_RandomFloatInRange_ReturnValue4 (0-0-0-0): size 32 (cls: CallFunc_RandomFloatInRange_ReturnValue4>FloatProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_Subtract_FloatFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Subtract_FloatFloat_ReturnValue>FloatProperty>/Script/CoreUObject) :
-		Tag array:
-	CallFunc_Subtract_FloatFloat_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Subtract_FloatFloat_ReturnValue1>FloatProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_VSize_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_VSize_ReturnValue>FloatProperty>/Script/CoreUObject) :
 		Tag array:
@@ -2380,7 +2464,11 @@ Serialized exports:
 			AttachParent(ObjectProperty)=CollisionCylinder=Default__EnemyPawn_Parent_C 
 	NODE_AddFXSkeletonMeshComponent-2 (0-0-0-0): size 12 (cls: NODE_AddFXSkeletonMeshComponent-2>FXSkeletonMeshComponent_C>/Game/Characters/Enemies/Blueprints/FXSkeletonMeshComponent) :
 		Tag array:
+	NODE_AddFXSkeletonMeshComponent-6 (0-0-0-0): size 12 (cls: NODE_AddFXSkeletonMeshComponent-6>FXSkeletonMeshComponent_C>/Game/Characters/Enemies/Blueprints/FXSkeletonMeshComponent) :
+		Tag array:
 	NODE_AddFXStaticMeshComponent-0 (0-0-0-0): size 16 (cls: NODE_AddFXStaticMeshComponent-0>FXStaticMeshComponent_C>/Game/Characters/Enemies/Blueprints/FXStaticMeshComponent) :
+		Tag array:
+	NODE_AddFXStaticMeshComponent-2 (0-0-0-0): size 16 (cls: NODE_AddFXStaticMeshComponent-2>FXStaticMeshComponent_C>/Game/Characters/Enemies/Blueprints/FXStaticMeshComponent) :
 		Tag array:
 	K2Node_DynamicCast_AsGameplay_Tag_Asset_Interface (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsGameplay_Tag_Asset_Interface>InterfaceProperty>/Script/CoreUObject) :
 		Tag array:
@@ -2454,6 +2542,12 @@ Serialized exports:
 		Tag array:
 	CallFunc_Add_IntInt_ReturnValue4 (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue4>IntProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_Add_IntInt_ReturnValue5 (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue5>IntProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Add_IntInt_ReturnValue6 (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue6>IntProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Add_IntInt_ReturnValue7 (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue7>IntProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_Array_Length_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Array_Length_ReturnValue>IntProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_Array_Length_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Array_Length_ReturnValue1>IntProperty>/Script/CoreUObject) :
@@ -2462,13 +2556,19 @@ Serialized exports:
 		Tag array:
 	CallFunc_Array_Length_ReturnValue3 (0-0-0-0): size 32 (cls: CallFunc_Array_Length_ReturnValue3>IntProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_Array_Length_ReturnValue4 (0-0-0-0): size 32 (cls: CallFunc_Array_Length_ReturnValue4>IntProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Array_Length_ReturnValue5 (0-0-0-0): size 32 (cls: CallFunc_Array_Length_ReturnValue5>IntProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Array_Length_ReturnValue6 (0-0-0-0): size 32 (cls: CallFunc_Array_Length_ReturnValue6>IntProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Array_Length_ReturnValue7 (0-0-0-0): size 32 (cls: CallFunc_Array_Length_ReturnValue7>IntProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_BreakHitResult_FaceIndex (0-0-0-0): size 32 (cls: CallFunc_BreakHitResult_FaceIndex>IntProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_BreakHitResult_HitItem (0-0-0-0): size 32 (cls: CallFunc_BreakHitResult_HitItem>IntProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_GetBoneIndex_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetBoneIndex_ReturnValue>IntProperty>/Script/CoreUObject) :
-		Tag array:
-	CallFunc_GetNumMaterials_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetNumMaterials_ReturnValue>IntProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_Subtract_IntInt_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Subtract_IntInt_ReturnValue>IntProperty>/Script/CoreUObject) :
 		Tag array:
@@ -2480,6 +2580,12 @@ Serialized exports:
 		Tag array:
 	CallFunc_Subtract_IntInt_ReturnValue4 (0-0-0-0): size 32 (cls: CallFunc_Subtract_IntInt_ReturnValue4>IntProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_Subtract_IntInt_ReturnValue5 (0-0-0-0): size 32 (cls: CallFunc_Subtract_IntInt_ReturnValue5>IntProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Subtract_IntInt_ReturnValue6 (0-0-0-0): size 32 (cls: CallFunc_Subtract_IntInt_ReturnValue6>IntProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Subtract_IntInt_ReturnValue7 (0-0-0-0): size 32 (cls: CallFunc_Subtract_IntInt_ReturnValue7>IntProperty>/Script/CoreUObject) :
+		Tag array:
 	Temp_int_Variable (0-0-0-0): size 32 (cls: Temp_int_Variable>IntProperty>/Script/CoreUObject) :
 		Tag array:
 	Temp_int_Variable1 (0-0-0-0): size 32 (cls: Temp_int_Variable1>IntProperty>/Script/CoreUObject) :
@@ -2489,6 +2595,12 @@ Serialized exports:
 	Temp_int_Variable3 (0-0-0-0): size 32 (cls: Temp_int_Variable3>IntProperty>/Script/CoreUObject) :
 		Tag array:
 	Temp_int_Variable4 (0-0-0-0): size 32 (cls: Temp_int_Variable4>IntProperty>/Script/CoreUObject) :
+		Tag array:
+	Temp_int_Variable5 (0-0-0-0): size 32 (cls: Temp_int_Variable5>IntProperty>/Script/CoreUObject) :
+		Tag array:
+	Temp_int_Variable6 (0-0-0-0): size 32 (cls: Temp_int_Variable6>IntProperty>/Script/CoreUObject) :
+		Tag array:
+	Temp_int_Variable7 (0-0-0-0): size 32 (cls: Temp_int_Variable7>IntProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_Add_IntInt_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue>IntProperty>/Script/CoreUObject) :
 		Tag array:
@@ -2616,6 +2728,30 @@ Serialized exports:
 		Tag array:
 	Temp_int_Loop_Counter_Variable (0-0-0-0): size 32 (cls: Temp_int_Loop_Counter_Variable>IntProperty>/Script/CoreUObject) :
 		Tag array:
+	AwakenFXSkeletalMeshes_Value (0-0-0-0): size 36 (cls: AwakenFXSkeletalMeshes_Value>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	AwakenFXSkeletalMeshes (0-0-0-0): size 36 (cls: AwakenFXSkeletalMeshes>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	AwakenFXSkeletalMeshes (0-0-0-0): size 40 (cls: AwakenFXSkeletalMeshes>MapProperty>/Script/CoreUObject) :
+		Tag array:
+	AwakenFXStaticMeshes_Value (0-0-0-0): size 36 (cls: AwakenFXStaticMeshes_Value>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	AwakenFXStaticMeshes (0-0-0-0): size 36 (cls: AwakenFXStaticMeshes>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	AwakenFXStaticMeshes (0-0-0-0): size 40 (cls: AwakenFXStaticMeshes>MapProperty>/Script/CoreUObject) :
+		Tag array:
+	BuildingHitFXSkeletalMeshes_Value (0-0-0-0): size 36 (cls: BuildingHitFXSkeletalMeshes_Value>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	BuildingHitFXSkeletalMeshes (0-0-0-0): size 36 (cls: BuildingHitFXSkeletalMeshes>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	BuildingHitFXSkeletalMeshes (0-0-0-0): size 40 (cls: BuildingHitFXSkeletalMeshes>MapProperty>/Script/CoreUObject) :
+		Tag array:
+	BuildingHitFXStaticMeshes_Value (0-0-0-0): size 36 (cls: BuildingHitFXStaticMeshes_Value>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	BuildingHitFXStaticMeshes (0-0-0-0): size 36 (cls: BuildingHitFXStaticMeshes>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	BuildingHitFXStaticMeshes (0-0-0-0): size 40 (cls: BuildingHitFXStaticMeshes>MapProperty>/Script/CoreUObject) :
+		Tag array:
 	Death Socket (0-0-0-0): size 32 (cls: Death Socket>NameProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_BreakHitResult_HitBoneName (0-0-0-0): size 32 (cls: CallFunc_BreakHitResult_HitBoneName>NameProperty>/Script/CoreUObject) :
@@ -2640,19 +2776,27 @@ Serialized exports:
 		Tag array:
 	CallFunc_AddComponent_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_AddComponent_ReturnValue>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	EffectMesh (0-0-0-0): size 36 (cls: EffectMesh>ObjectProperty>/Script/CoreUObject) :
+	CallFunc_Map_Find_Value (0-0-0-0): size 36 (cls: CallFunc_Map_Find_Value>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	EffectMID (0-0-0-0): size 36 (cls: EffectMID>ObjectProperty>/Script/CoreUObject) :
+	FXSkeletalMesh (0-0-0-0): size 36 (cls: FXSkeletalMesh>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_AddComponent_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_AddComponent_ReturnValue>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	Effect MID (0-0-0-0): size 36 (cls: Effect MID>ObjectProperty>/Script/CoreUObject) :
+	CallFunc_Map_Find_Value (0-0-0-0): size 36 (cls: CallFunc_Map_Find_Value>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	EffectMesh (0-0-0-0): size 36 (cls: EffectMesh>ObjectProperty>/Script/CoreUObject) :
+	FXStaticMesh (0-0-0-0): size 36 (cls: FXStaticMesh>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	AwokenSkeletalMesh (0-0-0-0): size 36 (cls: AwokenSkeletalMesh>ObjectProperty>/Script/CoreUObject) :
+	CallFunc_AddComponent_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_AddComponent_ReturnValue>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	AwokenSkelMeshMID (0-0-0-0): size 36 (cls: AwokenSkelMeshMID>ObjectProperty>/Script/CoreUObject) :
+	CallFunc_Map_Find_Value (0-0-0-0): size 36 (cls: CallFunc_Map_Find_Value>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	FXSkeletalMesh (0-0-0-0): size 36 (cls: FXSkeletalMesh>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_AddComponent_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_AddComponent_ReturnValue>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Map_Find_Value (0-0-0-0): size 36 (cls: CallFunc_Map_Find_Value>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	FXStaticMesh (0-0-0-0): size 36 (cls: FXStaticMesh>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	CharacterAmbientParticles (0-0-0-0): size 36 (cls: CharacterAmbientParticles>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
@@ -2692,6 +2836,14 @@ Serialized exports:
 		Tag array:
 	K2Node_DynamicCast_AsMesh_Component (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsMesh_Component>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_Map_Find_Value (0-0-0-0): size 36 (cls: CallFunc_Map_Find_Value>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Map_Find_Value1 (0-0-0-0): size 36 (cls: CallFunc_Map_Find_Value1>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Map_Find_Value (0-0-0-0): size 36 (cls: CallFunc_Map_Find_Value>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Map_Find_Value1 (0-0-0-0): size 36 (cls: CallFunc_Map_Find_Value1>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
 	DuplicateCharacterMesh (0-0-0-0): size 36 (cls: DuplicateCharacterMesh>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	DuplicateCharacterMID (0-0-0-0): size 36 (cls: DuplicateCharacterMID>ObjectProperty>/Script/CoreUObject) :
@@ -2726,8 +2878,6 @@ Serialized exports:
 		Tag array:
 	CallFunc_AddComponent_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_AddComponent_ReturnValue>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	CallFunc_AddComponent_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_AddComponent_ReturnValue1>ObjectProperty>/Script/CoreUObject) :
-		Tag array:
 	CallFunc_Array_Get_Item (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_Array_Get_Item1 (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item1>ObjectProperty>/Script/CoreUObject) :
@@ -2737,6 +2887,12 @@ Serialized exports:
 	CallFunc_Array_Get_Item3 (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item3>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_Array_Get_Item4 (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item4>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Array_Get_Item5 (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item5>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Array_Get_Item6 (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item6>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Array_Get_Item7 (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item7>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_BreakHitResult_HitActor (0-0-0-0): size 36 (cls: CallFunc_BreakHitResult_HitActor>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
@@ -2748,15 +2904,15 @@ Serialized exports:
 		Tag array:
 	CallFunc_CreateDynamicMaterialInstance_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_CreateDynamicMaterialInstance_ReturnValue1>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	CallFunc_CreateDynamicMaterialInstance_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_CreateDynamicMaterialInstance_ReturnValue2>ObjectProperty>/Script/CoreUObject) :
-		Tag array:
-	CallFunc_GetMIDForSkeletalMeshComponent_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetMIDForSkeletalMeshComponent_ReturnValue>ObjectProperty>/Script/CoreUObject) :
-		Tag array:
 	CallFunc_GetPlayerCameraManager_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetPlayerCameraManager_ReturnValue>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	CallFunc_K2_GetTextureParameterValue_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_GetTextureParameterValue_ReturnValue>ObjectProperty>/Script/CoreUObject) :
+	CallFunc_Map_Find_Value (0-0-0-0): size 36 (cls: CallFunc_Map_Find_Value>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	CallFunc_K2_GetTextureParameterValue_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_K2_GetTextureParameterValue_ReturnValue1>ObjectProperty>/Script/CoreUObject) :
+	CallFunc_Map_Find_Value1 (0-0-0-0): size 36 (cls: CallFunc_Map_Find_Value1>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Map_Find_Value2 (0-0-0-0): size 36 (cls: CallFunc_Map_Find_Value2>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Map_Find_Value3 (0-0-0-0): size 36 (cls: CallFunc_Map_Find_Value3>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_SpawnEmitterAtLocation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_SpawnEmitterAtLocation_ReturnValue>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
@@ -2886,11 +3042,14 @@ Serialized exports:
 		Tag array:
 	CallFunc_GetAbilitySystemComponent_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetAbilitySystemComponent_ReturnValue>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
+	TempFXSkeletalMesh (0-0-0-0): size 36 (cls: TempFXSkeletalMesh>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
 	WakeUpParticleSystemComp (0-0-0-0): size 36 (cls: WakeUpParticleSystemComp>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	NODE_AddParticleSystemComponent-3 (0-0-0-0): size 41 (cls: NODE_AddParticleSystemComponent-3>ParticleSystemComponent>/Script/Engine) :
+	NODE_AddParticleSystemComponent-3 (0-0-0-0): size 124 (cls: NODE_AddParticleSystemComponent-3>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_Husk_Sleeping_Effect=/Game/Characters/Enemies/Husk/Effects/P_Husk_Sleeping_Effect 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 	NODE_AddPointLightComponent-0 (0-0-0-0): size 204 (cls: NODE_AddPointLightComponent-0>PointLightComponent>/Script/Engine) :
 		Tag array:
 			bUseInverseSquaredFalloff(BoolProperty)=False 
@@ -2930,9 +3089,6 @@ Serialized exports:
 			RootNodes(ArrayProperty)=[object] (inner: ObjectProperty)
 			AllNodes(ArrayProperty)=[object] (inner: ObjectProperty)
 			DefaultSceneRootNode(ObjectProperty)=SCS_Node_0=EnemyPawn_Parent_C 
-	NODE_AddSkeletalMeshComponent-0 (0-0-0-0): size 41 (cls: NODE_AddSkeletalMeshComponent-0>SkeletalMeshComponent>/Script/Engine) :
-		Tag array:
-			ClothingSimulationFactory(ObjectProperty)=ClothingSimulationFactoryNv=/Script/ClothingSystemRuntime 
 	NODE_AddSkeletalMeshComponent-1 (0-0-0-0): size 41 (cls: NODE_AddSkeletalMeshComponent-1>SkeletalMeshComponent>/Script/Engine) :
 		Tag array:
 			ClothingSimulationFactory(ObjectProperty)=ClothingSimulationFactoryNv=/Script/ClothingSystemRuntime 
@@ -2940,6 +3096,10 @@ Serialized exports:
 		Tag array:
 			ClothingSimulationFactory(ObjectProperty)=ClothingSimulationFactoryNv=/Script/ClothingSystemRuntime 
 	NODE_AddStaticMeshComponent-4 (0-0-0-0): size 16 (cls: NODE_AddStaticMeshComponent-4>StaticMeshComponent>/Script/Engine) :
+		Tag array:
+	Temp_struct_Variable (0-0-0-0): size 36 (cls: Temp_struct_Variable>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	Temp_struct_Variable (0-0-0-0): size 36 (cls: Temp_struct_Variable>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	Temp_struct_Variable (0-0-0-0): size 36 (cls: Temp_struct_Variable>StructProperty>/Script/CoreUObject) :
 		Tag array:
@@ -2958,6 +3118,8 @@ Serialized exports:
 	Death FX Emissive Soft Color (0-0-0-0): size 36 (cls: Death FX Emissive Soft Color>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	DeathFX_EmissiveHot (0-0-0-0): size 36 (cls: DeathFX_EmissiveHot>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	DestroyAwakenFXTimer (0-0-0-0): size 36 (cls: DestroyAwakenFXTimer>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	DestroyBuildingHitFXTimer (0-0-0-0): size 36 (cls: DestroyBuildingHitFXTimer>StructProperty>/Script/CoreUObject) :
 		Tag array:
@@ -3057,6 +3219,8 @@ Serialized exports:
 		Tag array:
 	CallFunc_K2_SetTimerDelegate_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_K2_SetTimerDelegate_ReturnValue1>StructProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_K2_SetTimerDelegate_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_K2_SetTimerDelegate_ReturnValue2>StructProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_LineTraceSingle_OutHit (0-0-0-0): size 36 (cls: CallFunc_LineTraceSingle_OutHit>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_MakeTransform_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_MakeTransform_ReturnValue>StructProperty>/Script/CoreUObject) :
@@ -3114,8 +3278,6 @@ Serialized exports:
 	Temp_struct_Variable1 (0-0-0-0): size 36 (cls: Temp_struct_Variable1>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	Temp_struct_Variable2 (0-0-0-0): size 36 (cls: Temp_struct_Variable2>StructProperty>/Script/CoreUObject) :
-		Tag array:
-	Temp_struct_Variable3 (0-0-0-0): size 36 (cls: Temp_struct_Variable3>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	FrozenHuskMeshScale (0-0-0-0): size 36 (cls: FrozenHuskMeshScale>StructProperty>/Script/CoreUObject) :
 		Tag array:

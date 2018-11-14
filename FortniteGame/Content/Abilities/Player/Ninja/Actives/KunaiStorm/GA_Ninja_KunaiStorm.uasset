@@ -11,9 +11,13 @@ Name table:
 	/Game/Abilities/Player/Ninja/Actives/KunaiStorm/TT_Ninja_KunaiStorm
 	/Game/Abilities/Player/Ninja/Perks/KunaiBarrage/GE_Ninja_KunaiBarrage_Damage
 	/Game/Abilities/Player/Ninja/Perks/KunaiBomb/GE_Ninja_KunaiBomb_Damage
+	/Game/Abilities/Player/Parents/GAT_ActiveAbility
+	/Game/Abilities/Player/Parents/GAT_ActiveAbility_Hero
 	/Game/Abilities/Player/Parents/GAT_NinjaActiveAbility
+	/Game/Abilities/Player/Perks/Hero/Kunaihilation/GE_Perk_H_Kunaihilation_Damage
 	/Game/Balance/DataTables/CombatEffects_HeroAbilities
 	/Game/Balance/DataTables/GadgetScaling
+	/Game/Macros/Abilities/AbilityFunctions
 	/Script/CoreUObject
 	/Script/Engine
 	/Script/FortniteGame
@@ -30,8 +34,11 @@ Name table:
 	Ability.Ninja.KunaiStorm
 	Ability.Ninja.KunaiStorm.Cost
 	AbilityCosts
+	AbilityFunctions_C
 	AbilitySystemBlueprintLibrary
 	AbilitySystemComponent
+	AbilitySystemIn
+	AbilitySystemOut
 	AbilityTags
 	AbilityTask_WaitMovementModeChange
 	ActiveAbilitySetup
@@ -43,6 +50,7 @@ Name table:
 	ActorTypeFilter
 	Add_FloatFloat
 	Add_VectorVector
+	AddDynamicGameplayEffectContainer
 	AnimMontage
 	ApplicationTag
 	ApplyGameplayEffectContainer
@@ -76,6 +84,7 @@ Name table:
 	BlueprintGeneratedClass
 	bOnlyApplyCostOnHit
 	BoolProperty
+	BP_GetGameplayEffectContainer
 	BP_Ninja_KunaiStorm_Camera_In_C
 	BP_Ninja_KunaiStorm_Camera_Out_C
 	BreakRotator
@@ -96,12 +105,14 @@ Name table:
 	CallFunc_Add_VectorVector_ReturnValue
 	CallFunc_Add_VectorVector_ReturnValue1
 	CallFunc_ApplyGameplayEffectContainer_ReturnValue
+	CallFunc_BP_GetGameplayEffectContainer_ReturnValue
 	CallFunc_BreakRotator_Pitch
 	CallFunc_BreakRotator_Roll
 	CallFunc_BreakRotator_Yaw
 	CallFunc_BreakVector_X
 	CallFunc_BreakVector_Y
 	CallFunc_BreakVector_Z
+	CallFunc_CommitAbilityWithEvent_Passed
 	CallFunc_Conv_VectorToRotator_ReturnValue
 	CallFunc_CreateWaitMovementModeChange_ReturnValue
 	CallFunc_CreateWaitMovementModeChange_ReturnValue1
@@ -121,7 +132,9 @@ Name table:
 	CallFunc_GetActorForwardVector_ReturnValue
 	CallFunc_GetActorForwardVector_ReturnValue1
 	CallFunc_GetController_ReturnValue
+	CallFunc_GetRangeFromGameplayEffectContainer_Range
 	CallFunc_GetSocketLocation_ReturnValue
+	CallFunc_GetValueAtLevel_ReturnValue
 	CallFunc_Greater_FloatFloat_ReturnValue
 	CallFunc_GreaterEqual_FloatFloat_ReturnValue
 	CallFunc_HasAllMatchingGameplayTags_ReturnValue
@@ -136,7 +149,6 @@ Name table:
 	CallFunc_IsValid_ReturnValue2
 	CallFunc_IsValid_ReturnValue3
 	CallFunc_IsValid_ReturnValue4
-	CallFunc_K2_CommitAbility_ReturnValue
 	CallFunc_K2_GetActorLocation_ReturnValue
 	CallFunc_K2_SetTimerDelegate_ReturnValue
 	CallFunc_K2_SetTimerDelegate_ReturnValue1
@@ -144,6 +156,7 @@ Name table:
 	CallFunc_LineTraceSingle_ReturnValue
 	CallFunc_MakeGameplayEffectContainerSpec_ReturnValue
 	CallFunc_MakeGameplayEffectContainerSpec_ReturnValue1
+	CallFunc_MakeGameplayEffectContainerSpec_ReturnValue2
 	CallFunc_MakeRotator_ReturnValue
 	CallFunc_MakeTransform_ReturnValue
 	CallFunc_MakeVector_ReturnValue
@@ -154,6 +167,7 @@ Name table:
 	CallFunc_Multiply_VectorFloat_ReturnValue
 	CallFunc_Normal_ReturnValue
 	CallFunc_PlayMontageWaitTarget_ReturnValue
+	CallFunc_ReplaceRangeInGameplayEffectContainer_ReturnValue
 	CallFunc_SetHolsterWeaponWithName_IsWeaponHolstered
 	CallFunc_SetHolsterWeaponWithName_IsWeaponHolstered1
 	CallFunc_SetHolsterWeaponWithName_OperationSuccessful
@@ -176,6 +190,7 @@ Name table:
 	ClientPlayForceFeedback
 	CollisionCapsule0
 	CombatEffects_HeroAbilities
+	CommitAbilityWithEvent
 	Completed
 	Completed_E4438F7C4186BD1373883884B54149F0
 	ConeMinRadius
@@ -194,6 +209,7 @@ Name table:
 	DamageStatHandle
 	DataTable
 	DataTableRowHandle
+	Default__AbilityFunctions_C
 	Default__AbilitySystemBlueprintLibrary
 	Default__AbilityTask_WaitMovementModeChange
 	Default__ArrayProperty
@@ -210,14 +226,18 @@ Name table:
 	Default__FortAbilityTask_PlayMontageWaitTarget
 	Default__FortAbilityTask_WaitTargetSelection
 	Default__FortKismetLibrary
+	Default__FortScalableFloatUtils
 	Default__Function
 	Default__GA_Ninja_KunaiStorm_C
+	Default__GAT_ActiveAbility_C
+	Default__GAT_ActiveAbility_Hero_C
 	Default__GAT_NinjaActiveAbility_C
 	Default__GE_Ninja_KunaiBarrage_Damage_C
 	Default__GE_Ninja_KunaiBomb_Damage_C
 	Default__GE_Ninja_KunaiStorm_Cooldown_C
 	Default__GE_Ninja_KunaiStorm_Damage_C
 	Default__GE_Ninja_KunaiStorm_Projectile_Damage_C
+	Default__GE_Perk_H_Kunaihilation_Damage_C
 	Default__InterfaceProperty
 	Default__IntProperty
 	Default__KismetSystemLibrary
@@ -235,6 +255,7 @@ Name table:
 	Divide_FloatFloat
 	EC_DefaultTargeting
 	EC_KunaiBarrage
+	EC_Kunaihilation_T01_Targeting
 	EffectContainerOnExplode
 	EffectContainerOnHit
 	EffectContainers
@@ -291,6 +312,7 @@ Name table:
 	FortKismetLibrary
 	FortPlayerController
 	FortProjectileBase
+	FortScalableFloatUtils
 	FortTargetFilter
 	ForwardVectorOffset
 	Function
@@ -307,17 +329,22 @@ Name table:
 	GameplayTagAssetInterface
 	GameplayTagContainer
 	GameplayTask
+	GAT_ActiveAbility_C
+	GAT_ActiveAbility_Hero_C
 	GAT_NinjaActiveAbility_C
 	GE_Ninja_KunaiBarrage_Damage_C
 	GE_Ninja_KunaiBomb_Damage_C
 	GE_Ninja_KunaiStorm_Cooldown_C
 	GE_Ninja_KunaiStorm_Damage_C
 	GE_Ninja_KunaiStorm_Projectile_Damage_C
+	GE_Perk_H_Kunaihilation_Damage_C
 	GetAbilitySystemComponent
 	GetActorForwardVector
 	GetController
 	GetCustomAbilitySourceTransform
+	GetRangeFromGameplayEffectContainer
 	GetSocketLocation
+	GetValueAtLevel
 	Granted.Abilities.Ninja.Perks.KunaiStorm.KunaiBarrage
 	Granted.Abilities.Ninja.Perks.KunaiStorm.KunaiBomb
 	Granted.Abilities.Ninja.Perks.KunaiStorm.KunaiCollection
@@ -334,14 +361,12 @@ Name table:
 	InitialSpeed
 	InterfaceProperty
 	IntProperty
-	isAutoCommitted
 	IsServer
 	IsValid
 	ItemDefinition
 	K2_ActivateAbility
 	K2_AddGameplayCue
 	K2_ClearAndInvalidateTimerHandle
-	K2_CommitAbility
 	K2_EndAbility
 	K2_ExecuteGameplayCue
 	K2_GetActorLocation
@@ -381,6 +406,7 @@ Name table:
 	K2Node_DynamicCast_AsFort_Player_Controller
 	K2Node_DynamicCast_bSuccess
 	K2Node_Event_bWasCancelled
+	K2Node_MakeStruct_ScalableFloat
 	K2Node_Select1_Default
 	K2Node_Select2_Default
 	K2Node_Select_Default
@@ -391,6 +417,9 @@ Name table:
 	KunaiBomb
 	KunaiCollection
 	KunaiCount
+	Kunaihilation_T01
+	Kunaihilation_T02
+	Kunaihilation_T02_Radius
 	KunaiSpreadMulti
 	KunaiThrow
 	LaunchCharacter
@@ -430,6 +459,8 @@ Name table:
 	ParticleSystemComponent
 	PassedFirstCheckPoint
 	Pawn
+	Perk.Kunaihilation.T01.Radius
+	Perk.Kunaihilation.T02.Radius
 	Pitch
 	PlayMontageWaitTarget
 	PointerToUberGraphFrame
@@ -440,6 +471,7 @@ Name table:
 	ProjectileMovementComponent
 	Range
 	ReadyForActivation
+	ReplaceRangeInGameplayEffectContainer
 	RequestedBy
 	ReturnValue
 	RightHand
@@ -477,11 +509,14 @@ Name table:
 	Targeted_C13D51AF45354EC56985A9831A903B6B
 	TargetFilter
 	TargetGameplayEffectClasses
+	Targeting.ApplicationTag.1
 	TargetSelection
 	TargetSelectionUsage
 	TC_KunaiBarrage
 	TC_KunaiBomb
 	TC_KunaiCooldown
+	TC_Kunaihilation_T01
+	TC_Kunaihilation_T02
 	Temp_bool_Variable
 	Temp_bool_Variable1
 	Temp_bool_Variable2
@@ -512,13 +547,14 @@ Name table:
 	UberGraphFramePointerProperty
 	UberGraphFunction
 	UInt64Property
-	UseNewPerkSystem
+	UseHeroLoadoutSystem
 	Value
 	Vector
 	WaitTargetSelection
 	WaitTargetSelectionDelegate__DelegateSignature
 	ZVelocity
 Import table:
+	Default__AbilityFunctions_C (AbilityFunctions_C)
 	Default__AbilitySystemBlueprintLibrary (AbilitySystemBlueprintLibrary)
 	Default__AbilityTask_WaitMovementModeChange (AbilityTask_WaitMovementModeChange)
 	M_Kunai_Spin (AnimMontage)
@@ -534,9 +570,13 @@ Import table:
 	TT_Ninja_KunaiStorm_C (BlueprintGeneratedClass)
 	GE_Ninja_KunaiBarrage_Damage_C (BlueprintGeneratedClass)
 	GE_Ninja_KunaiBomb_Damage_C (BlueprintGeneratedClass)
+	GAT_ActiveAbility_C (BlueprintGeneratedClass)
+	GAT_ActiveAbility_Hero_C (BlueprintGeneratedClass)
 	GAT_NinjaActiveAbility_C (BlueprintGeneratedClass)
+	GE_Perk_H_Kunaihilation_Damage_C (BlueprintGeneratedClass)
 	Default__BlueprintGeneratedClass (BlueprintGeneratedClass)
 	KunaiBomb (BoolProperty)
+	UseHeroLoadoutSystem (BoolProperty)
 	Default__BoolProperty (BoolProperty)
 	Default__BP_Ninja_KunaiStorm_Camera_In_C (BP_Ninja_KunaiStorm_Camera_In_C)
 	Default__BP_Ninja_KunaiStorm_Camera_Out_C (BP_Ninja_KunaiStorm_Camera_Out_C)
@@ -571,6 +611,7 @@ Import table:
 	FortKismetLibrary (Class)
 	FortPlayerController (Class)
 	FortProjectileBase (Class)
+	FortScalableFloatUtils (Class)
 	AbilitySystemBlueprintLibrary (Class)
 	AbilitySystemComponent (Class)
 	AbilityTask_WaitMovementModeChange (Class)
@@ -589,10 +630,13 @@ Import table:
 	Default__DelegateProperty (DelegateProperty)
 	EMovementMode (Enum)
 	Default__FloatProperty (FloatProperty)
+	Value (FloatProperty)
 	FF_Ninja_KunaiStorm (ForceFeedbackEffect)
 	Default__FortAbilityTask_PlayMontageWaitTarget (FortAbilityTask_PlayMontageWaitTarget)
 	Default__FortAbilityTask_WaitTargetSelection (FortAbilityTask_WaitTargetSelection)
 	Default__FortKismetLibrary (FortKismetLibrary)
+	Default__FortScalableFloatUtils (FortScalableFloatUtils)
+	ActiveAbilitySetup (Function)
 	K2_ActivateAbility (Function)
 	Default__Function (Function)
 	FlushNetDormancy (Function)
@@ -627,19 +671,24 @@ Import table:
 	WaitTargetSelection (Function)
 	GetCustomAbilitySourceTransform (Function)
 	SetCameraMode (Function)
+	ReplaceRangeInGameplayEffectContainer (Function)
 	SpawnProjectile (Function)
+	GetValueAtLevel (Function)
 	GetAbilitySystemComponent (Function)
 	CreateWaitMovementModeChange (Function)
 	K2_OnEndAbility (Function)
 	MontageJumpToSection (Function)
 	HasAllMatchingGameplayTags (Function)
 	ReadyForActivation (Function)
+	Default__GAT_ActiveAbility_C (GAT_ActiveAbility_C)
+	Default__GAT_ActiveAbility_Hero_C (GAT_ActiveAbility_Hero_C)
 	Default__GAT_NinjaActiveAbility_C (GAT_NinjaActiveAbility_C)
 	Default__GE_Ninja_KunaiBarrage_Damage_C (GE_Ninja_KunaiBarrage_Damage_C)
 	Default__GE_Ninja_KunaiBomb_Damage_C (GE_Ninja_KunaiBomb_Damage_C)
 	Default__GE_Ninja_KunaiStorm_Cooldown_C (GE_Ninja_KunaiStorm_Cooldown_C)
 	Default__GE_Ninja_KunaiStorm_Damage_C (GE_Ninja_KunaiStorm_Damage_C)
 	Default__GE_Ninja_KunaiStorm_Projectile_Damage_C (GE_Ninja_KunaiStorm_Projectile_Damage_C)
+	Default__GE_Perk_H_Kunaihilation_Damage_C (GE_Perk_H_Kunaihilation_Damage_C)
 	Default__InterfaceProperty (InterfaceProperty)
 	Default__IntProperty (IntProperty)
 	Default__KismetSystemLibrary (KismetSystemLibrary)
@@ -665,9 +714,13 @@ Import table:
 	/Game/Abilities/Player/Ninja/Actives/KunaiStorm/TT_Ninja_KunaiStorm (Package)
 	/Game/Abilities/Player/Ninja/Perks/KunaiBarrage/GE_Ninja_KunaiBarrage_Damage (Package)
 	/Game/Abilities/Player/Ninja/Perks/KunaiBomb/GE_Ninja_KunaiBomb_Damage (Package)
+	/Game/Abilities/Player/Parents/GAT_ActiveAbility (Package)
+	/Game/Abilities/Player/Parents/GAT_ActiveAbility_Hero (Package)
 	/Game/Abilities/Player/Parents/GAT_NinjaActiveAbility (Package)
+	/Game/Abilities/Player/Perks/Hero/Kunaihilation/GE_Perk_H_Kunaihilation_Damage (Package)
 	/Game/Balance/DataTables/CombatEffects_HeroAbilities (Package)
 	/Game/Balance/DataTables/GadgetScaling (Package)
+	/Game/Macros/Abilities/AbilityFunctions (Package)
 	/Script/CoreUObject (Package)
 	/Script/Engine (Package)
 	/Script/FortniteGame (Package)
@@ -681,27 +734,31 @@ Import table:
 	Rotator (ScriptStruct)
 	Transform (ScriptStruct)
 	Vector (ScriptStruct)
+	CurveTableRowHandle (ScriptStruct)
 	HitResult (ScriptStruct)
 	PointerToUberGraphFrame (ScriptStruct)
 	TimerHandle (ScriptStruct)
+	FortGameplayEffectContainer (ScriptStruct)
 	FortGameplayEffectContainerSpec (ScriptStruct)
 	ActiveGameplayEffectHandle (ScriptStruct)
 	GameplayAbilityTargetDataHandle (ScriptStruct)
 	GameplayEffectContextHandle (ScriptStruct)
+	ScalableFloat (ScriptStruct)
 	GameplayTag (ScriptStruct)
 	GameplayTagContainer (ScriptStruct)
 	StaticMesh_GEN_VARIABLE (StaticMeshComponent)
 	Event Data (StructProperty)
 	Default__StructProperty (StructProperty)
+	Curve (StructProperty)
 	Default__TT_Ninja_KunaiStorm_C (TT_Ninja_KunaiStorm_C)
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	GA_Ninja_KunaiStorm_C (0-0-0-0): size 602 (cls: GA_Ninja_KunaiStorm_C>BlueprintGeneratedClass>/Script/Engine) :
+	GA_Ninja_KunaiStorm_C (0-0-0-0): size 638 (cls: GA_Ninja_KunaiStorm_C>BlueprintGeneratedClass>/Script/Engine) :
 		Tag array:
 			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=GA_Ninja_KunaiStorm_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_GA_Ninja_KunaiStorm=GA_Ninja_KunaiStorm_C 
-	Default__GA_Ninja_KunaiStorm_C (0-0-0-0): size 11543 (cls: Default__GA_Ninja_KunaiStorm_C>GA_Ninja_KunaiStorm_C) :
+	Default__GA_Ninja_KunaiStorm_C (0-0-0-0): size 14283 (cls: Default__GA_Ninja_KunaiStorm_C>GA_Ninja_KunaiStorm_C) :
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			SetRotation(StructProperty)=Rotator(0,0,0) 
@@ -731,7 +788,11 @@ Serialized exports:
 			EC_DefaultTargeting(StructProperty)=System.Byte[] 
 			T_Activate(StructProperty)=System.Byte[] 
 			T_Deactivate(StructProperty)=System.Byte[] 
-			isAutoCommitted(BoolProperty)=False 
+			TC_Kunaihilation_T01(StructProperty)=GameplayTagContainer: 
+			TC_Kunaihilation_T02(StructProperty)=GameplayTagContainer: 
+			EC_Kunaihilation_T01_Targeting(StructProperty)=System.Byte[] 
+			Kunaihilation_T02_Radius(StructProperty)=System.Byte[] 
+			EffectContainers(StructProperty)=System.Byte[] 
 			EffectContainers(StructProperty)=System.Byte[] 
 			EffectContainers(StructProperty)=System.Byte[] 
 			EffectContainers(StructProperty)=System.Byte[] 
@@ -746,7 +807,7 @@ Serialized exports:
 		Tag array:
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject) :
 		Tag array:
-	ExecuteUbergraph_GA_Ninja_KunaiStorm (0-0-0-0): size 3353 (cls: ExecuteUbergraph_GA_Ninja_KunaiStorm>Function>/Script/CoreUObject) :
+	ExecuteUbergraph_GA_Ninja_KunaiStorm (0-0-0-0): size 3378 (cls: ExecuteUbergraph_GA_Ninja_KunaiStorm>Function>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_ApplyGameplayEffectContainer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_ApplyGameplayEffectContainer_ReturnValue>StructProperty>/Script/CoreUObject) :
 		Tag array:
@@ -816,9 +877,25 @@ Serialized exports:
 		Tag array:
 	EffectContainerOnHit (0-0-0-0): size 36 (cls: EffectContainerOnHit>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	EffectContainers Setup (0-0-0-0): size 280 (cls: EffectContainers Setup>Function>/Script/CoreUObject) :
+	EffectContainers Setup (0-0-0-0): size 655 (cls: EffectContainers Setup>Function>/Script/CoreUObject) :
+		Tag array:
+	ReturnValue (0-0-0-0): size 36 (cls: ReturnValue>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	GetCustomAbilitySourceTransform (0-0-0-0): size 275 (cls: GetCustomAbilitySourceTransform>Function>/Script/CoreUObject) :
+		Tag array:
+	AbilitySystemIn (0-0-0-0): size 36 (cls: AbilitySystemIn>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	ActiveAbilitySetup (0-0-0-0): size 232 (cls: ActiveAbilitySetup>Function>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_HasAllMatchingGameplayTags_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasAllMatchingGameplayTags_ReturnValue>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_HasAllMatchingGameplayTags_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_HasAllMatchingGameplayTags_ReturnValue1>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	Temp_bool_Variable1 (0-0-0-0): size 34 (cls: Temp_bool_Variable1>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_CommitAbilityWithEvent_Passed (0-0-0-0): size 34 (cls: CallFunc_CommitAbilityWithEvent_Passed>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_Greater_FloatFloat_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Greater_FloatFloat_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -833,8 +910,6 @@ Serialized exports:
 	CallFunc_IsValid_ReturnValue3 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue3>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_IsValid_ReturnValue4 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue4>BoolProperty>/Script/CoreUObject) :
-		Tag array:
-	CallFunc_K2_CommitAbility_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_K2_CommitAbility_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_LineTraceSingle_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_LineTraceSingle_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -859,6 +934,10 @@ Serialized exports:
 	KunaiBomb (0-0-0-0): size 34 (cls: KunaiBomb>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	KunaiCollection (0-0-0-0): size 34 (cls: KunaiCollection>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	Kunaihilation_T01 (0-0-0-0): size 34 (cls: Kunaihilation_T01>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	Kunaihilation_T02 (0-0-0-0): size 34 (cls: Kunaihilation_T02>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	PassedFirstCheckPoint (0-0-0-0): size 34 (cls: PassedFirstCheckPoint>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -887,8 +966,6 @@ Serialized exports:
 	Temp_bool_Variable2 (0-0-0-0): size 34 (cls: Temp_bool_Variable2>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	ThrowAnimation_Triggered (0-0-0-0): size 34 (cls: ThrowAnimation_Triggered>BoolProperty>/Script/CoreUObject) :
-		Tag array:
-	UseNewPerkSystem (0-0-0-0): size 34 (cls: UseNewPerkSystem>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	K2Node_CustomEvent_NewMovementMode (0-0-0-0): size 36 (cls: K2Node_CustomEvent_NewMovementMode>ByteProperty>/Script/CoreUObject) :
 		Tag array:
@@ -930,6 +1007,14 @@ Serialized exports:
 		Tag array:
 	CallFunc_Add_FloatFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Add_FloatFloat_ReturnValue>FloatProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_GetRangeFromGameplayEffectContainer_Range (0-0-0-0): size 32 (cls: CallFunc_GetRangeFromGameplayEffectContainer_Range>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_GetValueAtLevel_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetValueAtLevel_ReturnValue>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	K2Node_Select1_Default (0-0-0-0): size 32 (cls: K2Node_Select1_Default>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Add_FloatFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Add_FloatFloat_ReturnValue>FloatProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_BreakRotator_Pitch (0-0-0-0): size 32 (cls: CallFunc_BreakRotator_Pitch>FloatProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_BreakRotator_Roll (0-0-0-0): size 32 (cls: CallFunc_BreakRotator_Roll>FloatProperty>/Script/CoreUObject) :
@@ -953,10 +1038,6 @@ Serialized exports:
 	FirstCheckPoint (0-0-0-0): size 32 (cls: FirstCheckPoint>FloatProperty>/Script/CoreUObject) :
 		Tag array:
 	ForwardVectorOffset (0-0-0-0): size 32 (cls: ForwardVectorOffset>FloatProperty>/Script/CoreUObject) :
-		Tag array:
-	ReturnValue (0-0-0-0): size 36 (cls: ReturnValue>StructProperty>/Script/CoreUObject) :
-		Tag array:
-	GetCustomAbilitySourceTransform (0-0-0-0): size 275 (cls: GetCustomAbilitySourceTransform>Function>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_BreakRotator_Pitch (0-0-0-0): size 32 (cls: CallFunc_BreakRotator_Pitch>FloatProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1052,9 +1133,17 @@ Serialized exports:
 		Tag array:
 	CallFunc_HasAllMatchingGameplayTags_TagContainerInterface1_CastInput (0-0-0-0): size 36 (cls: CallFunc_HasAllMatchingGameplayTags_TagContainerInterface1_CastInput>InterfaceProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_HasAllMatchingGameplayTags_TagContainerInterface_CastInput (0-0-0-0): size 36 (cls: CallFunc_HasAllMatchingGameplayTags_TagContainerInterface_CastInput>InterfaceProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_HasAllMatchingGameplayTags_TagContainerInterface1_CastInput (0-0-0-0): size 36 (cls: CallFunc_HasAllMatchingGameplayTags_TagContainerInterface1_CastInput>InterfaceProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_HasAllMatchingGameplayTags_TagContainerInterface2_CastInput (0-0-0-0): size 36 (cls: CallFunc_HasAllMatchingGameplayTags_TagContainerInterface2_CastInput>InterfaceProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_HasAllMatchingGameplayTags_TagContainerInterface_CastInput (0-0-0-0): size 36 (cls: CallFunc_HasAllMatchingGameplayTags_TagContainerInterface_CastInput>InterfaceProperty>/Script/CoreUObject) :
+		Tag array:
+	AbilitySystemOut (0-0-0-0): size 36 (cls: AbilitySystemOut>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_ActiveAbilitySetup_AbilitySystemOut (0-0-0-0): size 36 (cls: CallFunc_ActiveAbilitySetup_AbilitySystemOut>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	OtherActor (0-0-0-0): size 36 (cls: OtherActor>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1104,11 +1193,21 @@ Serialized exports:
 		Tag array:
 	EC_KunaiBarrage (0-0-0-0): size 36 (cls: EC_KunaiBarrage>StructProperty>/Script/CoreUObject) :
 		Tag array:
+	EC_Kunaihilation_T01_Targeting (0-0-0-0): size 36 (cls: EC_Kunaihilation_T01_Targeting>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_BP_GetGameplayEffectContainer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_BP_GetGameplayEffectContainer_ReturnValue>StructProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_MakeGameplayEffectContainerSpec_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_MakeGameplayEffectContainerSpec_ReturnValue>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_MakeGameplayEffectContainerSpec_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_MakeGameplayEffectContainerSpec_ReturnValue1>StructProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_MakeGameplayEffectContainerSpec_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_MakeGameplayEffectContainerSpec_ReturnValue2>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_ReplaceRangeInGameplayEffectContainer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_ReplaceRangeInGameplayEffectContainer_ReturnValue>StructProperty>/Script/CoreUObject) :
+		Tag array:
 	EffectContainerOnExplode (0-0-0-0): size 36 (cls: EffectContainerOnExplode>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	K2Node_MakeStruct_ScalableFloat (0-0-0-0): size 36 (cls: K2Node_MakeStruct_ScalableFloat>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	K2Node_Select_Default (0-0-0-0): size 36 (cls: K2Node_Select_Default>StructProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1200,6 +1299,8 @@ Serialized exports:
 		Tag array:
 	Initial Rotation (0-0-0-0): size 36 (cls: Initial Rotation>StructProperty>/Script/CoreUObject) :
 		Tag array:
+	Kunaihilation_T02_Radius (0-0-0-0): size 36 (cls: Kunaihilation_T02_Radius>StructProperty>/Script/CoreUObject) :
+		Tag array:
 	T_Activate (0-0-0-0): size 36 (cls: T_Activate>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	T_Deactivate (0-0-0-0): size 36 (cls: T_Deactivate>StructProperty>/Script/CoreUObject) :
@@ -1211,6 +1312,10 @@ Serialized exports:
 	TC_KunaiBomb (0-0-0-0): size 36 (cls: TC_KunaiBomb>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	TC_KunaiCooldown (0-0-0-0): size 36 (cls: TC_KunaiCooldown>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	TC_Kunaihilation_T01 (0-0-0-0): size 36 (cls: TC_Kunaihilation_T01>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	TC_Kunaihilation_T02 (0-0-0-0): size 36 (cls: TC_Kunaihilation_T02>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	TH_CeilingCheck (0-0-0-0): size 36 (cls: TH_CeilingCheck>StructProperty>/Script/CoreUObject) :
 		Tag array:

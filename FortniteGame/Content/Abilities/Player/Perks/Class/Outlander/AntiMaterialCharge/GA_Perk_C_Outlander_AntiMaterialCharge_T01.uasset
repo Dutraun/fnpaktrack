@@ -28,6 +28,7 @@ Name table:
 	Abilities.Outlander.AntiMaterialCharge.IgnoreDamage
 	Abilities.Outlander.AntiMaterialCharge.TargetBuildings
 	Abilities.Outlander.AntiMaterialCharge.TargetPawns
+	Ability.HeavyAttack
 	Ability.Perk.Outlander.AntiMaterialCharge
 	AbilityCosts
 	AbilitySystemBlueprintLibrary
@@ -305,6 +306,8 @@ Name table:
 	Enum
 	EnumProperty
 	Event.Abilities.Outlander.AntiMaterialCharge.Trigger
+	Event.Ability.HeavyAttack.Activate
+	Event.Ability.HeavyAttack.Deactivate
 	EventActivation
 	EventComplete
 	EventData
@@ -350,6 +353,7 @@ Name table:
 	GameplayTag
 	GameplayTagAssetInterface
 	GameplayTagContainer
+	GameplayTags
 	GameplayTask
 	GAT_OutlanderTriggeredAbility_C
 	GAT_TriggeredAbility_C
@@ -568,6 +572,8 @@ Name table:
 	Subtract_VectorVector
 	SweepResult
 	T_ActiveCue
+	T_Event_HeavyAttackActivate
+	T_Event_HeavyAttackDeactivate
 	TagName
 	TargetData
 	TargetFilter
@@ -615,6 +621,7 @@ Import table:
 	Punch_ShortFull_CM (AnimMontage)
 	Punch_ShortFull_Gauntlet (AnimMontage)
 	Default__ArrayProperty (ArrayProperty)
+	GameplayTags (ArrayProperty)
 	FeedbackAudioComp0 (AudioComponent)
 	Default__BlueprintGameplayTagLibrary (BlueprintGameplayTagLibrary)
 	GE_Ninja_Tactical_PressurePoints_Applied_C (BlueprintGeneratedClass)
@@ -808,15 +815,16 @@ Import table:
 	Default__StrProperty (StrProperty)
 	EventData (StructProperty)
 	Default__StructProperty (StructProperty)
+	GameplayTags (StructProperty)
 	Default__TT_Perk_C_Outlander_AntiMaterialCharge_T01_C (TT_Perk_C_Outlander_AntiMaterialCharge_T01_C)
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	GA_Perk_C_Outlander_AntiMaterialCharge_T01_C (0-0-0-0): size 758 (cls: GA_Perk_C_Outlander_AntiMaterialCharge_T01_C>BlueprintGeneratedClass>/Script/Engine) :
+	GA_Perk_C_Outlander_AntiMaterialCharge_T01_C (0-0-0-0): size 766 (cls: GA_Perk_C_Outlander_AntiMaterialCharge_T01_C>BlueprintGeneratedClass>/Script/Engine) :
 		Tag array:
 			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=GA_Perk_C_Outlander_AntiMaterialCharge_T01_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_GA_Perk_C_Outlander_AntiMaterialCharge_T01=GA_Perk_C_Outlander_AntiMaterialCharge_T01_C 
-	Default__GA_Perk_C_Outlander_AntiMaterialCharge_T01_C (0-0-0-0): size 7157 (cls: Default__GA_Perk_C_Outlander_AntiMaterialCharge_T01_C>GA_Perk_C_Outlander_AntiMaterialCharge_T01_C) :
+	Default__GA_Perk_C_Outlander_AntiMaterialCharge_T01_C (0-0-0-0): size 7345 (cls: Default__GA_Perk_C_Outlander_AntiMaterialCharge_T01_C>GA_Perk_C_Outlander_AntiMaterialCharge_T01_C) :
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			EventActivation(StructProperty)=System.Byte[] 
@@ -841,6 +849,8 @@ Serialized exports:
 			GE_KnockBackImmunity(ObjectProperty)=GET_KnockbackImmunityTag_C=/Game/GameplayEffectTemplates/GET_KnockbackImmunityTag 
 			GEH_KnockBackImmunity(StructProperty)=System.Byte[] 
 			T_ActiveCue(StructProperty)=System.Byte[] 
+			T_Event_HeavyAttackDeactivate(StructProperty)=System.Byte[] 
+			T_Event_HeavyAttackActivate(StructProperty)=System.Byte[] 
 			isAutoCommitted(BoolProperty)=False 
 			isStaminaLockedOut(BoolProperty)=True 
 			EffectContainers(StructProperty)=System.Byte[] 
@@ -849,7 +859,7 @@ Serialized exports:
 			AbilityCosts(ArrayProperty)=[object] (inner: StructProperty)
 			MontageInfo(StructProperty)=System.Byte[] 
 			Tooltip(ObjectProperty)=TT_Perk_C_Outlander_AntiMaterialCharge_T01_C=/Game/Abilities/Player/Perks/Class/Outlander/AntiMaterialCharge/TT_Perk_C_Outlander_AntiMaterialCharge_T01 
-			AbilityTags(StructProperty)=GameplayTagContainer:Gameplay.DamageSource.Ability,Gameplay.Effect.HarvestResources,Gameplay.Action.Player.PreventJump,Gameplay.Action.Player.PreventSprint,Ability.Perk.Outlander.AntiMaterialCharge 
+			AbilityTags(StructProperty)=GameplayTagContainer:Gameplay.DamageSource.Ability,Gameplay.Effect.HarvestResources,Gameplay.Action.Player.PreventJump,Gameplay.Action.Player.PreventSprint,Ability.Perk.Outlander.AntiMaterialCharge,Ability.HeavyAttack 
 			NetExecutionPolicy(ByteProperty)=EGameplayAbilityNetExecutionPolicy::LocalPredicted 
 			AbilityTriggers(ArrayProperty)=[object] (inner: StructProperty)
 	CharacterPartMontages (0-0-0-0): size 36 (cls: CharacterPartMontages>StructProperty>/Script/CoreUObject) :
@@ -860,7 +870,7 @@ Serialized exports:
 		Tag array:
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject) :
 		Tag array:
-	ExecuteUbergraph_GA_Perk_C_Outlander_AntiMaterialCharge_T01 (0-0-0-0): size 8065 (cls: ExecuteUbergraph_GA_Perk_C_Outlander_AntiMaterialCharge_T01>Function>/Script/CoreUObject) :
+	ExecuteUbergraph_GA_Perk_C_Outlander_AntiMaterialCharge_T01 (0-0-0-0): size 8271 (cls: ExecuteUbergraph_GA_Perk_C_Outlander_AntiMaterialCharge_T01>Function>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_BP_ApplyGameplayEffectToTarget_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_BP_ApplyGameplayEffectToTarget_ReturnValue>StructProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1481,6 +1491,10 @@ Serialized exports:
 	CallFunc_MakeOutgoingGameplayEffectSpec_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_MakeOutgoingGameplayEffectSpec_ReturnValue>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	T_ActiveCue (0-0-0-0): size 36 (cls: T_ActiveCue>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	T_Event_HeavyAttackActivate (0-0-0-0): size 36 (cls: T_Event_HeavyAttackActivate>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	T_Event_HeavyAttackDeactivate (0-0-0-0): size 36 (cls: T_Event_HeavyAttackDeactivate>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	TC_LongArmOfTheLaw_T01 (0-0-0-0): size 36 (cls: TC_LongArmOfTheLaw_T01>StructProperty>/Script/CoreUObject) :
 		Tag array:

@@ -1,5 +1,4 @@
 Name table:
-	/Game/Abilities/Weapons/Melee/GAB_Melee_Generic_EventGraph
 	/Game/Abilities/Weapons/Melee/GAB_Melee_GenericHeavyAttack
 	/Game/Abilities/Weapons/Melee/Impact/GAB_Melee_ImpactHeavyAttack
 	/Game/Abilities/Weapons/Melee/Impact/GE_Melee_ImpactHeavyAttack
@@ -10,6 +9,7 @@ Name table:
 	/Script/GameplayAbilities
 	/Script/GameplayTags
 	Abilities.Weapons.Melee
+	Ability.HeavyAttack.Melee.Impact
 	AbilityCosts
 	AbilitySystemBlueprintLibrary
 	AbilityTags
@@ -50,6 +50,7 @@ Name table:
 	bTraceComplexCollision
 	bUseProjectileRotationForDamageZones
 	bUseTrapsOwningPawnAsInstigator
+	bWasCancelled
 	ByteProperty
 	CallFunc_GetAvatarActorFromActorInfo_ReturnValue
 	CallFunc_HasAllMatchingGameplayTags_ReturnValue
@@ -70,7 +71,6 @@ Name table:
 	Default__BlueprintGeneratedClass
 	Default__BoolProperty
 	Default__Function
-	Default__GAB_Melee_Generic_EventGraph_C
 	Default__GAB_Melee_GenericHeavyAttack_C
 	Default__GAB_Melee_ImpactHeavyAttack_C
 	Default__GE_Melee_ImpactHeavyAttack_C
@@ -108,7 +108,6 @@ Name table:
 	FortGameplayEffectContainer
 	FortTargetFilter
 	Function
-	GAB_Melee_Generic_EventGraph_C
 	GAB_Melee_GenericHeavyAttack_C
 	GAB_Melee_ImpactHeavyAttack_C
 	Gameplay.Action.Player.Heavy
@@ -134,8 +133,10 @@ Name table:
 	ItemDefinition
 	K2_ActivateAbility
 	K2_EndAbility
+	K2_OnEndAbility
 	K2Node_DynamicCast_AsGameplay_Tag_Asset_Interface
 	K2Node_DynamicCast_bSuccess
+	K2Node_Event_bWasCancelled
 	List
 	MaxTargets
 	MeleeCombos
@@ -168,6 +169,7 @@ Name table:
 	UberGraphFrame
 	UberGraphFramePointerProperty
 	UberGraphFunction
+	UseAMC
 	Value
 	Vector
 Import table:
@@ -175,7 +177,6 @@ Import table:
 	EarthSmash (AnimMontage)
 	GameplayTags (ArrayProperty)
 	Default__BlueprintGameplayTagLibrary (BlueprintGameplayTagLibrary)
-	GAB_Melee_Generic_EventGraph_C (BlueprintGeneratedClass)
 	GAB_Melee_GenericHeavyAttack_C (BlueprintGeneratedClass)
 	GE_Melee_ImpactHeavyAttack_C (BlueprintGeneratedClass)
 	Default__BlueprintGeneratedClass (BlueprintGeneratedClass)
@@ -195,17 +196,16 @@ Import table:
 	GameplayTagAssetInterface (Class)
 	MeleeCombos (CurveTable)
 	K2_ActivateAbility (Function)
+	K2_OnEndAbility (Function)
 	Default__Function (Function)
 	SendGameplayEventToActor (Function)
 	GetAvatarActorFromActorInfo (Function)
 	HasAllMatchingGameplayTags (Function)
-	Default__GAB_Melee_Generic_EventGraph_C (GAB_Melee_Generic_EventGraph_C)
 	Default__GAB_Melee_GenericHeavyAttack_C (GAB_Melee_GenericHeavyAttack_C)
 	Default__GE_Melee_ImpactHeavyAttack_C (GE_Melee_ImpactHeavyAttack_C)
 	Default__InterfaceProperty (InterfaceProperty)
 	Default__IntProperty (IntProperty)
 	Default__ObjectProperty (ObjectProperty)
-	/Game/Abilities/Weapons/Melee/GAB_Melee_Generic_EventGraph (Package)
 	/Game/Abilities/Weapons/Melee/GAB_Melee_GenericHeavyAttack (Package)
 	/Game/Abilities/Weapons/Melee/Impact/GE_Melee_ImpactHeavyAttack (Package)
 	/Game/Animation/Game/MainPlayer/Montages/Melee/EarthSmash (Package)
@@ -225,11 +225,11 @@ Import table:
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	GAB_Melee_ImpactHeavyAttack_C (0-0-0-0): size 178 (cls: GAB_Melee_ImpactHeavyAttack_C>BlueprintGeneratedClass>/Script/Engine) :
+	GAB_Melee_ImpactHeavyAttack_C (0-0-0-0): size 198 (cls: GAB_Melee_ImpactHeavyAttack_C>BlueprintGeneratedClass>/Script/Engine) :
 		Tag array:
 			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=GAB_Melee_ImpactHeavyAttack_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_GAB_Melee_ImpactHeavyAttack=GAB_Melee_ImpactHeavyAttack_C 
-	Default__GAB_Melee_ImpactHeavyAttack_C (0-0-0-0): size 3419 (cls: Default__GAB_Melee_ImpactHeavyAttack_C>GAB_Melee_ImpactHeavyAttack_C) :
+	Default__GAB_Melee_ImpactHeavyAttack_C (0-0-0-0): size 3427 (cls: Default__GAB_Melee_ImpactHeavyAttack_C>GAB_Melee_ImpactHeavyAttack_C) :
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			T_Event_AMC(StructProperty)=System.Byte[] 
@@ -237,19 +237,27 @@ Serialized exports:
 			EffectContainers(StructProperty)=System.Byte[] 
 			AbilityCosts(ArrayProperty)=[object] (inner: StructProperty)
 			MontageInfo(StructProperty)=System.Byte[] 
-			AbilityTags(StructProperty)=GameplayTagContainer:Gameplay.Action.Player.Heavy,Abilities.Weapons.Melee,Gameplay.Effect.HarvestResources 
+			AbilityTags(StructProperty)=GameplayTagContainer:Gameplay.Action.Player.Heavy,Abilities.Weapons.Melee,Gameplay.Effect.HarvestResources,Ability.HeavyAttack.Melee.Impact 
 			ActivationRequiredTags(StructProperty)=GameplayTagContainer:Gameplay.Melee.EnableHeavyAttack.Harvest 
 	T_Event_AMC (0-0-0-0): size 36 (cls: T_Event_AMC>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject) :
 		Tag array:
-	ExecuteUbergraph_GAB_Melee_ImpactHeavyAttack (0-0-0-0): size 404 (cls: ExecuteUbergraph_GAB_Melee_ImpactHeavyAttack>Function>/Script/CoreUObject) :
+	ExecuteUbergraph_GAB_Melee_ImpactHeavyAttack (0-0-0-0): size 450 (cls: ExecuteUbergraph_GAB_Melee_ImpactHeavyAttack>Function>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_HasAllMatchingGameplayTags_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasAllMatchingGameplayTags_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_HasMatchingGameplayTag_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasMatchingGameplayTag_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	K2Node_Event_bWasCancelled (0-0-0-0): size 34 (cls: K2Node_Event_bWasCancelled>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	K2_OnEndAbility (0-0-0-0): size 72 (cls: K2_OnEndAbility>Function>/Script/CoreUObject) :
+		Tag array:
+	bWasCancelled (0-0-0-0): size 34 (cls: bWasCancelled>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	UseAMC (0-0-0-0): size 34 (cls: UseAMC>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	K2_ActivateAbility (0-0-0-0): size 58 (cls: K2_ActivateAbility>Function>/Script/CoreUObject) :
 		Tag array:

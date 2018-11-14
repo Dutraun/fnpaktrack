@@ -38,6 +38,7 @@ Name table:
 	/Script/FortniteGame
 	/Script/GameplayTags
 	Activate
+	ActorComponentTickFunction
 	AllNodes
 	AnimBlueprintGeneratedClass
 	AnimClass
@@ -82,6 +83,7 @@ Name table:
 	bPlayedSpinUpAudio
 	bSecondaryFire
 	bShouldAimFromMuzzleAtCloseRange
+	bStartWithTickEnabled
 	bUseBeamParticles
 	bUseImpactFXForProjectiles
 	bValidatedAsWired
@@ -177,6 +179,7 @@ Name table:
 	FortEffectDistanceQuality
 	FortGameplayAbilityBehaviorDistanceData
 	FortWeapon
+	FortWeaponRanged
 	Function
 	Game
 	GameplayAbilityBehaviorDistanceData
@@ -242,6 +245,7 @@ Name table:
 	OnChargeUp
 	OnInitCosmeticAlterations
 	OnPlayWeaponFireFX
+	OnStartOverheated
 	OnWeaponAttached
 	Opacity
 	OutOfAmmoSound
@@ -260,6 +264,7 @@ Name table:
 	Play
 	PointerToUberGraphFrame
 	PostProcessComponent
+	PrimaryComponentTick
 	PrimaryFireSound
 	PrimaryFireSoundFadeOutTime
 	PrimaryFireStopSound
@@ -418,6 +423,7 @@ Import table:
 	TimelineComponent (Class)
 	TimelineTemplate (Class)
 	FortWeapon (Class)
+	FortWeaponRanged (Class)
 	Default__CurveFloat (CurveFloat)
 	ETimelineDirection (Enum)
 	Default__FloatProperty (FloatProperty)
@@ -435,6 +441,7 @@ Import table:
 	OnAmmoCountChanged (Function)
 	OnChargeDown (Function)
 	OnChargeUp (Function)
+	OnStartOverheated (Function)
 	Default__InheritableComponentHandler (InheritableComponentHandler)
 	Default__IntProperty (IntProperty)
 	Default__KismetSystemLibrary (KismetSystemLibrary)
@@ -496,6 +503,7 @@ Import table:
 	Default__SceneComponent (SceneComponent)
 	Rotator (ScriptStruct)
 	Vector (ScriptStruct)
+	ActorComponentTickFunction (ScriptStruct)
 	BodyInstance (ScriptStruct)
 	CollisionResponse (ScriptStruct)
 	PointerToUberGraphFrame (ScriptStruct)
@@ -527,7 +535,7 @@ Import table:
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	B_Minigun_Athena_C (0-0-0-0): size 595 (cls: B_Minigun_Athena_C>BlueprintGeneratedClass>/Script/Engine) :
+	B_Minigun_Athena_C (0-0-0-0): size 611 (cls: B_Minigun_Athena_C>BlueprintGeneratedClass>/Script/Engine) :
 		Tag array:
 			bHasCookedComponentInstancingData(BoolProperty)=True 
 			Timelines(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -635,7 +643,7 @@ Serialized exports:
 		Tag array:
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject) :
 		Tag array:
-	ExecuteUbergraph_B_Minigun_Athena (0-0-0-0): size 918 (cls: ExecuteUbergraph_B_Minigun_Athena>Function>/Script/CoreUObject) :
+	ExecuteUbergraph_B_Minigun_Athena (0-0-0-0): size 930 (cls: ExecuteUbergraph_B_Minigun_Athena>Function>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_IsDedicatedServer_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsDedicatedServer_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -646,6 +654,8 @@ Serialized exports:
 	K2Node_Event_bPersistentFire (0-0-0-0): size 34 (cls: K2Node_Event_bPersistentFire>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	K2Node_Event_bSecondaryFire (0-0-0-0): size 34 (cls: K2Node_Event_bSecondaryFire>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	OnStartOverheated (0-0-0-0): size 58 (cls: OnStartOverheated>Function>/Script/CoreUObject) :
 		Tag array:
 	OnWeaponAttached (0-0-0-0): size 58 (cls: OnWeaponAttached>Function>/Script/CoreUObject) :
 		Tag array:
@@ -729,11 +739,12 @@ Serialized exports:
 		Tag array:
 	CallFunc_CreateDynamicMaterialInstance_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_CreateDynamicMaterialInstance_ReturnValue>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	P_MinigunChargeUp_GEN_VARIABLE (0-0-0-0): size 189 (cls: P_MinigunChargeUp_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	P_MinigunChargeUp_GEN_VARIABLE (0-0-0-0): size 272 (cls: P_MinigunChargeUp_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_Minigun_ChargeUp=/Game/CharClasses/Soldier/Traits/AdvancedTactics/Abilities/GoingCommando/Particles/P_Minigun_ChargeUp 
 			RelativeLocation(StructProperty)=Vector(1.363236,141.3994,8.385739) 
 			RelativeRotation(StructProperty)=Rotator(0,0,90) 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
 	DefaultSceneRoot_GEN_VARIABLE (0-0-0-0): size 12 (cls: DefaultSceneRoot_GEN_VARIABLE>SceneComponent>/Script/Engine) :
 		Tag array:
@@ -743,7 +754,7 @@ Serialized exports:
 			ComponentTemplate(ObjectProperty)=DefaultSceneRoot_GEN_VARIABLE=B_Minigun_Athena_C 
 			VariableGuid(StructProperty)=Guid: 943933171-1104693472-4075563904-1120939581 
 			InternalVariableName(NameProperty)=DefaultSceneRoot 
-	SCS_Node_1 (0-0-0-0): size 1188 (cls: SCS_Node_1>SCS_Node>/Script/Engine) :
+	SCS_Node_1 (0-0-0-0): size 1386 (cls: SCS_Node_1>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=P_MinigunChargeUp_GEN_VARIABLE=B_Minigun_Athena_C 

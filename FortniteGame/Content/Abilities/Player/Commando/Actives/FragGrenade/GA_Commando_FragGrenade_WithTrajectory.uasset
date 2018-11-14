@@ -9,6 +9,7 @@ Name table:
 	/Game/Abilities/Player/Commando/Perks/ClusterBomb/GE_Commando_ClusterBombDamage
 	/Game/Abilities/Player/Commando/TacticalPerks/Clusterbomb/GE_Commando_Tactical_ClusterBomb_Damage
 	/Game/Abilities/Player/Parents/GAT_ActiveAbility
+	/Game/Abilities/Player/Parents/GAT_ActiveAbility_Hero
 	/Game/Abilities/Player/Parents/GAT_CommandoActiveAbility
 	/Game/Abilities/Player/Perks/Hero/ClusterBomb/B_Prj_Commando_FragGrenade_Cluster
 	/Game/Animation/Game/MainPlayer/Combat/Gadgets/Medium/Male/Grenade/Grenade_Cook_IntroAnLoop
@@ -63,6 +64,7 @@ Name table:
 	ActorTypeFilter
 	Add_FloatFloat
 	Add_VectorVector
+	AddDynamicGameplayEffectContainer
 	AdditionalThrowAngle
 	AimPitch
 	AmmoDataFragGrenades
@@ -118,6 +120,7 @@ Name table:
 	BooleanAND
 	BoolProperty
 	Bounciness
+	BP_GetGameplayEffectContainer
 	BP_ProjectileTrajectory_C
 	bPlayRandomSection
 	bReadOnly
@@ -141,6 +144,7 @@ Name table:
 	CallFunc_BeginDeferredActorSpawnFromClass_ReturnValue
 	CallFunc_BeginDeferredActorSpawnFromClass_ReturnValue1
 	CallFunc_BooleanAND_ReturnValue
+	CallFunc_BP_GetGameplayEffectContainer_ReturnValue
 	CallFunc_BreakRotator_Pitch
 	CallFunc_BreakRotator_Pitch1
 	CallFunc_BreakRotator_Roll
@@ -148,8 +152,10 @@ Name table:
 	CallFunc_BreakRotator_Yaw
 	CallFunc_BreakRotator_Yaw1
 	CallFunc_CalcGrenadeSpeedFromPitch_GrenadeSpeed
+	CallFunc_CalcGrenadeSpeedFromPitch_GrenadeSpeed1
 	CallFunc_CalculateProjectileTrajectorySpline_OutSplinePoints
 	CallFunc_CalculateProjectileTrajectorySpline_OutSplineTangents
+	CallFunc_CommitAbilityWithEvent_Passed
 	CallFunc_Conv_RotatorToVector_ReturnValue
 	CallFunc_CreatePlayMontageAndWaitProxy_ReturnValue
 	CallFunc_Divide_FloatFloat_ReturnValue
@@ -161,6 +167,7 @@ Name table:
 	CallFunc_DoesTagAssetInterfaceHaveTag_TagContainerInterface2_CastInput
 	CallFunc_DoesTagAssetInterfaceHaveTag_TagContainerInterface3_CastInput
 	CallFunc_DoesTagAssetInterfaceHaveTag_TagContainerInterface_CastInput
+	CallFunc_EvaluatePerkTierBalanceValue_Balance_Value
 	CallFunc_FClamp_ReturnValue
 	CallFunc_FinishSpawningActor_ReturnValue
 	CallFunc_FinishSpawningActor_ReturnValue1
@@ -168,7 +175,9 @@ Name table:
 	CallFunc_GetAbilitySystemComponent_ReturnValue
 	CallFunc_GetDefaultTargetingRotation_ReturnValue
 	CallFunc_GetGravityZ_ReturnValue
+	CallFunc_GetRangeFromGameplayEffectContainer_Range
 	CallFunc_GetRangeFromGameplayEffectContainerSpec_Range
+	CallFunc_GetRangeFromGameplayEffectContainerSpec_Range1
 	CallFunc_GetScaledCapsuleSize_OutHalfHeight
 	CallFunc_GetScaledCapsuleSize_OutRadius
 	CallFunc_GetTransform_ReturnValue
@@ -198,7 +207,6 @@ Name table:
 	CallFunc_IsValid_ReturnValue1
 	CallFunc_IsValid_ReturnValue2
 	CallFunc_IsValid_ReturnValue3
-	CallFunc_K2_CommitAbility_ReturnValue
 	CallFunc_K2_GetActorLocation_ReturnValue
 	CallFunc_K2_GetActorRotation_ReturnValue
 	CallFunc_K2_SetTimer_ReturnValue
@@ -212,6 +220,7 @@ Name table:
 	CallFunc_Multiply_VectorFloat_ReturnValue
 	CallFunc_NormalizeAxis_ReturnValue
 	CallFunc_PlayMontageWaitTarget_ReturnValue
+	CallFunc_ReplaceRangeInGameplayEffectContainer_ReturnValue
 	CallFunc_RotateAngleAxis_ReturnValue
 	CallFunc_SelectFloat_ReturnValue
 	CallFunc_SelectInt_ReturnValue
@@ -252,6 +261,7 @@ Name table:
 	CombatEffects_HeroAbilities
 	Commando_FragGrenade
 	CommandoPlayerPawn
+	CommitAbilityWithEvent
 	Completed
 	Completed_BF65CDBE4F9E98E9174850B85775A15B
 	ConeMinRadius
@@ -291,6 +301,7 @@ Name table:
 	Default__GA_Commando_FragGrenade_WithTrajectory_C
 	Default__GameplayStatics
 	Default__GAT_ActiveAbility_C
+	Default__GAT_ActiveAbility_Hero_C
 	Default__GAT_CommandoActiveAbility_C
 	Default__GE_Commando_ClusterBombDamage_C
 	Default__GE_Commando_FragGrenadeCooldown_C
@@ -319,7 +330,6 @@ Name table:
 	DummyTimeStep
 	EC_ClusterExplosion
 	EC_ClusterExplosion_Tactical
-	EC_DefaultExplosion
 	EC_IncreasedRadius
 	EC_KeepOut
 	EC_ReturnedEffect
@@ -347,6 +357,7 @@ Name table:
 	Engine
 	EntryPoint
 	EnumProperty
+	EvaluatePerkTierBalanceValue
 	Event Data
 	Event.Ability.Commando.FragGrenade.Activate
 	Event.Ability.Commando.FragGrenade.Deactivate
@@ -405,6 +416,7 @@ Name table:
 	GameplayTags
 	GameplayTask
 	GAT_ActiveAbility_C
+	GAT_ActiveAbility_Hero_C
 	GAT_CommandoActiveAbility_C
 	GE_Commando_ClusterBombDamage_C
 	GE_Commando_FragGrenadeCooldown_C
@@ -414,6 +426,7 @@ Name table:
 	GetAbilitySystemComponent
 	GetDefaultTargetingRotation
 	GetGravityZ
+	GetRangeFromGameplayEffectContainer
 	GetRangeFromGameplayEffectContainerSpec
 	GetScaledCapsuleSize
 	GetTransform
@@ -447,14 +460,12 @@ Name table:
 	InterfaceProperty
 	InThrowWindup
 	IntProperty
-	isAutoCommitted
 	IsLocallyControlled
 	IsServer
 	IsValid
 	ItemDefinition
 	K2_ActivateAbility
 	K2_ClearTimer
-	K2_CommitAbility
 	K2_DestroyActor
 	K2_EndAbility
 	K2_ExecuteGameplayCue
@@ -481,6 +492,7 @@ Name table:
 	K2Node_DynamicCast_AsBP_Projectile_Trajectory
 	K2Node_DynamicCast_bSuccess
 	K2Node_Event_bWasCancelled
+	K2Node_MakeStruct_ScalableFloat
 	K2Node_Select_Default
 	KeepOut
 	KeepOutContainerSpec
@@ -535,6 +547,8 @@ Name table:
 	ParticleSystemComponent
 	ParticleSystemComponent_2306__DE3CC847
 	ParticleSystemComponent_9119__FC156DAD
+	Perk.BiggerIsBetter.T01.Radius
+	Perk.BiggerIsBetter.T02.Radius
 	PlasmaGrenades
 	PlayMontageWaitTarget
 	PointerToUberGraphFrame
@@ -549,6 +563,7 @@ Name table:
 	ProjectileMovementComponent
 	Range
 	ReadyForActivation
+	ReplaceRangeInGameplayEffectContainer
 	RotateAngleAxis
 	RotatingMovement_GEN_VARIABLE
 	RotatingMovementComponent
@@ -561,6 +576,7 @@ Name table:
 	SelectFloat
 	SelectInt
 	SendGameplayEvent
+	SendHeroAbilityActivationEvent
 	ServerSpawnProjectile
 	SetActorHiddenInGame
 	SetCanBeCanceled
@@ -571,8 +587,8 @@ Name table:
 	SetupAbility
 	SetupDummyProjectile
 	SetupGrenade
-	SF_ClusterBombCount_T01
-	SF_ClusterBombCount_T02
+	SF_BiggerIsBetterRadius_T01
+	SF_BiggerIsBetterRadius_T02
 	Shape
 	Soldier_Grenade_Activate_Cue
 	Soldier_Male_Feedback
@@ -597,6 +613,7 @@ Name table:
 	T_ClusterBomb_T02
 	T_Event_Activate
 	T_Event_Deactivate
+	T_GEContainer_Explosion
 	Tactical_Clusterbomb
 	TagName
 	Target_GEN_VARIABLE
@@ -636,7 +653,7 @@ Name table:
 	UberGraphFramePointerProperty
 	UberGraphFunction
 	UpdateTrajectorySpline
-	UseNewPerkSystem
+	UseHeroLoadoutSystem
 	Value
 	Vector
 	WaitDelay
@@ -670,6 +687,7 @@ Import table:
 	GE_Commando_ClusterBombDamage_C (BlueprintGeneratedClass)
 	GE_Commando_Tactical_ClusterBomb_Damage_C (BlueprintGeneratedClass)
 	GAT_ActiveAbility_C (BlueprintGeneratedClass)
+	GAT_ActiveAbility_Hero_C (BlueprintGeneratedClass)
 	GAT_CommandoActiveAbility_C (BlueprintGeneratedClass)
 	B_Prj_Commando_FragGrenade_Cluster_C (BlueprintGeneratedClass)
 	BP_ProjectileTrajectory_C (BlueprintGeneratedClass)
@@ -677,6 +695,7 @@ Import table:
 	bHasCluster (BoolProperty)
 	bHasClusterTactical (BoolProperty)
 	bHasKeepOut (BoolProperty)
+	UseHeroLoadoutSystem (BoolProperty)
 	Default__BoolProperty (BoolProperty)
 	bShouldBounce (BoolProperty)
 	Default__BP_ProjectileTrajectory_C (BP_ProjectileTrajectory_C)
@@ -730,6 +749,7 @@ Import table:
 	MaxSpeed (FloatProperty)
 	ProjectileGravityScale (FloatProperty)
 	AnimPlayRate (FloatProperty)
+	Value (FloatProperty)
 	Default__FortAbilityTask_PlayMontageWaitTarget (FortAbilityTask_PlayMontageWaitTarget)
 	AmmoDataFragGrenades (FortAmmoItemDefinition)
 	Soldier_Male_Feedback (FortFeedbackBank)
@@ -772,6 +792,7 @@ Import table:
 	PlayMontageWaitTarget (Function)
 	CalculateProjectileTrajectorySpline (Function)
 	OnAbilityInputReleased (Function)
+	ReplaceRangeInGameplayEffectContainer (Function)
 	SpawnProjectile (Function)
 	TriggerFeedbackEvent (Function)
 	GetAbilitySystemComponent (Function)
@@ -783,6 +804,7 @@ Import table:
 	ReadyForActivation (Function)
 	Default__GameplayStatics (GameplayStatics)
 	Default__GAT_ActiveAbility_C (GAT_ActiveAbility_C)
+	Default__GAT_ActiveAbility_Hero_C (GAT_ActiveAbility_Hero_C)
 	Default__GAT_CommandoActiveAbility_C (GAT_CommandoActiveAbility_C)
 	Default__GE_Commando_ClusterBombDamage_C (GE_Commando_ClusterBombDamage_C)
 	Default__GE_Commando_FragGrenadeCooldown_C (GE_Commando_FragGrenadeCooldown_C)
@@ -814,6 +836,7 @@ Import table:
 	/Game/Abilities/Player/Commando/Perks/ClusterBomb/GE_Commando_ClusterBombDamage (Package)
 	/Game/Abilities/Player/Commando/TacticalPerks/Clusterbomb/GE_Commando_Tactical_ClusterBomb_Damage (Package)
 	/Game/Abilities/Player/Parents/GAT_ActiveAbility (Package)
+	/Game/Abilities/Player/Parents/GAT_ActiveAbility_Hero (Package)
 	/Game/Abilities/Player/Parents/GAT_CommandoActiveAbility (Package)
 	/Game/Abilities/Player/Perks/Hero/ClusterBomb/B_Prj_Commando_FragGrenade_Cluster (Package)
 	/Game/Animation/Game/MainPlayer/Combat/Gadgets/Medium/Male/Grenade/Grenade_Cook_IntroAnLoop (Package)
@@ -845,12 +868,14 @@ Import table:
 	Rotator (ScriptStruct)
 	Transform (ScriptStruct)
 	Vector (ScriptStruct)
+	CurveTableRowHandle (ScriptStruct)
 	LatentActionInfo (ScriptStruct)
 	PointerToUberGraphFrame (ScriptStruct)
 	TimerHandle (ScriptStruct)
 	FortAbilityTargetSelectionList (ScriptStruct)
 	FortFeedbackHandle (ScriptStruct)
 	FortGameplayAbilityMontageInfo (ScriptStruct)
+	FortGameplayEffectContainer (ScriptStruct)
 	FortGameplayEffectContainerSpec (ScriptStruct)
 	GameplayAbilityTargetDataHandle (ScriptStruct)
 	GameplayEffectContextHandle (ScriptStruct)
@@ -871,16 +896,17 @@ Import table:
 	List (StructProperty)
 	OwnerGameplayEffectSpecs (StructProperty)
 	TargetGameplayEffectSpecs (StructProperty)
+	Curve (StructProperty)
 	GameplayTags (StructProperty)
 	Default__TT_Commando_FragGrenade_C (TT_Commando_FragGrenade_C)
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	GA_Commando_FragGrenade_WithTrajectory_C (0-0-0-0): size 846 (cls: GA_Commando_FragGrenade_WithTrajectory_C>BlueprintGeneratedClass>/Script/Engine) :
+	GA_Commando_FragGrenade_WithTrajectory_C (0-0-0-0): size 842 (cls: GA_Commando_FragGrenade_WithTrajectory_C>BlueprintGeneratedClass>/Script/Engine) :
 		Tag array:
 			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=GA_Commando_FragGrenade_WithTrajectory_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_GA_Commando_FragGrenade_WithTrajectory=GA_Commando_FragGrenade_WithTrajectory_C 
-	Default__GA_Commando_FragGrenade_WithTrajectory_C (0-0-0-0): size 17247 (cls: Default__GA_Commando_FragGrenade_WithTrajectory_C>GA_Commando_FragGrenade_WithTrajectory_C) :
+	Default__GA_Commando_FragGrenade_WithTrajectory_C (0-0-0-0): size 17221 (cls: Default__GA_Commando_FragGrenade_WithTrajectory_C>GA_Commando_FragGrenade_WithTrajectory_C) :
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			EventActivation(StructProperty)=System.Byte[] 
@@ -895,7 +921,7 @@ Serialized exports:
 			Prj_Cluster(ObjectProperty)=B_Prj_Commando_FragGrenade_Cluster_C=/Game/Abilities/Player/Perks/Hero/ClusterBomb/B_Prj_Commando_FragGrenade_Cluster 
 			ClusterSpeedMax(FloatProperty)=1400 
 			TC_BiggerIsBetter(StructProperty)=GameplayTagContainer:Abilities.Commando.BiggerIsBetter 
-			EC_DefaultExplosion(StructProperty)=System.Byte[] 
+			T_GEContainer_Explosion(StructProperty)=System.Byte[] 
 			EC_IncreasedRadius(StructProperty)=System.Byte[] 
 			EC_ReturnedEffect(StructProperty)=System.Byte[] 
 			AdditionalThrowAngle(FloatProperty)=18 
@@ -932,12 +958,11 @@ Serialized exports:
 			T_BiggerIsBetter_T02(StructProperty)=System.Byte[] 
 			T_ClusterBomb_T01(StructProperty)=System.Byte[] 
 			T_ClusterBomb_T02(StructProperty)=System.Byte[] 
-			SF_ClusterBombCount_T01(StructProperty)=System.Byte[] 
-			SF_ClusterBombCount_T02(StructProperty)=System.Byte[] 
+			SF_BiggerIsBetterRadius_T01(StructProperty)=System.Byte[] 
 			ThrowMontage(ObjectProperty)=Grenade_Cook_Outro=/Game/Animation/Game/MainPlayer/Combat/Gadgets/Medium/Male/Grenade/Grenade_Cook_Outro 
 			T_Event_Activate(StructProperty)=System.Byte[] 
 			T_Event_Deactivate(StructProperty)=System.Byte[] 
-			isAutoCommitted(BoolProperty)=False 
+			SF_BiggerIsBetterRadius_T02(StructProperty)=System.Byte[] 
 			EffectContainers(StructProperty)=System.Byte[] 
 			EffectContainers(StructProperty)=System.Byte[] 
 			EffectContainers(StructProperty)=System.Byte[] 
@@ -955,7 +980,7 @@ Serialized exports:
 		Tag array:
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject) :
 		Tag array:
-	ExecuteUbergraph_GA_Commando_FragGrenade_WithTrajectory (0-0-0-0): size 2212 (cls: ExecuteUbergraph_GA_Commando_FragGrenade_WithTrajectory>Function>/Script/CoreUObject) :
+	ExecuteUbergraph_GA_Commando_FragGrenade_WithTrajectory (0-0-0-0): size 2226 (cls: ExecuteUbergraph_GA_Commando_FragGrenade_WithTrajectory>Function>/Script/CoreUObject) :
 		Tag array:
 	K2_ActivateAbility (0-0-0-0): size 58 (cls: K2_ActivateAbility>Function>/Script/CoreUObject) :
 		Tag array:
@@ -997,7 +1022,7 @@ Serialized exports:
 		Tag array:
 	AimPitch (0-0-0-0): size 32 (cls: AimPitch>FloatProperty>/Script/CoreUObject) :
 		Tag array:
-	SetupGrenade (0-0-0-0): size 325 (cls: SetupGrenade>Function>/Script/CoreUObject) :
+	SetupGrenade (0-0-0-0): size 814 (cls: SetupGrenade>Function>/Script/CoreUObject) :
 		Tag array:
 	AbilitySystemComponentRef (0-0-0-0): size 36 (cls: AbilitySystemComponentRef>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1061,6 +1086,8 @@ Serialized exports:
 		Tag array:
 	CallFunc_BooleanAND_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_CommitAbilityWithEvent_Passed (0-0-0-0): size 34 (cls: CallFunc_CommitAbilityWithEvent_Passed>BoolProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_IsLocallyControlled_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsLocallyControlled_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_IsServer_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsServer_ReturnValue>BoolProperty>/Script/CoreUObject) :
@@ -1072,8 +1099,6 @@ Serialized exports:
 	CallFunc_IsValid_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue2>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_IsValid_ReturnValue3 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue3>BoolProperty>/Script/CoreUObject) :
-		Tag array:
-	CallFunc_K2_CommitAbility_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_K2_CommitAbility_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_SetHolsterWeaponWithName_IsWeaponHolstered (0-0-0-0): size 34 (cls: CallFunc_SetHolsterWeaponWithName_IsWeaponHolstered>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1130,8 +1155,6 @@ Serialized exports:
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	Tactical_Clusterbomb (0-0-0-0): size 34 (cls: Tactical_Clusterbomb>BoolProperty>/Script/CoreUObject) :
-		Tag array:
-	UseNewPerkSystem (0-0-0-0): size 34 (cls: UseNewPerkSystem>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	AOE_KeepOut (0-0-0-0): size 40 (cls: AOE_KeepOut>ClassProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1237,9 +1260,17 @@ Serialized exports:
 		Tag array:
 	CallFunc_Multiply_FloatFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Multiply_FloatFloat_ReturnValue>FloatProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_Add_FloatFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Add_FloatFloat_ReturnValue>FloatProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_CalcGrenadeSpeedFromPitch_GrenadeSpeed (0-0-0-0): size 32 (cls: CallFunc_CalcGrenadeSpeedFromPitch_GrenadeSpeed>FloatProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_CalcGrenadeSpeedFromPitch_GrenadeSpeed1 (0-0-0-0): size 32 (cls: CallFunc_CalcGrenadeSpeedFromPitch_GrenadeSpeed1>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_GetRangeFromGameplayEffectContainer_Range (0-0-0-0): size 32 (cls: CallFunc_GetRangeFromGameplayEffectContainer_Range>FloatProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_GetRangeFromGameplayEffectContainerSpec_Range (0-0-0-0): size 32 (cls: CallFunc_GetRangeFromGameplayEffectContainerSpec_Range>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_GetRangeFromGameplayEffectContainerSpec_Range1 (0-0-0-0): size 32 (cls: CallFunc_GetRangeFromGameplayEffectContainerSpec_Range1>FloatProperty>/Script/CoreUObject) :
 		Tag array:
 	Projectile Gravity Scale (0-0-0-0): size 32 (cls: Projectile Gravity Scale>FloatProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1373,8 +1404,6 @@ Serialized exports:
 		Tag array:
 	EC_ClusterExplosion_Tactical (0-0-0-0): size 36 (cls: EC_ClusterExplosion_Tactical>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	EC_DefaultExplosion (0-0-0-0): size 36 (cls: EC_DefaultExplosion>StructProperty>/Script/CoreUObject) :
-		Tag array:
 	EC_IncreasedRadius (0-0-0-0): size 36 (cls: EC_IncreasedRadius>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	EC_KeepOut (0-0-0-0): size 36 (cls: EC_KeepOut>StructProperty>/Script/CoreUObject) :
@@ -1413,15 +1442,25 @@ Serialized exports:
 		Tag array:
 	CallFunc_GetTransform_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetTransform_ReturnValue1>StructProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_BP_GetGameplayEffectContainer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_BP_GetGameplayEffectContainer_ReturnValue>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_EvaluatePerkTierBalanceValue_Balance_Value (0-0-0-0): size 36 (cls: CallFunc_EvaluatePerkTierBalanceValue_Balance_Value>StructProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_MakeGameplayEffectContainerSpec_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_MakeGameplayEffectContainerSpec_ReturnValue>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_MakeGameplayEffectContainerSpec_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_MakeGameplayEffectContainerSpec_ReturnValue1>StructProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_MakeGameplayEffectContainerSpec_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_MakeGameplayEffectContainerSpec_ReturnValue2>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_ReplaceRangeInGameplayEffectContainer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_ReplaceRangeInGameplayEffectContainer_ReturnValue>StructProperty>/Script/CoreUObject) :
+		Tag array:
 	Explosion Gameplay Spec (0-0-0-0): size 36 (cls: Explosion Gameplay Spec>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	SF_ClusterBombCount_T01 (0-0-0-0): size 36 (cls: SF_ClusterBombCount_T01>StructProperty>/Script/CoreUObject) :
+	K2Node_MakeStruct_ScalableFloat (0-0-0-0): size 36 (cls: K2Node_MakeStruct_ScalableFloat>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	SF_ClusterBombCount_T02 (0-0-0-0): size 36 (cls: SF_ClusterBombCount_T02>StructProperty>/Script/CoreUObject) :
+	SF_BiggerIsBetterRadius_T01 (0-0-0-0): size 36 (cls: SF_BiggerIsBetterRadius_T01>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	SF_BiggerIsBetterRadius_T02 (0-0-0-0): size 36 (cls: SF_BiggerIsBetterRadius_T02>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_MakeGameplayEffectContainerSpec_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_MakeGameplayEffectContainerSpec_ReturnValue>StructProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1460,6 +1499,8 @@ Serialized exports:
 	T_Event_Activate (0-0-0-0): size 36 (cls: T_Event_Activate>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	T_Event_Deactivate (0-0-0-0): size 36 (cls: T_Event_Deactivate>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	T_GEContainer_Explosion (0-0-0-0): size 36 (cls: T_GEContainer_Explosion>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	TC_BiggerIsBetter (0-0-0-0): size 36 (cls: TC_BiggerIsBetter>StructProperty>/Script/CoreUObject) :
 		Tag array:

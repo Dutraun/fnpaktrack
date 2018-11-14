@@ -47,6 +47,7 @@ Name table:
 	Clipping
 	ColorAndOpacity
 	CommonBorder
+	CommonBorder_BG
 	CommonBorder_TextContainer
 	CommonLazyImage
 	CommonTextBlock
@@ -96,6 +97,7 @@ Name table:
 	FormatArgumentData
 	FortShowdownScoringRuleDisplayInfo
 	FortShowdownScoringRuleInfo
+	FortTournamentDisplayInfo
 	Function
 	GetDataTableRowFromName
 	HAlign_Fill
@@ -141,10 +143,12 @@ Name table:
 	ScoreRule
 	ScoringRuleDisplayData
 	ScriptStruct
+	SetBrushColor
 	SetBrushFromLazyTexture
 	SetContentColorAndOpacity
 	SetData
 	SetText
+	ShadowColor
 	ShowdownScoringRuleDisplayData
 	ShowdownTournamentDetailsScoringRule_C
 	Size
@@ -168,6 +172,7 @@ Name table:
 	TextProperty
 	Texture2D
 	Top
+	TournamentDisplayInfo
 	TypefaceFontName
 	VAlign_Center
 	Vector2D
@@ -221,6 +226,7 @@ Import table:
 	EqualEqual_NameName (Function)
 	LessEqual_IntInt (Function)
 	Format (Function)
+	SetBrushColor (Function)
 	SetContentColorAndOpacity (Function)
 	Default__HorizontalBox (HorizontalBox)
 	Default__HorizontalBoxSlot (HorizontalBoxSlot)
@@ -244,9 +250,11 @@ Import table:
 	FormatArgumentData (ScriptStruct)
 	FortShowdownScoringRuleDisplayInfo (ScriptStruct)
 	FortShowdownScoringRuleInfo (ScriptStruct)
+	FortTournamentDisplayInfo (ScriptStruct)
 	Icon (SoftObjectProperty)
 	ArgumentName (StrProperty)
 	Default__StructProperty (StructProperty)
+	ShadowColor (StructProperty)
 	Default__TextProperty (TextProperty)
 	ArgumentValue (TextProperty)
 	Description (TextProperty)
@@ -254,13 +262,13 @@ Import table:
 	Default__WidgetBlueprintGeneratedClass (WidgetBlueprintGeneratedClass)
 	Default__WidgetTree (WidgetTree)
 Serialized exports:
-	CommonBorder_TextContainer (0-0-0-0): size 36 (cls: CommonBorder_TextContainer>ObjectProperty>/Script/CoreUObject) :
+	CommonBorder_BG (0-0-0-0): size 36 (cls: CommonBorder_BG>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	ScoreRule (0-0-0-0): size 36 (cls: ScoreRule>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	SetData (0-0-0-0): size 1006 (cls: SetData>Function>/Script/CoreUObject) :
+	SetData (0-0-0-0): size 1040 (cls: SetData>Function>/Script/CoreUObject) :
 		Tag array:
-	ShowdownTournamentDetailsScoringRule_C (0-0-0-0): size 230 (cls: ShowdownTournamentDetailsScoringRule_C>WidgetBlueprintGeneratedClass>/Script/UMG) :
+	ShowdownTournamentDetailsScoringRule_C (0-0-0-0): size 234 (cls: ShowdownTournamentDetailsScoringRule_C>WidgetBlueprintGeneratedClass>/Script/UMG) :
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
@@ -296,18 +304,19 @@ Serialized exports:
 	BorderSlot_0 (0-0-0-0): size 243 (cls: BorderSlot_0>BorderSlot>/Script/UMG) :
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
-			Parent(ObjectProperty)=CommonBorder_0=WidgetArchetype 
+			Parent(ObjectProperty)=CommonBorder_BG=WidgetArchetype 
 			Content(ObjectProperty)=Overlay_0=WidgetArchetype 
 	BorderSlot_0 (0-0-0-0): size 70 (cls: BorderSlot_0>BorderSlot>/Script/UMG) :
 		Tag array:
 			Parent(ObjectProperty)=CommonBorder_TextContainer=WidgetArchetype 
 			Content(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
-	CommonBorder_0 (0-0-0-0): size 389 (cls: CommonBorder_0>CommonBorder>/Script/CommonUI) :
+	CommonBorder_BG (0-0-0-0): size 415 (cls: CommonBorder_BG>CommonBorder>/Script/CommonUI) :
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
 			Background(StructProperty)=System.Byte[] 
 			BrushColor(StructProperty)=System.Byte[] 
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			bIsVariable(BoolProperty)=True 
 	CommonBorder_TextContainer (0-0-0-0): size 108 (cls: CommonBorder_TextContainer>CommonBorder>/Script/CommonUI) :
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -351,6 +360,8 @@ Serialized exports:
 			VerticalAlignment(ByteProperty)=VAlign_Center 
 			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
 			Content(ObjectProperty)=RuleValueText=WidgetArchetype 
+	CommonBorder_TextContainer (0-0-0-0): size 36 (cls: CommonBorder_TextContainer>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
 	RuleIcon (0-0-0-0): size 36 (cls: RuleIcon>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	RuleNameText (0-0-0-0): size 36 (cls: RuleNameText>ObjectProperty>/Script/CoreUObject) :
@@ -376,8 +387,9 @@ Serialized exports:
 			VerticalAlignment(ByteProperty)=VAlign_Center 
 			Parent(ObjectProperty)=Overlay_0=WidgetArchetype 
 			Content(ObjectProperty)=RuleIcon=WidgetArchetype 
-	WidgetArchetype (0-0-0-0): size 183 (cls: WidgetArchetype>ShowdownTournamentDetailsScoringRule_C) :
+	WidgetArchetype (0-0-0-0): size 212 (cls: WidgetArchetype>ShowdownTournamentDetailsScoringRule_C) :
 		Tag array:
+			CommonBorder_BG(ObjectProperty)=CommonBorder_BG=WidgetArchetype 
 			CommonBorder_TextContainer(ObjectProperty)=CommonBorder_TextContainer=WidgetArchetype 
 			RuleIcon(ObjectProperty)=RuleIcon=WidgetArchetype 
 			RuleNameText(ObjectProperty)=RuleNameText=WidgetArchetype 
@@ -396,6 +408,8 @@ Serialized exports:
 		Tag array:
 	Temp_struct_Variable1 (0-0-0-0): size 36 (cls: Temp_struct_Variable1>StructProperty>/Script/CoreUObject) :
 		Tag array:
+	TournamentDisplayInfo (0-0-0-0): size 36 (cls: TournamentDisplayInfo>StructProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_Format_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Format_ReturnValue>TextProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_Format_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Format_ReturnValue1>TextProperty>/Script/CoreUObject) :
@@ -406,4 +420,4 @@ Serialized exports:
 		Tag array:
 	WidgetTree_0 (0-0-0-0): size 41 (cls: WidgetTree_0>WidgetTree>/Script/UMG) :
 		Tag array:
-			RootWidget(ObjectProperty)=CommonBorder_0=WidgetArchetype 
+			RootWidget(ObjectProperty)=CommonBorder_BG=WidgetArchetype 

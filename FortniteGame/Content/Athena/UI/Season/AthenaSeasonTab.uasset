@@ -263,6 +263,8 @@ Name table:
 	CallFunc_NotEqual_IntInt_ReturnValue
 	CallFunc_NotEqual_IntInt_ReturnValue1
 	CallFunc_OwnsSeasonPass_ReturnValue
+	CallFunc_PlayAnimationAtTime_ReturnValue
+	CallFunc_PlayAnimationAtTime_ReturnValue1
 	CallFunc_PurchaseAvailible_ReturnValue
 	CallFunc_ShouldOpenAboutScreen_ReturnValue
 	CallFunc_Subtract_FloatFloat_ReturnValue
@@ -823,7 +825,7 @@ Name table:
 	Pip7
 	Pip8
 	Pip9
-	PlayAnimation
+	PlayAnimationAtTime
 	PlaybackRange
 	PlayerController
 	PlaySeasonCinematic
@@ -1038,6 +1040,7 @@ Name table:
 	UInt16Property
 	UInt32Property
 	UInt64Property
+	UMGSequencePlayer
 	UnderlyingType
 	UnifiedRotateItem
 	UnifiedZoomItem
@@ -1215,6 +1218,7 @@ Import table:
 	SizeBoxSlot (Class)
 	SlateBlueprintLibrary (Class)
 	Spacer (Class)
+	UMGSequencePlayer (Class)
 	UserWidget (Class)
 	VerticalBox (Class)
 	VerticalBoxSlot (Class)
@@ -1350,7 +1354,7 @@ Import table:
 	GetLocalSize (Function)
 	LocalToAbsolute (Function)
 	Construct (Function)
-	PlayAnimation (Function)
+	PlayAnimationAtTime (Function)
 	Tick (Function)
 	GetCachedGeometry (Function)
 	SetRenderTranslation (Function)
@@ -1664,7 +1668,7 @@ Serialized exports:
 		Tag array:
 	Item (0-0-0-0): size 36 (cls: Item>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	SetupViewedItemData (0-0-0-0): size 505 (cls: SetupViewedItemData>Function>/Script/CoreUObject) :
+	SetupViewedItemData (0-0-0-0): size 525 (cls: SetupViewedItemData>Function>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_GetSeasonEndDate_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetSeasonEndDate_ReturnValue>StructProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1725,9 +1729,8 @@ Serialized exports:
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=SizeBoxSlot_1=WidgetArchetype 
-	WidgetArchetype (0-0-0-0): size 937 (cls: WidgetArchetype>AthenaSeasonTab_C) :
+	WidgetArchetype (0-0-0-0): size 908 (cls: WidgetArchetype>AthenaSeasonTab_C) :
 		Tag array:
-			ItemInfoHeaderFade(ObjectProperty)=ItemInfoHeaderFade_INST=WidgetArchetype 
 			AthenaSeasonBPTrackerWidget(ObjectProperty)=AthenaSeasonBPTrackerWidget=WidgetArchetype 
 			BackgroundGradient(ObjectProperty)=BackgroundGradient=WidgetArchetype 
 			Border_SaleInfo(ObjectProperty)=Border_SaleInfo=WidgetArchetype 
@@ -3170,17 +3173,6 @@ Your current progress will be applied to the next tier. (F31207D347D36E53C329EFB
 			PlaybackRange(StructProperty)=System.Byte[] 
 			DisplayRate(StructProperty)=System.Byte[] 
 			Signature(StructProperty)=Guid: 3857348033-1314973337-2151549359-3790675867 
-	ItemInfoHeaderFade (0-0-0-0): size 818 (cls: ItemInfoHeaderFade>MovieScene>/Script/MovieScene) :
-		Tag array:
-			Possessables(ArrayProperty)=[object] (inner: StructProperty)
-			ObjectBindings(ArrayProperty)=[object] (inner: StructProperty)
-			PlaybackRange(StructProperty)=System.Byte[] 
-			DisplayRate(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 3857348033-1314973337-2151549359-3790675867 
-	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene) :
-		Tag array:
-	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene) :
-		Tag array:
 	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene) :
 		Tag array:
 	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene) :
@@ -3191,18 +3183,6 @@ Your current progress will be applied to the next tier. (F31207D347D36E53C329EFB
 			Easing(StructProperty)=System.Byte[] 
 			SectionRange(StructProperty)=System.Byte[] 
 			Signature(StructProperty)=Guid: 2678056911-1177461058-104422056-2343831178 
-	MovieSceneFloatSection_0 (0-0-0-0): size 1491 (cls: MovieSceneFloatSection_0>MovieSceneFloatSection>/Script/MovieSceneTracks) :
-		Tag array:
-			FloatCurve(StructProperty)=System.Byte[] 
-			Easing(StructProperty)=System.Byte[] 
-			SectionRange(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 2678056911-1177461058-104422056-2343831178 
-	MovieSceneFloatTrack_0 (0-0-0-0): size 194 (cls: MovieSceneFloatTrack_0>MovieSceneFloatTrack>/Script/MovieSceneTracks) :
-		Tag array:
-			PropertyName(NameProperty)=RenderOpacity 
-			PropertyPath(StrProperty)=RenderOpacity 
-			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
-			Signature(StructProperty)=Guid: 3494158956-1198542325-2446676922-3153526244 
 	MovieSceneFloatTrack_0 (0-0-0-0): size 194 (cls: MovieSceneFloatTrack_0>MovieSceneFloatTrack>/Script/MovieSceneTracks) :
 		Tag array:
 			PropertyName(NameProperty)=RenderOpacity 
@@ -3346,6 +3326,10 @@ Your current progress will be applied to the next tier. (F31207D347D36E53C329EFB
 	K2Node_DynamicCast_AsSeason_Pass_Page_Widget (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsSeason_Pass_Page_Widget>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_GetItemDefinitionBP_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetItemDefinitionBP_ReturnValue>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_PlayAnimationAtTime_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlayAnimationAtTime_ReturnValue>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_PlayAnimationAtTime_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_PlayAnimationAtTime_ReturnValue1>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	SwipePanel (0-0-0-0): size 36 (cls: SwipePanel>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
@@ -4036,12 +4020,6 @@ Your current progress will be applied to the next tier. (F31207D347D36E53C329EFB
 	ItemInfoHeaderFade_INST (0-0-0-0): size 5720 (cls: ItemInfoHeaderFade_INST>WidgetAnimation>/Script/UMG) :
 		Tag array:
 			MovieScene(ObjectProperty)=ItemInfoHeaderFade=AthenaSeasonTab_C 
-			AnimationBindings(ArrayProperty)=[object] (inner: StructProperty)
-			PrecompiledEvaluationTemplate(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 526764314-1332398119-3191291283-513096372 
-	ItemInfoHeaderFade_INST (0-0-0-0): size 5720 (cls: ItemInfoHeaderFade_INST>WidgetAnimation>/Script/UMG) :
-		Tag array:
-			MovieScene(ObjectProperty)=ItemInfoHeaderFade=WidgetArchetype 
 			AnimationBindings(ArrayProperty)=[object] (inner: StructProperty)
 			PrecompiledEvaluationTemplate(StructProperty)=System.Byte[] 
 			Signature(StructProperty)=Guid: 526764314-1332398119-3191291283-513096372 

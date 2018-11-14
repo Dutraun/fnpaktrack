@@ -11,8 +11,8 @@ Name table:
 	/Game/Athena/Items/ForagedItems/Rift/FX/SM_Shard_Portal
 	/Game/Athena/Items/QuestInteractables/AthenaQuestFunctionLibrary
 	/Game/Athena/Items/Quests/AthenaObjectiveStatTable
+	/Game/Athena/Items/Quests/BattlePass/Quest_BR_Use_HookPadRift_Chain_C
 	/Game/Athena/Items/Quests/BattlePass/Quest_BR_Use_RiftPortal_DifferentLocations
-	/Game/Athena/Items/Quests/BattlePass/Quest_BR_Use_RiftPortals
 	/Game/Sounds/Fort_GamePlay_Sounds/Player/RiftPortal/RiftPortal_Collapse_Cue
 	/Game/Sounds/Fort_GamePlay_Sounds/Player/RiftPortal/RiftPortal_Destroy_Cue
 	/Game/Sounds/Fort_GamePlay_Sounds/Player/RiftPortal/RiftPortal_Expand_Cue
@@ -27,9 +27,11 @@ Name table:
 	A
 	Abilities.Generic.Rift.Trigger
 	AbilitySystemBlueprintLibrary
+	AbilitySystemComponent
 	AbilitySystemComponentCreationPolicy
 	ActiveDuration
 	Actor
+	ActorComponentTickFunction
 	ActorOriginalLocation
 	ActorRotation
 	Add_FloatFloat
@@ -97,7 +99,7 @@ Name table:
 	battlepass_athena_use_location_riftportal_07
 	battlepass_athena_use_location_riftportal_08
 	battlepass_athena_use_location_riftportal_09
-	battlepass_touch_athena_riftportal
+	battlepass_hookpadrift_chain_c
 	bAutoActivate
 	bCanEverAffectNavigation
 	bFireBuiltAndDestroyedEvents
@@ -132,6 +134,7 @@ Name table:
 	BreakVector
 	bRenderCustomDepth
 	bReplicateMovement
+	bStartWithTickEnabled
 	bSurpressHealthBar
 	Building.GameplayActor.Consumable.Rift
 	BuildingType
@@ -158,9 +161,11 @@ Name table:
 	CallFunc_BreakVector_X
 	CallFunc_BreakVector_Y
 	CallFunc_BreakVector_Z
+	CallFunc_CanTeleport_ReturnValue
 	CallFunc_Conv_IntToString_ReturnValue
 	CallFunc_EqualEqual_ByteByte_ReturnValue
 	CallFunc_EqualEqual_IntInt_ReturnValue
+	CallFunc_GetAbilitySystemComponent_ReturnValue
 	CallFunc_GetAllPassengers_ReturnValue
 	CallFunc_GetAllPassengers_ReturnValue1
 	CallFunc_GetAllPassengers_ReturnValue2
@@ -215,6 +220,7 @@ Name table:
 	CallFunc_IsDrivingVehicle_ReturnValue
 	CallFunc_IsInVehicle_ReturnValue
 	CallFunc_IsLocallyControlled_ReturnValue
+	CallFunc_IsOperatingTurret_ReturnValue
 	CallFunc_IsPlaying_ReturnValue
 	CallFunc_IsValid_ReturnValue
 	CallFunc_IsValid_ReturnValue1
@@ -240,12 +246,14 @@ Name table:
 	CallFunc_Multiply_FloatFloat_ReturnValue
 	CallFunc_Not_PreBool_ReturnValue
 	CallFunc_RandomFloatInRange_ReturnValue
+	CallFunc_RemoveActiveEffectsWithGrantedTags_ReturnValue
 	CallFunc_SelectFloat_ReturnValue
 	CallFunc_SpawnEmitterAtLocation_ReturnValue
 	CallFunc_SpawnEmitterAtLocation_ReturnValue1
 	CallFunc_SpawnSoundAtLocation_ReturnValue
 	Camera
 	CanCharacterStepUpOn
+	CanTeleport
 	Capsule
 	Capsule_GEN_VARIABLE
 	CapsuleComponent
@@ -343,6 +351,7 @@ Name table:
 	ECR_Overlap
 	EFortBuildingType
 	EFortBuildingType::SpawnedItem
+	EjectFromTurret
 	Emissive
 	EndSkydiving
 	ENetDormancy
@@ -394,6 +403,7 @@ Name table:
 	FunctionNameToBind
 	G
 	Game
+	Gameplay.Action.Player.AthenaInVehicle
 	GameplayAbilityTargetDataHandle
 	GameplayEffectContextHandle
 	GameplayEventData
@@ -403,6 +413,7 @@ Name table:
 	GameplayTagContainer
 	GameplayTags
 	GameStateBase
+	GetAbilitySystemComponent
 	GetAllPassengers
 	GetAthenaPlaylistContextTags
 	GetController
@@ -429,6 +440,7 @@ Name table:
 	IsDrivingVehicle
 	IsInVehicle
 	IsLocallyControlled
+	IsOperatingTurret
 	IsPlaying
 	IsValid
 	K2_DestroyActor
@@ -614,19 +626,21 @@ Name table:
 	PostProcessRadius
 	PostProcessRadius_GEN_VARIABLE
 	PostProcessSettings
+	PrimaryComponentTick
 	PrimitiveComponent
 	PrintString
 	Priority
 	PropertyName
 	PropertyScope
+	Quest_BR_Use_HookPadRift_Chain_C
 	Quest_BR_Use_RiftPortal_DifferentLocations
-	Quest_BR_Use_RiftPortals
 	QuestItem
 	R
 	RandomFloatInRange
 	ReceiveBeginPlay
 	RelativeLocation
 	RelativeScale3D
+	RemoveActiveEffectsWithGrantedTags
 	Response
 	ResponseArray
 	ResponseChannel
@@ -865,6 +879,7 @@ Import table:
 	FortQuestItemDefinition (Class)
 	FortScalableFloatUtils (Class)
 	AbilitySystemBlueprintLibrary (Class)
+	AbilitySystemComponent (Class)
 	BlueprintGameplayTagLibrary (Class)
 	GameplayTagAssetInterface (Class)
 	Default__ComponentDelegateBinding (ComponentDelegateBinding)
@@ -879,8 +894,8 @@ Import table:
 	Default__FloatProperty (FloatProperty)
 	Default__FortAthenaRiftPortal (FortAthenaRiftPortal)
 	Default__FortMissionLibrary (FortMissionLibrary)
+	Quest_BR_Use_HookPadRift_Chain_C (FortQuestItemDefinition)
 	Quest_BR_Use_RiftPortal_DifferentLocations (FortQuestItemDefinition)
-	Quest_BR_Use_RiftPortals (FortQuestItemDefinition)
 	Default__FortScalableFloatUtils (FortScalableFloatUtils)
 	Default__Function (Function)
 	FlushNetDormancy (Function)
@@ -944,8 +959,11 @@ Import table:
 	GetVehicle (Function)
 	IsDrivingVehicle (Function)
 	IsInVehicle (Function)
+	IsOperatingTurret (Function)
 	GetValueAtLevel (Function)
+	GetAbilitySystemComponent (Function)
 	SendGameplayEventToActor (Function)
+	RemoveActiveEffectsWithGrantedTags (Function)
 	HasTag (Function)
 	Default__GameplayStatics (GameplayStatics)
 	Default__InterfaceProperty (InterfaceProperty)
@@ -967,8 +985,8 @@ Import table:
 	/Game/Athena/Items/ForagedItems/Rift/FX/SM_Shard_Portal (Package)
 	/Game/Athena/Items/QuestInteractables/AthenaQuestFunctionLibrary (Package)
 	/Game/Athena/Items/Quests/AthenaObjectiveStatTable (Package)
+	/Game/Athena/Items/Quests/BattlePass/Quest_BR_Use_HookPadRift_Chain_C (Package)
 	/Game/Athena/Items/Quests/BattlePass/Quest_BR_Use_RiftPortal_DifferentLocations (Package)
-	/Game/Athena/Items/Quests/BattlePass/Quest_BR_Use_RiftPortals (Package)
 	/Game/Sounds/Fort_GamePlay_Sounds/Player/RiftPortal/RiftPortal_Collapse_Cue (Package)
 	/Game/Sounds/Fort_GamePlay_Sounds/Player/RiftPortal/RiftPortal_Destroy_Cue (Package)
 	/Game/Sounds/Fort_GamePlay_Sounds/Player/RiftPortal/RiftPortal_Expand_Cue (Package)
@@ -992,6 +1010,7 @@ Import table:
 	Rotator (ScriptStruct)
 	Vector (ScriptStruct)
 	Vector4 (ScriptStruct)
+	ActorComponentTickFunction (ScriptStruct)
 	BodyInstance (ScriptStruct)
 	CollisionResponse (ScriptStruct)
 	DataTableRowHandle (ScriptStruct)
@@ -1025,7 +1044,7 @@ Import table:
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	BGA_RiftPortal_Item_Athena_C (0-0-0-0): size 1016 (cls: BGA_RiftPortal_Item_Athena_C>BlueprintGeneratedClass>/Script/Engine) :
+	BGA_RiftPortal_Item_Athena_C (0-0-0-0): size 1032 (cls: BGA_RiftPortal_Item_Athena_C>BlueprintGeneratedClass>/Script/Engine) :
 		Tag array:
 			NumReplicatedProperties(IntProperty)=1 
 			bHasCookedComponentInstancingData(BoolProperty)=True 
@@ -1050,8 +1069,8 @@ Serialized exports:
 			CrackExitRift(ObjectProperty)=P_Geode_CrackExit_Rift=/Game/Athena/Items/ForagedItems/Rift/FX/P_Geode_CrackExit_Rift 
 			PlayerExitSkyCrack(ObjectProperty)=RiftPortal_Teleport_Exit_3P_Cue=/Game/Sounds/Fort_GamePlay_Sounds/Player/RiftPortal/RiftPortal_Teleport_Exit_3P_Cue 
 			ActorOriginalLocation(StructProperty)=Vector(0,0,0) 
-			QuestItem(ObjectProperty)=Quest_BR_Use_RiftPortals=/Game/Athena/Items/Quests/BattlePass/Quest_BR_Use_RiftPortals 
-			ObjectiveBackendName(NameProperty)=battlepass_touch_athena_riftportal 
+			QuestItem(ObjectProperty)=Quest_BR_Use_HookPadRift_Chain_C=/Game/Athena/Items/Quests/BattlePass/Quest_BR_Use_HookPadRift_Chain_C 
+			ObjectiveBackendName(NameProperty)=battlepass_hookpadrift_chain_c 
 			ObjStat(StructProperty)=System.Byte[] 
 			RiftPortalLocationsQuest(ObjectProperty)=Quest_BR_Use_RiftPortal_DifferentLocations=/Game/Athena/Items/Quests/BattlePass/Quest_BR_Use_RiftPortal_DifferentLocations 
 			ObjStatLoc_1(StructProperty)=System.Byte[] 
@@ -1099,7 +1118,7 @@ Serialized exports:
 		Tag array:
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject) :
 		Tag array:
-	ExecuteUbergraph_BGA_RiftPortal_Item_Athena (0-0-0-0): size 5212 (cls: ExecuteUbergraph_BGA_RiftPortal_Item_Athena>Function>/Script/CoreUObject) :
+	ExecuteUbergraph_BGA_RiftPortal_Item_Athena (0-0-0-0): size 5267 (cls: ExecuteUbergraph_BGA_RiftPortal_Item_Athena>Function>/Script/CoreUObject) :
 		Tag array:
 	FortPlayerPawnAthena (0-0-0-0): size 36 (cls: FortPlayerPawnAthena>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1372,9 +1391,19 @@ Serialized exports:
 		Tag array:
 	CreativeMode (0-0-0-0): size 34 (cls: CreativeMode>BoolProperty>/Script/CoreUObject) :
 		Tag array:
+	NewParam (0-0-0-0): size 34 (cls: NewParam>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	Is Flying (0-0-0-0): size 196 (cls: Is Flying>Function>/Script/CoreUObject) :
+		Tag array:
+	EjectFromTurret (0-0-0-0): size 191 (cls: EjectFromTurret>Function>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_IsOperatingTurret_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsOperatingTurret_ReturnValue>BoolProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_Array_Contains_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Array_Contains_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_BooleanAND_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_CanTeleport_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_CanTeleport_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_EqualEqual_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1441,10 +1470,6 @@ Serialized exports:
 	K2Node_DynamicCast_bSuccess5 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess5>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	K2Node_DynamicCast_bSuccess6 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess6>BoolProperty>/Script/CoreUObject) :
-		Tag array:
-	NewParam (0-0-0-0): size 34 (cls: NewParam>BoolProperty>/Script/CoreUObject) :
-		Tag array:
-	Is Flying (0-0-0-0): size 196 (cls: Is Flying>Function>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_EqualEqual_ByteByte_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ByteByte_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1594,6 +1619,8 @@ Serialized exports:
 		Tag array:
 	Temp_int_Variable1 (0-0-0-0): size 32 (cls: Temp_int_Variable1>IntProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_RemoveActiveEffectsWithGrantedTags_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_RemoveActiveEffectsWithGrantedTags_ReturnValue>IntProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_Add_IntInt_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue>IntProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_Add_IntInt_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue1>IntProperty>/Script/CoreUObject) :
@@ -1704,6 +1731,8 @@ Serialized exports:
 		Tag array:
 	DeathEffects (0-0-0-0): size 36 (cls: DeathEffects>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_GetAbilitySystemComponent_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetAbilitySystemComponent_ReturnValue>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
 	EnteredRift (0-0-0-0): size 36 (cls: EnteredRift>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	EnterRift (0-0-0-0): size 36 (cls: EnterRift>ObjectProperty>/Script/CoreUObject) :
@@ -1812,12 +1841,13 @@ Serialized exports:
 		Tag array:
 	Vehicle (0-0-0-0): size 36 (cls: Vehicle>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	P_Rift_Idle_Loop_GEN_VARIABLE (0-0-0-0): size 153 (cls: P_Rift_Idle_Loop_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	P_Rift_Idle_Loop_GEN_VARIABLE (0-0-0-0): size 236 (cls: P_Rift_Idle_Loop_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_Rift_Portal_Idle_Shimmer=/Game/Athena/Items/ForagedItems/Rift/FX/P_Rift_Portal_Idle_Shimmer 
 			BodyInstance(StructProperty)=System.Byte[] 
 			bAbsoluteScale(BoolProperty)=True 
-	P_RiftClosingUp_GEN_VARIABLE (0-0-0-0): size 298 (cls: P_RiftClosingUp_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
+	P_RiftClosingUp_GEN_VARIABLE (0-0-0-0): size 381 (cls: P_RiftClosingUp_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_Rift_Portal_Closing=/Game/Athena/Items/ForagedItems/Rift/FX/P_Rift_Portal_Closing 
 			LDMaxDrawDistance(FloatProperty)=90000 
@@ -1825,6 +1855,7 @@ Serialized exports:
 			BodyInstance(StructProperty)=System.Byte[] 
 			RelativeScale3D(StructProperty)=Vector(0.5,0.5,0.5) 
 			bAbsoluteScale(BoolProperty)=True 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
 	RiftPostProcess_GEN_VARIABLE (0-0-0-0): size 568 (cls: RiftPostProcess_GEN_VARIABLE>PostProcessComponent>/Script/Engine) :
 		Tag array:
@@ -1857,7 +1888,7 @@ Serialized exports:
 			ChildNodes(ArrayProperty)=[object] (inner: ObjectProperty)
 			VariableGuid(StructProperty)=Guid: 2403594232-1173246507-657514939-1591394265 
 			InternalVariableName(NameProperty)=Capsule 
-	SCS_Node_12 (0-0-0-0): size 1426 (cls: SCS_Node_12>SCS_Node>/Script/Engine) :
+	SCS_Node_12 (0-0-0-0): size 1624 (cls: SCS_Node_12>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=P_RiftClosingUp_GEN_VARIABLE=BGA_RiftPortal_Item_Athena_C 
@@ -1893,7 +1924,7 @@ Serialized exports:
 			CookedComponentInstancingData(StructProperty)=System.Byte[] 
 			VariableGuid(StructProperty)=Guid: 400938752-1166110233-3886363548-617494509 
 			InternalVariableName(NameProperty)=OverlapCapsule 
-	SCS_Node_9 (0-0-0-0): size 733 (cls: SCS_Node_9>SCS_Node>/Script/Engine) :
+	SCS_Node_9 (0-0-0-0): size 931 (cls: SCS_Node_9>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=P_Rift_Idle_Loop_GEN_VARIABLE=BGA_RiftPortal_Item_Athena_C 

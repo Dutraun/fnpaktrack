@@ -19,9 +19,14 @@ Name table:
 	/Script/GameplayTags
 	Activate
 	Actor
+	ActorComponentTickFunction
 	Add_IntInt
 	AllNodes
+	AllPlayers
+	Array_AddUnique
+	Array_Clear
 	Array_Get
+	Array_Length
 	ArrayProperty
 	Athena.Creative
 	Athena_CheckQuestAndObjectiveCompletion
@@ -46,13 +51,20 @@ Name table:
 	bPlaylistDataIsLoaded
 	BPVariableMetaDataEntry
 	bReplicates
+	bRequiresHighScore
+	bStartWithTickEnabled
 	Building.Type.Prop
 	BuildingProp
 	ByteProperty
 	CallFunc_Add_IntInt_ReturnValue
+	CallFunc_Add_IntInt_ReturnValue1
+	CallFunc_Array_AddUnique_ReturnValue
+	CallFunc_Array_AddUnique_ReturnValue1
 	CallFunc_Array_Get_Item
 	CallFunc_Array_Get_Item1
 	CallFunc_Array_Get_Item2
+	CallFunc_Array_Get_Item3
+	CallFunc_Array_Length_ReturnValue
 	CallFunc_Athena_CheckQuestAndObjectiveCompletion_ObjectiveCompleted
 	CallFunc_Athena_CheckQuestAndObjectiveCompletion_ObjectiveCompleted1
 	CallFunc_Athena_CheckQuestAndObjectiveCompletion_QuestCompleted
@@ -65,14 +77,15 @@ Name table:
 	CallFunc_CreateDynamicMaterialInstance_ReturnValue1
 	CallFunc_EqualEqual_IntInt_ReturnValue
 	CallFunc_GetAthenaPlaylistContextTags_ReturnValue
-	CallFunc_GetFortPlayerControllerFromActor_ReturnValue
 	CallFunc_GetGameState_ReturnValue
+	CallFunc_GetInstigatorController_ReturnValue
 	CallFunc_GetLocalFortPlayerControllers_ReturnValue
 	CallFunc_GetLocalFortPlayerControllers_ReturnValue1
 	CallFunc_GetLocalFortPlayerControllers_ReturnValue2
 	CallFunc_GetPlayerPawn_ReturnValue
 	CallFunc_GetQuestManager_ReturnValue
 	CallFunc_Greater_IntInt_ReturnValue
+	CallFunc_Greater_IntInt_ReturnValue1
 	CallFunc_GreaterEqual_IntInt_ReturnValue
 	CallFunc_HasAuthority_ReturnValue
 	CallFunc_HasAuthority_ReturnValue1
@@ -86,6 +99,7 @@ Name table:
 	CallFunc_K2_GetActorLocation_ReturnValue2
 	CallFunc_K2_GetActorLocation_ReturnValue3
 	CallFunc_K2_GetComponentLocation_ReturnValue
+	CallFunc_Less_IntInt_ReturnValue
 	CallFunc_NotEqual_ObjectObject_ReturnValue
 	CallFunc_NotEqual_ObjectObject_ReturnValue1
 	CallFunc_SetStaticMesh_ReturnValue
@@ -99,6 +113,8 @@ Name table:
 	Color
 	ComponentClass
 	ComponentTemplate
+	ContributingPlayers
+	Controller
 	Conv_IntToFloat
 	CreateDynamicMaterialInstance
 	CreativeMode
@@ -152,6 +168,7 @@ Name table:
 	FortGameStateAthena
 	FortKismetLibrary
 	FortPlayerController
+	FortPlayerControllerAthena
 	FortPlayerPawn
 	FortQuestItemDefinition
 	FortQuestManager
@@ -162,8 +179,8 @@ Name table:
 	GameplayTagContainer
 	GameStateBase
 	GetAthenaPlaylistContextTags
-	GetFortPlayerControllerFromActor
 	GetGameState
+	GetInstigatorController
 	GetLocalFortPlayerControllers
 	GetPlayerPawn
 	GetQuestManager
@@ -189,14 +206,17 @@ Name table:
 	K2Node_CustomEvent_PlaylistContextTags
 	K2Node_CustomEvent_PlaylistName
 	K2Node_DynamicCast_AsFort_Game_State_Athena
+	K2Node_DynamicCast_AsFort_Player_Controller_Athena
 	K2Node_DynamicCast_bSuccess
+	K2Node_DynamicCast_bSuccess1
+	K2Node_Event_ContributingPlayers
 	K2Node_Event_OwningPlayer
 	K2Node_Event_ScoreIncrement
-	K2Node_MakeArray_Array
 	KismetArrayLibrary
 	KismetMathLibrary
 	KismetSystemLibrary
 	LatentActionInfo
+	Less_IntInt
 	LinearColor
 	LocallyActive
 	LocalPlayer
@@ -243,6 +263,7 @@ Name table:
 	PlayQuestSuccessFX
 	PlaySoundAtLocation
 	PointerToUberGraphFrame
+	PrimaryComponentTick
 	Quest_BR_Shoot_SpecificTargets
 	QuestItem
 	QuestSuccessEmitter
@@ -285,6 +306,8 @@ Name table:
 	StaticMeshComponent0
 	StrProperty
 	StructProperty
+	Temp_int_Array_Index_Variable
+	Temp_int_Loop_Counter_Variable
 	Template
 	tooltip
 	UberGraphFrame
@@ -319,6 +342,7 @@ Import table:
 	BlueprintGeneratedClass (Class)
 	BoxComponent (Class)
 	Character (Class)
+	Controller (Class)
 	GameplayStatics (Class)
 	GameStateBase (Class)
 	KismetArrayLibrary (Class)
@@ -338,6 +362,7 @@ Import table:
 	FortGameStateAthena (Class)
 	FortKismetLibrary (Class)
 	FortPlayerController (Class)
+	FortPlayerControllerAthena (Class)
 	FortPlayerPawn (Class)
 	FortQuestItemDefinition (Class)
 	FortQuestManager (Class)
@@ -351,6 +376,7 @@ Import table:
 	Quest_BR_Shoot_SpecificTargets (FortQuestItemDefinition)
 	Default__Function (Function)
 	FlushNetDormancy (Function)
+	GetInstigatorController (Function)
 	HasAuthority (Function)
 	K2_GetActorLocation (Function)
 	ReceiveBeginPlay (Function)
@@ -358,13 +384,17 @@ Import table:
 	GetGameState (Function)
 	PlaySoundAtLocation (Function)
 	SpawnEmitterAttached (Function)
+	Array_AddUnique (Function)
+	Array_Clear (Function)
 	Array_Get (Function)
+	Array_Length (Function)
 	Add_IntInt (Function)
 	BooleanOR (Function)
 	Conv_IntToFloat (Function)
 	EqualEqual_IntInt (Function)
 	Greater_IntInt (Function)
 	GreaterEqual_IntInt (Function)
+	Less_IntInt (Function)
 	NotEqual_ObjectObject (Function)
 	Delay (Function)
 	SetScalarParameterValue (Function)
@@ -372,7 +402,6 @@ Import table:
 	SetTemplate (Function)
 	K2_GetComponentLocation (Function)
 	GetAthenaPlaylistContextTags (Function)
-	GetFortPlayerControllerFromActor (Function)
 	GetLocalFortPlayerControllers (Function)
 	GetPlayerPawn (Function)
 	HasTag (Function)
@@ -429,7 +458,7 @@ Import table:
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	BP_ScoreBoard_Place_C (0-0-0-0): size 572 (cls: BP_ScoreBoard_Place_C>BlueprintGeneratedClass>/Script/Engine) :
+	BP_ScoreBoard_Place_C (0-0-0-0): size 584 (cls: BP_ScoreBoard_Place_C>BlueprintGeneratedClass>/Script/Engine) :
 		Tag array:
 			NumReplicatedProperties(IntProperty)=10 
 			SimpleConstructionScript(ObjectProperty)=SimpleConstructionScript_0=BP_ScoreBoard_Place_C 
@@ -464,11 +493,15 @@ Serialized exports:
 			RemoteRole(ByteProperty)=ROLE_None 
 			NetDormancy(ByteProperty)=DORM_Awake 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Default__BP_ScoreBoard_Place_C 
+	ContributingPlayers (0-0-0-0): size 36 (cls: ContributingPlayers>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	ContributingPlayers (0-0-0-0): size 36 (cls: ContributingPlayers>ArrayProperty>/Script/CoreUObject) :
+		Tag array:
 	HighScoreFX (0-0-0-0): size 36 (cls: HighScoreFX>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject) :
 		Tag array:
-	ExecuteUbergraph_BP_ScoreBoard_Place (0-0-0-0): size 3050 (cls: ExecuteUbergraph_BP_ScoreBoard_Place>Function>/Script/CoreUObject) :
+	ExecuteUbergraph_BP_ScoreBoard_Place (0-0-0-0): size 3458 (cls: ExecuteUbergraph_BP_ScoreBoard_Place>Function>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_GetLocalFortPlayerControllers_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetLocalFortPlayerControllers_ReturnValue>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
@@ -482,57 +515,13 @@ Serialized exports:
 		Tag array:
 	CallFunc_GetLocalFortPlayerControllers_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_GetLocalFortPlayerControllers_ReturnValue2>ArrayProperty>/Script/CoreUObject) :
 		Tag array:
-	K2Node_MakeArray_Array (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array>ObjectProperty>/Script/CoreUObject) :
+	K2Node_Event_ContributingPlayers (0-0-0-0): size 36 (cls: K2Node_Event_ContributingPlayers>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	K2Node_MakeArray_Array (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array>ArrayProperty>/Script/CoreUObject) :
-		Tag array:
-	CreativeMode (0-0-0-0): size 34 (cls: CreativeMode>BoolProperty>/Script/CoreUObject) :
-		Tag array:
-	CallFunc_Athena_CheckQuestAndObjectiveCompletion_ObjectiveCompleted (0-0-0-0): size 34 (cls: CallFunc_Athena_CheckQuestAndObjectiveCompletion_ObjectiveCompleted>BoolProperty>/Script/CoreUObject) :
-		Tag array:
-	CallFunc_Athena_CheckQuestAndObjectiveCompletion_ObjectiveCompleted1 (0-0-0-0): size 34 (cls: CallFunc_Athena_CheckQuestAndObjectiveCompletion_ObjectiveCompleted1>BoolProperty>/Script/CoreUObject) :
-		Tag array:
-	CallFunc_Athena_CheckQuestAndObjectiveCompletion_QuestCompleted (0-0-0-0): size 34 (cls: CallFunc_Athena_CheckQuestAndObjectiveCompletion_QuestCompleted>BoolProperty>/Script/CoreUObject) :
-		Tag array:
-	CallFunc_Athena_CheckQuestAndObjectiveCompletion_QuestCompleted1 (0-0-0-0): size 34 (cls: CallFunc_Athena_CheckQuestAndObjectiveCompletion_QuestCompleted1>BoolProperty>/Script/CoreUObject) :
-		Tag array:
-	CallFunc_Athena_CheckQuestAndObjectiveCompletion_QuestIsValid (0-0-0-0): size 34 (cls: CallFunc_Athena_CheckQuestAndObjectiveCompletion_QuestIsValid>BoolProperty>/Script/CoreUObject) :
-		Tag array:
-	CallFunc_Athena_CheckQuestAndObjectiveCompletion_QuestIsValid1 (0-0-0-0): size 34 (cls: CallFunc_Athena_CheckQuestAndObjectiveCompletion_QuestIsValid1>BoolProperty>/Script/CoreUObject) :
-		Tag array:
-	CallFunc_BooleanOR_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanOR_ReturnValue>BoolProperty>/Script/CoreUObject) :
-		Tag array:
-	CallFunc_Greater_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Greater_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject) :
-		Tag array:
-	CallFunc_GreaterEqual_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_GreaterEqual_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject) :
-		Tag array:
-	CallFunc_HasAuthority_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasAuthority_ReturnValue>BoolProperty>/Script/CoreUObject) :
-		Tag array:
-	CallFunc_HasAuthority_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_HasAuthority_ReturnValue1>BoolProperty>/Script/CoreUObject) :
-		Tag array:
-	CallFunc_HasAuthority_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_HasAuthority_ReturnValue2>BoolProperty>/Script/CoreUObject) :
-		Tag array:
-	CallFunc_HasAuthority_ReturnValue3 (0-0-0-0): size 34 (cls: CallFunc_HasAuthority_ReturnValue3>BoolProperty>/Script/CoreUObject) :
-		Tag array:
-	CallFunc_HasAuthority_ReturnValue4 (0-0-0-0): size 34 (cls: CallFunc_HasAuthority_ReturnValue4>BoolProperty>/Script/CoreUObject) :
-		Tag array:
-	CallFunc_HasTag_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasTag_ReturnValue>BoolProperty>/Script/CoreUObject) :
-		Tag array:
-	CallFunc_HasTag_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_HasTag_ReturnValue1>BoolProperty>/Script/CoreUObject) :
-		Tag array:
-	CallFunc_NotEqual_ObjectObject_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_NotEqual_ObjectObject_ReturnValue>BoolProperty>/Script/CoreUObject) :
-		Tag array:
-	CallFunc_NotEqual_ObjectObject_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_NotEqual_ObjectObject_ReturnValue1>BoolProperty>/Script/CoreUObject) :
-		Tag array:
-	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject) :
-		Tag array:
-	LocallyActive (0-0-0-0): size 34 (cls: LocallyActive>BoolProperty>/Script/CoreUObject) :
-		Tag array:
-	NewHighScore (0-0-0-0): size 34 (cls: NewHighScore>BoolProperty>/Script/CoreUObject) :
-		Tag array:
-	No High Score FX (0-0-0-0): size 60 (cls: No High Score FX>Function>/Script/CoreUObject) :
+	K2Node_Event_ContributingPlayers (0-0-0-0): size 36 (cls: K2Node_Event_ContributingPlayers>ArrayProperty>/Script/CoreUObject) :
 		Tag array:
 	WinFX (0-0-0-0): size 58 (cls: WinFX>Function>/Script/CoreUObject) :
+		Tag array:
+	No High Score FX (0-0-0-0): size 60 (cls: No High Score FX>Function>/Script/CoreUObject) :
 		Tag array:
 	PlayQuestSuccessFX (0-0-0-0): size 58 (cls: PlayQuestSuccessFX>Function>/Script/CoreUObject) :
 		Tag array:
@@ -552,7 +541,65 @@ Serialized exports:
 		Tag array:
 	ScoreIncrement (0-0-0-0): size 32 (cls: ScoreIncrement>IntProperty>/Script/CoreUObject) :
 		Tag array:
-	MoveScore (0-0-0-0): size 72 (cls: MoveScore>Function>/Script/CoreUObject) :
+	MoveScore (0-0-0-0): size 86 (cls: MoveScore>Function>/Script/CoreUObject) :
+		Tag array:
+	ContributingPlayers (0-0-0-0): size 36 (cls: ContributingPlayers>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	ContributingPlayers (0-0-0-0): size 36 (cls: ContributingPlayers>ArrayProperty>/Script/CoreUObject) :
+		Tag array:
+	AllPlayers (0-0-0-0): size 34 (cls: AllPlayers>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	bRequiresHighScore (0-0-0-0): size 34 (cls: bRequiresHighScore>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CreativeMode (0-0-0-0): size 34 (cls: CreativeMode>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Athena_CheckQuestAndObjectiveCompletion_ObjectiveCompleted (0-0-0-0): size 34 (cls: CallFunc_Athena_CheckQuestAndObjectiveCompletion_ObjectiveCompleted>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Athena_CheckQuestAndObjectiveCompletion_ObjectiveCompleted1 (0-0-0-0): size 34 (cls: CallFunc_Athena_CheckQuestAndObjectiveCompletion_ObjectiveCompleted1>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Athena_CheckQuestAndObjectiveCompletion_QuestCompleted (0-0-0-0): size 34 (cls: CallFunc_Athena_CheckQuestAndObjectiveCompletion_QuestCompleted>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Athena_CheckQuestAndObjectiveCompletion_QuestCompleted1 (0-0-0-0): size 34 (cls: CallFunc_Athena_CheckQuestAndObjectiveCompletion_QuestCompleted1>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Athena_CheckQuestAndObjectiveCompletion_QuestIsValid (0-0-0-0): size 34 (cls: CallFunc_Athena_CheckQuestAndObjectiveCompletion_QuestIsValid>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Athena_CheckQuestAndObjectiveCompletion_QuestIsValid1 (0-0-0-0): size 34 (cls: CallFunc_Athena_CheckQuestAndObjectiveCompletion_QuestIsValid1>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_BooleanOR_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanOR_ReturnValue>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Greater_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Greater_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Greater_IntInt_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_Greater_IntInt_ReturnValue1>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_GreaterEqual_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_GreaterEqual_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_HasAuthority_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasAuthority_ReturnValue>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_HasAuthority_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_HasAuthority_ReturnValue1>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_HasAuthority_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_HasAuthority_ReturnValue2>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_HasAuthority_ReturnValue3 (0-0-0-0): size 34 (cls: CallFunc_HasAuthority_ReturnValue3>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_HasAuthority_ReturnValue4 (0-0-0-0): size 34 (cls: CallFunc_HasAuthority_ReturnValue4>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_HasTag_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasTag_ReturnValue>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_HasTag_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_HasTag_ReturnValue1>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Less_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_NotEqual_ObjectObject_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_NotEqual_ObjectObject_ReturnValue>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_NotEqual_ObjectObject_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_NotEqual_ObjectObject_ReturnValue1>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	K2Node_DynamicCast_bSuccess1 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess1>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	LocallyActive (0-0-0-0): size 34 (cls: LocallyActive>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	NewHighScore (0-0-0-0): size 34 (cls: NewHighScore>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_SetStaticMesh_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_SetStaticMesh_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -592,7 +639,19 @@ Serialized exports:
 		Tag array:
 	CallFunc_Add_IntInt_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue>IntProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_Add_IntInt_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue1>IntProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Array_AddUnique_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Array_AddUnique_ReturnValue>IntProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Array_AddUnique_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Array_AddUnique_ReturnValue1>IntProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Array_Length_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Array_Length_ReturnValue>IntProperty>/Script/CoreUObject) :
+		Tag array:
 	K2Node_Event_ScoreIncrement (0-0-0-0): size 32 (cls: K2Node_Event_ScoreIncrement>IntProperty>/Script/CoreUObject) :
+		Tag array:
+	Temp_int_Array_Index_Variable (0-0-0-0): size 32 (cls: Temp_int_Array_Index_Variable>IntProperty>/Script/CoreUObject) :
+		Tag array:
+	Temp_int_Loop_Counter_Variable (0-0-0-0): size 32 (cls: Temp_int_Loop_Counter_Variable>IntProperty>/Script/CoreUObject) :
 		Tag array:
 	HighScore (0-0-0-0): size 32 (cls: HighScore>IntProperty>/Script/CoreUObject) :
 		Tag array:
@@ -612,13 +671,15 @@ Serialized exports:
 		Tag array:
 	CallFunc_Array_Get_Item2 (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item2>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_Array_Get_Item3 (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item3>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_CreateDynamicMaterialInstance_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_CreateDynamicMaterialInstance_ReturnValue>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_CreateDynamicMaterialInstance_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_CreateDynamicMaterialInstance_ReturnValue1>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	CallFunc_GetFortPlayerControllerFromActor_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetFortPlayerControllerFromActor_ReturnValue>ObjectProperty>/Script/CoreUObject) :
-		Tag array:
 	CallFunc_GetGameState_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetGameState_ReturnValue>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_GetInstigatorController_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetInstigatorController_ReturnValue>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_GetPlayerPawn_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetPlayerPawn_ReturnValue>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
@@ -627,6 +688,8 @@ Serialized exports:
 	CallFunc_SpawnEmitterAttached_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_SpawnEmitterAttached_ReturnValue>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	K2Node_DynamicCast_AsFort_Game_State_Athena (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Game_State_Athena>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	K2Node_DynamicCast_AsFort_Player_Controller_Athena (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Player_Controller_Athena>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	K2Node_Event_OwningPlayer (0-0-0-0): size 36 (cls: K2Node_Event_OwningPlayer>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
@@ -660,9 +723,10 @@ Serialized exports:
 		Tag array:
 	WinEffect (0-0-0-0): size 36 (cls: WinEffect>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	HighScoreFX_GEN_VARIABLE (0-0-0-0): size 67 (cls: HighScoreFX_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	HighScoreFX_GEN_VARIABLE (0-0-0-0): size 150 (cls: HighScoreFX_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_Athena_SoccerGame_ScoredGoal=/Game/Athena/Prototype/SoccerGame/P_Athena_SoccerGame_ScoredGoal 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
 	DefaultSceneRoot_GEN_VARIABLE (0-0-0-0): size 12 (cls: DefaultSceneRoot_GEN_VARIABLE>SceneComponent>/Script/Engine) :
 		Tag array:

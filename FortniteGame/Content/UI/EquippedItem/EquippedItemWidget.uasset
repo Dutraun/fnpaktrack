@@ -56,9 +56,11 @@ Name table:
 	bValidTemplate
 	ByteProperty
 	CallFunc_BooleanAND_ReturnValue
+	CallFunc_Conv_FloatToText_ReturnValue
 	CallFunc_Conv_IntToText_ReturnValue
 	CallFunc_Format_ReturnValue
 	CallFunc_Format_ReturnValue1
+	CallFunc_FTrunc_ReturnValue
 	CallFunc_Get_Debuff_Color_Color
 	CallFunc_GetContext_ReturnValue
 	CallFunc_GetContext_ReturnValue1
@@ -71,6 +73,7 @@ Name table:
 	CallFunc_GetLocalMagazineAmmoCount_ReturnValue
 	CallFunc_GetLocalRemainingAmmo_ReturnValue
 	CallFunc_GetSmallPreviewImage_ReturnValue
+	CallFunc_GetValueAtLevel_ReturnValue
 	CallFunc_Greater_IntInt_ReturnValue
 	CallFunc_Greater_IntInt_ReturnValue1
 	CallFunc_Greater_IntInt_ReturnValue2
@@ -79,6 +82,7 @@ Name table:
 	CallFunc_Greater_IntInt_ReturnValue5
 	CallFunc_IsValid_ReturnValue
 	CallFunc_IsValid_ReturnValue1
+	CallFunc_IsValid_ReturnValue2
 	CallFunc_Less_IntInt_ReturnValue
 	CallFunc_Less_IntInt_ReturnValue1
 	CallFunc_Max_ReturnValue
@@ -94,11 +98,13 @@ Name table:
 	CommonWidgetSwitcher
 	Construct
 	Content
+	Conv_FloatToText
 	Conv_IntToText
 	CurrentAmmoCount
 	CurrentAmmoText
 	CurrentQuickbar
 	CursorModeEnabled
+	CustomEvent
 	Default__ArrayProperty
 	Default__BlueprintContextLibrary
 	Default__BoolProperty
@@ -114,6 +120,7 @@ Name table:
 	Default__EquippedItemWidget_C
 	Default__FloatProperty
 	Default__FortHUDElementWidget
+	Default__FortScalableFloatUtils
 	Default__FortUIBlueprintFunctionLibrary
 	Default__Function
 	Default__HorizontalBox
@@ -166,16 +173,20 @@ Name table:
 	FortHUDContext
 	FortHUDElementWidget
 	FortInventoryContext
+	FortMountedTurret
 	FortMultiSizeBrush
 	FortPawnEquippedWeaponSignature__DelegateSignature
 	FortResourceItemDefinition
+	FortScalableFloatUtils
 	FortUIBlueprintFunctionLibrary
 	FortUIStylesheet
 	FortUITheme
 	FortWeap_BuildingToolBase
 	FortWeapon
 	FortWeaponRanged
+	FortWeaponRangedDualMountedTurret
 	FortWorldItemDefinition
+	FTrunc
 	FullUpdateAmmoDisplay
 	FullUpdateResourceDisplay
 	Function
@@ -193,6 +204,7 @@ Name table:
 	GetLocalMagazineAmmoCount
 	GetLocalRemainingAmmo
 	GetSmallPreviewImage
+	GetValueAtLevel
 	Greater_IntInt
 	HAlign_Center
 	HAlign_Left
@@ -219,14 +231,18 @@ Name table:
 	K2Node_CreateDelegate_OutputDelegate2
 	K2Node_CreateDelegate_OutputDelegate3
 	K2Node_CreateDelegate_OutputDelegate4
+	K2Node_CreateDelegate_OutputDelegate5
 	K2Node_CustomEvent_LocalCount
 	K2Node_CustomEvent_LocalRemaining
 	K2Node_CustomEvent_NewWeapon
 	K2Node_CustomEvent_PrevWeapon
+	K2Node_CustomEvent_ShotsRemaining
 	K2Node_DynamicCast_AsFort_Weap_Building_Tool_Base
 	K2Node_DynamicCast_AsFort_Weapon_Ranged
+	K2Node_DynamicCast_AsFort_Weapon_Ranged_Dual_Mounted_Turret
 	K2Node_DynamicCast_bSuccess
 	K2Node_DynamicCast_bSuccess1
+	K2Node_DynamicCast_bSuccess2
 	K2Node_MakeArray_Array
 	K2Node_MakeArray_Array1
 	K2Node_MakeStruct_FormatArgumentData
@@ -253,6 +269,7 @@ Name table:
 	Margin
 	Material
 	Max
+	MountedTurretCached
 	MulticastDelegateProperty
 	NameProperty
 	NewWeapon
@@ -263,6 +280,8 @@ Name table:
 	OnBuildingMaterialCycled
 	OnLocalAmmoChanged
 	OnLocalAmmoChanged__DelegateSignature
+	OnMountedTurretFired__DelegateSignature
+	OnMountedTurretFiredEvent
 	OnPawnSet
 	OnWeaponEquipped
 	OnWeaponEquippedDelegate
@@ -294,6 +313,8 @@ Name table:
 	SetOpacity
 	SetText
 	SetVisibility
+	ShotsFired
+	ShotsRemaining
 	ShouldDisplayAmmoCounter
 	Size
 	SizeBox
@@ -336,6 +357,7 @@ Name table:
 	Texture2D
 	Tiling
 	Top
+	TotalShotsAllowedThenShutdown
 	TransitionDuration
 	Translation
 	TypefaceFontName
@@ -344,6 +366,7 @@ Name table:
 	UberGraphFunction
 	UnderlyingType
 	UpdateCurrentAmmo
+	UpdateMountedTurret
 	UpdateResourceCount
 	UpdateVisibility
 	UpdateWidgetColor
@@ -394,10 +417,13 @@ Import table:
 	KismetSystemLibrary (Class)
 	KismetTextLibrary (Class)
 	Texture2D (Class)
+	FortMountedTurret (Class)
 	FortResourceItemDefinition (Class)
+	FortScalableFloatUtils (Class)
 	FortWeap_BuildingToolBase (Class)
 	FortWeapon (Class)
 	FortWeaponRanged (Class)
+	FortWeaponRangedDualMountedTurret (Class)
 	FortWorldItemDefinition (Class)
 	FortHUDContext (Class)
 	FortHUDElementWidget (Class)
@@ -422,6 +448,7 @@ Import table:
 	Default__CommonWidgetSwitcher (CommonWidgetSwitcher)
 	FortPawnEquippedWeaponSignature__DelegateSignature (DelegateFunction)
 	OnLocalAmmoChanged__DelegateSignature (DelegateFunction)
+	OnMountedTurretFired__DelegateSignature (DelegateFunction)
 	HUDBasicDelegate__DelegateSignature (DelegateFunction)
 	ItemsChanged__DelegateSignature (DelegateFunction)
 	Default__DelegateProperty (DelegateProperty)
@@ -435,19 +462,23 @@ Import table:
 	R (FloatProperty)
 	ArgumentValueFloat (FloatProperty)
 	Default__FortHUDElementWidget (FortHUDElementWidget)
+	Default__FortScalableFloatUtils (FortScalableFloatUtils)
 	Default__FortUIBlueprintFunctionLibrary (FortUIBlueprintFunctionLibrary)
 	GetContext (Function)
 	SetBrushFromLazyTexture (Function)
 	Default__Function (Function)
 	BooleanAND (Function)
+	FTrunc (Function)
 	Greater_IntInt (Function)
 	Less_IntInt (Function)
 	Max (Function)
 	Subtract_IntInt (Function)
 	Delay (Function)
 	IsValid (Function)
+	Conv_FloatToText (Function)
 	Conv_IntToText (Function)
 	Format (Function)
+	GetValueAtLevel (Function)
 	ShouldDisplayAmmoCounter (Function)
 	GetCurrentAmmoItemDefinition (Function)
 	GetCurrentResourceCount (Function)
@@ -463,16 +494,19 @@ Import table:
 	Default__Image (Image)
 	Default__IntProperty (IntProperty)
 	ArgumentValueInt (IntProperty)
+	ShotsFired (IntProperty)
 	Default__KeybindWidget_C (KeybindWidget_C)
 	Default__KismetSystemLibrary (KismetSystemLibrary)
 	Default__KismetTextLibrary (KismetTextLibrary)
 	M-FontShadow (Material)
+	OnMountedTurretFiredEvent (MulticastDelegateProperty)
 	OnLocalAmmoChanged (MulticastDelegateProperty)
 	OnBuildingMaterialCycled (MulticastDelegateProperty)
 	OnPawnSet (MulticastDelegateProperty)
 	OnWeaponEquippedDelegate (MulticastDelegateProperty)
 	OnWorldItemsChanged (MulticastDelegateProperty)
 	Default__ObjectProperty (ObjectProperty)
+	MountedTurretCached (ObjectProperty)
 	Default__Overlay (Overlay)
 	Default__OverlaySlot (OverlaySlot)
 	/Game/UI/Foundation/Border/Border_HUD_Line_Vert (Package)
@@ -511,6 +545,7 @@ Import table:
 	Default__SoftObjectProperty (SoftObjectProperty)
 	ArgumentName (StrProperty)
 	Default__StructProperty (StructProperty)
+	TotalShotsAllowedThenShutdown (StructProperty)
 	SpecifiedColor (StructProperty)
 	Default__StyleLibrary_C (StyleLibrary_C)
 	Default__TextProperty (TextProperty)
@@ -529,7 +564,7 @@ Import table:
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	EquippedItemWidget_C (0-0-0-0): size 524 (cls: EquippedItemWidget_C>WidgetBlueprintGeneratedClass>/Script/UMG) :
+	EquippedItemWidget_C (0-0-0-0): size 556 (cls: EquippedItemWidget_C>WidgetBlueprintGeneratedClass>/Script/UMG) :
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
@@ -547,7 +582,11 @@ Serialized exports:
 		Tag array:
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject) :
 		Tag array:
-	ExecuteUbergraph_EquippedItemWidget (0-0-0-0): size 972 (cls: ExecuteUbergraph_EquippedItemWidget>Function>/Script/CoreUObject) :
+	ExecuteUbergraph_EquippedItemWidget (0-0-0-0): size 1224 (cls: ExecuteUbergraph_EquippedItemWidget>Function>/Script/CoreUObject) :
+		Tag array:
+	ShotsRemaining (0-0-0-0): size 32 (cls: ShotsRemaining>IntProperty>/Script/CoreUObject) :
+		Tag array:
+	CustomEvent_0 (0-0-0-0): size 72 (cls: CustomEvent_0>Function>/Script/CoreUObject) :
 		Tag array:
 	OnBuildingMaterialCycled (0-0-0-0): size 58 (cls: OnBuildingMaterialCycled>Function>/Script/CoreUObject) :
 		Tag array:
@@ -573,7 +612,7 @@ Serialized exports:
 		Tag array:
 	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	UpdateVisibility (0-0-0-0): size 509 (cls: UpdateVisibility>Function>/Script/CoreUObject) :
+	UpdateVisibility (0-0-0-0): size 519 (cls: UpdateVisibility>Function>/Script/CoreUObject) :
 		Tag array:
 	HasAmmo (0-0-0-0): size 34 (cls: HasAmmo>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -605,11 +644,15 @@ Serialized exports:
 		Tag array:
 	CallFunc_IsValid_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue1>BoolProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_IsValid_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue2>BoolProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_ShouldDisplayAmmoCounter_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_ShouldDisplayAmmoCounter_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	K2Node_DynamicCast_bSuccess1 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess1>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	K2Node_DynamicCast_bSuccess2 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess2>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_Less_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -640,6 +683,12 @@ Serialized exports:
 	Temp_bool_Variable1 (0-0-0-0): size 34 (cls: Temp_bool_Variable1>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	Temp_bool_Variable2 (0-0-0-0): size 34 (cls: Temp_bool_Variable2>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	UpdateMountedTurret (0-0-0-0): size 559 (cls: UpdateMountedTurret>Function>/Script/CoreUObject) :
+		Tag array:
+	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_ShouldDisplayAmmoCounter_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_ShouldDisplayAmmoCounter_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -725,6 +774,8 @@ Serialized exports:
 		Tag array:
 	K2Node_CreateDelegate_OutputDelegate4 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate4>DelegateProperty>/Script/CoreUObject) :
 		Tag array:
+	K2Node_CreateDelegate_OutputDelegate5 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate5>DelegateProperty>/Script/CoreUObject) :
+		Tag array:
 	K2Node_Select_Default (0-0-0-0): size 40 (cls: K2Node_Select_Default>EnumProperty>/Script/CoreUObject) :
 		Tag array:
 	Temp_byte_Variable (0-0-0-0): size 40 (cls: Temp_byte_Variable>EnumProperty>/Script/CoreUObject) :
@@ -757,6 +808,8 @@ Serialized exports:
 	Temp_float_Variable2 (0-0-0-0): size 32 (cls: Temp_float_Variable2>FloatProperty>/Script/CoreUObject) :
 		Tag array:
 	Temp_float_Variable3 (0-0-0-0): size 32 (cls: Temp_float_Variable3>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_GetValueAtLevel_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetValueAtLevel_ReturnValue>FloatProperty>/Script/CoreUObject) :
 		Tag array:
 	HorizontalBoxAmmo (0-0-0-0): size 102 (cls: HorizontalBoxAmmo>HorizontalBox>/Script/UMG) :
 		Tag array:
@@ -847,6 +900,8 @@ Serialized exports:
 		Tag array:
 	K2Node_CustomEvent_LocalRemaining (0-0-0-0): size 32 (cls: K2Node_CustomEvent_LocalRemaining>IntProperty>/Script/CoreUObject) :
 		Tag array:
+	K2Node_CustomEvent_ShotsRemaining (0-0-0-0): size 32 (cls: K2Node_CustomEvent_ShotsRemaining>IntProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_GetLocalMagazineAmmoCount_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetLocalMagazineAmmoCount_ReturnValue>IntProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_GetLocalRemainingAmmo_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetLocalRemainingAmmo_ReturnValue>IntProperty>/Script/CoreUObject) :
@@ -860,6 +915,10 @@ Serialized exports:
 	CallFunc_Subtract_IntInt_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Subtract_IntInt_ReturnValue>IntProperty>/Script/CoreUObject) :
 		Tag array:
 	LocalRemaining (0-0-0-0): size 32 (cls: LocalRemaining>IntProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_FTrunc_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_FTrunc_ReturnValue>IntProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Subtract_IntInt_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Subtract_IntInt_ReturnValue>IntProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_GetCurrentResourceCount_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetCurrentResourceCount_ReturnValue>IntProperty>/Script/CoreUObject) :
 		Tag array:
@@ -886,6 +945,8 @@ Serialized exports:
 		Tag array:
 	K2Node_DynamicCast_AsFort_Weapon_Ranged (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Weapon_Ranged>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
+	K2Node_DynamicCast_AsFort_Weapon_Ranged_Dual_Mounted_Turret (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Weapon_Ranged_Dual_Mounted_Turret>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_GetEquippedWeapon_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetEquippedWeapon_ReturnValue>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_GetCurrentResourceItemDefinition_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetCurrentResourceItemDefinition_ReturnValue>ObjectProperty>/Script/CoreUObject) :
@@ -911,6 +972,10 @@ Serialized exports:
 	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_GetCurrentAmmoItemDefinition_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetCurrentAmmoItemDefinition_ReturnValue>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_GetEquippedWeapon_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetEquippedWeapon_ReturnValue>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	K2Node_DynamicCast_AsFort_Weapon_Ranged_Dual_Mounted_Turret (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Weapon_Ranged_Dual_Mounted_Turret>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_GetEquippedWeapon_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetEquippedWeapon_ReturnValue>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
@@ -989,6 +1054,10 @@ Serialized exports:
 	K2Node_Select_Default (0-0-0-0): size 32 (cls: K2Node_Select_Default>TextProperty>/Script/CoreUObject) :
 		Tag array:
 	Temp_text_Variable (0-0-0-0): size 32 (cls: Temp_text_Variable>TextProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Conv_FloatToText_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Conv_FloatToText_ReturnValue>TextProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Conv_IntToText_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Conv_IntToText_ReturnValue>TextProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_Conv_IntToText_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Conv_IntToText_ReturnValue>TextProperty>/Script/CoreUObject) :
 		Tag array:

@@ -49,6 +49,7 @@ Name table:
 	CallFunc_GetTimeRemainingForRespawnBP_ReturnValue
 	CallFunc_Greater_FloatFloat_ReturnValue
 	CallFunc_K2_SetTimerDelegate_ReturnValue
+	CallFunc_PlayAnimationAtTime_ReturnValue
 	ChildTemplates
 	Class
 	CommonTextBlock
@@ -240,7 +241,7 @@ Name table:
 	Padding
 	Parent
 	ParentGuid
-	PlayAnimation
+	PlayAnimationAtTime
 	PlaybackRange
 	PlayerController
 	PlayerDeathReport
@@ -329,6 +330,7 @@ Name table:
 	UberGraphFunction
 	UInt16Property
 	UInt32Property
+	UMGSequencePlayer
 	UpdateDisplayTime
 	UserWidget
 	VAlign_Center
@@ -376,6 +378,7 @@ Import table:
 	MovieScene2DTransformTrack (Class)
 	Overlay (Class)
 	OverlaySlot (Class)
+	UMGSequencePlayer (Class)
 	UserWidget (Class)
 	VerticalBox (Class)
 	VerticalBoxSlot (Class)
@@ -397,7 +400,7 @@ Import table:
 	GetDynamicMaterial (Function)
 	Construct (Function)
 	Destruct (Function)
-	PlayAnimation (Function)
+	PlayAnimationAtTime (Function)
 	Default__GameplayStatics (GameplayStatics)
 	Default__HorizontalBox (HorizontalBox)
 	Default__HorizontalBoxSlot (HorizontalBoxSlot)
@@ -461,9 +464,8 @@ Serialized exports:
 			TotalTime(FloatProperty)=1 
 			bHasScriptImplementedTick(BoolProperty)=False 
 			bHasScriptImplementedPaint(BoolProperty)=False 
-	WidgetArchetype (0-0-0-0): size 241 (cls: WidgetArchetype>AthenaRespawnTimer_C) :
+	WidgetArchetype (0-0-0-0): size 212 (cls: WidgetArchetype>AthenaRespawnTimer_C) :
 		Tag array:
-			TickDown(ObjectProperty)=TickDown_INST=WidgetArchetype 
 			Content(ObjectProperty)=Content=WidgetArchetype 
 			Feedback(ObjectProperty)=Feedback=WidgetArchetype 
 			Image_ProgressBar(ObjectProperty)=Image_ProgressBar=WidgetArchetype 
@@ -489,7 +491,7 @@ Serialized exports:
 		Tag array:
 	PlayerDeathReport (0-0-0-0): size 36 (cls: PlayerDeathReport>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	UpdateDisplayTime (0-0-0-0): size 557 (cls: UpdateDisplayTime>Function>/Script/CoreUObject) :
+	UpdateDisplayTime (0-0-0-0): size 567 (cls: UpdateDisplayTime>Function>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_Greater_FloatFloat_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Greater_FloatFloat_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -553,20 +555,6 @@ Serialized exports:
 			PlaybackRange(StructProperty)=System.Byte[] 
 			DisplayRate(StructProperty)=System.Byte[] 
 			Signature(StructProperty)=Guid: 509729367-1239677693-2769854865-530503933 
-	TickDown (0-0-0-0): size 792 (cls: TickDown>MovieScene>/Script/MovieScene) :
-		Tag array:
-			Possessables(ArrayProperty)=[object] (inner: StructProperty)
-			ObjectBindings(ArrayProperty)=[object] (inner: StructProperty)
-			PlaybackRange(StructProperty)=System.Byte[] 
-			DisplayRate(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 509729367-1239677693-2769854865-530503933 
-	MovieScene2DTransformSection_0 (0-0-0-0): size 3405 (cls: MovieScene2DTransformSection_0>MovieScene2DTransformSection>/Script/UMG) :
-		Tag array:
-			Scale(StructProperty)=System.Byte[] 
-			Scale(StructProperty)=System.Byte[] 
-			Easing(StructProperty)=System.Byte[] 
-			SectionRange(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 2714274082-1300030602-1902302118-3033415882 
 	MovieScene2DTransformSection_0 (0-0-0-0): size 3405 (cls: MovieScene2DTransformSection_0>MovieScene2DTransformSection>/Script/UMG) :
 		Tag array:
 			Scale(StructProperty)=System.Byte[] 
@@ -580,20 +568,6 @@ Serialized exports:
 			PropertyPath(StrProperty)=RenderTransform 
 			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
 			Signature(StructProperty)=Guid: 239249652-1095568182-3575071360-2191006914 
-	MovieScene2DTransformTrack_0 (0-0-0-0): size 196 (cls: MovieScene2DTransformTrack_0>MovieScene2DTransformTrack>/Script/UMG) :
-		Tag array:
-			PropertyName(NameProperty)=RenderTransform 
-			PropertyPath(StrProperty)=RenderTransform 
-			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
-			Signature(StructProperty)=Guid: 239249652-1095568182-3575071360-2191006914 
-	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene) :
-		Tag array:
-	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene) :
-		Tag array:
-	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene) :
-		Tag array:
-	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene) :
-		Tag array:
 	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene) :
 		Tag array:
 	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene) :
@@ -608,18 +582,6 @@ Serialized exports:
 			Easing(StructProperty)=System.Byte[] 
 			SectionRange(StructProperty)=System.Byte[] 
 			Signature(StructProperty)=Guid: 1928782178-1179829460-3566366602-2338391329 
-	MovieSceneFloatSection_0 (0-0-0-0): size 1491 (cls: MovieSceneFloatSection_0>MovieSceneFloatSection>/Script/MovieSceneTracks) :
-		Tag array:
-			FloatCurve(StructProperty)=System.Byte[] 
-			Easing(StructProperty)=System.Byte[] 
-			SectionRange(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 1928782178-1179829460-3566366602-2338391329 
-	MovieSceneFloatTrack_0 (0-0-0-0): size 194 (cls: MovieSceneFloatTrack_0>MovieSceneFloatTrack>/Script/MovieSceneTracks) :
-		Tag array:
-			PropertyName(NameProperty)=RenderOpacity 
-			PropertyPath(StrProperty)=RenderOpacity 
-			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
-			Signature(StructProperty)=Guid: 159352631-1331062780-38073217-2549816300 
 	MovieSceneFloatTrack_0 (0-0-0-0): size 194 (cls: MovieSceneFloatTrack_0>MovieSceneFloatTrack>/Script/MovieSceneTracks) :
 		Tag array:
 			PropertyName(NameProperty)=RenderOpacity 
@@ -653,6 +615,8 @@ Serialized exports:
 	TimeText (0-0-0-0): size 36 (cls: TimeText>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_GetOwningPlayer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetOwningPlayer_ReturnValue>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_PlayAnimationAtTime_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlayAnimationAtTime_ReturnValue>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	K2Node_DynamicCast_AsFort_Player_Controller_Athena (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Player_Controller_Athena>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
@@ -690,12 +654,6 @@ Serialized exports:
 	TickDown_INST (0-0-0-0): size 13632 (cls: TickDown_INST>WidgetAnimation>/Script/UMG) :
 		Tag array:
 			MovieScene(ObjectProperty)=TickDown=AthenaRespawnTimer_C 
-			AnimationBindings(ArrayProperty)=[object] (inner: StructProperty)
-			PrecompiledEvaluationTemplate(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 3768611130-1290950116-3017263233-3621640665 
-	TickDown_INST (0-0-0-0): size 13632 (cls: TickDown_INST>WidgetAnimation>/Script/UMG) :
-		Tag array:
-			MovieScene(ObjectProperty)=TickDown=WidgetArchetype 
 			AnimationBindings(ArrayProperty)=[object] (inner: StructProperty)
 			PrecompiledEvaluationTemplate(StructProperty)=System.Byte[] 
 			Signature(StructProperty)=Guid: 3768611130-1290950116-3017263233-3621640665 

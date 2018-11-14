@@ -30,6 +30,7 @@ Name table:
 	Activate
 	ActiveGameplayEffectHandle
 	Actor
+	ActorComponentTickFunction
 	ActualCollide
 	ActualCollide_GEN_VARIABLE
 	Add_FloatFloat
@@ -72,6 +73,7 @@ Name table:
 	BP_ApplyGameplayEffectToSelf
 	BreakHitResult
 	bShouldBounce
+	bStartWithTickEnabled
 	bStopSimulatingOnHit
 	bValidatedAsWired
 	ByteProperty
@@ -410,8 +412,8 @@ Name table:
 	KismetMathLibrary
 	KismetSystemLibrary
 	LatentActionInfo
-	LERP
 	Lerp
+	LERP
 	LifespanAfterKill
 	Lifetime
 	LinearColor
@@ -474,6 +476,7 @@ Name table:
 	PostProcessComponent
 	PostProcessSettings
 	PPBlendWeight
+	PrimaryComponentTick
 	PrimitiveComponent
 	ProjectileComp0
 	ProjectileGravityScale
@@ -765,6 +768,7 @@ Import table:
 	LinearColor (ScriptStruct)
 	Rotator (ScriptStruct)
 	Vector (ScriptStruct)
+	ActorComponentTickFunction (ScriptStruct)
 	BodyInstance (ScriptStruct)
 	CollisionResponse (ScriptStruct)
 	HitResult (ScriptStruct)
@@ -1257,21 +1261,25 @@ Serialized exports:
 		Tag array:
 	CallFunc_CreateDynamicMaterialInstance_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_CreateDynamicMaterialInstance_ReturnValue>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	P_Outlander_GravitySphere_Running_01_GEN_VARIABLE (0-0-0-0): size 67 (cls: P_Outlander_GravitySphere_Running_01_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	P_Outlander_GravitySphere_Running_01_GEN_VARIABLE (0-0-0-0): size 150 (cls: P_Outlander_GravitySphere_Running_01_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_Outlander_GravitySphere_Running_01=/Game/CharClasses/Outlander/Gadgets/GravitySphere/Particles/P_Outlander_GravitySphere_Running_01 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
-	P_Outlander_GravityWell_01_GEN_VARIABLE (0-0-0-0): size 67 (cls: P_Outlander_GravityWell_01_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	P_Outlander_GravityWell_01_GEN_VARIABLE (0-0-0-0): size 150 (cls: P_Outlander_GravityWell_01_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_Outlander_GravityWell_01=/Game/CharClasses/Outlander/Gadgets/GravitySphere/Particles/P_Outlander_GravityWell_01 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
-	ParticleSystemComponent_2829 (0-0-0-0): size 67 (cls: ParticleSystemComponent_2829>ParticleSystemComponent>/Script/Engine) :
+	ParticleSystemComponent_2829 (0-0-0-0): size 150 (cls: ParticleSystemComponent_2829>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_C4_Land=/Game/Gadgets/Assets/Classes/ConstructionWorker/C4/P_C4_Land 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
-	ParticleSystemComponent_6083 (0-0-0-0): size 67 (cls: ParticleSystemComponent_6083>ParticleSystemComponent>/Script/Engine) :
+	ParticleSystemComponent_6083 (0-0-0-0): size 150 (cls: ParticleSystemComponent_6083>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_C4_Distance=/Game/Gadgets/Assets/Classes/ConstructionWorker/C4/P_C4_Distance 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
 	PostProcess_GEN_VARIABLE (0-0-0-0): size 510 (cls: PostProcess_GEN_VARIABLE>PostProcessComponent>/Script/Engine) :
 		Tag array:
@@ -1299,7 +1307,7 @@ Serialized exports:
 			ComponentTemplate(ObjectProperty)=SceneComponent_108=B_Prj_Outlander_GravitySphere_C 
 			VariableGuid(StructProperty)=Guid: 1295648158-0-0-0 
 			InternalVariableName(NameProperty)=DefaultSceneRoot 
-	SCS_Node_14 (0-0-0-0): size 594 (cls: SCS_Node_14>SCS_Node>/Script/Engine) :
+	SCS_Node_14 (0-0-0-0): size 792 (cls: SCS_Node_14>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=ParticleSystemComponent_6083=B_Prj_Outlander_GravitySphere_C 
@@ -1308,7 +1316,7 @@ Serialized exports:
 			bIsParentComponentNative(BoolProperty)=True 
 			VariableGuid(StructProperty)=Guid: 3024357827-0-0-0 
 			InternalVariableName(NameProperty)=Effect_Distance_Guide 
-	SCS_Node_2 (0-0-0-0): size 594 (cls: SCS_Node_2>SCS_Node>/Script/Engine) :
+	SCS_Node_2 (0-0-0-0): size 792 (cls: SCS_Node_2>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=P_Outlander_GravityWell_01_GEN_VARIABLE=B_Prj_Outlander_GravitySphere_C 
@@ -1344,7 +1352,7 @@ Serialized exports:
 			bIsParentComponentNative(BoolProperty)=True 
 			VariableGuid(StructProperty)=Guid: 2805181809-0-0-0 
 			InternalVariableName(NameProperty)=Mesh 
-	SCS_Node_6 (0-0-0-0): size 594 (cls: SCS_Node_6>SCS_Node>/Script/Engine) :
+	SCS_Node_6 (0-0-0-0): size 792 (cls: SCS_Node_6>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=ParticleSystemComponent_2829=B_Prj_Outlander_GravitySphere_C 
@@ -1353,7 +1361,7 @@ Serialized exports:
 			bIsParentComponentNative(BoolProperty)=True 
 			VariableGuid(StructProperty)=Guid: 3348036515-0-0-0 
 			InternalVariableName(NameProperty)=Effect_land 
-	SCS_Node_7 (0-0-0-0): size 594 (cls: SCS_Node_7>SCS_Node>/Script/Engine) :
+	SCS_Node_7 (0-0-0-0): size 792 (cls: SCS_Node_7>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=P_Outlander_GravitySphere_Running_01_GEN_VARIABLE=B_Prj_Outlander_GravitySphere_C 

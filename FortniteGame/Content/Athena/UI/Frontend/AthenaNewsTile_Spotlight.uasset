@@ -61,6 +61,7 @@ Name table:
 	ButtonText
 	bValidTemplate
 	ByteProperty
+	CallFunc_PlayAnimationAtTime_ReturnValue
 	CenterButtonTextWidget
 	ChildTemplates
 	Class
@@ -275,7 +276,7 @@ Name table:
 	Parent
 	ParentGuid
 	Percentage
-	PlayAnimation
+	PlayAnimationAtTime
 	PlaybackRange
 	PlayIntroAnim
 	PointerToUberGraphFrame
@@ -376,6 +377,7 @@ Name table:
 	UberGraphFunction
 	UInt16Property
 	UInt32Property
+	UMGSequencePlayer
 	UserWidget
 	VAlign_Bottom
 	VAlign_Center
@@ -437,6 +439,7 @@ Import table:
 	ScaleBoxSlot (Class)
 	SizeBox (Class)
 	SizeBoxSlot (Class)
+	UMGSequencePlayer (Class)
 	UserWidget (Class)
 	VerticalBox (Class)
 	VerticalBoxSlot (Class)
@@ -456,7 +459,7 @@ Import table:
 	Default__Function (Function)
 	PlayIntroAnim (Function)
 	SetDefaultImage (Function)
-	PlayAnimation (Function)
+	PlayAnimationAtTime (Function)
 	Default__HorizontalBox (HorizontalBox)
 	Default__HorizontalBoxSlot (HorizontalBoxSlot)
 	Default__IconTextButton_C (IconTextButton_C)
@@ -534,9 +537,8 @@ Serialized exports:
 			Padding(StructProperty)=System.Byte[] 
 			bHasScriptImplementedTick(BoolProperty)=False 
 			bHasScriptImplementedPaint(BoolProperty)=False 
-	WidgetArchetype (0-0-0-0): size 589 (cls: WidgetArchetype>AthenaNewsTile_Spotlight_C) :
+	WidgetArchetype (0-0-0-0): size 560 (cls: WidgetArchetype>AthenaNewsTile_Spotlight_C) :
 		Tag array:
-			Intro(ObjectProperty)=Intro_INST=WidgetArchetype 
 			Button_Action(ObjectProperty)=Button_Action=WidgetArchetype 
 			CommonLoadGuard_0(ObjectProperty)=CommonLoadGuard_0=WidgetArchetype 
 			ConfirmSelectionFlash(ObjectProperty)=ConfirmSelectionFlash=WidgetArchetype 
@@ -672,9 +674,11 @@ Serialized exports:
 		Tag array:
 	VisibilityBox (0-0-0-0): size 36 (cls: VisibilityBox>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_PlayAnimationAtTime_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlayAnimationAtTime_ReturnValue>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject) :
 		Tag array:
-	ExecuteUbergraph_AthenaNewsTile_Spotlight (0-0-0-0): size 152 (cls: ExecuteUbergraph_AthenaNewsTile_Spotlight>Function>/Script/CoreUObject) :
+	ExecuteUbergraph_AthenaNewsTile_Spotlight (0-0-0-0): size 162 (cls: ExecuteUbergraph_AthenaNewsTile_Spotlight>Function>/Script/CoreUObject) :
 		Tag array:
 	PlayIntroAnim (0-0-0-0): size 58 (cls: PlayIntroAnim>Function>/Script/CoreUObject) :
 		Tag array:
@@ -756,21 +760,6 @@ Serialized exports:
 			PlaybackRange(StructProperty)=System.Byte[] 
 			DisplayRate(StructProperty)=System.Byte[] 
 			Signature(StructProperty)=Guid: 2534679960-1295396130-348444344-2103280133 
-	Intro (0-0-0-0): size 798 (cls: Intro>MovieScene>/Script/MovieScene) :
-		Tag array:
-			Possessables(ArrayProperty)=[object] (inner: StructProperty)
-			ObjectBindings(ArrayProperty)=[object] (inner: StructProperty)
-			PlaybackRange(StructProperty)=System.Byte[] 
-			DisplayRate(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 2534679960-1295396130-348444344-2103280133 
-	MovieScene2DTransformSection_0 (0-0-0-0): size 4645 (cls: MovieScene2DTransformSection_0>MovieScene2DTransformSection>/Script/UMG) :
-		Tag array:
-			Rotation(StructProperty)=System.Byte[] 
-			Scale(StructProperty)=System.Byte[] 
-			Scale(StructProperty)=System.Byte[] 
-			Easing(StructProperty)=System.Byte[] 
-			SectionRange(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 1341359056-1213156208-3958916004-1143578079 
 	MovieScene2DTransformSection_0 (0-0-0-0): size 4645 (cls: MovieScene2DTransformSection_0>MovieScene2DTransformSection>/Script/UMG) :
 		Tag array:
 			Rotation(StructProperty)=System.Byte[] 
@@ -785,16 +774,6 @@ Serialized exports:
 			PropertyPath(StrProperty)=RenderTransform 
 			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
 			Signature(StructProperty)=Guid: 2194052990-1291233071-3600462217-3276803929 
-	MovieScene2DTransformTrack_0 (0-0-0-0): size 196 (cls: MovieScene2DTransformTrack_0>MovieScene2DTransformTrack>/Script/UMG) :
-		Tag array:
-			PropertyName(NameProperty)=RenderTransform 
-			PropertyPath(StrProperty)=RenderTransform 
-			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
-			Signature(StructProperty)=Guid: 2194052990-1291233071-3600462217-3276803929 
-	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene) :
-		Tag array:
-	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene) :
-		Tag array:
 	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene) :
 		Tag array:
 	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene) :
@@ -991,12 +970,6 @@ Serialized exports:
 	Intro_INST (0-0-0-0): size 11375 (cls: Intro_INST>WidgetAnimation>/Script/UMG) :
 		Tag array:
 			MovieScene(ObjectProperty)=Intro=AthenaNewsTile_Spotlight_C 
-			AnimationBindings(ArrayProperty)=[object] (inner: StructProperty)
-			PrecompiledEvaluationTemplate(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 3928962606-1180613682-1320247978-2127142670 
-	Intro_INST (0-0-0-0): size 11375 (cls: Intro_INST>WidgetAnimation>/Script/UMG) :
-		Tag array:
-			MovieScene(ObjectProperty)=Intro=WidgetArchetype 
 			AnimationBindings(ArrayProperty)=[object] (inner: StructProperty)
 			PrecompiledEvaluationTemplate(StructProperty)=System.Byte[] 
 			Signature(StructProperty)=Guid: 3928962606-1180613682-1320247978-2127142670 

@@ -9,6 +9,7 @@ Name table:
 	/Script/FortniteGame
 	Activate
 	Actor
+	ActorComponentTickFunction
 	Add_IntInt
 	AllNodes
 	Array Is Valid
@@ -23,6 +24,7 @@ Name table:
 	BlueprintMapLibrary
 	BoneSocketActor
 	BoolProperty
+	bStartWithTickEnabled
 	ByteProperty
 	CallFunc_Add_IntInt_ReturnValue
 	CallFunc_Add_IntInt_ReturnValue1
@@ -53,7 +55,6 @@ Name table:
 	CallFunc_GetAssociatedPlayerPawn_ReturnValue4
 	CallFunc_GetAssociatedPlayerPawn_ReturnValue5
 	CallFunc_GetAssociatedPlayerPawn_ReturnValue6
-	CallFunc_GetAssociatedPlayerPawn_ReturnValue7
 	CallFunc_GetCharacterPartType_ReturnValue
 	CallFunc_GetCharacterPartType_ReturnValue1
 	CallFunc_GetCharacterPartType_ReturnValue2
@@ -64,11 +65,9 @@ Name table:
 	CallFunc_GetSkeletalMeshForPartType_ReturnValue3
 	CallFunc_IsDedicatedServer_ReturnValue
 	CallFunc_IsDedicatedServer_ReturnValue1
-	CallFunc_IsSkydiving_ReturnValue
 	CallFunc_K2_AttachToComponent_ReturnValue
 	CallFunc_K2_AttachToComponent_ReturnValue1
 	CallFunc_K2_AttachToComponent_ReturnValue2
-	CallFunc_K2_SetTimerDelegate_ReturnValue
 	CallFunc_Less_IntInt_ReturnValue
 	CallFunc_Less_IntInt_ReturnValue1
 	CallFunc_Less_IntInt_ReturnValue2
@@ -87,7 +86,6 @@ Name table:
 	CallFunc_Map_Keys_Keys3
 	CCPM_EvilCowboy_Body_C
 	CCPM_Parent_WatchCosmeticStat_C
-	Check for Skydiving
 	Class
 	Color Mask 1-B: Color A
 	Color Mask 1-B: Color B
@@ -124,6 +122,7 @@ Name table:
 	ComponentTemplate
 	Conv_LinearColorToVector
 	Core Glow Color
+	CustomCharacterPartModifier
 	Default__ArrayProperty
 	Default__BlueprintGeneratedClass
 	Default__BlueprintMapLibrary
@@ -131,7 +130,6 @@ Name table:
 	Default__ByteProperty
 	Default__CCPM_EvilCowboy_Body_C
 	Default__CCPM_Parent_WatchCosmeticStat_C
-	Default__DelegateProperty
 	Default__FloatProperty
 	Default__Function
 	Default__InheritableComponentHandler
@@ -149,8 +147,6 @@ Name table:
 	DefaultSceneRoot
 	DefaultSceneRoot_GEN_VARIABLE
 	DefaultSceneRootNode
-	DelegateFunction
-	DelegateProperty
 	Dirt Color A
 	Dirt Color B
 	EFortCustomPartType
@@ -173,10 +169,7 @@ Name table:
 	InternalVariableName
 	IntProperty
 	IsDedicatedServer
-	IsSkydiving
 	K2_AttachToComponent
-	K2_SetTimerDelegate
-	K2Node_CreateDelegate_OutputDelegate
 	KismetArrayLibrary
 	KismetMathLibrary
 	KismetSystemLibrary
@@ -190,6 +183,8 @@ Name table:
 	None
 	Object
 	ObjectProperty
+	OnBeginSkydiving
+	OnEndSkydiving
 	OnPawnAndPartChanged
 	Overall Emissive Max
 	Overall Emissive Min
@@ -207,6 +202,7 @@ Name table:
 	PlayersLeft_Threshold_Stage 1
 	PlayersLeft_Threshold_Stage 2
 	PointerToUberGraphFrame
+	PrimaryComponentTick
 	ReceiveBeginPlay
 	RootNodes
 	SceneComponent
@@ -245,8 +241,6 @@ Name table:
 	Temp_int_Loop_Counter_Variable2
 	Temp_int_Loop_Counter_Variable3
 	Template
-	TimerDynamicDelegate__DelegateSignature
-	TimerHandle
 	UberGraphFrame
 	UberGraphFramePointerProperty
 	UberGraphFunction
@@ -264,7 +258,6 @@ Import table:
 	ArrayProperty (Class)
 	BoolProperty (Class)
 	ByteProperty (Class)
-	DelegateProperty (Class)
 	FloatProperty (Class)
 	Function (Class)
 	IntProperty (Class)
@@ -286,9 +279,8 @@ Import table:
 	SCS_Node (Class)
 	SimpleConstructionScript (Class)
 	SkeletalMeshComponent (Class)
+	CustomCharacterPartModifier (Class)
 	FortPlayerPawn (Class)
-	TimerDynamicDelegate__DelegateSignature (DelegateFunction)
-	Default__DelegateProperty (DelegateProperty)
 	EFortCustomPartType (Enum)
 	Default__FloatProperty (FloatProperty)
 	OnPawnAndPartChanged (Function)
@@ -306,12 +298,12 @@ Import table:
 	EqualEqual_NameName (Function)
 	Less_IntInt (Function)
 	IsDedicatedServer (Function)
-	K2_SetTimerDelegate (Function)
 	SetScalarParameterValueOnMaterials (Function)
 	SetVectorParameterValueOnMaterials (Function)
 	SetActorParameter (Function)
 	K2_AttachToComponent (Function)
-	IsSkydiving (Function)
+	OnBeginSkydiving (Function)
+	OnEndSkydiving (Function)
 	Default__InheritableComponentHandler (InheritableComponentHandler)
 	Default__IntProperty (IntProperty)
 	Default__KismetArrayLibrary (KismetArrayLibrary)
@@ -335,14 +327,13 @@ Import table:
 	LinearColor (ScriptStruct)
 	Vector (ScriptStruct)
 	PointerToUberGraphFrame (ScriptStruct)
-	TimerHandle (ScriptStruct)
 	Default__SCS_Node (SCS_Node)
 	Default__SimpleConstructionScript (SimpleConstructionScript)
 	Default__StructProperty (StructProperty)
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	CCPM_EvilCowboy_Body_C (0-0-0-0): size 336 (cls: CCPM_EvilCowboy_Body_C>BlueprintGeneratedClass>/Script/Engine) :
+	CCPM_EvilCowboy_Body_C (0-0-0-0): size 352 (cls: CCPM_EvilCowboy_Body_C>BlueprintGeneratedClass>/Script/Engine) :
 		Tag array:
 			SimpleConstructionScript(ObjectProperty)=SimpleConstructionScript_0=CCPM_EvilCowboy_Body_C 
 			InheritableComponentHandler(ObjectProperty)=InheritableComponentHandler=CCPM_EvilCowboy_Body_C 
@@ -364,7 +355,7 @@ Serialized exports:
 		Tag array:
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject) :
 		Tag array:
-	ExecuteUbergraph_CCPM_EvilCowboy_Body (0-0-0-0): size 3145 (cls: ExecuteUbergraph_CCPM_EvilCowboy_Body>Function>/Script/CoreUObject) :
+	ExecuteUbergraph_CCPM_EvilCowboy_Body (0-0-0-0): size 3021 (cls: ExecuteUbergraph_CCPM_EvilCowboy_Body>Function>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_Map_Keys_Keys (0-0-0-0): size 32 (cls: CallFunc_Map_Keys_Keys>NameProperty>/Script/CoreUObject) :
 		Tag array:
@@ -402,8 +393,6 @@ Serialized exports:
 		Tag array:
 	CallFunc_IsDedicatedServer_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_IsDedicatedServer_ReturnValue1>BoolProperty>/Script/CoreUObject) :
 		Tag array:
-	CallFunc_IsSkydiving_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsSkydiving_ReturnValue>BoolProperty>/Script/CoreUObject) :
-		Tag array:
 	CallFunc_K2_AttachToComponent_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_K2_AttachToComponent_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_K2_AttachToComponent_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_K2_AttachToComponent_ReturnValue1>BoolProperty>/Script/CoreUObject) :
@@ -434,9 +423,7 @@ Serialized exports:
 		Tag array:
 	CallFunc_GetCharacterPartType_ReturnValue3 (0-0-0-0): size 36 (cls: CallFunc_GetCharacterPartType_ReturnValue3>ByteProperty>/Script/CoreUObject) :
 		Tag array:
-	K2Node_CreateDelegate_OutputDelegate (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate>DelegateProperty>/Script/CoreUObject) :
-		Tag array:
-	CallFunc_Map_Find_Value1 (0-0-0-0): size 32 (cls: CallFunc_Map_Find_Value1>FloatProperty>/Script/CoreUObject) :
+	CallFunc_Map_Find_Value (0-0-0-0): size 32 (cls: CallFunc_Map_Find_Value>FloatProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_Map_Find_Value3 (0-0-0-0): size 32 (cls: CallFunc_Map_Find_Value3>FloatProperty>/Script/CoreUObject) :
 		Tag array:
@@ -444,7 +431,9 @@ Serialized exports:
 		Tag array:
 	Stage 2 Material Scalars_Value (0-0-0-0): size 32 (cls: Stage 2 Material Scalars_Value>FloatProperty>/Script/CoreUObject) :
 		Tag array:
-	Check for Skydiving (0-0-0-0): size 58 (cls: Check for Skydiving>Function>/Script/CoreUObject) :
+	OnBeginSkydiving (0-0-0-0): size 58 (cls: OnBeginSkydiving>Function>/Script/CoreUObject) :
+		Tag array:
+	OnEndSkydiving (0-0-0-0): size 58 (cls: OnEndSkydiving>Function>/Script/CoreUObject) :
 		Tag array:
 	OnPawnAndPartChanged (0-0-0-0): size 58 (cls: OnPawnAndPartChanged>Function>/Script/CoreUObject) :
 		Tag array:
@@ -532,8 +521,6 @@ Serialized exports:
 		Tag array:
 	CallFunc_GetAssociatedPlayerPawn_ReturnValue6 (0-0-0-0): size 36 (cls: CallFunc_GetAssociatedPlayerPawn_ReturnValue6>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	CallFunc_GetAssociatedPlayerPawn_ReturnValue7 (0-0-0-0): size 36 (cls: CallFunc_GetAssociatedPlayerPawn_ReturnValue7>ObjectProperty>/Script/CoreUObject) :
-		Tag array:
 	CallFunc_GetSkeletalMeshForPartType_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetSkeletalMeshForPartType_ReturnValue>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_GetSkeletalMeshForPartType_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetSkeletalMeshForPartType_ReturnValue1>ObjectProperty>/Script/CoreUObject) :
@@ -546,17 +533,20 @@ Serialized exports:
 		Tag array:
 	P_EvilCowboy_Stage3_Onbody_Fire (0-0-0-0): size 36 (cls: P_EvilCowboy_Stage3_Onbody_Fire>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	P_EvilCowboy_Stage2_Onbody_Transition_GEN_VARIABLE (0-0-0-0): size 67 (cls: P_EvilCowboy_Stage2_Onbody_Transition_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	P_EvilCowboy_Stage2_Onbody_Transition_GEN_VARIABLE (0-0-0-0): size 150 (cls: P_EvilCowboy_Stage2_Onbody_Transition_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_EvilCowboy_Stage2_Onbody_Transition=/Game/Athena/Effects/Particles/Skins/EvilCowboy/P_EvilCowboy_Stage2_Onbody_Transition 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
-	P_EvilCowboy_Stage3_Onbody_Fire_GEN_VARIABLE (0-0-0-0): size 67 (cls: P_EvilCowboy_Stage3_Onbody_Fire_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	P_EvilCowboy_Stage3_Onbody_Fire_GEN_VARIABLE (0-0-0-0): size 150 (cls: P_EvilCowboy_Stage3_Onbody_Fire_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_EvilCowboy_Stage3_Onbody_Fire=/Game/Athena/Effects/Particles/Skins/EvilCowboy/P_EvilCowboy_Stage3_Onbody_Fire 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
-	P_EvilCowboy_Stage3_Onbody_Transition_GEN_VARIABLE (0-0-0-0): size 67 (cls: P_EvilCowboy_Stage3_Onbody_Transition_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	P_EvilCowboy_Stage3_Onbody_Transition_GEN_VARIABLE (0-0-0-0): size 150 (cls: P_EvilCowboy_Stage3_Onbody_Transition_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_EvilCowboy_Stage3_Onbody_Transition=/Game/Athena/Effects/Particles/Skins/EvilCowboy/P_EvilCowboy_Stage3_Onbody_Transition 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
 	DefaultSceneRoot_GEN_VARIABLE (0-0-0-0): size 12 (cls: DefaultSceneRoot_GEN_VARIABLE>SceneComponent>/Script/Engine) :
 		Tag array:
@@ -599,9 +589,7 @@ Serialized exports:
 		Tag array:
 	CallFunc_Conv_LinearColorToVector_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_Conv_LinearColorToVector_ReturnValue1>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	CallFunc_K2_SetTimerDelegate_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_SetTimerDelegate_ReturnValue>StructProperty>/Script/CoreUObject) :
-		Tag array:
-	CallFunc_Map_Find_Value (0-0-0-0): size 36 (cls: CallFunc_Map_Find_Value>StructProperty>/Script/CoreUObject) :
+	CallFunc_Map_Find_Value1 (0-0-0-0): size 36 (cls: CallFunc_Map_Find_Value1>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_Map_Find_Value2 (0-0-0-0): size 36 (cls: CallFunc_Map_Find_Value2>StructProperty>/Script/CoreUObject) :
 		Tag array:

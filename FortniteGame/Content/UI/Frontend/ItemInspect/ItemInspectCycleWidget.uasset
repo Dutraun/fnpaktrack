@@ -38,6 +38,7 @@ Name table:
 	bHasDefaultValue
 	bHasScriptImplementedPaint
 	bHasScriptImplementedTick
+	bHideInputAction
 	BindingName
 	bIsRootWidget
 	bIsVariable
@@ -66,6 +67,8 @@ Name table:
 	CallFunc_GetContext_ReturnValue
 	CallFunc_GetCurrentInputType_ReturnValue
 	CallFunc_Less_IntInt_ReturnValue
+	CallFunc_PlayAnimationAtTime_ReturnValue
+	CallFunc_PlayAnimationAtTime_ReturnValue1
 	CenterButtonTextWidget
 	ChildTemplates
 	Class
@@ -290,7 +293,7 @@ Name table:
 	Parent
 	ParentGuid
 	Percentage
-	PlayAnimation
+	PlayAnimationAtTime
 	PlaybackRange
 	PointerToUberGraphFrame
 	Possessables
@@ -382,6 +385,7 @@ Name table:
 	UberGraphFunction
 	UInt16Property
 	UInt32Property
+	UMGSequencePlayer
 	UnderlyingType
 	Up
 	UserWidget
@@ -442,6 +446,7 @@ Import table:
 	NamedSlot (Class)
 	SizeBox (Class)
 	SizeBoxSlot (Class)
+	UMGSequencePlayer (Class)
 	UserWidget (Class)
 	WidgetAnimation (Class)
 	WidgetBlueprintGeneratedClass (Class)
@@ -462,7 +467,7 @@ Import table:
 	OnItemCycled (Function)
 	SelectNextItem (Function)
 	SelectPreviousItem (Function)
-	PlayAnimation (Function)
+	PlayAnimationAtTime (Function)
 	Default__HorizontalBox (HorizontalBox)
 	Default__HorizontalBoxSlot (HorizontalBoxSlot)
 	Default__IconTextButton_C (IconTextButton_C)
@@ -529,7 +534,7 @@ Serialized exports:
 		Tag array:
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject) :
 		Tag array:
-	ExecuteUbergraph_ItemInspectCycleWidget (0-0-0-0): size 305 (cls: ExecuteUbergraph_ItemInspectCycleWidget>Function>/Script/CoreUObject) :
+	ExecuteUbergraph_ItemInspectCycleWidget (0-0-0-0): size 325 (cls: ExecuteUbergraph_ItemInspectCycleWidget>Function>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_EqualEqual_ByteByte_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ByteByte_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -716,7 +721,7 @@ Serialized exports:
 			Padding(StructProperty)=System.Byte[] 
 			Parent(ObjectProperty)=HorizontalBox=WidgetArchetype 
 			Content(ObjectProperty)=RightExtraContentSlot=WidgetArchetype 
-	LeftButton (0-0-0-0): size 716 (cls: LeftButton>IconTextButton_C>/Game/UI/Foundation/Buttons/IconTextButton) :
+	LeftButton (0-0-0-0): size 742 (cls: LeftButton>IconTextButton_C>/Game/UI/Foundation/Buttons/IconTextButton) :
 		Tag array:
 			CenterButtonTextWidget(ObjectProperty)=CenterButtonTextWidget=WidgetArchetype 
 			ContentBorder(ObjectProperty)=ContentBorder=WidgetArchetype 
@@ -728,6 +733,7 @@ Serialized exports:
 			MinWidth(IntProperty)=64 
 			MinHeight(IntProperty)=64 
 			Style(ObjectProperty)=ButtonStyle-Left_C=/Game/UI/Foundation/Buttons/ButtonStyles/ButtonStyle-Left 
+			bHideInputAction(BoolProperty)=True 
 			bDisplayInputActionWhenNotInteractable(BoolProperty)=False 
 			TriggeringInputAction(StructProperty)=System.Byte[] 
 			InputActionWidget(ObjectProperty)=InputActionWidget=WidgetArchetype 
@@ -736,7 +742,7 @@ Serialized exports:
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
 			Visibility(EnumProperty)=ESlateVisibility::Visible 
 			Navigation(ObjectProperty)=WidgetNavigation_1=WidgetArchetype 
-	RightButton (0-0-0-0): size 802 (cls: RightButton>IconTextButton_C>/Game/UI/Foundation/Buttons/IconTextButton) :
+	RightButton (0-0-0-0): size 828 (cls: RightButton>IconTextButton_C>/Game/UI/Foundation/Buttons/IconTextButton) :
 		Tag array:
 			CenterButtonTextWidget(ObjectProperty)=CenterButtonTextWidget=WidgetArchetype 
 			ContentBorder(ObjectProperty)=ContentBorder=WidgetArchetype 
@@ -748,6 +754,7 @@ Serialized exports:
 			MinWidth(IntProperty)=64 
 			MinHeight(IntProperty)=64 
 			Style(ObjectProperty)=ButtonStyle-Right_C=/Game/UI/Foundation/Buttons/ButtonStyles/ButtonStyle-Right 
+			bHideInputAction(BoolProperty)=True 
 			bDisplayInputActionWhenNotInteractable(BoolProperty)=False 
 			TriggeringInputAction(StructProperty)=System.Byte[] 
 			InputActionWidget(ObjectProperty)=InputActionWidget=WidgetArchetype 
@@ -765,10 +772,8 @@ Serialized exports:
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
 			Slot(ObjectProperty)=HorizontalBoxSlot_2=WidgetArchetype 
-	WidgetArchetype (0-0-0-0): size 183 (cls: WidgetArchetype>ItemInspectCycleWidget_C) :
+	WidgetArchetype (0-0-0-0): size 125 (cls: WidgetArchetype>ItemInspectCycleWidget_C) :
 		Tag array:
-			RightPulse(ObjectProperty)=RightPulse_INST=WidgetArchetype 
-			LeftPulse(ObjectProperty)=LeftPulse_INST=WidgetArchetype 
 			LeftButton(ObjectProperty)=LeftButton=WidgetArchetype 
 			RightButton(ObjectProperty)=RightButton=WidgetArchetype 
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
@@ -787,28 +792,6 @@ Serialized exports:
 			PlaybackRange(StructProperty)=System.Byte[] 
 			DisplayRate(StructProperty)=System.Byte[] 
 			Signature(StructProperty)=Guid: 1604306581-1096152135-2655313548-333846074 
-	LeftPulse (0-0-0-0): size 792 (cls: LeftPulse>MovieScene>/Script/MovieScene) :
-		Tag array:
-			Possessables(ArrayProperty)=[object] (inner: StructProperty)
-			ObjectBindings(ArrayProperty)=[object] (inner: StructProperty)
-			PlaybackRange(StructProperty)=System.Byte[] 
-			DisplayRate(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 1164829602-1099236577-4137647514-1781823793 
-	RightPulse (0-0-0-0): size 792 (cls: RightPulse>MovieScene>/Script/MovieScene) :
-		Tag array:
-			Possessables(ArrayProperty)=[object] (inner: StructProperty)
-			ObjectBindings(ArrayProperty)=[object] (inner: StructProperty)
-			PlaybackRange(StructProperty)=System.Byte[] 
-			DisplayRate(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 1604306581-1096152135-2655313548-333846074 
-	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene) :
-		Tag array:
-	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene) :
-		Tag array:
-	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene) :
-		Tag array:
-	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene) :
-		Tag array:
 	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene) :
 		Tag array:
 	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene) :
@@ -837,38 +820,6 @@ Serialized exports:
 			Easing(StructProperty)=System.Byte[] 
 			SectionRange(StructProperty)=System.Byte[] 
 			Signature(StructProperty)=Guid: 3613259211-1169902415-1741950603-1761219978 
-	MovieSceneColorSection_0 (0-0-0-0): size 4298 (cls: MovieSceneColorSection_0>MovieSceneColorSection>/Script/MovieSceneTracks) :
-		Tag array:
-			RedCurve(StructProperty)=System.Byte[] 
-			GreenCurve(StructProperty)=System.Byte[] 
-			BlueCurve(StructProperty)=System.Byte[] 
-			AlphaCurve(StructProperty)=System.Byte[] 
-			EvalOptions(StructProperty)=System.Byte[] 
-			Easing(StructProperty)=System.Byte[] 
-			SectionRange(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 3613259211-1169902415-1741950603-1761219978 
-	MovieSceneColorSection_0 (0-0-0-0): size 4298 (cls: MovieSceneColorSection_0>MovieSceneColorSection>/Script/MovieSceneTracks) :
-		Tag array:
-			RedCurve(StructProperty)=System.Byte[] 
-			GreenCurve(StructProperty)=System.Byte[] 
-			BlueCurve(StructProperty)=System.Byte[] 
-			AlphaCurve(StructProperty)=System.Byte[] 
-			EvalOptions(StructProperty)=System.Byte[] 
-			Easing(StructProperty)=System.Byte[] 
-			SectionRange(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 3613259211-1169902415-1741950603-1761219978 
-	MovieSceneColorTrack_0 (0-0-0-0): size 196 (cls: MovieSceneColorTrack_0>MovieSceneColorTrack>/Script/MovieSceneTracks) :
-		Tag array:
-			PropertyName(NameProperty)=ColorAndOpacity 
-			PropertyPath(StrProperty)=ColorAndOpacity 
-			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
-			Signature(StructProperty)=Guid: 1532489929-1118897809-2574349985-4096242903 
-	MovieSceneColorTrack_0 (0-0-0-0): size 196 (cls: MovieSceneColorTrack_0>MovieSceneColorTrack>/Script/MovieSceneTracks) :
-		Tag array:
-			PropertyName(NameProperty)=ColorAndOpacity 
-			PropertyPath(StrProperty)=ColorAndOpacity 
-			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
-			Signature(StructProperty)=Guid: 1532489929-1118897809-2574349985-4096242903 
 	MovieSceneColorTrack_0 (0-0-0-0): size 196 (cls: MovieSceneColorTrack_0>MovieSceneColorTrack>/Script/MovieSceneTracks) :
 		Tag array:
 			PropertyName(NameProperty)=ColorAndOpacity 
@@ -888,6 +839,10 @@ Serialized exports:
 		Tag array:
 			Slot(ObjectProperty)=HorizontalBoxSlot_3=WidgetArchetype 
 	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_PlayAnimationAtTime_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlayAnimationAtTime_ReturnValue>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_PlayAnimationAtTime_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_PlayAnimationAtTime_ReturnValue1>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	LeftButton (0-0-0-0): size 36 (cls: LeftButton>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
@@ -939,20 +894,6 @@ Serialized exports:
 	RightPulse_INST (0-0-0-0): size 9205 (cls: RightPulse_INST>WidgetAnimation>/Script/UMG) :
 		Tag array:
 			MovieScene(ObjectProperty)=RightPulse=ItemInspectCycleWidget_C 
-			AnimationBindings(ArrayProperty)=[object] (inner: StructProperty)
-			bLegacyFinishOnStop(BoolProperty)=False 
-			PrecompiledEvaluationTemplate(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 1145216547-1250351547-3295193511-2259377370 
-	LeftPulse_INST (0-0-0-0): size 9205 (cls: LeftPulse_INST>WidgetAnimation>/Script/UMG) :
-		Tag array:
-			MovieScene(ObjectProperty)=LeftPulse=WidgetArchetype 
-			AnimationBindings(ArrayProperty)=[object] (inner: StructProperty)
-			bLegacyFinishOnStop(BoolProperty)=False 
-			PrecompiledEvaluationTemplate(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 252168804-1177472551-788917382-2882354072 
-	RightPulse_INST (0-0-0-0): size 9205 (cls: RightPulse_INST>WidgetAnimation>/Script/UMG) :
-		Tag array:
-			MovieScene(ObjectProperty)=RightPulse=WidgetArchetype 
 			AnimationBindings(ArrayProperty)=[object] (inner: StructProperty)
 			bLegacyFinishOnStop(BoolProperty)=False 
 			PrecompiledEvaluationTemplate(StructProperty)=System.Byte[] 

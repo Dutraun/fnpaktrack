@@ -15,6 +15,8 @@ Name table:
 	/Game/Athena/MappedEffects/GE_Athena_Revive
 	/Game/Athena/PlayerPawn_Athena_Generic
 	/Game/Athena/PlayerPawn_Athena_Generic_Parent
+	/Game/Athena/Sounds/Character/Falling/Character_InAirAudioTell_Cue
+	/Game/Athena/Sounds/Character/Falling/Character_InAirAudioTell_Enemy_Cue
 	/Game/Athena/Sounds/Character/Sliding/Sliding_Intensity_Athena_3P_Cue
 	/Game/Athena/Sounds/Character/Sliding/Sliding_Intensity_Athena_Cue
 	/Game/Blueprints/Camera/Original/PlayerTakeDamage_CameraShake
@@ -70,6 +72,7 @@ Name table:
 	Abs
 	Activate
 	Actor
+	ActorComponentTickFunction
 	ActorDestroyedSignature__DelegateSignature
 	Add Render To Texture Particle
 	Add_IntInt
@@ -152,6 +155,7 @@ Name table:
 	bReceivesDecals
 	BroadcastFilter
 	bStartPenetrating
+	bStartWithTickEnabled
 	bUseRefPoseOnInitAnim
 	bValidatedAsWired
 	ByteProperty
@@ -223,10 +227,14 @@ Name table:
 	CallFunc_Array_Length_ReturnValue1
 	CallFunc_BooleanAND_ReturnValue
 	CallFunc_BooleanAND_ReturnValue1
+	CallFunc_BooleanAND_ReturnValue2
+	CallFunc_BooleanAND_ReturnValue3
+	CallFunc_BooleanAND_ReturnValue4
 	CallFunc_BooleanOR_ReturnValue
 	CallFunc_BooleanOR_ReturnValue1
 	CallFunc_BooleanOR_ReturnValue2
 	CallFunc_BooleanOR_ReturnValue3
+	CallFunc_BooleanOR_ReturnValue4
 	CallFunc_BreakHitResult_bBlockingHit
 	CallFunc_BreakHitResult_bBlockingHit1
 	CallFunc_BreakHitResult_bInitialOverlap
@@ -291,6 +299,7 @@ Name table:
 	CallFunc_EqualEqual_ObjectObject_ReturnValue
 	CallFunc_FClamp_ReturnValue
 	CallFunc_FInterpTo_ReturnValue
+	CallFunc_FInterpTo_ReturnValue1
 	CallFunc_FMax_ReturnValue
 	CallFunc_GetAbilitySystemComponent_ReturnValue
 	CallFunc_GetAbilitySystemComponent_ReturnValue1
@@ -368,9 +377,11 @@ Name table:
 	CallFunc_GetVelocity_ReturnValue
 	CallFunc_GetWindManager_ReturnValue
 	CallFunc_GetWorldDeltaSeconds_ReturnValue
+	CallFunc_GetWorldDeltaSeconds_ReturnValue1
 	CallFunc_Greater_FloatFloat_ReturnValue
 	CallFunc_Greater_FloatFloat_ReturnValue1
 	CallFunc_Greater_FloatFloat_ReturnValue2
+	CallFunc_Greater_FloatFloat_ReturnValue3
 	CallFunc_Greater_IntInt_ReturnValue
 	CallFunc_HasAnyTags_ReturnValue
 	CallFunc_HasMatchingGameplayTag_ReturnValue
@@ -391,8 +402,10 @@ Name table:
 	CallFunc_IsLocallyControlled_ReturnValue1
 	CallFunc_IsLocalPlayerController_ReturnValue
 	CallFunc_IsMovingOnGround_ReturnValue
+	CallFunc_IsParachuteOpen_ReturnValue
 	CallFunc_IsPlayerControlled_ReturnValue
 	CallFunc_IsPlaying_ReturnValue
+	CallFunc_IsSkydiving_ReturnValue
 	CallFunc_IsValid_ReturnValue
 	CallFunc_IsValid_ReturnValue1
 	CallFunc_IsValid_ReturnValue10
@@ -523,12 +536,14 @@ Name table:
 	CallFunc_MakeVector_ReturnValue1
 	CallFunc_MakeVector_ReturnValue2
 	CallFunc_MapRangeClamped_ReturnValue
+	CallFunc_MapRangeClamped_ReturnValue1
 	CallFunc_Multiply_FloatFloat_ReturnValue
 	CallFunc_Multiply_FloatFloat_ReturnValue1
 	CallFunc_Multiply_VectorFloat_ReturnValue
 	CallFunc_Not_PreBool_ReturnValue
 	CallFunc_Not_PreBool_ReturnValue1
 	CallFunc_Not_PreBool_ReturnValue2
+	CallFunc_Not_PreBool_ReturnValue3
 	CallFunc_NotEqual_IntInt_ReturnValue
 	CallFunc_PlayLocalAnimMontage_ReturnValue
 	CallFunc_RandomFloatInRange_ReturnValue
@@ -584,10 +599,13 @@ Name table:
 	CastShadow
 	ChangedPropertyList
 	Character
+	Character_InAirAudioTell_Cue
+	Character_InAirAudioTell_Enemy_Cue
 	CharacterAttributesPlayer
 	CharacterDestroyed
 	CharacterMesh0
 	CharacterMovement
+	CharacterMovementComponent
 	CharMoveComp
 	CharmValid
 	Class
@@ -613,6 +631,7 @@ Name table:
 	CreateDynamicMaterialInstance
 	CreateRenderTarget2D
 	CrouchMeshOffset
+	CurrentPawnSpeed
 	CurrentPawnSpeedXY
 	CurrentPawnVelXYRot
 	CurrentShield
@@ -645,6 +664,7 @@ Name table:
 	Default.DBNO.ReviveHealth
 	Default__AbilitySystemBlueprintLibrary
 	Default__ArrayProperty
+	Default__AudioComponent
 	Default__B_PlayerHealthDamage_CameraLensEffect_C
 	Default__B_PlayerHealthDamage_LensEffect_Direction_C
 	Default__B_PlayerShieldDamage_CameraLensEffect_C
@@ -704,6 +724,7 @@ Name table:
 	Delay
 	DelegateFunction
 	DelegateProperty
+	DeltaSeconds
 	DestroyedActor
 	DetailMode
 	DirectionPropertyName
@@ -861,6 +882,11 @@ Name table:
 	ImageSize
 	ImpactNormal
 	ImpactPoint
+	InAirAudio
+	InAirAudio_GEN_VARIABLE
+	InAirAudio_Inst
+	InAirAudioInterpSpeed
+	InAirAudioScalar
 	InFrontv2
 	InstigatedBy
 	InstigatorCheckDistanceSqrd
@@ -876,9 +902,11 @@ Name table:
 	IsLocalPlayerController
 	IsMovingOnGround
 	IsNinjaInShadowStance?
+	IsParachuteOpen
 	IsPlayerControlled
 	IsPlaying
 	IsShielded
+	IsSkydiving
 	IsValid
 	Item
 	JumpZVelocity
@@ -940,6 +968,7 @@ Name table:
 	K2Node_Event_DamageTags
 	K2Node_Event_DamageTags1
 	K2Node_Event_DamageTags2
+	K2Node_Event_DeltaSeconds
 	K2Node_Event_EffectContext
 	K2Node_Event_EffectContext1
 	K2Node_Event_EffectContext2
@@ -1043,6 +1072,7 @@ Name table:
 	MeleeSwingRight
 	Mesh
 	Momentum
+	MovementMode
 	MulticastDelegateProperty
 	Multiply_FloatFloat
 	Multiply_VectorFloat
@@ -1116,12 +1146,15 @@ Name table:
 	PawnHatMaterials
 	PawnHeadMaterials
 	PawnMaterials_ALL
+	PawnSpeedAudioMax
+	PawnSpeedAudioMin
 	PawnStatHandle
 	PendingSpokenLine
 	PenetrationDepth
 	PhysicalMaterial
 	PhysMaterial
 	PhysMaterialOverride
+	Play
 	PlayDynamicForceFeedback
 	Player_Flesh
 	Player_Foley_Jump_Cue
@@ -1146,6 +1179,7 @@ Name table:
 	PostProcessComponent
 	PreviousVelocityXY
 	PrevWeapon
+	PrimaryComponentTick
 	PrimitiveComponent
 	PropertyName
 	PropertyScope
@@ -1155,6 +1189,7 @@ Name table:
 	RandomInteger
 	RawMagnitude
 	ReceiveDestroyed
+	ReceiveTick
 	RefractionRingSize
 	RelativeLocation
 	RelativeRotation
@@ -1224,7 +1259,10 @@ Name table:
 	Sliding_Intensity_Athena_Cue
 	SlidingAudio_Inst
 	SlidingIntensity
+	Sound
 	Sound Player Hit
+	Sound_InAirLoop1P
+	Sound_InAirLoop3P
 	Sound_Shield_Destroyed
 	Sound_Shield_FullyCharged
 	Sound_Shield_Impact
@@ -1245,6 +1283,7 @@ Name table:
 	Stencil_ID_Definitions
 	Stop
 	Streaks
+	Strength
 	StructProperty
 	Subtract_FloatFloat
 	Subtract_IntInt
@@ -1259,12 +1298,16 @@ Name table:
 	Temp_bool_Has_Been_Initd_Variable3
 	Temp_bool_Has_Been_Initd_Variable4
 	Temp_bool_Has_Been_Initd_Variable5
+	Temp_bool_Has_Been_Initd_Variable6
+	Temp_bool_Has_Been_Initd_Variable7
 	Temp_bool_IsClosed_Variable
 	Temp_bool_IsClosed_Variable1
 	Temp_bool_IsClosed_Variable2
 	Temp_bool_IsClosed_Variable3
 	Temp_bool_IsClosed_Variable4
 	Temp_bool_IsClosed_Variable5
+	Temp_bool_IsClosed_Variable6
+	Temp_bool_IsClosed_Variable7
 	Temp_bool_Variable
 	Temp_bool_Variable1
 	Temp_bool_Variable2
@@ -1400,6 +1443,7 @@ Import table:
 	ReloadCartridge (AudioComponent)
 	ReloadEnd (AudioComponent)
 	ReloadStart (AudioComponent)
+	Default__AudioComponent (AudioComponent)
 	Default__B_PlayerHealthDamage_CameraLensEffect_C (B_PlayerHealthDamage_CameraLensEffect_C)
 	Default__B_PlayerHealthDamage_LensEffect_Direction_C (B_PlayerHealthDamage_LensEffect_Direction_C)
 	Default__B_PlayerShieldDamage_CameraLensEffect_C (B_PlayerShieldDamage_CameraLensEffect_C)
@@ -1424,6 +1468,7 @@ Import table:
 	Default__BlueprintGeneratedClass (BlueprintGeneratedClass)
 	Default__BoolProperty (BoolProperty)
 	Default__ByteProperty (ByteProperty)
+	MovementMode (ByteProperty)
 	CollisionCylinder (CapsuleComponent)
 	SkeletalMeshComponentBudgeted (Class)
 	ClothingSimulationFactoryNv (Class)
@@ -1449,6 +1494,7 @@ Import table:
 	CameraShake (Class)
 	CapsuleComponent (Class)
 	Character (Class)
+	CharacterMovementComponent (Class)
 	Controller (Class)
 	CurveFloat (Class)
 	EmitterCameraLensEffectBase (Class)
@@ -1508,6 +1554,7 @@ Import table:
 	Default__FloatProperty (FloatProperty)
 	CustomTimeDilation (FloatProperty)
 	CapsuleIndirectShadowMinVisibility (FloatProperty)
+	CurrentPawnSpeed (FloatProperty)
 	CurrentPawnSpeedXY (FloatProperty)
 	RawMagnitude (FloatProperty)
 	FF_Generic_DBNORevive (ForceFeedbackEffect)
@@ -1523,6 +1570,7 @@ Import table:
 	K2_GetActorLocation (Function)
 	K2_GetRootComponent (Function)
 	ReceiveDestroyed (Function)
+	ReceiveTick (Function)
 	SetFloatParameter (Function)
 	OnLanded (Function)
 	IsLocalPlayerController (Function)
@@ -1629,6 +1677,8 @@ Import table:
 	AnimTrailsSetup (Function)
 	GetIsSlopeSliding (Function)
 	GetSlopeSlidingAngles (Function)
+	IsParachuteOpen (Function)
+	IsSkydiving (Function)
 	OnCharacterPartsReinitialized (Function)
 	OnSlidingStateChanged (Function)
 	OnPawnLODChanged (Function)
@@ -1679,6 +1729,8 @@ Import table:
 	/Game/Athena/Effects/Particles/P_PlayerRevived_Athena (Package)
 	/Game/Athena/MappedEffects/GE_Athena_Revive (Package)
 	/Game/Athena/PlayerPawn_Athena_Generic_Parent (Package)
+	/Game/Athena/Sounds/Character/Falling/Character_InAirAudioTell_Cue (Package)
+	/Game/Athena/Sounds/Character/Falling/Character_InAirAudioTell_Enemy_Cue (Package)
 	/Game/Athena/Sounds/Character/Sliding/Sliding_Intensity_Athena_3P_Cue (Package)
 	/Game/Athena/Sounds/Character/Sliding/Sliding_Intensity_Athena_Cue (Package)
 	/Game/Blueprints/Camera/Original/PlayerTakeDamage_CameraShake (Package)
@@ -1763,6 +1815,7 @@ Import table:
 	Rotator (ScriptStruct)
 	Transform (ScriptStruct)
 	Vector (ScriptStruct)
+	ActorComponentTickFunction (ScriptStruct)
 	BodyInstance (ScriptStruct)
 	HitResult (ScriptStruct)
 	LatentActionInfo (ScriptStruct)
@@ -1779,6 +1832,8 @@ Import table:
 	Default__SkeletalMeshComponent (SkeletalMeshComponent)
 	CharacterMesh0 (SkeletalMeshComponentBudgeted)
 	WeaponMesh0 (SkeletalMeshComponentBudgeted)
+	Character_InAirAudioTell_Cue (SoundCue)
+	Character_InAirAudioTell_Enemy_Cue (SoundCue)
 	Sliding_Intensity_Athena_3P_Cue (SoundCue)
 	Sliding_Intensity_Athena_Cue (SoundCue)
 	Player_Foley_Jump_Cue (SoundCue)
@@ -1814,7 +1869,7 @@ Import table:
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	PlayerPawn_Athena_Generic_C (0-0-0-0): size 1929 (cls: PlayerPawn_Athena_Generic_C>BlueprintGeneratedClass>/Script/Engine) :
+	PlayerPawn_Athena_Generic_C (0-0-0-0): size 1977 (cls: PlayerPawn_Athena_Generic_C>BlueprintGeneratedClass>/Script/Engine) :
 		Tag array:
 			bHasCookedComponentInstancingData(BoolProperty)=True 
 			ComponentTemplates(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -1823,7 +1878,7 @@ Serialized exports:
 			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=PlayerPawn_Athena_Generic_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_PlayerPawn_Athena_Generic=PlayerPawn_Athena_Generic_C 
 			CookedComponentInstancingData(MapProperty)=[object] (inner: NameProperty)
-	Default__PlayerPawn_Athena_Generic_C (0-0-0-0): size 5238 (cls: Default__PlayerPawn_Athena_Generic_C>PlayerPawn_Athena_Generic_C) :
+	Default__PlayerPawn_Athena_Generic_C (0-0-0-0): size 5383 (cls: Default__PlayerPawn_Athena_Generic_C>PlayerPawn_Athena_Generic_C) :
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			ScreenEffect_PlayerHealthDamageDirection(ObjectProperty)=B_PlayerHealthDamage_LensEffect_Direction_C=/Game/Effects/Fort_Effects/Camera_Effects/B_PlayerHealthDamage_LensEffect_Direction 
@@ -1857,6 +1912,11 @@ Serialized exports:
 			SlideDustActivateSpeed(FloatProperty)=580 
 			Effect_Player_ShieldActivate(ObjectProperty)=P_Player_ShieldActivate_New=/Game/Athena/Effects/Particles/P_Player_ShieldActivate_New 
 			Effect_PLayer_ShieldBreak(ObjectProperty)=P_Player_ShieldBreak=/Game/Athena/Effects/Particles/P_Player_ShieldBreak 
+			InAirAudioInterpSpeed(FloatProperty)=1 
+			PawnSpeedAudioMin(FloatProperty)=400 
+			PawnSpeedAudioMax(FloatProperty)=900 
+			Sound_InAirLoop1P(ObjectProperty)=Character_InAirAudioTell_Cue=/Game/Athena/Sounds/Character/Falling/Character_InAirAudioTell_Cue 
+			Sound_InAirLoop3P(ObjectProperty)=Character_InAirAudioTell_Enemy_Cue=/Game/Athena/Sounds/Character/Falling/Character_InAirAudioTell_Enemy_Cue 
 			CrouchMeshOffset(FloatProperty)=0 
 			OutsideSafeZonePPComponent(ObjectProperty)=OutsideSafeZonePP0=Default__PlayerPawn_Athena_Generic_C 
 			SelfReviveGameplayEffect(ObjectProperty)=GE_ExtraLifeRevive_C=/Game/Abilities/Player/Generic/GameplayEffects/GE_ExtraLifeRevive 
@@ -1888,11 +1948,11 @@ Serialized exports:
 			CharacterMovement(ObjectProperty)=CharMoveComp=Default__PlayerPawn_Athena_Generic_C 
 			CapsuleComponent(ObjectProperty)=CollisionCylinder=Default__PlayerPawn_Athena_Generic_C 
 			RootComponent(ObjectProperty)=CollisionCylinder=Default__PlayerPawn_Athena_Generic_C 
-	Effect_Player_In_Water (0-0-0-0): size 36 (cls: Effect_Player_In_Water>ObjectProperty>/Script/CoreUObject) :
+	InAirAudio (0-0-0-0): size 36 (cls: InAirAudio>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject) :
 		Tag array:
-	ExecuteUbergraph_PlayerPawn_Athena_Generic (0-0-0-0): size 28792 (cls: ExecuteUbergraph_PlayerPawn_Athena_Generic>Function>/Script/CoreUObject) :
+	ExecuteUbergraph_PlayerPawn_Athena_Generic (0-0-0-0): size 29603 (cls: ExecuteUbergraph_PlayerPawn_Athena_Generic>Function>/Script/CoreUObject) :
 		Tag array:
 	EventType (0-0-0-0): size 36 (cls: EventType>ByteProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1923,6 +1983,10 @@ Serialized exports:
 	NewLOD (0-0-0-0): size 32 (cls: NewLOD>IntProperty>/Script/CoreUObject) :
 		Tag array:
 	OnPawnLODChanged (0-0-0-0): size 72 (cls: OnPawnLODChanged>Function>/Script/CoreUObject) :
+		Tag array:
+	DeltaSeconds (0-0-0-0): size 32 (cls: DeltaSeconds>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	ReceiveTick (0-0-0-0): size 72 (cls: ReceiveTick>Function>/Script/CoreUObject) :
 		Tag array:
 	EventType (0-0-0-0): size 36 (cls: EventType>ByteProperty>/Script/CoreUObject) :
 		Tag array:
@@ -2075,6 +2139,11 @@ Serialized exports:
 	FeedbackAudioComp0 (0-0-0-0): size 41 (cls: FeedbackAudioComp0>AudioComponent>/Script/Engine) :
 		Tag array:
 			AttachParent(ObjectProperty)=CollisionCylinder=Default__PlayerPawn_Athena_Generic_C 
+	InAirAudio_GEN_VARIABLE (0-0-0-0): size 93 (cls: InAirAudio_GEN_VARIABLE>AudioComponent>/Script/Engine) :
+		Tag array:
+			Sound(ObjectProperty)=Character_InAirAudioTell_Cue=/Game/Athena/Sounds/Character/Falling/Character_InAirAudioTell_Cue 
+			bAutoManageAttachment(BoolProperty)=True 
+			bAutoActivate(BoolProperty)=False 
 	DisableWaterLevelTick (0-0-0-0): size 50 (cls: DisableWaterLevelTick>Function>/Script/CoreUObject) :
 		Tag array:
 	NewParam (0-0-0-0): size 34 (cls: NewParam>BoolProperty>/Script/CoreUObject) :
@@ -2153,6 +2222,12 @@ Serialized exports:
 		Tag array:
 	CallFunc_BooleanAND_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue1>BoolProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_BooleanAND_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue2>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_BooleanAND_ReturnValue3 (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue3>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_BooleanAND_ReturnValue4 (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue4>BoolProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_BooleanOR_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanOR_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_BooleanOR_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_BooleanOR_ReturnValue1>BoolProperty>/Script/CoreUObject) :
@@ -2161,6 +2236,8 @@ Serialized exports:
 		Tag array:
 	CallFunc_BooleanOR_ReturnValue3 (0-0-0-0): size 34 (cls: CallFunc_BooleanOR_ReturnValue3>BoolProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_BooleanOR_ReturnValue4 (0-0-0-0): size 34 (cls: CallFunc_BooleanOR_ReturnValue4>BoolProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_BreakHitResult_bBlockingHit (0-0-0-0): size 34 (cls: CallFunc_BreakHitResult_bBlockingHit>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_BreakHitResult_bBlockingHit1 (0-0-0-0): size 34 (cls: CallFunc_BreakHitResult_bBlockingHit1>BoolProperty>/Script/CoreUObject) :
@@ -2168,6 +2245,10 @@ Serialized exports:
 	CallFunc_BreakHitResult_bInitialOverlap (0-0-0-0): size 34 (cls: CallFunc_BreakHitResult_bInitialOverlap>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_BreakHitResult_bInitialOverlap1 (0-0-0-0): size 34 (cls: CallFunc_BreakHitResult_bInitialOverlap1>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_EqualEqual_ByteByte_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ByteByte_ReturnValue>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_EqualEqual_ByteByte_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ByteByte_ReturnValue1>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_EqualEqual_ObjectObject_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ObjectObject_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -2186,6 +2267,8 @@ Serialized exports:
 	CallFunc_Greater_FloatFloat_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_Greater_FloatFloat_ReturnValue1>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_Greater_FloatFloat_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_Greater_FloatFloat_ReturnValue2>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Greater_FloatFloat_ReturnValue3 (0-0-0-0): size 34 (cls: CallFunc_Greater_FloatFloat_ReturnValue3>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_Greater_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Greater_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -2225,9 +2308,13 @@ Serialized exports:
 		Tag array:
 	CallFunc_IsMovingOnGround_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsMovingOnGround_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_IsParachuteOpen_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsParachuteOpen_ReturnValue>BoolProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_IsPlayerControlled_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsPlayerControlled_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_IsPlaying_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsPlaying_ReturnValue>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_IsSkydiving_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsSkydiving_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -2393,6 +2480,8 @@ Serialized exports:
 		Tag array:
 	CallFunc_Not_PreBool_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue2>BoolProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_Not_PreBool_ReturnValue3 (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue3>BoolProperty>/Script/CoreUObject) :
+		Tag array:
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	K2Node_DynamicCast_bSuccess1 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess1>BoolProperty>/Script/CoreUObject) :
@@ -2457,6 +2546,10 @@ Serialized exports:
 		Tag array:
 	Temp_bool_Has_Been_Initd_Variable5 (0-0-0-0): size 34 (cls: Temp_bool_Has_Been_Initd_Variable5>BoolProperty>/Script/CoreUObject) :
 		Tag array:
+	Temp_bool_Has_Been_Initd_Variable6 (0-0-0-0): size 34 (cls: Temp_bool_Has_Been_Initd_Variable6>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	Temp_bool_Has_Been_Initd_Variable7 (0-0-0-0): size 34 (cls: Temp_bool_Has_Been_Initd_Variable7>BoolProperty>/Script/CoreUObject) :
+		Tag array:
 	Temp_bool_IsClosed_Variable (0-0-0-0): size 34 (cls: Temp_bool_IsClosed_Variable>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	Temp_bool_IsClosed_Variable1 (0-0-0-0): size 34 (cls: Temp_bool_IsClosed_Variable1>BoolProperty>/Script/CoreUObject) :
@@ -2468,6 +2561,10 @@ Serialized exports:
 	Temp_bool_IsClosed_Variable4 (0-0-0-0): size 34 (cls: Temp_bool_IsClosed_Variable4>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	Temp_bool_IsClosed_Variable5 (0-0-0-0): size 34 (cls: Temp_bool_IsClosed_Variable5>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	Temp_bool_IsClosed_Variable6 (0-0-0-0): size 34 (cls: Temp_bool_IsClosed_Variable6>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	Temp_bool_IsClosed_Variable7 (0-0-0-0): size 34 (cls: Temp_bool_IsClosed_Variable7>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -2664,6 +2761,8 @@ Serialized exports:
 		Tag array:
 	CallFunc_FInterpTo_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_FInterpTo_ReturnValue>FloatProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_FInterpTo_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_FInterpTo_ReturnValue1>FloatProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_FMax_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_FMax_ReturnValue>FloatProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_GetFloatAttributeFromAbilitySystemComponent_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetFloatAttributeFromAbilitySystemComponent_ReturnValue>FloatProperty>/Script/CoreUObject) :
@@ -2690,6 +2789,8 @@ Serialized exports:
 		Tag array:
 	CallFunc_GetWorldDeltaSeconds_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetWorldDeltaSeconds_ReturnValue>FloatProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_GetWorldDeltaSeconds_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_GetWorldDeltaSeconds_ReturnValue1>FloatProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_Lerp_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Lerp_ReturnValue>FloatProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_Lerp_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Lerp_ReturnValue1>FloatProperty>/Script/CoreUObject) :
@@ -2710,6 +2811,8 @@ Serialized exports:
 		Tag array:
 	CallFunc_MapRangeClamped_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_MapRangeClamped_ReturnValue>FloatProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_MapRangeClamped_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_MapRangeClamped_ReturnValue1>FloatProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_Multiply_FloatFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Multiply_FloatFloat_ReturnValue>FloatProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_Multiply_FloatFloat_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Multiply_FloatFloat_ReturnValue1>FloatProperty>/Script/CoreUObject) :
@@ -2728,13 +2831,23 @@ Serialized exports:
 		Tag array:
 	K2Node_Event_Damage2 (0-0-0-0): size 32 (cls: K2Node_Event_Damage2>FloatProperty>/Script/CoreUObject) :
 		Tag array:
+	K2Node_Event_DeltaSeconds (0-0-0-0): size 32 (cls: K2Node_Event_DeltaSeconds>FloatProperty>/Script/CoreUObject) :
+		Tag array:
 	K2Node_Event_Significance (0-0-0-0): size 32 (cls: K2Node_Event_Significance>FloatProperty>/Script/CoreUObject) :
 		Tag array:
 	K2Node_Event_Width (0-0-0-0): size 32 (cls: K2Node_Event_Width>FloatProperty>/Script/CoreUObject) :
 		Tag array:
+	InAirAudioInterpSpeed (0-0-0-0): size 32 (cls: InAirAudioInterpSpeed>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	InAirAudioScalar (0-0-0-0): size 32 (cls: InAirAudioScalar>FloatProperty>/Script/CoreUObject) :
+		Tag array:
 	InstigatorCheckDistanceSqrd (0-0-0-0): size 32 (cls: InstigatorCheckDistanceSqrd>FloatProperty>/Script/CoreUObject) :
 		Tag array:
 	Last_Shield_Damage_Time (0-0-0-0): size 32 (cls: Last_Shield_Damage_Time>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	PawnSpeedAudioMax (0-0-0-0): size 32 (cls: PawnSpeedAudioMax>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	PawnSpeedAudioMin (0-0-0-0): size 32 (cls: PawnSpeedAudioMin>FloatProperty>/Script/CoreUObject) :
 		Tag array:
 	Run_Particle_Activate_Speed (0-0-0-0): size 32 (cls: Run_Particle_Activate_Speed>FloatProperty>/Script/CoreUObject) :
 		Tag array:
@@ -3095,6 +3208,8 @@ Serialized exports:
 		Tag array:
 	DBNOResurrectSound (0-0-0-0): size 36 (cls: DBNOResurrectSound>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
+	Effect_Player_In_Water (0-0-0-0): size 36 (cls: Effect_Player_In_Water>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
 	Effect_Player_Landed_WindVector_P (0-0-0-0): size 36 (cls: Effect_Player_Landed_WindVector_P>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	Effect_Player_LandedDust (0-0-0-0): size 36 (cls: Effect_Player_LandedDust>ObjectProperty>/Script/CoreUObject) :
@@ -3305,6 +3420,8 @@ Serialized exports:
 		Tag array:
 	HitDamageParticles (0-0-0-0): size 36 (cls: HitDamageParticles>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
+	InAirAudio_Inst (0-0-0-0): size 36 (cls: InAirAudio_Inst>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
 	NewVar_1 (0-0-0-0): size 36 (cls: NewVar_1>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	DamageCauser (0-0-0-0): size 36 (cls: DamageCauser>ObjectProperty>/Script/CoreUObject) :
@@ -3351,6 +3468,10 @@ Serialized exports:
 		Tag array:
 	Sound Player Hit (0-0-0-0): size 36 (cls: Sound Player Hit>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
+	Sound_InAirLoop1P (0-0-0-0): size 36 (cls: Sound_InAirLoop1P>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	Sound_InAirLoop3P (0-0-0-0): size 36 (cls: Sound_InAirLoop3P>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
 	Sound_Shield_Destroyed (0-0-0-0): size 36 (cls: Sound_Shield_Destroyed>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	Sound_Shield_FullyCharged (0-0-0-0): size 36 (cls: Sound_Shield_FullyCharged>ObjectProperty>/Script/CoreUObject) :
@@ -3372,7 +3493,7 @@ Serialized exports:
 			bAutoManageAttachment(BoolProperty)=True 
 			CachedMaxDrawDistance(FloatProperty)=2125 
 			bAutoActivate(BoolProperty)=False 
-	Effect_Player_In_Water_GEN_VARIABLE (0-0-0-0): size 301 (cls: Effect_Player_In_Water_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	Effect_Player_In_Water_GEN_VARIABLE (0-0-0-0): size 384 (cls: Effect_Player_In_Water_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_Player_In_Water_Athena=/Game/WaterAndWind/Particles/WaterInteraction/P_Player_In_Water_Athena 
 			bAutoManageAttachment(BoolProperty)=True 
@@ -3381,8 +3502,9 @@ Serialized exports:
 			bAbsoluteRotation(BoolProperty)=True 
 			bAbsoluteScale(BoolProperty)=True 
 			DetailMode(ByteProperty)=DM_Medium 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
-	Effect_Player_Run_Land_GEN_VARIABLE (0-0-0-0): size 242 (cls: Effect_Player_Run_Land_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	Effect_Player_Run_Land_GEN_VARIABLE (0-0-0-0): size 325 (cls: Effect_Player_Run_Land_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_Run_DustKickup_01=/Game/Effects/Fort_Effects/Gameplay/SmokeDustExplosions/Particles/P_Run_DustKickup_01 
 			bAutoManageAttachment(BoolProperty)=True 
@@ -3390,16 +3512,18 @@ Serialized exports:
 			CachedMaxDrawDistance(FloatProperty)=2200 
 			CastShadow(BoolProperty)=True 
 			RelativeLocation(StructProperty)=Vector(0,0,-9) 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
-	Effect_Player_Slide_Land_GEN_VARIABLE (0-0-0-0): size 181 (cls: Effect_Player_Slide_Land_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	Effect_Player_Slide_Land_GEN_VARIABLE (0-0-0-0): size 264 (cls: Effect_Player_Slide_Land_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_Slide_DustKickup_01=/Game/Effects/Fort_Effects/Gameplay/SmokeDustExplosions/Particles/P_Slide_DustKickup_01 
 			bAutoManageAttachment(BoolProperty)=True 
 			AutoAttachSocketName(NameProperty)=FX_Feet 
 			CachedMaxDrawDistance(FloatProperty)=2300 
 			CastShadow(BoolProperty)=True 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
-	Effect_Player_Walk_Land_GEN_VARIABLE (0-0-0-0): size 242 (cls: Effect_Player_Walk_Land_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	Effect_Player_Walk_Land_GEN_VARIABLE (0-0-0-0): size 325 (cls: Effect_Player_Walk_Land_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_Walk_DustKickup_01=/Game/Effects/Fort_Effects/Gameplay/SmokeDustExplosions/Particles/P_Walk_DustKickup_01 
 			bAutoManageAttachment(BoolProperty)=True 
@@ -3407,8 +3531,9 @@ Serialized exports:
 			CachedMaxDrawDistance(FloatProperty)=2500 
 			CastShadow(BoolProperty)=True 
 			RelativeLocation(StructProperty)=Vector(0,0,-9) 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
-	Effect_WaterInteraction_FX_GEN_VARIABLE (0-0-0-0): size 314 (cls: Effect_WaterInteraction_FX_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	Effect_WaterInteraction_FX_GEN_VARIABLE (0-0-0-0): size 397 (cls: Effect_WaterInteraction_FX_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=PlayerWaterRipple=/Game/WaterAndWind/Particles/WaterInteraction/PlayerWaterRipple 
 			bAutoManageAttachment(BoolProperty)=True 
@@ -3417,12 +3542,14 @@ Serialized exports:
 			RelativeLocation(StructProperty)=Vector(0,0,86) 
 			RelativeRotation(StructProperty)=Rotator(0,89.99999,0) 
 			DetailMode(ByteProperty)=DM_Medium 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
-	HitDamageParticles_GEN_VARIABLE (0-0-0-0): size 154 (cls: HitDamageParticles_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	HitDamageParticles_GEN_VARIABLE (0-0-0-0): size 237 (cls: HitDamageParticles_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_Player_HealthShield_Damage_Effect=/Game/Effects/Fort_Effects/Gameplay/Player/P_Player_HealthShield_Damage_Effect 
 			bAutoManageAttachment(BoolProperty)=True 
 			RelativeLocation(StructProperty)=Vector(0,0,12) 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
 	NODE_AddPoseableMeshComponent-1 (0-0-0-0): size 12 (cls: NODE_AddPoseableMeshComponent-1>PoseableMeshComponent>/Script/Engine) :
 		Tag array:
@@ -3430,7 +3557,7 @@ Serialized exports:
 		Tag array:
 	SceneComponent_9 (0-0-0-0): size 12 (cls: SceneComponent_9>SceneComponent>/Script/Engine) :
 		Tag array:
-	SCS_Node_0 (0-0-0-0): size 990 (cls: SCS_Node_0>SCS_Node>/Script/Engine) :
+	SCS_Node_0 (0-0-0-0): size 1188 (cls: SCS_Node_0>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=Effect_Player_Slide_Land_GEN_VARIABLE=PlayerPawn_Athena_Generic_C 
@@ -3439,7 +3566,7 @@ Serialized exports:
 			bIsParentComponentNative(BoolProperty)=True 
 			VariableGuid(StructProperty)=Guid: 3792808243-1156705194-3061952653-3045832728 
 			InternalVariableName(NameProperty)=Effect_Player_Slide_Land 
-	SCS_Node_1 (0-0-0-0): size 891 (cls: SCS_Node_1>SCS_Node>/Script/Engine) :
+	SCS_Node_1 (0-0-0-0): size 1089 (cls: SCS_Node_1>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=HitDamageParticles_GEN_VARIABLE=PlayerPawn_Athena_Generic_C 
@@ -3454,7 +3581,7 @@ Serialized exports:
 			ComponentTemplate(ObjectProperty)=SceneComponent_9=PlayerPawn_Athena_Generic_C 
 			VariableGuid(StructProperty)=Guid: 1295648158-0-0-0 
 			InternalVariableName(NameProperty)=DefaultSceneRoot 
-	SCS_Node_12 (0-0-0-0): size 1188 (cls: SCS_Node_12>SCS_Node>/Script/Engine) :
+	SCS_Node_12 (0-0-0-0): size 1386 (cls: SCS_Node_12>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=Effect_Player_Run_Land_GEN_VARIABLE=PlayerPawn_Athena_Generic_C 
@@ -3463,7 +3590,7 @@ Serialized exports:
 			bIsParentComponentNative(BoolProperty)=True 
 			VariableGuid(StructProperty)=Guid: 431470771-1213927785-1677281671-3875920595 
 			InternalVariableName(NameProperty)=Effect_Player_Run_Land 
-	SCS_Node_13 (0-0-0-0): size 1188 (cls: SCS_Node_13>SCS_Node>/Script/Engine) :
+	SCS_Node_13 (0-0-0-0): size 1386 (cls: SCS_Node_13>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=Effect_Player_Walk_Land_GEN_VARIABLE=PlayerPawn_Athena_Generic_C 
@@ -3481,7 +3608,16 @@ Serialized exports:
 			bIsParentComponentNative(BoolProperty)=True 
 			VariableGuid(StructProperty)=Guid: 1824495611-1117076550-1582368183-3152039858 
 			InternalVariableName(NameProperty)=AnimTrailPS 
-	SCS_Node_4 (0-0-0-0): size 1386 (cls: SCS_Node_4>SCS_Node>/Script/Engine) :
+	SCS_Node_3 (0-0-0-0): size 693 (cls: SCS_Node_3>SCS_Node>/Script/Engine) :
+		Tag array:
+			ComponentClass(ObjectProperty)=AudioComponent=/Script/Engine 
+			ComponentTemplate(ObjectProperty)=InAirAudio_GEN_VARIABLE=PlayerPawn_Athena_Generic_C 
+			CookedComponentInstancingData(StructProperty)=System.Byte[] 
+			ParentComponentOrVariableName(NameProperty)=CharacterMesh0 
+			bIsParentComponentNative(BoolProperty)=True 
+			VariableGuid(StructProperty)=Guid: 1316948553-1301458528-2151811518-451651817 
+			InternalVariableName(NameProperty)=InAirAudio 
+	SCS_Node_4 (0-0-0-0): size 1584 (cls: SCS_Node_4>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=Effect_WaterInteraction_FX_GEN_VARIABLE=PlayerPawn_Athena_Generic_C 
@@ -3490,7 +3626,7 @@ Serialized exports:
 			bIsParentComponentNative(BoolProperty)=True 
 			VariableGuid(StructProperty)=Guid: 1831611413-1282018286-2238011821-1323270471 
 			InternalVariableName(NameProperty)=Effect_WaterInteraction_FX 
-	SCS_Node_8 (0-0-0-0): size 1287 (cls: SCS_Node_8>SCS_Node>/Script/Engine) :
+	SCS_Node_8 (0-0-0-0): size 1485 (cls: SCS_Node_8>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=Effect_Player_In_Water_GEN_VARIABLE=PlayerPawn_Athena_Generic_C 
@@ -3499,7 +3635,7 @@ Serialized exports:
 			bIsParentComponentNative(BoolProperty)=True 
 			VariableGuid(StructProperty)=Guid: 381719943-1310952441-4146883985-1748768763 
 			InternalVariableName(NameProperty)=Effect_Player_In_Water 
-	SimpleConstructionScript_2 (0-0-0-0): size 171 (cls: SimpleConstructionScript_2>SimpleConstructionScript>/Script/Engine) :
+	SimpleConstructionScript_2 (0-0-0-0): size 179 (cls: SimpleConstructionScript_2>SimpleConstructionScript>/Script/Engine) :
 		Tag array:
 			RootNodes(ArrayProperty)=[object] (inner: ObjectProperty)
 			AllNodes(ArrayProperty)=[object] (inner: ObjectProperty)

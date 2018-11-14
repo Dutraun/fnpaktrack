@@ -33,6 +33,7 @@ Name table:
 	Activate
 	Actor
 	ActorComponent
+	ActorComponentTickFunction
 	Add_FloatFloat
 	Addressee
 	AllNodes
@@ -94,6 +95,7 @@ Name table:
 	bReplicates
 	BroadcastFilter
 	bRunPhysicsWithNoController
+	bStartWithTickEnabled
 	bTraceComplexOnMove
 	bTransformed
 	bValidatedAsWired
@@ -576,6 +578,7 @@ Name table:
 	PostProcessComponent
 	PreviousTriggeredHealthThreshold
 	PreviousVector
+	PrimaryComponentTick
 	PrimitiveComponent
 	PropertyName
 	PropertyScope
@@ -942,6 +945,7 @@ Import table:
 	LinearColor (ScriptStruct)
 	Rotator (ScriptStruct)
 	Vector (ScriptStruct)
+	ActorComponentTickFunction (ScriptStruct)
 	BodyInstance (ScriptStruct)
 	CollisionResponse (ScriptStruct)
 	HitResult (ScriptStruct)
@@ -1540,26 +1544,29 @@ Serialized exports:
 		Tag array:
 	TransformationSound (0-0-0-0): size 36 (cls: TransformationSound>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	BlinkingLight_GEN_VARIABLE (0-0-0-0): size 215 (cls: BlinkingLight_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	BlinkingLight_GEN_VARIABLE (0-0-0-0): size 298 (cls: BlinkingLight_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_RCRocket_Light_TeamColored=/Game/Athena/Items/Weapons/Abilities/RCRocket/P_RCRocket_Light_TeamColored 
 			bRenderCustomDepth(BoolProperty)=True 
 			RelativeLocation(StructProperty)=Vector(0,35.5,6) 
 			RelativeScale3D(StructProperty)=Vector(0.5,0.5,0.5) 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
-	Jet_GEN_VARIABLE (0-0-0-0): size 215 (cls: Jet_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	Jet_GEN_VARIABLE (0-0-0-0): size 298 (cls: Jet_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_RCRocket_Thruster=/Game/Athena/Items/Weapons/Abilities/RCRocket/P_RCRocket_Thruster 
 			bRenderCustomDepth(BoolProperty)=True 
 			RelativeLocation(StructProperty)=Vector(0,-50,0) 
 			RelativeRotation(StructProperty)=Rotator(0,-90,0) 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
-	Jet_Launch_GEN_VARIABLE (0-0-0-0): size 224 (cls: Jet_Launch_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	Jet_Launch_GEN_VARIABLE (0-0-0-0): size 307 (cls: Jet_Launch_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_RCRocket_Thruster_Launch=/Game/Athena/Items/Weapons/Abilities/RCRocket/P_RCRocket_Thruster_Launch 
 			RelativeLocation(StructProperty)=Vector(0.000260671,-14.52459,0) 
 			RelativeRotation(StructProperty)=Rotator(0,-89.99995,0) 
 			RelativeScale3D(StructProperty)=Vector(0.8333333,0.8333333,0.8333333) 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 	PoseableMissileMesh_GEN_VARIABLE (0-0-0-0): size 1192 (cls: PoseableMissileMesh_GEN_VARIABLE>PoseableMeshComponent>/Script/Engine) :
 		Tag array:
 			SkeletalMesh(ObjectProperty)=RC_Rocket_Only_Export=/Game/Weapons/FORT_RocketLaunchers/Mesh/RC_Rocket_Only_Export 
@@ -1596,7 +1603,7 @@ Serialized exports:
 			ChildNodes(ArrayProperty)=[object] (inner: ObjectProperty)
 			VariableGuid(StructProperty)=Guid: 1629298016-1306107044-3386493084-1856682288 
 			InternalVariableName(NameProperty)=PoseableMissileMesh 
-	SCS_Node_2 (0-0-0-0): size 1030 (cls: SCS_Node_2>SCS_Node>/Script/Engine) :
+	SCS_Node_2 (0-0-0-0): size 1228 (cls: SCS_Node_2>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=Jet_GEN_VARIABLE=B_PrjPawn_Athena_RCRocket_C 
@@ -1619,7 +1626,7 @@ Serialized exports:
 			bIsParentComponentNative(BoolProperty)=True 
 			VariableGuid(StructProperty)=Guid: 1050758636-1189103133-4281276576-576267612 
 			InternalVariableName(NameProperty)=MissileInAirAudio 
-	SCS_Node_5 (0-0-0-0): size 1327 (cls: SCS_Node_5>SCS_Node>/Script/Engine) :
+	SCS_Node_5 (0-0-0-0): size 1525 (cls: SCS_Node_5>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=BlinkingLight_GEN_VARIABLE=B_PrjPawn_Athena_RCRocket_C 
@@ -1642,7 +1649,7 @@ Serialized exports:
 			bIsParentComponentNative(BoolProperty)=True 
 			VariableGuid(StructProperty)=Guid: 2856818887-1142803612-810793108-2238063647 
 			InternalVariableName(NameProperty)=MissileInAirBankingAudio 
-	SCS_Node_9 (0-0-0-0): size 1327 (cls: SCS_Node_9>SCS_Node>/Script/Engine) :
+	SCS_Node_9 (0-0-0-0): size 1525 (cls: SCS_Node_9>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=Jet_Launch_GEN_VARIABLE=B_PrjPawn_Athena_RCRocket_C 

@@ -18,6 +18,7 @@ Name table:
 	/Script/FortniteGame
 	Activate
 	Actor
+	ActorComponentTickFunction
 	AllNodes
 	Alpha
 	AnimBlueprintGeneratedClass
@@ -47,6 +48,7 @@ Name table:
 	BodyInstance
 	BooleanAND
 	BoolProperty
+	bStartWithTickEnabled
 	bValidatedAsWired
 	ByteProperty
 	C_AudioCurve_LinearVolume
@@ -260,6 +262,7 @@ Name table:
 	PitchParam
 	PlayFromStart
 	PointerToUberGraphFrame
+	PrimaryComponentTick
 	PropertyName
 	PropertyScope
 	ReceiveBeginPlay
@@ -469,6 +472,7 @@ Import table:
 	Rotator (ScriptStruct)
 	Vector (ScriptStruct)
 	Vector2D (ScriptStruct)
+	ActorComponentTickFunction (ScriptStruct)
 	BodyInstance (ScriptStruct)
 	CollisionResponse (ScriptStruct)
 	PointerToUberGraphFrame (ScriptStruct)
@@ -696,23 +700,27 @@ Serialized exports:
 		Tag array:
 	TrailParticles2 (0-0-0-0): size 36 (cls: TrailParticles2>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	P_DarkVikingGlider_Flames_GEN_VARIABLE (0-0-0-0): size 67 (cls: P_DarkVikingGlider_Flames_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	P_DarkVikingGlider_Flames_GEN_VARIABLE (0-0-0-0): size 150 (cls: P_DarkVikingGlider_Flames_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_DarkVikingGlider_Flames_v3=/Game/Gadgets/Assets/VinderTech_GliderChute/Glider_Dark_Viking/Effects/P_DarkVikingGlider_Flames_v3 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
-	Storm_GEN_VARIABLE (0-0-0-0): size 128 (cls: Storm_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	Storm_GEN_VARIABLE (0-0-0-0): size 211 (cls: Storm_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_Glider_DarkViking_Snow=/Game/Athena/Effects/Particles/Gliders/P_Glider_DarkViking_Snow 
 			RelativeRotation(StructProperty)=Rotator(0,-89.99999,0) 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
-	TrailParticles2_GEN_VARIABLE (0-0-0-0): size 102 (cls: TrailParticles2_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	TrailParticles2_GEN_VARIABLE (0-0-0-0): size 185 (cls: TrailParticles2_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_Glider_DarkViking_Trail=/Game/Athena/Effects/Particles/Gliders/P_Glider_DarkViking_Trail 
 			RelativeRotation(StructProperty)=Rotator(0,-89.99999,0) 
-	ParachuteTrails0 (0-0-0-0): size 70 (cls: ParachuteTrails0>ParticleSystemComponent>/Script/Engine) :
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
+	ParachuteTrails0 (0-0-0-0): size 153 (cls: ParachuteTrails0>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_Glider_DarkViking_Trail=/Game/Athena/Effects/Particles/Gliders/P_Glider_DarkViking_Trail 
 			AttachParent(ObjectProperty)=ParachuteMesh0=Default__B_Glider_DarkViking_C 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 	DefaultSceneRoot_GEN_VARIABLE (0-0-0-0): size 12 (cls: DefaultSceneRoot_GEN_VARIABLE>SceneComponent>/Script/Engine) :
 		Tag array:
 	FlameTarget_GEN_VARIABLE (0-0-0-0): size 73 (cls: FlameTarget_GEN_VARIABLE>SceneComponent>/Script/Engine) :
@@ -726,7 +734,7 @@ Serialized exports:
 			ComponentTemplate(ObjectProperty)=DefaultSceneRoot_GEN_VARIABLE=B_Glider_DarkViking_C 
 			VariableGuid(StructProperty)=Guid: 407734703-1244099851-1084424577-652376848 
 			InternalVariableName(NameProperty)=DefaultSceneRoot 
-	SCS_Node_1 (0-0-0-0): size 693 (cls: SCS_Node_1>SCS_Node>/Script/Engine) :
+	SCS_Node_1 (0-0-0-0): size 891 (cls: SCS_Node_1>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=TrailParticles2_GEN_VARIABLE=B_Glider_DarkViking_C 
@@ -744,7 +752,7 @@ Serialized exports:
 			bIsParentComponentNative(BoolProperty)=True 
 			VariableGuid(StructProperty)=Guid: 2582666658-1284608435-310261927-3277560457 
 			InternalVariableName(NameProperty)=FortVehicleAudioVoice 
-	SCS_Node_3 (0-0-0-0): size 627 (cls: SCS_Node_3>SCS_Node>/Script/Engine) :
+	SCS_Node_3 (0-0-0-0): size 825 (cls: SCS_Node_3>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=P_DarkVikingGlider_Flames_GEN_VARIABLE=B_Glider_DarkViking_C 
@@ -773,7 +781,7 @@ Serialized exports:
 			bIsParentComponentNative(BoolProperty)=True 
 			VariableGuid(StructProperty)=Guid: 3760151230-1275076948-1755831428-3738271137 
 			InternalVariableName(NameProperty)=FlameTarget 
-	SCS_Node_7 (0-0-0-0): size 792 (cls: SCS_Node_7>SCS_Node>/Script/Engine) :
+	SCS_Node_7 (0-0-0-0): size 990 (cls: SCS_Node_7>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=Storm_GEN_VARIABLE=B_Glider_DarkViking_C 

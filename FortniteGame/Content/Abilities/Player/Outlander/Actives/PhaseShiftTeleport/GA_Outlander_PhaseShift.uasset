@@ -11,6 +11,7 @@ Name table:
 	/Game/Abilities/Player/Outlander/Perks/PhasicEnergy/GE_Outlander_PhasicEnergy_Applied
 	/Game/Abilities/Player/Outlander/Perks/Unphased/GE_Outlander_Unphased_Applied
 	/Game/Abilities/Player/Parents/GAT_ActiveAbility
+	/Game/Abilities/Player/Parents/GAT_ActiveAbility_Hero
 	/Game/Abilities/Player/Parents/GAT_OutlanderActiveAbility
 	/Game/Abilities/Player/Pawns/PlayerPawn_Outlander
 	/Game/Abilities/Player/Perks/Hero/PhaseSiphon/GE_Perk_H_PhaseSiphon_Heal
@@ -119,6 +120,7 @@ Name table:
 	CallFunc_BreakVector_Z
 	CallFunc_BreakVector_Z1
 	CallFunc_CheckTeam_Friendly
+	CallFunc_CommitAbilityWithEvent_Passed
 	CallFunc_EqualEqual_FloatFloat_ReturnValue
 	CallFunc_EqualEqual_FloatFloat_ReturnValue1
 	CallFunc_EqualEqual_FloatFloat_ReturnValue2
@@ -196,6 +198,7 @@ Name table:
 	CollisionCylinder
 	CombatEffects_Abilities
 	CombatEffects_HeroAbilities
+	CommitAbilityWithEvent
 	ComponentBeginOverlapSignature__DelegateSignature
 	ContextHandle
 	Controller
@@ -227,6 +230,7 @@ Name table:
 	Default__Function
 	Default__GA_Outlander_PhaseShift_C
 	Default__GAT_ActiveAbility_C
+	Default__GAT_ActiveAbility_Hero_C
 	Default__GAT_OutlanderActiveAbility_C
 	Default__GE_Outlander_PhaseShield_Applied_C
 	Default__GE_Outlander_PhaseShift_Cooldown_C
@@ -307,6 +311,7 @@ Name table:
 	GameplayTagContainer
 	GameplayTask
 	GAT_ActiveAbility_C
+	GAT_ActiveAbility_Hero_C
 	GAT_OutlanderActiveAbility_C
 	GE_Outlander_Movespeed
 	GE_Outlander_PhaseShield_Applied
@@ -457,7 +462,6 @@ Name table:
 	SelectFloat
 	SelectVector
 	SendGameplayEvent
-	SendHeroAbilityActivationEvent
 	SetByCaller.MoveSpeed
 	SetCollisionEnabled
 	SetKnockbackImmunity
@@ -505,7 +509,7 @@ Name table:
 	UberGraphFrame
 	UberGraphFramePointerProperty
 	UberGraphFunction
-	UseNewPerkSystem
+	UseHeroLoadoutSystem
 	V_TargetLocation
 	V_VelocityBeforePhaseShift
 	Value
@@ -528,11 +532,13 @@ Import table:
 	GE_Outlander_PhasicEnergy_Applied_C (BlueprintGeneratedClass)
 	GE_Outlander_Unphased_Applied_C (BlueprintGeneratedClass)
 	GAT_ActiveAbility_C (BlueprintGeneratedClass)
+	GAT_ActiveAbility_Hero_C (BlueprintGeneratedClass)
 	GAT_OutlanderActiveAbility_C (BlueprintGeneratedClass)
 	PlayerPawn_Outlander_C (BlueprintGeneratedClass)
 	GE_Perk_H_PhaseSiphon_Heal_C (BlueprintGeneratedClass)
 	GE_Perk_L_ShiftingGears_MaxCharges_C (BlueprintGeneratedClass)
 	Default__BlueprintGeneratedClass (BlueprintGeneratedClass)
+	UseHeroLoadoutSystem (BoolProperty)
 	Default__BoolProperty (BoolProperty)
 	AntiMaterialHitBox_GEN_VARIABLE (BoxComponent)
 	PhaseShiftHitBox_GEN_VARIABLE (BoxComponent)
@@ -643,6 +649,7 @@ Import table:
 	HasAllMatchingGameplayTags (Function)
 	ReadyForActivation (Function)
 	Default__GAT_ActiveAbility_C (GAT_ActiveAbility_C)
+	Default__GAT_ActiveAbility_Hero_C (GAT_ActiveAbility_Hero_C)
 	Default__GAT_OutlanderActiveAbility_C (GAT_OutlanderActiveAbility_C)
 	Default__GE_Outlander_PhaseShield_Applied_C (GE_Outlander_PhaseShield_Applied_C)
 	Default__GE_Outlander_PhaseShift_Cooldown_C (GE_Outlander_PhaseShift_Cooldown_C)
@@ -680,6 +687,7 @@ Import table:
 	/Game/Abilities/Player/Outlander/Perks/PhasicEnergy/GE_Outlander_PhasicEnergy_Applied (Package)
 	/Game/Abilities/Player/Outlander/Perks/Unphased/GE_Outlander_Unphased_Applied (Package)
 	/Game/Abilities/Player/Parents/GAT_ActiveAbility (Package)
+	/Game/Abilities/Player/Parents/GAT_ActiveAbility_Hero (Package)
 	/Game/Abilities/Player/Parents/GAT_OutlanderActiveAbility (Package)
 	/Game/Abilities/Player/Pawns/PlayerPawn_Outlander (Package)
 	/Game/Abilities/Player/Perks/Hero/PhaseSiphon/GE_Perk_H_PhaseSiphon_Heal (Package)
@@ -728,7 +736,7 @@ Import table:
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	GA_Outlander_PhaseShift_C (0-0-0-0): size 695 (cls: GA_Outlander_PhaseShift_C>BlueprintGeneratedClass>/Script/Engine) :
+	GA_Outlander_PhaseShift_C (0-0-0-0): size 691 (cls: GA_Outlander_PhaseShift_C>BlueprintGeneratedClass>/Script/Engine) :
 		Tag array:
 			NumReplicatedProperties(IntProperty)=2 
 			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=GA_Outlander_PhaseShift_C 
@@ -792,7 +800,7 @@ Serialized exports:
 		Tag array:
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject) :
 		Tag array:
-	ExecuteUbergraph_GA_Outlander_PhaseShift (0-0-0-0): size 2901 (cls: ExecuteUbergraph_GA_Outlander_PhaseShift>Function>/Script/CoreUObject) :
+	ExecuteUbergraph_GA_Outlander_PhaseShift (0-0-0-0): size 2936 (cls: ExecuteUbergraph_GA_Outlander_PhaseShift>Function>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_GetOverlappingActors_OverlappingActors (0-0-0-0): size 36 (cls: CallFunc_GetOverlappingActors_OverlappingActors>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
@@ -902,6 +910,8 @@ Serialized exports:
 		Tag array:
 	CallFunc_CheckTeam_Friendly (0-0-0-0): size 34 (cls: CallFunc_CheckTeam_Friendly>BoolProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_CommitAbilityWithEvent_Passed (0-0-0-0): size 34 (cls: CallFunc_CommitAbilityWithEvent_Passed>BoolProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_IsAuthOrStandalone_IsAuthOrStand (0-0-0-0): size 34 (cls: CallFunc_IsAuthOrStandalone_IsAuthOrStand>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_IsFalling_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsFalling_ReturnValue>BoolProperty>/Script/CoreUObject) :
@@ -977,8 +987,6 @@ Serialized exports:
 	CallFunc_HasAllMatchingGameplayTags_ReturnValue9 (0-0-0-0): size 34 (cls: CallFunc_HasAllMatchingGameplayTags_ReturnValue9>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject) :
-		Tag array:
-	UseNewPerkSystem (0-0-0-0): size 34 (cls: UseNewPerkSystem>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_GetTeamAffiliation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetTeamAffiliation_ReturnValue>ByteProperty>/Script/CoreUObject) :
 		Tag array:

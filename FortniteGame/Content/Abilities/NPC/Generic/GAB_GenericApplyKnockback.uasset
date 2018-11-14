@@ -4,6 +4,7 @@ Name table:
 	/Game/Abilities/NPC/Generic/GE_KnockbackActive
 	/Game/Abilities/NPC/Generic/GE_RestoreControlResistance
 	/Game/Abilities/NPC/Generic/GE_TransferKnockback
+	/Game/Macros/Abilities/AbilityFunctions
 	/Script/CoreUObject
 	/Script/Engine
 	/Script/FortniteGame
@@ -11,6 +12,7 @@ Name table:
 	/Script/GameplayTags
 	/Script/GameplayTasks
 	Abilities.Knockback.UseAngleFromInstigator
+	AbilityFunctions_C
 	AbilitySystemBlueprintLibrary
 	AbilitySystemComponent
 	AbilityTags
@@ -91,7 +93,8 @@ Name table:
 	CallFunc_GetImpulseData_ImpulseDirection
 	CallFunc_GetImpulseData_KnockbackMagnitude
 	CallFunc_GetImpulseData_KnockbackZAngle
-	CallFunc_GetPawnFromInstigator_OutPawn
+	CallFunc_GetPawnFromPlayerStateZone_OutPawn
+	CallFunc_GetPawnFromPlayerStateZone_PawnReturned
 	CallFunc_GetVelocity_ReturnValue
 	CallFunc_Greater_FloatFloat_ReturnValue
 	CallFunc_HasMatchingGameplayTag_ReturnValue
@@ -145,6 +148,7 @@ Name table:
 	DebugLastLocation
 	DebugLine
 	DebugNumbers
+	Default__AbilityFunctions_C
 	Default__AbilitySystemBlueprintLibrary
 	Default__AbilityTask_PlayMontageAndWait
 	Default__ArrayProperty
@@ -187,6 +191,8 @@ Name table:
 	EnumProperty
 	EqualEqual_FloatFloat
 	Event.Control.Knockback
+	Event.TriggeredControl.KnockBack
+	Event_Triggered_Knockback
 	EventData
 	ExecuteUbergraph_GAB_GenericApplyKnockback
 	F_OneFrameDelay
@@ -226,6 +232,7 @@ Name table:
 	GetCurrentPawn
 	GetImpulseData
 	GetPawnFromInstigator
+	GetPawnFromPlayerStateZone
 	GetVelocity
 	Greater_FloatFloat
 	GT_IgnoreImpulseDirection
@@ -363,6 +370,7 @@ Name table:
 	ScriptStruct
 	SelectFloat
 	SelfActor
+	SendGameplayEventToActor
 	SetAIFocalPoint
 	SetIsKnockedBack
 	SetLandingMontageReplication
@@ -383,6 +391,7 @@ Name table:
 	Vector
 	VSize
 Import table:
+	Default__AbilityFunctions_C (AbilityFunctions_C)
 	Default__AbilitySystemBlueprintLibrary (AbilitySystemBlueprintLibrary)
 	Default__AbilityTask_PlayMontageAndWait (AbilityTask_PlayMontageAndWait)
 	Default__ArrayProperty (ArrayProperty)
@@ -476,6 +485,7 @@ Import table:
 	AbilityTargetDataFromHitResult (Function)
 	EffectContextGetSourceObject (Function)
 	GetAbilitySystemComponent (Function)
+	SendGameplayEventToActor (Function)
 	CreatePlayMontageAndWaitProxy (Function)
 	BP_ApplyGameplayEffectToOwner (Function)
 	BP_ApplyGameplayEffectToTarget (Function)
@@ -506,6 +516,7 @@ Import table:
 	/Game/Abilities/NPC/Generic/GE_KnockbackActive (Package)
 	/Game/Abilities/NPC/Generic/GE_RestoreControlResistance (Package)
 	/Game/Abilities/NPC/Generic/GE_TransferKnockback (Package)
+	/Game/Macros/Abilities/AbilityFunctions (Package)
 	/Script/CoreUObject (Package)
 	/Script/Engine (Package)
 	/Script/FortniteGame (Package)
@@ -531,11 +542,11 @@ Import table:
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	GAB_GenericApplyKnockback_C (0-0-0-0): size 754 (cls: GAB_GenericApplyKnockback_C>BlueprintGeneratedClass>/Script/Engine) :
+	GAB_GenericApplyKnockback_C (0-0-0-0): size 758 (cls: GAB_GenericApplyKnockback_C>BlueprintGeneratedClass>/Script/Engine) :
 		Tag array:
 			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=GAB_GenericApplyKnockback_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_GAB_GenericApplyKnockback=GAB_GenericApplyKnockback_C 
-	Default__GAB_GenericApplyKnockback_C (0-0-0-0): size 1498 (cls: Default__GAB_GenericApplyKnockback_C>GAB_GenericApplyKnockback_C) :
+	Default__GAB_GenericApplyKnockback_C (0-0-0-0): size 1588 (cls: Default__GAB_GenericApplyKnockback_C>GAB_GenericApplyKnockback_C) :
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			GE_TransferKnockback(ObjectProperty)=GE_TransferKnockback_C=/Game/Abilities/NPC/Generic/GE_TransferKnockback 
@@ -553,6 +564,7 @@ Serialized exports:
 			GE_ImpactImmunity(ObjectProperty)=GE_ImpactImmunity_C=/Game/Abilities/NPC/Generic/GE_ImpactImmunity 
 			ActiveImpactImmunity(StructProperty)=System.Byte[] 
 			F_OneFrameDelay(FloatProperty)=0.01 
+			Event_Triggered_Knockback(StructProperty)=System.Byte[] 
 			bStopsAIBehaviorLogic(BoolProperty)=True 
 			bStopsAIMovement(BoolProperty)=True 
 			MinimumRequiredAILODLevel(EnumProperty)=EFortAILODLevel::BelowNormal 
@@ -568,7 +580,7 @@ Serialized exports:
 		Tag array:
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject) :
 		Tag array:
-	ExecuteUbergraph_GAB_GenericApplyKnockback (0-0-0-0): size 4839 (cls: ExecuteUbergraph_GAB_GenericApplyKnockback>Function>/Script/CoreUObject) :
+	ExecuteUbergraph_GAB_GenericApplyKnockback (0-0-0-0): size 4903 (cls: ExecuteUbergraph_GAB_GenericApplyKnockback>Function>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_BP_ApplyGameplayEffectToTarget_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_BP_ApplyGameplayEffectToTarget_ReturnValue>StructProperty>/Script/CoreUObject) :
 		Tag array:
@@ -677,6 +689,8 @@ Serialized exports:
 	CallFunc_BooleanAND_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_DoesUseInstagorInsteadOfImpulseDirection_Value (0-0-0-0): size 34 (cls: CallFunc_DoesUseInstagorInsteadOfImpulseDirection_Value>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_GetPawnFromPlayerStateZone_PawnReturned (0-0-0-0): size 34 (cls: CallFunc_GetPawnFromPlayerStateZone_PawnReturned>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_Greater_FloatFloat_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Greater_FloatFloat_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -878,7 +892,7 @@ Serialized exports:
 		Tag array:
 	CallFunc_GetActivatingPawn_ReturnValue9 (0-0-0-0): size 36 (cls: CallFunc_GetActivatingPawn_ReturnValue9>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	CallFunc_GetPawnFromInstigator_OutPawn (0-0-0-0): size 36 (cls: CallFunc_GetPawnFromInstigator_OutPawn>ObjectProperty>/Script/CoreUObject) :
+	CallFunc_GetPawnFromPlayerStateZone_OutPawn (0-0-0-0): size 36 (cls: CallFunc_GetPawnFromPlayerStateZone_OutPawn>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	K2Node_CustomEvent_OtherActor (0-0-0-0): size 36 (cls: K2Node_CustomEvent_OtherActor>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
@@ -929,6 +943,8 @@ Serialized exports:
 	DebugLastLocation (0-0-0-0): size 36 (cls: DebugLastLocation>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	GT_IgnoreImpulseDirection (0-0-0-0): size 36 (cls: GT_IgnoreImpulseDirection>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	Event_Triggered_Knockback (0-0-0-0): size 36 (cls: Event_Triggered_Knockback>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_AbilityTargetDataFromHitResult_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_AbilityTargetDataFromHitResult_ReturnValue>StructProperty>/Script/CoreUObject) :
 		Tag array:

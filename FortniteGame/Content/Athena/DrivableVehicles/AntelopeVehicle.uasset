@@ -37,6 +37,7 @@ Name table:
 	/Game/Athena/DrivableVehicles/ShoppingCartWheels
 	/Game/Athena/DrivableVehicles/Speed_CameraShake
 	/Game/Athena/DrivableVehicles/VehicleConfigsAntelopeVehicle
+	/Game/Athena/Sounds/HitNotifications/HitNotifyAudioBank_VehicleDefault
 	/Game/Athena/Sounds/Items/Consumable_CantApply_Cue
 	/Game/Athena/Sounds/Vehicles/GolfCart/C_GolfCart_Audio_MainMovement
 	/Game/Athena/Sounds/Vehicles/GolfCart/C_GolfCart_Audio_PitchTest
@@ -105,6 +106,7 @@ Name table:
 	ActiveGameplayEffectHandle
 	Actor
 	ActorComponent
+	ActorComponentTickFunction
 	ActorHasTag
 	ActorSpaceCameraOffset
 	ActorToDestroy
@@ -243,6 +245,7 @@ Name table:
 	BoxComponent
 	BoxExtent
 	BP_ApplyGameplayEffectToTarget
+	bPlayDamageAudio
 	bPlayingBoostFX
 	bPlayingBoostFXForward
 	BrakeAboveTopSpeedDelta
@@ -251,6 +254,7 @@ Name table:
 	BreakVector
 	BroadcastAbilityImpactAtLocation
 	bSimulatePhysics
+	bStartWithTickEnabled
 	BuildingActor
 	BuildingEditModeMetadata
 	BuildingEditModeMetadata_Wall
@@ -733,6 +737,7 @@ Name table:
 	Default__StructProperty
 	Default__TextProperty
 	Default__VehicleConfigsAntelopeVehicle_C
+	DefaultHitNotifyAudioBank
 	Defaults
 	DefaultSceneRoot
 	DefaultSceneRoot_GEN_VARIABLE
@@ -980,6 +985,7 @@ Name table:
 	HitMagnitude
 	HitNormal
 	HitNormalImpulse
+	HitNotifyAudioBank_VehicleDefault
 	HitResult
 	HonkAudioComp
 	HonkMulticast
@@ -1326,6 +1332,7 @@ Name table:
 	PointerToUberGraphFrame
 	PreviousDayPhase
 	PrevWeapon
+	PrimaryComponentTick
 	PrimitiveComponent
 	PropDamageAmount
 	PropertyName
@@ -1579,6 +1586,7 @@ Name table:
 	Weapon3
 	Weapon4
 	Weapon5
+	WeaponHitNotifyAudioBank
 	WeaponMesh0
 	wheel_tilted_bk_l
 	wheel_tilted_bk_r
@@ -2010,6 +2018,7 @@ Import table:
 	/Game/Athena/DrivableVehicles/ShoppingCartWheels (Package)
 	/Game/Athena/DrivableVehicles/Speed_CameraShake (Package)
 	/Game/Athena/DrivableVehicles/VehicleConfigsAntelopeVehicle (Package)
+	/Game/Athena/Sounds/HitNotifications/HitNotifyAudioBank_VehicleDefault (Package)
 	/Game/Athena/Sounds/Items/Consumable_CantApply_Cue (Package)
 	/Game/Athena/Sounds/Vehicles/GolfCart/C_GolfCart_Audio_MainMovement (Package)
 	/Game/Athena/Sounds/Vehicles/GolfCart/C_GolfCart_Audio_PitchTest (Package)
@@ -2096,6 +2105,7 @@ Import table:
 	Transform (ScriptStruct)
 	Vector (ScriptStruct)
 	Vector2D (ScriptStruct)
+	ActorComponentTickFunction (ScriptStruct)
 	BodyInstance (ScriptStruct)
 	CollisionResponse (ScriptStruct)
 	HitResult (ScriptStruct)
@@ -2158,6 +2168,7 @@ Import table:
 	GameplayTags (StructProperty)
 	Default__TextProperty (TextProperty)
 	Default__VehicleConfigsAntelopeVehicle_C (VehicleConfigsAntelopeVehicle_C)
+	HitNotifyAudioBank_VehicleDefault (WeaponHitNotifyAudioBank)
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject) :
 		Tag array:
@@ -2169,7 +2180,7 @@ Serialized exports:
 			SimpleConstructionScript(ObjectProperty)=SimpleConstructionScript_0=AntelopeVehicle_C 
 			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=AntelopeVehicle_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_AntelopeVehicle=AntelopeVehicle_C 
-	Default__AntelopeVehicle_C (0-0-0-0): size 10116 (cls: Default__AntelopeVehicle_C>AntelopeVehicle_C) :
+	Default__AntelopeVehicle_C (0-0-0-0): size 10171 (cls: Default__AntelopeVehicle_C>AntelopeVehicle_C) :
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			OnDeathSound(ObjectProperty)=Quad_Destroy_Cue=/Game/Athena/Sounds/Vehicles/Quad/Quad_Destroy_Cue 
@@ -2223,6 +2234,7 @@ Serialized exports:
 			WheelOffsetLimitB(FloatProperty)=15 
 			WheelSpinDampingPerSecond(FloatProperty)=1 
 			SeatSwitchCooldown(FloatProperty)=0.33 
+			bPlayDamageAudio(BoolProperty)=True 
 			VehicleTags(StructProperty)=GameplayTagContainer:Vehicle.GolfCart 
 			Springs(ArrayProperty)=[object] (inner: StructProperty)
 			Gears(ArrayProperty)=[object] (inner: StructProperty)
@@ -2240,6 +2252,7 @@ Serialized exports:
 			PushForceSocket(NameProperty)=PushForce 
 			FrontWheelsSocket(NameProperty)=FrontWheels 
 			RearWheelSockets(NameProperty)=RearWheels 
+			DefaultHitNotifyAudioBank(ObjectProperty)=HitNotifyAudioBank_VehicleDefault=/Game/Athena/Sounds/HitNotifications/HitNotifyAudioBank_VehicleDefault 
 			SeatTransitions(ArrayProperty)=[object] (inner: StructProperty)
 			PlayerSlots(ArrayProperty)=[object] (inner: StructProperty)
 			CameraModeClass(ObjectProperty)=AthenaSimpleCar_CameraMode3_C=/Game/Athena/DrivableVehicles/AthenaSimpleCar_CameraMode3 
@@ -3697,7 +3710,7 @@ Serialized exports:
 		Tag array:
 	WheelBlursFront (0-0-0-0): size 36 (cls: WheelBlursFront>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	P_ATV_Engine_Ready_GEN_VARIABLE (0-0-0-0): size 249 (cls: P_ATV_Engine_Ready_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	P_ATV_Engine_Ready_GEN_VARIABLE (0-0-0-0): size 332 (cls: P_ATV_Engine_Ready_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_ATV_Engine_Ready=/Game/Athena/DrivableVehicles/FX/Quad/P_ATV_Engine_Ready 
 			bAutoManageAttachment(BoolProperty)=True 
@@ -3705,33 +3718,38 @@ Serialized exports:
 			AutoAttachLocationRule(EnumProperty)=EAttachmentRule::SnapToTarget 
 			AutoAttachRotationRule(EnumProperty)=EAttachmentRule::SnapToTarget 
 			AutoAttachScaleRule(EnumProperty)=EAttachmentRule::SnapToTarget 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
-	P_GolfCart_Vehicle_WheelDust_GEN_VARIABLE (0-0-0-0): size 154 (cls: P_GolfCart_Vehicle_WheelDust_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	P_GolfCart_Vehicle_WheelDust_GEN_VARIABLE (0-0-0-0): size 237 (cls: P_GolfCart_Vehicle_WheelDust_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_ATV_Vehicle_WheelDust=/Game/Athena/DrivableVehicles/FX/Quad/P_ATV_Vehicle_WheelDust 
 			bAutoManageAttachment(BoolProperty)=True 
 			RelativeLocation(StructProperty)=Vector(-99.37962,0,0) 
 			bAbsoluteScale(BoolProperty)=True 
-	TrailLeft_GEN_VARIABLE (0-0-0-0): size 256 (cls: TrailLeft_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
+	TrailLeft_GEN_VARIABLE (0-0-0-0): size 339 (cls: TrailLeft_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_ATV_SkidTrails=/Game/Athena/DrivableVehicles/FX/Quad/P_ATV_SkidTrails 
 			bAutoManageAttachment(BoolProperty)=True 
 			RelativeLocation(StructProperty)=Vector(-40.35519,81.42823,31.85225) 
 			RelativeRotation(StructProperty)=Rotator(9.999724,142.0056,0.0004913404) 
 			DetailMode(ByteProperty)=DM_Medium 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
-	TrailRight_GEN_VARIABLE (0-0-0-0): size 256 (cls: TrailRight_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	TrailRight_GEN_VARIABLE (0-0-0-0): size 339 (cls: TrailRight_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_ATV_SkidTrails=/Game/Athena/DrivableVehicles/FX/Quad/P_ATV_SkidTrails 
 			bAutoManageAttachment(BoolProperty)=True 
 			RelativeLocation(StructProperty)=Vector(-40.35519,81.42823,31.85225) 
 			RelativeRotation(StructProperty)=Rotator(9.999724,142.0056,0.0004913404) 
 			DetailMode(ByteProperty)=DM_Medium 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
-	P_Boost_Flames (0-0-0-0): size 70 (cls: P_Boost_Flames>ParticleSystemComponent>/Script/Engine) :
+	P_Boost_Flames (0-0-0-0): size 153 (cls: P_Boost_Flames>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_ATV_Boost_Flames=/Game/Athena/DrivableVehicles/FX/Quad/P_ATV_Boost_Flames 
 			AttachParent(ObjectProperty)=SkeletalMeshComponent=Default__AntelopeVehicle_C 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 	DefaultSceneRoot_GEN_VARIABLE (0-0-0-0): size 12 (cls: DefaultSceneRoot_GEN_VARIABLE>SceneComponent>/Script/Engine) :
 		Tag array:
 	SCS_Node_0 (0-0-0-0): size 168 (cls: SCS_Node_0>SCS_Node>/Script/Engine) :
@@ -3805,7 +3823,7 @@ Serialized exports:
 			CookedComponentInstancingData(StructProperty)=System.Byte[] 
 			VariableGuid(StructProperty)=Guid: 4135599671-1323235266-4264089216-1973225503 
 			InternalVariableName(NameProperty)=AudioBoost 
-	SCS_Node_18 (0-0-0-0): size 1584 (cls: SCS_Node_18>SCS_Node>/Script/Engine) :
+	SCS_Node_18 (0-0-0-0): size 1782 (cls: SCS_Node_18>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=TrailLeft_GEN_VARIABLE=AntelopeVehicle_C 
@@ -3814,7 +3832,7 @@ Serialized exports:
 			bIsParentComponentNative(BoolProperty)=True 
 			VariableGuid(StructProperty)=Guid: 2227194909-1214673294-143448235-1381978159 
 			InternalVariableName(NameProperty)=TrailLeft 
-	SCS_Node_19 (0-0-0-0): size 1584 (cls: SCS_Node_19>SCS_Node>/Script/Engine) :
+	SCS_Node_19 (0-0-0-0): size 1782 (cls: SCS_Node_19>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=TrailRight_GEN_VARIABLE=AntelopeVehicle_C 
@@ -3904,7 +3922,7 @@ Serialized exports:
 			CookedComponentInstancingData(StructProperty)=System.Byte[] 
 			VariableGuid(StructProperty)=Guid: 256630623-1094415227-167784373-339231448 
 			InternalVariableName(NameProperty)=FortCollisionAudioImpacts 
-	SCS_Node_7 (0-0-0-0): size 1122 (cls: SCS_Node_7>SCS_Node>/Script/Engine) :
+	SCS_Node_7 (0-0-0-0): size 1320 (cls: SCS_Node_7>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=P_ATV_Engine_Ready_GEN_VARIABLE=AntelopeVehicle_C 
@@ -3914,7 +3932,7 @@ Serialized exports:
 			bIsParentComponentNative(BoolProperty)=True 
 			VariableGuid(StructProperty)=Guid: 1471343008-1284486552-2322231684-3940133386 
 			InternalVariableName(NameProperty)=P_ATV_Engine_Ready 
-	SCS_Node_8 (0-0-0-0): size 891 (cls: SCS_Node_8>SCS_Node>/Script/Engine) :
+	SCS_Node_8 (0-0-0-0): size 1089 (cls: SCS_Node_8>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=P_GolfCart_Vehicle_WheelDust_GEN_VARIABLE=AntelopeVehicle_C 

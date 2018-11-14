@@ -18,7 +18,7 @@ Name table:
 	/Game/Athena/HUD/LTM/Domination/M_UI_Domination_ZoneIndicator_Enemy
 	/Game/Athena/Items/QuestInteractables/DancePlatforms/FX/MI_DanceFloorOffQuest
 	/Game/Athena/PlayerPawn_Athena
-	/Game/Athena/Playlists/50v50/Disco/AthenaGameData
+	/Game/Athena/Playlists/50v50/Disco/AthenaCompositeGD_Disco
 	/Game/Athena/Playlists/50v50/Disco/BP_BuilderGridFloor
 	/Game/Athena/Playlists/50v50/Disco/BP_BuilderGridWall
 	/Game/Athena/Playlists/50v50/Disco/DiscoPoint
@@ -49,6 +49,7 @@ Name table:
 	AbilitySystemComponentCreationPolicy
 	Activate
 	Actor
+	ActorComponentTickFunction
 	Add_IntInt
 	Add_VectorVector
 	AllNodes
@@ -59,7 +60,7 @@ Name table:
 	ArrayProperty
 	ArrowComponent
 	AthenaCapturePoint
-	AthenaGameData
+	AthenaCompositeGD_Disco
 	AttachParent
 	AttenuationSettings
 	AudioComponent
@@ -98,6 +99,7 @@ Name table:
 	BPM_TimeInSeconds
 	BreakVector
 	BRMaxDrawDistance
+	bStartWithTickEnabled
 	BuilderGridFloor
 	BuilderGridWall
 	bUseCentroidForBlockBuildingsCheck
@@ -201,6 +203,7 @@ Name table:
 	ComponentTags
 	ComponentTemplate
 	ComposeRotators
+	CompositeCurveTable
 	ContentionRules
 	CookedComponentInstancingData
 	Corner_Truss_01
@@ -559,6 +562,7 @@ Name table:
 	PointerToUberGraphFrame
 	PointLightComponent
 	PostProcessComponent
+	PrimaryComponentTick
 	Prop_DanceClub_SpeakerCluster_01
 	Prop_DanceClub_SpeakerCluster_01_GEN_VARIABLE
 	PropertyName
@@ -780,8 +784,8 @@ Import table:
 	AthenaCapturePoint (Class)
 	FortGameStateAthena (Class)
 	FortKismetLibrary (Class)
+	AthenaCompositeGD_Disco (CompositeCurveTable)
 	Default__CurveFloat (CurveFloat)
-	AthenaGameData (CurveTable)
 	TimerDynamicDelegate__DelegateSignature (DelegateFunction)
 	OnGamePhaseStepChanged__DelegateSignature (DelegateFunction)
 	Default__DelegateProperty (DelegateProperty)
@@ -880,7 +884,7 @@ Import table:
 	/Game/Athena/HUD/LTM/Domination/M_UI_Domination_ZoneIndicator_Enemy (Package)
 	/Game/Athena/Items/QuestInteractables/DancePlatforms/FX/MI_DanceFloorOffQuest (Package)
 	/Game/Athena/PlayerPawn_Athena (Package)
-	/Game/Athena/Playlists/50v50/Disco/AthenaGameData (Package)
+	/Game/Athena/Playlists/50v50/Disco/AthenaCompositeGD_Disco (Package)
 	/Game/Athena/Playlists/50v50/Disco/BP_BuilderGridFloor (Package)
 	/Game/Athena/Playlists/50v50/Disco/BP_BuilderGridWall (Package)
 	/Game/Athena/Sounds/LTMs/Disco/LTM_Disco_CapturePoint_CrashIn_Cue (Package)
@@ -931,6 +935,7 @@ Import table:
 	Rotator (ScriptStruct)
 	Transform (ScriptStruct)
 	Vector (ScriptStruct)
+	ActorComponentTickFunction (ScriptStruct)
 	BodyInstance (ScriptStruct)
 	CollisionResponse (ScriptStruct)
 	HitResult (ScriptStruct)
@@ -1523,60 +1528,71 @@ Serialized exports:
 		Tag array:
 	StaticMesh9 (0-0-0-0): size 36 (cls: StaticMesh9>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	Capture_Pulse_Enemy_GEN_VARIABLE (0-0-0-0): size 163 (cls: Capture_Pulse_Enemy_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	Capture_Pulse_Enemy_GEN_VARIABLE (0-0-0-0): size 246 (cls: Capture_Pulse_Enemy_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_Disco_Capture_EnemyTeam=/Game/Athena/Effects/Particles/Disco/P_Disco_Capture_EnemyTeam 
 			RelativeLocation(StructProperty)=Vector(0,256.0001,0) 
 			RelativeRotation(StructProperty)=Rotator(0,90.00001,0) 
-	Capture_Pulse_Friend_GEN_VARIABLE (0-0-0-0): size 189 (cls: Capture_Pulse_Friend_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
+	Capture_Pulse_Friend_GEN_VARIABLE (0-0-0-0): size 272 (cls: Capture_Pulse_Friend_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_Disco_Capture=/Game/Athena/Effects/Particles/Disco/P_Disco_Capture 
 			RelativeLocation(StructProperty)=Vector(0,256.0001,0) 
 			RelativeRotation(StructProperty)=Rotator(0,90.00001,0) 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
-	Capturing_Enemy_GEN_VARIABLE (0-0-0-0): size 189 (cls: Capturing_Enemy_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	Capturing_Enemy_GEN_VARIABLE (0-0-0-0): size 272 (cls: Capturing_Enemy_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_Disco_Capturing_Pulse_EnemyTeam=/Game/Athena/Effects/Particles/Disco/P_Disco_Capturing_Pulse_EnemyTeam 
 			RelativeLocation(StructProperty)=Vector(0,256.0001,0) 
 			RelativeRotation(StructProperty)=Rotator(0,90.00001,0) 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
-	Capturing_Friend_GEN_VARIABLE (0-0-0-0): size 189 (cls: Capturing_Friend_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	Capturing_Friend_GEN_VARIABLE (0-0-0-0): size 272 (cls: Capturing_Friend_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_Disco_Capturing_Pulse=/Game/Athena/Effects/Particles/Disco/P_Disco_Capturing_Pulse 
 			RelativeLocation(StructProperty)=Vector(0,256.0001,0) 
 			RelativeRotation(StructProperty)=Rotator(0,90.00001,0) 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
-	P_DancePlatforms_DiscoBall_GEN_VARIABLE (0-0-0-0): size 128 (cls: P_DancePlatforms_DiscoBall_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	P_DancePlatforms_DiscoBall_GEN_VARIABLE (0-0-0-0): size 211 (cls: P_DancePlatforms_DiscoBall_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_Disco_DiscoBall_Rising=/Game/Athena/Effects/Particles/Disco/P_Disco_DiscoBall_Rising 
 			RelativeLocation(StructProperty)=Vector(0,0,-260) 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
-	P_Disco_BuildPoint_GEN_VARIABLE (0-0-0-0): size 128 (cls: P_Disco_BuildPoint_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	P_Disco_BuildPoint_GEN_VARIABLE (0-0-0-0): size 211 (cls: P_Disco_BuildPoint_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_Disco_BuildPoint=/Game/Athena/Effects/Particles/Disco/P_Disco_BuildPoint 
 			RelativeLocation(StructProperty)=Vector(0,0,384) 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
-	P_Disco_Shutdown_GEN_VARIABLE (0-0-0-0): size 128 (cls: P_Disco_Shutdown_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	P_Disco_Shutdown_GEN_VARIABLE (0-0-0-0): size 211 (cls: P_Disco_Shutdown_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_Disco_Shutdown=/Game/Athena/Effects/Particles/Disco/P_Disco_Shutdown 
 			RelativeLocation(StructProperty)=Vector(0,0,384) 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
-	P_Spotlight_1_GEN_VARIABLE (0-0-0-0): size 102 (cls: P_Spotlight_1_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	P_Spotlight_1_GEN_VARIABLE (0-0-0-0): size 185 (cls: P_Spotlight_1_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_Disco_Lights_Neutral=/Game/Athena/Effects/Particles/Disco/P_Disco_Lights_Neutral 
 			RelativeLocation(StructProperty)=Vector(-2.636469,3.947114,100.6678) 
-	P_Spotlight_2_GEN_VARIABLE (0-0-0-0): size 102 (cls: P_Spotlight_2_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
+	P_Spotlight_2_GEN_VARIABLE (0-0-0-0): size 185 (cls: P_Spotlight_2_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_Disco_Lights_Neutral=/Game/Athena/Effects/Particles/Disco/P_Disco_Lights_Neutral 
 			RelativeLocation(StructProperty)=Vector(-2.636469,3.947114,100.6678) 
-	P_Spotlight_3_GEN_VARIABLE (0-0-0-0): size 102 (cls: P_Spotlight_3_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
+	P_Spotlight_3_GEN_VARIABLE (0-0-0-0): size 185 (cls: P_Spotlight_3_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_Disco_Lights_Neutral=/Game/Athena/Effects/Particles/Disco/P_Disco_Lights_Neutral 
 			RelativeLocation(StructProperty)=Vector(-2.636469,3.947114,100.6678) 
-	P_Spotlight_4_GEN_VARIABLE (0-0-0-0): size 102 (cls: P_Spotlight_4_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
+	P_Spotlight_4_GEN_VARIABLE (0-0-0-0): size 185 (cls: P_Spotlight_4_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_Disco_Lights_Neutral=/Game/Athena/Effects/Particles/Disco/P_Disco_Lights_Neutral 
 			RelativeLocation(StructProperty)=Vector(-2.636469,3.947114,100.6678) 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 	DefaultSceneRoot_GEN_VARIABLE (0-0-0-0): size 12 (cls: DefaultSceneRoot_GEN_VARIABLE>SceneComponent>/Script/Engine) :
 		Tag array:
 	SCS_Node_0 (0-0-0-0): size 168 (cls: SCS_Node_0>SCS_Node>/Script/Engine) :
@@ -1585,7 +1601,7 @@ Serialized exports:
 			ComponentTemplate(ObjectProperty)=DefaultSceneRoot_GEN_VARIABLE=DiscoPoint_C 
 			VariableGuid(StructProperty)=Guid: 2545244501-1086460897-912060561-1204711568 
 			InternalVariableName(NameProperty)=DefaultSceneRoot 
-	SCS_Node_1 (0-0-0-0): size 832 (cls: SCS_Node_1>SCS_Node>/Script/Engine) :
+	SCS_Node_1 (0-0-0-0): size 1030 (cls: SCS_Node_1>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=P_Spotlight_1_GEN_VARIABLE=DiscoPoint_C 
@@ -1812,7 +1828,7 @@ Serialized exports:
 			CookedComponentInstancingData(StructProperty)=System.Byte[] 
 			VariableGuid(StructProperty)=Guid: 950407685-1184492155-2602771100-700759690 
 			InternalVariableName(NameProperty)=Lights_08 
-	SCS_Node_3 (0-0-0-0): size 792 (cls: SCS_Node_3>SCS_Node>/Script/Engine) :
+	SCS_Node_3 (0-0-0-0): size 990 (cls: SCS_Node_3>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=P_Disco_Shutdown_GEN_VARIABLE=DiscoPoint_C 
@@ -1888,7 +1904,7 @@ Serialized exports:
 			CookedComponentInstancingData(StructProperty)=System.Byte[] 
 			VariableGuid(StructProperty)=Guid: 723724964-1279464757-481877901-3876197511 
 			InternalVariableName(NameProperty)=CornerSupport03a 
-	SCS_Node_4 (0-0-0-0): size 733 (cls: SCS_Node_4>SCS_Node>/Script/Engine) :
+	SCS_Node_4 (0-0-0-0): size 931 (cls: SCS_Node_4>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=P_DancePlatforms_DiscoBall_GEN_VARIABLE=DiscoPoint_C 
@@ -1955,35 +1971,35 @@ Serialized exports:
 			CookedComponentInstancingData(StructProperty)=System.Byte[] 
 			VariableGuid(StructProperty)=Guid: 3224941115-1238401833-2245561476-1926741725 
 			InternalVariableName(NameProperty)=DiscoBallAudio 
-	SCS_Node_53 (0-0-0-0): size 931 (cls: SCS_Node_53>SCS_Node>/Script/Engine) :
+	SCS_Node_53 (0-0-0-0): size 1129 (cls: SCS_Node_53>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=Capturing_Friend_GEN_VARIABLE=DiscoPoint_C 
 			CookedComponentInstancingData(StructProperty)=System.Byte[] 
 			VariableGuid(StructProperty)=Guid: 2015669697-1265170198-3122827911-4229845416 
 			InternalVariableName(NameProperty)=Capturing_Friend 
-	SCS_Node_54 (0-0-0-0): size 931 (cls: SCS_Node_54>SCS_Node>/Script/Engine) :
+	SCS_Node_54 (0-0-0-0): size 1129 (cls: SCS_Node_54>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=Capture_Pulse_Friend_GEN_VARIABLE=DiscoPoint_C 
 			CookedComponentInstancingData(StructProperty)=System.Byte[] 
 			VariableGuid(StructProperty)=Guid: 2274728458-1150064123-330867640-24786246 
 			InternalVariableName(NameProperty)=Capture_Pulse_Friend 
-	SCS_Node_55 (0-0-0-0): size 832 (cls: SCS_Node_55>SCS_Node>/Script/Engine) :
+	SCS_Node_55 (0-0-0-0): size 1030 (cls: SCS_Node_55>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=Capture_Pulse_Enemy_GEN_VARIABLE=DiscoPoint_C 
 			CookedComponentInstancingData(StructProperty)=System.Byte[] 
 			VariableGuid(StructProperty)=Guid: 2968944995-1228105845-2362342295-3015845904 
 			InternalVariableName(NameProperty)=Capture_Pulse_Enemy 
-	SCS_Node_56 (0-0-0-0): size 931 (cls: SCS_Node_56>SCS_Node>/Script/Engine) :
+	SCS_Node_56 (0-0-0-0): size 1129 (cls: SCS_Node_56>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=Capturing_Enemy_GEN_VARIABLE=DiscoPoint_C 
 			CookedComponentInstancingData(StructProperty)=System.Byte[] 
 			VariableGuid(StructProperty)=Guid: 174834700-1331306228-1100991887-2174181390 
 			InternalVariableName(NameProperty)=Capturing_Enemy 
-	SCS_Node_57 (0-0-0-0): size 792 (cls: SCS_Node_57>SCS_Node>/Script/Engine) :
+	SCS_Node_57 (0-0-0-0): size 990 (cls: SCS_Node_57>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=P_Disco_BuildPoint_GEN_VARIABLE=DiscoPoint_C 
@@ -2018,7 +2034,7 @@ Serialized exports:
 			ChildNodes(ArrayProperty)=[object] (inner: ObjectProperty)
 			VariableGuid(StructProperty)=Guid: 1482422688-1235239237-3190833281-4192656294 
 			InternalVariableName(NameProperty)=Spotlight2 
-	SCS_Node_72 (0-0-0-0): size 832 (cls: SCS_Node_72>SCS_Node>/Script/Engine) :
+	SCS_Node_72 (0-0-0-0): size 1030 (cls: SCS_Node_72>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=P_Spotlight_2_GEN_VARIABLE=DiscoPoint_C 
@@ -2035,7 +2051,7 @@ Serialized exports:
 			ChildNodes(ArrayProperty)=[object] (inner: ObjectProperty)
 			VariableGuid(StructProperty)=Guid: 3896184809-1131450321-2450256268-1901000784 
 			InternalVariableName(NameProperty)=Spotlight3 
-	SCS_Node_74 (0-0-0-0): size 832 (cls: SCS_Node_74>SCS_Node>/Script/Engine) :
+	SCS_Node_74 (0-0-0-0): size 1030 (cls: SCS_Node_74>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=P_Spotlight_3_GEN_VARIABLE=DiscoPoint_C 
@@ -2052,7 +2068,7 @@ Serialized exports:
 			ChildNodes(ArrayProperty)=[object] (inner: ObjectProperty)
 			VariableGuid(StructProperty)=Guid: 2193497197-1123684931-860598662-3108993827 
 			InternalVariableName(NameProperty)=Spotlight4 
-	SCS_Node_76 (0-0-0-0): size 832 (cls: SCS_Node_76>SCS_Node>/Script/Engine) :
+	SCS_Node_76 (0-0-0-0): size 1030 (cls: SCS_Node_76>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=P_Spotlight_4_GEN_VARIABLE=DiscoPoint_C 

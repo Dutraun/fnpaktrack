@@ -3,12 +3,14 @@ Name table:
 	/Game/Abilities/NPC/Generic/GE_ImpactImmunity
 	/Game/Abilities/NPC/Generic/GE_RestoreControlResistance
 	/Game/Abilities/NPC/Generic/GE_TransferFullBodyHit
+	/Game/Macros/Abilities/AbilityFunctions
 	/Script/CoreUObject
 	/Script/Engine
 	/Script/FortniteGame
 	/Script/GameplayAbilities
 	/Script/GameplayTags
 	/Script/GameplayTasks
+	AbilityFunctions_C
 	AbilitySystemBlueprintLibrary
 	AbilitySystemComponent
 	AbilityTags
@@ -59,6 +61,8 @@ Name table:
 	CallFunc_GetImpulseData_ImpulseDirection
 	CallFunc_GetImpulseData_KnockbackMagnitude
 	CallFunc_GetImpulseData_KnockbackZAngle
+	CallFunc_GetPawnFromPlayerStateZone_OutPawn
+	CallFunc_GetPawnFromPlayerStateZone_PawnReturned
 	CallFunc_IsValid_ReturnValue
 	CallFunc_IsValid_ReturnValue1
 	CallFunc_Multiply_VectorFloat_ReturnValue
@@ -74,6 +78,7 @@ Name table:
 	ContextHandle
 	ControlRecoveryBehavior
 	CreatePlayMontageAndWaitProxy
+	Default__AbilityFunctions_C
 	Default__AbilitySystemBlueprintLibrary
 	Default__AbilityTask_PlayMontageAndWait
 	Default__ArrayProperty
@@ -110,6 +115,8 @@ Name table:
 	EntryPoint
 	EnumProperty
 	Event.Control.FullBodyHit
+	Event.TriggeredControl.FullBodyHit
+	Event_Triggered_FullBodyHit
 	EventData
 	ExecuteUbergraph_GAB_GenericApplyFullBodyHit
 	FloatProperty
@@ -118,6 +125,7 @@ Name table:
 	FortGameplayAbility
 	FortKismetLibrary
 	FortPawn
+	FortPlayerPawn
 	Front
 	FullBodyHitMontage
 	FullBodyHitMontageSection
@@ -145,11 +153,13 @@ Name table:
 	GetActivatingAbilityComponent
 	GetActivatingPawn
 	GetImpulseData
+	GetPawnFromPlayerStateZone
 	Handle
 	Hit
 	HitImpulse
 	HitResult
 	InstancingPolicy
+	Instigator
 	IntProperty
 	IsValid
 	K2_ActivateAbilityFromEvent
@@ -206,6 +216,7 @@ Name table:
 	Right
 	ScriptStruct
 	SelfActor
+	SendGameplayEventToActor
 	SetFNameBasedOnHitDirection
 	StructProperty
 	TagName
@@ -216,6 +227,7 @@ Name table:
 	UberGraphFunction
 	Vector
 Import table:
+	Default__AbilityFunctions_C (AbilityFunctions_C)
 	Default__AbilitySystemBlueprintLibrary (AbilitySystemBlueprintLibrary)
 	Default__AbilityTask_PlayMontageAndWait (AbilityTask_PlayMontageAndWait)
 	Default__ArrayProperty (ArrayProperty)
@@ -249,6 +261,7 @@ Import table:
 	FortGameplayAbility (Class)
 	FortKismetLibrary (Class)
 	FortPawn (Class)
+	FortPlayerPawn (Class)
 	AbilitySystemBlueprintLibrary (Class)
 	AbilitySystemComponent (Class)
 	AbilityTask_PlayMontageAndWait (Class)
@@ -277,6 +290,7 @@ Import table:
 	SetFNameBasedOnHitDirection (Function)
 	AbilityTargetDataFromHitResult (Function)
 	GetAbilitySystemComponent (Function)
+	SendGameplayEventToActor (Function)
 	CreatePlayMontageAndWaitProxy (Function)
 	BP_ApplyGameplayEffectToOwner (Function)
 	BP_ApplyGameplayEffectToTarget (Function)
@@ -296,9 +310,11 @@ Import table:
 	OnInterrupted (MulticastDelegateProperty)
 	Default__NameProperty (NameProperty)
 	Default__ObjectProperty (ObjectProperty)
+	Instigator (ObjectProperty)
 	/Game/Abilities/NPC/Generic/GE_ImpactImmunity (Package)
 	/Game/Abilities/NPC/Generic/GE_RestoreControlResistance (Package)
 	/Game/Abilities/NPC/Generic/GE_TransferFullBodyHit (Package)
+	/Game/Macros/Abilities/AbilityFunctions (Package)
 	/Script/CoreUObject (Package)
 	/Script/Engine (Package)
 	/Script/FortniteGame (Package)
@@ -320,11 +336,11 @@ Import table:
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	GAB_GenericApplyFullBodyHit_C (0-0-0-0): size 334 (cls: GAB_GenericApplyFullBodyHit_C>BlueprintGeneratedClass>/Script/Engine) :
+	GAB_GenericApplyFullBodyHit_C (0-0-0-0): size 338 (cls: GAB_GenericApplyFullBodyHit_C>BlueprintGeneratedClass>/Script/Engine) :
 		Tag array:
 			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=GAB_GenericApplyFullBodyHit_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_GAB_GenericApplyFullBodyHit=GAB_GenericApplyFullBodyHit_C 
-	Default__GAB_GenericApplyFullBodyHit_C (0-0-0-0): size 1069 (cls: Default__GAB_GenericApplyFullBodyHit_C>GAB_GenericApplyFullBodyHit_C) :
+	Default__GAB_GenericApplyFullBodyHit_C (0-0-0-0): size 1159 (cls: Default__GAB_GenericApplyFullBodyHit_C>GAB_GenericApplyFullBodyHit_C) :
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			GE_TransferFullBodyHit(ObjectProperty)=GE_TransferFullBodyHit_C=/Game/Abilities/NPC/Generic/GE_TransferFullBodyHit 
@@ -333,6 +349,7 @@ Serialized exports:
 			ActiveImpactImmunity(StructProperty)=System.Byte[] 
 			GE_ImpactImmunity(ObjectProperty)=GE_ImpactImmunity_C=/Game/Abilities/NPC/Generic/GE_ImpactImmunity 
 			ActiveFullBodyHit(StructProperty)=System.Byte[] 
+			Event_Triggered_FullBodyHit(StructProperty)=System.Byte[] 
 			bStopsAIBehaviorLogic(BoolProperty)=True 
 			bStopsAIMovement(BoolProperty)=True 
 			MinimumRequiredAILODLevel(EnumProperty)=EFortAILODLevel::BelowNormal 
@@ -347,13 +364,15 @@ Serialized exports:
 		Tag array:
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject) :
 		Tag array:
-	ExecuteUbergraph_GAB_GenericApplyFullBodyHit (0-0-0-0): size 1827 (cls: ExecuteUbergraph_GAB_GenericApplyFullBodyHit>Function>/Script/CoreUObject) :
+	ExecuteUbergraph_GAB_GenericApplyFullBodyHit (0-0-0-0): size 1930 (cls: ExecuteUbergraph_GAB_GenericApplyFullBodyHit>Function>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_BP_ApplyGameplayEffectToTarget_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_BP_ApplyGameplayEffectToTarget_ReturnValue>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_BP_ApplyGameplayEffectToTarget_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_BP_ApplyGameplayEffectToTarget_ReturnValue>ArrayProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_BooleanAND_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_GetPawnFromPlayerStateZone_PawnReturned (0-0-0-0): size 34 (cls: CallFunc_GetPawnFromPlayerStateZone_PawnReturned>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -447,6 +466,8 @@ Serialized exports:
 		Tag array:
 	CallFunc_GetActivatingPawn_ReturnValue4 (0-0-0-0): size 36 (cls: CallFunc_GetActivatingPawn_ReturnValue4>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_GetPawnFromPlayerStateZone_OutPawn (0-0-0-0): size 36 (cls: CallFunc_GetPawnFromPlayerStateZone_OutPawn>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
 	K2Node_CustomEvent_OtherActor (0-0-0-0): size 36 (cls: K2Node_CustomEvent_OtherActor>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	K2Node_CustomEvent_SelfActor (0-0-0-0): size 36 (cls: K2Node_CustomEvent_SelfActor>ObjectProperty>/Script/CoreUObject) :
@@ -458,6 +479,8 @@ Serialized exports:
 	ActiveFullBodyHit (0-0-0-0): size 36 (cls: ActiveFullBodyHit>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	ActiveImpactImmunity (0-0-0-0): size 36 (cls: ActiveImpactImmunity>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	Event_Triggered_FullBodyHit (0-0-0-0): size 36 (cls: Event_Triggered_FullBodyHit>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_AbilityTargetDataFromHitResult_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_AbilityTargetDataFromHitResult_ReturnValue>StructProperty>/Script/CoreUObject) :
 		Tag array:

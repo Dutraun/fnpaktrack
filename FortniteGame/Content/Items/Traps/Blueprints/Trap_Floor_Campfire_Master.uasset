@@ -21,6 +21,7 @@ Name table:
 	ActiveGameplayEffectHandle
 	ActiveSound_AudioComponent
 	Actor
+	ActorComponentTickFunction
 	Add_IntInt
 	AddAnyExistingInRange
 	AddPawn
@@ -51,12 +52,11 @@ Name table:
 	BlueprintGeneratedClass
 	BodyInstance
 	BoolProperty
-	Box
-	Box_GEN_VARIABLE
 	BoxComponent
 	BoxExtent
 	BP_ApplyGameplayEffectToSelf
 	BP_ShouldTrigger
+	bStartWithTickEnabled
 	BuildingDeco
 	BuildingTrap
 	BuildingTrapFloor
@@ -71,11 +71,14 @@ Name table:
 	CallFunc_FMin_ReturnValue
 	CallFunc_GetAbilitySystemComponent_ReturnValue
 	CallFunc_GetDurabilityPercent_ReturnValue
+	CallFunc_GetInstigator_ReturnValue
 	CallFunc_GetMaxDurability_ReturnValue
 	CallFunc_GetOverlappingActors_OverlappingActors
 	CallFunc_GetReloadTime_ReturnValue
 	CallFunc_Greater_IntInt_ReturnValue
 	CallFunc_HasAuthority_ReturnValue
+	CallFunc_HasAuthority_ReturnValue1
+	CallFunc_HasAuthority_ReturnValue2
 	CallFunc_HasMatchingGameplayTag_ReturnValue
 	CallFunc_IsDedicatedServer_ReturnValue
 	CallFunc_K2_SetTimerDelegate_ReturnValue
@@ -85,7 +88,6 @@ Name table:
 	CallFunc_Multiply_FloatFloat_ReturnValue
 	CallFunc_Not_PreBool_ReturnValue
 	CallFunc_ShouldReward_ReturnValue
-	CallFunc_TriggerIfAppropriate_ReturnValue
 	Campfire_Fire_Loop_Cue
 	Campfire_Fire_Loop_Cue_GEN_VARIABLE
 	Channel
@@ -99,6 +101,7 @@ Name table:
 	ComponentClass
 	ComponentEndOverlapSignature__DelegateSignature
 	ComponentTemplate
+	ContextHandle
 	Default__AbilitySystemBlueprintLibrary
 	Default__ArrayProperty
 	Default__AudioComponent
@@ -134,8 +137,11 @@ Name table:
 	EComponentMobility
 	EComponentMobility::Movable
 	ECR_Ignore
+	ED_TickEventData
 	EndOverlap
 	EntryPoint
+	EventMagnitude
+	EventTag
 	ExecuteUbergraph_Trap_Floor_Campfire_Master
 	FinishTrigger
 	FloatProperty
@@ -149,15 +155,21 @@ Name table:
 	FortTargetFilter
 	Function
 	Game
+	Gameplay.Effect.Trap.Activate
+	GameplayAbilityTargetDataHandle
 	GameplayEffect
 	GameplayEffectContextHandle
+	GameplayEventData
 	GameplayTag
 	GameplayTagAssetInterface
+	GameplayTagContainer
+	GameplayTags
 	GAS_Floor_Campfire
 	GE_CampfireDurabiltyCost_C
 	GE_TrapDurability
 	GetAbilitySystemComponent
 	GetDurabilityPercent
+	GetInstigator
 	GetMaxDurability
 	GetOverlappingActors
 	GetReloadTime
@@ -170,6 +182,8 @@ Name table:
 	health_fire_cue
 	health_place_Cue
 	HitResult
+	Instigator
+	InstigatorTags
 	InterfaceProperty
 	InternalVariableName
 	IntProperty
@@ -197,6 +211,7 @@ Name table:
 	K2Node_DynamicCast_bSuccess
 	K2Node_DynamicCast_bSuccess1
 	K2Node_DynamicCast_bSuccess2
+	K2Node_MakeStruct_GameplayEventData
 	KismetArrayLibrary
 	KismetMathLibrary
 	KismetSystemLibrary
@@ -216,6 +231,8 @@ Name table:
 	OnComponentBeginOverlap
 	OnComponentEndOverlap
 	OnFinishedBuilding
+	OptionalObject
+	OptionalObject2
 	OtherActor
 	OtherBodyIndex
 	OtherComp
@@ -234,6 +251,7 @@ Name table:
 	Play
 	PlayerPawns
 	PointerToUberGraphFrame
+	PrimaryComponentTick
 	PrimitiveComponent
 	ReceiveDestroyed
 	RelativeLocation
@@ -246,6 +264,7 @@ Name table:
 	SceneComponent
 	ScriptStruct
 	SCS_Node
+	SendGameplayEventToActor
 	ShouldReward
 	ShouldTriggerTraceOffsets
 	SimpleConstructionScript
@@ -257,6 +276,10 @@ Name table:
 	Stop
 	StructProperty
 	SweepResult
+	TagName
+	Target
+	TargetData
+	TargetTags
 	Temp_bool_Has_Been_Initd_Variable
 	Temp_bool_IsClosed_Variable
 	Temp_bool_Variable
@@ -277,8 +300,10 @@ Name table:
 	Trap_Placed_Sound
 	Trap_Reload_Sound
 	TrapTickTime
+	TrapTriggerEventTag
+	TriggerBoxVolume
+	TriggerBoxVolume_GEN_VARIABLE
 	TriggerFilter
-	TriggerIfAppropriate
 	UberGraphFrame
 	UberGraphFramePointerProperty
 	UberGraphFunction
@@ -294,6 +319,7 @@ Name table:
 Import table:
 	Default__AbilitySystemBlueprintLibrary (AbilitySystemBlueprintLibrary)
 	Default__ArrayProperty (ArrayProperty)
+	GameplayTags (ArrayProperty)
 	Default__AudioComponent (AudioComponent)
 	GE_CampfireDurabiltyCost_C (BlueprintGeneratedClass)
 	Default__BlueprintGeneratedClass (BlueprintGeneratedClass)
@@ -321,6 +347,7 @@ Import table:
 	KismetSystemLibrary (Class)
 	MaterialInterface (Class)
 	ParticleSystemComponent (Class)
+	Pawn (Class)
 	PrimitiveComponent (Class)
 	SceneComponent (Class)
 	SCS_Node (Class)
@@ -342,8 +369,10 @@ Import table:
 	TimerDynamicDelegate__DelegateSignature (DelegateFunction)
 	Default__DelegateProperty (DelegateProperty)
 	Default__FloatProperty (FloatProperty)
+	EventMagnitude (FloatProperty)
 	GAS_Floor_Campfire (FortAbilitySet)
 	Default__Function (Function)
+	GetInstigator (Function)
 	HasAuthority (Function)
 	ReceiveDestroyed (Function)
 	UserConstructionScript (Function)
@@ -367,6 +396,7 @@ Import table:
 	GetReloadTime (Function)
 	OnFinishedBuilding (Function)
 	GetAbilitySystemComponent (Function)
+	SendGameplayEventToActor (Function)
 	BP_ApplyGameplayEffectToSelf (Function)
 	Default__GE_CampfireDurabiltyCost_C (GE_CampfireDurabiltyCost_C)
 	Default__InterfaceProperty (InterfaceProperty)
@@ -376,6 +406,10 @@ Import table:
 	OnComponentBeginOverlap (MulticastDelegateProperty)
 	OnComponentEndOverlap (MulticastDelegateProperty)
 	Default__ObjectProperty (ObjectProperty)
+	Instigator (ObjectProperty)
+	OptionalObject (ObjectProperty)
+	OptionalObject2 (ObjectProperty)
+	Target (ObjectProperty)
 	/Game/Abilities/Traps/FloorCampfire/GAS_Floor_Campfire (Package)
 	/Game/Abilities/Traps/FloorCampfire/GE_CampfireDurabiltyCost (Package)
 	/Game/Athena/Items/Traps/Campfire/Effects/P_Athena_Campfire (Package)
@@ -398,8 +432,11 @@ Import table:
 	PointerToUberGraphFrame (ScriptStruct)
 	TimerHandle (ScriptStruct)
 	ActiveGameplayEffectHandle (ScriptStruct)
+	GameplayAbilityTargetDataHandle (ScriptStruct)
 	GameplayEffectContextHandle (ScriptStruct)
+	GameplayEventData (ScriptStruct)
 	GameplayTag (ScriptStruct)
+	GameplayTagContainer (ScriptStruct)
 	Default__SCS_Node (SCS_Node)
 	Default__SimpleConstructionScript (SimpleConstructionScript)
 	Campfire_Fire_Loop_Cue (SoundCue)
@@ -410,15 +447,21 @@ Import table:
 	FORT_Athena_Campfire_Item (StaticMesh)
 	StaticMeshComponent0 (StaticMeshComponent)
 	Default__StructProperty (StructProperty)
+	ContextHandle (StructProperty)
+	EventTag (StructProperty)
+	InstigatorTags (StructProperty)
+	TargetData (StructProperty)
+	TargetTags (StructProperty)
+	GameplayTags (StructProperty)
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	Trap_Floor_Campfire_Master_C (0-0-0-0): size 499 (cls: Trap_Floor_Campfire_Master_C>BlueprintGeneratedClass>/Script/Engine) :
+	Trap_Floor_Campfire_Master_C (0-0-0-0): size 507 (cls: Trap_Floor_Campfire_Master_C>BlueprintGeneratedClass>/Script/Engine) :
 		Tag array:
 			SimpleConstructionScript(ObjectProperty)=SimpleConstructionScript_47=Trap_Floor_Campfire_Master_C 
 			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=Trap_Floor_Campfire_Master_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_Trap_Floor_Campfire_Master=Trap_Floor_Campfire_Master_C 
-	Default__Trap_Floor_Campfire_Master_C (0-0-0-0): size 1054 (cls: Default__Trap_Floor_Campfire_Master_C>Trap_Floor_Campfire_Master_C) :
+	Default__Trap_Floor_Campfire_Master_C (0-0-0-0): size 1656 (cls: Default__Trap_Floor_Campfire_Master_C>Trap_Floor_Campfire_Master_C) :
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			Trap_Placed_Sound(ObjectProperty)=health_place_Cue=/Game/Sounds/Fort_Gadgets/Teleporter/health_place_Cue 
@@ -430,6 +473,8 @@ Serialized exports:
 			TickTrapTimerHandle(StructProperty)=System.Byte[] 
 			TrapTickTime(FloatProperty)=1 
 			GE_TrapDurability(ObjectProperty)=GE_CampfireDurabiltyCost_C=/Game/Abilities/Traps/FloorCampfire/GE_CampfireDurabiltyCost 
+			TrapTriggerEventTag(StructProperty)=System.Byte[] 
+			ED_TickEventData(StructProperty)=System.Byte[] 
 			TraceLocation(ObjectProperty)=Trace Location=Default__Trap_Floor_Campfire_Master_C 
 			TriggerFilter(StructProperty)=System.Byte[] 
 			AbilitySet(ObjectProperty)=GAS_Floor_Campfire=/Game/Abilities/Traps/FloorCampfire/GAS_Floor_Campfire 
@@ -440,11 +485,11 @@ Serialized exports:
 			AttributeInitKeys(StructProperty)=System.Byte[] 
 			AttributeInitKeys(StructProperty)=System.Byte[] 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Default__Trap_Floor_Campfire_Master_C 
-	Box (0-0-0-0): size 36 (cls: Box>ObjectProperty>/Script/CoreUObject) :
+	TriggerBoxVolume (0-0-0-0): size 36 (cls: TriggerBoxVolume>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject) :
 		Tag array:
-	ExecuteUbergraph_Trap_Floor_Campfire_Master (0-0-0-0): size 902 (cls: ExecuteUbergraph_Trap_Floor_Campfire_Master>Function>/Script/CoreUObject) :
+	ExecuteUbergraph_Trap_Floor_Campfire_Master (0-0-0-0): size 1228 (cls: ExecuteUbergraph_Trap_Floor_Campfire_Master>Function>/Script/CoreUObject) :
 		Tag array:
 	BindOverlapEnd (0-0-0-0): size 58 (cls: BindOverlapEnd>Function>/Script/CoreUObject) :
 		Tag array:
@@ -531,11 +576,13 @@ Serialized exports:
 		Tag array:
 	CallFunc_HasAuthority_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasAuthority_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_HasAuthority_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_HasAuthority_ReturnValue1>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_HasAuthority_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_HasAuthority_ReturnValue2>BoolProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_IsDedicatedServer_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsDedicatedServer_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_ShouldReward_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_ShouldReward_ReturnValue>BoolProperty>/Script/CoreUObject) :
-		Tag array:
-	CallFunc_TriggerIfAppropriate_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_TriggerIfAppropriate_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	K2Node_CustomEvent_bFromSweep (0-0-0-0): size 34 (cls: K2Node_CustomEvent_bFromSweep>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -553,7 +600,7 @@ Serialized exports:
 		Tag array:
 	CallFunc_Not_PreBool_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
-	Box_GEN_VARIABLE (0-0-0-0): size 73 (cls: Box_GEN_VARIABLE>BoxComponent>/Script/Engine) :
+	TriggerBoxVolume_GEN_VARIABLE (0-0-0-0): size 73 (cls: TriggerBoxVolume_GEN_VARIABLE>BoxComponent>/Script/Engine) :
 		Tag array:
 			BoxExtent(StructProperty)=Vector(768,768,192) 
 	GE_TrapDurability (0-0-0-0): size 40 (cls: GE_TrapDurability>ClassProperty>/Script/CoreUObject) :
@@ -616,6 +663,8 @@ Serialized exports:
 		Tag array:
 	CallFunc_GetAbilitySystemComponent_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetAbilitySystemComponent_ReturnValue>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_GetInstigator_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetInstigator_ReturnValue>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
 	K2Node_CustomEvent_OtherActor (0-0-0-0): size 36 (cls: K2Node_CustomEvent_OtherActor>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	K2Node_CustomEvent_OtherActor1 (0-0-0-0): size 36 (cls: K2Node_CustomEvent_OtherActor1>ObjectProperty>/Script/CoreUObject) :
@@ -650,10 +699,11 @@ Serialized exports:
 		Tag array:
 	Trap_Reload_Sound (0-0-0-0): size 36 (cls: Trap_Reload_Sound>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	P_Athena_Campfire_GEN_VARIABLE (0-0-0-0): size 102 (cls: P_Athena_Campfire_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	P_Athena_Campfire_GEN_VARIABLE (0-0-0-0): size 185 (cls: P_Athena_Campfire_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_Athena_Campfire=/Game/Athena/Items/Traps/Campfire/Effects/P_Athena_Campfire 
 			RelativeLocation(StructProperty)=Vector(0,252,40) 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 	Trace Location (0-0-0-0): size 102 (cls: Trace Location>SceneComponent>/Script/Engine) :
 		Tag array:
 			AttachParent(ObjectProperty)=StaticMeshComponent0=Default__Trap_Floor_Campfire_Master_C 
@@ -663,11 +713,11 @@ Serialized exports:
 	SCS_Node_1 (0-0-0-0): size 227 (cls: SCS_Node_1>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=BoxComponent=/Script/Engine 
-			ComponentTemplate(ObjectProperty)=Box_GEN_VARIABLE=Trap_Floor_Campfire_Master_C 
+			ComponentTemplate(ObjectProperty)=TriggerBoxVolume_GEN_VARIABLE=Trap_Floor_Campfire_Master_C 
 			ParentComponentOrVariableName(NameProperty)=Trace Location 
 			bIsParentComponentNative(BoolProperty)=True 
 			VariableGuid(StructProperty)=Guid: 2814686910-1310893070-1857060770-3952938941 
-			InternalVariableName(NameProperty)=Box 
+			InternalVariableName(NameProperty)=TriggerBoxVolume 
 	SCS_Node_26 (0-0-0-0): size 168 (cls: SCS_Node_26>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=SceneComponent=/Script/Engine 
@@ -701,6 +751,8 @@ Serialized exports:
 			BodyInstance(StructProperty)=System.Byte[] 
 			Mobility(ByteProperty)=EComponentMobility::Movable 
 			bCanEverAffectNavigation(BoolProperty)=True 
+	ED_TickEventData (0-0-0-0): size 36 (cls: ED_TickEventData>StructProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_BP_ApplyGameplayEffectToSelf_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_BP_ApplyGameplayEffectToSelf_ReturnValue>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_K2_SetTimerDelegate_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_SetTimerDelegate_ReturnValue>StructProperty>/Script/CoreUObject) :
@@ -709,7 +761,11 @@ Serialized exports:
 		Tag array:
 	K2Node_CustomEvent_SweepResult (0-0-0-0): size 36 (cls: K2Node_CustomEvent_SweepResult>StructProperty>/Script/CoreUObject) :
 		Tag array:
+	K2Node_MakeStruct_GameplayEventData (0-0-0-0): size 36 (cls: K2Node_MakeStruct_GameplayEventData>StructProperty>/Script/CoreUObject) :
+		Tag array:
 	SweepResult (0-0-0-0): size 36 (cls: SweepResult>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	TickTrapTimerHandle (0-0-0-0): size 36 (cls: TickTrapTimerHandle>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	TrapTriggerEventTag (0-0-0-0): size 36 (cls: TrapTriggerEventTag>StructProperty>/Script/CoreUObject) :
 		Tag array:

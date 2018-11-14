@@ -9,6 +9,8 @@ Name table:
 	/Game/Environments/FrontEnd/Blueprints/ManageWeaponAmbient
 	/Game/Environments/FrontEnd/Blueprints/PartyDisplayManagerBP
 	/Game/UI/Frontend/Lobby/HeroSquad/M_CharacterShader_Holo_Inst
+	/Game/Weapons/FORT_Pistols/Effects/Weapon/M_GhostFlame
+	/Game/Weapons/FORT_Pistols/Mesh/SK_GhostPistol
 	/Script/AnimationBudgetAllocator
 	/Script/BlueprintContext
 	/Script/ClothingSystemRuntime
@@ -74,6 +76,7 @@ Name table:
 	CallFunc_EqualEqual_ByteByte_ReturnValue
 	CallFunc_EqualEqual_IntInt_ReturnValue
 	CallFunc_EqualEqual_ObjectObject_ReturnValue
+	CallFunc_EqualEqual_ObjectObject_ReturnValue1
 	CallFunc_EqualEqual_RotatorRotator_ReturnValue
 	CallFunc_EqualEqual_VectorVector_ReturnValue
 	CallFunc_EqualEqual_VectorVector_ReturnValue1
@@ -170,6 +173,7 @@ Name table:
 	CallFunc_SpawnEmitterAtLocation_ReturnValue
 	CallFunc_SpawnEmitterAtLocation_ReturnValue1
 	CallFunc_SpawnEmitterAtLocation_ReturnValue2
+	CallFunc_SpawnEmitterAttached_ReturnValue
 	CallFunc_Subtract_IntInt_ReturnValue
 	CapsuleComponent
 	CelebrateWithFX
@@ -322,6 +326,7 @@ Name table:
 	GetSubGame
 	GetTransform
 	GetWeaponPlacementTransform
+	GhostPistolVFX
 	Glow Color Inner
 	Glow Color Outer
 	Guid
@@ -430,6 +435,7 @@ Name table:
 	LinearColorLerp
 	LoadedAssets
 	M_CharacterShader_Holo_Inst
+	M_GhostFlame
 	MakeRotator
 	MakeTransform
 	ManageWeaponAmbient
@@ -507,7 +513,6 @@ Name table:
 	RelativeLocation
 	RequestId
 	ResetPreScaleLocations
-	ResetTeslaHackParticles
 	ResetVisuals
 	ResOutPawnFromLobby
 	RestoreInProgressRes
@@ -562,6 +567,7 @@ Name table:
 	ShowItem
 	ShowLoading
 	SimpleConstructionScript
+	SK_GhostPistol
 	SkeletalMesh
 	SkeletalMesh_GEN_VARIABLE
 	SkeletalMeshComponent
@@ -571,6 +577,7 @@ Name table:
 	SoftClassProperty
 	SoftObjectProperty
 	SpawnEmitterAtLocation
+	SpawnEmitterAttached
 	StaticMesh
 	StaticMesh_GEN_VARIABLE
 	StaticMeshComponent
@@ -717,6 +724,7 @@ Import table:
 	Montage_Stop (Function)
 	SetChildActorClass (Function)
 	SpawnEmitterAtLocation (Function)
+	SpawnEmitterAttached (Function)
 	Array_Get (Function)
 	Array_Length (Function)
 	CreateDynamicMaterialInstance (Function)
@@ -822,6 +830,8 @@ Import table:
 	/Game/Effects/Fort_Effects/UI/Transition/P_FrontEndTransitionOut (Package)
 	/Game/Environments/FrontEnd/Blueprints/ManageWeaponAmbient (Package)
 	/Game/UI/Frontend/Lobby/HeroSquad/M_CharacterShader_Holo_Inst (Package)
+	/Game/Weapons/FORT_Pistols/Effects/Weapon/M_GhostFlame (Package)
+	/Game/Weapons/FORT_Pistols/Mesh/SK_GhostPistol (Package)
 	/Script/BlueprintContext (Package)
 	/Script/ClothingSystemRuntime (Package)
 	/Script/CoreUObject (Package)
@@ -833,6 +843,7 @@ Import table:
 	P_ItemLevelUp (ParticleSystem)
 	P_FrontEndCharacterTransition (ParticleSystem)
 	P_FrontEndTransitionOut (ParticleSystem)
+	M_GhostFlame (ParticleSystem)
 	Effect_Player_In_Water_GEN_VARIABLE (ParticleSystemComponent)
 	Default__ParticleSystemComponent (ParticleSystemComponent)
 	Default__PartyDisplayManager (PartyDisplayManager)
@@ -855,6 +866,7 @@ Import table:
 	FortRarityItemData (ScriptStruct)
 	Default__SCS_Node (SCS_Node)
 	Default__SimpleConstructionScript (SimpleConstructionScript)
+	SK_GhostPistol (SkeletalMesh)
 	Default__SkeletalMeshComponent (SkeletalMeshComponent)
 	CharacterMesh0 (SkeletalMeshComponentBudgeted)
 	Default__SoftClassProperty (SoftClassProperty)
@@ -869,7 +881,7 @@ Import table:
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	PartyDisplayManagerBP_C (0-0-0-0): size 1100 (cls: PartyDisplayManagerBP_C>BlueprintGeneratedClass>/Script/Engine) :
+	PartyDisplayManagerBP_C (0-0-0-0): size 1088 (cls: PartyDisplayManagerBP_C>BlueprintGeneratedClass>/Script/Engine) :
 		Tag array:
 			Timelines(ArrayProperty)=[object] (inner: ObjectProperty)
 			SimpleConstructionScript(ObjectProperty)=SimpleConstructionScript_0=PartyDisplayManagerBP_C 
@@ -909,7 +921,7 @@ Serialized exports:
 		Tag array:
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject) :
 		Tag array:
-	ExecuteUbergraph_PartyDisplayManagerBP (0-0-0-0): size 5138 (cls: ExecuteUbergraph_PartyDisplayManagerBP>Function>/Script/CoreUObject) :
+	ExecuteUbergraph_PartyDisplayManagerBP (0-0-0-0): size 5391 (cls: ExecuteUbergraph_PartyDisplayManagerBP>Function>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_GetChildrenComponents_Children (0-0-0-0): size 36 (cls: CallFunc_GetChildrenComponents_Children>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1001,9 +1013,9 @@ Serialized exports:
 		Tag array:
 	UserConstructionScript (0-0-0-0): size 43 (cls: UserConstructionScript>Function>/Script/CoreUObject) :
 		Tag array:
-	CallFunc_MakeTransform_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_MakeTransform_ReturnValue>StructProperty>/Script/CoreUObject) :
+	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
-	ResetVisuals (0-0-0-0): size 434 (cls: ResetVisuals>Function>/Script/CoreUObject) :
+	ResetVisuals (0-0-0-0): size 492 (cls: ResetVisuals>Function>/Script/CoreUObject) :
 		Tag array:
 	NewMesh (0-0-0-0): size 36 (cls: NewMesh>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1041,10 +1053,6 @@ Serialized exports:
 		Tag array:
 	GetMeshForCurrentDisplayedItem (0-0-0-0): size 435 (cls: GetMeshForCurrentDisplayedItem>Function>/Script/CoreUObject) :
 		Tag array:
-	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject) :
-		Tag array:
-	ResetTeslaHackParticles (0-0-0-0): size 193 (cls: ResetTeslaHackParticles>Function>/Script/CoreUObject) :
-		Tag array:
 	PostSetupPrefabVisuals (0-0-0-0): size 54 (cls: PostSetupPrefabVisuals>Function>/Script/CoreUObject) :
 		Tag array:
 	ReturnValue (0-0-0-0): size 36 (cls: ReturnValue>ObjectProperty>/Script/CoreUObject) :
@@ -1068,6 +1076,8 @@ Serialized exports:
 	CallFunc_EqualEqual_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_EqualEqual_ObjectObject_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ObjectObject_ReturnValue>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_EqualEqual_ObjectObject_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ObjectObject_ReturnValue1>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_GetPartyMemberIndexByPlayerPawn_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_GetPartyMemberIndexByPlayerPawn_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1192,8 +1202,6 @@ Serialized exports:
 	K2Node_SwitchEnum_CmpSuccess (0-0-0-0): size 34 (cls: K2Node_SwitchEnum_CmpSuccess>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	PreviewRotation (0-0-0-0): size 34 (cls: PreviewRotation>BoolProperty>/Script/CoreUObject) :
-		Tag array:
-	CallFunc_IsValid_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue1>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_SetStaticMesh_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_SetStaticMesh_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1456,6 +1464,8 @@ Serialized exports:
 		Tag array:
 	CallFunc_SpawnEmitterAtLocation_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_SpawnEmitterAtLocation_ReturnValue2>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_SpawnEmitterAttached_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_SpawnEmitterAttached_ReturnValue>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
 	K2Node_CustomEvent_Item (0-0-0-0): size 36 (cls: K2Node_CustomEvent_Item>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	K2Node_DynamicCast_AsFrontend_Anim_Instance (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFrontend_Anim_Instance>ObjectProperty>/Script/CoreUObject) :
@@ -1501,6 +1511,8 @@ Serialized exports:
 	K2Node_DynamicCast_AsFort_Player_Parachute (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Player_Parachute>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_GetItemDefinitionToShow_ItemDefinition (0-0-0-0): size 36 (cls: CallFunc_GetItemDefinitionToShow_ItemDefinition>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	GhostPistolVFX (0-0-0-0): size 36 (cls: GhostPistolVFX>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_Array_Get_Item (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1741,6 +1753,8 @@ Serialized exports:
 	CallFunc_GetPlayerIdFromPartyMemberIndex_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetPlayerIdFromPartyMemberIndex_ReturnValue>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_K2_SetRelativeTransform_SweepHitResult (0-0-0-0): size 36 (cls: CallFunc_K2_SetRelativeTransform_SweepHitResult>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_MakeTransform_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_MakeTransform_ReturnValue>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_GetPlayerIdFromPartyMemberIndex_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetPlayerIdFromPartyMemberIndex_ReturnValue>StructProperty>/Script/CoreUObject) :
 		Tag array:

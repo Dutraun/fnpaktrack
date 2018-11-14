@@ -9,7 +9,6 @@ Name table:
 	/Game/Sounds/Fort_Weapons/Launchers/Neon/Impact_NeonRocket_Wood_Cue
 	/Game/Sounds/Fort_Weapons/Launchers/Neon/Weapon_Neon_Rocket_Charge_Lg_Cue
 	/Game/Sounds/Fort_Weapons/Launchers/Neon/Weapon_Neon_Rocket_Charge_Md_Cue
-	/Game/Sounds/Fort_Weapons/Launchers/Neon/Weapon_Neon_Rocket_Charge_Reached2_Cue
 	/Game/Sounds/Fort_Weapons/Launchers/Neon/Weapon_Neon_Rocket_Charge_Reached3_Cue
 	/Game/Sounds/Fort_Weapons/Launchers/Neon/Weapon_Neon_Rocket_Charge_Sm_Cue
 	/Game/Sounds/Fort_Weapons/Launchers/Neon/Weapon_Neon_Rocket_Charge_Start_Cue
@@ -34,6 +33,7 @@ Name table:
 	Activate
 	Actor
 	ActorComponent
+	ActorComponentTickFunction
 	AllNodes
 	AnimBlueprintGeneratedClass
 	AnimClass
@@ -57,6 +57,7 @@ Name table:
 	BlueprintGeneratedClass
 	BoolProperty
 	BP_Launcher_FrontAction_C
+	bStartWithTickEnabled
 	bValidatedAsWired
 	ByteProperty
 	CallFunc_Conv_FloatToVector_ReturnValue
@@ -77,7 +78,6 @@ Name table:
 	CallFunc_IsReloading_ReturnValue
 	CallFunc_IsValid_ReturnValue
 	CallFunc_K2_GetActorLocation_ReturnValue
-	CallFunc_K2_GetActorLocation_ReturnValue1
 	CallFunc_K2_GetComponentLocation_ReturnValue
 	CallFunc_K2_IsValidTimerHandle_ReturnValue
 	CallFunc_K2_SetTimerDelegate_ReturnValue
@@ -156,6 +156,7 @@ Name table:
 	EntryPoint
 	Enum
 	ETimelineDirection
+	EventChargeSoundUpdate
 	ExecuteUbergraph_B_RocketLauncher_Neon
 	FadeOut
 	FinishedFunctionName
@@ -202,6 +203,7 @@ Name table:
 	K2_OnUnEquip
 	K2_SetTimerDelegate
 	K2Node_CreateDelegate_OutputDelegate
+	K2Node_CustomEvent_ChargingSound
 	K2Node_Event_Persistent_Fire
 	K2Node_Event_SpawnProjectile
 	K2Node_Select1_Default
@@ -303,6 +305,7 @@ Name table:
 	PlaySoundAtLocation
 	PointerToUberGraphFrame
 	PostProcessComponent
+	PrimaryComponentTick
 	PrimaryFireSound
 	PrimaryFireStopSound
 	PropertyName
@@ -388,7 +391,6 @@ Name table:
 	VLerp
 	Weapon_Neon_Rocket_Charge_Lg_Cue
 	Weapon_Neon_Rocket_Charge_Md_Cue
-	Weapon_Neon_Rocket_Charge_Reached2_Cue
 	Weapon_Neon_Rocket_Charge_Reached3_Cue
 	Weapon_Neon_Rocket_Charge_Sm_Cue
 	Weapon_Neon_Rocket_Charge_Start_Cue
@@ -520,7 +522,6 @@ Import table:
 	/Game/Sounds/Fort_Weapons/Launchers/Neon/Impact_NeonRocket_Wood_Cue (Package)
 	/Game/Sounds/Fort_Weapons/Launchers/Neon/Weapon_Neon_Rocket_Charge_Lg_Cue (Package)
 	/Game/Sounds/Fort_Weapons/Launchers/Neon/Weapon_Neon_Rocket_Charge_Md_Cue (Package)
-	/Game/Sounds/Fort_Weapons/Launchers/Neon/Weapon_Neon_Rocket_Charge_Reached2_Cue (Package)
 	/Game/Sounds/Fort_Weapons/Launchers/Neon/Weapon_Neon_Rocket_Charge_Reached3_Cue (Package)
 	/Game/Sounds/Fort_Weapons/Launchers/Neon/Weapon_Neon_Rocket_Charge_Sm_Cue (Package)
 	/Game/Sounds/Fort_Weapons/Launchers/Neon/Weapon_Neon_Rocket_Charge_Start_Cue (Package)
@@ -558,6 +559,7 @@ Import table:
 	Default__SceneComponent (SceneComponent)
 	LinearColor (ScriptStruct)
 	Vector (ScriptStruct)
+	ActorComponentTickFunction (ScriptStruct)
 	PointerToUberGraphFrame (ScriptStruct)
 	TimerHandle (ScriptStruct)
 	Default__SCS_Node (SCS_Node)
@@ -572,7 +574,6 @@ Import table:
 	Impact_NeonRocket_Wood_Cue (SoundCue)
 	Weapon_Neon_Rocket_Charge_Lg_Cue (SoundCue)
 	Weapon_Neon_Rocket_Charge_Md_Cue (SoundCue)
-	Weapon_Neon_Rocket_Charge_Reached2_Cue (SoundCue)
 	Weapon_Neon_Rocket_Charge_Reached3_Cue (SoundCue)
 	Weapon_Neon_Rocket_Charge_Sm_Cue (SoundCue)
 	Weapon_Neon_Rocket_Charge_Start_Cue (SoundCue)
@@ -587,7 +588,7 @@ Import table:
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	B_RocketLauncher_Neon_C (0-0-0-0): size 844 (cls: B_RocketLauncher_Neon_C>BlueprintGeneratedClass>/Script/Engine) :
+	B_RocketLauncher_Neon_C (0-0-0-0): size 860 (cls: B_RocketLauncher_Neon_C>BlueprintGeneratedClass>/Script/Engine) :
 		Tag array:
 			NumReplicatedProperties(IntProperty)=3 
 			bHasCookedComponentInstancingData(BoolProperty)=True 
@@ -698,7 +699,11 @@ Serialized exports:
 		Tag array:
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject) :
 		Tag array:
-	ExecuteUbergraph_B_RocketLauncher_Neon (0-0-0-0): size 2966 (cls: ExecuteUbergraph_B_RocketLauncher_Neon>Function>/Script/CoreUObject) :
+	ExecuteUbergraph_B_RocketLauncher_Neon (0-0-0-0): size 2801 (cls: ExecuteUbergraph_B_RocketLauncher_Neon>Function>/Script/CoreUObject) :
+		Tag array:
+	ChargingSound (0-0-0-0): size 36 (cls: ChargingSound>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	EventChargeSoundUpdate (0-0-0-0): size 74 (cls: EventChargeSoundUpdate>Function>/Script/CoreUObject) :
 		Tag array:
 	Reset Everything (0-0-0-0): size 60 (cls: Reset Everything>Function>/Script/CoreUObject) :
 		Tag array:
@@ -762,7 +767,7 @@ Serialized exports:
 		Tag array:
 	ChargingSound (0-0-0-0): size 36 (cls: ChargingSound>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	Charge Sound Update (0-0-0-0): size 365 (cls: Charge Sound Update>Function>/Script/CoreUObject) :
+	Charge Sound Update (0-0-0-0): size 453 (cls: Charge Sound Update>Function>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1015,15 +1020,18 @@ Serialized exports:
 		Tag array:
 	ChargingSoundMid (0-0-0-0): size 36 (cls: ChargingSoundMid>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
+	K2Node_CustomEvent_ChargingSound (0-0-0-0): size 36 (cls: K2Node_CustomEvent_ChargingSound>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
 	K2Node_Event_SpawnProjectile (0-0-0-0): size 36 (cls: K2Node_Event_SpawnProjectile>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	P_RocketMuzzle_Charger (0-0-0-0): size 36 (cls: P_RocketMuzzle_Charger>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	Particle Transition Control (0-0-0-0): size 36 (cls: Particle Transition Control>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	P_RocketMuzzle_Charger_GEN_VARIABLE (0-0-0-0): size 67 (cls: P_RocketMuzzle_Charger_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	P_RocketMuzzle_Charger_GEN_VARIABLE (0-0-0-0): size 150 (cls: P_RocketMuzzle_Charger_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_RocketMuzzle_Charger=/Game/Weapons/FORT_Special/NeonGlow/Effects/P_RocketMuzzle_Charger 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
 	DefaultSceneRoot_GEN_VARIABLE (0-0-0-0): size 12 (cls: DefaultSceneRoot_GEN_VARIABLE>SceneComponent>/Script/Engine) :
 		Tag array:
@@ -1033,7 +1041,7 @@ Serialized exports:
 			ComponentTemplate(ObjectProperty)=DefaultSceneRoot_GEN_VARIABLE=B_RocketLauncher_Neon_C 
 			VariableGuid(StructProperty)=Guid: 1638054538-1278717020-999196085-1898868422 
 			InternalVariableName(NameProperty)=DefaultSceneRoot 
-	SCS_Node_1 (0-0-0-0): size 627 (cls: SCS_Node_1>SCS_Node>/Script/Engine) :
+	SCS_Node_1 (0-0-0-0): size 825 (cls: SCS_Node_1>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=P_RocketMuzzle_Charger_GEN_VARIABLE=B_RocketLauncher_Neon_C 
@@ -1070,15 +1078,13 @@ Serialized exports:
 		Tag array:
 			AnimClass(ObjectProperty)=BP_Launcher_FrontAction_C=/Game/Weapons/Skeleton_Templates/BP_Launcher_FrontAction 
 			SkeletalMesh(ObjectProperty)=SK_Neon_Glow_Launcher=/Game/Weapons/FORT_RocketLaunchers/Mesh/SK_Neon_Glow_Launcher 
+	CallFunc_K2_GetActorLocation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_GetActorLocation_ReturnValue>StructProperty>/Script/CoreUObject) :
+		Tag array:
 	ChargeTimer (0-0-0-0): size 36 (cls: ChargeTimer>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_Conv_FloatToVector_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_Conv_FloatToVector_ReturnValue>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_Conv_LinearColorToVector_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_Conv_LinearColorToVector_ReturnValue>StructProperty>/Script/CoreUObject) :
-		Tag array:
-	CallFunc_K2_GetActorLocation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_GetActorLocation_ReturnValue>StructProperty>/Script/CoreUObject) :
-		Tag array:
-	CallFunc_K2_GetActorLocation_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_K2_GetActorLocation_ReturnValue1>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_K2_GetComponentLocation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_GetComponentLocation_ReturnValue>StructProperty>/Script/CoreUObject) :
 		Tag array:

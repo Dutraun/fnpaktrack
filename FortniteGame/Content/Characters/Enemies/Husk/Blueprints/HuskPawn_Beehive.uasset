@@ -32,6 +32,7 @@ Name table:
 	ActiveGameplayCues
 	Actor
 	ActorComponent
+	ActorComponentTickFunction
 	Addressee
 	AdjustVolume
 	AIPawnAbilitySystemComponent
@@ -78,6 +79,7 @@ Name table:
 	BreakHitResult
 	bReceivesDecals
 	BroadcastFilter
+	bStartWithTickEnabled
 	BT_HuskRanged
 	bUseLineTestForDamageZoneBoneDetection
 	ByteProperty
@@ -188,6 +190,7 @@ Name table:
 	DefaultSceneRoot_GEN_VARIABLE
 	DefaultSceneRootNode
 	Delay
+	DeregisterEffectStaticMesh
 	Destructible
 	DisplayName
 	DistanceAlgorithm
@@ -336,10 +339,11 @@ Name table:
 	NameProperty
 	NoCollision
 	NODE_AddFXSkeletonMeshComponent-2
+	NODE_AddFXSkeletonMeshComponent-6
 	NODE_AddFXStaticMeshComponent-0
+	NODE_AddFXStaticMeshComponent-2
 	NODE_AddParticleSystemComponent-3
 	NODE_AddPointLightComponent-0
-	NODE_AddSkeletalMeshComponent-0
 	NODE_AddSkeletalMeshComponent-1
 	NODE_AddSkeletalMeshComponent-3
 	NODE_AddStaticMeshComponent-4
@@ -379,13 +383,14 @@ Name table:
 	PredictionKey
 	PredictionKeys
 	PredictiveConnection
+	PrimaryComponentTick
 	PrimitiveComponent
 	PropertyName
 	PropertyScope
 	Pumpkin Head MID
 	QueuedSpokenLine
 	ReceiveBeginPlay
-	RegisterBuildingHitStaticMesh
+	RegisterEffectStaticMesh
 	RelativeLocation
 	RelativeRotation
 	RemainingFuseTime
@@ -552,7 +557,9 @@ Import table:
 	GetAbilitySystemComponent (Function)
 	TryActivateAbilitiesByTag (Function)
 	NODE_AddFXSkeletonMeshComponent-2 (FXSkeletonMeshComponent_C)
+	NODE_AddFXSkeletonMeshComponent-6 (FXSkeletonMeshComponent_C)
 	NODE_AddFXStaticMeshComponent-0 (FXStaticMeshComponent_C)
+	NODE_AddFXStaticMeshComponent-2 (FXStaticMeshComponent_C)
 	Default__GameplayStatics (GameplayStatics)
 	Default__HuskInterface_C (HuskInterface_C)
 	Default__HuskPawn_C (HuskPawn_C)
@@ -598,6 +605,7 @@ Import table:
 	DefaultSceneRoot_GEN_VARIABLE (SceneComponent)
 	Rotator (ScriptStruct)
 	Vector (ScriptStruct)
+	ActorComponentTickFunction (ScriptStruct)
 	BodyInstance (ScriptStruct)
 	CollisionResponse (ScriptStruct)
 	HitResult (ScriptStruct)
@@ -612,7 +620,6 @@ Import table:
 	GameplayTagContainer (ScriptStruct)
 	Default__SCS_Node (SCS_Node)
 	Default__SimpleConstructionScript (SimpleConstructionScript)
-	NODE_AddSkeletalMeshComponent-0 (SkeletalMeshComponent)
 	NODE_AddSkeletalMeshComponent-1 (SkeletalMeshComponent)
 	NODE_AddSkeletalMeshComponent-3 (SkeletalMeshComponent)
 	Beehive_Impact_Cue (SoundCue)
@@ -754,7 +761,9 @@ Serialized exports:
 		Tag array:
 	UserConstructionScript (0-0-0-0): size 168 (cls: UserConstructionScript>Function>/Script/CoreUObject) :
 		Tag array:
-	OnRep_HiveBroken (0-0-0-0): size 509 (cls: OnRep_HiveBroken>Function>/Script/CoreUObject) :
+	CallFunc_GetAnimInstance_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetAnimInstance_ReturnValue>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	OnRep_HiveBroken (0-0-0-0): size 524 (cls: OnRep_HiveBroken>Function>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_HasAuthority_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasAuthority_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -847,19 +856,18 @@ Serialized exports:
 		Tag array:
 	InstigatedBy (0-0-0-0): size 36 (cls: InstigatedBy>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	CallFunc_GetAnimInstance_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetAnimInstance_ReturnValue>ObjectProperty>/Script/CoreUObject) :
-		Tag array:
 	CallFunc_SpawnEmitterAtLocation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_SpawnEmitterAtLocation_ReturnValue>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	K2Node_DynamicCast_AsFort_Husk_Anim_Instance (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Husk_Anim_Instance>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_CreateDynamicMaterialInstance_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_CreateDynamicMaterialInstance_ReturnValue>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	ParticleSystemComponent_165 (0-0-0-0): size 70 (cls: ParticleSystemComponent_165>ParticleSystemComponent>/Script/Engine) :
+	ParticleSystemComponent_165 (0-0-0-0): size 153 (cls: ParticleSystemComponent_165>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_Bee_HuskHead=/Game/Effects/Fort_Effects/BluePrints/BeeHive/P_Bee_HuskHead 
 			WarmupTime(FloatProperty)=5 
-	SCS_Node_1 (0-0-0-0): size 627 (cls: SCS_Node_1>SCS_Node>/Script/Engine) :
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
+	SCS_Node_1 (0-0-0-0): size 825 (cls: SCS_Node_1>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=ParticleSystemComponent_165=HuskPawn_Beehive_C 

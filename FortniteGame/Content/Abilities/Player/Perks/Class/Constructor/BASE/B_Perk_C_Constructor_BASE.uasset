@@ -3,12 +3,9 @@ Name table:
 	/Game/Abilities/Player/Constructor/Actives/BASE/GE_Constructor_BASEDefault
 	/Game/Abilities/Player/Constructor/Actives/BASE/StructRecyclingResource
 	/Game/Abilities/Player/Constructor/Perks/ContainmentUnit/GE_Constructor_ContainmentUnit_Applied
-	/Game/Abilities/Player/Constructor/Perks/ElectrifiedFloors/GE_Constructor_ElectrifiedFloorsDamage
 	/Game/Abilities/Player/Constructor/Perks/ExitPlan/GE_Constructor_ExitPlanApplied
 	/Game/Abilities/Player/Constructor/Perks/FasterExit/GE_Constructor_FasterExitApplied
 	/Game/Abilities/Player/Constructor/Perks/FeelTheBase/FX/P_FeeltheBase_Chargup
-	/Game/Abilities/Player/Constructor/Perks/LoftyArchitecture/GE_Constructor_LoftyArchitectureApplied
-	/Game/Abilities/Player/Constructor/Perks/PowerModulation/GE_Constructor_PowerModulationApplied
 	/Game/Abilities/Player/Constructor/Perks/ShieldCapacitor/GE_Constructor_ShieldCapacitorApplied
 	/Game/Abilities/Player/Constructor/Perks/TrapDamage/GE_Constructor_TrapDamage_Applied
 	/Game/Abilities/Player/Constructor/Perks/TrapReloadRate/GE_Constructor_TrapReloadRate_Applied
@@ -20,6 +17,9 @@ Name table:
 	/Game/Abilities/Player/Perks/Hero/ElectrifiedFloors/GE_Perk_H_ElectrifiedFloors_T01_Damage
 	/Game/Abilities/Player/Perks/Hero/FeelTheBASE/GE_Perk_H_FeelTheBase_Applied
 	/Game/Abilities/Player/Perks/Hero/FullyContained/GE_Perk_H_FullyContained_Applied
+	/Game/Abilities/Player/Perks/Hero/LoftyArchitecture/GE_Perk_H_LoftyArchitecture_Applied
+	/Game/Abilities/Player/Perks/Hero/PowerModulation/GE_Perk_H_PowerModulation_Applied_T01
+	/Game/Abilities/Player/Perks/Hero/PowerModulation/GE_Perk_H_PowerModulation_Applied_T02
 	/Game/Balance/DataTables/CombatEffects_HeroAbilities
 	/Game/Building/EditModePatterns/Floor/EMP_Floor_BalconyD
 	/Game/Building/EditModePatterns/Floor/EMP_Floor_BalconyI
@@ -127,12 +127,9 @@ Name table:
 	/Script/GameplayTags
 	Abilities.Constructor.BASE.InBase
 	Abilities.Constructor.ContainmentUnit
-	Abilities.Constructor.ElectrifiedFloors
-	Abilities.Constructor.LoftyArchitecture
 	Abilities.Constructor.MegaBASE
 	Abilities.Constructor.Perks.Trap.Damage
 	Abilities.Constructor.Perks.Trap.ReloadRate
-	Abilities.Constructor.PowerModulation
 	Abilities.Constructor.Recycling
 	Abilities.Constructor.SlowUnit
 	Ability System Component
@@ -142,6 +139,7 @@ Name table:
 	Activate
 	ActiveGameplayEffectHandle
 	Actor
+	ActorComponentTickFunction
 	Add_FloatFloat
 	Add_IntInt
 	AddResourceToStack
@@ -228,6 +226,7 @@ Name table:
 	Box_GEN_VARIABLE
 	BoxComponent
 	BP_ApplyGameplayEffectSpecToSelf
+	bStartWithTickEnabled
 	Building.Type.Prop
 	BuildingActor
 	BuildingActorArray
@@ -305,6 +304,7 @@ Name table:
 	CallFunc_Format_ReturnValue
 	CallFunc_FTrunc_ReturnValue
 	CallFunc_FTrunc_ReturnValue1
+	CallFunc_FTrunc_ReturnValue2
 	CallFunc_GetAbilitySystemComponent_ReturnValue
 	CallFunc_GetAnimatingMID_ReturnValue
 	CallFunc_GetBuildingMeshComponent_ReturnValue
@@ -323,6 +323,7 @@ Name table:
 	CallFunc_GetResourceAmountsBasedOnUpgradeTier_WoodResult
 	CallFunc_GetValueAtLevel_ReturnValue
 	CallFunc_GetValueAtLevel_ReturnValue1
+	CallFunc_GetValueAtLevel_ReturnValue2
 	CallFunc_GiveItemToInventoryOwner_InventoryOwner1_CastInput
 	CallFunc_GiveItemToInventoryOwner_InventoryOwner2_CastInput
 	CallFunc_GiveItemToInventoryOwner_InventoryOwner_CastInput
@@ -464,11 +465,8 @@ Name table:
 	Default__GE_Constructor_BASE_InBase_C
 	Default__GE_Constructor_BASEDefault_C
 	Default__GE_Constructor_ContainmentUnit_Applied_C
-	Default__GE_Constructor_ElectrifiedFloorsDamage_C
 	Default__GE_Constructor_ExitPlanApplied_C
 	Default__GE_Constructor_FasterExitApplied_C
-	Default__GE_Constructor_LoftyArchitectureApplied_C
-	Default__GE_Constructor_PowerModulationApplied_C
 	Default__GE_Constructor_ShieldCapacitorApplied_C
 	Default__GE_Constructor_TrapDamage_Applied_C
 	Default__GE_Constructor_TrapReloadRate_Applied_C
@@ -478,6 +476,9 @@ Name table:
 	Default__GE_Perk_H_ElectrifiedFloors_T01_Damage_C
 	Default__GE_Perk_H_FeelTheBase_Applied_C
 	Default__GE_Perk_H_FullyContained_Applied_C
+	Default__GE_Perk_H_LoftyArchitecture_Applied_C
+	Default__GE_Perk_H_PowerModulation_Applied_T01_C
+	Default__GE_Perk_H_PowerModulation_Applied_T02_C
 	Default__InterfaceProperty
 	Default__IntProperty
 	Default__KismetArrayLibrary
@@ -646,17 +647,13 @@ Name table:
 	GE_Constructor_BASEDefault_C
 	GE_Constructor_BASEOutgoingDamageMod
 	GE_Constructor_ContainmentUnit_Applied_C
-	GE_Constructor_ElectrifiedFloorsDamage_C
 	GE_Constructor_ExitPlanApplied_C
 	GE_Constructor_FasterExitApplied_C
-	GE_Constructor_LoftyArchitectureApplied_C
-	GE_Constructor_PowerModulationApplied_C
 	GE_Constructor_ShieldCapacitorApplied_C
 	GE_Constructor_TrapDamage_Applied_C
 	GE_Constructor_TrapReloadRate_Applied_C
 	GE_ElectrifiedFloors
-	GE_ElectrifiedFloors_T01
-	GE_FeelTheBase_T01
+	GE_FeelTheBase
 	GE_FullyContained_T01
 	GE_Grant_TriggerReflectDamage_FromBASEWall
 	GE_LoftyArchitecture
@@ -667,7 +664,11 @@ Name table:
 	GE_Perk_H_ElectrifiedFloors_T01_Damage_C
 	GE_Perk_H_FeelTheBase_Applied_C
 	GE_Perk_H_FullyContained_Applied_C
-	GE_PowerModulation
+	GE_Perk_H_LoftyArchitecture_Applied_C
+	GE_Perk_H_PowerModulation_Applied_T01_C
+	GE_Perk_H_PowerModulation_Applied_T02_C
+	GE_Power_Modulation_T02
+	GE_PowerModulation_T01
 	GE_SlowUnit
 	GE_TrapDamage
 	GE_TrapReloadRate
@@ -687,8 +688,11 @@ Name table:
 	Granted.Perk.ElectrifiedFloors.T01
 	Granted.Perk.FeelTheBASE.T01
 	Granted.Perk.FullyContained.T01
+	Granted.Perk.LoftyArchitecture.T01
 	Granted.Perk.MegaBASE.T01
 	Granted.Perk.MegaBASE.T02
+	Granted.Perk.PowerModulation.T01
+	Granted.Perk.PowerModulation.T02
 	Granted.Perk.Recycling.T01
 	Greater_IntInt
 	Guid
@@ -800,6 +804,8 @@ Name table:
 	MaterialInstanceConstant
 	MaterialInstanceDynamic
 	MaterialInterface
+	MaximumResourceLimit
+	MaximumResourceSpawned
 	MegaBASE_AdditionalNodes_T01
 	MegaBASE_AdditionalNodes_T02
 	Mesh
@@ -811,7 +817,6 @@ Name table:
 	Multiply_IntFloat
 	NameProperty
 	NewHeroSystem
-	NewVar
 	NoAddedNodes
 	NODE_AddStaticMeshComponent-0
 	NodesToAffect
@@ -884,6 +889,10 @@ Name table:
 	PBW_BASE1_WindowsSide
 	Perk.MegaBASE.T01.Size
 	Perk.MegaBASE.T02.Size
+	Perk.Recycling.T01.MaximumResourceLimit
+	Perk.Recycling.T01.RecyclingMult
+	Perk.Recycling.T01.Tier2Amount
+	Perk.Recycling.T01.Tier3Amount
 	PhysicsBody
 	Play
 	PlayAnimation
@@ -892,6 +901,7 @@ Name table:
 	PlaySoundAtLocation
 	PointerToUberGraphFrame
 	PostProcessComponent
+	PrimaryComponentTick
 	PrimarySurfaceType
 	PrimitiveComponent
 	PrintString
@@ -1016,7 +1026,6 @@ Name table:
 	TC_BASEMD_T01
 	TC_ContainmentUnit
 	TC_ElectrifiedFloors
-	TC_ElectrifiedFloors_T01
 	TC_Empty
 	TC_FeelTheBASE_T01
 	TC_FullyContained
@@ -1025,7 +1034,8 @@ Name table:
 	TC_MegaBASE
 	TC_MegaBASE_T01
 	TC_MegaBASE_T02
-	TC_PowerModulation
+	TC_PowerModulation_T01
+	TC_PowerModulation_T02
 	TC_Recycling
 	TC_Recycling_T01
 	TC_SlowUnit
@@ -1088,11 +1098,8 @@ Import table:
 	GE_Constructor_BASE_InBase_C (BlueprintGeneratedClass)
 	GE_Constructor_BASEDefault_C (BlueprintGeneratedClass)
 	GE_Constructor_ContainmentUnit_Applied_C (BlueprintGeneratedClass)
-	GE_Constructor_ElectrifiedFloorsDamage_C (BlueprintGeneratedClass)
 	GE_Constructor_ExitPlanApplied_C (BlueprintGeneratedClass)
 	GE_Constructor_FasterExitApplied_C (BlueprintGeneratedClass)
-	GE_Constructor_LoftyArchitectureApplied_C (BlueprintGeneratedClass)
-	GE_Constructor_PowerModulationApplied_C (BlueprintGeneratedClass)
 	GE_Constructor_ShieldCapacitorApplied_C (BlueprintGeneratedClass)
 	GE_Constructor_TrapDamage_Applied_C (BlueprintGeneratedClass)
 	GE_Constructor_TrapReloadRate_Applied_C (BlueprintGeneratedClass)
@@ -1103,6 +1110,9 @@ Import table:
 	GE_Perk_H_ElectrifiedFloors_T01_Damage_C (BlueprintGeneratedClass)
 	GE_Perk_H_FeelTheBase_Applied_C (BlueprintGeneratedClass)
 	GE_Perk_H_FullyContained_Applied_C (BlueprintGeneratedClass)
+	GE_Perk_H_LoftyArchitecture_Applied_C (BlueprintGeneratedClass)
+	GE_Perk_H_PowerModulation_Applied_T01_C (BlueprintGeneratedClass)
+	GE_Perk_H_PowerModulation_Applied_T02_C (BlueprintGeneratedClass)
 	Default__BlueprintGeneratedClass (BlueprintGeneratedClass)
 	Default__BoolProperty (BoolProperty)
 	BullRushPoke_GEN_VARIABLE (BoxComponent)
@@ -1303,11 +1313,8 @@ Import table:
 	Default__GE_Constructor_BASE_InBase_C (GE_Constructor_BASE_InBase_C)
 	Default__GE_Constructor_BASEDefault_C (GE_Constructor_BASEDefault_C)
 	Default__GE_Constructor_ContainmentUnit_Applied_C (GE_Constructor_ContainmentUnit_Applied_C)
-	Default__GE_Constructor_ElectrifiedFloorsDamage_C (GE_Constructor_ElectrifiedFloorsDamage_C)
 	Default__GE_Constructor_ExitPlanApplied_C (GE_Constructor_ExitPlanApplied_C)
 	Default__GE_Constructor_FasterExitApplied_C (GE_Constructor_FasterExitApplied_C)
-	Default__GE_Constructor_LoftyArchitectureApplied_C (GE_Constructor_LoftyArchitectureApplied_C)
-	Default__GE_Constructor_PowerModulationApplied_C (GE_Constructor_PowerModulationApplied_C)
 	Default__GE_Constructor_ShieldCapacitorApplied_C (GE_Constructor_ShieldCapacitorApplied_C)
 	Default__GE_Constructor_TrapDamage_Applied_C (GE_Constructor_TrapDamage_Applied_C)
 	Default__GE_Constructor_TrapReloadRate_Applied_C (GE_Constructor_TrapReloadRate_Applied_C)
@@ -1317,6 +1324,9 @@ Import table:
 	Default__GE_Perk_H_ElectrifiedFloors_T01_Damage_C (GE_Perk_H_ElectrifiedFloors_T01_Damage_C)
 	Default__GE_Perk_H_FeelTheBase_Applied_C (GE_Perk_H_FeelTheBase_Applied_C)
 	Default__GE_Perk_H_FullyContained_Applied_C (GE_Perk_H_FullyContained_Applied_C)
+	Default__GE_Perk_H_LoftyArchitecture_Applied_C (GE_Perk_H_LoftyArchitecture_Applied_C)
+	Default__GE_Perk_H_PowerModulation_Applied_T01_C (GE_Perk_H_PowerModulation_Applied_T01_C)
+	Default__GE_Perk_H_PowerModulation_Applied_T02_C (GE_Perk_H_PowerModulation_Applied_T02_C)
 	Default__InterfaceProperty (InterfaceProperty)
 	AmountStored_5_ADCE813746D841E0568B169628A9BFDA (IntProperty)
 	Default__IntProperty (IntProperty)
@@ -1349,12 +1359,9 @@ Import table:
 	/Game/Abilities/Player/Constructor/Actives/BASE/GE_Constructor_BASEDefault (Package)
 	/Game/Abilities/Player/Constructor/Actives/BASE/StructRecyclingResource (Package)
 	/Game/Abilities/Player/Constructor/Perks/ContainmentUnit/GE_Constructor_ContainmentUnit_Applied (Package)
-	/Game/Abilities/Player/Constructor/Perks/ElectrifiedFloors/GE_Constructor_ElectrifiedFloorsDamage (Package)
 	/Game/Abilities/Player/Constructor/Perks/ExitPlan/GE_Constructor_ExitPlanApplied (Package)
 	/Game/Abilities/Player/Constructor/Perks/FasterExit/GE_Constructor_FasterExitApplied (Package)
 	/Game/Abilities/Player/Constructor/Perks/FeelTheBase/FX/P_FeeltheBase_Chargup (Package)
-	/Game/Abilities/Player/Constructor/Perks/LoftyArchitecture/GE_Constructor_LoftyArchitectureApplied (Package)
-	/Game/Abilities/Player/Constructor/Perks/PowerModulation/GE_Constructor_PowerModulationApplied (Package)
 	/Game/Abilities/Player/Constructor/Perks/ShieldCapacitor/GE_Constructor_ShieldCapacitorApplied (Package)
 	/Game/Abilities/Player/Constructor/Perks/TrapDamage/GE_Constructor_TrapDamage_Applied (Package)
 	/Game/Abilities/Player/Constructor/Perks/TrapReloadRate/GE_Constructor_TrapReloadRate_Applied (Package)
@@ -1365,6 +1372,9 @@ Import table:
 	/Game/Abilities/Player/Perks/Hero/ElectrifiedFloors/GE_Perk_H_ElectrifiedFloors_T01_Damage (Package)
 	/Game/Abilities/Player/Perks/Hero/FeelTheBASE/GE_Perk_H_FeelTheBase_Applied (Package)
 	/Game/Abilities/Player/Perks/Hero/FullyContained/GE_Perk_H_FullyContained_Applied (Package)
+	/Game/Abilities/Player/Perks/Hero/LoftyArchitecture/GE_Perk_H_LoftyArchitecture_Applied (Package)
+	/Game/Abilities/Player/Perks/Hero/PowerModulation/GE_Perk_H_PowerModulation_Applied_T01 (Package)
+	/Game/Abilities/Player/Perks/Hero/PowerModulation/GE_Perk_H_PowerModulation_Applied_T02 (Package)
 	/Game/Balance/DataTables/CombatEffects_HeroAbilities (Package)
 	/Game/Building/EditModePatterns/Floor/EMP_Floor_BalconyD (Package)
 	/Game/Building/EditModePatterns/Floor/EMP_Floor_BalconyI (Package)
@@ -1569,27 +1579,24 @@ Serialized exports:
 			SimpleConstructionScript(ObjectProperty)=SimpleConstructionScript_1=B_Perk_C_Constructor_BASE_C 
 			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=B_Perk_C_Constructor_BASE_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_B_Perk_C_Constructor_BASE=B_Perk_C_Constructor_BASE_C 
-	Default__B_Perk_C_Constructor_BASE_C (0-0-0-0): size 7527 (cls: Default__B_Perk_C_Constructor_BASE_C>B_Perk_C_Constructor_BASE_C) :
+	Default__B_Perk_C_Constructor_BASE_C (0-0-0-0): size 8260 (cls: Default__B_Perk_C_Constructor_BASE_C>B_Perk_C_Constructor_BASE_C) :
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			MinimapIcon(ObjectProperty)=Skill_Technician_BASE=/Game/UI/Icons/Skills/Skill_Technician_BASE 
 			Minimap View Distance(FloatProperty)=50000 
-			GE_ElectrifiedFloors(ObjectProperty)=GE_Constructor_ElectrifiedFloorsDamage_C=/Game/Abilities/Player/Constructor/Perks/ElectrifiedFloors/GE_Constructor_ElectrifiedFloorsDamage 
 			TC_Recycling(StructProperty)=GameplayTagContainer:Abilities.Constructor.Recycling 
 			Wood(ObjectProperty)=WoodItemData=/Game/Items/ResourcePickups/WoodItemData 
 			Stone(ObjectProperty)=StoneItemData=/Game/Items/ResourcePickups/StoneItemData 
 			Metal(ObjectProperty)=MetalItemData=/Game/Items/ResourcePickups/MetalItemData 
-			RecyclingMultiplier(FloatProperty)=0.34 
 			SpawnMax(IntProperty)=75 
 			HyperThreadingMultiplier(FloatProperty)=0.5 
-			TC_PowerModulation(StructProperty)=GameplayTagContainer:Abilities.Constructor.PowerModulation 
-			GE_PowerModulation(ObjectProperty)=GE_Constructor_PowerModulationApplied_C=/Game/Abilities/Player/Constructor/Perks/PowerModulation/GE_Constructor_PowerModulationApplied 
+			TC_PowerModulation_T01(StructProperty)=GameplayTagContainer:Granted.Perk.PowerModulation.T01 
+			GE_PowerModulation_T01(ObjectProperty)=GE_Perk_H_PowerModulation_Applied_T01_C=/Game/Abilities/Player/Perks/Hero/PowerModulation/GE_Perk_H_PowerModulation_Applied_T01 
 			DefensiveIntegrationLevel(IntProperty)=-1 
-			GE_LoftyArchitecture(ObjectProperty)=GE_Constructor_LoftyArchitectureApplied_C=/Game/Abilities/Player/Constructor/Perks/LoftyArchitecture/GE_Constructor_LoftyArchitectureApplied 
-			TC_LoftyArchitecture(StructProperty)=GameplayTagContainer:Abilities.Constructor.LoftyArchitecture 
+			GE_LoftyArchitecture(ObjectProperty)=GE_Perk_H_LoftyArchitecture_Applied_C=/Game/Abilities/Player/Perks/Hero/LoftyArchitecture/GE_Perk_H_LoftyArchitecture_Applied 
+			TC_LoftyArchitecture(StructProperty)=GameplayTagContainer:Granted.Perk.LoftyArchitecture.T01 
 			BasePowerLevel(FloatProperty)=1 
 			ResourceLimit(IntProperty)=450 
-			TC_ElectrifiedFloors(StructProperty)=GameplayTagContainer:Abilities.Constructor.ElectrifiedFloors 
 			TC_SlowUnit(StructProperty)=GameplayTagContainer:Abilities.Constructor.SlowUnit 
 			GE_SlowUnit(ObjectProperty)=GE_Constructor_ShieldCapacitorApplied_C=/Game/Abilities/Player/Constructor/Perks/ShieldCapacitor/GE_Constructor_ShieldCapacitorApplied 
 			TC_ContainmentUnit(StructProperty)=GameplayTagContainer:Abilities.Constructor.ContainmentUnit 
@@ -1615,10 +1622,8 @@ Serialized exports:
 			TC_TrapReloadRate(StructProperty)=GameplayTagContainer:Abilities.Constructor.Perks.Trap.ReloadRate 
 			GE_TrapReloadRate(ObjectProperty)=GE_Constructor_TrapReloadRate_Applied_C=/Game/Abilities/Player/Constructor/Perks/TrapReloadRate/GE_Constructor_TrapReloadRate_Applied 
 			GE_Constructor_BASEOutgoingDamageMod(ObjectProperty)=GE_Perk_C_Constructor_BASEOutgoingDamageMod_C=/Game/Abilities/Player/Perks/Class/Constructor/BASE/GE_Perk_C_Constructor_BASEOutgoingDamageMod 
-			T2Amount(IntProperty)=2 
-			T3Amount(IntProperty)=5 
 			RecyclingTimer(FloatProperty)=60 
-			GE_FeelTheBase_T01(ObjectProperty)=GE_Perk_H_FeelTheBase_Applied_C=/Game/Abilities/Player/Perks/Hero/FeelTheBASE/GE_Perk_H_FeelTheBase_Applied 
+			GE_FeelTheBase(ObjectProperty)=GE_Perk_H_FeelTheBase_Applied_C=/Game/Abilities/Player/Perks/Hero/FeelTheBASE/GE_Perk_H_FeelTheBase_Applied 
 			EnergyBuildASound(ObjectProperty)=Constructor_BaseEnergyBuildA_Cue=/Game/Sounds/Fort_Gadgets/ConstructionWorker/Constructor_BaseEnergyBuildA_Cue 
 			EnergyBuildBSound(ObjectProperty)=Constructor_BaseEnergyBuildB_Cue=/Game/Sounds/Fort_Gadgets/ConstructionWorker/Constructor_BaseEnergyBuildB_Cue 
 			EnergyBuildCSound(ObjectProperty)=Constructor_BaseEnergyBuildC_Cue=/Game/Sounds/Fort_Gadgets/ConstructionWorker/Constructor_BaseEnergyBuildC_Cue 
@@ -1628,13 +1633,19 @@ Serialized exports:
 			MegaBASE_AdditionalNodes_T01(StructProperty)=System.Byte[] 
 			MegaBASE_AdditionalNodes_T02(StructProperty)=System.Byte[] 
 			TC_Recycling_T01(StructProperty)=GameplayTagContainer:Granted.Perk.Recycling.T01 
-			NewVar_0(StructProperty)=System.Byte[] 
-			NewVar_1(StructProperty)=System.Byte[] 
-			TC_ElectrifiedFloors_T01(StructProperty)=GameplayTagContainer:Granted.Perk.ElectrifiedFloors.T01 
-			GE_ElectrifiedFloors_T01(ObjectProperty)=GE_Perk_H_ElectrifiedFloors_T01_Damage_C=/Game/Abilities/Player/Perks/Hero/ElectrifiedFloors/GE_Perk_H_ElectrifiedFloors_T01_Damage 
+			TC_ElectrifiedFloors(StructProperty)=GameplayTagContainer:Granted.Perk.ElectrifiedFloors.T01 
+			GE_ElectrifiedFloors(ObjectProperty)=GE_Perk_H_ElectrifiedFloors_T01_Damage_C=/Game/Abilities/Player/Perks/Hero/ElectrifiedFloors/GE_Perk_H_ElectrifiedFloors_T01_Damage 
 			TC_FullyContained_T01(StructProperty)=System.Byte[] 
 			GE_FullyContained_T01(ObjectProperty)=GE_Perk_H_FullyContained_Applied_C=/Game/Abilities/Player/Perks/Hero/FullyContained/GE_Perk_H_FullyContained_Applied 
 			TC_FeelTheBASE_T01(StructProperty)=GameplayTagContainer:Granted.Perk.FeelTheBASE.T01 
+			TC_PowerModulation_T02(StructProperty)=GameplayTagContainer:Granted.Perk.PowerModulation.T02 
+			GE_Power_Modulation_T02(ObjectProperty)=GE_Perk_H_PowerModulation_Applied_T02_C=/Game/Abilities/Player/Perks/Hero/PowerModulation/GE_Perk_H_PowerModulation_Applied_T02 
+			RecyclingMultiplier(StructProperty)=System.Byte[] 
+			T1Amount(StructProperty)=System.Byte[] 
+			T2Amount(StructProperty)=System.Byte[] 
+			T3Amount(StructProperty)=System.Byte[] 
+			MaximumResourceSpawned(StructProperty)=System.Byte[] 
+			MaximumResourceLimit(StructProperty)=System.Byte[] 
 			BASEBuildingApplicationEffects(ArrayProperty)=[object] (inner: StructProperty)
 			BASEFriendlyApplicationEffects(ArrayProperty)=[object] (inner: StructProperty)
 			InBASETag(StructProperty)=System.Byte[] 
@@ -1725,7 +1736,7 @@ Serialized exports:
 		Tag array:
 	AbilitySystemComponent (0-0-0-0): size 36 (cls: AbilitySystemComponent>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	SetupBuildingEffects (0-0-0-0): size 551 (cls: SetupBuildingEffects>Function>/Script/CoreUObject) :
+	SetupBuildingEffects (0-0-0-0): size 666 (cls: SetupBuildingEffects>Function>/Script/CoreUObject) :
 		Tag array:
 	AbilitySystemComponent (0-0-0-0): size 36 (cls: AbilitySystemComponent>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1735,9 +1746,9 @@ Serialized exports:
 		Tag array:
 	SetupHostileEffects (0-0-0-0): size 551 (cls: SetupHostileEffects>Function>/Script/CoreUObject) :
 		Tag array:
-	CallFunc_GetResourceAmountsBasedOnUpgradeTier_WoodResult (0-0-0-0): size 32 (cls: CallFunc_GetResourceAmountsBasedOnUpgradeTier_WoodResult>IntProperty>/Script/CoreUObject) :
+	CallFunc_GetValueAtLevel_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetValueAtLevel_ReturnValue>FloatProperty>/Script/CoreUObject) :
 		Tag array:
-	RecycleResources (0-0-0-0): size 220 (cls: RecycleResources>Function>/Script/CoreUObject) :
+	RecycleResources (0-0-0-0): size 427 (cls: RecycleResources>Function>/Script/CoreUObject) :
 		Tag array:
 	OnRep_BaseIsPlaced (0-0-0-0): size 53 (cls: OnRep_BaseIsPlaced>Function>/Script/CoreUObject) :
 		Tag array:
@@ -1751,7 +1762,7 @@ Serialized exports:
 		Tag array:
 	RecyclingResource (0-0-0-0): size 36 (cls: RecyclingResource>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	AddResourceToStack (0-0-0-0): size 260 (cls: AddResourceToStack>Function>/Script/CoreUObject) :
+	AddResourceToStack (0-0-0-0): size 329 (cls: AddResourceToStack>Function>/Script/CoreUObject) :
 		Tag array:
 	InteractingPawn (0-0-0-0): size 36 (cls: InteractingPawn>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
@@ -2021,6 +2032,10 @@ Serialized exports:
 		Tag array:
 	CallFunc_HasAllMatchingGameplayTags_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_HasAllMatchingGameplayTags_ReturnValue2>BoolProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_HasAllMatchingGameplayTags_ReturnValue3 (0-0-0-0): size 34 (cls: CallFunc_HasAllMatchingGameplayTags_ReturnValue3>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_HasAllMatchingGameplayTags_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasAllMatchingGameplayTags_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_HasAllMatchingGameplayTags_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasAllMatchingGameplayTags_ReturnValue>BoolProperty>/Script/CoreUObject) :
@@ -2043,7 +2058,7 @@ Serialized exports:
 		Tag array:
 	ItemDefinition (0-0-0-0): size 36 (cls: ItemDefinition>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	SpawnResourceWithAmount (0-0-0-0): size 293 (cls: SpawnResourceWithAmount>Function>/Script/CoreUObject) :
+	SpawnResourceWithAmount (0-0-0-0): size 507 (cls: SpawnResourceWithAmount>Function>/Script/CoreUObject) :
 		Tag array:
 	Tracelocation (0-0-0-0): size 36 (cls: Tracelocation>StructProperty>/Script/CoreUObject) :
 		Tag array:
@@ -2084,9 +2099,7 @@ Serialized exports:
 		Tag array:
 	GE_ElectrifiedFloors (0-0-0-0): size 40 (cls: GE_ElectrifiedFloors>ClassProperty>/Script/CoreUObject) :
 		Tag array:
-	GE_ElectrifiedFloors_T01 (0-0-0-0): size 40 (cls: GE_ElectrifiedFloors_T01>ClassProperty>/Script/CoreUObject) :
-		Tag array:
-	GE_FeelTheBase_T01 (0-0-0-0): size 40 (cls: GE_FeelTheBase_T01>ClassProperty>/Script/CoreUObject) :
+	GE_FeelTheBase (0-0-0-0): size 40 (cls: GE_FeelTheBase>ClassProperty>/Script/CoreUObject) :
 		Tag array:
 	GE_FullyContained_T01 (0-0-0-0): size 40 (cls: GE_FullyContained_T01>ClassProperty>/Script/CoreUObject) :
 		Tag array:
@@ -2096,7 +2109,9 @@ Serialized exports:
 		Tag array:
 	GE_OutgoingHealAmp (0-0-0-0): size 40 (cls: GE_OutgoingHealAmp>ClassProperty>/Script/CoreUObject) :
 		Tag array:
-	GE_PowerModulation (0-0-0-0): size 40 (cls: GE_PowerModulation>ClassProperty>/Script/CoreUObject) :
+	GE_Power_Modulation_T02 (0-0-0-0): size 40 (cls: GE_Power_Modulation_T02>ClassProperty>/Script/CoreUObject) :
+		Tag array:
+	GE_PowerModulation_T01 (0-0-0-0): size 40 (cls: GE_PowerModulation_T01>ClassProperty>/Script/CoreUObject) :
 		Tag array:
 	GE_SlowUnit (0-0-0-0): size 40 (cls: GE_SlowUnit>ClassProperty>/Script/CoreUObject) :
 		Tag array:
@@ -2106,10 +2121,14 @@ Serialized exports:
 		Tag array:
 	OutGE (0-0-0-0): size 40 (cls: OutGE>ClassProperty>/Script/CoreUObject) :
 		Tag array:
+	K2Node_Select_Default (0-0-0-0): size 40 (cls: K2Node_Select_Default>ClassProperty>/Script/CoreUObject) :
+		Tag array:
 	ComponentDelegateBinding_0 (0-0-0-0): size 419 (cls: ComponentDelegateBinding_0>ComponentDelegateBinding>/Script/Engine) :
 		Tag array:
 			ComponentDelegateBindings(ArrayProperty)=[object] (inner: StructProperty)
 	K2Node_CreateDelegate_OutputDelegate (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate>DelegateProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_GetValueAtLevel_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetValueAtLevel_ReturnValue>FloatProperty>/Script/CoreUObject) :
 		Tag array:
 	BasePowerLevel (0-0-0-0): size 32 (cls: BasePowerLevel>FloatProperty>/Script/CoreUObject) :
 		Tag array:
@@ -2143,7 +2162,9 @@ Serialized exports:
 		Tag array:
 	Minimap View Distance (0-0-0-0): size 32 (cls: Minimap View Distance>FloatProperty>/Script/CoreUObject) :
 		Tag array:
-	RecyclingMultiplier (0-0-0-0): size 32 (cls: RecyclingMultiplier>FloatProperty>/Script/CoreUObject) :
+	CallFunc_GetValueAtLevel_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_GetValueAtLevel_ReturnValue1>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_GetValueAtLevel_ReturnValue2 (0-0-0-0): size 32 (cls: CallFunc_GetValueAtLevel_ReturnValue2>FloatProperty>/Script/CoreUObject) :
 		Tag array:
 	RecyclingTimer (0-0-0-0): size 32 (cls: RecyclingTimer>FloatProperty>/Script/CoreUObject) :
 		Tag array:
@@ -2158,6 +2179,10 @@ Serialized exports:
 	CallFunc_EvaluateAttributeValueWithTagsAndBase_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_EvaluateAttributeValueWithTagsAndBase_ReturnValue>FloatProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_GetFloatAttributeFromAbilitySystemComponent_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetFloatAttributeFromAbilitySystemComponent_ReturnValue>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_GetValueAtLevel_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetValueAtLevel_ReturnValue>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_GetValueAtLevel_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_GetValueAtLevel_ReturnValue1>FloatProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_GetValueAtLevel_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetValueAtLevel_ReturnValue>FloatProperty>/Script/CoreUObject) :
 		Tag array:
@@ -2206,6 +2231,8 @@ Serialized exports:
 		Tag array:
 	CallFunc_HasAllMatchingGameplayTags_TagContainerInterface2_CastInput (0-0-0-0): size 36 (cls: CallFunc_HasAllMatchingGameplayTags_TagContainerInterface2_CastInput>InterfaceProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_HasAllMatchingGameplayTags_TagContainerInterface3_CastInput (0-0-0-0): size 36 (cls: CallFunc_HasAllMatchingGameplayTags_TagContainerInterface3_CastInput>InterfaceProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_HasAllMatchingGameplayTags_TagContainerInterface_CastInput (0-0-0-0): size 36 (cls: CallFunc_HasAllMatchingGameplayTags_TagContainerInterface_CastInput>InterfaceProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_HasAllMatchingGameplayTags_TagContainerInterface_CastInput (0-0-0-0): size 36 (cls: CallFunc_HasAllMatchingGameplayTags_TagContainerInterface_CastInput>InterfaceProperty>/Script/CoreUObject) :
@@ -2223,6 +2250,8 @@ Serialized exports:
 	AmountToSpawn (0-0-0-0): size 32 (cls: AmountToSpawn>IntProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_Add_IntInt_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue>IntProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_FTrunc_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_FTrunc_ReturnValue>IntProperty>/Script/CoreUObject) :
 		Tag array:
 	HopperResourceAmount (0-0-0-0): size 32 (cls: HopperResourceAmount>IntProperty>/Script/CoreUObject) :
 		Tag array:
@@ -2298,9 +2327,17 @@ Serialized exports:
 		Tag array:
 	NumPlayersNearBase (0-0-0-0): size 32 (cls: NumPlayersNearBase>IntProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_FTrunc_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_FTrunc_ReturnValue>IntProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_FTrunc_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_FTrunc_ReturnValue1>IntProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_FTrunc_ReturnValue2 (0-0-0-0): size 32 (cls: CallFunc_FTrunc_ReturnValue2>IntProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_GetResourceAmountsBasedOnUpgradeTier_MetalResult (0-0-0-0): size 32 (cls: CallFunc_GetResourceAmountsBasedOnUpgradeTier_MetalResult>IntProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_GetResourceAmountsBasedOnUpgradeTier_StoneResult (0-0-0-0): size 32 (cls: CallFunc_GetResourceAmountsBasedOnUpgradeTier_StoneResult>IntProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_GetResourceAmountsBasedOnUpgradeTier_WoodResult (0-0-0-0): size 32 (cls: CallFunc_GetResourceAmountsBasedOnUpgradeTier_WoodResult>IntProperty>/Script/CoreUObject) :
 		Tag array:
 	ResourceLimit (0-0-0-0): size 32 (cls: ResourceLimit>IntProperty>/Script/CoreUObject) :
 		Tag array:
@@ -2386,11 +2423,7 @@ Serialized exports:
 		Tag array:
 	CallFunc_FFloor_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_FFloor_ReturnValue>IntProperty>/Script/CoreUObject) :
 		Tag array:
-	T1Amount (0-0-0-0): size 32 (cls: T1Amount>IntProperty>/Script/CoreUObject) :
-		Tag array:
-	T2Amount (0-0-0-0): size 32 (cls: T2Amount>IntProperty>/Script/CoreUObject) :
-		Tag array:
-	T3Amount (0-0-0-0): size 32 (cls: T3Amount>IntProperty>/Script/CoreUObject) :
+	CallFunc_FTrunc_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_FTrunc_ReturnValue>IntProperty>/Script/CoreUObject) :
 		Tag array:
 	TotalResourcesSpawned (0-0-0-0): size 32 (cls: TotalResourcesSpawned>IntProperty>/Script/CoreUObject) :
 		Tag array:
@@ -2532,9 +2565,10 @@ Serialized exports:
 		Tag array:
 	Workbench_Ticking (0-0-0-0): size 36 (cls: Workbench_Ticking>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	P_FeeltheBase_Chargup_GEN_VARIABLE (0-0-0-0): size 67 (cls: P_FeeltheBase_Chargup_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	P_FeeltheBase_Chargup_GEN_VARIABLE (0-0-0-0): size 150 (cls: P_FeeltheBase_Chargup_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_FeeltheBase_Chargup=/Game/Abilities/Player/Constructor/Perks/FeelTheBase/FX/P_FeeltheBase_Chargup 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
 	FeelTheBaseTraceLocation_GEN_VARIABLE (0-0-0-0): size 73 (cls: FeelTheBaseTraceLocation_GEN_VARIABLE>SceneComponent>/Script/Engine) :
 		Tag array:
@@ -2708,13 +2742,15 @@ Serialized exports:
 		Tag array:
 	CallFunc_MakeGameplayTagContainerFromTag_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_MakeGameplayTagContainerFromTag_ReturnValue>StructProperty>/Script/CoreUObject) :
 		Tag array:
+	MaximumResourceLimit (0-0-0-0): size 36 (cls: MaximumResourceLimit>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	MaximumResourceSpawned (0-0-0-0): size 36 (cls: MaximumResourceSpawned>StructProperty>/Script/CoreUObject) :
+		Tag array:
 	MegaBASE_AdditionalNodes_T01 (0-0-0-0): size 36 (cls: MegaBASE_AdditionalNodes_T01>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	MegaBASE_AdditionalNodes_T02 (0-0-0-0): size 36 (cls: MegaBASE_AdditionalNodes_T02>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	NewVar_0 (0-0-0-0): size 36 (cls: NewVar_0>StructProperty>/Script/CoreUObject) :
-		Tag array:
-	NewVar_1 (0-0-0-0): size 36 (cls: NewVar_1>StructProperty>/Script/CoreUObject) :
+	RecyclingMultiplier (0-0-0-0): size 36 (cls: RecyclingMultiplier>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_AssignSetByCallerMagnitude_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_AssignSetByCallerMagnitude_ReturnValue>StructProperty>/Script/CoreUObject) :
 		Tag array:
@@ -2766,13 +2802,17 @@ Serialized exports:
 		Tag array:
 	StoredWood (0-0-0-0): size 36 (cls: StoredWood>StructProperty>/Script/CoreUObject) :
 		Tag array:
+	T1Amount (0-0-0-0): size 36 (cls: T1Amount>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	T2Amount (0-0-0-0): size 36 (cls: T2Amount>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	T3Amount (0-0-0-0): size 36 (cls: T3Amount>StructProperty>/Script/CoreUObject) :
+		Tag array:
 	TC_BASEMD_T01 (0-0-0-0): size 36 (cls: TC_BASEMD_T01>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	TC_ContainmentUnit (0-0-0-0): size 36 (cls: TC_ContainmentUnit>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	TC_ElectrifiedFloors (0-0-0-0): size 36 (cls: TC_ElectrifiedFloors>StructProperty>/Script/CoreUObject) :
-		Tag array:
-	TC_ElectrifiedFloors_T01 (0-0-0-0): size 36 (cls: TC_ElectrifiedFloors_T01>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	TC_FeelTheBASE_T01 (0-0-0-0): size 36 (cls: TC_FeelTheBASE_T01>StructProperty>/Script/CoreUObject) :
 		Tag array:
@@ -2788,7 +2828,9 @@ Serialized exports:
 		Tag array:
 	TC_MegaBASE_T02 (0-0-0-0): size 36 (cls: TC_MegaBASE_T02>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	TC_PowerModulation (0-0-0-0): size 36 (cls: TC_PowerModulation>StructProperty>/Script/CoreUObject) :
+	TC_PowerModulation_T01 (0-0-0-0): size 36 (cls: TC_PowerModulation_T01>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	TC_PowerModulation_T02 (0-0-0-0): size 36 (cls: TC_PowerModulation_T02>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	TC_Recycling (0-0-0-0): size 36 (cls: TC_Recycling>StructProperty>/Script/CoreUObject) :
 		Tag array:

@@ -85,6 +85,7 @@ Name table:
 	CallFunc_IsAnimationPlaying_ReturnValue
 	CallFunc_IsInCursorMode_ReturnValue
 	CallFunc_Not_PreBool_ReturnValue
+	CallFunc_PlayAnimationAtTime_ReturnValue
 	CallFunc_SelectTabByID_ReturnValue
 	ChangedFeature
 	ChildTemplates
@@ -376,7 +377,7 @@ Name table:
 	Padding
 	Parent
 	ParentGuid
-	PlayAnimation
+	PlayAnimationAtTime
 	PlaybackRange
 	PlayerHitThrob
 	PlayerHitThrob_INST
@@ -499,6 +500,7 @@ Name table:
 	UIFeatureStateChangedListener__DelegateSignature
 	UInt16Property
 	UInt32Property
+	UMGSequencePlayer
 	UnderlyingType
 	Up
 	UseButtonStyle
@@ -574,6 +576,7 @@ Import table:
 	SafeZoneSlot (Class)
 	SizeBox (Class)
 	SizeBoxSlot (Class)
+	UMGSequencePlayer (Class)
 	UserWidget (Class)
 	VerticalBox (Class)
 	VerticalBoxSlot (Class)
@@ -616,7 +619,7 @@ Import table:
 	Construct (Function)
 	Destruct (Function)
 	IsAnimationPlaying (Function)
-	PlayAnimation (Function)
+	PlayAnimationAtTime (Function)
 	GetWidgetAtIndex (Function)
 	Default__HeroSquadManagementScreen_C (HeroSquadManagementScreen_C)
 	Default__HorizontalBox (HorizontalBox)
@@ -764,7 +767,7 @@ Serialized exports:
 		Tag array:
 	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	HandleDamageReceived (0-0-0-0): size 215 (cls: HandleDamageReceived>Function>/Script/CoreUObject) :
+	HandleDamageReceived (0-0-0-0): size 225 (cls: HandleDamageReceived>Function>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_BooleanAND_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -969,9 +972,8 @@ Serialized exports:
 			Brush(StructProperty)=System.Byte[] 
 			Slot(ObjectProperty)=OverlaySlot_2=WidgetArchetype 
 			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
-	WidgetArchetype (0-0-0-0): size 183 (cls: WidgetArchetype>MgmtTabsScreen_C) :
+	WidgetArchetype (0-0-0-0): size 154 (cls: WidgetArchetype>MgmtTabsScreen_C) :
 		Tag array:
-			PlayerHitThrob(ObjectProperty)=PlayerHitThrob_INST=WidgetArchetype 
 			SafeZone_6(ObjectProperty)=SafeZone_6=WidgetArchetype 
 			TopTabContentWidgetSwitcher(ObjectProperty)=TopTabContentWidgetSwitcher=WidgetArchetype 
 			TopTabList(ObjectProperty)=TopTabList=WidgetArchetype 
@@ -984,17 +986,6 @@ Serialized exports:
 			PlaybackRange(StructProperty)=System.Byte[] 
 			DisplayRate(StructProperty)=System.Byte[] 
 			Signature(StructProperty)=Guid: 3219634955-1090280807-3592382889-2328648192 
-	PlayerHitThrob (0-0-0-0): size 800 (cls: PlayerHitThrob>MovieScene>/Script/MovieScene) :
-		Tag array:
-			Possessables(ArrayProperty)=[object] (inner: StructProperty)
-			ObjectBindings(ArrayProperty)=[object] (inner: StructProperty)
-			PlaybackRange(StructProperty)=System.Byte[] 
-			DisplayRate(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 3219634955-1090280807-3592382889-2328648192 
-	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene) :
-		Tag array:
-	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene) :
-		Tag array:
 	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene) :
 		Tag array:
 	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene) :
@@ -1009,23 +1000,6 @@ Serialized exports:
 			Easing(StructProperty)=System.Byte[] 
 			SectionRange(StructProperty)=System.Byte[] 
 			Signature(StructProperty)=Guid: 825631267-1084726023-500602499-2782683034 
-	MovieSceneColorSection_0 (0-0-0-0): size 4972 (cls: MovieSceneColorSection_0>MovieSceneColorSection>/Script/MovieSceneTracks) :
-		Tag array:
-			RedCurve(StructProperty)=System.Byte[] 
-			GreenCurve(StructProperty)=System.Byte[] 
-			BlueCurve(StructProperty)=System.Byte[] 
-			AlphaCurve(StructProperty)=System.Byte[] 
-			EvalOptions(StructProperty)=System.Byte[] 
-			Easing(StructProperty)=System.Byte[] 
-			SectionRange(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 825631267-1084726023-500602499-2782683034 
-	MovieSceneColorTrack_0 (0-0-0-0): size 286 (cls: MovieSceneColorTrack_0>MovieSceneColorTrack>/Script/MovieSceneTracks) :
-		Tag array:
-			PropertyName(NameProperty)=ContentColorAndOpacity 
-			PropertyPath(StrProperty)=ContentColorAndOpacity 
-			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
-			EvalOptions(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 3407905213-1163496520-1829174435-1889099709 
 	MovieSceneColorTrack_0 (0-0-0-0): size 286 (cls: MovieSceneColorTrack_0>MovieSceneColorTrack>/Script/MovieSceneTracks) :
 		Tag array:
 			PropertyName(NameProperty)=ContentColorAndOpacity 
@@ -1056,6 +1030,8 @@ Serialized exports:
 	K2Node_DynamicCast_AsIcon_Tab_Button (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsIcon_Tab_Button>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	CursorModeContentCustomWidget (0-0-0-0): size 36 (cls: CursorModeContentCustomWidget>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_PlayAnimationAtTime_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlayAnimationAtTime_ReturnValue>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	SafeZone_6 (0-0-0-0): size 36 (cls: SafeZone_6>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1146,13 +1122,6 @@ Serialized exports:
 	PlayerHitThrob_INST (0-0-0-0): size 11116 (cls: PlayerHitThrob_INST>WidgetAnimation>/Script/UMG) :
 		Tag array:
 			MovieScene(ObjectProperty)=PlayerHitThrob=MgmtTabsScreen_C 
-			AnimationBindings(ArrayProperty)=[object] (inner: StructProperty)
-			bLegacyFinishOnStop(BoolProperty)=False 
-			PrecompiledEvaluationTemplate(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 996212216-1138007850-1562584724-3074868997 
-	PlayerHitThrob_INST (0-0-0-0): size 11116 (cls: PlayerHitThrob_INST>WidgetAnimation>/Script/UMG) :
-		Tag array:
-			MovieScene(ObjectProperty)=PlayerHitThrob=WidgetArchetype 
 			AnimationBindings(ArrayProperty)=[object] (inner: StructProperty)
 			bLegacyFinishOnStop(BoolProperty)=False 
 			PrecompiledEvaluationTemplate(StructProperty)=System.Byte[] 

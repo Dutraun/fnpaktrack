@@ -38,6 +38,7 @@ Name table:
 	Activate
 	Actor
 	ActorComponent
+	ActorComponentTickFunction
 	ActorsToTeleport
 	ActorToTeleport
 	Add_IntInt
@@ -107,6 +108,7 @@ Name table:
 	bRetVal
 	bSetSearchSpeed
 	bShowGlow
+	bStartWithTickEnabled
 	bTeleporterActive
 	bTeleportHusks
 	bTeleporting
@@ -770,6 +772,7 @@ Name table:
 	PostProcessTL_Template
 	PostProcessTL_Weight_313874CC47D4DBB662B568BCDD322E9F
 	PrevWeapon
+	PrimaryComponentTick
 	PrimarySurfaceType
 	PrimitiveComponent
 	PrintString
@@ -1258,6 +1261,7 @@ Import table:
 	Rotator (ScriptStruct)
 	Vector (ScriptStruct)
 	Vector4 (ScriptStruct)
+	ActorComponentTickFunction (ScriptStruct)
 	BodyInstance (ScriptStruct)
 	CollisionResponse (ScriptStruct)
 	CurveTableRowHandle (ScriptStruct)
@@ -2587,32 +2591,37 @@ Serialized exports:
 		Tag array:
 	Vortex MID (0-0-0-0): size 36 (cls: Vortex MID>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	P_Teleporter_Active_0166AE41FC4369D9DF5C4D1CAB692270B4 (0-0-0-0): size 153 (cls: P_Teleporter_Active_0166AE41FC4369D9DF5C4D1CAB692270B4>ParticleSystemComponent>/Script/Engine) :
+	P_Teleporter_Active_0166AE41FC4369D9DF5C4D1CAB692270B4 (0-0-0-0): size 236 (cls: P_Teleporter_Active_0166AE41FC4369D9DF5C4D1CAB692270B4>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_Teleporter_Active_01=/Game/Gadgets/Assets/Teleporter/Effects/P_Teleporter_Active_01 
 			BodyInstance(StructProperty)=System.Byte[] 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
-	P_Teleporter_Explo_GEN_VARIABLE (0-0-0-0): size 128 (cls: P_Teleporter_Explo_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	P_Teleporter_Explo_GEN_VARIABLE (0-0-0-0): size 211 (cls: P_Teleporter_Explo_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_Teleporter_Explo=/Game/Gadgets/Assets/Teleporter/Effects/P_Teleporter_Explo 
 			RelativeRotation(StructProperty)=Rotator(90,0,0) 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
-	P_Teleporter_ReloadRing_01_GEN_VARIABLE (0-0-0-0): size 128 (cls: P_Teleporter_ReloadRing_01_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	P_Teleporter_ReloadRing_01_GEN_VARIABLE (0-0-0-0): size 211 (cls: P_Teleporter_ReloadRing_01_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_Teleporter_ReloadRing_01=/Game/Gadgets/Assets/Teleporter/Effects/P_Teleporter_ReloadRing_01 
 			RelativeLocation(StructProperty)=Vector(-3.051758E-05,-0.0003814697,121.1979) 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
-	P_Teleporter_ReloadRingRays_01_GEN_VARIABLE (0-0-0-0): size 189 (cls: P_Teleporter_ReloadRingRays_01_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	P_Teleporter_ReloadRingRays_01_GEN_VARIABLE (0-0-0-0): size 272 (cls: P_Teleporter_ReloadRingRays_01_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_Teleporter_ReloadRingRays_01=/Game/Gadgets/Assets/Teleporter/Effects/P_Teleporter_ReloadRingRays_01 
 			RelativeLocation(StructProperty)=Vector(52.16838,58.16681,20.03841) 
 			RelativeRotation(StructProperty)=Rotator(50.27509,-132.605,8.129052) 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
-	P_Teleporter_Teleported_015D403B0640D8C51A0692399619EF49DC (0-0-0-0): size 214 (cls: P_Teleporter_Teleported_015D403B0640D8C51A0692399619EF49DC>ParticleSystemComponent>/Script/Engine) :
+	P_Teleporter_Teleported_015D403B0640D8C51A0692399619EF49DC (0-0-0-0): size 297 (cls: P_Teleporter_Teleported_015D403B0640D8C51A0692399619EF49DC>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_Teleporter_Teleported_01=/Game/Gadgets/Assets/Teleporter/Effects/P_Teleporter_Teleported_01 
 			BodyInstance(StructProperty)=System.Byte[] 
 			RelativeLocation(StructProperty)=Vector(0,0,120.4498) 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
 	Light_GEN_VARIABLE (0-0-0-0): size 265 (cls: Light_GEN_VARIABLE>PointLightComponent>/Script/Engine) :
 		Tag array:
@@ -2673,14 +2682,14 @@ Serialized exports:
 			CookedComponentInstancingData(StructProperty)=System.Byte[] 
 			VariableGuid(StructProperty)=Guid: 388847367-1129733919-1951555478-2320390662 
 			InternalVariableName(NameProperty)=Vortex 
-	SCS_Node_13 (0-0-0-0): size 733 (cls: SCS_Node_13>SCS_Node>/Script/Engine) :
+	SCS_Node_13 (0-0-0-0): size 931 (cls: SCS_Node_13>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=P_Teleporter_Active_0166AE41FC4369D9DF5C4D1CAB692270B4=B_Teleporter_C 
 			CookedComponentInstancingData(StructProperty)=System.Byte[] 
 			VariableGuid(StructProperty)=Guid: 3889119191-1180518165-378267789-4122707119 
 			InternalVariableName(NameProperty)=P_Teleporter_Active_01 
-	SCS_Node_14 (0-0-0-0): size 931 (cls: SCS_Node_14>SCS_Node>/Script/Engine) :
+	SCS_Node_14 (0-0-0-0): size 1129 (cls: SCS_Node_14>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=P_Teleporter_Teleported_015D403B0640D8C51A0692399619EF49DC=B_Teleporter_C 
@@ -2701,7 +2710,7 @@ Serialized exports:
 			CookedComponentInstancingData(StructProperty)=System.Byte[] 
 			VariableGuid(StructProperty)=Guid: 1073664030-1129007199-2181516728-1291806467 
 			InternalVariableName(NameProperty)=teleporter_recharge_audiocomponent 
-	SCS_Node_17 (0-0-0-0): size 931 (cls: SCS_Node_17>SCS_Node>/Script/Engine) :
+	SCS_Node_17 (0-0-0-0): size 1129 (cls: SCS_Node_17>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=P_Teleporter_ReloadRing_01_GEN_VARIABLE=B_Teleporter_C 
@@ -2715,7 +2724,7 @@ Serialized exports:
 			CookedComponentInstancingData(StructProperty)=System.Byte[] 
 			VariableGuid(StructProperty)=Guid: 571031869-1087238548-1853654935-2743138998 
 			InternalVariableName(NameProperty)=ProjectileMovement 
-	SCS_Node_19 (0-0-0-0): size 733 (cls: SCS_Node_19>SCS_Node>/Script/Engine) :
+	SCS_Node_19 (0-0-0-0): size 931 (cls: SCS_Node_19>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=P_Teleporter_Explo_GEN_VARIABLE=B_Teleporter_C 
@@ -2772,7 +2781,7 @@ Serialized exports:
 			CookedComponentInstancingData(StructProperty)=System.Byte[] 
 			VariableGuid(StructProperty)=Guid: 696743539-1190826048-624185764-1355790010 
 			InternalVariableName(NameProperty)=Teleport_AudioComponent 
-	SCS_Node_8 (0-0-0-0): size 1327 (cls: SCS_Node_8>SCS_Node>/Script/Engine) :
+	SCS_Node_8 (0-0-0-0): size 1525 (cls: SCS_Node_8>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=P_Teleporter_ReloadRingRays_01_GEN_VARIABLE=B_Teleporter_C 

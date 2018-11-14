@@ -1,4 +1,5 @@
 Name table:
+	/Game/Items/HomebaseNodes/QuestReward_RecycleCollection
 	/Game/UI/Foundation/Buttons/ButtonStyles/Tab/ButtonStyle-Tab-Secondary
 	/Game/UI/Foundation/Buttons/IconTextButton
 	/Game/UI/Foundation/Input/InputActionDataTable
@@ -13,6 +14,7 @@ Name table:
 	/Game/UI/Frontend/ItemManagement/DetailsPanel/ItemDetailsMode/ItemManagementDetailsModeBox
 	/Game/UI/Frontend/ItemManagement/DetailsPanel/ItemDetailsMode/ItemManagementDetailsModeBox.WidgetArchetype
 	/Game/UI/Frontend/ItemManagement/DetailsPanel/ItemMulchMode/MulchConfirmationItem
+	/Game/UI/Frontend/ItemManagement/FortItemManagementViewPopup
 	/Game/UI/Frontend/ItemManagement/InventoryPanel/ItemManagementInventoryPanel
 	/Game/UI/Frontend/ItemManagement/ItemManagementScreen
 	/Game/UI/Frontend/XpBoosts/BoostsRoot
@@ -32,6 +34,7 @@ Name table:
 	AdvanceSelection
 	AreProfilesAvailableToWIFE
 	ArrayProperty
+	AsFort Item Management View Popup
 	AutoWrapText
 	Back
 	bAllowedInZone
@@ -80,7 +83,6 @@ Name table:
 	CallFunc_CanCraftSchematic_ReturnValue
 	CallFunc_CanItemBeMulched_OutRestrictionReason
 	CallFunc_CanItemBeMulched_ReturnValue
-	CallFunc_CanRequestPopupMenuForSelectedItem_ReturnValue
 	CallFunc_Create_ReturnValue
 	CallFunc_EqualEqual_ByteByte_ReturnValue
 	CallFunc_EqualEqual_ByteByte_ReturnValue1
@@ -92,6 +94,7 @@ Name table:
 	CallFunc_GetActiveTab_ReturnValue
 	CallFunc_GetActiveTab_ReturnValue1
 	CallFunc_GetActiveWidgetIndex_ReturnValue
+	CallFunc_GetCachedWidget_ReturnValue
 	CallFunc_GetContext_ReturnValue
 	CallFunc_GetContext_ReturnValue1
 	CallFunc_GetContext_ReturnValue2
@@ -100,8 +103,10 @@ Name table:
 	CallFunc_GetInputActions_InputActionDataRows
 	CallFunc_GetInputActions_ReturnValue
 	CallFunc_GetInputManager_ReturnValue
+	CallFunc_GetItemManagementViewPopup_AsFort_Item_Management_View_Popup
 	CallFunc_GetLocalPartyMemberLocation_Location
 	CallFunc_GetLocalPartyMemberLocation_ReturnValue
+	CallFunc_GetLocalPlayerSubsystem_ReturnValue
 	CallFunc_GetMaxTransferCount_Count
 	CallFunc_GetNumInStack_ReturnValue
 	CallFunc_GetNumItems_ReturnValue
@@ -109,11 +114,14 @@ Name table:
 	CallFunc_GetSchematicResultType_ReturnValue
 	CallFunc_GetStatsTabVisibility_StatsTabVisbility
 	CallFunc_GetStatsTabVisibility_StatsTabVisbility1
+	CallFunc_GetTotalItemQuantityByDefinition_ReturnValue
 	CallFunc_GetType_ReturnValue
+	CallFunc_GetUIManagerWidget_ReturnValue
 	CallFunc_GetWidgetAtIndex_ReturnValue
 	CallFunc_Greater_IntInt_ReturnValue
 	CallFunc_Greater_IntInt_ReturnValue1
 	CallFunc_GreaterEqual_DateTimeDateTime_ReturnValue
+	CallFunc_GreaterEqual_IntInt_ReturnValue
 	CallFunc_GuardActionForReadOnlyWIFE_Proceed
 	CallFunc_HasTooltipStats_ReturnValue
 	CallFunc_IsEquipAvailable_EquipAvailable
@@ -132,7 +140,10 @@ Name table:
 	CallFunc_IsValid_ReturnValue2
 	CallFunc_K2_SetTimer_ReturnValue
 	CallFunc_MakeTimespan_ReturnValue
+	CallFunc_MulchQuestComplete_QuestComplete
+	CallFunc_MulchQuestComplete_QuestComplete1
 	CallFunc_Not_PreBool_ReturnValue
+	CallFunc_Not_PreBool_ReturnValue1
 	CallFunc_NotEqual_ByteByte_ReturnValue
 	CallFunc_PreferReadOnlyWIFE_ReadOnly
 	CallFunc_SelectTabByID_ReturnValue
@@ -148,7 +159,6 @@ Name table:
 	CancelInventoryPanelTileViewRefresh
 	CanCraftSchematic
 	CanItemBeMulched
-	CanRequestPopupMenuForSelectedItem
 	ChangedSlots
 	Class
 	ColorUseRule
@@ -159,6 +169,7 @@ Name table:
 	CommonInputActionHandlerData
 	CommonInputManager
 	CommonInputSubsystem
+	CommonPopupMenu
 	CommonTabListWidget
 	CommonTextBlock
 	CommonUISubsystem
@@ -170,7 +181,6 @@ Name table:
 	ConsumeItem
 	ConsumeItemRequestInProgress
 	Content
-	ContextPopupMenu
 	Craft
 	CraftAndSlot
 	Crafting
@@ -195,6 +205,8 @@ Name table:
 	Default__FortAsyncAction_ShowConfirmation_NUI
 	Default__FortGlobals
 	Default__FortItemDetailsModeActivatablePanel
+	Default__FortItemManagementViewPopup_C
+	Default__FortUIManagerWidget_NUI
 	Default__Function
 	Default__HorizontalBox
 	Default__HorizontalBoxSlot
@@ -218,6 +230,7 @@ Name table:
 	Default__Spacer
 	Default__StatsModeItemDetailsHostPanel_C
 	Default__StructProperty
+	Default__SubsystemBlueprintLibrary
 	Default__TextProperty
 	Default__TextStyle-Base-XS-B_C
 	Default__TextStyle-Base-XS_C
@@ -293,6 +306,7 @@ Name table:
 	FortFrontEndContext
 	FortGlobals
 	FortGlobalUIContext
+	FortHomebaseNodeItemDefinition
 	FortHUDContext
 	FortInventoryContext
 	FortItem
@@ -301,6 +315,7 @@ Name table:
 	FortItemDetailsModeActivatablePanel
 	FortItemManagementInventoryPanel
 	FortItemManagementScreen
+	FortItemManagementViewPopup_C
 	FortMatchmakingContext
 	FortPartyContext
 	FortPlayerControllerDeployableBase
@@ -308,27 +323,34 @@ Name table:
 	FortTabButtonLabelInfo
 	FortTabListRegistrationInfo
 	FortTooltipUIContext
+	FortUIManagerWidget_NUI
 	FortWorldItem
 	FrontendInventoryFilter
 	Function
 	FunctionNameToBind
 	GetActiveTab
 	GetActiveWidgetIndex
+	GetCachedWidget
 	GetContext
 	GetCurrentInputType
 	GetInputActions
 	GetInputManager
+	GetItemManagementViewPopup
 	GetLocalPartyMemberLocation
+	GetLocalPlayerSubsystem
 	GetMaxTransferCount
 	GetNumInStack
 	GetNumItems
 	GetOwningPlayer
 	GetSchematicResultType
 	GetStatsTabVisibility
+	GetTotalItemQuantityByDefinition
 	GetType
+	GetUIManagerWidget
 	GetWidgetAtIndex
 	Greater_IntInt
 	GreaterEqual_DateTimeDateTime
+	GreaterEqual_IntInt
 	GuardActionForReadOnlyWIFE
 	HAlign_Center
 	HAlign_Fill
@@ -397,6 +419,7 @@ Name table:
 	ItemManagementDetailsModeBox_C
 	ItemManagementInventoryPanel_C
 	ItemManagementScreen_C
+	ItemManagementViewPopup
 	ItemsAdded
 	ItemsChanged__DelegateSignature
 	ItemSelected
@@ -431,6 +454,7 @@ Name table:
 	K2Node_DynamicCast_AsFort_Consumable_Account_Item
 	K2Node_DynamicCast_AsFort_Item_Details_Host_Panel
 	K2Node_DynamicCast_AsFort_Item_Details_Host_Panel1
+	K2Node_DynamicCast_AsFort_Item_Management_View_Popup
 	K2Node_DynamicCast_AsFort_Player_Controller_Deployable_Base
 	K2Node_DynamicCast_AsFort_Schematic_Item
 	K2Node_DynamicCast_AsIcon_Text_Button
@@ -462,9 +486,12 @@ Name table:
 	MgmtTabRight
 	Mirroring
 	MiscellaneousModeItemDetailsHostPanel_C
+	Mode
+	MoreInfo
 	MoveAllItemsFromDeployableBase
 	Mulch
 	MulchConfirmationItem_C
+	MulchQuestComplete
 	MulticastDelegateProperty
 	NameProperty
 	NextTabAction
@@ -513,6 +540,8 @@ Name table:
 	PushActivatablePanel
 	PushContentWidget_Adv
 	Quantity
+	QuestComplete
+	QuestReward_RecycleCollection
 	QuickbarIndex
 	ReadOnly
 	RefreshConsumeAction
@@ -541,7 +570,6 @@ Name table:
 	RegisterTransferActions
 	RemoveAllInputActionHandlers
 	RemoveFromParent
-	RequestPopupMenuForSelectedItem
 	ResourceName
 	ResourceObject
 	Result
@@ -556,7 +584,9 @@ Name table:
 	SetActionHandlerState
 	SetActionHandlerStateFromHandle
 	SetContentAlignment
+	SetContextProvider
 	SetInputActionHandler
+	SetInputActionHandlerWithPopupMenu
 	SetIntPropertyByName
 	SetItemToDetail
 	SetItemVisualization
@@ -596,6 +626,7 @@ Name table:
 	StorageTileView
 	StructProperty
 	Style
+	SubsystemBlueprintLibrary
 	SwitchPanel
 	SwitchPanelFocus
 	T-Tab-Secondary-Base-32x64
@@ -690,6 +721,7 @@ Import table:
 	CommonActivatablePanel (Class)
 	CommonButton (Class)
 	CommonInputManager (Class)
+	CommonPopupMenu (Class)
 	CommonTabListWidget (Class)
 	CommonTextBlock (Class)
 	CommonUISubsystem (Class)
@@ -710,6 +742,7 @@ Import table:
 	KismetMathLibrary (Class)
 	KismetSystemLibrary (Class)
 	PlayerController (Class)
+	SubsystemBlueprintLibrary (Class)
 	FortConsumableAccountItem (Class)
 	FortGlobals (Class)
 	FortItem (Class)
@@ -729,6 +762,7 @@ Import table:
 	FortItemManagementInventoryPanel (Class)
 	FortItemManagementScreen (Class)
 	FortTooltipUIContext (Class)
+	FortUIManagerWidget_NUI (Class)
 	HorizontalBox (Class)
 	HorizontalBoxSlot (Class)
 	Image (Class)
@@ -769,9 +803,13 @@ Import table:
 	ESlateVisibility (Enum)
 	Default__EnumProperty (EnumProperty)
 	FrontendInventoryFilter (EnumProperty)
+	Mode (EnumProperty)
 	Default__FortAsyncAction_ShowConfirmation_NUI (FortAsyncAction_ShowConfirmation_NUI)
 	Default__FortGlobals (FortGlobals)
+	QuestReward_RecycleCollection (FortHomebaseNodeItemDefinition)
 	Default__FortItemDetailsModeActivatablePanel (FortItemDetailsModeActivatablePanel)
+	Default__FortItemManagementViewPopup_C (FortItemManagementViewPopup_C)
+	Default__FortUIManagerWidget_NUI (FortUIManagerWidget_NUI)
 	GetContext (Function)
 	GetCurrentInputType (Function)
 	GetInputActions (Function)
@@ -782,7 +820,9 @@ Import table:
 	SetActionHandlerState (Function)
 	SetActionHandlerStateFromHandle (Function)
 	SetInputActionHandler (Function)
+	SetInputActionHandlerWithPopupMenu (Function)
 	PushActivatablePanel (Function)
+	SetContextProvider (Function)
 	GetActiveTab (Function)
 	SelectTabByID (Function)
 	SetLinkedSwitcher (Function)
@@ -796,6 +836,7 @@ Import table:
 	EqualEqual_NameName (Function)
 	Greater_IntInt (Function)
 	GreaterEqual_DateTimeDateTime (Function)
+	GreaterEqual_IntInt (Function)
 	MakeTimespan (Function)
 	Not_PreBool (Function)
 	NotEqual_ByteByte (Function)
@@ -805,6 +846,7 @@ Import table:
 	K2_SetTimer (Function)
 	SetIntPropertyByName (Function)
 	SetObjectPropertyByName (Function)
+	GetLocalPlayerSubsystem (Function)
 	CanActivateOnOthers (Function)
 	CanActivateOnSelf (Function)
 	IsFrontendCraftingEnabled (Function)
@@ -821,6 +863,7 @@ Import table:
 	EnterCursorMode (Function)
 	CanCraftSchematic (Function)
 	DestroyWorldItem (Function)
+	GetTotalItemQuantityByDefinition (Function)
 	IsSchematicPinned (Function)
 	SetSchematicPinned (Function)
 	HandleConsumeItemProgressChangedBP (Function)
@@ -833,7 +876,6 @@ Import table:
 	UpdateSchematicTiles (Function)
 	CancelInventoryPanelTileViewRefresh (Function)
 	CanItemBeMulched (Function)
-	CanRequestPopupMenuForSelectedItem (Function)
 	ConsumeItem (Function)
 	CraftItem (Function)
 	CycleSortType (Function)
@@ -843,10 +885,11 @@ Import table:
 	EquipItem (Function)
 	InspectItem (Function)
 	IsScreenWIFE (Function)
-	RequestPopupMenuForSelectedItem (Function)
 	ShowCustomFilterModal (Function)
 	TransferItem (Function)
 	HasTooltipStats (Function)
+	GetCachedWidget (Function)
+	GetUIManagerWidget (Function)
 	GetNumItems (Function)
 	OnInitialized (Function)
 	Create (Function)
@@ -880,6 +923,7 @@ Import table:
 	InventoryPanel (ObjectProperty)
 	Default__Overlay (Overlay)
 	Default__OverlaySlot (OverlaySlot)
+	/Game/Items/HomebaseNodes/QuestReward_RecycleCollection (Package)
 	/Game/UI/Foundation/Buttons/ButtonStyles/Tab/ButtonStyle-Tab-Secondary (Package)
 	/Game/UI/Foundation/Buttons/IconTextButton (Package)
 	/Game/UI/Foundation/Input/InputActionDataTable (Package)
@@ -892,6 +936,7 @@ Import table:
 	/Game/UI/Frontend/ItemManagement/CustomItemDetailsWidgets/MiscellaneousModeItemDetailsHostPanel (Package)
 	/Game/UI/Frontend/ItemManagement/CustomItemDetailsWidgets/StatsModeItemDetailsHostPanel (Package)
 	/Game/UI/Frontend/ItemManagement/DetailsPanel/ItemMulchMode/MulchConfirmationItem (Package)
+	/Game/UI/Frontend/ItemManagement/FortItemManagementViewPopup (Package)
 	/Game/UI/Frontend/ItemManagement/InventoryPanel/ItemManagementInventoryPanel (Package)
 	/Game/UI/Frontend/ItemManagement/ItemManagementScreen (Package)
 	/Game/UI/Frontend/XpBoosts/BoostsRoot (Package)
@@ -921,6 +966,7 @@ Import table:
 	Default__Spacer (Spacer)
 	Default__StatsModeItemDetailsHostPanel_C (StatsModeItemDetailsHostPanel_C)
 	Default__StructProperty (StructProperty)
+	Default__SubsystemBlueprintLibrary (SubsystemBlueprintLibrary)
 	Default__TextProperty (TextProperty)
 	Default__TextStyle-Base-XS-B_C (TextStyle-Base-XS-B_C)
 	Default__TextStyle-Base-XS_C (TextStyle-Base-XS_C)
@@ -936,6 +982,7 @@ Import table:
 	MiscellaneousModeItemDetailsHostPanel_C (WidgetBlueprintGeneratedClass)
 	StatsModeItemDetailsHostPanel_C (WidgetBlueprintGeneratedClass)
 	MulchConfirmationItem_C (WidgetBlueprintGeneratedClass)
+	FortItemManagementViewPopup_C (WidgetBlueprintGeneratedClass)
 	ItemManagementInventoryPanel_C (WidgetBlueprintGeneratedClass)
 	ItemManagementScreen_C (WidgetBlueprintGeneratedClass)
 	BoostsRoot_C (WidgetBlueprintGeneratedClass)
@@ -945,7 +992,7 @@ Import table:
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	ItemManagementDetailsModeBox_C (0-0-0-0): size 1443 (cls: ItemManagementDetailsModeBox_C>WidgetBlueprintGeneratedClass>/Script/UMG) :
+	ItemManagementDetailsModeBox_C (0-0-0-0): size 1479 (cls: ItemManagementDetailsModeBox_C>WidgetBlueprintGeneratedClass>/Script/UMG) :
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
@@ -1043,9 +1090,9 @@ Serialized exports:
 		Tag array:
 	HandleSort (0-0-0-0): size 74 (cls: HandleSort>Function>/Script/CoreUObject) :
 		Tag array:
-	CallFunc_IsSchematic_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsSchematic_ReturnValue>BoolProperty>/Script/CoreUObject) :
+	CallFunc_MulchQuestComplete_QuestComplete (0-0-0-0): size 34 (cls: CallFunc_MulchQuestComplete_QuestComplete>BoolProperty>/Script/CoreUObject) :
 		Tag array:
-	TrySetupInputHandling (0-0-0-0): size 1480 (cls: TrySetupInputHandling>Function>/Script/CoreUObject) :
+	TrySetupInputHandling (0-0-0-0): size 1578 (cls: TrySetupInputHandling>Function>/Script/CoreUObject) :
 		Tag array:
 	PassThrough (0-0-0-0): size 34 (cls: PassThrough>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1245,13 +1292,13 @@ Serialized exports:
 		Tag array:
 	HandleDestroy (0-0-0-0): size 69 (cls: HandleDestroy>Function>/Script/CoreUObject) :
 		Tag array:
-	K2Node_CreateDelegate_OutputDelegate (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate>DelegateProperty>/Script/CoreUObject) :
+	CallFunc_GetItemManagementViewPopup_AsFort_Item_Management_View_Popup (0-0-0-0): size 36 (cls: CallFunc_GetItemManagementViewPopup_AsFort_Item_Management_View_Popup>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	RegisterMore (0-0-0-0): size 162 (cls: RegisterMore>Function>/Script/CoreUObject) :
+	RegisterMore (0-0-0-0): size 383 (cls: RegisterMore>Function>/Script/CoreUObject) :
 		Tag array:
 	Pass Through (0-0-0-0): size 34 (cls: Pass Through>BoolProperty>/Script/CoreUObject) :
 		Tag array:
-	HandleMore (0-0-0-0): size 74 (cls: HandleMore>Function>/Script/CoreUObject) :
+	HandleMore (0-0-0-0): size 101 (cls: HandleMore>Function>/Script/CoreUObject) :
 		Tag array:
 	ReadOnly (0-0-0-0): size 34 (cls: ReadOnly>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1278,6 +1325,18 @@ Serialized exports:
 	StatsTabVisbility (0-0-0-0): size 40 (cls: StatsTabVisbility>EnumProperty>/Script/CoreUObject) :
 		Tag array:
 	GetStatsTabVisibility (0-0-0-0): size 216 (cls: GetStatsTabVisibility>Function>/Script/CoreUObject) :
+		Tag array:
+	QuestComplete (0-0-0-0): size 34 (cls: QuestComplete>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	MulchQuestComplete (0-0-0-0): size 159 (cls: MulchQuestComplete>Function>/Script/CoreUObject) :
+		Tag array:
+	AsFort Item Management View Popup (0-0-0-0): size 36 (cls: AsFort Item Management View Popup>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	GetItemManagementViewPopup (0-0-0-0): size 245 (cls: GetItemManagementViewPopup>Function>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_HasTooltipStats_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasTooltipStats_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1312,6 +1371,8 @@ Serialized exports:
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_GreaterEqual_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_GreaterEqual_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_AreProfilesAvailableToWIFE_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_AreProfilesAvailableToWIFE_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1457,7 +1518,19 @@ Serialized exports:
 		Tag array:
 	CallFunc_IsInZone_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsInZone_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
-	CallFunc_CanRequestPopupMenuForSelectedItem_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_CanRequestPopupMenuForSelectedItem_ReturnValue>BoolProperty>/Script/CoreUObject) :
+	CallFunc_BooleanAND_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_BooleanAND_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue1>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_IsInZone_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsInZone_ReturnValue>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_IsScreenWIFE_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsScreenWIFE_ReturnValue>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Not_PreBool_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Not_PreBool_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue1>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_NotEqual_ByteByte_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_NotEqual_ByteByte_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1501,7 +1574,11 @@ Serialized exports:
 		Tag array:
 	CallFunc_GetInputActions_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_GetInputActions_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_IsSchematic_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsSchematic_ReturnValue>BoolProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_MulchQuestComplete_QuestComplete1 (0-0-0-0): size 34 (cls: CallFunc_MulchQuestComplete_QuestComplete1>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	K2Node_SwitchEnum1_CmpSuccess (0-0-0-0): size 34 (cls: K2Node_SwitchEnum1_CmpSuccess>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1667,6 +1744,8 @@ Serialized exports:
 	K2Node_CreateDelegate_OutputDelegate1 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate1>DelegateProperty>/Script/CoreUObject) :
 		Tag array:
 	K2Node_CreateDelegate_OutputDelegate2 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate2>DelegateProperty>/Script/CoreUObject) :
+		Tag array:
+	K2Node_CreateDelegate_OutputDelegate (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate>DelegateProperty>/Script/CoreUObject) :
 		Tag array:
 	K2Node_CreateDelegate_OutputDelegate (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate>DelegateProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1886,6 +1965,8 @@ Serialized exports:
 		Tag array:
 	K2Node_ComponentBoundEvent_ActiveWidgetIndex (0-0-0-0): size 32 (cls: K2Node_ComponentBoundEvent_ActiveWidgetIndex>IntProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_GetTotalItemQuantityByDefinition_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetTotalItemQuantityByDefinition_ReturnValue>IntProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_GetMaxTransferCount_Count (0-0-0-0): size 32 (cls: CallFunc_GetMaxTransferCount_Count>IntProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_GetNumItems_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetNumItems_ReturnValue>IntProperty>/Script/CoreUObject) :
@@ -1960,6 +2041,12 @@ Serialized exports:
 		Tag array:
 	K2Node_DynamicCast_AsItem_Management_Screen (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsItem_Management_Screen>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_GetCachedWidget_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetCachedWidget_ReturnValue>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_GetUIManagerWidget_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetUIManagerWidget_ReturnValue>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	K2Node_DynamicCast_AsFort_Item_Management_View_Popup (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Item_Management_View_Popup>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	K2Node_DynamicCast_AsItem_Management_Screen (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsItem_Management_Screen>ObjectProperty>/Script/CoreUObject) :
@@ -1996,7 +2083,11 @@ Serialized exports:
 		Tag array:
 	K2Node_DynamicCast_AsFort_Player_Controller_Deployable_Base (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Player_Controller_Deployable_Base>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
+	ItemManagementViewPopup (0-0-0-0): size 36 (cls: ItemManagementViewPopup>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
 	ItemSelected (0-0-0-0): size 36 (cls: ItemSelected>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	NoSelectionDetailsBox (0-0-0-0): size 36 (cls: NoSelectionDetailsBox>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
@@ -2033,6 +2124,8 @@ Serialized exports:
 	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	K2Node_DynamicCast_AsItem_Management_Screen (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsItem_Management_Screen>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_GetLocalPlayerSubsystem_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetLocalPlayerSubsystem_ReturnValue>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject) :
 		Tag array:

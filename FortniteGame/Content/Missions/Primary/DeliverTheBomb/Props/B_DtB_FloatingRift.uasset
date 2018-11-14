@@ -33,6 +33,7 @@ Name table:
 	Activate
 	Activities.ObjectiveHandle.Num.01
 	Actor
+	ActorComponentTickFunction
 	AIPawnAbilitySystemComponent
 	AllNodes
 	AmbientClose_small
@@ -86,6 +87,7 @@ Name table:
 	bOverrideAttenuation
 	BoxComponent
 	BoxExtent
+	bStartWithTickEnabled
 	BuildingActorSpecification
 	BuildingGameplayActor
 	BuildingGameplayActorAbilityDeliveryBucket
@@ -386,6 +388,7 @@ Name table:
 	PostProcessSettings
 	PostProcessVolume
 	PostProcessVolume_GEN_VARIABLE
+	PrimaryComponentTick
 	PrimitiveComponent
 	PropertyName
 	PropertyScope
@@ -581,6 +584,7 @@ Import table:
 	LinearColor (ScriptStruct)
 	Rotator (ScriptStruct)
 	Vector (ScriptStruct)
+	ActorComponentTickFunction (ScriptStruct)
 	BodyInstance (ScriptStruct)
 	CollisionResponse (ScriptStruct)
 	HitResult (ScriptStruct)
@@ -918,24 +922,28 @@ Serialized exports:
 		Tag array:
 	StaticMesh2 (0-0-0-0): size 36 (cls: StaticMesh2>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	CampSlime_GEN_VARIABLE (0-0-0-0): size 128 (cls: CampSlime_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	CampSlime_GEN_VARIABLE (0-0-0-0): size 211 (cls: CampSlime_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_DtBCampSlime=/Game/Missions/Primary/DeliverTheBomb/Particles/P_DtBCampSlime 
 			RelativeLocation(StructProperty)=Vector(0,0,200) 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
-	P_DtBRiftCoreFloating_GEN_VARIABLE (0-0-0-0): size 102 (cls: P_DtBRiftCoreFloating_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	P_DtBRiftCoreFloating_GEN_VARIABLE (0-0-0-0): size 185 (cls: P_DtBRiftCoreFloating_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_DtBRiftCoreFloating=/Game/Missions/Primary/DeliverTheBomb/Particles/P_DtBRiftCoreFloating 
 			RelativeLocation(StructProperty)=Vector(0,-33.31372,1800) 
-	P_Rift_Arcs_GEN_VARIABLE (0-0-0-0): size 67 (cls: P_Rift_Arcs_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
+	P_Rift_Arcs_GEN_VARIABLE (0-0-0-0): size 150 (cls: P_Rift_Arcs_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_Rift_Arcs_DtB=/Game/Missions/Primary/DeliverTheBomb/Particles/P_Rift_Arcs_DtB 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
-	P_StormFog_GEN_VARIABLE (0-0-0-0): size 163 (cls: P_StormFog_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	P_StormFog_GEN_VARIABLE (0-0-0-0): size 246 (cls: P_StormFog_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_StormChestFog=/Game/Missions/Secondary/Gauntlet/Props/P_StormChestFog 
 			RelativeLocation(StructProperty)=Vector(0,0,20) 
 			RelativeScale3D(StructProperty)=Vector(1.7,1.7,1.7) 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 	PostProcess_GEN_VARIABLE (0-0-0-0): size 390 (cls: PostProcess_GEN_VARIABLE>PostProcessComponent>/Script/Engine) :
 		Tag array:
 			Settings(StructProperty)=System.Byte[] 
@@ -1001,7 +1009,7 @@ Serialized exports:
 			CookedComponentInstancingData(StructProperty)=System.Byte[] 
 			VariableGuid(StructProperty)=Guid: 884981525-1217522306-1968071844-2881254337 
 			InternalVariableName(NameProperty)=AmbientClose_small 
-	SCS_Node_16 (0-0-0-0): size 1030 (cls: SCS_Node_16>SCS_Node>/Script/Engine) :
+	SCS_Node_16 (0-0-0-0): size 1228 (cls: SCS_Node_16>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=P_StormFog_GEN_VARIABLE=B_DtB_FloatingRift_C 
@@ -1030,7 +1038,7 @@ Serialized exports:
 			CookedComponentInstancingData(StructProperty)=System.Byte[] 
 			VariableGuid(StructProperty)=Guid: 2715782090-1311153744-3178322316-2548600499 
 			InternalVariableName(NameProperty)=StaticMesh 
-	SCS_Node_2 (0-0-0-0): size 733 (cls: SCS_Node_2>SCS_Node>/Script/Engine) :
+	SCS_Node_2 (0-0-0-0): size 931 (cls: SCS_Node_2>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=P_DtBRiftCoreFloating_GEN_VARIABLE=B_DtB_FloatingRift_C 
@@ -1122,7 +1130,7 @@ Serialized exports:
 			CookedComponentInstancingData(StructProperty)=System.Byte[] 
 			VariableGuid(StructProperty)=Guid: 1496829989-1191366760-1479421334-2586047147 
 			InternalVariableName(NameProperty)=PostProcess 
-	SCS_Node_5 (0-0-0-0): size 733 (cls: SCS_Node_5>SCS_Node>/Script/Engine) :
+	SCS_Node_5 (0-0-0-0): size 931 (cls: SCS_Node_5>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=CampSlime_GEN_VARIABLE=B_DtB_FloatingRift_C 
@@ -1150,7 +1158,7 @@ Serialized exports:
 			CookedComponentInstancingData(StructProperty)=System.Byte[] 
 			VariableGuid(StructProperty)=Guid: 3481864763-1079769757-1309177738-2941408224 
 			InternalVariableName(NameProperty)=RiftArcTriggerVolume 
-	SCS_Node_9 (0-0-0-0): size 535 (cls: SCS_Node_9>SCS_Node>/Script/Engine) :
+	SCS_Node_9 (0-0-0-0): size 733 (cls: SCS_Node_9>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=P_Rift_Arcs_GEN_VARIABLE=B_DtB_FloatingRift_C 

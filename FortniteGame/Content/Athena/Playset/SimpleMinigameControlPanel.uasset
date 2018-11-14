@@ -12,11 +12,13 @@ Name table:
 	AbortMinigame
 	Active Color
 	Actor
+	ActorComponentTickFunction
 	Alarm Clock
 	Alarm Clock_GEN_VARIABLE
 	AllNodes
 	Ambient Light
 	Ambient Light_GEN_VARIABLE
+	Array_Contains
 	ArrayProperty
 	AttachedToBuilding
 	AttachParent
@@ -44,12 +46,16 @@ Name table:
 	BodyInstance
 	BoolProperty
 	BoxComponent
+	bStartWithTickEnabled
 	BuildingActor
 	BuildingSMActor
 	BuildingTrapFloor
 	ByteProperty
+	CallFunc_Array_Contains_ReturnValue
 	CallFunc_Conv_LinearColorToVector_ReturnValue
 	CallFunc_GetMinigameState_ReturnValue
+	CallFunc_GetPlayerStatesInMinigame_PlayerStates
+	CallFunc_GetPlayerStatesInMinigame_ReturnValue
 	CallFunc_IsDedicatedServer_ReturnValue
 	CallFunc_IsDedicatedServer_ReturnValue1
 	CallFunc_IsDedicatedServer_ReturnValue2
@@ -78,6 +84,7 @@ Name table:
 	Conv_LinearColorToVector
 	Current State
 	Custom
+	Default__ArrayProperty
 	Default__BlueprintGeneratedClass
 	Default__BoolProperty
 	Default__BuildingTrapFloor
@@ -85,6 +92,7 @@ Name table:
 	Default__FortMinigameLogicComponent
 	Default__Function
 	Default__IntProperty
+	Default__KismetArrayLibrary
 	Default__KismetSystemLibrary
 	Default__NameProperty
 	Default__ObjectProperty
@@ -126,6 +134,7 @@ Name table:
 	FortMinigameLogicComponent
 	FortMinigameState
 	FortPawn
+	FortPlayerState
 	FortPlayspace
 	Function
 	FunctionNameToBind
@@ -134,6 +143,7 @@ Name table:
 	GameplayTagContainer
 	GetCurrentMinigameState
 	GetMinigameState
+	GetPlayerStatesInMinigame
 	Glow Color Inner
 	God Beam
 	God Beam_GEN_VARIABLE
@@ -149,10 +159,13 @@ Name table:
 	IsMinigameInProgress
 	IsValid
 	K2Node_ComponentBoundEvent_bInEditMode
+	K2Node_DynamicCast_AsFort_Player_State
+	K2Node_DynamicCast_bSuccess
 	K2Node_Event_AttachedToBuilding
 	K2Node_Event_bBeingDestroyed
 	K2Node_Event_InteractingPawn
 	K2Node_Select_Default
+	KismetArrayLibrary
 	KismetMathLibrary
 	KismetSystemLibrary
 	LightColor
@@ -181,9 +194,11 @@ Name table:
 	ParticleSystem
 	ParticleSystemComponent
 	Pawn
+	PlayerState
 	Playspace
 	PointerToUberGraphFrame
 	PointLightComponent
+	PrimaryComponentTick
 	ReadyToStartMinigame
 	RelativeLocation
 	RelativeScale3D
@@ -225,9 +240,11 @@ Name table:
 	WorldDynamic
 	WorldStatic
 Import table:
+	Default__ArrayProperty (ArrayProperty)
 	Default__BlueprintGeneratedClass (BlueprintGeneratedClass)
 	Default__BoolProperty (BoolProperty)
 	Default__BuildingTrapFloor (BuildingTrapFloor)
+	ArrayProperty (Class)
 	BoolProperty (Class)
 	Function (Class)
 	IntProperty (Class)
@@ -240,10 +257,12 @@ Import table:
 	BlueprintGeneratedClass (Class)
 	BoxComponent (Class)
 	ComponentDelegateBinding (Class)
+	KismetArrayLibrary (Class)
 	KismetMathLibrary (Class)
 	KismetSystemLibrary (Class)
 	MeshComponent (Class)
 	ParticleSystemComponent (Class)
+	Pawn (Class)
 	PointLightComponent (Class)
 	SceneComponent (Class)
 	SCS_Node (Class)
@@ -255,11 +274,13 @@ Import table:
 	FortMinigameLogicComponent (Class)
 	FortMinigameState (Class)
 	FortPawn (Class)
+	FortPlayerState (Class)
 	FortPlayspace (Class)
 	Default__ComponentDelegateBinding (ComponentDelegateBinding)
 	Default__FortMinigameLogicComponent (FortMinigameLogicComponent)
 	Default__Function (Function)
 	UserConstructionScript (Function)
+	Array_Contains (Function)
 	Conv_LinearColorToVector (Function)
 	IsDedicatedServer (Function)
 	IsValid (Function)
@@ -270,12 +291,15 @@ Import table:
 	BlueprintOnInteract (Function)
 	OnDetachFromBuilding (Function)
 	GetMinigameState (Function)
+	GetPlayerStatesInMinigame (Function)
 	DestroyPlayspace (Function)
 	Default__IntProperty (IntProperty)
+	Default__KismetArrayLibrary (KismetArrayLibrary)
 	Default__KismetSystemLibrary (KismetSystemLibrary)
 	M_AlarmClock_Inst1 (MaterialInstanceConstant)
 	Default__NameProperty (NameProperty)
 	Default__ObjectProperty (ObjectProperty)
+	PlayerState (ObjectProperty)
 	AuthorityMinigameMode (ObjectProperty)
 	MinigameState (ObjectProperty)
 	Playspace (ObjectProperty)
@@ -333,7 +357,7 @@ Serialized exports:
 		Tag array:
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject) :
 		Tag array:
-	ExecuteUbergraph_SimpleMinigameControlPanel (0-0-0-0): size 874 (cls: ExecuteUbergraph_SimpleMinigameControlPanel>Function>/Script/CoreUObject) :
+	ExecuteUbergraph_SimpleMinigameControlPanel (0-0-0-0): size 864 (cls: ExecuteUbergraph_SimpleMinigameControlPanel>Function>/Script/CoreUObject) :
 		Tag array:
 	AttachedToBuilding (0-0-0-0): size 36 (cls: AttachedToBuilding>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
@@ -355,15 +379,37 @@ Serialized exports:
 		Tag array:
 	InteractingPawn (0-0-0-0): size 36 (cls: InteractingPawn>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	BlueprintCanInteract (0-0-0-0): size 115 (cls: BlueprintCanInteract>Function>/Script/CoreUObject) :
+	BlueprintCanInteract (0-0-0-0): size 388 (cls: BlueprintCanInteract>Function>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_GetPlayerStatesInMinigame_PlayerStates (0-0-0-0): size 36 (cls: CallFunc_GetPlayerStatesInMinigame_PlayerStates>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_GetPlayerStatesInMinigame_PlayerStates (0-0-0-0): size 36 (cls: CallFunc_GetPlayerStatesInMinigame_PlayerStates>ArrayProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Array_Contains_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Array_Contains_ReturnValue>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_GetPlayerStatesInMinigame_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_GetPlayerStatesInMinigame_ReturnValue>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_IsMinigameInProgress_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsMinigameInProgress_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	ReturnValue (0-0-0-0): size 34 (cls: ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	InteractingPawn (0-0-0-0): size 36 (cls: InteractingPawn>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	BlueprintGetInteractionString (0-0-0-0): size 373 (cls: BlueprintGetInteractionString>Function>/Script/CoreUObject) :
+		Tag array:
+	Current State (0-0-0-0): size 32 (cls: Current State>NameProperty>/Script/CoreUObject) :
+		Tag array:
+	GetCurrentMinigameState (0-0-0-0): size 193 (cls: GetCurrentMinigameState>Function>/Script/CoreUObject) :
+		Tag array:
+	InteractingPawn (0-0-0-0): size 36 (cls: InteractingPawn>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	BlueprintGetFailedInteractionString (0-0-0-0): size 279 (cls: BlueprintGetFailedInteractionString>Function>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_IsMinigameInProgress_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsMinigameInProgress_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -393,10 +439,6 @@ Serialized exports:
 		Tag array:
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject) :
 		Tag array:
-	Current State (0-0-0-0): size 32 (cls: Current State>NameProperty>/Script/CoreUObject) :
-		Tag array:
-	GetCurrentMinigameState (0-0-0-0): size 193 (cls: GetCurrentMinigameState>Function>/Script/CoreUObject) :
-		Tag array:
 	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	bBeingDestroyed (0-0-0-0): size 34 (cls: bBeingDestroyed>BoolProperty>/Script/CoreUObject) :
@@ -407,12 +449,6 @@ Serialized exports:
 	FortMinigameLogic_GEN_VARIABLE (0-0-0-0): size 73 (cls: FortMinigameLogic_GEN_VARIABLE>FortMinigameLogicComponent>/Script/FortniteGame) :
 		Tag array:
 			MinigameTags(StructProperty)=GameplayTagContainer:Minigame.RaceStart 
-	ReturnValue (0-0-0-0): size 32 (cls: ReturnValue>TextProperty>/Script/CoreUObject) :
-		Tag array:
-	InteractingPawn (0-0-0-0): size 36 (cls: InteractingPawn>ObjectProperty>/Script/CoreUObject) :
-		Tag array:
-	BlueprintGetFailedInteractionString (0-0-0-0): size 120 (cls: BlueprintGetFailedInteractionString>Function>/Script/CoreUObject) :
-		Tag array:
 	Alarm Clock (0-0-0-0): size 36 (cls: Alarm Clock>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_Conv_LinearColorToVector_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_Conv_LinearColorToVector_ReturnValue>StructProperty>/Script/CoreUObject) :
@@ -422,6 +458,8 @@ Serialized exports:
 	Set Clock Color (0-0-0-0): size 106 (cls: Set Clock Color>Function>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_GetMinigameState_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetMinigameState_ReturnValue>NameProperty>/Script/CoreUObject) :
+		Tag array:
+	K2Node_DynamicCast_AsFort_Player_State (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Player_State>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	K2Node_Event_AttachedToBuilding (0-0-0-0): size 36 (cls: K2Node_Event_AttachedToBuilding>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
@@ -433,11 +471,12 @@ Serialized exports:
 		Tag array:
 	Interaction Cylinder (0-0-0-0): size 36 (cls: Interaction Cylinder>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	God Beam_GEN_VARIABLE (0-0-0-0): size 163 (cls: God Beam_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	God Beam_GEN_VARIABLE (0-0-0-0): size 246 (cls: God Beam_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_TimedChallenge_InWorldLocation=/Game/Athena/Effects/Particles/TimedChallenge/P_TimedChallenge_InWorldLocation 
 			RelativeLocation(StructProperty)=Vector(0,256,103) 
 			RelativeScale3D(StructProperty)=Vector(0.5,0.5,0.5) 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 	Ambient Light_GEN_VARIABLE (0-0-0-0): size 220 (cls: Ambient Light_GEN_VARIABLE>PointLightComponent>/Script/Engine) :
 		Tag array:
 			LightGuid(StructProperty)=Guid: 4276504492-1191141127-1366990483-2643079014 
@@ -536,6 +575,8 @@ Serialized exports:
 	K2Node_Select_Default (0-0-0-0): size 36 (cls: K2Node_Select_Default>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	Inacctive Color (0-0-0-0): size 36 (cls: Inacctive Color>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	ReturnValue (0-0-0-0): size 32 (cls: ReturnValue>TextProperty>/Script/CoreUObject) :
 		Tag array:
 	ReturnValue (0-0-0-0): size 32 (cls: ReturnValue>TextProperty>/Script/CoreUObject) :
 		Tag array:

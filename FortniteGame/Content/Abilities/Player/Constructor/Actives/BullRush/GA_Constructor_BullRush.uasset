@@ -13,6 +13,7 @@ Name table:
 	/Game/Abilities/Player/Constructor/Perks/RiotShield/GE_Constructor_RiotShieldDamage
 	/Game/Abilities/Player/Ninja/TacticalPerks/BloodyBull/GE_Ninja_Tactical_BloodyBull_Applied
 	/Game/Abilities/Player/Parents/GAT_ActiveAbility
+	/Game/Abilities/Player/Parents/GAT_ActiveAbility_Hero
 	/Game/Abilities/Player/Parents/GAT_ConstructorActiveAbility
 	/Game/Abilities/Player/Pawns/PlayerPawn_Constructor
 	/Game/Animation/Game/MainPlayer/Combat/Gadgets/Large/BullRush/BullCharge_CLM_Montage
@@ -60,6 +61,7 @@ Name table:
 	Abilities.Outlander.ChinaShop
 	Ability.Constructor.BullRush
 	Ability.Constructor.BullRush.Cost
+	Ability.Constructor.BullRush.Distance
 	Ability.DamageSource.Melee
 	Ability_BullsRush_ShieldImpact_Cue
 	Ability_BullsRush_ShieldPush_Cue
@@ -244,6 +246,7 @@ Name table:
 	CallFunc_BreakVector_Z1
 	CallFunc_BreakVector_Z2
 	CallFunc_BreakVector_Z3
+	CallFunc_CommitAbilityWithEvent_Passed
 	CallFunc_Contains_ReturnValue
 	CallFunc_Conv_RotatorToVector_ReturnValue
 	CallFunc_Conv_VectorToRotator_ReturnValue
@@ -273,6 +276,9 @@ Name table:
 	CallFunc_GetScaledCapsuleHalfHeight_ReturnValue
 	CallFunc_GetTeamAffiliation_ReturnValue
 	CallFunc_GetTimeSeconds_ReturnValue
+	CallFunc_GetValueAtLevel_ReturnValue
+	CallFunc_GetValueAtLevel_ReturnValue1
+	CallFunc_GetValueAtLevel_ReturnValue2
 	CallFunc_GetWorldDeltaSeconds_ReturnValue
 	CallFunc_Greater_FloatFloat_ReturnValue
 	CallFunc_Greater_IntInt_ReturnValue
@@ -403,6 +409,7 @@ Name table:
 	CloseWall
 	CollisionCylinder
 	CombatEffects_HeroAbilities
+	CommitAbilityWithEvent
 	Completed
 	Completed_58E7CF8B45CF32A479A6C5AF0380A969
 	Completed_763E234D46424B8B9BF854AD480CB4DE
@@ -456,10 +463,12 @@ Name table:
 	Default__FloatProperty
 	Default__FortAbilityTask_PlayMontageWaitTarget
 	Default__FortKismetLibrary
+	Default__FortScalableFloatUtils
 	Default__Function
 	Default__GA_Constructor_BullRush_C
 	Default__GameplayStatics
 	Default__GAT_ActiveAbility_C
+	Default__GAT_ActiveAbility_Hero_C
 	Default__GAT_ConstructorActiveAbility_C
 	Default__GE_Constructor_BullRush_ChinaShop_C
 	Default__GE_Constructor_BullRushCooldown_C
@@ -484,6 +493,7 @@ Name table:
 	Default__StructProperty
 	Default__TakerPawn_C
 	Default__TT_Constructor_BullRush_C
+	Default_Distance
 	DefaultDistance
 	Degraded
 	Delay
@@ -579,6 +589,7 @@ Name table:
 	FortPlayerPawn
 	FortPlayerStateZone
 	FortPooledSkelMeshComponent
+	FortScalableFloatUtils
 	FortStaticMeshActor
 	FortTargetFilter
 	Function
@@ -606,6 +617,7 @@ Name table:
 	GameplayTagsK2Node_SwitchGameplayTag_CmpSuccess
 	GameplayTask
 	GAT_ActiveAbility_C
+	GAT_ActiveAbility_Hero_C
 	GAT_ConstructorActiveAbility_C
 	GE_AppliedDamage
 	GE_BloodyBullDamage
@@ -644,7 +656,10 @@ Name table:
 	GetScaledCapsuleHalfHeight
 	GetTeamAffiliation
 	GetTimeSeconds
+	GetValueAtLevel
 	GetWorldDeltaSeconds
+	Granted.Perk.LongRush.T01
+	Granted.Perk.LongRush.T02
 	Greater_FloatFloat
 	Greater_IntInt
 	GreaterEqual_FloatFloat
@@ -657,7 +672,6 @@ Name table:
 	HasCharm
 	HasMatchingGameplayTag
 	HasShieldCharacterPiece
-	HeroLoadoutSystem
 	HideFor
 	HideToggledDecoTools
 	HighOffGround
@@ -820,6 +834,7 @@ Name table:
 	K2Node_Event_bWasCancelled
 	K2Node_MakeArray_Array
 	K2Node_MakeStruct_GameplayEventData
+	K2Node_Select1_Default
 	K2Node_Select_Default
 	K2Node_SwitchEnum1_CmpSuccess
 	K2Node_SwitchEnum_CmpSuccess
@@ -839,6 +854,9 @@ Name table:
 	List
 	LocalOverlap
 	LongRush
+	LongRush_Distance_T01
+	LongRush_Distance_T02
+	LongRush_T02
 	LowAmmo
 	M_Bull_Rush_Med_F
 	M_Bull_Rush_Med_M
@@ -913,6 +931,8 @@ Name table:
 	PawnMovementComponent
 	PawnReference
 	Payload
+	Perk.LongRush.T01.Distance
+	Perk.LongRush.T02.Distance
 	PhysicalMaterial
 	PitchInputScale
 	PlayerController
@@ -1009,11 +1029,14 @@ Name table:
 	TC_ChinaShop
 	TC_EmergencyOverride
 	TC_LongRush
+	TC_LongRush_T01
+	TC_LongRush_T02
 	TC_RiotShield
 	TC_StopSmasherCharge
 	Temp_bool_Has_Been_Initd_Variable
 	Temp_bool_IsClosed_Variable
 	Temp_bool_Variable
+	Temp_bool_Variable1
 	Temp_int_Array_Index_Variable
 	Temp_int_Loop_Counter_Variable
 	Temp_object_Variable
@@ -1055,6 +1078,7 @@ Name table:
 	UnbindShieldOverlaps
 	UnderlyingType
 	UpgradeDistance
+	UseHeroLoadoutSystem
 	UserDefinedEnum
 	Value
 	Vector
@@ -1114,6 +1138,7 @@ Import table:
 	GE_Constructor_RiotShieldDamage_C (BlueprintGeneratedClass)
 	GE_Ninja_Tactical_BloodyBull_Applied_C (BlueprintGeneratedClass)
 	GAT_ActiveAbility_C (BlueprintGeneratedClass)
+	GAT_ActiveAbility_Hero_C (BlueprintGeneratedClass)
 	GAT_ConstructorActiveAbility_C (BlueprintGeneratedClass)
 	PlayerPawn_Constructor_C (BlueprintGeneratedClass)
 	EnemyPawn_Interface_C (BlueprintGeneratedClass)
@@ -1122,6 +1147,7 @@ Import table:
 	AbilityDecoTool_AirStrike_C (BlueprintGeneratedClass)
 	AbilityDecoTool_SupplyDrop_C (BlueprintGeneratedClass)
 	Default__BlueprintGeneratedClass (BlueprintGeneratedClass)
+	UseHeroLoadoutSystem (BoolProperty)
 	Default__BoolProperty (BoolProperty)
 	BullRushPoke_GEN_VARIABLE (BoxComponent)
 	ShieldCollider_GEN_VARIABLE (BoxComponent)
@@ -1188,6 +1214,7 @@ Import table:
 	FortPlayerController (Class)
 	FortPlayerPawn (Class)
 	FortPlayerStateZone (Class)
+	FortScalableFloatUtils (Class)
 	FortStaticMeshActor (Class)
 	AbilitySystemBlueprintLibrary (Class)
 	AbilitySystemComponent (Class)
@@ -1227,6 +1254,7 @@ Import table:
 	CharMoveComp (FortMovementComp_Character)
 	CharacterMesh0 (FortPooledSkelMeshComponent)
 	CharacterMesh0 (FortPooledSkelMeshComponent)
+	Default__FortScalableFloatUtils (FortScalableFloatUtils)
 	ActiveAbilitySetup (Function)
 	K2_ActivateAbility (Function)
 	Default__Function (Function)
@@ -1308,6 +1336,7 @@ Import table:
 	SetInputYawScale (Function)
 	GetCharacterBodyType (Function)
 	GetGender (Function)
+	GetValueAtLevel (Function)
 	AbilityTargetDataFromActor (Function)
 	AssignSetByCallerMagnitude (Function)
 	GetAbilitySystemComponent (Function)
@@ -1326,6 +1355,7 @@ Import table:
 	ReadyForActivation (Function)
 	Default__GameplayStatics (GameplayStatics)
 	Default__GAT_ActiveAbility_C (GAT_ActiveAbility_C)
+	Default__GAT_ActiveAbility_Hero_C (GAT_ActiveAbility_Hero_C)
 	Default__GAT_ConstructorActiveAbility_C (GAT_ConstructorActiveAbility_C)
 	Default__GE_Constructor_BullRush_ChinaShop_C (GE_Constructor_BullRush_ChinaShop_C)
 	Default__GE_Constructor_BullRushCooldown_C (GE_Constructor_BullRushCooldown_C)
@@ -1375,6 +1405,7 @@ Import table:
 	/Game/Abilities/Player/Constructor/Perks/RiotShield/GE_Constructor_RiotShieldDamage (Package)
 	/Game/Abilities/Player/Ninja/TacticalPerks/BloodyBull/GE_Ninja_Tactical_BloodyBull_Applied (Package)
 	/Game/Abilities/Player/Parents/GAT_ActiveAbility (Package)
+	/Game/Abilities/Player/Parents/GAT_ActiveAbility_Hero (Package)
 	/Game/Abilities/Player/Parents/GAT_ConstructorActiveAbility (Package)
 	/Game/Abilities/Player/Pawns/PlayerPawn_Constructor (Package)
 	/Game/Animation/Game/MainPlayer/Combat/Gadgets/Large/BullRush/BullCharge_CLM_Montage (Package)
@@ -1437,6 +1468,7 @@ Import table:
 	GameplayEffectContextHandle (ScriptStruct)
 	GameplayEffectSpecHandle (ScriptStruct)
 	GameplayEventData (ScriptStruct)
+	ScalableFloat (ScriptStruct)
 	GameplayTag (ScriptStruct)
 	GameplayTagContainer (ScriptStruct)
 	Default__ShieldHitGround_CameraShake_C (ShieldHitGround_CameraShake_C)
@@ -1470,11 +1502,11 @@ Import table:
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	GA_Constructor_BullRush_C (0-0-0-0): size 1650 (cls: GA_Constructor_BullRush_C>BlueprintGeneratedClass>/Script/Engine) :
+	GA_Constructor_BullRush_C (0-0-0-0): size 1670 (cls: GA_Constructor_BullRush_C>BlueprintGeneratedClass>/Script/Engine) :
 		Tag array:
 			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=GA_Constructor_BullRush_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_GA_Constructor_BullRush=GA_Constructor_BullRush_C 
-	Default__GA_Constructor_BullRush_C (0-0-0-0): size 5827 (cls: Default__GA_Constructor_BullRush_C>GA_Constructor_BullRush_C) :
+	Default__GA_Constructor_BullRush_C (0-0-0-0): size 6564 (cls: Default__GA_Constructor_BullRush_C>GA_Constructor_BullRush_C) :
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			Event Activate(StructProperty)=System.Byte[] 
@@ -1528,6 +1560,11 @@ Serialized exports:
 			M_Bull_Rush_Med_F(ObjectProperty)=BullCharge_CMF_M=/Game/Animation/Game/MainPlayer/Combat/Gadgets/Medium/Female/BullRush/BullCharge_CMF_M 
 			T_Event_Deactivate(StructProperty)=System.Byte[] 
 			T_Event_Activate(StructProperty)=System.Byte[] 
+			Default_Distance(StructProperty)=System.Byte[] 
+			LongRush_Distance_T01(StructProperty)=System.Byte[] 
+			TC_LongRush_T02(StructProperty)=GameplayTagContainer:Granted.Perk.LongRush.T02 
+			TC_LongRush_T01(StructProperty)=GameplayTagContainer:Granted.Perk.LongRush.T01 
+			LongRush_Distance_T02(StructProperty)=System.Byte[] 
 			EffectContainers(StructProperty)=System.Byte[] 
 			DamageStatHandle(StructProperty)=System.Byte[] 
 			AbilityCosts(ArrayProperty)=[object] (inner: StructProperty)
@@ -1540,7 +1577,7 @@ Serialized exports:
 		Tag array:
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject) :
 		Tag array:
-	ExecuteUbergraph_GA_Constructor_BullRush (0-0-0-0): size 9490 (cls: ExecuteUbergraph_GA_Constructor_BullRush>Function>/Script/CoreUObject) :
+	ExecuteUbergraph_GA_Constructor_BullRush (0-0-0-0): size 9540 (cls: ExecuteUbergraph_GA_Constructor_BullRush>Function>/Script/CoreUObject) :
 		Tag array:
 	LocalOverlap (0-0-0-0): size 36 (cls: LocalOverlap>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1886,7 +1923,7 @@ Serialized exports:
 		Tag array:
 	AbilitySystemIn (0-0-0-0): size 36 (cls: AbilitySystemIn>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	ActiveAbilitySetup (0-0-0-0): size 586 (cls: ActiveAbilitySetup>Function>/Script/CoreUObject) :
+	ActiveAbilitySetup (0-0-0-0): size 868 (cls: ActiveAbilitySetup>Function>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_HasAllMatchingGameplayTags_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasAllMatchingGameplayTags_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1899,6 +1936,8 @@ Serialized exports:
 	CallFunc_HasAllMatchingGameplayTags_ReturnValue4 (0-0-0-0): size 34 (cls: CallFunc_HasAllMatchingGameplayTags_ReturnValue4>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	Temp_bool_Variable1 (0-0-0-0): size 34 (cls: Temp_bool_Variable1>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1971,6 +2010,8 @@ Serialized exports:
 	CallFunc_BreakHitResult_bInitialOverlap (0-0-0-0): size 34 (cls: CallFunc_BreakHitResult_bInitialOverlap>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_BreakHitResult_bInitialOverlap1 (0-0-0-0): size 34 (cls: CallFunc_BreakHitResult_bInitialOverlap1>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_CommitAbilityWithEvent_Passed (0-0-0-0): size 34 (cls: CallFunc_CommitAbilityWithEvent_Passed>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_Greater_FloatFloat_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Greater_FloatFloat_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -2116,8 +2157,6 @@ Serialized exports:
 		Tag array:
 	CallFunc_Less_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
-	HeroLoadoutSystem (0-0-0-0): size 34 (cls: HeroLoadoutSystem>BoolProperty>/Script/CoreUObject) :
-		Tag array:
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	K2Node_DynamicCast_bSuccess1 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess1>BoolProperty>/Script/CoreUObject) :
@@ -2159,6 +2198,8 @@ Serialized exports:
 	CallFunc_K2_SetActorRotation_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_K2_SetActorRotation_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	LongRush (0-0-0-0): size 34 (cls: LongRush>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	LongRush_T02 (0-0-0-0): size 34 (cls: LongRush_T02>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_HasAllMatchingGameplayTags_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasAllMatchingGameplayTags_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -2324,7 +2365,19 @@ Serialized exports:
 		Tag array:
 	CallFunc_Subtract_FloatFloat_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Subtract_FloatFloat_ReturnValue1>FloatProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_Add_FloatFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Add_FloatFloat_ReturnValue>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Add_FloatFloat_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Add_FloatFloat_ReturnValue1>FloatProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_Divide_FloatFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Divide_FloatFloat_ReturnValue>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_GetValueAtLevel_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetValueAtLevel_ReturnValue>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_GetValueAtLevel_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_GetValueAtLevel_ReturnValue1>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_GetValueAtLevel_ReturnValue2 (0-0-0-0): size 32 (cls: CallFunc_GetValueAtLevel_ReturnValue2>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	K2Node_Select1_Default (0-0-0-0): size 32 (cls: K2Node_Select1_Default>FloatProperty>/Script/CoreUObject) :
 		Tag array:
 	K2Node_Select_Default (0-0-0-0): size 32 (cls: K2Node_Select_Default>FloatProperty>/Script/CoreUObject) :
 		Tag array:
@@ -2820,6 +2873,8 @@ Serialized exports:
 		Tag array:
 	DashStartLocation (0-0-0-0): size 36 (cls: DashStartLocation>StructProperty>/Script/CoreUObject) :
 		Tag array:
+	Default_Distance (0-0-0-0): size 36 (cls: Default_Distance>StructProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_K2_GetActorLocation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_GetActorLocation_ReturnValue>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_MakeLiteralGameplayTagContainer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_MakeLiteralGameplayTagContainer_ReturnValue>StructProperty>/Script/CoreUObject) :
@@ -3050,6 +3105,10 @@ Serialized exports:
 		Tag array:
 	CallFunc_MakeVector_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_MakeVector_ReturnValue>StructProperty>/Script/CoreUObject) :
 		Tag array:
+	LongRush_Distance_T01 (0-0-0-0): size 36 (cls: LongRush_Distance_T01>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	LongRush_Distance_T02 (0-0-0-0): size 36 (cls: LongRush_Distance_T02>StructProperty>/Script/CoreUObject) :
+		Tag array:
 	NPC_Survivor (0-0-0-0): size 36 (cls: NPC_Survivor>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_AssignSetByCallerMagnitude_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_AssignSetByCallerMagnitude_ReturnValue>StructProperty>/Script/CoreUObject) :
@@ -3075,6 +3134,10 @@ Serialized exports:
 	TC_EmergencyOverride (0-0-0-0): size 36 (cls: TC_EmergencyOverride>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	TC_LongRush (0-0-0-0): size 36 (cls: TC_LongRush>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	TC_LongRush_T01 (0-0-0-0): size 36 (cls: TC_LongRush_T01>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	TC_LongRush_T02 (0-0-0-0): size 36 (cls: TC_LongRush_T02>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	TC_RiotShield (0-0-0-0): size 36 (cls: TC_RiotShield>StructProperty>/Script/CoreUObject) :
 		Tag array:

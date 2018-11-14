@@ -1,14 +1,20 @@
 Name table:
 	/Game/Characters/Enemies/Blueprints/FXStaticMeshComponent
+	/Game/Characters/Enemies/Husk/Materials/M_EnemyAwokenThroughWalls_01
 	/Game/Characters/Enemies/Husk/Materials/M_EnemyHitBuilding_01
 	/Script/CoreUObject
 	/Script/Engine
 	/Script/FortniteGame
 	Add_FloatFloat
 	Add_IntInt
+	ApplyAwakenEffect
 	ApplyBuildingHitEffect
+	ApplyEffect
 	Array_Get
 	ArrayProperty
+	AwakenDuration
+	AwakenFadeInTime
+	AwakenFadeOutTime
 	BlueprintGeneratedClass
 	BoolProperty
 	BuildingHitDuration
@@ -45,8 +51,11 @@ Name table:
 	Default__ObjectProperty
 	Diffuse
 	Diffuse Map
+	Duration
 	EffectMID
 	Engine
+	FadeInTime
+	FadeOutTimer
 	FloatProperty
 	FortFXStaticMeshComponent
 	Function
@@ -63,6 +72,7 @@ Name table:
 	KismetMathLibrary
 	KismetSystemLibrary
 	LessEqual_IntInt
+	M_EnemyAwokenThroughWalls_01
 	M_EnemyHitBuilding_01
 	Material
 	MaterialInstanceDynamic
@@ -75,6 +85,7 @@ Name table:
 	SetMaterial
 	SetScalarParameterValue
 	SetTextureParameterValue
+	Source Material
 	SourceMeshComponent
 	Subtract_FloatFloat
 	Subtract_IntInt
@@ -104,6 +115,9 @@ Import table:
 	Texture (Class)
 	FortFXStaticMeshComponent (Class)
 	Default__FloatProperty (FloatProperty)
+	AwakenDuration (FloatProperty)
+	AwakenFadeInTime (FloatProperty)
+	AwakenFadeOutTime (FloatProperty)
 	BuildingHitDuration (FloatProperty)
 	BuildingHitFadeInTime (FloatProperty)
 	BuildingHitFadeOutTime (FloatProperty)
@@ -123,9 +137,11 @@ Import table:
 	Default__IntProperty (IntProperty)
 	Default__KismetArrayLibrary (KismetArrayLibrary)
 	Default__KismetSystemLibrary (KismetSystemLibrary)
+	M_EnemyAwokenThroughWalls_01 (Material)
 	M_EnemyHitBuilding_01 (Material)
 	Default__ObjectProperty (ObjectProperty)
 	SourceMeshComponent (ObjectProperty)
+	/Game/Characters/Enemies/Husk/Materials/M_EnemyAwokenThroughWalls_01 (Package)
 	/Game/Characters/Enemies/Husk/Materials/M_EnemyHitBuilding_01 (Package)
 	/Script/CoreUObject (Package)
 	/Script/Engine (Package)
@@ -133,12 +149,21 @@ Import table:
 Serialized exports:
 	EffectMID (0-0-0-0): size 36 (cls: EffectMID>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	ApplyBuildingHitEffect (0-0-0-0): size 968 (cls: ApplyBuildingHitEffect>Function>/Script/CoreUObject) :
+	ApplyBuildingHitEffect (0-0-0-0): size 77 (cls: ApplyBuildingHitEffect>Function>/Script/CoreUObject) :
 		Tag array:
-	FXStaticMeshComponent_C (0-0-0-0): size 92 (cls: FXStaticMeshComponent_C>BlueprintGeneratedClass>/Script/Engine) :
+	Source Material (0-0-0-0): size 36 (cls: Source Material>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	Default__FXStaticMeshComponent_C (0-0-0-0): size 95 (cls: Default__FXStaticMeshComponent_C>FXStaticMeshComponent_C) :
+	ApplyEffect (0-0-0-0): size 984 (cls: ApplyEffect>Function>/Script/CoreUObject) :
 		Tag array:
+	ApplyAwakenEffect (0-0-0-0): size 73 (cls: ApplyAwakenEffect>Function>/Script/CoreUObject) :
+		Tag array:
+	FXStaticMeshComponent_C (0-0-0-0): size 124 (cls: FXStaticMeshComponent_C>BlueprintGeneratedClass>/Script/Engine) :
+		Tag array:
+	Default__FXStaticMeshComponent_C (0-0-0-0): size 182 (cls: Default__FXStaticMeshComponent_C>FXStaticMeshComponent_C) :
+		Tag array:
+			AwakenFadeInTime(FloatProperty)=0.15 
+			AwakenDuration(FloatProperty)=1.8 
+			AwakenFadeOutTime(FloatProperty)=0.5 
 			BuildingHitFadeInTime(FloatProperty)=0.15 
 			BuildingHitDuration(FloatProperty)=2.8 
 			BuildingHitFadeOutTime(FloatProperty)=0.5 
@@ -164,6 +189,12 @@ Serialized exports:
 		Tag array:
 	CallFunc_Subtract_FloatFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Subtract_FloatFloat_ReturnValue>FloatProperty>/Script/CoreUObject) :
 		Tag array:
+	Duration (0-0-0-0): size 32 (cls: Duration>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	FadeInTime (0-0-0-0): size 32 (cls: FadeInTime>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	FadeOutTimer (0-0-0-0): size 32 (cls: FadeOutTimer>FloatProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_Add_IntInt_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue>IntProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_GetNumMaterials_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetNumMaterials_ReturnValue>IntProperty>/Script/CoreUObject) :
@@ -179,6 +210,8 @@ Serialized exports:
 	CallFunc_K2_GetTextureParameterValue_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_GetTextureParameterValue_ReturnValue>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_K2_GetTextureParameterValue_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_K2_GetTextureParameterValue_ReturnValue1>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	EffectMID (0-0-0-0): size 36 (cls: EffectMID>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	K2Node_DynamicCast_AsMaterial_Instance_Dynamic (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsMaterial_Instance_Dynamic>ObjectProperty>/Script/CoreUObject) :
 		Tag array:

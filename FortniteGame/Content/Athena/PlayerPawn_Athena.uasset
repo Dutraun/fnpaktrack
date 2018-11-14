@@ -74,6 +74,7 @@ Name table:
 	ActiveContrail
 	Actor
 	ActorComponent
+	ActorComponentTickFunction
 	Add_IntInt
 	Add_VectorVector
 	AddComponent
@@ -222,6 +223,7 @@ Name table:
 	BreakVector
 	BroadcastFilter
 	bSpawnGameplayCue
+	bStartWithTickEnabled
 	bStormAudioCleanedUp
 	bUseInverseSquaredFalloff
 	bUseNewTeleportFX
@@ -295,7 +297,6 @@ Name table:
 	CallFunc_FinishSpawningActor_ReturnValue
 	CallFunc_FinishSpawningActor_ReturnValue1
 	CallFunc_FInterpTo_ReturnValue
-	CallFunc_FInterpTo_ReturnValue1
 	CallFunc_FMax_ReturnValue
 	CallFunc_GetAbilitySystemComponent_ReturnValue
 	CallFunc_GetActorBounds_BoxExtent
@@ -321,7 +322,6 @@ Name table:
 	CallFunc_GetValueAtLevel_ReturnValue
 	CallFunc_GetVelocity_ReturnValue
 	CallFunc_GetWorldDeltaSeconds_ReturnValue
-	CallFunc_GetWorldDeltaSeconds_ReturnValue1
 	CallFunc_Greater_FloatFloat_ReturnValue
 	CallFunc_Greater_FloatFloat_ReturnValue1
 	CallFunc_GreaterEqual_FloatFloat_ReturnValue
@@ -336,7 +336,6 @@ Name table:
 	CallFunc_IsDedicatedServer_ReturnValue1
 	CallFunc_IsDedicatedServer_ReturnValue2
 	CallFunc_IsDedicatedServer_ReturnValue3
-	CallFunc_IsFalling_ReturnValue
 	CallFunc_IsInZone_ReturnValue
 	CallFunc_IsLocallyControlled_ReturnValue
 	CallFunc_IsLocallyControlled_ReturnValue1
@@ -359,8 +358,6 @@ Name table:
 	CallFunc_IsValid_ReturnValue3
 	CallFunc_IsValid_ReturnValue4
 	CallFunc_IsValid_ReturnValue5
-	CallFunc_IsValid_ReturnValue6
-	CallFunc_IsValid_ReturnValue7
 	CallFunc_K2_GetActorLocation_ReturnValue
 	CallFunc_K2_GetActorLocation_ReturnValue1
 	CallFunc_K2_GetComponentLocation_ReturnValue
@@ -390,7 +387,6 @@ Name table:
 	CallFunc_MapRangeClamped_ReturnValue
 	CallFunc_MapRangeClamped_ReturnValue1
 	CallFunc_MapRangeClamped_ReturnValue2
-	CallFunc_MapRangeClamped_ReturnValue3
 	CallFunc_Multiply_FloatFloat_ReturnValue
 	CallFunc_Multiply_FloatFloat_ReturnValue1
 	CallFunc_Multiply_FloatFloat_ReturnValue2
@@ -416,14 +412,12 @@ Name table:
 	CallFunc_SpawnEmitterAttached_ReturnValue
 	CallFunc_SpawnEmitterAttached_ReturnValue1
 	CallFunc_SpawnEmitterAttached_ReturnValue2
-	CallFunc_SpawnSound2D_ReturnValue
 	CallFunc_SpawnSoundAttached_ReturnValue
 	CallFunc_SpawnSoundAttached_ReturnValue1
 	CallFunc_Subtract_FloatFloat_ReturnValue
 	CallFunc_Subtract_IntInt_ReturnValue
 	CallFunc_Subtract_VectorVector_ReturnValue
 	CallFunc_Subtract_VectorVector_ReturnValue1
-	CallFunc_TimeFromJumpApex_ReturnValue
 	CallFunc_VLerp_ReturnValue
 	CallFunc_VSize_ReturnValue
 	CallFunc_VSize_ReturnValue1
@@ -739,6 +733,7 @@ Name table:
 	HitNotifyAudioBank_Default
 	HitResult
 	Homebase.Class.IsCommando
+	InAirAudio_GEN_VARIABLE
 	InheritableComponentHandler
 	InitAthenaFoleyAudio
 	InLobby
@@ -759,7 +754,6 @@ Name table:
 	IsBackpackEquipped
 	IsDBNO
 	IsDedicatedServer
-	IsFalling
 	IsInWater
 	IsInZone
 	IsLocallyControlled
@@ -1014,6 +1008,7 @@ Name table:
 	PoseableMeshComponent
 	PostProcessComponent
 	PostProcessSettings
+	PrimaryComponentTick
 	PrimitiveComponent
 	PrintString
 	PropertyName
@@ -1134,6 +1129,7 @@ Name table:
 	Socket_MeshBot
 	Socket_MeshTop
 	Sound
+	Sound_InAirLoop3P
 	SoundBase
 	SoundCue
 	SourceObject
@@ -1141,7 +1137,6 @@ Name table:
 	SpawnEffect_GEN_VARIABLE
 	SpawnEmitterAtLocation
 	SpawnEmitterAttached
-	SpawnSound2D
 	SpawnSoundAttached
 	SpawnTeleportationLight
 	SpeedRun
@@ -1237,7 +1232,6 @@ Name table:
 	TFX_ResOutCharacterMesh_TransitionParam_742226E94F2087597CFE2FAE7DCC91EA
 	TFX_ResOutCharacterMesh_ZHeightParam_742226E94F2087597CFE2FAE7DCC91EA
 	ThreatColor
-	TimeFromJumpApex
 	Timeline
 	Timeline_0__Direction_A4943458400C3662DB243099F9EAC7E8
 	Timeline_0__FinishedFunc
@@ -1284,7 +1278,6 @@ Name table:
 	VLerp
 	VocalChords
 	Volume
-	VolumeMultiplier
 	VolumetricScatteringIntensity
 	VortexParachuteControlParams
 	VortexSkydivingControlParamsActive
@@ -1314,6 +1307,7 @@ Import table:
 	GameplayTags (ArrayProperty)
 	Default__Athena_GameState_C (Athena_GameState_C)
 	FeedbackAudioComp0 (AudioComponent)
+	InAirAudio_GEN_VARIABLE (AudioComponent)
 	FeedbackAudioComp0 (AudioComponent)
 	Default__B_SoundIndicator_01_C (B_SoundIndicator_01_C)
 	Base_REMOVED_F84E74A74935931DDA62CDBC37715B13 (BillboardComponent)
@@ -1422,7 +1416,6 @@ Import table:
 	GamePhase (EnumProperty)
 	AnimPlayRate (FloatProperty)
 	Default__FloatProperty (FloatProperty)
-	VolumeMultiplier (FloatProperty)
 	BlendWeight (FloatProperty)
 	SpeedRun (FloatProperty)
 	SpeedSprint (FloatProperty)
@@ -1465,7 +1458,6 @@ Import table:
 	PlaySoundAtLocation (Function)
 	SpawnEmitterAtLocation (Function)
 	SpawnEmitterAttached (Function)
-	SpawnSound2D (Function)
 	SpawnSoundAttached (Function)
 	Array_Add (Function)
 	Array_Clear (Function)
@@ -1560,7 +1552,6 @@ Import table:
 	OnOpenParachute (Function)
 	OnStartLongInteract (Function)
 	SafeZoneStatusChanged (Function)
-	TimeFromJumpApex (Function)
 	IsBackpackEquipped (Function)
 	OnEnteredReplayRelevancy (Function)
 	OnEnteredWaterVolume (Function)
@@ -1707,6 +1698,7 @@ Import table:
 	Rotator (ScriptStruct)
 	Transform (ScriptStruct)
 	Vector (ScriptStruct)
+	ActorComponentTickFunction (ScriptStruct)
 	HitResult (ScriptStruct)
 	LatentActionInfo (ScriptStruct)
 	PointerToUberGraphFrame (ScriptStruct)
@@ -1798,7 +1790,7 @@ Serialized exports:
 			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=PlayerPawn_Athena_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_PlayerPawn_Athena=PlayerPawn_Athena_C 
 			CookedComponentInstancingData(MapProperty)=[object] (inner: NameProperty)
-	Default__PlayerPawn_Athena_C (0-0-0-0): size 8393 (cls: Default__PlayerPawn_Athena_C>PlayerPawn_Athena_C) :
+	Default__PlayerPawn_Athena_C (0-0-0-0): size 8422 (cls: Default__PlayerPawn_Athena_C>PlayerPawn_Athena_C) :
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			TC_FlakVest(StructProperty)=GameplayTagContainer:Abilities.Commando.FlakVest 
@@ -1835,6 +1827,7 @@ Serialized exports:
 			OutsideSafeZoneGameplayCueTag(StructProperty)=System.Byte[] 
 			WhichSafeZoneTag(IntProperty)=-1 
 			SafeZoneDamageScalableFloat(StructProperty)=System.Byte[] 
+			Sound_InAirLoop3P(ObjectProperty)=[object] 
 			OnReviveSound(ObjectProperty)=Revive_Player_Athena_Cue=/Game/Sounds/Fort_GamePlay_Sounds/Player/Revive_Player_Athena_Cue 
 			ParachuteDirectionalSpeedMultiplierCurve(ObjectProperty)=ParachuteDirectionalSpeedMultiplierCurve=/Game/Athena/Balance/Movement/ParachuteDirectionalSpeedMultiplierCurve 
 			SkydivingDirectionalSpeedMultiplierCurve(ObjectProperty)=SkydivingDirectionalSpeedMultiplierCurve=/Game/Athena/Balance/Movement/SkydivingDirectionalSpeedMultiplierCurve 
@@ -1883,7 +1876,7 @@ Serialized exports:
 		Tag array:
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject) :
 		Tag array:
-	ExecuteUbergraph_PlayerPawn_Athena (0-0-0-0): size 10618 (cls: ExecuteUbergraph_PlayerPawn_Athena>Function>/Script/CoreUObject) :
+	ExecuteUbergraph_PlayerPawn_Athena (0-0-0-0): size 10182 (cls: ExecuteUbergraph_PlayerPawn_Athena>Function>/Script/CoreUObject) :
 		Tag array:
 	Temp_object_Variable (0-0-0-0): size 36 (cls: Temp_object_Variable>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1953,6 +1946,10 @@ Serialized exports:
 		Tag array:
 	Update Parachute and Falling Audio (0-0-0-0): size 58 (cls: Update Parachute and Falling Audio>Function>/Script/CoreUObject) :
 		Tag array:
+	EventType (0-0-0-0): size 36 (cls: EventType>ByteProperty>/Script/CoreUObject) :
+		Tag array:
+	GameplayCue.Abilities.Activation.Generic.HarvestBuff.Tier1 (0-0-0-0): size 86 (cls: GameplayCue.Abilities.Activation.Generic.HarvestBuff.Tier1>Function>/Script/CoreUObject) :
+		Tag array:
 	Start Storm Audio Fader (0-0-0-0): size 58 (cls: Start Storm Audio Fader>Function>/Script/CoreUObject) :
 		Tag array:
 	Location (0-0-0-0): size 36 (cls: Location>StructProperty>/Script/CoreUObject) :
@@ -1965,6 +1962,10 @@ Serialized exports:
 		Tag array:
 	GameplayCue.Abilities.Activation.DBNOResurrect (0-0-0-0): size 86 (cls: GameplayCue.Abilities.Activation.DBNOResurrect>Function>/Script/CoreUObject) :
 		Tag array:
+	EventType (0-0-0-0): size 36 (cls: EventType>ByteProperty>/Script/CoreUObject) :
+		Tag array:
+	GameplayCue.Abilities.Activation.Generic.HarvestBuff.Tier2 (0-0-0-0): size 86 (cls: GameplayCue.Abilities.Activation.Generic.HarvestBuff.Tier2>Function>/Script/CoreUObject) :
+		Tag array:
 	RandomLightningFlashesRepeat (0-0-0-0): size 58 (cls: RandomLightningFlashesRepeat>Function>/Script/CoreUObject) :
 		Tag array:
 	StartRandomLightningFlashes (0-0-0-0): size 58 (cls: StartRandomLightningFlashes>Function>/Script/CoreUObject) :
@@ -1975,11 +1976,13 @@ Serialized exports:
 		Tag array:
 	GameplayCue.Athena.Player.BeingRevivedFromDBNO (0-0-0-0): size 86 (cls: GameplayCue.Athena.Player.BeingRevivedFromDBNO>Function>/Script/CoreUObject) :
 		Tag array:
+	NewController (0-0-0-0): size 36 (cls: NewController>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	ReceivePossessed (0-0-0-0): size 72 (cls: ReceivePossessed>Function>/Script/CoreUObject) :
+		Tag array:
 	ContrailCheck (0-0-0-0): size 58 (cls: ContrailCheck>Function>/Script/CoreUObject) :
 		Tag array:
-	EventType (0-0-0-0): size 36 (cls: EventType>ByteProperty>/Script/CoreUObject) :
-		Tag array:
-	GameplayCue.Abilities.Activation.Generic.HarvestBuff.Tier1 (0-0-0-0): size 86 (cls: GameplayCue.Abilities.Activation.Generic.HarvestBuff.Tier1>Function>/Script/CoreUObject) :
+	ReceiveBeginPlay (0-0-0-0): size 58 (cls: ReceiveBeginPlay>Function>/Script/CoreUObject) :
 		Tag array:
 	Damage (0-0-0-0): size 32 (cls: Damage>FloatProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1992,16 +1995,6 @@ Serialized exports:
 	SafeZoneStatusChanged (0-0-0-0): size 58 (cls: SafeZoneStatusChanged>Function>/Script/CoreUObject) :
 		Tag array:
 	ReceiveDestroyed (0-0-0-0): size 58 (cls: ReceiveDestroyed>Function>/Script/CoreUObject) :
-		Tag array:
-	EventType (0-0-0-0): size 36 (cls: EventType>ByteProperty>/Script/CoreUObject) :
-		Tag array:
-	GameplayCue.Abilities.Activation.Generic.HarvestBuff.Tier2 (0-0-0-0): size 86 (cls: GameplayCue.Abilities.Activation.Generic.HarvestBuff.Tier2>Function>/Script/CoreUObject) :
-		Tag array:
-	ReceiveBeginPlay (0-0-0-0): size 58 (cls: ReceiveBeginPlay>Function>/Script/CoreUObject) :
-		Tag array:
-	NewController (0-0-0-0): size 36 (cls: NewController>ObjectProperty>/Script/CoreUObject) :
-		Tag array:
-	ReceivePossessed (0-0-0-0): size 72 (cls: ReceivePossessed>Function>/Script/CoreUObject) :
 		Tag array:
 	TFX_ResOutCharacterMesh__UpdateFunc (0-0-0-0): size 58 (cls: TFX_ResOutCharacterMesh__UpdateFunc>Function>/Script/CoreUObject) :
 		Tag array:
@@ -2180,8 +2173,6 @@ Serialized exports:
 		Tag array:
 	CallFunc_IsDedicatedServer_ReturnValue3 (0-0-0-0): size 34 (cls: CallFunc_IsDedicatedServer_ReturnValue3>BoolProperty>/Script/CoreUObject) :
 		Tag array:
-	CallFunc_IsFalling_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsFalling_ReturnValue>BoolProperty>/Script/CoreUObject) :
-		Tag array:
 	CallFunc_IsInZone_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsInZone_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_IsLocallyControlled_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsLocallyControlled_ReturnValue>BoolProperty>/Script/CoreUObject) :
@@ -2225,10 +2216,6 @@ Serialized exports:
 	CallFunc_IsValid_ReturnValue4 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue4>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_IsValid_ReturnValue5 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue5>BoolProperty>/Script/CoreUObject) :
-		Tag array:
-	CallFunc_IsValid_ReturnValue6 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue6>BoolProperty>/Script/CoreUObject) :
-		Tag array:
-	CallFunc_IsValid_ReturnValue7 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue7>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_Less_FloatFloat_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Less_FloatFloat_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -2469,13 +2456,9 @@ Serialized exports:
 		Tag array:
 	CallFunc_FInterpTo_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_FInterpTo_ReturnValue>FloatProperty>/Script/CoreUObject) :
 		Tag array:
-	CallFunc_FInterpTo_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_FInterpTo_ReturnValue1>FloatProperty>/Script/CoreUObject) :
-		Tag array:
 	CallFunc_GetValueAtLevel_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetValueAtLevel_ReturnValue>FloatProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_GetWorldDeltaSeconds_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetWorldDeltaSeconds_ReturnValue>FloatProperty>/Script/CoreUObject) :
-		Tag array:
-	CallFunc_GetWorldDeltaSeconds_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_GetWorldDeltaSeconds_ReturnValue1>FloatProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_Lerp_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Lerp_ReturnValue>FloatProperty>/Script/CoreUObject) :
 		Tag array:
@@ -2484,8 +2467,6 @@ Serialized exports:
 	CallFunc_MapRangeClamped_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_MapRangeClamped_ReturnValue1>FloatProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_MapRangeClamped_ReturnValue2 (0-0-0-0): size 32 (cls: CallFunc_MapRangeClamped_ReturnValue2>FloatProperty>/Script/CoreUObject) :
-		Tag array:
-	CallFunc_MapRangeClamped_ReturnValue3 (0-0-0-0): size 32 (cls: CallFunc_MapRangeClamped_ReturnValue3>FloatProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_PlayLocalAnimMontage_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_PlayLocalAnimMontage_ReturnValue>FloatProperty>/Script/CoreUObject) :
 		Tag array:
@@ -2496,8 +2477,6 @@ Serialized exports:
 	CallFunc_RandomFloatInRange_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_RandomFloatInRange_ReturnValue1>FloatProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_RandomFloatInRange_ReturnValue2 (0-0-0-0): size 32 (cls: CallFunc_RandomFloatInRange_ReturnValue2>FloatProperty>/Script/CoreUObject) :
-		Tag array:
-	CallFunc_TimeFromJumpApex_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_TimeFromJumpApex_ReturnValue>FloatProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_VSize_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_VSize_ReturnValue>FloatProperty>/Script/CoreUObject) :
 		Tag array:
@@ -2630,7 +2609,7 @@ Serialized exports:
 			VortexParachuteControlParams(StructProperty)=System.Byte[] 
 			GroundFriction(FloatProperty)=6 
 			MaxAcceleration(FloatProperty)=750 
-	InheritableComponentHandler (0-0-0-0): size 814 (cls: InheritableComponentHandler>InheritableComponentHandler>/Script/Engine) :
+	InheritableComponentHandler (0-0-0-0): size 1012 (cls: InheritableComponentHandler>InheritableComponentHandler>/Script/Engine) :
 		Tag array:
 			Records(ArrayProperty)=[object] (inner: StructProperty)
 	CallFunc_HasAllMatchingGameplayTags_TagContainerInterface_CastInput (0-0-0-0): size 36 (cls: CallFunc_HasAllMatchingGameplayTags_TagContainerInterface_CastInput>InterfaceProperty>/Script/CoreUObject) :
@@ -2800,8 +2779,6 @@ Serialized exports:
 	CallFunc_SpawnEmitterAttached_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_SpawnEmitterAttached_ReturnValue1>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_SpawnEmitterAttached_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_SpawnEmitterAttached_ReturnValue2>ObjectProperty>/Script/CoreUObject) :
-		Tag array:
-	CallFunc_SpawnSound2D_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_SpawnSound2D_ReturnValue>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_SpawnSoundAttached_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_SpawnSoundAttached_ReturnValue>ObjectProperty>/Script/CoreUObject) :
 		Tag array:

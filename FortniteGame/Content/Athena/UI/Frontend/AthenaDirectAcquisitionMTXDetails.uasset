@@ -157,7 +157,6 @@ Name table:
 	CallFunc_GetOfferInfo_ReturnValue3
 	CallFunc_GetOfferInfo_ReturnValue4
 	CallFunc_GetOfferInfo_ReturnValue5
-	CallFunc_GetOfferInfo_ReturnValue6
 	CallFunc_GetOwningPlayer_ReturnValue
 	CallFunc_GetSalePrice_ReturnValue
 	CallFunc_GetSalePrice_SalePrice
@@ -171,7 +170,6 @@ Name table:
 	CallFunc_IsMobileGame_ReturnValue
 	CallFunc_IsMobileGame_ReturnValue1
 	CallFunc_IsPriceInMTX_ReturnValue
-	CallFunc_IsPriceInMTX_ReturnValue1
 	CallFunc_Less_IntInt_ReturnValue
 	CallFunc_PurchaseOffer_ReturnValue
 	CallFunc_TextToUpper_ReturnValue
@@ -357,6 +355,7 @@ Name table:
 	HAlign_Right
 	HandleBack
 	HandlePurchaseComplete
+	HandleRealMoneyPurchaseComplete
 	HeightOverride
 	Highlight
 	HollowCircularProgressBar
@@ -387,6 +386,8 @@ Name table:
 	K2Node_CreateDelegate_OutputDelegate1
 	K2Node_CreateDelegate_OutputDelegate2
 	K2Node_CustomEvent_bSuccess
+	K2Node_CustomEvent_bSuccess1
+	K2Node_CustomEvent_PurchasedItems
 	K2Node_MakeStruct_DataTableRowHandle
 	K2Node_Select1_Default
 	K2Node_Select2_Default
@@ -458,6 +459,8 @@ Name table:
 	ProgressMaterialBrush
 	ProgressMaterialParam
 	PurchaseButton
+	PurchasedItemInfo
+	PurchasedItems
 	PurchaseOffer
 	PurchaseRealMoneyCatalogEntry
 	PushContentWidgetAdvanced
@@ -840,6 +843,7 @@ Import table:
 	LinearColor (ScriptStruct)
 	DataTableRowHandle (ScriptStruct)
 	PointerToUberGraphFrame (ScriptStruct)
+	PurchasedItemInfo (ScriptStruct)
 	FortMtxDetailsAttribute (ScriptStruct)
 	FortMtxGradient (ScriptStruct)
 	SlateBrush (ScriptStruct)
@@ -885,7 +889,7 @@ Import table:
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	AthenaDirectAcquisitionMTXDetails_C (0-0-0-0): size 607 (cls: AthenaDirectAcquisitionMTXDetails_C>WidgetBlueprintGeneratedClass>/Script/UMG) :
+	AthenaDirectAcquisitionMTXDetails_C (0-0-0-0): size 623 (cls: AthenaDirectAcquisitionMTXDetails_C>WidgetBlueprintGeneratedClass>/Script/UMG) :
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
@@ -905,7 +909,15 @@ Serialized exports:
 		Tag array:
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject) :
 		Tag array:
-	ExecuteUbergraph_AthenaDirectAcquisitionMTXDetails (0-0-0-0): size 2342 (cls: ExecuteUbergraph_AthenaDirectAcquisitionMTXDetails>Function>/Script/CoreUObject) :
+	ExecuteUbergraph_AthenaDirectAcquisitionMTXDetails (0-0-0-0): size 2270 (cls: ExecuteUbergraph_AthenaDirectAcquisitionMTXDetails>Function>/Script/CoreUObject) :
+		Tag array:
+	K2Node_CustomEvent_PurchasedItems (0-0-0-0): size 36 (cls: K2Node_CustomEvent_PurchasedItems>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	K2Node_CustomEvent_PurchasedItems (0-0-0-0): size 36 (cls: K2Node_CustomEvent_PurchasedItems>ArrayProperty>/Script/CoreUObject) :
+		Tag array:
+	bSuccess (0-0-0-0): size 34 (cls: bSuccess>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	HandleRealMoneyPurchaseComplete (0-0-0-0): size 72 (cls: HandleRealMoneyPurchaseComplete>Function>/Script/CoreUObject) :
 		Tag array:
 	Button (0-0-0-0): size 36 (cls: Button>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
@@ -923,7 +935,11 @@ Serialized exports:
 		Tag array:
 	bSuccess (0-0-0-0): size 34 (cls: bSuccess>BoolProperty>/Script/CoreUObject) :
 		Tag array:
-	HandlePurchaseComplete (0-0-0-0): size 72 (cls: HandlePurchaseComplete>Function>/Script/CoreUObject) :
+	HandlePurchaseComplete (0-0-0-0): size 86 (cls: HandlePurchaseComplete>Function>/Script/CoreUObject) :
+		Tag array:
+	PurchasedItems (0-0-0-0): size 36 (cls: PurchasedItems>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	PurchasedItems (0-0-0-0): size 36 (cls: PurchasedItems>ArrayProperty>/Script/CoreUObject) :
 		Tag array:
 	PassThrough (0-0-0-0): size 34 (cls: PassThrough>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -995,9 +1011,9 @@ Serialized exports:
 		Tag array:
 	CallFunc_IsPriceInMTX_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsPriceInMTX_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
-	CallFunc_IsPriceInMTX_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_IsPriceInMTX_ReturnValue1>BoolProperty>/Script/CoreUObject) :
-		Tag array:
 	K2Node_CustomEvent_bSuccess (0-0-0-0): size 34 (cls: K2Node_CustomEvent_bSuccess>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	K2Node_CustomEvent_bSuccess1 (0-0-0-0): size 34 (cls: K2Node_CustomEvent_bSuccess1>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	K2Node_SwitchEnum_CmpSuccess (0-0-0-0): size 34 (cls: K2Node_SwitchEnum_CmpSuccess>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1225,11 +1241,10 @@ Serialized exports:
 			Justification(ByteProperty)=ETextJustify::Center 
 			Slot(ObjectProperty)=VerticalBoxSlot_4=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
-	CommonText_BonusQuantity (0-0-0-0): size 429 (cls: CommonText_BonusQuantity>CommonTextBlock>/Script/CommonUI) :
+	CommonText_BonusQuantity (0-0-0-0): size 307 (cls: CommonText_BonusQuantity>CommonTextBlock>/Script/CommonUI) :
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-M-B-Yellow_C=/Game/UI/Foundation/Text/TextStyle-Base-M-B-Yellow 
 			Text(TextProperty)=9999 (478A46B84C4E26BA23DD8DBC56D1A5D0) 
-			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
 			Justification(ByteProperty)=ETextJustify::Center 
 			Slot(ObjectProperty)=VerticalBoxSlot_6=WidgetArchetype 
@@ -1864,8 +1879,6 @@ Description Text Appears Here (F687E0734A91EB11FAEC3FB8E8708890)
 	CallFunc_GetOfferInfo_ReturnValue4 (0-0-0-0): size 36 (cls: CallFunc_GetOfferInfo_ReturnValue4>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_GetOfferInfo_ReturnValue5 (0-0-0-0): size 36 (cls: CallFunc_GetOfferInfo_ReturnValue5>ObjectProperty>/Script/CoreUObject) :
-		Tag array:
-	CallFunc_GetOfferInfo_ReturnValue6 (0-0-0-0): size 36 (cls: CallFunc_GetOfferInfo_ReturnValue6>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_GetOwningPlayer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetOwningPlayer_ReturnValue>ObjectProperty>/Script/CoreUObject) :
 		Tag array:

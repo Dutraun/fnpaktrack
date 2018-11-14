@@ -13,6 +13,7 @@ Name table:
 	AbilityTriggers
 	ActivationType
 	Actor
+	AIPawnBeingRevived
 	AnimMontage
 	AnimPlayRate
 	ArrayProperty
@@ -25,13 +26,14 @@ Name table:
 	ByteProperty
 	CallFunc_CreatePlayMontageAndWaitProxy_ReturnValue
 	CallFunc_GetActivatingPawn_ReturnValue
-	CallFunc_GetActivatingPawn_ReturnValue1
-	CallFunc_GetActivatingPawn_ReturnValue2
-	CallFunc_GetActivatingPawn_ReturnValue3
+	CallFunc_HandleReviveCompleteActions_Success
 	CallFunc_IsValid_ReturnValue
 	CallFunc_K2_CommitAbility_ReturnValue
 	CallFunc_K2_SetTimerDelegate_ReturnValue
 	Class
+	CleanupAbilityIfMontageFailsToComplete
+	CleanupTimerHandle
+	CompleteRevive
 	CreatePlayMontageAndWaitProxy
 	DBNO_Outro
 	Default__AbilityTask_PlayMontageAndWait
@@ -48,6 +50,8 @@ Name table:
 	DefenderResurrected
 	DelegateFunction
 	DelegateProperty
+	EFortAILODLevel
+	EFortAILODLevel::Lower
 	EFortGameplayAbilityActivation
 	EFortGameplayAbilityActivation::Triggered
 	EGameplayAbilityInstancingPolicy
@@ -80,6 +84,8 @@ Name table:
 	GameplayTask
 	GetActivatingPawn
 	Handle
+	HandleReviveCompleteActions
+	InitializePawnForReviveMontage
 	InstancingPolicy
 	IntProperty
 	IsValid
@@ -99,6 +105,8 @@ Name table:
 	K2Node_Event_bWasCancelled
 	K2Node_Event_EventData
 	KismetSystemLibrary
+	LinearColor
+	MinimumRequiredAILODLevel
 	MontageInfo
 	MontageToPlay
 	MontageWaitSimpleDelegate__DelegateSignature
@@ -117,16 +125,18 @@ Name table:
 	OnCompleted_2491B74745BECED77F7B838860EC4602
 	OnInterrupted
 	OnInterrupted_2491B74745BECED77F7B838860EC4602
-	OnReviveNotFinished
 	Package
+	PawnBeingRevived
+	PawnToRevive
 	PointerToUberGraphFrame
+	PrintString
 	ReadyForActivation
 	ReplicationPolicy
-	SafetyTimerHandle
 	ScriptStruct
 	SetBlockCollisionWithOtherAI
 	SetCanBeCanceled
 	StructProperty
+	Success
 	TagName
 	TimerDynamicDelegate__DelegateSignature
 	TimerHandle
@@ -169,6 +179,7 @@ Import table:
 	IsValid (Function)
 	K2_ClearAndInvalidateTimerHandle (Function)
 	K2_SetTimerDelegate (Function)
+	PrintString (Function)
 	SetBlockCollisionWithOtherAI (Function)
 	GetActivatingPawn (Function)
 	TriggerFeedbackEvent (Function)
@@ -191,6 +202,7 @@ Import table:
 	/Script/GameplayAbilities (Package)
 	/Script/GameplayTags (Package)
 	/Script/GameplayTasks (Package)
+	LinearColor (ScriptStruct)
 	PointerToUberGraphFrame (ScriptStruct)
 	TimerHandle (ScriptStruct)
 	FortGameplayAbilityMontageInfo (ScriptStruct)
@@ -201,40 +213,67 @@ Import table:
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	GAB_SurvivorDBNORevive_C (0-0-0-0): size 270 (cls: GAB_SurvivorDBNORevive_C>BlueprintGeneratedClass>/Script/Engine) :
+	GAB_SurvivorDBNORevive_C (0-0-0-0): size 318 (cls: GAB_SurvivorDBNORevive_C>BlueprintGeneratedClass>/Script/Engine) :
 		Tag array:
 			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=GAB_SurvivorDBNORevive_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_GAB_SurvivorDBNORevive=GAB_SurvivorDBNORevive_C 
-	Default__GAB_SurvivorDBNORevive_C (0-0-0-0): size 751 (cls: Default__GAB_SurvivorDBNORevive_C>GAB_SurvivorDBNORevive_C) :
+	Default__GAB_SurvivorDBNORevive_C (0-0-0-0): size 792 (cls: Default__GAB_SurvivorDBNORevive_C>GAB_SurvivorDBNORevive_C) :
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
-			SafetyTimerHandle(StructProperty)=System.Byte[] 
+			CleanupTimerHandle(StructProperty)=System.Byte[] 
 			ActivationType(EnumProperty)=EFortGameplayAbilityActivation::Triggered 
 			bStopsAIBehaviorLogic(BoolProperty)=True 
 			bStopsAIMovement(BoolProperty)=True 
+			MinimumRequiredAILODLevel(EnumProperty)=EFortAILODLevel::Lower 
 			MontageInfo(StructProperty)=System.Byte[] 
 			AbilityTags(StructProperty)=GameplayTagContainer:Gameplay.Action.NPC.DBNO,NPC.Ability.NonAttack.DBNORevive 
 			ReplicationPolicy(ByteProperty)=EGameplayAbilityReplicationPolicy::ReplicateYes 
 			InstancingPolicy(ByteProperty)=EGameplayAbilityInstancingPolicy::InstancedPerActor 
 			NetExecutionPolicy(ByteProperty)=EGameplayAbilityNetExecutionPolicy::ServerOnly 
 			AbilityTriggers(ArrayProperty)=[object] (inner: StructProperty)
-	SafetyTimerHandle (0-0-0-0): size 36 (cls: SafetyTimerHandle>StructProperty>/Script/CoreUObject) :
+	CleanupTimerHandle (0-0-0-0): size 36 (cls: CleanupTimerHandle>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject) :
 		Tag array:
-	ExecuteUbergraph_GAB_SurvivorDBNORevive (0-0-0-0): size 854 (cls: ExecuteUbergraph_GAB_SurvivorDBNORevive>Function>/Script/CoreUObject) :
+	ExecuteUbergraph_GAB_SurvivorDBNORevive (0-0-0-0): size 637 (cls: ExecuteUbergraph_GAB_SurvivorDBNORevive>Function>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_HandleReviveCompleteActions_Success (0-0-0-0): size 34 (cls: CallFunc_HandleReviveCompleteActions_Success>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_K2_CommitAbility_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_K2_CommitAbility_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
-	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject) :
-		Tag array:
 	K2Node_Event_bWasCancelled (0-0-0-0): size 34 (cls: K2Node_Event_bWasCancelled>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CompleteRevive (0-0-0-0): size 58 (cls: CompleteRevive>Function>/Script/CoreUObject) :
+		Tag array:
+	CleanupAbilityIfMontageFailsToComplete (0-0-0-0): size 58 (cls: CleanupAbilityIfMontageFailsToComplete>Function>/Script/CoreUObject) :
+		Tag array:
+	EventData (0-0-0-0): size 36 (cls: EventData>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	K2_ActivateAbilityFromEvent (0-0-0-0): size 72 (cls: K2_ActivateAbilityFromEvent>Function>/Script/CoreUObject) :
+		Tag array:
+	bWasCancelled (0-0-0-0): size 34 (cls: bWasCancelled>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	K2_OnEndAbility (0-0-0-0): size 72 (cls: K2_OnEndAbility>Function>/Script/CoreUObject) :
 		Tag array:
-	bWasCancelled (0-0-0-0): size 34 (cls: bWasCancelled>BoolProperty>/Script/CoreUObject) :
+	OnCompleted_2491B74745BECED77F7B838860EC4602 (0-0-0-0): size 58 (cls: OnCompleted_2491B74745BECED77F7B838860EC4602>Function>/Script/CoreUObject) :
+		Tag array:
+	OnBlendOut_2491B74745BECED77F7B838860EC4602 (0-0-0-0): size 58 (cls: OnBlendOut_2491B74745BECED77F7B838860EC4602>Function>/Script/CoreUObject) :
+		Tag array:
+	OnInterrupted_2491B74745BECED77F7B838860EC4602 (0-0-0-0): size 58 (cls: OnInterrupted_2491B74745BECED77F7B838860EC4602>Function>/Script/CoreUObject) :
+		Tag array:
+	OnCancelled_2491B74745BECED77F7B838860EC4602 (0-0-0-0): size 58 (cls: OnCancelled_2491B74745BECED77F7B838860EC4602>Function>/Script/CoreUObject) :
+		Tag array:
+	PawnToRevive (0-0-0-0): size 36 (cls: PawnToRevive>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	InitializePawnForReviveMontage (0-0-0-0): size 155 (cls: InitializePawnForReviveMontage>Function>/Script/CoreUObject) :
+		Tag array:
+	Success (0-0-0-0): size 34 (cls: Success>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	HandleReviveCompleteActions (0-0-0-0): size 356 (cls: HandleReviveCompleteActions>Function>/Script/CoreUObject) :
+		Tag array:
+	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	K2Node_CreateDelegate_OutputDelegate (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate>DelegateProperty>/Script/CoreUObject) :
 		Tag array:
@@ -246,33 +285,19 @@ Serialized exports:
 		Tag array:
 	K2Node_CreateDelegate_OutputDelegate4 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate4>DelegateProperty>/Script/CoreUObject) :
 		Tag array:
-	K2Node_Event_EventData (0-0-0-0): size 36 (cls: K2Node_Event_EventData>StructProperty>/Script/CoreUObject) :
-		Tag array:
-	EventData (0-0-0-0): size 36 (cls: EventData>StructProperty>/Script/CoreUObject) :
-		Tag array:
-	K2_ActivateAbilityFromEvent (0-0-0-0): size 72 (cls: K2_ActivateAbilityFromEvent>Function>/Script/CoreUObject) :
-		Tag array:
-	OnBlendOut_2491B74745BECED77F7B838860EC4602 (0-0-0-0): size 58 (cls: OnBlendOut_2491B74745BECED77F7B838860EC4602>Function>/Script/CoreUObject) :
-		Tag array:
-	OnCancelled_2491B74745BECED77F7B838860EC4602 (0-0-0-0): size 58 (cls: OnCancelled_2491B74745BECED77F7B838860EC4602>Function>/Script/CoreUObject) :
-		Tag array:
-	OnCompleted_2491B74745BECED77F7B838860EC4602 (0-0-0-0): size 58 (cls: OnCompleted_2491B74745BECED77F7B838860EC4602>Function>/Script/CoreUObject) :
-		Tag array:
-	OnInterrupted_2491B74745BECED77F7B838860EC4602 (0-0-0-0): size 58 (cls: OnInterrupted_2491B74745BECED77F7B838860EC4602>Function>/Script/CoreUObject) :
-		Tag array:
-	OnReviveNotFinished (0-0-0-0): size 58 (cls: OnReviveNotFinished>Function>/Script/CoreUObject) :
-		Tag array:
 	CallFunc_CreatePlayMontageAndWaitProxy_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_CreatePlayMontageAndWaitProxy_ReturnValue>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	AIPawnBeingRevived (0-0-0-0): size 36 (cls: AIPawnBeingRevived>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_GetActivatingPawn_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetActivatingPawn_ReturnValue>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	CallFunc_GetActivatingPawn_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetActivatingPawn_ReturnValue1>ObjectProperty>/Script/CoreUObject) :
-		Tag array:
-	CallFunc_GetActivatingPawn_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_GetActivatingPawn_ReturnValue2>ObjectProperty>/Script/CoreUObject) :
-		Tag array:
-	CallFunc_GetActivatingPawn_ReturnValue3 (0-0-0-0): size 36 (cls: CallFunc_GetActivatingPawn_ReturnValue3>ObjectProperty>/Script/CoreUObject) :
-		Tag array:
 	K2Node_DynamicCast_AsFort_AIPawn (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_AIPawn>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
+	PawnBeingRevived (0-0-0-0): size 36 (cls: PawnBeingRevived>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_GetActivatingPawn_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetActivatingPawn_ReturnValue>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_K2_SetTimerDelegate_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_SetTimerDelegate_ReturnValue>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	K2Node_Event_EventData (0-0-0-0): size 36 (cls: K2Node_Event_EventData>StructProperty>/Script/CoreUObject) :
 		Tag array:

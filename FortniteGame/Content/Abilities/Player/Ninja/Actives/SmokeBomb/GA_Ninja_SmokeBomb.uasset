@@ -10,6 +10,7 @@ Name table:
 	/Game/Abilities/Player/Ninja/Actives/SmokeBomb/TT_Ninja_SmokeBomb
 	/Game/Abilities/Player/Ninja/Perks/SmokeBombHeals/GE_Ninja_SmokeBombHeals
 	/Game/Abilities/Player/Parents/GAT_ActiveAbility
+	/Game/Abilities/Player/Parents/GAT_ActiveAbility_Hero
 	/Game/Abilities/Player/Parents/GAT_NinjaActiveAbility
 	/Game/Abilities/Player/Perks/Leader/SlowReleaseBombs/GE_Perk_L_SlowReleaseBombs_DurationPerStack
 	/Game/Animation/Game/MainPlayer/Montages/Gadgets/SmokeBombThrow
@@ -40,6 +41,7 @@ Name table:
 	Ability.DamageSource.Ranged
 	Ability.Ninja.SmokeBomb
 	Ability.Ninja.SmokeBomb.Cost
+	Ability.Ninja.SmokeBomb.Radius
 	AbilityCosts
 	AbilitySystem
 	AbilitySystemBlueprintLibrary
@@ -111,11 +113,19 @@ Name table:
 	CallFunc_BooleanAND_ReturnValue
 	CallFunc_BooleanAND_ReturnValue1
 	CallFunc_BooleanOR_ReturnValue
+	CallFunc_CommitAbilityWithEvent_Passed
+	CallFunc_Conv_FloatToVector_ReturnValue
+	CallFunc_Conv_FloatToVector_ReturnValue1
+	CallFunc_Divide_FloatFloat_ReturnValue
+	CallFunc_Divide_FloatFloat_ReturnValue1
 	CallFunc_GetAbilitySystemComponent_ReturnValue
 	CallFunc_GetDefaultTargetingRotation_ReturnValue
 	CallFunc_GetGameplayEffectCount_ReturnValue
 	CallFunc_GetTransform_ReturnValue
 	CallFunc_GetValueAtLevel_ReturnValue
+	CallFunc_GetValueAtLevel_ReturnValue1
+	CallFunc_GetValueAtLevel_ReturnValue2
+	CallFunc_GetValueAtLevel_ReturnValue3
 	CallFunc_HasAllMatchingGameplayTags_ReturnValue
 	CallFunc_HasAllMatchingGameplayTags_ReturnValue1
 	CallFunc_HasAllMatchingGameplayTags_ReturnValue2
@@ -137,15 +147,18 @@ Name table:
 	CallFunc_IsOverlappingActor_ReturnValue
 	CallFunc_IsValid_ReturnValue
 	CallFunc_IsValid_ReturnValue1
-	CallFunc_K2_CommitAbility_ReturnValue
 	CallFunc_K2_GetActorLocation_ReturnValue
 	CallFunc_MakeGameplayEffectContainerSpec_ReturnValue
 	CallFunc_MakeGameplayEffectContainerSpec_ReturnValue1
+	CallFunc_MakeGameplayEffectContainerSpec_ReturnValue2
+	CallFunc_Multiply_FloatFloat_ReturnValue
 	CallFunc_Multiply_IntFloat_ReturnValue
 	CallFunc_PlayMontageInfoAndWaitForTrigger_ReturnValue
 	CallFunc_SpawnAreaOfEffectCloud_ReturnValue
 	CallFunc_SpawnAreaOfEffectCloud_ReturnValue1
+	CallFunc_SpawnAreaOfEffectCloud_ReturnValue2
 	CallFunc_SpawnProjectileAndWait_ReturnValue
+	CallFunc_Subtract_FloatFloat_ReturnValue
 	CallFunc_ThrowSmokeBomb_EffectSpec
 	CallFunc_ThrowSmokeBomb_Location
 	CallFunc_ThrowSmokeBomb_Requestor
@@ -158,11 +171,13 @@ Name table:
 	ClassProperty
 	CollisionCapsule0
 	CombatEffects_HeroAbilities
+	CommitAbilityWithEvent
 	Completed
 	Completed_3644944049E84BE80D314DBC53F664CB
 	ConeMinRadius
 	ConePitchAngle
 	ConeYawAngle
+	Conv_FloatToVector
 	CooldownGameplayEffectClass
 	CostSource
 	CostValue
@@ -193,6 +208,7 @@ Name table:
 	Default__Function
 	Default__GA_Ninja_SmokeBomb_C
 	Default__GAT_ActiveAbility_C
+	Default__GAT_ActiveAbility_Hero_C
 	Default__GAT_NinjaActiveAbility_C
 	Default__GE_Ninja_Assassination_Juice_C
 	Default__GE_Ninja_SmokeBomb_CloudUpgrade_C
@@ -213,6 +229,7 @@ Name table:
 	DelegateProperty
 	Destroyed
 	Destroyed_4C7C12404F5C962CA59DD49973166CB9
+	Divide_FloatFloat
 	EC_Assassination_Juice
 	EC_Heal
 	EC_PersistCloud
@@ -233,7 +250,12 @@ Name table:
 	EFortTargetSelectionShape::Sphere
 	EFortTargetSelectionTestType
 	EFortTargetSelectionTestType::Overlap
+	Endless_Smoke_T01
+	Endless_Smoke_T02
 	EndlessSmoke
+	EndlessSmokeMultipler
+	EndlessSmokeT01RadiusUpgrade
+	EndlessSmokeT02RadiusUpgrade
 	Engine
 	EntryPoint
 	EnumProperty
@@ -285,6 +307,7 @@ Name table:
 	GameplayTags
 	GameplayTask
 	GAT_ActiveAbility_C
+	GAT_ActiveAbility_Hero_C
 	GAT_NinjaActiveAbility_C
 	GC_ImpactFX
 	GE_Ninja_Assassination_Juice_C
@@ -301,21 +324,21 @@ Name table:
 	GetValueAtLevel
 	Granted.Abilities.Ninja.Perks.Smokebomb.AssassinationJuice
 	Granted.Abilities.Ninja.Perks.Smokebomb.EndlessSmoke
+	Granted.Perk.EndlessSmoke.T01
+	Granted.Perk.EndlessSmoke.T02
+	Granted.Perk.MedicinalFumes.T01
 	Granted.Perk.SlowReleaseBombs.T01
 	Gravity
 	HalfExtents
 	HasAllMatchingGameplayTags
-	HeroLoadoutSystem
 	IncreasedRadius
 	IncreasedSize
 	InterfaceProperty
 	IntProperty
-	isAutoCommitted
 	IsOverlappingActor
 	IsValid
 	ItemDefinition
 	K2_ActivateAbility
-	K2_CommitAbility
 	K2_EndAbility
 	K2_ExecuteGameplayCue
 	K2_GetActorLocation
@@ -354,9 +377,11 @@ Name table:
 	Location
 	MakeGameplayEffectContainerSpec
 	MaxTargets
+	MedicinalFumes_T01
 	MontageInfo
 	MontageToPlay
 	MulticastDelegateProperty
+	Multiply_FloatFloat
 	Multiply_IntFloat
 	NameProperty
 	Ninja_SmokeBomb
@@ -370,6 +395,7 @@ Name table:
 	Package
 	ParticleSystemComponent
 	ParticleSystemComponent_27647__BE76D04E
+	Perk.EndlessSmoke.T02.Radius
 	Perk.SlowReleaseBombs.T01.DurationPerStack
 	PersistDuration
 	PlayMontageInfoAndWaitForTrigger
@@ -406,6 +432,7 @@ Name table:
 	SmokeBombHeals
 	SmokeBombSize
 	SmokeBombThrow
+	SmokeDefaultRadius
 	SmokePP_GEN_VARIABLE
 	Smokescreen
 	SpawnAreaOfEffectCloud
@@ -419,6 +446,7 @@ Name table:
 	Stopped_4C7C12404F5C962CA59DD49973166CB9
 	StrProperty
 	StructProperty
+	Subtract_FloatFloat
 	T_EventActivate
 	T_EventDeactivate
 	TagName
@@ -431,7 +459,10 @@ Name table:
 	TC_Assassination_Juice
 	TC_DeepPockets
 	TC_Endless_Smoke
+	TC_EndlessSmoke_T01
+	TC_EndlessSmoke_T02
 	TC_ExtraLongFuse
+	TC_MedicinalFumes_T01
 	TC_NowYouSeeMe
 	TC_SlowReleaseBombs_T01
 	TC_SmokeBombHeals
@@ -461,6 +492,7 @@ Name table:
 	UberGraphFunction
 	UpgradeDuration
 	UpInSmoke
+	UseHeroLoadoutSystem
 	UtilityBelt
 	Value
 	Vector
@@ -487,9 +519,11 @@ Import table:
 	TT_Ninja_SmokeBomb_C (BlueprintGeneratedClass)
 	GE_Ninja_SmokeBombHeals_C (BlueprintGeneratedClass)
 	GAT_ActiveAbility_C (BlueprintGeneratedClass)
+	GAT_ActiveAbility_Hero_C (BlueprintGeneratedClass)
 	GAT_NinjaActiveAbility_C (BlueprintGeneratedClass)
 	GE_Perk_L_SlowReleaseBombs_DurationPerStack_C (BlueprintGeneratedClass)
 	Default__BlueprintGeneratedClass (BlueprintGeneratedClass)
+	UseHeroLoadoutSystem (BoolProperty)
 	Default__BoolProperty (BoolProperty)
 	CapsuleComponent_2 (CapsuleComponent)
 	CapsuleComponent_2 (CapsuleComponent)
@@ -544,7 +578,11 @@ Import table:
 	Add_VectorVector (Function)
 	BooleanAND (Function)
 	BooleanOR (Function)
+	Conv_FloatToVector (Function)
+	Divide_FloatFloat (Function)
+	Multiply_FloatFloat (Function)
 	Multiply_IntFloat (Function)
+	Subtract_FloatFloat (Function)
 	TransformLocation (Function)
 	Delay (Function)
 	IsValid (Function)
@@ -559,6 +597,7 @@ Import table:
 	HasAllMatchingGameplayTags (Function)
 	ReadyForActivation (Function)
 	Default__GAT_ActiveAbility_C (GAT_ActiveAbility_C)
+	Default__GAT_ActiveAbility_Hero_C (GAT_ActiveAbility_Hero_C)
 	Default__GAT_NinjaActiveAbility_C (GAT_NinjaActiveAbility_C)
 	Default__GE_Ninja_Assassination_Juice_C (GE_Ninja_Assassination_Juice_C)
 	Default__GE_Ninja_SmokeBomb_CloudUpgrade_C (GE_Ninja_SmokeBomb_CloudUpgrade_C)
@@ -591,6 +630,7 @@ Import table:
 	/Game/Abilities/Player/Ninja/Actives/SmokeBomb/TT_Ninja_SmokeBomb (Package)
 	/Game/Abilities/Player/Ninja/Perks/SmokeBombHeals/GE_Ninja_SmokeBombHeals (Package)
 	/Game/Abilities/Player/Parents/GAT_ActiveAbility (Package)
+	/Game/Abilities/Player/Parents/GAT_ActiveAbility_Hero (Package)
 	/Game/Abilities/Player/Parents/GAT_NinjaActiveAbility (Package)
 	/Game/Abilities/Player/Perks/Leader/SlowReleaseBombs/GE_Perk_L_SlowReleaseBombs_DurationPerStack (Package)
 	/Game/Animation/Game/MainPlayer/Montages/Gadgets/SmokeBombThrow (Package)
@@ -638,11 +678,11 @@ Import table:
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	GA_Ninja_SmokeBomb_C (0-0-0-0): size 594 (cls: GA_Ninja_SmokeBomb_C>BlueprintGeneratedClass>/Script/Engine) :
+	GA_Ninja_SmokeBomb_C (0-0-0-0): size 630 (cls: GA_Ninja_SmokeBomb_C>BlueprintGeneratedClass>/Script/Engine) :
 		Tag array:
 			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=GA_Ninja_SmokeBomb_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_GA_Ninja_SmokeBomb=GA_Ninja_SmokeBomb_C 
-	Default__GA_Ninja_SmokeBomb_C (0-0-0-0): size 15277 (cls: Default__GA_Ninja_SmokeBomb_C>GA_Ninja_SmokeBomb_C) :
+	Default__GA_Ninja_SmokeBomb_C (0-0-0-0): size 16049 (cls: Default__GA_Ninja_SmokeBomb_C>GA_Ninja_SmokeBomb_C) :
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			P_SmokeBomb(ObjectProperty)=B_Prj_Ninja_SmokeBomb_C=/Game/Abilities/Player/Ninja/Actives/SmokeBomb/B_Prj_Ninja_SmokeBomb 
@@ -685,7 +725,12 @@ Serialized exports:
 			TC_SlowReleaseBombs_T01(StructProperty)=GameplayTagContainer:Granted.Perk.SlowReleaseBombs.T01 
 			Row_SlowReleaseBombs_DurationPerStack(StructProperty)=System.Byte[] 
 			GE_SlowReleaseBombs_DurationPerStack(ObjectProperty)=GE_Perk_L_SlowReleaseBombs_DurationPerStack_C=/Game/Abilities/Player/Perks/Leader/SlowReleaseBombs/GE_Perk_L_SlowReleaseBombs_DurationPerStack 
-			isAutoCommitted(BoolProperty)=False 
+			TC_EndlessSmoke_T01(StructProperty)=GameplayTagContainer:Granted.Perk.EndlessSmoke.T01 
+			SmokeDefaultRadius(StructProperty)=System.Byte[] 
+			EndlessSmokeT01RadiusUpgrade(StructProperty)=System.Byte[] 
+			TC_EndlessSmoke_T02(StructProperty)=GameplayTagContainer:Granted.Perk.EndlessSmoke.T02 
+			EndlessSmokeT02RadiusUpgrade(StructProperty)=System.Byte[] 
+			TC_MedicinalFumes_T01(StructProperty)=GameplayTagContainer:Granted.Perk.MedicinalFumes.T01 
 			EffectContainers(StructProperty)=System.Byte[] 
 			EffectContainers(StructProperty)=System.Byte[] 
 			EffectContainers(StructProperty)=System.Byte[] 
@@ -701,7 +746,7 @@ Serialized exports:
 		Tag array:
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject) :
 		Tag array:
-	ExecuteUbergraph_GA_Ninja_SmokeBomb (0-0-0-0): size 2702 (cls: ExecuteUbergraph_GA_Ninja_SmokeBomb>Function>/Script/CoreUObject) :
+	ExecuteUbergraph_GA_Ninja_SmokeBomb (0-0-0-0): size 2935 (cls: ExecuteUbergraph_GA_Ninja_SmokeBomb>Function>/Script/CoreUObject) :
 		Tag array:
 	K2_ActivateAbility (0-0-0-0): size 58 (cls: K2_ActivateAbility>Function>/Script/CoreUObject) :
 		Tag array:
@@ -755,13 +800,29 @@ Serialized exports:
 		Tag array:
 	AbilitySystemIn (0-0-0-0): size 36 (cls: AbilitySystemIn>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	ActiveAbilitySetup (0-0-0-0): size 157 (cls: ActiveAbilitySetup>Function>/Script/CoreUObject) :
+	ActiveAbilitySetup (0-0-0-0): size 1011 (cls: ActiveAbilitySetup>Function>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_HasAllMatchingGameplayTags_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasAllMatchingGameplayTags_ReturnValue>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_HasAllMatchingGameplayTags_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_HasAllMatchingGameplayTags_ReturnValue1>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_HasAllMatchingGameplayTags_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_HasAllMatchingGameplayTags_ReturnValue2>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_HasAllMatchingGameplayTags_ReturnValue3 (0-0-0-0): size 34 (cls: CallFunc_HasAllMatchingGameplayTags_ReturnValue3>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	Temp_bool_Variable1 (0-0-0-0): size 34 (cls: Temp_bool_Variable1>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	Temp_bool_Variable2 (0-0-0-0): size 34 (cls: Temp_bool_Variable2>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	AssassinationJuice (0-0-0-0): size 34 (cls: AssassinationJuice>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	DeepPockets (0-0-0-0): size 34 (cls: DeepPockets>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	Endless_Smoke_T01 (0-0-0-0): size 34 (cls: Endless_Smoke_T01>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	Endless_Smoke_T02 (0-0-0-0): size 34 (cls: Endless_Smoke_T02>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	EndlessSmoke (0-0-0-0): size 34 (cls: EndlessSmoke>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -773,13 +834,13 @@ Serialized exports:
 		Tag array:
 	CallFunc_BooleanOR_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanOR_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_CommitAbilityWithEvent_Passed (0-0-0-0): size 34 (cls: CallFunc_CommitAbilityWithEvent_Passed>BoolProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_IsOverlappingActor_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsOverlappingActor_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_IsValid_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue1>BoolProperty>/Script/CoreUObject) :
-		Tag array:
-	CallFunc_K2_CommitAbility_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_K2_CommitAbility_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -795,7 +856,7 @@ Serialized exports:
 		Tag array:
 	ExtraLongFuse (0-0-0-0): size 34 (cls: ExtraLongFuse>BoolProperty>/Script/CoreUObject) :
 		Tag array:
-	HeroLoadoutSystem (0-0-0-0): size 34 (cls: HeroLoadoutSystem>BoolProperty>/Script/CoreUObject) :
+	MedicinalFumes_T01 (0-0-0-0): size 34 (cls: MedicinalFumes_T01>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	NowYouSeeMe (0-0-0-0): size 34 (cls: NowYouSeeMe>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -859,9 +920,33 @@ Serialized exports:
 		Tag array:
 	K2Node_CreateDelegate_OutputDelegate8 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate8>DelegateProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_Add_FloatFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Add_FloatFloat_ReturnValue>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Divide_FloatFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Divide_FloatFloat_ReturnValue>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Divide_FloatFloat_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Divide_FloatFloat_ReturnValue1>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_GetValueAtLevel_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetValueAtLevel_ReturnValue>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_GetValueAtLevel_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_GetValueAtLevel_ReturnValue1>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_GetValueAtLevel_ReturnValue2 (0-0-0-0): size 32 (cls: CallFunc_GetValueAtLevel_ReturnValue2>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_GetValueAtLevel_ReturnValue3 (0-0-0-0): size 32 (cls: CallFunc_GetValueAtLevel_ReturnValue3>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Multiply_FloatFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Multiply_FloatFloat_ReturnValue>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Subtract_FloatFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Subtract_FloatFloat_ReturnValue>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	K2Node_Select2_Default (0-0-0-0): size 32 (cls: K2Node_Select2_Default>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	K2Node_Select_Default (0-0-0-0): size 32 (cls: K2Node_Select_Default>FloatProperty>/Script/CoreUObject) :
+		Tag array:
 	DefaultDuration (0-0-0-0): size 32 (cls: DefaultDuration>FloatProperty>/Script/CoreUObject) :
 		Tag array:
 	DefaultRadius (0-0-0-0): size 32 (cls: DefaultRadius>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	EndlessSmokeMultipler (0-0-0-0): size 32 (cls: EndlessSmokeMultipler>FloatProperty>/Script/CoreUObject) :
 		Tag array:
 	Failsafe_Delay (0-0-0-0): size 32 (cls: Failsafe_Delay>FloatProperty>/Script/CoreUObject) :
 		Tag array:
@@ -884,6 +969,12 @@ Serialized exports:
 	Speed (0-0-0-0): size 32 (cls: Speed>FloatProperty>/Script/CoreUObject) :
 		Tag array:
 	UpgradeDuration (0-0-0-0): size 32 (cls: UpgradeDuration>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_HasAllMatchingGameplayTags_TagContainerInterface1_CastInput (0-0-0-0): size 36 (cls: CallFunc_HasAllMatchingGameplayTags_TagContainerInterface1_CastInput>InterfaceProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_HasAllMatchingGameplayTags_TagContainerInterface2_CastInput (0-0-0-0): size 36 (cls: CallFunc_HasAllMatchingGameplayTags_TagContainerInterface2_CastInput>InterfaceProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_HasAllMatchingGameplayTags_TagContainerInterface3_CastInput (0-0-0-0): size 36 (cls: CallFunc_HasAllMatchingGameplayTags_TagContainerInterface3_CastInput>InterfaceProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_HasAllMatchingGameplayTags_TagContainerInterface_CastInput (0-0-0-0): size 36 (cls: CallFunc_HasAllMatchingGameplayTags_TagContainerInterface_CastInput>InterfaceProperty>/Script/CoreUObject) :
 		Tag array:
@@ -923,6 +1014,8 @@ Serialized exports:
 		Tag array:
 	CallFunc_SpawnAreaOfEffectCloud_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_SpawnAreaOfEffectCloud_ReturnValue1>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_SpawnAreaOfEffectCloud_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_SpawnAreaOfEffectCloud_ReturnValue2>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_SpawnProjectileAndWait_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_SpawnProjectileAndWait_ReturnValue>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_ThrowSmokeBomb_Requestor (0-0-0-0): size 36 (cls: CallFunc_ThrowSmokeBomb_Requestor>ObjectProperty>/Script/CoreUObject) :
@@ -932,6 +1025,12 @@ Serialized exports:
 	K2Node_DynamicCast_AsAOE_Ninja_Smoke_Bomb_Cloud_Heal (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsAOE_Ninja_Smoke_Bomb_Cloud_Heal>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_GetAbilitySystemComponent_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetAbilitySystemComponent_ReturnValue>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Conv_FloatToVector_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_Conv_FloatToVector_ReturnValue>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Conv_FloatToVector_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_Conv_FloatToVector_ReturnValue1>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	K2Node_Select1_Default (0-0-0-0): size 36 (cls: K2Node_Select1_Default>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	AOESize (0-0-0-0): size 36 (cls: AOESize>StructProperty>/Script/CoreUObject) :
 		Tag array:
@@ -946,6 +1045,10 @@ Serialized exports:
 	EC_PersistCloud (0-0-0-0): size 36 (cls: EC_PersistCloud>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	EC_SmokeBombHeal_And_Assassination_Juice (0-0-0-0): size 36 (cls: EC_SmokeBombHeal_And_Assassination_Juice>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	EndlessSmokeT01RadiusUpgrade (0-0-0-0): size 36 (cls: EndlessSmokeT01RadiusUpgrade>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	EndlessSmokeT02RadiusUpgrade (0-0-0-0): size 36 (cls: EndlessSmokeT02RadiusUpgrade>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	Event_Smokescreen (0-0-0-0): size 36 (cls: Event_Smokescreen>StructProperty>/Script/CoreUObject) :
 		Tag array:
@@ -964,6 +1067,8 @@ Serialized exports:
 	CallFunc_MakeGameplayEffectContainerSpec_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_MakeGameplayEffectContainerSpec_ReturnValue>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_MakeGameplayEffectContainerSpec_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_MakeGameplayEffectContainerSpec_ReturnValue1>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_MakeGameplayEffectContainerSpec_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_MakeGameplayEffectContainerSpec_ReturnValue2>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_ThrowSmokeBomb_EffectSpec (0-0-0-0): size 36 (cls: CallFunc_ThrowSmokeBomb_EffectSpec>StructProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1021,6 +1126,8 @@ Serialized exports:
 		Tag array:
 	SmokeBombSize (0-0-0-0): size 36 (cls: SmokeBombSize>StructProperty>/Script/CoreUObject) :
 		Tag array:
+	SmokeDefaultRadius (0-0-0-0): size 36 (cls: SmokeDefaultRadius>StructProperty>/Script/CoreUObject) :
+		Tag array:
 	T_EventActivate (0-0-0-0): size 36 (cls: T_EventActivate>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	T_EventDeactivate (0-0-0-0): size 36 (cls: T_EventDeactivate>StructProperty>/Script/CoreUObject) :
@@ -1031,7 +1138,13 @@ Serialized exports:
 		Tag array:
 	TC_Endless_Smoke (0-0-0-0): size 36 (cls: TC_Endless_Smoke>StructProperty>/Script/CoreUObject) :
 		Tag array:
+	TC_EndlessSmoke_T01 (0-0-0-0): size 36 (cls: TC_EndlessSmoke_T01>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	TC_EndlessSmoke_T02 (0-0-0-0): size 36 (cls: TC_EndlessSmoke_T02>StructProperty>/Script/CoreUObject) :
+		Tag array:
 	TC_ExtraLongFuse (0-0-0-0): size 36 (cls: TC_ExtraLongFuse>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	TC_MedicinalFumes_T01 (0-0-0-0): size 36 (cls: TC_MedicinalFumes_T01>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	TC_NowYouSeeMe (0-0-0-0): size 36 (cls: TC_NowYouSeeMe>StructProperty>/Script/CoreUObject) :
 		Tag array:

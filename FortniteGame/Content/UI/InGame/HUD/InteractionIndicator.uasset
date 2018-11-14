@@ -43,6 +43,7 @@ Name table:
 	/Game/UI/InGame/HUD/InteractionIndicator
 	/Game/UI/InGame/HUD/InteractionIndicator.WidgetArchetype
 	/Game/UI/InGame/KeybindWidget/KeybindWidget
+	/Game/UI/InGame/Traps/DefenderLimitDisplay
 	/Game/UI/Tooltips/Textures/Tooltip-Buff-Arrow
 	/Script/BlueprintContext
 	/Script/CommonUI
@@ -135,6 +136,7 @@ Name table:
 	Default__CommonBorder
 	Default__CommonNumericTextBlock
 	Default__CommonTextBlock
+	Default__DefenderLimitDisplay_C
 	Default__DelegateProperty
 	Default__EnumProperty
 	Default__FortActorIndicatorWidget
@@ -195,6 +197,10 @@ Name table:
 	Default__WidgetSwitcherSlot
 	Default__WidgetTree
 	DefenderItemCard
+	DefenderLimitBox
+	DefenderLimitDisplay
+	DefenderLimitDisplay_C
+	DefenderLimitText
 	DefenderSelection
 	DefenderSlotEmpty
 	DelegateFunction
@@ -588,6 +594,7 @@ Import table:
 	Default__CommonBorder (CommonBorder)
 	Default__CommonNumericTextBlock (CommonNumericTextBlock)
 	Default__CommonTextBlock (CommonTextBlock)
+	Default__DefenderLimitDisplay_C (DefenderLimitDisplay_C)
 	OnCanInteract__DelegateSignature (DelegateFunction)
 	OnInteractUpdated__DelegateSignature (DelegateFunction)
 	OnKeybindsChangedDelegate__DelegateSignature (DelegateFunction)
@@ -696,6 +703,7 @@ Import table:
 	/Game/UI/InGame/HUD/HUD-PickupItemWidget (Package)
 	/Game/UI/InGame/HUD/Interaction_DefenderBeacon (Package)
 	/Game/UI/InGame/KeybindWidget/KeybindWidget (Package)
+	/Game/UI/InGame/Traps/DefenderLimitDisplay (Package)
 	/Game/UI/Tooltips/Textures/Tooltip-Buff-Arrow (Package)
 	/Script/BlueprintContext (Package)
 	/Script/CommonUI (Package)
@@ -751,6 +759,7 @@ Import table:
 	HUD-PickupItemWidget_C (WidgetBlueprintGeneratedClass)
 	Interaction_DefenderBeacon_C (WidgetBlueprintGeneratedClass)
 	KeybindWidget_C (WidgetBlueprintGeneratedClass)
+	DefenderLimitDisplay_C (WidgetBlueprintGeneratedClass)
 	Default__WidgetBlueprintGeneratedClass (WidgetBlueprintGeneratedClass)
 	Default__WidgetSwitcher (WidgetSwitcher)
 	Default__WidgetSwitcherSlot (WidgetSwitcherSlot)
@@ -1035,6 +1044,12 @@ Serialized exports:
 			Text(TextProperty)=Unable to deploy! (936E563D461D0A375EC3FEBCBD0E389B) 
 			Font(StructProperty)=System.Byte[] 
 			Slot(ObjectProperty)=VerticalBoxSlot_4=WidgetArchetype 
+	DefenderLimitText (0-0-0-0): size 284 (cls: DefenderLimitText>CommonTextBlock>/Script/CommonUI) :
+		Tag array:
+			Style(ObjectProperty)=TextStyle-Base-S-B_C=/Game/UI/Foundation/Text/TextStyle-Base-S-B 
+			Text(TextProperty)=Defender Limit {Limit} (54227E134AF5D9037CC8BEAEFAD1A356) 
+			Font(StructProperty)=System.Byte[] 
+			bIsVariable(BoolProperty)=True 
 	ErrorTextBlock (0-0-0-0): size 270 (cls: ErrorTextBlock>CommonTextBlock>/Script/CommonUI) :
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-S_C=/Game/UI/Foundation/Text/TextStyle-Base-S 
@@ -1049,6 +1064,12 @@ Serialized exports:
 			Font(StructProperty)=System.Byte[] 
 			Slot(ObjectProperty)=VerticalBoxSlot_1=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
+	DefenderLimitDisplay (0-0-0-0): size 125 (cls: DefenderLimitDisplay>DefenderLimitDisplay_C>/Game/UI/InGame/Traps/DefenderLimitDisplay) :
+		Tag array:
+			DefenderLimitText(ObjectProperty)=DefenderLimitText=WidgetArchetype 
+			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
+			bCookedWidgetTree(BoolProperty)=True 
+			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 	K2Node_CreateDelegate_OutputDelegate (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate>DelegateProperty>/Script/CoreUObject) :
 		Tag array:
 	K2Node_CreateDelegate_OutputDelegate1 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate1>DelegateProperty>/Script/CoreUObject) :
@@ -1202,6 +1223,10 @@ Serialized exports:
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=OverlaySlot_3=WidgetArchetype 
+	DefenderLimitBox (0-0-0-0): size 82 (cls: DefenderLimitBox>HorizontalBox>/Script/UMG) :
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=VerticalBoxSlot_2=WidgetArchetype 
 	InteractBox (0-0-0-0): size 112 (cls: InteractBox>HorizontalBox>/Script/UMG) :
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -1366,6 +1391,10 @@ Serialized exports:
 			VerticalAlignment(ByteProperty)=VAlign_Center 
 			Parent(ObjectProperty)=UpgradeAndLevelBox=WidgetArchetype 
 			Content(ObjectProperty)=UpgradeIndicator=WidgetArchetype 
+	HorizontalBoxSlot_0 (0-0-0-0): size 70 (cls: HorizontalBoxSlot_0>HorizontalBoxSlot>/Script/UMG) :
+		Tag array:
+			Parent(ObjectProperty)=DefenderLimitBox=WidgetArchetype 
+			Content(ObjectProperty)=DefenderLimitDisplay=WidgetArchetype 
 	HorizontalBoxSlot_7 (0-0-0-0): size 152 (cls: HorizontalBoxSlot_7>HorizontalBoxSlot>/Script/UMG) :
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Left 
@@ -1472,13 +1501,14 @@ Serialized exports:
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
 			Slot(ObjectProperty)=HorizontalBoxSlot_7=WidgetArchetype 
-	Interaction_DefenderBeacon (0-0-0-0): size 746 (cls: Interaction_DefenderBeacon>Interaction_DefenderBeacon_C>/Game/UI/InGame/HUD/Interaction_DefenderBeacon) :
+	Interaction_DefenderBeacon (0-0-0-0): size 775 (cls: Interaction_DefenderBeacon>Interaction_DefenderBeacon_C>/Game/UI/InGame/HUD/Interaction_DefenderBeacon) :
 		Tag array:
 			AmmoItemCard(ObjectProperty)=AmmoItemCard=WidgetArchetype 
 			AmmoSelection(ObjectProperty)=AmmoSelection=WidgetArchetype 
 			AmmoSlot(ObjectProperty)=AmmoSlot=WidgetArchetype 
 			AmmoSlotLocked(ObjectProperty)=AmmoSlotLocked=WidgetArchetype 
 			DefenderItemCard(ObjectProperty)=DefenderItemCard=WidgetArchetype 
+			DefenderLimitDisplay(ObjectProperty)=DefenderLimitDisplay=WidgetArchetype 
 			DefenderSelection(ObjectProperty)=DefenderSelection=WidgetArchetype 
 			DefenderSlotEmpty(ObjectProperty)=DefenderSlotEmpty=WidgetArchetype 
 			ErrorTextBlock(ObjectProperty)=ErrorTextBlock=WidgetArchetype 
@@ -2023,7 +2053,7 @@ Serialized exports:
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=HorizontalBoxSlot_2=WidgetArchetype 
-	VerticalBox_2 (0-0-0-0): size 61 (cls: VerticalBox_2>VerticalBox>/Script/UMG) :
+	VerticalBox_2 (0-0-0-0): size 65 (cls: VerticalBox_2>VerticalBox>/Script/UMG) :
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 	InteractionKeybindBox (0-0-0-0): size 112 (cls: InteractionKeybindBox>VerticalBox>/Script/UMG) :
@@ -2084,6 +2114,10 @@ Serialized exports:
 			Padding(StructProperty)=System.Byte[] 
 			Parent(ObjectProperty)=VerticalBox_2=WidgetArchetype 
 			Content(ObjectProperty)=ItemHBox=WidgetArchetype 
+	VerticalBoxSlot_2 (0-0-0-0): size 70 (cls: VerticalBoxSlot_2>VerticalBoxSlot>/Script/UMG) :
+		Tag array:
+			Parent(ObjectProperty)=VerticalBox_2=WidgetArchetype 
+			Content(ObjectProperty)=DefenderLimitBox=WidgetArchetype 
 	VerticalBoxSlot_6 (0-0-0-0): size 214 (cls: VerticalBoxSlot_6>VerticalBoxSlot>/Script/UMG) :
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
@@ -2146,5 +2180,8 @@ Serialized exports:
 	WidgetTree_0 (0-0-0-0): size 41 (cls: WidgetTree_0>WidgetTree>/Script/UMG) :
 		Tag array:
 			RootWidget(ObjectProperty)=VerticalBox_2=WidgetArchetype 
+	WidgetTree_0 (0-0-0-0): size 41 (cls: WidgetTree_0>WidgetTree>/Script/UMG) :
+		Tag array:
+			RootWidget(ObjectProperty)=DefenderLimitText=WidgetArchetype 
 	WidgetTree_0 (0-0-0-0): size 12 (cls: WidgetTree_0>WidgetTree>/Script/UMG) :
 		Tag array:

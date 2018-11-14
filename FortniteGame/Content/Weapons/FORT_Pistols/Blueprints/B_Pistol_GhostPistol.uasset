@@ -29,6 +29,7 @@ Name table:
 	/Script/Engine
 	/Script/FortniteGame
 	Activate
+	ActorComponentTickFunction
 	AllNodes
 	AnimBlueprintGeneratedClass
 	AnimClass
@@ -52,11 +53,9 @@ Name table:
 	BlueprintGeneratedClass
 	BodyInstance
 	BoolProperty
+	bStartWithTickEnabled
 	ByteProperty
 	CallFunc_EqualEqual_ByteByte_ReturnValue
-	CallFunc_EqualEqual_ObjectObject_ReturnValue
-	CallFunc_GetBaseMaterial_ReturnValue
-	CallFunc_GetMaterial_ReturnValue
 	Camera
 	ChangedPropertyList
 	Channel
@@ -70,6 +69,7 @@ Name table:
 	ComponentOverrideRecord
 	ComponentTemplate
 	CookedComponentInstancingData
+	CosmeticMod
 	Cylindrical Height
 	Cylindrical Radius
 	Default__B_Pistol_Generic_C
@@ -96,6 +96,7 @@ Name table:
 	DefaultSceneRootNode
 	Degraded
 	Delay
+	DynamicMaterialInstance
 	ECC_WorldStatic
 	ECollisionChannel
 	ECollisionEnabled
@@ -108,22 +109,23 @@ Name table:
 	EntryPoint
 	Enum
 	EqualEqual_ByteByte
-	EqualEqual_ObjectObject
 	ExecuteUbergraph_B_Pistol_GhostPistol
 	FireAudioChannels
 	FloatProperty
+	FortCosmeticModification
 	FortWeapon
 	Function
 	Game
-	GetBaseMaterial
-	GetMaterial
 	Ghost_Pistol_Reload_Open_Cue
+	GhostPistolMaterial
 	Guid
 	ImpactPhysicalSurfaceEffects
 	ImpactPhysicalSurfaceSounds
 	InheritableComponentHandler
 	InternalVariableName
 	IntProperty
+	K2Node_Event_CosmeticMod
+	K2Node_Event_DynamicMaterialInstance
 	K2Node_Event_ReloadStage
 	KismetMathLibrary
 	KismetSystemLibrary
@@ -134,7 +136,7 @@ Name table:
 	M_GhostFlame_GEN_VARIABLE
 	MassInKgOverride
 	Material
-	MaterialInterface
+	MaterialInstanceDynamic
 	MovementComp_Tracer
 	MTL_Bullet_Impact_Ricochet_Heavy_Cue
 	Muzzle
@@ -152,7 +154,9 @@ Name table:
 	Object
 	ObjectProperty
 	ObjectType
+	OnInitCosmeticAlterations
 	OnPlayReloadFX
+	OnWeaponAttached
 	OverrideMaterials
 	OwnerClass
 	P_Ghost_MF
@@ -174,10 +178,10 @@ Name table:
 	Pistol_Revolver_SideAction_Reload_WMM
 	PointerToUberGraphFrame
 	PostProcessComponent
+	PrimaryComponentTick
 	PrimaryFireSound
 	PropertyName
 	PropertyScope
-	ReceiveBeginPlay
 	Records
 	RelativeLocation
 	RelativeRotation
@@ -287,8 +291,7 @@ Import table:
 	InheritableComponentHandler (Class)
 	KismetMathLibrary (Class)
 	KismetSystemLibrary (Class)
-	Material (Class)
-	MaterialInterface (Class)
+	MaterialInstanceDynamic (Class)
 	ParticleSystemComponent (Class)
 	SceneComponent (Class)
 	SCS_Node (Class)
@@ -296,14 +299,13 @@ Import table:
 	StaticMeshComponent (Class)
 	FortWeapon (Class)
 	EFortReloadFXState (Enum)
+	OnInitCosmeticAlterations (Function)
 	OnPlayReloadFX (Function)
-	ReceiveBeginPlay (Function)
+	OnWeaponAttached (Function)
 	UserConstructionScript (Function)
 	Default__Function (Function)
 	EqualEqual_ByteByte (Function)
-	EqualEqual_ObjectObject (Function)
 	Delay (Function)
-	GetBaseMaterial (Function)
 	SetVisibility (Function)
 	Default__InheritableComponentHandler (InheritableComponentHandler)
 	Default__IntProperty (IntProperty)
@@ -359,11 +361,13 @@ Import table:
 	Default__SceneComponent (SceneComponent)
 	Rotator (ScriptStruct)
 	Vector (ScriptStruct)
+	ActorComponentTickFunction (ScriptStruct)
 	BodyInstance (ScriptStruct)
 	CollisionResponse (ScriptStruct)
 	LatentActionInfo (ScriptStruct)
 	PointerToUberGraphFrame (ScriptStruct)
 	ResponseChannel (ScriptStruct)
+	FortCosmeticModification (ScriptStruct)
 	Default__SCS_Node (SCS_Node)
 	Default__SimpleConstructionScript (SimpleConstructionScript)
 	SK_GhostPistol (SkeletalMesh)
@@ -387,16 +391,17 @@ Import table:
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	B_Pistol_GhostPistol_C (0-0-0-0): size 306 (cls: B_Pistol_GhostPistol_C>BlueprintGeneratedClass>/Script/Engine) :
+	B_Pistol_GhostPistol_C (0-0-0-0): size 326 (cls: B_Pistol_GhostPistol_C>BlueprintGeneratedClass>/Script/Engine) :
 		Tag array:
 			bHasCookedComponentInstancingData(BoolProperty)=True 
 			SimpleConstructionScript(ObjectProperty)=SimpleConstructionScript_0__57659476=B_Pistol_GhostPistol_C 
 			InheritableComponentHandler(ObjectProperty)=InheritableComponentHandler=B_Pistol_GhostPistol_C 
 			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=B_Pistol_GhostPistol_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_B_Pistol_GhostPistol=B_Pistol_GhostPistol_C 
-	Default__B_Pistol_GhostPistol_C (0-0-0-0): size 1186 (cls: Default__B_Pistol_GhostPistol_C>B_Pistol_GhostPistol_C) :
+	Default__B_Pistol_GhostPistol_C (0-0-0-0): size 1215 (cls: Default__B_Pistol_GhostPistol_C>B_Pistol_GhostPistol_C) :
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
+			GhostPistolMaterial(ObjectProperty)=M_Ghost_Pistol=/Game/Weapons/FORT_Pistols/Materials/M_Ghost_Pistol 
 			MuzzleParticleSystem(ObjectProperty)=P_Ghost_MF=/Game/Weapons/FORT_Pistols/Effects/Muzzle/P_Ghost_MF 
 			Shells Socket Name(NameProperty)=ShellsReload 
 			ShellTypeSelect(ByteProperty)=En_ShellTypes_01::NewEnumerator2 
@@ -452,30 +457,34 @@ Serialized exports:
 		Tag array:
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject) :
 		Tag array:
-	ExecuteUbergraph_B_Pistol_GhostPistol (0-0-0-0): size 445 (cls: ExecuteUbergraph_B_Pistol_GhostPistol>Function>/Script/CoreUObject) :
+	ExecuteUbergraph_B_Pistol_GhostPistol (0-0-0-0): size 353 (cls: ExecuteUbergraph_B_Pistol_GhostPistol>Function>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_EqualEqual_ByteByte_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ByteByte_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
-	CallFunc_EqualEqual_ObjectObject_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ObjectObject_ReturnValue>BoolProperty>/Script/CoreUObject) :
-		Tag array:
 	K2Node_Event_ReloadStage (0-0-0-0): size 36 (cls: K2Node_Event_ReloadStage>ByteProperty>/Script/CoreUObject) :
+		Tag array:
+	CosmeticMod (0-0-0-0): size 36 (cls: CosmeticMod>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	OnInitCosmeticAlterations (0-0-0-0): size 86 (cls: OnInitCosmeticAlterations>Function>/Script/CoreUObject) :
+		Tag array:
+	OnWeaponAttached (0-0-0-0): size 58 (cls: OnWeaponAttached>Function>/Script/CoreUObject) :
 		Tag array:
 	OnPlayReloadFX (0-0-0-0): size 72 (cls: OnPlayReloadFX>Function>/Script/CoreUObject) :
 		Tag array:
 	ReloadStage (0-0-0-0): size 36 (cls: ReloadStage>ByteProperty>/Script/CoreUObject) :
 		Tag array:
-	ReceiveBeginPlay (0-0-0-0): size 58 (cls: ReceiveBeginPlay>Function>/Script/CoreUObject) :
-		Tag array:
 	UserConstructionScript (0-0-0-0): size 49 (cls: UserConstructionScript>Function>/Script/CoreUObject) :
 		Tag array:
-	InheritableComponentHandler (0-0-0-0): size 1507 (cls: InheritableComponentHandler>InheritableComponentHandler>/Script/Engine) :
+	InheritableComponentHandler (0-0-0-0): size 1705 (cls: InheritableComponentHandler>InheritableComponentHandler>/Script/Engine) :
 		Tag array:
 			Records(ArrayProperty)=[object] (inner: StructProperty)
-	CallFunc_GetBaseMaterial_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetBaseMaterial_ReturnValue>ObjectProperty>/Script/CoreUObject) :
+	K2Node_Event_DynamicMaterialInstance (0-0-0-0): size 36 (cls: K2Node_Event_DynamicMaterialInstance>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	CallFunc_GetMaterial_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetMaterial_ReturnValue>ObjectProperty>/Script/CoreUObject) :
+	GhostPistolMaterial (0-0-0-0): size 36 (cls: GhostPistolMaterial>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	M_GhostFlame (0-0-0-0): size 36 (cls: M_GhostFlame>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	DynamicMaterialInstance (0-0-0-0): size 36 (cls: DynamicMaterialInstance>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	P_Reload (0-0-0-0): size 36 (cls: P_Reload>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
@@ -483,26 +492,30 @@ Serialized exports:
 		Tag array:
 	Reload_QuickReload (0-0-0-0): size 36 (cls: Reload_QuickReload>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	M_GhostFlame_GEN_VARIABLE (0-0-0-0): size 102 (cls: M_GhostFlame_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	M_GhostFlame_GEN_VARIABLE (0-0-0-0): size 185 (cls: M_GhostFlame_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=M_GhostFlame=/Game/Weapons/FORT_Pistols/Effects/Weapon/M_GhostFlame 
 			RelativeLocation(StructProperty)=Vector(2.306265,0,0) 
-	Muzzle(Empty)_GEN_VARIABLE (0-0-0-0): size 196 (cls: Muzzle(Empty)_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
+	Muzzle(Empty)_GEN_VARIABLE (0-0-0-0): size 279 (cls: Muzzle(Empty)_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_Ghost_MF=/Game/Weapons/FORT_Pistols/Effects/Muzzle/P_Ghost_MF 
 			AutoAttachSocketName(NameProperty)=Muzzle 
 			RelativeLocation(StructProperty)=Vector(1.992272,47.59803,11.17174) 
 			RelativeRotation(StructProperty)=Rotator(0,90.00024,0) 
-	P_Pistol_ReloadSmoke_GEN_VARIABLE (0-0-0-0): size 102 (cls: P_Pistol_ReloadSmoke_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
+	P_Pistol_ReloadSmoke_GEN_VARIABLE (0-0-0-0): size 185 (cls: P_Pistol_ReloadSmoke_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_Pistol_ReloadSmoke=/Game/Weapons/FORT_Pistols/Effects/Weapon/P_Pistol_ReloadSmoke 
 			RelativeLocation(StructProperty)=Vector(1.880908,47.17678,11.24253) 
-	P_Reload_GEN_VARIABLE (0-0-0-0): size 41 (cls: P_Reload_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
+	P_Reload_GEN_VARIABLE (0-0-0-0): size 124 (cls: P_Reload_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_Reload=/Game/Weapons/FORT_Pistols/Effects/Weapon/P_Reload 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 	SceneComponent_21 (0-0-0-0): size 12 (cls: SceneComponent_21>SceneComponent>/Script/Engine) :
 		Tag array:
-	SCS_Node_0 (0-0-0-0): size 693 (cls: SCS_Node_0>SCS_Node>/Script/Engine) :
+	SCS_Node_0 (0-0-0-0): size 891 (cls: SCS_Node_0>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=M_GhostFlame_GEN_VARIABLE=B_Pistol_GhostPistol_C 
@@ -537,7 +550,7 @@ Serialized exports:
 			ComponentTemplate(ObjectProperty)=SceneComponent_21=B_Pistol_GhostPistol_C 
 			VariableGuid(StructProperty)=Guid: 1455200153-3298092774-840778389-2103358230 
 			InternalVariableName(NameProperty)=DefaultSceneRoot 
-	SCS_Node_3 (0-0-0-0): size 495 (cls: SCS_Node_3>SCS_Node>/Script/Engine) :
+	SCS_Node_3 (0-0-0-0): size 693 (cls: SCS_Node_3>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=P_Reload_GEN_VARIABLE=B_Pistol_GhostPistol_C 
@@ -546,7 +559,7 @@ Serialized exports:
 			bIsParentComponentNative(BoolProperty)=True 
 			VariableGuid(StructProperty)=Guid: 919948402-1111294593-3849002906-169125526 
 			InternalVariableName(NameProperty)=P_Reload 
-	SCS_Node_4 (0-0-0-0): size 891 (cls: SCS_Node_4>SCS_Node>/Script/Engine) :
+	SCS_Node_4 (0-0-0-0): size 1089 (cls: SCS_Node_4>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=P_Pistol_ReloadSmoke_GEN_VARIABLE=B_Pistol_GhostPistol_C 
@@ -576,3 +589,5 @@ Serialized exports:
 			BodyInstance(StructProperty)=System.Byte[] 
 			RelativeLocation(StructProperty)=Vector(1.925123,14.90446,23.49787) 
 			RelativeScale3D(StructProperty)=Vector(0,0,0) 
+	K2Node_Event_CosmeticMod (0-0-0-0): size 36 (cls: K2Node_Event_CosmeticMod>StructProperty>/Script/CoreUObject) :
+		Tag array:

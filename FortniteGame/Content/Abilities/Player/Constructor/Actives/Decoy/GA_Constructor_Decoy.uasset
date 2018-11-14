@@ -8,8 +8,10 @@ Name table:
 	/Game/Abilities/Player/Constructor/Perks/DecoyHealth/GE_Constructor_Decoy_Health_Applied
 	/Game/Abilities/Player/Constructor/Perks/DecoyReflectMeleeDamage/GE_Grant_ReflectDamage_Melee_Decoy
 	/Game/Abilities/Player/Parents/GAT_ActiveAbility
+	/Game/Abilities/Player/Parents/GAT_ActiveAbility_Hero
 	/Game/Abilities/Player/Parents/GAT_ConstructorActiveAbility
 	/Game/Abilities/Player/Perks/Hero/ImJustNotUserFriendly/GE_Perk_H_ImJustNotUserFriendly_Granted
+	/Game/Abilities/Player/Perks/Leader/YoureComingWithMe/GE_Perk_L_YoureComingWithMe_StackCountTag_T01
 	/Game/Balance/DataTables/CombatEffects_HeroAbilities
 	/Script/CoreUObject
 	/Script/Engine
@@ -29,6 +31,8 @@ Name table:
 	Abilities.Outlander.Tactical.DecoyDoT
 	Ability.Constructor.Decoy
 	Ability.Constructor.Decoy.Cost
+	Ability.Constructor.Decoy.Duration
+	Ability.Constructor.Decoy.Radius
 	AbilityCosts
 	AbilitySystemBlueprintLibrary
 	AbilitySystemComponent
@@ -41,6 +45,7 @@ Name table:
 	ActiveAbilitySetup
 	ActiveGameplayEffectHandle
 	Actor
+	Add_FloatFloat
 	ArrayProperty
 	AssignTagSetByCallerMagnitude
 	B_BGA_Constructor_Decoy_C
@@ -56,16 +61,26 @@ Name table:
 	CallFunc_AbilityTargetDataFromActor_ReturnValue1
 	CallFunc_AbilityTargetDataFromActor_ReturnValue2
 	CallFunc_ActiveAbilitySetup_AbilitySystemOut
+	CallFunc_Add_FloatFloat_ReturnValue
+	CallFunc_Add_FloatFloat_ReturnValue1
 	CallFunc_AssignTagSetByCallerMagnitude_ReturnValue
 	CallFunc_AssignTagSetByCallerMagnitude_ReturnValue1
 	CallFunc_BooleanAND_ReturnValue
 	CallFunc_BP_ApplyGameplayEffectToTarget_ReturnValue
 	CallFunc_BP_ApplyGameplayEffectToTarget_ReturnValue1
+	CallFunc_CommitAbilityWithEvent_Passed
+	CallFunc_Conv_IntToFloat_ReturnValue
 	CallFunc_DoesTagAssetInterfaceHaveTag_ReturnValue
 	CallFunc_DoesTagAssetInterfaceHaveTag_ReturnValue1
 	CallFunc_DoesTagAssetInterfaceHaveTag_ReturnValue2
+	CallFunc_DoesTagAssetInterfaceHaveTag_ReturnValue3
+	CallFunc_DoesTagAssetInterfaceHaveTag_ReturnValue4
+	CallFunc_DoesTagAssetInterfaceHaveTag_ReturnValue5
 	CallFunc_DoesTagAssetInterfaceHaveTag_TagContainerInterface1_CastInput
 	CallFunc_DoesTagAssetInterfaceHaveTag_TagContainerInterface2_CastInput
+	CallFunc_DoesTagAssetInterfaceHaveTag_TagContainerInterface3_CastInput
+	CallFunc_DoesTagAssetInterfaceHaveTag_TagContainerInterface4_CastInput
+	CallFunc_DoesTagAssetInterfaceHaveTag_TagContainerInterface5_CastInput
 	CallFunc_DoesTagAssetInterfaceHaveTag_TagContainerInterface_CastInput
 	CallFunc_EvaluateAttributeValueWithTagsAndBase_bSuccess
 	CallFunc_EvaluateAttributeValueWithTagsAndBase_ReturnValue
@@ -74,7 +89,13 @@ Name table:
 	CallFunc_GetAbilitySystemComponent_ReturnValue2
 	CallFunc_GetFloatAttributeFromAbilitySystemComponent_bSuccessfullyFoundAttribute
 	CallFunc_GetFloatAttributeFromAbilitySystemComponent_ReturnValue
+	CallFunc_GetGameplayEffectCount_ReturnValue
 	CallFunc_GetSpawnParameters_OutSpawnParamters
+	CallFunc_GetValueAtLevel_ReturnValue
+	CallFunc_GetValueAtLevel_ReturnValue1
+	CallFunc_GetValueAtLevel_ReturnValue2
+	CallFunc_GetValueAtLevel_ReturnValue3
+	CallFunc_GetValueAtLevel_ReturnValue4
 	CallFunc_HasAllMatchingGameplayTags_ReturnValue
 	CallFunc_HasAllMatchingGameplayTags_ReturnValue1
 	CallFunc_HasAllMatchingGameplayTags_ReturnValue2
@@ -103,6 +124,7 @@ Name table:
 	CallFunc_MakeOutgoingSpec_ReturnValue
 	CallFunc_MakeOutgoingSpec_ReturnValue1
 	CallFunc_MakeTransform_ReturnValue
+	CallFunc_Multiply_FloatFloat_ReturnValue
 	CallFunc_SelectFloat_ReturnValue
 	CallFunc_SelectFloat_ReturnValue1
 	CallFunc_SpawnBuildingGameplayActor_ReturnValue
@@ -110,7 +132,9 @@ Name table:
 	Class
 	ClassProperty
 	CombatEffects_HeroAbilities
+	CommitAbilityWithEvent
 	ConstructorPlayerPawn
+	Conv_IntToFloat
 	CooldownGameplayEffectClass
 	CostSource
 	CostValue
@@ -119,6 +143,9 @@ Name table:
 	CurveTable
 	CurveTableRowHandle
 	DecoTool
+	Decoy_Duration_Default
+	Decoy_Duration_Going_and_Going_T01
+	Decoy_LifeSpan_Going_and_Going_T02
 	DecoyCollisionCapsule_GEN_VARIABLE
 	DecoyHasExplodePerk
 	DecoyHasHealthPerk
@@ -147,9 +174,11 @@ Name table:
 	Default__ClassProperty
 	Default__FloatProperty
 	Default__FortKismetLibrary
+	Default__FortScalableFloatUtils
 	Default__Function
 	Default__GA_Constructor_Decoy_C
 	Default__GAT_ActiveAbility_C
+	Default__GAT_ActiveAbility_Hero_C
 	Default__GAT_ConstructorActiveAbility_C
 	Default__GE_Constructor_Decoy_Health_Applied_C
 	Default__GE_Constructor_DecoyCooldown_C
@@ -157,12 +186,14 @@ Name table:
 	Default__GE_Generic_BGAStatBuff_Impact_C
 	Default__GE_Grant_ReflectDamage_Melee_Decoy_C
 	Default__GE_Perk_H_ImJustNotUserFriendly_Granted_C
+	Default__GE_Perk_L_YoureComingWithMe_StackCountTag_T01_C
 	Default__InterfaceProperty
 	Default__IntProperty
 	Default__KismetSystemLibrary
 	Default__ObjectProperty
 	Default__StructProperty
 	Default__TT_Constructor_Decoy_C
+	Default_Decoy_Radius
 	DefaultSceneRoot_REMOVED_7A3C045645033A00C33204B98F015672
 	DoesTagAssetInterfaceHaveTag
 	EFortAbilityCostSource
@@ -183,6 +214,7 @@ Name table:
 	FortDamageSet
 	FortKismetLibrary
 	FortPawn
+	FortScalableFloatUtils
 	Function
 	GA_Constructor_Decoy_C
 	Gameplay.Action.Player.Medium
@@ -200,6 +232,7 @@ Name table:
 	GameplayTagContainer
 	GameplayTags
 	GAT_ActiveAbility_C
+	GAT_ActiveAbility_Hero_C
 	GAT_ConstructorActiveAbility_C
 	GE_Constructor_Decoy_Health_Applied_C
 	GE_Constructor_DecoyCooldown_C
@@ -210,14 +243,23 @@ Name table:
 	GE_HealthUpgrade
 	GE_ImJustNotUserFriendly_T01_DamageReflect
 	GE_Perk_H_ImJustNotUserFriendly_Granted_C
+	GE_Perk_L_YoureComingWithMe_StackCountTag_T01_C
+	GE_YoureComingWithMe_StackCount
 	GetAbilitySystemComponent
 	GetFloatAttributeFromAbilitySystemComponent
+	GetGameplayEffectCount
 	GetReadyForASurprise_T01
 	GetSpawnParameters
+	GetValueAtLevel
+	Going_and_Going_T01
+	Going_and_Going_T02
 	Granted.Perk.DecoyStun.T01
 	Granted.Perk.DecoyStun.T02
 	Granted.Perk.GetReadyForASurprise.T01
+	Granted.Perk.GoingandGoing.T01
+	Granted.Perk.GoingandGoing.T02
 	Granted.Perk.ImJustNotUserFriendly.T01
+	Granted.Perk.YourMoveCreep.T01
 	HasAllMatchingGameplayTags
 	HasAuthority
 	ImJustNotUserFriendly_T01
@@ -242,6 +284,7 @@ Name table:
 	MakeLiteralGameplayTagContainer
 	MakeOutgoingSpec
 	MakeTransform
+	Multiply_FloatFloat
 	NameProperty
 	None
 	Object
@@ -254,6 +297,9 @@ Name table:
 	P_PropaneTankFuse3_GEN_VARIABLE
 	Package
 	ParticleSystemComponent
+	Perk.GoingandGoing.T01.Duration
+	Perk.GoingandGoing.T02.Duration
+	Perk.YoureComingWithMe.T01.RangePerHero
 	PointerToUberGraphFrame
 	Quat
 	Rotation
@@ -269,6 +315,7 @@ Name table:
 	SetDecoyHasDamagePerks
 	SetDecoyHasRadiusPerk
 	SetDecoyHasTacticalDoTPerk
+	SetDecoyHasYourMoveCreep
 	SetDecoyLifespan
 	SetupAbility
 	SkeletalMeshComponent
@@ -280,7 +327,10 @@ Name table:
 	Tag_DecoyStun_T01
 	Tag_DecoyStun_T02
 	Tag_GetReadyForASurprise_T01
+	Tag_GoingandGoing_T01
+	Tag_GoingandGoing_T02
 	Tag_ImJustNotUserFriendly_T01
+	Tag_YourMoveCreep_T01
 	TagName
 	TC_Decoy_DoT
 	TC_Decoy_Explode
@@ -300,9 +350,11 @@ Name table:
 	UberGraphFrame
 	UberGraphFramePointerProperty
 	UberGraphFunction
-	UseNewHeroSystem
+	UseHeroLoadoutSystem
 	Value
 	Vector
+	YoureComingWithMe_Radius
+	YourMoveCreep
 Import table:
 	Default__AbilitySystemBlueprintLibrary (AbilitySystemBlueprintLibrary)
 	Default__ArrayProperty (ArrayProperty)
@@ -317,9 +369,12 @@ Import table:
 	GE_Constructor_Decoy_Health_Applied_C (BlueprintGeneratedClass)
 	GE_Grant_ReflectDamage_Melee_Decoy_C (BlueprintGeneratedClass)
 	GAT_ActiveAbility_C (BlueprintGeneratedClass)
+	GAT_ActiveAbility_Hero_C (BlueprintGeneratedClass)
 	GAT_ConstructorActiveAbility_C (BlueprintGeneratedClass)
 	GE_Perk_H_ImJustNotUserFriendly_Granted_C (BlueprintGeneratedClass)
+	GE_Perk_L_YoureComingWithMe_StackCountTag_T01_C (BlueprintGeneratedClass)
 	Default__BlueprintGeneratedClass (BlueprintGeneratedClass)
+	UseHeroLoadoutSystem (BoolProperty)
 	Default__BoolProperty (BoolProperty)
 	DecoyCollisionCapsule_GEN_VARIABLE (CapsuleComponent)
 	ArrayProperty (Class)
@@ -342,6 +397,7 @@ Import table:
 	FortDamageSet (Class)
 	FortKismetLibrary (Class)
 	FortPawn (Class)
+	FortScalableFloatUtils (Class)
 	AbilitySystemBlueprintLibrary (Class)
 	AbilitySystemComponent (Class)
 	GameplayAbility (Class)
@@ -352,28 +408,35 @@ Import table:
 	CombatEffects_HeroAbilities (CurveTable)
 	Default__FloatProperty (FloatProperty)
 	Default__FortKismetLibrary (FortKismetLibrary)
+	Default__FortScalableFloatUtils (FortScalableFloatUtils)
 	ActiveAbilitySetup (Function)
 	K2_ActivateAbility (Function)
 	Default__Function (Function)
 	HasAuthority (Function)
+	Add_FloatFloat (Function)
 	BooleanAND (Function)
+	Conv_IntToFloat (Function)
 	MakeTransform (Function)
+	Multiply_FloatFloat (Function)
 	SelectFloat (Function)
 	IsValid (Function)
 	MakeLiteralFloat (Function)
 	GetSpawnParameters (Function)
 	SpawnBuildingGameplayActor (Function)
+	GetValueAtLevel (Function)
 	AbilityTargetDataFromActor (Function)
 	AssignTagSetByCallerMagnitude (Function)
 	EvaluateAttributeValueWithTagsAndBase (Function)
 	GetAbilitySystemComponent (Function)
 	GetFloatAttributeFromAbilitySystemComponent (Function)
+	GetGameplayEffectCount (Function)
 	BP_ApplyGameplayEffectToTarget (Function)
 	K2_ApplyGameplayEffectSpecToTarget (Function)
 	DoesTagAssetInterfaceHaveTag (Function)
 	HasAllMatchingGameplayTags (Function)
 	MakeLiteralGameplayTagContainer (Function)
 	Default__GAT_ActiveAbility_C (GAT_ActiveAbility_C)
+	Default__GAT_ActiveAbility_Hero_C (GAT_ActiveAbility_Hero_C)
 	Default__GAT_ConstructorActiveAbility_C (GAT_ConstructorActiveAbility_C)
 	Default__GE_Constructor_Decoy_Health_Applied_C (GE_Constructor_Decoy_Health_Applied_C)
 	Default__GE_Constructor_DecoyCooldown_C (GE_Constructor_DecoyCooldown_C)
@@ -381,6 +444,7 @@ Import table:
 	Default__GE_Generic_BGAStatBuff_Impact_C (GE_Generic_BGAStatBuff_Impact_C)
 	Default__GE_Grant_ReflectDamage_Melee_Decoy_C (GE_Grant_ReflectDamage_Melee_Decoy_C)
 	Default__GE_Perk_H_ImJustNotUserFriendly_Granted_C (GE_Perk_H_ImJustNotUserFriendly_Granted_C)
+	Default__GE_Perk_L_YoureComingWithMe_StackCountTag_T01_C (GE_Perk_L_YoureComingWithMe_StackCountTag_T01_C)
 	Default__InterfaceProperty (InterfaceProperty)
 	Default__IntProperty (IntProperty)
 	Default__KismetSystemLibrary (KismetSystemLibrary)
@@ -395,8 +459,10 @@ Import table:
 	/Game/Abilities/Player/Constructor/Perks/DecoyHealth/GE_Constructor_Decoy_Health_Applied (Package)
 	/Game/Abilities/Player/Constructor/Perks/DecoyReflectMeleeDamage/GE_Grant_ReflectDamage_Melee_Decoy (Package)
 	/Game/Abilities/Player/Parents/GAT_ActiveAbility (Package)
+	/Game/Abilities/Player/Parents/GAT_ActiveAbility_Hero (Package)
 	/Game/Abilities/Player/Parents/GAT_ConstructorActiveAbility (Package)
 	/Game/Abilities/Player/Perks/Hero/ImJustNotUserFriendly/GE_Perk_H_ImJustNotUserFriendly_Granted (Package)
+	/Game/Abilities/Player/Perks/Leader/YoureComingWithMe/GE_Perk_L_YoureComingWithMe_StackCountTag_T01 (Package)
 	/Game/Balance/DataTables/CombatEffects_HeroAbilities (Package)
 	/Script/CoreUObject (Package)
 	/Script/Engine (Package)
@@ -417,6 +483,7 @@ Import table:
 	GameplayAttribute (ScriptStruct)
 	GameplayEffectContextHandle (ScriptStruct)
 	GameplayEffectSpecHandle (ScriptStruct)
+	ScalableFloat (ScriptStruct)
 	GameplayTag (ScriptStruct)
 	GameplayTagContainer (ScriptStruct)
 	DecoySkeletalMesh_GEN_VARIABLE (SkeletalMeshComponent)
@@ -431,11 +498,11 @@ Import table:
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	GA_Constructor_Decoy_C (0-0-0-0): size 366 (cls: GA_Constructor_Decoy_C>BlueprintGeneratedClass>/Script/Engine) :
+	GA_Constructor_Decoy_C (0-0-0-0): size 410 (cls: GA_Constructor_Decoy_C>BlueprintGeneratedClass>/Script/Engine) :
 		Tag array:
 			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=GA_Constructor_Decoy_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_GA_Constructor_Decoy=GA_Constructor_Decoy_C 
-	Default__GA_Constructor_Decoy_C (0-0-0-0): size 2356 (cls: Default__GA_Constructor_Decoy_C>GA_Constructor_Decoy_C) :
+	Default__GA_Constructor_Decoy_C (0-0-0-0): size 3680 (cls: Default__GA_Constructor_Decoy_C>GA_Constructor_Decoy_C) :
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			EventActivation(StructProperty)=System.Byte[] 
@@ -463,6 +530,15 @@ Serialized exports:
 			GE_ImJustNotUserFriendly_T01_DamageReflect(ObjectProperty)=GE_Perk_H_ImJustNotUserFriendly_Granted_C=/Game/Abilities/Player/Perks/Hero/ImJustNotUserFriendly/GE_Perk_H_ImJustNotUserFriendly_Granted 
 			T_Event_Activate(StructProperty)=System.Byte[] 
 			T_Event_Deactivate(StructProperty)=System.Byte[] 
+			Tag_GoingandGoing_T01(StructProperty)=System.Byte[] 
+			Tag_GoingandGoing_T02(StructProperty)=System.Byte[] 
+			Decoy_Duration_Going_and_Going_T01(StructProperty)=System.Byte[] 
+			Decoy_Duration_Default(StructProperty)=System.Byte[] 
+			Decoy_LifeSpan_Going_and_Going_T02(StructProperty)=System.Byte[] 
+			Tag_YourMoveCreep_T01(StructProperty)=System.Byte[] 
+			Default_Decoy_Radius(StructProperty)=System.Byte[] 
+			YoureComingWithMe_Radius(StructProperty)=System.Byte[] 
+			GE_YoureComingWithMe_StackCount(ObjectProperty)=GE_Perk_L_YoureComingWithMe_StackCountTag_T01_C=/Game/Abilities/Player/Perks/Leader/YoureComingWithMe/GE_Perk_L_YoureComingWithMe_StackCountTag_T01 
 			AbilityCosts(ArrayProperty)=[object] (inner: StructProperty)
 			Tooltip(ObjectProperty)=TT_Constructor_Decoy_C=/Game/Abilities/Player/Constructor/Actives/Decoy/TT_Constructor_Decoy 
 			AbilityTags(StructProperty)=GameplayTagContainer:Gameplay.Action.Player.Medium,Gameplay.DamageSource.Ability,Abilities.Constructor.Decoy,Gameplay.Action.RestrictedAbility,Ability.Constructor.Decoy 
@@ -472,7 +548,7 @@ Serialized exports:
 		Tag array:
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject) :
 		Tag array:
-	ExecuteUbergraph_GA_Constructor_Decoy (0-0-0-0): size 2422 (cls: ExecuteUbergraph_GA_Constructor_Decoy>Function>/Script/CoreUObject) :
+	ExecuteUbergraph_GA_Constructor_Decoy (0-0-0-0): size 2502 (cls: ExecuteUbergraph_GA_Constructor_Decoy>Function>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_BP_ApplyGameplayEffectToTarget_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_BP_ApplyGameplayEffectToTarget_ReturnValue>StructProperty>/Script/CoreUObject) :
 		Tag array:
@@ -498,13 +574,23 @@ Serialized exports:
 		Tag array:
 	AbilitySystemIn (0-0-0-0): size 36 (cls: AbilitySystemIn>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	ActiveAbilitySetup (0-0-0-0): size 307 (cls: ActiveAbilitySetup>Function>/Script/CoreUObject) :
+	ActiveAbilitySetup (0-0-0-0): size 1040 (cls: ActiveAbilitySetup>Function>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_DoesTagAssetInterfaceHaveTag_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_DoesTagAssetInterfaceHaveTag_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_DoesTagAssetInterfaceHaveTag_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_DoesTagAssetInterfaceHaveTag_ReturnValue1>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_DoesTagAssetInterfaceHaveTag_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_DoesTagAssetInterfaceHaveTag_ReturnValue2>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_DoesTagAssetInterfaceHaveTag_ReturnValue3 (0-0-0-0): size 34 (cls: CallFunc_DoesTagAssetInterfaceHaveTag_ReturnValue3>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_DoesTagAssetInterfaceHaveTag_ReturnValue4 (0-0-0-0): size 34 (cls: CallFunc_DoesTagAssetInterfaceHaveTag_ReturnValue4>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_DoesTagAssetInterfaceHaveTag_ReturnValue5 (0-0-0-0): size 34 (cls: CallFunc_DoesTagAssetInterfaceHaveTag_ReturnValue5>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	Temp_bool_Variable1 (0-0-0-0): size 34 (cls: Temp_bool_Variable1>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	DecoyHasExplodePerk (0-0-0-0): size 34 (cls: DecoyHasExplodePerk>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -528,6 +614,8 @@ Serialized exports:
 		Tag array:
 	CallFunc_BooleanAND_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_CommitAbilityWithEvent_Passed (0-0-0-0): size 34 (cls: CallFunc_CommitAbilityWithEvent_Passed>BoolProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_EvaluateAttributeValueWithTagsAndBase_bSuccess (0-0-0-0): size 34 (cls: CallFunc_EvaluateAttributeValueWithTagsAndBase_bSuccess>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_GetFloatAttributeFromAbilitySystemComponent_bSuccessfullyFoundAttribute (0-0-0-0): size 34 (cls: CallFunc_GetFloatAttributeFromAbilitySystemComponent_bSuccessfullyFoundAttribute>BoolProperty>/Script/CoreUObject) :
@@ -550,6 +638,10 @@ Serialized exports:
 		Tag array:
 	GetReadyForASurprise_T01 (0-0-0-0): size 34 (cls: GetReadyForASurprise_T01>BoolProperty>/Script/CoreUObject) :
 		Tag array:
+	Going_and_Going_T01 (0-0-0-0): size 34 (cls: Going_and_Going_T01>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	Going_and_Going_T02 (0-0-0-0): size 34 (cls: Going_and_Going_T02>BoolProperty>/Script/CoreUObject) :
+		Tag array:
 	ImJustNotUserFriendly_T01 (0-0-0-0): size 34 (cls: ImJustNotUserFriendly_T01>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_HasAllMatchingGameplayTags_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasAllMatchingGameplayTags_ReturnValue>BoolProperty>/Script/CoreUObject) :
@@ -568,7 +660,7 @@ Serialized exports:
 		Tag array:
 	CallFunc_HasAllMatchingGameplayTags_ReturnValue7 (0-0-0-0): size 34 (cls: CallFunc_HasAllMatchingGameplayTags_ReturnValue7>BoolProperty>/Script/CoreUObject) :
 		Tag array:
-	UseNewHeroSystem (0-0-0-0): size 34 (cls: UseNewHeroSystem>BoolProperty>/Script/CoreUObject) :
+	YourMoveCreep (0-0-0-0): size 34 (cls: YourMoveCreep>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	BGA_ConstructorDecoy (0-0-0-0): size 40 (cls: BGA_ConstructorDecoy>ClassProperty>/Script/CoreUObject) :
 		Tag array:
@@ -577,6 +669,30 @@ Serialized exports:
 	GE_HealthUpgrade (0-0-0-0): size 40 (cls: GE_HealthUpgrade>ClassProperty>/Script/CoreUObject) :
 		Tag array:
 	GE_ImJustNotUserFriendly_T01_DamageReflect (0-0-0-0): size 40 (cls: GE_ImJustNotUserFriendly_T01_DamageReflect>ClassProperty>/Script/CoreUObject) :
+		Tag array:
+	GE_YoureComingWithMe_StackCount (0-0-0-0): size 40 (cls: GE_YoureComingWithMe_StackCount>ClassProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Add_FloatFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Add_FloatFloat_ReturnValue>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Add_FloatFloat_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Add_FloatFloat_ReturnValue1>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Conv_IntToFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Conv_IntToFloat_ReturnValue>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_GetValueAtLevel_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetValueAtLevel_ReturnValue>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_GetValueAtLevel_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_GetValueAtLevel_ReturnValue1>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_GetValueAtLevel_ReturnValue2 (0-0-0-0): size 32 (cls: CallFunc_GetValueAtLevel_ReturnValue2>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_GetValueAtLevel_ReturnValue3 (0-0-0-0): size 32 (cls: CallFunc_GetValueAtLevel_ReturnValue3>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_GetValueAtLevel_ReturnValue4 (0-0-0-0): size 32 (cls: CallFunc_GetValueAtLevel_ReturnValue4>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Multiply_FloatFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Multiply_FloatFloat_ReturnValue>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	K2Node_Select1_Default (0-0-0-0): size 32 (cls: K2Node_Select1_Default>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	K2Node_Select_Default (0-0-0-0): size 32 (cls: K2Node_Select_Default>FloatProperty>/Script/CoreUObject) :
 		Tag array:
 	DecoyLifespan (0-0-0-0): size 32 (cls: DecoyLifespan>FloatProperty>/Script/CoreUObject) :
 		Tag array:
@@ -606,6 +722,12 @@ Serialized exports:
 		Tag array:
 	CallFunc_DoesTagAssetInterfaceHaveTag_TagContainerInterface2_CastInput (0-0-0-0): size 36 (cls: CallFunc_DoesTagAssetInterfaceHaveTag_TagContainerInterface2_CastInput>InterfaceProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_DoesTagAssetInterfaceHaveTag_TagContainerInterface3_CastInput (0-0-0-0): size 36 (cls: CallFunc_DoesTagAssetInterfaceHaveTag_TagContainerInterface3_CastInput>InterfaceProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_DoesTagAssetInterfaceHaveTag_TagContainerInterface4_CastInput (0-0-0-0): size 36 (cls: CallFunc_DoesTagAssetInterfaceHaveTag_TagContainerInterface4_CastInput>InterfaceProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_DoesTagAssetInterfaceHaveTag_TagContainerInterface5_CastInput (0-0-0-0): size 36 (cls: CallFunc_DoesTagAssetInterfaceHaveTag_TagContainerInterface5_CastInput>InterfaceProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_DoesTagAssetInterfaceHaveTag_TagContainerInterface_CastInput (0-0-0-0): size 36 (cls: CallFunc_DoesTagAssetInterfaceHaveTag_TagContainerInterface_CastInput>InterfaceProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_HasAllMatchingGameplayTags_TagContainerInterface1_CastInput (0-0-0-0): size 36 (cls: CallFunc_HasAllMatchingGameplayTags_TagContainerInterface1_CastInput>InterfaceProperty>/Script/CoreUObject) :
@@ -623,6 +745,8 @@ Serialized exports:
 	CallFunc_HasAllMatchingGameplayTags_TagContainerInterface7_CastInput (0-0-0-0): size 36 (cls: CallFunc_HasAllMatchingGameplayTags_TagContainerInterface7_CastInput>InterfaceProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_HasAllMatchingGameplayTags_TagContainerInterface_CastInput (0-0-0-0): size 36 (cls: CallFunc_HasAllMatchingGameplayTags_TagContainerInterface_CastInput>InterfaceProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_GetGameplayEffectCount_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetGameplayEffectCount_ReturnValue>IntProperty>/Script/CoreUObject) :
 		Tag array:
 	AbilitySystemOut (0-0-0-0): size 36 (cls: AbilitySystemOut>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
@@ -643,6 +767,14 @@ Serialized exports:
 	K2Node_DynamicCast_AsB_BGA_Constructor_Decoy (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsB_BGA_Constructor_Decoy>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	K2Node_DynamicCast_AsFort_Ability_Deco_Tool (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Ability_Deco_Tool>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	Decoy_Duration_Default (0-0-0-0): size 36 (cls: Decoy_Duration_Default>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	Decoy_Duration_Going_and_Going_T01 (0-0-0-0): size 36 (cls: Decoy_Duration_Going_and_Going_T01>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	Decoy_LifeSpan_Going_and_Going_T02 (0-0-0-0): size 36 (cls: Decoy_LifeSpan_Going_and_Going_T02>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	Default_Decoy_Radius (0-0-0-0): size 36 (cls: Default_Decoy_Radius>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	EventComplete (0-0-0-0): size 36 (cls: EventComplete>StructProperty>/Script/CoreUObject) :
 		Tag array:
@@ -684,7 +816,13 @@ Serialized exports:
 		Tag array:
 	Tag_GetReadyForASurprise_T01 (0-0-0-0): size 36 (cls: Tag_GetReadyForASurprise_T01>StructProperty>/Script/CoreUObject) :
 		Tag array:
+	Tag_GoingandGoing_T01 (0-0-0-0): size 36 (cls: Tag_GoingandGoing_T01>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	Tag_GoingandGoing_T02 (0-0-0-0): size 36 (cls: Tag_GoingandGoing_T02>StructProperty>/Script/CoreUObject) :
+		Tag array:
 	Tag_ImJustNotUserFriendly_T01 (0-0-0-0): size 36 (cls: Tag_ImJustNotUserFriendly_T01>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	Tag_YourMoveCreep_T01 (0-0-0-0): size 36 (cls: Tag_YourMoveCreep_T01>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	TC_Decoy_DoT (0-0-0-0): size 36 (cls: TC_Decoy_DoT>StructProperty>/Script/CoreUObject) :
 		Tag array:
@@ -701,4 +839,6 @@ Serialized exports:
 	TC_Decoy_ReflectMeleeDamage (0-0-0-0): size 36 (cls: TC_Decoy_ReflectMeleeDamage>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	TC_DecoyStun (0-0-0-0): size 36 (cls: TC_DecoyStun>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	YoureComingWithMe_Radius (0-0-0-0): size 36 (cls: YoureComingWithMe_Radius>StructProperty>/Script/CoreUObject) :
 		Tag array:

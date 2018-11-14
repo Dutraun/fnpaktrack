@@ -9,9 +9,11 @@ Name table:
 	/Game/Missions/Primary/OB_FarmsteadFort/ArtAssets/Meshes/S_ProjStationCone
 	/Game/Quests/Outpost/OutpostQuest_T1_L1
 	/Game/UI/Foundation/Lobby/materials/M_Lobby_Pad
+	/Game/UI/Foundation/Lobby/materials/M_Lobby_PadSmall
 	/Game/UI/Foundation/Lobby/materials/P_LobbySpawnSpin
 	/Game/UI/Foundation/Lobby/meshes/SM_Lobby_Character_Pad
 	/Game/UI/Foundation/Lobby/meshes/SM_Lobby_Character_Pad_Light_Ring
+	/Game/UI/Foundation/Lobby/meshes/SM_Lobby_Character_Pad_Small
 	/Game/UI/Frontend/Lobby/HeroSquad/M_CharacterShader_Holo
 	/Game/UI/Frontend/Lobby/HeroSquad/M_CharacterShader_Holo_Inst
 	/Game/UI/Frontend/Lobby/PlayerPad/LobbyPlayerAddPlayer
@@ -29,6 +31,7 @@ Name table:
 	/Script/UMG
 	Activate
 	Actor
+	ActorComponentTickFunction
 	AllNodes
 	Animation.FrontEnd.Lobby
 	ApplyUniformOverrideMaterial
@@ -64,7 +67,9 @@ Name table:
 	bOwnsBattlePass
 	Box2D
 	bPlayerPodiumHovered
+	bStartWithTickEnabled
 	bUseAsOccluder
+	bUseInverseSquaredFalloff
 	bUseTemperature
 	bVisible
 	ByteProperty
@@ -89,6 +94,7 @@ Name table:
 	CallFunc_GetLocalPlayerTeam_ReturnValue
 	CallFunc_GetMaterial_ReturnValue
 	CallFunc_GetMaterial_ReturnValue1
+	CallFunc_GetMaterial_ReturnValue2
 	CallFunc_GetQuestManager_ReturnValue
 	CallFunc_GetStoreState_ReturnValue
 	CallFunc_GetSubGame_ReturnValue
@@ -102,9 +108,19 @@ Name table:
 	CallFunc_K2_SetRelativeLocation_SweepHitResult
 	CallFunc_MakeGameplayTagQuery_ReturnValue
 	CallFunc_MakeVector_ReturnValue
+	CallFunc_Multiply_FloatFloat_ReturnValue
+	CallFunc_Multiply_FloatFloat_ReturnValue1
+	CallFunc_Multiply_FloatFloat_ReturnValue2
+	CallFunc_Multiply_FloatFloat_ReturnValue3
+	CallFunc_Multiply_FloatFloat_ReturnValue4
+	CallFunc_Multiply_FloatFloat_ReturnValue5
 	CallFunc_Multiply_LinearColorFloat_ReturnValue
 	CallFunc_NotEqual_ObjectObject_ReturnValue
+	CallFunc_SelectFloat_ReturnValue
+	CallFunc_SelectFloat_ReturnValue1
+	CallFunc_SelectFloat_ReturnValue2
 	CallFunc_SetStaticMesh_ReturnValue
+	CallFunc_SetStaticMesh_ReturnValue1
 	Camera
 	CapsuleComponent
 	CastShadow
@@ -134,6 +150,7 @@ Name table:
 	Deactivate
 	Debug_OnFriendLFGRequest
 	Debug_OnFriendLFGRequest__DelegateSignature
+	debugHoveredLighting
 	Default__ArrayProperty
 	Default__BlueprintContextLibrary
 	Default__BlueprintGameplayTagLibrary
@@ -274,6 +291,7 @@ Name table:
 	KismetMathLibrary
 	KismetSystemLibrary
 	LastAnimatedPlayerPawn
+	LightBrightnessScale
 	LightColor
 	LightComponent
 	LightEmissiveColor
@@ -289,6 +307,7 @@ Name table:
 	M_FakeLightCone_FE
 	M_FakeLightCone_FE_Inst
 	M_Lobby_Pad
+	M_Lobby_PadSmall
 	MakeGameplayTagQuery
 	MakeVector
 	Margin
@@ -306,9 +325,11 @@ Name table:
 	MID_Top_Light_Ring
 	Mouseover
 	MulticastDelegateProperty
+	Multiply_FloatFloat
 	Multiply_LinearColorFloat
 	NameProperty
 	NewCamera
+	NewLobbyLayout
 	NoCollision
 	NODE_AddPointLightComponent-1
 	NODE_AddPointLightComponent-2
@@ -366,6 +387,7 @@ Name table:
 	PointLightComponent
 	PostProcessComponent
 	PreviewMesh
+	PrimaryComponentTick
 	PS-NoPlayer-Sparkle
 	PS-NoPlayer-Sparkle_GEN_VARIABLE
 	PS-NoPlayer-Swirl01
@@ -384,6 +406,7 @@ Name table:
 	ResponseArray
 	ResponseChannel
 	RimSpotLight
+	RimSpotLight_Brightness
 	RimSpotLight_GEN_VARIABLE
 	Root
 	RootComponent
@@ -397,10 +420,12 @@ Name table:
 	SCS_Node
 	Selected
 	SelectedGadgetItems
+	SelectFloat
 	SetFloatParameter
 	SetForceCachedShadowsForMovablePrimitives
 	SetIntensity
 	SetLightColor
+	SetMaterial
 	SetScalarParameterValue
 	SetStaticMesh
 	SetVectorParameterValue
@@ -415,8 +440,10 @@ Name table:
 	SM_Lobby_Character_Pad_GEN_VARIABLE
 	SM_Lobby_Character_Pad_Light_Ring
 	SM_Lobby_Character_Pad_Light_Ring_GEN_VARIABLE
+	SM_Lobby_Character_Pad_Small
 	SM_Lobby_Character_TopSpot
 	SM_Lobby_Character_TopSpot_GEN_VARIABLE
+	SourceRadius
 	SpotLightComponent
 	StaticMesh
 	StaticMeshComponent
@@ -439,6 +466,8 @@ Name table:
 	Temperature
 	Template
 	TopSpotLight
+	TopSpotLight_Brightness
+	TopSpotLight_Brightness_Hovered
 	TopSpotLight_GEN_VARIABLE
 	TranslucencySortPriority
 	UberGraphFrame
@@ -452,6 +481,10 @@ Name table:
 	UnderlightBluePoint01_GEN_VARIABLE
 	UnderlightBluePoint02
 	UnderlightBluePoint02_GEN_VARIABLE
+	UnderlightBluePoint_Brightness
+	UnderlightBluePoint_Brightness_Hovered
+	UnderlightBlueSpot_Brightness
+	UnderlightBlueSpot_Brightness_Hovered
 	UnderlyingType
 	UserConstructionScript
 	UserWidget
@@ -555,9 +588,11 @@ Import table:
 	EqualEqual_ByteByte (Function)
 	EqualEqual_IntInt (Function)
 	MakeVector (Function)
+	Multiply_FloatFloat (Function)
 	Multiply_LinearColorFloat (Function)
 	NotEqual_IntInt (Function)
 	NotEqual_ObjectObject (Function)
+	SelectFloat (Function)
 	IsValid (Function)
 	SetForceCachedShadowsForMovablePrimitives (Function)
 	SetIntensity (Function)
@@ -597,6 +632,7 @@ Import table:
 	Default__LobbyPlayerPadGadgets_C (LobbyPlayerPadGadgets_C)
 	M_FakeLightCone_FE (Material)
 	M_Lobby_Pad (Material)
+	M_Lobby_PadSmall (Material)
 	M_CharacterShader_Holo (Material)
 	M_FakeLightCone_FE_Inst (MaterialInstanceConstant)
 	M_CharacterShader_Holo_Inst (MaterialInstanceConstant)
@@ -622,9 +658,11 @@ Import table:
 	/Game/Missions/Primary/OB_FarmsteadFort/ArtAssets/Meshes/S_ProjStationCone (Package)
 	/Game/Quests/Outpost/OutpostQuest_T1_L1 (Package)
 	/Game/UI/Foundation/Lobby/materials/M_Lobby_Pad (Package)
+	/Game/UI/Foundation/Lobby/materials/M_Lobby_PadSmall (Package)
 	/Game/UI/Foundation/Lobby/materials/P_LobbySpawnSpin (Package)
 	/Game/UI/Foundation/Lobby/meshes/SM_Lobby_Character_Pad (Package)
 	/Game/UI/Foundation/Lobby/meshes/SM_Lobby_Character_Pad_Light_Ring (Package)
+	/Game/UI/Foundation/Lobby/meshes/SM_Lobby_Character_Pad_Small (Package)
 	/Game/UI/Frontend/Lobby/HeroSquad/M_CharacterShader_Holo (Package)
 	/Game/UI/Frontend/Lobby/HeroSquad/M_CharacterShader_Holo_Inst (Package)
 	/Game/UI/Frontend/Lobby/PlayerPad/LobbyPlayerAddPlayer (Package)
@@ -676,6 +714,7 @@ Import table:
 	S_ProjStationCone (StaticMesh)
 	SM_Lobby_Character_Pad (StaticMesh)
 	SM_Lobby_Character_Pad_Light_Ring (StaticMesh)
+	SM_Lobby_Character_Pad_Small (StaticMesh)
 	Default__StaticMeshComponent (StaticMeshComponent)
 	Default__StructProperty (StructProperty)
 	MemberUniqueId (StructProperty)
@@ -693,15 +732,23 @@ Import table:
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	TeamMemberPedestal_C (0-0-0-0): size 679 (cls: TeamMemberPedestal_C>BlueprintGeneratedClass>/Script/Engine) :
+	TeamMemberPedestal_C (0-0-0-0): size 719 (cls: TeamMemberPedestal_C>BlueprintGeneratedClass>/Script/Engine) :
 		Tag array:
 			SimpleConstructionScript(ObjectProperty)=SimpleConstructionScript_2=TeamMemberPedestal_C 
 			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=TeamMemberPedestal_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_TeamMemberPedestal=TeamMemberPedestal_C 
-	Default__TeamMemberPedestal_C (0-0-0-0): size 239 (cls: Default__TeamMemberPedestal_C>TeamMemberPedestal_C) :
+	Default__TeamMemberPedestal_C (0-0-0-0): size 471 (cls: Default__TeamMemberPedestal_C>TeamMemberPedestal_C) :
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			HoloMaterial(ObjectProperty)=M_CharacterShader_Holo=/Game/UI/Frontend/Lobby/HeroSquad/M_CharacterShader_Holo 
+			LightBrightnessScale(FloatProperty)=1 
+			TopSpotLight_Brightness(FloatProperty)=1500 
+			TopSpotLight_Brightness_Hovered(FloatProperty)=16000 
+			RimSpotLight_Brightness(FloatProperty)=100 
+			UnderlightBlueSpot_Brightness(FloatProperty)=30 
+			UnderlightBlueSpot_Brightness_Hovered(FloatProperty)=150 
+			UnderlightBluePoint_Brightness(FloatProperty)=50 
+			UnderlightBluePoint_Brightness_Hovered(FloatProperty)=250 
 			WidgetComponent_MemberInfo(ObjectProperty)=WidgetComponent_MemberInfo=Default__TeamMemberPedestal_C 
 			WidgetComponent_FillOpenSlot(ObjectProperty)=WidgetComponent_FillOpenSlot=Default__TeamMemberPedestal_C 
 			WidgetComponent_EquippedGadgets(ObjectProperty)=WidgetComponent_EquippedGadgets=Default__TeamMemberPedestal_C 
@@ -715,7 +762,7 @@ Serialized exports:
 		Tag array:
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject) :
 		Tag array:
-	ExecuteUbergraph_TeamMemberPedestal (0-0-0-0): size 4215 (cls: ExecuteUbergraph_TeamMemberPedestal>Function>/Script/CoreUObject) :
+	ExecuteUbergraph_TeamMemberPedestal (0-0-0-0): size 4439 (cls: ExecuteUbergraph_TeamMemberPedestal>Function>/Script/CoreUObject) :
 		Tag array:
 	OnItemClicked (0-0-0-0): size 58 (cls: OnItemClicked>Function>/Script/CoreUObject) :
 		Tag array:
@@ -747,9 +794,9 @@ Serialized exports:
 		Tag array:
 	HandleClientEvent_StoreTabSelected (0-0-0-0): size 100 (cls: HandleClientEvent_StoreTabSelected>Function>/Script/CoreUObject) :
 		Tag array:
-	CallFunc_SetStaticMesh_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_SetStaticMesh_ReturnValue>BoolProperty>/Script/CoreUObject) :
+	CallFunc_SelectFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_SelectFloat_ReturnValue>FloatProperty>/Script/CoreUObject) :
 		Tag array:
-	UserConstructionScript (0-0-0-0): size 92 (cls: UserConstructionScript>Function>/Script/CoreUObject) :
+	UserConstructionScript (0-0-0-0): size 566 (cls: UserConstructionScript>Function>/Script/CoreUObject) :
 		Tag array:
 	K2Node_CreateDelegate_OutputDelegate (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate>DelegateProperty>/Script/CoreUObject) :
 		Tag array:
@@ -796,6 +843,8 @@ Serialized exports:
 	CallFunc_EqualEqual_ByteByte_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ByteByte_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_HasCompletedQuest_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasCompletedQuest_ReturnValue>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	debugHoveredLighting (0-0-0-0): size 34 (cls: debugHoveredLighting>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_EqualEqual_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -851,6 +900,8 @@ Serialized exports:
 		Tag array:
 	CallFunc_IsInLobby_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsInLobby_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
+	NewLobbyLayout (0-0-0-0): size 34 (cls: NewLobbyLayout>BoolProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_BooleanAND_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_EqualEqual_ByteByte_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ByteByte_ReturnValue>BoolProperty>/Script/CoreUObject) :
@@ -884,6 +935,10 @@ Serialized exports:
 	Has Player (0-0-0-0): size 34 (cls: Has Player>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_SetStaticMesh_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_SetStaticMesh_ReturnValue>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_SetStaticMesh_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_SetStaticMesh_ReturnValue1>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject) :
 		Tag array:
@@ -945,7 +1000,47 @@ Serialized exports:
 		Tag array:
 	Temp_byte_Variable1 (0-0-0-0): size 40 (cls: Temp_byte_Variable1>EnumProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_Multiply_FloatFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Multiply_FloatFloat_ReturnValue>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Multiply_FloatFloat_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Multiply_FloatFloat_ReturnValue1>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Multiply_FloatFloat_ReturnValue2 (0-0-0-0): size 32 (cls: CallFunc_Multiply_FloatFloat_ReturnValue2>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Multiply_FloatFloat_ReturnValue3 (0-0-0-0): size 32 (cls: CallFunc_Multiply_FloatFloat_ReturnValue3>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Multiply_FloatFloat_ReturnValue4 (0-0-0-0): size 32 (cls: CallFunc_Multiply_FloatFloat_ReturnValue4>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Multiply_FloatFloat_ReturnValue5 (0-0-0-0): size 32 (cls: CallFunc_Multiply_FloatFloat_ReturnValue5>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	LightBrightnessScale (0-0-0-0): size 32 (cls: LightBrightnessScale>FloatProperty>/Script/CoreUObject) :
+		Tag array:
 	OffsetLobbyAddPlayer (0-0-0-0): size 32 (cls: OffsetLobbyAddPlayer>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	RimSpotLight_Brightness (0-0-0-0): size 32 (cls: RimSpotLight_Brightness>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	TopSpotLight_Brightness (0-0-0-0): size 32 (cls: TopSpotLight_Brightness>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	TopSpotLight_Brightness_Hovered (0-0-0-0): size 32 (cls: TopSpotLight_Brightness_Hovered>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	UnderlightBluePoint_Brightness (0-0-0-0): size 32 (cls: UnderlightBluePoint_Brightness>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	UnderlightBluePoint_Brightness_Hovered (0-0-0-0): size 32 (cls: UnderlightBluePoint_Brightness_Hovered>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	UnderlightBlueSpot_Brightness (0-0-0-0): size 32 (cls: UnderlightBlueSpot_Brightness>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	UnderlightBlueSpot_Brightness_Hovered (0-0-0-0): size 32 (cls: UnderlightBlueSpot_Brightness_Hovered>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Multiply_FloatFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Multiply_FloatFloat_ReturnValue>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Multiply_FloatFloat_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Multiply_FloatFloat_ReturnValue1>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Multiply_FloatFloat_ReturnValue2 (0-0-0-0): size 32 (cls: CallFunc_Multiply_FloatFloat_ReturnValue2>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Multiply_FloatFloat_ReturnValue3 (0-0-0-0): size 32 (cls: CallFunc_Multiply_FloatFloat_ReturnValue3>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_SelectFloat_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_SelectFloat_ReturnValue1>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_SelectFloat_ReturnValue2 (0-0-0-0): size 32 (cls: CallFunc_SelectFloat_ReturnValue2>FloatProperty>/Script/CoreUObject) :
 		Tag array:
 	K2Node_DynamicCast_AsCustom_Character_Part_Owner_Interface (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsCustom_Character_Part_Owner_Interface>InterfaceProperty>/Script/CoreUObject) :
 		Tag array:
@@ -968,6 +1063,8 @@ Serialized exports:
 	CallFunc_GetMaterial_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetMaterial_ReturnValue>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_GetMaterial_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetMaterial_ReturnValue1>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_GetMaterial_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_GetMaterial_ReturnValue2>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_GetUserWidgetObject_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetUserWidgetObject_ReturnValue>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1069,17 +1166,19 @@ Serialized exports:
 		Tag array:
 	UnderlightBluePoint02 (0-0-0-0): size 36 (cls: UnderlightBluePoint02>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	P_FE_Smoke_GEN_VARIABLE (0-0-0-0): size 128 (cls: P_FE_Smoke_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	P_FE_Smoke_GEN_VARIABLE (0-0-0-0): size 211 (cls: P_FE_Smoke_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_FE_Smoke=/Game/Environments/FrontEnd/Misc/P_FE_Smoke 
 			RelativeLocation(StructProperty)=Vector(4,0,8) 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
-	PS-NoPlayer-Sparkle_GEN_VARIABLE (0-0-0-0): size 131 (cls: PS-NoPlayer-Sparkle_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	PS-NoPlayer-Sparkle_GEN_VARIABLE (0-0-0-0): size 214 (cls: PS-NoPlayer-Sparkle_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_Outlander_Teleport=/Game/Effects/Fort_Effects/Effects/Characters/Outlander/InTheZone/P_Outlander_Teleport 
 			CustomTimeDilation(FloatProperty)=0.3 
 			RelativeScale3D(StructProperty)=Vector(0.4,0.5,1) 
-	PS-NoPlayer-Swirl01_GEN_VARIABLE (0-0-0-0): size 314 (cls: PS-NoPlayer-Swirl01_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
+	PS-NoPlayer-Swirl01_GEN_VARIABLE (0-0-0-0): size 397 (cls: PS-NoPlayer-Swirl01_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_LobbySpawnSpin=/Game/UI/Foundation/Lobby/materials/P_LobbySpawnSpin 
 			OldPosition(StructProperty)=Vector(-210,125371,78) 
@@ -1087,33 +1186,37 @@ Serialized exports:
 			RelativeLocation(StructProperty)=Vector(0,0,49) 
 			RelativeRotation(StructProperty)=Rotator(90,0,0) 
 			RelativeScale3D(StructProperty)=Vector(5,5,5) 
-	PS-NoPlayer-Swirl02_GEN_VARIABLE (0-0-0-0): size 285 (cls: PS-NoPlayer-Swirl02_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
+	PS-NoPlayer-Swirl02_GEN_VARIABLE (0-0-0-0): size 368 (cls: PS-NoPlayer-Swirl02_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_LobbySpawnSpin=/Game/UI/Foundation/Lobby/materials/P_LobbySpawnSpin 
 			OldPosition(StructProperty)=Vector(-210,125371,78) 
 			RelativeLocation(StructProperty)=Vector(0,0,51) 
 			RelativeRotation(StructProperty)=Rotator(-90,0,0) 
 			RelativeScale3D(StructProperty)=Vector(4,4,4) 
-	UnderlightBluePoint01_GEN_VARIABLE (0-0-0-0): size 411 (cls: UnderlightBluePoint01_GEN_VARIABLE>PointLightComponent>/Script/Engine) :
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
+	UnderlightBluePoint01_GEN_VARIABLE (0-0-0-0): size 437 (cls: UnderlightBluePoint01_GEN_VARIABLE>PointLightComponent>/Script/Engine) :
 		Tag array:
+			bUseInverseSquaredFalloff(BoolProperty)=False 
 			AttenuationRadius(FloatProperty)=50 
 			Temperature(FloatProperty)=7500 
 			bForceCachedShadowsForMovablePrimitives(BoolProperty)=True 
 			LightGuid(StructProperty)=Guid: 1389525186-1157485568-1929919890-3280209711 
-			Intensity(FloatProperty)=2000 
+			Intensity(FloatProperty)=250 
 			LightColor(StructProperty)=System.Byte[] 
 			CastShadows(BoolProperty)=False 
 			CastStaticShadows(BoolProperty)=False 
 			VolumetricScatteringIntensity(FloatProperty)=0 
 			RelativeLocation(StructProperty)=Vector(0,0,0.1372156) 
 			bVisible(BoolProperty)=False 
-	UnderlightBluePoint02_GEN_VARIABLE (0-0-0-0): size 411 (cls: UnderlightBluePoint02_GEN_VARIABLE>PointLightComponent>/Script/Engine) :
+	UnderlightBluePoint02_GEN_VARIABLE (0-0-0-0): size 437 (cls: UnderlightBluePoint02_GEN_VARIABLE>PointLightComponent>/Script/Engine) :
 		Tag array:
+			bUseInverseSquaredFalloff(BoolProperty)=False 
 			AttenuationRadius(FloatProperty)=50 
 			Temperature(FloatProperty)=7500 
 			bForceCachedShadowsForMovablePrimitives(BoolProperty)=True 
 			LightGuid(StructProperty)=Guid: 3622669516-1315619420-1110289810-894677431 
-			Intensity(FloatProperty)=2000 
+			Intensity(FloatProperty)=250 
 			LightColor(StructProperty)=System.Byte[] 
 			CastShadows(BoolProperty)=False 
 			CastStaticShadows(BoolProperty)=False 
@@ -1253,20 +1356,20 @@ Serialized exports:
 		Tag array:
 			InnerConeAngle(FloatProperty)=12 
 			OuterConeAngle(FloatProperty)=20 
+			bUseInverseSquaredFalloff(BoolProperty)=False 
+			SourceRadius(FloatProperty)=50 
 			AttenuationRadius(FloatProperty)=350 
 			Temperature(FloatProperty)=5500 
-			ShadowBias(FloatProperty)=0.2 
 			bForceCachedShadowsForMovablePrimitives(BoolProperty)=True 
 			LightGuid(StructProperty)=Guid: 2934163069-1183830894-3858739126-715708655 
-			Intensity(FloatProperty)=40000 
+			Intensity(FloatProperty)=50 
 			LightColor(StructProperty)=System.Byte[] 
 			CastShadows(BoolProperty)=False 
 			CastStaticShadows(BoolProperty)=False 
 			IndirectLightingIntensity(FloatProperty)=0 
 			VolumetricScatteringIntensity(FloatProperty)=0 
-			RelativeLocation(StructProperty)=Vector(-159.237,144.8993,208) 
-			RelativeRotation(StructProperty)=Rotator(-22.4999,-42.18739,-3.141999E-05) 
-			bVisible(BoolProperty)=False 
+			RelativeLocation(StructProperty)=Vector(-119.237,144.8993,208) 
+			RelativeRotation(StructProperty)=Rotator(-22.49986,-49.10086,5.544703E-06) 
 	TopSpotLight_GEN_VARIABLE (0-0-0-0): size 614 (cls: TopSpotLight_GEN_VARIABLE>SpotLightComponent>/Script/Engine) :
 		Tag array:
 			InnerConeAngle(FloatProperty)=12 
@@ -1286,36 +1389,38 @@ Serialized exports:
 			RelativeLocation(StructProperty)=Vector(118.3681,-4.147302E-07,349.7588) 
 			RelativeRotation(StructProperty)=Rotator(-70.30856,-179.9999,-180) 
 			bVisible(BoolProperty)=False 
-	UnderlightBlue01_GEN_VARIABLE (0-0-0-0): size 530 (cls: UnderlightBlue01_GEN_VARIABLE>SpotLightComponent>/Script/Engine) :
+	UnderlightBlue01_GEN_VARIABLE (0-0-0-0): size 556 (cls: UnderlightBlue01_GEN_VARIABLE>SpotLightComponent>/Script/Engine) :
 		Tag array:
 			InnerConeAngle(FloatProperty)=27.81652 
 			OuterConeAngle(FloatProperty)=32.16511 
-			AttenuationRadius(FloatProperty)=150 
+			bUseInverseSquaredFalloff(BoolProperty)=False 
+			AttenuationRadius(FloatProperty)=300 
 			ShadowBias(FloatProperty)=0.2 
 			bForceCachedShadowsForMovablePrimitives(BoolProperty)=True 
 			LightGuid(StructProperty)=Guid: 2908986933-1251282925-756375948-3362244266 
-			Intensity(FloatProperty)=150000 
+			Intensity(FloatProperty)=10 
 			LightColor(StructProperty)=System.Byte[] 
 			CastShadows(BoolProperty)=False 
 			CastStaticShadows(BoolProperty)=False 
 			VolumetricScatteringIntensity(FloatProperty)=0 
-			RelativeLocation(StructProperty)=Vector(32.00008,32,-59.19999) 
+			RelativeLocation(StructProperty)=Vector(48.00008,32,-59.19999) 
 			RelativeRotation(StructProperty)=Rotator(62.00876,-133.2198,-136.7813) 
 			bVisible(BoolProperty)=False 
-	UnderlightBlue02_GEN_VARIABLE (0-0-0-0): size 530 (cls: UnderlightBlue02_GEN_VARIABLE>SpotLightComponent>/Script/Engine) :
+	UnderlightBlue02_GEN_VARIABLE (0-0-0-0): size 556 (cls: UnderlightBlue02_GEN_VARIABLE>SpotLightComponent>/Script/Engine) :
 		Tag array:
 			InnerConeAngle(FloatProperty)=27.81652 
 			OuterConeAngle(FloatProperty)=32.16511 
-			AttenuationRadius(FloatProperty)=150 
+			bUseInverseSquaredFalloff(BoolProperty)=False 
+			AttenuationRadius(FloatProperty)=300 
 			ShadowBias(FloatProperty)=0.2 
 			bForceCachedShadowsForMovablePrimitives(BoolProperty)=True 
 			LightGuid(StructProperty)=Guid: 1598575414-1225797631-1409908368-2902824432 
-			Intensity(FloatProperty)=150000 
+			Intensity(FloatProperty)=10 
 			LightColor(StructProperty)=System.Byte[] 
 			CastShadows(BoolProperty)=False 
 			CastStaticShadows(BoolProperty)=False 
 			VolumetricScatteringIntensity(FloatProperty)=0 
-			RelativeLocation(StructProperty)=Vector(32.00008,-32,-59.19999) 
+			RelativeLocation(StructProperty)=Vector(48.00008,-32,-59.19999) 
 			RelativeRotation(StructProperty)=Rotator(62.99998,136.4446,126.213) 
 			bVisible(BoolProperty)=False 
 	SM_Lobby_Character_Pad_GEN_VARIABLE (0-0-0-0): size 260 (cls: SM_Lobby_Character_Pad_GEN_VARIABLE>StaticMeshComponent>/Script/Engine) :

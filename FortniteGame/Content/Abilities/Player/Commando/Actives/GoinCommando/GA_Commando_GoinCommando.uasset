@@ -9,6 +9,7 @@ Name table:
 	/Game/Abilities/Player/Commando/Actives/GoinCommando/GoinCommandoWeapon_Boomstick
 	/Game/Abilities/Player/Commando/Actives/GoinCommando/TT_Commando_GoinCommando
 	/Game/Abilities/Player/Parents/GAT_ActiveAbility
+	/Game/Abilities/Player/Parents/GAT_ActiveAbility_Hero
 	/Game/Abilities/Player/Parents/GAT_CommandoActiveAbility
 	/Game/Abilities/Player/Perks/Leader/ShootyMcShootsAlot/GE_Perk_L_ShootyMcShootsAlot_DurationPerStack
 	/Game/Balance/DataTables/CombatEffects_HeroAbilities
@@ -66,6 +67,7 @@ Name table:
 	CallFunc_Add_FloatFloat_ReturnValue
 	CallFunc_Add_FloatFloat_ReturnValue1
 	CallFunc_Add_FloatFloat_ReturnValue2
+	CallFunc_CommitAbilityWithEvent_Passed
 	CallFunc_DoesTagAssetInterfaceHaveTag_ReturnValue
 	CallFunc_DoesTagAssetInterfaceHaveTag_ReturnValue1
 	CallFunc_DoesTagAssetInterfaceHaveTag_ReturnValue2
@@ -94,7 +96,6 @@ Name table:
 	CallFunc_IsValid_ReturnValue
 	CallFunc_IsValid_ReturnValue1
 	CallFunc_K2_ApplyGameplayEffectSpecToOwner_ReturnValue
-	CallFunc_K2_CommitAbility_ReturnValue
 	CallFunc_K2_SetTimerDelegate_ReturnValue
 	CallFunc_MakeOutgoingGameplayEffectSpec_ReturnValue
 	CallFunc_Multiply_IntFloat_ReturnValue
@@ -109,6 +110,7 @@ Name table:
 	ClientPlayForceFeedback
 	CombatEffects_HeroAbilities
 	CommandoPlayerPawn
+	CommitAbilityWithEvent
 	Controller
 	CooldownGameplayEffectClass
 	CostSource
@@ -130,6 +132,7 @@ Name table:
 	Default__Function
 	Default__GA_Commando_GoinCommando_C
 	Default__GAT_ActiveAbility_C
+	Default__GAT_ActiveAbility_Hero_C
 	Default__GAT_CommandoActiveAbility_C
 	Default__GE_Commando_GoinCommandoActive_C
 	Default__GE_Commando_GoinCommandoCooldown_C
@@ -189,6 +192,7 @@ Name table:
 	GameplayTags
 	GameplayTask
 	GAT_ActiveAbility_C
+	GAT_ActiveAbility_Hero_C
 	GAT_CommandoActiveAbility_C
 	GE_Commando_GoinCommandoActive_C
 	GE_Commando_GoinCommandoCooldown_C
@@ -214,14 +218,12 @@ Name table:
 	IfItBleeds
 	InterfaceProperty
 	IntProperty
-	isAutoCommitted
 	IsServer
 	IsValid
 	ItemDefinition
 	K2_ActivateAbility
 	K2_ApplyGameplayEffectSpecToOwner
 	K2_ClearAndInvalidateTimerHandle
-	K2_CommitAbility
 	K2_EndAbility
 	K2_OnEndAbility
 	K2_SetTimerDelegate
@@ -256,6 +258,7 @@ Name table:
 	ScalableFloat
 	ScriptStruct
 	SendGameplayEvent
+	SendHeroAbilityActivationEvent
 	SetCameraMode
 	SetCanBeCanceled
 	SetupAbility
@@ -290,7 +293,7 @@ Name table:
 	UberGraphFunction
 	UInt64Property
 	UpgradeDuration
-	UseNewPerkSystem
+	UseHeroLoadoutSystem
 	Value
 	WaitGameplayEvent
 	WaitGameplayEventDelegate__DelegateSignature
@@ -309,9 +312,11 @@ Import table:
 	GE_Commando_GoinCommandoSnare_Self_C (BlueprintGeneratedClass)
 	TT_Commando_GoinCommando_C (BlueprintGeneratedClass)
 	GAT_ActiveAbility_C (BlueprintGeneratedClass)
+	GAT_ActiveAbility_Hero_C (BlueprintGeneratedClass)
 	GAT_CommandoActiveAbility_C (BlueprintGeneratedClass)
 	GE_Perk_L_ShootyMcShootsAlot_DurationPerStack_C (BlueprintGeneratedClass)
 	Default__BlueprintGeneratedClass (BlueprintGeneratedClass)
+	UseHeroLoadoutSystem (BoolProperty)
 	Default__BoolProperty (BoolProperty)
 	Default__BP_Commando_GoinCommando_Camera_Out_C (BP_Commando_GoinCommando_Camera_Out_C)
 	BoolProperty (Class)
@@ -382,6 +387,7 @@ Import table:
 	HasAllMatchingGameplayTags (Function)
 	ReadyForActivation (Function)
 	Default__GAT_ActiveAbility_C (GAT_ActiveAbility_C)
+	Default__GAT_ActiveAbility_Hero_C (GAT_ActiveAbility_Hero_C)
 	Default__GAT_CommandoActiveAbility_C (GAT_CommandoActiveAbility_C)
 	Default__GE_Commando_GoinCommandoActive_C (GE_Commando_GoinCommandoActive_C)
 	Default__GE_Commando_GoinCommandoCooldown_C (GE_Commando_GoinCommandoCooldown_C)
@@ -403,6 +409,7 @@ Import table:
 	/Game/Abilities/Player/Commando/Actives/GoinCommando/GoinCommandoWeapon_Boomstick (Package)
 	/Game/Abilities/Player/Commando/Actives/GoinCommando/TT_Commando_GoinCommando (Package)
 	/Game/Abilities/Player/Parents/GAT_ActiveAbility (Package)
+	/Game/Abilities/Player/Parents/GAT_ActiveAbility_Hero (Package)
 	/Game/Abilities/Player/Parents/GAT_CommandoActiveAbility (Package)
 	/Game/Abilities/Player/Perks/Leader/ShootyMcShootsAlot/GE_Perk_L_ShootyMcShootsAlot_DurationPerStack (Package)
 	/Game/Balance/DataTables/CombatEffects_HeroAbilities (Package)
@@ -429,11 +436,11 @@ Import table:
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	GA_Commando_GoinCommando_C (0-0-0-0): size 426 (cls: GA_Commando_GoinCommando_C>BlueprintGeneratedClass>/Script/Engine) :
+	GA_Commando_GoinCommando_C (0-0-0-0): size 422 (cls: GA_Commando_GoinCommando_C>BlueprintGeneratedClass>/Script/Engine) :
 		Tag array:
 			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=GA_Commando_GoinCommando_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_GA_Commando_GoinCommando=GA_Commando_GoinCommando_C 
-	Default__GA_Commando_GoinCommando_C (0-0-0-0): size 3513 (cls: Default__GA_Commando_GoinCommando_C>GA_Commando_GoinCommando_C) :
+	Default__GA_Commando_GoinCommando_C (0-0-0-0): size 3487 (cls: Default__GA_Commando_GoinCommando_C>GA_Commando_GoinCommando_C) :
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			EventActivation(StructProperty)=System.Byte[] 
@@ -466,7 +473,6 @@ Serialized exports:
 			Timer_AbilityDuration(StructProperty)=System.Byte[] 
 			GE_ShootyMcShootsAlot_DurationPerStack(ObjectProperty)=GE_Perk_L_ShootyMcShootsAlot_DurationPerStack_C=/Game/Abilities/Player/Perks/Leader/ShootyMcShootsAlot/GE_Perk_L_ShootyMcShootsAlot_DurationPerStack 
 			Row_ShootyMcShootsAlot_DurationPerStack(StructProperty)=System.Byte[] 
-			isAutoCommitted(BoolProperty)=False 
 			EffectContainers(StructProperty)=System.Byte[] 
 			EffectContainers(StructProperty)=System.Byte[] 
 			EffectContainers(StructProperty)=System.Byte[] 
@@ -480,7 +486,7 @@ Serialized exports:
 		Tag array:
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject) :
 		Tag array:
-	ExecuteUbergraph_GA_Commando_GoinCommando (0-0-0-0): size 1123 (cls: ExecuteUbergraph_GA_Commando_GoinCommando>Function>/Script/CoreUObject) :
+	ExecuteUbergraph_GA_Commando_GoinCommando (0-0-0-0): size 1153 (cls: ExecuteUbergraph_GA_Commando_GoinCommando>Function>/Script/CoreUObject) :
 		Tag array:
 	K2_ActivateAbility (0-0-0-0): size 58 (cls: K2_ActivateAbility>Function>/Script/CoreUObject) :
 		Tag array:
@@ -526,13 +532,13 @@ Serialized exports:
 		Tag array:
 	EasyOperation (0-0-0-0): size 34 (cls: EasyOperation>BoolProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_CommitAbilityWithEvent_Passed (0-0-0-0): size 34 (cls: CallFunc_CommitAbilityWithEvent_Passed>BoolProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_IsServer_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsServer_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_IsValid_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue1>BoolProperty>/Script/CoreUObject) :
-		Tag array:
-	CallFunc_K2_CommitAbility_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_K2_CommitAbility_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -557,8 +563,6 @@ Serialized exports:
 	Temp_bool_Variable1 (0-0-0-0): size 34 (cls: Temp_bool_Variable1>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	ShootyMcShootsAlot_T01 (0-0-0-0): size 34 (cls: ShootyMcShootsAlot_T01>BoolProperty>/Script/CoreUObject) :
-		Tag array:
-	UseNewPerkSystem (0-0-0-0): size 34 (cls: UseNewPerkSystem>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	Cam_Out (0-0-0-0): size 40 (cls: Cam_Out>ClassProperty>/Script/CoreUObject) :
 		Tag array:

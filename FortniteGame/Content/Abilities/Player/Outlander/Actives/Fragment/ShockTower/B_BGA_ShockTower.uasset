@@ -40,6 +40,7 @@ Name table:
 	ActiveGameplayEffectHandle
 	Actor
 	ActorComponent
+	ActorComponentTickFunction
 	Add_FloatFloat
 	Add_IntInt
 	Add_VectorVector
@@ -78,6 +79,7 @@ Name table:
 	BP_ApplyGameplayEffectToSelf
 	BreakRotator
 	BreakVector
+	bStartWithTickEnabled
 	BuildingGameplayActor
 	bUseInverseSquaredFalloff
 	bValidatedAsWired
@@ -597,6 +599,7 @@ Name table:
 	PointerToUberGraphFrame
 	PointLightComponent
 	PostProcessComponent
+	PrimaryComponentTick
 	PrimitiveComponent
 	Progress
 	PropertyName
@@ -936,6 +939,7 @@ Import table:
 	Rotator (ScriptStruct)
 	Transform (ScriptStruct)
 	Vector (ScriptStruct)
+	ActorComponentTickFunction (ScriptStruct)
 	BodyInstance (ScriptStruct)
 	CollisionResponse (ScriptStruct)
 	HitResult (ScriptStruct)
@@ -1634,19 +1638,22 @@ Serialized exports:
 		Tag array:
 	TurnTop (0-0-0-0): size 36 (cls: TurnTop>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	P_Outlander_ShockTower_ChargeUp_GEN_VARIABLE (0-0-0-0): size 102 (cls: P_Outlander_ShockTower_ChargeUp_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	P_Outlander_ShockTower_ChargeUp_GEN_VARIABLE (0-0-0-0): size 185 (cls: P_Outlander_ShockTower_ChargeUp_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_Outlander_ShockTower_ChargeUp=/Game/CharClasses/Outlander/Gadgets/Fragment/ShockTower/P_Outlander_ShockTower_ChargeUp 
 			RelativeLocation(StructProperty)=Vector(0,0,-4) 
-	P_Outlander_ShockTowerSparks_GEN_VARIABLE (0-0-0-0): size 163 (cls: P_Outlander_ShockTowerSparks_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
+	P_Outlander_ShockTowerSparks_GEN_VARIABLE (0-0-0-0): size 246 (cls: P_Outlander_ShockTowerSparks_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_Outlander_ShockTowerSparks=/Game/CharClasses/Outlander/Gadgets/Fragment/ShockTower/P_Outlander_ShockTowerSparks 
 			RelativeLocation(StructProperty)=Vector(-50.49634,4.621443,36.52464) 
 			RelativeRotation(StructProperty)=Rotator(29.59483,0,0) 
-	P_Shocktower_Fire_GEN_VARIABLE (0-0-0-0): size 128 (cls: P_Shocktower_Fire_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
+	P_Shocktower_Fire_GEN_VARIABLE (0-0-0-0): size 211 (cls: P_Shocktower_Fire_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_Shocktower_Fire=/Game/CharClasses/Outlander/Gadgets/Fragment/ShockTower/P_Shocktower_Fire 
 			RelativeLocation(StructProperty)=Vector(0,0,146) 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
 	Illumination_GEN_VARIABLE (0-0-0-0): size 484 (cls: Illumination_GEN_VARIABLE>PointLightComponent>/Script/Engine) :
 		Tag array:
@@ -1690,14 +1697,14 @@ Serialized exports:
 			ChildNodes(ArrayProperty)=[object] (inner: ObjectProperty)
 			VariableGuid(StructProperty)=Guid: 267176970-1280686863-4112096133-2656583577 
 			InternalVariableName(NameProperty)=ShockTower_Sphere 
-	SCS_Node_12 (0-0-0-0): size 634 (cls: SCS_Node_12>SCS_Node>/Script/Engine) :
+	SCS_Node_12 (0-0-0-0): size 832 (cls: SCS_Node_12>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=P_Outlander_ShockTower_ChargeUp_GEN_VARIABLE=B_BGA_ShockTower_C 
 			CookedComponentInstancingData(StructProperty)=System.Byte[] 
 			VariableGuid(StructProperty)=Guid: 449619433-1098440490-3650246570-3345768462 
 			InternalVariableName(NameProperty)=P_Outlander_ShockTower_ChargeUp 
-	SCS_Node_2 (0-0-0-0): size 1030 (cls: SCS_Node_2>SCS_Node>/Script/Engine) :
+	SCS_Node_2 (0-0-0-0): size 1228 (cls: SCS_Node_2>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=P_Outlander_ShockTowerSparks_GEN_VARIABLE=B_BGA_ShockTower_C 
@@ -1711,7 +1718,7 @@ Serialized exports:
 			CookedComponentInstancingData(StructProperty)=System.Byte[] 
 			VariableGuid(StructProperty)=Guid: 2368266841-1080741063-1191915947-3880208969 
 			InternalVariableName(NameProperty)=SoundShockTowerAmbientLoop 
-	SCS_Node_4 (0-0-0-0): size 733 (cls: SCS_Node_4>SCS_Node>/Script/Engine) :
+	SCS_Node_4 (0-0-0-0): size 931 (cls: SCS_Node_4>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=P_Shocktower_Fire_GEN_VARIABLE=B_BGA_ShockTower_C 

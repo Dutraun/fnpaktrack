@@ -27,9 +27,12 @@ Name table:
 	2PigeonThreshold
 	Activate
 	Actor
+	ActorComponentTickFunction
 	ActorHitSignature__DelegateSignature
 	Add_IntInt
 	AllNodes
+	Array_AddUnique
+	Array_Clear
 	Array_Get
 	ArrayProperty
 	Arrow
@@ -73,6 +76,7 @@ Name table:
 	bPlaylistDataIsLoaded
 	BreakRotator
 	BreakVector
+	bStartWithTickEnabled
 	Building.Type.Prop
 	BuildingActor
 	BuildingDamagedSignature__DelegateSignature
@@ -82,6 +86,7 @@ Name table:
 	ByteProperty
 	CallFunc_Add_IntInt_ReturnValue
 	CallFunc_Add_IntInt_ReturnValue1
+	CallFunc_Array_AddUnique_ReturnValue
 	CallFunc_Array_Get_Item
 	CallFunc_Array_Get_Item1
 	CallFunc_Array_Get_Item2
@@ -112,6 +117,7 @@ Name table:
 	CallFunc_GetQuestManager_ReturnValue
 	CallFunc_GetServerWorldTimeSeconds_ReturnValue
 	CallFunc_Greater_IntInt_ReturnValue
+	CallFunc_GreaterEqual_IntInt_ReturnValue
 	CallFunc_HasAuthority_ReturnValue
 	CallFunc_HasAuthority_ReturnValue1
 	CallFunc_HasAuthority_ReturnValue2
@@ -176,6 +182,7 @@ Name table:
 	Color
 	ComponentClass
 	ComponentTemplate
+	ContributingPlayers
 	Controller
 	Conv_IntToFloat
 	CreateDynamicMaterialInstance
@@ -281,7 +288,9 @@ Name table:
 	GetPlayerPawn
 	GetQuestManager
 	GetServerWorldTimeSeconds
+	GoalScore
 	Greater_IntInt
+	GreaterEqual_IntInt
 	Guid
 	hackyscoresign
 	hackyscoresign_GEN_VARIABLE
@@ -333,7 +342,6 @@ Name table:
 	K2Node_DynamicCast_bSuccess2
 	K2Node_DynamicCast_bSuccess3
 	K2Node_Event_InteractingPawn
-	K2Node_MakeArray_Array
 	Keys
 	KismetArrayLibrary
 	KismetMathLibrary
@@ -400,6 +408,7 @@ Name table:
 	PlaylistName
 	PlaySoundAtLocation
 	PointerToUberGraphFrame
+	PrimaryComponentTick
 	PrimitiveComponent
 	ProjectileMovement_GEN_VARIABLE
 	ProjectileMovementComponent
@@ -612,6 +621,8 @@ Import table:
 	PlaySoundAtLocation (Function)
 	SpawnEmitterAtLocation (Function)
 	SpawnEmitterAttached (Function)
+	Array_AddUnique (Function)
+	Array_Clear (Function)
 	Array_Get (Function)
 	Add_IntInt (Function)
 	BooleanOR (Function)
@@ -619,6 +630,7 @@ Import table:
 	BreakVector (Function)
 	Conv_IntToFloat (Function)
 	Greater_IntInt (Function)
+	GreaterEqual_IntInt (Function)
 	Lerp (Function)
 	Less_IntInt (Function)
 	LessEqual_FloatFloat (Function)
@@ -726,14 +738,14 @@ Import table:
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	Prop_Quest_ClayPidgeonLauncher_C (0-0-0-0): size 1013 (cls: Prop_Quest_ClayPidgeonLauncher_C>BlueprintGeneratedClass>/Script/Engine) :
+	Prop_Quest_ClayPidgeonLauncher_C (0-0-0-0): size 1021 (cls: Prop_Quest_ClayPidgeonLauncher_C>BlueprintGeneratedClass>/Script/Engine) :
 		Tag array:
-			NumReplicatedProperties(IntProperty)=6 
+			NumReplicatedProperties(IntProperty)=7 
 			Timelines(ArrayProperty)=[object] (inner: ObjectProperty)
 			SimpleConstructionScript(ObjectProperty)=SimpleConstructionScript_0=Prop_Quest_ClayPidgeonLauncher_C 
 			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=Prop_Quest_ClayPidgeonLauncher_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_Prop_Quest_ClayPidgeonLauncher=Prop_Quest_ClayPidgeonLauncher_C 
-	Default__Prop_Quest_ClayPidgeonLauncher_C (0-0-0-0): size 1921 (cls: Default__Prop_Quest_ClayPidgeonLauncher_C>Prop_Quest_ClayPidgeonLauncher_C) :
+	Default__Prop_Quest_ClayPidgeonLauncher_C (0-0-0-0): size 1950 (cls: Default__Prop_Quest_ClayPidgeonLauncher_C>Prop_Quest_ClayPidgeonLauncher_C) :
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			ShootReloadSound(ObjectProperty)=ClayPidgeon_Shoot_TEMP_Cue=/Game/Athena/Sounds/Quests/ClayPidgeon_Shoot_TEMP_Cue 
@@ -759,6 +771,7 @@ Serialized exports:
 			InteractionString(TextProperty)=Activate (1BB671AD4AD312656E2D8CAE67088A59) 
 			Score Up Sound(ObjectProperty)=Clays_Score_Hit_Cue=/Game/Athena/Sounds/Quests/Clays_Score_Hit_Cue 
 			ResetScoreSound(ObjectProperty)=Clays_Score_Miss_Cue=/Game/Athena/Sounds/Quests/Clays_Score_Miss_Cue 
+			GoalScore(IntProperty)=3 
 			StaticMesh(ObjectProperty)=SM_Trap_Thrower_Bottom=/Game/Athena/Items/QuestInteractables/ClayPidgeons/Meshes/SM_Trap_Thrower_Bottom 
 			bClearMIDWhenReturningToUndamagedState(BoolProperty)=False 
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Default__Prop_Quest_ClayPidgeonLauncher_C 
@@ -767,11 +780,15 @@ Serialized exports:
 			StaticGameplayTags(StructProperty)=GameplayTagContainer:Building.Type.Prop 
 			bCanBeDamaged(BoolProperty)=False 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Default__Prop_Quest_ClayPidgeonLauncher_C 
+	ContributingPlayers (0-0-0-0): size 36 (cls: ContributingPlayers>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	ContributingPlayers (0-0-0-0): size 36 (cls: ContributingPlayers>ArrayProperty>/Script/CoreUObject) :
+		Tag array:
 	P_Athena_SoccerGame_ScoredGoal (0-0-0-0): size 36 (cls: P_Athena_SoccerGame_ScoredGoal>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject) :
 		Tag array:
-	ExecuteUbergraph_Prop_Quest_ClayPidgeonLauncher (0-0-0-0): size 5066 (cls: ExecuteUbergraph_Prop_Quest_ClayPidgeonLauncher>Function>/Script/CoreUObject) :
+	ExecuteUbergraph_Prop_Quest_ClayPidgeonLauncher (0-0-0-0): size 5195 (cls: ExecuteUbergraph_Prop_Quest_ClayPidgeonLauncher>Function>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_GetLocalFortPlayerControllers_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetLocalFortPlayerControllers_ReturnValue>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
@@ -784,10 +801,6 @@ Serialized exports:
 	CallFunc_GetLocalFortPlayerControllers_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_GetLocalFortPlayerControllers_ReturnValue2>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_GetLocalFortPlayerControllers_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_GetLocalFortPlayerControllers_ReturnValue2>ArrayProperty>/Script/CoreUObject) :
-		Tag array:
-	K2Node_MakeArray_Array (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array>ObjectProperty>/Script/CoreUObject) :
-		Tag array:
-	K2Node_MakeArray_Array (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array>ArrayProperty>/Script/CoreUObject) :
 		Tag array:
 	Arrow_GEN_VARIABLE (0-0-0-0): size 134 (cls: Arrow_GEN_VARIABLE>ArrowComponent>/Script/Engine) :
 		Tag array:
@@ -894,6 +907,8 @@ Serialized exports:
 	CallFunc_BooleanOR_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanOR_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_Greater_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Greater_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_GreaterEqual_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_GreaterEqual_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_HasAuthority_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasAuthority_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1068,7 +1083,11 @@ Serialized exports:
 		Tag array:
 	CallFunc_Add_IntInt_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue1>IntProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_Array_AddUnique_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Array_AddUnique_ReturnValue>IntProperty>/Script/CoreUObject) :
+		Tag array:
 	Temp_int_Variable (0-0-0-0): size 32 (cls: Temp_int_Variable>IntProperty>/Script/CoreUObject) :
+		Tag array:
+	GoalScore (0-0-0-0): size 32 (cls: GoalScore>IntProperty>/Script/CoreUObject) :
 		Tag array:
 	HighScore (0-0-0-0): size 32 (cls: HighScore>IntProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1186,11 +1205,12 @@ Serialized exports:
 		Tag array:
 	CallFunc_CreateDynamicMaterialInstance_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_CreateDynamicMaterialInstance_ReturnValue1>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	P_Athena_SoccerGame_ScoredGoal_GEN_VARIABLE (0-0-0-0): size 189 (cls: P_Athena_SoccerGame_ScoredGoal_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	P_Athena_SoccerGame_ScoredGoal_GEN_VARIABLE (0-0-0-0): size 272 (cls: P_Athena_SoccerGame_ScoredGoal_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_Athena_SoccerGame_ScoredGoal=/Game/Athena/Prototype/SoccerGame/P_Athena_SoccerGame_ScoredGoal 
 			RelativeLocation(StructProperty)=Vector(-46,0,80) 
 			RelativeScale3D(StructProperty)=Vector(0.5,0.5,0.5) 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
 	DefaultSceneRoot_GEN_VARIABLE (0-0-0-0): size 12 (cls: DefaultSceneRoot_GEN_VARIABLE>SceneComponent>/Script/Engine) :
 		Tag array:

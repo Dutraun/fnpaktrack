@@ -22,6 +22,7 @@ Name table:
 	/Game/Athena/Items/QuestInteractables/AthenaQuestFunctionLibrary
 	/Game/Athena/Items/Quests/AthenaObjectiveStatTable
 	/Game/Athena/Items/Quests/BattlePass/Quest_BR_Use_ShoppingCart
+	/Game/Athena/Sounds/HitNotifications/HitNotifyAudioBank_VehicleDefault
 	/Game/Athena/Sounds/Vehicles/ShoppingCart/C_ShoppingCart_Audio_CoastVolCurve
 	/Game/Athena/Sounds/Vehicles/ShoppingCart/C_ShoppingCart_Audio_PitchTest
 	/Game/Athena/Sounds/Vehicles/ShoppingCart/C_ShoppingCart_Audio_VolumeTest
@@ -60,6 +61,7 @@ Name table:
 	Abs
 	Actor
 	ActorComponent
+	ActorComponentTickFunction
 	ActorSpaceCameraOffset
 	Add_FloatFloat
 	Add_IntInt
@@ -149,10 +151,12 @@ Name table:
 	BoxCollision
 	BoxComponent
 	BoxExtent
+	bPlayDamageAudio
 	BreakRotator
 	BreakVector
 	BroadcastAbilityImpactAtLocation
 	bSimulatePhysics
+	bStartWithTickEnabled
 	BulletCollision
 	BulletCollision_GEN_VARIABLE
 	bUpdateOverlapsOnAnimationFinalize
@@ -472,6 +476,7 @@ Name table:
 	Default__StructProperty
 	Default__TextProperty
 	Default__VehicleConfigsShoppingCart_C
+	DefaultHitNotifyAudioBank
 	Defaults
 	DefaultSceneRoot
 	DefaultSceneRoot_GEN_VARIABLE
@@ -660,6 +665,7 @@ Name table:
 	HitMagnitude
 	HitNormal
 	HitNormalImpulse
+	HitNotifyAudioBank_VehicleDefault
 	HitResult
 	IgnoreHitLastDriver
 	ImpactNormal
@@ -929,6 +935,7 @@ Name table:
 	PointerToUberGraphFrame
 	PossibleInteractContextInfo
 	PrevWeapon
+	PrimaryComponentTick
 	PrimitiveComponent
 	PropertyName
 	PropertyScope
@@ -1139,6 +1146,7 @@ Name table:
 	Weapon3
 	Weapon4
 	Weapon5
+	WeaponHitNotifyAudioBank
 	WeaponMesh0
 	WheelSpinDampingPerSecond
 	WorldDynamic
@@ -1455,6 +1463,7 @@ Import table:
 	/Game/Athena/Items/QuestInteractables/AthenaQuestFunctionLibrary (Package)
 	/Game/Athena/Items/Quests/AthenaObjectiveStatTable (Package)
 	/Game/Athena/Items/Quests/BattlePass/Quest_BR_Use_ShoppingCart (Package)
+	/Game/Athena/Sounds/HitNotifications/HitNotifyAudioBank_VehicleDefault (Package)
 	/Game/Athena/Sounds/Vehicles/ShoppingCart/C_ShoppingCart_Audio_CoastVolCurve (Package)
 	/Game/Athena/Sounds/Vehicles/ShoppingCart/C_ShoppingCart_Audio_PitchTest (Package)
 	/Game/Athena/Sounds/Vehicles/ShoppingCart/C_ShoppingCart_Audio_VolumeTest (Package)
@@ -1505,6 +1514,7 @@ Import table:
 	Transform (ScriptStruct)
 	Vector (ScriptStruct)
 	Vector2D (ScriptStruct)
+	ActorComponentTickFunction (ScriptStruct)
 	BodyInstance (ScriptStruct)
 	CollisionResponse (ScriptStruct)
 	DataTableRowHandle (ScriptStruct)
@@ -1548,6 +1558,7 @@ Import table:
 	GameplayTags (StructProperty)
 	Default__TextProperty (TextProperty)
 	Default__VehicleConfigsShoppingCart_C (VehicleConfigsShoppingCart_C)
+	HitNotifyAudioBank_VehicleDefault (WeaponHitNotifyAudioBank)
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1559,7 +1570,7 @@ Serialized exports:
 			SimpleConstructionScript(ObjectProperty)=SimpleConstructionScript_0=ShoppingCartVehicleSK_C 
 			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=ShoppingCartVehicleSK_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_ShoppingCartVehicleSK=ShoppingCartVehicleSK_C 
-	Default__ShoppingCartVehicleSK_C (0-0-0-0): size 10573 (cls: Default__ShoppingCartVehicleSK_C>ShoppingCartVehicleSK_C) :
+	Default__ShoppingCartVehicleSK_C (0-0-0-0): size 10628 (cls: Default__ShoppingCartVehicleSK_C>ShoppingCartVehicleSK_C) :
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			OnDeathSound(ObjectProperty)=ShoppingCart_Destroy_Cue=/Game/Athena/Sounds/Vehicles/ShoppingCart/ShoppingCart_Destroy_Cue 
@@ -1599,6 +1610,7 @@ Serialized exports:
 			SKPushVehicleConfigsClass(ObjectProperty)=VehicleConfigsShoppingCart_C=/Game/Athena/DrivableVehicles/VehicleConfigsShoppingCart 
 			SkeletalMesh(ObjectProperty)=SkeletalMeshComponent=Default__ShoppingCartVehicleSK_C 
 			WheelSpinDampingPerSecond(FloatProperty)=1 
+			bPlayDamageAudio(BoolProperty)=True 
 			VehicleTags(StructProperty)=GameplayTagContainer:Vehicle.ShoppingCart 
 			Springs(ArrayProperty)=[object] (inner: StructProperty)
 			Gears(ArrayProperty)=[object] (inner: StructProperty)
@@ -1608,6 +1620,7 @@ Serialized exports:
 			PushForceSocket(NameProperty)=PushForce 
 			FrontWheelsSocket(NameProperty)=FrontWheels 
 			RearWheelSockets(NameProperty)=RearWheels 
+			DefaultHitNotifyAudioBank(ObjectProperty)=HitNotifyAudioBank_VehicleDefault=/Game/Athena/Sounds/HitNotifications/HitNotifyAudioBank_VehicleDefault 
 			SeatTransitions(ArrayProperty)=[object] (inner: StructProperty)
 			PlayerSlots(ArrayProperty)=[object] (inner: StructProperty)
 			CameraModeClass(ObjectProperty)=AthenaSimpleCar_CameraMode3_C=/Game/Athena/DrivableVehicles/AthenaSimpleCar_CameraMode3 
@@ -2589,10 +2602,11 @@ Serialized exports:
 		Tag array:
 	QuestItem (0-0-0-0): size 36 (cls: QuestItem>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	P_Shopping_Cart_Vehicle_WheelDust_GEN_VARIABLE (0-0-0-0): size 67 (cls: P_Shopping_Cart_Vehicle_WheelDust_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
+	P_Shopping_Cart_Vehicle_WheelDust_GEN_VARIABLE (0-0-0-0): size 150 (cls: P_Shopping_Cart_Vehicle_WheelDust_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
 			Template(ObjectProperty)=P_Shopping_Cart_Vehicle_WheelDust=/Game/Athena/DrivableVehicles/FX/P_Shopping_Cart_Vehicle_WheelDust 
 			bAbsoluteScale(BoolProperty)=True 
+			PrimaryComponentTick(StructProperty)=System.Byte[] 
 	DefaultSceneRoot_GEN_VARIABLE (0-0-0-0): size 12 (cls: DefaultSceneRoot_GEN_VARIABLE>SceneComponent>/Script/Engine) :
 		Tag array:
 	SCS_Node_0 (0-0-0-0): size 168 (cls: SCS_Node_0>SCS_Node>/Script/Engine) :
@@ -2689,7 +2703,7 @@ Serialized exports:
 			bIsParentComponentNative(BoolProperty)=True 
 			VariableGuid(StructProperty)=Guid: 1325746703-1148999151-3877236099-1937638424 
 			InternalVariableName(NameProperty)=PawnStepUpCollision 
-	SCS_Node_8 (0-0-0-0): size 594 (cls: SCS_Node_8>SCS_Node>/Script/Engine) :
+	SCS_Node_8 (0-0-0-0): size 792 (cls: SCS_Node_8>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=P_Shopping_Cart_Vehicle_WheelDust_GEN_VARIABLE=ShoppingCartVehicleSK_C 

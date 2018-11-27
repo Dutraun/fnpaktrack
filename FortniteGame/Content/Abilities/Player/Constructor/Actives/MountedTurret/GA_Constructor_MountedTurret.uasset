@@ -8,6 +8,7 @@ Name table:
 	/Game/Abilities/Player/Constructor/Actives/MountedTurret/TT_Constructor_MountedTurret
 	/Game/Abilities/Player/Parents/GAT_ActiveAbility
 	/Game/Abilities/Player/Parents/GAT_ConstructorActiveAbility
+	/Game/Abilities/Player/Perks/Leader/BouquetOfROSIES/GE_Perk_L_BouquetOfROSIES_Ammo_Stacks
 	/Game/Athena/Items/Traps/MountedTurret/MountedTurret_Weapon
 	/Game/Balance/DataTables/CombatEffects_HeroAbilities
 	/Game/Items/Datatables/RangedWeapons
@@ -32,12 +33,16 @@ Name table:
 	ActiveGameplayEffectHandle
 	Actor
 	ArrayProperty
+	bBouqetOfROSIES_8_8819513C4AE831B2D2CCADB3FF75804D
+	bBouquetOfROSIES
 	BlockActivationHandle
 	BlueprintGameplayTagLibrary
 	BlueprintGeneratedClass
 	BoneName
 	bOnlyApplyCostOnHit
 	BoolProperty
+	BouqetOfROSIE_Stack
+	BouquetOfROSIES_Stacks_13_486BE58646B5E62684DD1CA6C78386E8
 	BoxComponent
 	BP_RemoveGameplayEffectFromOwnerWithHandle
 	bPassedFiltersAndWasExecuted
@@ -51,10 +56,13 @@ Name table:
 	CallFunc_AbilitySpawnDeco_ReturnValue
 	CallFunc_ActiveAbilitySetup_AbilitySystemOut
 	CallFunc_GetAbilitySystemComponent_ReturnValue
+	CallFunc_GetGameplayEffectCount_ReturnValue
 	CallFunc_GetSpawnParameters_OutSpawnParamters
 	CallFunc_HasAllMatchingGameplayTags_ReturnValue
 	CallFunc_HasAllMatchingGameplayTags_ReturnValue1
+	CallFunc_HasAllMatchingGameplayTags_ReturnValue2
 	CallFunc_HasAllMatchingGameplayTags_TagContainerInterface1_CastInput
+	CallFunc_HasAllMatchingGameplayTags_TagContainerInterface2_CastInput
 	CallFunc_HasAllMatchingGameplayTags_TagContainerInterface_CastInput
 	CallFunc_IsServer_ReturnValue
 	CallFunc_K2_ApplyGameplayEffectSpecToOwner_ReturnValue
@@ -62,6 +70,7 @@ Name table:
 	CallFunc_K2_CommitAbilityCost_ReturnValue
 	CallFunc_MakeOutgoingGameplayEffectSpec_ReturnValue
 	Class
+	ClassProperty
 	CombatEffects_HeroAbilities
 	ConstructorPlayerPawn
 	ConstructorPlayerPawn_6_029FECCA4F25E925358637A587F9EE84
@@ -84,6 +93,7 @@ Name table:
 	Default__BlueprintGameplayTagLibrary
 	Default__BlueprintGeneratedClass
 	Default__BoolProperty
+	Default__ClassProperty
 	Default__DelegateProperty
 	Default__FloatProperty
 	Default__Function
@@ -92,6 +102,7 @@ Name table:
 	Default__GAT_ConstructorActiveAbility_C
 	Default__GE_Constructor_MountedTurretBlocker_C
 	Default__GE_Constructor_MountedTurretCooldown_C
+	Default__GE_Perk_L_BouquetOfROSIES_Ammo_Stacks_C
 	Default__InterfaceProperty
 	Default__IntProperty
 	Default__KismetSystemLibrary
@@ -120,18 +131,23 @@ Name table:
 	Gameplay.Action.Player.Medium
 	Gameplay.Action.RestrictedAbility
 	GameplayAbility
+	GameplayEffect
 	GameplayEffectSpecHandle
 	GameplayTag
 	GameplayTagAssetInterface
 	GameplayTagContainer
 	GAT_ActiveAbility_C
 	GAT_ConstructorActiveAbility_C
+	GE_BouquetOfROSIES_Stack
 	GE_Constructor_MountedTurretBlocker_C
 	GE_Constructor_MountedTurretCooldown_C
+	GE_Perk_L_BouquetOfROSIES_Ammo_Stacks_C
 	GetAbilitySystemComponent
+	GetGameplayEffectCount
 	GetSpawnParameters
 	GetUpgradeValue
 	Granted.Ability.Constructor.MountedTurret.BlockActivation
+	Granted.Perk.BouquetOfROSIES.T01
 	Granted.Perk.WarOfTheRosie.T01
 	Granted.Perk.WarOfTheRosie.T02
 	Handle
@@ -193,6 +209,7 @@ Name table:
 	StaticMeshComponent0
 	Struct_Constructor_MountedTurretVars
 	StructProperty
+	TC_BoquetOfROSIES
 	TC_WarOfTheRosieT01
 	TC_WarOfTheRosieT02
 	Tooltip
@@ -216,13 +233,17 @@ Import table:
 	TT_Constructor_MountedTurret_C (BlueprintGeneratedClass)
 	GAT_ActiveAbility_C (BlueprintGeneratedClass)
 	GAT_ConstructorActiveAbility_C (BlueprintGeneratedClass)
+	GE_Perk_L_BouquetOfROSIES_Ammo_Stacks_C (BlueprintGeneratedClass)
 	Default__BlueprintGeneratedClass (BlueprintGeneratedClass)
+	bBouqetOfROSIES_8_8819513C4AE831B2D2CCADB3FF75804D (BoolProperty)
 	bWarOfTheRosie_T01_2_50CD75484F953138BF91B1A3294C29CA (BoolProperty)
 	bWarOfTheRosie_T02_3_DF15E008493E7470AB2B9286E84E21C5 (BoolProperty)
 	isAutoCommitted (BoolProperty)
 	Default__BoolProperty (BoolProperty)
 	NoBuildZone_GEN_VARIABLE (BoxComponent)
 	BoolProperty (Class)
+	Class (Class)
+	ClassProperty (Class)
 	DelegateProperty (Class)
 	FloatProperty (Class)
 	Function (Class)
@@ -244,8 +265,10 @@ Import table:
 	AbilitySystemBlueprintLibrary (Class)
 	AbilitySystemComponent (Class)
 	GameplayAbility (Class)
+	GameplayEffect (Class)
 	BlueprintGameplayTagLibrary (Class)
 	GameplayTagAssetInterface (Class)
+	Default__ClassProperty (ClassProperty)
 	CombatEffects_HeroAbilities (CurveTable)
 	RangedWeapons (DataTable)
 	BuildingDamagedSignature__DelegateSignature (DelegateFunction)
@@ -260,6 +283,7 @@ Import table:
 	AbilitySpawnDeco (Function)
 	GetSpawnParameters (Function)
 	GetAbilitySystemComponent (Function)
+	GetGameplayEffectCount (Function)
 	BP_RemoveGameplayEffectFromOwnerWithHandle (Function)
 	K2_ApplyGameplayEffectSpecToOwner (Function)
 	K2_OnEndAbility (Function)
@@ -269,7 +293,9 @@ Import table:
 	Default__GAT_ConstructorActiveAbility_C (GAT_ConstructorActiveAbility_C)
 	Default__GE_Constructor_MountedTurretBlocker_C (GE_Constructor_MountedTurretBlocker_C)
 	Default__GE_Constructor_MountedTurretCooldown_C (GE_Constructor_MountedTurretCooldown_C)
+	Default__GE_Perk_L_BouquetOfROSIES_Ammo_Stacks_C (GE_Perk_L_BouquetOfROSIES_Ammo_Stacks_C)
 	Default__InterfaceProperty (InterfaceProperty)
+	BouquetOfROSIES_Stacks_13_486BE58646B5E62684DD1CA6C78386E8 (IntProperty)
 	Default__IntProperty (IntProperty)
 	Default__KismetSystemLibrary (KismetSystemLibrary)
 	OnDied (MulticastDelegateProperty)
@@ -286,6 +312,7 @@ Import table:
 	/Game/Abilities/Player/Constructor/Actives/MountedTurret/TT_Constructor_MountedTurret (Package)
 	/Game/Abilities/Player/Parents/GAT_ActiveAbility (Package)
 	/Game/Abilities/Player/Parents/GAT_ConstructorActiveAbility (Package)
+	/Game/Abilities/Player/Perks/Leader/BouquetOfROSIES/GE_Perk_L_BouquetOfROSIES_Ammo_Stacks (Package)
 	/Game/Athena/Items/Traps/MountedTurret/MountedTurret_Weapon (Package)
 	/Game/Balance/DataTables/CombatEffects_HeroAbilities (Package)
 	/Game/Items/Datatables/RangedWeapons (Package)
@@ -313,11 +340,11 @@ Import table:
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	GA_Constructor_MountedTurret_C (0-0-0-0): size 250 (cls: GA_Constructor_MountedTurret_C>BlueprintGeneratedClass>/Script/Engine) :
+	GA_Constructor_MountedTurret_C (0-0-0-0): size 266 (cls: GA_Constructor_MountedTurret_C>BlueprintGeneratedClass>/Script/Engine) :
 		Tag array:
 			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=GA_Constructor_MountedTurret_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_GA_Constructor_MountedTurret=GA_Constructor_MountedTurret_C 
-	Default__GA_Constructor_MountedTurret_C (0-0-0-0): size 1096 (cls: Default__GA_Constructor_MountedTurret_C>GA_Constructor_MountedTurret_C) :
+	Default__GA_Constructor_MountedTurret_C (0-0-0-0): size 1186 (cls: Default__GA_Constructor_MountedTurret_C>GA_Constructor_MountedTurret_C) :
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			MountedTurretWeapon(ObjectProperty)=MountedTurret_Weapon=/Game/Athena/Items/Traps/MountedTurret/MountedTurret_Weapon 
@@ -325,6 +352,8 @@ Serialized exports:
 			BlockActivationHandle(StructProperty)=System.Byte[] 
 			TC_WarOfTheRosieT01(StructProperty)=GameplayTagContainer:Granted.Perk.WarOfTheRosie.T01 
 			MountedTurretWeaponTT(ObjectProperty)=MountedTurret_Weapon_STW=/Game/Abilities/Player/Constructor/Actives/MountedTurret/MountedTurret_Weapon_STW 
+			TC_BoquetOfROSIES(StructProperty)=GameplayTagContainer:Granted.Perk.BouquetOfROSIES.T01 
+			GE_BouquetOfROSIES_Stack(ObjectProperty)=GE_Perk_L_BouquetOfROSIES_Ammo_Stacks_C=/Game/Abilities/Player/Perks/Leader/BouquetOfROSIES/GE_Perk_L_BouquetOfROSIES_Ammo_Stacks 
 			DamageStatHandle(StructProperty)=System.Byte[] 
 			AbilityCosts(ArrayProperty)=[object] (inner: StructProperty)
 			AbilityWeapon(ObjectProperty)=MountedTurret_Weapon_STW=/Game/Abilities/Player/Constructor/Actives/MountedTurret/MountedTurret_Weapon_STW 
@@ -336,7 +365,7 @@ Serialized exports:
 		Tag array:
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject) :
 		Tag array:
-	ExecuteUbergraph_GA_Constructor_MountedTurret (0-0-0-0): size 736 (cls: ExecuteUbergraph_GA_Constructor_MountedTurret>Function>/Script/CoreUObject) :
+	ExecuteUbergraph_GA_Constructor_MountedTurret (0-0-0-0): size 772 (cls: ExecuteUbergraph_GA_Constructor_MountedTurret>Function>/Script/CoreUObject) :
 		Tag array:
 	DamagedActor (0-0-0-0): size 36 (cls: DamagedActor>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
@@ -350,11 +379,15 @@ Serialized exports:
 		Tag array:
 	AbilitySystemIn (0-0-0-0): size 36 (cls: AbilitySystemIn>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	ActiveAbilitySetup (0-0-0-0): size 232 (cls: ActiveAbilitySetup>Function>/Script/CoreUObject) :
+	ActiveAbilitySetup (0-0-0-0): size 363 (cls: ActiveAbilitySetup>Function>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_HasAllMatchingGameplayTags_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasAllMatchingGameplayTags_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_HasAllMatchingGameplayTags_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_HasAllMatchingGameplayTags_ReturnValue1>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_HasAllMatchingGameplayTags_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_HasAllMatchingGameplayTags_ReturnValue2>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	bBouquetOfROSIES (0-0-0-0): size 34 (cls: bBouquetOfROSIES>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	bWarOfTheRosieT01 (0-0-0-0): size 34 (cls: bWarOfTheRosieT01>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -372,6 +405,8 @@ Serialized exports:
 		Tag array:
 	K2Node_Event_bWasCancelled (0-0-0-0): size 34 (cls: K2Node_Event_bWasCancelled>BoolProperty>/Script/CoreUObject) :
 		Tag array:
+	GE_BouquetOfROSIES_Stack (0-0-0-0): size 40 (cls: GE_BouquetOfROSIES_Stack>ClassProperty>/Script/CoreUObject) :
+		Tag array:
 	K2Node_CreateDelegate_OutputDelegate (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate>DelegateProperty>/Script/CoreUObject) :
 		Tag array:
 	K2Node_CustomEvent_Damage (0-0-0-0): size 32 (cls: K2Node_CustomEvent_Damage>FloatProperty>/Script/CoreUObject) :
@@ -380,7 +415,13 @@ Serialized exports:
 		Tag array:
 	CallFunc_HasAllMatchingGameplayTags_TagContainerInterface1_CastInput (0-0-0-0): size 36 (cls: CallFunc_HasAllMatchingGameplayTags_TagContainerInterface1_CastInput>InterfaceProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_HasAllMatchingGameplayTags_TagContainerInterface2_CastInput (0-0-0-0): size 36 (cls: CallFunc_HasAllMatchingGameplayTags_TagContainerInterface2_CastInput>InterfaceProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_HasAllMatchingGameplayTags_TagContainerInterface_CastInput (0-0-0-0): size 36 (cls: CallFunc_HasAllMatchingGameplayTags_TagContainerInterface_CastInput>InterfaceProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_GetGameplayEffectCount_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetGameplayEffectCount_ReturnValue>IntProperty>/Script/CoreUObject) :
+		Tag array:
+	BouqetOfROSIE_Stack (0-0-0-0): size 32 (cls: BouqetOfROSIE_Stack>IntProperty>/Script/CoreUObject) :
 		Tag array:
 	K2Node_CustomEvent_BoneName (0-0-0-0): size 32 (cls: K2Node_CustomEvent_BoneName>NameProperty>/Script/CoreUObject) :
 		Tag array:
@@ -431,6 +472,8 @@ Serialized exports:
 	K2Node_CustomEvent_Momentum (0-0-0-0): size 36 (cls: K2Node_CustomEvent_Momentum>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	K2Node_MakeStruct_Struct_Constructor_MountedTurretVars (0-0-0-0): size 36 (cls: K2Node_MakeStruct_Struct_Constructor_MountedTurretVars>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	TC_BoquetOfROSIES (0-0-0-0): size 36 (cls: TC_BoquetOfROSIES>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	TC_WarOfTheRosieT01 (0-0-0-0): size 36 (cls: TC_WarOfTheRosieT01>StructProperty>/Script/CoreUObject) :
 		Tag array:

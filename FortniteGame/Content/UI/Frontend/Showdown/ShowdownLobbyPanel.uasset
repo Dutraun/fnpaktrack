@@ -69,6 +69,7 @@ Name table:
 	BndEvt__EventDetailsButton_K2Node_ComponentBoundEvent_1_CommonButtonClicked__DelegateSignature
 	BndEvt__EventDetailsButton_K2Node_ComponentBoundEvent_2_CommonButtonClicked__DelegateSignature
 	Bold
+	BooleanAND
 	BoolProperty
 	Border
 	BorderSlot
@@ -92,17 +93,21 @@ Name table:
 	ByteProperty
 	CallFunc_Add_FloatFloat_ReturnValue
 	CallFunc_Add_FloatFloat_ReturnValue1
+	CallFunc_BooleanAND_ReturnValue
 	CallFunc_Conv_IntToText_ReturnValue
 	CallFunc_Conv_StringToText_ReturnValue
 	CallFunc_Conv_StringToText_ReturnValue1
 	CallFunc_Create_ReturnValue
 	CallFunc_EqualEqual_StrStr_ReturnValue
 	CallFunc_Format_ReturnValue
+	CallFunc_Format_ReturnValue1
 	CallFunc_GetBestEventScore_ReturnValue
 	CallFunc_GetContext_ReturnValue
 	CallFunc_GetContext_ReturnValue1
 	CallFunc_GetCurrentEventScore_ReturnValue
 	CallFunc_GetCurrentEventScore_ReturnValue1
+	CallFunc_GetCurrentEventTeamNumMatchesPlayed_ReturnValue
+	CallFunc_GetCurrentEventTeamNumMatchesPlayed_ReturnValue1
 	CallFunc_GetDynamicMaterial_ReturnValue
 	CallFunc_GetEndTime_ReturnValue
 	CallFunc_GetEndTime_ReturnValue1
@@ -114,10 +119,15 @@ Name table:
 	CallFunc_GetStartTime_ReturnValue1
 	CallFunc_GetText_ReturnValue
 	CallFunc_GetTournamentId_ReturnValue
+	CallFunc_GetTournamentMatchCap_ReturnValue
+	CallFunc_GetTournamentMatchCap_ReturnValue1
+	CallFunc_GetTournamentMatchCap_ReturnValue2
 	CallFunc_GetTournamentPinUnlockScore_ReturnValue
 	CallFunc_GetTournamentPinUnlockScore_ReturnValue1
 	CallFunc_Greater_IntInt_ReturnValue
 	CallFunc_GreaterEqual_IntInt_ReturnValue
+	CallFunc_GreaterEqual_IntInt_ReturnValue1
+	CallFunc_GreaterEqual_IntInt_ReturnValue2
 	CallFunc_LessEqual_FloatFloat_ReturnValue
 	CallFunc_LessEqual_FloatFloat_ReturnValue1
 	CallFunc_MakeLiteralText_ReturnValue
@@ -130,11 +140,12 @@ Name table:
 	CallFunc_PlayAnimationAtTime_ReturnValue1
 	CallFunc_PlayAnimationAtTime_ReturnValue2
 	CallFunc_PlayAnimationAtTime_ReturnValue3
-	CallFunc_ShouldShowCrossplayError_ReturnValue
 	CallFunc_SlotAsOverlaySlot_ReturnValue
 	CallFunc_SlotAsVerticalBoxSlot_ReturnValue
 	CallFunc_Subtract_FloatFloat_ReturnValue
 	CallFunc_Subtract_FloatFloat_ReturnValue1
+	CallFunc_Subtract_IntInt_ReturnValue
+	CallFunc_Subtract_IntInt_ReturnValue1
 	CallFunc_TextIsEmpty_ReturnValue
 	CallFunc_TextToUpper_ReturnValue
 	CallFunc_TextToUpper_ReturnValue1
@@ -332,6 +343,7 @@ Name table:
 	GetBestEventScore
 	GetContext
 	GetCurrentEventScore
+	GetCurrentEventTeamNumMatchesPlayed
 	GetDynamicMaterial
 	GetEndTime
 	GetEventId
@@ -341,6 +353,7 @@ Name table:
 	GetStartTime
 	GetText
 	GetTournamentId
+	GetTournamentMatchCap
 	GetTournamentPinUnlockScore
 	Greater_IntInt
 	GreaterEqual_IntInt
@@ -387,7 +400,9 @@ Name table:
 	K2Node_CreateDelegate_OutputDelegate1
 	K2Node_CustomEvent_bUsingGamepad
 	K2Node_MakeArray_Array
+	K2Node_MakeArray_Array1
 	K2Node_MakeStruct_FormatArgumentData
+	K2Node_MakeStruct_FormatArgumentData1
 	K2Node_MakeStruct_Margin
 	K2Node_MakeStruct_SlateColor
 	K2Node_Select1_Default
@@ -466,7 +481,6 @@ Name table:
 	Name
 	NamedSlot
 	NameProperty
-	NeedMorePlayersMessage
 	NoMessage
 	None
 	NoPinContent
@@ -572,7 +586,6 @@ Name table:
 	ShadowColorAndOpacity
 	ShadowOffset
 	Shear
-	ShouldShowCrossplayError
 	ShowdownLobbyPanel_C
 	ShowdownPin
 	ShowdownPin_C
@@ -608,6 +621,7 @@ Name table:
 	SubsystemBlueprintLibrary
 	SubTemplateSerialNumbers
 	Subtract_FloatFloat
+	Subtract_IntInt
 	T-Icon-Clock-128
 	Tags
 	Tangent
@@ -636,6 +650,8 @@ Name table:
 	TemplateLedger
 	TemplateSerialNumber
 	Text
+	Text_CrossplayWarning
+	Text_MatchCapWarning
 	Text_Remaining
 	Text_TimeRemaining
 	TextBlock
@@ -687,6 +703,7 @@ Name table:
 	VerticalBoxPointValues
 	VerticalBoxSlot
 	Visibility
+	WarningMessage
 	Widget
 	WidgetAnimation
 	WidgetAnimationBinding
@@ -810,10 +827,12 @@ Import table:
 	GetContext (Function)
 	Default__Function (Function)
 	Add_FloatFloat (Function)
+	BooleanAND (Function)
 	Greater_IntInt (Function)
 	GreaterEqual_IntInt (Function)
 	LessEqual_FloatFloat (Function)
 	Subtract_FloatFloat (Function)
+	Subtract_IntInt (Function)
 	EqualEqual_StrStr (Function)
 	MakeLiteralText (Function)
 	Conv_IntToText (Function)
@@ -826,13 +845,14 @@ Import table:
 	PushContentWidget_Adv (Function)
 	GetBestEventScore (Function)
 	GetCurrentEventScore (Function)
+	GetCurrentEventTeamNumMatchesPlayed (Function)
 	GetEventId (Function)
 	GetEventState (Function)
 	GetTournamentId (Function)
+	GetTournamentMatchCap (Function)
 	GetTournamentPinUnlockScore (Function)
 	RefreshDataBP (Function)
 	SetTournament (Function)
-	ShouldShowCrossplayError (Function)
 	SetBrushColor (Function)
 	GetDynamicMaterial (Function)
 	SetPadding (Function)
@@ -957,7 +977,7 @@ Import table:
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	ShowdownLobbyPanel_C (0-0-0-0): size 668 (cls: ShowdownLobbyPanel_C>WidgetBlueprintGeneratedClass>/Script/UMG) :
+	ShowdownLobbyPanel_C (0-0-0-0): size 676 (cls: ShowdownLobbyPanel_C>WidgetBlueprintGeneratedClass>/Script/UMG) :
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
@@ -1006,15 +1026,17 @@ Serialized exports:
 		Tag array:
 	RefreshDataBP (0-0-0-0): size 58 (cls: RefreshDataBP>Function>/Script/CoreUObject) :
 		Tag array:
-	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject) :
+	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject) :
 		Tag array:
-	Temp_byte_Variable (0-0-0-0): size 40 (cls: Temp_byte_Variable>EnumProperty>/Script/CoreUObject) :
-		Tag array:
-	Refresh (0-0-0-0): size 2588 (cls: Refresh>Function>/Script/CoreUObject) :
+	Refresh (0-0-0-0): size 3110 (cls: Refresh>Function>/Script/CoreUObject) :
 		Tag array:
 	K2Node_MakeArray_Array (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	K2Node_MakeArray_Array (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array>ArrayProperty>/Script/CoreUObject) :
+		Tag array:
+	K2Node_MakeArray_Array1 (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array1>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	K2Node_MakeArray_Array1 (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array1>ArrayProperty>/Script/CoreUObject) :
 		Tag array:
 	BackgroundBlur_0 (0-0-0-0): size 111 (cls: BackgroundBlur_0>BackgroundBlur>/Script/UMG) :
 		Tag array:
@@ -1050,21 +1072,23 @@ Serialized exports:
 		Tag array:
 	isGamepad (0-0-0-0): size 34 (cls: isGamepad>BoolProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_BooleanAND_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue>BoolProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_EqualEqual_StrStr_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_StrStr_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_Greater_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Greater_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_GreaterEqual_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_GreaterEqual_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
-	CallFunc_LessEqual_FloatFloat_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_LessEqual_FloatFloat_ReturnValue>BoolProperty>/Script/CoreUObject) :
+	CallFunc_GreaterEqual_IntInt_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_GreaterEqual_IntInt_ReturnValue1>BoolProperty>/Script/CoreUObject) :
 		Tag array:
-	CallFunc_ShouldShowCrossplayError_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_ShouldShowCrossplayError_ReturnValue>BoolProperty>/Script/CoreUObject) :
+	CallFunc_GreaterEqual_IntInt_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_GreaterEqual_IntInt_ReturnValue2>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_LessEqual_FloatFloat_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_LessEqual_FloatFloat_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_TextIsEmpty_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_TextIsEmpty_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	Temp_bool_A10E7D2E4AB7432758712A95D56AEA5F_Variable (0-0-0-0): size 34 (cls: Temp_bool_A10E7D2E4AB7432758712A95D56AEA5F_Variable>BoolProperty>/Script/CoreUObject) :
-		Tag array:
-	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	Temp_bool_Variable1 (0-0-0-0): size 34 (cls: Temp_bool_Variable1>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1113,6 +1137,8 @@ Serialized exports:
 			Padding(StructProperty)=System.Byte[] 
 			Parent(ObjectProperty)=ContentBorder=WidgetArchetype 
 			Content(ObjectProperty)=HorizontalBox=WidgetArchetype 
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject) :
+		Tag array:
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject) :
 		Tag array:
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject) :
@@ -1183,18 +1209,6 @@ players to compete (54CD564A4D515F0C2463828191E0CD43)
 			WrapTextAt(FloatProperty)=366 
 			LineHeightPercentage(FloatProperty)=0.9 
 			Slot(ObjectProperty)=WidgetSwitcherSlot_0=WidgetArchetype 
-			RenderTransform(StructProperty)=System.Byte[] 
-	CommonTextBlock_1 (0-0-0-0): size 721 (cls: CommonTextBlock_1>CommonTextBlock>/Script/CommonUI) :
-		Tag array:
-			Style(ObjectProperty)=[object] 
-			Text(TextProperty)=You must opt-in for crossplay to participate in competitive events (2CE3BD9743E44E2ABCC9ABB1FBFDB3DF) 
-			ColorAndOpacity(StructProperty)=System.Byte[] 
-			Font(StructProperty)=System.Byte[] 
-			Justification(ByteProperty)=ETextJustify::Center 
-			AutoWrapText(BoolProperty)=True 
-			WrapTextAt(FloatProperty)=366 
-			LineHeightPercentage(FloatProperty)=0.9 
-			Slot(ObjectProperty)=WidgetSwitcherSlot_2=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
 	CommonTextBlock_4 (0-0-0-0): size 470 (cls: CommonTextBlock_4>CommonTextBlock>/Script/CommonUI) :
 		Tag array:
@@ -1278,6 +1292,32 @@ players to compete (54CD564A4D515F0C2463828191E0CD43)
 			Margin(StructProperty)=System.Byte[] 
 			Slot(ObjectProperty)=VerticalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
+	Text_CrossplayWarning (0-0-0-0): size 747 (cls: Text_CrossplayWarning>CommonTextBlock>/Script/CommonUI) :
+		Tag array:
+			Style(ObjectProperty)=[object] 
+			Text(TextProperty)=You must opt-in for crossplay to participate in competitive events (2CE3BD9743E44E2ABCC9ABB1FBFDB3DF) 
+			ColorAndOpacity(StructProperty)=System.Byte[] 
+			Font(StructProperty)=System.Byte[] 
+			Justification(ByteProperty)=ETextJustify::Center 
+			AutoWrapText(BoolProperty)=True 
+			WrapTextAt(FloatProperty)=366 
+			LineHeightPercentage(FloatProperty)=0.9 
+			Slot(ObjectProperty)=WidgetSwitcherSlot_2=WidgetArchetype 
+			RenderTransform(StructProperty)=System.Byte[] 
+			bIsVariable(BoolProperty)=True 
+	Text_MatchCapWarning (0-0-0-0): size 700 (cls: Text_MatchCapWarning>CommonTextBlock>/Script/CommonUI) :
+		Tag array:
+			Style(ObjectProperty)=[object] 
+			Text(TextProperty)=5 matches remaining (358055804A6AEC72379018AD0F80B8AE) 
+			ColorAndOpacity(StructProperty)=System.Byte[] 
+			Font(StructProperty)=System.Byte[] 
+			Justification(ByteProperty)=ETextJustify::Center 
+			AutoWrapText(BoolProperty)=True 
+			WrapTextAt(FloatProperty)=366 
+			LineHeightPercentage(FloatProperty)=0.9 
+			Slot(ObjectProperty)=WidgetSwitcherSlot_1=WidgetArchetype 
+			RenderTransform(StructProperty)=System.Byte[] 
+			bIsVariable(BoolProperty)=True 
 	Text_Remaining (0-0-0-0): size 370 (cls: Text_Remaining>CommonTextBlock>/Script/CommonUI) :
 		Tag array:
 			Style(ObjectProperty)=[object] 
@@ -1319,7 +1359,7 @@ players to compete (54CD564A4D515F0C2463828191E0CD43)
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=VerticalBoxSlot_0=WidgetArchetype 
 			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
-	CommonWidgetSwitcher_TournamentWarnings (0-0-0-0): size 86 (cls: CommonWidgetSwitcher_TournamentWarnings>CommonWidgetSwitcher>/Script/CommonUI) :
+	CommonWidgetSwitcher_TournamentWarnings (0-0-0-0): size 90 (cls: CommonWidgetSwitcher_TournamentWarnings>CommonWidgetSwitcher>/Script/CommonUI) :
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
@@ -1335,9 +1375,11 @@ players to compete (54CD564A4D515F0C2463828191E0CD43)
 		Tag array:
 	CallFunc_GetEventState_ReturnValue (0-0-0-0): size 40 (cls: CallFunc_GetEventState_ReturnValue>EnumProperty>/Script/CoreUObject) :
 		Tag array:
+	K2Node_Select1_Default (0-0-0-0): size 40 (cls: K2Node_Select1_Default>EnumProperty>/Script/CoreUObject) :
+		Tag array:
 	K2Node_Select4_Default (0-0-0-0): size 40 (cls: K2Node_Select4_Default>EnumProperty>/Script/CoreUObject) :
 		Tag array:
-	K2Node_Select_Default (0-0-0-0): size 40 (cls: K2Node_Select_Default>EnumProperty>/Script/CoreUObject) :
+	Temp_byte_Variable (0-0-0-0): size 40 (cls: Temp_byte_Variable>EnumProperty>/Script/CoreUObject) :
 		Tag array:
 	Temp_byte_Variable1 (0-0-0-0): size 40 (cls: Temp_byte_Variable1>EnumProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1542,9 +1584,23 @@ players to compete (54CD564A4D515F0C2463828191E0CD43)
 		Tag array:
 	CallFunc_GetCurrentEventScore_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_GetCurrentEventScore_ReturnValue1>IntProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_GetCurrentEventTeamNumMatchesPlayed_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetCurrentEventTeamNumMatchesPlayed_ReturnValue>IntProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_GetCurrentEventTeamNumMatchesPlayed_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_GetCurrentEventTeamNumMatchesPlayed_ReturnValue1>IntProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_GetTournamentMatchCap_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetTournamentMatchCap_ReturnValue>IntProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_GetTournamentMatchCap_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_GetTournamentMatchCap_ReturnValue1>IntProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_GetTournamentMatchCap_ReturnValue2 (0-0-0-0): size 32 (cls: CallFunc_GetTournamentMatchCap_ReturnValue2>IntProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_GetTournamentPinUnlockScore_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetTournamentPinUnlockScore_ReturnValue>IntProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_GetTournamentPinUnlockScore_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_GetTournamentPinUnlockScore_ReturnValue1>IntProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Subtract_IntInt_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Subtract_IntInt_ReturnValue>IntProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Subtract_IntInt_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Subtract_IntInt_ReturnValue1>IntProperty>/Script/CoreUObject) :
 		Tag array:
 	EventButtonHover (0-0-0-0): size 814 (cls: EventButtonHover>MovieScene>/Script/MovieScene) :
 		Tag array:
@@ -1702,8 +1758,6 @@ players to compete (54CD564A4D515F0C2463828191E0CD43)
 		Tag array:
 	intro (0-0-0-0): size 36 (cls: intro>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	NeedMorePlayersMessage (0-0-0-0): size 36 (cls: NeedMorePlayersMessage>ObjectProperty>/Script/CoreUObject) :
-		Tag array:
 	NoMessage (0-0-0-0): size 36 (cls: NoMessage>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_PlayAnimationAtTime_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlayAnimationAtTime_ReturnValue>ObjectProperty>/Script/CoreUObject) :
@@ -1720,21 +1774,22 @@ players to compete (54CD564A4D515F0C2463828191E0CD43)
 		Tag array:
 	SizeBox_HighestScore (0-0-0-0): size 36 (cls: SizeBox_HighestScore>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
+	Text_CrossplayWarning (0-0-0-0): size 36 (cls: Text_CrossplayWarning>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	Text_MatchCapWarning (0-0-0-0): size 36 (cls: Text_MatchCapWarning>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
 	Text_Remaining (0-0-0-0): size 36 (cls: Text_Remaining>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	TournamentTitle (0-0-0-0): size 36 (cls: TournamentTitle>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	TournamentTitle2 (0-0-0-0): size 36 (cls: TournamentTitle2>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
+	WarningMessage (0-0-0-0): size 36 (cls: WarningMessage>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
 	EarnPinMessage (0-0-0-0): size 108 (cls: EarnPinMessage>Overlay>/Script/UMG) :
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=WidgetSwitcherSlot_0=WidgetArchetype 
-			bIsVariable(BoolProperty)=True 
-	NeedMorePlayersMessage (0-0-0-0): size 112 (cls: NeedMorePlayersMessage>Overlay>/Script/UMG) :
-		Tag array:
-			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-			Slot(ObjectProperty)=WidgetSwitcherSlot_4=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
 	NoMessage (0-0-0-0): size 67 (cls: NoMessage>Overlay>/Script/UMG) :
 		Tag array:
@@ -1762,25 +1817,17 @@ players to compete (54CD564A4D515F0C2463828191E0CD43)
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=WidgetSwitcherSlot_1=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
+	WarningMessage (0-0-0-0): size 112 (cls: WarningMessage>Overlay>/Script/UMG) :
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=WidgetSwitcherSlot_4=WidgetArchetype 
+			bIsVariable(BoolProperty)=True 
 	OverlaySlot_0 (0-0-0-0): size 152 (cls: OverlaySlot_0>OverlaySlot>/Script/UMG) :
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Fill 
 			VerticalAlignment(ByteProperty)=VAlign_Fill 
 			Parent(ObjectProperty)=EarnPinMessage=WidgetArchetype 
 			Content(ObjectProperty)=VerticalBox_7=WidgetArchetype 
-	OverlaySlot_0 (0-0-0-0): size 284 (cls: OverlaySlot_0>OverlaySlot>/Script/UMG) :
-		Tag array:
-			Padding(StructProperty)=System.Byte[] 
-			HorizontalAlignment(ByteProperty)=HAlign_Fill 
-			Parent(ObjectProperty)=NeedMorePlayersMessage=WidgetArchetype 
-			Content(ObjectProperty)=CommonWidgetSwitcher_TournamentWarnings=WidgetArchetype 
-	OverlaySlot_2 (0-0-0-0): size 296 (cls: OverlaySlot_2>OverlaySlot>/Script/UMG) :
-		Tag array:
-			Padding(StructProperty)=System.Byte[] 
-			HorizontalAlignment(ByteProperty)=HAlign_Fill 
-			VerticalAlignment(ByteProperty)=VAlign_Fill 
-			Parent(ObjectProperty)=NeedMorePlayersMessage=WidgetArchetype 
-			Content(ObjectProperty)=Image_ErrorBG=WidgetArchetype 
 	OverlaySlot_0 (0-0-0-0): size 152 (cls: OverlaySlot_0>OverlaySlot>/Script/UMG) :
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Fill 
@@ -1859,6 +1906,19 @@ players to compete (54CD564A4D515F0C2463828191E0CD43)
 		Tag array:
 			Parent(ObjectProperty)=PinContent=WidgetArchetype 
 			Content(ObjectProperty)=Image_PinShadow=WidgetArchetype 
+	OverlaySlot_0 (0-0-0-0): size 284 (cls: OverlaySlot_0>OverlaySlot>/Script/UMG) :
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			Parent(ObjectProperty)=WarningMessage=WidgetArchetype 
+			Content(ObjectProperty)=CommonWidgetSwitcher_TournamentWarnings=WidgetArchetype 
+	OverlaySlot_2 (0-0-0-0): size 296 (cls: OverlaySlot_2>OverlaySlot>/Script/UMG) :
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=WarningMessage=WidgetArchetype 
+			Content(ObjectProperty)=Image_ErrorBG=WidgetArchetype 
 	ScaleBox_0 (0-0-0-0): size 123 (cls: ScaleBox_0>ScaleBox>/Script/UMG) :
 		Tag array:
 			StretchDirection(ByteProperty)=EStretchDirection::DownOnly 
@@ -1918,7 +1978,7 @@ players to compete (54CD564A4D515F0C2463828191E0CD43)
 			HorizontalAlignment(ByteProperty)=HAlign_Right 
 			Parent(ObjectProperty)=ScaleBox_DetailsText=WidgetArchetype 
 			Content(ObjectProperty)=CommonTextBlock_4=WidgetArchetype 
-	WidgetArchetype (0-0-0-0): size 734 (cls: WidgetArchetype>ShowdownLobbyPanel_C) :
+	WidgetArchetype (0-0-0-0): size 792 (cls: WidgetArchetype>ShowdownLobbyPanel_C) :
 		Tag array:
 			BorderTimeRemaining(ObjectProperty)=BorderTimeRemaining=WidgetArchetype 
 			CentralContentSwitcher(ObjectProperty)=CentralContentSwitcher=WidgetArchetype 
@@ -1934,14 +1994,16 @@ players to compete (54CD564A4D515F0C2463828191E0CD43)
 			Image_DetailsButtonBG(ObjectProperty)=Image_DetailsButtonBG=WidgetArchetype 
 			Image_ErrorBG(ObjectProperty)=Image_ErrorBG=WidgetArchetype 
 			Image_PanelBorder(ObjectProperty)=Image_PanelBorder=WidgetArchetype 
-			NeedMorePlayersMessage(ObjectProperty)=NeedMorePlayersMessage=WidgetArchetype 
 			NoMessage(ObjectProperty)=NoMessage=WidgetArchetype 
 			ScaleBox_DetailsText(ObjectProperty)=ScaleBox_DetailsText=WidgetArchetype 
 			ShowdownPin(ObjectProperty)=ShowdownPin=WidgetArchetype 
 			SizeBox_HighestScore(ObjectProperty)=SizeBox_HighestScore=WidgetArchetype 
+			Text_CrossplayWarning(ObjectProperty)=Text_CrossplayWarning=WidgetArchetype 
+			Text_MatchCapWarning(ObjectProperty)=Text_MatchCapWarning=WidgetArchetype 
 			Text_Remaining(ObjectProperty)=Text_Remaining=WidgetArchetype 
 			TournamentTitle(ObjectProperty)=TournamentTitle=WidgetArchetype 
 			TournamentTitle2(ObjectProperty)=TournamentTitle2=WidgetArchetype 
+			WarningMessage(ObjectProperty)=WarningMessage=WidgetArchetype 
 			Text_TimeRemaining(ObjectProperty)=Text_TimeRemaining=WidgetArchetype 
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
@@ -2024,6 +2086,8 @@ players to compete (54CD564A4D515F0C2463828191E0CD43)
 		Tag array:
 	K2Node_MakeStruct_FormatArgumentData (0-0-0-0): size 36 (cls: K2Node_MakeStruct_FormatArgumentData>StructProperty>/Script/CoreUObject) :
 		Tag array:
+	K2Node_MakeStruct_FormatArgumentData1 (0-0-0-0): size 36 (cls: K2Node_MakeStruct_FormatArgumentData1>StructProperty>/Script/CoreUObject) :
+		Tag array:
 	K2Node_MakeStruct_Margin (0-0-0-0): size 36 (cls: K2Node_MakeStruct_Margin>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	ShadowColor (0-0-0-0): size 36 (cls: ShadowColor>StructProperty>/Script/CoreUObject) :
@@ -2035,6 +2099,8 @@ players to compete (54CD564A4D515F0C2463828191E0CD43)
 	CallFunc_Conv_StringToText_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Conv_StringToText_ReturnValue1>TextProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_Format_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Format_ReturnValue>TextProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Format_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Format_ReturnValue1>TextProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_GetText_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetText_ReturnValue>TextProperty>/Script/CoreUObject) :
 		Tag array:
@@ -2048,7 +2114,7 @@ players to compete (54CD564A4D515F0C2463828191E0CD43)
 		Tag array:
 	CallFunc_TextToUpper_ReturnValue2 (0-0-0-0): size 32 (cls: CallFunc_TextToUpper_ReturnValue2>TextProperty>/Script/CoreUObject) :
 		Tag array:
-	K2Node_Select1_Default (0-0-0-0): size 32 (cls: K2Node_Select1_Default>TextProperty>/Script/CoreUObject) :
+	K2Node_Select_Default (0-0-0-0): size 32 (cls: K2Node_Select_Default>TextProperty>/Script/CoreUObject) :
 		Tag array:
 	Temp_text_Variable (0-0-0-0): size 32 (cls: Temp_text_Variable>TextProperty>/Script/CoreUObject) :
 		Tag array:
@@ -2219,15 +2285,19 @@ players to compete (54CD564A4D515F0C2463828191E0CD43)
 			Padding(StructProperty)=System.Byte[] 
 			VerticalAlignment(ByteProperty)=VAlign_Top 
 			Parent(ObjectProperty)=CentralContentSwitcher=WidgetArchetype 
-			Content(ObjectProperty)=NeedMorePlayersMessage=WidgetArchetype 
+			Content(ObjectProperty)=WarningMessage=WidgetArchetype 
 	WidgetSwitcherSlot_0 (0-0-0-0): size 70 (cls: WidgetSwitcherSlot_0>WidgetSwitcherSlot>/Script/UMG) :
 		Tag array:
 			Parent(ObjectProperty)=CommonWidgetSwitcher_TournamentWarnings=WidgetArchetype 
 			Content(ObjectProperty)=CommonTextBlock_0=WidgetArchetype 
+	WidgetSwitcherSlot_1 (0-0-0-0): size 70 (cls: WidgetSwitcherSlot_1>WidgetSwitcherSlot>/Script/UMG) :
+		Tag array:
+			Parent(ObjectProperty)=CommonWidgetSwitcher_TournamentWarnings=WidgetArchetype 
+			Content(ObjectProperty)=Text_MatchCapWarning=WidgetArchetype 
 	WidgetSwitcherSlot_2 (0-0-0-0): size 70 (cls: WidgetSwitcherSlot_2>WidgetSwitcherSlot>/Script/UMG) :
 		Tag array:
 			Parent(ObjectProperty)=CommonWidgetSwitcher_TournamentWarnings=WidgetArchetype 
-			Content(ObjectProperty)=CommonTextBlock_1=WidgetArchetype 
+			Content(ObjectProperty)=Text_CrossplayWarning=WidgetArchetype 
 	WidgetSwitcherSlot_0 (0-0-0-0): size 152 (cls: WidgetSwitcherSlot_0>WidgetSwitcherSlot>/Script/UMG) :
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Center 

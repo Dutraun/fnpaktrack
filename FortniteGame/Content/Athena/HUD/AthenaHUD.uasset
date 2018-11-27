@@ -47,6 +47,9 @@ Name table:
 	/Game/Athena/HUD/AthenaServerAddress
 	/Game/Athena/HUD/AthenaSessionId
 	/Game/Athena/HUD/AthenaStandaloneTimer
+	/Game/Athena/HUD/AthenaStormSurgeIconWidget
+	/Game/Athena/HUD/AthenaStormSurgePhase
+	/Game/Athena/HUD/AthenaStormSurgeWidget
 	/Game/Athena/HUD/AthenaTeamCountWidget
 	/Game/Athena/HUD/AthenaTeamScoreWidget
 	/Game/Athena/HUD/AthenaVehicleFeedback
@@ -79,7 +82,11 @@ Name table:
 	/Game/Athena/HUD/Materials/M_CountdownBG_Base
 	/Game/Athena/HUD/Materials/M_CountdownBG_Core
 	/Game/Athena/HUD/Materials/M_CountdownBG_SolidGlow
+	/Game/Athena/HUD/Materials/M_UI_LightningFX_Inst
+	/Game/Athena/HUD/Materials/M_UI_RadialGradientMaster_Inst
 	/Game/Athena/HUD/Materials/M_UI_SideFade
+	/Game/Athena/HUD/Materials/M_UI_StormSurge_Glow_Inst
+	/Game/Athena/HUD/Materials/M_UI_StormSurgeIconFX
 	/Game/Athena/HUD/Materials/Score/M_ScoreLTM_PlacementPlate_1st
 	/Game/Athena/HUD/Materials/Score/M_ScoreLTM_PlacementPlate_2nd
 	/Game/Athena/HUD/Materials/Score/M_ScoreLTM_PlacementPlate_3rd
@@ -87,6 +94,8 @@ Name table:
 	/Game/Athena/HUD/Materials/Score/M_ScoreLTM_ScoreProgress_Inst
 	/Game/Athena/HUD/Materials/Score/TextStyle-ScorePlacementGeneric
 	/Game/Athena/HUD/Materials/Score/TextStyle-ScorePopup
+	/Game/Athena/HUD/Materials/T-UI-Icon-StormDMG
+	/Game/Athena/HUD/Materials/T-UI-Icon-StormDMG_Off
 	/Game/Athena/HUD/Materials/Victory/M_1stplace_Gold
 	/Game/Athena/HUD/Materials/Victory/M_Cross_Flare
 	/Game/Athena/HUD/Materials/Victory/M_Flare_Spikeball
@@ -244,6 +253,7 @@ Name table:
 	/Game/UI/Foundation/Text/TextStyle-Base-M-B_Black
 	/Game/UI/Foundation/Text/TextStyle-Base-S-B
 	/Game/UI/Foundation/Text/TextStyle-Base-S-B-LowOpacity
+	/Game/UI/Foundation/Text/TextStyle-Base-S-B-Outline
 	/Game/UI/Foundation/Text/TextStyle-Base-S-B-S
 	/Game/UI/Foundation/Text/TextStyle-Base-XS
 	/Game/UI/Foundation/Text/TextStyle-Base-XS-B
@@ -375,12 +385,14 @@ Name table:
 	[SizeBox] Item
 	[Switcher] CursorModeContent
 	[Vertical Box] Top Left Content
+	AboveDMG
 	AccountMergeInfoButton
 	ActionName
 	ActiveWidgetIndex
 	AddChildToHorizontalBox
 	AddChildToOverlay
 	AddChildToVerticalBox
+	AlertText
 	Alignment
 	AliveIco
 	AliveTeamsIco
@@ -486,6 +498,12 @@ Name table:
 	AthenaSquadList_C
 	AthenaStandaloneTimer
 	AthenaStandaloneTimer_C
+	AthenaStormSurgeIconWidget
+	AthenaStormSurgeIconWidget_C
+	AthenaStormSurgePhase
+	AthenaStormSurgePhase_C
+	AthenaStormSurgeWidget
+	AthenaStormSurgeWidget_C
 	AthenaTeamCountWidget
 	AthenaTeamCountWidget_C
 	AthenaTeamMemberDBNOState_C
@@ -529,6 +547,7 @@ Name table:
 	bClassRequiresNativeTick
 	bClientWon
 	bCookedWidgetTree
+	BelowDMG
 	bGradientBar
 	bHasScriptImplementedPaint
 	bHasScriptImplementedTick
@@ -766,6 +785,7 @@ Name table:
 	CodeOfConduct
 	ColorAndOpacity
 	ColorBackground
+	ColorUseRule
 	Column
 	ColumnFill
 	ColumnSpan
@@ -883,6 +903,9 @@ Name table:
 	Default__AthenaSessionId_C
 	Default__AthenaSquadList_C
 	Default__AthenaStandaloneTimer_C
+	Default__AthenaStormSurgeIconWidget_C
+	Default__AthenaStormSurgePhase_C
+	Default__AthenaStormSurgeWidget_C
 	Default__AthenaTeamCountWidget_C
 	Default__AthenaTeamMemberDBNOState_C
 	Default__AthenaTeamMemberInfo_C
@@ -1066,6 +1089,7 @@ Name table:
 	Default__TextStyle-Base-M-B_Black_C
 	Default__TextStyle-Base-M-B_C
 	Default__TextStyle-Base-S-B-LowOpacity_C
+	Default__TextStyle-Base-S-B-Outline_C
 	Default__TextStyle-Base-S-B-S_C
 	Default__TextStyle-Base-S-B_C
 	Default__TextStyle-Base-XS-B-40pc_C
@@ -1127,6 +1151,7 @@ Name table:
 	DisplayName
 	DisplayStateContent
 	Divider
+	DmgThresh_SizeBox
 	Down
 	DownBandwidthUI
 	DownFeedback
@@ -1226,6 +1251,8 @@ Name table:
 	ESlateBrushTileType
 	ESlateBrushTileType::Horizontal
 	ESlateBrushTileType::Vertical
+	ESlateColorStylingMode
+	ESlateColorStylingMode::UseColor_Foreground
 	ESlateSizeRule
 	ESlateSizeRule::Fill
 	ESlateVisibility
@@ -1245,6 +1272,8 @@ Name table:
 	ETextJustify
 	ETextJustify::Center
 	ETextJustify::Right
+	ETransitionCurve
+	ETransitionCurve::QuadInOut
 	EUINavigationRule
 	EUINavigationRule::Custom
 	EUINavigationRule::Stop
@@ -1366,6 +1395,7 @@ Name table:
 	GetVisibility
 	GlobalAction
 	GlobalActionKeybindWidget_C
+	Glow
 	GridPanel
 	GridSlot
 	HAlign
@@ -1400,6 +1430,7 @@ Name table:
 	HeightOverride
 	HelpButton
 	HelpButtonInner
+	HelpText
 	HeroListItem-Background_Material
 	HiddenHUDElementTags
 	HighRarityBorder
@@ -1603,6 +1634,8 @@ Name table:
 	K2Node_CreateDelegate_OutputDelegate13
 	K2Node_CreateDelegate_OutputDelegate14
 	K2Node_CreateDelegate_OutputDelegate15
+	K2Node_CreateDelegate_OutputDelegate16
+	K2Node_CreateDelegate_OutputDelegate17
 	K2Node_CreateDelegate_OutputDelegate2
 	K2Node_CreateDelegate_OutputDelegate3
 	K2Node_CreateDelegate_OutputDelegate4
@@ -1696,6 +1729,8 @@ Name table:
 	Legal
 	LevelBar
 	LevelIndicator
+	LightningBack
+	LightningHBox
 	LinearColor
 	LineSeparator
 	LoadGuard
@@ -1778,12 +1813,16 @@ Name table:
 	M_UI_BoostIcon_Player
 	M_UI_ErrorPopUpBorder
 	M_UI_LightFlare
+	M_UI_LightningFX_Inst
 	M_UI_OutlineCircle_Inst
+	M_UI_RadialGradientMaster_Inst
 	M_UI_Ring_Inst
 	M_UI_ScrollBottom
 	M_UI_ScrollTop
 	M_UI_SideFade
 	M_UI_SkewBorderFrame
+	M_UI_StormSurge_Glow_Inst
+	M_UI_StormSurgeIconFX
 	M_UI_TopBar_AngledBacking
 	M_UI_Trick_BailedBG_Inst
 	M_UI_TrickBailedBG_Inst
@@ -1945,6 +1984,8 @@ Name table:
 	OnRevived
 	OnShowPicker
 	OnShowPickerDelegate__DelegateSignature
+	OnStartStormSurgeDisplay
+	OnStopStormSurgeDisplay
 	OnUnableToPerformAction
 	OnUnableToPerformActionDelegate__DelegateSignature
 	OpenImage
@@ -2267,13 +2308,20 @@ Name table:
 	SquadIndicators
 	SquadList
 	StandAloneAmmoCount
+	StartStormSurgeDisplay
+	StartStormSurgeDisplay__DelegateSignature
 	State
 	StatNumericTextBlock_C
 	StatsList
 	StatsListWidget
 	StatsListWidget_C
+	StopStormSurgeDisplay
+	StopStormSurgeDisplay__DelegateSignature
+	StormDMG_HorizontalBox
 	StormEnterMessage
 	StormFeeedback
+	StormIcon
+	StormIconOff
 	StreamImage
 	Stretch
 	StretchDirection
@@ -2281,6 +2329,7 @@ Name table:
 	Style
 	SuggestedQuestList
 	SuperBang
+	SurgeIcon_SizeBox
 	SurplusAmmoCount
 	SurroundImage
 	SurroundLoadGuard
@@ -2314,6 +2363,8 @@ Name table:
 	T-PC-ScrollWheel
 	T-Slot-Banner-Empty-S-128
 	T-Stars-TierNumber-1-32
+	T-UI-Icon-StormDMG
+	T-UI-Icon-StormDMG_Off
 	T-VBuck-64
 	T_UI_Icon_Input_Controller
 	T_UI_Icon_SocialPanel
@@ -2365,6 +2416,7 @@ Name table:
 	TextStyle-Base-M-B_Black_C
 	TextStyle-Base-M-B_C
 	TextStyle-Base-S-B-LowOpacity_C
+	TextStyle-Base-S-B-Outline_C
 	TextStyle-Base-S-B-S_C
 	TextStyle-Base-S-B_C
 	TextStyle-Base-XS-B-40pc_C
@@ -2395,6 +2447,7 @@ Name table:
 	TextStyleSet
 	TextTimeRemaining
 	Texture2D
+	ThresholdText
 	Throbber_Material-Monochrome
 	TierIndicator
 	TileAlignment
@@ -2428,6 +2481,7 @@ Name table:
 	TopTitlebarArea
 	TotalScore
 	TouchZone
+	TransitionCurveType
 	TransitionDuration
 	Translation
 	TrickEntry_C
@@ -2502,6 +2556,7 @@ Name table:
 	WidgetStyle
 	WidgetSwitcher
 	WidgetSwitcher_BackgroundFlash
+	WidgetSwitcher_Phase
 	WidgetSwitcher_PlaceBackground
 	WidgetSwitcher_TopMiddleAlerts
 	WidgetSwitcherSlot
@@ -2574,6 +2629,9 @@ Import table:
 	Default__AthenaSessionId_C (AthenaSessionId_C)
 	Default__AthenaSquadList_C (AthenaSquadList_C)
 	Default__AthenaStandaloneTimer_C (AthenaStandaloneTimer_C)
+	Default__AthenaStormSurgeIconWidget_C (AthenaStormSurgeIconWidget_C)
+	Default__AthenaStormSurgePhase_C (AthenaStormSurgePhase_C)
+	Default__AthenaStormSurgeWidget_C (AthenaStormSurgeWidget_C)
 	Default__AthenaTeamCountWidget_C (AthenaTeamCountWidget_C)
 	Default__AthenaTeamMemberDBNOState_C (AthenaTeamMemberDBNOState_C)
 	Default__AthenaTeamMemberInfo_C (AthenaTeamMemberInfo_C)
@@ -2640,6 +2698,7 @@ Import table:
 	TextStyle-Base-M-B_C (BlueprintGeneratedClass)
 	TextStyle-Base-M-B_Black_C (BlueprintGeneratedClass)
 	TextStyle-Base-S-B-LowOpacity_C (BlueprintGeneratedClass)
+	TextStyle-Base-S-B-Outline_C (BlueprintGeneratedClass)
 	TextStyle-Base-S-B-S_C (BlueprintGeneratedClass)
 	TextStyle-Base-S-B_C (BlueprintGeneratedClass)
 	TextStyle-Base-XS-B-40pc_C (BlueprintGeneratedClass)
@@ -2898,6 +2957,8 @@ Import table:
 	Default__FortSZAwareImage (FortSZAwareImage)
 	Default__FortTierIndicator (FortTierIndicator)
 	Default__FortUpgradeIndicator (FortUpgradeIndicator)
+	StartStormSurgeDisplay__DelegateSignature (Function)
+	StopStormSurgeDisplay__DelegateSignature (Function)
 	GetContext (Function)
 	SetGlobalInputHandlerPriorityFilter (Function)
 	GetInputManager (Function)
@@ -3002,6 +3063,7 @@ Import table:
 	M_Compass (Material)
 	M_InventoryBackground (Material)
 	M_UI_SideFade (Material)
+	M_UI_StormSurgeIconFX (Material)
 	M_ScoreLTM_PlacementPlate_1st (Material)
 	M_Cross_Flare (Material)
 	M_Flare_Spikeball (Material)
@@ -3030,6 +3092,9 @@ Import table:
 	M_CountdownBG_Base (MaterialInstanceConstant)
 	M_CountdownBG_Core (MaterialInstanceConstant)
 	M_CountdownBG_SolidGlow (MaterialInstanceConstant)
+	M_UI_LightningFX_Inst (MaterialInstanceConstant)
+	M_UI_RadialGradientMaster_Inst (MaterialInstanceConstant)
+	M_UI_StormSurge_Glow_Inst (MaterialInstanceConstant)
 	M_ScoreLTM_PlacementPlate_2nd (MaterialInstanceConstant)
 	M_ScoreLTM_PlacementPlate_3rd (MaterialInstanceConstant)
 	M_ScoreLTM_PlacementPlate_Generic (MaterialInstanceConstant)
@@ -3090,6 +3155,8 @@ Import table:
 	Default__MiniPartyBar_C (MiniPartyBar_C)
 	Default__MiniPartyMember_C (MiniPartyMember_C)
 	Default__MTXButton_C (MTXButton_C)
+	StartStormSurgeDisplay (MulticastDelegateProperty)
+	StopStormSurgeDisplay (MulticastDelegateProperty)
 	FinalCountdownFinished (MulticastDelegateProperty)
 	FinalCountdownStarted (MulticastDelegateProperty)
 	GamePhaseStepChanged (MulticastDelegateProperty)
@@ -3166,6 +3233,9 @@ Import table:
 	/Game/Athena/HUD/AthenaServerAddress (Package)
 	/Game/Athena/HUD/AthenaSessionId (Package)
 	/Game/Athena/HUD/AthenaStandaloneTimer (Package)
+	/Game/Athena/HUD/AthenaStormSurgeIconWidget (Package)
+	/Game/Athena/HUD/AthenaStormSurgePhase (Package)
+	/Game/Athena/HUD/AthenaStormSurgeWidget (Package)
 	/Game/Athena/HUD/AthenaTeamCountWidget (Package)
 	/Game/Athena/HUD/AthenaTeamScoreWidget (Package)
 	/Game/Athena/HUD/AthenaVehicleFeedback (Package)
@@ -3198,7 +3268,11 @@ Import table:
 	/Game/Athena/HUD/Materials/M_CountdownBG_Base (Package)
 	/Game/Athena/HUD/Materials/M_CountdownBG_Core (Package)
 	/Game/Athena/HUD/Materials/M_CountdownBG_SolidGlow (Package)
+	/Game/Athena/HUD/Materials/M_UI_LightningFX_Inst (Package)
+	/Game/Athena/HUD/Materials/M_UI_RadialGradientMaster_Inst (Package)
 	/Game/Athena/HUD/Materials/M_UI_SideFade (Package)
+	/Game/Athena/HUD/Materials/M_UI_StormSurge_Glow_Inst (Package)
+	/Game/Athena/HUD/Materials/M_UI_StormSurgeIconFX (Package)
 	/Game/Athena/HUD/Materials/Score/M_ScoreLTM_PlacementPlate_1st (Package)
 	/Game/Athena/HUD/Materials/Score/M_ScoreLTM_PlacementPlate_2nd (Package)
 	/Game/Athena/HUD/Materials/Score/M_ScoreLTM_PlacementPlate_3rd (Package)
@@ -3206,6 +3280,8 @@ Import table:
 	/Game/Athena/HUD/Materials/Score/M_ScoreLTM_ScoreProgress_Inst (Package)
 	/Game/Athena/HUD/Materials/Score/TextStyle-ScorePlacementGeneric (Package)
 	/Game/Athena/HUD/Materials/Score/TextStyle-ScorePopup (Package)
+	/Game/Athena/HUD/Materials/T-UI-Icon-StormDMG (Package)
+	/Game/Athena/HUD/Materials/T-UI-Icon-StormDMG_Off (Package)
 	/Game/Athena/HUD/Materials/Victory/M_1stplace_Gold (Package)
 	/Game/Athena/HUD/Materials/Victory/M_Cross_Flare (Package)
 	/Game/Athena/HUD/Materials/Victory/M_Flare_Spikeball (Package)
@@ -3363,6 +3439,7 @@ Import table:
 	/Game/UI/Foundation/Text/TextStyle-Base-M-B_Black (Package)
 	/Game/UI/Foundation/Text/TextStyle-Base-S-B (Package)
 	/Game/UI/Foundation/Text/TextStyle-Base-S-B-LowOpacity (Package)
+	/Game/UI/Foundation/Text/TextStyle-Base-S-B-Outline (Package)
 	/Game/UI/Foundation/Text/TextStyle-Base-S-B-S (Package)
 	/Game/UI/Foundation/Text/TextStyle-Base-XS (Package)
 	/Game/UI/Foundation/Text/TextStyle-Base-XS-B (Package)
@@ -3545,6 +3622,7 @@ Import table:
 	Default__TextStyle-Base-M-B_Black_C (TextStyle-Base-M-B_Black_C)
 	Default__TextStyle-Base-M-B_C (TextStyle-Base-M-B_C)
 	Default__TextStyle-Base-S-B-LowOpacity_C (TextStyle-Base-S-B-LowOpacity_C)
+	Default__TextStyle-Base-S-B-Outline_C (TextStyle-Base-S-B-Outline_C)
 	Default__TextStyle-Base-S-B-S_C (TextStyle-Base-S-B-S_C)
 	Default__TextStyle-Base-S-B_C (TextStyle-Base-S-B_C)
 	Default__TextStyle-Base-XS-B-40pc_C (TextStyle-Base-XS-B-40pc_C)
@@ -3580,6 +3658,8 @@ Import table:
 	NetDirectionArrow (Texture2D)
 	squad_Eliminated (Texture2D)
 	T-Icon-SwapSlot (Texture2D)
+	T-UI-Icon-StormDMG (Texture2D)
+	T-UI-Icon-StormDMG_Off (Texture2D)
 	Radial_Pointer (Texture2D)
 	Shell-Top-Crown (Texture2D)
 	T-Icon-Friends-S (Texture2D)
@@ -3658,6 +3738,9 @@ Import table:
 	AthenaServerAddress_C (WidgetBlueprintGeneratedClass)
 	AthenaSessionId_C (WidgetBlueprintGeneratedClass)
 	AthenaStandaloneTimer_C (WidgetBlueprintGeneratedClass)
+	AthenaStormSurgeIconWidget_C (WidgetBlueprintGeneratedClass)
+	AthenaStormSurgePhase_C (WidgetBlueprintGeneratedClass)
+	AthenaStormSurgeWidget_C (WidgetBlueprintGeneratedClass)
 	AthenaTeamCountWidget_C (WidgetBlueprintGeneratedClass)
 	AthenaTeamScoreWidget_C (WidgetBlueprintGeneratedClass)
 	AthenaVehicleFeedback_C (WidgetBlueprintGeneratedClass)
@@ -3754,7 +3837,7 @@ Import table:
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	AthenaHUD_C (0-0-0-0): size 1278 (cls: AthenaHUD_C>WidgetBlueprintGeneratedClass>/Script/UMG) :
+	AthenaHUD_C (0-0-0-0): size 1322 (cls: AthenaHUD_C>WidgetBlueprintGeneratedClass>/Script/UMG) :
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
@@ -3979,7 +4062,7 @@ Serialized exports:
 			HUDElementTag(StructProperty)=GameplayTagContainer:HUD.Athena.GamePhase,Athena.HideForCapture 
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
-			Slot(ObjectProperty)=WidgetSwitcherSlot_0=WidgetArchetype 
+			Slot(ObjectProperty)=WidgetSwitcherSlot_2=WidgetArchetype 
 			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
 	AthenaGamePhaseWidget (0-0-0-0): size 239 (cls: AthenaGamePhaseWidget>AthenaGamePhaseWidget_C>/Game/Athena/HUD/Phase/AthenaGamePhaseWidget) :
 		Tag array:
@@ -4031,7 +4114,7 @@ Serialized exports:
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=VerticalBoxSlot_46=WidgetArchetype 
 			Visibility(EnumProperty)=ESlateVisibility::SelfHitTestInvisible 
-	WidgetArchetype (0-0-0-0): size 1894 (cls: WidgetArchetype>AthenaHUD_C) :
+	WidgetArchetype (0-0-0-0): size 1981 (cls: WidgetArchetype>AthenaHUD_C) :
 		Tag array:
 			[Overlay] Persistent HUD Content(ObjectProperty)=[Overlay] Persistent HUD Content=WidgetArchetype 
 			[Vertical Box] Top Left Content(ObjectProperty)=[Vertical Box] Top Left Content=WidgetArchetype 
@@ -4059,6 +4142,8 @@ Serialized exports:
 			AthenaServerAddress(ObjectProperty)=AthenaServerAddress=WidgetArchetype 
 			AthenaSessionId(ObjectProperty)=AthenaSessionId=WidgetArchetype 
 			AthenaStandaloneTimer(ObjectProperty)=AthenaStandaloneTimer=WidgetArchetype 
+			AthenaStormSurgePhase(ObjectProperty)=AthenaStormSurgePhase=WidgetArchetype 
+			AthenaStormSurgeWidget(ObjectProperty)=AthenaStormSurgeWidget=WidgetArchetype 
 			AthenaWatchers(ObjectProperty)=AthenaWatchers=WidgetArchetype 
 			AutoRunHUDWidget(ObjectProperty)=AutoRunHUDWidget=WidgetArchetype 
 			BuildWatermark(ObjectProperty)=BuildWatermark=WidgetArchetype 
@@ -4094,6 +4179,7 @@ Serialized exports:
 			TrickHUD(ObjectProperty)=TrickHUD=WidgetArchetype 
 			VehicleActionsInvalidationBox(ObjectProperty)=VehicleActionsInvalidationBox=WidgetArchetype 
 			WeaponOverheat_ProgressBar(ObjectProperty)=WeaponOverheat_ProgressBar=WidgetArchetype 
+			WidgetSwitcher_Phase(ObjectProperty)=WidgetSwitcher_Phase=WidgetArchetype 
 			WidgetSwitcher_TopMiddleAlerts(ObjectProperty)=WidgetSwitcher_TopMiddleAlerts=WidgetArchetype 
 			WinnerOverlay_v2(ObjectProperty)=WinnerOverlay_v2=WidgetArchetype 
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
@@ -5050,6 +5136,38 @@ Serialized exports:
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=OverlaySlot_14=WidgetArchetype 
 			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
+	AthenaStormSurgeIconWidget (0-0-0-0): size 241 (cls: AthenaStormSurgeIconWidget>AthenaStormSurgeIconWidget_C>/Game/Athena/HUD/AthenaStormSurgeIconWidget) :
+		Tag array:
+			Glow(ObjectProperty)=Glow=WidgetArchetype 
+			Image_1(ObjectProperty)=Image_1=WidgetArchetype 
+			Image_2(ObjectProperty)=Image_2=WidgetArchetype 
+			StormIcon(ObjectProperty)=StormIcon=WidgetArchetype 
+			StormIconOff(ObjectProperty)=StormIconOff=WidgetArchetype 
+			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
+			bCookedWidgetTree(BoolProperty)=True 
+			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
+	AthenaStormSurgePhase (0-0-0-0): size 212 (cls: AthenaStormSurgePhase>AthenaStormSurgePhase_C>/Game/Athena/HUD/AthenaStormSurgePhase) :
+		Tag array:
+			AlertText(ObjectProperty)=AlertText=WidgetArchetype 
+			HelpText(ObjectProperty)=HelpText=WidgetArchetype 
+			LightningBack(ObjectProperty)=LightningBack=WidgetArchetype 
+			StormIcon(ObjectProperty)=StormIcon=WidgetArchetype 
+			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
+			bCookedWidgetTree(BoolProperty)=True 
+			Slot(ObjectProperty)=WidgetSwitcherSlot_1=WidgetArchetype 
+	AthenaStormSurgeWidget (0-0-0-0): size 340 (cls: AthenaStormSurgeWidget>AthenaStormSurgeWidget_C>/Game/Athena/HUD/AthenaStormSurgeWidget) :
+		Tag array:
+			AboveDMG(ObjectProperty)=AboveDMG=WidgetArchetype 
+			AthenaStormSurgeIconWidget(ObjectProperty)=AthenaStormSurgeIconWidget=WidgetArchetype 
+			BelowDMG(ObjectProperty)=BelowDMG=WidgetArchetype 
+			CommonBorder_0(ObjectProperty)=CommonBorder_0=WidgetArchetype 
+			DmgThresh_SizeBox(ObjectProperty)=DmgThresh_SizeBox=WidgetArchetype 
+			SurgeIcon_SizeBox(ObjectProperty)=SurgeIcon_SizeBox=WidgetArchetype 
+			ThresholdText(ObjectProperty)=ThresholdText=WidgetArchetype 
+			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
+			bCookedWidgetTree(BoolProperty)=True 
+			Slot(ObjectProperty)=VerticalBoxSlot_9=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
 	AthenaTeamCountWidget (0-0-0-0): size 241 (cls: AthenaTeamCountWidget>AthenaTeamCountWidget_C>/Game/Athena/HUD/AthenaTeamCountWidget) :
 		Tag array:
 			CommonTextBlock_3(ObjectProperty)=CommonTextBlock_3=WidgetArchetype 
@@ -5105,7 +5223,7 @@ Serialized exports:
 			HUDElementTag(StructProperty)=GameplayTagContainer:HUD.Athena.Hide.WithMap 
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
-			Slot(ObjectProperty)=VerticalBoxSlot_2=WidgetArchetype 
+			Slot(ObjectProperty)=VerticalBoxSlot_7=WidgetArchetype 
 			RenderTransformPivot(StructProperty)=Vector2D(1,0.5) 
 			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
 	AthenaVehicleFeedback (0-0-0-0): size 249 (cls: AthenaVehicleFeedback>AthenaVehicleFeedback_C>/Game/Athena/HUD/AthenaVehicleFeedback) :
@@ -5231,7 +5349,11 @@ Serialized exports:
 		Tag array:
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject) :
 		Tag array:
-	ExecuteUbergraph_AthenaHUD (0-0-0-0): size 5531 (cls: ExecuteUbergraph_AthenaHUD>Function>/Script/CoreUObject) :
+	ExecuteUbergraph_AthenaHUD (0-0-0-0): size 5754 (cls: ExecuteUbergraph_AthenaHUD>Function>/Script/CoreUObject) :
+		Tag array:
+	OnStopStormSurgeDisplay (0-0-0-0): size 58 (cls: OnStopStormSurgeDisplay>Function>/Script/CoreUObject) :
+		Tag array:
+	OnStartStormSurgeDisplay (0-0-0-0): size 58 (cls: OnStartStormSurgeDisplay>Function>/Script/CoreUObject) :
 		Tag array:
 	bShouldDoQuickBarNative (0-0-0-0): size 34 (cls: bShouldDoQuickBarNative>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -6426,6 +6548,13 @@ Serialized exports:
 			Padding(StructProperty)=System.Byte[] 
 			Parent(ObjectProperty)=BorderContainer=WidgetArchetype 
 			Content(ObjectProperty)=Overlay_0=WidgetArchetype 
+	BorderSlot_0 (0-0-0-0): size 325 (cls: BorderSlot_0>BorderSlot>/Script/UMG) :
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			HorizontalAlignment(ByteProperty)=HAlign_Right 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=CommonBorder_0=WidgetArchetype 
+			Content(ObjectProperty)=ThresholdText=WidgetArchetype 
 	BorderSlot_0 (0-0-0-0): size 243 (cls: BorderSlot_0>BorderSlot>/Script/UMG) :
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
@@ -7524,6 +7653,15 @@ Serialized exports:
 			Padding(StructProperty)=System.Byte[] 
 			Background(StructProperty)=System.Byte[] 
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			bIsVariable(BoolProperty)=True 
+	CommonBorder_0 (0-0-0-0): size 818 (cls: CommonBorder_0>CommonBorder>/Script/CommonUI) :
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Right 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Padding(StructProperty)=System.Byte[] 
+			Background(StructProperty)=System.Byte[] 
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=VerticalBoxSlot_10=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
 	DailyQuestsLabel (0-0-0-0): size 349 (cls: DailyQuestsLabel>CommonBorder>/Script/CommonUI) :
 		Tag array:
@@ -8816,6 +8954,50 @@ Serialized exports:
 			ShadowColorAndOpacity(StructProperty)=System.Byte[] 
 			Justification(ByteProperty)=ETextJustify::Center 
 			Slot(ObjectProperty)=OverlaySlot_1=WidgetArchetype 
+	AlertText (0-0-0-0): size 462 (cls: AlertText>CommonTextBlock>/Script/CommonUI) :
+		Tag array:
+			Style(ObjectProperty)=[object] 
+			Text(TextProperty)=STORM SURGE WARNING! (9230D9844E457F85D8F327A5E3D5E5A4) 
+			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(3,3) 
+			ShadowColorAndOpacity(StructProperty)=System.Byte[] 
+			Slot(ObjectProperty)=OverlaySlot_3=WidgetArchetype 
+			bIsVariable(BoolProperty)=True 
+	HelpText (0-0-0-0): size 413 (cls: HelpText>CommonTextBlock>/Script/CommonUI) :
+		Tag array:
+			Style(ObjectProperty)=TextStyle-Base-S-B-Outline_C=/Game/UI/Foundation/Text/TextStyle-Base-S-B-Outline 
+			Text(TextProperty)=Damage enemies to avoid elimination! (1917CB4E46ED45E56322DF939DF64714) 
+			Font(StructProperty)=System.Byte[] 
+			Slot(ObjectProperty)=VerticalBoxSlot_0=WidgetArchetype 
+			bIsVariable(BoolProperty)=True 
+	AboveDMG (0-0-0-0): size 588 (cls: AboveDMG>CommonTextBlock>/Script/CommonUI) :
+		Tag array:
+			Style(ObjectProperty)=[object] 
+			Text(TextProperty)=+ 265 Above (2F97D1C94F9722AE965941B15B7E5049) 
+			Font(StructProperty)=System.Byte[] 
+			ShadowColorAndOpacity(StructProperty)=System.Byte[] 
+			Slot(ObjectProperty)=VerticalBoxSlot_7=WidgetArchetype 
+			bIsVariable(BoolProperty)=True 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
+			RenderOpacity(FloatProperty)=0 
+	BelowDMG (0-0-0-0): size 643 (cls: BelowDMG>CommonTextBlock>/Script/CommonUI) :
+		Tag array:
+			Style(ObjectProperty)=[object] 
+			Text(TextProperty)=-256 BELOW! (ED7EDA4B4D003B025D550B990C7D7C2A) 
+			Font(StructProperty)=System.Byte[] 
+			ShadowColorAndOpacity(StructProperty)=System.Byte[] 
+			Slot(ObjectProperty)=VerticalBoxSlot_6=WidgetArchetype 
+			bIsVariable(BoolProperty)=True 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
+			RenderOpacity(FloatProperty)=0 
+	ThresholdText (0-0-0-0): size 597 (cls: ThresholdText>CommonTextBlock>/Script/CommonUI) :
+		Tag array:
+			Style(ObjectProperty)=[object] 
+			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
+			Text(TextProperty)=DAMAGE THRESHOLD (132D3B974AAD9882269BE9B2713E892E) 
+			Font(StructProperty)=System.Byte[] 
+			Slot(ObjectProperty)=BorderSlot_0=WidgetArchetype 
+			bIsVariable(BoolProperty)=True 
 	CommonTextBlock_3 (0-0-0-0): size 300 (cls: CommonTextBlock_3>CommonTextBlock>/Script/CommonUI) :
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-S_C=/Game/UI/Foundation/Text/TextStyle-Header-S 
@@ -9894,6 +10076,11 @@ Serialized exports:
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=OverlaySlot_1=WidgetArchetype 
+	WidgetSwitcher_Phase (0-0-0-0): size 127 (cls: WidgetSwitcher_Phase>CommonWidgetSwitcher>/Script/CommonUI) :
+		Tag array:
+			TransitionCurveType(EnumProperty)=ETransitionCurve::QuadInOut 
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=WidgetSwitcherSlot_0=WidgetArchetype 
 	CommonWidgetSwitcher_WinnerListStyle (0-0-0-0): size 86 (cls: CommonWidgetSwitcher_WinnerListStyle>CommonWidgetSwitcher>/Script/CommonUI) :
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -9944,6 +10131,10 @@ Serialized exports:
 	K2Node_CreateDelegate_OutputDelegate14 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate14>DelegateProperty>/Script/CoreUObject) :
 		Tag array:
 	K2Node_CreateDelegate_OutputDelegate15 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate15>DelegateProperty>/Script/CoreUObject) :
+		Tag array:
+	K2Node_CreateDelegate_OutputDelegate16 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate16>DelegateProperty>/Script/CoreUObject) :
+		Tag array:
+	K2Node_CreateDelegate_OutputDelegate17 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate17>DelegateProperty>/Script/CoreUObject) :
 		Tag array:
 	K2Node_CreateDelegate_OutputDelegate2 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate2>DelegateProperty>/Script/CoreUObject) :
 		Tag array:
@@ -10779,6 +10970,12 @@ Serialized exports:
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
+	LightningHBox (0-0-0-0): size 156 (cls: LightningHBox>HorizontalBox>/Script/UMG) :
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=OverlaySlot_3=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Visible 
+			RenderOpacity(FloatProperty)=0 
 	FeedbackLine (0-0-0-0): size 53 (cls: FeedbackLine>HorizontalBox>/Script/UMG) :
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -12916,6 +13113,20 @@ Serialized exports:
 			Size(StructProperty)=System.Byte[] 
 			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
 			Content(ObjectProperty)=ImageTriangleR=WidgetArchetype 
+	HorizontalBoxSlot_0 (0-0-0-0): size 267 (cls: HorizontalBoxSlot_0>HorizontalBoxSlot>/Script/UMG) :
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=LightningHBox=WidgetArchetype 
+			Content(ObjectProperty)=Image_1=WidgetArchetype 
+	HorizontalBoxSlot_1 (0-0-0-0): size 267 (cls: HorizontalBoxSlot_1>HorizontalBoxSlot>/Script/UMG) :
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=LightningHBox=WidgetArchetype 
+			Content(ObjectProperty)=Image_2=WidgetArchetype 
 	HorizontalBoxSlot_3 (0-0-0-0): size 156 (cls: HorizontalBoxSlot_3>HorizontalBoxSlot>/Script/UMG) :
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
@@ -16217,6 +16428,40 @@ Serialized exports:
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=False 
+	LightningBack (0-0-0-0): size 298 (cls: LightningBack>Image>/Script/UMG) :
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			Slot(ObjectProperty)=OverlaySlot_5=WidgetArchetype 
+			RenderTransform(StructProperty)=System.Byte[] 
+	StormIcon (0-0-0-0): size 184 (cls: StormIcon>Image>/Script/UMG) :
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			Slot(ObjectProperty)=OverlaySlot_1=WidgetArchetype 
+	Glow (0-0-0-0): size 213 (cls: Glow>Image>/Script/UMG) :
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			Slot(ObjectProperty)=OverlaySlot_6=WidgetArchetype 
+			RenderOpacity(FloatProperty)=0 
+	Image_1 (0-0-0-0): size 327 (cls: Image_1>Image>/Script/UMG) :
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
+			RenderTransform(StructProperty)=System.Byte[] 
+			RenderTransformPivot(StructProperty)=Vector2D(0.5,1) 
+	Image_2 (0-0-0-0): size 327 (cls: Image_2>Image>/Script/UMG) :
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
+			RenderTransform(StructProperty)=System.Byte[] 
+			RenderTransformPivot(StructProperty)=Vector2D(0.5,1) 
+	StormIcon (0-0-0-0): size 184 (cls: StormIcon>Image>/Script/UMG) :
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
+	StormIconOff (0-0-0-0): size 184 (cls: StormIconOff>Image>/Script/UMG) :
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			Slot(ObjectProperty)=OverlaySlot_2=WidgetArchetype 
 	I_Watcher (0-0-0-0): size 196 (cls: I_Watcher>Image>/Script/UMG) :
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
@@ -19131,6 +19376,10 @@ Serialized exports:
 		Tag array:
 	AthenaStandaloneTimer (0-0-0-0): size 36 (cls: AthenaStandaloneTimer>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
+	AthenaStormSurgePhase (0-0-0-0): size 36 (cls: AthenaStormSurgePhase>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	AthenaStormSurgeWidget (0-0-0-0): size 36 (cls: AthenaStormSurgeWidget>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
 	AthenaWatchers (0-0-0-0): size 36 (cls: AthenaWatchers>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	AutoRunHUDWidget (0-0-0-0): size 36 (cls: AutoRunHUDWidget>ObjectProperty>/Script/CoreUObject) :
@@ -19324,6 +19573,8 @@ Serialized exports:
 	VehicleActionsInvalidationBox (0-0-0-0): size 36 (cls: VehicleActionsInvalidationBox>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	WeaponOverheat_ProgressBar (0-0-0-0): size 36 (cls: WeaponOverheat_ProgressBar>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	WidgetSwitcher_Phase (0-0-0-0): size 36 (cls: WidgetSwitcher_Phase>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	WidgetSwitcher_TopMiddleAlerts (0-0-0-0): size 36 (cls: WidgetSwitcher_TopMiddleAlerts>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
@@ -19639,6 +19890,21 @@ Serialized exports:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
 	Overlay_0 (0-0-0-0): size 86 (cls: Overlay_0>Overlay>/Script/UMG) :
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
+	Overlay_0 (0-0-0-0): size 82 (cls: Overlay_0>Overlay>/Script/UMG) :
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=VerticalBoxSlot_4=WidgetArchetype 
+	Overlay_3 (0-0-0-0): size 86 (cls: Overlay_3>Overlay>/Script/UMG) :
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=VerticalBoxSlot_1=WidgetArchetype 
+	Overlay_3 (0-0-0-0): size 65 (cls: Overlay_3>Overlay>/Script/UMG) :
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+	Overlay_1 (0-0-0-0): size 86 (cls: Overlay_1>Overlay>/Script/UMG) :
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
@@ -21107,6 +21373,60 @@ Serialized exports:
 			HorizontalAlignment(ByteProperty)=HAlign_Center 
 			Parent(ObjectProperty)=Overlay_0=WidgetArchetype 
 			Content(ObjectProperty)=TimeText=WidgetArchetype 
+	OverlaySlot_1 (0-0-0-0): size 70 (cls: OverlaySlot_1>OverlaySlot>/Script/UMG) :
+		Tag array:
+			Parent(ObjectProperty)=Overlay_0=WidgetArchetype 
+			Content(ObjectProperty)=StormIcon=WidgetArchetype 
+	OverlaySlot_3 (0-0-0-0): size 152 (cls: OverlaySlot_3>OverlaySlot>/Script/UMG) :
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=Overlay_3=WidgetArchetype 
+			Content(ObjectProperty)=AlertText=WidgetArchetype 
+	OverlaySlot_5 (0-0-0-0): size 325 (cls: OverlaySlot_5>OverlaySlot>/Script/UMG) :
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=Overlay_3=WidgetArchetype 
+			Content(ObjectProperty)=LightningBack=WidgetArchetype 
+	OverlaySlot_0 (0-0-0-0): size 325 (cls: OverlaySlot_0>OverlaySlot>/Script/UMG) :
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=Overlay_3=WidgetArchetype 
+			Content(ObjectProperty)=StormIcon=WidgetArchetype 
+	OverlaySlot_2 (0-0-0-0): size 152 (cls: OverlaySlot_2>OverlaySlot>/Script/UMG) :
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=Overlay_3=WidgetArchetype 
+			Content(ObjectProperty)=StormIconOff=WidgetArchetype 
+	OverlaySlot_3 (0-0-0-0): size 152 (cls: OverlaySlot_3>OverlaySlot>/Script/UMG) :
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=Overlay_3=WidgetArchetype 
+			Content(ObjectProperty)=LightningHBox=WidgetArchetype 
+	OverlaySlot_6 (0-0-0-0): size 152 (cls: OverlaySlot_6>OverlaySlot>/Script/UMG) :
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=Overlay_3=WidgetArchetype 
+			Content(ObjectProperty)=Glow=WidgetArchetype 
+	OverlaySlot_1 (0-0-0-0): size 152 (cls: OverlaySlot_1>OverlaySlot>/Script/UMG) :
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Right 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=Overlay_1=WidgetArchetype 
+			Content(ObjectProperty)=DmgThresh_SizeBox=WidgetArchetype 
+	OverlaySlot_2 (0-0-0-0): size 197 (cls: OverlaySlot_2>OverlaySlot>/Script/UMG) :
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=Overlay_1=WidgetArchetype 
+			Content(ObjectProperty)=SurgeIcon_SizeBox=WidgetArchetype 
 	OverlaySlot_0 (0-0-0-0): size 238 (cls: OverlaySlot_0>OverlaySlot>/Script/UMG) :
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
@@ -24273,6 +24593,26 @@ DolorIpsum <img id="ElimIcon"/> 3 (902A8CBB41414D422CD4D68A9DBDB88D)
 			bOverride_MinDesiredWidth(BoolProperty)=True 
 			MinDesiredWidth(FloatProperty)=106 
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+	SizeBox_0 (0-0-0-0): size 53 (cls: SizeBox_0>SizeBox>/Script/UMG) :
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+	DmgThresh_SizeBox (0-0-0-0): size 163 (cls: DmgThresh_SizeBox>SizeBox>/Script/UMG) :
+		Tag array:
+			bOverride_WidthOverride(BoolProperty)=True 
+			WidthOverride(FloatProperty)=236 
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=OverlaySlot_1=WidgetArchetype 
+			bIsVariable(BoolProperty)=True 
+	SizeBox_5 (0-0-0-0): size 108 (cls: SizeBox_5>SizeBox>/Script/UMG) :
+		Tag array:
+			bOverride_WidthOverride(BoolProperty)=True 
+			WidthOverride(FloatProperty)=290 
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+	SurgeIcon_SizeBox (0-0-0-0): size 108 (cls: SurgeIcon_SizeBox>SizeBox>/Script/UMG) :
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=OverlaySlot_2=WidgetArchetype 
+			bIsVariable(BoolProperty)=True 
 	SizeBox_3 (0-0-0-0): size 108 (cls: SizeBox_3>SizeBox>/Script/UMG) :
 		Tag array:
 			bOverride_WidthOverride(BoolProperty)=True 
@@ -26030,6 +26370,26 @@ DolorIpsum <img id="ElimIcon"/> 3 (902A8CBB41414D422CD4D68A9DBDB88D)
 			VerticalAlignment(ByteProperty)=VAlign_Center 
 			Parent(ObjectProperty)=SizeBox_0=WidgetArchetype 
 			Content(ObjectProperty)=Overlay_0=WidgetArchetype 
+	SizeBoxSlot_0 (0-0-0-0): size 152 (cls: SizeBoxSlot_0>SizeBoxSlot>/Script/UMG) :
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=SizeBox_0=WidgetArchetype 
+			Content(ObjectProperty)=VerticalBox_2=WidgetArchetype 
+	SizeBoxSlot_0 (0-0-0-0): size 70 (cls: SizeBoxSlot_0>SizeBoxSlot>/Script/UMG) :
+		Tag array:
+			Parent(ObjectProperty)=DmgThresh_SizeBox=WidgetArchetype 
+			Content(ObjectProperty)=StormDMG_HorizontalBox=WidgetArchetype 
+	SizeBoxSlot_0 (0-0-0-0): size 70 (cls: SizeBoxSlot_0>SizeBoxSlot>/Script/UMG) :
+		Tag array:
+			Parent(ObjectProperty)=SizeBox_5=WidgetArchetype 
+			Content(ObjectProperty)=Overlay_1=WidgetArchetype 
+	SizeBoxSlot_0 (0-0-0-0): size 152 (cls: SizeBoxSlot_0>SizeBoxSlot>/Script/UMG) :
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=SurgeIcon_SizeBox=WidgetArchetype 
+			Content(ObjectProperty)=AthenaStormSurgeIconWidget=WidgetArchetype 
 	SizeBoxSlot_0 (0-0-0-0): size 185 (cls: SizeBoxSlot_0>SizeBoxSlot>/Script/UMG) :
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
@@ -27462,6 +27822,15 @@ DolorIpsum <img id="ElimIcon"/> 3 (902A8CBB41414D422CD4D68A9DBDB88D)
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
+	VerticalBox_2 (0-0-0-0): size 90 (cls: VerticalBox_2>VerticalBox>/Script/UMG) :
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
+	StormDMG_HorizontalBox (0-0-0-0): size 147 (cls: StormDMG_HorizontalBox>VerticalBox>/Script/UMG) :
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
+			RenderTransformPivot(StructProperty)=Vector2D(1,0.5) 
 	Feedback (0-0-0-0): size 79 (cls: Feedback>VerticalBox>/Script/UMG) :
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -27713,7 +28082,7 @@ DolorIpsum <img id="ElimIcon"/> 3 (902A8CBB41414D422CD4D68A9DBDB88D)
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			RenderTransformPivot(StructProperty)=Vector2D(0,0) 
-	TopRightContent (0-0-0-0): size 124 (cls: TopRightContent>VerticalBox>/Script/UMG) :
+	TopRightContent (0-0-0-0): size 128 (cls: TopRightContent>VerticalBox>/Script/UMG) :
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=OverlaySlot_2=WidgetArchetype 
@@ -28281,6 +28650,44 @@ DolorIpsum <img id="ElimIcon"/> 3 (902A8CBB41414D422CD4D68A9DBDB88D)
 			HorizontalAlignment(ByteProperty)=HAlign_Left 
 			Parent(ObjectProperty)=VerticalBox_1=WidgetArchetype 
 			Content(ObjectProperty)=CommonTextBlock_ScoreType=WidgetArchetype 
+	VerticalBoxSlot_0 (0-0-0-0): size 152 (cls: VerticalBoxSlot_0>VerticalBoxSlot>/Script/UMG) :
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Bottom 
+			Parent(ObjectProperty)=VerticalBox_2=WidgetArchetype 
+			Content(ObjectProperty)=HelpText=WidgetArchetype 
+	VerticalBoxSlot_1 (0-0-0-0): size 152 (cls: VerticalBoxSlot_1>VerticalBoxSlot>/Script/UMG) :
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=VerticalBox_2=WidgetArchetype 
+			Content(ObjectProperty)=Overlay_3=WidgetArchetype 
+	VerticalBoxSlot_4 (0-0-0-0): size 238 (cls: VerticalBoxSlot_4>VerticalBoxSlot>/Script/UMG) :
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=VerticalBox_2=WidgetArchetype 
+			Content(ObjectProperty)=Overlay_0=WidgetArchetype 
+	VerticalBoxSlot_10 (0-0-0-0): size 111 (cls: VerticalBoxSlot_10>VerticalBoxSlot>/Script/UMG) :
+		Tag array:
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=StormDMG_HorizontalBox=WidgetArchetype 
+			Content(ObjectProperty)=CommonBorder_0=WidgetArchetype 
+	VerticalBoxSlot_6 (0-0-0-0): size 238 (cls: VerticalBoxSlot_6>VerticalBoxSlot>/Script/UMG) :
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			HorizontalAlignment(ByteProperty)=HAlign_Right 
+			VerticalAlignment(ByteProperty)=VAlign_Bottom 
+			Parent(ObjectProperty)=StormDMG_HorizontalBox=WidgetArchetype 
+			Content(ObjectProperty)=BelowDMG=WidgetArchetype 
+	VerticalBoxSlot_7 (0-0-0-0): size 267 (cls: VerticalBoxSlot_7>VerticalBoxSlot>/Script/UMG) :
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			HorizontalAlignment(ByteProperty)=HAlign_Right 
+			VerticalAlignment(ByteProperty)=VAlign_Top 
+			Parent(ObjectProperty)=StormDMG_HorizontalBox=WidgetArchetype 
+			Content(ObjectProperty)=AboveDMG=WidgetArchetype 
 	VerticalBoxSlot_1 (0-0-0-0): size 70 (cls: VerticalBoxSlot_1>VerticalBoxSlot>/Script/UMG) :
 		Tag array:
 			Parent(ObjectProperty)=Feedback=WidgetArchetype 
@@ -29091,13 +29498,6 @@ DolorIpsum <img id="ElimIcon"/> 3 (902A8CBB41414D422CD4D68A9DBDB88D)
 			Padding(StructProperty)=System.Byte[] 
 			Parent(ObjectProperty)=TopRightContent=WidgetArchetype 
 			Content(ObjectProperty)=InvalidationBoxGamePhase_PlayerNumbers=WidgetArchetype 
-	VerticalBoxSlot_2 (0-0-0-0): size 238 (cls: VerticalBoxSlot_2>VerticalBoxSlot>/Script/UMG) :
-		Tag array:
-			Padding(StructProperty)=System.Byte[] 
-			HorizontalAlignment(ByteProperty)=HAlign_Right 
-			VerticalAlignment(ByteProperty)=VAlign_Center 
-			Parent(ObjectProperty)=TopRightContent=WidgetArchetype 
-			Content(ObjectProperty)=TeamScoreWidget=WidgetArchetype 
 	VerticalBoxSlot_3 (0-0-0-0): size 70 (cls: VerticalBoxSlot_3>VerticalBoxSlot>/Script/UMG) :
 		Tag array:
 			Parent(ObjectProperty)=TopRightContent=WidgetArchetype 
@@ -29113,6 +29513,15 @@ DolorIpsum <img id="ElimIcon"/> 3 (902A8CBB41414D422CD4D68A9DBDB88D)
 			HorizontalAlignment(ByteProperty)=HAlign_Center 
 			Parent(ObjectProperty)=TopRightContent=WidgetArchetype 
 			Content(ObjectProperty)=Minimap=WidgetArchetype 
+	VerticalBoxSlot_7 (0-0-0-0): size 70 (cls: VerticalBoxSlot_7>VerticalBoxSlot>/Script/UMG) :
+		Tag array:
+			Parent(ObjectProperty)=TopRightContent=WidgetArchetype 
+			Content(ObjectProperty)=TeamScoreWidget=WidgetArchetype 
+	VerticalBoxSlot_9 (0-0-0-0): size 111 (cls: VerticalBoxSlot_9>VerticalBoxSlot>/Script/UMG) :
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			Parent(ObjectProperty)=TopRightContent=WidgetArchetype 
+			Content(ObjectProperty)=AthenaStormSurgeWidget=WidgetArchetype 
 	VerticalBoxSlot_0 (0-0-0-0): size 238 (cls: VerticalBoxSlot_0>VerticalBoxSlot>/Script/UMG) :
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
@@ -30346,10 +30755,18 @@ DolorIpsum <img id="ElimIcon"/> 3 (902A8CBB41414D422CD4D68A9DBDB88D)
 		Tag array:
 			Parent(ObjectProperty)=WidgetSwitcher_PlaceBackground=WidgetArchetype 
 			Content(ObjectProperty)=Image_Generic=WidgetArchetype 
+	WidgetSwitcherSlot_1 (0-0-0-0): size 70 (cls: WidgetSwitcherSlot_1>WidgetSwitcherSlot>/Script/UMG) :
+		Tag array:
+			Parent(ObjectProperty)=WidgetSwitcher_Phase=WidgetArchetype 
+			Content(ObjectProperty)=AthenaStormSurgePhase=WidgetArchetype 
+	WidgetSwitcherSlot_2 (0-0-0-0): size 70 (cls: WidgetSwitcherSlot_2>WidgetSwitcherSlot>/Script/UMG) :
+		Tag array:
+			Parent(ObjectProperty)=WidgetSwitcher_Phase=WidgetArchetype 
+			Content(ObjectProperty)=GamePhaseAlert=WidgetArchetype 
 	WidgetSwitcherSlot_0 (0-0-0-0): size 70 (cls: WidgetSwitcherSlot_0>WidgetSwitcherSlot>/Script/UMG) :
 		Tag array:
 			Parent(ObjectProperty)=WidgetSwitcher_TopMiddleAlerts=WidgetArchetype 
-			Content(ObjectProperty)=GamePhaseAlert=WidgetArchetype 
+			Content(ObjectProperty)=WidgetSwitcher_Phase=WidgetArchetype 
 	WidgetSwitcherSlot_2 (0-0-0-0): size 111 (cls: WidgetSwitcherSlot_2>WidgetSwitcherSlot>/Script/UMG) :
 		Tag array:
 			VerticalAlignment(ByteProperty)=VAlign_Bottom 
@@ -30760,6 +31177,15 @@ DolorIpsum <img id="ElimIcon"/> 3 (902A8CBB41414D422CD4D68A9DBDB88D)
 	WidgetTree_0 (0-0-0-0): size 41 (cls: WidgetTree_0>WidgetTree>/Script/UMG) :
 		Tag array:
 			RootWidget(ObjectProperty)=SizeBox_0=WidgetArchetype 
+	WidgetTree_0 (0-0-0-0): size 41 (cls: WidgetTree_0>WidgetTree>/Script/UMG) :
+		Tag array:
+			RootWidget(ObjectProperty)=SizeBox_0=WidgetArchetype 
+	WidgetTree_0 (0-0-0-0): size 41 (cls: WidgetTree_0>WidgetTree>/Script/UMG) :
+		Tag array:
+			RootWidget(ObjectProperty)=SizeBox_5=WidgetArchetype 
+	WidgetTree_0 (0-0-0-0): size 41 (cls: WidgetTree_0>WidgetTree>/Script/UMG) :
+		Tag array:
+			RootWidget(ObjectProperty)=Overlay_3=WidgetArchetype 
 	WidgetTree_0 (0-0-0-0): size 41 (cls: WidgetTree_0>WidgetTree>/Script/UMG) :
 		Tag array:
 			RootWidget(ObjectProperty)=Feedback=WidgetArchetype 

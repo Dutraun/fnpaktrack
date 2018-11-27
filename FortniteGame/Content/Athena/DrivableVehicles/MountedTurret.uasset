@@ -54,6 +54,7 @@ Name table:
 	ActorComponentTickFunction
 	ActorSpaceCameraOffset
 	Add_FloatFloat
+	Add_VectorVector
 	AimingPitch
 	AllNodes
 	AnimBlueprintGeneratedClass
@@ -105,6 +106,7 @@ Name table:
 	bNotifyRigidBodyCollision
 	BodyInstance
 	BoolProperty
+	bOutOverriderExitSocket
 	bOverrideMaxDepenetrationVelocity
 	BoxComponent
 	BoxExtent
@@ -114,6 +116,7 @@ Name table:
 	bPersistantFire
 	bPlayDamageAudio
 	BrakeAboveTopSpeedDelta
+	BreakTransform
 	bShouldUpdatePhysicsVolume
 	bSimulatePhysics
 	bStartWithTickEnabled
@@ -124,10 +127,14 @@ Name table:
 	C_MountedTurret_Overheat
 	CallFunc_Abs_ReturnValue
 	CallFunc_Add_FloatFloat_ReturnValue
+	CallFunc_Add_VectorVector_ReturnValue
 	CallFunc_ApplyGlobalEnvironmentGameplayEffectToActor_ReturnValue
 	CallFunc_Array_Add_ReturnValue
 	CallFunc_Array_Add_ReturnValue1
 	CallFunc_BP_ApplyGameplayEffectToTarget_ReturnValue
+	CallFunc_BreakTransform_Location
+	CallFunc_BreakTransform_Rotation
+	CallFunc_BreakTransform_Scale
 	CallFunc_Conv_LinearColorToVector_ReturnValue
 	CallFunc_Conv_LinearColorToVector_ReturnValue1
 	CallFunc_CreateProxyObjectForPlayMontage_ReturnValue
@@ -187,6 +194,7 @@ Name table:
 	CallFunc_MakeGameplayTagContainerFromTag_ReturnValue
 	CallFunc_MakeLiteralText_ReturnValue
 	CallFunc_MakeLiteralText_ReturnValue1
+	CallFunc_MakeTransform_ReturnValue
 	CallFunc_MapRangeClamped_ReturnValue
 	CallFunc_MapRangeUnclamped_ReturnValue
 	CallFunc_Multiply_FloatFloat_ReturnValue
@@ -194,7 +202,9 @@ Name table:
 	CallFunc_NormalizeAxis_ReturnValue
 	CallFunc_RemoveActiveGameplayEffect_ReturnValue
 	CallFunc_RemoveActiveGameplayEffect_ReturnValue1
+	CallFunc_RotateAngleAxis_ReturnValue
 	CallFunc_SpawnEmitterAtLocation_ReturnValue
+	CallFunc_Subtract_VectorVector_ReturnValue
 	CallFunc_VLerp_ReturnValue
 	Camera
 	CanCharacterStepUpOn
@@ -291,6 +301,7 @@ Name table:
 	ECommonInputType
 	ECR_Block
 	ECR_Ignore
+	ECR_Overlap
 	EDualWeaponHand
 	EEndPlayReason
 	EffectContext
@@ -310,17 +321,21 @@ Name table:
 	EVectorQuantization::RoundTwoDecimals
 	Event On Weapon Fired
 	ExecuteUbergraph_MountedTurret
+	ExitSocket
 	ExitSocketName
 	ExitSockets
 	FadeIn
 	FadeOut
 	FCC_Object_PawnAI
 	FCC_Object_Projectile
+	FCC_Object_ProjectileIgnoreAI
 	FCC_Object_ProjectileMesh
 	FCC_Object_SpectatorDroneCamera
 	FCC_Query_PawnCapsule
 	FCC_Trace_Interaction
 	FCC_Trace_Weapon
+	FCC_Trace_WeaponCapsule
+	FCC_Trace_WeaponMulti
 	FCC_Trace_WeaponPawnAndWorldMulti
 	FCC_Trace_WeaponWorldMulti
 	fInteractionDelay
@@ -383,8 +398,8 @@ Name table:
 	Guid
 	gun_base
 	gun_body_l
-	gun_body_r
 	gun_body_R
+	gun_body_r
 	Hand
 	Handle
 	Handle Rotation Audio
@@ -400,6 +415,7 @@ Name table:
 	InstigatedBy
 	InternalVariableName
 	IntProperty
+	InTransform
 	InWaterFX
 	InWaterLoop
 	IsDedicatedServer
@@ -518,6 +534,7 @@ Name table:
 	MagazineGlowR_GEN_VARIABLE
 	MakeGameplayTagContainerFromTag
 	MakeLiteralText
+	MakeTransform
 	MapRangeClamped
 	MapRangeUnclamped
 	Mesh
@@ -569,6 +586,7 @@ Name table:
 	OnCompleted_DC5D83234D74654A536804AC35F92FE4
 	OnDeathPlayEffects
 	OnDeathSound
+	OnGetExitSocketTransform
 	OnHandFired
 	OnHandFired__DelegateSignature
 	OnInterrupted
@@ -597,6 +615,7 @@ Name table:
 	OnPawnExitVehicle
 	OutExtents
 	OutLocation
+	OutOverrideTransform
 	Overheat
 	OverHeat_Alpha
 	OverHeat_Color
@@ -669,6 +688,7 @@ Name table:
 	Roll
 	RootComponent
 	RootNodes
+	RotateAngleAxis
 	RotationQuantizationLevel
 	Rotator
 	SceneComponent
@@ -698,6 +718,7 @@ Name table:
 	SkeletalMeshComponent
 	SkeletalMeshComponentBudgeted
 	SlopeCompensationCameraOffset
+	SocketIndex
 	Sound
 	SoundBase
 	SoundCue
@@ -709,6 +730,7 @@ Name table:
 	Start FX And Audio Timer
 	StaticMeshComponent
 	StructProperty
+	Subtract_VectorVector
 	Temp_bool_Has_Been_Initd_Variable
 	Temp_bool_Has_Been_Initd_Variable1
 	Temp_bool_IsClosed_Variable
@@ -727,6 +749,7 @@ Name table:
 	TextProperty
 	TimerDynamicDelegate__DelegateSignature
 	TimerHandle
+	Transform
 	Turret_Ballistic_Explode_Cue
 	Turret_Ballistic_Getin_Cue
 	Turret_Ballistic_GetOut_Cue
@@ -902,16 +925,21 @@ Import table:
 	Array_Add (Function)
 	Abs (Function)
 	Add_FloatFloat (Function)
+	Add_VectorVector (Function)
+	BreakTransform (Function)
 	Conv_LinearColorToVector (Function)
 	Divide_FloatFloat (Function)
 	EqualEqual_ByteByte (Function)
 	Greater_FloatFloat (Function)
 	GreaterEqual_FloatFloat (Function)
+	MakeTransform (Function)
 	MapRangeClamped (Function)
 	MapRangeUnclamped (Function)
 	Multiply_FloatFloat (Function)
 	MultiplyMultiply_FloatFloat (Function)
 	NormalizeAxis (Function)
+	RotateAngleAxis (Function)
+	Subtract_VectorVector (Function)
 	VLerp (Function)
 	Delay (Function)
 	IsDedicatedServer (Function)
@@ -939,6 +967,7 @@ Import table:
 	IsMobilePlatform (Function)
 	GetCurrentOverheatValue (Function)
 	GetOverheatingMaxValue (Function)
+	OnGetExitSocketTransform (Function)
 	IsOperatingTurret (Function)
 	SetParam (Function)
 	GetFireActionName (Function)
@@ -1026,6 +1055,7 @@ Import table:
 	Default__SceneComponent (SceneComponent)
 	LinearColor (ScriptStruct)
 	Rotator (ScriptStruct)
+	Transform (ScriptStruct)
 	Vector (ScriptStruct)
 	Vector2D (ScriptStruct)
 	ActorComponentTickFunction (ScriptStruct)
@@ -1060,7 +1090,7 @@ Import table:
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	MountedTurret_C (0-0-0-0): size 1190 (cls: MountedTurret_C>BlueprintGeneratedClass>/Script/Engine) :
+	MountedTurret_C (0-0-0-0): size 1206 (cls: MountedTurret_C>BlueprintGeneratedClass>/Script/Engine) :
 		Tag array:
 			NumReplicatedProperties(IntProperty)=3 
 			bHasCookedComponentInstancingData(BoolProperty)=True 
@@ -1409,7 +1439,13 @@ Serialized exports:
 		Tag array:
 	Temp_bool_Variable1 (0-0-0-0): size 34 (cls: Temp_bool_Variable1>BoolProperty>/Script/CoreUObject) :
 		Tag array:
-	OverlapVolume_GEN_VARIABLE (0-0-0-0): size 1090 (cls: OverlapVolume_GEN_VARIABLE>BoxComponent>/Script/Engine) :
+	ExitSocket (0-0-0-0): size 32 (cls: ExitSocket>NameProperty>/Script/CoreUObject) :
+		Tag array:
+	OnGetExitSocketTransform (0-0-0-0): size 281 (cls: OnGetExitSocketTransform>Function>/Script/CoreUObject) :
+		Tag array:
+	bOutOverriderExitSocket (0-0-0-0): size 34 (cls: bOutOverriderExitSocket>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	OverlapVolume_GEN_VARIABLE (0-0-0-0): size 1008 (cls: OverlapVolume_GEN_VARIABLE>BoxComponent>/Script/Engine) :
 		Tag array:
 			BoxExtent(StructProperty)=Vector(88,88,80) 
 			BodyInstance(StructProperty)=System.Byte[] 
@@ -1555,7 +1591,7 @@ Serialized exports:
 			VolumeParam(StructProperty)=System.Byte[] 
 			PitchParam(StructProperty)=System.Byte[] 
 			ParamRange(StructProperty)=Vector2D(0,1) 
-	SkeletalMeshComponent (0-0-0-0): size 1327 (cls: SkeletalMeshComponent>FortVehicleSkelMeshComponent>/Script/FortniteGame) :
+	SkeletalMeshComponent (0-0-0-0): size 1737 (cls: SkeletalMeshComponent>FortVehicleSkelMeshComponent>/Script/FortniteGame) :
 		Tag array:
 			AnimClass(ObjectProperty)=AnimBP_MountedTurret_C=/Game/Animation/Game/MainPlayer/Combat/Gadgets/Medium/Male/MountedTurret/AnimBP_MountedTurret 
 			bEnablePhysicsOnDedicatedServer(BoolProperty)=True 
@@ -1576,6 +1612,8 @@ Serialized exports:
 	CallFunc_Array_Add_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Array_Add_ReturnValue1>IntProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_Array_Add_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Array_Add_ReturnValue>IntProperty>/Script/CoreUObject) :
+		Tag array:
+	SocketIndex (0-0-0-0): size 32 (cls: SocketIndex>IntProperty>/Script/CoreUObject) :
 		Tag array:
 	SeatIdx (0-0-0-0): size 32 (cls: SeatIdx>IntProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1877,7 +1915,7 @@ Serialized exports:
 			bIsParentComponentNative(BoolProperty)=True 
 			VariableGuid(StructProperty)=Guid: 2500729359-1244479405-3818463125-617911469 
 			InternalVariableName(NameProperty)=OverHeatScreen_R 
-	SCS_Node_25 (0-0-0-0): size 3762 (cls: SCS_Node_25>SCS_Node>/Script/Engine) :
+	SCS_Node_25 (0-0-0-0): size 3465 (cls: SCS_Node_25>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=BoxComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=OverlapVolume_GEN_VARIABLE=MountedTurret_C 
@@ -2007,6 +2045,26 @@ Serialized exports:
 	HitInfo (0-0-0-0): size 36 (cls: HitInfo>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	Momentum (0-0-0-0): size 36 (cls: Momentum>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Add_VectorVector_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_Add_VectorVector_ReturnValue>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_BreakTransform_Location (0-0-0-0): size 36 (cls: CallFunc_BreakTransform_Location>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_BreakTransform_Rotation (0-0-0-0): size 36 (cls: CallFunc_BreakTransform_Rotation>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_BreakTransform_Scale (0-0-0-0): size 36 (cls: CallFunc_BreakTransform_Scale>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_K2_GetActorLocation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_GetActorLocation_ReturnValue>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_MakeTransform_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_MakeTransform_ReturnValue>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_RotateAngleAxis_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_RotateAngleAxis_ReturnValue>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Subtract_VectorVector_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_Subtract_VectorVector_ReturnValue>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	InTransform (0-0-0-0): size 36 (cls: InTransform>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	OutOverrideTransform (0-0-0-0): size 36 (cls: OutOverrideTransform>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	OverheatCostmeticTimer (0-0-0-0): size 36 (cls: OverheatCostmeticTimer>StructProperty>/Script/CoreUObject) :
 		Tag array:

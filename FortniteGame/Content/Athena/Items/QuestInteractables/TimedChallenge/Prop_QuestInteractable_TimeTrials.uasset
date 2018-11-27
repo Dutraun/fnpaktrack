@@ -10,9 +10,12 @@ Name table:
 	/Game/Athena/Items/QuestInteractables/TimedChallenge/M_AlarmClock_Inst1
 	/Game/Athena/Items/QuestInteractables/TimedChallenge/Prop_QuestInteractable_TimeTrials
 	/Game/Athena/Items/QuestInteractables/TimedChallenge/SM_StopwatchNoFace
+	/Game/Athena/Items/QuestInteractables/TimedChallenge/SM_TimeTrial_Gate
+	/Game/Athena/Items/QuestInteractables/TimedChallenge/SM_TimeTrial_Tire
 	/Game/Athena/Items/QuestInteractables/TimedChallenge/TimeTrialRunnerData
 	/Game/Athena/Items/Quests/AthenaObjectiveStatTable
 	/Game/Athena/Items/Quests/BattlePass/Quest_BR_Timed_Trials
+	/Game/Athena/Items/Traps/FreezeTrap/FX/SM_Vehicle_Wheel_Frozen
 	/Game/Athena/Sounds/Quests/Athena_CollectHiddenStarReward_Cue
 	/Game/Athena/Sounds/Quests/TimedTrial/Athena_Quest_TimeTrial_Activate_Cue
 	/Game/Athena/Sounds/Quests/TimedTrial/Athena_Quest_TimeTrial_Collect_Cue
@@ -35,6 +38,8 @@ Name table:
 	ActorComponentTickFunction
 	Add_FloatFloat
 	Add_IntInt
+	Add_VectorVector
+	AddComponent
 	AlarmClock
 	AlarmClock_GEN_VARIABLE
 	AllCompleted
@@ -67,9 +72,11 @@ Name table:
 	AthenaGameData
 	AthenaObjectiveStatTable
 	AthenaQuestFunctionLibrary_C
+	AttenuationRadius
 	AudioComponent
 	AwardQuest
 	bAffectDynamicIndirectLighting
+	bAlwaysUseNetCullDistanceSquaredForRelevancy
 	battlepass_complete_timed_trials_01
 	bAutoActivate
 	bCanBeDamaged
@@ -83,6 +90,8 @@ Name table:
 	bIsExternalCurve
 	bIsNavigationRelevant
 	bIsParentComponentNative
+	bIsVehicleTimeTrial
+	bLockFlagZRot
 	BlueprintCanInteract
 	BlueprintGameplayTagLibrary
 	BlueprintGeneratedClass
@@ -99,11 +108,14 @@ Name table:
 	BoolProperty
 	BoxComponent
 	bPlaylistDataIsLoaded
+	BreakRotator
+	BreakVector
 	Brightness
 	bStartWithTickEnabled
 	Building.Type.Prop
 	BuildingActor
 	BuildingProp
+	BuildingSMActor
 	BurstTime
 	bValidatedAsWired
 	ByteProperty
@@ -112,6 +124,7 @@ Name table:
 	CallFunc_Add_FloatFloat_ReturnValue10
 	CallFunc_Add_FloatFloat_ReturnValue11
 	CallFunc_Add_FloatFloat_ReturnValue12
+	CallFunc_Add_FloatFloat_ReturnValue13
 	CallFunc_Add_FloatFloat_ReturnValue2
 	CallFunc_Add_FloatFloat_ReturnValue3
 	CallFunc_Add_FloatFloat_ReturnValue4
@@ -123,6 +136,11 @@ Name table:
 	CallFunc_Add_IntInt_ReturnValue
 	CallFunc_Add_IntInt_ReturnValue1
 	CallFunc_Add_IntInt_ReturnValue10
+	CallFunc_Add_IntInt_ReturnValue11
+	CallFunc_Add_IntInt_ReturnValue12
+	CallFunc_Add_IntInt_ReturnValue13
+	CallFunc_Add_IntInt_ReturnValue14
+	CallFunc_Add_IntInt_ReturnValue15
 	CallFunc_Add_IntInt_ReturnValue2
 	CallFunc_Add_IntInt_ReturnValue3
 	CallFunc_Add_IntInt_ReturnValue4
@@ -131,14 +149,28 @@ Name table:
 	CallFunc_Add_IntInt_ReturnValue7
 	CallFunc_Add_IntInt_ReturnValue8
 	CallFunc_Add_IntInt_ReturnValue9
+	CallFunc_Add_VectorVector_ReturnValue
+	CallFunc_AddComponent_ReturnValue
 	CallFunc_Array_Add_ReturnValue
 	CallFunc_Array_Get_Item
 	CallFunc_Array_Get_Item1
+	CallFunc_Array_Get_Item10
+	CallFunc_Array_Get_Item11
+	CallFunc_Array_Get_Item12
+	CallFunc_Array_Get_Item13
 	CallFunc_Array_Get_Item2
 	CallFunc_Array_Get_Item3
 	CallFunc_Array_Get_Item4
+	CallFunc_Array_Get_Item5
+	CallFunc_Array_Get_Item6
+	CallFunc_Array_Get_Item7
+	CallFunc_Array_Get_Item8
+	CallFunc_Array_Get_Item9
 	CallFunc_Array_Length_ReturnValue
 	CallFunc_Array_Length_ReturnValue1
+	CallFunc_Array_Length_ReturnValue2
+	CallFunc_Array_Length_ReturnValue3
+	CallFunc_Array_Length_ReturnValue4
 	CallFunc_Athena_CheckQuestAndObjectiveCompletion_ObjectiveCompleted
 	CallFunc_Athena_CheckQuestAndObjectiveCompletion_ObjectiveCompleted1
 	CallFunc_Athena_CheckQuestAndObjectiveCompletion_QuestCompleted
@@ -149,6 +181,12 @@ Name table:
 	CallFunc_BooleanAND_ReturnValue1
 	CallFunc_BooleanAND_ReturnValue2
 	CallFunc_BooleanOR_ReturnValue
+	CallFunc_BreakRotator_Pitch
+	CallFunc_BreakRotator_Roll
+	CallFunc_BreakRotator_Yaw
+	CallFunc_BreakVector_X
+	CallFunc_BreakVector_Y
+	CallFunc_BreakVector_Z
 	CallFunc_CreateDynamicMaterialInstance_ReturnValue
 	CallFunc_CreateDynamicMaterialInstance_ReturnValue1
 	CallFunc_CreateDynamicMaterialInstance_ReturnValue2
@@ -163,6 +201,8 @@ Name table:
 	CallFunc_EqualEqual_ObjectObject_ReturnValue
 	CallFunc_EvaluateCurveTableRow_OutXY
 	CallFunc_EvaluateCurveTableRow_ReturnValue
+	CallFunc_FindLookAtRotation_ReturnValue
+	CallFunc_FindLookAtRotation_ReturnValue1
 	CallFunc_GetAthenaPlaylistContextTags_ReturnValue
 	CallFunc_GetController_ReturnValue
 	CallFunc_GetController_ReturnValue1
@@ -220,28 +260,42 @@ Name table:
 	CallFunc_IsValid_ReturnValue3
 	CallFunc_IsValid_ReturnValue4
 	CallFunc_IsValid_ReturnValue5
+	CallFunc_K2_AttachToComponent_ReturnValue
 	CallFunc_K2_GetActorLocation_ReturnValue
 	CallFunc_K2_GetActorLocation_ReturnValue1
 	CallFunc_K2_GetComponentLocation_ReturnValue
 	CallFunc_K2_GetComponentLocation_ReturnValue1
+	CallFunc_K2_GetComponentLocation_ReturnValue10
+	CallFunc_K2_GetComponentLocation_ReturnValue11
 	CallFunc_K2_GetComponentLocation_ReturnValue2
 	CallFunc_K2_GetComponentLocation_ReturnValue3
 	CallFunc_K2_GetComponentLocation_ReturnValue4
 	CallFunc_K2_GetComponentLocation_ReturnValue5
 	CallFunc_K2_GetComponentLocation_ReturnValue6
 	CallFunc_K2_GetComponentLocation_ReturnValue7
+	CallFunc_K2_GetComponentLocation_ReturnValue8
+	CallFunc_K2_GetComponentLocation_ReturnValue9
 	CallFunc_K2_IsValidTimerHandle_ReturnValue
 	CallFunc_K2_SetRelativeLocation_SweepHitResult
 	CallFunc_K2_SetRelativeLocation_SweepHitResult1
 	CallFunc_K2_SetTimerDelegate_ReturnValue
 	CallFunc_K2_SetTimerDelegate_ReturnValue1
+	CallFunc_K2_SetWorldRotation_SweepHitResult
+	CallFunc_K2_SetWorldRotation_SweepHitResult1
+	CallFunc_K2_SetWorldRotation_SweepHitResult2
 	CallFunc_Lerp_ReturnValue
 	CallFunc_Lerp_ReturnValue1
 	CallFunc_Lerp_ReturnValue2
 	CallFunc_Less_FloatFloat_ReturnValue
 	CallFunc_Less_IntInt_ReturnValue
 	CallFunc_Less_IntInt_ReturnValue1
+	CallFunc_Less_IntInt_ReturnValue2
+	CallFunc_Less_IntInt_ReturnValue3
+	CallFunc_Less_IntInt_ReturnValue4
 	CallFunc_LessEqual_IntInt_ReturnValue
+	CallFunc_LessEqual_IntInt_ReturnValue1
+	CallFunc_MakeRotator_ReturnValue
+	CallFunc_MakeVector_ReturnValue
 	CallFunc_Multiply_IntFloat_ReturnValue
 	CallFunc_Multiply_IntFloat_ReturnValue1
 	CallFunc_Multiply_IntFloat_ReturnValue2
@@ -268,6 +322,7 @@ Name table:
 	CallFunc_VLerp_ReturnValue1
 	CallFunc_VLerp_ReturnValue2
 	CallFunc_VLerp_ReturnValue3
+	CallFunc_VLerp_ReturnValue4
 	Camera
 	CastShadow
 	Channel
@@ -304,6 +359,7 @@ Name table:
 	ComponentBeginOverlapSignature__DelegateSignature
 	ComponentClass
 	ComponentTemplate
+	ComponentTemplates
 	Controller
 	CP Hit Pitch Mulitplier
 	CP1 Location
@@ -359,12 +415,16 @@ Name table:
 	CP8Location
 	CP8Mat
 	CP8Triggered
+	CPArray
+	CPArrayAndInitial
 	CPNumPlacement
 	CPTriggered_44_4B52E41B47DCC48019DAB08129A9B3C8
 	CPTriggeredFX
 	CPTriggeredSound
 	CreateDynamicMaterialInstance
 	CreativeMode
+	CurrentBottomClock
+	CurrentBottomClockScale
 	CurveFloat
 	CurveFloat_1
 	CurveFloat_2
@@ -407,6 +467,7 @@ Name table:
 	Default__StructProperty
 	Default__TextProperty
 	Default__TimelineTemplate
+	DefaultClockMesh
 	DefaultSceneRoot
 	DefaultSceneRoot_GEN_VARIABLE
 	DefaultSceneRootNode
@@ -440,14 +501,19 @@ Name table:
 	FailFade__UpdateFunc
 	FailFade_FadeTime_EB31C2E74E2EC89E95E918A2A65023D8
 	FailFade_Template
+	FailsafeGateTimer
 	Failure FX
 	FCC_Object_PawnAI
 	FCC_Trace_Interaction
 	FCC_Trace_WeakSpot
 	FCC_Trace_WeaponPawnAndWorldMulti
 	FCC_Trace_WeaponWorldMulti
+	FindLookAtRotation
 	FinishedFunctionName
+	FlagIndex
 	FloatCurve
+	FloatingAlarm
+	FloatingAlarm_GEN_VARIABLE
 	FloatProperty
 	FloatTracks
 	FlushNetDormancy
@@ -471,6 +537,8 @@ Name table:
 	GameplayTag
 	GameplayTagContainer
 	GameStateBase
+	GateArray
+	GateHit
 	GetAthenaPlaylistContextTags
 	GetController
 	GetFocusedSocketLocation
@@ -485,6 +553,7 @@ Name table:
 	Handle
 	HasAuthority
 	HasTag
+	HideAllGates
 	HideQuestProp
 	HitResult
 	InitializeNextCP
@@ -500,12 +569,14 @@ Name table:
 	isLocallyValid
 	IsRunnerTracked
 	IsValid
+	K2_AttachToComponent
 	K2_ClearAndInvalidateTimerHandle
 	K2_GetActorLocation
 	K2_GetComponentLocation
 	K2_IsValidTimerHandle
 	K2_SetRelativeLocation
 	K2_SetTimerDelegate
+	K2_SetWorldRotation
 	K2Node_CreateDelegate_OutputDelegate
 	K2Node_CreateDelegate_OutputDelegate1
 	K2Node_CreateDelegate_OutputDelegate10
@@ -527,6 +598,7 @@ Name table:
 	K2Node_CustomEvent_bFromSweep6
 	K2Node_CustomEvent_bFromSweep7
 	K2Node_CustomEvent_Controller
+	K2Node_CustomEvent_FlagIndex
 	K2Node_CustomEvent_InPlayer
 	K2Node_CustomEvent_OtherActor
 	K2Node_CustomEvent_OtherActor1
@@ -622,18 +694,25 @@ Name table:
 	LinearColor
 	M_AlarmClock_Inst1
 	M_TimeTrial_Flat
+	MakeGatesVisible
+	MakeRotator
+	MakeVector
 	Material
 	MaterialInstanceConstant
 	MaterialInstanceDynamic
 	Mesh
 	MeshComponent
 	MoveCPsIntoPlace
+	MoveGatesIntoPlace
 	MoveTime
 	MulticastDelegateProperty
 	Multiply_IntFloat
 	NameProperty
 	NetCullDistanceSquared
+	NewTrack
+	NewVar
 	NoCollision
+	NODE_AddStaticMeshComponent-1
 	None
 	Not_PreBool
 	NotifyEnding
@@ -722,6 +801,7 @@ Name table:
 	QuestValid
 	ReceiveBeginPlay
 	RelativeLocation
+	RelativeRotation
 	RelativeScale3D
 	Reset Time Trial
 	Response
@@ -732,6 +812,7 @@ Name table:
 	RichCurveKey
 	RootComponent
 	RootNodes
+	Rotator
 	RowName
 	RunnerIndex
 	RunnerIsTracked
@@ -747,7 +828,6 @@ Name table:
 	ServerGraceTime
 	SetActorHiddenInGame
 	SetHiddenInGame
-	SetIndirectLightingIntensity
 	SetIntensity
 	SetPlayRate
 	SetRelativeScale3D
@@ -757,7 +837,10 @@ Name table:
 	SimpleConstructionScript
 	SM_InteractionCylidner
 	SM_StopwatchNoFace
+	SM_TimeTrial_Gate
 	SM_TimeTrial_Marker
+	SM_TimeTrial_Tire
+	SM_Vehicle_Wheel_Frozen
 	SoftObjectProperty
 	Sound
 	SoundBase
@@ -787,13 +870,20 @@ Name table:
 	Temp_bool_Variable6
 	Temp_bool_Variable7
 	Temp_int_Array_Index_Variable
+	Temp_int_Array_Index_Variable1
+	Temp_int_Array_Index_Variable2
+	Temp_int_Array_Index_Variable3
 	Temp_int_Loop_Counter_Variable
+	Temp_int_Loop_Counter_Variable1
+	Temp_int_Loop_Counter_Variable2
+	Temp_int_Loop_Counter_Variable3
 	Temp_int_Variable
 	Temp_int_Variable1
 	Temp_int_Variable10
 	Temp_int_Variable11
 	Temp_int_Variable12
 	Temp_int_Variable13
+	Temp_int_Variable14
 	Temp_int_Variable2
 	Temp_int_Variable3
 	Temp_int_Variable4
@@ -802,6 +892,7 @@ Name table:
 	Temp_int_Variable7
 	Temp_int_Variable8
 	Temp_int_Variable9
+	Temp_struct_Variable
 	Template
 	TestSetup
 	TextProperty
@@ -814,6 +905,11 @@ Name table:
 	Timeline_0_ClockShrinkTime_A251E41D426C6D8A20303A9CA9903A48
 	Timeline_0_MoveTime_A251E41D426C6D8A20303A9CA9903A48
 	Timeline_0_Template
+	Timeline_1__Direction_92F521FF45B403E2B0085896F0368CBD
+	Timeline_1__FinishedFunc
+	Timeline_1__UpdateFunc
+	Timeline_1_NewTrack_0_92F521FF45B403E2B0085896F0368CBD
+	Timeline_1_Template
 	TimelineComponent
 	TimelineGuid
 	TimelineLength
@@ -843,6 +939,7 @@ Name table:
 	TimeTrialTime
 	TotalCPNumber
 	TrackName
+	Transform
 	TrialTimer
 	TriggeredSound
 	TTEventTrack
@@ -859,8 +956,13 @@ Name table:
 	VariableName
 	Vector
 	Vehicle
+	VehicleCheckpointMesh
+	VehicleClockMesh
+	VehicleInteractText
 	Visibility
 	VLerp
+	WheelClock
+	WheelClock_GEN_VARIABLE
 	WorldDynamic
 	WorldStatic
 Import table:
@@ -911,11 +1013,13 @@ Import table:
 	SimpleConstructionScript (Class)
 	SoundBase (Class)
 	SphereComponent (Class)
+	StaticMesh (Class)
 	StaticMeshComponent (Class)
 	TimelineComponent (Class)
 	TimelineTemplate (Class)
 	BuildingActor (Class)
 	BuildingProp (Class)
+	BuildingSMActor (Class)
 	FortGameStateAthena (Class)
 	FortInteractInterface (Class)
 	FortKismetLibrary (Class)
@@ -940,6 +1044,7 @@ Import table:
 	Default__FortKismetLibrary (FortKismetLibrary)
 	Quest_BR_Timed_Trials (FortQuestItemDefinition)
 	Default__Function (Function)
+	AddComponent (Function)
 	FlushNetDormancy (Function)
 	GetInstigatorController (Function)
 	HasAuthority (Function)
@@ -959,16 +1064,22 @@ Import table:
 	Array_Set (Function)
 	Add_FloatFloat (Function)
 	Add_IntInt (Function)
+	Add_VectorVector (Function)
 	BooleanAND (Function)
 	BooleanOR (Function)
+	BreakRotator (Function)
+	BreakVector (Function)
 	Divide_FloatFloat (Function)
 	EqualEqual_IntInt (Function)
 	EqualEqual_ObjectObject (Function)
+	FindLookAtRotation (Function)
 	GreaterEqual_IntInt (Function)
 	Lerp (Function)
 	Less_FloatFloat (Function)
 	Less_IntInt (Function)
 	LessEqual_IntInt (Function)
+	MakeRotator (Function)
+	MakeVector (Function)
 	Multiply_IntFloat (Function)
 	Not_PreBool (Function)
 	VLerp (Function)
@@ -979,13 +1090,14 @@ Import table:
 	K2_IsValidTimerHandle (Function)
 	K2_SetTimerDelegate (Function)
 	PrintString (Function)
-	SetIndirectLightingIntensity (Function)
 	SetIntensity (Function)
 	SetScalarParameterValue (Function)
 	SetScalarParameterValueOnMaterials (Function)
 	GetController (Function)
+	K2_AttachToComponent (Function)
 	K2_GetComponentLocation (Function)
 	K2_SetRelativeLocation (Function)
+	K2_SetWorldRotation (Function)
 	SetHiddenInGame (Function)
 	PlayFromStart (Function)
 	SetPlayRate (Function)
@@ -1013,6 +1125,7 @@ Import table:
 	RunningPawn_15_6D6AFF35415544E8F16E49922C3918B0 (ObjectProperty)
 	Default__ObjectProperty (ObjectProperty)
 	Mesh (ObjectProperty)
+	StaticMeshComponent (ObjectProperty)
 	/Game/Athena/Balance/DataTables/AthenaGameData (Package)
 	/Game/Athena/Effects/Particles/TimedChallenge/P_TimedChallenge_InWorldLocation (Package)
 	/Game/Athena/Effects/Particles/TimedChallenge/P_TimedChallenge_PickingUp (Package)
@@ -1023,9 +1136,12 @@ Import table:
 	/Game/Athena/Items/QuestInteractables/Generic/FX/SM_InteractionCylidner (Package)
 	/Game/Athena/Items/QuestInteractables/TimedChallenge/M_AlarmClock_Inst1 (Package)
 	/Game/Athena/Items/QuestInteractables/TimedChallenge/SM_StopwatchNoFace (Package)
+	/Game/Athena/Items/QuestInteractables/TimedChallenge/SM_TimeTrial_Gate (Package)
+	/Game/Athena/Items/QuestInteractables/TimedChallenge/SM_TimeTrial_Tire (Package)
 	/Game/Athena/Items/QuestInteractables/TimedChallenge/TimeTrialRunnerData (Package)
 	/Game/Athena/Items/Quests/AthenaObjectiveStatTable (Package)
 	/Game/Athena/Items/Quests/BattlePass/Quest_BR_Timed_Trials (Package)
+	/Game/Athena/Items/Traps/FreezeTrap/FX/SM_Vehicle_Wheel_Frozen (Package)
 	/Game/Athena/Sounds/Quests/Athena_CollectHiddenStarReward_Cue (Package)
 	/Game/Athena/Sounds/Quests/TimedTrial/Athena_Quest_TimeTrial_Activate_Cue (Package)
 	/Game/Athena/Sounds/Quests/TimedTrial/Athena_Quest_TimeTrial_Collect_Cue (Package)
@@ -1050,6 +1166,8 @@ Import table:
 	Default__PointLightComponent (PointLightComponent)
 	Default__SceneComponent (SceneComponent)
 	LinearColor (ScriptStruct)
+	Rotator (ScriptStruct)
+	Transform (ScriptStruct)
 	Vector (ScriptStruct)
 	CurveTableRowHandle (ScriptStruct)
 	DataTableRowHandle (ScriptStruct)
@@ -1073,25 +1191,30 @@ Import table:
 	Default__SphereComponent (SphereComponent)
 	SM_InteractionCylidner (StaticMesh)
 	SM_StopwatchNoFace (StaticMesh)
+	SM_TimeTrial_Gate (StaticMesh)
+	SM_TimeTrial_Tire (StaticMesh)
+	SM_Vehicle_Wheel_Frozen (StaticMesh)
 	SM_TimeTrial_Marker (StaticMesh)
 	Default__StaticMeshComponent (StaticMeshComponent)
 	StaticMeshComponent0 (StaticMeshComponent)
 	Default__StructProperty (StructProperty)
 	RelativeLocation (StructProperty)
+	RelativeScale3D (StructProperty)
 	Default__TextProperty (TextProperty)
 	Default__TimelineTemplate (TimelineTemplate)
 	TimeTrialRunnerData (UserDefinedStruct)
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	Prop_QuestInteractable_TimeTrials_C (0-0-0-0): size 1417 (cls: Prop_QuestInteractable_TimeTrials_C>BlueprintGeneratedClass>/Script/Engine) :
+	Prop_QuestInteractable_TimeTrials_C (0-0-0-0): size 1630 (cls: Prop_QuestInteractable_TimeTrials_C>BlueprintGeneratedClass>/Script/Engine) :
 		Tag array:
 			NumReplicatedProperties(IntProperty)=9 
+			ComponentTemplates(ArrayProperty)=[object] (inner: ObjectProperty)
 			Timelines(ArrayProperty)=[object] (inner: ObjectProperty)
 			SimpleConstructionScript(ObjectProperty)=SimpleConstructionScript_0=Prop_QuestInteractable_TimeTrials_C 
 			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=Prop_QuestInteractable_TimeTrials_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_Prop_QuestInteractable_TimeTrials=Prop_QuestInteractable_TimeTrials_C 
-	Default__Prop_QuestInteractable_TimeTrials_C (0-0-0-0): size 2075 (cls: Default__Prop_QuestInteractable_TimeTrials_C>Prop_QuestInteractable_TimeTrials_C) :
+	Default__Prop_QuestInteractable_TimeTrials_C (0-0-0-0): size 2352 (cls: Default__Prop_QuestInteractable_TimeTrials_C>Prop_QuestInteractable_TimeTrials_C) :
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			InteractText(TextProperty)=Activate Time Trial (F90A4E1943003918E06AA78B95DF357F) 
@@ -1128,6 +1251,11 @@ Serialized exports:
 			SafetyTimer(StructProperty)=System.Byte[] 
 			TimerBuffer(FloatProperty)=2.5 
 			ServerGraceTime(FloatProperty)=1 
+			VehicleInteractText(TextProperty)=Activate Vehicle Time Trial (BFD6109D47B48901633B0E80C21E9520) 
+			VehicleClockMesh(ObjectProperty)=SM_TimeTrial_Tire=/Game/Athena/Items/QuestInteractables/TimedChallenge/SM_TimeTrial_Tire 
+			DefaultClockMesh(ObjectProperty)=SM_StopwatchNoFace=/Game/Athena/Items/QuestInteractables/TimedChallenge/SM_StopwatchNoFace 
+			VehicleCheckpointMesh(ObjectProperty)=SM_Vehicle_Wheel_Frozen=/Game/Athena/Items/Traps/FreezeTrap/FX/SM_Vehicle_Wheel_Frozen 
+			CurrentBottomClockScale(StructProperty)=Vector(4,4,4) 
 			StaticMesh(ObjectProperty)=SM_InteractionCylidner=/Game/Athena/Items/QuestInteractables/Generic/FX/SM_InteractionCylidner 
 			bNoCameraCollision(BoolProperty)=True 
 			bNoPawnCollision(BoolProperty)=True 
@@ -1137,15 +1265,24 @@ Serialized exports:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Default__Prop_QuestInteractable_TimeTrials_C 
 			AreaClass(SoftObjectProperty)=/Script/NavigationSystem.NavArea_Default 
 			bIsNavigationRelevant(BoolProperty)=False 
+			bAlwaysUseNetCullDistanceSquaredForRelevancy(BoolProperty)=True 
 			StaticGameplayTags(StructProperty)=GameplayTagContainer:Building.Type.Prop 
 			bCanBeDamaged(BoolProperty)=False 
 			NetCullDistanceSquared(FloatProperty)=6.25E+08 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Default__Prop_QuestInteractable_TimeTrials_C 
-	InteractPlacement (0-0-0-0): size 36 (cls: InteractPlacement>ObjectProperty>/Script/CoreUObject) :
+	CPArray (0-0-0-0): size 36 (cls: CPArray>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	CPArray (0-0-0-0): size 36 (cls: CPArray>ArrayProperty>/Script/CoreUObject) :
+		Tag array:
+	CPArrayAndInitial (0-0-0-0): size 36 (cls: CPArrayAndInitial>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	CPArrayAndInitial (0-0-0-0): size 36 (cls: CPArrayAndInitial>ArrayProperty>/Script/CoreUObject) :
+		Tag array:
+	FloatingAlarm (0-0-0-0): size 36 (cls: FloatingAlarm>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject) :
 		Tag array:
-	ExecuteUbergraph_Prop_QuestInteractable_TimeTrials (0-0-0-0): size 12713 (cls: ExecuteUbergraph_Prop_QuestInteractable_TimeTrials>Function>/Script/CoreUObject) :
+	ExecuteUbergraph_Prop_QuestInteractable_TimeTrials (0-0-0-0): size 15019 (cls: ExecuteUbergraph_Prop_QuestInteractable_TimeTrials>Function>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_GetLocalFortPlayerControllers_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetLocalFortPlayerControllers_ReturnValue>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1171,14 +1308,24 @@ Serialized exports:
 		Tag array:
 	K2Node_MakeArray_Array1 (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array1>ArrayProperty>/Script/CoreUObject) :
 		Tag array:
+	GateArray (0-0-0-0): size 36 (cls: GateArray>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	GateArray (0-0-0-0): size 36 (cls: GateArray>ArrayProperty>/Script/CoreUObject) :
+		Tag array:
 	Runners (0-0-0-0): size 36 (cls: Runners>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	Runners (0-0-0-0): size 36 (cls: Runners>ArrayProperty>/Script/CoreUObject) :
 		Tag array:
-	AmbientSound_GEN_VARIABLE (0-0-0-0): size 67 (cls: AmbientSound_GEN_VARIABLE>AudioComponent>/Script/Engine) :
+	HideAllGates (0-0-0-0): size 58 (cls: HideAllGates>Function>/Script/CoreUObject) :
 		Tag array:
-			Sound(ObjectProperty)=Athena_Quest_TimeTrial_Loop_Cue=/Game/Athena/Sounds/Quests/TimedTrial/Athena_Quest_TimeTrial_Loop_Cue 
-			bAutoActivate(BoolProperty)=False 
+	FlagIndex (0-0-0-0): size 32 (cls: FlagIndex>IntProperty>/Script/CoreUObject) :
+		Tag array:
+	GateHit (0-0-0-0): size 72 (cls: GateHit>Function>/Script/CoreUObject) :
+		Tag array:
+	MakeGatesVisible (0-0-0-0): size 58 (cls: MakeGatesVisible>Function>/Script/CoreUObject) :
+		Tag array:
+	MoveGatesIntoPlace (0-0-0-0): size 58 (cls: MoveGatesIntoPlace>Function>/Script/CoreUObject) :
+		Tag array:
 	SafetyTimeOut (0-0-0-0): size 58 (cls: SafetyTimeOut>Function>/Script/CoreUObject) :
 		Tag array:
 	InPlayer (0-0-0-0): size 36 (cls: InPlayer>ObjectProperty>/Script/CoreUObject) :
@@ -1259,6 +1406,10 @@ Serialized exports:
 		Tag array:
 	ReceiveBeginPlay (0-0-0-0): size 58 (cls: ReceiveBeginPlay>Function>/Script/CoreUObject) :
 		Tag array:
+	Timeline_1__UpdateFunc (0-0-0-0): size 58 (cls: Timeline_1__UpdateFunc>Function>/Script/CoreUObject) :
+		Tag array:
+	Timeline_1__FinishedFunc (0-0-0-0): size 58 (cls: Timeline_1__FinishedFunc>Function>/Script/CoreUObject) :
+		Tag array:
 	Timeline_0__UpdateFunc (0-0-0-0): size 58 (cls: Timeline_0__UpdateFunc>Function>/Script/CoreUObject) :
 		Tag array:
 	Timeline_0__FinishedFunc (0-0-0-0): size 58 (cls: Timeline_0__FinishedFunc>Function>/Script/CoreUObject) :
@@ -1281,7 +1432,21 @@ Serialized exports:
 		Tag array:
 	CP1Movement__FinishedFunc (0-0-0-0): size 58 (cls: CP1Movement__FinishedFunc>Function>/Script/CoreUObject) :
 		Tag array:
-	UserConstructionScript (0-0-0-0): size 43 (cls: UserConstructionScript>Function>/Script/CoreUObject) :
+	Temp_int_Array_Index_Variable (0-0-0-0): size 32 (cls: Temp_int_Array_Index_Variable>IntProperty>/Script/CoreUObject) :
+		Tag array:
+	UserConstructionScript (0-0-0-0): size 650 (cls: UserConstructionScript>Function>/Script/CoreUObject) :
+		Tag array:
+	K2Node_MakeArray_Array (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	K2Node_MakeArray_Array (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array>ArrayProperty>/Script/CoreUObject) :
+		Tag array:
+	AmbientSound_GEN_VARIABLE (0-0-0-0): size 67 (cls: AmbientSound_GEN_VARIABLE>AudioComponent>/Script/Engine) :
+		Tag array:
+			Sound(ObjectProperty)=Athena_Quest_TimeTrial_Loop_Cue=/Game/Athena/Sounds/Quests/TimedTrial/Athena_Quest_TimeTrial_Loop_Cue 
+			bAutoActivate(BoolProperty)=False 
+	bIsVehicleTimeTrial (0-0-0-0): size 34 (cls: bIsVehicleTimeTrial>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	bLockFlagZRot (0-0-0-0): size 34 (cls: bLockFlagZRot>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	InteractingPawn (0-0-0-0): size 36 (cls: InteractingPawn>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1317,7 +1482,7 @@ Serialized exports:
 		Tag array:
 	InteractingPawn (0-0-0-0): size 36 (cls: InteractingPawn>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
-	BlueprintGetInteractionString (0-0-0-0): size 70 (cls: BlueprintGetInteractionString>Function>/Script/CoreUObject) :
+	BlueprintGetInteractionString (0-0-0-0): size 100 (cls: BlueprintGetInteractionString>Function>/Script/CoreUObject) :
 		Tag array:
 	HideQuestProp (0-0-0-0): size 127 (cls: HideQuestProp>Function>/Script/CoreUObject) :
 		Tag array:
@@ -1456,7 +1621,15 @@ Serialized exports:
 		Tag array:
 	CallFunc_Less_IntInt_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue1>BoolProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_Less_IntInt_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue2>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Less_IntInt_ReturnValue3 (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue3>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Less_IntInt_ReturnValue4 (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue4>BoolProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_LessEqual_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_LessEqual_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_LessEqual_IntInt_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_LessEqual_IntInt_ReturnValue1>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_Not_PreBool_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue>BoolProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1538,6 +1711,8 @@ Serialized exports:
 		Tag array:
 	Temp_bool_True_if_break_was_hit_Variable (0-0-0-0): size 34 (cls: Temp_bool_True_if_break_was_hit_Variable>BoolProperty>/Script/CoreUObject) :
 		Tag array:
+	NewVar_0 (0-0-0-0): size 34 (cls: NewVar_0>BoolProperty>/Script/CoreUObject) :
+		Tag array:
 	QuestCompleted (0-0-0-0): size 34 (cls: QuestCompleted>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	Success (0-0-0-0): size 34 (cls: Success>BoolProperty>/Script/CoreUObject) :
@@ -1546,6 +1721,10 @@ Serialized exports:
 		Tag array:
 	TimeTrialRunning (0-0-0-0): size 34 (cls: TimeTrialRunning>BoolProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_K2_AttachToComponent_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_K2_AttachToComponent_ReturnValue>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Less_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject) :
+		Tag array:
 	CP1Movement__Direction_A4EEC2064632AE1BA2736DA535C3A1C4 (0-0-0-0): size 36 (cls: CP1Movement__Direction_A4EEC2064632AE1BA2736DA535C3A1C4>ByteProperty>/Script/CoreUObject) :
 		Tag array:
 	CP2Movement__Direction_705803EC4F97916856CB7EB6950DBFDF (0-0-0-0): size 36 (cls: CP2Movement__Direction_705803EC4F97916856CB7EB6950DBFDF>ByteProperty>/Script/CoreUObject) :
@@ -1553,6 +1732,8 @@ Serialized exports:
 	FailFade__Direction_EB31C2E74E2EC89E95E918A2A65023D8 (0-0-0-0): size 36 (cls: FailFade__Direction_EB31C2E74E2EC89E95E918A2A65023D8>ByteProperty>/Script/CoreUObject) :
 		Tag array:
 	Timeline_0__Direction_A251E41D426C6D8A20303A9CA9903A48 (0-0-0-0): size 36 (cls: Timeline_0__Direction_A251E41D426C6D8A20303A9CA9903A48>ByteProperty>/Script/CoreUObject) :
+		Tag array:
+	Timeline_1__Direction_92F521FF45B403E2B0085896F0368CBD (0-0-0-0): size 36 (cls: Timeline_1__Direction_92F521FF45B403E2B0085896F0368CBD>ByteProperty>/Script/CoreUObject) :
 		Tag array:
 	TIMER_VISUALS__Direction_C932E683484067425FBCB8820D8FCBB8 (0-0-0-0): size 36 (cls: TIMER_VISUALS__Direction_C932E683484067425FBCB8820D8FCBB8>ByteProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1579,6 +1760,9 @@ Serialized exports:
 		Tag array:
 			FloatCurve(StructProperty)=System.Byte[] 
 	CurveFloat_3_4 (0-0-0-0): size 209 (cls: CurveFloat_3_4>CurveFloat>/Script/Engine) :
+		Tag array:
+			FloatCurve(StructProperty)=System.Byte[] 
+	CurveFloat_4 (0-0-0-0): size 236 (cls: CurveFloat_4>CurveFloat>/Script/Engine) :
 		Tag array:
 			FloatCurve(StructProperty)=System.Byte[] 
 	CurveFloat_5 (0-0-0-0): size 263 (cls: CurveFloat_5>CurveFloat>/Script/Engine) :
@@ -1628,6 +1812,8 @@ Serialized exports:
 		Tag array:
 	CallFunc_Add_FloatFloat_ReturnValue12 (0-0-0-0): size 32 (cls: CallFunc_Add_FloatFloat_ReturnValue12>FloatProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_Add_FloatFloat_ReturnValue13 (0-0-0-0): size 32 (cls: CallFunc_Add_FloatFloat_ReturnValue13>FloatProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_Add_FloatFloat_ReturnValue2 (0-0-0-0): size 32 (cls: CallFunc_Add_FloatFloat_ReturnValue2>FloatProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_Add_FloatFloat_ReturnValue3 (0-0-0-0): size 32 (cls: CallFunc_Add_FloatFloat_ReturnValue3>FloatProperty>/Script/CoreUObject) :
@@ -1643,6 +1829,18 @@ Serialized exports:
 	CallFunc_Add_FloatFloat_ReturnValue8 (0-0-0-0): size 32 (cls: CallFunc_Add_FloatFloat_ReturnValue8>FloatProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_Add_FloatFloat_ReturnValue9 (0-0-0-0): size 32 (cls: CallFunc_Add_FloatFloat_ReturnValue9>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_BreakRotator_Pitch (0-0-0-0): size 32 (cls: CallFunc_BreakRotator_Pitch>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_BreakRotator_Roll (0-0-0-0): size 32 (cls: CallFunc_BreakRotator_Roll>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_BreakRotator_Yaw (0-0-0-0): size 32 (cls: CallFunc_BreakRotator_Yaw>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_BreakVector_X (0-0-0-0): size 32 (cls: CallFunc_BreakVector_X>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_BreakVector_Y (0-0-0-0): size 32 (cls: CallFunc_BreakVector_Y>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_BreakVector_Z (0-0-0-0): size 32 (cls: CallFunc_BreakVector_Z>FloatProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_EvaluateCurveTableRow_OutXY (0-0-0-0): size 32 (cls: CallFunc_EvaluateCurveTableRow_OutXY>FloatProperty>/Script/CoreUObject) :
 	CallFunc_GetGameTimeInSeconds_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetGameTimeInSeconds_ReturnValue>FloatProperty>/Script/CoreUObject) :
@@ -1675,6 +1873,8 @@ Serialized exports:
 		Tag array:
 	FailFade_FadeTime_EB31C2E74E2EC89E95E918A2A65023D8 (0-0-0-0): size 32 (cls: FailFade_FadeTime_EB31C2E74E2EC89E95E918A2A65023D8>FloatProperty>/Script/CoreUObject) :
 		Tag array:
+	FailsafeGateTimer (0-0-0-0): size 32 (cls: FailsafeGateTimer>FloatProperty>/Script/CoreUObject) :
+		Tag array:
 	ServerGraceTime (0-0-0-0): size 32 (cls: ServerGraceTime>FloatProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_Divide_FloatFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Divide_FloatFloat_ReturnValue>FloatProperty>/Script/CoreUObject) :
@@ -1687,6 +1887,8 @@ Serialized exports:
 		Tag array:
 	Timeline_0_MoveTime_A251E41D426C6D8A20303A9CA9903A48 (0-0-0-0): size 32 (cls: Timeline_0_MoveTime_A251E41D426C6D8A20303A9CA9903A48>FloatProperty>/Script/CoreUObject) :
 		Tag array:
+	Timeline_1_NewTrack_0_92F521FF45B403E2B0085896F0368CBD (0-0-0-0): size 32 (cls: Timeline_1_NewTrack_0_92F521FF45B403E2B0085896F0368CBD>FloatProperty>/Script/CoreUObject) :
+		Tag array:
 	TIMER_VISUALS_BurstTime_C932E683484067425FBCB8820D8FCBB8 (0-0-0-0): size 32 (cls: TIMER_VISUALS_BurstTime_C932E683484067425FBCB8820D8FCBB8>FloatProperty>/Script/CoreUObject) :
 		Tag array:
 	TIMER_VISUALS_FadeTime_C932E683484067425FBCB8820D8FCBB8 (0-0-0-0): size 32 (cls: TIMER_VISUALS_FadeTime_C932E683484067425FBCB8820D8FCBB8>FloatProperty>/Script/CoreUObject) :
@@ -1694,6 +1896,8 @@ Serialized exports:
 	TimerBuffer (0-0-0-0): size 32 (cls: TimerBuffer>FloatProperty>/Script/CoreUObject) :
 		Tag array:
 	TimeTrialTime (0-0-0-0): size 32 (cls: TimeTrialTime>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	InteractPlacement (0-0-0-0): size 36 (cls: InteractPlacement>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_K2_GetComponentLocation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_GetComponentLocation_ReturnValue>StructProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1737,6 +1941,16 @@ Serialized exports:
 		Tag array:
 	CallFunc_Add_IntInt_ReturnValue10 (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue10>IntProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_Add_IntInt_ReturnValue11 (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue11>IntProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Add_IntInt_ReturnValue12 (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue12>IntProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Add_IntInt_ReturnValue13 (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue13>IntProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Add_IntInt_ReturnValue14 (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue14>IntProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Add_IntInt_ReturnValue15 (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue15>IntProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_Add_IntInt_ReturnValue2 (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue2>IntProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_Add_IntInt_ReturnValue3 (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue3>IntProperty>/Script/CoreUObject) :
@@ -1759,6 +1973,12 @@ Serialized exports:
 		Tag array:
 	CallFunc_Array_Length_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Array_Length_ReturnValue1>IntProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_Array_Length_ReturnValue2 (0-0-0-0): size 32 (cls: CallFunc_Array_Length_ReturnValue2>IntProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Array_Length_ReturnValue3 (0-0-0-0): size 32 (cls: CallFunc_Array_Length_ReturnValue3>IntProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Array_Length_ReturnValue4 (0-0-0-0): size 32 (cls: CallFunc_Array_Length_ReturnValue4>IntProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_IsRunnerTracked_RunnerIndex (0-0-0-0): size 32 (cls: CallFunc_IsRunnerTracked_RunnerIndex>IntProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_IsRunnerTracked_RunnerIndex1 (0-0-0-0): size 32 (cls: CallFunc_IsRunnerTracked_RunnerIndex1>IntProperty>/Script/CoreUObject) :
@@ -1779,6 +1999,8 @@ Serialized exports:
 		Tag array:
 	CallFunc_IsRunnerTracked_RunnerIndex9 (0-0-0-0): size 32 (cls: CallFunc_IsRunnerTracked_RunnerIndex9>IntProperty>/Script/CoreUObject) :
 		Tag array:
+	K2Node_CustomEvent_FlagIndex (0-0-0-0): size 32 (cls: K2Node_CustomEvent_FlagIndex>IntProperty>/Script/CoreUObject) :
+		Tag array:
 	K2Node_CustomEvent_OtherBodyIndex (0-0-0-0): size 32 (cls: K2Node_CustomEvent_OtherBodyIndex>IntProperty>/Script/CoreUObject) :
 		Tag array:
 	K2Node_CustomEvent_OtherBodyIndex1 (0-0-0-0): size 32 (cls: K2Node_CustomEvent_OtherBodyIndex1>IntProperty>/Script/CoreUObject) :
@@ -1797,7 +2019,19 @@ Serialized exports:
 		Tag array:
 	Temp_int_Array_Index_Variable (0-0-0-0): size 32 (cls: Temp_int_Array_Index_Variable>IntProperty>/Script/CoreUObject) :
 		Tag array:
+	Temp_int_Array_Index_Variable1 (0-0-0-0): size 32 (cls: Temp_int_Array_Index_Variable1>IntProperty>/Script/CoreUObject) :
+		Tag array:
+	Temp_int_Array_Index_Variable2 (0-0-0-0): size 32 (cls: Temp_int_Array_Index_Variable2>IntProperty>/Script/CoreUObject) :
+		Tag array:
+	Temp_int_Array_Index_Variable3 (0-0-0-0): size 32 (cls: Temp_int_Array_Index_Variable3>IntProperty>/Script/CoreUObject) :
+		Tag array:
 	Temp_int_Loop_Counter_Variable (0-0-0-0): size 32 (cls: Temp_int_Loop_Counter_Variable>IntProperty>/Script/CoreUObject) :
+		Tag array:
+	Temp_int_Loop_Counter_Variable1 (0-0-0-0): size 32 (cls: Temp_int_Loop_Counter_Variable1>IntProperty>/Script/CoreUObject) :
+		Tag array:
+	Temp_int_Loop_Counter_Variable2 (0-0-0-0): size 32 (cls: Temp_int_Loop_Counter_Variable2>IntProperty>/Script/CoreUObject) :
+		Tag array:
+	Temp_int_Loop_Counter_Variable3 (0-0-0-0): size 32 (cls: Temp_int_Loop_Counter_Variable3>IntProperty>/Script/CoreUObject) :
 		Tag array:
 	Temp_int_Variable (0-0-0-0): size 32 (cls: Temp_int_Variable>IntProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1810,6 +2044,8 @@ Serialized exports:
 	Temp_int_Variable12 (0-0-0-0): size 32 (cls: Temp_int_Variable12>IntProperty>/Script/CoreUObject) :
 		Tag array:
 	Temp_int_Variable13 (0-0-0-0): size 32 (cls: Temp_int_Variable13>IntProperty>/Script/CoreUObject) :
+		Tag array:
+	Temp_int_Variable14 (0-0-0-0): size 32 (cls: Temp_int_Variable14>IntProperty>/Script/CoreUObject) :
 		Tag array:
 	Temp_int_Variable2 (0-0-0-0): size 32 (cls: Temp_int_Variable2>IntProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1844,6 +2080,14 @@ Serialized exports:
 	NumCPsHit (0-0-0-0): size 32 (cls: NumCPsHit>IntProperty>/Script/CoreUObject) :
 		Tag array:
 	TotalCPNumber (0-0-0-0): size 32 (cls: TotalCPNumber>IntProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Add_IntInt_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue>IntProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Array_Add_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Array_Add_ReturnValue>IntProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Array_Length_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Array_Length_ReturnValue>IntProperty>/Script/CoreUObject) :
+		Tag array:
+	Temp_int_Loop_Counter_Variable (0-0-0-0): size 32 (cls: Temp_int_Loop_Counter_Variable>IntProperty>/Script/CoreUObject) :
 		Tag array:
 	K2Node_CustomEvent_PlaylistName (0-0-0-0): size 32 (cls: K2Node_CustomEvent_PlaylistName>NameProperty>/Script/CoreUObject) :
 		Tag array:
@@ -1949,13 +2193,35 @@ Serialized exports:
 		Tag array:
 	CPTriggeredSound (0-0-0-0): size 36 (cls: CPTriggeredSound>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
+	CurrentBottomClock (0-0-0-0): size 36 (cls: CurrentBottomClock>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	DefaultClockMesh (0-0-0-0): size 36 (cls: DefaultClockMesh>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_Array_Get_Item (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_Array_Get_Item1 (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item1>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_Array_Get_Item10 (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item10>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Array_Get_Item11 (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item11>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Array_Get_Item12 (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item12>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Array_Get_Item13 (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item13>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_Array_Get_Item2 (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item2>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_Array_Get_Item3 (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item3>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Array_Get_Item5 (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item5>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Array_Get_Item6 (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item6>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Array_Get_Item7 (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item7>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Array_Get_Item8 (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item8>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Array_Get_Item9 (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item9>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_GetController_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetController_ReturnValue>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
@@ -2135,6 +2401,8 @@ Serialized exports:
 		Tag array:
 	Timeline_0 (0-0-0-0): size 36 (cls: Timeline_0>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
+	Timeline_1 (0-0-0-0): size 36 (cls: Timeline_1>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
 	TIMER VISUALS (0-0-0-0): size 36 (cls: TIMER VISUALS>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	TimerFinalSecondsSound (0-0-0-0): size 36 (cls: TimerFinalSecondsSound>ObjectProperty>/Script/CoreUObject) :
@@ -2152,6 +2420,16 @@ Serialized exports:
 	TimeTrialSuccessSound (0-0-0-0): size 36 (cls: TimeTrialSuccessSound>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	TriggeredSound (0-0-0-0): size 36 (cls: TriggeredSound>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_AddComponent_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_AddComponent_ReturnValue>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Array_Get_Item (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	VehicleCheckpointMesh (0-0-0-0): size 36 (cls: VehicleCheckpointMesh>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	VehicleClockMesh (0-0-0-0): size 36 (cls: VehicleClockMesh>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	WheelClock (0-0-0-0): size 36 (cls: WheelClock>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	AmbientGodBeamFX_GEN_VARIABLE (0-0-0-0): size 246 (cls: AmbientGodBeamFX_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine) :
 		Tag array:
@@ -2239,8 +2517,9 @@ Serialized exports:
 			Template(ObjectProperty)=P_TimedChallenge_Trail=/Game/Athena/Effects/Particles/TimedChallenge/P_TimedChallenge_Trail 
 			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
-	AmbientLight_GEN_VARIABLE (0-0-0-0): size 159 (cls: AmbientLight_GEN_VARIABLE>PointLightComponent>/Script/Engine) :
+	AmbientLight_GEN_VARIABLE (0-0-0-0): size 188 (cls: AmbientLight_GEN_VARIABLE>PointLightComponent>/Script/Engine) :
 		Tag array:
+			AttenuationRadius(FloatProperty)=804.768 
 			LightGuid(StructProperty)=Guid: 2697687449-1340836200-3625078672-3858367479 
 			Intensity(FloatProperty)=0 
 			LightColor(StructProperty)=System.Byte[] 
@@ -2344,6 +2623,12 @@ Serialized exports:
 			bIsParentComponentNative(BoolProperty)=True 
 			VariableGuid(StructProperty)=Guid: 778167020-1285708054-2195935108-985657463 
 			InternalVariableName(NameProperty)=AlarmClock 
+	SCS_Node_20 (0-0-0-0): size 168 (cls: SCS_Node_20>SCS_Node>/Script/Engine) :
+		Tag array:
+			ComponentClass(ObjectProperty)=StaticMeshComponent=/Script/Engine 
+			ComponentTemplate(ObjectProperty)=FloatingAlarm_GEN_VARIABLE=Prop_QuestInteractable_TimeTrials_C 
+			VariableGuid(StructProperty)=Guid: 1111243024-1218581467-2279841697-1232000192 
+			InternalVariableName(NameProperty)=FloatingAlarm 
 	SCS_Node_21 (0-0-0-0): size 168 (cls: SCS_Node_21>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
@@ -2472,6 +2757,15 @@ Serialized exports:
 			ComponentTemplate(ObjectProperty)=CP8Coll_GEN_VARIABLE=Prop_QuestInteractable_TimeTrials_C 
 			VariableGuid(StructProperty)=Guid: 1850668837-1193162021-775372705-2559941443 
 			InternalVariableName(NameProperty)=CP8Coll 
+	SCS_Node_41 (0-0-0-0): size 268 (cls: SCS_Node_41>SCS_Node>/Script/Engine) :
+		Tag array:
+			ComponentClass(ObjectProperty)=StaticMeshComponent=/Script/Engine 
+			ComponentTemplate(ObjectProperty)=WheelClock_GEN_VARIABLE=Prop_QuestInteractable_TimeTrials_C 
+			ParentComponentOrVariableName(NameProperty)=StaticMeshComponent0 
+			bIsParentComponentNative(BoolProperty)=True 
+			ChildNodes(ArrayProperty)=[object] (inner: ObjectProperty)
+			VariableGuid(StructProperty)=Guid: 3356151643-1081524487-3100052396-3215265967 
+			InternalVariableName(NameProperty)=WheelClock 
 	SCS_Node_5 (0-0-0-0): size 276 (cls: SCS_Node_5>SCS_Node>/Script/Engine) :
 		Tag array:
 			ComponentClass(ObjectProperty)=StaticMeshComponent=/Script/Engine 
@@ -2511,7 +2805,7 @@ Serialized exports:
 			ChildNodes(ArrayProperty)=[object] (inner: ObjectProperty)
 			VariableGuid(StructProperty)=Guid: 1671721056-1336528239-2006084281-3361033922 
 			InternalVariableName(NameProperty)=Checkpoint3 
-	SimpleConstructionScript_0 (0-0-0-0): size 315 (cls: SimpleConstructionScript_0>SimpleConstructionScript>/Script/Engine) :
+	SimpleConstructionScript_0 (0-0-0-0): size 327 (cls: SimpleConstructionScript_0>SimpleConstructionScript>/Script/Engine) :
 		Tag array:
 			RootNodes(ArrayProperty)=[object] (inner: ObjectProperty)
 			AllNodes(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -2570,7 +2864,7 @@ Serialized exports:
 			StaticMesh(ObjectProperty)=SM_TimeTrial_Marker=/Game/Effects/Fort_Effects/Mesh/UI/SM_TimeTrial_Marker 
 			OverrideMaterials(ArrayProperty)=[object] (inner: ObjectProperty)
 			BodyInstance(StructProperty)=System.Byte[] 
-			RelativeLocation(StructProperty)=Vector(0,0,200) 
+			RelativeLocation(StructProperty)=Vector(0,0,338) 
 			RelativeScale3D(StructProperty)=Vector(2,2,2) 
 			bHiddenInGame(BoolProperty)=True 
 	Checkpoint2_GEN_VARIABLE (0-0-0-0): size 717 (cls: Checkpoint2_GEN_VARIABLE>StaticMeshComponent>/Script/Engine) :
@@ -2578,7 +2872,7 @@ Serialized exports:
 			StaticMesh(ObjectProperty)=SM_TimeTrial_Marker=/Game/Effects/Fort_Effects/Mesh/UI/SM_TimeTrial_Marker 
 			OverrideMaterials(ArrayProperty)=[object] (inner: ObjectProperty)
 			BodyInstance(StructProperty)=System.Byte[] 
-			RelativeLocation(StructProperty)=Vector(0,0,200) 
+			RelativeLocation(StructProperty)=Vector(0,0,338) 
 			RelativeScale3D(StructProperty)=Vector(2,2,2) 
 			bHiddenInGame(BoolProperty)=True 
 	Checkpoint3_GEN_VARIABLE (0-0-0-0): size 717 (cls: Checkpoint3_GEN_VARIABLE>StaticMeshComponent>/Script/Engine) :
@@ -2586,7 +2880,7 @@ Serialized exports:
 			StaticMesh(ObjectProperty)=SM_TimeTrial_Marker=/Game/Effects/Fort_Effects/Mesh/UI/SM_TimeTrial_Marker 
 			OverrideMaterials(ArrayProperty)=[object] (inner: ObjectProperty)
 			BodyInstance(StructProperty)=System.Byte[] 
-			RelativeLocation(StructProperty)=Vector(0,0,200) 
+			RelativeLocation(StructProperty)=Vector(0,0,338) 
 			RelativeScale3D(StructProperty)=Vector(2,2,2) 
 			bHiddenInGame(BoolProperty)=True 
 	Checkpoint4_GEN_VARIABLE (0-0-0-0): size 717 (cls: Checkpoint4_GEN_VARIABLE>StaticMeshComponent>/Script/Engine) :
@@ -2594,7 +2888,7 @@ Serialized exports:
 			StaticMesh(ObjectProperty)=SM_TimeTrial_Marker=/Game/Effects/Fort_Effects/Mesh/UI/SM_TimeTrial_Marker 
 			OverrideMaterials(ArrayProperty)=[object] (inner: ObjectProperty)
 			BodyInstance(StructProperty)=System.Byte[] 
-			RelativeLocation(StructProperty)=Vector(0,0,200) 
+			RelativeLocation(StructProperty)=Vector(0,0,338) 
 			RelativeScale3D(StructProperty)=Vector(2,2,2) 
 			bHiddenInGame(BoolProperty)=True 
 	Checkpoint5_GEN_VARIABLE (0-0-0-0): size 717 (cls: Checkpoint5_GEN_VARIABLE>StaticMeshComponent>/Script/Engine) :
@@ -2602,7 +2896,7 @@ Serialized exports:
 			StaticMesh(ObjectProperty)=SM_TimeTrial_Marker=/Game/Effects/Fort_Effects/Mesh/UI/SM_TimeTrial_Marker 
 			OverrideMaterials(ArrayProperty)=[object] (inner: ObjectProperty)
 			BodyInstance(StructProperty)=System.Byte[] 
-			RelativeLocation(StructProperty)=Vector(0,0,200) 
+			RelativeLocation(StructProperty)=Vector(0,0,338) 
 			RelativeScale3D(StructProperty)=Vector(2,2,2) 
 			bHiddenInGame(BoolProperty)=True 
 	Checkpoint6_GEN_VARIABLE (0-0-0-0): size 717 (cls: Checkpoint6_GEN_VARIABLE>StaticMeshComponent>/Script/Engine) :
@@ -2610,7 +2904,7 @@ Serialized exports:
 			StaticMesh(ObjectProperty)=SM_TimeTrial_Marker=/Game/Effects/Fort_Effects/Mesh/UI/SM_TimeTrial_Marker 
 			OverrideMaterials(ArrayProperty)=[object] (inner: ObjectProperty)
 			BodyInstance(StructProperty)=System.Byte[] 
-			RelativeLocation(StructProperty)=Vector(0,0,200) 
+			RelativeLocation(StructProperty)=Vector(0,0,338) 
 			RelativeScale3D(StructProperty)=Vector(2,2,2) 
 			bHiddenInGame(BoolProperty)=True 
 	Checkpoint7_GEN_VARIABLE (0-0-0-0): size 717 (cls: Checkpoint7_GEN_VARIABLE>StaticMeshComponent>/Script/Engine) :
@@ -2618,7 +2912,7 @@ Serialized exports:
 			StaticMesh(ObjectProperty)=SM_TimeTrial_Marker=/Game/Effects/Fort_Effects/Mesh/UI/SM_TimeTrial_Marker 
 			OverrideMaterials(ArrayProperty)=[object] (inner: ObjectProperty)
 			BodyInstance(StructProperty)=System.Byte[] 
-			RelativeLocation(StructProperty)=Vector(0,0,200) 
+			RelativeLocation(StructProperty)=Vector(0,0,338) 
 			RelativeScale3D(StructProperty)=Vector(2,2,2) 
 			bHiddenInGame(BoolProperty)=True 
 	Checkpoint8_GEN_VARIABLE (0-0-0-0): size 717 (cls: Checkpoint8_GEN_VARIABLE>StaticMeshComponent>/Script/Engine) :
@@ -2626,9 +2920,30 @@ Serialized exports:
 			StaticMesh(ObjectProperty)=SM_TimeTrial_Marker=/Game/Effects/Fort_Effects/Mesh/UI/SM_TimeTrial_Marker 
 			OverrideMaterials(ArrayProperty)=[object] (inner: ObjectProperty)
 			BodyInstance(StructProperty)=System.Byte[] 
-			RelativeLocation(StructProperty)=Vector(0,0,200) 
+			RelativeLocation(StructProperty)=Vector(0,0,338) 
 			RelativeScale3D(StructProperty)=Vector(2,2,2) 
 			bHiddenInGame(BoolProperty)=True 
+	FloatingAlarm_GEN_VARIABLE (0-0-0-0): size 748 (cls: FloatingAlarm_GEN_VARIABLE>StaticMeshComponent>/Script/Engine) :
+		Tag array:
+			StaticMesh(ObjectProperty)=SM_StopwatchNoFace=/Game/Athena/Items/QuestInteractables/TimedChallenge/SM_StopwatchNoFace 
+			OverrideMaterials(ArrayProperty)=[object] (inner: ObjectProperty)
+			BodyInstance(StructProperty)=System.Byte[] 
+			RelativeLocation(StructProperty)=Vector(-4.907257E-08,4.907257E-08,5.462849) 
+			RelativeRotation(StructProperty)=Rotator(0,45.00009,0) 
+			RelativeScale3D(StructProperty)=Vector(0.25,0.25,0.25) 
+	NODE_AddStaticMeshComponent-1 (0-0-0-0): size 132 (cls: NODE_AddStaticMeshComponent-1>StaticMeshComponent>/Script/Engine) :
+		Tag array:
+			StaticMesh(ObjectProperty)=SM_TimeTrial_Gate=/Game/Athena/Items/QuestInteractables/TimedChallenge/SM_TimeTrial_Gate 
+			RelativeScale3D(StructProperty)=Vector(1,1.3,1) 
+			bHiddenInGame(BoolProperty)=True 
+	WheelClock_GEN_VARIABLE (0-0-0-0): size 748 (cls: WheelClock_GEN_VARIABLE>StaticMeshComponent>/Script/Engine) :
+		Tag array:
+			StaticMesh(ObjectProperty)=SM_TimeTrial_Tire=/Game/Athena/Items/QuestInteractables/TimedChallenge/SM_TimeTrial_Tire 
+			OverrideMaterials(ArrayProperty)=[object] (inner: ObjectProperty)
+			BodyInstance(StructProperty)=System.Byte[] 
+			RelativeLocation(StructProperty)=Vector(0,0,71) 
+			RelativeRotation(StructProperty)=Rotator(0,-45.00009,0) 
+			RelativeScale3D(StructProperty)=Vector(8,8,8) 
 	CP1 Location (0-0-0-0): size 36 (cls: CP1 Location>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	SweepResult (0-0-0-0): size 36 (cls: SweepResult>StructProperty>/Script/CoreUObject) :
@@ -2661,7 +2976,15 @@ Serialized exports:
 		Tag array:
 	SweepResult (0-0-0-0): size 36 (cls: SweepResult>StructProperty>/Script/CoreUObject) :
 		Tag array:
+	CurrentBottomClockScale (0-0-0-0): size 36 (cls: CurrentBottomClockScale>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_Add_VectorVector_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_Add_VectorVector_ReturnValue>StructProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_Array_Get_Item4 (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item4>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_FindLookAtRotation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_FindLookAtRotation_ReturnValue>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_FindLookAtRotation_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_FindLookAtRotation_ReturnValue1>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_GetAthenaPlaylistContextTags_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetAthenaPlaylistContextTags_ReturnValue>StructProperty>/Script/CoreUObject) :
 		Tag array:
@@ -2672,6 +2995,10 @@ Serialized exports:
 	CallFunc_K2_GetComponentLocation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_GetComponentLocation_ReturnValue>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_K2_GetComponentLocation_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_K2_GetComponentLocation_ReturnValue1>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_K2_GetComponentLocation_ReturnValue10 (0-0-0-0): size 36 (cls: CallFunc_K2_GetComponentLocation_ReturnValue10>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_K2_GetComponentLocation_ReturnValue11 (0-0-0-0): size 36 (cls: CallFunc_K2_GetComponentLocation_ReturnValue11>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_K2_GetComponentLocation_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_K2_GetComponentLocation_ReturnValue2>StructProperty>/Script/CoreUObject) :
 		Tag array:
@@ -2685,6 +3012,10 @@ Serialized exports:
 		Tag array:
 	CallFunc_K2_GetComponentLocation_ReturnValue7 (0-0-0-0): size 36 (cls: CallFunc_K2_GetComponentLocation_ReturnValue7>StructProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_K2_GetComponentLocation_ReturnValue8 (0-0-0-0): size 36 (cls: CallFunc_K2_GetComponentLocation_ReturnValue8>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_K2_GetComponentLocation_ReturnValue9 (0-0-0-0): size 36 (cls: CallFunc_K2_GetComponentLocation_ReturnValue9>StructProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_K2_SetRelativeLocation_SweepHitResult (0-0-0-0): size 36 (cls: CallFunc_K2_SetRelativeLocation_SweepHitResult>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_K2_SetRelativeLocation_SweepHitResult1 (0-0-0-0): size 36 (cls: CallFunc_K2_SetRelativeLocation_SweepHitResult1>StructProperty>/Script/CoreUObject) :
@@ -2693,6 +3024,16 @@ Serialized exports:
 		Tag array:
 	CallFunc_K2_SetTimerDelegate_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_K2_SetTimerDelegate_ReturnValue1>StructProperty>/Script/CoreUObject) :
 		Tag array:
+	CallFunc_K2_SetWorldRotation_SweepHitResult (0-0-0-0): size 36 (cls: CallFunc_K2_SetWorldRotation_SweepHitResult>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_K2_SetWorldRotation_SweepHitResult1 (0-0-0-0): size 36 (cls: CallFunc_K2_SetWorldRotation_SweepHitResult1>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_K2_SetWorldRotation_SweepHitResult2 (0-0-0-0): size 36 (cls: CallFunc_K2_SetWorldRotation_SweepHitResult2>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_MakeRotator_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_MakeRotator_ReturnValue>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_MakeVector_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_MakeVector_ReturnValue>StructProperty>/Script/CoreUObject) :
+		Tag array:
 	CallFunc_VLerp_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_VLerp_ReturnValue>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_VLerp_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_VLerp_ReturnValue1>StructProperty>/Script/CoreUObject) :
@@ -2700,6 +3041,8 @@ Serialized exports:
 	CallFunc_VLerp_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_VLerp_ReturnValue2>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_VLerp_ReturnValue3 (0-0-0-0): size 36 (cls: CallFunc_VLerp_ReturnValue3>StructProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_VLerp_ReturnValue4 (0-0-0-0): size 36 (cls: CallFunc_VLerp_ReturnValue4>StructProperty>/Script/CoreUObject) :
 		Tag array:
 	K2Node_CustomEvent_PlaylistContextTags (0-0-0-0): size 36 (cls: K2Node_CustomEvent_PlaylistContextTags>StructProperty>/Script/CoreUObject) :
 		Tag array:
@@ -2737,9 +3080,13 @@ Serialized exports:
 		Tag array:
 	TrialTimer (0-0-0-0): size 36 (cls: TrialTimer>StructProperty>/Script/CoreUObject) :
 		Tag array:
+	Temp_struct_Variable (0-0-0-0): size 36 (cls: Temp_struct_Variable>StructProperty>/Script/CoreUObject) :
+		Tag array:
 	ReturnValue (0-0-0-0): size 32 (cls: ReturnValue>TextProperty>/Script/CoreUObject) :
 		Tag array:
 	InteractText (0-0-0-0): size 32 (cls: InteractText>TextProperty>/Script/CoreUObject) :
+		Tag array:
+	VehicleInteractText (0-0-0-0): size 32 (cls: VehicleInteractText>TextProperty>/Script/CoreUObject) :
 		Tag array:
 	CP1Movement_Template (0-0-0-0): size 608 (cls: CP1Movement_Template>TimelineTemplate>/Script/Engine) :
 		Tag array:
@@ -2780,6 +3127,16 @@ Serialized exports:
 			DirectionPropertyName(NameProperty)=Timeline_0__Direction_A251E41D426C6D8A20303A9CA9903A48 
 			UpdateFunctionName(NameProperty)=Timeline_0__UpdateFunc 
 			FinishedFunctionName(NameProperty)=Timeline_0__FinishedFunc 
+	Timeline_1_Template (0-0-0-0): size 479 (cls: Timeline_1_Template>TimelineTemplate>/Script/Engine) :
+		Tag array:
+			TimelineLength(FloatProperty)=0.5 
+			bValidatedAsWired(BoolProperty)=True 
+			FloatTracks(ArrayProperty)=[object] (inner: StructProperty)
+			TimelineGuid(StructProperty)=Guid: 2465538559-1169425378-2953336982-4030106813 
+			VariableName(NameProperty)=Timeline_1 
+			DirectionPropertyName(NameProperty)=Timeline_1__Direction_92F521FF45B403E2B0085896F0368CBD 
+			UpdateFunctionName(NameProperty)=Timeline_1__UpdateFunc 
+			FinishedFunctionName(NameProperty)=Timeline_1__FinishedFunc 
 	TIMER VISUALS_Template (0-0-0-0): size 823 (cls: TIMER VISUALS_Template>TimelineTemplate>/Script/Engine) :
 		Tag array:
 			TimelineLength(FloatProperty)=10 

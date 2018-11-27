@@ -53,6 +53,7 @@ Name table:
 	AttributeInitSubCategory
 	Audio
 	AudioComponent
+	AutoAttachParent
 	B_PrjPawn_Athena_RCRocket_C
 	B_RCRocket_Launcher_Athena_C
 	BankingAudioPitch
@@ -413,6 +414,7 @@ Name table:
 	HitResult
 	HologramRocket
 	hologramSocket
+	InAirAudioComp
 	InternalVariableName
 	IntProperty
 	IsCurrentlyDelayingLaunch
@@ -568,7 +570,11 @@ Name table:
 	PhysMaterialOverride
 	Play
 	PlayAnimMontage
+	PlayerInWaterFX
 	PlayerLoadout_AthenaPlayer
+	PlayerRunLandFX
+	PlayerSlideLandFX
+	PlayerWalkLandFX
 	PlayMontageCallbackProxy
 	PlaySoundAtLocation
 	PointerToUberGraphFrame
@@ -582,6 +588,10 @@ Name table:
 	PrimitiveComponent
 	PropertyName
 	PropertyScope
+	PSC_PlayerInWater
+	PSC_PlayerRunLand
+	PSC_PlayerSlideLand
+	PSC_PlayerWalkLand
 	QueuedSpokenLine
 	RC
 	RC_GEN_VARIABLE
@@ -737,6 +747,7 @@ Import table:
 	ReloadStart (AudioComponent)
 	Default__AudioComponent (AudioComponent)
 	FeedbackAudioComp0 (AudioComponent)
+	InAirAudioComp (AudioComponent)
 	Default__B_RCRocket_Launcher_Athena_C (B_RCRocket_Launcher_Athena_C)
 	Athena_RCRocket_CameraMode_C (BlueprintGeneratedClass)
 	Athena_RCRocket_CameraMode_Triggered_C (BlueprintGeneratedClass)
@@ -936,6 +947,10 @@ Import table:
 	Muzzle(Empty)_GEN_VARIABLE (ParticleSystemComponent)
 	RearMuzzle_GEN_VARIABLE (ParticleSystemComponent)
 	Default__ParticleSystemComponent (ParticleSystemComponent)
+	PlayerInWaterFX (ParticleSystemComponent)
+	PlayerRunLandFX (ParticleSystemComponent)
+	PlayerSlideLandFX (ParticleSystemComponent)
+	PlayerWalkLandFX (ParticleSystemComponent)
 	Missile (PhysicalMaterial)
 	Default__PlayMontageCallbackProxy (PlayMontageCallbackProxy)
 	Default__PoseableMeshComponent (PoseableMeshComponent)
@@ -984,7 +999,7 @@ Serialized exports:
 			SimpleConstructionScript(ObjectProperty)=SimpleConstructionScript_0=B_PrjPawn_Athena_RCRocket_C 
 			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=B_PrjPawn_Athena_RCRocket_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_B_PrjPawn_Athena_RCRocket=B_PrjPawn_Athena_RCRocket_C 
-	Default__B_PrjPawn_Athena_RCRocket_C (0-0-0-0): size 3099 (cls: Default__B_PrjPawn_Athena_RCRocket_C>B_PrjPawn_Athena_RCRocket_C) :
+	Default__B_PrjPawn_Athena_RCRocket_C (0-0-0-0): size 3244 (cls: Default__B_PrjPawn_Athena_RCRocket_C>B_PrjPawn_Athena_RCRocket_C) :
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			ScaleUpRocket_ScaleRocket_AE4726BD4835EF8E9D886681DC468461(StructProperty)=Vector(0,0,0) 
@@ -1015,6 +1030,11 @@ Serialized exports:
 			RemoteControlledPawnTriggeredCameraClass(ObjectProperty)=Athena_RCRocket_CameraMode_Triggered_C=/Game/Athena/Items/Weapons/Abilities/RCRocket/Athena_RCRocket_CameraMode_Triggered 
 			ControllingPlayerEffect(ObjectProperty)=GE_RCRocket_IsUsingRemoteControlPawn_C=/Game/Athena/Items/Weapons/Abilities/RCRocket/GE_RCRocket_IsUsingRemoteControlPawn 
 			DamageFXSignificance(StructProperty)=System.Byte[] 
+			InAirAudioComp(ObjectProperty)=InAirAudioComp=Default__B_PrjPawn_Athena_RCRocket_C 
+			PSC_PlayerWalkLand(ObjectProperty)=PlayerWalkLandFX=Default__B_PrjPawn_Athena_RCRocket_C 
+			PSC_PlayerRunLand(ObjectProperty)=PlayerRunLandFX=Default__B_PrjPawn_Athena_RCRocket_C 
+			PSC_PlayerSlideLand(ObjectProperty)=PlayerSlideLandFX=Default__B_PrjPawn_Athena_RCRocket_C 
+			PSC_PlayerInWater(ObjectProperty)=PlayerInWaterFX=Default__B_PrjPawn_Athena_RCRocket_C 
 			OutsideSafeZonePPComponent(ObjectProperty)=OutsideSafeZonePP0=Default__B_PrjPawn_Athena_RCRocket_C 
 			CharacterBodyType(ByteProperty)=EFortCustomBodyType::EFortCustomBodyType_MAX 
 			PawnStatHandle(StructProperty)=System.Byte[] 
@@ -1047,6 +1067,9 @@ Serialized exports:
 	FeedbackAudioComp0 (0-0-0-0): size 41 (cls: FeedbackAudioComp0>AudioComponent>/Script/Engine) :
 		Tag array:
 			AttachParent(ObjectProperty)=CollisionCylinder=Default__B_PrjPawn_Athena_RCRocket_C 
+	InAirAudioComp (0-0-0-0): size 41 (cls: InAirAudioComp>AudioComponent>/Script/Engine) :
+		Tag array:
+			AttachParent(ObjectProperty)=CharacterMesh0=Default__B_PrjPawn_Athena_RCRocket_C 
 	bDetached (0-0-0-0): size 34 (cls: bDetached>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	bHasPlayedFuelWarningSound (0-0-0-0): size 34 (cls: bHasPlayedFuelWarningSound>BoolProperty>/Script/CoreUObject) :
@@ -1567,6 +1590,21 @@ Serialized exports:
 			RelativeRotation(StructProperty)=Rotator(0,-89.99995,0) 
 			RelativeScale3D(StructProperty)=Vector(0.8333333,0.8333333,0.8333333) 
 			PrimaryComponentTick(StructProperty)=System.Byte[] 
+	PlayerInWaterFX (0-0-0-0): size 41 (cls: PlayerInWaterFX>ParticleSystemComponent>/Script/Engine) :
+		Tag array:
+			AttachParent(ObjectProperty)=CollisionCylinder=Default__B_PrjPawn_Athena_RCRocket_C 
+	PlayerRunLandFX (0-0-0-0): size 70 (cls: PlayerRunLandFX>ParticleSystemComponent>/Script/Engine) :
+		Tag array:
+			AutoAttachParent(ObjectProperty)=CharacterMesh0=Default__B_PrjPawn_Athena_RCRocket_C 
+			AttachParent(ObjectProperty)=CharacterMesh0=Default__B_PrjPawn_Athena_RCRocket_C 
+	PlayerSlideLandFX (0-0-0-0): size 70 (cls: PlayerSlideLandFX>ParticleSystemComponent>/Script/Engine) :
+		Tag array:
+			AutoAttachParent(ObjectProperty)=CharacterMesh0=Default__B_PrjPawn_Athena_RCRocket_C 
+			AttachParent(ObjectProperty)=CharacterMesh0=Default__B_PrjPawn_Athena_RCRocket_C 
+	PlayerWalkLandFX (0-0-0-0): size 70 (cls: PlayerWalkLandFX>ParticleSystemComponent>/Script/Engine) :
+		Tag array:
+			AutoAttachParent(ObjectProperty)=CharacterMesh0=Default__B_PrjPawn_Athena_RCRocket_C 
+			AttachParent(ObjectProperty)=CharacterMesh0=Default__B_PrjPawn_Athena_RCRocket_C 
 	PoseableMissileMesh_GEN_VARIABLE (0-0-0-0): size 1192 (cls: PoseableMissileMesh_GEN_VARIABLE>PoseableMeshComponent>/Script/Engine) :
 		Tag array:
 			SkeletalMesh(ObjectProperty)=RC_Rocket_Only_Export=/Game/Weapons/FORT_RocketLaunchers/Mesh/RC_Rocket_Only_Export 

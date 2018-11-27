@@ -2,6 +2,7 @@ Name table:
 	/Game/Abilities/Traps/MountedTurret/GAS_Trap_Floor_MountedTurret
 	/Game/Athena/Balance/DataTables/AthenaGameData
 	/Game/Athena/DrivableVehicles/MountedTurret
+	/Game/Athena/Items/Traps/MountedTurret/B_MountedTurretAthena
 	/Game/Athena/Items/Traps/MountedTurret/Trap_Floor_MountedTurret
 	/Game/Building/ActorBlueprints/Navigation/NavLink_Floor
 	/Game/Building/ActorBlueprints/Navigation/NavLink_Floor.NavLink_Floor_C
@@ -12,6 +13,7 @@ Name table:
 	/Game/Sounds/Fort_Traps/MountedTurret/Turret_Ballistic_Appear_Cue
 	/Game/Sounds/Fort_Traps/MountedTurret/Turret_Ballistic_Explode_Cue
 	/Game/Sounds/Fort_Weapons/Rifle/Weapon_RFL_TripleShot_T04_Triple_Tap_Cue
+	/Script/AnimationBudgetAllocator
 	/Script/CoreUObject
 	/Script/Engine
 	/Script/FortniteGame
@@ -34,6 +36,7 @@ Name table:
 	AudioComponent
 	AudioOnOverheat_GEN_VARIABLE
 	AudioOverheat_GEN_VARIABLE
+	B_MountedTurretAthena_C
 	bAllowResourceDrop
 	BarrelGlowL_GEN_VARIABLE
 	BarrelGlowR_GEN_VARIABLE
@@ -52,11 +55,11 @@ Name table:
 	bIncludeWalls
 	bIsNavigationModifier
 	bIsParentComponentNative
-	bIsPlayerBuildable
 	BlueprintGeneratedClass
 	BodyInstance
 	BoneName
 	BoolProperty
+	bOutConsumeEvent
 	BoxComponent
 	BoxOverlapActors
 	BPVariableMetaDataEntry
@@ -93,6 +96,7 @@ Name table:
 	CallFunc_BreakVector_Y
 	CallFunc_BreakVector_Z
 	CallFunc_CalculateLaunch_Velocity
+	CallFunc_EqualEqual_ObjectObject_ReturnValue
 	CallFunc_FinishSpawningActor_ReturnValue
 	CallFunc_GetActorTeam_ReturnValue
 	CallFunc_GetBuildingAttachedTo_ReturnValue
@@ -152,6 +156,7 @@ Name table:
 	DataValue
 	Default.MountedTurret.ShouldBumpPlayers
 	Default__ArrayProperty
+	Default__B_MountedTurretAthena_C
 	Default__BlueprintGeneratedClass
 	Default__BoolProperty
 	Default__BuildingTrapFloor
@@ -176,6 +181,7 @@ Name table:
 	DefaultSceneRoot
 	DefaultSceneRoot_GEN_VARIABLE
 	DefaultSceneRootNode
+	Degraded
 	Delay
 	DelegateFunction
 	DelegateProperty
@@ -183,8 +189,6 @@ Name table:
 	DestroyedTurret
 	ECanBeCharacterBase
 	ECB_Yes
-	EFortBaseWeaponDamage
-	EFortBaseWeaponDamage::Combat
 	EFortBuildingType
 	EFortBuildingType::Floor
 	EFortResourceType
@@ -193,6 +197,8 @@ Name table:
 	EntryPoint
 	Enum
 	EObjectTypeQuery
+	EqualEqual_ObjectObject
+	EventInstigator
 	ExecuteUbergraph_Trap_Floor_MountedTurret
 	FHitComponent
 	FinishSpawningActor
@@ -209,6 +215,7 @@ Name table:
 	FortScalableFloatUtils
 	FortVehicleAudioVoice
 	FortVehicleSkelMeshComponent
+	FortWeaponRangedDualMountedTurret
 	Function
 	Game
 	GameplayStatics
@@ -251,6 +258,7 @@ Name table:
 	K2Node_CustomEvent_HitLocation
 	K2Node_CustomEvent_InstigatedBy
 	K2Node_CustomEvent_Momentum
+	K2Node_DynamicCast_AsB_Mounted_Turret_Athena
 	K2Node_DynamicCast_AsBuilding_Roof
 	K2Node_DynamicCast_AsBuilding_Stairs
 	K2Node_DynamicCast_AsFort_Player_Pawn
@@ -271,9 +279,12 @@ Name table:
 	KismetSystemLibrary
 	LatentActionInfo
 	LaunchCharacter
+	Left Hand Weapon Mesh
+	LeftShells(Empty)_GEN_VARIABLE
 	Less_IntInt
 	LessEqual_FloatFloat
 	LifespanAfterDeath
+	LowAmmo
 	MagazineGlowL_GEN_VARIABLE
 	MagazineGlowR_GEN_VARIABLE
 	MakeVector
@@ -283,6 +294,7 @@ Name table:
 	Momentum
 	MountedTurret
 	MountedTurret_C
+	MountedTurretCached
 	MountedTurretFloor
 	MulticastDelegateProperty
 	Multiply_FloatFloat
@@ -296,6 +308,8 @@ Name table:
 	NeighboringCenterCellInfos
 	None
 	Normal
+	NormalA
+	NormalB
 	NumReplicatedProperties
 	Object
 	ObjectProperty
@@ -305,8 +319,10 @@ Name table:
 	OnDestroyed
 	OnDied
 	OnFinishedBuilding
+	OnModifyTrapIncomingDamage
 	OnPlaced
 	OnWorldReady
+	OutDamage
 	OverHeatScreen_L_GEN_VARIABLE
 	OverHeatScreen_R_GEN_VARIABLE
 	OverheatSmoke_GEN_VARIABLE
@@ -333,6 +349,9 @@ Name table:
 	PrimitiveComponent
 	RelativeLocation
 	RelativeRotation
+	ReloadCartridge
+	ReloadEnd
+	ReloadStart
 	ResourceType
 	Root
 	Root_GEN_VARIABLE
@@ -347,6 +366,7 @@ Name table:
 	ScriptStruct
 	SCS_Node
 	ServoAudio_GEN_VARIABLE
+	SetActorBase
 	SetActorEnableCollision
 	SetActorHiddenInGame
 	SetObjectPropertyByName
@@ -362,6 +382,7 @@ Name table:
 	SizeY-
 	SkeletalMesh
 	SkeletalMeshComponent
+	SkeletalMeshComponentBudgeted
 	SoftObjectProperty
 	SoundCue
 	SpawnEmitterAttached
@@ -410,14 +431,23 @@ Name table:
 	VSize
 	WeakObjectProperty
 	Weapon_RFL_TripleShot_T04_Triple_Tap_Cue
-	WeaponResponseType
+	WeaponMesh0
 Import table:
 	Default__ArrayProperty (ArrayProperty)
 	InstanceParameters (ArrayProperty)
 	NeighboringCenterCellInfos (ArrayProperty)
 	AudioOnOverheat_GEN_VARIABLE (AudioComponent)
 	AudioOverheat_GEN_VARIABLE (AudioComponent)
+	Degraded (AudioComponent)
+	LowAmmo (AudioComponent)
+	NormalA (AudioComponent)
+	NormalB (AudioComponent)
+	ReloadCartridge (AudioComponent)
+	ReloadEnd (AudioComponent)
+	ReloadStart (AudioComponent)
+	Default__B_MountedTurretAthena_C (B_MountedTurretAthena_C)
 	MountedTurret_C (BlueprintGeneratedClass)
+	B_MountedTurretAthena_C (BlueprintGeneratedClass)
 	Default__BlueprintGeneratedClass (BlueprintGeneratedClass)
 	Default__BoolProperty (BoolProperty)
 	bCanBeDamaged (BoolProperty)
@@ -472,6 +502,7 @@ Import table:
 	FortPlayerPawn (Class)
 	FortPlayerState (Class)
 	FortScalableFloatUtils (Class)
+	FortWeaponRangedDualMountedTurret (Class)
 	AthenaGameData (CurveTable)
 	ActorDestroyedSignature__DelegateSignature (DelegateFunction)
 	TimerDynamicDelegate__DelegateSignature (DelegateFunction)
@@ -504,6 +535,7 @@ Import table:
 	Array_Length (Function)
 	Add_IntInt (Function)
 	BreakVector (Function)
+	EqualEqual_ObjectObject (Function)
 	Greater_FloatFloat (Function)
 	Less_IntInt (Function)
 	LessEqual_FloatFloat (Function)
@@ -529,9 +561,11 @@ Import table:
 	K2_GetBuildingActorsInGridCell (Function)
 	GetBuildingAttachedTo (Function)
 	OnFinishedBuilding (Function)
+	OnModifyTrapIncomingDamage (Function)
 	OnPlaced (Function)
 	GetActorTeam (Function)
 	GetBuildingStructuralSupportSystem (Function)
+	SetActorBase (Function)
 	GetValueAtLevel (Function)
 	Default__GameplayStatics (GameplayStatics)
 	Default__IntProperty (IntProperty)
@@ -547,9 +581,11 @@ Import table:
 	Actor (ObjectProperty)
 	Material (ObjectProperty)
 	StaticMeshComponent (ObjectProperty)
+	MountedTurretCached (ObjectProperty)
 	/Game/Abilities/Traps/MountedTurret/GAS_Trap_Floor_MountedTurret (Package)
 	/Game/Athena/Balance/DataTables/AthenaGameData (Package)
 	/Game/Athena/DrivableVehicles/MountedTurret (Package)
+	/Game/Athena/Items/Traps/MountedTurret/B_MountedTurretAthena (Package)
 	/Game/Gadgets/Assets/Turret_Gun/Meshes/Static_Turret_Floor (Package)
 	/Game/Gadgets/Assets/Turret_Gun/Meshes/Turret_Gun (Package)
 	/Game/Gadgets/Assets/Turret_Gun/Particles/P_TurretGun_BuildPoint (Package)
@@ -570,6 +606,8 @@ Import table:
 	OverHeatScreen_L_GEN_VARIABLE (ParticleSystemComponent)
 	OverHeatScreen_R_GEN_VARIABLE (ParticleSystemComponent)
 	OverheatSmoke_GEN_VARIABLE (ParticleSystemComponent)
+	LeftShells(Empty)_GEN_VARIABLE (ParticleSystemComponent)
+	DefaultSceneRoot_GEN_VARIABLE (SceneComponent)
 	DefaultSceneRoot_GEN_VARIABLE (SceneComponent)
 	Default__SceneComponent (SceneComponent)
 	Trace Location (SceneComponent)
@@ -587,6 +625,8 @@ Import table:
 	Default__SCS_Node (SCS_Node)
 	Default__SimpleConstructionScript (SimpleConstructionScript)
 	Turret_Gun (SkeletalMesh)
+	Left Hand Weapon Mesh (SkeletalMeshComponentBudgeted)
+	WeaponMesh0 (SkeletalMeshComponentBudgeted)
 	Turret_Ballistic_Appear_Cue (SoundCue)
 	Turret_Ballistic_Explode_Cue (SoundCue)
 	Weapon_RFL_TripleShot_T04_Triple_Tap_Cue (SoundCue)
@@ -600,13 +640,13 @@ Import table:
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject) :
 		Tag array:
-	Trap_Floor_MountedTurret_C (0-0-0-0): size 448 (cls: Trap_Floor_MountedTurret_C>BlueprintGeneratedClass>/Script/Engine) :
+	Trap_Floor_MountedTurret_C (0-0-0-0): size 464 (cls: Trap_Floor_MountedTurret_C>BlueprintGeneratedClass>/Script/Engine) :
 		Tag array:
 			NumReplicatedProperties(IntProperty)=1 
 			SimpleConstructionScript(ObjectProperty)=SimpleConstructionScript_44=Trap_Floor_MountedTurret_C 
 			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=Trap_Floor_MountedTurret_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_Trap_Floor_MountedTurret=Trap_Floor_MountedTurret_C 
-	Default__Trap_Floor_MountedTurret_C (0-0-0-0): size 1461 (cls: Default__Trap_Floor_MountedTurret_C>Trap_Floor_MountedTurret_C) :
+	Default__Trap_Floor_MountedTurret_C (0-0-0-0): size 1394 (cls: Default__Trap_Floor_MountedTurret_C>Trap_Floor_MountedTurret_C) :
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			Place_Trap_Sound(ObjectProperty)=Turret_Ballistic_Appear_Cue=/Game/Sounds/Fort_Traps/MountedTurret/Turret_Ballistic_Appear_Cue 
@@ -632,21 +672,19 @@ Serialized exports:
 			MaximumBuildingLevel(IntProperty)=1 
 			AttributeInitKeys(StructProperty)=System.Byte[] 
 			AttributeInitKeys(StructProperty)=System.Byte[] 
-			WeaponResponseType(ByteProperty)=EFortBaseWeaponDamage::Combat 
 			LifespanAfterDeath(FloatProperty)=0.2 
 			bIsNavigationModifier(BoolProperty)=True 
 			bCanExportNavigationCollisions(BoolProperty)=True 
 			bCanExportNavigationObstacle(BoolProperty)=False 
 			bForceBlockBuildings(BoolProperty)=True 
 			bUseCentroidForBlockBuildingsCheck(BoolProperty)=False 
-			bIsPlayerBuildable(BoolProperty)=True 
 			BuildingType(ByteProperty)=EFortBuildingType::Floor 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Default__Trap_Floor_MountedTurret_C 
 	Center (0-0-0-0): size 36 (cls: Center>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject) :
 		Tag array:
-	ExecuteUbergraph_Trap_Floor_MountedTurret (0-0-0-0): size 3659 (cls: ExecuteUbergraph_Trap_Floor_MountedTurret>Function>/Script/CoreUObject) :
+	ExecuteUbergraph_Trap_Floor_MountedTurret (0-0-0-0): size 3680 (cls: ExecuteUbergraph_Trap_Floor_MountedTurret>Function>/Script/CoreUObject) :
 		Tag array:
 	BuildingSMActor (0-0-0-0): size 36 (cls: BuildingSMActor>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
@@ -728,6 +766,20 @@ Serialized exports:
 		Tag array:
 	Temp_bool_IsClosed_Variable (0-0-0-0): size 34 (cls: Temp_bool_IsClosed_Variable>BoolProperty>/Script/CoreUObject) :
 		Tag array:
+	Player (0-0-0-0): size 36 (cls: Player>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	CalculateLaunch (0-0-0-0): size 292 (cls: CalculateLaunch>Function>/Script/CoreUObject) :
+		Tag array:
+	Damage (0-0-0-0): size 32 (cls: Damage>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	OnModifyTrapIncomingDamage (0-0-0-0): size 217 (cls: OnModifyTrapIncomingDamage>Function>/Script/CoreUObject) :
+		Tag array:
+	bOutConsumeEvent (0-0-0-0): size 34 (cls: bOutConsumeEvent>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	CallFunc_EqualEqual_ObjectObject_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ObjectObject_ReturnValue>BoolProperty>/Script/CoreUObject) :
+		Tag array:
+	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject) :
+		Tag array:
 	ShouldBumpPlayer? (0-0-0-0): size 34 (cls: ShouldBumpPlayer?>BoolProperty>/Script/CoreUObject) :
 		Tag array:
 	ShouldTick (0-0-0-0): size 34 (cls: ShouldTick>BoolProperty>/Script/CoreUObject) :
@@ -745,10 +797,6 @@ Serialized exports:
 	Damage (0-0-0-0): size 32 (cls: Damage>FloatProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_GetValueAtLevel_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetValueAtLevel_ReturnValue>FloatProperty>/Script/CoreUObject) :
-		Tag array:
-	Player (0-0-0-0): size 36 (cls: Player>ObjectProperty>/Script/CoreUObject) :
-		Tag array:
-	CalculateLaunch (0-0-0-0): size 292 (cls: CalculateLaunch>Function>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_BreakVector_X (0-0-0-0): size 32 (cls: CallFunc_BreakVector_X>FloatProperty>/Script/CoreUObject) :
 		Tag array:
@@ -771,6 +819,8 @@ Serialized exports:
 	K2Node_CustomEvent_Damage (0-0-0-0): size 32 (cls: K2Node_CustomEvent_Damage>FloatProperty>/Script/CoreUObject) :
 		Tag array:
 	Temp_float_Variable (0-0-0-0): size 32 (cls: Temp_float_Variable>FloatProperty>/Script/CoreUObject) :
+		Tag array:
+	OutDamage (0-0-0-0): size 32 (cls: OutDamage>FloatProperty>/Script/CoreUObject) :
 		Tag array:
 	CallFunc_Add_IntInt_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue>IntProperty>/Script/CoreUObject) :
 		Tag array:
@@ -835,6 +885,12 @@ Serialized exports:
 	K2Node_CustomEvent_InstigatedBy (0-0-0-0): size 36 (cls: K2Node_CustomEvent_InstigatedBy>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	MountedTurret (0-0-0-0): size 36 (cls: MountedTurret>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	DamageCauser (0-0-0-0): size 36 (cls: DamageCauser>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	EventInstigator (0-0-0-0): size 36 (cls: EventInstigator>ObjectProperty>/Script/CoreUObject) :
+		Tag array:
+	K2Node_DynamicCast_AsB_Mounted_Turret_Athena (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsB_Mounted_Turret_Athena>ObjectProperty>/Script/CoreUObject) :
 		Tag array:
 	Place_Trap_Sound (0-0-0-0): size 36 (cls: Place_Trap_Sound>ObjectProperty>/Script/CoreUObject) :
 		Tag array:

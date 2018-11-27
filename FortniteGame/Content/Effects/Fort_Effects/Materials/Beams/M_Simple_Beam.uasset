@@ -3,8 +3,11 @@ Name table:
 	/Engine/Functions/Engine_MaterialFunctions01/ImageAdjustment/CheapContrast
 	/Engine/Functions/Engine_MaterialFunctions01/Shading/AxisAlignedFresnel
 	/Engine/Functions/Engine_MaterialFunctions02/Utility/BreakOutFloat2Components
+	/Engine/Functions/Engine_MaterialFunctions02/Utility/BreakOutFloat4Components
+	/Game/Effects/Fort_Effects/Materials/_Functions/Color_Time_of_Day
 	/Game/Effects/Fort_Effects/Materials/Beams/M_Simple_Beam
 	/Game/Effects/WeaponDestroy/T_WeaponDestroy_Streak
+	/Game/Packages/Fortress_SharedMaterials/GlobalMaterialParameters/FortniteMaterialParameters
 	/Script/CoreUObject
 	/Script/Engine
 	A
@@ -18,13 +21,16 @@ Name table:
 	BlendMode
 	BoolProperty
 	BreakOutFloat2Components
+	BreakOutFloat4Components
 	bUsedWithMeshParticles
 	ByteProperty
 	CachedQualityLevelsUsed
 	CheapContrast
 	Class
+	Color_Time_of_Day
 	ColorMaterialInput
 	Coordinates
+	Day_Intensity
 	Default
 	Default__Material
 	Default__MaterialExpressionDynamicParameter
@@ -45,6 +51,7 @@ Name table:
 	Expressions
 	FadeDistance
 	FloatProperty
+	FortniteMaterialParameters
 	FresnelExp
 	Function
 	Guid
@@ -71,6 +78,9 @@ Name table:
 	MaterialFunction
 	MaterialFunctionInfo
 	MaterialFunctionInfos
+	MaterialParameterCollection
+	MaterialParameterCollectionInfo
+	MaterialParameterCollectionInfos
 	MSM_Unlit
 	Multiply Particle Color
 	NameProperty
@@ -78,6 +88,7 @@ Name table:
 	ObjectProperty
 	OutsideColor
 	Package
+	ParameterCollection
 	ParameterName
 	ParamNames
 	ShadingModel
@@ -113,15 +124,21 @@ Import table:
 	CheapContrast (MaterialFunction)
 	AxisAlignedFresnel (MaterialFunction)
 	BreakOutFloat2Components (MaterialFunction)
+	BreakOutFloat4Components (MaterialFunction)
+	Color_Time_of_Day (MaterialFunction)
+	FortniteMaterialParameters (MaterialParameterCollection)
 	/Engine/Functions/Engine_MaterialFunctions01/Gradient/LinearGradient (Package)
 	/Engine/Functions/Engine_MaterialFunctions01/ImageAdjustment/CheapContrast (Package)
 	/Engine/Functions/Engine_MaterialFunctions01/Shading/AxisAlignedFresnel (Package)
 	/Engine/Functions/Engine_MaterialFunctions02/Utility/BreakOutFloat2Components (Package)
+	/Engine/Functions/Engine_MaterialFunctions02/Utility/BreakOutFloat4Components (Package)
+	/Game/Effects/Fort_Effects/Materials/_Functions/Color_Time_of_Day (Package)
 	/Game/Effects/WeaponDestroy/T_WeaponDestroy_Streak (Package)
+	/Game/Packages/Fortress_SharedMaterials/GlobalMaterialParameters/FortniteMaterialParameters (Package)
 	/Script/Engine (Package)
 	T_WeaponDestroy_Streak (Texture2D)
 Serialized exports:
-	M_Simple_Beam (0-0-0-0): size 38332 (cls: M_Simple_Beam>Material>/Script/Engine) :
+	M_Simple_Beam (0-0-0-0): size 38840 (cls: M_Simple_Beam>Material>/Script/Engine) :
 		Tag array:
 			EmissiveColor(StructProperty)=System.Byte[] 
 			BlendMode(ByteProperty)=BLEND_Translucent 
@@ -131,8 +148,9 @@ Serialized exports:
 			bUsedWithMeshParticles(BoolProperty)=True 
 			Expressions(ArrayProperty)=[object] (inner: ObjectProperty)
 			MaterialFunctionInfos(ArrayProperty)=[object] (inner: StructProperty)
+			MaterialParameterCollectionInfos(ArrayProperty)=[object] (inner: StructProperty)
 			bCanMaskedBeAssumedOpaque(BoolProperty)=True 
-			StateId(StructProperty)=Guid: 1573741590-1274199786-2868266929-2246190263 
+			StateId(StructProperty)=Guid: 3125570833-1152826816-1638135726-2087974764 
 			CachedQualityLevelsUsed(ArrayProperty)=[object] (inner: BoolProperty)
 	MaterialExpressionDynamicParameter_0 (0-0-0-0): size 138 (cls: MaterialExpressionDynamicParameter_0>MaterialExpressionDynamicParameter>/Script/Engine) :
 		Tag array:
@@ -170,6 +188,10 @@ Serialized exports:
 		Tag array:
 			MaterialFunction(ObjectProperty)=CheapContrast=/Engine/Functions/Engine_MaterialFunctions01/ImageAdjustment/CheapContrast 
 			Material(ObjectProperty)=M_Simple_Beam= 
+	MaterialExpressionMaterialFunctionCall_3 (0-0-0-0): size 70 (cls: MaterialExpressionMaterialFunctionCall_3>MaterialExpressionMaterialFunctionCall>/Script/Engine) :
+		Tag array:
+			MaterialFunction(ObjectProperty)=Color_Time_of_Day=/Game/Effects/Fort_Effects/Materials/_Functions/Color_Time_of_Day 
+			Material(ObjectProperty)=M_Simple_Beam= 
 	MaterialExpressionMaterialFunctionCall_5 (0-0-0-0): size 70 (cls: MaterialExpressionMaterialFunctionCall_5>MaterialExpressionMaterialFunctionCall>/Script/Engine) :
 		Tag array:
 			MaterialFunction(ObjectProperty)=BreakOutFloat2Components=/Engine/Functions/Engine_MaterialFunctions02/Utility/BreakOutFloat2Components 
@@ -196,6 +218,12 @@ Serialized exports:
 		Tag array:
 			ParameterName(NameProperty)=EndFade 
 			ExpressionGUID(StructProperty)=Guid: 230413428-1179613444-3639418806-3828528770 
+			Material(ObjectProperty)=M_Simple_Beam= 
+	MaterialExpressionScalarParameter_4 (0-0-0-0): size 168 (cls: MaterialExpressionScalarParameter_4>MaterialExpressionScalarParameter>/Script/Engine) :
+		Tag array:
+			DefaultValue(FloatProperty)=1 
+			ParameterName(NameProperty)=Day_Intensity 
+			ExpressionGUID(StructProperty)=Guid: 2370057371-1091715707-3373240989-553197742 
 			Material(ObjectProperty)=M_Simple_Beam= 
 	MaterialExpressionScalarParameter_6 (0-0-0-0): size 168 (cls: MaterialExpressionScalarParameter_6>MaterialExpressionScalarParameter>/Script/Engine) :
 		Tag array:
@@ -231,6 +259,13 @@ Serialized exports:
 			B(StructProperty)=System.Byte[] 
 			ParameterName(NameProperty)=Multiply Particle Color 
 			ExpressionGUID(StructProperty)=Guid: 3742515137-1211463476-1913754785-4278670754 
+			Material(ObjectProperty)=M_Simple_Beam= 
+	MaterialExpressionStaticSwitchParameter_5 (0-0-0-0): size 317 (cls: MaterialExpressionStaticSwitchParameter_5>MaterialExpressionStaticSwitchParameter>/Script/Engine) :
+		Tag array:
+			A(StructProperty)=System.Byte[] 
+			B(StructProperty)=System.Byte[] 
+			ParameterName(NameProperty)=Color_Time_of_Day 
+			ExpressionGUID(StructProperty)=Guid: 1430942639-1339161662-3099816602-3666409315 
 			Material(ObjectProperty)=M_Simple_Beam= 
 	MaterialExpressionTextureSample_0 (0-0-0-0): size 159 (cls: MaterialExpressionTextureSample_0>MaterialExpressionTextureSample>/Script/Engine) :
 		Tag array:

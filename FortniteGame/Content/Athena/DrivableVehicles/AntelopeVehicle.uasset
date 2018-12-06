@@ -125,6 +125,7 @@ Name table:
 	AntelopeVehicle_C
 	ApplyImpulse
 	ApplyMaterialAndUseWrapIfPossible
+	AreaClass
 	AreAnyListenersWithinRange
 	Array_Add
 	Array_AddUnique
@@ -139,6 +140,7 @@ Name table:
 	Athena_Prop_ParentBuildingContainerBlueprint_C
 	AthenaCarPlayerSlot
 	AthenaGolfCart
+	AthenaItemWrapDefinition
 	AthenaSimpleCar_CameraMode3_C
 	AthenaVehicleData
 	AthenaVehicleShootingCone
@@ -199,6 +201,7 @@ Name table:
 	bCastDynamicShadow
 	bCastStaticShadow
 	bEnablePhysicsOnDedicatedServer
+	bForceAlongSpringNormal
 	bForceCrouch
 	bGenerateOverlapEvents
 	bHasCookedComponentInstancingData
@@ -215,8 +218,11 @@ Name table:
 	BlueprintCookedComponentInstancingData
 	BlueprintGeneratedClass
 	BndEvt__SkeletalMesh_K2Node_ComponentBoundEvent_2_ComponentHitSignature__DelegateSignature
+	bNormalToGroundTriangle
 	bNotifyRigidBodyCollision
 	BodyInstance
+	BodyMID
+	bOffsetPlayerRelativeAttachLocation
 	BooleanAND
 	BooleanOR
 	BoolProperty
@@ -659,7 +665,6 @@ Name table:
 	Conv_VectorToRotator
 	CookedComponentInstancingData
 	CorrectiveImpulse
-	CosmeticOnlyAlterationItemDefinition
 	CreateDynamicMaterialInstance
 	CrouchingFiringOffset
 	CurrentDayPhase
@@ -783,7 +788,6 @@ Name table:
 	ECollisionChannel
 	ECollisionEnabled
 	ECollisionEnabled::NoCollision
-	ECollisionEnabled::QueryOnly
 	ECollisionResponse
 	ECommonInputType
 	ECR_Block
@@ -867,6 +871,7 @@ Name table:
 	FortGlobalUIContext
 	FortInteractInterface
 	FortKismetLibrary
+	FortMetaNavArea_Obstacles
 	FortPawn
 	FortPawnEquippedWeaponSignature__DelegateSignature
 	FortPickup
@@ -1252,6 +1257,7 @@ Name table:
 	OnRep_ImpulseVector
 	OnSmashSound
 	OnSpringCompression
+	OnStopTick
 	OnWeaponEquipped
 	OnWeaponEquippedDelegate
 	Opacity
@@ -1321,6 +1327,7 @@ Name table:
 	Player
 	PlayerCameraManager
 	PlayerController
+	PlayerEntryTime
 	PlayerPawn
 	PlayerPawn_Local
 	PlayerSlots
@@ -1501,6 +1508,7 @@ Name table:
 	StaticMeshComponent0
 	SteeringAngleMultiplier
 	Stop
+	StopAllAudio
 	StopCameraShake
 	StopDriverCameraShake
 	StopDriverRumble
@@ -1552,7 +1560,6 @@ Name table:
 	TrickSet
 	TurningAmount
 	UberGraphFrame
-	UberGraphFramePointerProperty
 	UberGraphFunction
 	UInt64Property
 	UnderlyingType
@@ -1608,15 +1615,14 @@ Name table:
 	Z
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	AntelopeVehicle_C (0-0-0-0): size 1655 (cls: AntelopeVehicle_C>BlueprintGeneratedClass>/Script/Engine):
+	AntelopeVehicle_C (0-0-0-0): size 1646 (cls: AntelopeVehicle_C>BlueprintGeneratedClass>/Script/Engine):
 		Tag array:
 			NumReplicatedProperties(IntProperty)=5 
 			bHasCookedComponentInstancingData(BoolProperty)=True 
 			DynamicBindingObjects(ArrayProperty)=[object] (inner: ObjectProperty)
 			SimpleConstructionScript(ObjectProperty)=SimpleConstructionScript_0=AntelopeVehicle_C 
-			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=AntelopeVehicle_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_AntelopeVehicle=AntelopeVehicle_C 
-	Default__AntelopeVehicle_C (0-0-0-0): size 10171 (cls: Default__AntelopeVehicle_C>AntelopeVehicle_C):
+	Default__AntelopeVehicle_C (0-0-0-0): size 10489 (cls: Default__AntelopeVehicle_C>AntelopeVehicle_C):
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			OnDeathSound(ObjectProperty)=Quad_Destroy_Cue=/Game/Athena/Sounds/Vehicles/Quad/Quad_Destroy_Cue 
@@ -1704,7 +1710,7 @@ Serialized exports:
 	BounceIgnoreList (0-0-0-0): size 36 (cls: BounceIgnoreList>ArrayProperty>/Script/CoreUObject)
 	FortCollisionAudioHitPlayer (0-0-0-0): size 36 (cls: FortCollisionAudioHitPlayer>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_AntelopeVehicle (0-0-0-0): size 15929 (cls: ExecuteUbergraph_AntelopeVehicle>Function>/Script/CoreUObject)
+	ExecuteUbergraph_AntelopeVehicle (0-0-0-0): size 15962 (cls: ExecuteUbergraph_AntelopeVehicle>Function>/Script/CoreUObject)
 	CallFunc_GetAllPassengers_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetAllPassengers_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetAllPassengers_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetAllPassengers_ReturnValue>ArrayProperty>/Script/CoreUObject)
 	CallFunc_GetAllPassengers_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetAllPassengers_ReturnValue1>ObjectProperty>/Script/CoreUObject)
@@ -1720,70 +1726,71 @@ Serialized exports:
 	K2Node_MakeArray_Array3 (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array3>ObjectProperty>/Script/CoreUObject)
 	K2Node_MakeArray_Array3 (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array3>ArrayProperty>/Script/CoreUObject)
 	EventName (0-0-0-0): size 32 (cls: EventName>NameProperty>/Script/CoreUObject)
-	LightningSpark (0-0-0-0): size 114 (cls: LightningSpark>Function>/Script/CoreUObject)
+	LightningSpark (0-0-0-0): size 110 (cls: LightningSpark>Function>/Script/CoreUObject)
 	EventType (0-0-0-0): size 36 (cls: EventType>ByteProperty>/Script/CoreUObject)
-	GameplayCue.Athena.IceWheels (0-0-0-0): size 86 (cls: GameplayCue.Athena.IceWheels>Function>/Script/CoreUObject)
+	GameplayCue.Athena.IceWheels (0-0-0-0): size 82 (cls: GameplayCue.Athena.IceWheels>Function>/Script/CoreUObject)
 	CurrentDayPhase (0-0-0-0): size 36 (cls: CurrentDayPhase>ByteProperty>/Script/CoreUObject)
-	SetHeadlightState (0-0-0-0): size 100 (cls: SetHeadlightState>Function>/Script/CoreUObject)
-	CanHitLastDriver (0-0-0-0): size 58 (cls: CanHitLastDriver>Function>/Script/CoreUObject)
-	StopDriverCameraShake (0-0-0-0): size 58 (cls: StopDriverCameraShake>Function>/Script/CoreUObject)
-	StartDriverCameraShake (0-0-0-0): size 58 (cls: StartDriverCameraShake>Function>/Script/CoreUObject)
-	StartDriverRumble (0-0-0-0): size 58 (cls: StartDriverRumble>Function>/Script/CoreUObject)
-	StopDriverRumble (0-0-0-0): size 58 (cls: StopDriverRumble>Function>/Script/CoreUObject)
-	OnIsSprintingChanged (0-0-0-0): size 58 (cls: OnIsSprintingChanged>Function>/Script/CoreUObject)
+	SetHeadlightState (0-0-0-0): size 96 (cls: SetHeadlightState>Function>/Script/CoreUObject)
+	CanHitLastDriver (0-0-0-0): size 54 (cls: CanHitLastDriver>Function>/Script/CoreUObject)
+	StopDriverCameraShake (0-0-0-0): size 54 (cls: StopDriverCameraShake>Function>/Script/CoreUObject)
+	StartDriverCameraShake (0-0-0-0): size 54 (cls: StartDriverCameraShake>Function>/Script/CoreUObject)
+	StartDriverRumble (0-0-0-0): size 54 (cls: StartDriverRumble>Function>/Script/CoreUObject)
+	StopDriverRumble (0-0-0-0): size 54 (cls: StopDriverRumble>Function>/Script/CoreUObject)
+	OnIsSprintingChanged (0-0-0-0): size 54 (cls: OnIsSprintingChanged>Function>/Script/CoreUObject)
+	OnStopTick (0-0-0-0): size 54 (cls: OnStopTick>Function>/Script/CoreUObject)
 	LoadedWrap (0-0-0-0): size 36 (cls: LoadedWrap>ObjectProperty>/Script/CoreUObject)
-	K2_ApplyCosmeticWrap (0-0-0-0): size 72 (cls: K2_ApplyCosmeticWrap>Function>/Script/CoreUObject)
+	K2_ApplyCosmeticWrap (0-0-0-0): size 68 (cls: K2_ApplyCosmeticWrap>Function>/Script/CoreUObject)
 	Pawn (0-0-0-0): size 36 (cls: Pawn>ObjectProperty>/Script/CoreUObject)
-	PawnHitByVehicle (0-0-0-0): size 114 (cls: PawnHitByVehicle>Function>/Script/CoreUObject)
+	PawnHitByVehicle (0-0-0-0): size 110 (cls: PawnHitByVehicle>Function>/Script/CoreUObject)
 	SpecialHonk (0-0-0-0): size 34 (cls: SpecialHonk>BoolProperty>/Script/CoreUObject)
-	PerformHonk (0-0-0-0): size 72 (cls: PerformHonk>Function>/Script/CoreUObject)
+	PerformHonk (0-0-0-0): size 68 (cls: PerformHonk>Function>/Script/CoreUObject)
 	SpecialHonk (0-0-0-0): size 34 (cls: SpecialHonk>BoolProperty>/Script/CoreUObject)
-	HonkMulticast (0-0-0-0): size 74 (cls: HonkMulticast>Function>/Script/CoreUObject)
+	HonkMulticast (0-0-0-0): size 70 (cls: HonkMulticast>Function>/Script/CoreUObject)
 	SpecialHonk (0-0-0-0): size 34 (cls: SpecialHonk>BoolProperty>/Script/CoreUObject)
-	HonkToServer (0-0-0-0): size 74 (cls: HonkToServer>Function>/Script/CoreUObject)
-	SpecialHonkDone (0-0-0-0): size 58 (cls: SpecialHonkDone>Function>/Script/CoreUObject)
-	OnHonk (0-0-0-0): size 58 (cls: OnHonk>Function>/Script/CoreUObject)
-	BoostFailed (0-0-0-0): size 58 (cls: BoostFailed>Function>/Script/CoreUObject)
+	HonkToServer (0-0-0-0): size 70 (cls: HonkToServer>Function>/Script/CoreUObject)
+	SpecialHonkDone (0-0-0-0): size 54 (cls: SpecialHonkDone>Function>/Script/CoreUObject)
+	OnHonk (0-0-0-0): size 54 (cls: OnHonk>Function>/Script/CoreUObject)
+	BoostFailed (0-0-0-0): size 54 (cls: BoostFailed>Function>/Script/CoreUObject)
 	ImpactPoint (0-0-0-0): size 36 (cls: ImpactPoint>StructProperty>/Script/CoreUObject)
-	SmashedThroughBuildingPiece (0-0-0-0): size 86 (cls: SmashedThroughBuildingPiece>Function>/Script/CoreUObject)
-	NaturalSlideEnd (0-0-0-0): size 58 (cls: NaturalSlideEnd>Function>/Script/CoreUObject)
-	NaturalSlideBegin (0-0-0-0): size 58 (cls: NaturalSlideBegin>Function>/Script/CoreUObject)
-	CheckWater (0-0-0-0): size 58 (cls: CheckWater>Function>/Script/CoreUObject)
+	SmashedThroughBuildingPiece (0-0-0-0): size 82 (cls: SmashedThroughBuildingPiece>Function>/Script/CoreUObject)
+	NaturalSlideEnd (0-0-0-0): size 54 (cls: NaturalSlideEnd>Function>/Script/CoreUObject)
+	NaturalSlideBegin (0-0-0-0): size 54 (cls: NaturalSlideBegin>Function>/Script/CoreUObject)
+	CheckWater (0-0-0-0): size 54 (cls: CheckWater>Function>/Script/CoreUObject)
 	WaterSurfacePoint (0-0-0-0): size 36 (cls: WaterSurfacePoint>StructProperty>/Script/CoreUObject)
-	OnExitedWaterVolume (0-0-0-0): size 72 (cls: OnExitedWaterVolume>Function>/Script/CoreUObject)
+	OnExitedWaterVolume (0-0-0-0): size 68 (cls: OnExitedWaterVolume>Function>/Script/CoreUObject)
 	WaterSurfacePoint (0-0-0-0): size 36 (cls: WaterSurfacePoint>StructProperty>/Script/CoreUObject)
-	OnEnteredWaterVolume (0-0-0-0): size 72 (cls: OnEnteredWaterVolume>Function>/Script/CoreUObject)
-	Handle Spring Compression Audio (0-0-0-0): size 58 (cls: Handle Spring Compression Audio>Function>/Script/CoreUObject)
-	ReceiveBeginPlay (0-0-0-0): size 58 (cls: ReceiveBeginPlay>Function>/Script/CoreUObject)
-	DestroyCooldown (0-0-0-0): size 58 (cls: DestroyCooldown>Function>/Script/CoreUObject)
+	OnEnteredWaterVolume (0-0-0-0): size 68 (cls: OnEnteredWaterVolume>Function>/Script/CoreUObject)
+	Handle Spring Compression Audio (0-0-0-0): size 54 (cls: Handle Spring Compression Audio>Function>/Script/CoreUObject)
+	ReceiveBeginPlay (0-0-0-0): size 54 (cls: ReceiveBeginPlay>Function>/Script/CoreUObject)
+	DestroyCooldown (0-0-0-0): size 54 (cls: DestroyCooldown>Function>/Script/CoreUObject)
 	HitComponent (0-0-0-0): size 36 (cls: HitComponent>ObjectProperty>/Script/CoreUObject)
-	BndEvt__SkeletalMesh_K2Node_ComponentBoundEvent_2_ComponentHitSignature__DelegateSignature (0-0-0-0): size 128 (cls: BndEvt__SkeletalMesh_K2Node_ComponentBoundEvent_2_ComponentHitSignature__DelegateSignature>Function>/Script/CoreUObject)
-	NoShake (0-0-0-0): size 58 (cls: NoShake>Function>/Script/CoreUObject)
-	BoostEnd (0-0-0-0): size 58 (cls: BoostEnd>Function>/Script/CoreUObject)
-	BoostBegin (0-0-0-0): size 58 (cls: BoostBegin>Function>/Script/CoreUObject)
-	OnSpringCompression (0-0-0-0): size 58 (cls: OnSpringCompression>Function>/Script/CoreUObject)
+	BndEvt__SkeletalMesh_K2Node_ComponentBoundEvent_2_ComponentHitSignature__DelegateSignature (0-0-0-0): size 124 (cls: BndEvt__SkeletalMesh_K2Node_ComponentBoundEvent_2_ComponentHitSignature__DelegateSignature>Function>/Script/CoreUObject)
+	NoShake (0-0-0-0): size 54 (cls: NoShake>Function>/Script/CoreUObject)
+	BoostEnd (0-0-0-0): size 54 (cls: BoostEnd>Function>/Script/CoreUObject)
+	BoostBegin (0-0-0-0): size 54 (cls: BoostBegin>Function>/Script/CoreUObject)
+	OnSpringCompression (0-0-0-0): size 54 (cls: OnSpringCompression>Function>/Script/CoreUObject)
 	EndPlayReason (0-0-0-0): size 36 (cls: EndPlayReason>ByteProperty>/Script/CoreUObject)
-	ReceiveEndPlay (0-0-0-0): size 72 (cls: ReceiveEndPlay>Function>/Script/CoreUObject)
+	ReceiveEndPlay (0-0-0-0): size 68 (cls: ReceiveEndPlay>Function>/Script/CoreUObject)
 	Damage (0-0-0-0): size 32 (cls: Damage>FloatProperty>/Script/CoreUObject)
-	Update Damage State (0-0-0-0): size 74 (cls: Update Damage State>Function>/Script/CoreUObject)
+	Update Damage State (0-0-0-0): size 70 (cls: Update Damage State>Function>/Script/CoreUObject)
 	Damage (0-0-0-0): size 32 (cls: Damage>FloatProperty>/Script/CoreUObject)
-	OnDamaged (0-0-0-0): size 128 (cls: OnDamaged>Function>/Script/CoreUObject)
+	OnDamaged (0-0-0-0): size 124 (cls: OnDamaged>Function>/Script/CoreUObject)
 	PlayerPawn (0-0-0-0): size 36 (cls: PlayerPawn>ObjectProperty>/Script/CoreUObject)
-	OnPawnExitVehicle (0-0-0-0): size 86 (cls: OnPawnExitVehicle>Function>/Script/CoreUObject)
-	RocketSpawned (0-0-0-0): size 58 (cls: RocketSpawned>Function>/Script/CoreUObject)
+	OnPawnExitVehicle (0-0-0-0): size 82 (cls: OnPawnExitVehicle>Function>/Script/CoreUObject)
+	RocketSpawned (0-0-0-0): size 54 (cls: RocketSpawned>Function>/Script/CoreUObject)
 	NewWeapon (0-0-0-0): size 36 (cls: NewWeapon>ObjectProperty>/Script/CoreUObject)
-	OnWeaponEquipped (0-0-0-0): size 86 (cls: OnWeaponEquipped>Function>/Script/CoreUObject)
+	OnWeaponEquipped (0-0-0-0): size 82 (cls: OnWeaponEquipped>Function>/Script/CoreUObject)
 	PlayerPawn (0-0-0-0): size 36 (cls: PlayerPawn>ObjectProperty>/Script/CoreUObject)
-	OnPawnEnterVehicle (0-0-0-0): size 86 (cls: OnPawnEnterVehicle>Function>/Script/CoreUObject)
-	PedalForceFeedback (0-0-0-0): size 58 (cls: PedalForceFeedback>Function>/Script/CoreUObject)
-	ApplyImpulse (0-0-0-0): size 60 (cls: ApplyImpulse>Function>/Script/CoreUObject)
+	OnPawnEnterVehicle (0-0-0-0): size 82 (cls: OnPawnEnterVehicle>Function>/Script/CoreUObject)
+	PedalForceFeedback (0-0-0-0): size 54 (cls: PedalForceFeedback>Function>/Script/CoreUObject)
+	ApplyImpulse (0-0-0-0): size 56 (cls: ApplyImpulse>Function>/Script/CoreUObject)
 	HitLocation (0-0-0-0): size 36 (cls: HitLocation>StructProperty>/Script/CoreUObject)
-	OnCollisionHitEffects (0-0-0-0): size 128 (cls: OnCollisionHitEffects>Function>/Script/CoreUObject)
-	UpdateMovementCosmeticParameters (0-0-0-0): size 58 (cls: UpdateMovementCosmeticParameters>Function>/Script/CoreUObject)
+	OnCollisionHitEffects (0-0-0-0): size 124 (cls: OnCollisionHitEffects>Function>/Script/CoreUObject)
+	UpdateMovementCosmeticParameters (0-0-0-0): size 54 (cls: UpdateMovementCosmeticParameters>Function>/Script/CoreUObject)
 	Damage (0-0-0-0): size 32 (cls: Damage>FloatProperty>/Script/CoreUObject)
-	OnDeathPlayEffects (0-0-0-0): size 156 (cls: OnDeathPlayEffects>Function>/Script/CoreUObject)
+	OnDeathPlayEffects (0-0-0-0): size 152 (cls: OnDeathPlayEffects>Function>/Script/CoreUObject)
 	DeltaSeconds (0-0-0-0): size 32 (cls: DeltaSeconds>FloatProperty>/Script/CoreUObject)
-	ReceiveTick (0-0-0-0): size 72 (cls: ReceiveTick>Function>/Script/CoreUObject)
+	ReceiveTick (0-0-0-0): size 68 (cls: ReceiveTick>Function>/Script/CoreUObject)
 	CallFunc_CreateDynamicMaterialInstance_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_CreateDynamicMaterialInstance_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	UserConstructionScript (0-0-0-0): size 310 (cls: UserConstructionScript>Function>/Script/CoreUObject)
 	OnRep_ImpulseVector (0-0-0-0): size 85 (cls: OnRep_ImpulseVector>Function>/Script/CoreUObject)
@@ -1793,11 +1800,11 @@ Serialized exports:
 	PlayHapticsOnHit (0-0-0-0): size 1823 (cls: PlayHapticsOnHit>Function>/Script/CoreUObject)
 	OnRep_CorrectiveImpulse (0-0-0-0): size 43 (cls: OnRep_CorrectiveImpulse>Function>/Script/CoreUObject)
 	PlayerPawn (0-0-0-0): size 36 (cls: PlayerPawn>ObjectProperty>/Script/CoreUObject)
-	GetVehicleSeatActionNames (0-0-0-0): size 1110 (cls: GetVehicleSeatActionNames>Function>/Script/CoreUObject)
+	GetVehicleSeatActionNames (0-0-0-0): size 1081 (cls: GetVehicleSeatActionNames>Function>/Script/CoreUObject)
 	PlayerPawn (0-0-0-0): size 36 (cls: PlayerPawn>ObjectProperty>/Script/CoreUObject)
 	GetVehicleSeatLabels (0-0-0-0): size 594 (cls: GetVehicleSeatLabels>Function>/Script/CoreUObject)
 	PlayerPawn (0-0-0-0): size 36 (cls: PlayerPawn>ObjectProperty>/Script/CoreUObject)
-	GetVehicleSeatActionLabels (0-0-0-0): size 1194 (cls: GetVehicleSeatActionLabels>Function>/Script/CoreUObject)
+	GetVehicleSeatActionLabels (0-0-0-0): size 1165 (cls: GetVehicleSeatActionLabels>Function>/Script/CoreUObject)
 	ReturnLabels_Local (0-0-0-0): size 32 (cls: ReturnLabels_Local>TextProperty>/Script/CoreUObject)
 	ReturnLabels_Local (0-0-0-0): size 36 (cls: ReturnLabels_Local>ArrayProperty>/Script/CoreUObject)
 	ReturnValue (0-0-0-0): size 32 (cls: ReturnValue>TextProperty>/Script/CoreUObject)
@@ -1832,7 +1839,7 @@ Serialized exports:
 	CallFunc_ClientIsDriver_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_ClientIsDriver_ReturnValue>BoolProperty>/Script/CoreUObject)
 	OnRep_ImpactLocation (0-0-0-0): size 229 (cls: OnRep_ImpactLocation>Function>/Script/CoreUObject)
 	FortPlayerPawn (0-0-0-0): size 36 (cls: FortPlayerPawn>ObjectProperty>/Script/CoreUObject)
-	GetVehicleSeatPrimaryAction (0-0-0-0): size 539 (cls: GetVehicleSeatPrimaryAction>Function>/Script/CoreUObject)
+	GetVehicleSeatPrimaryAction (0-0-0-0): size 510 (cls: GetVehicleSeatPrimaryAction>Function>/Script/CoreUObject)
 	BuildingActor (0-0-0-0): size 36 (cls: BuildingActor>ObjectProperty>/Script/CoreUObject)
 	DestroyOrDamageBuildingPiece (0-0-0-0): size 358 (cls: DestroyOrDamageBuildingPiece>Function>/Script/CoreUObject)
 	CallFunc_Less_FloatFloat_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Less_FloatFloat_ReturnValue>BoolProperty>/Script/CoreUObject)
@@ -2003,9 +2010,10 @@ Serialized exports:
 	bAtCreation (0-0-0-0): size 34 (cls: bAtCreation>BoolProperty>/Script/CoreUObject)
 	SpecialHonk (0-0-0-0): size 34 (cls: SpecialHonk>BoolProperty>/Script/CoreUObject)
 	TrailsActive (0-0-0-0): size 34 (cls: TrailsActive>BoolProperty>/Script/CoreUObject)
-	OverlapVolume_GEN_VARIABLE (0-0-0-0): size 1672 (cls: OverlapVolume_GEN_VARIABLE>BoxComponent>/Script/Engine):
+	OverlapVolume_GEN_VARIABLE (0-0-0-0): size 1701 (cls: OverlapVolume_GEN_VARIABLE>BoxComponent>/Script/Engine):
 		Tag array:
 			BoxExtent(StructProperty)=Vector(80,65,35) 
+			AreaClass(ObjectProperty)=FortMetaNavArea_Obstacles=/Script/FortniteGame 
 			BodyInstance(StructProperty)=System.Byte[] 
 			RelativeLocation(StructProperty)=Vector(-3.881195,9.155273E-05,54.71854) 
 			RelativeScale3D(StructProperty)=Vector(1.234386,-0.9162073,1.157539) 
@@ -2182,7 +2190,7 @@ Serialized exports:
 	SendHeadlightStateToMaterial (0-0-0-0): size 96 (cls: SendHeadlightStateToMaterial>Function>/Script/CoreUObject)
 	ParameterValue (0-0-0-0): size 32 (cls: ParameterValue>FloatProperty>/Script/CoreUObject)
 	SendDamageStateToMaterial (0-0-0-0): size 96 (cls: SendDamageStateToMaterial>Function>/Script/CoreUObject)
-	SendBoostMeterToMaterial (0-0-0-0): size 97 (cls: SendBoostMeterToMaterial>Function>/Script/CoreUObject)
+	SendBoostMeterToMaterial (0-0-0-0): size 131 (cls: SendBoostMeterToMaterial>Function>/Script/CoreUObject)
 	CallFunc_GetBoostAccumulated_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetBoostAccumulated_ReturnValue>FloatProperty>/Script/CoreUObject)
 	TurningAmount (0-0-0-0): size 32 (cls: TurningAmount>FloatProperty>/Script/CoreUObject)
 	UnobstructedBounceVelocity (0-0-0-0): size 32 (cls: UnobstructedBounceVelocity>FloatProperty>/Script/CoreUObject)
@@ -2254,7 +2262,7 @@ Serialized exports:
 			VolumeParam(StructProperty)=System.Byte[] 
 			PitchParam(StructProperty)=System.Byte[] 
 			ParamRange(StructProperty)=Vector2D(0,100) 
-	SkeletalMeshComponent (0-0-0-0): size 555 (cls: SkeletalMeshComponent>FortVehicleSkelMeshComponent>/Script/FortniteGame):
+	SkeletalMeshComponent (0-0-0-0): size 481 (cls: SkeletalMeshComponent>FortVehicleSkelMeshComponent>/Script/FortniteGame):
 		Tag array:
 			AnimClass(ObjectProperty)=Quad_Base_AnimBP_Base_C=/Game/Athena/DrivableVehicles/Quad/Quad_Base/Meshes/Quad_Base_AnimBP_Base 
 			bEnablePhysicsOnDedicatedServer(BoolProperty)=True 
@@ -2344,6 +2352,7 @@ Serialized exports:
 	AudioWind (0-0-0-0): size 36 (cls: AudioWind>ObjectProperty>/Script/CoreUObject)
 	OtherActor (0-0-0-0): size 36 (cls: OtherActor>ObjectProperty>/Script/CoreUObject)
 	OtherComp (0-0-0-0): size 36 (cls: OtherComp>ObjectProperty>/Script/CoreUObject)
+	BodyMID (0-0-0-0): size 36 (cls: BodyMID>ObjectProperty>/Script/CoreUObject)
 	BoostIncreaseAudioComp (0-0-0-0): size 36 (cls: BoostIncreaseAudioComp>ObjectProperty>/Script/CoreUObject)
 	BoostMeter (0-0-0-0): size 36 (cls: BoostMeter>ObjectProperty>/Script/CoreUObject)
 	BoostMeterMID (0-0-0-0): size 36 (cls: BoostMeterMID>ObjectProperty>/Script/CoreUObject)
@@ -2644,7 +2653,7 @@ Serialized exports:
 			bIsParentComponentNative(BoolProperty)=True 
 			VariableGuid(StructProperty)=Guid: 3594562994-1078929259-659464370-2078902648 
 			InternalVariableName(NameProperty)=SM_WheelBlur_BR 
-	SCS_Node_25 (0-0-0-0): size 5247 (cls: SCS_Node_25>SCS_Node>/Script/Engine):
+	SCS_Node_25 (0-0-0-0): size 5346 (cls: SCS_Node_25>SCS_Node>/Script/Engine):
 		Tag array:
 			ComponentClass(ObjectProperty)=BoxComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=OverlapVolume_GEN_VARIABLE=AntelopeVehicle_C 

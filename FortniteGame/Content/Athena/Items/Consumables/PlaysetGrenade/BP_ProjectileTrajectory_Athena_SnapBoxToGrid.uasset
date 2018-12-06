@@ -1,12 +1,13 @@
 Name table:
 	/Game/Athena/Items/Consumables/Grenade/BP_ProjectileTrajectory_Athena
 	/Game/Athena/Items/Consumables/PlaysetGrenade/BP_ProjectileTrajectory_Athena_SnapBoxToGrid
-	/Game/Athena/Items/Consumables/TowerGrenade/FX/M_TowerGrenade_Preview_Holo
 	/Game/BP_ProjectileTrajectory
 	/Game/Characters/Player/Male/Male_Avg_Base/ECardinalDirection
 	/Game/Missions/Primary/DeadDrop/Meshes/S_Deaddrop_VoidArea1024
+	/Game/Sounds/Creative/Gadgets/Grenade/Creative_Grenade_Loop_Cue
 	/Game/Sounds/Fort_UI_Sounds/Gameplay/Fort_Build_BluePrint_Select_Cue
 	/Game/Weapons/Grenades/Tower_Grenade/Meshes/SM_Tower_Preview
+	/Game/Weapons/Prototype/ObjectMover/Materials/M_CreativeMoveTool_VolumeSpawn
 	/Script/CoreUObject
 	/Script/Engine
 	/Script/FortniteGame
@@ -22,6 +23,8 @@ Name table:
 	Array_Length
 	ArrayProperty
 	AssociatedGuid
+	AudioComponent
+	bAutoActivate
 	bGenerateOverlapEvents
 	bIsValid
 	BlueprintComponentChangedPropertyInfo
@@ -93,6 +96,7 @@ Name table:
 	CallFunc_GreaterEqual_FloatFloat_ReturnValue
 	CallFunc_GreaterEqual_FloatFloat_ReturnValue1
 	CallFunc_GreaterEqual_FloatFloat_ReturnValue2
+	CallFunc_IsLocallyControlled_ReturnValue
 	CallFunc_IsValid_ReturnValue
 	CallFunc_K2_GetComponentScale_ReturnValue
 	CallFunc_K2_SetWorldLocation_SweepHitResult
@@ -141,7 +145,9 @@ Name table:
 	Conv_IntToFloat
 	Conv_VectorToLinearColor
 	CookedComponentInstancingData
+	Creative_Grenade_Loop_Cue
 	Default__ArrayProperty
+	Default__AudioComponent
 	Default__BlueprintGeneratedClass
 	Default__BoolProperty
 	Default__BP_ProjectileTrajectory_Athena_C
@@ -149,7 +155,7 @@ Name table:
 	Default__BP_ProjectileTrajectory_C
 	Default__ByteProperty
 	Default__FloatProperty
-	Default__FortPlayspaceManager
+	Default__FortPlaysetItemDefinition
 	Default__Function
 	Default__GameplayStatics
 	Default__InheritableComponentHandler
@@ -181,11 +187,11 @@ Name table:
 	Engine
 	EntryPoint
 	ExecuteUbergraph_BP_ProjectileTrajectory_Athena_SnapBoxToGrid
+	FadeOut
 	FloatProperty
 	Fort_Build_BluePrint_Select_Cue
 	FortPlayerControllerAthena
 	FortPlaysetItemDefinition
-	FortPlayspaceManager
 	Function
 	GameplayStatics
 	GetActorForwardVector
@@ -211,6 +217,7 @@ Name table:
 	InheritableComponentHandler
 	InternalVariableName
 	IntProperty
+	IsLocallyControlled
 	IsValid
 	K2_GetComponentScale
 	K2_SetWorldLocation
@@ -227,7 +234,9 @@ Name table:
 	LastYawOffset
 	Less_IntInt
 	LinearColor
-	M_TowerGrenade_Preview_Holo
+	Looping_Sound
+	Looping_Sound_GEN_VARIABLE
+	M_CreativeMoveTool_VolumeSpawn
 	MakeVector
 	Material
 	MaterialInstanceDynamic
@@ -253,11 +262,13 @@ Name table:
 	ParentComponentOrVariableName
 	ParentComponentOwnerClassName
 	Pawn
+	Play
 	PlayerController
 	PlaysetRotation
 	PlaySound2D
 	PointerToUberGraphFrame
 	ReceiveBeginPlay
+	ReceiveDestroyed
 	Records
 	RelativeScale3D
 	Response
@@ -284,6 +295,7 @@ Name table:
 	SM_BuildingPreview
 	SM_BuildingPreview_GEN_VARIABLE
 	SM_Tower_Preview
+	Sound
 	SoundBase
 	SoundCue
 	Spline
@@ -306,7 +318,6 @@ Name table:
 	Temp_int_Loop_Counter_Variable
 	Temp_int_Loop_Counter_Variable1
 	UberGraphFrame
-	UberGraphFramePointerProperty
 	UberGraphFunction
 	UpdateScaleForPlayset
 	UserConstructionScript
@@ -318,11 +329,10 @@ Name table:
 	YawOffset
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	BP_ProjectileTrajectory_Athena_SnapBoxToGrid_C (0-0-0-0): size 368 (cls: BP_ProjectileTrajectory_Athena_SnapBoxToGrid_C>BlueprintGeneratedClass>/Script/Engine):
+	BP_ProjectileTrajectory_Athena_SnapBoxToGrid_C (0-0-0-0): size 359 (cls: BP_ProjectileTrajectory_Athena_SnapBoxToGrid_C>BlueprintGeneratedClass>/Script/Engine):
 		Tag array:
 			SimpleConstructionScript(ObjectProperty)=SimpleConstructionScript_0=BP_ProjectileTrajectory_Athena_SnapBoxToGrid_C 
 			InheritableComponentHandler(ObjectProperty)=InheritableComponentHandler=BP_ProjectileTrajectory_Athena_SnapBoxToGrid_C 
-			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=BP_ProjectileTrajectory_Athena_SnapBoxToGrid_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_BP_ProjectileTrajectory_Athena_SnapBoxToGrid=BP_ProjectileTrajectory_Athena_SnapBoxToGrid_C 
 	Default__BP_ProjectileTrajectory_Athena_SnapBoxToGrid_C (0-0-0-0): size 454 (cls: Default__BP_ProjectileTrajectory_Athena_SnapBoxToGrid_C>BP_ProjectileTrajectory_Athena_SnapBoxToGrid_C):
 		Tag array:
@@ -336,23 +346,29 @@ Serialized exports:
 			LastGridSnapPosition(StructProperty)=Vector(0,0,0) 
 			GridSnapSound(ObjectProperty)=Fort_Build_BluePrint_Select_Cue=/Game/Sounds/Fort_UI_Sounds/Gameplay/Fort_Build_BluePrint_Select_Cue 
 			BuildingPreviewMesh(ObjectProperty)=S_Deaddrop_VoidArea1024=/Game/Missions/Primary/DeadDrop/Meshes/S_Deaddrop_VoidArea1024 
-	SM_BuildingPreview (0-0-0-0): size 36 (cls: SM_BuildingPreview>ObjectProperty>/Script/CoreUObject)
+	Looping_Sound (0-0-0-0): size 36 (cls: Looping_Sound>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_BP_ProjectileTrajectory_Athena_SnapBoxToGrid (0-0-0-0): size 1798 (cls: ExecuteUbergraph_BP_ProjectileTrajectory_Athena_SnapBoxToGrid>Function>/Script/CoreUObject)
+	ExecuteUbergraph_BP_ProjectileTrajectory_Athena_SnapBoxToGrid (0-0-0-0): size 1918 (cls: ExecuteUbergraph_BP_ProjectileTrajectory_Athena_SnapBoxToGrid>Function>/Script/CoreUObject)
 	K2Node_Event_SplinePoints (0-0-0-0): size 36 (cls: K2Node_Event_SplinePoints>StructProperty>/Script/CoreUObject)
 	K2Node_Event_SplinePoints (0-0-0-0): size 36 (cls: K2Node_Event_SplinePoints>ArrayProperty>/Script/CoreUObject)
 	K2Node_Event_SplineTangents (0-0-0-0): size 36 (cls: K2Node_Event_SplineTangents>StructProperty>/Script/CoreUObject)
 	K2Node_Event_SplineTangents (0-0-0-0): size 36 (cls: K2Node_Event_SplineTangents>ArrayProperty>/Script/CoreUObject)
-	SetTrajectorySpline (0-0-0-0): size 86 (cls: SetTrajectorySpline>Function>/Script/CoreUObject)
+	ReceiveDestroyed (0-0-0-0): size 54 (cls: ReceiveDestroyed>Function>/Script/CoreUObject)
+	SetTrajectorySpline (0-0-0-0): size 82 (cls: SetTrajectorySpline>Function>/Script/CoreUObject)
 	SplinePoints (0-0-0-0): size 36 (cls: SplinePoints>StructProperty>/Script/CoreUObject)
 	SplinePoints (0-0-0-0): size 36 (cls: SplinePoints>ArrayProperty>/Script/CoreUObject)
 	SplineTangents (0-0-0-0): size 36 (cls: SplineTangents>StructProperty>/Script/CoreUObject)
 	SplineTangents (0-0-0-0): size 36 (cls: SplineTangents>ArrayProperty>/Script/CoreUObject)
+	Looping_Sound_GEN_VARIABLE (0-0-0-0): size 67 (cls: Looping_Sound_GEN_VARIABLE>AudioComponent>/Script/Engine):
+		Tag array:
+			Sound(ObjectProperty)=Creative_Grenade_Loop_Cue=/Game/Sounds/Creative/Gadgets/Grenade/Creative_Grenade_Loop_Cue 
+			bAutoActivate(BoolProperty)=False 
 	CallFunc_Array_IsValidIndex_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Array_IsValidIndex_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_IsLocallyControlled_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsLocallyControlled_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Less_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Less_IntInt_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_Less_IntInt_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue2>BoolProperty>/Script/CoreUObject)
-	ReceiveBeginPlay (0-0-0-0): size 58 (cls: ReceiveBeginPlay>Function>/Script/CoreUObject)
+	ReceiveBeginPlay (0-0-0-0): size 54 (cls: ReceiveBeginPlay>Function>/Script/CoreUObject)
 	CallFunc_SetStaticMesh_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_SetStaticMesh_ReturnValue>BoolProperty>/Script/CoreUObject)
 	UserConstructionScript (0-0-0-0): size 88 (cls: UserConstructionScript>Function>/Script/CoreUObject)
 	NewLocation (0-0-0-0): size 36 (cls: NewLocation>StructProperty>/Script/CoreUObject)
@@ -429,11 +445,13 @@ Serialized exports:
 	BuildingPreviewMesh (0-0-0-0): size 36 (cls: BuildingPreviewMesh>ObjectProperty>/Script/CoreUObject)
 	CachedPlayset (0-0-0-0): size 36 (cls: CachedPlayset>ObjectProperty>/Script/CoreUObject)
 	CallFunc_Array_Get_Item4 (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item4>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetInstigator_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetInstigator_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetPlayerController_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetPlayerController_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetPlayset_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetPlayset_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Player_Controller_Athena (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Player_Controller_Athena>ObjectProperty>/Script/CoreUObject)
 	GridSnapSound (0-0-0-0): size 36 (cls: GridSnapSound>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetInstigator_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetInstigator_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	SM_BuildingPreview (0-0-0-0): size 36 (cls: SM_BuildingPreview>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetPlayset_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetPlayset_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Player_Controller_Athena (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Player_Controller_Athena>ObjectProperty>/Script/CoreUObject)
 	Building_GEN_VARIABLE (0-0-0-0): size 38 (cls: Building_GEN_VARIABLE>SceneComponent>/Script/Engine):
@@ -446,6 +464,14 @@ Serialized exports:
 			ComponentTemplate(ObjectProperty)=DefaultSceneRoot_GEN_VARIABLE=BP_ProjectileTrajectory_Athena_SnapBoxToGrid_C 
 			VariableGuid(StructProperty)=Guid: 1996270567-1109091441-3837877645-3410267343 
 			InternalVariableName(NameProperty)=DefaultSceneRoot 
+	SCS_Node_1 (0-0-0-0): size 234 (cls: SCS_Node_1>SCS_Node>/Script/Engine):
+		Tag array:
+			ComponentClass(ObjectProperty)=AudioComponent=/Script/Engine 
+			ComponentTemplate(ObjectProperty)=Looping_Sound_GEN_VARIABLE=BP_ProjectileTrajectory_Athena_SnapBoxToGrid_C 
+			ParentComponentOrVariableName(NameProperty)=DefaultSceneRoot 
+			ParentComponentOwnerClassName(NameProperty)=BP_ProjectileTrajectory_C 
+			VariableGuid(StructProperty)=Guid: 2008976556-1097705991-1200463271-1145723916 
+			InternalVariableName(NameProperty)=Looping_Sound 
 	SCS_Node_8 (0-0-0-0): size 275 (cls: SCS_Node_8>SCS_Node>/Script/Engine):
 		Tag array:
 			ComponentClass(ObjectProperty)=SceneComponent=/Script/Engine 
@@ -461,7 +487,7 @@ Serialized exports:
 			ComponentTemplate(ObjectProperty)=SM_BuildingPreview_GEN_VARIABLE=BP_ProjectileTrajectory_Athena_SnapBoxToGrid_C 
 			VariableGuid(StructProperty)=Guid: 938682907-1231286453-2142089357-567136191 
 			InternalVariableName(NameProperty)=SM_BuildingPreview 
-	SimpleConstructionScript_0 (0-0-0-0): size 127 (cls: SimpleConstructionScript_0>SimpleConstructionScript>/Script/Engine):
+	SimpleConstructionScript_0 (0-0-0-0): size 135 (cls: SimpleConstructionScript_0>SimpleConstructionScript>/Script/Engine):
 		Tag array:
 			RootNodes(ArrayProperty)=[object] (inner: ObjectProperty)
 			AllNodes(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -474,8 +500,9 @@ Serialized exports:
 			CanCharacterStepUpOn(ByteProperty)=ECB_No 
 			BodyInstance(StructProperty)=System.Byte[] 
 			bVisible(BoolProperty)=False 
-	Target_GEN_VARIABLE (0-0-0-0): size 103 (cls: Target_GEN_VARIABLE>StaticMeshComponent>/Script/Engine):
+	Target_GEN_VARIABLE (0-0-0-0): size 144 (cls: Target_GEN_VARIABLE>StaticMeshComponent>/Script/Engine):
 		Tag array:
+			OverrideMaterials(ArrayProperty)=[object] (inner: ObjectProperty)
 			RelativeScale3D(StructProperty)=Vector(1,1,1) 
 			bVisible(BoolProperty)=False 
 	CallFunc_Array_Get_Item (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item>StructProperty>/Script/CoreUObject)

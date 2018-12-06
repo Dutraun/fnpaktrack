@@ -23,6 +23,7 @@ Name table:
 	/Game/UI/Foundation/Buttons/IconTextButton
 	/Game/UI/Foundation/Buttons/TextStyles/TextStyle-MediumButton
 	/Game/UI/Foundation/Fonts/Burbank
+	/Game/UI/Foundation/Fonts/NotoSans
 	/Game/UI/Foundation/Input/InputActionDataTable
 	/Game/UI/Foundation/Lightbox/Lightbox
 	/Game/UI/Foundation/Materials/M_Athena_Matchmaking_ShineAnim_Details
@@ -107,7 +108,6 @@ Name table:
 	bIsEnabled
 	bIsFocusable
 	bIsRootWidget
-	bIsTournamentPlaylist
 	bIsVariable
 	bLegacyFinishOnStop
 	BlendType
@@ -133,8 +133,7 @@ Name table:
 	bOverride_HeightOverride
 	bOverride_MaxDesiredWidth
 	bOverride_WidthOverride
-	bPartyTooBig
-	bPartyTooSmall
+	bPlaylistIsEnabled
 	Brush
 	BrushColor
 	BrushPropertyNamePath
@@ -147,6 +146,7 @@ Name table:
 	Burbank
 	Burbank-Black
 	Button
+	Button_ServerPrivacy
 	ButtonClicked
 	ButtonStyle-Outline-FadedBlue_C
 	ButtonStyle-Outline-FadedWhite_C
@@ -161,13 +161,12 @@ Name table:
 	CallFunc_BooleanAND_ReturnValue
 	CallFunc_BooleanAND_ReturnValue1
 	CallFunc_BooleanOR_ReturnValue
-	CallFunc_BooleanOR_ReturnValue1
-	CallFunc_BooleanOR_ReturnValue2
-	CallFunc_BooleanOR_ReturnValue3
 	CallFunc_Conv_StringToText_ReturnValue
 	CallFunc_Conv_StringToText_ReturnValue1
 	CallFunc_Conv_StringToText_ReturnValue2
 	CallFunc_Create_ReturnValue
+	CallFunc_EqualEqual_ByteByte_ReturnValue
+	CallFunc_EqualEqual_ByteByte_ReturnValue1
 	CallFunc_EqualEqual_KeyKey_ReturnValue
 	CallFunc_GetButtonAtIndex_ReturnValue
 	CallFunc_GetContext_ReturnValue
@@ -188,8 +187,8 @@ Name table:
 	CallFunc_MakeBrushFromTexture_ReturnValue
 	CallFunc_MakeBrushFromTexture_ReturnValue1
 	CallFunc_Not_PreBool_ReturnValue
-	CallFunc_Not_PreBool_ReturnValue1
-	CallFunc_Not_PreBool_ReturnValue2
+	CallFunc_NotEqual_ByteByte_ReturnValue
+	CallFunc_NotEqual_ByteByte_ReturnValue1
 	CallFunc_PlayAnimationAtTime_ReturnValue
 	CallFunc_PlayAnimationAtTime_ReturnValue1
 	CallFunc_PointerEvent_GetEffectingButton_ReturnValue
@@ -202,7 +201,6 @@ Name table:
 	Cancel
 	CancelButton
 	CanceledPlaylist
-	CanShowFill
 	CenterButtonTextWidget
 	ChildTemplates
 	ChoosePromptSB
@@ -361,6 +359,7 @@ Name table:
 	EBindingKind::Function
 	EEvaluationMethod
 	EEvaluationMethod::Static
+	EFillDisableReason
 	EFortMatchmakingTileStyle
 	EHorizontalAlignment
 	EInputActionState
@@ -375,6 +374,7 @@ Name table:
 	EnumProperty
 	EOrientation
 	EpicCMSImage
+	EqualEqual_ByteByte
 	EqualEqual_KeyKey
 	ERichCurveExtrapolation
 	ERichCurveInterpMode
@@ -382,6 +382,7 @@ Name table:
 	ERichCurveTangentWeightMode
 	ESectionEvaluationFlags
 	ESectionEvaluationFlags::None
+	EServerAccessSetting
 	ESlateBrushDrawType
 	ESlateBrushDrawType::Box
 	ESlateBrushDrawType::Image
@@ -392,6 +393,7 @@ Name table:
 	ESlateVisibility::Collapsed
 	ESlateVisibility::SelfHitTestInvisible
 	ESlateVisibility::Visible
+	ESquadFillSetting
 	EStretch
 	EStretch::None
 	EStretch::ScaleToFill
@@ -409,6 +411,7 @@ Name table:
 	EVerticalAlignment
 	ExecuteUbergraph_AthenaMatchmakingOptionsDisplay_v2
 	Fill
+	FillDisableReason
 	FillMatchmaking
 	Flags
 	FloatCurve
@@ -467,12 +470,13 @@ Name table:
 	Image-Flare-Btm
 	ImageSize
 	ImplIndex
-	InCurrentSquadFill
 	InitialButtonSelection
 	Input_Cancel
 	InputActionDataTable
 	InputActionWidget
 	InputCustomMatchmaking
+	InServerAccessSetting
+	InSquadFillSetting
 	InterfaceProperty
 	InterpMode
 	IntProperty
@@ -480,8 +484,6 @@ Name table:
 	IntroRightPanel
 	IntroRightPanel_INST
 	IsCustomMatchmakingKeyEnabled
-	IsMatchmaking
-	IsPartyLeader
 	IsPerformingOutro
 	IsValid
 	Justification
@@ -494,19 +496,21 @@ Name table:
 	K2Node_CreateDelegate_OutputDelegate3
 	K2Node_DynamicCast_AsAthena_Matchmaking_Tile
 	K2Node_DynamicCast_AsIcon_Text_Button
+	K2Node_DynamicCast_AsIcon_Text_Button1
 	K2Node_DynamicCast_bSuccess
-	K2Node_Event_bIsTournamentPlaylist
-	K2Node_Event_bPartyTooBig
-	K2Node_Event_bPartyTooSmall
+	K2Node_DynamicCast_bSuccess1
+	K2Node_Event_bPlaylistIsEnabled
 	K2Node_Event_ButtonClicked
-	K2Node_Event_CanShowFill
-	K2Node_Event_InCurrentSquadFill
-	K2Node_Event_IsMatchmaking
-	K2Node_Event_IsPartyLeader
+	K2Node_Event_FillDisableReason
+	K2Node_Event_InServerAccessSetting
+	K2Node_Event_InSquadFillSetting
 	K2Node_Event_NewRepresentedPlaylist
-	K2Node_Event_PlaylistIsDisabled
 	K2Node_Select10_Default
 	K2Node_Select11_Default
+	K2Node_Select12_Default
+	K2Node_Select13_Default
+	K2Node_Select14_Default
+	K2Node_Select15_Default
 	K2Node_Select1_Default
 	K2Node_Select2_Default
 	K2Node_Select3_Default
@@ -626,7 +630,9 @@ Name table:
 	Next
 	None
 	Not_PreBool
+	NotEqual_ByteByte
 	NotifyFunctionName
+	NotoSans
 	NotoSans-Bold
 	NotoSans-Italic
 	Numerator
@@ -660,8 +666,8 @@ Name table:
 	ParameterName
 	Parent
 	ParentGuid
-	Passthrough
 	PassThrough
+	Passthrough
 	Percentage
 	PlayAnimationAtTime
 	PlaybackRange
@@ -671,7 +677,6 @@ Name table:
 	PlayIntroOrOutro
 	PlaylistData
 	PlaylistFrontEndData
-	PlaylistIsDisabled
 	PlaySound2D
 	PointerEvent
 	PointerEvent_GetEffectingButton
@@ -691,7 +696,6 @@ Name table:
 	PropertyPathSegment
 	PushContentWidget
 	Ranges
-	RankedButton
 	RankedMatchmaking
 	RCCE_Constant
 	RCIM_Cubic
@@ -745,11 +749,13 @@ Name table:
 	SetInputActionHandler
 	SetIsEnabled
 	SetScrollWidget
+	SetServerAccessText
 	SetSquadFillText
 	SetStyle
 	SetText
 	SetupInput
 	SetVisibility
+	ShadowOffset
 	Shear
 	ShineAnim
 	Signature
@@ -805,6 +811,13 @@ Name table:
 	Temp_bool_Variable
 	Temp_bool_Variable1
 	Temp_bool_Variable10
+	Temp_bool_Variable11
+	Temp_bool_Variable12
+	Temp_bool_Variable13
+	Temp_bool_Variable14
+	Temp_bool_Variable15
+	Temp_bool_Variable16
+	Temp_bool_Variable17
 	Temp_bool_Variable2
 	Temp_bool_Variable3
 	Temp_bool_Variable4
@@ -818,6 +831,9 @@ Name table:
 	Temp_byte_Variable10
 	Temp_byte_Variable11
 	Temp_byte_Variable12
+	Temp_byte_Variable13
+	Temp_byte_Variable14
+	Temp_byte_Variable15
 	Temp_byte_Variable2
 	Temp_byte_Variable3
 	Temp_byte_Variable4
@@ -838,6 +854,16 @@ Name table:
 	Temp_struct_Variable3
 	Temp_text_Variable
 	Temp_text_Variable1
+	Temp_text_Variable10
+	Temp_text_Variable11
+	Temp_text_Variable2
+	Temp_text_Variable3
+	Temp_text_Variable4
+	Temp_text_Variable5
+	Temp_text_Variable6
+	Temp_text_Variable7
+	Temp_text_Variable8
+	Temp_text_Variable9
 	TemplateAsset
 	TemplateLedger
 	TemplateSerialNumber
@@ -880,7 +906,6 @@ Name table:
 	TriggerMatchmakingPageTileOutroAnim
 	TypefaceFontName
 	UberGraphFrame
-	UberGraphFramePointerProperty
 	UberGraphFunction
 	UIDescription
 	UIDisplayName
@@ -892,7 +917,7 @@ Name table:
 	Unhandled
 	UnhoveredVignette
 	Up
-	UpdateMatchmakingButtonsBP
+	UpdateMMButtonStatusBP
 	UserWidget
 	VAlign_Bottom
 	VAlign_Center
@@ -933,7 +958,7 @@ Name table:
 	WindowTitleBarArea
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	AthenaMatchmakingOptionsDisplay_v2_C (0-0-0-0): size 1389 (cls: AthenaMatchmakingOptionsDisplay_v2_C>WidgetBlueprintGeneratedClass>/Script/UMG):
+	AthenaMatchmakingOptionsDisplay_v2_C (0-0-0-0): size 1372 (cls: AthenaMatchmakingOptionsDisplay_v2_C>WidgetBlueprintGeneratedClass>/Script/UMG):
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
@@ -943,7 +968,6 @@ Serialized exports:
 			Animations(ArrayProperty)=[object] (inner: ObjectProperty)
 			TemplateAsset(SoftObjectProperty)=/Game/Athena/UI/Matchmaking/AthenaMatchmakingOptionsDisplay_v2.WidgetArchetype 
 			DynamicBindingObjects(ArrayProperty)=[object] (inner: ObjectProperty)
-			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=AthenaMatchmakingOptionsDisplay_v2_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_AthenaMatchmakingOptionsDisplay_v2=AthenaMatchmakingOptionsDisplay_v2_C 
 	Default__AthenaMatchmakingOptionsDisplay_v2_C (0-0-0-0): size 468 (cls: Default__AthenaMatchmakingOptionsDisplay_v2_C>AthenaMatchmakingOptionsDisplay_v2_C):
 		Tag array:
@@ -956,7 +980,7 @@ Serialized exports:
 			TileItemClass(ObjectProperty)=AthenaMatchmakingTile_C=/Game/Athena/UI/Matchmaking/AthenaMatchmakingTile 
 			bHasScriptImplementedTick(BoolProperty)=False 
 			bHasScriptImplementedPaint(BoolProperty)=False 
-	WidgetArchetype (0-0-0-0): size 1111 (cls: WidgetArchetype>AthenaMatchmakingOptionsDisplay_v2_C):
+	WidgetArchetype (0-0-0-0): size 1082 (cls: WidgetArchetype>AthenaMatchmakingOptionsDisplay_v2_C):
 		Tag array:
 			AcceptButton(ObjectProperty)=AcceptButton=WidgetArchetype 
 			AthenaMatchmakingTile(ObjectProperty)=AthenaMatchmakingTile=WidgetArchetype 
@@ -986,12 +1010,11 @@ Serialized exports:
 			T_LTMBangText(ObjectProperty)=T_LTMBangText=WidgetArchetype 
 			T_LTMBangText_Heist(ObjectProperty)=T_LTMBangText_Heist=WidgetArchetype 
 			TouchTOCloseZone(ObjectProperty)=TouchTOCloseZone=WidgetArchetype 
-			VB_GameModeContainer(ObjectProperty)=VB_GameModeContainer=WidgetArchetype 
 			WarningHB(ObjectProperty)=WarningHB=WidgetArchetype 
 			StandardGameModeBox(ObjectProperty)=StandardGameModeBox=WidgetArchetype 
 			LTMGameModeBox(ObjectProperty)=LTMGameModeBox=WidgetArchetype 
 			TeamFillButton(ObjectProperty)=TeamFillButton=WidgetArchetype 
-			RankedButton(ObjectProperty)=RankedButton=WidgetArchetype 
+			Button_ServerPrivacy(ObjectProperty)=Button_ServerPrivacy=WidgetArchetype 
 			MatchmakingKnobsButton(ObjectProperty)=MatchmakingKnobsButton=WidgetArchetype 
 			MatchmakingWarningText(ObjectProperty)=MatchmakingWarningText=WidgetArchetype 
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
@@ -1306,34 +1329,35 @@ Serialized exports:
 			Content(ObjectProperty)=Lightbox=WidgetArchetype 
 	IntroRightPanel (0-0-0-0): size 36 (cls: IntroRightPanel>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_AthenaMatchmakingOptionsDisplay_v2 (0-0-0-0): size 5686 (cls: ExecuteUbergraph_AthenaMatchmakingOptionsDisplay_v2>Function>/Script/CoreUObject)
+	ExecuteUbergraph_AthenaMatchmakingOptionsDisplay_v2 (0-0-0-0): size 5704 (cls: ExecuteUbergraph_AthenaMatchmakingOptionsDisplay_v2>Function>/Script/CoreUObject)
 	CallFunc_BooleanAND_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_BooleanAND_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue1>BoolProperty>/Script/CoreUObject)
-	CallFunc_BooleanOR_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanOR_ReturnValue>BoolProperty>/Script/CoreUObject)
-	CallFunc_BooleanOR_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_BooleanOR_ReturnValue1>BoolProperty>/Script/CoreUObject)
-	CallFunc_BooleanOR_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_BooleanOR_ReturnValue2>BoolProperty>/Script/CoreUObject)
-	CallFunc_BooleanOR_ReturnValue3 (0-0-0-0): size 34 (cls: CallFunc_BooleanOR_ReturnValue3>BoolProperty>/Script/CoreUObject)
+	CallFunc_EqualEqual_ByteByte_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ByteByte_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_EqualEqual_ByteByte_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ByteByte_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_Greater_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Greater_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Greater_IntInt_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_Greater_IntInt_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_Greater_IntInt_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_Greater_IntInt_ReturnValue2>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsCustomMatchmakingKeyEnabled_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsCustomMatchmakingKeyEnabled_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Not_PreBool_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue>BoolProperty>/Script/CoreUObject)
-	CallFunc_Not_PreBool_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue1>BoolProperty>/Script/CoreUObject)
-	CallFunc_Not_PreBool_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue2>BoolProperty>/Script/CoreUObject)
+	CallFunc_NotEqual_ByteByte_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_NotEqual_ByteByte_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_NotEqual_ByteByte_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_NotEqual_ByteByte_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_TextIsEmpty_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_TextIsEmpty_ReturnValue>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
-	K2Node_Event_bIsTournamentPlaylist (0-0-0-0): size 34 (cls: K2Node_Event_bIsTournamentPlaylist>BoolProperty>/Script/CoreUObject)
-	K2Node_Event_bPartyTooBig (0-0-0-0): size 34 (cls: K2Node_Event_bPartyTooBig>BoolProperty>/Script/CoreUObject)
-	K2Node_Event_bPartyTooSmall (0-0-0-0): size 34 (cls: K2Node_Event_bPartyTooSmall>BoolProperty>/Script/CoreUObject)
-	K2Node_Event_CanShowFill (0-0-0-0): size 34 (cls: K2Node_Event_CanShowFill>BoolProperty>/Script/CoreUObject)
-	K2Node_Event_InCurrentSquadFill (0-0-0-0): size 34 (cls: K2Node_Event_InCurrentSquadFill>BoolProperty>/Script/CoreUObject)
-	K2Node_Event_IsMatchmaking (0-0-0-0): size 34 (cls: K2Node_Event_IsMatchmaking>BoolProperty>/Script/CoreUObject)
-	K2Node_Event_IsPartyLeader (0-0-0-0): size 34 (cls: K2Node_Event_IsPartyLeader>BoolProperty>/Script/CoreUObject)
-	K2Node_Event_PlaylistIsDisabled (0-0-0-0): size 34 (cls: K2Node_Event_PlaylistIsDisabled>BoolProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_bSuccess1 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess1>BoolProperty>/Script/CoreUObject)
+	K2Node_Event_bPlaylistIsEnabled (0-0-0-0): size 34 (cls: K2Node_Event_bPlaylistIsEnabled>BoolProperty>/Script/CoreUObject)
+	K2Node_Select13_Default (0-0-0-0): size 34 (cls: K2Node_Select13_Default>BoolProperty>/Script/CoreUObject)
+	K2Node_Select1_Default (0-0-0-0): size 34 (cls: K2Node_Select1_Default>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable1 (0-0-0-0): size 34 (cls: Temp_bool_Variable1>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable10 (0-0-0-0): size 34 (cls: Temp_bool_Variable10>BoolProperty>/Script/CoreUObject)
+	Temp_bool_Variable11 (0-0-0-0): size 34 (cls: Temp_bool_Variable11>BoolProperty>/Script/CoreUObject)
+	Temp_bool_Variable12 (0-0-0-0): size 34 (cls: Temp_bool_Variable12>BoolProperty>/Script/CoreUObject)
+	Temp_bool_Variable13 (0-0-0-0): size 34 (cls: Temp_bool_Variable13>BoolProperty>/Script/CoreUObject)
+	Temp_bool_Variable14 (0-0-0-0): size 34 (cls: Temp_bool_Variable14>BoolProperty>/Script/CoreUObject)
+	Temp_bool_Variable15 (0-0-0-0): size 34 (cls: Temp_bool_Variable15>BoolProperty>/Script/CoreUObject)
+	Temp_bool_Variable16 (0-0-0-0): size 34 (cls: Temp_bool_Variable16>BoolProperty>/Script/CoreUObject)
+	Temp_bool_Variable17 (0-0-0-0): size 34 (cls: Temp_bool_Variable17>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable2 (0-0-0-0): size 34 (cls: Temp_bool_Variable2>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable3 (0-0-0-0): size 34 (cls: Temp_bool_Variable3>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable4 (0-0-0-0): size 34 (cls: Temp_bool_Variable4>BoolProperty>/Script/CoreUObject)
@@ -1342,26 +1366,30 @@ Serialized exports:
 	Temp_bool_Variable7 (0-0-0-0): size 34 (cls: Temp_bool_Variable7>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable8 (0-0-0-0): size 34 (cls: Temp_bool_Variable8>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable9 (0-0-0-0): size 34 (cls: Temp_bool_Variable9>BoolProperty>/Script/CoreUObject)
-	OnDeactivated (0-0-0-0): size 58 (cls: OnDeactivated>Function>/Script/CoreUObject)
-	Construct (0-0-0-0): size 58 (cls: Construct>Function>/Script/CoreUObject)
-	OnActivated (0-0-0-0): size 58 (cls: OnActivated>Function>/Script/CoreUObject)
-	ApplyCMSOverrides (0-0-0-0): size 58 (cls: ApplyCMSOverrides>Function>/Script/CoreUObject)
-	Start Closing Matchmaking Options (0-0-0-0): size 58 (cls: Start Closing Matchmaking Options>Function>/Script/CoreUObject)
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	InServerAccessSetting (0-0-0-0): size 40 (cls: InServerAccessSetting>EnumProperty>/Script/CoreUObject)
+	SetServerAccessText (0-0-0-0): size 68 (cls: SetServerAccessText>Function>/Script/CoreUObject)
+	bPlaylistIsEnabled (0-0-0-0): size 34 (cls: bPlaylistIsEnabled>BoolProperty>/Script/CoreUObject)
+	UpdateMMButtonStatusBP (0-0-0-0): size 82 (cls: UpdateMMButtonStatusBP>Function>/Script/CoreUObject)
+	OnDeactivated (0-0-0-0): size 54 (cls: OnDeactivated>Function>/Script/CoreUObject)
+	Construct (0-0-0-0): size 54 (cls: Construct>Function>/Script/CoreUObject)
+	OnActivated (0-0-0-0): size 54 (cls: OnActivated>Function>/Script/CoreUObject)
+	ApplyCMSOverrides (0-0-0-0): size 54 (cls: ApplyCMSOverrides>Function>/Script/CoreUObject)
+	Start Closing Matchmaking Options (0-0-0-0): size 54 (cls: Start Closing Matchmaking Options>Function>/Script/CoreUObject)
 	ButtonClicked (0-0-0-0): size 36 (cls: ButtonClicked>ObjectProperty>/Script/CoreUObject)
-	OnTileDoubleClicked (0-0-0-0): size 72 (cls: OnTileDoubleClicked>Function>/Script/CoreUObject)
+	OnTileDoubleClicked (0-0-0-0): size 68 (cls: OnTileDoubleClicked>Function>/Script/CoreUObject)
 	NewRepresentedPlaylist (0-0-0-0): size 36 (cls: NewRepresentedPlaylist>StructProperty>/Script/CoreUObject)
-	RepresentedPlaylistChanged (0-0-0-0): size 72 (cls: RepresentedPlaylistChanged>Function>/Script/CoreUObject)
-	OnRightPanelIntroFinshed (0-0-0-0): size 58 (cls: OnRightPanelIntroFinshed>Function>/Script/CoreUObject)
-	OnBeginIntro (0-0-0-0): size 58 (cls: OnBeginIntro>Function>/Script/CoreUObject)
-	OnRightPanelOutroFinshed (0-0-0-0): size 58 (cls: OnRightPanelOutroFinshed>Function>/Script/CoreUObject)
-	IsPartyLeader (0-0-0-0): size 34 (cls: IsPartyLeader>BoolProperty>/Script/CoreUObject)
-	UpdateMatchmakingButtonsBP (0-0-0-0): size 156 (cls: UpdateMatchmakingButtonsBP>Function>/Script/CoreUObject)
+	RepresentedPlaylistChanged (0-0-0-0): size 68 (cls: RepresentedPlaylistChanged>Function>/Script/CoreUObject)
+	OnRightPanelIntroFinshed (0-0-0-0): size 54 (cls: OnRightPanelIntroFinshed>Function>/Script/CoreUObject)
+	OnBeginIntro (0-0-0-0): size 54 (cls: OnBeginIntro>Function>/Script/CoreUObject)
+	OnRightPanelOutroFinshed (0-0-0-0): size 54 (cls: OnRightPanelOutroFinshed>Function>/Script/CoreUObject)
 	Button (0-0-0-0): size 36 (cls: Button>ObjectProperty>/Script/CoreUObject)
-	BndEvt__CancelButton_K2Node_ComponentBoundEvent_18_CommonButtonClicked__DelegateSignature (0-0-0-0): size 72 (cls: BndEvt__CancelButton_K2Node_ComponentBoundEvent_18_CommonButtonClicked__DelegateSignature>Function>/Script/CoreUObject)
+	BndEvt__CancelButton_K2Node_ComponentBoundEvent_18_CommonButtonClicked__DelegateSignature (0-0-0-0): size 68 (cls: BndEvt__CancelButton_K2Node_ComponentBoundEvent_18_CommonButtonClicked__DelegateSignature>Function>/Script/CoreUObject)
 	Button (0-0-0-0): size 36 (cls: Button>ObjectProperty>/Script/CoreUObject)
-	BndEvt__AcceptButton_K2Node_ComponentBoundEvent_1_CommonButtonClicked__DelegateSignature (0-0-0-0): size 72 (cls: BndEvt__AcceptButton_K2Node_ComponentBoundEvent_1_CommonButtonClicked__DelegateSignature>Function>/Script/CoreUObject)
-	InCurrentSquadFill (0-0-0-0): size 34 (cls: InCurrentSquadFill>BoolProperty>/Script/CoreUObject)
-	SetSquadFillText (0-0-0-0): size 72 (cls: SetSquadFillText>Function>/Script/CoreUObject)
+	BndEvt__AcceptButton_K2Node_ComponentBoundEvent_1_CommonButtonClicked__DelegateSignature (0-0-0-0): size 68 (cls: BndEvt__AcceptButton_K2Node_ComponentBoundEvent_1_CommonButtonClicked__DelegateSignature>Function>/Script/CoreUObject)
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	InSquadFillSetting (0-0-0-0): size 40 (cls: InSquadFillSetting>EnumProperty>/Script/CoreUObject)
+	SetSquadFillText (0-0-0-0): size 68 (cls: SetSquadFillText>Function>/Script/CoreUObject)
 	K2Node_CreateDelegate_OutputDelegate (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate>DelegateProperty>/Script/CoreUObject)
 	SetupInput (0-0-0-0): size 113 (cls: SetupInput>Function>/Script/CoreUObject)
 	Handle_InputAction_Cancel (0-0-0-0): size 64 (cls: Handle_InputAction_Cancel>Function>/Script/CoreUObject)
@@ -1383,12 +1411,6 @@ Serialized exports:
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
-	bIsTournamentPlaylist (0-0-0-0): size 34 (cls: bIsTournamentPlaylist>BoolProperty>/Script/CoreUObject)
-	bPartyTooBig (0-0-0-0): size 34 (cls: bPartyTooBig>BoolProperty>/Script/CoreUObject)
-	bPartyTooSmall (0-0-0-0): size 34 (cls: bPartyTooSmall>BoolProperty>/Script/CoreUObject)
-	CanShowFill (0-0-0-0): size 34 (cls: CanShowFill>BoolProperty>/Script/CoreUObject)
-	IsMatchmaking (0-0-0-0): size 34 (cls: IsMatchmaking>BoolProperty>/Script/CoreUObject)
-	PlaylistIsDisabled (0-0-0-0): size 34 (cls: PlaylistIsDisabled>BoolProperty>/Script/CoreUObject)
 	ContentBorder (0-0-0-0): size 350 (cls: ContentBorder>Border>/Script/UMG):
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
@@ -1486,6 +1508,12 @@ Serialized exports:
 			RenderTransform(StructProperty)=System.Byte[] 
 			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
 			RenderOpacity(FloatProperty)=0.7 
+	ContentBorder (0-0-0-0): size 350 (cls: ContentBorder>Border>/Script/UMG):
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			Background(StructProperty)=System.Byte[] 
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			bIsVariable(BoolProperty)=True 
 	Border_Darken (0-0-0-0): size 305 (cls: Border_Darken>Border>/Script/UMG):
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
@@ -1493,12 +1521,6 @@ Serialized exports:
 			Slot(ObjectProperty)=OverlaySlot_1=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
 	Dimmer (0-0-0-0): size 350 (cls: Dimmer>Border>/Script/UMG):
-		Tag array:
-			Padding(StructProperty)=System.Byte[] 
-			Background(StructProperty)=System.Byte[] 
-			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-			bIsVariable(BoolProperty)=True 
-	ContentBorder (0-0-0-0): size 350 (cls: ContentBorder>Border>/Script/UMG):
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
 			Background(StructProperty)=System.Byte[] 
@@ -1651,6 +1673,11 @@ Serialized exports:
 			Padding(StructProperty)=System.Byte[] 
 			Parent(ObjectProperty)=BorderLTMBang_Heist=WidgetArchetype 
 			Content(ObjectProperty)=SizeBox_2=WidgetArchetype 
+	BorderSlot_0 (0-0-0-0): size 243 (cls: BorderSlot_0>BorderSlot>/Script/UMG):
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			Parent(ObjectProperty)=ContentBorder=WidgetArchetype 
+			Content(ObjectProperty)=HorizontalBox=WidgetArchetype 
 	BorderSlot_1 (0-0-0-0): size 243 (cls: BorderSlot_1>BorderSlot>/Script/UMG):
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
@@ -1666,11 +1693,6 @@ Serialized exports:
 			Padding(StructProperty)=System.Byte[] 
 			Parent(ObjectProperty)=WIndowButtons=WidgetArchetype 
 			Content(ObjectProperty)=SizeBox_0=WidgetArchetype 
-	BorderSlot_0 (0-0-0-0): size 243 (cls: BorderSlot_0>BorderSlot>/Script/UMG):
-		Tag array:
-			Padding(StructProperty)=System.Byte[] 
-			Parent(ObjectProperty)=ContentBorder=WidgetArchetype 
-			Content(ObjectProperty)=HorizontalBox=WidgetArchetype 
 	BorderSlot_0 (0-0-0-0): size 243 (cls: BorderSlot_0>BorderSlot>/Script/UMG):
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
@@ -1705,8 +1727,15 @@ Serialized exports:
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
-	K2Node_Select2_Default (0-0-0-0): size 40 (cls: K2Node_Select2_Default>ClassProperty>/Script/CoreUObject)
-	K2Node_Select3_Default (0-0-0-0): size 40 (cls: K2Node_Select3_Default>ClassProperty>/Script/CoreUObject)
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	K2Node_Select6_Default (0-0-0-0): size 40 (cls: K2Node_Select6_Default>ClassProperty>/Script/CoreUObject)
+	K2Node_Select7_Default (0-0-0-0): size 40 (cls: K2Node_Select7_Default>ClassProperty>/Script/CoreUObject)
 	Temp_class_Variable (0-0-0-0): size 40 (cls: Temp_class_Variable>ClassProperty>/Script/CoreUObject)
 	Temp_class_Variable1 (0-0-0-0): size 40 (cls: Temp_class_Variable1>ClassProperty>/Script/CoreUObject)
 	Temp_class_Variable2 (0-0-0-0): size 40 (cls: Temp_class_Variable2>ClassProperty>/Script/CoreUObject)
@@ -1928,362 +1957,403 @@ Serialized exports:
 		Tag array:
 			Slot(ObjectProperty)=OverlaySlot_2=WidgetArchetype 
 			Visibility(EnumProperty)=ESlateVisibility::Visible 
-	CenterButtonTextWidget (0-0-0-0): size 367 (cls: CenterButtonTextWidget>CommonTextBlock>/Script/CommonUI):
+	CenterButtonTextWidget (0-0-0-0): size 453 (cls: CenterButtonTextWidget>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-MediumButton_C=/Game/UI/Foundation/Buttons/TextStyles/TextStyle-MediumButton 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)={Text} (99357DD44CFC5E3692A9C792F19B30DA) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Center 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	AdText (0-0-0-0): size 328 (cls: AdText>CommonTextBlock>/Script/CommonUI):
+	AdText (0-0-0-0): size 385 (cls: AdText>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-S_C=/Game/UI/Foundation/Text/TextStyle-Header-S 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)=UPDATED! (F79995CD4BF68EE059B2309007EC6AF9) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	GameModeName (0-0-0-0): size 595 (cls: GameModeName>CommonTextBlock>/Script/CommonUI):
+	GameModeName (0-0-0-0): size 652 (cls: GameModeName>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-M-70pc_C=/Game/UI/Foundation/Text/TextStyle-Header-M-70pc 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)={GameMode} (387A537C44B96B61DA14CA84FCCC814C) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
 			bIsVariable(BoolProperty)=True 
-	SpecialAdText (0-0-0-0): size 328 (cls: SpecialAdText>CommonTextBlock>/Script/CommonUI):
+	SpecialAdText (0-0-0-0): size 385 (cls: SpecialAdText>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-S_C=/Game/UI/Foundation/Text/TextStyle-Header-S 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)=UPDATED! (F79995CD4BF68EE059B2309007EC6AF9) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	SubGameModeName (0-0-0-0): size 569 (cls: SubGameModeName>CommonTextBlock>/Script/CommonUI):
+	SubGameModeName (0-0-0-0): size 626 (cls: SubGameModeName>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-S-40pc_C=/Game/UI/Foundation/Text/TextStyle-Header-S-40pc 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)={SubGameMode} (6E23A7E648D7DA2CA6901085DBD4196B) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
 			bIsVariable(BoolProperty)=True 
-	AdText (0-0-0-0): size 328 (cls: AdText>CommonTextBlock>/Script/CommonUI):
+	AdText (0-0-0-0): size 385 (cls: AdText>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-S_C=/Game/UI/Foundation/Text/TextStyle-Header-S 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)=UPDATED! (F79995CD4BF68EE059B2309007EC6AF9) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	GameModeName (0-0-0-0): size 595 (cls: GameModeName>CommonTextBlock>/Script/CommonUI):
+	GameModeName (0-0-0-0): size 652 (cls: GameModeName>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-M-70pc_C=/Game/UI/Foundation/Text/TextStyle-Header-M-70pc 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)={GameMode} (387A537C44B96B61DA14CA84FCCC814C) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
 			bIsVariable(BoolProperty)=True 
-	SpecialAdText (0-0-0-0): size 328 (cls: SpecialAdText>CommonTextBlock>/Script/CommonUI):
+	SpecialAdText (0-0-0-0): size 385 (cls: SpecialAdText>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-S_C=/Game/UI/Foundation/Text/TextStyle-Header-S 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)=UPDATED! (F79995CD4BF68EE059B2309007EC6AF9) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	SubGameModeName (0-0-0-0): size 569 (cls: SubGameModeName>CommonTextBlock>/Script/CommonUI):
+	SubGameModeName (0-0-0-0): size 626 (cls: SubGameModeName>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-S-40pc_C=/Game/UI/Foundation/Text/TextStyle-Header-S-40pc 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)={SubGameMode} (6E23A7E648D7DA2CA6901085DBD4196B) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
 			bIsVariable(BoolProperty)=True 
-	AdText (0-0-0-0): size 328 (cls: AdText>CommonTextBlock>/Script/CommonUI):
+	AdText (0-0-0-0): size 385 (cls: AdText>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-S_C=/Game/UI/Foundation/Text/TextStyle-Header-S 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)=UPDATED! (F79995CD4BF68EE059B2309007EC6AF9) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	GameModeName (0-0-0-0): size 595 (cls: GameModeName>CommonTextBlock>/Script/CommonUI):
+	GameModeName (0-0-0-0): size 652 (cls: GameModeName>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-M-70pc_C=/Game/UI/Foundation/Text/TextStyle-Header-M-70pc 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)={GameMode} (387A537C44B96B61DA14CA84FCCC814C) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
 			bIsVariable(BoolProperty)=True 
-	SpecialAdText (0-0-0-0): size 328 (cls: SpecialAdText>CommonTextBlock>/Script/CommonUI):
+	SpecialAdText (0-0-0-0): size 385 (cls: SpecialAdText>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-S_C=/Game/UI/Foundation/Text/TextStyle-Header-S 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)=UPDATED! (F79995CD4BF68EE059B2309007EC6AF9) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	SubGameModeName (0-0-0-0): size 569 (cls: SubGameModeName>CommonTextBlock>/Script/CommonUI):
+	SubGameModeName (0-0-0-0): size 626 (cls: SubGameModeName>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-S-40pc_C=/Game/UI/Foundation/Text/TextStyle-Header-S-40pc 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)={SubGameMode} (6E23A7E648D7DA2CA6901085DBD4196B) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
 			bIsVariable(BoolProperty)=True 
-	AdText (0-0-0-0): size 328 (cls: AdText>CommonTextBlock>/Script/CommonUI):
+	AdText (0-0-0-0): size 385 (cls: AdText>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-S_C=/Game/UI/Foundation/Text/TextStyle-Header-S 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)=UPDATED! (F79995CD4BF68EE059B2309007EC6AF9) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	GameModeName (0-0-0-0): size 595 (cls: GameModeName>CommonTextBlock>/Script/CommonUI):
+	GameModeName (0-0-0-0): size 652 (cls: GameModeName>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-M-70pc_C=/Game/UI/Foundation/Text/TextStyle-Header-M-70pc 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)={GameMode} (387A537C44B96B61DA14CA84FCCC814C) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
 			bIsVariable(BoolProperty)=True 
-	SpecialAdText (0-0-0-0): size 328 (cls: SpecialAdText>CommonTextBlock>/Script/CommonUI):
+	SpecialAdText (0-0-0-0): size 385 (cls: SpecialAdText>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-S_C=/Game/UI/Foundation/Text/TextStyle-Header-S 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)=UPDATED! (F79995CD4BF68EE059B2309007EC6AF9) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	SubGameModeName (0-0-0-0): size 569 (cls: SubGameModeName>CommonTextBlock>/Script/CommonUI):
+	SubGameModeName (0-0-0-0): size 626 (cls: SubGameModeName>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-S-40pc_C=/Game/UI/Foundation/Text/TextStyle-Header-S-40pc 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)={SubGameMode} (6E23A7E648D7DA2CA6901085DBD4196B) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
 			bIsVariable(BoolProperty)=True 
-	AdText (0-0-0-0): size 328 (cls: AdText>CommonTextBlock>/Script/CommonUI):
+	AdText (0-0-0-0): size 385 (cls: AdText>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-S_C=/Game/UI/Foundation/Text/TextStyle-Header-S 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)=UPDATED! (F79995CD4BF68EE059B2309007EC6AF9) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	GameModeName (0-0-0-0): size 595 (cls: GameModeName>CommonTextBlock>/Script/CommonUI):
+	GameModeName (0-0-0-0): size 652 (cls: GameModeName>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-M-70pc_C=/Game/UI/Foundation/Text/TextStyle-Header-M-70pc 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)={GameMode} (387A537C44B96B61DA14CA84FCCC814C) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
 			bIsVariable(BoolProperty)=True 
-	SpecialAdText (0-0-0-0): size 328 (cls: SpecialAdText>CommonTextBlock>/Script/CommonUI):
+	SpecialAdText (0-0-0-0): size 385 (cls: SpecialAdText>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-S_C=/Game/UI/Foundation/Text/TextStyle-Header-S 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)=UPDATED! (F79995CD4BF68EE059B2309007EC6AF9) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	SubGameModeName (0-0-0-0): size 569 (cls: SubGameModeName>CommonTextBlock>/Script/CommonUI):
+	SubGameModeName (0-0-0-0): size 626 (cls: SubGameModeName>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-S-40pc_C=/Game/UI/Foundation/Text/TextStyle-Header-S-40pc 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)={SubGameMode} (6E23A7E648D7DA2CA6901085DBD4196B) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
 			bIsVariable(BoolProperty)=True 
-	AdText (0-0-0-0): size 328 (cls: AdText>CommonTextBlock>/Script/CommonUI):
+	AdText (0-0-0-0): size 385 (cls: AdText>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-S_C=/Game/UI/Foundation/Text/TextStyle-Header-S 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)=UPDATED! (F79995CD4BF68EE059B2309007EC6AF9) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	GameModeName (0-0-0-0): size 595 (cls: GameModeName>CommonTextBlock>/Script/CommonUI):
+	GameModeName (0-0-0-0): size 652 (cls: GameModeName>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-M-70pc_C=/Game/UI/Foundation/Text/TextStyle-Header-M-70pc 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)={GameMode} (387A537C44B96B61DA14CA84FCCC814C) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
 			bIsVariable(BoolProperty)=True 
-	SpecialAdText (0-0-0-0): size 328 (cls: SpecialAdText>CommonTextBlock>/Script/CommonUI):
+	SpecialAdText (0-0-0-0): size 385 (cls: SpecialAdText>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-S_C=/Game/UI/Foundation/Text/TextStyle-Header-S 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)=UPDATED! (F79995CD4BF68EE059B2309007EC6AF9) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	SubGameModeName (0-0-0-0): size 569 (cls: SubGameModeName>CommonTextBlock>/Script/CommonUI):
+	SubGameModeName (0-0-0-0): size 626 (cls: SubGameModeName>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-S-40pc_C=/Game/UI/Foundation/Text/TextStyle-Header-S-40pc 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)={SubGameMode} (6E23A7E648D7DA2CA6901085DBD4196B) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
 			bIsVariable(BoolProperty)=True 
-	AdText (0-0-0-0): size 328 (cls: AdText>CommonTextBlock>/Script/CommonUI):
+	AdText (0-0-0-0): size 385 (cls: AdText>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-S_C=/Game/UI/Foundation/Text/TextStyle-Header-S 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)=UPDATED! (F79995CD4BF68EE059B2309007EC6AF9) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	GameModeName (0-0-0-0): size 595 (cls: GameModeName>CommonTextBlock>/Script/CommonUI):
+	GameModeName (0-0-0-0): size 652 (cls: GameModeName>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-M-70pc_C=/Game/UI/Foundation/Text/TextStyle-Header-M-70pc 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)={GameMode} (387A537C44B96B61DA14CA84FCCC814C) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
 			bIsVariable(BoolProperty)=True 
-	SpecialAdText (0-0-0-0): size 328 (cls: SpecialAdText>CommonTextBlock>/Script/CommonUI):
+	SpecialAdText (0-0-0-0): size 385 (cls: SpecialAdText>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-S_C=/Game/UI/Foundation/Text/TextStyle-Header-S 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)=UPDATED! (F79995CD4BF68EE059B2309007EC6AF9) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	SubGameModeName (0-0-0-0): size 569 (cls: SubGameModeName>CommonTextBlock>/Script/CommonUI):
+	SubGameModeName (0-0-0-0): size 626 (cls: SubGameModeName>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-S-40pc_C=/Game/UI/Foundation/Text/TextStyle-Header-S-40pc 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)={SubGameMode} (6E23A7E648D7DA2CA6901085DBD4196B) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
 			bIsVariable(BoolProperty)=True 
-	CommonTextBlock_0 (0-0-0-0): size 380 (cls: CommonTextBlock_0>CommonTextBlock>/Script/CommonUI):
+	CenterButtonTextWidget (0-0-0-0): size 453 (cls: CenterButtonTextWidget>CommonTextBlock>/Script/CommonUI):
+		Tag array:
+			Style(ObjectProperty)=TextStyle-MediumButton_C=/Game/UI/Foundation/Buttons/TextStyles/TextStyle-MediumButton 
+			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
+			Text(TextProperty)={Text} (99357DD44CFC5E3692A9C792F19B30DA) 
+			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
+			Justification(ByteProperty)=ETextJustify::Center 
+			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
+			bIsVariable(BoolProperty)=True 
+	CommonTextBlock_0 (0-0-0-0): size 559 (cls: CommonTextBlock_0>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-L-20pc_C=/Game/UI/Foundation/Text/TextStyle-Header-L-20pc 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)=CHOOSE GAME MODE (E56C2FBB4F24B5D4E9DC39A1F779369C) 
+			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Center 
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
-	CurrentGameModeDescription (0-0-0-0): size 475 (cls: CurrentGameModeDescription>CommonTextBlock>/Script/CommonUI):
+	CurrentGameModeDescription (0-0-0-0): size 561 (cls: CurrentGameModeDescription>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-I-40pc_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-I-40pc 
 			Text(TextProperty)={Current Game Mode Description Text} (2B0ECC8D430BC159ECFE0BA55669BDFD) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			AutoWrapText(BoolProperty)=True 
 			Slot(ObjectProperty)=VerticalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	CurrentGameModeDisabledDescription (0-0-0-0): size 479 (cls: CurrentGameModeDisabledDescription>CommonTextBlock>/Script/CommonUI):
+	CurrentGameModeDisabledDescription (0-0-0-0): size 565 (cls: CurrentGameModeDisabledDescription>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B-Yellow_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B-Yellow 
 			Text(TextProperty)={Current Game Mode Disabled Description} (CCA83BAC4B24D2058F4DA19350148CD2) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			AutoWrapText(BoolProperty)=True 
-			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
+			Slot(ObjectProperty)=VerticalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	CurrentGameModeName (0-0-0-0): size 400 (cls: CurrentGameModeName>CommonTextBlock>/Script/CommonUI):
+	CurrentGameModeName (0-0-0-0): size 457 (cls: CurrentGameModeName>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-L_C=/Game/UI/Foundation/Text/TextStyle-Header-L 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)={GameMode} (CAF3CC9A4BFCC22261F149B3B6D00BC5) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Center 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	CenterButtonTextWidget (0-0-0-0): size 367 (cls: CenterButtonTextWidget>CommonTextBlock>/Script/CommonUI):
+	CenterButtonTextWidget (0-0-0-0): size 453 (cls: CenterButtonTextWidget>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-MediumButton_C=/Game/UI/Foundation/Buttons/TextStyles/TextStyle-MediumButton 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)={Text} (99357DD44CFC5E3692A9C792F19B30DA) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Center 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	MatchmakingWarningText (0-0-0-0): size 530 (cls: MatchmakingWarningText>CommonTextBlock>/Script/CommonUI):
+	MatchmakingWarningText (0-0-0-0): size 616 (cls: MatchmakingWarningText>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B-Yellow_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B-Yellow 
 			Text(TextProperty)=Custom Options are only available with Don't Fill. (64EBB1E44A649F180BE801B235ED5D37) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			AutoWrapText(BoolProperty)=True 
 			Slot(ObjectProperty)=VerticalBoxSlot_2=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
 			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
-	CenterButtonTextWidget (0-0-0-0): size 367 (cls: CenterButtonTextWidget>CommonTextBlock>/Script/CommonUI):
-		Tag array:
-			Style(ObjectProperty)=TextStyle-MediumButton_C=/Game/UI/Foundation/Buttons/TextStyles/TextStyle-MediumButton 
-			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
-			Text(TextProperty)={Text} (99357DD44CFC5E3692A9C792F19B30DA) 
-			Font(StructProperty)=System.Byte[] 
-			Justification(ByteProperty)=ETextJustify::Center 
-			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
-			bIsVariable(BoolProperty)=True 
-	SubGameModeName (0-0-0-0): size 569 (cls: SubGameModeName>CommonTextBlock>/Script/CommonUI):
+	SubGameModeName (0-0-0-0): size 626 (cls: SubGameModeName>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-S-70pc_C=/Game/UI/Foundation/Text/TextStyle-Header-S-70pc 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)={SubGameMode} (37BA810D40C3444F99A8A09AFA5A4A4F) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
 			bIsVariable(BoolProperty)=True 
-	T_LTMBangText (0-0-0-0): size 338 (cls: T_LTMBangText>CommonTextBlock>/Script/CommonUI):
+	T_LTMBangText (0-0-0-0): size 395 (cls: T_LTMBangText>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-S_C=/Game/UI/Foundation/Text/TextStyle-Header-S 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)=LIMITED TIME ONLY! (ED72F91149697385694D57A124A0D41A) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	T_LTMBangText_Heist (0-0-0-0): size 344 (cls: T_LTMBangText_Heist>CommonTextBlock>/Script/CommonUI):
+	T_LTMBangText_Heist (0-0-0-0): size 401 (cls: T_LTMBangText_Heist>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-S_C=/Game/UI/Foundation/Text/TextStyle-Header-S 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)=UPDATED!UPDATED!UPDATED! (E68107FA462BF02568E15EB36215C2F5) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	CenterButtonTextWidget (0-0-0-0): size 367 (cls: CenterButtonTextWidget>CommonTextBlock>/Script/CommonUI):
+	CenterButtonTextWidget (0-0-0-0): size 453 (cls: CenterButtonTextWidget>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-MediumButton_C=/Game/UI/Foundation/Buttons/TextStyles/TextStyle-MediumButton 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)={Text} (99357DD44CFC5E3692A9C792F19B30DA) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Center 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
@@ -2414,17 +2484,23 @@ Serialized exports:
 	K2Node_CreateDelegate_OutputDelegate1 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate1>DelegateProperty>/Script/CoreUObject)
 	K2Node_CreateDelegate_OutputDelegate (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate>DelegateProperty>/Script/CoreUObject)
 	K2Node_CreateDelegate_OutputDelegate (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate>DelegateProperty>/Script/CoreUObject)
-	K2Node_Select1_Default (0-0-0-0): size 40 (cls: K2Node_Select1_Default>EnumProperty>/Script/CoreUObject)
-	K2Node_Select6_Default (0-0-0-0): size 40 (cls: K2Node_Select6_Default>EnumProperty>/Script/CoreUObject)
-	K2Node_Select7_Default (0-0-0-0): size 40 (cls: K2Node_Select7_Default>EnumProperty>/Script/CoreUObject)
-	K2Node_Select8_Default (0-0-0-0): size 40 (cls: K2Node_Select8_Default>EnumProperty>/Script/CoreUObject)
-	K2Node_Select9_Default (0-0-0-0): size 40 (cls: K2Node_Select9_Default>EnumProperty>/Script/CoreUObject)
+	K2Node_Event_FillDisableReason (0-0-0-0): size 40 (cls: K2Node_Event_FillDisableReason>EnumProperty>/Script/CoreUObject)
+	K2Node_Event_InServerAccessSetting (0-0-0-0): size 40 (cls: K2Node_Event_InServerAccessSetting>EnumProperty>/Script/CoreUObject)
+	K2Node_Event_InSquadFillSetting (0-0-0-0): size 40 (cls: K2Node_Event_InSquadFillSetting>EnumProperty>/Script/CoreUObject)
+	K2Node_Select10_Default (0-0-0-0): size 40 (cls: K2Node_Select10_Default>EnumProperty>/Script/CoreUObject)
+	K2Node_Select11_Default (0-0-0-0): size 40 (cls: K2Node_Select11_Default>EnumProperty>/Script/CoreUObject)
+	K2Node_Select12_Default (0-0-0-0): size 40 (cls: K2Node_Select12_Default>EnumProperty>/Script/CoreUObject)
+	K2Node_Select2_Default (0-0-0-0): size 40 (cls: K2Node_Select2_Default>EnumProperty>/Script/CoreUObject)
+	K2Node_Select5_Default (0-0-0-0): size 40 (cls: K2Node_Select5_Default>EnumProperty>/Script/CoreUObject)
 	K2Node_Select_Default (0-0-0-0): size 40 (cls: K2Node_Select_Default>EnumProperty>/Script/CoreUObject)
 	Temp_byte_Variable (0-0-0-0): size 40 (cls: Temp_byte_Variable>EnumProperty>/Script/CoreUObject)
 	Temp_byte_Variable1 (0-0-0-0): size 40 (cls: Temp_byte_Variable1>EnumProperty>/Script/CoreUObject)
 	Temp_byte_Variable10 (0-0-0-0): size 40 (cls: Temp_byte_Variable10>EnumProperty>/Script/CoreUObject)
 	Temp_byte_Variable11 (0-0-0-0): size 40 (cls: Temp_byte_Variable11>EnumProperty>/Script/CoreUObject)
 	Temp_byte_Variable12 (0-0-0-0): size 40 (cls: Temp_byte_Variable12>EnumProperty>/Script/CoreUObject)
+	Temp_byte_Variable13 (0-0-0-0): size 40 (cls: Temp_byte_Variable13>EnumProperty>/Script/CoreUObject)
+	Temp_byte_Variable14 (0-0-0-0): size 40 (cls: Temp_byte_Variable14>EnumProperty>/Script/CoreUObject)
+	Temp_byte_Variable15 (0-0-0-0): size 40 (cls: Temp_byte_Variable15>EnumProperty>/Script/CoreUObject)
 	Temp_byte_Variable2 (0-0-0-0): size 40 (cls: Temp_byte_Variable2>EnumProperty>/Script/CoreUObject)
 	Temp_byte_Variable3 (0-0-0-0): size 40 (cls: Temp_byte_Variable3>EnumProperty>/Script/CoreUObject)
 	Temp_byte_Variable4 (0-0-0-0): size 40 (cls: Temp_byte_Variable4>EnumProperty>/Script/CoreUObject)
@@ -2433,6 +2509,7 @@ Serialized exports:
 	Temp_byte_Variable7 (0-0-0-0): size 40 (cls: Temp_byte_Variable7>EnumProperty>/Script/CoreUObject)
 	Temp_byte_Variable8 (0-0-0-0): size 40 (cls: Temp_byte_Variable8>EnumProperty>/Script/CoreUObject)
 	Temp_byte_Variable9 (0-0-0-0): size 40 (cls: Temp_byte_Variable9>EnumProperty>/Script/CoreUObject)
+	FillDisableReason (0-0-0-0): size 40 (cls: FillDisableReason>EnumProperty>/Script/CoreUObject)
 	GameModeImage (0-0-0-0): size 290 (cls: GameModeImage>EpicCMSImage>/Script/EpicCMSUIFramework):
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
@@ -2553,6 +2630,10 @@ Serialized exports:
 			Slot(ObjectProperty)=VerticalBoxSlot_1=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
 			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
+	HorizontalBox (0-0-0-0): size 94 (cls: HorizontalBox>HorizontalBox>/Script/UMG):
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=BorderSlot_0=WidgetArchetype 
 	GameModeNameHB (0-0-0-0): size 90 (cls: GameModeNameHB>HorizontalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -2562,10 +2643,6 @@ Serialized exports:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
 			Visibility(EnumProperty)=ESlateVisibility::Visible 
-	HorizontalBox (0-0-0-0): size 94 (cls: HorizontalBox>HorizontalBox>/Script/UMG):
-		Tag array:
-			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-			Slot(ObjectProperty)=BorderSlot_0=WidgetArchetype 
 	HorizontalBox (0-0-0-0): size 94 (cls: HorizontalBox>HorizontalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -2580,7 +2657,7 @@ Serialized exports:
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=BorderSlot_0=WidgetArchetype 
-	WarningHB (0-0-0-0): size 112 (cls: WarningHB>HorizontalBox>/Script/UMG):
+	WarningHB (0-0-0-0): size 108 (cls: WarningHB>HorizontalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=VerticalBoxSlot_2=WidgetArchetype 
@@ -2821,6 +2898,32 @@ Serialized exports:
 			VerticalAlignment(ByteProperty)=VAlign_Center 
 			Parent(ObjectProperty)=SubGameModeNameHB=WidgetArchetype 
 			Content(ObjectProperty)=LTMModeSubIcon=WidgetArchetype 
+	HorizontalBoxSlot_0 (0-0-0-0): size 382 (cls: HorizontalBoxSlot_0>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			Size(StructProperty)=System.Byte[] 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=HorizontalBox=WidgetArchetype 
+			Content(ObjectProperty)=CenterButtonTextWidget=WidgetArchetype 
+	HorizontalBoxSlot_1 (0-0-0-0): size 267 (cls: HorizontalBoxSlot_1>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=HorizontalBox=WidgetArchetype 
+			Content(ObjectProperty)=InputActionWidget=WidgetArchetype 
+	HorizontalBoxSlot_2 (0-0-0-0): size 325 (cls: HorizontalBoxSlot_2>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=HorizontalBox=WidgetArchetype 
+			Content(ObjectProperty)=LeftSideImage=WidgetArchetype 
+	HorizontalBoxSlot_3 (0-0-0-0): size 243 (cls: HorizontalBoxSlot_3>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			Parent(ObjectProperty)=HorizontalBox=WidgetArchetype 
+			Content(ObjectProperty)=RightExtraContentSlot=WidgetArchetype 
 	HorizontalBoxSlot_0 (0-0-0-0): size 70 (cls: HorizontalBoxSlot_0>HorizontalBoxSlot>/Script/UMG):
 		Tag array:
 			Parent(ObjectProperty)=GameModeNameHB=WidgetArchetype 
@@ -2849,32 +2952,6 @@ Serialized exports:
 			Size(StructProperty)=System.Byte[] 
 			Parent(ObjectProperty)=HorizontalBox_1=WidgetArchetype 
 			Content(ObjectProperty)=SizeBox_1=WidgetArchetype 
-	HorizontalBoxSlot_0 (0-0-0-0): size 382 (cls: HorizontalBoxSlot_0>HorizontalBoxSlot>/Script/UMG):
-		Tag array:
-			Padding(StructProperty)=System.Byte[] 
-			Size(StructProperty)=System.Byte[] 
-			VerticalAlignment(ByteProperty)=VAlign_Center 
-			Parent(ObjectProperty)=HorizontalBox=WidgetArchetype 
-			Content(ObjectProperty)=CenterButtonTextWidget=WidgetArchetype 
-	HorizontalBoxSlot_1 (0-0-0-0): size 267 (cls: HorizontalBoxSlot_1>HorizontalBoxSlot>/Script/UMG):
-		Tag array:
-			Padding(StructProperty)=System.Byte[] 
-			HorizontalAlignment(ByteProperty)=HAlign_Center 
-			VerticalAlignment(ByteProperty)=VAlign_Center 
-			Parent(ObjectProperty)=HorizontalBox=WidgetArchetype 
-			Content(ObjectProperty)=InputActionWidget=WidgetArchetype 
-	HorizontalBoxSlot_2 (0-0-0-0): size 325 (cls: HorizontalBoxSlot_2>HorizontalBoxSlot>/Script/UMG):
-		Tag array:
-			Padding(StructProperty)=System.Byte[] 
-			HorizontalAlignment(ByteProperty)=HAlign_Center 
-			VerticalAlignment(ByteProperty)=VAlign_Center 
-			Parent(ObjectProperty)=HorizontalBox=WidgetArchetype 
-			Content(ObjectProperty)=LeftSideImage=WidgetArchetype 
-	HorizontalBoxSlot_3 (0-0-0-0): size 243 (cls: HorizontalBoxSlot_3>HorizontalBoxSlot>/Script/UMG):
-		Tag array:
-			Padding(StructProperty)=System.Byte[] 
-			Parent(ObjectProperty)=HorizontalBox=WidgetArchetype 
-			Content(ObjectProperty)=RightExtraContentSlot=WidgetArchetype 
 	HorizontalBoxSlot_0 (0-0-0-0): size 382 (cls: HorizontalBoxSlot_0>HorizontalBoxSlot>/Script/UMG):
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
@@ -2947,13 +3024,7 @@ Serialized exports:
 			Padding(StructProperty)=System.Byte[] 
 			Size(StructProperty)=System.Byte[] 
 			Parent(ObjectProperty)=WarningHB=WidgetArchetype 
-			Content(ObjectProperty)=CurrentGameModeDisabledDescription=WidgetArchetype 
-	HorizontalBoxSlot_1 (0-0-0-0): size 152 (cls: HorizontalBoxSlot_1>HorizontalBoxSlot>/Script/UMG):
-		Tag array:
-			HorizontalAlignment(ByteProperty)=HAlign_Center 
-			VerticalAlignment(ByteProperty)=VAlign_Center 
-			Parent(ObjectProperty)=WarningHB=WidgetArchetype 
-			Content(ObjectProperty)=WarningIcon=WidgetArchetype 
+			Content(ObjectProperty)=VerticalBox_5=WidgetArchetype 
 	AcceptButton (0-0-0-0): size 512 (cls: AcceptButton>IconTextButton_C>/Game/UI/Foundation/Buttons/IconTextButton):
 		Tag array:
 			CenterButtonTextWidget(ObjectProperty)=CenterButtonTextWidget=WidgetArchetype 
@@ -2968,6 +3039,22 @@ Serialized exports:
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=VerticalBoxSlot_5=WidgetArchetype 
+	Button_ServerPrivacy (0-0-0-0): size 592 (cls: Button_ServerPrivacy>IconTextButton_C>/Game/UI/Foundation/Buttons/IconTextButton):
+		Tag array:
+			CenterButtonTextWidget(ObjectProperty)=CenterButtonTextWidget=WidgetArchetype 
+			ContentBorder(ObjectProperty)=ContentBorder=WidgetArchetype 
+			LeftSideImage(ObjectProperty)=LeftSideImage=WidgetArchetype 
+			RightExtraContentSlot(ObjectProperty)=RightExtraContentSlot=WidgetArchetype 
+			ButtonText(TextProperty)=FRIENDS CAN JOIN (A401F49B4D7C8CFB11B1E0B26BC0C560) 
+			ContentAlignment(ByteProperty)=HAlign_Center 
+			MinHeight(IntProperty)=72 
+			Style(ObjectProperty)=ButtonStyle-Outline-FadedBlue_C=/Game/UI/Foundation/Buttons/ButtonStyles/TopBar/ButtonStyle-Outline-FadedBlue 
+			TriggeringInputAction(StructProperty)=System.Byte[] 
+			InputActionWidget(ObjectProperty)=InputActionWidget=WidgetArchetype 
+			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
+			bCookedWidgetTree(BoolProperty)=True 
+			Slot(ObjectProperty)=VerticalBoxSlot_4=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
 	MatchmakingKnobsButton (0-0-0-0): size 589 (cls: MatchmakingKnobsButton>IconTextButton_C>/Game/UI/Foundation/Buttons/IconTextButton):
 		Tag array:
 			CenterButtonTextWidget(ObjectProperty)=CenterButtonTextWidget=WidgetArchetype 
@@ -2984,23 +3071,7 @@ Serialized exports:
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=VerticalBoxSlot_0=WidgetArchetype 
 			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
-	RankedButton (0-0-0-0): size 582 (cls: RankedButton>IconTextButton_C>/Game/UI/Foundation/Buttons/IconTextButton):
-		Tag array:
-			CenterButtonTextWidget(ObjectProperty)=CenterButtonTextWidget=WidgetArchetype 
-			ContentBorder(ObjectProperty)=ContentBorder=WidgetArchetype 
-			LeftSideImage(ObjectProperty)=LeftSideImage=WidgetArchetype 
-			RightExtraContentSlot(ObjectProperty)=RightExtraContentSlot=WidgetArchetype 
-			ButtonText(TextProperty)=RANKED (A401F49B4D7C8CFB11B1E0B26BC0C560) 
-			ContentAlignment(ByteProperty)=HAlign_Center 
-			MinHeight(IntProperty)=72 
-			Style(ObjectProperty)=ButtonStyle-Outline-FadedBlue_C=/Game/UI/Foundation/Buttons/ButtonStyles/TopBar/ButtonStyle-Outline-FadedBlue 
-			TriggeringInputAction(StructProperty)=System.Byte[] 
-			InputActionWidget(ObjectProperty)=InputActionWidget=WidgetArchetype 
-			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
-			bCookedWidgetTree(BoolProperty)=True 
-			Slot(ObjectProperty)=VerticalBoxSlot_4=WidgetArchetype 
-			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
-	TeamFillButton (0-0-0-0): size 539 (cls: TeamFillButton>IconTextButton_C>/Game/UI/Foundation/Buttons/IconTextButton):
+	TeamFillButton (0-0-0-0): size 580 (cls: TeamFillButton>IconTextButton_C>/Game/UI/Foundation/Buttons/IconTextButton):
 		Tag array:
 			CenterButtonTextWidget(ObjectProperty)=CenterButtonTextWidget=WidgetArchetype 
 			ContentBorder(ObjectProperty)=ContentBorder=WidgetArchetype 
@@ -3015,6 +3086,7 @@ Serialized exports:
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=VerticalBoxSlot_3=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Visible 
 	LeftSideImage (0-0-0-0): size 196 (cls: LeftSideImage>Image>/Script/UMG):
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
@@ -3542,6 +3614,10 @@ Serialized exports:
 			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
 			Slot(ObjectProperty)=OverlaySlot_5=WidgetArchetype 
 			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
+	LeftSideImage (0-0-0-0): size 196 (cls: LeftSideImage>Image>/Script/UMG):
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			Slot(ObjectProperty)=HorizontalBoxSlot_2=WidgetArchetype 
 	ConfirmSelectionShine (0-0-0-0): size 168 (cls: ConfirmSelectionShine>Image>/Script/UMG):
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
@@ -3569,10 +3645,6 @@ Serialized exports:
 			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
 			Slot(ObjectProperty)=HorizontalBoxSlot_2=WidgetArchetype 
 			Visibility(EnumProperty)=ESlateVisibility::SelfHitTestInvisible 
-	LeftSideImage (0-0-0-0): size 196 (cls: LeftSideImage>Image>/Script/UMG):
-		Tag array:
-			Brush(StructProperty)=System.Byte[] 
-			Slot(ObjectProperty)=HorizontalBoxSlot_2=WidgetArchetype 
 	LeftSideImage (0-0-0-0): size 196 (cls: LeftSideImage>Image>/Script/UMG):
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
@@ -3606,7 +3678,7 @@ Serialized exports:
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
 			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
-			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
+			Slot(ObjectProperty)=VerticalBoxSlot_1=WidgetArchetype 
 			bIsVariable(BoolProperty)=False 
 			Visibility(EnumProperty)=ESlateVisibility::SelfHitTestInvisible 
 	CallFunc_Len_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Len_ReturnValue>IntProperty>/Script/CoreUObject)
@@ -3853,13 +3925,13 @@ Serialized exports:
 	RightExtraContentSlot (0-0-0-0): size 41 (cls: RightExtraContentSlot>NamedSlot>/Script/UMG):
 		Tag array:
 			Slot(ObjectProperty)=HorizontalBoxSlot_3=WidgetArchetype 
+	RightExtraContentSlot (0-0-0-0): size 41 (cls: RightExtraContentSlot>NamedSlot>/Script/UMG):
+		Tag array:
+			Slot(ObjectProperty)=HorizontalBoxSlot_3=WidgetArchetype 
 	Content (0-0-0-0): size 82 (cls: Content>NamedSlot>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=SafeZoneSlot_0=WidgetArchetype 
-	RightExtraContentSlot (0-0-0-0): size 41 (cls: RightExtraContentSlot>NamedSlot>/Script/UMG):
-		Tag array:
-			Slot(ObjectProperty)=HorizontalBoxSlot_3=WidgetArchetype 
 	RightExtraContentSlot (0-0-0-0): size 41 (cls: RightExtraContentSlot>NamedSlot>/Script/UMG):
 		Tag array:
 			Slot(ObjectProperty)=HorizontalBoxSlot_3=WidgetArchetype 
@@ -3887,8 +3959,9 @@ Serialized exports:
 	K2Node_ComponentBoundEvent_Button (0-0-0-0): size 36 (cls: K2Node_ComponentBoundEvent_Button>ObjectProperty>/Script/CoreUObject)
 	K2Node_ComponentBoundEvent_Button1 (0-0-0-0): size 36 (cls: K2Node_ComponentBoundEvent_Button1>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsIcon_Text_Button (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsIcon_Text_Button>ObjectProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_AsIcon_Text_Button1 (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsIcon_Text_Button1>ObjectProperty>/Script/CoreUObject)
 	K2Node_Event_ButtonClicked (0-0-0-0): size 36 (cls: K2Node_Event_ButtonClicked>ObjectProperty>/Script/CoreUObject)
-	K2Node_Select11_Default (0-0-0-0): size 36 (cls: K2Node_Select11_Default>ObjectProperty>/Script/CoreUObject)
+	K2Node_Select3_Default (0-0-0-0): size 36 (cls: K2Node_Select3_Default>ObjectProperty>/Script/CoreUObject)
 	Temp_object_Variable (0-0-0-0): size 36 (cls: Temp_object_Variable>ObjectProperty>/Script/CoreUObject)
 	GameModeGlow (0-0-0-0): size 36 (cls: GameModeGlow>ObjectProperty>/Script/CoreUObject)
 	GameModeIcon (0-0-0-0): size 36 (cls: GameModeIcon>ObjectProperty>/Script/CoreUObject)
@@ -3913,7 +3986,6 @@ Serialized exports:
 	K2Node_DynamicCast_AsAthena_Matchmaking_Tile (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsAthena_Matchmaking_Tile>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetButtonAtIndex_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetButtonAtIndex_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsAthena_Matchmaking_Tile (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsAthena_Matchmaking_Tile>ObjectProperty>/Script/CoreUObject)
-	VB_GameModeContainer (0-0-0-0): size 36 (cls: VB_GameModeContainer>ObjectProperty>/Script/CoreUObject)
 	WarningHB (0-0-0-0): size 36 (cls: WarningHB>ObjectProperty>/Script/CoreUObject)
 	GameModeNameOvr (0-0-0-0): size 212 (cls: GameModeNameOvr>Overlay>/Script/UMG):
 		Tag array:
@@ -5763,8 +5835,8 @@ Serialized exports:
 	CallFunc_MakeBrushFromTexture_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_MakeBrushFromTexture_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_MakeBrushFromTexture_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_MakeBrushFromTexture_ReturnValue1>StructProperty>/Script/CoreUObject)
 	K2Node_Event_NewRepresentedPlaylist (0-0-0-0): size 36 (cls: K2Node_Event_NewRepresentedPlaylist>StructProperty>/Script/CoreUObject)
-	K2Node_Select4_Default (0-0-0-0): size 36 (cls: K2Node_Select4_Default>StructProperty>/Script/CoreUObject)
-	K2Node_Select5_Default (0-0-0-0): size 36 (cls: K2Node_Select5_Default>StructProperty>/Script/CoreUObject)
+	K2Node_Select8_Default (0-0-0-0): size 36 (cls: K2Node_Select8_Default>StructProperty>/Script/CoreUObject)
+	K2Node_Select9_Default (0-0-0-0): size 36 (cls: K2Node_Select9_Default>StructProperty>/Script/CoreUObject)
 	Temp_struct_Variable (0-0-0-0): size 36 (cls: Temp_struct_Variable>StructProperty>/Script/CoreUObject)
 	Temp_struct_Variable1 (0-0-0-0): size 36 (cls: Temp_struct_Variable1>StructProperty>/Script/CoreUObject)
 	Temp_struct_Variable2 (0-0-0-0): size 36 (cls: Temp_struct_Variable2>StructProperty>/Script/CoreUObject)
@@ -5785,9 +5857,21 @@ Serialized exports:
 	CallFunc_TextToUpper_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_TextToUpper_ReturnValue>TextProperty>/Script/CoreUObject)
 	CallFunc_TextToUpper_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_TextToUpper_ReturnValue1>TextProperty>/Script/CoreUObject)
 	CallFunc_TextToUpper_ReturnValue2 (0-0-0-0): size 32 (cls: CallFunc_TextToUpper_ReturnValue2>TextProperty>/Script/CoreUObject)
-	K2Node_Select10_Default (0-0-0-0): size 32 (cls: K2Node_Select10_Default>TextProperty>/Script/CoreUObject)
+	K2Node_Select14_Default (0-0-0-0): size 32 (cls: K2Node_Select14_Default>TextProperty>/Script/CoreUObject)
+	K2Node_Select15_Default (0-0-0-0): size 32 (cls: K2Node_Select15_Default>TextProperty>/Script/CoreUObject)
+	K2Node_Select4_Default (0-0-0-0): size 32 (cls: K2Node_Select4_Default>TextProperty>/Script/CoreUObject)
 	Temp_text_Variable (0-0-0-0): size 32 (cls: Temp_text_Variable>TextProperty>/Script/CoreUObject)
 	Temp_text_Variable1 (0-0-0-0): size 32 (cls: Temp_text_Variable1>TextProperty>/Script/CoreUObject)
+	Temp_text_Variable10 (0-0-0-0): size 32 (cls: Temp_text_Variable10>TextProperty>/Script/CoreUObject)
+	Temp_text_Variable11 (0-0-0-0): size 32 (cls: Temp_text_Variable11>TextProperty>/Script/CoreUObject)
+	Temp_text_Variable2 (0-0-0-0): size 32 (cls: Temp_text_Variable2>TextProperty>/Script/CoreUObject)
+	Temp_text_Variable3 (0-0-0-0): size 32 (cls: Temp_text_Variable3>TextProperty>/Script/CoreUObject)
+	Temp_text_Variable4 (0-0-0-0): size 32 (cls: Temp_text_Variable4>TextProperty>/Script/CoreUObject)
+	Temp_text_Variable5 (0-0-0-0): size 32 (cls: Temp_text_Variable5>TextProperty>/Script/CoreUObject)
+	Temp_text_Variable6 (0-0-0-0): size 32 (cls: Temp_text_Variable6>TextProperty>/Script/CoreUObject)
+	Temp_text_Variable7 (0-0-0-0): size 32 (cls: Temp_text_Variable7>TextProperty>/Script/CoreUObject)
+	Temp_text_Variable8 (0-0-0-0): size 32 (cls: Temp_text_Variable8>TextProperty>/Script/CoreUObject)
+	Temp_text_Variable9 (0-0-0-0): size 32 (cls: Temp_text_Variable9>TextProperty>/Script/CoreUObject)
 	VerticalBox_0 (0-0-0-0): size 86 (cls: VerticalBox_0>VerticalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -5822,11 +5906,10 @@ Serialized exports:
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
 			Navigation(ObjectProperty)=WidgetNavigation_0=WidgetArchetype 
-	VB_GameModeContainer (0-0-0-0): size 124 (cls: VB_GameModeContainer>VerticalBox>/Script/UMG):
+	VB_GameModeContainer (0-0-0-0): size 98 (cls: VB_GameModeContainer>VerticalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=VerticalBoxSlot_3=WidgetArchetype 
-			bIsVariable(BoolProperty)=True 
 	VerticalBox_0 (0-0-0-0): size 86 (cls: VerticalBox_0>VerticalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -5839,6 +5922,10 @@ Serialized exports:
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=ScrollBoxSlot_0=WidgetArchetype 
+	VerticalBox_5 (0-0-0-0): size 86 (cls: VerticalBox_5>VerticalBox>/Script/UMG):
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 	VerticalBoxSlot_0 (0-0-0-0): size 197 (cls: VerticalBoxSlot_0>VerticalBoxSlot>/Script/UMG):
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
@@ -5950,8 +6037,9 @@ Serialized exports:
 			Padding(StructProperty)=System.Byte[] 
 			Parent(ObjectProperty)=VB_GameModeContainer=WidgetArchetype 
 			Content(ObjectProperty)=MatchmakingKnobsButton=WidgetArchetype 
-	VerticalBoxSlot_2 (0-0-0-0): size 168 (cls: VerticalBoxSlot_2>VerticalBoxSlot>/Script/UMG):
+	VerticalBoxSlot_2 (0-0-0-0): size 254 (cls: VerticalBoxSlot_2>VerticalBoxSlot>/Script/UMG):
 		Tag array:
+			Padding(StructProperty)=System.Byte[] 
 			Size(StructProperty)=System.Byte[] 
 			Parent(ObjectProperty)=VB_GameModeContainer=WidgetArchetype 
 			Content(ObjectProperty)=MatchmakingWarningText=WidgetArchetype 
@@ -5964,7 +6052,7 @@ Serialized exports:
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
 			Parent(ObjectProperty)=VB_GameModeContainer=WidgetArchetype 
-			Content(ObjectProperty)=RankedButton=WidgetArchetype 
+			Content(ObjectProperty)=Button_ServerPrivacy=WidgetArchetype 
 	VerticalBoxSlot_5 (0-0-0-0): size 156 (cls: VerticalBoxSlot_5>VerticalBoxSlot>/Script/UMG):
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
@@ -5981,9 +6069,8 @@ Serialized exports:
 			HorizontalAlignment(ByteProperty)=HAlign_Center 
 			Parent(ObjectProperty)=VerticalBox_0=WidgetArchetype 
 			Content(ObjectProperty)=SubGameModeNameHB=WidgetArchetype 
-	VerticalBoxSlot_1 (0-0-0-0): size 283 (cls: VerticalBoxSlot_1>VerticalBoxSlot>/Script/UMG):
+	VerticalBoxSlot_1 (0-0-0-0): size 168 (cls: VerticalBoxSlot_1>VerticalBoxSlot>/Script/UMG):
 		Tag array:
-			Padding(StructProperty)=System.Byte[] 
 			Size(StructProperty)=System.Byte[] 
 			Parent(ObjectProperty)=VerticalBox_1=WidgetArchetype 
 			Content(ObjectProperty)=ModeDescriptionScrollBox=WidgetArchetype 
@@ -6001,8 +6088,9 @@ Serialized exports:
 			Padding(StructProperty)=System.Byte[] 
 			Parent(ObjectProperty)=VerticalBox_1=WidgetArchetype 
 			Content(ObjectProperty)=LineRule=WidgetArchetype 
-	VerticalBoxSlot_0 (0-0-0-0): size 70 (cls: VerticalBoxSlot_0>VerticalBoxSlot>/Script/UMG):
+	VerticalBoxSlot_0 (0-0-0-0): size 156 (cls: VerticalBoxSlot_0>VerticalBoxSlot>/Script/UMG):
 		Tag array:
+			Padding(StructProperty)=System.Byte[] 
 			Parent(ObjectProperty)=VerticalBox_4=WidgetArchetype 
 			Content(ObjectProperty)=CurrentGameModeDescription=WidgetArchetype 
 	VerticalBoxSlot_2 (0-0-0-0): size 156 (cls: VerticalBoxSlot_2>VerticalBoxSlot>/Script/UMG):
@@ -6010,6 +6098,16 @@ Serialized exports:
 			Padding(StructProperty)=System.Byte[] 
 			Parent(ObjectProperty)=VerticalBox_4=WidgetArchetype 
 			Content(ObjectProperty)=WarningHB=WidgetArchetype 
+	VerticalBoxSlot_0 (0-0-0-0): size 70 (cls: VerticalBoxSlot_0>VerticalBoxSlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=VerticalBox_5=WidgetArchetype 
+			Content(ObjectProperty)=CurrentGameModeDisabledDescription=WidgetArchetype 
+	VerticalBoxSlot_1 (0-0-0-0): size 152 (cls: VerticalBoxSlot_1>VerticalBoxSlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=VerticalBox_5=WidgetArchetype 
+			Content(ObjectProperty)=WarningIcon=WidgetArchetype 
 	IntroRightPanel_INST (0-0-0-0): size 25820 (cls: IntroRightPanel_INST>WidgetAnimation>/Script/UMG):
 		Tag array:
 			MovieScene(ObjectProperty)=IntroRightPanel=AthenaMatchmakingOptionsDisplay_v2_C 
@@ -6243,13 +6341,13 @@ Serialized exports:
 			RootWidget(ObjectProperty)=SizeBox_Tile=WidgetArchetype 
 	WidgetTree_0 (0-0-0-0): size 41 (cls: WidgetTree_0>WidgetTree>/Script/UMG):
 		Tag array:
+			RootWidget(ObjectProperty)=ContentBorder=WidgetArchetype 
+	WidgetTree_0 (0-0-0-0): size 41 (cls: WidgetTree_0>WidgetTree>/Script/UMG):
+		Tag array:
 			RootWidget(ObjectProperty)=Dimmer=WidgetArchetype 
 	WidgetTree_0 (0-0-0-0): size 41 (cls: WidgetTree_0>WidgetTree>/Script/UMG):
 		Tag array:
 			RootWidget(ObjectProperty)=WindowTitleBarArea_107=WidgetArchetype 
-	WidgetTree_0 (0-0-0-0): size 41 (cls: WidgetTree_0>WidgetTree>/Script/UMG):
-		Tag array:
-			RootWidget(ObjectProperty)=ContentBorder=WidgetArchetype 
 	WidgetTree_0 (0-0-0-0): size 41 (cls: WidgetTree_0>WidgetTree>/Script/UMG):
 		Tag array:
 			RootWidget(ObjectProperty)=ContentBorder=WidgetArchetype 

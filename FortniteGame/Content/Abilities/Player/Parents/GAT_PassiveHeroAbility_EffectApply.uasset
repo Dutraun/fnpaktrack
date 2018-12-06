@@ -2,6 +2,7 @@ Name table:
 	/Game/Abilities/Player/Parents/GAT_PassiveHeroAbility
 	/Game/Abilities/Player/Parents/GAT_PassiveHeroAbility_EffectApply
 	/Game/Balance/DataTables/CombatEffects_HeroAbilities
+	/Script/BlueprintContext
 	/Script/CoreUObject
 	/Script/Engine
 	/Script/FortniteGame
@@ -19,6 +20,7 @@ Name table:
 	Array_Get
 	Array_Length
 	ArrayProperty
+	BlueprintContextLibrary
 	BlueprintGameplayTagLibrary
 	BlueprintGeneratedClass
 	BooleanOR
@@ -38,6 +40,10 @@ Name table:
 	CallFunc_Conv_IntToFloat_ReturnValue
 	CallFunc_FTrunc_ReturnValue
 	CallFunc_GetAbilitySystemComponent_ReturnValue
+	CallFunc_GetContext_ReturnValue
+	CallFunc_GetCurrentHeroLoadoutItem_OutCampaignHeroLoadoutItem
+	CallFunc_GetMcpProfile_ReturnValue
+	CallFunc_GetTeamLeadPerkActivationLevel_ReturnValue
 	CallFunc_GetValueAtLevel_ReturnValue
 	CallFunc_GetValueAtLevel_ReturnValue1
 	CallFunc_Greater_IntInt_ReturnValue
@@ -57,6 +63,7 @@ Name table:
 	CurveTableRowHandle
 	Default__AbilitySystemBlueprintLibrary
 	Default__ArrayProperty
+	Default__BlueprintContextLibrary
 	Default__BlueprintGameplayTagLibrary
 	Default__BlueprintGeneratedClass
 	Default__BoolProperty
@@ -77,6 +84,9 @@ Name table:
 	EntryPoint
 	ExecuteUbergraph_GAT_PassiveHeroAbility_EffectApply
 	FloatProperty
+	FortCampaignHeroLoadoutItem
+	FortMcpContext
+	FortMcpProfileCampaign
 	FortPlayerPawn
 	FortScalableFloatUtils
 	FTrunc
@@ -90,6 +100,10 @@ Name table:
 	GE_EffectToApply
 	GEH_AppliedEffect
 	GetAbilitySystemComponent
+	GetContext
+	GetCurrentHeroLoadoutItem
+	GetMcpProfile
+	GetTeamLeadPerkActivationLevel
 	GetValueAtLevel
 	Greater_IntInt
 	HasAllMatchingGameplayTags
@@ -126,15 +140,13 @@ Name table:
 	Temp_int_Loop_Counter_Variable
 	Temp_int_Loop_Counter_Variable1
 	UberGraphFrame
-	UberGraphFramePointerProperty
 	UberGraphFunction
 	UseTagToSetAddedConditionalStack
 	Value
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	GAT_PassiveHeroAbility_EffectApply_C (0-0-0-0): size 226 (cls: GAT_PassiveHeroAbility_EffectApply_C>BlueprintGeneratedClass>/Script/Engine):
+	GAT_PassiveHeroAbility_EffectApply_C (0-0-0-0): size 197 (cls: GAT_PassiveHeroAbility_EffectApply_C>BlueprintGeneratedClass>/Script/Engine):
 		Tag array:
-			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=GAT_PassiveHeroAbility_EffectApply_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_GAT_PassiveHeroAbility_EffectApply=GAT_PassiveHeroAbility_EffectApply_C 
 	Default__GAT_PassiveHeroAbility_EffectApply_C (0-0-0-0): size 815 (cls: Default__GAT_PassiveHeroAbility_EffectApply_C>GAT_PassiveHeroAbility_EffectApply_C):
 		Tag array:
@@ -151,13 +163,13 @@ Serialized exports:
 	GEH_AppliedEffect (0-0-0-0): size 36 (cls: GEH_AppliedEffect>ArrayProperty>/Script/CoreUObject)
 	AddConditionalStackOverride (0-0-0-0): size 34 (cls: AddConditionalStackOverride>BoolProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_GAT_PassiveHeroAbility_EffectApply (0-0-0-0): size 991 (cls: ExecuteUbergraph_GAT_PassiveHeroAbility_EffectApply>Function>/Script/CoreUObject)
+	ExecuteUbergraph_GAT_PassiveHeroAbility_EffectApply (0-0-0-0): size 1140 (cls: ExecuteUbergraph_GAT_PassiveHeroAbility_EffectApply>Function>/Script/CoreUObject)
 	CallFunc_BooleanOR_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanOR_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Greater_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Greater_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Less_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Less_IntInt_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	OverrideQualifyingHeroes (0-0-0-0): size 34 (cls: OverrideQualifyingHeroes>BoolProperty>/Script/CoreUObject)
-	K2_ActivateAbility (0-0-0-0): size 58 (cls: K2_ActivateAbility>Function>/Script/CoreUObject)
+	K2_ActivateAbility (0-0-0-0): size 54 (cls: K2_ActivateAbility>Function>/Script/CoreUObject)
 	AbilitySystemComponentIn (0-0-0-0): size 36 (cls: AbilitySystemComponentIn>ObjectProperty>/Script/CoreUObject)
 	PassiveAbilityEffectApplySetup (0-0-0-0): size 152 (cls: PassiveAbilityEffectApplySetup>Function>/Script/CoreUObject)
 	CallFunc_HasAllMatchingGameplayTags_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasAllMatchingGameplayTags_ReturnValue>BoolProperty>/Script/CoreUObject)
@@ -175,12 +187,16 @@ Serialized exports:
 	CallFunc_Array_Length_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Array_Length_ReturnValue>IntProperty>/Script/CoreUObject)
 	CallFunc_Array_Length_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Array_Length_ReturnValue1>IntProperty>/Script/CoreUObject)
 	CallFunc_FTrunc_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_FTrunc_ReturnValue>IntProperty>/Script/CoreUObject)
+	CallFunc_GetTeamLeadPerkActivationLevel_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetTeamLeadPerkActivationLevel_ReturnValue>IntProperty>/Script/CoreUObject)
 	Temp_int_Array_Index_Variable (0-0-0-0): size 32 (cls: Temp_int_Array_Index_Variable>IntProperty>/Script/CoreUObject)
 	Temp_int_Array_Index_Variable1 (0-0-0-0): size 32 (cls: Temp_int_Array_Index_Variable1>IntProperty>/Script/CoreUObject)
 	Temp_int_Loop_Counter_Variable (0-0-0-0): size 32 (cls: Temp_int_Loop_Counter_Variable>IntProperty>/Script/CoreUObject)
 	Temp_int_Loop_Counter_Variable1 (0-0-0-0): size 32 (cls: Temp_int_Loop_Counter_Variable1>IntProperty>/Script/CoreUObject)
 	QualifyingHeroes (0-0-0-0): size 32 (cls: QualifyingHeroes>IntProperty>/Script/CoreUObject)
 	CallFunc_GetAbilitySystemComponent_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetAbilitySystemComponent_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetCurrentHeroLoadoutItem_OutCampaignHeroLoadoutItem (0-0-0-0): size 36 (cls: CallFunc_GetCurrentHeroLoadoutItem_OutCampaignHeroLoadoutItem>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetMcpProfile_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetMcpProfile_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_PassiveAbilityEffectApplySetup_AbilitySystemComponentOut (0-0-0-0): size 36 (cls: CallFunc_PassiveAbilityEffectApplySetup_AbilitySystemComponentOut>ObjectProperty>/Script/CoreUObject)
 	AbilitySystemComponentOut (0-0-0-0): size 36 (cls: AbilitySystemComponentOut>ObjectProperty>/Script/CoreUObject)
 	CallFunc_Array_Get_Item (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item>StructProperty>/Script/CoreUObject)

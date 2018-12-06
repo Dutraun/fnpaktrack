@@ -1,10 +1,14 @@
 Name table:
+	/Engine/Functions/Engine_MaterialFunctions01/Gradient/LinearGradient
+	/Engine/Functions/Engine_MaterialFunctions01/ImageAdjustment/CheapContrast
 	/Engine/Functions/Engine_MaterialFunctions02/Lerp_Multiple_Float3
 	/Engine/Functions/Engine_MaterialFunctions02/Math/TimeWithSpeedVariable
 	/Engine/Functions/Engine_MaterialFunctions02/ObjectLocalToWorldData
 	/Engine/Functions/Engine_MaterialFunctions02/PivotPainter/PivotPainter_PerObjectData
 	/Engine/Functions/Engine_MaterialFunctions02/PivotPainter/PivotPainter_PerObjectFoliageData
+	/Engine/Functions/Engine_MaterialFunctions02/Texturing/HeightLerp
 	/Engine/Functions/Engine_MaterialFunctions02/Utility/BreakOutFloat2Components
+	/Engine/Functions/Engine_MaterialFunctions02/Utility/BreakOutFloat4Components
 	/Engine/Functions/Engine_MaterialFunctions02/Utility/VectorLength
 	/Engine/Functions/Engine_MaterialFunctions02/WorldPositionOffset/ObjectScale
 	/Engine/Functions/Engine_MaterialFunctions02/WorldPositionOffset/Wind
@@ -20,8 +24,13 @@ Name table:
 	/Game/Athena/Environments/Landscape/MaterialFunctions/MF_Landscape_GrassDistanceBlend
 	/Game/Athena/Environments/Landscape/MaterialFunctions/MF_StormMask
 	/Game/Athena/Environments/Landscape/MaterialFunctions/MF_TerrainDistanceFade
+	/Game/Athena/Environments/Landscape/MaterialFunctions/Snow/MF_Athena_Holiday_SnowFall
+	/Game/Athena/Environments/Landscape/MaterialFunctions/Snow/MF_Athena_Snow_01
 	/Game/Athena/Environments/Landscape/MaterialFunctions/Standard/MF_Athena_LakeGrass_01
+	/Game/Athena/Environments/Landscape/MaterialFunctions/Utilities/MF_Athena_Terrain_Coords
 	/Game/Athena/Environments/Landscape/MPC/MPC_Landscape
+	/Game/Athena/WinterArt/Materials/MF_SharedWinter
+	/Game/Effects/Fort_Effects/Materials/_Functions/Color_Time_of_Day
 	/Game/Environments/Foliage/Textures/T_FieldGrass_01_M
 	/Game/Environments/Foliage/Textures/T_SwirlNoise_N
 	/Game/Environments/Foliage/Textures/T_WavyGrass_01_N
@@ -40,13 +49,16 @@ Name table:
 	BlendMode
 	BoolProperty
 	BreakOutFloat2Components
+	BreakOutFloat4Components
 	bTangentSpaceNormal
 	bUsedWithInstancedStaticMeshes
 	bUseMaterialAttributes
 	ByteProperty
 	CachedQualityLevelsUsed
+	CheapContrast
 	Class
 	Collection
+	Color_Time_of_Day
 	ColorMaterialInput
 	Coordinates
 	Default
@@ -72,9 +84,11 @@ Name table:
 	FortniteMaterialParameters
 	Function
 	Guid
+	HeightLerp
 	Inputs
 	InternalSampleWindTexture
 	Lerp_Multiple_Float3
+	LinearGradient
 	M_Athena_Flower_Master
 	Material
 	MaterialAttributes
@@ -102,11 +116,15 @@ Name table:
 	MC_Athena_Terrain
 	MF_Athena_BiomeMask
 	MF_Athena_FlowerColors
+	MF_Athena_Holiday_SnowFall
 	MF_Athena_LakeGrass_01
+	MF_Athena_Snow_01
+	MF_Athena_Terrain_Coords
 	MF_Athena_TerrainColorMatch
 	MF_AthenaFoliagePlayerInteract
 	MF_ColorGradientMap
 	MF_Landscape_GrassDistanceBlend
+	MF_SharedWinter
 	MF_StormMask
 	MF_TerrainDistanceFade
 	MPC_Landscape
@@ -130,6 +148,8 @@ Name table:
 	SamplerType
 	SAMPLERTYPE_LinearColor
 	SAMPLERTYPE_Normal
+	Snow_GrassLowerAmount
+	SnowGrass_LowerMaskOffset
 	Spec
 	StateId
 	StructProperty
@@ -153,7 +173,7 @@ Name table:
 	WindSpeed_Storm
 	WindWaveScale
 Serialized exports:
-	M_Athena_Flower_Master (0-0-0-0): size 245572 (cls: M_Athena_Flower_Master>Material>/Script/Engine):
+	M_Athena_Flower_Master (0-0-0-0): size 240957 (cls: M_Athena_Flower_Master>Material>/Script/Engine):
 		Tag array:
 			EmissiveColor(StructProperty)=System.Byte[] 
 			BlendMode(ByteProperty)=BLEND_Masked 
@@ -165,7 +185,7 @@ Serialized exports:
 			MaterialFunctionInfos(ArrayProperty)=[object] (inner: StructProperty)
 			MaterialParameterCollectionInfos(ArrayProperty)=[object] (inner: StructProperty)
 			bUseMaterialAttributes(BoolProperty)=True 
-			StateId(StructProperty)=Guid: 1631118631-1080328033-3511294893-771289467 
+			StateId(StructProperty)=Guid: 1404386238-1316772899-1942223241-3594345877 
 			CachedQualityLevelsUsed(ArrayProperty)=[object] (inner: BoolProperty)
 	MaterialExpressionCollectionParameter_11 (0-0-0-0): size 168 (cls: MaterialExpressionCollectionParameter_11>MaterialExpressionCollectionParameter>/Script/Engine):
 		Tag array:
@@ -233,6 +253,10 @@ Serialized exports:
 		Tag array:
 			MaterialFunction(ObjectProperty)=Fortnite_SampleRealTimeWindData=/Game/WaterAndWind/MaterialFunctions/Fortnite_SampleRealTimeWindData 
 			Material(ObjectProperty)=M_Athena_Flower_Master= 
+	MaterialExpressionMaterialFunctionCall_8 (0-0-0-0): size 70 (cls: MaterialExpressionMaterialFunctionCall_8>MaterialExpressionMaterialFunctionCall>/Script/Engine):
+		Tag array:
+			MaterialFunction(ObjectProperty)=MF_Athena_Holiday_SnowFall=/Game/Athena/Environments/Landscape/MaterialFunctions/Snow/MF_Athena_Holiday_SnowFall 
+			Material(ObjectProperty)=M_Athena_Flower_Master= 
 	MaterialExpressionQualitySwitch_1 (0-0-0-0): size 397 (cls: MaterialExpressionQualitySwitch_1>MaterialExpressionQualitySwitch>/Script/Engine):
 		Tag array:
 			Default(StructProperty)=System.Byte[] 
@@ -289,6 +313,12 @@ Serialized exports:
 			ParameterName(NameProperty)=PlayerBendRadiusMax 
 			ExpressionGUID(StructProperty)=Guid: 1410059901-1284834654-1502147485-2623505044 
 			Material(ObjectProperty)=M_Athena_Flower_Master= 
+	MaterialExpressionScalarParameter_2 (0-0-0-0): size 168 (cls: MaterialExpressionScalarParameter_2>MaterialExpressionScalarParameter>/Script/Engine):
+		Tag array:
+			DefaultValue(FloatProperty)=3 
+			ParameterName(NameProperty)=SnowGrass_LowerMaskOffset 
+			ExpressionGUID(StructProperty)=Guid: 104754159-1122970447-3782986385-2110672221 
+			Material(ObjectProperty)=M_Athena_Flower_Master= 
 	MaterialExpressionScalarParameter_24 (0-0-0-0): size 168 (cls: MaterialExpressionScalarParameter_24>MaterialExpressionScalarParameter>/Script/Engine):
 		Tag array:
 			DefaultValue(FloatProperty)=0.325689 
@@ -300,6 +330,12 @@ Serialized exports:
 			DefaultValue(FloatProperty)=0.75 
 			ParameterName(NameProperty)=WindPower_Storm 
 			ExpressionGUID(StructProperty)=Guid: 2788397078-1328017324-119771033-1259249987 
+			Material(ObjectProperty)=M_Athena_Flower_Master= 
+	MaterialExpressionScalarParameter_26 (0-0-0-0): size 168 (cls: MaterialExpressionScalarParameter_26>MaterialExpressionScalarParameter>/Script/Engine):
+		Tag array:
+			DefaultValue(FloatProperty)=-100 
+			ParameterName(NameProperty)=Snow_GrassLowerAmount 
+			ExpressionGUID(StructProperty)=Guid: 959472706-1159666180-2158327936-1703501246 
 			Material(ObjectProperty)=M_Athena_Flower_Master= 
 	MaterialExpressionScalarParameter_31 (0-0-0-0): size 168 (cls: MaterialExpressionScalarParameter_31>MaterialExpressionScalarParameter>/Script/Engine):
 		Tag array:

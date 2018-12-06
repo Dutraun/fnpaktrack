@@ -10,6 +10,7 @@ Name table:
 	/Script/FortniteGame
 	Actor
 	AllNodes
+	AreaClass
 	ArrayProperty
 	AttachParent
 	B_AthenaMapMarkerBase_C
@@ -87,6 +88,7 @@ Name table:
 	FloatProperty
 	FloatTracks
 	Fort_UI_Minimap_Ping_InWorld_Cue
+	FortMetaNavArea_Obstacles
 	FortPlayerMarkerBase
 	FortTriggerOnlyPawns
 	Function
@@ -192,7 +194,6 @@ Name table:
 	TranslucencySortPriority
 	TTFloatTrack
 	UberGraphFrame
-	UberGraphFramePointerProperty
 	UberGraphFunction
 	UpdateFunctionName
 	UserConstructionScript
@@ -205,12 +206,11 @@ Name table:
 	WorldStatic
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	B_AthenaMapMarkerBase_C (0-0-0-0): size 397 (cls: B_AthenaMapMarkerBase_C>BlueprintGeneratedClass>/Script/Engine):
+	B_AthenaMapMarkerBase_C (0-0-0-0): size 368 (cls: B_AthenaMapMarkerBase_C>BlueprintGeneratedClass>/Script/Engine):
 		Tag array:
 			DynamicBindingObjects(ArrayProperty)=[object] (inner: ObjectProperty)
 			Timelines(ArrayProperty)=[object] (inner: ObjectProperty)
 			SimpleConstructionScript(ObjectProperty)=SimpleConstructionScript_0=B_AthenaMapMarkerBase_C 
-			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=B_AthenaMapMarkerBase_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_B_AthenaMapMarkerBase=B_AthenaMapMarkerBase_C 
 	Default__B_AthenaMapMarkerBase_C (0-0-0-0): size 181 (cls: Default__B_AthenaMapMarkerBase_C>B_AthenaMapMarkerBase_C):
 		Tag array:
@@ -222,11 +222,11 @@ Serialized exports:
 	SM-Target (0-0-0-0): size 36 (cls: SM-Target>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
 	ExecuteUbergraph_B_AthenaMapMarkerBase (0-0-0-0): size 1011 (cls: ExecuteUbergraph_B_AthenaMapMarkerBase>Function>/Script/CoreUObject)
-	OnMarkerPlaced (0-0-0-0): size 58 (cls: OnMarkerPlaced>Function>/Script/CoreUObject)
+	OnMarkerPlaced (0-0-0-0): size 54 (cls: OnMarkerPlaced>Function>/Script/CoreUObject)
 	MarkerData (0-0-0-0): size 36 (cls: MarkerData>StructProperty>/Script/CoreUObject)
-	OnSetupMarker (0-0-0-0): size 72 (cls: OnSetupMarker>Function>/Script/CoreUObject)
+	OnSetupMarker (0-0-0-0): size 68 (cls: OnSetupMarker>Function>/Script/CoreUObject)
 	OverlappedComponent (0-0-0-0): size 36 (cls: OverlappedComponent>ObjectProperty>/Script/CoreUObject)
-	BndEvt__Sphere1_K2Node_ComponentBoundEvent_0_ComponentBeginOverlapSignature__DelegateSignature (0-0-0-0): size 142 (cls: BndEvt__Sphere1_K2Node_ComponentBoundEvent_0_ComponentBeginOverlapSignature__DelegateSignature>Function>/Script/CoreUObject)
+	BndEvt__Sphere1_K2Node_ComponentBoundEvent_0_ComponentBeginOverlapSignature__DelegateSignature (0-0-0-0): size 138 (cls: BndEvt__Sphere1_K2Node_ComponentBoundEvent_0_ComponentBeginOverlapSignature__DelegateSignature>Function>/Script/CoreUObject)
 	bFromSweep (0-0-0-0): size 34 (cls: bFromSweep>BoolProperty>/Script/CoreUObject)
 	CallFunc_EqualEqual_ObjectObject_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ObjectObject_ReturnValue>BoolProperty>/Script/CoreUObject)
 	K2Node_ComponentBoundEvent_bFromSweep (0-0-0-0): size 34 (cls: K2Node_ComponentBoundEvent_bFromSweep>BoolProperty>/Script/CoreUObject)
@@ -246,8 +246,8 @@ Serialized exports:
 	SpawnMarkerAnim_Opacity_D00BAF4B4CCD528A4D4E94BA8CAE97A2 (0-0-0-0): size 32 (cls: SpawnMarkerAnim_Opacity_D00BAF4B4CCD528A4D4E94BA8CAE97A2>FloatProperty>/Script/CoreUObject)
 	SpawnMarkerAnim_SpawnScale_D00BAF4B4CCD528A4D4E94BA8CAE97A2 (0-0-0-0): size 32 (cls: SpawnMarkerAnim_SpawnScale_D00BAF4B4CCD528A4D4E94BA8CAE97A2>FloatProperty>/Script/CoreUObject)
 	SpawnMarkerAnim_SpawnVerticalScale_D00BAF4B4CCD528A4D4E94BA8CAE97A2 (0-0-0-0): size 32 (cls: SpawnMarkerAnim_SpawnVerticalScale_D00BAF4B4CCD528A4D4E94BA8CAE97A2>FloatProperty>/Script/CoreUObject)
-	SpawnMarkerAnim__FinishedFunc (0-0-0-0): size 58 (cls: SpawnMarkerAnim__FinishedFunc>Function>/Script/CoreUObject)
-	SpawnMarkerAnim__UpdateFunc (0-0-0-0): size 58 (cls: SpawnMarkerAnim__UpdateFunc>Function>/Script/CoreUObject)
+	SpawnMarkerAnim__FinishedFunc (0-0-0-0): size 54 (cls: SpawnMarkerAnim__FinishedFunc>Function>/Script/CoreUObject)
+	SpawnMarkerAnim__UpdateFunc (0-0-0-0): size 54 (cls: SpawnMarkerAnim__UpdateFunc>Function>/Script/CoreUObject)
 	MID-Target (0-0-0-0): size 36 (cls: MID-Target>ObjectProperty>/Script/CoreUObject)
 	MID-Main (0-0-0-0): size 36 (cls: MID-Main>ObjectProperty>/Script/CoreUObject)
 	CallFunc_CreateDynamicMaterialInstance_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_CreateDynamicMaterialInstance_ReturnValue1>ObjectProperty>/Script/CoreUObject)
@@ -294,9 +294,10 @@ Serialized exports:
 			RootNodes(ArrayProperty)=[object] (inner: ObjectProperty)
 			AllNodes(ArrayProperty)=[object] (inner: ObjectProperty)
 			DefaultSceneRootNode(ObjectProperty)=SCS_Node_0=B_AthenaMapMarkerBase_C 
-	ProximitySphereCollision_GEN_VARIABLE (0-0-0-0): size 1094 (cls: ProximitySphereCollision_GEN_VARIABLE>SphereComponent>/Script/Engine):
+	ProximitySphereCollision_GEN_VARIABLE (0-0-0-0): size 1123 (cls: ProximitySphereCollision_GEN_VARIABLE>SphereComponent>/Script/Engine):
 		Tag array:
 			SphereRadius(FloatProperty)=5000 
+			AreaClass(ObjectProperty)=FortMetaNavArea_Obstacles=/Script/FortniteGame 
 			BodyInstance(StructProperty)=System.Byte[] 
 	SM-Target_GEN_VARIABLE (0-0-0-0): size 141 (cls: SM-Target_GEN_VARIABLE>StaticMeshComponent>/Script/Engine):
 		Tag array:

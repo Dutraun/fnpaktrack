@@ -1,7 +1,11 @@
 Name table:
-	/Game/Athena/HUD/Phase/M_GamePhase_Warmup
-	/Game/Athena/HUD/Spectator/Art/AliveIco_Blue
+	/Game/Athena/HUD/Spectator/Art/M_GamePhase_End_Blue
 	/Game/Athena/HUD/Spectator/Art/M_GamePhase_StormCount_Blue
+	/Game/Athena/HUD/Spectator/Art/M_PlayersCount
+	/Game/Athena/HUD/Spectator/Art/MI_MatchStatusClockBG
+	/Game/Athena/HUD/Spectator/Art/MI_MatchStatusGameBG
+	/Game/Athena/HUD/Spectator/Art/MI_MatchStatusPlayersBG
+	/Game/Athena/HUD/Spectator/Art/MI_MatchStatusStormBG
 	/Game/Athena/HUD/Spectator/MatchStatus/AthenaBroadcastGameTimeWidget
 	/Game/Athena/HUD/Spectator/MatchStatus/AthenaBroadcastMatchStatus
 	/Game/Athena/HUD/Spectator/MatchStatus/AthenaBroadcastMatchStatus.WidgetArchetype
@@ -12,7 +16,6 @@ Name table:
 	/Script/Engine
 	/Script/FortniteUI
 	/Script/UMG
-	AliveIco_Blue
 	ArrayProperty
 	AthenaBroadcastGameTimeWidget
 	AthenaBroadcastGameTimeWidget_C
@@ -74,6 +77,8 @@ Name table:
 	EntryPoint
 	ESlateBrushDrawType
 	ESlateBrushDrawType::Box
+	ESlateSizeRule
+	ESlateSizeRule::Fill
 	ETextJustify
 	ETextJustify::Center
 	EVerticalAlignment
@@ -90,6 +95,7 @@ Name table:
 	HorizontalAlignment
 	HorizontalBox
 	HorizontalBoxSlot
+	Icon
 	Image
 	ImageSize
 	IntProperty
@@ -98,11 +104,18 @@ Name table:
 	KismetTextLibrary
 	Left
 	LinearColor
+	M_GamePhase_End_Blue
 	M_GamePhase_StormCount_Blue
-	M_GamePhase_Warmup
+	M_PlayersCount
 	Margin
 	Material
+	MaterialInstanceConstant
 	MaxStormPhaseText
+	MI_MatchStatusClockBG
+	MI_MatchStatusGameBG
+	MI_MatchStatusPlayersBG
+	MI_MatchStatusStormBG
+	MinDesiredWidth
 	NameProperty
 	None
 	Object
@@ -124,7 +137,9 @@ Name table:
 	Size
 	SizeBox
 	SizeBoxSlot
+	SizeRule
 	SlateBrush
+	SlateChildSize
 	SlateColor
 	SlateFontInfo
 	Slot
@@ -143,16 +158,12 @@ Name table:
 	Text
 	TextBlock
 	TextProperty
-	Texture2D
-	TimeImage
 	TimeText
 	Top
 	TypefaceFontName
 	UberGraphFrame
-	UberGraphFramePointerProperty
 	UberGraphFunction
 	VAlign_Center
-	VAlign_Top
 	Vector2D
 	VerticalAlignment
 	WidgetArchetype
@@ -161,14 +172,13 @@ Name table:
 	WidthOverride
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	AthenaBroadcastMatchStatus_C (0-0-0-0): size 326 (cls: AthenaBroadcastMatchStatus_C>WidgetBlueprintGeneratedClass>/Script/UMG):
+	AthenaBroadcastMatchStatus_C (0-0-0-0): size 297 (cls: AthenaBroadcastMatchStatus_C>WidgetBlueprintGeneratedClass>/Script/UMG):
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
 			bValidTemplate(BoolProperty)=True 
 			bClassRequiresNativeTick(BoolProperty)=True 
 			TemplateAsset(SoftObjectProperty)=/Game/Athena/HUD/Spectator/MatchStatus/AthenaBroadcastMatchStatus.WidgetArchetype 
-			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=AthenaBroadcastMatchStatus_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_AthenaBroadcastMatchStatus=AthenaBroadcastMatchStatus_C 
 	Default__AthenaBroadcastMatchStatus_C (0-0-0-0): size 117 (cls: Default__AthenaBroadcastMatchStatus_C>AthenaBroadcastMatchStatus_C):
 		Tag array:
@@ -177,7 +187,7 @@ Serialized exports:
 			bHasScriptImplementedPaint(BoolProperty)=False 
 	AthenaBroadcastGameTimeWidget (0-0-0-0): size 154 (cls: AthenaBroadcastGameTimeWidget>AthenaBroadcastGameTimeWidget_C>/Game/Athena/HUD/Spectator/MatchStatus/AthenaBroadcastGameTimeWidget):
 		Tag array:
-			TimeImage(ObjectProperty)=TimeImage=WidgetArchetype 
+			Icon(ObjectProperty)=Icon=WidgetArchetype 
 			TimeText(ObjectProperty)=TimeText=WidgetArchetype 
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
@@ -199,41 +209,40 @@ Serialized exports:
 	BorderSlot_0 (0-0-0-0): size 325 (cls: BorderSlot_0>BorderSlot>/Script/UMG):
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
-			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			HorizontalAlignment(ByteProperty)=HAlign_Left 
 			VerticalAlignment(ByteProperty)=VAlign_Center 
 			Parent(ObjectProperty)=GameTimeBorder=WidgetArchetype 
 			Content(ObjectProperty)=AthenaBroadcastGameTimeWidget=WidgetArchetype 
 	BorderSlot_0 (0-0-0-0): size 325 (cls: BorderSlot_0>BorderSlot>/Script/UMG):
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
-			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			HorizontalAlignment(ByteProperty)=HAlign_Left 
 			VerticalAlignment(ByteProperty)=VAlign_Center 
 			Parent(ObjectProperty)=PlayersLeftBorder=WidgetArchetype 
 			Content(ObjectProperty)=AthenaBroadcastPlayersLeftWidget=WidgetArchetype 
-	BorderSlot_0 (0-0-0-0): size 325 (cls: BorderSlot_0>BorderSlot>/Script/UMG):
+	BorderSlot_0 (0-0-0-0): size 296 (cls: BorderSlot_0>BorderSlot>/Script/UMG):
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
 			HorizontalAlignment(ByteProperty)=HAlign_Center 
 			VerticalAlignment(ByteProperty)=VAlign_Center 
 			Parent(ObjectProperty)=StormPhaseBorder=WidgetArchetype 
 			Content(ObjectProperty)=StormPhaseBox=WidgetArchetype 
-	BlueBorder (0-0-0-0): size 204 (cls: BlueBorder>CommonBorder>/Script/CommonUI):
+	BlueBorder (0-0-0-0): size 168 (cls: BlueBorder>CommonBorder>/Script/CommonUI):
 		Tag array:
 			Background(StructProperty)=System.Byte[] 
-			BrushColor(StructProperty)=UE4.FLinearColor 
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
-	GameTimeBorder (0-0-0-0): size 500 (cls: GameTimeBorder>CommonBorder>/Script/CommonUI):
+	GameTimeBorder (0-0-0-0): size 529 (cls: GameTimeBorder>CommonBorder>/Script/CommonUI):
 		Tag array:
-			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			HorizontalAlignment(ByteProperty)=HAlign_Left 
 			VerticalAlignment(ByteProperty)=VAlign_Center 
 			Padding(StructProperty)=System.Byte[] 
 			Background(StructProperty)=System.Byte[] 
 			BrushColor(StructProperty)=UE4.FLinearColor 
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
-	PlayersLeftBorder (0-0-0-0): size 500 (cls: PlayersLeftBorder>CommonBorder>/Script/CommonUI):
+	PlayersLeftBorder (0-0-0-0): size 529 (cls: PlayersLeftBorder>CommonBorder>/Script/CommonUI):
 		Tag array:
-			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			HorizontalAlignment(ByteProperty)=HAlign_Left 
 			VerticalAlignment(ByteProperty)=VAlign_Center 
 			Padding(StructProperty)=System.Byte[] 
 			Background(StructProperty)=System.Byte[] 
@@ -255,13 +264,15 @@ Serialized exports:
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
 	ExecuteUbergraph_AthenaBroadcastMatchStatus (0-0-0-0): size 137 (cls: ExecuteUbergraph_AthenaBroadcastMatchStatus>Function>/Script/CoreUObject)
 	StormPhase (0-0-0-0): size 32 (cls: StormPhase>IntProperty>/Script/CoreUObject)
-	OnStormPhaseChanged (0-0-0-0): size 72 (cls: OnStormPhaseChanged>Function>/Script/CoreUObject)
-	HorizontalBox_0 (0-0-0-0): size 57 (cls: HorizontalBox_0>HorizontalBox>/Script/UMG):
+	OnStormPhaseChanged (0-0-0-0): size 68 (cls: OnStormPhaseChanged>Function>/Script/CoreUObject)
+	HorizontalBox_0 (0-0-0-0): size 86 (cls: HorizontalBox_0>HorizontalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-	HorizontalBox_0 (0-0-0-0): size 57 (cls: HorizontalBox_0>HorizontalBox>/Script/UMG):
+			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
+	HorizontalBox_0 (0-0-0-0): size 86 (cls: HorizontalBox_0>HorizontalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
 	HorizontalBox (0-0-0-0): size 94 (cls: HorizontalBox>HorizontalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -277,7 +288,7 @@ Serialized exports:
 	HorizontalBoxSlot_0 (0-0-0-0): size 197 (cls: HorizontalBoxSlot_0>HorizontalBoxSlot>/Script/UMG):
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
-			VerticalAlignment(ByteProperty)=VAlign_Top 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
 			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
 			Content(ObjectProperty)=TimeText=WidgetArchetype 
 	HorizontalBoxSlot_3 (0-0-0-0): size 238 (cls: HorizontalBoxSlot_3>HorizontalBoxSlot>/Script/UMG):
@@ -286,7 +297,7 @@ Serialized exports:
 			HorizontalAlignment(ByteProperty)=HAlign_Left 
 			VerticalAlignment(ByteProperty)=VAlign_Center 
 			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
-			Content(ObjectProperty)=TimeImage=WidgetArchetype 
+			Content(ObjectProperty)=Icon=WidgetArchetype 
 	HorizontalBoxSlot_0 (0-0-0-0): size 238 (cls: HorizontalBoxSlot_0>HorizontalBoxSlot>/Script/UMG):
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
@@ -294,14 +305,16 @@ Serialized exports:
 			VerticalAlignment(ByteProperty)=VAlign_Center 
 			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
 			Content(ObjectProperty)=PlayersImage=WidgetArchetype 
-	HorizontalBoxSlot_2 (0-0-0-0): size 156 (cls: HorizontalBoxSlot_2>HorizontalBoxSlot>/Script/UMG):
+	HorizontalBoxSlot_2 (0-0-0-0): size 336 (cls: HorizontalBoxSlot_2>HorizontalBoxSlot>/Script/UMG):
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
+			Size(StructProperty)=System.Byte[] 
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
 			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
 			Content(ObjectProperty)=PlayersLeftText=WidgetArchetype 
-	HorizontalBoxSlot_10 (0-0-0-0): size 156 (cls: HorizontalBoxSlot_10>HorizontalBoxSlot>/Script/UMG):
+	HorizontalBoxSlot_10 (0-0-0-0): size 70 (cls: HorizontalBoxSlot_10>HorizontalBoxSlot>/Script/UMG):
 		Tag array:
-			Padding(StructProperty)=System.Byte[] 
 			Parent(ObjectProperty)=HorizontalBox=WidgetArchetype 
 			Content(ObjectProperty)=BlueSB=WidgetArchetype 
 	HorizontalBoxSlot_6 (0-0-0-0): size 156 (cls: HorizontalBoxSlot_6>HorizontalBoxSlot>/Script/UMG):
@@ -314,8 +327,9 @@ Serialized exports:
 			Padding(StructProperty)=System.Byte[] 
 			Parent(ObjectProperty)=HorizontalBox=WidgetArchetype 
 			Content(ObjectProperty)=GameTimeSB=WidgetArchetype 
-	HorizontalBoxSlot_9 (0-0-0-0): size 70 (cls: HorizontalBoxSlot_9>HorizontalBoxSlot>/Script/UMG):
+	HorizontalBoxSlot_9 (0-0-0-0): size 156 (cls: HorizontalBoxSlot_9>HorizontalBoxSlot>/Script/UMG):
 		Tag array:
+			Padding(StructProperty)=System.Byte[] 
 			Parent(ObjectProperty)=HorizontalBox=WidgetArchetype 
 			Content(ObjectProperty)=PlayersLeftSB=WidgetArchetype 
 	HorizontalBoxSlot_0 (0-0-0-0): size 238 (cls: HorizontalBoxSlot_0>HorizontalBoxSlot>/Script/UMG):
@@ -325,10 +339,10 @@ Serialized exports:
 			VerticalAlignment(ByteProperty)=VAlign_Center 
 			Parent(ObjectProperty)=StormPhaseBox=WidgetArchetype 
 			Content(ObjectProperty)=StormPhaseImage=WidgetArchetype 
-	HorizontalBoxSlot_3 (0-0-0-0): size 197 (cls: HorizontalBoxSlot_3>HorizontalBoxSlot>/Script/UMG):
+	HorizontalBoxSlot_3 (0-0-0-0): size 255 (cls: HorizontalBoxSlot_3>HorizontalBoxSlot>/Script/UMG):
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
-			VerticalAlignment(ByteProperty)=VAlign_Top 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
 			Parent(ObjectProperty)=StormPhaseBox=WidgetArchetype 
 			Content(ObjectProperty)=StormPhaseTextBox=WidgetArchetype 
 	HorizontalBoxSlot_0 (0-0-0-0): size 70 (cls: HorizontalBoxSlot_0>HorizontalBoxSlot>/Script/UMG):
@@ -339,7 +353,7 @@ Serialized exports:
 		Tag array:
 			Parent(ObjectProperty)=StormPhaseTextBox=WidgetArchetype 
 			Content(ObjectProperty)=MaxStormPhaseText=WidgetArchetype 
-	TimeImage (0-0-0-0): size 184 (cls: TimeImage>Image>/Script/UMG):
+	Icon (0-0-0-0): size 184 (cls: Icon>Image>/Script/UMG):
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
 			Slot(ObjectProperty)=HorizontalBoxSlot_3=WidgetArchetype 
@@ -354,6 +368,16 @@ Serialized exports:
 			bIsVariable(BoolProperty)=False 
 	AthenaBroadcastGameTimeWidget (0-0-0-0): size 36 (cls: AthenaBroadcastGameTimeWidget>ObjectProperty>/Script/CoreUObject)
 	AthenaBroadcastPlayersLeftWidget (0-0-0-0): size 36 (cls: AthenaBroadcastPlayersLeftWidget>ObjectProperty>/Script/CoreUObject)
+	SizeBox_0 (0-0-0-0): size 108 (cls: SizeBox_0>SizeBox>/Script/UMG):
+		Tag array:
+			bOverride_WidthOverride(BoolProperty)=True 
+			WidthOverride(FloatProperty)=120 
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+	SizeBox_0 (0-0-0-0): size 108 (cls: SizeBox_0>SizeBox>/Script/UMG):
+		Tag array:
+			bOverride_WidthOverride(BoolProperty)=True 
+			WidthOverride(FloatProperty)=95 
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 	BlueSB (0-0-0-0): size 166 (cls: BlueSB>SizeBox>/Script/UMG):
 		Tag array:
 			bOverride_WidthOverride(BoolProperty)=True 
@@ -364,13 +388,14 @@ Serialized exports:
 	GameTimeSB (0-0-0-0): size 137 (cls: GameTimeSB>SizeBox>/Script/UMG):
 		Tag array:
 			bOverride_WidthOverride(BoolProperty)=True 
-			WidthOverride(FloatProperty)=150 
+			WidthOverride(FloatProperty)=160 
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=HorizontalBoxSlot_8=WidgetArchetype 
-	PlayersLeftSB (0-0-0-0): size 137 (cls: PlayersLeftSB>SizeBox>/Script/UMG):
+	PlayersLeftSB (0-0-0-0): size 166 (cls: PlayersLeftSB>SizeBox>/Script/UMG):
 		Tag array:
 			bOverride_WidthOverride(BoolProperty)=True 
-			WidthOverride(FloatProperty)=150 
+			WidthOverride(FloatProperty)=120 
+			MinDesiredWidth(FloatProperty)=100 
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=HorizontalBoxSlot_9=WidgetArchetype 
 	StatusSB (0-0-0-0): size 108 (cls: StatusSB>SizeBox>/Script/UMG):
@@ -381,9 +406,17 @@ Serialized exports:
 	StormPhaseSB (0-0-0-0): size 137 (cls: StormPhaseSB>SizeBox>/Script/UMG):
 		Tag array:
 			bOverride_WidthOverride(BoolProperty)=True 
-			WidthOverride(FloatProperty)=150 
+			WidthOverride(FloatProperty)=135 
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=HorizontalBoxSlot_6=WidgetArchetype 
+	SizeBoxSlot_0 (0-0-0-0): size 70 (cls: SizeBoxSlot_0>SizeBoxSlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=SizeBox_0=WidgetArchetype 
+			Content(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
+	SizeBoxSlot_0 (0-0-0-0): size 70 (cls: SizeBoxSlot_0>SizeBoxSlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=SizeBox_0=WidgetArchetype 
+			Content(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
 	SizeBoxSlot_0 (0-0-0-0): size 70 (cls: SizeBoxSlot_0>SizeBoxSlot>/Script/UMG):
 		Tag array:
 			Parent(ObjectProperty)=BlueSB=WidgetArchetype 
@@ -404,9 +437,9 @@ Serialized exports:
 		Tag array:
 			Parent(ObjectProperty)=StormPhaseSB=WidgetArchetype 
 			Content(ObjectProperty)=StormPhaseBorder=WidgetArchetype 
-	TimeText (0-0-0-0): size 362 (cls: TimeText>TextBlock>/Script/UMG):
+	TimeText (0-0-0-0): size 363 (cls: TimeText>TextBlock>/Script/UMG):
 		Tag array:
-			Text(TextProperty)=0:00 (02FD2F85441355FE2CC94AA2DD229A0C) 
+			Text(TextProperty)=00:00 (02FD2F85441355FE2CC94AA2DD229A0C) 
 			Font(StructProperty)=System.Byte[] 
 			bSimpleTextMode(BoolProperty)=True 
 			Justification(ByteProperty)=ETextJustify::Center 
@@ -435,7 +468,7 @@ Serialized exports:
 			RootWidget(ObjectProperty)=StatusSB=WidgetArchetype 
 	WidgetTree_0 (0-0-0-0): size 41 (cls: WidgetTree_0>WidgetTree>/Script/UMG):
 		Tag array:
-			RootWidget(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
+			RootWidget(ObjectProperty)=SizeBox_0=WidgetArchetype 
 	WidgetTree_0 (0-0-0-0): size 41 (cls: WidgetTree_0>WidgetTree>/Script/UMG):
 		Tag array:
-			RootWidget(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
+			RootWidget(ObjectProperty)=SizeBox_0=WidgetArchetype 

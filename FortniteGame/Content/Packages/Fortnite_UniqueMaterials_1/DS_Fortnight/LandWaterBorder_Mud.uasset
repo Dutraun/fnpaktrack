@@ -12,11 +12,15 @@ Name table:
 	/Engine/Functions/Engine_MaterialFunctions02/Math/Transform3x3Matrix
 	/Engine/Functions/Engine_MaterialFunctions02/PivotPainter/PivotPainter_PerObjectData
 	/Engine/Functions/Engine_MaterialFunctions02/SafeNormalize
+	/Engine/Functions/Engine_MaterialFunctions02/Texturing/CustomRotator
 	/Engine/Functions/Engine_MaterialFunctions02/Texturing/HeightLerp
 	/Engine/Functions/Engine_MaterialFunctions02/Texturing/ScreenAlignedPixelToPixelUVs
 	/Engine/Functions/Engine_MaterialFunctions02/Utility/BlendAngleCorrectedNormals
 	/Engine/Functions/Engine_MaterialFunctions02/Utility/BreakOutFloat2Components
 	/Engine/Functions/Engine_MaterialFunctions02/Utility/BreakOutFloat3Components
+	/Engine/Functions/Engine_MaterialFunctions02/Utility/BreakOutFloat4Components
+	/Engine/Functions/Engine_MaterialFunctions02/Utility/CameraDirectionVector
+	/Engine/Functions/Engine_MaterialFunctions02/Utility/DepthFromWorldPosition
 	/Engine/Functions/Engine_MaterialFunctions02/Utility/DitherTemporalAA
 	/Engine/Functions/Engine_MaterialFunctions02/Utility/MakeFloat3
 	/Engine/Functions/Engine_MaterialFunctions02/Utility/MakeFloat4
@@ -27,6 +31,11 @@ Name table:
 	/Engine/Functions/MaterialLayerFunctions/MatLayerBlend_OverrideOpacityMask
 	/Engine/Functions/MaterialLayerFunctions/MatLayerBlend_ReplaceNormals
 	/Engine/Functions/MaterialLayerFunctions/MatLayerBlend_Standard
+	/Game/Athena/Environments/Landscape/MaterialFunctions/MF_TerrainDistanceFade
+	/Game/Athena/Environments/Landscape/MaterialFunctions/Snow/MF_Athena_Snow_01
+	/Game/Athena/WinterArt/Materials/MF_FrozenLake
+	/Game/Athena/WinterArt/Materials/MF_SharedWinter
+	/Game/Effects/Fort_Effects/Materials/_Functions/Color_Time_of_Day
 	/Game/FortressPhysicalMaterials/Water
 	/Game/Packages/DS_Fortnight/T_MudBeachNormal_01
 	/Game/Packages/DS_Fortnight/WhiteRockCustom_D
@@ -60,17 +69,21 @@ Name table:
 	BorderVerts_ZOffset
 	BreakOutFloat2Components
 	BreakOutFloat3Components
+	BreakOutFloat4Components
 	bTangentSpaceNormal
 	bUsedWithInstancedStaticMeshes
 	bUseMaterialAttributes
 	ByteProperty
 	CachedQualityLevelsUsed
 	CameraDepthFade
+	CameraDirectionVector
 	CheapContrast
 	Class
+	Color_Time_of_Day
 	Contrast
 	Coordinates
 	CreateThirdOrthogonalVector
+	CustomRotator
 	Default
 	Default__Material
 	Default__MaterialExpressionFeatureLevelSwitch
@@ -83,6 +96,7 @@ Name table:
 	Default__MaterialExpressionTextureSampleParameter2D
 	Default__MaterialExpressionVectorParameter
 	DefaultValue
+	DepthFromWorldPosition
 	DitherTemporalAA
 	EBlendMode
 	EMaterialSamplerType
@@ -101,6 +115,7 @@ Name table:
 	Fortnite_WaterInteractions_SurfaceColorModulation
 	FortniteMaterialParameters
 	Fresnel_Function
+	FrozenLakeWater
 	Function
 	Group
 	Guid
@@ -143,6 +158,10 @@ Name table:
 	MatLayerBlend_ReplaceNormals
 	MatLayerBlend_Standard
 	Metallic
+	MF_Athena_Snow_01
+	MF_FrozenLake
+	MF_SharedWinter
+	MF_TerrainDistanceFade
 	MipValue
 	MipValueMode
 	Mud
@@ -209,7 +228,7 @@ Name table:
 	WorldPositionOffset
 	Z offset amount
 Serialized exports:
-	LandWaterBorder_Mud (0-0-0-0): size 249091 (cls: LandWaterBorder_Mud>Material>/Script/Engine):
+	LandWaterBorder_Mud (0-0-0-0): size 234932 (cls: LandWaterBorder_Mud>Material>/Script/Engine):
 		Tag array:
 			PhysMaterial(ObjectProperty)=Water=/Game/FortressPhysicalMaterials/Water 
 			Metallic(StructProperty)=System.Byte[] 
@@ -223,7 +242,7 @@ Serialized exports:
 			MaterialFunctionInfos(ArrayProperty)=[object] (inner: StructProperty)
 			MaterialParameterCollectionInfos(ArrayProperty)=[object] (inner: StructProperty)
 			bUseMaterialAttributes(BoolProperty)=True 
-			StateId(StructProperty)=Guid: 3333136766-1082552182-4026650018-732369058 
+			StateId(StructProperty)=Guid: 540250832-1302534432-1809576073-2812743588 
 			CachedQualityLevelsUsed(ArrayProperty)=[object] (inner: BoolProperty)
 	MaterialExpressionFeatureLevelSwitch_1 (0-0-0-0): size 308 (cls: MaterialExpressionFeatureLevelSwitch_1>MaterialExpressionFeatureLevelSwitch>/Script/Engine):
 		Tag array:
@@ -279,6 +298,10 @@ Serialized exports:
 		Tag array:
 			MaterialFunction(ObjectProperty)=LinearGradient=/Engine/Functions/Engine_MaterialFunctions01/Gradient/LinearGradient 
 			Material(ObjectProperty)=LandWaterBorder_Mud= 
+	MaterialExpressionMaterialFunctionCall_3 (0-0-0-0): size 70 (cls: MaterialExpressionMaterialFunctionCall_3>MaterialExpressionMaterialFunctionCall>/Script/Engine):
+		Tag array:
+			MaterialFunction(ObjectProperty)=MF_FrozenLake=/Game/Athena/WinterArt/Materials/MF_FrozenLake 
+			Material(ObjectProperty)=LandWaterBorder_Mud= 
 	MaterialExpressionMaterialFunctionCall_34 (0-0-0-0): size 70 (cls: MaterialExpressionMaterialFunctionCall_34>MaterialExpressionMaterialFunctionCall>/Script/Engine):
 		Tag array:
 			MaterialFunction(ObjectProperty)=BreakOutFloat2Components=/Engine/Functions/Engine_MaterialFunctions02/Utility/BreakOutFloat2Components 
@@ -290,6 +313,10 @@ Serialized exports:
 	MaterialExpressionMaterialFunctionCall_5 (0-0-0-0): size 70 (cls: MaterialExpressionMaterialFunctionCall_5>MaterialExpressionMaterialFunctionCall>/Script/Engine):
 		Tag array:
 			MaterialFunction(ObjectProperty)=WorldAlignedNormal=/Engine/Functions/Engine_MaterialFunctions01/Texturing/WorldAlignedNormal 
+			Material(ObjectProperty)=LandWaterBorder_Mud= 
+	MaterialExpressionMaterialFunctionCall_6 (0-0-0-0): size 70 (cls: MaterialExpressionMaterialFunctionCall_6>MaterialExpressionMaterialFunctionCall>/Script/Engine):
+		Tag array:
+			MaterialFunction(ObjectProperty)=HeightLerp=/Engine/Functions/Engine_MaterialFunctions02/Texturing/HeightLerp 
 			Material(ObjectProperty)=LandWaterBorder_Mud= 
 	MaterialExpressionMaterialFunctionCall_7 (0-0-0-0): size 70 (cls: MaterialExpressionMaterialFunctionCall_7>MaterialExpressionMaterialFunctionCall>/Script/Engine):
 		Tag array:
@@ -438,7 +465,7 @@ Serialized exports:
 			Material(ObjectProperty)=LandWaterBorder_Mud= 
 	MaterialExpressionScalarParameter_81 (0-0-0-0): size 168 (cls: MaterialExpressionScalarParameter_81>MaterialExpressionScalarParameter>/Script/Engine):
 		Tag array:
-			DefaultValue(FloatProperty)=0.505826 
+			DefaultValue(FloatProperty)=1 
 			ParameterName(NameProperty)=Opacity mask Contrast 
 			ExpressionGUID(StructProperty)=Guid: 188017634-1268835034-1041731237-4069258270 
 			Material(ObjectProperty)=LandWaterBorder_Mud= 
@@ -454,6 +481,20 @@ Serialized exports:
 			B(StructProperty)=System.Byte[] 
 			ParameterName(NameProperty)=Athena_HideBorderVerts 
 			ExpressionGUID(StructProperty)=Guid: 1938834118-1105850346-1465309848-1379041554 
+			Material(ObjectProperty)=LandWaterBorder_Mud= 
+	MaterialExpressionStaticSwitchParameter_1 (0-0-0-0): size 317 (cls: MaterialExpressionStaticSwitchParameter_1>MaterialExpressionStaticSwitchParameter>/Script/Engine):
+		Tag array:
+			A(StructProperty)=System.Byte[] 
+			B(StructProperty)=System.Byte[] 
+			ParameterName(NameProperty)=FrozenLakeWater 
+			ExpressionGUID(StructProperty)=Guid: 2950736418-1106850579-2122616494-516593310 
+			Material(ObjectProperty)=LandWaterBorder_Mud= 
+	MaterialExpressionStaticSwitchParameter_3 (0-0-0-0): size 317 (cls: MaterialExpressionStaticSwitchParameter_3>MaterialExpressionStaticSwitchParameter>/Script/Engine):
+		Tag array:
+			A(StructProperty)=System.Byte[] 
+			B(StructProperty)=System.Byte[] 
+			ParameterName(NameProperty)=FrozenLakeWater 
+			ExpressionGUID(StructProperty)=Guid: 1698592544-1204581542-192395684-4110849611 
 			Material(ObjectProperty)=LandWaterBorder_Mud= 
 	MaterialExpressionTextureObjectParameter_11 (0-0-0-0): size 242 (cls: MaterialExpressionTextureObjectParameter_11>MaterialExpressionTextureObjectParameter>/Script/Engine):
 		Tag array:

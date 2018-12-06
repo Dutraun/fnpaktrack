@@ -18,6 +18,7 @@ Name table:
 	/Game/UI/Fort_HUD/Radar/UI_Radar_SpawnPoint
 	/Game/UI/Foundation/Banner/Banner-SquareLobbyFrame
 	/Game/UI/HomeBase/BannerWidget/HB-Banner-Base
+	/Script/AnimationBudgetAllocator
 	/Script/BlueprintContext
 	/Script/CoreUObject
 	/Script/Engine
@@ -33,6 +34,7 @@ Name table:
 	Add_VectorVector
 	AddComponent
 	AllNodes
+	AreaClass
 	Array_Add
 	Array_Clear
 	Array_Contains
@@ -53,6 +55,7 @@ Name table:
 	BannerColorId
 	BannerIconId
 	BannerLibrary_C
+	BannerMID
 	BannerMID_16_47E69C5641EF29CC25F0E7BC050BF490
 	bAutoActivate
 	bAutoWeld
@@ -245,6 +248,7 @@ Name table:
 	CallFunc_K2_GetComponentLocation_ReturnValue
 	CallFunc_K2_GetComponentLocation_ReturnValue1
 	CallFunc_K2_GetComponentToWorld_ReturnValue
+	CallFunc_K2_GetPawn_ReturnValue
 	CallFunc_K2_SetRelativeLocation_SweepHitResult
 	CallFunc_K2_SetRelativeLocation_SweepHitResult1
 	CallFunc_K2_SetRelativeLocation_SweepHitResult2
@@ -450,6 +454,7 @@ Name table:
 	FortHomeTeleporterInterface
 	FortKismetLibrary
 	FortMcpContext
+	FortMetaNavArea_Obstacles
 	FortMiniMapComponent
 	FortMiniMapData
 	FortMissionEvent
@@ -506,7 +511,6 @@ Name table:
 	HandleClientEvent_ChestSkipToResultFocus
 	HandleClientEvent_HeroLevelUpEvent
 	HandleClientEvent_PlayerLeavingEvent
-	HandleMissionEvent_PlayerSpawned
 	HandleMissionEvent_PlayTeleportOnToSpawnPad
 	HandleMissionEvent_SetupTeleportOutCamera
 	HandleMissionEvent_StartLeavingZone
@@ -518,6 +522,7 @@ Name table:
 	InitializeChestProgression
 	InitPlayerData
 	InMissionGuid
+	InstigatingPlayerState
 	InternalVariableName
 	IntProperty
 	IsNewRewardFlowEnabled
@@ -528,6 +533,7 @@ Name table:
 	K2_DestroyComponent
 	K2_GetComponentLocation
 	K2_GetComponentToWorld
+	K2_GetPawn
 	K2_SetRelativeLocation
 	K2_SetRelativeRotation
 	K2_SetTimerDelegate
@@ -535,7 +541,9 @@ Name table:
 	K2Node_CreateDelegate_OutputDelegate
 	K2Node_CreateDelegate_OutputDelegate1
 	K2Node_CreateDelegate_OutputDelegate2
+	K2Node_CustomEvent_BannerMID
 	K2Node_CustomEvent_Controller
+	K2Node_CustomEvent_InstigatingPlayerState
 	K2Node_CustomEvent_Loaded
 	K2Node_CustomEvent_Loaded1
 	K2Node_CustomEvent_NewPlayerData
@@ -591,51 +599,39 @@ Name table:
 	K2Node_HandleMissionEvent_DO_NOT_USE_THIS_OR_VARIABLES_BELOW
 	K2Node_HandleMissionEvent_DO_NOT_USE_THIS_OR_VARIABLES_BELOW1
 	K2Node_HandleMissionEvent_DO_NOT_USE_THIS_OR_VARIABLES_BELOW2
-	K2Node_HandleMissionEvent_DO_NOT_USE_THIS_OR_VARIABLES_BELOW3
 	K2Node_HandleMissionEvent_EventContent
 	K2Node_HandleMissionEvent_EventContent1
 	K2Node_HandleMissionEvent_EventContent2
-	K2Node_HandleMissionEvent_EventContent3
 	K2Node_HandleMissionEvent_EventFocus
 	K2Node_HandleMissionEvent_EventFocus1
 	K2Node_HandleMissionEvent_EventFocus2
-	K2Node_HandleMissionEvent_EventFocus3
 	K2Node_HandleMissionEvent_EventInstigator
 	K2Node_HandleMissionEvent_EventInstigator1
 	K2Node_HandleMissionEvent_EventInstigator2
-	K2Node_HandleMissionEvent_EventInstigator3
 	K2Node_HandleMissionEvent_GameplayTags
 	K2Node_HandleMissionEvent_GameplayTags1
 	K2Node_HandleMissionEvent_GameplayTags2
-	K2Node_HandleMissionEvent_GameplayTags3
 	K2Node_HandleMissionEvent_GenericFloat
 	K2Node_HandleMissionEvent_GenericFloat1
 	K2Node_HandleMissionEvent_GenericFloat2
-	K2Node_HandleMissionEvent_GenericFloat3
 	K2Node_HandleMissionEvent_GenericInt
 	K2Node_HandleMissionEvent_GenericInt1
 	K2Node_HandleMissionEvent_GenericInt2
-	K2Node_HandleMissionEvent_GenericInt3
 	K2Node_HandleMissionEvent_GenericText
 	K2Node_HandleMissionEvent_GenericText1
 	K2Node_HandleMissionEvent_GenericText2
-	K2Node_HandleMissionEvent_GenericText3
 	K2Node_HandleMissionEvent_InMissionGuid
 	K2Node_HandleMissionEvent_InMissionGuid1
 	K2Node_HandleMissionEvent_InMissionGuid2
-	K2Node_HandleMissionEvent_InMissionGuid3
 	K2Node_HandleMissionEvent_MissionEvent
 	K2Node_HandleMissionEvent_MissionEvent1
 	K2Node_HandleMissionEvent_MissionEvent2
-	K2Node_HandleMissionEvent_MissionEvent3
 	K2Node_HandleMissionEvent_ObjectiveHandle
 	K2Node_HandleMissionEvent_ObjectiveHandle1
 	K2Node_HandleMissionEvent_ObjectiveHandle2
-	K2Node_HandleMissionEvent_ObjectiveHandle3
 	K2Node_HandleMissionEvent_Params
 	K2Node_HandleMissionEvent_Params1
 	K2Node_HandleMissionEvent_Params2
-	K2Node_HandleMissionEvent_Params3
 	K2Node_Select_Default
 	K2Node_SetFieldsInStruct_StructOut
 	Keys
@@ -676,6 +672,7 @@ Name table:
 	NameProperty
 	Native
 	NewHomeActor
+	NewPawn
 	NewPlayerData
 	NewPlayerParams
 	NextChestSpawnTransform
@@ -694,8 +691,8 @@ Name table:
 	OnHomeTeleporterBoundServer
 	OnHomeTeleporterUnbound
 	OnHomeTeleporterUnboundServer
-	OnLoaded_192496DB41CC2100CC1C729D270056FB
-	OnLoaded_192496DB41CC2100CC1C729D5761F983
+	OnLoaded_192496DB41CC2100CC1C729DAFB58034
+	OnLoaded_192496DB41CC2100CC1C729DBE2919C7
 	OnReceivedPlayerData
 	OnWorldReady
 	P_LlamaExplode_Lvl0
@@ -734,6 +731,7 @@ Name table:
 	PointerToUberGraphFrame
 	PowerSwipeAnim
 	PowerSwipeAnimation
+	PreparePlayerForDisplay
 	PrestreamChestTextures
 	PrimaryChestHide
 	PrimaryChestOffset
@@ -777,8 +775,8 @@ Name table:
 	SetViewTargetWithBlend
 	SetVisibility
 	SimpleConstructionScript
-	SkeletalMesh_GEN_VARIABLE
-	SkeletalMeshComponent
+	SkeletalMeshComponentBudgeted
+	SkeletalMeshComponentBudgeted_GEN_VARIABLE
 	SoftObjectProperty
 	SoundBase
 	SoundCue
@@ -900,10 +898,10 @@ Name table:
 	TTFloatTrack
 	TTVectorTrack
 	UberGraphFrame
-	UberGraphFramePointerProperty
 	UberGraphFunction
 	UI_Radar_SpawnPoint
 	UniqueNetIdRepl
+	UpdateBannerMIDS
 	UpdateFunctionName
 	UserConstructionScript
 	UserDefinedStruct
@@ -917,12 +915,11 @@ Name table:
 	whiteOut
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	BP_PlayerSpawnTeleportPAd_C (0-0-0-0): size 1609 (cls: BP_PlayerSpawnTeleportPAd_C>BlueprintGeneratedClass>/Script/Engine):
+	BP_PlayerSpawnTeleportPAd_C (0-0-0-0): size 1580 (cls: BP_PlayerSpawnTeleportPAd_C>BlueprintGeneratedClass>/Script/Engine):
 		Tag array:
 			ComponentTemplates(ArrayProperty)=[object] (inner: ObjectProperty)
 			Timelines(ArrayProperty)=[object] (inner: ObjectProperty)
 			SimpleConstructionScript(ObjectProperty)=SimpleConstructionScript_226=BP_PlayerSpawnTeleportPAd_C 
-			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=BP_PlayerSpawnTeleportPAd_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_BP_PlayerSpawnTeleportPAd=BP_PlayerSpawnTeleportPAd_C 
 	Default__BP_PlayerSpawnTeleportPAd_C (0-0-0-0): size 1608 (cls: Default__BP_PlayerSpawnTeleportPAd_C>BP_PlayerSpawnTeleportPAd_C):
 		Tag array:
@@ -964,79 +961,78 @@ Serialized exports:
 	ChestMeshes (0-0-0-0): size 36 (cls: ChestMeshes>ArrayProperty>/Script/CoreUObject)
 	CameraTransformProxy (0-0-0-0): size 36 (cls: CameraTransformProxy>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_BP_PlayerSpawnTeleportPAd (0-0-0-0): size 9488 (cls: ExecuteUbergraph_BP_PlayerSpawnTeleportPAd>Function>/Script/CoreUObject)
+	ExecuteUbergraph_BP_PlayerSpawnTeleportPAd (0-0-0-0): size 9388 (cls: ExecuteUbergraph_BP_PlayerSpawnTeleportPAd>Function>/Script/CoreUObject)
+	BannerMID (0-0-0-0): size 36 (cls: BannerMID>ObjectProperty>/Script/CoreUObject)
+	UpdateBannerMIDS (0-0-0-0): size 82 (cls: UpdateBannerMIDS>Function>/Script/CoreUObject)
 	EventSource (0-0-0-0): size 36 (cls: EventSource>ObjectProperty>/Script/CoreUObject)
-	HandleClientEvent_CameraIntro (0-0-0-0): size 100 (cls: HandleClientEvent_CameraIntro>Function>/Script/CoreUObject)
+	HandleClientEvent_CameraIntro (0-0-0-0): size 96 (cls: HandleClientEvent_CameraIntro>Function>/Script/CoreUObject)
+	LogoutTick (0-0-0-0): size 54 (cls: LogoutTick>Function>/Script/CoreUObject)
 	InMissionGuid (0-0-0-0): size 36 (cls: InMissionGuid>StructProperty>/Script/CoreUObject)
-	HandleMissionEvent_PlayerSpawned (0-0-0-0): size 226 (cls: HandleMissionEvent_PlayerSpawned>Function>/Script/CoreUObject)
-	LogoutTick (0-0-0-0): size 58 (cls: LogoutTick>Function>/Script/CoreUObject)
-	InMissionGuid (0-0-0-0): size 36 (cls: InMissionGuid>StructProperty>/Script/CoreUObject)
-	HandleMissionEvent_StartLeavingZone (0-0-0-0): size 226 (cls: HandleMissionEvent_StartLeavingZone>Function>/Script/CoreUObject)
-	ClientStartSpawnInCamera (0-0-0-0): size 58 (cls: ClientStartSpawnInCamera>Function>/Script/CoreUObject)
-	ReceiveBeginPlay (0-0-0-0): size 58 (cls: ReceiveBeginPlay>Function>/Script/CoreUObject)
+	HandleMissionEvent_StartLeavingZone (0-0-0-0): size 222 (cls: HandleMissionEvent_StartLeavingZone>Function>/Script/CoreUObject)
+	ClientStartSpawnInCamera (0-0-0-0): size 54 (cls: ClientStartSpawnInCamera>Function>/Script/CoreUObject)
+	ReceiveBeginPlay (0-0-0-0): size 54 (cls: ReceiveBeginPlay>Function>/Script/CoreUObject)
 	Controller (0-0-0-0): size 36 (cls: Controller>ObjectProperty>/Script/CoreUObject)
-	PlayerLeavingEndedEvent (0-0-0-0): size 74 (cls: PlayerLeavingEndedEvent>Function>/Script/CoreUObject)
+	PlayerLeavingEndedEvent (0-0-0-0): size 70 (cls: PlayerLeavingEndedEvent>Function>/Script/CoreUObject)
 	EventSource (0-0-0-0): size 36 (cls: EventSource>ObjectProperty>/Script/CoreUObject)
-	HandleClientEvent_HeroLevelUpEvent (0-0-0-0): size 100 (cls: HandleClientEvent_HeroLevelUpEvent>Function>/Script/CoreUObject)
+	HandleClientEvent_HeroLevelUpEvent (0-0-0-0): size 96 (cls: HandleClientEvent_HeroLevelUpEvent>Function>/Script/CoreUObject)
 	EventSource (0-0-0-0): size 36 (cls: EventSource>ObjectProperty>/Script/CoreUObject)
-	HandleClientEvent_PlayerLeavingEvent (0-0-0-0): size 100 (cls: HandleClientEvent_PlayerLeavingEvent>Function>/Script/CoreUObject)
+	HandleClientEvent_PlayerLeavingEvent (0-0-0-0): size 96 (cls: HandleClientEvent_PlayerLeavingEvent>Function>/Script/CoreUObject)
 	InMissionGuid (0-0-0-0): size 36 (cls: InMissionGuid>StructProperty>/Script/CoreUObject)
-	HandleMissionEvent_SetupTeleportOutCamera (0-0-0-0): size 226 (cls: HandleMissionEvent_SetupTeleportOutCamera>Function>/Script/CoreUObject)
-	OnWorldReady (0-0-0-0): size 58 (cls: OnWorldReady>Function>/Script/CoreUObject)
-	ClientInitSpawnOut (0-0-0-0): size 74 (cls: ClientInitSpawnOut>Function>/Script/CoreUObject)
+	HandleMissionEvent_SetupTeleportOutCamera (0-0-0-0): size 222 (cls: HandleMissionEvent_SetupTeleportOutCamera>Function>/Script/CoreUObject)
+	OnWorldReady (0-0-0-0): size 54 (cls: OnWorldReady>Function>/Script/CoreUObject)
+	ClientInitSpawnOut (0-0-0-0): size 70 (cls: ClientInitSpawnOut>Function>/Script/CoreUObject)
 	NewPlayerData (0-0-0-0): size 36 (cls: NewPlayerData>StructProperty>/Script/CoreUObject)
 	NewPlayerData (0-0-0-0): size 36 (cls: NewPlayerData>ArrayProperty>/Script/CoreUObject)
 	InMissionGuid (0-0-0-0): size 36 (cls: InMissionGuid>StructProperty>/Script/CoreUObject)
-	HandleMissionEvent_PlayTeleportOnToSpawnPad (0-0-0-0): size 226 (cls: HandleMissionEvent_PlayTeleportOnToSpawnPad>Function>/Script/CoreUObject)
+	HandleMissionEvent_PlayTeleportOnToSpawnPad (0-0-0-0): size 222 (cls: HandleMissionEvent_PlayTeleportOnToSpawnPad>Function>/Script/CoreUObject)
 	EventSource (0-0-0-0): size 36 (cls: EventSource>ObjectProperty>/Script/CoreUObject)
-	HandleClientEvent_ChestSkipToResultFocus (0-0-0-0): size 100 (cls: HandleClientEvent_ChestSkipToResultFocus>Function>/Script/CoreUObject)
+	HandleClientEvent_ChestSkipToResultFocus (0-0-0-0): size 96 (cls: HandleClientEvent_ChestSkipToResultFocus>Function>/Script/CoreUObject)
 	EventSource (0-0-0-0): size 36 (cls: EventSource>ObjectProperty>/Script/CoreUObject)
-	HandleClientEvent_ChestOutro (0-0-0-0): size 100 (cls: HandleClientEvent_ChestOutro>Function>/Script/CoreUObject)
+	HandleClientEvent_ChestOutro (0-0-0-0): size 96 (cls: HandleClientEvent_ChestOutro>Function>/Script/CoreUObject)
 	EventSource (0-0-0-0): size 36 (cls: EventSource>ObjectProperty>/Script/CoreUObject)
-	HandleClientEvent_ChestResultFocus (0-0-0-0): size 100 (cls: HandleClientEvent_ChestResultFocus>Function>/Script/CoreUObject)
+	HandleClientEvent_ChestResultFocus (0-0-0-0): size 96 (cls: HandleClientEvent_ChestResultFocus>Function>/Script/CoreUObject)
 	EventSource (0-0-0-0): size 36 (cls: EventSource>ObjectProperty>/Script/CoreUObject)
-	HandleClientEvent_ChestProgression (0-0-0-0): size 100 (cls: HandleClientEvent_ChestProgression>Function>/Script/CoreUObject)
+	HandleClientEvent_ChestProgression (0-0-0-0): size 96 (cls: HandleClientEvent_ChestProgression>Function>/Script/CoreUObject)
 	EventSource (0-0-0-0): size 36 (cls: EventSource>ObjectProperty>/Script/CoreUObject)
-	HandleClientEvent_ChestAddBadge (0-0-0-0): size 100 (cls: HandleClientEvent_ChestAddBadge>Function>/Script/CoreUObject)
+	HandleClientEvent_ChestAddBadge (0-0-0-0): size 96 (cls: HandleClientEvent_ChestAddBadge>Function>/Script/CoreUObject)
 	EventSource (0-0-0-0): size 36 (cls: EventSource>ObjectProperty>/Script/CoreUObject)
-	HandleClientEvent_ChestIntro (0-0-0-0): size 100 (cls: HandleClientEvent_ChestIntro>Function>/Script/CoreUObject)
-	Chest Intro Next Chest (0-0-0-0): size 58 (cls: Chest Intro Next Chest>Function>/Script/CoreUObject)
+	HandleClientEvent_ChestIntro (0-0-0-0): size 96 (cls: HandleClientEvent_ChestIntro>Function>/Script/CoreUObject)
+	Chest Intro Next Chest (0-0-0-0): size 54 (cls: Chest Intro Next Chest>Function>/Script/CoreUObject)
 	PlayerPawn (0-0-0-0): size 36 (cls: PlayerPawn>ObjectProperty>/Script/CoreUObject)
-	OnHomeTeleporterUnboundServer (0-0-0-0): size 86 (cls: OnHomeTeleporterUnboundServer>Function>/Script/CoreUObject)
+	OnHomeTeleporterUnboundServer (0-0-0-0): size 82 (cls: OnHomeTeleporterUnboundServer>Function>/Script/CoreUObject)
 	PlayerPawn (0-0-0-0): size 36 (cls: PlayerPawn>ObjectProperty>/Script/CoreUObject)
-	OnHomeTeleporterUnbound (0-0-0-0): size 86 (cls: OnHomeTeleporterUnbound>Function>/Script/CoreUObject)
+	OnHomeTeleporterUnbound (0-0-0-0): size 82 (cls: OnHomeTeleporterUnbound>Function>/Script/CoreUObject)
 	PlayerPawn (0-0-0-0): size 36 (cls: PlayerPawn>ObjectProperty>/Script/CoreUObject)
-	OnHomeTeleporterBoundServer (0-0-0-0): size 86 (cls: OnHomeTeleporterBoundServer>Function>/Script/CoreUObject)
+	OnHomeTeleporterBoundServer (0-0-0-0): size 82 (cls: OnHomeTeleporterBoundServer>Function>/Script/CoreUObject)
 	PlayerPawn (0-0-0-0): size 36 (cls: PlayerPawn>ObjectProperty>/Script/CoreUObject)
-	OnHomeTeleporterBound (0-0-0-0): size 86 (cls: OnHomeTeleporterBound>Function>/Script/CoreUObject)
+	OnHomeTeleporterBound (0-0-0-0): size 82 (cls: OnHomeTeleporterBound>Function>/Script/CoreUObject)
 	Loaded (0-0-0-0): size 36 (cls: Loaded>ObjectProperty>/Script/CoreUObject)
-	OnLoaded_192496DB41CC2100CC1C729D5761F983 (0-0-0-0): size 72 (cls: OnLoaded_192496DB41CC2100CC1C729D5761F983>Function>/Script/CoreUObject)
+	OnLoaded_192496DB41CC2100CC1C729DAFB58034 (0-0-0-0): size 68 (cls: OnLoaded_192496DB41CC2100CC1C729DAFB58034>Function>/Script/CoreUObject)
 	Loaded (0-0-0-0): size 36 (cls: Loaded>ObjectProperty>/Script/CoreUObject)
-	OnLoaded_192496DB41CC2100CC1C729D270056FB (0-0-0-0): size 72 (cls: OnLoaded_192496DB41CC2100CC1C729D270056FB>Function>/Script/CoreUObject)
-	TimelineCameraIntro__UpdateFunc (0-0-0-0): size 58 (cls: TimelineCameraIntro__UpdateFunc>Function>/Script/CoreUObject)
-	TimelineCameraIntro__FinishedFunc (0-0-0-0): size 58 (cls: TimelineCameraIntro__FinishedFunc>Function>/Script/CoreUObject)
-	TimelineChestOutro__UpdateFunc (0-0-0-0): size 58 (cls: TimelineChestOutro__UpdateFunc>Function>/Script/CoreUObject)
-	TimelineChestOutro__FinishedFunc (0-0-0-0): size 58 (cls: TimelineChestOutro__FinishedFunc>Function>/Script/CoreUObject)
-	TimelineChestIntroNextChest__UpdateFunc (0-0-0-0): size 58 (cls: TimelineChestIntroNextChest__UpdateFunc>Function>/Script/CoreUObject)
-	TimelineChestIntroNextChest__FinishedFunc (0-0-0-0): size 58 (cls: TimelineChestIntroNextChest__FinishedFunc>Function>/Script/CoreUObject)
-	TimelineChestCameraOutro__UpdateFunc (0-0-0-0): size 58 (cls: TimelineChestCameraOutro__UpdateFunc>Function>/Script/CoreUObject)
-	TimelineChestCameraOutro__FinishedFunc (0-0-0-0): size 58 (cls: TimelineChestCameraOutro__FinishedFunc>Function>/Script/CoreUObject)
-	TimelineChestFinalFocus__UpdateFunc (0-0-0-0): size 58 (cls: TimelineChestFinalFocus__UpdateFunc>Function>/Script/CoreUObject)
-	TimelineChestFinalFocus__FinishedFunc (0-0-0-0): size 58 (cls: TimelineChestFinalFocus__FinishedFunc>Function>/Script/CoreUObject)
-	TimelineChestProgression__PrimaryChestHide__EventFunc (0-0-0-0): size 58 (cls: TimelineChestProgression__PrimaryChestHide__EventFunc>Function>/Script/CoreUObject)
-	TimelineChestProgression__UpdateFunc (0-0-0-0): size 58 (cls: TimelineChestProgression__UpdateFunc>Function>/Script/CoreUObject)
-	TimelineChestProgression__FinishedFunc (0-0-0-0): size 58 (cls: TimelineChestProgression__FinishedFunc>Function>/Script/CoreUObject)
-	TimelineChestAddBadge__UpdateFunc (0-0-0-0): size 58 (cls: TimelineChestAddBadge__UpdateFunc>Function>/Script/CoreUObject)
-	TimelineChestAddBadge__FinishedFunc (0-0-0-0): size 58 (cls: TimelineChestAddBadge__FinishedFunc>Function>/Script/CoreUObject)
-	TimelineChestCameraIntro__UpdateFunc (0-0-0-0): size 58 (cls: TimelineChestCameraIntro__UpdateFunc>Function>/Script/CoreUObject)
-	TimelineChestCameraIntro__FinishedFunc (0-0-0-0): size 58 (cls: TimelineChestCameraIntro__FinishedFunc>Function>/Script/CoreUObject)
+	OnLoaded_192496DB41CC2100CC1C729DBE2919C7 (0-0-0-0): size 68 (cls: OnLoaded_192496DB41CC2100CC1C729DBE2919C7>Function>/Script/CoreUObject)
+	TimelineCameraIntro__UpdateFunc (0-0-0-0): size 54 (cls: TimelineCameraIntro__UpdateFunc>Function>/Script/CoreUObject)
+	TimelineCameraIntro__FinishedFunc (0-0-0-0): size 54 (cls: TimelineCameraIntro__FinishedFunc>Function>/Script/CoreUObject)
+	TimelineChestOutro__UpdateFunc (0-0-0-0): size 54 (cls: TimelineChestOutro__UpdateFunc>Function>/Script/CoreUObject)
+	TimelineChestOutro__FinishedFunc (0-0-0-0): size 54 (cls: TimelineChestOutro__FinishedFunc>Function>/Script/CoreUObject)
+	TimelineChestIntroNextChest__UpdateFunc (0-0-0-0): size 54 (cls: TimelineChestIntroNextChest__UpdateFunc>Function>/Script/CoreUObject)
+	TimelineChestIntroNextChest__FinishedFunc (0-0-0-0): size 54 (cls: TimelineChestIntroNextChest__FinishedFunc>Function>/Script/CoreUObject)
+	TimelineChestCameraOutro__UpdateFunc (0-0-0-0): size 54 (cls: TimelineChestCameraOutro__UpdateFunc>Function>/Script/CoreUObject)
+	TimelineChestCameraOutro__FinishedFunc (0-0-0-0): size 54 (cls: TimelineChestCameraOutro__FinishedFunc>Function>/Script/CoreUObject)
+	TimelineChestFinalFocus__UpdateFunc (0-0-0-0): size 54 (cls: TimelineChestFinalFocus__UpdateFunc>Function>/Script/CoreUObject)
+	TimelineChestFinalFocus__FinishedFunc (0-0-0-0): size 54 (cls: TimelineChestFinalFocus__FinishedFunc>Function>/Script/CoreUObject)
+	TimelineChestProgression__PrimaryChestHide__EventFunc (0-0-0-0): size 54 (cls: TimelineChestProgression__PrimaryChestHide__EventFunc>Function>/Script/CoreUObject)
+	TimelineChestProgression__UpdateFunc (0-0-0-0): size 54 (cls: TimelineChestProgression__UpdateFunc>Function>/Script/CoreUObject)
+	TimelineChestProgression__FinishedFunc (0-0-0-0): size 54 (cls: TimelineChestProgression__FinishedFunc>Function>/Script/CoreUObject)
+	TimelineChestAddBadge__UpdateFunc (0-0-0-0): size 54 (cls: TimelineChestAddBadge__UpdateFunc>Function>/Script/CoreUObject)
+	TimelineChestAddBadge__FinishedFunc (0-0-0-0): size 54 (cls: TimelineChestAddBadge__FinishedFunc>Function>/Script/CoreUObject)
+	TimelineChestCameraIntro__UpdateFunc (0-0-0-0): size 54 (cls: TimelineChestCameraIntro__UpdateFunc>Function>/Script/CoreUObject)
+	TimelineChestCameraIntro__FinishedFunc (0-0-0-0): size 54 (cls: TimelineChestCameraIntro__FinishedFunc>Function>/Script/CoreUObject)
 	CallFunc_HasAuthority_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasAuthority_ReturnValue>BoolProperty>/Script/CoreUObject)
 	UserConstructionScript (0-0-0-0): size 142 (cls: UserConstructionScript>Function>/Script/CoreUObject)
 	PlayerIndex (0-0-0-0): size 32 (cls: PlayerIndex>IntProperty>/Script/CoreUObject)
 	GetPlayerTeleportTransform (0-0-0-0): size 305 (cls: GetPlayerTeleportTransform>Function>/Script/CoreUObject)
-	PlayerPawns (0-0-0-0): size 36 (cls: PlayerPawns>ObjectProperty>/Script/CoreUObject)
-	PlayerPawns (0-0-0-0): size 36 (cls: PlayerPawns>ArrayProperty>/Script/CoreUObject)
-	TeleportAllPlayers (0-0-0-0): size 941 (cls: TeleportAllPlayers>Function>/Script/CoreUObject)
+	NewPawn (0-0-0-0): size 36 (cls: NewPawn>ObjectProperty>/Script/CoreUObject)
+	TeleportAllPlayers (0-0-0-0): size 1026 (cls: TeleportAllPlayers>Function>/Script/CoreUObject)
 	bEnable (0-0-0-0): size 34 (cls: bEnable>BoolProperty>/Script/CoreUObject)
 	EnableLocalPlayerInput (0-0-0-0): size 434 (cls: EnableLocalPlayerInput>Function>/Script/CoreUObject)
 	CallFunc_GetLocalFortPlayerControllers_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetLocalFortPlayerControllers_ReturnValue>ObjectProperty>/Script/CoreUObject)
@@ -1090,6 +1086,8 @@ Serialized exports:
 	CallFunc_AuthorityGetFortPossessedPlayerPawns_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_AuthorityGetFortPossessedPlayerPawns_ReturnValue>ArrayProperty>/Script/CoreUObject)
 	CallFunc_GetPossessedPlayerPawnsByID_SortedPlayerPawns (0-0-0-0): size 36 (cls: CallFunc_GetPossessedPlayerPawnsByID_SortedPlayerPawns>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetPossessedPlayerPawnsByID_SortedPlayerPawns (0-0-0-0): size 36 (cls: CallFunc_GetPossessedPlayerPawnsByID_SortedPlayerPawns>ArrayProperty>/Script/CoreUObject)
+	PlayerPawns (0-0-0-0): size 36 (cls: PlayerPawns>ObjectProperty>/Script/CoreUObject)
+	PlayerPawns (0-0-0-0): size 36 (cls: PlayerPawns>ArrayProperty>/Script/CoreUObject)
 	CallFunc_GetAllFortPlayerPawns_OutFortPlayerPawns (0-0-0-0): size 36 (cls: CallFunc_GetAllFortPlayerPawns_OutFortPlayerPawns>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetAllFortPlayerPawns_OutFortPlayerPawns (0-0-0-0): size 36 (cls: CallFunc_GetAllFortPlayerPawns_OutFortPlayerPawns>ArrayProperty>/Script/CoreUObject)
 	CallFunc_GetLocalFortPlayerControllers_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetLocalFortPlayerControllers_ReturnValue>ObjectProperty>/Script/CoreUObject)
@@ -1149,14 +1147,12 @@ Serialized exports:
 	K2Node_HandleMissionEvent_DO_NOT_USE_THIS_OR_VARIABLES_BELOW (0-0-0-0): size 34 (cls: K2Node_HandleMissionEvent_DO_NOT_USE_THIS_OR_VARIABLES_BELOW>BoolProperty>/Script/CoreUObject)
 	K2Node_HandleMissionEvent_DO_NOT_USE_THIS_OR_VARIABLES_BELOW1 (0-0-0-0): size 34 (cls: K2Node_HandleMissionEvent_DO_NOT_USE_THIS_OR_VARIABLES_BELOW1>BoolProperty>/Script/CoreUObject)
 	K2Node_HandleMissionEvent_DO_NOT_USE_THIS_OR_VARIABLES_BELOW2 (0-0-0-0): size 34 (cls: K2Node_HandleMissionEvent_DO_NOT_USE_THIS_OR_VARIABLES_BELOW2>BoolProperty>/Script/CoreUObject)
-	K2Node_HandleMissionEvent_DO_NOT_USE_THIS_OR_VARIABLES_BELOW3 (0-0-0-0): size 34 (cls: K2Node_HandleMissionEvent_DO_NOT_USE_THIS_OR_VARIABLES_BELOW3>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
 	CallFunc_Less_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_BooleanAND_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_EqualEqual_ObjectObject_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ObjectObject_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Less_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
-	DO_NOT_USE_THIS_OR_VARIABLES_BELOW (0-0-0-0): size 34 (cls: DO_NOT_USE_THIS_OR_VARIABLES_BELOW>BoolProperty>/Script/CoreUObject)
 	DO_NOT_USE_THIS_OR_VARIABLES_BELOW (0-0-0-0): size 34 (cls: DO_NOT_USE_THIS_OR_VARIABLES_BELOW>BoolProperty>/Script/CoreUObject)
 	DO_NOT_USE_THIS_OR_VARIABLES_BELOW (0-0-0-0): size 34 (cls: DO_NOT_USE_THIS_OR_VARIABLES_BELOW>BoolProperty>/Script/CoreUObject)
 	DO_NOT_USE_THIS_OR_VARIABLES_BELOW (0-0-0-0): size 34 (cls: DO_NOT_USE_THIS_OR_VARIABLES_BELOW>BoolProperty>/Script/CoreUObject)
@@ -1180,12 +1176,14 @@ Serialized exports:
 	CallFunc_IsNewRewardFlowEnabled_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsNewRewardFlowEnabled_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Less_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_bSuccess1 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess1>BoolProperty>/Script/CoreUObject)
 	CallFunc_EqualEqual_ObjectObject_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ObjectObject_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Less_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Less_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
-	DestructionVolume_GEN_VARIABLE (0-0-0-0): size 709 (cls: DestructionVolume_GEN_VARIABLE>BoxComponent>/Script/Engine):
+	DestructionVolume_GEN_VARIABLE (0-0-0-0): size 738 (cls: DestructionVolume_GEN_VARIABLE>BoxComponent>/Script/Engine):
 		Tag array:
 			BoxExtent(StructProperty)=Vector(340,340,224) 
+			AreaClass(ObjectProperty)=FortMetaNavArea_Obstacles=/Script/FortniteGame 
 			bGenerateOverlapEvents(BoolProperty)=False 
 			CanCharacterStepUpOn(ByteProperty)=ECB_No 
 			BodyInstance(StructProperty)=System.Byte[] 
@@ -1262,7 +1260,6 @@ Serialized exports:
 	K2Node_HandleMissionEvent_GenericFloat (0-0-0-0): size 32 (cls: K2Node_HandleMissionEvent_GenericFloat>FloatProperty>/Script/CoreUObject)
 	K2Node_HandleMissionEvent_GenericFloat1 (0-0-0-0): size 32 (cls: K2Node_HandleMissionEvent_GenericFloat1>FloatProperty>/Script/CoreUObject)
 	K2Node_HandleMissionEvent_GenericFloat2 (0-0-0-0): size 32 (cls: K2Node_HandleMissionEvent_GenericFloat2>FloatProperty>/Script/CoreUObject)
-	K2Node_HandleMissionEvent_GenericFloat3 (0-0-0-0): size 32 (cls: K2Node_HandleMissionEvent_GenericFloat3>FloatProperty>/Script/CoreUObject)
 	ExitDelay (0-0-0-0): size 32 (cls: ExitDelay>FloatProperty>/Script/CoreUObject)
 	CallFunc_Add_FloatFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Add_FloatFloat_ReturnValue>FloatProperty>/Script/CoreUObject)
 	CallFunc_Add_FloatFloat_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Add_FloatFloat_ReturnValue1>FloatProperty>/Script/CoreUObject)
@@ -1272,7 +1269,6 @@ Serialized exports:
 	CallFunc_BreakVector_X (0-0-0-0): size 32 (cls: CallFunc_BreakVector_X>FloatProperty>/Script/CoreUObject)
 	CallFunc_BreakVector_Y (0-0-0-0): size 32 (cls: CallFunc_BreakVector_Y>FloatProperty>/Script/CoreUObject)
 	CallFunc_BreakVector_Z (0-0-0-0): size 32 (cls: CallFunc_BreakVector_Z>FloatProperty>/Script/CoreUObject)
-	GenericFloat (0-0-0-0): size 32 (cls: GenericFloat>FloatProperty>/Script/CoreUObject)
 	GenericFloat (0-0-0-0): size 32 (cls: GenericFloat>FloatProperty>/Script/CoreUObject)
 	GenericFloat (0-0-0-0): size 32 (cls: GenericFloat>FloatProperty>/Script/CoreUObject)
 	GenericFloat (0-0-0-0): size 32 (cls: GenericFloat>FloatProperty>/Script/CoreUObject)
@@ -1328,7 +1324,6 @@ Serialized exports:
 	K2Node_HandleMissionEvent_GenericInt (0-0-0-0): size 32 (cls: K2Node_HandleMissionEvent_GenericInt>IntProperty>/Script/CoreUObject)
 	K2Node_HandleMissionEvent_GenericInt1 (0-0-0-0): size 32 (cls: K2Node_HandleMissionEvent_GenericInt1>IntProperty>/Script/CoreUObject)
 	K2Node_HandleMissionEvent_GenericInt2 (0-0-0-0): size 32 (cls: K2Node_HandleMissionEvent_GenericInt2>IntProperty>/Script/CoreUObject)
-	K2Node_HandleMissionEvent_GenericInt3 (0-0-0-0): size 32 (cls: K2Node_HandleMissionEvent_GenericInt3>IntProperty>/Script/CoreUObject)
 	Temp_int_Array_Index_Variable (0-0-0-0): size 32 (cls: Temp_int_Array_Index_Variable>IntProperty>/Script/CoreUObject)
 	Temp_int_Array_Index_Variable1 (0-0-0-0): size 32 (cls: Temp_int_Array_Index_Variable1>IntProperty>/Script/CoreUObject)
 	Temp_int_Array_Index_Variable2 (0-0-0-0): size 32 (cls: Temp_int_Array_Index_Variable2>IntProperty>/Script/CoreUObject)
@@ -1351,7 +1346,6 @@ Serialized exports:
 	Temp_int_Array_Index_Variable (0-0-0-0): size 32 (cls: Temp_int_Array_Index_Variable>IntProperty>/Script/CoreUObject)
 	Temp_int_Loop_Counter_Variable (0-0-0-0): size 32 (cls: Temp_int_Loop_Counter_Variable>IntProperty>/Script/CoreUObject)
 	CallFunc_Add_IntInt_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue>IntProperty>/Script/CoreUObject)
-	GenericInt (0-0-0-0): size 32 (cls: GenericInt>IntProperty>/Script/CoreUObject)
 	GenericInt (0-0-0-0): size 32 (cls: GenericInt>IntProperty>/Script/CoreUObject)
 	GenericInt (0-0-0-0): size 32 (cls: GenericInt>IntProperty>/Script/CoreUObject)
 	GenericInt (0-0-0-0): size 32 (cls: GenericInt>IntProperty>/Script/CoreUObject)
@@ -1402,6 +1396,7 @@ Serialized exports:
 	K2Node_Select_Default (0-0-0-0): size 36 (cls: K2Node_Select_Default>ObjectProperty>/Script/CoreUObject)
 	DestructionVolume (0-0-0-0): size 36 (cls: DestructionVolume>ObjectProperty>/Script/CoreUObject)
 	CallFunc_Array_Get_Item (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item>ObjectProperty>/Script/CoreUObject)
+	CallFunc_Array_Get_Item (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item>ObjectProperty>/Script/CoreUObject)
 	CallFunc_Array_Get_Item1 (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item1>ObjectProperty>/Script/CoreUObject)
 	CallFunc_Array_Get_Item10 (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item10>ObjectProperty>/Script/CoreUObject)
 	CallFunc_Array_Get_Item11 (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item11>ObjectProperty>/Script/CoreUObject)
@@ -1415,7 +1410,6 @@ Serialized exports:
 	CallFunc_Array_Get_Item2 (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item2>ObjectProperty>/Script/CoreUObject)
 	CallFunc_Array_Get_Item3 (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item3>ObjectProperty>/Script/CoreUObject)
 	CallFunc_Array_Get_Item4 (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item4>ObjectProperty>/Script/CoreUObject)
-	CallFunc_Array_Get_Item5 (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item5>ObjectProperty>/Script/CoreUObject)
 	CallFunc_Array_Get_Item6 (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item6>ObjectProperty>/Script/CoreUObject)
 	CallFunc_Array_Get_Item7 (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item7>ObjectProperty>/Script/CoreUObject)
 	CallFunc_Array_Get_Item8 (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item8>ObjectProperty>/Script/CoreUObject)
@@ -1425,7 +1419,9 @@ Serialized exports:
 	CallFunc_GetController_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetController_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetPlayerPawn_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetPlayerPawn_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_SpawnSoundAttached_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_SpawnSoundAttached_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	K2Node_CustomEvent_BannerMID (0-0-0-0): size 36 (cls: K2Node_CustomEvent_BannerMID>ObjectProperty>/Script/CoreUObject)
 	K2Node_CustomEvent_Controller (0-0-0-0): size 36 (cls: K2Node_CustomEvent_Controller>ObjectProperty>/Script/CoreUObject)
+	K2Node_CustomEvent_InstigatingPlayerState (0-0-0-0): size 36 (cls: K2Node_CustomEvent_InstigatingPlayerState>ObjectProperty>/Script/CoreUObject)
 	K2Node_CustomEvent_Loaded (0-0-0-0): size 36 (cls: K2Node_CustomEvent_Loaded>ObjectProperty>/Script/CoreUObject)
 	K2Node_CustomEvent_Loaded1 (0-0-0-0): size 36 (cls: K2Node_CustomEvent_Loaded1>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Player_Controller (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Player_Controller>ObjectProperty>/Script/CoreUObject)
@@ -1464,19 +1460,15 @@ Serialized exports:
 	K2Node_HandleMissionEvent_EventContent (0-0-0-0): size 36 (cls: K2Node_HandleMissionEvent_EventContent>ObjectProperty>/Script/CoreUObject)
 	K2Node_HandleMissionEvent_EventContent1 (0-0-0-0): size 36 (cls: K2Node_HandleMissionEvent_EventContent1>ObjectProperty>/Script/CoreUObject)
 	K2Node_HandleMissionEvent_EventContent2 (0-0-0-0): size 36 (cls: K2Node_HandleMissionEvent_EventContent2>ObjectProperty>/Script/CoreUObject)
-	K2Node_HandleMissionEvent_EventContent3 (0-0-0-0): size 36 (cls: K2Node_HandleMissionEvent_EventContent3>ObjectProperty>/Script/CoreUObject)
 	K2Node_HandleMissionEvent_EventFocus (0-0-0-0): size 36 (cls: K2Node_HandleMissionEvent_EventFocus>ObjectProperty>/Script/CoreUObject)
 	K2Node_HandleMissionEvent_EventFocus1 (0-0-0-0): size 36 (cls: K2Node_HandleMissionEvent_EventFocus1>ObjectProperty>/Script/CoreUObject)
 	K2Node_HandleMissionEvent_EventFocus2 (0-0-0-0): size 36 (cls: K2Node_HandleMissionEvent_EventFocus2>ObjectProperty>/Script/CoreUObject)
-	K2Node_HandleMissionEvent_EventFocus3 (0-0-0-0): size 36 (cls: K2Node_HandleMissionEvent_EventFocus3>ObjectProperty>/Script/CoreUObject)
 	K2Node_HandleMissionEvent_EventInstigator (0-0-0-0): size 36 (cls: K2Node_HandleMissionEvent_EventInstigator>ObjectProperty>/Script/CoreUObject)
 	K2Node_HandleMissionEvent_EventInstigator1 (0-0-0-0): size 36 (cls: K2Node_HandleMissionEvent_EventInstigator1>ObjectProperty>/Script/CoreUObject)
 	K2Node_HandleMissionEvent_EventInstigator2 (0-0-0-0): size 36 (cls: K2Node_HandleMissionEvent_EventInstigator2>ObjectProperty>/Script/CoreUObject)
-	K2Node_HandleMissionEvent_EventInstigator3 (0-0-0-0): size 36 (cls: K2Node_HandleMissionEvent_EventInstigator3>ObjectProperty>/Script/CoreUObject)
 	K2Node_HandleMissionEvent_Params (0-0-0-0): size 36 (cls: K2Node_HandleMissionEvent_Params>ObjectProperty>/Script/CoreUObject)
 	K2Node_HandleMissionEvent_Params1 (0-0-0-0): size 36 (cls: K2Node_HandleMissionEvent_Params1>ObjectProperty>/Script/CoreUObject)
 	K2Node_HandleMissionEvent_Params2 (0-0-0-0): size 36 (cls: K2Node_HandleMissionEvent_Params2>ObjectProperty>/Script/CoreUObject)
-	K2Node_HandleMissionEvent_Params3 (0-0-0-0): size 36 (cls: K2Node_HandleMissionEvent_Params3>ObjectProperty>/Script/CoreUObject)
 	K2Node_Select_Default (0-0-0-0): size 36 (cls: K2Node_Select_Default>ObjectProperty>/Script/CoreUObject)
 	Temp_object_Variable (0-0-0-0): size 36 (cls: Temp_object_Variable>ObjectProperty>/Script/CoreUObject)
 	Temp_object_Variable1 (0-0-0-0): size 36 (cls: Temp_object_Variable1>ObjectProperty>/Script/CoreUObject)
@@ -1492,10 +1484,6 @@ Serialized exports:
 	EventFocus (0-0-0-0): size 36 (cls: EventFocus>ObjectProperty>/Script/CoreUObject)
 	EventFocus (0-0-0-0): size 36 (cls: EventFocus>ObjectProperty>/Script/CoreUObject)
 	EventFocus (0-0-0-0): size 36 (cls: EventFocus>ObjectProperty>/Script/CoreUObject)
-	EventContent (0-0-0-0): size 36 (cls: EventContent>ObjectProperty>/Script/CoreUObject)
-	EventFocus (0-0-0-0): size 36 (cls: EventFocus>ObjectProperty>/Script/CoreUObject)
-	EventInstigator (0-0-0-0): size 36 (cls: EventInstigator>ObjectProperty>/Script/CoreUObject)
-	Params (0-0-0-0): size 36 (cls: Params>ObjectProperty>/Script/CoreUObject)
 	EventContent (0-0-0-0): size 36 (cls: EventContent>ObjectProperty>/Script/CoreUObject)
 	EventFocus (0-0-0-0): size 36 (cls: EventFocus>ObjectProperty>/Script/CoreUObject)
 	EventInstigator (0-0-0-0): size 36 (cls: EventInstigator>ObjectProperty>/Script/CoreUObject)
@@ -1536,7 +1524,9 @@ Serialized exports:
 	CallFunc_BreakHitResult_PhysMat (0-0-0-0): size 36 (cls: CallFunc_BreakHitResult_PhysMat>ObjectProperty>/Script/CoreUObject)
 	CallFunc_Array_Get_Item (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetController_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetController_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_K2_GetPawn_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_GetPawn_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Player_Controller (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Player_Controller>ObjectProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_AsFort_Player_Pawn (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Player_Pawn>ObjectProperty>/Script/CoreUObject)
 	TimelineCameraIntro (0-0-0-0): size 36 (cls: TimelineCameraIntro>ObjectProperty>/Script/CoreUObject)
 	TimelineChestAddBadge (0-0-0-0): size 36 (cls: TimelineChestAddBadge>ObjectProperty>/Script/CoreUObject)
 	TimelineChestCameraIntro (0-0-0-0): size 36 (cls: TimelineChestCameraIntro>ObjectProperty>/Script/CoreUObject)
@@ -1547,6 +1537,7 @@ Serialized exports:
 	TimelineChestProgression (0-0-0-0): size 36 (cls: TimelineChestProgression>ObjectProperty>/Script/CoreUObject)
 	CallFunc_Array_Get_Item (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item>ObjectProperty>/Script/CoreUObject)
 	K2Node_Select_Default (0-0-0-0): size 36 (cls: K2Node_Select_Default>ObjectProperty>/Script/CoreUObject)
+	InstigatingPlayerState (0-0-0-0): size 36 (cls: InstigatingPlayerState>ObjectProperty>/Script/CoreUObject)
 	CallFunc_Array_Get_Item (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item>ObjectProperty>/Script/CoreUObject)
 	Player1LevelUpPS_GEN_VARIABLE (0-0-0-0): size 211 (cls: Player1LevelUpPS_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine):
 		Tag array:
@@ -1751,8 +1742,8 @@ Serialized exports:
 	CallFunc_Add_VectorVector_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_Add_VectorVector_ReturnValue2>StructProperty>/Script/CoreUObject)
 	CallFunc_Add_VectorVector_ReturnValue3 (0-0-0-0): size 36 (cls: CallFunc_Add_VectorVector_ReturnValue3>StructProperty>/Script/CoreUObject)
 	CallFunc_Add_VectorVector_ReturnValue4 (0-0-0-0): size 36 (cls: CallFunc_Add_VectorVector_ReturnValue4>StructProperty>/Script/CoreUObject)
-	CallFunc_Array_Get_Item (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item>StructProperty>/Script/CoreUObject)
 	CallFunc_Array_Get_Item20 (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item20>StructProperty>/Script/CoreUObject)
+	CallFunc_Array_Get_Item5 (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item5>StructProperty>/Script/CoreUObject)
 	CallFunc_GetBannerColorPrimaryColorFromRowName_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetBannerColorPrimaryColorFromRowName_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_GetBannerColorPrimaryColorFromRowName_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetBannerColorPrimaryColorFromRowName_ReturnValue1>StructProperty>/Script/CoreUObject)
 	CallFunc_GetBannerColorSecondaryColorFromRowName_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetBannerColorSecondaryColorFromRowName_ReturnValue>StructProperty>/Script/CoreUObject)
@@ -1785,19 +1776,15 @@ Serialized exports:
 	K2Node_HandleMissionEvent_GameplayTags (0-0-0-0): size 36 (cls: K2Node_HandleMissionEvent_GameplayTags>StructProperty>/Script/CoreUObject)
 	K2Node_HandleMissionEvent_GameplayTags1 (0-0-0-0): size 36 (cls: K2Node_HandleMissionEvent_GameplayTags1>StructProperty>/Script/CoreUObject)
 	K2Node_HandleMissionEvent_GameplayTags2 (0-0-0-0): size 36 (cls: K2Node_HandleMissionEvent_GameplayTags2>StructProperty>/Script/CoreUObject)
-	K2Node_HandleMissionEvent_GameplayTags3 (0-0-0-0): size 36 (cls: K2Node_HandleMissionEvent_GameplayTags3>StructProperty>/Script/CoreUObject)
 	K2Node_HandleMissionEvent_InMissionGuid (0-0-0-0): size 36 (cls: K2Node_HandleMissionEvent_InMissionGuid>StructProperty>/Script/CoreUObject)
 	K2Node_HandleMissionEvent_InMissionGuid1 (0-0-0-0): size 36 (cls: K2Node_HandleMissionEvent_InMissionGuid1>StructProperty>/Script/CoreUObject)
 	K2Node_HandleMissionEvent_InMissionGuid2 (0-0-0-0): size 36 (cls: K2Node_HandleMissionEvent_InMissionGuid2>StructProperty>/Script/CoreUObject)
-	K2Node_HandleMissionEvent_InMissionGuid3 (0-0-0-0): size 36 (cls: K2Node_HandleMissionEvent_InMissionGuid3>StructProperty>/Script/CoreUObject)
 	K2Node_HandleMissionEvent_MissionEvent (0-0-0-0): size 36 (cls: K2Node_HandleMissionEvent_MissionEvent>StructProperty>/Script/CoreUObject)
 	K2Node_HandleMissionEvent_MissionEvent1 (0-0-0-0): size 36 (cls: K2Node_HandleMissionEvent_MissionEvent1>StructProperty>/Script/CoreUObject)
 	K2Node_HandleMissionEvent_MissionEvent2 (0-0-0-0): size 36 (cls: K2Node_HandleMissionEvent_MissionEvent2>StructProperty>/Script/CoreUObject)
-	K2Node_HandleMissionEvent_MissionEvent3 (0-0-0-0): size 36 (cls: K2Node_HandleMissionEvent_MissionEvent3>StructProperty>/Script/CoreUObject)
 	K2Node_HandleMissionEvent_ObjectiveHandle (0-0-0-0): size 36 (cls: K2Node_HandleMissionEvent_ObjectiveHandle>StructProperty>/Script/CoreUObject)
 	K2Node_HandleMissionEvent_ObjectiveHandle1 (0-0-0-0): size 36 (cls: K2Node_HandleMissionEvent_ObjectiveHandle1>StructProperty>/Script/CoreUObject)
 	K2Node_HandleMissionEvent_ObjectiveHandle2 (0-0-0-0): size 36 (cls: K2Node_HandleMissionEvent_ObjectiveHandle2>StructProperty>/Script/CoreUObject)
-	K2Node_HandleMissionEvent_ObjectiveHandle3 (0-0-0-0): size 36 (cls: K2Node_HandleMissionEvent_ObjectiveHandle3>StructProperty>/Script/CoreUObject)
 	CallFunc_BreakTransform_Location (0-0-0-0): size 36 (cls: CallFunc_BreakTransform_Location>StructProperty>/Script/CoreUObject)
 	CallFunc_BreakTransform_Rotation (0-0-0-0): size 36 (cls: CallFunc_BreakTransform_Rotation>StructProperty>/Script/CoreUObject)
 	CallFunc_BreakTransform_Scale (0-0-0-0): size 36 (cls: CallFunc_BreakTransform_Scale>StructProperty>/Script/CoreUObject)
@@ -1818,9 +1805,6 @@ Serialized exports:
 	ClientEvent (0-0-0-0): size 36 (cls: ClientEvent>StructProperty>/Script/CoreUObject)
 	ClientEvent (0-0-0-0): size 36 (cls: ClientEvent>StructProperty>/Script/CoreUObject)
 	ClientEvent (0-0-0-0): size 36 (cls: ClientEvent>StructProperty>/Script/CoreUObject)
-	GameplayTags (0-0-0-0): size 36 (cls: GameplayTags>StructProperty>/Script/CoreUObject)
-	MissionEvent (0-0-0-0): size 36 (cls: MissionEvent>StructProperty>/Script/CoreUObject)
-	ObjectiveHandle (0-0-0-0): size 36 (cls: ObjectiveHandle>StructProperty>/Script/CoreUObject)
 	GameplayTags (0-0-0-0): size 36 (cls: GameplayTags>StructProperty>/Script/CoreUObject)
 	MissionEvent (0-0-0-0): size 36 (cls: MissionEvent>StructProperty>/Script/CoreUObject)
 	ObjectiveHandle (0-0-0-0): size 36 (cls: ObjectiveHandle>StructProperty>/Script/CoreUObject)
@@ -1878,8 +1862,6 @@ Serialized exports:
 	K2Node_HandleMissionEvent_GenericText (0-0-0-0): size 32 (cls: K2Node_HandleMissionEvent_GenericText>TextProperty>/Script/CoreUObject)
 	K2Node_HandleMissionEvent_GenericText1 (0-0-0-0): size 32 (cls: K2Node_HandleMissionEvent_GenericText1>TextProperty>/Script/CoreUObject)
 	K2Node_HandleMissionEvent_GenericText2 (0-0-0-0): size 32 (cls: K2Node_HandleMissionEvent_GenericText2>TextProperty>/Script/CoreUObject)
-	K2Node_HandleMissionEvent_GenericText3 (0-0-0-0): size 32 (cls: K2Node_HandleMissionEvent_GenericText3>TextProperty>/Script/CoreUObject)
-	GenericText (0-0-0-0): size 32 (cls: GenericText>TextProperty>/Script/CoreUObject)
 	GenericText (0-0-0-0): size 32 (cls: GenericText>TextProperty>/Script/CoreUObject)
 	GenericText (0-0-0-0): size 32 (cls: GenericText>TextProperty>/Script/CoreUObject)
 	GenericText (0-0-0-0): size 32 (cls: GenericText>TextProperty>/Script/CoreUObject)

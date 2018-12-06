@@ -20,6 +20,7 @@ Name table:
 	AbilitySystemIn
 	AbilitySystemOut
 	AbilityTags
+	AbilityTargetDataFromLocations
 	AbilityTriggerData
 	AbilityTriggers
 	ActiveGameplayEffectHandle
@@ -77,6 +78,7 @@ Name table:
 	ByteProperty
 	CacheAbilityTransformValuesForLinePlacement
 	CalcLinePlacements
+	CallFunc_AbilityTargetDataFromLocations_ReturnValue
 	CallFunc_Add_FloatFloat_ReturnValue
 	CallFunc_Add_FloatFloat_ReturnValue1
 	CallFunc_Add_FloatFloat_ReturnValue2
@@ -165,6 +167,7 @@ Name table:
 	ConeMinRadius
 	ConePitchAngle
 	ConeYawAngle
+	ContextHandle
 	Curve
 	CurveTable
 	CurveTableRowHandle
@@ -221,7 +224,10 @@ Name table:
 	EnumProperty
 	EqualEqual_IntInt
 	Event.Ability.Outlander.GroundWave.Activate
+	Event.Ability.Outlander.GroundWave.MaxRangeReached
 	EventData
+	EventMagnitude
+	EventTag
 	ExclusionGameplayTags
 	ExecuteUbergraph_GA_Outlander_GroundWave_Wave
 	FloatProperty
@@ -239,6 +245,7 @@ Name table:
 	Gameplay.DamageSource.Ability
 	GameplayAbility
 	GameplayAbilityTargetDataHandle
+	GameplayAbilityTargetingLocationInfo
 	GameplayCue.Abilities.Outlander.GroundWave.Explosion
 	GameplayCue.Abilities.Outlander.GroundWave.ReturnToSender
 	GameplayCueParameters
@@ -272,6 +279,7 @@ Name table:
 	Index
 	InNormalsArray
 	Instigator
+	InstigatorTags
 	InterfaceProperty
 	IntProperty
 	InTransformArray
@@ -290,8 +298,10 @@ Name table:
 	K2Node_CustomEvent_TargetData
 	K2Node_CustomEvent_TargetData1
 	K2Node_Event_EventData
+	K2Node_MakeStruct_GameplayAbilityTargetingLocationInfo
 	K2Node_MakeStruct_GameplayCueParameters
 	K2Node_MakeStruct_GameplayCueParameters1
+	K2Node_MakeStruct_GameplayEventData
 	K2Node_MakeStruct_Vector_NetQuantize10
 	K2Node_MakeStruct_Vector_NetQuantize101
 	K2Node_MakeStruct_Vector_NetQuantizeNormal
@@ -307,7 +317,9 @@ Name table:
 	LinearColor
 	LineTraceSingle
 	List
+	LiteralTransform
 	Location
+	LocationType
 	MakeExplosion
 	MakeOutgoingGameplayEffectSpec
 	MakeTransform
@@ -330,6 +342,8 @@ Name table:
 	ObjectProperty
 	OffsetHigh
 	OffsetLow
+	OptionalObject
+	OptionalObject2
 	OriginalTag
 	OutlanderPlayerPawn
 	Package
@@ -358,9 +372,14 @@ Name table:
 	SecondarySource
 	SegmentLength
 	SegmentLengthOffset
+	SendGameplayEventToActor
 	SetupAbility
 	Shape
+	SourceAbility
+	SourceActor
+	SourceComponent
 	SourceObject
+	SourceSocketName
 	StartingForwardV
 	StartingLoc
 	StartingRot
@@ -368,7 +387,9 @@ Name table:
 	StrProperty
 	StructProperty
 	Subtract_IntInt
+	T_Event_MaxRangeReached
 	TagName
+	Target
 	TargetAttachComponent
 	TargetData
 	Targeted
@@ -380,6 +401,7 @@ Name table:
 	TargetingTransforms
 	TargetSelection
 	TargetSelectionUsage
+	TargetTags
 	TC_ReturnToSender
 	TC_ReturnToSender_T01
 	Temp_bool_Variable
@@ -401,7 +423,6 @@ Name table:
 	TriggerSource
 	TriggerTag
 	UberGraphFrame
-	UberGraphFramePointerProperty
 	UberGraphFunction
 	UpdatedLocation
 	UpdateStartLocation
@@ -419,12 +440,11 @@ Name table:
 	Zero
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	GA_Outlander_GroundWave_Wave_C (0-0-0-0): size 475 (cls: GA_Outlander_GroundWave_Wave_C>BlueprintGeneratedClass>/Script/Engine):
+	GA_Outlander_GroundWave_Wave_C (0-0-0-0): size 450 (cls: GA_Outlander_GroundWave_Wave_C>BlueprintGeneratedClass>/Script/Engine):
 		Tag array:
 			NumReplicatedProperties(IntProperty)=7 
-			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=GA_Outlander_GroundWave_Wave_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_GA_Outlander_GroundWave_Wave=GA_Outlander_GroundWave_Wave_C 
-	Default__GA_Outlander_GroundWave_Wave_C (0-0-0-0): size 3894 (cls: Default__GA_Outlander_GroundWave_Wave_C>GA_Outlander_GroundWave_Wave_C):
+	Default__GA_Outlander_GroundWave_Wave_C (0-0-0-0): size 3984 (cls: Default__GA_Outlander_GroundWave_Wave_C>GA_Outlander_GroundWave_Wave_C):
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			GES_EffectToApply(StructProperty)=System.Byte[] 
@@ -445,6 +465,7 @@ Serialized exports:
 			TC_ReturnToSender(StructProperty)=GameplayTagContainer:Granted.Abilities.Outlander.Perks.GroundWave.ReturnToSender 
 			ReturnToSenderFXOffset(FloatProperty)=200 
 			TC_ReturnToSender_T01(StructProperty)=GameplayTagContainer:Granted.Perk.ReturnToSender.T01 
+			T_Event_MaxRangeReached(StructProperty)=System.Byte[] 
 			isAutoCommitted(BoolProperty)=False 
 			EffectContainers(StructProperty)=System.Byte[] 
 			DamageStatHandle(StructProperty)=System.Byte[] 
@@ -456,15 +477,15 @@ Serialized exports:
 	ActorsToIgnore (0-0-0-0): size 36 (cls: ActorsToIgnore>ObjectProperty>/Script/CoreUObject)
 	ActorsToIgnore (0-0-0-0): size 36 (cls: ActorsToIgnore>ArrayProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_GA_Outlander_GroundWave_Wave (0-0-0-0): size 3033 (cls: ExecuteUbergraph_GA_Outlander_GroundWave_Wave>Function>/Script/CoreUObject)
+	ExecuteUbergraph_GA_Outlander_GroundWave_Wave (0-0-0-0): size 3432 (cls: ExecuteUbergraph_GA_Outlander_GroundWave_Wave>Function>/Script/CoreUObject)
 	EventData (0-0-0-0): size 36 (cls: EventData>StructProperty>/Script/CoreUObject)
-	K2_ActivateAbilityFromEvent (0-0-0-0): size 72 (cls: K2_ActivateAbilityFromEvent>Function>/Script/CoreUObject)
-	PlaySegmentVisuals (0-0-0-0): size 58 (cls: PlaySegmentVisuals>Function>/Script/CoreUObject)
-	MakeExplosion (0-0-0-0): size 58 (cls: MakeExplosion>Function>/Script/CoreUObject)
+	K2_ActivateAbilityFromEvent (0-0-0-0): size 68 (cls: K2_ActivateAbilityFromEvent>Function>/Script/CoreUObject)
+	PlaySegmentVisuals (0-0-0-0): size 54 (cls: PlaySegmentVisuals>Function>/Script/CoreUObject)
+	MakeExplosion (0-0-0-0): size 54 (cls: MakeExplosion>Function>/Script/CoreUObject)
 	TargetData (0-0-0-0): size 36 (cls: TargetData>StructProperty>/Script/CoreUObject)
-	Targeted_2A3279CE44EEB6168DF2AD9928DF7C95 (0-0-0-0): size 86 (cls: Targeted_2A3279CE44EEB6168DF2AD9928DF7C95>Function>/Script/CoreUObject)
+	Targeted_2A3279CE44EEB6168DF2AD9928DF7C95 (0-0-0-0): size 82 (cls: Targeted_2A3279CE44EEB6168DF2AD9928DF7C95>Function>/Script/CoreUObject)
 	TargetData (0-0-0-0): size 36 (cls: TargetData>StructProperty>/Script/CoreUObject)
-	Cancelled_2A3279CE44EEB6168DF2AD9928DF7C95 (0-0-0-0): size 86 (cls: Cancelled_2A3279CE44EEB6168DF2AD9928DF7C95>Function>/Script/CoreUObject)
+	Cancelled_2A3279CE44EEB6168DF2AD9928DF7C95 (0-0-0-0): size 82 (cls: Cancelled_2A3279CE44EEB6168DF2AD9928DF7C95>Function>/Script/CoreUObject)
 	AbilitySystem (0-0-0-0): size 36 (cls: AbilitySystem>ObjectProperty>/Script/CoreUObject)
 	SetupAbility (0-0-0-0): size 303 (cls: SetupAbility>Function>/Script/CoreUObject)
 	ReturnValue (0-0-0-0): size 36 (cls: ReturnValue>StructProperty>/Script/CoreUObject)
@@ -626,6 +647,7 @@ Serialized exports:
 	UpdatedLocation (0-0-0-0): size 36 (cls: UpdatedLocation>StructProperty>/Script/CoreUObject)
 	ApplicationTag (0-0-0-0): size 36 (cls: ApplicationTag>StructProperty>/Script/CoreUObject)
 	CustomAbilitySource (0-0-0-0): size 36 (cls: CustomAbilitySource>StructProperty>/Script/CoreUObject)
+	CallFunc_AbilityTargetDataFromLocations_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_AbilityTargetDataFromLocations_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_Add_VectorVector_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_Add_VectorVector_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_BreakTransform_Location (0-0-0-0): size 36 (cls: CallFunc_BreakTransform_Location>StructProperty>/Script/CoreUObject)
 	CallFunc_BreakTransform_Location1 (0-0-0-0): size 36 (cls: CallFunc_BreakTransform_Location1>StructProperty>/Script/CoreUObject)
@@ -640,8 +662,10 @@ Serialized exports:
 	K2Node_CustomEvent_TargetData (0-0-0-0): size 36 (cls: K2Node_CustomEvent_TargetData>StructProperty>/Script/CoreUObject)
 	K2Node_CustomEvent_TargetData1 (0-0-0-0): size 36 (cls: K2Node_CustomEvent_TargetData1>StructProperty>/Script/CoreUObject)
 	K2Node_Event_EventData (0-0-0-0): size 36 (cls: K2Node_Event_EventData>StructProperty>/Script/CoreUObject)
+	K2Node_MakeStruct_GameplayAbilityTargetingLocationInfo (0-0-0-0): size 36 (cls: K2Node_MakeStruct_GameplayAbilityTargetingLocationInfo>StructProperty>/Script/CoreUObject)
 	K2Node_MakeStruct_GameplayCueParameters (0-0-0-0): size 36 (cls: K2Node_MakeStruct_GameplayCueParameters>StructProperty>/Script/CoreUObject)
 	K2Node_MakeStruct_GameplayCueParameters1 (0-0-0-0): size 36 (cls: K2Node_MakeStruct_GameplayCueParameters1>StructProperty>/Script/CoreUObject)
+	K2Node_MakeStruct_GameplayEventData (0-0-0-0): size 36 (cls: K2Node_MakeStruct_GameplayEventData>StructProperty>/Script/CoreUObject)
 	K2Node_MakeStruct_Vector_NetQuantize10 (0-0-0-0): size 36 (cls: K2Node_MakeStruct_Vector_NetQuantize10>StructProperty>/Script/CoreUObject)
 	K2Node_MakeStruct_Vector_NetQuantize101 (0-0-0-0): size 36 (cls: K2Node_MakeStruct_Vector_NetQuantize101>StructProperty>/Script/CoreUObject)
 	K2Node_MakeStruct_Vector_NetQuantizeNormal (0-0-0-0): size 36 (cls: K2Node_MakeStruct_Vector_NetQuantizeNormal>StructProperty>/Script/CoreUObject)
@@ -654,6 +678,7 @@ Serialized exports:
 	StartingForwardV (0-0-0-0): size 36 (cls: StartingForwardV>StructProperty>/Script/CoreUObject)
 	StartingLoc (0-0-0-0): size 36 (cls: StartingLoc>StructProperty>/Script/CoreUObject)
 	StartingRot (0-0-0-0): size 36 (cls: StartingRot>StructProperty>/Script/CoreUObject)
+	T_Event_MaxRangeReached (0-0-0-0): size 36 (cls: T_Event_MaxRangeReached>StructProperty>/Script/CoreUObject)
 	ApplicationTag (0-0-0-0): size 36 (cls: ApplicationTag>StructProperty>/Script/CoreUObject)
 	TC_ReturnToSender (0-0-0-0): size 36 (cls: TC_ReturnToSender>StructProperty>/Script/CoreUObject)
 	TC_ReturnToSender_T01 (0-0-0-0): size 36 (cls: TC_ReturnToSender_T01>StructProperty>/Script/CoreUObject)

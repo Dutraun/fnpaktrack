@@ -19,6 +19,7 @@ Name table:
 	/Script/FortniteGame
 	/Script/GameplayAbilities
 	/Script/GameplayTags
+	AbilitySystemBlueprintLibrary
 	Activate
 	Actor
 	ActorComponentTickFunction
@@ -52,6 +53,7 @@ Name table:
 	BalloonPopCue
 	Balloons_Pop_Cue
 	BalloonStencilSelection
+	bAllowCullDistanceVolume
 	bAlwaysUseNetCullDistanceSquaredForRelevancy
 	bAutoActivate
 	bAutoCalculateSignificance
@@ -70,6 +72,7 @@ Name table:
 	BoolProperty
 	BreakHitResult
 	bReplicateMovement
+	BroadcastBalloonShotEvent
 	bSavedLooping
 	bShouldBounce
 	bSimulationEnabled
@@ -110,6 +113,7 @@ Name table:
 	CallFunc_GetGameTimeInSeconds_ReturnValue1
 	CallFunc_GetInstigator_ReturnValue
 	CallFunc_GetInstigator_ReturnValue1
+	CallFunc_GetInstigator_ReturnValue2
 	CallFunc_GetMaterial_ReturnValue
 	CallFunc_GetVelocity_ReturnValue
 	CallFunc_Greater_FloatFloat_ReturnValue
@@ -129,6 +133,7 @@ Name table:
 	CollisionResponses
 	ComponentClass
 	ComponentTemplate
+	ContextHandle
 	Controller
 	Conv_IntToBool
 	CookedComponentInstancingData
@@ -136,6 +141,7 @@ Name table:
 	Damage
 	DamageCauser
 	DamageTags
+	Default__AbilitySystemBlueprintLibrary
 	Default__ArrayProperty
 	Default__AudioComponent
 	Default__BGA_Athena_Balloons_C
@@ -184,6 +190,11 @@ Name table:
 	Enum
 	EnumProperty
 	EPhysicalSurface
+	Event.Athena.Balloons.Shot
+	EventMagnitude
+	EventTag
+	EVisibilityBasedAnimTickOption
+	EVisibilityBasedAnimTickOption::AlwaysTickPoseAndRefreshBones
 	ExecuteUbergraph_BGA_Athena_Balloons
 	FCC_Object_Projectile
 	FCC_Object_ProjectileIgnoreAI
@@ -197,7 +208,6 @@ Name table:
 	FlushNetDormancy
 	FortAttributeInitializationKey
 	FortKismetLibrary
-	FortPawn
 	FortPlayerPawnAthena
 	FortProjectileBall
 	FortTriggerOnlyWeapons
@@ -205,7 +215,9 @@ Name table:
 	Function
 	Game
 	Gameplay.Damage.Environment.Falling.Balloons
+	GameplayAbilityTargetDataHandle
 	GameplayEffectContextHandle
+	GameplayEventData
 	GameplayStatics
 	GameplayTag
 	GameplayTagContainer
@@ -217,10 +229,12 @@ Name table:
 	GetVelocity
 	Greater_FloatFloat
 	Guid
+	HitEvent
 	HitInfo
 	HitResult
 	InstigatedBy
 	Instigator
+	InstigatorTags
 	IntArray
 	InteractionText
 	InternalVariableName
@@ -229,29 +243,26 @@ Name table:
 	isReleased
 	IsValid
 	K2_DestroyActor
+	K2_DetachFromActor
+	K2Node_CustomEvent_HitEvent
+	K2Node_CustomEvent_Shooter
 	K2Node_DynamicCast_AsFort_Player_Pawn_Athena
 	K2Node_DynamicCast_bSuccess
 	K2Node_Event_Damage
 	K2Node_Event_Damage1
-	K2Node_Event_Damage2
 	K2Node_Event_DamageCauser
 	K2Node_Event_DamageCauser1
-	K2Node_Event_DamageCauser2
 	K2Node_Event_DamageTags
 	K2Node_Event_DamageTags1
-	K2Node_Event_DamageTags2
 	K2Node_Event_EffectContext
 	K2Node_Event_EffectContext1
-	K2Node_Event_EffectContext2
 	K2Node_Event_HitInfo
 	K2Node_Event_HitInfo1
-	K2Node_Event_HitInfo2
 	K2Node_Event_InstigatedBy
 	K2Node_Event_InstigatedBy1
-	K2Node_Event_InstigatedBy2
 	K2Node_Event_Momentum
 	K2Node_Event_Momentum1
-	K2Node_Event_Momentum2
+	K2Node_MakeStruct_GameplayEventData
 	K2Node_Select_Default
 	KismetArrayLibrary
 	KismetMathLibrary
@@ -262,7 +273,6 @@ Name table:
 	Material
 	MaterialInstanceDynamic
 	MaterialInterface
-	MeshComponentUpdateFlag
 	Momentum
 	MovementComponent
 	Multiply_VectorFloat
@@ -274,8 +284,9 @@ Name table:
 	ObjectProperty
 	ObjectType
 	OnDamageServer
-	OnDeathPlayEffects
 	OnDeathServer
+	OptionalObject
+	OptionalObject2
 	P_Balloon_Pop
 	P_Balloon_Pop_GEN_VARIABLE
 	Package
@@ -311,6 +322,7 @@ Name table:
 	SceneComponent
 	ScriptStruct
 	SCS_Node
+	SendGameplayEventToActor
 	SetAnimationMode
 	SetCollisionEnabled
 	SetCollisionProfileName
@@ -322,6 +334,7 @@ Name table:
 	SetTextureParameterValue
 	SetVectorParameter
 	SetVectorParameterValue
+	Shooter
 	Shot
 	SimpleConstructionScript
 	SingleAnimationPlayData
@@ -334,18 +347,21 @@ Name table:
 	Sound
 	SoundBase
 	SoundCue
+	SpawnMontage
 	SpawnSoundAttached
 	Stencil
 	StencilArray
 	StructProperty
 	SurfaceType11
-	SwapToAnimBp
 	T-Banners-Icons-BRSeason1-L
 	T-Banners-Icons-DurrBurger-L
 	T-Banners-Icons-TeddyBear-L
 	T-Icon-Balloon-E-Celebration-L
 	T-Icon-Balloon-E-TakeTheL-L
 	T_NoDecal
+	Target
+	TargetData
+	TargetTags
 	Team
 	Temp_bool_Has_Been_Initd_Variable
 	Temp_bool_IsClosed_Variable
@@ -357,7 +373,6 @@ Name table:
 	Texture2D
 	TimeScale
 	UberGraphFrame
-	UberGraphFramePointerProperty
 	UberGraphFunction
 	UserConstructionScript
 	VariableGuid
@@ -365,6 +380,7 @@ Name table:
 	Vehicle
 	Velocity
 	Visibility
+	VisibilityBasedAnimTickOption
 	WiggleStrength
 	WorldDynamic
 	WorldStatic
@@ -373,20 +389,20 @@ Name table:
 	Z
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	BGA_Athena_Balloons_C (0-0-0-0): size 430 (cls: BGA_Athena_Balloons_C>BlueprintGeneratedClass>/Script/Engine):
+	BGA_Athena_Balloons_C (0-0-0-0): size 389 (cls: BGA_Athena_Balloons_C>BlueprintGeneratedClass>/Script/Engine):
 		Tag array:
 			NumReplicatedProperties(IntProperty)=2 
 			bHasCookedComponentInstancingData(BoolProperty)=True 
 			SimpleConstructionScript(ObjectProperty)=SimpleConstructionScript_0=BGA_Athena_Balloons_C 
-			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=BGA_Athena_Balloons_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_BGA_Athena_Balloons=BGA_Athena_Balloons_C 
-	Default__BGA_Athena_Balloons_C (0-0-0-0): size 800 (cls: Default__BGA_Athena_Balloons_C>BGA_Athena_Balloons_C):
+	Default__BGA_Athena_Balloons_C (0-0-0-0): size 829 (cls: Default__BGA_Athena_Balloons_C>BGA_Athena_Balloons_C):
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			Balloon Color Choices(ArrayProperty)=[object] (inner: StructProperty)
 			StencilArray(ArrayProperty)=[object] (inner: ObjectProperty)
 			IntArray(ArrayProperty)=[object] (inner: IntProperty)
 			BalloonPopCue(ObjectProperty)=Balloon_Shot_Cue=/Game/Sounds/Fort_Gadgets/Balloons/Balloon_Shot_Cue 
+			SpawnMontage(ObjectProperty)=Floatation_Balloon_Deploy_Montage=/Game/Weapons/Prototype/Flotation_Balloon/Demo/Floatation_Balloon_Deploy_Montage 
 			InteractionText(TextProperty)= () 
 			DisplayName(TextProperty)= () 
 			AttributeInitKeys(StructProperty)=System.Byte[] 
@@ -413,7 +429,7 @@ Serialized exports:
 			bAutoActivate(BoolProperty)=False 
 	Audio (0-0-0-0): size 36 (cls: Audio>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_BGA_Athena_Balloons (0-0-0-0): size 2408 (cls: ExecuteUbergraph_BGA_Athena_Balloons>Function>/Script/CoreUObject)
+	ExecuteUbergraph_BGA_Athena_Balloons (0-0-0-0): size 2694 (cls: ExecuteUbergraph_BGA_Athena_Balloons>Function>/Script/CoreUObject)
 	CallFunc_BreakHitResult_bBlockingHit (0-0-0-0): size 34 (cls: CallFunc_BreakHitResult_bBlockingHit>BoolProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_bInitialOverlap (0-0-0-0): size 34 (cls: CallFunc_BreakHitResult_bInitialOverlap>BoolProperty>/Script/CoreUObject)
 	CallFunc_Conv_IntToBool_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Conv_IntToBool_ReturnValue>BoolProperty>/Script/CoreUObject)
@@ -434,18 +450,17 @@ Serialized exports:
 	CallFunc_GetGameTimeInSeconds_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_GetGameTimeInSeconds_ReturnValue1>FloatProperty>/Script/CoreUObject)
 	K2Node_Event_Damage (0-0-0-0): size 32 (cls: K2Node_Event_Damage>FloatProperty>/Script/CoreUObject)
 	K2Node_Event_Damage1 (0-0-0-0): size 32 (cls: K2Node_Event_Damage1>FloatProperty>/Script/CoreUObject)
-	K2Node_Event_Damage2 (0-0-0-0): size 32 (cls: K2Node_Event_Damage2>FloatProperty>/Script/CoreUObject)
-	PlayPopFX (0-0-0-0): size 60 (cls: PlayPopFX>Function>/Script/CoreUObject)
-	OnDamageServer (0-0-0-0): size 156 (cls: OnDamageServer>Function>/Script/CoreUObject)
+	Shooter (0-0-0-0): size 36 (cls: Shooter>ObjectProperty>/Script/CoreUObject)
+	BroadcastBalloonShotEvent (0-0-0-0): size 70 (cls: BroadcastBalloonShotEvent>Function>/Script/CoreUObject)
+	HitEvent (0-0-0-0): size 36 (cls: HitEvent>StructProperty>/Script/CoreUObject)
+	PlayPopFX (0-0-0-0): size 70 (cls: PlayPopFX>Function>/Script/CoreUObject)
+	OnDamageServer (0-0-0-0): size 152 (cls: OnDamageServer>Function>/Script/CoreUObject)
 	Damage (0-0-0-0): size 32 (cls: Damage>FloatProperty>/Script/CoreUObject)
-	SwapToAnimBp (0-0-0-0): size 60 (cls: SwapToAnimBp>Function>/Script/CoreUObject)
-	PopAtMaxHeight (0-0-0-0): size 60 (cls: PopAtMaxHeight>Function>/Script/CoreUObject)
-	ReceiveBeginPlay (0-0-0-0): size 58 (cls: ReceiveBeginPlay>Function>/Script/CoreUObject)
-	OnDeathPlayEffects (0-0-0-0): size 156 (cls: OnDeathPlayEffects>Function>/Script/CoreUObject)
+	PopAtMaxHeight (0-0-0-0): size 56 (cls: PopAtMaxHeight>Function>/Script/CoreUObject)
+	ReceiveBeginPlay (0-0-0-0): size 54 (cls: ReceiveBeginPlay>Function>/Script/CoreUObject)
+	OnDeathServer (0-0-0-0): size 152 (cls: OnDeathServer>Function>/Script/CoreUObject)
 	Damage (0-0-0-0): size 32 (cls: Damage>FloatProperty>/Script/CoreUObject)
-	OnDeathServer (0-0-0-0): size 156 (cls: OnDeathServer>Function>/Script/CoreUObject)
-	Damage (0-0-0-0): size 32 (cls: Damage>FloatProperty>/Script/CoreUObject)
-	Released (0-0-0-0): size 60 (cls: Released>Function>/Script/CoreUObject)
+	Released (0-0-0-0): size 56 (cls: Released>Function>/Script/CoreUObject)
 	UserConstructionScript (0-0-0-0): size 43 (cls: UserConstructionScript>Function>/Script/CoreUObject)
 	Balloon Color Selection (0-0-0-0): size 32 (cls: Balloon Color Selection>IntProperty>/Script/CoreUObject)
 	BalloonStencilSelection (0-0-0-0): size 32 (cls: BalloonStencilSelection>IntProperty>/Script/CoreUObject)
@@ -465,31 +480,27 @@ Serialized exports:
 	CallFunc_CreateDynamicMaterialInstance_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_CreateDynamicMaterialInstance_ReturnValue2>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetInstigator_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetInstigator_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetInstigator_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetInstigator_ReturnValue1>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetInstigator_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_GetInstigator_ReturnValue2>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetMaterial_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetMaterial_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_SpawnSoundAttached_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_SpawnSoundAttached_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	K2Node_CustomEvent_Shooter (0-0-0-0): size 36 (cls: K2Node_CustomEvent_Shooter>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Player_Pawn_Athena (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Player_Pawn_Athena>ObjectProperty>/Script/CoreUObject)
 	K2Node_Event_DamageCauser (0-0-0-0): size 36 (cls: K2Node_Event_DamageCauser>ObjectProperty>/Script/CoreUObject)
 	K2Node_Event_DamageCauser1 (0-0-0-0): size 36 (cls: K2Node_Event_DamageCauser1>ObjectProperty>/Script/CoreUObject)
-	K2Node_Event_DamageCauser2 (0-0-0-0): size 36 (cls: K2Node_Event_DamageCauser2>ObjectProperty>/Script/CoreUObject)
 	K2Node_Event_InstigatedBy (0-0-0-0): size 36 (cls: K2Node_Event_InstigatedBy>ObjectProperty>/Script/CoreUObject)
 	K2Node_Event_InstigatedBy1 (0-0-0-0): size 36 (cls: K2Node_Event_InstigatedBy1>ObjectProperty>/Script/CoreUObject)
-	K2Node_Event_InstigatedBy2 (0-0-0-0): size 36 (cls: K2Node_Event_InstigatedBy2>ObjectProperty>/Script/CoreUObject)
-	DamageCauser (0-0-0-0): size 36 (cls: DamageCauser>ObjectProperty>/Script/CoreUObject)
-	InstigatedBy (0-0-0-0): size 36 (cls: InstigatedBy>ObjectProperty>/Script/CoreUObject)
 	DamageCauser (0-0-0-0): size 36 (cls: DamageCauser>ObjectProperty>/Script/CoreUObject)
 	InstigatedBy (0-0-0-0): size 36 (cls: InstigatedBy>ObjectProperty>/Script/CoreUObject)
 	DamageCauser (0-0-0-0): size 36 (cls: DamageCauser>ObjectProperty>/Script/CoreUObject)
 	InstigatedBy (0-0-0-0): size 36 (cls: InstigatedBy>ObjectProperty>/Script/CoreUObject)
 	P_Balloon_Pop (0-0-0-0): size 36 (cls: P_Balloon_Pop>ObjectProperty>/Script/CoreUObject)
 	ProjectileMovement (0-0-0-0): size 36 (cls: ProjectileMovement>ObjectProperty>/Script/CoreUObject)
-	P_Balloon_Pop_GEN_VARIABLE (0-0-0-0): size 421 (cls: P_Balloon_Pop_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine):
+	SpawnMontage (0-0-0-0): size 36 (cls: SpawnMontage>ObjectProperty>/Script/CoreUObject)
+	P_Balloon_Pop_GEN_VARIABLE (0-0-0-0): size 298 (cls: P_Balloon_Pop_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine):
 		Tag array:
 			Template(ObjectProperty)=P_Balloon_Pop=/Game/Athena/Items/Consumables/Balloons/FXs/P_Balloon_Pop 
 			bAutoManageAttachment(BoolProperty)=True 
-			AutoAttachLocationRule(EnumProperty)=EAttachmentRule::SnapToTarget 
-			AutoAttachRotationRule(EnumProperty)=EAttachmentRule::SnapToTarget 
-			AutoAttachScaleRule(EnumProperty)=EAttachmentRule::SnapToTarget 
-			RelativeLocation(StructProperty)=Vector(9.094947E-13,9.797174E-15,120.0819) 
+			RelativeLocation(StructProperty)=Vector(9.094947E-13,9.797174E-15,120) 
 			RelativeRotation(StructProperty)=Rotator(0,0,1.403342E-14) 
 			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
@@ -508,7 +519,7 @@ Serialized exports:
 			ComponentTemplate(ObjectProperty)=DefaultSceneRoot_GEN_VARIABLE=BGA_Athena_Balloons_C 
 			VariableGuid(StructProperty)=Guid: 1838290349-1306455730-3904841390-2132075411 
 			InternalVariableName(NameProperty)=DefaultSceneRoot 
-	SCS_Node_2 (0-0-0-0): size 1723 (cls: SCS_Node_2>SCS_Node>/Script/Engine):
+	SCS_Node_2 (0-0-0-0): size 1426 (cls: SCS_Node_2>SCS_Node>/Script/Engine):
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=P_Balloon_Pop_GEN_VARIABLE=BGA_Athena_Balloons_C 
@@ -522,7 +533,7 @@ Serialized exports:
 			CookedComponentInstancingData(StructProperty)=System.Byte[] 
 			VariableGuid(StructProperty)=Guid: 1695266461-1113312733-1940366979-4068131970 
 			InternalVariableName(NameProperty)=Audio 
-	SCS_Node_5 (0-0-0-0): size 2362 (cls: SCS_Node_5>SCS_Node>/Script/Engine):
+	SCS_Node_5 (0-0-0-0): size 2560 (cls: SCS_Node_5>SCS_Node>/Script/Engine):
 		Tag array:
 			ComponentClass(ObjectProperty)=SkeletalMeshComponentBudgeted=/Script/AnimationBudgetAllocator 
 			ComponentTemplate(ObjectProperty)=Balloon_SKBudgeted_GEN_VARIABLE=BGA_Athena_Balloons_C 
@@ -542,7 +553,7 @@ Serialized exports:
 			RootNodes(ArrayProperty)=[object] (inner: ObjectProperty)
 			AllNodes(ArrayProperty)=[object] (inner: ObjectProperty)
 			DefaultSceneRootNode(ObjectProperty)=SCS_Node_0=BGA_Athena_Balloons_C 
-	Balloon_SKBudgeted_GEN_VARIABLE (0-0-0-0): size 1764 (cls: Balloon_SKBudgeted_GEN_VARIABLE>SkeletalMeshComponentBudgeted>/Script/AnimationBudgetAllocator):
+	Balloon_SKBudgeted_GEN_VARIABLE (0-0-0-0): size 1831 (cls: Balloon_SKBudgeted_GEN_VARIABLE>SkeletalMeshComponentBudgeted>/Script/AnimationBudgetAllocator):
 		Tag array:
 			bAutoCalculateSignificance(BoolProperty)=True 
 			AnimClass(ObjectProperty)=SK_Weapon_Flotation_Balloon_Skeleton_AnimBP_C=/Game/Weapons/Prototype/Flotation_Balloon/Demo/SK_Weapon_Flotation_Balloon_Skeleton_AnimBP 
@@ -550,7 +561,9 @@ Serialized exports:
 			AnimationMode(ByteProperty)=EAnimationMode::AnimationSingleNode 
 			bDisablePostProcessBlueprint(BoolProperty)=True 
 			SkeletalMesh(ObjectProperty)=SK_Weapon_Flotation_Balloon=/Game/Weapons/Prototype/Flotation_Balloon/Demo/SK_Weapon_Flotation_Balloon 
+			VisibilityBasedAnimTickOption(EnumProperty)=EVisibilityBasedAnimTickOption::AlwaysTickPoseAndRefreshBones 
 			bNeverDistanceCull(BoolProperty)=True 
+			bAllowCullDistanceVolume(BoolProperty)=False 
 			BodyInstance(StructProperty)=System.Byte[] 
 	CallFunc_Add_VectorVector_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_Add_VectorVector_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_ImpactNormal (0-0-0-0): size 36 (cls: CallFunc_BreakHitResult_ImpactNormal>StructProperty>/Script/CoreUObject)
@@ -562,24 +575,18 @@ Serialized exports:
 	CallFunc_GetVelocity_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetVelocity_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_Multiply_VectorFloat_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_Multiply_VectorFloat_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_Multiply_VectorFloat_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_Multiply_VectorFloat_ReturnValue1>StructProperty>/Script/CoreUObject)
+	K2Node_CustomEvent_HitEvent (0-0-0-0): size 36 (cls: K2Node_CustomEvent_HitEvent>StructProperty>/Script/CoreUObject)
 	K2Node_Event_DamageTags (0-0-0-0): size 36 (cls: K2Node_Event_DamageTags>StructProperty>/Script/CoreUObject)
 	K2Node_Event_DamageTags1 (0-0-0-0): size 36 (cls: K2Node_Event_DamageTags1>StructProperty>/Script/CoreUObject)
-	K2Node_Event_DamageTags2 (0-0-0-0): size 36 (cls: K2Node_Event_DamageTags2>StructProperty>/Script/CoreUObject)
 	K2Node_Event_EffectContext (0-0-0-0): size 36 (cls: K2Node_Event_EffectContext>StructProperty>/Script/CoreUObject)
 	K2Node_Event_EffectContext1 (0-0-0-0): size 36 (cls: K2Node_Event_EffectContext1>StructProperty>/Script/CoreUObject)
-	K2Node_Event_EffectContext2 (0-0-0-0): size 36 (cls: K2Node_Event_EffectContext2>StructProperty>/Script/CoreUObject)
 	K2Node_Event_HitInfo (0-0-0-0): size 36 (cls: K2Node_Event_HitInfo>StructProperty>/Script/CoreUObject)
 	K2Node_Event_HitInfo1 (0-0-0-0): size 36 (cls: K2Node_Event_HitInfo1>StructProperty>/Script/CoreUObject)
-	K2Node_Event_HitInfo2 (0-0-0-0): size 36 (cls: K2Node_Event_HitInfo2>StructProperty>/Script/CoreUObject)
 	K2Node_Event_Momentum (0-0-0-0): size 36 (cls: K2Node_Event_Momentum>StructProperty>/Script/CoreUObject)
 	K2Node_Event_Momentum1 (0-0-0-0): size 36 (cls: K2Node_Event_Momentum1>StructProperty>/Script/CoreUObject)
-	K2Node_Event_Momentum2 (0-0-0-0): size 36 (cls: K2Node_Event_Momentum2>StructProperty>/Script/CoreUObject)
+	K2Node_MakeStruct_GameplayEventData (0-0-0-0): size 36 (cls: K2Node_MakeStruct_GameplayEventData>StructProperty>/Script/CoreUObject)
 	K2Node_Select_Default (0-0-0-0): size 36 (cls: K2Node_Select_Default>StructProperty>/Script/CoreUObject)
 	Temp_struct_Variable (0-0-0-0): size 36 (cls: Temp_struct_Variable>StructProperty>/Script/CoreUObject)
-	DamageTags (0-0-0-0): size 36 (cls: DamageTags>StructProperty>/Script/CoreUObject)
-	EffectContext (0-0-0-0): size 36 (cls: EffectContext>StructProperty>/Script/CoreUObject)
-	HitInfo (0-0-0-0): size 36 (cls: HitInfo>StructProperty>/Script/CoreUObject)
-	Momentum (0-0-0-0): size 36 (cls: Momentum>StructProperty>/Script/CoreUObject)
 	DamageTags (0-0-0-0): size 36 (cls: DamageTags>StructProperty>/Script/CoreUObject)
 	EffectContext (0-0-0-0): size 36 (cls: EffectContext>StructProperty>/Script/CoreUObject)
 	HitInfo (0-0-0-0): size 36 (cls: HitInfo>StructProperty>/Script/CoreUObject)

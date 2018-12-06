@@ -34,6 +34,7 @@ Name table:
 	Add_VectorVector
 	AddComponent
 	AllNodes
+	AreaClass
 	ARoot
 	ARoot_GEN_VARIABLE
 	Array_Add
@@ -202,12 +203,15 @@ Name table:
 	CallFunc_GetAllActorsOfClass_OutActors
 	CallFunc_GetAllActorsOfClass_OutActors1
 	CallFunc_GetAllActorsOfClass_OutActors2
+	CallFunc_GetCameraLocation_ReturnValue
 	CallFunc_GetCloudsAreHidden_ReturnValue
 	CallFunc_GetGameTimeInSeconds_ReturnValue
 	CallFunc_GetGameUserSettings_ReturnValue
 	CallFunc_GetGameUserSettings_ReturnValue1
 	CallFunc_GetGameUserSettings_ReturnValue2
+	CallFunc_GetPlayerController_ReturnValue
 	CallFunc_GetPlayerPawn_ReturnValue
+	CallFunc_GetPlayerPawnLocationSafe_Safe_Location
 	CallFunc_GetThreatVisualsManager_ReturnValue
 	CallFunc_GetThreatVolume_ReturnValue
 	CallFunc_GetVisualEffectQuality_ReturnValue
@@ -229,7 +233,6 @@ Name table:
 	CallFunc_K2_GetActorLocation_ReturnValue3
 	CallFunc_K2_GetActorLocation_ReturnValue4
 	CallFunc_K2_GetActorLocation_ReturnValue5
-	CallFunc_K2_GetActorLocation_ReturnValue6
 	CallFunc_K2_GetComponentLocation_ReturnValue
 	CallFunc_K2_GetComponentLocation_ReturnValue1
 	CallFunc_K2_GetComponentLocation_ReturnValue2
@@ -449,6 +452,7 @@ Name table:
 	FloatTracks
 	FortFXManager
 	FortKismetLibrary
+	FortMetaNavArea_Obstacles
 	FortMiniMap_GEN_VARIABLE
 	FortMiniMapComponent
 	FortThreatVisualsManager
@@ -458,10 +462,13 @@ Name table:
 	GameplayStatics
 	GameUserSettings
 	GetAllActorsOfClass
+	GetCameraLocation
 	GetCloudsAreHidden
 	GetGameTimeInSeconds
 	GetGameUserSettings
+	GetPlayerController
 	GetPlayerPawn
+	GetPlayerPawnLocationSafe
 	GetThreatVisualsManager
 	GetThreatVolume
 	GetVisualEffectQuality
@@ -627,6 +634,8 @@ Name table:
 	ParticleSystemComponent
 	Pawn
 	PhysicalMaterial
+	PlayerCameraManager
+	PlayerController
 	PlayFromStart
 	PlayRandomLightingFlashAudio
 	PlaySoundAtLocation
@@ -664,6 +673,7 @@ Name table:
 	Rotator
 	S_SpawnCloudDarkenDisc
 	S_SpawnStorm_FullRound
+	Safe Location
 	ScaleSplineIn
 	ScaleSplineOut
 	SceneComponent
@@ -786,7 +796,6 @@ Name table:
 	TranslucencySortPriority
 	TTFloatTrack
 	UberGraphFrame
-	UberGraphFramePointerProperty
 	UberGraphFunction
 	UI_Radar_ThreatCloud
 	UInt64Property
@@ -815,12 +824,11 @@ Name table:
 	Y
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	CorrectcloudStartBlueprint_C (0-0-0-0): size 1221 (cls: CorrectcloudStartBlueprint_C>BlueprintGeneratedClass>/Script/Engine):
+	CorrectcloudStartBlueprint_C (0-0-0-0): size 1208 (cls: CorrectcloudStartBlueprint_C>BlueprintGeneratedClass>/Script/Engine):
 		Tag array:
 			ComponentTemplates(ArrayProperty)=[object] (inner: ObjectProperty)
 			Timelines(ArrayProperty)=[object] (inner: ObjectProperty)
 			SimpleConstructionScript(ObjectProperty)=SimpleConstructionScript_257=CorrectcloudStartBlueprint_C 
-			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=CorrectcloudStartBlueprint_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_CorrectcloudStartBlueprint=CorrectcloudStartBlueprint_C 
 	Default__CorrectcloudStartBlueprint_C (0-0-0-0): size 1937 (cls: Default__CorrectcloudStartBlueprint_C>CorrectcloudStartBlueprint_C):
 		Tag array:
@@ -868,7 +876,7 @@ Serialized exports:
 	EnvironmentDebrisEmitters (0-0-0-0): size 36 (cls: EnvironmentDebrisEmitters>ArrayProperty>/Script/CoreUObject)
 	P_Cloud_RandomLightning_01 (0-0-0-0): size 36 (cls: P_Cloud_RandomLightning_01>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_CorrectcloudStartBlueprint (0-0-0-0): size 9880 (cls: ExecuteUbergraph_CorrectcloudStartBlueprint>Function>/Script/CoreUObject)
+	ExecuteUbergraph_CorrectcloudStartBlueprint (0-0-0-0): size 9753 (cls: ExecuteUbergraph_CorrectcloudStartBlueprint>Function>/Script/CoreUObject)
 	CallFunc_GetAllActorsOfClass_OutActors (0-0-0-0): size 36 (cls: CallFunc_GetAllActorsOfClass_OutActors>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetAllActorsOfClass_OutActors (0-0-0-0): size 36 (cls: CallFunc_GetAllActorsOfClass_OutActors>ArrayProperty>/Script/CoreUObject)
 	CallFunc_GetAllActorsOfClass_OutActors1 (0-0-0-0): size 36 (cls: CallFunc_GetAllActorsOfClass_OutActors1>ObjectProperty>/Script/CoreUObject)
@@ -879,50 +887,50 @@ Serialized exports:
 	K2Node_MakeArray_Array (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array>ArrayProperty>/Script/CoreUObject)
 	Temp_object_Variable (0-0-0-0): size 36 (cls: Temp_object_Variable>ObjectProperty>/Script/CoreUObject)
 	Temp_object_Variable (0-0-0-0): size 36 (cls: Temp_object_Variable>ArrayProperty>/Script/CoreUObject)
-	EpicLightningSafetyKill (0-0-0-0): size 58 (cls: EpicLightningSafetyKill>Function>/Script/CoreUObject)
-	ManualLightningFlash (0-0-0-0): size 58 (cls: ManualLightningFlash>Function>/Script/CoreUObject)
+	EpicLightningSafetyKill (0-0-0-0): size 54 (cls: EpicLightningSafetyKill>Function>/Script/CoreUObject)
+	ManualLightningFlash (0-0-0-0): size 54 (cls: ManualLightningFlash>Function>/Script/CoreUObject)
 	Flash Location (0-0-0-0): size 36 (cls: Flash Location>StructProperty>/Script/CoreUObject)
-	BigLightning (0-0-0-0): size 72 (cls: BigLightning>Function>/Script/CoreUObject)
-	RandomLightningFlashEvent (0-0-0-0): size 58 (cls: RandomLightningFlashEvent>Function>/Script/CoreUObject)
-	RestartLightningTimer (0-0-0-0): size 58 (cls: RestartLightningTimer>Function>/Script/CoreUObject)
-	BigSpoutRepeat (0-0-0-0): size 58 (cls: BigSpoutRepeat>Function>/Script/CoreUObject)
+	BigLightning (0-0-0-0): size 68 (cls: BigLightning>Function>/Script/CoreUObject)
+	RandomLightningFlashEvent (0-0-0-0): size 54 (cls: RandomLightningFlashEvent>Function>/Script/CoreUObject)
+	RestartLightningTimer (0-0-0-0): size 54 (cls: RestartLightningTimer>Function>/Script/CoreUObject)
+	BigSpoutRepeat (0-0-0-0): size 54 (cls: BigSpoutRepeat>Function>/Script/CoreUObject)
 	Vortex (0-0-0-0): size 36 (cls: Vortex>ObjectProperty>/Script/CoreUObject)
-	VortexReturnedToCloudFXPool (0-0-0-0): size 72 (cls: VortexReturnedToCloudFXPool>Function>/Script/CoreUObject)
-	SpoutSmallRepeat (0-0-0-0): size 58 (cls: SpoutSmallRepeat>Function>/Script/CoreUObject)
-	AutoFadeOutReached (0-0-0-0): size 58 (cls: AutoFadeOutReached>Function>/Script/CoreUObject)
-	On Cloud Start Manual (0-0-0-0): size 58 (cls: On Cloud Start Manual>Function>/Script/CoreUObject)
-	Spawn Particles Manual (0-0-0-0): size 58 (cls: Spawn Particles Manual>Function>/Script/CoreUObject)
-	StopCloudFadeOut (0-0-0-0): size 58 (cls: StopCloudFadeOut>Function>/Script/CoreUObject)
-	StopCloudFadeIn (0-0-0-0): size 58 (cls: StopCloudFadeIn>Function>/Script/CoreUObject)
+	VortexReturnedToCloudFXPool (0-0-0-0): size 68 (cls: VortexReturnedToCloudFXPool>Function>/Script/CoreUObject)
+	SpoutSmallRepeat (0-0-0-0): size 54 (cls: SpoutSmallRepeat>Function>/Script/CoreUObject)
+	AutoFadeOutReached (0-0-0-0): size 54 (cls: AutoFadeOutReached>Function>/Script/CoreUObject)
+	On Cloud Start Manual (0-0-0-0): size 54 (cls: On Cloud Start Manual>Function>/Script/CoreUObject)
+	Spawn Particles Manual (0-0-0-0): size 54 (cls: Spawn Particles Manual>Function>/Script/CoreUObject)
+	StopCloudFadeOut (0-0-0-0): size 54 (cls: StopCloudFadeOut>Function>/Script/CoreUObject)
+	StopCloudFadeIn (0-0-0-0): size 54 (cls: StopCloudFadeIn>Function>/Script/CoreUObject)
 	bCloudsAreHidden (0-0-0-0): size 34 (cls: bCloudsAreHidden>BoolProperty>/Script/CoreUObject)
-	OnCloudHiddenChange (0-0-0-0): size 72 (cls: OnCloudHiddenChange>Function>/Script/CoreUObject)
-	CloudFadeOut (0-0-0-0): size 58 (cls: CloudFadeOut>Function>/Script/CoreUObject)
-	CloudFadeIn (0-0-0-0): size 58 (cls: CloudFadeIn>Function>/Script/CoreUObject)
-	ReceiveDestroyed (0-0-0-0): size 58 (cls: ReceiveDestroyed>Function>/Script/CoreUObject)
-	OnCloudActivated (0-0-0-0): size 58 (cls: OnCloudActivated>Function>/Script/CoreUObject)
+	OnCloudHiddenChange (0-0-0-0): size 68 (cls: OnCloudHiddenChange>Function>/Script/CoreUObject)
+	CloudFadeOut (0-0-0-0): size 54 (cls: CloudFadeOut>Function>/Script/CoreUObject)
+	CloudFadeIn (0-0-0-0): size 54 (cls: CloudFadeIn>Function>/Script/CoreUObject)
+	ReceiveDestroyed (0-0-0-0): size 54 (cls: ReceiveDestroyed>Function>/Script/CoreUObject)
+	OnCloudActivated (0-0-0-0): size 54 (cls: OnCloudActivated>Function>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	DeactivationType (0-0-0-0): size 40 (cls: DeactivationType>EnumProperty>/Script/CoreUObject)
-	OnCloudDeactivated (0-0-0-0): size 72 (cls: OnCloudDeactivated>Function>/Script/CoreUObject)
+	OnCloudDeactivated (0-0-0-0): size 68 (cls: OnCloudDeactivated>Function>/Script/CoreUObject)
 	StartLocation (0-0-0-0): size 36 (cls: StartLocation>StructProperty>/Script/CoreUObject)
-	OnLightningStrike (0-0-0-0): size 114 (cls: OnLightningStrike>Function>/Script/CoreUObject)
-	OnCloudStart (0-0-0-0): size 58 (cls: OnCloudStart>Function>/Script/CoreUObject)
-	OnBeginDeath (0-0-0-0): size 58 (cls: OnBeginDeath>Function>/Script/CoreUObject)
-	DebugSpawnLoc (0-0-0-0): size 58 (cls: DebugSpawnLoc>Function>/Script/CoreUObject)
-	DEBUG-ShowThreatVolume (0-0-0-0): size 58 (cls: DEBUG-ShowThreatVolume>Function>/Script/CoreUObject)
-	Light Flash Epic Quality TL__UpdateFunc (0-0-0-0): size 58 (cls: Light Flash Epic Quality TL__UpdateFunc>Function>/Script/CoreUObject)
-	Light Flash Epic Quality TL__FinishedFunc (0-0-0-0): size 58 (cls: Light Flash Epic Quality TL__FinishedFunc>Function>/Script/CoreUObject)
-	Capture Light Flash Epic Quality__UpdateFunc (0-0-0-0): size 58 (cls: Capture Light Flash Epic Quality__UpdateFunc>Function>/Script/CoreUObject)
-	Capture Light Flash Epic Quality__FinishedFunc (0-0-0-0): size 58 (cls: Capture Light Flash Epic Quality__FinishedFunc>Function>/Script/CoreUObject)
-	Timeline_CloudFadeOut__UpdateFunc (0-0-0-0): size 58 (cls: Timeline_CloudFadeOut__UpdateFunc>Function>/Script/CoreUObject)
-	Timeline_CloudFadeOut__FinishedFunc (0-0-0-0): size 58 (cls: Timeline_CloudFadeOut__FinishedFunc>Function>/Script/CoreUObject)
-	Timeline_CloudFadeIn__UpdateFunc (0-0-0-0): size 58 (cls: Timeline_CloudFadeIn__UpdateFunc>Function>/Script/CoreUObject)
-	Timeline_CloudFadeIn__FinishedFunc (0-0-0-0): size 58 (cls: Timeline_CloudFadeIn__FinishedFunc>Function>/Script/CoreUObject)
+	OnLightningStrike (0-0-0-0): size 110 (cls: OnLightningStrike>Function>/Script/CoreUObject)
+	OnCloudStart (0-0-0-0): size 54 (cls: OnCloudStart>Function>/Script/CoreUObject)
+	OnBeginDeath (0-0-0-0): size 54 (cls: OnBeginDeath>Function>/Script/CoreUObject)
+	DebugSpawnLoc (0-0-0-0): size 54 (cls: DebugSpawnLoc>Function>/Script/CoreUObject)
+	DEBUG-ShowThreatVolume (0-0-0-0): size 54 (cls: DEBUG-ShowThreatVolume>Function>/Script/CoreUObject)
+	Light Flash Epic Quality TL__UpdateFunc (0-0-0-0): size 54 (cls: Light Flash Epic Quality TL__UpdateFunc>Function>/Script/CoreUObject)
+	Light Flash Epic Quality TL__FinishedFunc (0-0-0-0): size 54 (cls: Light Flash Epic Quality TL__FinishedFunc>Function>/Script/CoreUObject)
+	Capture Light Flash Epic Quality__UpdateFunc (0-0-0-0): size 54 (cls: Capture Light Flash Epic Quality__UpdateFunc>Function>/Script/CoreUObject)
+	Capture Light Flash Epic Quality__FinishedFunc (0-0-0-0): size 54 (cls: Capture Light Flash Epic Quality__FinishedFunc>Function>/Script/CoreUObject)
+	Timeline_CloudFadeOut__UpdateFunc (0-0-0-0): size 54 (cls: Timeline_CloudFadeOut__UpdateFunc>Function>/Script/CoreUObject)
+	Timeline_CloudFadeOut__FinishedFunc (0-0-0-0): size 54 (cls: Timeline_CloudFadeOut__FinishedFunc>Function>/Script/CoreUObject)
+	Timeline_CloudFadeIn__UpdateFunc (0-0-0-0): size 54 (cls: Timeline_CloudFadeIn__UpdateFunc>Function>/Script/CoreUObject)
+	Timeline_CloudFadeIn__FinishedFunc (0-0-0-0): size 54 (cls: Timeline_CloudFadeIn__FinishedFunc>Function>/Script/CoreUObject)
 	CallFunc_IsDedicatedServer_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsDedicatedServer_ReturnValue>BoolProperty>/Script/CoreUObject)
 	UserConstructionScript (0-0-0-0): size 277 (cls: UserConstructionScript>Function>/Script/CoreUObject)
 	Lightning starting point (0-0-0-0): size 36 (cls: Lightning starting point>StructProperty>/Script/CoreUObject)
 	Set Lightning parameters on clouds (0-0-0-0): size 732 (cls: Set Lightning parameters on clouds>Function>/Script/CoreUObject)
 	CallFunc_GetGameUserSettings_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetGameUserSettings_ReturnValue>ObjectProperty>/Script/CoreUObject)
-	SpawnParticleSystemsActive (0-0-0-0): size 3641 (cls: SpawnParticleSystemsActive>Function>/Script/CoreUObject)
+	SpawnParticleSystemsActive (0-0-0-0): size 2961 (cls: SpawnParticleSystemsActive>Function>/Script/CoreUObject)
 	Temp_object_Variable (0-0-0-0): size 36 (cls: Temp_object_Variable>ObjectProperty>/Script/CoreUObject)
 	Temp_object_Variable (0-0-0-0): size 36 (cls: Temp_object_Variable>ArrayProperty>/Script/CoreUObject)
 	AudioComponent_6__D2053828 (0-0-0-0): size 67 (cls: AudioComponent_6__D2053828>AudioComponent>/Script/Engine):
@@ -937,7 +945,7 @@ Serialized exports:
 	Temp_int_Array_Index_Variable (0-0-0-0): size 32 (cls: Temp_int_Array_Index_Variable>IntProperty>/Script/CoreUObject)
 	DisableParticleSystems (0-0-0-0): size 446 (cls: DisableParticleSystems>Function>/Script/CoreUObject)
 	RotateToPlayer (0-0-0-0): size 36 (cls: RotateToPlayer>StructProperty>/Script/CoreUObject)
-	RotateLightTowardsPlayer (0-0-0-0): size 221 (cls: RotateLightTowardsPlayer>Function>/Script/CoreUObject)
+	RotateLightTowardsPlayer (0-0-0-0): size 170 (cls: RotateLightTowardsPlayer>Function>/Script/CoreUObject)
 	Location (0-0-0-0): size 36 (cls: Location>StructProperty>/Script/CoreUObject)
 	PlayRandomLightingFlashAudio (0-0-0-0): size 159 (cls: PlayRandomLightingFlashAudio>Function>/Script/CoreUObject)
 	CaptureTeam (0-0-0-0): size 34 (cls: CaptureTeam>BoolProperty>/Script/CoreUObject)
@@ -1002,6 +1010,10 @@ Serialized exports:
 	Temp_bool_Variable3 (0-0-0-0): size 34 (cls: Temp_bool_Variable3>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable4 (0-0-0-0): size 34 (cls: Temp_bool_Variable4>BoolProperty>/Script/CoreUObject)
 	FoundLargeVortex (0-0-0-0): size 34 (cls: FoundLargeVortex>BoolProperty>/Script/CoreUObject)
+	Safe Location (0-0-0-0): size 36 (cls: Safe Location>StructProperty>/Script/CoreUObject)
+	GetPlayerPawnLocationSafe (0-0-0-0): size 418 (cls: GetPlayerPawnLocationSafe>Function>/Script/CoreUObject)
+	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_IsValid_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	IsActive (0-0-0-0): size 34 (cls: IsActive>BoolProperty>/Script/CoreUObject)
 	IsAlive (0-0-0-0): size 34 (cls: IsAlive>BoolProperty>/Script/CoreUObject)
 	isBigLightning (0-0-0-0): size 34 (cls: isBigLightning>BoolProperty>/Script/CoreUObject)
@@ -1017,20 +1029,22 @@ Serialized exports:
 	K2Node_SwitchInteger_CmpSuccess (0-0-0-0): size 34 (cls: K2Node_SwitchInteger_CmpSuccess>BoolProperty>/Script/CoreUObject)
 	SpawnTraceBool (0-0-0-0): size 34 (cls: SpawnTraceBool>BoolProperty>/Script/CoreUObject)
 	UseAutoFadeOut (0-0-0-0): size 34 (cls: UseAutoFadeOut>BoolProperty>/Script/CoreUObject)
-	BoxComponent_0__E7AA8990 (0-0-0-0): size 849 (cls: BoxComponent_0__E7AA8990>BoxComponent>/Script/Engine):
+	BoxComponent_0__E7AA8990 (0-0-0-0): size 878 (cls: BoxComponent_0__E7AA8990>BoxComponent>/Script/Engine):
 		Tag array:
 			BoxExtent(StructProperty)=Vector(1,1,1) 
 			ShapeColor(StructProperty)=System.Byte[] 
+			AreaClass(ObjectProperty)=FortMetaNavArea_Obstacles=/Script/FortniteGame 
 			bRenderInMainPass(BoolProperty)=False 
 			bReceivesDecals(BoolProperty)=False 
 			CanCharacterStepUpOn(ByteProperty)=ECB_No 
 			BodyInstance(StructProperty)=System.Byte[] 
 			RelativeLocation(StructProperty)=Vector(0,-0.0002441406,1289.776) 
 			RelativeScale3D(StructProperty)=Vector(1600,1600,1300) 
-	LightningAreaBox_GEN_VARIABLE (0-0-0-0): size 875 (cls: LightningAreaBox_GEN_VARIABLE>BoxComponent>/Script/Engine):
+	LightningAreaBox_GEN_VARIABLE (0-0-0-0): size 904 (cls: LightningAreaBox_GEN_VARIABLE>BoxComponent>/Script/Engine):
 		Tag array:
 			BoxExtent(StructProperty)=Vector(1,1,1) 
 			ShapeColor(StructProperty)=System.Byte[] 
+			AreaClass(ObjectProperty)=FortMetaNavArea_Obstacles=/Script/FortniteGame 
 			bRenderInMainPass(BoolProperty)=False 
 			bReceivesDecals(BoolProperty)=False 
 			CanCharacterStepUpOn(ByteProperty)=ECB_No 
@@ -1285,12 +1299,13 @@ Serialized exports:
 	K2Node_DynamicCast_AsB_Rift_Portals (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsB_Rift_Portals>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsLightning_Lsystem (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsLightning_Lsystem>ObjectProperty>/Script/CoreUObject)
 	K2Node_Event_Rift (0-0-0-0): size 36 (cls: K2Node_Event_Rift>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetPlayerController_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetPlayerController_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetPlayerPawn_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetPlayerPawn_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	Light Flash Epic Quality TL (0-0-0-0): size 36 (cls: Light Flash Epic Quality TL>ObjectProperty>/Script/CoreUObject)
 	LightningAreaBox (0-0-0-0): size 36 (cls: LightningAreaBox>ObjectProperty>/Script/CoreUObject)
 	LightningFlahesLight (0-0-0-0): size 36 (cls: LightningFlahesLight>ObjectProperty>/Script/CoreUObject)
 	Rift (0-0-0-0): size 36 (cls: Rift>ObjectProperty>/Script/CoreUObject)
 	P_DistantLightningFlashes_01 (0-0-0-0): size 36 (cls: P_DistantLightningFlashes_01>ObjectProperty>/Script/CoreUObject)
-	CallFunc_GetPlayerPawn_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetPlayerPawn_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	SpawnedCloudVortex (0-0-0-0): size 36 (cls: SpawnedCloudVortex>ObjectProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_HitActor (0-0-0-0): size 36 (cls: CallFunc_BreakHitResult_HitActor>ObjectProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_HitComponent (0-0-0-0): size 36 (cls: CallFunc_BreakHitResult_HitComponent>ObjectProperty>/Script/CoreUObject)
@@ -1437,6 +1452,7 @@ Serialized exports:
 	CallFunc_Conv_VectorToLinearColor_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_Conv_VectorToLinearColor_ReturnValue1>StructProperty>/Script/CoreUObject)
 	CallFunc_Conv_VectorToLinearColor_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_Conv_VectorToLinearColor_ReturnValue2>StructProperty>/Script/CoreUObject)
 	CallFunc_Divide_VectorFloat_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_Divide_VectorFloat_ReturnValue>StructProperty>/Script/CoreUObject)
+	CallFunc_GetPlayerPawnLocationSafe_Safe_Location (0-0-0-0): size 36 (cls: CallFunc_GetPlayerPawnLocationSafe_Safe_Location>StructProperty>/Script/CoreUObject)
 	CallFunc_GetThreatVolume_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetThreatVolume_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_K2_GetActorLocation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_GetActorLocation_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_K2_GetActorLocation_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_K2_GetActorLocation_ReturnValue1>StructProperty>/Script/CoreUObject)
@@ -1444,7 +1460,6 @@ Serialized exports:
 	CallFunc_K2_GetActorLocation_ReturnValue3 (0-0-0-0): size 36 (cls: CallFunc_K2_GetActorLocation_ReturnValue3>StructProperty>/Script/CoreUObject)
 	CallFunc_K2_GetActorLocation_ReturnValue4 (0-0-0-0): size 36 (cls: CallFunc_K2_GetActorLocation_ReturnValue4>StructProperty>/Script/CoreUObject)
 	CallFunc_K2_GetActorLocation_ReturnValue5 (0-0-0-0): size 36 (cls: CallFunc_K2_GetActorLocation_ReturnValue5>StructProperty>/Script/CoreUObject)
-	CallFunc_K2_GetActorLocation_ReturnValue6 (0-0-0-0): size 36 (cls: CallFunc_K2_GetActorLocation_ReturnValue6>StructProperty>/Script/CoreUObject)
 	CallFunc_K2_GetComponentLocation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_GetComponentLocation_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_K2_GetComponentLocation_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_K2_GetComponentLocation_ReturnValue1>StructProperty>/Script/CoreUObject)
 	CallFunc_K2_GetComponentLocation_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_K2_GetComponentLocation_ReturnValue2>StructProperty>/Script/CoreUObject)
@@ -1477,6 +1492,8 @@ Serialized exports:
 	K2Node_CustomEvent_Flash_Location (0-0-0-0): size 36 (cls: K2Node_CustomEvent_Flash_Location>StructProperty>/Script/CoreUObject)
 	K2Node_Event_EndLocation (0-0-0-0): size 36 (cls: K2Node_Event_EndLocation>StructProperty>/Script/CoreUObject)
 	K2Node_Event_StartLocation (0-0-0-0): size 36 (cls: K2Node_Event_StartLocation>StructProperty>/Script/CoreUObject)
+	CallFunc_GetCameraLocation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetCameraLocation_ReturnValue>StructProperty>/Script/CoreUObject)
+	CallFunc_K2_GetActorLocation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_GetActorLocation_ReturnValue>StructProperty>/Script/CoreUObject)
 	Impact location (0-0-0-0): size 36 (cls: Impact location>StructProperty>/Script/CoreUObject)
 	Lightning starting point (0-0-0-0): size 36 (cls: Lightning starting point>StructProperty>/Script/CoreUObject)
 	Lightning Starting Point Offset (0-0-0-0): size 36 (cls: Lightning Starting Point Offset>StructProperty>/Script/CoreUObject)
@@ -1485,7 +1502,7 @@ Serialized exports:
 	CallFunc_K2_GetActorLocation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_GetActorLocation_ReturnValue>StructProperty>/Script/CoreUObject)
 	RandomLightningFlashLocation (0-0-0-0): size 36 (cls: RandomLightningFlashLocation>StructProperty>/Script/CoreUObject)
 	RandomLightningFlashTimer (0-0-0-0): size 36 (cls: RandomLightningFlashTimer>StructProperty>/Script/CoreUObject)
-	CallFunc_K2_GetActorLocation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_GetActorLocation_ReturnValue>StructProperty>/Script/CoreUObject)
+	CallFunc_GetPlayerPawnLocationSafe_Safe_Location (0-0-0-0): size 36 (cls: CallFunc_GetPlayerPawnLocationSafe_Safe_Location>StructProperty>/Script/CoreUObject)
 	CallFunc_K2_GetComponentLocation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_GetComponentLocation_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_MakeRotFromX_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_MakeRotFromX_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_Subtract_VectorVector_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_Subtract_VectorVector_ReturnValue>StructProperty>/Script/CoreUObject)

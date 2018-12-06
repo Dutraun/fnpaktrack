@@ -1,20 +1,16 @@
 Name table:
 	/Engine/EngineMaterials/DefaultPhysicalMaterial
 	/Game/Athena/Environments/Landscape/Foliage/Athena_Foliage_Bushes
-	/Game/Athena/Environments/Landscape/Foliage/Athena_Foliage_Corruption
 	/Game/Athena/Environments/Landscape/Foliage/Athena_Foliage_Flowers
 	/Game/Athena/Environments/Landscape/Foliage/Athena_Foliage_Forest
 	/Game/Athena/Environments/Landscape/Foliage/Athena_Foliage_Grass
 	/Game/Athena/Environments/Landscape/Foliage/Athena_Foliage_Gravel
-	/Game/Athena/Environments/Landscape/Foliage/Athena_Foliage_Mountain_Grass
 	/Game/Athena/Environments/Landscape/Foliage/Athena_SM_WavyGrass_TopologyColor
-	/Game/Athena/Environments/Landscape/LayerInfo/Athena_Terrain/Corruption_LayerInfo
 	/Game/Athena/Environments/Landscape/LayerInfo/Athena_Terrain/Farm_Grass_LayerInfo
 	/Game/Athena/Environments/Landscape/LayerInfo/Athena_Terrain/Flowers_LayerInfo
 	/Game/Athena/Environments/Landscape/LayerInfo/Athena_Terrain/Forest_LayerInfo
 	/Game/Athena/Environments/Landscape/LayerInfo/Athena_Terrain/Golf_Fairway_LayerInfo
 	/Game/Athena/Environments/Landscape/LayerInfo/Athena_Terrain/Golf_Green_LayerInfo
-	/Game/Athena/Environments/Landscape/LayerInfo/Athena_Terrain/Grass_Only_LayerInfo
 	/Game/Athena/Environments/Landscape/LayerInfo/Athena_Terrain/Grass_Topology_LayerInfo
 	/Game/Athena/Environments/Landscape/LayerInfo/Athena_Terrain/Gravel_LayerInfo
 	/Game/Athena/Environments/Landscape/LayerInfo/Athena_Terrain/Mountain_Grass_LayerInfo
@@ -22,6 +18,8 @@ Name table:
 	/Game/Athena/Environments/Landscape/LayerInfo/Athena_Terrain/NoFoliage_LayerInfo
 	/Game/Athena/Environments/Landscape/LayerInfo/Athena_Terrain/NoTopo_LayerInfo
 	/Game/Athena/Environments/Landscape/LayerInfo/Athena_Terrain/Road_LayerInfo
+	/Game/Athena/Environments/Landscape/LayerInfo/Athena_Terrain/Snow_LayerInfo
+	/Game/Athena/Environments/Landscape/LayerInfo/Athena_Terrain/SnowClumps_LayerInfo
 	/Game/Athena/Environments/Landscape/Material/Athena_Stream_02_inst
 	/Game/Athena/Environments/Landscape/Material/Athena_Stream_02_Reverse_inst
 	/Game/Athena/Environments/Landscape/Material/M_Athena_Terrain_01
@@ -33,6 +31,7 @@ Name table:
 	/Game/Environments/Foliage/Meshes/S_WavyGrass_01
 	/Game/FortressPhysicalMaterials/Dirt
 	/Game/FortressPhysicalMaterials/Grass
+	/Game/FortressPhysicalMaterials/Snow
 	/Game/FortressPhysicalMaterials/Stone
 	/Game/TimeOfDay/TODM/BR/TODM_BR
 	/Game/TimeOfDay/TODM/BR/TODM_BR.TODM_BR_C
@@ -46,20 +45,20 @@ Name table:
 	AddressX
 	AddressY
 	AggGeom
+	AreaClass
 	ArrayProperty
 	ArriveTangent
 	Association
 	Athena_Foliage_Bushes
-	Athena_Foliage_Corruption
 	Athena_Foliage_Flowers
 	Athena_Foliage_Forest
 	Athena_Foliage_Grass
 	Athena_Foliage_Gravel
-	Athena_Foliage_Mountain_Grass
 	Athena_SM_WavyGrass_TopologyColor
 	Athena_Stream_02_inst
 	Athena_Stream_02_Reverse_inst
 	Athena_Terrain_LS_03
+	Athena_Terrain_LS_03_C
 	AttachParent
 	bAffectDistanceFieldLighting
 	bAffectDynamicIndirectLighting
@@ -78,6 +77,7 @@ Name table:
 	BlueprintGeneratedClass
 	BodyInstance
 	BodySetup
+	BookmarkArray
 	BoolProperty
 	Bounds
 	bOverride
@@ -117,17 +117,17 @@ Name table:
 	ControlPoints
 	ConvexElems
 	CookedPhysicalMaterials
-	Corruption
-	Corruption_LayerInfo
 	CullDistance
 	Custom
 	DataVersion
+	Default__Athena_Terrain_LS_03_C
+	Default__BlueprintGeneratedClass
 	Default__BodySetup
 	Default__FoliageInstancedStaticMeshComponent
+	Default__FortLevelScriptActor
 	Default__FortWorldSettings
 	Default__InstancedFoliageActor
 	Default__LandscapeComponent
-	Default__LandscapeGizmoActiveActor
 	Default__LandscapeHeightfieldCollisionComponent
 	Default__LandscapeMaterialInstanceConstant
 	Default__LandscapeSplineControlPoint
@@ -166,10 +166,10 @@ Name table:
 	EndRoll
 	EndScale
 	EndTangent
+	Engine
 	ExpressionGUID
 	FalloffLeft
 	FalloffRight
-	Farm_Grass
 	Farm_Grass_LayerInfo
 	FCC_Object_PawnAI
 	FCC_Object_Projectile
@@ -188,6 +188,8 @@ Name table:
 	FoliageType_InstancedStaticMesh
 	Forest
 	Forest_LayerInfo
+	FortLevelScriptActor
+	FortMetaNavArea_Obstacles
 	FortWorldSettings
 	GlobalParameter
 	Golf_Fairway
@@ -195,7 +197,6 @@ Name table:
 	Golf_Green
 	Golf_Green_LayerInfo
 	Grass
-	Grass_Only_LayerInfo
 	Grass_Topology
 	Grass_Topology_LayerInfo
 	GrassFoliageType
@@ -226,7 +227,6 @@ Name table:
 	KConvexElem
 	LandscapeComponent
 	LandscapeComponents
-	LandscapeGizmoActiveActor
 	LandscapeGrassType
 	LandscapeGuid
 	LandscapeHeightfieldCollisionComponent
@@ -242,8 +242,6 @@ Name table:
 	LandscapeSplineSegmentConnection
 	LandscapeStreamingProxy
 	LayerInfo
-	LayerMask_Corruption
-	LayerMask_Farm_Grass
 	LayerMask_Flowers
 	LayerMask_Forest
 	LayerMask_Golf_Fairway
@@ -255,12 +253,14 @@ Name table:
 	LayerMask_NoFoliage
 	LayerMask_NoTopo
 	LayerMask_Road
+	LayerMask_Snow
 	LazyObjectProperty
 	LeaveTangent
 	Left
 	Level
 	LevelBounds
 	LevelBuildDataId
+	LevelScriptActor
 	LightingGuid
 	LinearColor
 	LocalMeshComponents
@@ -303,6 +303,7 @@ Name table:
 	NoTopo_LayerInfo
 	NumBuiltInstances
 	NumSubsections
+	Object
 	ObjectProperty
 	ObjectType
 	OpacityMaskClipValue
@@ -343,6 +344,9 @@ Name table:
 	Segment
 	Segments
 	SM_Athena_Stream_Spline_01
+	Snow
+	Snow_LayerInfo
+	SnowClumps_LayerInfo
 	SoftClassPath
 	SoftObjectProperty
 	SortedInstances
@@ -408,6 +412,9 @@ Name table:
 	WorldSettings
 	WorldTimeOfDayManager
 Serialized exports:
+	Athena_Terrain_LS_03_C (0-0-0-0): size 76 (cls: Athena_Terrain_LS_03_C>BlueprintGeneratedClass>/Script/Engine)
+	Default__Athena_Terrain_LS_03_C (0-0-0-0): size 8 (cls: Default__Athena_Terrain_LS_03_C>Athena_Terrain_LS_03_C)
+	Athena_Terrain_LS_03_C_0 (0-0-0-0): size 12 (cls: Athena_Terrain_LS_03_C_0>Athena_Terrain_LS_03_C)
 	BodySetup_1 (0-0-0-0): size 8526 (cls: BodySetup_1>BodySetup>/Script/Engine):
 		Tag array:
 			AggGeom(StructProperty)=System.Byte[] 
@@ -500,8 +507,9 @@ Serialized exports:
 		Tag array:
 			AggGeom(StructProperty)=System.Byte[] 
 			DefaultInstance(StructProperty)=System.Byte[] 
-	BoxComponent0 (0-0-0-0): size 246 (cls: BoxComponent0>BoxComponent>/Script/Engine):
+	BoxComponent0 (0-0-0-0): size 275 (cls: BoxComponent0>BoxComponent>/Script/Engine):
 		Tag array:
+			AreaClass(ObjectProperty)=FortMetaNavArea_Obstacles=/Script/FortniteGame 
 			BodyInstance(StructProperty)=System.Byte[] 
 			RelativeLocation(StructProperty)=Vector(89250,-70327.41,-1486.141) 
 			RelativeScale3D(StructProperty)=Vector(127500,165345.2,25187.5) 
@@ -545,7 +553,7 @@ Serialized exports:
 			BodyInstance(StructProperty)=System.Byte[] 
 			AttachParent(ObjectProperty)=RootComponent0=Athena_Terrain_LS_03 
 			Mobility(ByteProperty)=EComponentMobility::Static 
-	FortWorldSettings (0-0-0-0): size 326 (cls: FortWorldSettings>FortWorldSettings>/Script/FortniteGame):
+	FortWorldSettings (0-0-0-0): size 403 (cls: FortWorldSettings>FortWorldSettings>/Script/FortniteGame):
 		Tag array:
 			WorldCells(ArrayProperty)=[object] (inner: IntProperty)
 			WorldCellsOrigin(StructProperty)=Vector(512,512,0) 
@@ -556,6 +564,7 @@ Serialized exports:
 			WorldTimeOfDayManager(SoftObjectProperty)=/Game/TimeOfDay/TODM/BR/TODM_BR.TODM_BR_C 
 			bEnableNavigationSystem(BoolProperty)=False 
 			NavigationSystemConfig(ObjectProperty)=NavigationSystemConfig_0=Athena_Terrain_LS_03 
+			BookmarkArray(ArrayProperty)=[object] (inner: ObjectProperty)
 	InstancedFoliageActor_0 (0-0-0-0): size 61 (cls: InstancedFoliageActor_0>InstancedFoliageActor>/Script/Foliage):
 		Tag array:
 			RootComponent(ObjectProperty)=RootComponent0=Athena_Terrain_LS_03 
@@ -603,7 +612,7 @@ Serialized exports:
 			StateId(StructProperty)=Guid: 2668876436-1229179241-233354907-1337133978 
 			AttachParent(ObjectProperty)=RootComponent0=Athena_Terrain_LS_03 
 			RelativeLocation(StructProperty)=Vector(-127,0,0) 
-	LandscapeComponent_10 (0-0-0-0): size 133016 (cls: LandscapeComponent_10>LandscapeComponent>/Script/Landscape):
+	LandscapeComponent_10 (0-0-0-0): size 116624 (cls: LandscapeComponent_10>LandscapeComponent>/Script/Landscape):
 		Tag array:
 			SectionBaseX(IntProperty)=1016 
 			ComponentSizeQuads(IntProperty)=127 
@@ -624,7 +633,7 @@ Serialized exports:
 			StateId(StructProperty)=Guid: 3248356225-1299423012-2246797221-302869827 
 			AttachParent(ObjectProperty)=RootComponent0=Athena_Terrain_LS_03 
 			RelativeLocation(StructProperty)=Vector(-381,-635,0) 
-	LandscapeComponent_11 (0-0-0-0): size 99699 (cls: LandscapeComponent_11>LandscapeComponent>/Script/Landscape):
+	LandscapeComponent_11 (0-0-0-0): size 83341 (cls: LandscapeComponent_11>LandscapeComponent>/Script/Landscape):
 		Tag array:
 			SectionBaseX(IntProperty)=1143 
 			ComponentSizeQuads(IntProperty)=127 
@@ -643,9 +652,10 @@ Serialized exports:
 			CollisionComponent(LazyObjectProperty)=[object] 
 			MapBuildDataId(StructProperty)=Guid: 5236473-1239571102-378160024-995152370 
 			StateId(StructProperty)=Guid: 1752375915-1239763041-1742119598-3079107918 
+			MobileBlendableLayerMask(ByteProperty)=[object] 
 			AttachParent(ObjectProperty)=RootComponent0=Athena_Terrain_LS_03 
 			RelativeLocation(StructProperty)=Vector(-254,-635,0) 
-	LandscapeComponent_12 (0-0-0-0): size 116091 (cls: LandscapeComponent_12>LandscapeComponent>/Script/Landscape):
+	LandscapeComponent_12 (0-0-0-0): size 99733 (cls: LandscapeComponent_12>LandscapeComponent>/Script/Landscape):
 		Tag array:
 			SectionBaseX(IntProperty)=1270 
 			ComponentSizeQuads(IntProperty)=127 
@@ -664,9 +674,10 @@ Serialized exports:
 			CollisionComponent(LazyObjectProperty)=[object] 
 			MapBuildDataId(StructProperty)=Guid: 752957623-1314811707-763509653-3196869043 
 			StateId(StructProperty)=Guid: 1928616442-1325107799-1652574630-1950634447 
+			MobileBlendableLayerMask(ByteProperty)=[object] 
 			AttachParent(ObjectProperty)=RootComponent0=Athena_Terrain_LS_03 
 			RelativeLocation(StructProperty)=Vector(-127,-635,0) 
-	LandscapeComponent_13 (0-0-0-0): size 116439 (cls: LandscapeComponent_13>LandscapeComponent>/Script/Landscape):
+	LandscapeComponent_13 (0-0-0-0): size 100047 (cls: LandscapeComponent_13>LandscapeComponent>/Script/Landscape):
 		Tag array:
 			SectionBaseX(IntProperty)=1270 
 			SectionBaseY(IntProperty)=127 
@@ -684,11 +695,11 @@ Serialized exports:
 			HeightmapTexture(ObjectProperty)=Texture2D_11= 
 			CachedLocalBox(StructProperty)=System.Byte[] 
 			CollisionComponent(LazyObjectProperty)=[object] 
-			MapBuildDataId(StructProperty)=Guid: 1776817900-1273498096-2788560769-3925894743 
-			StateId(StructProperty)=Guid: 1668274277-1299265801-609958331-3119721580 
+			MapBuildDataId(StructProperty)=Guid: 1192261112-1234788040-241932474-2439358230 
+			StateId(StructProperty)=Guid: 1736430114-1127676746-2692247988-2081470192 
 			AttachParent(ObjectProperty)=RootComponent0=Athena_Terrain_LS_03 
 			RelativeLocation(StructProperty)=Vector(-127,-508,0) 
-	LandscapeComponent_14 (0-0-0-0): size 133045 (cls: LandscapeComponent_14>LandscapeComponent>/Script/Landscape):
+	LandscapeComponent_14 (0-0-0-0): size 116653 (cls: LandscapeComponent_14>LandscapeComponent>/Script/Landscape):
 		Tag array:
 			SectionBaseX(IntProperty)=1270 
 			SectionBaseY(IntProperty)=254 
@@ -706,11 +717,11 @@ Serialized exports:
 			HeightmapTexture(ObjectProperty)=Texture2D_15= 
 			CachedLocalBox(StructProperty)=System.Byte[] 
 			CollisionComponent(LazyObjectProperty)=[object] 
-			MapBuildDataId(StructProperty)=Guid: 232794127-1268652120-3266978230-509300319 
-			StateId(StructProperty)=Guid: 3518756520-1100842591-2439720088-2672420820 
+			MapBuildDataId(StructProperty)=Guid: 1092817712-1086425691-488812677-3100656362 
+			StateId(StructProperty)=Guid: 1961423990-1129196674-1464869789-35212483 
 			AttachParent(ObjectProperty)=RootComponent0=Athena_Terrain_LS_03 
 			RelativeLocation(StructProperty)=Vector(-127,-381,0) 
-	LandscapeComponent_15 (0-0-0-0): size 132936 (cls: LandscapeComponent_15>LandscapeComponent>/Script/Landscape):
+	LandscapeComponent_15 (0-0-0-0): size 116544 (cls: LandscapeComponent_15>LandscapeComponent>/Script/Landscape):
 		Tag array:
 			SectionBaseX(IntProperty)=1143 
 			SectionBaseY(IntProperty)=127 
@@ -732,7 +743,7 @@ Serialized exports:
 			StateId(StructProperty)=Guid: 1684489805-1185636799-3120478898-806653185 
 			AttachParent(ObjectProperty)=RootComponent0=Athena_Terrain_LS_03 
 			RelativeLocation(StructProperty)=Vector(-254,-508,0) 
-	LandscapeComponent_17 (0-0-0-0): size 149542 (cls: LandscapeComponent_17>LandscapeComponent>/Script/Landscape):
+	LandscapeComponent_17 (0-0-0-0): size 116653 (cls: LandscapeComponent_17>LandscapeComponent>/Script/Landscape):
 		Tag array:
 			SectionBaseX(IntProperty)=1016 
 			SectionBaseY(IntProperty)=127 
@@ -750,11 +761,11 @@ Serialized exports:
 			HeightmapTexture(ObjectProperty)=Texture2D_9= 
 			CachedLocalBox(StructProperty)=System.Byte[] 
 			CollisionComponent(LazyObjectProperty)=[object] 
-			MapBuildDataId(StructProperty)=Guid: 4260271096-1233064708-3762907578-527051605 
-			StateId(StructProperty)=Guid: 2004435291-1094515078-1439170726-3559679659 
+			MapBuildDataId(StructProperty)=Guid: 1893361769-1131566005-2354950284-2029760711 
+			StateId(StructProperty)=Guid: 3863462839-1175468561-1760355214-3170251868 
 			AttachParent(ObjectProperty)=RootComponent0=Athena_Terrain_LS_03 
 			RelativeLocation(StructProperty)=Vector(-381,-508,0) 
-	LandscapeComponent_19 (0-0-0-0): size 133045 (cls: LandscapeComponent_19>LandscapeComponent>/Script/Landscape):
+	LandscapeComponent_19 (0-0-0-0): size 116653 (cls: LandscapeComponent_19>LandscapeComponent>/Script/Landscape):
 		Tag array:
 			SectionBaseX(IntProperty)=1270 
 			SectionBaseY(IntProperty)=381 
@@ -772,11 +783,11 @@ Serialized exports:
 			HeightmapTexture(ObjectProperty)=Texture2D_19= 
 			CachedLocalBox(StructProperty)=System.Byte[] 
 			CollisionComponent(LazyObjectProperty)=[object] 
-			MapBuildDataId(StructProperty)=Guid: 1889501549-1272290333-57539251-3469191165 
-			StateId(StructProperty)=Guid: 545748083-1119311150-2257801346-1314869618 
+			MapBuildDataId(StructProperty)=Guid: 58875093-1183462456-1887872145-1011292925 
+			StateId(StructProperty)=Guid: 3255066161-1171563161-4261298337-451291872 
 			AttachParent(ObjectProperty)=RootComponent0=Athena_Terrain_LS_03 
 			RelativeLocation(StructProperty)=Vector(-127,-254,0) 
-	LandscapeComponent_2 (0-0-0-0): size 133255 (cls: LandscapeComponent_2>LandscapeComponent>/Script/Landscape):
+	LandscapeComponent_2 (0-0-0-0): size 116758 (cls: LandscapeComponent_2>LandscapeComponent>/Script/Landscape):
 		Tag array:
 			SectionBaseX(IntProperty)=1143 
 			SectionBaseY(IntProperty)=635 
@@ -794,8 +805,8 @@ Serialized exports:
 			HeightmapTexture(ObjectProperty)=Texture2D_2= 
 			CachedLocalBox(StructProperty)=System.Byte[] 
 			CollisionComponent(LazyObjectProperty)=[object] 
-			MapBuildDataId(StructProperty)=Guid: 2920449653-1199548146-3777336453-3407186198 
-			StateId(StructProperty)=Guid: 328692864-1135578927-2738721163-1793970490 
+			MapBuildDataId(StructProperty)=Guid: 1702002844-1170390421-1845091484-591688283 
+			StateId(StructProperty)=Guid: 2292279669-1119822479-2033317047-1559961651 
 			AttachParent(ObjectProperty)=RootComponent0=Athena_Terrain_LS_03 
 			RelativeLocation(StructProperty)=Vector(-254,0,0) 
 	LandscapeComponent_20 (0-0-0-0): size 116758 (cls: LandscapeComponent_20>LandscapeComponent>/Script/Landscape):
@@ -820,7 +831,7 @@ Serialized exports:
 			StateId(StructProperty)=Guid: 1673474639-1191772766-4201585800-2999507078 
 			AttachParent(ObjectProperty)=RootComponent0=Athena_Terrain_LS_03 
 			RelativeLocation(StructProperty)=Vector(-127,-127,0) 
-	LandscapeComponent_22 (0-0-0-0): size 132831 (cls: LandscapeComponent_22>LandscapeComponent>/Script/Landscape):
+	LandscapeComponent_22 (0-0-0-0): size 116439 (cls: LandscapeComponent_22>LandscapeComponent>/Script/Landscape):
 		Tag array:
 			SectionBaseX(IntProperty)=1143 
 			SectionBaseY(IntProperty)=254 
@@ -842,7 +853,7 @@ Serialized exports:
 			StateId(StructProperty)=Guid: 2783820068-1240375340-1988626069-1477557851 
 			AttachParent(ObjectProperty)=RootComponent0=Athena_Terrain_LS_03 
 			RelativeLocation(StructProperty)=Vector(-254,-381,0) 
-	LandscapeComponent_23 (0-0-0-0): size 133045 (cls: LandscapeComponent_23>LandscapeComponent>/Script/Landscape):
+	LandscapeComponent_23 (0-0-0-0): size 116653 (cls: LandscapeComponent_23>LandscapeComponent>/Script/Landscape):
 		Tag array:
 			SectionBaseX(IntProperty)=1143 
 			SectionBaseY(IntProperty)=381 
@@ -860,11 +871,11 @@ Serialized exports:
 			HeightmapTexture(ObjectProperty)=Texture2D_18= 
 			CachedLocalBox(StructProperty)=System.Byte[] 
 			CollisionComponent(LazyObjectProperty)=[object] 
-			MapBuildDataId(StructProperty)=Guid: 3025363930-1291131453-3376734609-1137369293 
-			StateId(StructProperty)=Guid: 225710861-1179972738-2749634952-2141078057 
+			MapBuildDataId(StructProperty)=Guid: 3387183757-1139104889-692526223-3681208503 
+			StateId(StructProperty)=Guid: 1825887063-1146401397-2038055315-2440146864 
 			AttachParent(ObjectProperty)=RootComponent0=Athena_Terrain_LS_03 
 			RelativeLocation(StructProperty)=Vector(-254,-254,0) 
-	LandscapeComponent_24 (0-0-0-0): size 116863 (cls: LandscapeComponent_24>LandscapeComponent>/Script/Landscape):
+	LandscapeComponent_24 (0-0-0-0): size 116758 (cls: LandscapeComponent_24>LandscapeComponent>/Script/Landscape):
 		Tag array:
 			SectionBaseX(IntProperty)=1143 
 			SectionBaseY(IntProperty)=508 
@@ -886,7 +897,7 @@ Serialized exports:
 			StateId(StructProperty)=Guid: 752209818-1173150127-2585062590-4141834411 
 			AttachParent(ObjectProperty)=RootComponent0=Athena_Terrain_LS_03 
 			RelativeLocation(StructProperty)=Vector(-254,-127,0) 
-	LandscapeComponent_25 (0-0-0-0): size 116439 (cls: LandscapeComponent_25>LandscapeComponent>/Script/Landscape):
+	LandscapeComponent_25 (0-0-0-0): size 100152 (cls: LandscapeComponent_25>LandscapeComponent>/Script/Landscape):
 		Tag array:
 			SectionBaseX(IntProperty)=1016 
 			SectionBaseY(IntProperty)=508 
@@ -908,7 +919,7 @@ Serialized exports:
 			StateId(StructProperty)=Guid: 2296184587-1178052757-2629261440-4024988433 
 			AttachParent(ObjectProperty)=RootComponent0=Athena_Terrain_LS_03 
 			RelativeLocation(StructProperty)=Vector(-381,-127,0) 
-	LandscapeComponent_26 (0-0-0-0): size 116544 (cls: LandscapeComponent_26>LandscapeComponent>/Script/Landscape):
+	LandscapeComponent_26 (0-0-0-0): size 100152 (cls: LandscapeComponent_26>LandscapeComponent>/Script/Landscape):
 		Tag array:
 			SectionBaseX(IntProperty)=1016 
 			SectionBaseY(IntProperty)=381 
@@ -926,11 +937,11 @@ Serialized exports:
 			HeightmapTexture(ObjectProperty)=Texture2D_17= 
 			CachedLocalBox(StructProperty)=System.Byte[] 
 			CollisionComponent(LazyObjectProperty)=[object] 
-			MapBuildDataId(StructProperty)=Guid: 3733656798-1142543547-3553890238-3498079558 
-			StateId(StructProperty)=Guid: 68769470-1249471753-1450974358-50142852 
+			MapBuildDataId(StructProperty)=Guid: 159945744-1194369247-3987393206-210077563 
+			StateId(StructProperty)=Guid: 3218777037-1334298506-1869800857-1125991098 
 			AttachParent(ObjectProperty)=RootComponent0=Athena_Terrain_LS_03 
 			RelativeLocation(StructProperty)=Vector(-381,-254,0) 
-	LandscapeComponent_27 (0-0-0-0): size 149542 (cls: LandscapeComponent_27>LandscapeComponent>/Script/Landscape):
+	LandscapeComponent_27 (0-0-0-0): size 116653 (cls: LandscapeComponent_27>LandscapeComponent>/Script/Landscape):
 		Tag array:
 			SectionBaseX(IntProperty)=1016 
 			SectionBaseY(IntProperty)=254 
@@ -948,11 +959,11 @@ Serialized exports:
 			HeightmapTexture(ObjectProperty)=Texture2D_13= 
 			CachedLocalBox(StructProperty)=System.Byte[] 
 			CollisionComponent(LazyObjectProperty)=[object] 
-			MapBuildDataId(StructProperty)=Guid: 2013448120-1226339887-3518173878-4123895234 
-			StateId(StructProperty)=Guid: 135165457-1149959441-412494482-2753547996 
+			MapBuildDataId(StructProperty)=Guid: 3953502761-1303648234-1316874635-3700027947 
+			StateId(StructProperty)=Guid: 3174995658-1193092601-1522915463-53304899 
 			AttachParent(ObjectProperty)=RootComponent0=Athena_Terrain_LS_03 
 			RelativeLocation(StructProperty)=Vector(-381,-381,0) 
-	LandscapeComponent_29 (0-0-0-0): size 116544 (cls: LandscapeComponent_29>LandscapeComponent>/Script/Landscape):
+	LandscapeComponent_29 (0-0-0-0): size 100261 (cls: LandscapeComponent_29>LandscapeComponent>/Script/Landscape):
 		Tag array:
 			SectionBaseX(IntProperty)=889 
 			SectionBaseY(IntProperty)=381 
@@ -970,11 +981,11 @@ Serialized exports:
 			HeightmapTexture(ObjectProperty)=Texture2D_29= 
 			CachedLocalBox(StructProperty)=System.Byte[] 
 			CollisionComponent(LazyObjectProperty)=[object] 
-			MapBuildDataId(StructProperty)=Guid: 3408654264-1182461180-4185603510-2944203435 
-			StateId(StructProperty)=Guid: 4199341136-1184180055-3358175167-3505970607 
+			MapBuildDataId(StructProperty)=Guid: 1988615762-1327865288-561466813-4268847566 
+			StateId(StructProperty)=Guid: 3163184827-1170080239-4015765393-2582438007 
 			AttachParent(ObjectProperty)=RootComponent0=Athena_Terrain_LS_03 
 			RelativeLocation(StructProperty)=Vector(-508,-254,0) 
-	LandscapeComponent_3 (0-0-0-0): size 116863 (cls: LandscapeComponent_3>LandscapeComponent>/Script/Landscape):
+	LandscapeComponent_3 (0-0-0-0): size 116653 (cls: LandscapeComponent_3>LandscapeComponent>/Script/Landscape):
 		Tag array:
 			SectionBaseX(IntProperty)=1016 
 			SectionBaseY(IntProperty)=635 
@@ -992,8 +1003,8 @@ Serialized exports:
 			HeightmapTexture(ObjectProperty)=Texture2D_3= 
 			CachedLocalBox(StructProperty)=System.Byte[] 
 			CollisionComponent(LazyObjectProperty)=[object] 
-			MapBuildDataId(StructProperty)=Guid: 3938454925-1077631127-427193754-4218317354 
-			StateId(StructProperty)=Guid: 374870123-1231888724-612795557-2145462059 
+			MapBuildDataId(StructProperty)=Guid: 2292815366-1254748115-814585273-3412883170 
+			StateId(StructProperty)=Guid: 1065380127-1256632298-497831870-915953888 
 			AttachParent(ObjectProperty)=RootComponent0=Athena_Terrain_LS_03 
 			RelativeLocation(StructProperty)=Vector(-381,0,0) 
 	LandscapeComponent_4 (0-0-0-0): size 99837 (cls: LandscapeComponent_4>LandscapeComponent>/Script/Landscape):
@@ -1018,7 +1029,7 @@ Serialized exports:
 			StateId(StructProperty)=Guid: 404320561-1240384639-1761224610-3403862114 
 			AttachParent(ObjectProperty)=RootComponent0=Athena_Terrain_LS_03 
 			RelativeLocation(StructProperty)=Vector(0,-127,0) 
-	LandscapeComponent_5 (0-0-0-0): size 116443 (cls: LandscapeComponent_5>LandscapeComponent>/Script/Landscape):
+	LandscapeComponent_5 (0-0-0-0): size 100051 (cls: LandscapeComponent_5>LandscapeComponent>/Script/Landscape):
 		Tag array:
 			SectionBaseX(IntProperty)=1397 
 			SectionBaseY(IntProperty)=381 
@@ -1040,7 +1051,7 @@ Serialized exports:
 			StateId(StructProperty)=Guid: 3504113456-1310278624-2288780716-3698713027 
 			AttachParent(ObjectProperty)=RootComponent0=Athena_Terrain_LS_03 
 			RelativeLocation(StructProperty)=Vector(0,-254,0) 
-	LandscapeComponent_6 (0-0-0-0): size 133045 (cls: LandscapeComponent_6>LandscapeComponent>/Script/Landscape):
+	LandscapeComponent_6 (0-0-0-0): size 116653 (cls: LandscapeComponent_6>LandscapeComponent>/Script/Landscape):
 		Tag array:
 			SectionBaseX(IntProperty)=1397 
 			SectionBaseY(IntProperty)=254 
@@ -1062,7 +1073,7 @@ Serialized exports:
 			StateId(StructProperty)=Guid: 396588632-1172323425-4048874119-2717608863 
 			AttachParent(ObjectProperty)=RootComponent0=Athena_Terrain_LS_03 
 			RelativeLocation(StructProperty)=Vector(0,-381,0) 
-	LandscapeComponent_7 (0-0-0-0): size 116334 (cls: LandscapeComponent_7>LandscapeComponent>/Script/Landscape):
+	LandscapeComponent_7 (0-0-0-0): size 99942 (cls: LandscapeComponent_7>LandscapeComponent>/Script/Landscape):
 		Tag array:
 			SectionBaseX(IntProperty)=1397 
 			SectionBaseY(IntProperty)=127 
@@ -1084,41 +1095,38 @@ Serialized exports:
 			StateId(StructProperty)=Guid: 3632803206-1325186569-1678650297-2051440529 
 			AttachParent(ObjectProperty)=RootComponent0=Athena_Terrain_LS_03 
 			RelativeLocation(StructProperty)=Vector(0,-508,0) 
-	LandscapeGizmoActiveActor_0 (0-0-0-0): size 41 (cls: LandscapeGizmoActiveActor_0>LandscapeGizmoActiveActor>/Script/Landscape):
-		Tag array:
-			RootComponent(ObjectProperty)=[object] 
-	LandscapeHeightfieldCollisionComponent_0 (0-0-0-0): size 66081 (cls: LandscapeHeightfieldCollisionComponent_0>LandscapeHeightfieldCollisionComponent>/Script/Landscape):
+	LandscapeHeightfieldCollisionComponent_0 (0-0-0-0): size 66085 (cls: LandscapeHeightfieldCollisionComponent_0>LandscapeHeightfieldCollisionComponent>/Script/Landscape):
 		Tag array:
 			ComponentLayerInfos(ArrayProperty)=[object] (inner: ObjectProperty)
 			SectionBaseX(IntProperty)=1397 
 			SectionBaseY(IntProperty)=635 
 			CollisionSizeQuads(IntProperty)=127 
 			CollisionScale(FloatProperty)=1 
-			HeightfieldGuid(StructProperty)=Guid: 2285165235-1300411742-882304657-3048856309 
+			HeightfieldGuid(StructProperty)=Guid: 1536046134-1197020391-253538970-1039516882 
 			CachedLocalBox(StructProperty)=System.Byte[] 
 			RenderComponent(LazyObjectProperty)=[object] 
 			CookedPhysicalMaterials(ArrayProperty)=[object] (inner: ObjectProperty)
 			AttachParent(ObjectProperty)=RootComponent0=Athena_Terrain_LS_03 
-	LandscapeHeightfieldCollisionComponent_1 (0-0-0-0): size 66166 (cls: LandscapeHeightfieldCollisionComponent_1>LandscapeHeightfieldCollisionComponent>/Script/Landscape):
+	LandscapeHeightfieldCollisionComponent_1 (0-0-0-0): size 66178 (cls: LandscapeHeightfieldCollisionComponent_1>LandscapeHeightfieldCollisionComponent>/Script/Landscape):
 		Tag array:
 			ComponentLayerInfos(ArrayProperty)=[object] (inner: ObjectProperty)
 			SectionBaseX(IntProperty)=1270 
 			SectionBaseY(IntProperty)=635 
 			CollisionSizeQuads(IntProperty)=127 
 			CollisionScale(FloatProperty)=1 
-			HeightfieldGuid(StructProperty)=Guid: 4192243005-1228220685-65075593-403258265 
+			HeightfieldGuid(StructProperty)=Guid: 2284421483-1183713700-1056239034-1543641324 
 			CachedLocalBox(StructProperty)=System.Byte[] 
 			RenderComponent(LazyObjectProperty)=[object] 
 			CookedPhysicalMaterials(ArrayProperty)=[object] (inner: ObjectProperty)
 			AttachParent(ObjectProperty)=RootComponent0=Athena_Terrain_LS_03 
 			RelativeLocation(StructProperty)=Vector(-127,0,0) 
-	LandscapeHeightfieldCollisionComponent_10 (0-0-0-0): size 66137 (cls: LandscapeHeightfieldCollisionComponent_10>LandscapeHeightfieldCollisionComponent>/Script/Landscape):
+	LandscapeHeightfieldCollisionComponent_10 (0-0-0-0): size 66149 (cls: LandscapeHeightfieldCollisionComponent_10>LandscapeHeightfieldCollisionComponent>/Script/Landscape):
 		Tag array:
 			ComponentLayerInfos(ArrayProperty)=[object] (inner: ObjectProperty)
 			SectionBaseX(IntProperty)=1016 
 			CollisionSizeQuads(IntProperty)=127 
 			CollisionScale(FloatProperty)=1 
-			HeightfieldGuid(StructProperty)=Guid: 4160177852-1253150844-3709250739-3269489754 
+			HeightfieldGuid(StructProperty)=Guid: 1041471236-1290271558-3780004506-1676845146 
 			CachedLocalBox(StructProperty)=System.Byte[] 
 			RenderComponent(LazyObjectProperty)=[object] 
 			CookedPhysicalMaterials(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -1130,7 +1138,7 @@ Serialized exports:
 			SectionBaseX(IntProperty)=1143 
 			CollisionSizeQuads(IntProperty)=127 
 			CollisionScale(FloatProperty)=1 
-			HeightfieldGuid(StructProperty)=Guid: 3185258944-1102564858-2548555444-3291346557 
+			HeightfieldGuid(StructProperty)=Guid: 2317989112-1164095115-4035365002-1072921449 
 			CachedLocalBox(StructProperty)=System.Byte[] 
 			RenderComponent(LazyObjectProperty)=[object] 
 			CookedPhysicalMaterials(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -1142,46 +1150,46 @@ Serialized exports:
 			SectionBaseX(IntProperty)=1270 
 			CollisionSizeQuads(IntProperty)=127 
 			CollisionScale(FloatProperty)=1 
-			HeightfieldGuid(StructProperty)=Guid: 2404894831-1253910811-4231494333-3106859768 
+			HeightfieldGuid(StructProperty)=Guid: 2485516569-1189627154-568592022-3120180027 
 			CachedLocalBox(StructProperty)=System.Byte[] 
 			RenderComponent(LazyObjectProperty)=[object] 
 			CookedPhysicalMaterials(ArrayProperty)=[object] (inner: ObjectProperty)
 			AttachParent(ObjectProperty)=RootComponent0=Athena_Terrain_LS_03 
 			RelativeLocation(StructProperty)=Vector(-127,-635,0) 
-	LandscapeHeightfieldCollisionComponent_13 (0-0-0-0): size 66158 (cls: LandscapeHeightfieldCollisionComponent_13>LandscapeHeightfieldCollisionComponent>/Script/Landscape):
+	LandscapeHeightfieldCollisionComponent_13 (0-0-0-0): size 66170 (cls: LandscapeHeightfieldCollisionComponent_13>LandscapeHeightfieldCollisionComponent>/Script/Landscape):
 		Tag array:
 			ComponentLayerInfos(ArrayProperty)=[object] (inner: ObjectProperty)
 			SectionBaseX(IntProperty)=1270 
 			SectionBaseY(IntProperty)=127 
 			CollisionSizeQuads(IntProperty)=127 
 			CollisionScale(FloatProperty)=1 
-			HeightfieldGuid(StructProperty)=Guid: 1658769121-1081124737-1078993337-2807547067 
+			HeightfieldGuid(StructProperty)=Guid: 1606368143-1152207317-2726851229-3170746335 
 			CachedLocalBox(StructProperty)=System.Byte[] 
 			RenderComponent(LazyObjectProperty)=[object] 
 			CookedPhysicalMaterials(ArrayProperty)=[object] (inner: ObjectProperty)
 			AttachParent(ObjectProperty)=RootComponent0=Athena_Terrain_LS_03 
 			RelativeLocation(StructProperty)=Vector(-127,-508,0) 
-	LandscapeHeightfieldCollisionComponent_14 (0-0-0-0): size 66170 (cls: LandscapeHeightfieldCollisionComponent_14>LandscapeHeightfieldCollisionComponent>/Script/Landscape):
+	LandscapeHeightfieldCollisionComponent_14 (0-0-0-0): size 66178 (cls: LandscapeHeightfieldCollisionComponent_14>LandscapeHeightfieldCollisionComponent>/Script/Landscape):
 		Tag array:
 			ComponentLayerInfos(ArrayProperty)=[object] (inner: ObjectProperty)
 			SectionBaseX(IntProperty)=1270 
 			SectionBaseY(IntProperty)=254 
 			CollisionSizeQuads(IntProperty)=127 
 			CollisionScale(FloatProperty)=1 
-			HeightfieldGuid(StructProperty)=Guid: 3001769463-1118999602-1560958096-3186867539 
+			HeightfieldGuid(StructProperty)=Guid: 1682967353-1296793318-1808087685-3475558668 
 			CachedLocalBox(StructProperty)=System.Byte[] 
 			RenderComponent(LazyObjectProperty)=[object] 
 			CookedPhysicalMaterials(ArrayProperty)=[object] (inner: ObjectProperty)
 			AttachParent(ObjectProperty)=RootComponent0=Athena_Terrain_LS_03 
 			RelativeLocation(StructProperty)=Vector(-127,-381,0) 
-	LandscapeHeightfieldCollisionComponent_15 (0-0-0-0): size 66170 (cls: LandscapeHeightfieldCollisionComponent_15>LandscapeHeightfieldCollisionComponent>/Script/Landscape):
+	LandscapeHeightfieldCollisionComponent_15 (0-0-0-0): size 66174 (cls: LandscapeHeightfieldCollisionComponent_15>LandscapeHeightfieldCollisionComponent>/Script/Landscape):
 		Tag array:
 			ComponentLayerInfos(ArrayProperty)=[object] (inner: ObjectProperty)
 			SectionBaseX(IntProperty)=1143 
 			SectionBaseY(IntProperty)=127 
 			CollisionSizeQuads(IntProperty)=127 
 			CollisionScale(FloatProperty)=1 
-			HeightfieldGuid(StructProperty)=Guid: 941040487-1238791587-2718369712-599883274 
+			HeightfieldGuid(StructProperty)=Guid: 3432369842-1158922306-2919393434-1160195945 
 			CachedLocalBox(StructProperty)=System.Byte[] 
 			RenderComponent(LazyObjectProperty)=[object] 
 			CookedPhysicalMaterials(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -1194,20 +1202,20 @@ Serialized exports:
 			SectionBaseY(IntProperty)=127 
 			CollisionSizeQuads(IntProperty)=127 
 			CollisionScale(FloatProperty)=1 
-			HeightfieldGuid(StructProperty)=Guid: 3987834525-1099929871-2017827760-3844695836 
+			HeightfieldGuid(StructProperty)=Guid: 3157924025-1131796791-1273807003-203864839 
 			CachedLocalBox(StructProperty)=System.Byte[] 
 			RenderComponent(LazyObjectProperty)=[object] 
 			CookedPhysicalMaterials(ArrayProperty)=[object] (inner: ObjectProperty)
 			AttachParent(ObjectProperty)=RootComponent0=Athena_Terrain_LS_03 
 			RelativeLocation(StructProperty)=Vector(-381,-508,0) 
-	LandscapeHeightfieldCollisionComponent_19 (0-0-0-0): size 66166 (cls: LandscapeHeightfieldCollisionComponent_19>LandscapeHeightfieldCollisionComponent>/Script/Landscape):
+	LandscapeHeightfieldCollisionComponent_19 (0-0-0-0): size 66174 (cls: LandscapeHeightfieldCollisionComponent_19>LandscapeHeightfieldCollisionComponent>/Script/Landscape):
 		Tag array:
 			ComponentLayerInfos(ArrayProperty)=[object] (inner: ObjectProperty)
 			SectionBaseX(IntProperty)=1270 
 			SectionBaseY(IntProperty)=381 
 			CollisionSizeQuads(IntProperty)=127 
 			CollisionScale(FloatProperty)=1 
-			HeightfieldGuid(StructProperty)=Guid: 789497412-1154454331-1453693072-3457943590 
+			HeightfieldGuid(StructProperty)=Guid: 1460262077-1254351322-3669488791-882000592 
 			CachedLocalBox(StructProperty)=System.Byte[] 
 			RenderComponent(LazyObjectProperty)=[object] 
 			CookedPhysicalMaterials(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -1220,46 +1228,46 @@ Serialized exports:
 			SectionBaseY(IntProperty)=635 
 			CollisionSizeQuads(IntProperty)=127 
 			CollisionScale(FloatProperty)=1 
-			HeightfieldGuid(StructProperty)=Guid: 706402534-1076348524-4118084542-2049754463 
+			HeightfieldGuid(StructProperty)=Guid: 3723924847-1260726910-3404950698-1915761478 
 			CachedLocalBox(StructProperty)=System.Byte[] 
 			RenderComponent(LazyObjectProperty)=[object] 
 			CookedPhysicalMaterials(ArrayProperty)=[object] (inner: ObjectProperty)
 			AttachParent(ObjectProperty)=RootComponent0=Athena_Terrain_LS_03 
 			RelativeLocation(StructProperty)=Vector(-254,0,0) 
-	LandscapeHeightfieldCollisionComponent_20 (0-0-0-0): size 66170 (cls: LandscapeHeightfieldCollisionComponent_20>LandscapeHeightfieldCollisionComponent>/Script/Landscape):
+	LandscapeHeightfieldCollisionComponent_20 (0-0-0-0): size 66182 (cls: LandscapeHeightfieldCollisionComponent_20>LandscapeHeightfieldCollisionComponent>/Script/Landscape):
 		Tag array:
 			ComponentLayerInfos(ArrayProperty)=[object] (inner: ObjectProperty)
 			SectionBaseX(IntProperty)=1270 
 			SectionBaseY(IntProperty)=508 
 			CollisionSizeQuads(IntProperty)=127 
 			CollisionScale(FloatProperty)=1 
-			HeightfieldGuid(StructProperty)=Guid: 958125826-1340828890-4173428656-3305513012 
+			HeightfieldGuid(StructProperty)=Guid: 134033982-1257515070-1705870238-1500197393 
 			CachedLocalBox(StructProperty)=System.Byte[] 
 			RenderComponent(LazyObjectProperty)=[object] 
 			CookedPhysicalMaterials(ArrayProperty)=[object] (inner: ObjectProperty)
 			AttachParent(ObjectProperty)=RootComponent0=Athena_Terrain_LS_03 
 			RelativeLocation(StructProperty)=Vector(-127,-127,0) 
-	LandscapeHeightfieldCollisionComponent_21 (0-0-0-0): size 66166 (cls: LandscapeHeightfieldCollisionComponent_21>LandscapeHeightfieldCollisionComponent>/Script/Landscape):
+	LandscapeHeightfieldCollisionComponent_21 (0-0-0-0): size 66170 (cls: LandscapeHeightfieldCollisionComponent_21>LandscapeHeightfieldCollisionComponent>/Script/Landscape):
 		Tag array:
 			ComponentLayerInfos(ArrayProperty)=[object] (inner: ObjectProperty)
 			SectionBaseX(IntProperty)=1143 
 			SectionBaseY(IntProperty)=254 
 			CollisionSizeQuads(IntProperty)=127 
 			CollisionScale(FloatProperty)=1 
-			HeightfieldGuid(StructProperty)=Guid: 3334938244-1315467003-3178538376-1411899574 
+			HeightfieldGuid(StructProperty)=Guid: 2223898207-1213672283-1589614747-745153187 
 			CachedLocalBox(StructProperty)=System.Byte[] 
 			RenderComponent(LazyObjectProperty)=[object] 
 			CookedPhysicalMaterials(ArrayProperty)=[object] (inner: ObjectProperty)
 			AttachParent(ObjectProperty)=RootComponent0=Athena_Terrain_LS_03 
 			RelativeLocation(StructProperty)=Vector(-254,-381,0) 
-	LandscapeHeightfieldCollisionComponent_22 (0-0-0-0): size 66166 (cls: LandscapeHeightfieldCollisionComponent_22>LandscapeHeightfieldCollisionComponent>/Script/Landscape):
+	LandscapeHeightfieldCollisionComponent_22 (0-0-0-0): size 66178 (cls: LandscapeHeightfieldCollisionComponent_22>LandscapeHeightfieldCollisionComponent>/Script/Landscape):
 		Tag array:
 			ComponentLayerInfos(ArrayProperty)=[object] (inner: ObjectProperty)
 			SectionBaseX(IntProperty)=1143 
 			SectionBaseY(IntProperty)=381 
 			CollisionSizeQuads(IntProperty)=127 
 			CollisionScale(FloatProperty)=1 
-			HeightfieldGuid(StructProperty)=Guid: 1430311133-1252281749-275234221-3048621208 
+			HeightfieldGuid(StructProperty)=Guid: 1281000431-1181588493-2568797369-2124863687 
 			CachedLocalBox(StructProperty)=System.Byte[] 
 			RenderComponent(LazyObjectProperty)=[object] 
 			CookedPhysicalMaterials(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -1272,388 +1280,400 @@ Serialized exports:
 			SectionBaseY(IntProperty)=508 
 			CollisionSizeQuads(IntProperty)=127 
 			CollisionScale(FloatProperty)=1 
-			HeightfieldGuid(StructProperty)=Guid: 2177632434-1222442740-4003434675-1456695234 
+			HeightfieldGuid(StructProperty)=Guid: 736117266-1115288552-1875860375-562623706 
 			CachedLocalBox(StructProperty)=System.Byte[] 
 			RenderComponent(LazyObjectProperty)=[object] 
 			CookedPhysicalMaterials(ArrayProperty)=[object] (inner: ObjectProperty)
 			AttachParent(ObjectProperty)=RootComponent0=Athena_Terrain_LS_03 
 			RelativeLocation(StructProperty)=Vector(-254,-127,0) 
-	LandscapeHeightfieldCollisionComponent_24 (0-0-0-0): size 66154 (cls: LandscapeHeightfieldCollisionComponent_24>LandscapeHeightfieldCollisionComponent>/Script/Landscape):
+	LandscapeHeightfieldCollisionComponent_24 (0-0-0-0): size 66170 (cls: LandscapeHeightfieldCollisionComponent_24>LandscapeHeightfieldCollisionComponent>/Script/Landscape):
 		Tag array:
 			ComponentLayerInfos(ArrayProperty)=[object] (inner: ObjectProperty)
 			SectionBaseX(IntProperty)=1016 
 			SectionBaseY(IntProperty)=508 
 			CollisionSizeQuads(IntProperty)=127 
 			CollisionScale(FloatProperty)=1 
-			HeightfieldGuid(StructProperty)=Guid: 2072735798-1078788645-3802302601-4249225545 
+			HeightfieldGuid(StructProperty)=Guid: 3021081460-1179858289-337554098-253456680 
 			CachedLocalBox(StructProperty)=System.Byte[] 
 			RenderComponent(LazyObjectProperty)=[object] 
 			CookedPhysicalMaterials(ArrayProperty)=[object] (inner: ObjectProperty)
 			AttachParent(ObjectProperty)=RootComponent0=Athena_Terrain_LS_03 
 			RelativeLocation(StructProperty)=Vector(-381,-127,0) 
-	LandscapeHeightfieldCollisionComponent_25 (0-0-0-0): size 66162 (cls: LandscapeHeightfieldCollisionComponent_25>LandscapeHeightfieldCollisionComponent>/Script/Landscape):
+	LandscapeHeightfieldCollisionComponent_25 (0-0-0-0): size 66174 (cls: LandscapeHeightfieldCollisionComponent_25>LandscapeHeightfieldCollisionComponent>/Script/Landscape):
 		Tag array:
 			ComponentLayerInfos(ArrayProperty)=[object] (inner: ObjectProperty)
 			SectionBaseX(IntProperty)=1016 
 			SectionBaseY(IntProperty)=381 
 			CollisionSizeQuads(IntProperty)=127 
 			CollisionScale(FloatProperty)=1 
-			HeightfieldGuid(StructProperty)=Guid: 1432149709-1264493028-3164353699-1145574022 
+			HeightfieldGuid(StructProperty)=Guid: 2284612149-1314321284-3083185286-272276400 
 			CachedLocalBox(StructProperty)=System.Byte[] 
 			RenderComponent(LazyObjectProperty)=[object] 
 			CookedPhysicalMaterials(ArrayProperty)=[object] (inner: ObjectProperty)
 			AttachParent(ObjectProperty)=RootComponent0=Athena_Terrain_LS_03 
 			RelativeLocation(StructProperty)=Vector(-381,-254,0) 
-	LandscapeHeightfieldCollisionComponent_26 (0-0-0-0): size 66178 (cls: LandscapeHeightfieldCollisionComponent_26>LandscapeHeightfieldCollisionComponent>/Script/Landscape):
+	LandscapeHeightfieldCollisionComponent_26 (0-0-0-0): size 66174 (cls: LandscapeHeightfieldCollisionComponent_26>LandscapeHeightfieldCollisionComponent>/Script/Landscape):
 		Tag array:
 			ComponentLayerInfos(ArrayProperty)=[object] (inner: ObjectProperty)
 			SectionBaseX(IntProperty)=1016 
 			SectionBaseY(IntProperty)=254 
 			CollisionSizeQuads(IntProperty)=127 
 			CollisionScale(FloatProperty)=1 
-			HeightfieldGuid(StructProperty)=Guid: 2694368237-1212512754-1762371244-4115124738 
+			HeightfieldGuid(StructProperty)=Guid: 1563635075-1222648959-3692780431-4123412296 
 			CachedLocalBox(StructProperty)=System.Byte[] 
 			RenderComponent(LazyObjectProperty)=[object] 
 			CookedPhysicalMaterials(ArrayProperty)=[object] (inner: ObjectProperty)
 			AttachParent(ObjectProperty)=RootComponent0=Athena_Terrain_LS_03 
 			RelativeLocation(StructProperty)=Vector(-381,-381,0) 
-	LandscapeHeightfieldCollisionComponent_28 (0-0-0-0): size 66162 (cls: LandscapeHeightfieldCollisionComponent_28>LandscapeHeightfieldCollisionComponent>/Script/Landscape):
+	LandscapeHeightfieldCollisionComponent_28 (0-0-0-0): size 66178 (cls: LandscapeHeightfieldCollisionComponent_28>LandscapeHeightfieldCollisionComponent>/Script/Landscape):
 		Tag array:
 			ComponentLayerInfos(ArrayProperty)=[object] (inner: ObjectProperty)
 			SectionBaseX(IntProperty)=889 
 			SectionBaseY(IntProperty)=381 
 			CollisionSizeQuads(IntProperty)=127 
 			CollisionScale(FloatProperty)=1 
-			HeightfieldGuid(StructProperty)=Guid: 1684692072-1331315218-134204547-1975297102 
+			HeightfieldGuid(StructProperty)=Guid: 1689300663-1194388584-4116768426-3205237327 
 			CachedLocalBox(StructProperty)=System.Byte[] 
 			RenderComponent(LazyObjectProperty)=[object] 
 			CookedPhysicalMaterials(ArrayProperty)=[object] (inner: ObjectProperty)
 			AttachParent(ObjectProperty)=RootComponent0=Athena_Terrain_LS_03 
 			RelativeLocation(StructProperty)=Vector(-508,-254,0) 
-	LandscapeHeightfieldCollisionComponent_3 (0-0-0-0): size 66178 (cls: LandscapeHeightfieldCollisionComponent_3>LandscapeHeightfieldCollisionComponent>/Script/Landscape):
+	LandscapeHeightfieldCollisionComponent_3 (0-0-0-0): size 66170 (cls: LandscapeHeightfieldCollisionComponent_3>LandscapeHeightfieldCollisionComponent>/Script/Landscape):
 		Tag array:
 			ComponentLayerInfos(ArrayProperty)=[object] (inner: ObjectProperty)
 			SectionBaseX(IntProperty)=1016 
 			SectionBaseY(IntProperty)=635 
 			CollisionSizeQuads(IntProperty)=127 
 			CollisionScale(FloatProperty)=1 
-			HeightfieldGuid(StructProperty)=Guid: 3363502004-1203854769-188846002-1945617524 
+			HeightfieldGuid(StructProperty)=Guid: 1187756973-1338159291-4290152105-2530226426 
 			CachedLocalBox(StructProperty)=System.Byte[] 
 			RenderComponent(LazyObjectProperty)=[object] 
 			CookedPhysicalMaterials(ArrayProperty)=[object] (inner: ObjectProperty)
 			AttachParent(ObjectProperty)=RootComponent0=Athena_Terrain_LS_03 
 			RelativeLocation(StructProperty)=Vector(-381,0,0) 
-	LandscapeHeightfieldCollisionComponent_4 (0-0-0-0): size 66150 (cls: LandscapeHeightfieldCollisionComponent_4>LandscapeHeightfieldCollisionComponent>/Script/Landscape):
+	LandscapeHeightfieldCollisionComponent_4 (0-0-0-0): size 66154 (cls: LandscapeHeightfieldCollisionComponent_4>LandscapeHeightfieldCollisionComponent>/Script/Landscape):
 		Tag array:
 			ComponentLayerInfos(ArrayProperty)=[object] (inner: ObjectProperty)
 			SectionBaseX(IntProperty)=1397 
 			SectionBaseY(IntProperty)=508 
 			CollisionSizeQuads(IntProperty)=127 
 			CollisionScale(FloatProperty)=1 
-			HeightfieldGuid(StructProperty)=Guid: 4286743844-1163566149-327151538-3528691048 
+			HeightfieldGuid(StructProperty)=Guid: 3421002681-1095828948-707722128-2334082155 
 			CachedLocalBox(StructProperty)=System.Byte[] 
 			RenderComponent(LazyObjectProperty)=[object] 
 			CookedPhysicalMaterials(ArrayProperty)=[object] (inner: ObjectProperty)
 			AttachParent(ObjectProperty)=RootComponent0=Athena_Terrain_LS_03 
 			RelativeLocation(StructProperty)=Vector(0,-127,0) 
-	LandscapeHeightfieldCollisionComponent_5 (0-0-0-0): size 66154 (cls: LandscapeHeightfieldCollisionComponent_5>LandscapeHeightfieldCollisionComponent>/Script/Landscape):
+	LandscapeHeightfieldCollisionComponent_5 (0-0-0-0): size 66166 (cls: LandscapeHeightfieldCollisionComponent_5>LandscapeHeightfieldCollisionComponent>/Script/Landscape):
 		Tag array:
 			ComponentLayerInfos(ArrayProperty)=[object] (inner: ObjectProperty)
 			SectionBaseX(IntProperty)=1397 
 			SectionBaseY(IntProperty)=381 
 			CollisionSizeQuads(IntProperty)=127 
 			CollisionScale(FloatProperty)=1 
-			HeightfieldGuid(StructProperty)=Guid: 2854858593-1086367976-2478710421-1186540894 
+			HeightfieldGuid(StructProperty)=Guid: 3535810969-1340389407-3824656519-1975677760 
 			CachedLocalBox(StructProperty)=System.Byte[] 
 			RenderComponent(LazyObjectProperty)=[object] 
 			CookedPhysicalMaterials(ArrayProperty)=[object] (inner: ObjectProperty)
 			AttachParent(ObjectProperty)=RootComponent0=Athena_Terrain_LS_03 
 			RelativeLocation(StructProperty)=Vector(0,-254,0) 
-	LandscapeHeightfieldCollisionComponent_6 (0-0-0-0): size 66174 (cls: LandscapeHeightfieldCollisionComponent_6>LandscapeHeightfieldCollisionComponent>/Script/Landscape):
+	LandscapeHeightfieldCollisionComponent_6 (0-0-0-0): size 66178 (cls: LandscapeHeightfieldCollisionComponent_6>LandscapeHeightfieldCollisionComponent>/Script/Landscape):
 		Tag array:
 			ComponentLayerInfos(ArrayProperty)=[object] (inner: ObjectProperty)
 			SectionBaseX(IntProperty)=1397 
 			SectionBaseY(IntProperty)=254 
 			CollisionSizeQuads(IntProperty)=127 
 			CollisionScale(FloatProperty)=1 
-			HeightfieldGuid(StructProperty)=Guid: 882267183-1304971699-2203383223-2718423548 
+			HeightfieldGuid(StructProperty)=Guid: 1444029021-1230266255-547134908-853275842 
 			CachedLocalBox(StructProperty)=System.Byte[] 
 			RenderComponent(LazyObjectProperty)=[object] 
 			CookedPhysicalMaterials(ArrayProperty)=[object] (inner: ObjectProperty)
 			AttachParent(ObjectProperty)=RootComponent0=Athena_Terrain_LS_03 
 			RelativeLocation(StructProperty)=Vector(0,-381,0) 
-	LandscapeHeightfieldCollisionComponent_7 (0-0-0-0): size 66154 (cls: LandscapeHeightfieldCollisionComponent_7>LandscapeHeightfieldCollisionComponent>/Script/Landscape):
+	LandscapeHeightfieldCollisionComponent_7 (0-0-0-0): size 66166 (cls: LandscapeHeightfieldCollisionComponent_7>LandscapeHeightfieldCollisionComponent>/Script/Landscape):
 		Tag array:
 			ComponentLayerInfos(ArrayProperty)=[object] (inner: ObjectProperty)
 			SectionBaseX(IntProperty)=1397 
 			SectionBaseY(IntProperty)=127 
 			CollisionSizeQuads(IntProperty)=127 
 			CollisionScale(FloatProperty)=1 
-			HeightfieldGuid(StructProperty)=Guid: 3050972794-1159321495-25654689-740454593 
+			HeightfieldGuid(StructProperty)=Guid: 1060860767-1337352249-590803592-706907844 
 			CachedLocalBox(StructProperty)=System.Byte[] 
 			RenderComponent(LazyObjectProperty)=[object] 
 			CookedPhysicalMaterials(ArrayProperty)=[object] (inner: ObjectProperty)
 			AttachParent(ObjectProperty)=RootComponent0=Athena_Terrain_LS_03 
 			RelativeLocation(StructProperty)=Vector(0,-508,0) 
-	LandscapeMaterialInstanceConstant_0 (0-0-0-0): size 273226 (cls: LandscapeMaterialInstanceConstant_0>LandscapeMaterialInstanceConstant>/Script/Landscape):
+	LandscapeMaterialInstanceConstant_11 (0-0-0-0): size 253954 (cls: LandscapeMaterialInstanceConstant_11>LandscapeMaterialInstanceConstant>/Script/Landscape):
 		Tag array:
 			Parent(ObjectProperty)=M_Athena_Terrain_01=/Game/Athena/Environments/Landscape/Material/M_Athena_Terrain_01 
 			bHasStaticPermutationResource(BoolProperty)=True 
 			BasePropertyOverrides(StructProperty)=System.Byte[] 
 			StaticParameters(StructProperty)=System.Byte[] 
-	LandscapeMaterialInstanceConstant_1 (0-0-0-0): size 295372 (cls: LandscapeMaterialInstanceConstant_1>LandscapeMaterialInstanceConstant>/Script/Landscape):
+	LandscapeMaterialInstanceConstant_112 (0-0-0-0): size 258139 (cls: LandscapeMaterialInstanceConstant_112>LandscapeMaterialInstanceConstant>/Script/Landscape):
 		Tag array:
 			Parent(ObjectProperty)=M_Athena_Terrain_01=/Game/Athena/Environments/Landscape/Material/M_Athena_Terrain_01 
 			bHasStaticPermutationResource(BoolProperty)=True 
 			BasePropertyOverrides(StructProperty)=System.Byte[] 
 			StaticParameters(StructProperty)=System.Byte[] 
-	LandscapeMaterialInstanceConstant_10 (0-0-0-0): size 280353 (cls: LandscapeMaterialInstanceConstant_10>LandscapeMaterialInstanceConstant>/Script/Landscape):
+	LandscapeMaterialInstanceConstant_116 (0-0-0-0): size 261468 (cls: LandscapeMaterialInstanceConstant_116>LandscapeMaterialInstanceConstant>/Script/Landscape):
 		Tag array:
 			Parent(ObjectProperty)=M_Athena_Terrain_01=/Game/Athena/Environments/Landscape/Material/M_Athena_Terrain_01 
 			bHasStaticPermutationResource(BoolProperty)=True 
 			BasePropertyOverrides(StructProperty)=System.Byte[] 
 			StaticParameters(StructProperty)=System.Byte[] 
-	LandscapeMaterialInstanceConstant_104 (0-0-0-0): size 277240 (cls: LandscapeMaterialInstanceConstant_104>LandscapeMaterialInstanceConstant>/Script/Landscape):
+	LandscapeMaterialInstanceConstant_119 (0-0-0-0): size 2015 (cls: LandscapeMaterialInstanceConstant_119>LandscapeMaterialInstanceConstant>/Script/Landscape):
+		Tag array:
+			Parent(ObjectProperty)=LandscapeMaterialInstanceConstant_94= 
+			VectorParameterValues(ArrayProperty)=[object] (inner: StructProperty)
+			TextureParameterValues(ArrayProperty)=[object] (inner: StructProperty)
+			BasePropertyOverrides(StructProperty)=System.Byte[] 
+	LandscapeMaterialInstanceConstant_121 (0-0-0-0): size 2015 (cls: LandscapeMaterialInstanceConstant_121>LandscapeMaterialInstanceConstant>/Script/Landscape):
+		Tag array:
+			Parent(ObjectProperty)=LandscapeMaterialInstanceConstant_94= 
+			VectorParameterValues(ArrayProperty)=[object] (inner: StructProperty)
+			TextureParameterValues(ArrayProperty)=[object] (inner: StructProperty)
+			BasePropertyOverrides(StructProperty)=System.Byte[] 
+	LandscapeMaterialInstanceConstant_128 (0-0-0-0): size 261468 (cls: LandscapeMaterialInstanceConstant_128>LandscapeMaterialInstanceConstant>/Script/Landscape):
 		Tag array:
 			Parent(ObjectProperty)=M_Athena_Terrain_01=/Game/Athena/Environments/Landscape/Material/M_Athena_Terrain_01 
 			bHasStaticPermutationResource(BoolProperty)=True 
 			BasePropertyOverrides(StructProperty)=System.Byte[] 
 			StaticParameters(StructProperty)=System.Byte[] 
-	LandscapeMaterialInstanceConstant_12 (0-0-0-0): size 4625 (cls: LandscapeMaterialInstanceConstant_12>LandscapeMaterialInstanceConstant>/Script/Landscape):
+	LandscapeMaterialInstanceConstant_129 (0-0-0-0): size 3469 (cls: LandscapeMaterialInstanceConstant_129>LandscapeMaterialInstanceConstant>/Script/Landscape):
 		Tag array:
-			Parent(ObjectProperty)=LandscapeMaterialInstanceConstant_4= 
+			Parent(ObjectProperty)=LandscapeMaterialInstanceConstant_28= 
 			VectorParameterValues(ArrayProperty)=[object] (inner: StructProperty)
 			TextureParameterValues(ArrayProperty)=[object] (inner: StructProperty)
 			BasePropertyOverrides(StructProperty)=System.Byte[] 
-	LandscapeMaterialInstanceConstant_14 (0-0-0-0): size 4625 (cls: LandscapeMaterialInstanceConstant_14>LandscapeMaterialInstanceConstant>/Script/Landscape):
+	LandscapeMaterialInstanceConstant_133 (0-0-0-0): size 3171 (cls: LandscapeMaterialInstanceConstant_133>LandscapeMaterialInstanceConstant>/Script/Landscape):
 		Tag array:
-			Parent(ObjectProperty)=LandscapeMaterialInstanceConstant_2= 
+			Parent(ObjectProperty)=LandscapeMaterialInstanceConstant_112= 
 			VectorParameterValues(ArrayProperty)=[object] (inner: StructProperty)
 			TextureParameterValues(ArrayProperty)=[object] (inner: StructProperty)
 			BasePropertyOverrides(StructProperty)=System.Byte[] 
-	LandscapeMaterialInstanceConstant_16 (0-0-0-0): size 4029 (cls: LandscapeMaterialInstanceConstant_16>LandscapeMaterialInstanceConstant>/Script/Landscape):
-		Tag array:
-			Parent(ObjectProperty)=LandscapeMaterialInstanceConstant_10= 
-			VectorParameterValues(ArrayProperty)=[object] (inner: StructProperty)
-			TextureParameterValues(ArrayProperty)=[object] (inner: StructProperty)
-			BasePropertyOverrides(StructProperty)=System.Byte[] 
-	LandscapeMaterialInstanceConstant_17 (0-0-0-0): size 3469 (cls: LandscapeMaterialInstanceConstant_17>LandscapeMaterialInstanceConstant>/Script/Landscape):
-		Tag array:
-			Parent(ObjectProperty)=LandscapeMaterialInstanceConstant_104= 
-			VectorParameterValues(ArrayProperty)=[object] (inner: StructProperty)
-			TextureParameterValues(ArrayProperty)=[object] (inner: StructProperty)
-			BasePropertyOverrides(StructProperty)=System.Byte[] 
-	LandscapeMaterialInstanceConstant_19 (0-0-0-0): size 3171 (cls: LandscapeMaterialInstanceConstant_19>LandscapeMaterialInstanceConstant>/Script/Landscape):
-		Tag array:
-			Parent(ObjectProperty)=LandscapeMaterialInstanceConstant_95= 
-			VectorParameterValues(ArrayProperty)=[object] (inner: StructProperty)
-			TextureParameterValues(ArrayProperty)=[object] (inner: StructProperty)
-			BasePropertyOverrides(StructProperty)=System.Byte[] 
-	LandscapeMaterialInstanceConstant_199 (0-0-0-0): size 1717 (cls: LandscapeMaterialInstanceConstant_199>LandscapeMaterialInstanceConstant>/Script/Landscape):
-		Tag array:
-			Parent(ObjectProperty)=LandscapeMaterialInstanceConstant_0= 
-			VectorParameterValues(ArrayProperty)=[object] (inner: StructProperty)
-			TextureParameterValues(ArrayProperty)=[object] (inner: StructProperty)
-			BasePropertyOverrides(StructProperty)=System.Byte[] 
-	LandscapeMaterialInstanceConstant_2 (0-0-0-0): size 295372 (cls: LandscapeMaterialInstanceConstant_2>LandscapeMaterialInstanceConstant>/Script/Landscape):
+	LandscapeMaterialInstanceConstant_136 (0-0-0-0): size 258137 (cls: LandscapeMaterialInstanceConstant_136>LandscapeMaterialInstanceConstant>/Script/Landscape):
 		Tag array:
 			Parent(ObjectProperty)=M_Athena_Terrain_01=/Game/Athena/Environments/Landscape/Material/M_Athena_Terrain_01 
 			bHasStaticPermutationResource(BoolProperty)=True 
 			BasePropertyOverrides(StructProperty)=System.Byte[] 
 			StaticParameters(StructProperty)=System.Byte[] 
-	LandscapeMaterialInstanceConstant_200 (0-0-0-0): size 4029 (cls: LandscapeMaterialInstanceConstant_200>LandscapeMaterialInstanceConstant>/Script/Landscape):
-		Tag array:
-			Parent(ObjectProperty)=LandscapeMaterialInstanceConstant_7= 
-			VectorParameterValues(ArrayProperty)=[object] (inner: StructProperty)
-			TextureParameterValues(ArrayProperty)=[object] (inner: StructProperty)
-			BasePropertyOverrides(StructProperty)=System.Byte[] 
-	LandscapeMaterialInstanceConstant_203 (0-0-0-0): size 2575 (cls: LandscapeMaterialInstanceConstant_203>LandscapeMaterialInstanceConstant>/Script/Landscape):
-		Tag array:
-			Parent(ObjectProperty)=LandscapeMaterialInstanceConstant_55= 
-			VectorParameterValues(ArrayProperty)=[object] (inner: StructProperty)
-			TextureParameterValues(ArrayProperty)=[object] (inner: StructProperty)
-			BasePropertyOverrides(StructProperty)=System.Byte[] 
-	LandscapeMaterialInstanceConstant_204 (0-0-0-0): size 3433 (cls: LandscapeMaterialInstanceConstant_204>LandscapeMaterialInstanceConstant>/Script/Landscape):
-		Tag array:
-			Parent(ObjectProperty)=LandscapeMaterialInstanceConstant_40= 
-			VectorParameterValues(ArrayProperty)=[object] (inner: StructProperty)
-			TextureParameterValues(ArrayProperty)=[object] (inner: StructProperty)
-			BasePropertyOverrides(StructProperty)=System.Byte[] 
-	LandscapeMaterialInstanceConstant_206 (0-0-0-0): size 2873 (cls: LandscapeMaterialInstanceConstant_206>LandscapeMaterialInstanceConstant>/Script/Landscape):
-		Tag array:
-			Parent(ObjectProperty)=LandscapeMaterialInstanceConstant_64= 
-			VectorParameterValues(ArrayProperty)=[object] (inner: StructProperty)
-			TextureParameterValues(ArrayProperty)=[object] (inner: StructProperty)
-			BasePropertyOverrides(StructProperty)=System.Byte[] 
-	LandscapeMaterialInstanceConstant_209 (0-0-0-0): size 4029 (cls: LandscapeMaterialInstanceConstant_209>LandscapeMaterialInstanceConstant>/Script/Landscape):
+	LandscapeMaterialInstanceConstant_137 (0-0-0-0): size 2873 (cls: LandscapeMaterialInstanceConstant_137>LandscapeMaterialInstanceConstant>/Script/Landscape):
 		Tag array:
 			Parent(ObjectProperty)=LandscapeMaterialInstanceConstant_68= 
 			VectorParameterValues(ArrayProperty)=[object] (inner: StructProperty)
 			TextureParameterValues(ArrayProperty)=[object] (inner: StructProperty)
 			BasePropertyOverrides(StructProperty)=System.Byte[] 
-	LandscapeMaterialInstanceConstant_210 (0-0-0-0): size 2015 (cls: LandscapeMaterialInstanceConstant_210>LandscapeMaterialInstanceConstant>/Script/Landscape):
+	LandscapeMaterialInstanceConstant_138 (0-0-0-0): size 261468 (cls: LandscapeMaterialInstanceConstant_138>LandscapeMaterialInstanceConstant>/Script/Landscape):
 		Tag array:
-			Parent(ObjectProperty)=LandscapeMaterialInstanceConstant_72= 
+			Parent(ObjectProperty)=M_Athena_Terrain_01=/Game/Athena/Environments/Landscape/Material/M_Athena_Terrain_01 
+			bHasStaticPermutationResource(BoolProperty)=True 
+			BasePropertyOverrides(StructProperty)=System.Byte[] 
+			StaticParameters(StructProperty)=System.Byte[] 
+	LandscapeMaterialInstanceConstant_14 (0-0-0-0): size 4029 (cls: LandscapeMaterialInstanceConstant_14>LandscapeMaterialInstanceConstant>/Script/Landscape):
+		Tag array:
+			Parent(ObjectProperty)=LandscapeMaterialInstanceConstant_116= 
 			VectorParameterValues(ArrayProperty)=[object] (inner: StructProperty)
 			TextureParameterValues(ArrayProperty)=[object] (inner: StructProperty)
 			BasePropertyOverrides(StructProperty)=System.Byte[] 
-	LandscapeMaterialInstanceConstant_211 (0-0-0-0): size 2015 (cls: LandscapeMaterialInstanceConstant_211>LandscapeMaterialInstanceConstant>/Script/Landscape):
+	LandscapeMaterialInstanceConstant_145 (0-0-0-0): size 258616 (cls: LandscapeMaterialInstanceConstant_145>LandscapeMaterialInstanceConstant>/Script/Landscape):
 		Tag array:
-			Parent(ObjectProperty)=LandscapeMaterialInstanceConstant_72= 
+			Parent(ObjectProperty)=M_Athena_Terrain_01=/Game/Athena/Environments/Landscape/Material/M_Athena_Terrain_01 
+			bHasStaticPermutationResource(BoolProperty)=True 
+			BasePropertyOverrides(StructProperty)=System.Byte[] 
+			StaticParameters(StructProperty)=System.Byte[] 
+	LandscapeMaterialInstanceConstant_146 (0-0-0-0): size 3171 (cls: LandscapeMaterialInstanceConstant_146>LandscapeMaterialInstanceConstant>/Script/Landscape):
+		Tag array:
+			Parent(ObjectProperty)=LandscapeMaterialInstanceConstant_136= 
 			VectorParameterValues(ArrayProperty)=[object] (inner: StructProperty)
 			TextureParameterValues(ArrayProperty)=[object] (inner: StructProperty)
 			BasePropertyOverrides(StructProperty)=System.Byte[] 
-	LandscapeMaterialInstanceConstant_212 (0-0-0-0): size 3171 (cls: LandscapeMaterialInstanceConstant_212>LandscapeMaterialInstanceConstant>/Script/Landscape):
+	LandscapeMaterialInstanceConstant_148 (0-0-0-0): size 4029 (cls: LandscapeMaterialInstanceConstant_148>LandscapeMaterialInstanceConstant>/Script/Landscape):
 		Tag array:
-			Parent(ObjectProperty)=LandscapeMaterialInstanceConstant_76= 
+			Parent(ObjectProperty)=LandscapeMaterialInstanceConstant_116= 
 			VectorParameterValues(ArrayProperty)=[object] (inner: StructProperty)
 			TextureParameterValues(ArrayProperty)=[object] (inner: StructProperty)
 			BasePropertyOverrides(StructProperty)=System.Byte[] 
-	LandscapeMaterialInstanceConstant_213 (0-0-0-0): size 4029 (cls: LandscapeMaterialInstanceConstant_213>LandscapeMaterialInstanceConstant>/Script/Landscape):
+	LandscapeMaterialInstanceConstant_15 (0-0-0-0): size 269621 (cls: LandscapeMaterialInstanceConstant_15>LandscapeMaterialInstanceConstant>/Script/Landscape):
 		Tag array:
-			Parent(ObjectProperty)=LandscapeMaterialInstanceConstant_68= 
+			Parent(ObjectProperty)=M_Athena_Terrain_01=/Game/Athena/Environments/Landscape/Material/M_Athena_Terrain_01 
+			bHasStaticPermutationResource(BoolProperty)=True 
+			BasePropertyOverrides(StructProperty)=System.Byte[] 
+			StaticParameters(StructProperty)=System.Byte[] 
+	LandscapeMaterialInstanceConstant_151 (0-0-0-0): size 4029 (cls: LandscapeMaterialInstanceConstant_151>LandscapeMaterialInstanceConstant>/Script/Landscape):
+		Tag array:
+			Parent(ObjectProperty)=LandscapeMaterialInstanceConstant_46= 
 			VectorParameterValues(ArrayProperty)=[object] (inner: StructProperty)
 			TextureParameterValues(ArrayProperty)=[object] (inner: StructProperty)
 			BasePropertyOverrides(StructProperty)=System.Byte[] 
-	LandscapeMaterialInstanceConstant_214 (0-0-0-0): size 3469 (cls: LandscapeMaterialInstanceConstant_214>LandscapeMaterialInstanceConstant>/Script/Landscape):
+	LandscapeMaterialInstanceConstant_154 (0-0-0-0): size 261468 (cls: LandscapeMaterialInstanceConstant_154>LandscapeMaterialInstanceConstant>/Script/Landscape):
 		Tag array:
-			Parent(ObjectProperty)=LandscapeMaterialInstanceConstant_81= 
+			Parent(ObjectProperty)=M_Athena_Terrain_01=/Game/Athena/Environments/Landscape/Material/M_Athena_Terrain_01 
+			bHasStaticPermutationResource(BoolProperty)=True 
+			BasePropertyOverrides(StructProperty)=System.Byte[] 
+			StaticParameters(StructProperty)=System.Byte[] 
+	LandscapeMaterialInstanceConstant_160 (0-0-0-0): size 270101 (cls: LandscapeMaterialInstanceConstant_160>LandscapeMaterialInstanceConstant>/Script/Landscape):
+		Tag array:
+			Parent(ObjectProperty)=M_Athena_Terrain_01=/Game/Athena/Environments/Landscape/Material/M_Athena_Terrain_01 
+			bHasStaticPermutationResource(BoolProperty)=True 
+			BasePropertyOverrides(StructProperty)=System.Byte[] 
+			StaticParameters(StructProperty)=System.Byte[] 
+	LandscapeMaterialInstanceConstant_163 (0-0-0-0): size 270101 (cls: LandscapeMaterialInstanceConstant_163>LandscapeMaterialInstanceConstant>/Script/Landscape):
+		Tag array:
+			Parent(ObjectProperty)=M_Athena_Terrain_01=/Game/Athena/Environments/Landscape/Material/M_Athena_Terrain_01 
+			bHasStaticPermutationResource(BoolProperty)=True 
+			BasePropertyOverrides(StructProperty)=System.Byte[] 
+			StaticParameters(StructProperty)=System.Byte[] 
+	LandscapeMaterialInstanceConstant_164 (0-0-0-0): size 4029 (cls: LandscapeMaterialInstanceConstant_164>LandscapeMaterialInstanceConstant>/Script/Landscape):
+		Tag array:
+			Parent(ObjectProperty)=LandscapeMaterialInstanceConstant_138= 
 			VectorParameterValues(ArrayProperty)=[object] (inner: StructProperty)
 			TextureParameterValues(ArrayProperty)=[object] (inner: StructProperty)
 			BasePropertyOverrides(StructProperty)=System.Byte[] 
-	LandscapeMaterialInstanceConstant_218 (0-0-0-0): size 4029 (cls: LandscapeMaterialInstanceConstant_218>LandscapeMaterialInstanceConstant>/Script/Landscape):
+	LandscapeMaterialInstanceConstant_168 (0-0-0-0): size 4029 (cls: LandscapeMaterialInstanceConstant_168>LandscapeMaterialInstanceConstant>/Script/Landscape):
+		Tag array:
+			Parent(ObjectProperty)=LandscapeMaterialInstanceConstant_128= 
+			VectorParameterValues(ArrayProperty)=[object] (inner: StructProperty)
+			TextureParameterValues(ArrayProperty)=[object] (inner: StructProperty)
+			BasePropertyOverrides(StructProperty)=System.Byte[] 
+	LandscapeMaterialInstanceConstant_170 (0-0-0-0): size 270101 (cls: LandscapeMaterialInstanceConstant_170>LandscapeMaterialInstanceConstant>/Script/Landscape):
+		Tag array:
+			Parent(ObjectProperty)=M_Athena_Terrain_01=/Game/Athena/Environments/Landscape/Material/M_Athena_Terrain_01 
+			bHasStaticPermutationResource(BoolProperty)=True 
+			BasePropertyOverrides(StructProperty)=System.Byte[] 
+			StaticParameters(StructProperty)=System.Byte[] 
+	LandscapeMaterialInstanceConstant_173 (0-0-0-0): size 3433 (cls: LandscapeMaterialInstanceConstant_173>LandscapeMaterialInstanceConstant>/Script/Landscape):
+		Tag array:
+			Parent(ObjectProperty)=LandscapeMaterialInstanceConstant_39= 
+			VectorParameterValues(ArrayProperty)=[object] (inner: StructProperty)
+			TextureParameterValues(ArrayProperty)=[object] (inner: StructProperty)
+			BasePropertyOverrides(StructProperty)=System.Byte[] 
+	LandscapeMaterialInstanceConstant_177 (0-0-0-0): size 3469 (cls: LandscapeMaterialInstanceConstant_177>LandscapeMaterialInstanceConstant>/Script/Landscape):
+		Tag array:
+			Parent(ObjectProperty)=LandscapeMaterialInstanceConstant_145= 
+			VectorParameterValues(ArrayProperty)=[object] (inner: StructProperty)
+			TextureParameterValues(ArrayProperty)=[object] (inner: StructProperty)
+			BasePropertyOverrides(StructProperty)=System.Byte[] 
+	LandscapeMaterialInstanceConstant_180 (0-0-0-0): size 4327 (cls: LandscapeMaterialInstanceConstant_180>LandscapeMaterialInstanceConstant>/Script/Landscape):
+		Tag array:
+			Parent(ObjectProperty)=LandscapeMaterialInstanceConstant_160= 
+			VectorParameterValues(ArrayProperty)=[object] (inner: StructProperty)
+			TextureParameterValues(ArrayProperty)=[object] (inner: StructProperty)
+			BasePropertyOverrides(StructProperty)=System.Byte[] 
+	LandscapeMaterialInstanceConstant_184 (0-0-0-0): size 4327 (cls: LandscapeMaterialInstanceConstant_184>LandscapeMaterialInstanceConstant>/Script/Landscape):
+		Tag array:
+			Parent(ObjectProperty)=LandscapeMaterialInstanceConstant_163= 
+			VectorParameterValues(ArrayProperty)=[object] (inner: StructProperty)
+			TextureParameterValues(ArrayProperty)=[object] (inner: StructProperty)
+			BasePropertyOverrides(StructProperty)=System.Byte[] 
+	LandscapeMaterialInstanceConstant_188 (0-0-0-0): size 2575 (cls: LandscapeMaterialInstanceConstant_188>LandscapeMaterialInstanceConstant>/Script/Landscape):
+		Tag array:
+			Parent(ObjectProperty)=LandscapeMaterialInstanceConstant_35= 
+			VectorParameterValues(ArrayProperty)=[object] (inner: StructProperty)
+			TextureParameterValues(ArrayProperty)=[object] (inner: StructProperty)
+			BasePropertyOverrides(StructProperty)=System.Byte[] 
+	LandscapeMaterialInstanceConstant_192 (0-0-0-0): size 4029 (cls: LandscapeMaterialInstanceConstant_192>LandscapeMaterialInstanceConstant>/Script/Landscape):
+		Tag array:
+			Parent(ObjectProperty)=LandscapeMaterialInstanceConstant_27= 
+			VectorParameterValues(ArrayProperty)=[object] (inner: StructProperty)
+			TextureParameterValues(ArrayProperty)=[object] (inner: StructProperty)
+			BasePropertyOverrides(StructProperty)=System.Byte[] 
+	LandscapeMaterialInstanceConstant_196 (0-0-0-0): size 4327 (cls: LandscapeMaterialInstanceConstant_196>LandscapeMaterialInstanceConstant>/Script/Landscape):
+		Tag array:
+			Parent(ObjectProperty)=LandscapeMaterialInstanceConstant_170= 
+			VectorParameterValues(ArrayProperty)=[object] (inner: StructProperty)
+			TextureParameterValues(ArrayProperty)=[object] (inner: StructProperty)
+			BasePropertyOverrides(StructProperty)=System.Byte[] 
+	LandscapeMaterialInstanceConstant_199 (0-0-0-0): size 4029 (cls: LandscapeMaterialInstanceConstant_199>LandscapeMaterialInstanceConstant>/Script/Landscape):
+		Tag array:
+			Parent(ObjectProperty)=LandscapeMaterialInstanceConstant_15= 
+			VectorParameterValues(ArrayProperty)=[object] (inner: StructProperty)
+			TextureParameterValues(ArrayProperty)=[object] (inner: StructProperty)
+			BasePropertyOverrides(StructProperty)=System.Byte[] 
+	LandscapeMaterialInstanceConstant_2 (0-0-0-0): size 261465 (cls: LandscapeMaterialInstanceConstant_2>LandscapeMaterialInstanceConstant>/Script/Landscape):
+		Tag array:
+			Parent(ObjectProperty)=M_Athena_Terrain_01=/Game/Athena/Environments/Landscape/Material/M_Athena_Terrain_01 
+			bHasStaticPermutationResource(BoolProperty)=True 
+			BasePropertyOverrides(StructProperty)=System.Byte[] 
+			StaticParameters(StructProperty)=System.Byte[] 
+	LandscapeMaterialInstanceConstant_203 (0-0-0-0): size 1717 (cls: LandscapeMaterialInstanceConstant_203>LandscapeMaterialInstanceConstant>/Script/Landscape):
+		Tag array:
+			Parent(ObjectProperty)=LandscapeMaterialInstanceConstant_11= 
+			VectorParameterValues(ArrayProperty)=[object] (inner: StructProperty)
+			TextureParameterValues(ArrayProperty)=[object] (inner: StructProperty)
+			BasePropertyOverrides(StructProperty)=System.Byte[] 
+	LandscapeMaterialInstanceConstant_27 (0-0-0-0): size 261468 (cls: LandscapeMaterialInstanceConstant_27>LandscapeMaterialInstanceConstant>/Script/Landscape):
+		Tag array:
+			Parent(ObjectProperty)=M_Athena_Terrain_01=/Game/Athena/Environments/Landscape/Material/M_Athena_Terrain_01 
+			bHasStaticPermutationResource(BoolProperty)=True 
+			BasePropertyOverrides(StructProperty)=System.Byte[] 
+			StaticParameters(StructProperty)=System.Byte[] 
+	LandscapeMaterialInstanceConstant_28 (0-0-0-0): size 258619 (cls: LandscapeMaterialInstanceConstant_28>LandscapeMaterialInstanceConstant>/Script/Landscape):
+		Tag array:
+			Parent(ObjectProperty)=M_Athena_Terrain_01=/Game/Athena/Environments/Landscape/Material/M_Athena_Terrain_01 
+			bHasStaticPermutationResource(BoolProperty)=True 
+			BasePropertyOverrides(StructProperty)=System.Byte[] 
+			StaticParameters(StructProperty)=System.Byte[] 
+	LandscapeMaterialInstanceConstant_289 (0-0-0-0): size 261468 (cls: LandscapeMaterialInstanceConstant_289>LandscapeMaterialInstanceConstant>/Script/Landscape):
+		Tag array:
+			Parent(ObjectProperty)=M_Athena_Terrain_01=/Game/Athena/Environments/Landscape/Material/M_Athena_Terrain_01 
+			bHasStaticPermutationResource(BoolProperty)=True 
+			BasePropertyOverrides(StructProperty)=System.Byte[] 
+			StaticParameters(StructProperty)=System.Byte[] 
+	LandscapeMaterialInstanceConstant_327 (0-0-0-0): size 4029 (cls: LandscapeMaterialInstanceConstant_327>LandscapeMaterialInstanceConstant>/Script/Landscape):
+		Tag array:
+			Parent(ObjectProperty)=LandscapeMaterialInstanceConstant_154= 
+			VectorParameterValues(ArrayProperty)=[object] (inner: StructProperty)
+			TextureParameterValues(ArrayProperty)=[object] (inner: StructProperty)
+			BasePropertyOverrides(StructProperty)=System.Byte[] 
+	LandscapeMaterialInstanceConstant_331 (0-0-0-0): size 3469 (cls: LandscapeMaterialInstanceConstant_331>LandscapeMaterialInstanceConstant>/Script/Landscape):
 		Tag array:
 			Parent(ObjectProperty)=LandscapeMaterialInstanceConstant_89= 
 			VectorParameterValues(ArrayProperty)=[object] (inner: StructProperty)
 			TextureParameterValues(ArrayProperty)=[object] (inner: StructProperty)
 			BasePropertyOverrides(StructProperty)=System.Byte[] 
-	LandscapeMaterialInstanceConstant_219 (0-0-0-0): size 4327 (cls: LandscapeMaterialInstanceConstant_219>LandscapeMaterialInstanceConstant>/Script/Landscape):
+	LandscapeMaterialInstanceConstant_333 (0-0-0-0): size 4029 (cls: LandscapeMaterialInstanceConstant_333>LandscapeMaterialInstanceConstant>/Script/Landscape):
 		Tag array:
-			Parent(ObjectProperty)=LandscapeMaterialInstanceConstant_92= 
+			Parent(ObjectProperty)=LandscapeMaterialInstanceConstant_289= 
 			VectorParameterValues(ArrayProperty)=[object] (inner: StructProperty)
 			TextureParameterValues(ArrayProperty)=[object] (inner: StructProperty)
 			BasePropertyOverrides(StructProperty)=System.Byte[] 
-	LandscapeMaterialInstanceConstant_221 (0-0-0-0): size 4029 (cls: LandscapeMaterialInstanceConstant_221>LandscapeMaterialInstanceConstant>/Script/Landscape):
+	LandscapeMaterialInstanceConstant_35 (0-0-0-0): size 257279 (cls: LandscapeMaterialInstanceConstant_35>LandscapeMaterialInstanceConstant>/Script/Landscape):
 		Tag array:
-			Parent(ObjectProperty)=LandscapeMaterialInstanceConstant_97= 
+			Parent(ObjectProperty)=M_Athena_Terrain_01=/Game/Athena/Environments/Landscape/Material/M_Athena_Terrain_01 
+			bHasStaticPermutationResource(BoolProperty)=True 
+			BasePropertyOverrides(StructProperty)=System.Byte[] 
+			StaticParameters(StructProperty)=System.Byte[] 
+	LandscapeMaterialInstanceConstant_39 (0-0-0-0): size 260506 (cls: LandscapeMaterialInstanceConstant_39>LandscapeMaterialInstanceConstant>/Script/Landscape):
+		Tag array:
+			Parent(ObjectProperty)=M_Athena_Terrain_01=/Game/Athena/Environments/Landscape/Material/M_Athena_Terrain_01 
+			bHasStaticPermutationResource(BoolProperty)=True 
+			BasePropertyOverrides(StructProperty)=System.Byte[] 
+			StaticParameters(StructProperty)=System.Byte[] 
+	LandscapeMaterialInstanceConstant_46 (0-0-0-0): size 261468 (cls: LandscapeMaterialInstanceConstant_46>LandscapeMaterialInstanceConstant>/Script/Landscape):
+		Tag array:
+			Parent(ObjectProperty)=M_Athena_Terrain_01=/Game/Athena/Environments/Landscape/Material/M_Athena_Terrain_01 
+			bHasStaticPermutationResource(BoolProperty)=True 
+			BasePropertyOverrides(StructProperty)=System.Byte[] 
+			StaticParameters(StructProperty)=System.Byte[] 
+	LandscapeMaterialInstanceConstant_68 (0-0-0-0): size 257657 (cls: LandscapeMaterialInstanceConstant_68>LandscapeMaterialInstanceConstant>/Script/Landscape):
+		Tag array:
+			Parent(ObjectProperty)=M_Athena_Terrain_01=/Game/Athena/Environments/Landscape/Material/M_Athena_Terrain_01 
+			bHasStaticPermutationResource(BoolProperty)=True 
+			BasePropertyOverrides(StructProperty)=System.Byte[] 
+			StaticParameters(StructProperty)=System.Byte[] 
+	LandscapeMaterialInstanceConstant_89 (0-0-0-0): size 258616 (cls: LandscapeMaterialInstanceConstant_89>LandscapeMaterialInstanceConstant>/Script/Landscape):
+		Tag array:
+			Parent(ObjectProperty)=M_Athena_Terrain_01=/Game/Athena/Environments/Landscape/Material/M_Athena_Terrain_01 
+			bHasStaticPermutationResource(BoolProperty)=True 
+			BasePropertyOverrides(StructProperty)=System.Byte[] 
+			StaticParameters(StructProperty)=System.Byte[] 
+	LandscapeMaterialInstanceConstant_9 (0-0-0-0): size 4029 (cls: LandscapeMaterialInstanceConstant_9>LandscapeMaterialInstanceConstant>/Script/Landscape):
+		Tag array:
+			Parent(ObjectProperty)=LandscapeMaterialInstanceConstant_2= 
 			VectorParameterValues(ArrayProperty)=[object] (inner: StructProperty)
 			TextureParameterValues(ArrayProperty)=[object] (inner: StructProperty)
 			BasePropertyOverrides(StructProperty)=System.Byte[] 
-	LandscapeMaterialInstanceConstant_223 (0-0-0-0): size 3171 (cls: LandscapeMaterialInstanceConstant_223>LandscapeMaterialInstanceConstant>/Script/Landscape):
-		Tag array:
-			Parent(ObjectProperty)=LandscapeMaterialInstanceConstant_76= 
-			VectorParameterValues(ArrayProperty)=[object] (inner: StructProperty)
-			TextureParameterValues(ArrayProperty)=[object] (inner: StructProperty)
-			BasePropertyOverrides(StructProperty)=System.Byte[] 
-	LandscapeMaterialInstanceConstant_224 (0-0-0-0): size 3469 (cls: LandscapeMaterialInstanceConstant_224>LandscapeMaterialInstanceConstant>/Script/Landscape):
-		Tag array:
-			Parent(ObjectProperty)=LandscapeMaterialInstanceConstant_104= 
-			VectorParameterValues(ArrayProperty)=[object] (inner: StructProperty)
-			TextureParameterValues(ArrayProperty)=[object] (inner: StructProperty)
-			BasePropertyOverrides(StructProperty)=System.Byte[] 
-	LandscapeMaterialInstanceConstant_34 (0-0-0-0): size 285431 (cls: LandscapeMaterialInstanceConstant_34>LandscapeMaterialInstanceConstant>/Script/Landscape):
-		Tag array:
-			Parent(ObjectProperty)=M_Athena_Terrain_01=/Game/Athena/Environments/Landscape/Material/M_Athena_Terrain_01 
-			bHasStaticPermutationResource(BoolProperty)=True 
-			BasePropertyOverrides(StructProperty)=System.Byte[] 
-			StaticParameters(StructProperty)=System.Byte[] 
-	LandscapeMaterialInstanceConstant_35 (0-0-0-0): size 4327 (cls: LandscapeMaterialInstanceConstant_35>LandscapeMaterialInstanceConstant>/Script/Landscape):
-		Tag array:
-			Parent(ObjectProperty)=LandscapeMaterialInstanceConstant_34= 
-			VectorParameterValues(ArrayProperty)=[object] (inner: StructProperty)
-			TextureParameterValues(ArrayProperty)=[object] (inner: StructProperty)
-			BasePropertyOverrides(StructProperty)=System.Byte[] 
-	LandscapeMaterialInstanceConstant_4 (0-0-0-0): size 285942 (cls: LandscapeMaterialInstanceConstant_4>LandscapeMaterialInstanceConstant>/Script/Landscape):
-		Tag array:
-			Parent(ObjectProperty)=M_Athena_Terrain_01=/Game/Athena/Environments/Landscape/Material/M_Athena_Terrain_01 
-			bHasStaticPermutationResource(BoolProperty)=True 
-			BasePropertyOverrides(StructProperty)=System.Byte[] 
-			StaticParameters(StructProperty)=System.Byte[] 
-	LandscapeMaterialInstanceConstant_40 (0-0-0-0): size 279335 (cls: LandscapeMaterialInstanceConstant_40>LandscapeMaterialInstanceConstant>/Script/Landscape):
-		Tag array:
-			Parent(ObjectProperty)=M_Athena_Terrain_01=/Game/Athena/Environments/Landscape/Material/M_Athena_Terrain_01 
-			bHasStaticPermutationResource(BoolProperty)=True 
-			BasePropertyOverrides(StructProperty)=System.Byte[] 
-			StaticParameters(StructProperty)=System.Byte[] 
-	LandscapeMaterialInstanceConstant_51 (0-0-0-0): size 4327 (cls: LandscapeMaterialInstanceConstant_51>LandscapeMaterialInstanceConstant>/Script/Landscape):
-		Tag array:
-			Parent(ObjectProperty)=LandscapeMaterialInstanceConstant_52= 
-			VectorParameterValues(ArrayProperty)=[object] (inner: StructProperty)
-			TextureParameterValues(ArrayProperty)=[object] (inner: StructProperty)
-			BasePropertyOverrides(StructProperty)=System.Byte[] 
-	LandscapeMaterialInstanceConstant_52 (0-0-0-0): size 285431 (cls: LandscapeMaterialInstanceConstant_52>LandscapeMaterialInstanceConstant>/Script/Landscape):
-		Tag array:
-			Parent(ObjectProperty)=M_Athena_Terrain_01=/Game/Athena/Environments/Landscape/Material/M_Athena_Terrain_01 
-			bHasStaticPermutationResource(BoolProperty)=True 
-			BasePropertyOverrides(StructProperty)=System.Byte[] 
-			StaticParameters(StructProperty)=System.Byte[] 
-	LandscapeMaterialInstanceConstant_55 (0-0-0-0): size 275856 (cls: LandscapeMaterialInstanceConstant_55>LandscapeMaterialInstanceConstant>/Script/Landscape):
-		Tag array:
-			Parent(ObjectProperty)=M_Athena_Terrain_01=/Game/Athena/Environments/Landscape/Material/M_Athena_Terrain_01 
-			bHasStaticPermutationResource(BoolProperty)=True 
-			BasePropertyOverrides(StructProperty)=System.Byte[] 
-			StaticParameters(StructProperty)=System.Byte[] 
-	LandscapeMaterialInstanceConstant_64 (0-0-0-0): size 277209 (cls: LandscapeMaterialInstanceConstant_64>LandscapeMaterialInstanceConstant>/Script/Landscape):
-		Tag array:
-			Parent(ObjectProperty)=M_Athena_Terrain_01=/Game/Athena/Environments/Landscape/Material/M_Athena_Terrain_01 
-			bHasStaticPermutationResource(BoolProperty)=True 
-			BasePropertyOverrides(StructProperty)=System.Byte[] 
-			StaticParameters(StructProperty)=System.Byte[] 
-	LandscapeMaterialInstanceConstant_68 (0-0-0-0): size 280353 (cls: LandscapeMaterialInstanceConstant_68>LandscapeMaterialInstanceConstant>/Script/Landscape):
-		Tag array:
-			Parent(ObjectProperty)=M_Athena_Terrain_01=/Game/Athena/Environments/Landscape/Material/M_Athena_Terrain_01 
-			bHasStaticPermutationResource(BoolProperty)=True 
-			BasePropertyOverrides(StructProperty)=System.Byte[] 
-			StaticParameters(StructProperty)=System.Byte[] 
-	LandscapeMaterialInstanceConstant_7 (0-0-0-0): size 289786 (cls: LandscapeMaterialInstanceConstant_7>LandscapeMaterialInstanceConstant>/Script/Landscape):
-		Tag array:
-			Parent(ObjectProperty)=M_Athena_Terrain_01=/Game/Athena/Environments/Landscape/Material/M_Athena_Terrain_01 
-			bHasStaticPermutationResource(BoolProperty)=True 
-			BasePropertyOverrides(StructProperty)=System.Byte[] 
-			StaticParameters(StructProperty)=System.Byte[] 
-	LandscapeMaterialInstanceConstant_72 (0-0-0-0): size 273741 (cls: LandscapeMaterialInstanceConstant_72>LandscapeMaterialInstanceConstant>/Script/Landscape):
-		Tag array:
-			Parent(ObjectProperty)=M_Athena_Terrain_01=/Game/Athena/Environments/Landscape/Material/M_Athena_Terrain_01 
-			bHasStaticPermutationResource(BoolProperty)=True 
-			BasePropertyOverrides(StructProperty)=System.Byte[] 
-			StaticParameters(StructProperty)=System.Byte[] 
-	LandscapeMaterialInstanceConstant_76 (0-0-0-0): size 277719 (cls: LandscapeMaterialInstanceConstant_76>LandscapeMaterialInstanceConstant>/Script/Landscape):
-		Tag array:
-			Parent(ObjectProperty)=M_Athena_Terrain_01=/Game/Athena/Environments/Landscape/Material/M_Athena_Terrain_01 
-			bHasStaticPermutationResource(BoolProperty)=True 
-			BasePropertyOverrides(StructProperty)=System.Byte[] 
-			StaticParameters(StructProperty)=System.Byte[] 
-	LandscapeMaterialInstanceConstant_81 (0-0-0-0): size 278227 (cls: LandscapeMaterialInstanceConstant_81>LandscapeMaterialInstanceConstant>/Script/Landscape):
-		Tag array:
-			Parent(ObjectProperty)=M_Athena_Terrain_01=/Game/Athena/Environments/Landscape/Material/M_Athena_Terrain_01 
-			bHasStaticPermutationResource(BoolProperty)=True 
-			BasePropertyOverrides(StructProperty)=System.Byte[] 
-			StaticParameters(StructProperty)=System.Byte[] 
-	LandscapeMaterialInstanceConstant_89 (0-0-0-0): size 280353 (cls: LandscapeMaterialInstanceConstant_89>LandscapeMaterialInstanceConstant>/Script/Landscape):
-		Tag array:
-			Parent(ObjectProperty)=M_Athena_Terrain_01=/Game/Athena/Environments/Landscape/Material/M_Athena_Terrain_01 
-			bHasStaticPermutationResource(BoolProperty)=True 
-			BasePropertyOverrides(StructProperty)=System.Byte[] 
-			StaticParameters(StructProperty)=System.Byte[] 
-	LandscapeMaterialInstanceConstant_9 (0-0-0-0): size 4625 (cls: LandscapeMaterialInstanceConstant_9>LandscapeMaterialInstanceConstant>/Script/Landscape):
-		Tag array:
-			Parent(ObjectProperty)=LandscapeMaterialInstanceConstant_1= 
-			VectorParameterValues(ArrayProperty)=[object] (inner: StructProperty)
-			TextureParameterValues(ArrayProperty)=[object] (inner: StructProperty)
-			BasePropertyOverrides(StructProperty)=System.Byte[] 
-	LandscapeMaterialInstanceConstant_92 (0-0-0-0): size 290294 (cls: LandscapeMaterialInstanceConstant_92>LandscapeMaterialInstanceConstant>/Script/Landscape):
-		Tag array:
-			Parent(ObjectProperty)=M_Athena_Terrain_01=/Game/Athena/Environments/Landscape/Material/M_Athena_Terrain_01 
-			bHasStaticPermutationResource(BoolProperty)=True 
-			BasePropertyOverrides(StructProperty)=System.Byte[] 
-			StaticParameters(StructProperty)=System.Byte[] 
-	LandscapeMaterialInstanceConstant_95 (0-0-0-0): size 277717 (cls: LandscapeMaterialInstanceConstant_95>LandscapeMaterialInstanceConstant>/Script/Landscape):
-		Tag array:
-			Parent(ObjectProperty)=M_Athena_Terrain_01=/Game/Athena/Environments/Landscape/Material/M_Athena_Terrain_01 
-			bHasStaticPermutationResource(BoolProperty)=True 
-			BasePropertyOverrides(StructProperty)=System.Byte[] 
-			StaticParameters(StructProperty)=System.Byte[] 
-	LandscapeMaterialInstanceConstant_97 (0-0-0-0): size 280353 (cls: LandscapeMaterialInstanceConstant_97>LandscapeMaterialInstanceConstant>/Script/Landscape):
+	LandscapeMaterialInstanceConstant_94 (0-0-0-0): size 254441 (cls: LandscapeMaterialInstanceConstant_94>LandscapeMaterialInstanceConstant>/Script/Landscape):
 		Tag array:
 			Parent(ObjectProperty)=M_Athena_Terrain_01=/Game/Athena/Environments/Landscape/Material/M_Athena_Terrain_01 
 			bHasStaticPermutationResource(BoolProperty)=True 
@@ -1841,9 +1861,10 @@ Serialized exports:
 			NumSubsections(IntProperty)=1 
 			bEnableAutoLODGeneration(BoolProperty)=False 
 			RootComponent(ObjectProperty)=RootComponent0=Athena_Terrain_LS_03 
-	PersistentLevel (0-0-0-0): size 319 (cls: PersistentLevel>Level>/Script/Engine):
+	PersistentLevel (0-0-0-0): size 348 (cls: PersistentLevel>Level>/Script/Engine):
 		Tag array:
 			Model(ObjectProperty)=Model_0=Athena_Terrain_LS_03 
+			LevelScriptActor(ObjectProperty)=Athena_Terrain_LS_03_C_0=Athena_Terrain_LS_03 
 			LevelBuildDataId(StructProperty)=Guid: 1464056879-1087501530-4003606171-710986782 
 			WorldSettings(ObjectProperty)=FortWorldSettings=Athena_Terrain_LS_03 
 	LevelBounds_0 (0-0-0-0): size 41 (cls: LevelBounds_0>LevelBounds>/Script/Engine):
@@ -2180,14 +2201,6 @@ Serialized exports:
 			LightingGuid(StructProperty)=Guid: 1632158985-1242706190-2241035149-2341984594 
 			LODGroup(ByteProperty)=TEXTUREGROUP_Terrain_Heightmap 
 			SRGB(BoolProperty)=False 
-	Texture2D_111 (0-0-0-0): size 22483 (cls: Texture2D_111>Texture2D>/Script/Engine):
-		Tag array:
-			AddressX(ByteProperty)=TA_Clamp 
-			AddressY(ByteProperty)=TA_Clamp 
-			ImportedSize(StructProperty)=System.Byte[] 
-			LightingGuid(StructProperty)=Guid: 698340000-1282924528-3028866439-382782224 
-			LODGroup(ByteProperty)=TEXTUREGROUP_Terrain_Weightmap 
-			SRGB(BoolProperty)=False 
 	Texture2D_12 (0-0-0-0): size 22483 (cls: Texture2D_12>Texture2D>/Script/Engine):
 		Tag array:
 			AddressX(ByteProperty)=TA_Clamp 
@@ -2195,6 +2208,38 @@ Serialized exports:
 			ImportedSize(StructProperty)=System.Byte[] 
 			LightingGuid(StructProperty)=Guid: 4209773507-1249209303-4226608256-663402859 
 			LODGroup(ByteProperty)=TEXTUREGROUP_Terrain_Heightmap 
+			SRGB(BoolProperty)=False 
+	Texture2D_122 (0-0-0-0): size 22483 (cls: Texture2D_122>Texture2D>/Script/Engine):
+		Tag array:
+			AddressX(ByteProperty)=TA_Clamp 
+			AddressY(ByteProperty)=TA_Clamp 
+			ImportedSize(StructProperty)=System.Byte[] 
+			LightingGuid(StructProperty)=Guid: 586844962-1121975294-3254121400-3989508969 
+			LODGroup(ByteProperty)=TEXTUREGROUP_Terrain_Weightmap 
+			SRGB(BoolProperty)=False 
+	Texture2D_123 (0-0-0-0): size 22483 (cls: Texture2D_123>Texture2D>/Script/Engine):
+		Tag array:
+			AddressX(ByteProperty)=TA_Clamp 
+			AddressY(ByteProperty)=TA_Clamp 
+			ImportedSize(StructProperty)=System.Byte[] 
+			LightingGuid(StructProperty)=Guid: 3117876185-1075662386-3884308620-838073432 
+			LODGroup(ByteProperty)=TEXTUREGROUP_Terrain_Weightmap 
+			SRGB(BoolProperty)=False 
+	Texture2D_124 (0-0-0-0): size 22483 (cls: Texture2D_124>Texture2D>/Script/Engine):
+		Tag array:
+			AddressX(ByteProperty)=TA_Clamp 
+			AddressY(ByteProperty)=TA_Clamp 
+			ImportedSize(StructProperty)=System.Byte[] 
+			LightingGuid(StructProperty)=Guid: 653202049-1101796513-253873596-3459372435 
+			LODGroup(ByteProperty)=TEXTUREGROUP_Terrain_Weightmap 
+			SRGB(BoolProperty)=False 
+	Texture2D_125 (0-0-0-0): size 22483 (cls: Texture2D_125>Texture2D>/Script/Engine):
+		Tag array:
+			AddressX(ByteProperty)=TA_Clamp 
+			AddressY(ByteProperty)=TA_Clamp 
+			ImportedSize(StructProperty)=System.Byte[] 
+			LightingGuid(StructProperty)=Guid: 2116616592-1157634713-2423276687-655013619 
+			LODGroup(ByteProperty)=TEXTUREGROUP_Terrain_Weightmap 
 			SRGB(BoolProperty)=False 
 	Texture2D_13 (0-0-0-0): size 22483 (cls: Texture2D_13>Texture2D>/Script/Engine):
 		Tag array:
@@ -2204,6 +2249,38 @@ Serialized exports:
 			LightingGuid(StructProperty)=Guid: 2885786572-1226672781-1440854193-62309830 
 			LODGroup(ByteProperty)=TEXTUREGROUP_Terrain_Heightmap 
 			SRGB(BoolProperty)=False 
+	Texture2D_130 (0-0-0-0): size 22483 (cls: Texture2D_130>Texture2D>/Script/Engine):
+		Tag array:
+			AddressX(ByteProperty)=TA_Clamp 
+			AddressY(ByteProperty)=TA_Clamp 
+			ImportedSize(StructProperty)=System.Byte[] 
+			LightingGuid(StructProperty)=Guid: 1121603683-1323868831-168752829-297217636 
+			LODGroup(ByteProperty)=TEXTUREGROUP_Terrain_Weightmap 
+			SRGB(BoolProperty)=False 
+	Texture2D_131 (0-0-0-0): size 22483 (cls: Texture2D_131>Texture2D>/Script/Engine):
+		Tag array:
+			AddressX(ByteProperty)=TA_Clamp 
+			AddressY(ByteProperty)=TA_Clamp 
+			ImportedSize(StructProperty)=System.Byte[] 
+			LightingGuid(StructProperty)=Guid: 549313840-1076028540-2240314004-2596250671 
+			LODGroup(ByteProperty)=TEXTUREGROUP_Terrain_Weightmap 
+			SRGB(BoolProperty)=False 
+	Texture2D_138 (0-0-0-0): size 22483 (cls: Texture2D_138>Texture2D>/Script/Engine):
+		Tag array:
+			AddressX(ByteProperty)=TA_Clamp 
+			AddressY(ByteProperty)=TA_Clamp 
+			ImportedSize(StructProperty)=System.Byte[] 
+			LightingGuid(StructProperty)=Guid: 1635595006-1281051908-1657483191-728274894 
+			LODGroup(ByteProperty)=TEXTUREGROUP_Terrain_Weightmap 
+			SRGB(BoolProperty)=False 
+	Texture2D_139 (0-0-0-0): size 22483 (cls: Texture2D_139>Texture2D>/Script/Engine):
+		Tag array:
+			AddressX(ByteProperty)=TA_Clamp 
+			AddressY(ByteProperty)=TA_Clamp 
+			ImportedSize(StructProperty)=System.Byte[] 
+			LightingGuid(StructProperty)=Guid: 715546451-1314548983-1359989679-2713782469 
+			LODGroup(ByteProperty)=TEXTUREGROUP_Terrain_Weightmap 
+			SRGB(BoolProperty)=False 
 	Texture2D_14 (0-0-0-0): size 22483 (cls: Texture2D_14>Texture2D>/Script/Engine):
 		Tag array:
 			AddressX(ByteProperty)=TA_Clamp 
@@ -2212,38 +2289,6 @@ Serialized exports:
 			LightingGuid(StructProperty)=Guid: 1757060626-1124001774-2876378504-4031954852 
 			LODGroup(ByteProperty)=TEXTUREGROUP_Terrain_Heightmap 
 			SRGB(BoolProperty)=False 
-	Texture2D_142 (0-0-0-0): size 22483 (cls: Texture2D_142>Texture2D>/Script/Engine):
-		Tag array:
-			AddressX(ByteProperty)=TA_Clamp 
-			AddressY(ByteProperty)=TA_Clamp 
-			ImportedSize(StructProperty)=System.Byte[] 
-			LightingGuid(StructProperty)=Guid: 950163697-1180549874-3976063155-1358081725 
-			LODGroup(ByteProperty)=TEXTUREGROUP_Terrain_Weightmap 
-			SRGB(BoolProperty)=False 
-	Texture2D_143 (0-0-0-0): size 22483 (cls: Texture2D_143>Texture2D>/Script/Engine):
-		Tag array:
-			AddressX(ByteProperty)=TA_Clamp 
-			AddressY(ByteProperty)=TA_Clamp 
-			ImportedSize(StructProperty)=System.Byte[] 
-			LightingGuid(StructProperty)=Guid: 4216257558-1210864510-2306273458-2077850341 
-			LODGroup(ByteProperty)=TEXTUREGROUP_Terrain_Weightmap 
-			SRGB(BoolProperty)=False 
-	Texture2D_144 (0-0-0-0): size 22483 (cls: Texture2D_144>Texture2D>/Script/Engine):
-		Tag array:
-			AddressX(ByteProperty)=TA_Clamp 
-			AddressY(ByteProperty)=TA_Clamp 
-			ImportedSize(StructProperty)=System.Byte[] 
-			LightingGuid(StructProperty)=Guid: 2769087341-1158215152-2249529789-2606470025 
-			LODGroup(ByteProperty)=TEXTUREGROUP_Terrain_Weightmap 
-			SRGB(BoolProperty)=False 
-	Texture2D_145 (0-0-0-0): size 22483 (cls: Texture2D_145>Texture2D>/Script/Engine):
-		Tag array:
-			AddressX(ByteProperty)=TA_Clamp 
-			AddressY(ByteProperty)=TA_Clamp 
-			ImportedSize(StructProperty)=System.Byte[] 
-			LightingGuid(StructProperty)=Guid: 3280010110-1109297470-1052275899-3357446629 
-			LODGroup(ByteProperty)=TEXTUREGROUP_Terrain_Weightmap 
-			SRGB(BoolProperty)=False 
 	Texture2D_15 (0-0-0-0): size 22483 (cls: Texture2D_15>Texture2D>/Script/Engine):
 		Tag array:
 			AddressX(ByteProperty)=TA_Clamp 
@@ -2251,38 +2296,6 @@ Serialized exports:
 			ImportedSize(StructProperty)=System.Byte[] 
 			LightingGuid(StructProperty)=Guid: 3387793175-1137879042-3011457687-3795516122 
 			LODGroup(ByteProperty)=TEXTUREGROUP_Terrain_Heightmap 
-			SRGB(BoolProperty)=False 
-	Texture2D_150 (0-0-0-0): size 22483 (cls: Texture2D_150>Texture2D>/Script/Engine):
-		Tag array:
-			AddressX(ByteProperty)=TA_Clamp 
-			AddressY(ByteProperty)=TA_Clamp 
-			ImportedSize(StructProperty)=System.Byte[] 
-			LightingGuid(StructProperty)=Guid: 1814727419-1329803123-775477895-4076014129 
-			LODGroup(ByteProperty)=TEXTUREGROUP_Terrain_Weightmap 
-			SRGB(BoolProperty)=False 
-	Texture2D_151 (0-0-0-0): size 22483 (cls: Texture2D_151>Texture2D>/Script/Engine):
-		Tag array:
-			AddressX(ByteProperty)=TA_Clamp 
-			AddressY(ByteProperty)=TA_Clamp 
-			ImportedSize(StructProperty)=System.Byte[] 
-			LightingGuid(StructProperty)=Guid: 402600053-1314172437-412554638-270091289 
-			LODGroup(ByteProperty)=TEXTUREGROUP_Terrain_Weightmap 
-			SRGB(BoolProperty)=False 
-	Texture2D_152 (0-0-0-0): size 22483 (cls: Texture2D_152>Texture2D>/Script/Engine):
-		Tag array:
-			AddressX(ByteProperty)=TA_Clamp 
-			AddressY(ByteProperty)=TA_Clamp 
-			ImportedSize(StructProperty)=System.Byte[] 
-			LightingGuid(StructProperty)=Guid: 1540678406-1252240978-2180700307-2924031216 
-			LODGroup(ByteProperty)=TEXTUREGROUP_Terrain_Weightmap 
-			SRGB(BoolProperty)=False 
-	Texture2D_153 (0-0-0-0): size 22483 (cls: Texture2D_153>Texture2D>/Script/Engine):
-		Tag array:
-			AddressX(ByteProperty)=TA_Clamp 
-			AddressY(ByteProperty)=TA_Clamp 
-			ImportedSize(StructProperty)=System.Byte[] 
-			LightingGuid(StructProperty)=Guid: 3325373235-1200099598-1962307243-1804448587 
-			LODGroup(ByteProperty)=TEXTUREGROUP_Terrain_Weightmap 
 			SRGB(BoolProperty)=False 
 	Texture2D_16 (0-0-0-0): size 22483 (cls: Texture2D_16>Texture2D>/Script/Engine):
 		Tag array:
@@ -2388,6 +2401,14 @@ Serialized exports:
 			LightingGuid(StructProperty)=Guid: 1133708570-1166234108-3387071383-2508298497 
 			LODGroup(ByteProperty)=TEXTUREGROUP_Terrain_Heightmap 
 			SRGB(BoolProperty)=False 
+	Texture2D_31 (0-0-0-0): size 22483 (cls: Texture2D_31>Texture2D>/Script/Engine):
+		Tag array:
+			AddressX(ByteProperty)=TA_Clamp 
+			AddressY(ByteProperty)=TA_Clamp 
+			ImportedSize(StructProperty)=System.Byte[] 
+			LightingGuid(StructProperty)=Guid: 631769440-1332987326-3403064738-3910321208 
+			LODGroup(ByteProperty)=TEXTUREGROUP_Terrain_Weightmap 
+			SRGB(BoolProperty)=False 
 	Texture2D_32 (0-0-0-0): size 22483 (cls: Texture2D_32>Texture2D>/Script/Engine):
 		Tag array:
 			AddressX(ByteProperty)=TA_Clamp 
@@ -2402,6 +2423,14 @@ Serialized exports:
 			AddressY(ByteProperty)=TA_Clamp 
 			ImportedSize(StructProperty)=System.Byte[] 
 			LightingGuid(StructProperty)=Guid: 2286249819-1227468565-2357844108-300909381 
+			LODGroup(ByteProperty)=TEXTUREGROUP_Terrain_Weightmap 
+			SRGB(BoolProperty)=False 
+	Texture2D_34 (0-0-0-0): size 22483 (cls: Texture2D_34>Texture2D>/Script/Engine):
+		Tag array:
+			AddressX(ByteProperty)=TA_Clamp 
+			AddressY(ByteProperty)=TA_Clamp 
+			ImportedSize(StructProperty)=System.Byte[] 
+			LightingGuid(StructProperty)=Guid: 3317519338-1113086877-3545538239-3753119239 
 			LODGroup(ByteProperty)=TEXTUREGROUP_Terrain_Weightmap 
 			SRGB(BoolProperty)=False 
 	Texture2D_35 (0-0-0-0): size 22483 (cls: Texture2D_35>Texture2D>/Script/Engine):
@@ -2457,7 +2486,7 @@ Serialized exports:
 			AddressX(ByteProperty)=TA_Clamp 
 			AddressY(ByteProperty)=TA_Clamp 
 			ImportedSize(StructProperty)=System.Byte[] 
-			LightingGuid(StructProperty)=Guid: 1001448215-1118211608-4046945201-918959599 
+			LightingGuid(StructProperty)=Guid: 1644881569-1136017795-2628040094-3224396047 
 			LODGroup(ByteProperty)=TEXTUREGROUP_Terrain_Weightmap 
 			SRGB(BoolProperty)=False 
 	Texture2D_41 (0-0-0-0): size 22483 (cls: Texture2D_41>Texture2D>/Script/Engine):
@@ -2465,7 +2494,7 @@ Serialized exports:
 			AddressX(ByteProperty)=TA_Clamp 
 			AddressY(ByteProperty)=TA_Clamp 
 			ImportedSize(StructProperty)=System.Byte[] 
-			LightingGuid(StructProperty)=Guid: 126013751-1228703876-576871558-488302986 
+			LightingGuid(StructProperty)=Guid: 1628733280-1313708019-1725400451-834234447 
 			LODGroup(ByteProperty)=TEXTUREGROUP_Terrain_Weightmap 
 			SRGB(BoolProperty)=False 
 	Texture2D_42 (0-0-0-0): size 22483 (cls: Texture2D_42>Texture2D>/Script/Engine):
@@ -2580,12 +2609,28 @@ Serialized exports:
 			LightingGuid(StructProperty)=Guid: 2314875821-1189182435-3110450351-3409935816 
 			LODGroup(ByteProperty)=TEXTUREGROUP_Terrain_Heightmap 
 			SRGB(BoolProperty)=False 
+	Texture2D_60 (0-0-0-0): size 22483 (cls: Texture2D_60>Texture2D>/Script/Engine):
+		Tag array:
+			AddressX(ByteProperty)=TA_Clamp 
+			AddressY(ByteProperty)=TA_Clamp 
+			ImportedSize(StructProperty)=System.Byte[] 
+			LightingGuid(StructProperty)=Guid: 416764581-1302949179-775218359-1994271575 
+			LODGroup(ByteProperty)=TEXTUREGROUP_Terrain_Weightmap 
+			SRGB(BoolProperty)=False 
 	Texture2D_61 (0-0-0-0): size 22483 (cls: Texture2D_61>Texture2D>/Script/Engine):
 		Tag array:
 			AddressX(ByteProperty)=TA_Clamp 
 			AddressY(ByteProperty)=TA_Clamp 
 			ImportedSize(StructProperty)=System.Byte[] 
 			LightingGuid(StructProperty)=Guid: 3588640516-1266161435-3965628068-616177584 
+			LODGroup(ByteProperty)=TEXTUREGROUP_Terrain_Weightmap 
+			SRGB(BoolProperty)=False 
+	Texture2D_62 (0-0-0-0): size 22483 (cls: Texture2D_62>Texture2D>/Script/Engine):
+		Tag array:
+			AddressX(ByteProperty)=TA_Clamp 
+			AddressY(ByteProperty)=TA_Clamp 
+			ImportedSize(StructProperty)=System.Byte[] 
+			LightingGuid(StructProperty)=Guid: 984916868-1089299943-2312205744-252429717 
 			LODGroup(ByteProperty)=TEXTUREGROUP_Terrain_Weightmap 
 			SRGB(BoolProperty)=False 
 	Texture2D_65 (0-0-0-0): size 22483 (cls: Texture2D_65>Texture2D>/Script/Engine):
@@ -2722,14 +2767,6 @@ Serialized exports:
 			AddressY(ByteProperty)=TA_Clamp 
 			ImportedSize(StructProperty)=System.Byte[] 
 			LightingGuid(StructProperty)=Guid: 1047178441-1325282574-2729211819-3150464429 
-			LODGroup(ByteProperty)=TEXTUREGROUP_Terrain_Weightmap 
-			SRGB(BoolProperty)=False 
-	Texture2D_91 (0-0-0-0): size 22483 (cls: Texture2D_91>Texture2D>/Script/Engine):
-		Tag array:
-			AddressX(ByteProperty)=TA_Clamp 
-			AddressY(ByteProperty)=TA_Clamp 
-			ImportedSize(StructProperty)=System.Byte[] 
-			LightingGuid(StructProperty)=Guid: 499042979-1122724362-3806036664-2119328725 
 			LODGroup(ByteProperty)=TEXTUREGROUP_Terrain_Weightmap 
 			SRGB(BoolProperty)=False 
 	Texture2D_93 (0-0-0-0): size 22483 (cls: Texture2D_93>Texture2D>/Script/Engine):

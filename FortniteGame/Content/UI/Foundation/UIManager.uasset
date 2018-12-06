@@ -22,9 +22,11 @@ Name table:
 	/Game/UI/Foundation/Onboarding/Announcement_Tutorial
 	/Game/UI/Foundation/Onboarding/TutorialOverlay
 	/Game/UI/Foundation/Profile/PlayerBanner
+	/Game/UI/Foundation/Quests/QuestTalkingHeadWidget
 	/Game/UI/Foundation/Shell/Textures/T-Icon-Warning-64
 	/Game/UI/Foundation/Text/Materials/M-HomeBasePower-OuterGlow
 	/Game/UI/Foundation/Text/TextScrollStyle-Base
+	/Game/UI/Foundation/Text/TextStyle-Base
 	/Game/UI/Foundation/Text/TextStyle-Base-XS-B
 	/Game/UI/Foundation/Text/TextStyle-Base-XS-B-Black
 	/Game/UI/Foundation/Text/TextStyle-Base-XS-B-EnchantedBlue
@@ -43,7 +45,6 @@ Name table:
 	/Game/UI/Foundation/UIManager
 	/Game/UI/Foundation/UIManager.WidgetArchetype
 	/Game/UI/Frontend/StoreMain/WebPurchase
-	/Game/UI/HUD/QuestTalkingHeadWidget
 	/Game/UI/Icons/Icon-InfoBox-M
 	/Game/UI/Materials/HollowCircularProgressBar
 	/Game/UI/Tooltips/Textures/ToolTip_Background_Black
@@ -286,6 +287,7 @@ Name table:
 	Default__TextStyle-Base-XS-EnchantedBlue_C
 	Default__TextStyle-Base-XS-Scorpion_C
 	Default__TextStyle-Base-XXS-Black_C
+	Default__TextStyle-Base_C
 	Default__TextStyle-Header-S-Black_C
 	Default__TextStyle-Header-S_C
 	Default__TextStyle-MediumButton_C
@@ -391,6 +393,7 @@ Name table:
 	HandleDeactivatedPanelModalLayer
 	HandleModalContentCleared
 	HandleStateContentUpdated
+	HasActiveModalWidget
 	HasAnyChildren
 	HasChild
 	HeightOverride
@@ -566,6 +569,7 @@ Name table:
 	SetWindowTitleBarOnCloseClickedDelegate
 	Shadow
 	ShadowColorAndOpacity
+	ShadowOffset
 	ShowErrorInErrorWindow
 	ShowNextConfirmation
 	ShowNextModalWidget
@@ -615,12 +619,14 @@ Name table:
 	TextProperty
 	TextScrollStyle-Base_C
 	TextSeparator
+	TextStyle
 	TextStyle-Base-XS-B-Black_C
 	TextStyle-Base-XS-B-EnchantedBlue_C
 	TextStyle-Base-XS-B_C
 	TextStyle-Base-XS-EnchantedBlue_C
 	TextStyle-Base-XS-Scorpion_C
 	TextStyle-Base-XXS-Black_C
+	TextStyle-Base_C
 	TextStyle-Header-S-Black_C
 	TextStyle-Header-S_C
 	TextStyle-MediumButton_C
@@ -649,7 +655,6 @@ Name table:
 	TutorialOverlay_C
 	TypefaceFontName
 	UberGraphFrame
-	UberGraphFramePointerProperty
 	UberGraphFunction
 	UIManager_C
 	UnderlyingType
@@ -679,7 +684,7 @@ Name table:
 	WrapTextAt
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	UIManager_C (0-0-0-0): size 1163 (cls: UIManager_C>WidgetBlueprintGeneratedClass>/Script/UMG):
+	UIManager_C (0-0-0-0): size 1150 (cls: UIManager_C>WidgetBlueprintGeneratedClass>/Script/UMG):
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
@@ -687,7 +692,6 @@ Serialized exports:
 			bClassRequiresNativeTick(BoolProperty)=True 
 			NamedSlots(ArrayProperty)=State Content Layer,Tutorial Layer,Modal Layer,ToastDisplayLayer,TalkingHeadLayer,Confirmation Layer,Error Layer,ControllerDisconnectedLayer (inner: NameProperty)
 			TemplateAsset(SoftObjectProperty)=/Game/UI/Foundation/UIManager.WidgetArchetype 
-			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=UIManager_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_UIManager=UIManager_C 
 	Default__UIManager_C (0-0-0-0): size 367 (cls: Default__UIManager_C>UIManager_C):
 		Tag array:
@@ -732,32 +736,32 @@ Serialized exports:
 	bShouldTriggerCameraModeOnClose (0-0-0-0): size 34 (cls: bShouldTriggerCameraModeOnClose>BoolProperty>/Script/CoreUObject)
 	Confirmation Layer (0-0-0-0): size 36 (cls: Confirmation Layer>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_UIManager (0-0-0-0): size 2164 (cls: ExecuteUbergraph_UIManager>Function>/Script/CoreUObject)
-	OnGameWindowCloseButtonClicked (0-0-0-0): size 58 (cls: OnGameWindowCloseButtonClicked>Function>/Script/CoreUObject)
-	Construct (0-0-0-0): size 58 (cls: Construct>Function>/Script/CoreUObject)
-	CloseErrorWindow (0-0-0-0): size 58 (cls: CloseErrorWindow>Function>/Script/CoreUObject)
-	CloseConfirmationWindow (0-0-0-0): size 58 (cls: CloseConfirmationWindow>Function>/Script/CoreUObject)
+	ExecuteUbergraph_UIManager (0-0-0-0): size 1814 (cls: ExecuteUbergraph_UIManager>Function>/Script/CoreUObject)
+	OnGameWindowCloseButtonClicked (0-0-0-0): size 54 (cls: OnGameWindowCloseButtonClicked>Function>/Script/CoreUObject)
+	Construct (0-0-0-0): size 54 (cls: Construct>Function>/Script/CoreUObject)
+	CloseErrorWindow (0-0-0-0): size 54 (cls: CloseErrorWindow>Function>/Script/CoreUObject)
+	CloseConfirmationWindow (0-0-0-0): size 54 (cls: CloseConfirmationWindow>Function>/Script/CoreUObject)
 	Panel (0-0-0-0): size 36 (cls: Panel>ObjectProperty>/Script/CoreUObject)
-	PopActivatablePanelInModalLayer (0-0-0-0): size 72 (cls: PopActivatablePanelInModalLayer>Function>/Script/CoreUObject)
-	OnStateEnded (0-0-0-0): size 58 (cls: OnStateEnded>Function>/Script/CoreUObject)
+	PopActivatablePanelInModalLayer (0-0-0-0): size 68 (cls: PopActivatablePanelInModalLayer>Function>/Script/CoreUObject)
+	OnStateEnded (0-0-0-0): size 54 (cls: OnStateEnded>Function>/Script/CoreUObject)
 	Panel (0-0-0-0): size 36 (cls: Panel>ObjectProperty>/Script/CoreUObject)
-	QueueActivatablePanelIntoModalLayer (0-0-0-0): size 72 (cls: QueueActivatablePanelIntoModalLayer>Function>/Script/CoreUObject)
+	QueueActivatablePanelIntoModalLayer (0-0-0-0): size 68 (cls: QueueActivatablePanelIntoModalLayer>Function>/Script/CoreUObject)
 	StateWidget (0-0-0-0): size 36 (cls: StateWidget>ObjectProperty>/Script/CoreUObject)
-	UpdateStateWidgetContent (0-0-0-0): size 72 (cls: UpdateStateWidgetContent>Function>/Script/CoreUObject)
-	KillConfirmation (0-0-0-0): size 58 (cls: KillConfirmation>Function>/Script/CoreUObject)
+	UpdateStateWidgetContent (0-0-0-0): size 68 (cls: UpdateStateWidgetContent>Function>/Script/CoreUObject)
+	KillConfirmation (0-0-0-0): size 54 (cls: KillConfirmation>Function>/Script/CoreUObject)
 	Description (0-0-0-0): size 36 (cls: Description>StructProperty>/Script/CoreUObject)
-	OnShowConfirmation_NUI (0-0-0-0): size 72 (cls: OnShowConfirmation_NUI>Function>/Script/CoreUObject)
+	OnShowConfirmation_NUI (0-0-0-0): size 68 (cls: OnShowConfirmation_NUI>Function>/Script/CoreUObject)
 	Info (0-0-0-0): size 36 (cls: Info>StructProperty>/Script/CoreUObject)
-	DisplayErrorDialog (0-0-0-0): size 72 (cls: DisplayErrorDialog>Function>/Script/CoreUObject)
-	Destruct (0-0-0-0): size 58 (cls: Destruct>Function>/Script/CoreUObject)
-	OnStateStarted (0-0-0-0): size 58 (cls: OnStateStarted>Function>/Script/CoreUObject)
+	DisplayErrorDialog (0-0-0-0): size 68 (cls: DisplayErrorDialog>Function>/Script/CoreUObject)
+	Destruct (0-0-0-0): size 54 (cls: Destruct>Function>/Script/CoreUObject)
+	OnStateStarted (0-0-0-0): size 54 (cls: OnStateStarted>Function>/Script/CoreUObject)
 	bDisplay (0-0-0-0): size 34 (cls: bDisplay>BoolProperty>/Script/CoreUObject)
-	DisplayStateContent (0-0-0-0): size 72 (cls: DisplayStateContent>Function>/Script/CoreUObject)
+	DisplayStateContent (0-0-0-0): size 68 (cls: DisplayStateContent>Function>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	Result (0-0-0-0): size 40 (cls: Result>EnumProperty>/Script/CoreUObject)
-	DialogResult_5E02A44647A3EA099FA7CEB9FA976CBB (0-0-0-0): size 86 (cls: DialogResult_5E02A44647A3EA099FA7CEB9FA976CBB>Function>/Script/CoreUObject)
+	DialogResult_5E02A44647A3EA099FA7CEB9FA976CBB (0-0-0-0): size 82 (cls: DialogResult_5E02A44647A3EA099FA7CEB9FA976CBB>Function>/Script/CoreUObject)
 	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject)
-	ClearLayers (0-0-0-0): size 290 (cls: ClearLayers>Function>/Script/CoreUObject)
+	ClearLayers (0-0-0-0): size 297 (cls: ClearLayers>Function>/Script/CoreUObject)
 	PopCurrentModal (0-0-0-0): size 58 (cls: PopCurrentModal>Function>/Script/CoreUObject)
 	ActivatablePanel (0-0-0-0): size 36 (cls: ActivatablePanel>ObjectProperty>/Script/CoreUObject)
 	QueueModalPanel (0-0-0-0): size 222 (cls: QueueModalPanel>Function>/Script/CoreUObject)
@@ -775,7 +779,7 @@ Serialized exports:
 	ConfirmationDescription (0-0-0-0): size 36 (cls: ConfirmationDescription>StructProperty>/Script/CoreUObject)
 	QueueConfirmation (0-0-0-0): size 309 (cls: QueueConfirmation>Function>/Script/CoreUObject)
 	Temp_text_Variable (0-0-0-0): size 32 (cls: Temp_text_Variable>TextProperty>/Script/CoreUObject)
-	Initialize (0-0-0-0): size 1323 (cls: Initialize>Function>/Script/CoreUObject)
+	Initialize (0-0-0-0): size 1353 (cls: Initialize>Function>/Script/CoreUObject)
 	ActivatablePanel (0-0-0-0): size 36 (cls: ActivatablePanel>ObjectProperty>/Script/CoreUObject)
 	AddActivatablePanelToModalLayer (0-0-0-0): size 230 (cls: AddActivatablePanelToModalLayer>Function>/Script/CoreUObject)
 	DeactivatedPanel (0-0-0-0): size 36 (cls: DeactivatedPanel>ObjectProperty>/Script/CoreUObject)
@@ -824,6 +828,15 @@ Serialized exports:
 	CallFunc_Greater_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Greater_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	SafeTriggerCameraMode (0-0-0-0): size 208 (cls: SafeTriggerCameraMode>Function>/Script/CoreUObject)
+	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	SafeTriggerCursorMode (0-0-0-0): size 305 (cls: SafeTriggerCursorMode>Function>/Script/CoreUObject)
+	ReturnValue (0-0-0-0): size 34 (cls: ReturnValue>BoolProperty>/Script/CoreUObject)
+	IsShowingModalsConfirmationsErrors (0-0-0-0): size 380 (cls: IsShowingModalsConfirmationsErrors>Function>/Script/CoreUObject)
+	ReturnValue (0-0-0-0): size 34 (cls: ReturnValue>BoolProperty>/Script/CoreUObject)
+	HasActiveModalWidget (0-0-0-0): size 97 (cls: HasActiveModalWidget>Function>/Script/CoreUObject)
+	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_EqualEqual_StrStr_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_StrStr_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_HasAnyChildren_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasAnyChildren_ReturnValue>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
@@ -831,12 +844,6 @@ Serialized exports:
 	CallFunc_BooleanOR_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanOR_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_EqualEqual_StrStr_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_StrStr_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_EqualEqual_StrStr_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_StrStr_ReturnValue1>BoolProperty>/Script/CoreUObject)
-	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject)
-	SafeTriggerCameraMode (0-0-0-0): size 208 (cls: SafeTriggerCameraMode>Function>/Script/CoreUObject)
-	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject)
-	SafeTriggerCursorMode (0-0-0-0): size 305 (cls: SafeTriggerCursorMode>Function>/Script/CoreUObject)
-	ReturnValue (0-0-0-0): size 34 (cls: ReturnValue>BoolProperty>/Script/CoreUObject)
-	IsShowingModalsConfirmationsErrors (0-0-0-0): size 380 (cls: IsShowingModalsConfirmationsErrors>Function>/Script/CoreUObject)
 	CallFunc_BooleanOR_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanOR_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_BooleanOR_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_BooleanOR_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_BooleanOR_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_BooleanOR_ReturnValue2>BoolProperty>/Script/CoreUObject)
@@ -1085,131 +1092,146 @@ Serialized exports:
 			Padding(StructProperty)=System.Byte[] 
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=OverlaySlot_1=WidgetArchetype 
-	LoadGuard (0-0-0-0): size 112 (cls: LoadGuard>CommonLoadGuard>/Script/CommonUI):
+	LoadGuard (0-0-0-0): size 141 (cls: LoadGuard>CommonLoadGuard>/Script/CommonUI):
 		Tag array:
 			LoadingText(TextProperty)= () 
+			TextStyle(ObjectProperty)=TextStyle-Base_C=/Game/UI/Foundation/Text/TextStyle-Base 
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
-	SurroundLoadGuard (0-0-0-0): size 153 (cls: SurroundLoadGuard>CommonLoadGuard>/Script/CommonUI):
+	SurroundLoadGuard (0-0-0-0): size 182 (cls: SurroundLoadGuard>CommonLoadGuard>/Script/CommonUI):
 		Tag array:
 			LoadingText(TextProperty)= () 
+			TextStyle(ObjectProperty)=TextStyle-Base_C=/Game/UI/Foundation/Text/TextStyle-Base 
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=OverlaySlot_1=WidgetArchetype 
 			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
-	BoostedPower (0-0-0-0): size 443 (cls: BoostedPower>CommonTextBlock>/Script/CommonUI):
+	BoostedPower (0-0-0-0): size 529 (cls: BoostedPower>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B-EnchantedBlue_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B-EnchantedBlue 
 			Text(TextProperty)=+999 (477353EA4D30B7528BE03D945F1E1ACC) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			AutoWrapText(BoolProperty)=True 
 			Slot(ObjectProperty)=VerticalBoxSlot_9=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	Description (0-0-0-0): size 457 (cls: Description>CommonTextBlock>/Script/CommonUI):
+	Description (0-0-0-0): size 576 (cls: Description>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-EnchantedBlue_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-EnchantedBlue 
 			Text(TextProperty)=Your Power Level and FORT stats have now increased. (12C3DE6A43FF7C021618A4856C5A87EB) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			AutoWrapText(BoolProperty)=True 
 			Slot(ObjectProperty)=VerticalBoxSlot_1=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	TeamMemberPower (0-0-0-0): size 320 (cls: TeamMemberPower>CommonTextBlock>/Script/CommonUI):
+	TeamMemberPower (0-0-0-0): size 406 (cls: TeamMemberPower>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B 
 			Text(TextProperty)=999 (0E75E2EB420D8CCA4DD2DD9A9F9E6217) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			AutoWrapText(BoolProperty)=True 
 			Slot(ObjectProperty)=HorizontalBoxSlot_15=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	Title (0-0-0-0): size 336 (cls: Title>CommonTextBlock>/Script/CommonUI):
+	Title (0-0-0-0): size 422 (cls: Title>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B 
 			Text(TextProperty)=Notification Title! (9AF8B9944D2466F2AAE8F081CCDD579A) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			AutoWrapText(BoolProperty)=True 
 			Slot(ObjectProperty)=VerticalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	Description (0-0-0-0): size 541 (cls: Description>CommonTextBlock>/Script/CommonUI):
+	Description (0-0-0-0): size 627 (cls: Description>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B-Black_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B-Black 
 			Text(TextProperty)=This should be a friendly message that is Helpful, Honest, Humble and Human. Seriously, its important! (881835E94F710B566C7F1BBACDB70188) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			AutoWrapText(BoolProperty)=True 
 			Slot(ObjectProperty)=VerticalBoxSlot_1=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	CenterButtonTextWidget (0-0-0-0): size 367 (cls: CenterButtonTextWidget>CommonTextBlock>/Script/CommonUI):
+	CenterButtonTextWidget (0-0-0-0): size 453 (cls: CenterButtonTextWidget>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-MediumButton_C=/Game/UI/Foundation/Buttons/TextStyles/TextStyle-MediumButton 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)={Text} (99357DD44CFC5E3692A9C792F19B30DA) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Center 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	ProgrammerNote (0-0-0-0): size 459 (cls: ProgrammerNote>CommonTextBlock>/Script/CommonUI):
+	ProgrammerNote (0-0-0-0): size 578 (cls: ProgrammerNote>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XXS-Black_C=/Game/UI/Foundation/Text/TextStyle-Base-XXS-Black 
 			Text(TextProperty)=Minor Error. (8A1CE9A146AE7E5C7C54EC87D326E9F7) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			AutoWrapText(BoolProperty)=True 
 			Slot(ObjectProperty)=VerticalBoxSlot_3=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
 			Visibility(EnumProperty)=ESlateVisibility::Visible 
-	Title (0-0-0-0): size 492 (cls: Title>CommonTextBlock>/Script/CommonUI):
+	Title (0-0-0-0): size 549 (cls: Title>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-S-Black_C=/Game/UI/Foundation/Text/TextStyle-Header-S-Black 
 			Text(TextProperty)=Minor Error. (8A1CE9A146AE7E5C7C54EC87D326E9F7) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			AutoWrapText(BoolProperty)=True 
 			Slot(ObjectProperty)=VerticalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
 			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
-	Description (0-0-0-0): size 467 (cls: Description>CommonTextBlock>/Script/CommonUI):
+	Description (0-0-0-0): size 553 (cls: Description>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B-Black_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B-Black 
 			Text(TextProperty)=Invite Sent to EnronTheGreat (F30FA8404281B31B167AA2ADCB056F6D) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			AutoWrapText(BoolProperty)=True 
 			Slot(ObjectProperty)=VerticalBoxSlot_1=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	CenterButtonTextWidget (0-0-0-0): size 367 (cls: CenterButtonTextWidget>CommonTextBlock>/Script/CommonUI):
+	CenterButtonTextWidget (0-0-0-0): size 453 (cls: CenterButtonTextWidget>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-MediumButton_C=/Game/UI/Foundation/Buttons/TextStyles/TextStyle-MediumButton 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)={Text} (99357DD44CFC5E3692A9C792F19B30DA) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Center 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	Title (0-0-0-0): size 492 (cls: Title>CommonTextBlock>/Script/CommonUI):
+	Title (0-0-0-0): size 549 (cls: Title>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-S-Black_C=/Game/UI/Foundation/Text/TextStyle-Header-S-Black 
 			Text(TextProperty)=Party Invite (5729B1CE435CED540F145BA232FBEA8A) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			AutoWrapText(BoolProperty)=True 
 			Slot(ObjectProperty)=VerticalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
 			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
-	SystemText (0-0-0-0): size 431 (cls: SystemText>CommonTextBlock>/Script/CommonUI):
+	SystemText (0-0-0-0): size 550 (cls: SystemText>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-Scorpion_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-Scorpion 
 			Text(TextProperty)=SystemText (B75FFC0C4F2D033FBA4D38B045F4B7FB) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=OverlaySlot_5=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
 			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
-	TitleText (0-0-0-0): size 294 (cls: TitleText>CommonTextBlock>/Script/CommonUI):
+	TitleText (0-0-0-0): size 351 (cls: TitleText>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-S_C=/Game/UI/Foundation/Text/TextStyle-Header-S 
 			Text(TextProperty)=Text Block (TextBlockDefaultValue) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=BorderSlot_1=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
 	K2Node_CreateDelegate_OutputDelegate (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate>DelegateProperty>/Script/CoreUObject)
@@ -1903,7 +1925,7 @@ Serialized exports:
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=OverlaySlot_1=WidgetArchetype 
-	QuestTalkingHeadWidget (0-0-0-0): size 311 (cls: QuestTalkingHeadWidget>QuestTalkingHeadWidget_C>/Game/UI/HUD/QuestTalkingHeadWidget):
+	QuestTalkingHeadWidget (0-0-0-0): size 311 (cls: QuestTalkingHeadWidget>QuestTalkingHeadWidget_C>/Game/UI/Foundation/Quests/QuestTalkingHeadWidget):
 		Tag array:
 			Image_0(ObjectProperty)=Image_0=WidgetArchetype 
 			RootOverlay(ObjectProperty)=RootOverlay=WidgetArchetype 
@@ -2091,7 +2113,7 @@ Serialized exports:
 			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
 	TextSeparator (0-0-0-0): size 492 (cls: TextSeparator>TextBlock>/Script/UMG):
 		Tag array:
-			Text(TextProperty)=:  (13AB7A73461D52B5D8582E82D4E6D156) 
+			Text(TextProperty)=:  (7A501AFA4548A5B0A6019EA304C91F84) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
 			ShadowColorAndOpacity(StructProperty)=UE4.FLinearColor 
@@ -2100,7 +2122,7 @@ Serialized exports:
 			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
 	TextSubtitles (0-0-0-0): size 496 (cls: TextSubtitles>TextBlock>/Script/UMG):
 		Tag array:
-			Text(TextProperty)=Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed  l l l l do eiusmod tempor incididunt. (BA26488E4A91DEF6A83CFA9530479914) 
+			Text(TextProperty)=Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed  l l l l do eiusmod tempor incididunt. (A2392AAB4D125FC3C554A19FF3E2E5DD) 
 			Font(StructProperty)=System.Byte[] 
 			ShadowColorAndOpacity(StructProperty)=UE4.FLinearColor 
 			WrapTextAt(FloatProperty)=1600 

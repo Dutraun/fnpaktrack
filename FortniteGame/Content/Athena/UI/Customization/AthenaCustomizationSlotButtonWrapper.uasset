@@ -10,12 +10,13 @@ Name table:
 	/Game/UI/Foundation/Border/Materials/M-TutorialTabGlow
 	/Game/UI/Foundation/Border/Materials/M_FlashingBang_Off
 	/Game/UI/Foundation/Buttons/Materials/M-Button-Console-YellowOutline
-	/Game/UI/Foundation/Buttons/Materials/Slot/M_Slot_Empty_Faded
 	/Game/UI/Foundation/Fonts/Burbank
+	/Game/UI/Foundation/Fonts/NotoSans
+	/Game/UI/Foundation/Materials/Athena_LockerSlot_CardS
 	/Game/UI/Foundation/Text/TextStyle-Base-M-B_Black
 	/Game/UI/Foundation/Text/TextStyle-Base-XS-B-Black
 	/Game/UI/Foundation/Text/TextStyle-Header-M-Yellow
-	/Game/UI/Icons/Consumables/Inventory_Food_FishTaco
+	/Game/UI/Foundation/Textures/Icons/ItemTypes/T-Icon-Assault-64
 	/Game/UI/Icons/Icon-Bang/T-Bang-Replacement
 	/Script/BlueprintContext
 	/Script/CommonUI
@@ -23,9 +24,11 @@ Name table:
 	/Script/Engine
 	/Script/FortniteGame
 	/Script/FortniteUI
+	/Script/SlateCore
 	/Script/UMG
 	Angle
 	ArrayProperty
+	Athena_LockerSlot_CardS
 	AthenaCustomizationSlotButton_C
 	AthenaCustomizationSlotButtonWrapper_C
 	AthenaCustomizationSlotSelectorButton
@@ -40,6 +43,7 @@ Name table:
 	bHasScriptImplementedTick
 	BigBang
 	BigBangCount
+	bIsDynamicallyLoaded
 	bIsVariable
 	BlueprintComponentDelegateBinding
 	BlueprintContextLibrary
@@ -56,6 +60,7 @@ Name table:
 	bOverride_HeightOverride
 	bOverride_MinDesiredWidth
 	bOverride_WidthOverride
+	Box2D
 	BPItemCardSize
 	Brush
 	BrushColor
@@ -66,10 +71,13 @@ Name table:
 	ByteProperty
 	CallFunc_CanShowLockerSlotType_ReturnValue
 	CallFunc_GetContext_ReturnValue
+	CallFunc_PlayAnimationAtTime_ReturnValue
+	CallFunc_PlayAnimationAtTime_ReturnValue1
 	CanShowLockerSlotType
 	CategoryDescription
 	Class
 	ColorAndOpacity
+	ColorUseRule
 	CommonActionWidget
 	CommonBorder
 	CommonButton
@@ -115,8 +123,6 @@ Name table:
 	Default__TextStyle-Base-M-B_Black_C
 	Default__TextStyle-Base-XS-B-Black_C
 	Default__TextStyle-Header-M-Yellow_C
-	Default__VerticalBox
-	Default__VerticalBoxSlot
 	Default__WidgetBlueprintGeneratedClass
 	Default__WidgetSwitcher
 	Default__WidgetSwitcherSlot
@@ -141,6 +147,14 @@ Name table:
 	ESlateBrushDrawType
 	ESlateBrushDrawType::Box
 	ESlateBrushDrawType::Image
+	ESlateBrushImageType
+	ESlateBrushImageType::NoImage
+	ESlateBrushMirrorType
+	ESlateBrushMirrorType::NoMirror
+	ESlateBrushTileType
+	ESlateBrushTileType::NoTile
+	ESlateColorStylingMode
+	ESlateColorStylingMode::UseColor_Specified
 	ESlateVisibility
 	ESlateVisibility::Collapsed
 	ESlateVisibility::HitTestInvisible
@@ -173,9 +187,9 @@ Name table:
 	Image
 	ImageSize
 	ImageSlotType
+	ImageType
 	InputActionWidget
 	IntProperty
-	Inventory_Food_FishTaco
 	IsDesignTime
 	ItemOverlay
 	ItemWidget
@@ -191,10 +205,10 @@ Name table:
 	M-Button-Console-YellowOutline
 	M-TutorialTabGlow
 	M_FlashingBang_Off
-	M_Slot_Empty_Faded
 	Margin
 	MaterialInstanceConstant
 	MinDesiredWidth
+	Mirroring
 	ModeSwitcher
 	MulticastDelegateProperty
 	Name
@@ -207,12 +221,14 @@ Name table:
 	None
 	NormalBangWrapper
 	NormalBangWrapper_C
+	NotoSans
 	NotoSans-Bold
 	Object
 	ObjectProperty
 	OnButtonClicked
 	OnButtonHovered
 	OnButtonUnhovered
+	OnHover
 	OnSlotClicked
 	OnSlotClicked__DelegateSignature
 	OnSlotHovered
@@ -221,24 +237,27 @@ Name table:
 	OnSlotUnhovered__DelegateSignature
 	Overlay
 	OverlaySlot
-	OverlayTypeIcon
 	Package
 	Padding
 	PanelSlot
 	Parent
+	PlayAnimationAtTime
 	PointerToUberGraphFrame
 	PreConstruct
 	PressedSlateSoundOverride
+	RenderOpacity
 	RenderTransform
+	ResourceName
 	ResourceObject
 	Right
 	RootWidget
 	Scale
 	ScriptStruct
 	SetBangType
-	SetCardSize
+	SetCardSizeAndSlotImage
 	SetCustomizationType
 	SetVisibility
+	ShadowOffset
 	Shear
 	Size
 	SizeBox
@@ -249,6 +268,8 @@ Name table:
 	SlateSound
 	Slot
 	SlotButton
+	SlotImage
+	SlotImageOverlay
 	Slots
 	SlottedItemCardSize
 	SmallBang
@@ -262,6 +283,7 @@ Name table:
 	SubslotIndex
 	SuperBang
 	T-Bang-Replacement
+	T-Icon-Assault-64
 	Temp_bool_Variable
 	Temp_byte_Variable
 	Temp_byte_Variable1
@@ -272,25 +294,25 @@ Name table:
 	TextStyle-Base-XS-B-Black_C
 	TextStyle-Header-M-Yellow_C
 	Texture2D
+	Tiling
 	TintColor
 	Top
 	Translation
 	TutorialBorder
 	TypefaceFontName
 	UberGraphFrame
-	UberGraphFramePointerProperty
 	UberGraphFunction
+	UMGSequencePlayer
 	UnderlyingType
 	UserWidget
 	UseSmallVersion
+	UVRegion
 	VAlign_Bottom
 	VAlign_Center
 	VAlign_Fill
 	VAlign_Top
 	Vector2D
 	VerticalAlignment
-	VerticalBox
-	VerticalBoxSlot
 	Visibility
 	WidgetArchetype
 	WidgetBlueprintGeneratedClass
@@ -301,21 +323,21 @@ Name table:
 	WidthOverride
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	AthenaCustomizationSlotButtonWrapper_C (0-0-0-0): size 481 (cls: AthenaCustomizationSlotButtonWrapper_C>WidgetBlueprintGeneratedClass>/Script/UMG):
+	AthenaCustomizationSlotButtonWrapper_C (0-0-0-0): size 456 (cls: AthenaCustomizationSlotButtonWrapper_C>WidgetBlueprintGeneratedClass>/Script/UMG):
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
 			bValidTemplate(BoolProperty)=True 
 			TemplateAsset(SoftObjectProperty)=/Game/Athena/UI/Customization/AthenaCustomizationSlotButtonWrapper.WidgetArchetype 
 			DynamicBindingObjects(ArrayProperty)=[object] (inner: ObjectProperty)
-			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=AthenaCustomizationSlotButtonWrapper_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_AthenaCustomizationSlotButtonWrapper=AthenaCustomizationSlotButtonWrapper_C 
-	Default__AthenaCustomizationSlotButtonWrapper_C (0-0-0-0): size 328 (cls: Default__AthenaCustomizationSlotButtonWrapper_C>AthenaCustomizationSlotButtonWrapper_C):
+	Default__AthenaCustomizationSlotButtonWrapper_C (0-0-0-0): size 1096 (cls: Default__AthenaCustomizationSlotButtonWrapper_C>AthenaCustomizationSlotButtonWrapper_C):
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			BannerDisplayName(TextProperty)=SLOT NAME (7D74F9B7443448F468B4E78BCC0B657F) 
 			CategoryDescription(TextProperty)=SLOT NAME (7D74F9B7443448F468B4E78BCC0B657F) 
 			SlottedItemCardSize(EnumProperty)=EFortItemCardSize::S 
+			SlotImage(StructProperty)=System.Byte[] 
 			bHasScriptImplementedTick(BoolProperty)=False 
 			bHasScriptImplementedPaint(BoolProperty)=False 
 	SlotButton (0-0-0-0): size 483 (cls: SlotButton>AthenaCustomizationSlotButton_C>/Game/Athena/UI/Customization/AthenaCustomizationSlotButton):
@@ -323,7 +345,7 @@ Serialized exports:
 			EmptyImage(ObjectProperty)=EmptyImage=WidgetArchetype 
 			ImageSlotType(ObjectProperty)=ImageSlotType=WidgetArchetype 
 			NormalBangWrapper(ObjectProperty)=NormalBangWrapper=WidgetArchetype 
-			OverlayTypeIcon(ObjectProperty)=OverlayTypeIcon=WidgetArchetype 
+			SlotImageOverlay(ObjectProperty)=SlotImageOverlay=WidgetArchetype 
 			CustomizationType(EnumProperty)=EAthenaCustomizationCategory::Glider 
 			ItemWidget(ObjectProperty)=ItemWidget=WidgetArchetype 
 			PressedSlateSoundOverride(StructProperty)=System.Byte[] 
@@ -346,18 +368,18 @@ Serialized exports:
 	OnSlotHovered__DelegateSignature (0-0-0-0): size 59 (cls: OnSlotHovered__DelegateSignature>Function>/Script/CoreUObject)
 	OnSlotUnhovered__DelegateSignature (0-0-0-0): size 43 (cls: OnSlotUnhovered__DelegateSignature>Function>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_AthenaCustomizationSlotButtonWrapper (0-0-0-0): size 439 (cls: ExecuteUbergraph_AthenaCustomizationSlotButtonWrapper>Function>/Script/CoreUObject)
+	ExecuteUbergraph_AthenaCustomizationSlotButtonWrapper (0-0-0-0): size 586 (cls: ExecuteUbergraph_AthenaCustomizationSlotButtonWrapper>Function>/Script/CoreUObject)
 	CallFunc_CanShowLockerSlotType_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_CanShowLockerSlotType_ReturnValue>BoolProperty>/Script/CoreUObject)
 	K2Node_Event_IsDesignTime (0-0-0-0): size 34 (cls: K2Node_Event_IsDesignTime>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
 	Button (0-0-0-0): size 36 (cls: Button>ObjectProperty>/Script/CoreUObject)
-	BndEvt__SlotButton_K2Node_ComponentBoundEvent_47_CommonButtonClicked__DelegateSignature (0-0-0-0): size 72 (cls: BndEvt__SlotButton_K2Node_ComponentBoundEvent_47_CommonButtonClicked__DelegateSignature>Function>/Script/CoreUObject)
+	BndEvt__SlotButton_K2Node_ComponentBoundEvent_47_CommonButtonClicked__DelegateSignature (0-0-0-0): size 68 (cls: BndEvt__SlotButton_K2Node_ComponentBoundEvent_47_CommonButtonClicked__DelegateSignature>Function>/Script/CoreUObject)
 	Button (0-0-0-0): size 36 (cls: Button>ObjectProperty>/Script/CoreUObject)
-	BndEvt__SlotButton_K2Node_ComponentBoundEvent_13_CommonButtonClicked__DelegateSignature (0-0-0-0): size 72 (cls: BndEvt__SlotButton_K2Node_ComponentBoundEvent_13_CommonButtonClicked__DelegateSignature>Function>/Script/CoreUObject)
-	Construct (0-0-0-0): size 58 (cls: Construct>Function>/Script/CoreUObject)
+	BndEvt__SlotButton_K2Node_ComponentBoundEvent_13_CommonButtonClicked__DelegateSignature (0-0-0-0): size 68 (cls: BndEvt__SlotButton_K2Node_ComponentBoundEvent_13_CommonButtonClicked__DelegateSignature>Function>/Script/CoreUObject)
+	Construct (0-0-0-0): size 54 (cls: Construct>Function>/Script/CoreUObject)
 	Button (0-0-0-0): size 36 (cls: Button>ObjectProperty>/Script/CoreUObject)
-	BndEvt__SlotButton_K2Node_ComponentBoundEvent_0_CommonButtonClicked__DelegateSignature (0-0-0-0): size 72 (cls: BndEvt__SlotButton_K2Node_ComponentBoundEvent_0_CommonButtonClicked__DelegateSignature>Function>/Script/CoreUObject)
-	PreConstruct (0-0-0-0): size 72 (cls: PreConstruct>Function>/Script/CoreUObject)
+	BndEvt__SlotButton_K2Node_ComponentBoundEvent_0_CommonButtonClicked__DelegateSignature (0-0-0-0): size 68 (cls: BndEvt__SlotButton_K2Node_ComponentBoundEvent_0_CommonButtonClicked__DelegateSignature>Function>/Script/CoreUObject)
+	PreConstruct (0-0-0-0): size 68 (cls: PreConstruct>Function>/Script/CoreUObject)
 	IsDesignTime (0-0-0-0): size 34 (cls: IsDesignTime>BoolProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
@@ -441,30 +463,33 @@ Serialized exports:
 			Slot(ObjectProperty)=OverlaySlot_3=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
 			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
-	CommonTextBlock_0 (0-0-0-0): size 570 (cls: CommonTextBlock_0>CommonTextBlock>/Script/CommonUI):
+	CommonTextBlock_0 (0-0-0-0): size 656 (cls: CommonTextBlock_0>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B-Black_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B-Black 
 			Text(TextProperty)=88 (EE6FE82A447EE61E281C208F117FCCDD) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Center 
 			Slot(ObjectProperty)=SizeBoxSlot_1=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
 			bIsVariable(BoolProperty)=True 
-	CommonTextBlock_1 (0-0-0-0): size 617 (cls: CommonTextBlock_1>CommonTextBlock>/Script/CommonUI):
+	CommonTextBlock_1 (0-0-0-0): size 674 (cls: CommonTextBlock_1>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-M-Yellow_C=/Game/UI/Foundation/Text/TextStyle-Header-M-Yellow 
 			Text(TextProperty)=! (CB8A5CB44472F7683032CC87496A28E9) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=OverlaySlot_1=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
-	CountText (0-0-0-0): size 386 (cls: CountText>CommonTextBlock>/Script/CommonUI):
+	CountText (0-0-0-0): size 472 (cls: CountText>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-M-B_Black_C=/Game/UI/Foundation/Text/TextStyle-Base-M-B_Black 
 			Text(TextProperty)=25 (9FD9EB2344E6568F2ADEA8B37EEC7A7D) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=SizeBoxSlot_5=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
 	ComponentDelegateBinding_0 (0-0-0-0): size 419 (cls: ComponentDelegateBinding_0>ComponentDelegateBinding>/Script/Engine):
@@ -480,7 +505,7 @@ Serialized exports:
 		Tag array:
 			BPItemCardSize(EnumProperty)=EFortItemCardSize::S 
 			EmptyItemType(EnumProperty)=EFortItemType::AthenaPickaxe 
-			Slot(ObjectProperty)=OverlaySlot_6=WidgetArchetype 
+			Slot(ObjectProperty)=OverlaySlot_1=WidgetArchetype 
 	HorizontalBox_0 (0-0-0-0): size 53 (cls: HorizontalBox_0>HorizontalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -491,15 +516,17 @@ Serialized exports:
 			VerticalAlignment(ByteProperty)=VAlign_Top 
 			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
 			Content(ObjectProperty)=SlotButton=WidgetArchetype 
-	EmptyImage (0-0-0-0): size 341 (cls: EmptyImage>Image>/Script/UMG):
+	EmptyImage (0-0-0-0): size 168 (cls: EmptyImage>Image>/Script/UMG):
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
 			Slot(ObjectProperty)=OverlaySlot_8=WidgetArchetype 
-	ImageSlotType (0-0-0-0): size 225 (cls: ImageSlotType>Image>/Script/UMG):
+			Visibility(EnumProperty)=ESlateVisibility::SelfHitTestInvisible 
+	ImageSlotType (0-0-0-0): size 254 (cls: ImageSlotType>Image>/Script/UMG):
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
 			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
-			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
+			Visibility(EnumProperty)=ESlateVisibility::SelfHitTestInvisible 
+			RenderOpacity(FloatProperty)=0.5 
 	Image_2 (0-0-0-0): size 194 (cls: Image_2>Image>/Script/UMG):
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
@@ -544,11 +571,13 @@ Serialized exports:
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_PlayAnimationAtTime_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlayAnimationAtTime_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_PlayAnimationAtTime_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_PlayAnimationAtTime_ReturnValue1>ObjectProperty>/Script/CoreUObject)
 	K2Node_ComponentBoundEvent_Button (0-0-0-0): size 36 (cls: K2Node_ComponentBoundEvent_Button>ObjectProperty>/Script/CoreUObject)
 	K2Node_ComponentBoundEvent_Button1 (0-0-0-0): size 36 (cls: K2Node_ComponentBoundEvent_Button1>ObjectProperty>/Script/CoreUObject)
 	K2Node_ComponentBoundEvent_Button2 (0-0-0-0): size 36 (cls: K2Node_ComponentBoundEvent_Button2>ObjectProperty>/Script/CoreUObject)
 	Button (0-0-0-0): size 36 (cls: Button>ObjectProperty>/Script/CoreUObject)
-	ItemOverlay (0-0-0-0): size 90 (cls: ItemOverlay>Overlay>/Script/UMG):
+	ItemOverlay (0-0-0-0): size 86 (cls: ItemOverlay>Overlay>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=PanelSlot_0=WidgetArchetype 
@@ -576,14 +605,14 @@ Serialized exports:
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=SizeBoxSlot_4=WidgetArchetype 
-	Overlay_3 (0-0-0-0): size 86 (cls: Overlay_3>Overlay>/Script/UMG):
+	Overlay_3 (0-0-0-0): size 90 (cls: Overlay_3>Overlay>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-			Slot(ObjectProperty)=VerticalBoxSlot_0=WidgetArchetype 
-	OverlayTypeIcon (0-0-0-0): size 222 (cls: OverlayTypeIcon>Overlay>/Script/UMG):
+			Slot(ObjectProperty)=OverlaySlot_5=WidgetArchetype 
+	SlotImageOverlay (0-0-0-0): size 222 (cls: SlotImageOverlay>Overlay>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-			Slot(ObjectProperty)=OverlaySlot_4=WidgetArchetype 
+			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
 			bIsVariable(BoolProperty)=True 
 	OverlaySlot_3 (0-0-0-0): size 152 (cls: OverlaySlot_3>OverlaySlot>/Script/UMG):
@@ -592,18 +621,12 @@ Serialized exports:
 			VerticalAlignment(ByteProperty)=VAlign_Bottom 
 			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
 			Content(ObjectProperty)=InputActionWidget=WidgetArchetype 
-	OverlaySlot_4 (0-0-0-0): size 152 (cls: OverlaySlot_4>OverlaySlot>/Script/UMG):
-		Tag array:
-			HorizontalAlignment(ByteProperty)=HAlign_Center 
-			VerticalAlignment(ByteProperty)=VAlign_Bottom 
-			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
-			Content(ObjectProperty)=OverlayTypeIcon=WidgetArchetype 
 	OverlaySlot_5 (0-0-0-0): size 152 (cls: OverlaySlot_5>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Fill 
 			VerticalAlignment(ByteProperty)=VAlign_Fill 
 			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
-			Content(ObjectProperty)=VerticalBox_2=WidgetArchetype 
+			Content(ObjectProperty)=Overlay_3=WidgetArchetype 
 	OverlaySlot_0 (0-0-0-0): size 70 (cls: OverlaySlot_0>OverlaySlot>/Script/UMG):
 		Tag array:
 			Parent(ObjectProperty)=FlashingBang=WidgetArchetype 
@@ -707,7 +730,13 @@ Serialized exports:
 			VerticalAlignment(ByteProperty)=VAlign_Fill 
 			Parent(ObjectProperty)=Overlay_4=WidgetArchetype 
 			Content(ObjectProperty)=CommonBorder_1=WidgetArchetype 
-	OverlaySlot_6 (0-0-0-0): size 152 (cls: OverlaySlot_6>OverlaySlot>/Script/UMG):
+	OverlaySlot_0 (0-0-0-0): size 152 (cls: OverlaySlot_0>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=Overlay_3=WidgetArchetype 
+			Content(ObjectProperty)=SlotImageOverlay=WidgetArchetype 
+	OverlaySlot_1 (0-0-0-0): size 152 (cls: OverlaySlot_1>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Center 
 			VerticalAlignment(ByteProperty)=VAlign_Fill 
@@ -721,7 +750,7 @@ Serialized exports:
 			Content(ObjectProperty)=EmptyImage=WidgetArchetype 
 	OverlaySlot_0 (0-0-0-0): size 70 (cls: OverlaySlot_0>OverlaySlot>/Script/UMG):
 		Tag array:
-			Parent(ObjectProperty)=OverlayTypeIcon=WidgetArchetype 
+			Parent(ObjectProperty)=SlotImageOverlay=WidgetArchetype 
 			Content(ObjectProperty)=ImageSlotType=WidgetArchetype 
 	PanelSlot_0 (0-0-0-0): size 70 (cls: PanelSlot_0>PanelSlot>/Script/UMG):
 		Tag array:
@@ -841,19 +870,12 @@ Serialized exports:
 		Tag array:
 			Parent(ObjectProperty)=SuperBang=WidgetArchetype 
 			Content(ObjectProperty)=FlashingBang=WidgetArchetype 
+	SlotImage (0-0-0-0): size 36 (cls: SlotImage>StructProperty>/Script/CoreUObject)
 	BannerDisplayName (0-0-0-0): size 32 (cls: BannerDisplayName>TextProperty>/Script/CoreUObject)
 	CategoryDescription (0-0-0-0): size 32 (cls: CategoryDescription>TextProperty>/Script/CoreUObject)
 	BannerLabel (0-0-0-0): size 32 (cls: BannerLabel>TextProperty>/Script/CoreUObject)
 	BannerLabel (0-0-0-0): size 32 (cls: BannerLabel>TextProperty>/Script/CoreUObject)
 	CustomizationDescription (0-0-0-0): size 32 (cls: CustomizationDescription>TextProperty>/Script/CoreUObject)
-	VerticalBox_2 (0-0-0-0): size 82 (cls: VerticalBox_2>VerticalBox>/Script/UMG):
-		Tag array:
-			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-			Slot(ObjectProperty)=OverlaySlot_5=WidgetArchetype 
-	VerticalBoxSlot_0 (0-0-0-0): size 70 (cls: VerticalBoxSlot_0>VerticalBoxSlot>/Script/UMG):
-		Tag array:
-			Parent(ObjectProperty)=VerticalBox_2=WidgetArchetype 
-			Content(ObjectProperty)=Overlay_3=WidgetArchetype 
 	ModeSwitcher (0-0-0-0): size 98 (cls: ModeSwitcher>WidgetSwitcher>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)

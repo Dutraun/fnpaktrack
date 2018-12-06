@@ -37,6 +37,7 @@ Name table:
 	/Game/Sounds/Fort_Gadgets/Outlander/Outlander_InTheZone_Start_Cue
 	/Game/Sounds/Fort_Gadgets/Outlander/Outlander_InTheZone_Stop_Cue
 	/Game/Sounds/Fort_Gadgets/Teleporter/teleporter_recharge_cue
+	/Game/Sounds/Fort_Step_Sounds/Outlander/Outlander_FootstepBank
 	/Game/Sounds/Fort_Weapons/SledgeHammers/Melee_Blunt_Rocket_Sledge_Impact_Husk_Cue
 	/Game/Sounds/Fort_Weapons/SledgeHammers/Melee_Blunt_T02_Basic_Sledgehammer_HeavyImpact_Cue
 	/Game/Sounds/Fortress_Foley/Player_Movement/Player_Jump_Cue
@@ -69,6 +70,7 @@ Name table:
 	AnimTrailPS_GEN_VARIABLE
 	AntiMaterialHitBox
 	AntiMaterialHitBox_GEN_VARIABLE
+	AreaClass
 	Array_Get
 	Array_Length
 	ArrayIndex
@@ -310,12 +312,15 @@ Name table:
 	FloatCurve
 	FloatProperty
 	FloatTracks
+	FootstepBank
 	ForceQuickbarUpdate
 	ForceUpdateQuickbar
 	FortFeedbackBank
 	FortFeedbackHandle
+	FortFootstepAudioBank
 	FortGameStateZone
 	FortKismetLibrary
+	FortMetaNavArea_Obstacles
 	FortMovementComp_Character
 	Fortnite_M_Avg_Player_MenusScreen_AnimBP_C
 	FortPawn
@@ -482,25 +487,11 @@ Name table:
 	NODE_AddPostProcessComponent-0
 	NODE_AddSkeletalMeshComponent-0
 	NODE_AddSkeletalMeshComponent-1
-	NODE_AddSkeletalMeshComponent-10
-	NODE_AddSkeletalMeshComponent-11
-	NODE_AddSkeletalMeshComponent-12
-	NODE_AddSkeletalMeshComponent-13
-	NODE_AddSkeletalMeshComponent-14
-	NODE_AddSkeletalMeshComponent-15
-	NODE_AddSkeletalMeshComponent-16
-	NODE_AddSkeletalMeshComponent-17
-	NODE_AddSkeletalMeshComponent-18
-	NODE_AddSkeletalMeshComponent-19
 	NODE_AddSkeletalMeshComponent-2
-	NODE_AddSkeletalMeshComponent-20
 	NODE_AddSkeletalMeshComponent-3
 	NODE_AddSkeletalMeshComponent-4
 	NODE_AddSkeletalMeshComponent-5
 	NODE_AddSkeletalMeshComponent-6
-	NODE_AddSkeletalMeshComponent-7
-	NODE_AddSkeletalMeshComponent-8
-	NODE_AddSkeletalMeshComponent-9
 	NODE_AddStaticMeshComponent-0
 	None
 	Normal
@@ -517,6 +508,7 @@ Name table:
 	OptionalObject
 	OptionalObject2
 	Outlander_Female_Gauntlet_Montage_Inspect
+	Outlander_FootstepBank
 	Outlander_Fragment_Deactivate_Cue
 	Outlander_Fragment_DefensiveActivate_Cue
 	Outlander_Fragment_Get_Cue
@@ -666,8 +658,8 @@ Name table:
 	StrProperty
 	StructProperty
 	Subtract_FloatFloat
-	sweep
 	Sweep
+	sweep
 	TagName
 	Target
 	TargetData
@@ -696,7 +688,6 @@ Name table:
 	TriggerFeedbackEvent
 	TTFloatTrack
 	UberGraphFrame
-	UberGraphFramePointerProperty
 	UberGraphFunction
 	UpdateFunctionName
 	UserConstructionScript
@@ -718,16 +709,15 @@ Name table:
 	Z
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	PlayerPawn_Outlander_C (0-0-0-0): size 1044 (cls: PlayerPawn_Outlander_C>BlueprintGeneratedClass>/Script/Engine):
+	PlayerPawn_Outlander_C (0-0-0-0): size 1015 (cls: PlayerPawn_Outlander_C>BlueprintGeneratedClass>/Script/Engine):
 		Tag array:
 			NumReplicatedProperties(IntProperty)=1 
 			bHasCookedComponentInstancingData(BoolProperty)=True 
 			Timelines(ArrayProperty)=[object] (inner: ObjectProperty)
 			SimpleConstructionScript(ObjectProperty)=SimpleConstructionScript_5=PlayerPawn_Outlander_C 
 			InheritableComponentHandler(ObjectProperty)=InheritableComponentHandler=PlayerPawn_Outlander_C 
-			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=PlayerPawn_Outlander_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_PlayerPawn_Outlander=PlayerPawn_Outlander_C 
-	Default__PlayerPawn_Outlander_C (0-0-0-0): size 4861 (cls: Default__PlayerPawn_Outlander_C>PlayerPawn_Outlander_C):
+	Default__PlayerPawn_Outlander_C (0-0-0-0): size 4890 (cls: Default__PlayerPawn_Outlander_C>PlayerPawn_Outlander_C):
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			P_FragmentActivation(ObjectProperty)=P_DF_Activation=/Game/Effects/Fort_Effects/Effects/Characters/Outlander/DimensionalFrag/P_DF_Activation 
@@ -780,6 +770,7 @@ Serialized exports:
 			PawnStatHandle(StructProperty)=System.Byte[] 
 			DefaultLandingSound(ObjectProperty)=Player_Land_Cue=/Game/Sounds/Fortress_Foley/Player_Movement/Player_Land_Cue 
 			DefaultJumpSound(ObjectProperty)=Player_Jump_Cue=/Game/Sounds/Fortress_Foley/Player_Movement/Player_Jump_Cue 
+			FootstepBank(ObjectProperty)=Outlander_FootstepBank=/Game/Sounds/Fort_Step_Sounds/Outlander/Outlander_FootstepBank 
 			VocalChords(ArrayProperty)=[object] (inner: StructProperty)
 			GameplayTags(StructProperty)=GameplayTagContainer:Class.IsOutlander,NPC.EnemyType.Pawn,Homebase.Class.IsOutlander 
 			Mesh(ObjectProperty)=CharacterMesh0=Default__PlayerPawn_Outlander_C 
@@ -790,7 +781,7 @@ Serialized exports:
 	Body Effect Mesh Materials (0-0-0-0): size 36 (cls: Body Effect Mesh Materials>ArrayProperty>/Script/CoreUObject)
 	PhaseShiftHitBox (0-0-0-0): size 36 (cls: PhaseShiftHitBox>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_PlayerPawn_Outlander (0-0-0-0): size 7065 (cls: ExecuteUbergraph_PlayerPawn_Outlander>Function>/Script/CoreUObject)
+	ExecuteUbergraph_PlayerPawn_Outlander (0-0-0-0): size 6515 (cls: ExecuteUbergraph_PlayerPawn_Outlander>Function>/Script/CoreUObject)
 	CallFunc_GetChildrenComponents_Children (0-0-0-0): size 36 (cls: CallFunc_GetChildrenComponents_Children>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetChildrenComponents_Children (0-0-0-0): size 36 (cls: CallFunc_GetChildrenComponents_Children>ArrayProperty>/Script/CoreUObject)
 	Head Effect Mesh Materials (0-0-0-0): size 36 (cls: Head Effect Mesh Materials>ObjectProperty>/Script/CoreUObject)
@@ -840,43 +831,45 @@ Serialized exports:
 	Temp_bool_Has_Been_Initd_Variable (0-0-0-0): size 34 (cls: Temp_bool_Has_Been_Initd_Variable>BoolProperty>/Script/CoreUObject)
 	Temp_bool_IsClosed_Variable (0-0-0-0): size 34 (cls: Temp_bool_IsClosed_Variable>BoolProperty>/Script/CoreUObject)
 	OnPlayerBuiltFloor (0-0-0-0): size 34 (cls: OnPlayerBuiltFloor>BoolProperty>/Script/CoreUObject)
-	PlayChargeCommonFX (0-0-0-0): size 58 (cls: PlayChargeCommonFX>Function>/Script/CoreUObject)
-	ChargedUp (0-0-0-0): size 58 (cls: ChargedUp>Function>/Script/CoreUObject)
-	SetMenuScreenClassName (0-0-0-0): size 58 (cls: SetMenuScreenClassName>Function>/Script/CoreUObject)
+	PlayChargeCommonFX (0-0-0-0): size 54 (cls: PlayChargeCommonFX>Function>/Script/CoreUObject)
+	ChargedUp (0-0-0-0): size 54 (cls: ChargedUp>Function>/Script/CoreUObject)
+	SetMenuScreenClassName (0-0-0-0): size 54 (cls: SetMenuScreenClassName>Function>/Script/CoreUObject)
 	MontageName (0-0-0-0): size 36 (cls: MontageName>ObjectProperty>/Script/CoreUObject)
-	PlayGauntletMontage (0-0-0-0): size 72 (cls: PlayGauntletMontage>Function>/Script/CoreUObject)
-	ReceiveBeginPlay (0-0-0-0): size 58 (cls: ReceiveBeginPlay>Function>/Script/CoreUObject)
-	ForceQuickbarUpdate (0-0-0-0): size 58 (cls: ForceQuickbarUpdate>Function>/Script/CoreUObject)
+	PlayGauntletMontage (0-0-0-0): size 68 (cls: PlayGauntletMontage>Function>/Script/CoreUObject)
+	ReceiveBeginPlay (0-0-0-0): size 54 (cls: ReceiveBeginPlay>Function>/Script/CoreUObject)
+	ForceQuickbarUpdate (0-0-0-0): size 54 (cls: ForceQuickbarUpdate>Function>/Script/CoreUObject)
 	EventType (0-0-0-0): size 36 (cls: EventType>ByteProperty>/Script/CoreUObject)
-	GameplayCue.Abilities.Activation.Outlander.AntiMaterialChargeImpact (0-0-0-0): size 86 (cls: GameplayCue.Abilities.Activation.Outlander.AntiMaterialChargeImpact>Function>/Script/CoreUObject)
+	GameplayCue.Abilities.Activation.Outlander.AntiMaterialChargeImpact (0-0-0-0): size 82 (cls: GameplayCue.Abilities.Activation.Outlander.AntiMaterialChargeImpact>Function>/Script/CoreUObject)
 	EventType (0-0-0-0): size 36 (cls: EventType>ByteProperty>/Script/CoreUObject)
-	GameplayCue.Abilities.Activation.Outlander.AntiMaterialChargeChargeUp (0-0-0-0): size 86 (cls: GameplayCue.Abilities.Activation.Outlander.AntiMaterialChargeChargeUp>Function>/Script/CoreUObject)
+	GameplayCue.Abilities.Activation.Outlander.AntiMaterialChargeChargeUp (0-0-0-0): size 82 (cls: GameplayCue.Abilities.Activation.Outlander.AntiMaterialChargeChargeUp>Function>/Script/CoreUObject)
 	EventType (0-0-0-0): size 36 (cls: EventType>ByteProperty>/Script/CoreUObject)
-	GameplayCue.Abilities.Activation.Outlander.AntiMaterialChargeThruster (0-0-0-0): size 86 (cls: GameplayCue.Abilities.Activation.Outlander.AntiMaterialChargeThruster>Function>/Script/CoreUObject)
+	GameplayCue.Abilities.Activation.Outlander.AntiMaterialChargeThruster (0-0-0-0): size 82 (cls: GameplayCue.Abilities.Activation.Outlander.AntiMaterialChargeThruster>Function>/Script/CoreUObject)
 	EventType (0-0-0-0): size 36 (cls: EventType>ByteProperty>/Script/CoreUObject)
-	GameplayCue.Abilities.Activation.Outlander.AntiMaterialCharge (0-0-0-0): size 86 (cls: GameplayCue.Abilities.Activation.Outlander.AntiMaterialCharge>Function>/Script/CoreUObject)
+	GameplayCue.Abilities.Activation.Outlander.AntiMaterialCharge (0-0-0-0): size 82 (cls: GameplayCue.Abilities.Activation.Outlander.AntiMaterialCharge>Function>/Script/CoreUObject)
 	EventType (0-0-0-0): size 36 (cls: EventType>ByteProperty>/Script/CoreUObject)
-	GameplayCue.Outlander.KnockKnock (0-0-0-0): size 86 (cls: GameplayCue.Outlander.KnockKnock>Function>/Script/CoreUObject)
-	EventOnDamagePlayFX (0-0-0-0): size 58 (cls: EventOnDamagePlayFX>Function>/Script/CoreUObject)
+	GameplayCue.Outlander.KnockKnock (0-0-0-0): size 82 (cls: GameplayCue.Outlander.KnockKnock>Function>/Script/CoreUObject)
+	EventOnDamagePlayFX (0-0-0-0): size 54 (cls: EventOnDamagePlayFX>Function>/Script/CoreUObject)
 	Damage (0-0-0-0): size 32 (cls: Damage>FloatProperty>/Script/CoreUObject)
-	OnDamagePlayEffects (0-0-0-0): size 156 (cls: OnDamagePlayEffects>Function>/Script/CoreUObject)
-	RefreshIcons (0-0-0-0): size 58 (cls: RefreshIcons>Function>/Script/CoreUObject)
+	OnDamagePlayEffects (0-0-0-0): size 152 (cls: OnDamagePlayEffects>Function>/Script/CoreUObject)
+	RefreshIcons (0-0-0-0): size 54 (cls: RefreshIcons>Function>/Script/CoreUObject)
 	EventType (0-0-0-0): size 36 (cls: EventType>ByteProperty>/Script/CoreUObject)
-	GameplayCue.Abilities.Activation.Generic.HarvestBuff.Tier2 (0-0-0-0): size 86 (cls: GameplayCue.Abilities.Activation.Generic.HarvestBuff.Tier2>Function>/Script/CoreUObject)
+	GameplayCue.Abilities.Activation.Generic.HarvestBuff.Tier2 (0-0-0-0): size 82 (cls: GameplayCue.Abilities.Activation.Generic.HarvestBuff.Tier2>Function>/Script/CoreUObject)
 	EventType (0-0-0-0): size 36 (cls: EventType>ByteProperty>/Script/CoreUObject)
-	GameplayCue.Abilities.Activation.Generic.HarvestBuff.Tier1 (0-0-0-0): size 86 (cls: GameplayCue.Abilities.Activation.Generic.HarvestBuff.Tier1>Function>/Script/CoreUObject)
+	GameplayCue.Abilities.Activation.Generic.HarvestBuff.Tier1 (0-0-0-0): size 82 (cls: GameplayCue.Abilities.Activation.Generic.HarvestBuff.Tier1>Function>/Script/CoreUObject)
 	VSpawnColor (0-0-0-0): size 36 (cls: VSpawnColor>StructProperty>/Script/CoreUObject)
-	WithinReachOfTreasure (0-0-0-0): size 86 (cls: WithinReachOfTreasure>Function>/Script/CoreUObject)
+	WithinReachOfTreasure (0-0-0-0): size 82 (cls: WithinReachOfTreasure>Function>/Script/CoreUObject)
 	Activate (0-0-0-0): size 34 (cls: Activate>BoolProperty>/Script/CoreUObject)
-	AntiMaterialHitBox_GEN_VARIABLE (0-0-0-0): size 236 (cls: AntiMaterialHitBox_GEN_VARIABLE>BoxComponent>/Script/Engine):
+	AntiMaterialHitBox_GEN_VARIABLE (0-0-0-0): size 265 (cls: AntiMaterialHitBox_GEN_VARIABLE>BoxComponent>/Script/Engine):
 		Tag array:
 			BoxExtent(StructProperty)=Vector(57.17575,96,52) 
+			AreaClass(ObjectProperty)=FortMetaNavArea_Obstacles=/Script/FortniteGame 
 			CanCharacterStepUpOn(ByteProperty)=ECB_No 
 			RelativeLocation(StructProperty)=Vector(0,57,75) 
 			RelativeRotation(StructProperty)=Rotator(0,89.99999,0) 
-	PhaseShiftHitBox_GEN_VARIABLE (0-0-0-0): size 797 (cls: PhaseShiftHitBox_GEN_VARIABLE>BoxComponent>/Script/Engine):
+	PhaseShiftHitBox_GEN_VARIABLE (0-0-0-0): size 826 (cls: PhaseShiftHitBox_GEN_VARIABLE>BoxComponent>/Script/Engine):
 		Tag array:
 			BoxExtent(StructProperty)=Vector(60,60,52) 
+			AreaClass(ObjectProperty)=FortMetaNavArea_Obstacles=/Script/FortniteGame 
 			CanCharacterStepUpOn(ByteProperty)=ECB_No 
 			BodyInstance(StructProperty)=System.Byte[] 
 			RelativeLocation(StructProperty)=Vector(0,0,75) 
@@ -895,16 +888,16 @@ Serialized exports:
 	K2Node_GameplayCueEvent_EventType9 (0-0-0-0): size 36 (cls: K2Node_GameplayCueEvent_EventType9>ByteProperty>/Script/CoreUObject)
 	FragType (0-0-0-0): size 36 (cls: FragType>ByteProperty>/Script/CoreUObject)
 	EventType (0-0-0-0): size 36 (cls: EventType>ByteProperty>/Script/CoreUObject)
-	GameplayCue.Explorer.Fragment.Specialty.PickupFX (0-0-0-0): size 86 (cls: GameplayCue.Explorer.Fragment.Specialty.PickupFX>Function>/Script/CoreUObject)
-	GameplayCue.Explorer.Fragment.Defense.PickupFX (0-0-0-0): size 86 (cls: GameplayCue.Explorer.Fragment.Defense.PickupFX>Function>/Script/CoreUObject)
+	GameplayCue.Explorer.Fragment.Specialty.PickupFX (0-0-0-0): size 82 (cls: GameplayCue.Explorer.Fragment.Specialty.PickupFX>Function>/Script/CoreUObject)
+	GameplayCue.Explorer.Fragment.Defense.PickupFX (0-0-0-0): size 82 (cls: GameplayCue.Explorer.Fragment.Defense.PickupFX>Function>/Script/CoreUObject)
 	EventType (0-0-0-0): size 36 (cls: EventType>ByteProperty>/Script/CoreUObject)
 	EventType (0-0-0-0): size 36 (cls: EventType>ByteProperty>/Script/CoreUObject)
-	GameplayCue.Explorer.Fragment.Offense.PickupFX (0-0-0-0): size 86 (cls: GameplayCue.Explorer.Fragment.Offense.PickupFX>Function>/Script/CoreUObject)
+	GameplayCue.Explorer.Fragment.Offense.PickupFX (0-0-0-0): size 82 (cls: GameplayCue.Explorer.Fragment.Offense.PickupFX>Function>/Script/CoreUObject)
 	NewController (0-0-0-0): size 36 (cls: NewController>ObjectProperty>/Script/CoreUObject)
-	ReceivePossessed (0-0-0-0): size 72 (cls: ReceivePossessed>Function>/Script/CoreUObject)
+	ReceivePossessed (0-0-0-0): size 68 (cls: ReceivePossessed>Function>/Script/CoreUObject)
 	EventType (0-0-0-0): size 36 (cls: EventType>ByteProperty>/Script/CoreUObject)
-	GameplayCue.Outlander.InTheZone.FX (0-0-0-0): size 86 (cls: GameplayCue.Outlander.InTheZone.FX>Function>/Script/CoreUObject)
-	GameplayCue.Explorer.Fragment (0-0-0-0): size 86 (cls: GameplayCue.Explorer.Fragment>Function>/Script/CoreUObject)
+	GameplayCue.Outlander.InTheZone.FX (0-0-0-0): size 82 (cls: GameplayCue.Outlander.InTheZone.FX>Function>/Script/CoreUObject)
+	GameplayCue.Explorer.Fragment (0-0-0-0): size 82 (cls: GameplayCue.Explorer.Fragment>Function>/Script/CoreUObject)
 	EventType (0-0-0-0): size 36 (cls: EventType>ByteProperty>/Script/CoreUObject)
 	PhaseShiftHitSweep__Direction_81A0178F416D1106B841D9A9B7E8C737 (0-0-0-0): size 36 (cls: PhaseShiftHitSweep__Direction_81A0178F416D1106B841D9A9B7E8C737>ByteProperty>/Script/CoreUObject)
 	CollisionCylinder (0-0-0-0): size 12 (cls: CollisionCylinder>CapsuleComponent>/Script/Engine)
@@ -928,8 +921,8 @@ Serialized exports:
 	EventNeedRoadsActivate (0-0-0-0): size 36 (cls: EventNeedRoadsActivate>StructProperty>/Script/CoreUObject)
 	K2Node_MakeStruct_GameplayEventData (0-0-0-0): size 36 (cls: K2Node_MakeStruct_GameplayEventData>StructProperty>/Script/CoreUObject)
 	OnRep_OnPlayerBuiltFloor (0-0-0-0): size 568 (cls: OnRep_OnPlayerBuiltFloor>Function>/Script/CoreUObject)
-	PhaseShiftHitSweep__FinishedFunc (0-0-0-0): size 58 (cls: PhaseShiftHitSweep__FinishedFunc>Function>/Script/CoreUObject)
-	PhaseShiftHitSweep__UpdateFunc (0-0-0-0): size 58 (cls: PhaseShiftHitSweep__UpdateFunc>Function>/Script/CoreUObject)
+	PhaseShiftHitSweep__FinishedFunc (0-0-0-0): size 54 (cls: PhaseShiftHitSweep__FinishedFunc>Function>/Script/CoreUObject)
+	PhaseShiftHitSweep__UpdateFunc (0-0-0-0): size 54 (cls: PhaseShiftHitSweep__UpdateFunc>Function>/Script/CoreUObject)
 	UserConstructionScript (0-0-0-0): size 49 (cls: UserConstructionScript>Function>/Script/CoreUObject)
 	InheritableComponentHandler (0-0-0-0): size 12 (cls: InheritableComponentHandler>InheritableComponentHandler>/Script/Engine)
 	CallFunc_HasAllMatchingGameplayTags_TagContainerInterface1_CastInput (0-0-0-0): size 36 (cls: CallFunc_HasAllMatchingGameplayTags_TagContainerInterface1_CastInput>InterfaceProperty>/Script/CoreUObject)
@@ -1056,7 +1049,7 @@ Serialized exports:
 			bIsParentComponentNative(BoolProperty)=True 
 			VariableGuid(StructProperty)=Guid: 1084838020-1296286525-1080306867-3627366554 
 			InternalVariableName(NameProperty)=P_Outlander_PhaseShift_Impact_01 
-	SCS_Node_4 (0-0-0-0): size 1287 (cls: SCS_Node_4>SCS_Node>/Script/Engine):
+	SCS_Node_4 (0-0-0-0): size 1386 (cls: SCS_Node_4>SCS_Node>/Script/Engine):
 		Tag array:
 			ComponentClass(ObjectProperty)=SphereComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=KeenEyesRadius_GEN_VARIABLE=PlayerPawn_Outlander_C 
@@ -1071,7 +1064,7 @@ Serialized exports:
 			ComponentTemplate(ObjectProperty)=SceneComponent_5=PlayerPawn_Outlander_C 
 			VariableGuid(StructProperty)=Guid: 1295648158-0-0-0 
 			InternalVariableName(NameProperty)=DefaultSceneRoot 
-	SCS_Node_6 (0-0-0-0): size 1386 (cls: SCS_Node_6>SCS_Node>/Script/Engine):
+	SCS_Node_6 (0-0-0-0): size 1485 (cls: SCS_Node_6>SCS_Node>/Script/Engine):
 		Tag array:
 			ComponentClass(ObjectProperty)=BoxComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=AntiMaterialHitBox_GEN_VARIABLE=PlayerPawn_Outlander_C 
@@ -1080,7 +1073,7 @@ Serialized exports:
 			bIsParentComponentNative(BoolProperty)=True 
 			VariableGuid(StructProperty)=Guid: 927397751-1306873828-1649736383-1490106916 
 			InternalVariableName(NameProperty)=AntiMaterialHitBox 
-	SCS_Node_7 (0-0-0-0): size 2574 (cls: SCS_Node_7>SCS_Node>/Script/Engine):
+	SCS_Node_7 (0-0-0-0): size 2673 (cls: SCS_Node_7>SCS_Node>/Script/Engine):
 		Tag array:
 			ComponentClass(ObjectProperty)=BoxComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=PhaseShiftHitBox_GEN_VARIABLE=PlayerPawn_Outlander_C 
@@ -1097,9 +1090,10 @@ Serialized exports:
 	CharacterMesh0 (0-0-0-0): size 41 (cls: CharacterMesh0>SkeletalMeshComponent>/Script/Engine):
 		Tag array:
 			AttachParent(ObjectProperty)=CollisionCylinder=Default__PlayerPawn_Outlander_C 
-	KeenEyesRadius_GEN_VARIABLE (0-0-0-0): size 1067 (cls: KeenEyesRadius_GEN_VARIABLE>SphereComponent>/Script/Engine):
+	KeenEyesRadius_GEN_VARIABLE (0-0-0-0): size 1096 (cls: KeenEyesRadius_GEN_VARIABLE>SphereComponent>/Script/Engine):
 		Tag array:
 			SphereRadius(FloatProperty)=1000 
+			AreaClass(ObjectProperty)=FortMetaNavArea_Obstacles=/Script/FortniteGame 
 			BodyInstance(StructProperty)=System.Byte[] 
 			bCanEverAffectNavigation(BoolProperty)=False 
 	CallFunc_GetDisplayName_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetDisplayName_ReturnValue>StrProperty>/Script/CoreUObject)

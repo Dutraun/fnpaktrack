@@ -3,11 +3,13 @@ Name table:
 	/Game/UI/Foundation/Banner/BR-Banner/M-BR-Banner-Inst-Bronze
 	/Game/UI/Foundation/Banner/M-Borderless-Banner
 	/Game/UI/Foundation/Fonts/Burbank
+	/Game/UI/Foundation/Fonts/NotoSans
 	/Game/UI/Foundation/Input/InputActionDataTable
 	/Game/UI/Foundation/Profile/PlayerBanner
 	/Game/UI/Foundation/StateLayouts/HUD
 	/Game/UI/Foundation/Text/Materials/M-FontShadow
 	/Game/UI/Foundation/Text/Materials/M_Font_Horizon_Dynamic
+	/Game/UI/Foundation/Text/TextStyle-Base
 	/Game/UI/Foundation/Text/TextStyle-Base-M-B
 	/Game/UI/Foundation/Text/TextStyle-Base-S-B-S
 	/Game/UI/Foundation/Text/TextStyle-Base-S-B-S-70pc
@@ -17,6 +19,7 @@ Name table:
 	/Game/UI/Icons/Icon-Worker/Icon-WorkerUnique-Headshot-F
 	/Game/UI/InGame/Death/DeathWidget
 	/Game/UI/InGame/Death/DeathWidget.WidgetArchetype
+	/Game/UI/InGame/Death/E_DeathWidgetBodyState
 	/Game/UI/InGame/Death/KillerPortraitWidget
 	/Game/UI/InGame/KeybindWidget/KeybindWidget
 	/Script/BlueprintContext
@@ -70,6 +73,7 @@ Name table:
 	BooleanAND
 	BooleanOR
 	BoolProperty
+	BossGameState
 	Bottom
 	BoundAction
 	bOverride_MinDesiredHeight
@@ -98,6 +102,7 @@ Name table:
 	CallFunc_FCeil_ReturnValue1
 	CallFunc_Format_ReturnValue
 	CallFunc_Format_ReturnValue1
+	CallFunc_Format_ReturnValue2
 	CallFunc_Fraction_ReturnValue
 	CallFunc_FTrunc_ReturnValue
 	CallFunc_GetAbilitySystemComponent_ReturnValue
@@ -121,6 +126,7 @@ Name table:
 	CallFunc_GetKillerVisualInfoFromDeathReport_ReturnValue
 	CallFunc_GetLocalTeamTeamMemberInfo_ReturnValue
 	CallFunc_GetLocalTeamTeamMemberInfo_TeamMemberInfo
+	CallFunc_GetOverrideRespawnStatusText_ReturnValue
 	CallFunc_GetOwningPlayer_ReturnValue
 	CallFunc_GetOwningPlayer_ReturnValue1
 	CallFunc_GetOwningPlayerPawn_ReturnValue
@@ -136,6 +142,7 @@ Name table:
 	CallFunc_Greater_IntInt_ReturnValue
 	CallFunc_HasMatchingGameplayTag_ReturnValue
 	CallFunc_HasMatchingGameplayTag_self_CastInput
+	CallFunc_InBossGameState_BossGameState
 	CallFunc_IsActivated_ReturnValue
 	CallFunc_IsDBNO_ReturnValue
 	CallFunc_IsDead_ReturnValue
@@ -146,19 +153,26 @@ Name table:
 	CallFunc_K2_SetTimerDelegate_ReturnValue1
 	CallFunc_Len_ReturnValue
 	CallFunc_LessEqual_IntInt_ReturnValue
+	CallFunc_LessEqual_IntInt_ReturnValue1
 	CallFunc_MakeLiteralName_ReturnValue
 	CallFunc_MakeLiteralText_ReturnValue
 	CallFunc_MakeLiteralText_ReturnValue1
 	CallFunc_Max_ReturnValue
 	CallFunc_Max_ReturnValue1
+	CallFunc_Not_PreBool_ReturnValue
+	CallFunc_NotEqual_ByteByte_ReturnValue
 	CallFunc_NotEqual_NameName_ReturnValue
 	CallFunc_PlayAnimationAtTime_ReturnValue
+	CallFunc_PlayAnimationAtTime_ReturnValue1
+	CallFunc_PlayAnimationForward_ReturnValue
 	CallFunc_SetBannerImage_Success
 	CallFunc_Subtract_FloatFloat_ReturnValue
 	CallFunc_Subtract_FloatFloat_ReturnValue1
 	CallFunc_Subtract_FloatFloat_ReturnValue2
 	CallFunc_Subtract_IntInt_ReturnValue
 	CallFunc_Subtract_IntInt_ReturnValue1
+	CallFunc_SupportsRespawning_ReturnValue
+	CallFunc_TextIsEmpty_ReturnValue
 	CallFunc_UseSpectatorMenu_Use_Spectator_Menu
 	CanFollowTeammate
 	CanRestartPlayer
@@ -194,6 +208,13 @@ Name table:
 	DataTableRowHandle
 	DeathReport
 	DeathWidget_C
+	DeathWidgetBody_StartDeathBox
+	DeathWidgetBody_SwitcherRespawn
+	DeathWidgetBodySkipAnimations
+	DeathWidgetBodyState
+	DeathWidgetBodyState_New
+	DeathWidgetBodyWaitingToShow
+	DeathWidgetBodyWaitToShowTimeHandle
 	Default__AbilitySystemBlueprintLibrary
 	Default__ArrayProperty
 	Default__BlueprintContextLibrary
@@ -247,6 +268,7 @@ Name table:
 	Default__TextStyle-Base-M-B_C
 	Default__TextStyle-Base-S-B-S-70pc_C
 	Default__TextStyle-Base-S-B-S_C
+	Default__TextStyle-Base_C
 	Default__TextStyle-Header-L-Horizon_C
 	Default__VerticalBox
 	Default__VerticalBoxSlot
@@ -259,7 +281,9 @@ Name table:
 	DelegateFunction
 	DelegateProperty
 	Denominator
+	DisplayLabel
 	DisplayRate
+	E_DeathWidgetBodyState
 	EaseIn
 	EaseInFunction
 	EaseOut
@@ -308,6 +332,7 @@ Name table:
 	ExecuteUbergraph_DeathWidget
 	ExtraLives
 	FCeil
+	FirstTimeShowing
 	Flags
 	FloatCurve
 	FloatFunction
@@ -323,6 +348,7 @@ Name table:
 	FormatArgumentData
 	FortActivatablePanel
 	FortGameModeZone
+	FortGameStateBoss
 	FortGameStateZone
 	FortHeroManagementContext
 	FortHUDContext
@@ -365,6 +391,7 @@ Name table:
 	GetInputManager
 	GetKillerVisualInfoFromDeathReport
 	GetLocalTeamTeamMemberInfo
+	GetOverrideRespawnStatusText
 	GetOwningPlayer
 	GetOwningPlayerPawn
 	GetPlayerController
@@ -373,6 +400,7 @@ Name table:
 	GetServerWorldTimeSeconds
 	GetSpectatingPlayerName
 	GetUIManagerWidget
+	GotoBodyState
 	Greater_FloatFloat
 	Greater_IntInt
 	Groups
@@ -399,7 +427,9 @@ Name table:
 	Image
 	ImageSize
 	ImplIndex
+	InBossGameState
 	Init
+	InitDeathWidgetBody
 	Input_NextTeammate
 	Input_PreviousTeammate
 	Input_RespawnAtBase
@@ -424,23 +454,28 @@ Name table:
 	K2Node_CreateDelegate_OutputDelegate2
 	K2Node_CreateDelegate_OutputDelegate3
 	K2Node_CreateDelegate_OutputDelegate4
-	K2Node_CreateDelegate_OutputDelegate5
+	K2Node_DynamicCast_AsFort_Game_State_Boss
 	K2Node_DynamicCast_AsFort_Pawn
 	K2Node_DynamicCast_AsFort_Player_Controller_Deployable_Base
 	K2Node_DynamicCast_AsFort_Player_Controller_Zone
 	K2Node_DynamicCast_AsFort_Player_State
+	K2Node_DynamicCast_AsFort_Player_State_Zone
 	K2Node_DynamicCast_AsFort_UIZone
 	K2Node_DynamicCast_AsHUD
 	K2Node_DynamicCast_bSuccess
 	K2Node_DynamicCast_bSuccess1
 	K2Node_MakeArray_Array
 	K2Node_MakeArray_Array1
+	K2Node_MakeArray_Array2
 	K2Node_MakeStruct_FormatArgumentData
 	K2Node_MakeStruct_FormatArgumentData1
+	K2Node_MakeStruct_FormatArgumentData2
 	K2Node_MakeStruct_SlateColor
 	K2Node_MakeStruct_SlateColor1
 	K2Node_Select1_Default
 	K2Node_Select_Default
+	K2Node_SwitchEnum1_CmpSuccess
+	K2Node_SwitchEnum_CmpSuccess
 	Key
 	Keybase-Left-L
 	Keybase-Right-L
@@ -517,11 +552,15 @@ Name table:
 	MulticastDelegateProperty
 	Name
 	NameProperty
+	New State
 	NextTeammate
 	None
 	Normal
+	Not_PreBool
+	NotEqual_ByteByte
 	NotEqual_NameName
 	NotifyFunctionName
+	NotoSans
 	NotoSans-Bold
 	Numerator
 	NumEvalPtrs
@@ -532,6 +571,7 @@ Name table:
 	ObjectGuid
 	ObjectProperty
 	OnActivated
+	OnBodyState_WaitToShowFinished
 	OnLocalPlayerDied
 	OnLocalPlayerRevived
 	OnLocalPlayerViewTargetChanged
@@ -548,6 +588,7 @@ Name table:
 	OutlineSettings
 	OutlineSize
 	Overlay
+	Overlay_DeathWidgetBody
 	OverlayEmblem
 	OverlaySlot
 	Package
@@ -557,6 +598,7 @@ Name table:
 	Pass Through
 	Pawn
 	PlayAnimationAtTime
+	PlayAnimationForward
 	PlaybackRange
 	PlayerBanner
 	PlayerBanner_C
@@ -610,11 +652,14 @@ Name table:
 	Resurrection Prompt Out
 	Resurrection Prompt Out_INST
 	Resurrection Prompt_1_INST
-	Resurrection Prompt_2_INST
-	Resurrection Prompt_INST
+	ResurrectionPrompt_2_UNUSED
+	ResurrectionPrompt_2_UNUSED_INST
+	ResurrectionPrompt_UNUSED
+	ResurrectionPrompt_UNUSED_INST
 	ResurrectTextBox
 	ResurrectTimeRemaining
 	ResurrectTimeRemainingFloat
+	ReturnValue
 	Right
 	RightMouseBase
 	RootWidget
@@ -639,6 +684,7 @@ Name table:
 	ServerTimeForResurrect
 	Set Parent Widget VAlignment
 	SetActionHandlerStateFromHandle
+	SetActiveWidget
 	SetActiveWidgetIndex
 	SetBannerImage
 	SetColorAndOpacity
@@ -654,11 +700,12 @@ Name table:
 	Shear
 	ShouldShowDeathWidget
 	Show Death Spectator Menu
-	Show Resurrect & Respawn
 	Show Resurrect & Respawn Anim
-	Show Resurrect & Respawn_INST
 	ShowExtraLivesText
 	ShowExtraLivesTimerHandle
+	ShowExtraLivesUI
+	ShowResurrectRespawn
+	ShowResurrectRespawn_INST
 	Signature
 	Size
 	SizeBox
@@ -678,7 +725,6 @@ Name table:
 	Spacer
 	SpecifiedColor
 	SpectatorName
-	StartDeathBox
 	Stretch
 	StrProperty
 	StructProperty
@@ -686,9 +732,9 @@ Name table:
 	SubTemplateSerialNumbers
 	Subtract_FloatFloat
 	Subtract_IntInt
+	SupportsRespawning
 	SurroundImage
 	SurroundLoadGuard
-	SwitcherBody
 	SwitcherRespawnTextWidget
 	SwitcherTitle
 	SwitcherTitleState_KnockDown const
@@ -710,10 +756,13 @@ Name table:
 	TemplateSerialNumber
 	Text
 	TextBlock
+	TextIsEmpty
 	TextProperty
+	TextStyle
 	TextStyle-Base-M-B_C
 	TextStyle-Base-S-B-S-70pc_C
 	TextStyle-Base-S-B-S_C
+	TextStyle-Base_C
 	TextStyle-Header-L-Horizon_C
 	Texture2D
 	TickResolution
@@ -730,7 +779,6 @@ Name table:
 	Translation
 	TypefaceFontName
 	UberGraphFrame
-	UberGraphFramePointerProperty
 	UberGraphFunction
 	UInt16Property
 	UInt32Property
@@ -738,6 +786,7 @@ Name table:
 	UMGSequencePlayer
 	UnderlyingType
 	Use Spectator Menu
+	UserDefinedEnum
 	UserSpecifiedScale
 	UserWidget
 	UseSpectatorMenu
@@ -766,23 +815,25 @@ Name table:
 	WidgetTree
 	WidthOverride
 	You Died!
-	You Died!_1_INST
-	You Died!_2_INST
 	You Died!_3_INST
-	You Died!_INST
 	YouDied Anim
+	YouDied_1_UNUSED
+	YouDied_1_UNUSED_INST
+	YouDied_2_UNUSED
+	YouDied_2_UNUSED_INST
+	YouDied_UNUSED
+	YouDied_UNUSED_INST
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	DeathWidget_C (0-0-0-0): size 837 (cls: DeathWidget_C>WidgetBlueprintGeneratedClass>/Script/UMG):
+	DeathWidget_C (0-0-0-0): size 912 (cls: DeathWidget_C>WidgetBlueprintGeneratedClass>/Script/UMG):
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
 			bValidTemplate(BoolProperty)=True 
 			Animations(ArrayProperty)=[object] (inner: ObjectProperty)
 			TemplateAsset(SoftObjectProperty)=/Game/UI/InGame/Death/DeathWidget.WidgetArchetype 
-			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=DeathWidget_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_DeathWidget=DeathWidget_C 
-	Default__DeathWidget_C (0-0-0-0): size 1003 (cls: Default__DeathWidget_C>DeathWidget_C):
+	Default__DeathWidget_C (0-0-0-0): size 1119 (cls: Default__DeathWidget_C>DeathWidget_C):
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			RespawnTimerHandle(StructProperty)=System.Byte[] 
@@ -794,36 +845,44 @@ Serialized exports:
 			Input_NextTeammate(StructProperty)=System.Byte[] 
 			SwitcherTitleState_Spectate const(IntProperty)=1 
 			Input_RespawnAtBase(StructProperty)=System.Byte[] 
+			DeathWidgetBodyWaitingToShow(BoolProperty)=True 
+			DeathWidgetBodyWaitToShowTimeHandle(StructProperty)=System.Byte[] 
 			InputPriority(EnumProperty)=EInputPriority::Menu 
 			bConsumePointerInput(BoolProperty)=True 
 			bHasScriptImplementedTick(BoolProperty)=False 
 			bHasScriptImplementedPaint(BoolProperty)=False 
 			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
-	Resurrection Prompt_2 (0-0-0-0): size 36 (cls: Resurrection Prompt_2>ObjectProperty>/Script/CoreUObject)
+	ResurrectionPrompt_2_UNUSED (0-0-0-0): size 36 (cls: ResurrectionPrompt_2_UNUSED>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_DeathWidget (0-0-0-0): size 477 (cls: ExecuteUbergraph_DeathWidget>Function>/Script/CoreUObject)
-	OnActivated (0-0-0-0): size 58 (cls: OnActivated>Function>/Script/CoreUObject)
-	Construct (0-0-0-0): size 58 (cls: Construct>Function>/Script/CoreUObject)
+	ExecuteUbergraph_DeathWidget (0-0-0-0): size 500 (cls: ExecuteUbergraph_DeathWidget>Function>/Script/CoreUObject)
+	OnActivated (0-0-0-0): size 54 (cls: OnActivated>Function>/Script/CoreUObject)
+	Construct (0-0-0-0): size 54 (cls: Construct>Function>/Script/CoreUObject)
 	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject)
-	OnPawnSpawned (0-0-0-0): size 461 (cls: OnPawnSpawned>Function>/Script/CoreUObject)
+	OnPawnSpawned (0-0-0-0): size 567 (cls: OnPawnSpawned>Function>/Script/CoreUObject)
 	DeathReport (0-0-0-0): size 36 (cls: DeathReport>StructProperty>/Script/CoreUObject)
-	OnPawnDied (0-0-0-0): size 1131 (cls: OnPawnDied>Function>/Script/CoreUObject)
+	OnPawnDied (0-0-0-0): size 988 (cls: OnPawnDied>Function>/Script/CoreUObject)
 	ServerRespawnTime (0-0-0-0): size 32 (cls: ServerRespawnTime>FloatProperty>/Script/CoreUObject)
-	ConfigureRespawnTimer (0-0-0-0): size 932 (cls: ConfigureRespawnTimer>Function>/Script/CoreUObject)
+	ConfigureRespawnTimer (0-0-0-0): size 942 (cls: ConfigureRespawnTimer>Function>/Script/CoreUObject)
 	Temp_int_Variable (0-0-0-0): size 32 (cls: Temp_int_Variable>IntProperty>/Script/CoreUObject)
-	OnRespawnTimerUpdate (0-0-0-0): size 1006 (cls: OnRespawnTimerUpdate>Function>/Script/CoreUObject)
-	K2Node_MakeStruct_SlateColor (0-0-0-0): size 36 (cls: K2Node_MakeStruct_SlateColor>StructProperty>/Script/CoreUObject)
-	SetRespawnTimerText (0-0-0-0): size 1303 (cls: SetRespawnTimerText>Function>/Script/CoreUObject)
+	OnRespawnTimerUpdate (0-0-0-0): size 940 (cls: OnRespawnTimerUpdate>Function>/Script/CoreUObject)
+	CallFunc_LessEqual_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_LessEqual_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
+	SetRespawnTimerText (0-0-0-0): size 1463 (cls: SetRespawnTimerText>Function>/Script/CoreUObject)
 	K2Node_MakeArray_Array (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array>StructProperty>/Script/CoreUObject)
 	K2Node_MakeArray_Array (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array>ArrayProperty>/Script/CoreUObject)
 	K2Node_MakeArray_Array1 (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array1>StructProperty>/Script/CoreUObject)
 	K2Node_MakeArray_Array1 (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array1>ArrayProperty>/Script/CoreUObject)
+	K2Node_MakeArray_Array2 (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array2>StructProperty>/Script/CoreUObject)
+	K2Node_MakeArray_Array2 (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array2>ArrayProperty>/Script/CoreUObject)
 	CallFunc_GetRuntimeOptions_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetRuntimeOptions_ReturnValue>ObjectProperty>/Script/CoreUObject)
-	ShowExtraLivesText (0-0-0-0): size 2465 (cls: ShowExtraLivesText>Function>/Script/CoreUObject)
+	ShowExtraLivesText (0-0-0-0): size 2552 (cls: ShowExtraLivesText>Function>/Script/CoreUObject)
 	K2Node_MakeArray_Array (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array>StructProperty>/Script/CoreUObject)
 	K2Node_MakeArray_Array (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array>ArrayProperty>/Script/CoreUObject)
 	CallFunc_Greater_FloatFloat_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Greater_FloatFloat_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Greater_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Greater_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
+	DeathWidgetBodySkipAnimations (0-0-0-0): size 34 (cls: DeathWidgetBodySkipAnimations>BoolProperty>/Script/CoreUObject)
+	DeathWidgetBodyWaitingToShow (0-0-0-0): size 34 (cls: DeathWidgetBodyWaitingToShow>BoolProperty>/Script/CoreUObject)
+	CallFunc_UseSpectatorMenu_Use_Spectator_Menu (0-0-0-0): size 34 (cls: CallFunc_UseSpectatorMenu_Use_Spectator_Menu>BoolProperty>/Script/CoreUObject)
+	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
 	CallFunc_PlayAnimationAtTime_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlayAnimationAtTime_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	YouDied Anim (0-0-0-0): size 81 (cls: YouDied Anim>Function>/Script/CoreUObject)
 	CallFunc_PlayAnimationAtTime_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlayAnimationAtTime_ReturnValue>ObjectProperty>/Script/CoreUObject)
@@ -836,31 +895,44 @@ Serialized exports:
 	OnWatchdogTimerUpdate (0-0-0-0): size 239 (cls: OnWatchdogTimerUpdate>Function>/Script/CoreUObject)
 	Pass Through (0-0-0-0): size 34 (cls: Pass Through>BoolProperty>/Script/CoreUObject)
 	Handle_FollowNextTeammate (0-0-0-0): size 149 (cls: Handle_FollowNextTeammate>Function>/Script/CoreUObject)
-	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	Pass Through (0-0-0-0): size 34 (cls: Pass Through>BoolProperty>/Script/CoreUObject)
 	Handle_FollowPreviousTeammate (0-0-0-0): size 149 (cls: Handle_FollowPreviousTeammate>Function>/Script/CoreUObject)
-	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	Temp_byte_Variable (0-0-0-0): size 40 (cls: Temp_byte_Variable>EnumProperty>/Script/CoreUObject)
-	Refresh_Input (0-0-0-0): size 959 (cls: Refresh_Input>Function>/Script/CoreUObject)
+	Refresh_Input (0-0-0-0): size 993 (cls: Refresh_Input>Function>/Script/CoreUObject)
 	Pass Through (0-0-0-0): size 34 (cls: Pass Through>BoolProperty>/Script/CoreUObject)
 	Handle_RespawnAtBase (0-0-0-0): size 153 (cls: Handle_RespawnAtBase>Function>/Script/CoreUObject)
+	Use Spectator Menu (0-0-0-0): size 34 (cls: Use Spectator Menu>BoolProperty>/Script/CoreUObject)
+	UseSpectatorMenu (0-0-0-0): size 184 (cls: UseSpectatorMenu>Function>/Script/CoreUObject)
+	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	OnViewTargetChanged (0-0-0-0): size 559 (cls: OnViewTargetChanged>Function>/Script/CoreUObject)
+	V Alignment (0-0-0-0): size 36 (cls: V Alignment>ByteProperty>/Script/CoreUObject)
+	Set Parent Widget VAlignment (0-0-0-0): size 192 (cls: Set Parent Widget VAlignment>Function>/Script/CoreUObject)
+	New State (0-0-0-0): size 36 (cls: New State>ByteProperty>/Script/CoreUObject)
+	GotoBodyState (0-0-0-0): size 621 (cls: GotoBodyState>Function>/Script/CoreUObject)
+	CallFunc_NotEqual_ByteByte_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_NotEqual_ByteByte_ReturnValue>BoolProperty>/Script/CoreUObject)
+	FirstTimeShowing (0-0-0-0): size 34 (cls: FirstTimeShowing>BoolProperty>/Script/CoreUObject)
+	K2Node_SwitchEnum1_CmpSuccess (0-0-0-0): size 34 (cls: K2Node_SwitchEnum1_CmpSuccess>BoolProperty>/Script/CoreUObject)
+	K2Node_SwitchEnum_CmpSuccess (0-0-0-0): size 34 (cls: K2Node_SwitchEnum_CmpSuccess>BoolProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
+	OnBodyState_WaitToShowFinished (0-0-0-0): size 102 (cls: OnBodyState_WaitToShowFinished>Function>/Script/CoreUObject)
+	K2Node_CreateDelegate_OutputDelegate (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate>DelegateProperty>/Script/CoreUObject)
+	InitDeathWidgetBody (0-0-0-0): size 142 (cls: InitDeathWidgetBody>Function>/Script/CoreUObject)
+	InBossGameState (0-0-0-0): size 152 (cls: InBossGameState>Function>/Script/CoreUObject)
+	BossGameState (0-0-0-0): size 34 (cls: BossGameState>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	CallFunc_GetHeroData_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_GetHeroData_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_K2_IsValidTimerHandle_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_K2_IsValidTimerHandle_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_UseSpectatorMenu_Use_Spectator_Menu (0-0-0-0): size 34 (cls: CallFunc_UseSpectatorMenu_Use_Spectator_Menu>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
-	CallFunc_CanRestartPlayer_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_CanRestartPlayer_ReturnValue>BoolProperty>/Script/CoreUObject)
-	CallFunc_Greater_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Greater_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsDBNO_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsDBNO_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_SupportsRespawning_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_SupportsRespawning_ReturnValue>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable1 (0-0-0-0): size 34 (cls: Temp_bool_Variable1>BoolProperty>/Script/CoreUObject)
-	Use Spectator Menu (0-0-0-0): size 34 (cls: Use Spectator Menu>BoolProperty>/Script/CoreUObject)
-	UseSpectatorMenu (0-0-0-0): size 172 (cls: UseSpectatorMenu>Function>/Script/CoreUObject)
-	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject)
-	OnViewTargetChanged (0-0-0-0): size 559 (cls: OnViewTargetChanged>Function>/Script/CoreUObject)
 	CallFunc_GetLocalTeamTeamMemberInfo_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_GetLocalTeamTeamMemberInfo_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_LessEqual_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_LessEqual_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_SetBannerImage_Success (0-0-0-0): size 34 (cls: CallFunc_SetBannerImage_Success>BoolProperty>/Script/CoreUObject)
@@ -877,14 +949,15 @@ Serialized exports:
 	CallFunc_IsActivated_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsActivated_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsVisible_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsVisible_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_LessEqual_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_LessEqual_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_LessEqual_IntInt_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_LessEqual_IntInt_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_NotEqual_NameName_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_NotEqual_NameName_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_UseSpectatorMenu_Use_Spectator_Menu (0-0-0-0): size 34 (cls: CallFunc_UseSpectatorMenu_Use_Spectator_Menu>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess1 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess1>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable1 (0-0-0-0): size 34 (cls: Temp_bool_Variable1>BoolProperty>/Script/CoreUObject)
-	V Alignment (0-0-0-0): size 36 (cls: V Alignment>ByteProperty>/Script/CoreUObject)
-	Set Parent Widget VAlignment (0-0-0-0): size 192 (cls: Set Parent Widget VAlignment>Function>/Script/CoreUObject)
+	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
+	CallFunc_TextIsEmpty_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_TextIsEmpty_ReturnValue>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	ShouldShowDeathWidget (0-0-0-0): size 34 (cls: ShouldShowDeathWidget>BoolProperty>/Script/CoreUObject)
 	CallFunc_BooleanAND_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue>BoolProperty>/Script/CoreUObject)
@@ -892,9 +965,15 @@ Serialized exports:
 	CallFunc_GetFloatAttributeFromAbilitySystemComponent_bSuccessfullyFoundAttribute (0-0-0-0): size 34 (cls: CallFunc_GetFloatAttributeFromAbilitySystemComponent_bSuccessfullyFoundAttribute>BoolProperty>/Script/CoreUObject)
 	CallFunc_Greater_FloatFloat_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Greater_FloatFloat_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_HasMatchingGameplayTag_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasMatchingGameplayTag_ReturnValue>BoolProperty>/Script/CoreUObject)
-	CallFunc_UseSpectatorMenu_Use_Spectator_Menu (0-0-0-0): size 34 (cls: CallFunc_UseSpectatorMenu_Use_Spectator_Menu>BoolProperty>/Script/CoreUObject)
+	CallFunc_InBossGameState_BossGameState (0-0-0-0): size 34 (cls: CallFunc_InBossGameState_BossGameState>BoolProperty>/Script/CoreUObject)
+	CallFunc_Not_PreBool_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
-	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
+	ShowExtraLivesUI (0-0-0-0): size 34 (cls: ShowExtraLivesUI>BoolProperty>/Script/CoreUObject)
+	ReturnValue (0-0-0-0): size 34 (cls: ReturnValue>BoolProperty>/Script/CoreUObject)
+	SupportsRespawning (0-0-0-0): size 178 (cls: SupportsRespawning>Function>/Script/CoreUObject)
+	CallFunc_CanRestartPlayer_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_CanRestartPlayer_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_InBossGameState_BossGameState (0-0-0-0): size 34 (cls: CallFunc_InBossGameState_BossGameState>BoolProperty>/Script/CoreUObject)
+	CallFunc_Not_PreBool_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue>BoolProperty>/Script/CoreUObject)
 	K2Node_ClassDynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_ClassDynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	LeftMouseBase (0-0-0-0): size 934 (cls: LeftMouseBase>Button>/Script/UMG):
 		Tag array:
@@ -918,6 +997,8 @@ Serialized exports:
 			HorizontalAlignment(ByteProperty)=HAlign_Left 
 			Parent(ObjectProperty)=RightMouseBase=WidgetArchetype 
 			Content(ObjectProperty)=RespawnBinding=WidgetArchetype 
+	DeathWidgetBodyState (0-0-0-0): size 36 (cls: DeathWidgetBodyState>ByteProperty>/Script/CoreUObject)
+	DeathWidgetBodyState_New (0-0-0-0): size 36 (cls: DeathWidgetBodyState_New>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
@@ -930,108 +1011,123 @@ Serialized exports:
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	K2Node_ClassDynamicCast_AsFort_Game_Mode_Zone (0-0-0-0): size 40 (cls: K2Node_ClassDynamicCast_AsFort_Game_Mode_Zone>ClassProperty>/Script/CoreUObject)
-	LoadGuard (0-0-0-0): size 112 (cls: LoadGuard>CommonLoadGuard>/Script/CommonUI):
+	LoadGuard (0-0-0-0): size 141 (cls: LoadGuard>CommonLoadGuard>/Script/CommonUI):
 		Tag array:
 			LoadingText(TextProperty)= () 
+			TextStyle(ObjectProperty)=TextStyle-Base_C=/Game/UI/Foundation/Text/TextStyle-Base 
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
-	SurroundLoadGuard (0-0-0-0): size 153 (cls: SurroundLoadGuard>CommonLoadGuard>/Script/CommonUI):
+	SurroundLoadGuard (0-0-0-0): size 182 (cls: SurroundLoadGuard>CommonLoadGuard>/Script/CommonUI):
 		Tag array:
 			LoadingText(TextProperty)= () 
+			TextStyle(ObjectProperty)=TextStyle-Base_C=/Game/UI/Foundation/Text/TextStyle-Base 
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=OverlaySlot_1=WidgetArchetype 
 			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
-	CommonTextBlock_PrimaryDeathText (0-0-0-0): size 580 (cls: CommonTextBlock_PrimaryDeathText>CommonTextBlock>/Script/CommonUI):
+	CommonTextBlock_PrimaryDeathText (0-0-0-0): size 637 (cls: CommonTextBlock_PrimaryDeathText>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-L-Horizon_C=/Game/UI/Foundation/Text/TextStyle-Header-L-Horizon 
 			Text(TextProperty)=KNOCKED DOWN! (AFD8017949D69D52B427AEA48BED44EE) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Center 
 			Slot(ObjectProperty)=VerticalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	CommonTextBlock_Spectating (0-0-0-0): size 577 (cls: CommonTextBlock_Spectating>CommonTextBlock>/Script/CommonUI):
+	CommonTextBlock_Spectating (0-0-0-0): size 634 (cls: CommonTextBlock_Spectating>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-L-Horizon_C=/Game/UI/Foundation/Text/TextStyle-Header-L-Horizon 
 			Text(TextProperty)=SPECTATING (3D7B4F8741A5A0651DF0BD8C7A86C24F) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Center 
 			Slot(ObjectProperty)=VerticalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	CommonTextBlock_YouWillNot (0-0-0-0): size 735 (cls: CommonTextBlock_YouWillNot>CommonTextBlock>/Script/CommonUI):
+	CommonTextBlock_YouWillNot (0-0-0-0): size 821 (cls: CommonTextBlock_YouWillNot>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-S-B-S-70pc_C=/Game/UI/Foundation/Text/TextStyle-Base-S-B-S-70pc 
 			Text(TextProperty)=You will not use a life if revived by a teammate. (2EC51DE843E373211C68408F4B929B3D) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Center 
 			Slot(ObjectProperty)=VerticalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	CommonTextBlockExtraLives (0-0-0-0): size 658 (cls: CommonTextBlockExtraLives>CommonTextBlock>/Script/CommonUI):
+	CommonTextBlockExtraLives (0-0-0-0): size 744 (cls: CommonTextBlockExtraLives>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-S-B-S-70pc_C=/Game/UI/Foundation/Text/TextStyle-Base-S-B-S-70pc 
 			Text(TextProperty)=99 lives left (8F66187841276DD1A02CC9BCD7E9B809) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=VerticalBoxSlot_15=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	CommonTextBlockRespawn (0-0-0-0): size 269 (cls: CommonTextBlockRespawn>CommonTextBlock>/Script/CommonUI):
+	CommonTextBlockRespawn (0-0-0-0): size 355 (cls: CommonTextBlockRespawn>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-M-B_C=/Game/UI/Foundation/Text/TextStyle-Base-M-B 
 			Text(TextProperty)=RESPAWN (239147CC4E34DA4C2DDA6FB9D68784CA) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=WidgetSwitcherSlot_1=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	CommonTextBlockRespawnAtStart (0-0-0-0): size 278 (cls: CommonTextBlockRespawnAtStart>CommonTextBlock>/Script/CommonUI):
+	CommonTextBlockRespawnAtStart (0-0-0-0): size 364 (cls: CommonTextBlockRespawnAtStart>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-M-B_C=/Game/UI/Foundation/Text/TextStyle-Base-M-B 
 			Text(TextProperty)=RESPAWN AT START (07B268654A4FED34A4E858AAA79F495C) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=WidgetSwitcherSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	CommonTextBlockResurrect (0-0-0-0): size 273 (cls: CommonTextBlockResurrect>CommonTextBlock>/Script/CommonUI):
+	CommonTextBlockResurrect (0-0-0-0): size 359 (cls: CommonTextBlockResurrect>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-M-B_C=/Game/UI/Foundation/Text/TextStyle-Base-M-B 
 			Text(TextProperty)=REVIVE HERE (AF0E17504999800808B44FA13C4A888D) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=VerticalBoxSlot_4=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	CommonTextBlockResurrectionTimerText (0-0-0-0): size 604 (cls: CommonTextBlockResurrectionTimerText>CommonTextBlock>/Script/CommonUI):
+	CommonTextBlockResurrectionTimerText (0-0-0-0): size 690 (cls: CommonTextBlockResurrectionTimerText>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-S-B-S_C=/Game/UI/Foundation/Text/TextStyle-Base-S-B-S 
 			Text(TextProperty)=Revive sequence beginning in 99 seconds. (84D3B12D4D1499E8CA8399AFC6E2FD55) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Center 
 			Slot(ObjectProperty)=VerticalBoxSlot_20=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	CommonTextBlockSpectatingRespawningTime (0-0-0-0): size 293 (cls: CommonTextBlockSpectatingRespawningTime>CommonTextBlock>/Script/CommonUI):
+	CommonTextBlockSpectatingRespawningTime (0-0-0-0): size 681 (cls: CommonTextBlockSpectatingRespawningTime>CommonTextBlock>/Script/CommonUI):
 		Tag array:
-			Style(ObjectProperty)=TextStyle-Base-M-B_C=/Game/UI/Foundation/Text/TextStyle-Base-M-B 
+			Style(ObjectProperty)=TextStyle-Base-S-B-S_C=/Game/UI/Foundation/Text/TextStyle-Base-S-B-S 
 			Text(TextProperty)=Respawning in {time} seconds... (3116F98341720DF7F7F24BB8771B7005) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
+			Justification(ByteProperty)=ETextJustify::Center 
 			Slot(ObjectProperty)=VerticalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	CommonTextBlockWait (0-0-0-0): size 676 (cls: CommonTextBlockWait>CommonTextBlock>/Script/CommonUI):
+	CommonTextBlockWait (0-0-0-0): size 762 (cls: CommonTextBlockWait>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-S-B-S-70pc_C=/Game/UI/Foundation/Text/TextStyle-Base-S-B-S-70pc 
 			Text(TextProperty)=Respawning in {time} seconds... (3116F98341720DF7F7F24BB8771B7005) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=VerticalBoxSlot_16=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	CommonTextBlock_0 (0-0-0-0): size 245 (cls: CommonTextBlock_0>CommonTextBlock>/Script/CommonUI):
+	CommonTextBlock_0 (0-0-0-0): size 331 (cls: CommonTextBlock_0>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-M-B_C=/Game/UI/Foundation/Text/TextStyle-Base-M-B 
 			Text(TextProperty)=Slain by: (D07C9FA34C370FE6A6A560B7DF164406) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=VerticalBoxSlot_0=WidgetArchetype 
-	KillerNameText (0-0-0-0): size 275 (cls: KillerNameText>CommonTextBlock>/Script/CommonUI):
+	KillerNameText (0-0-0-0): size 361 (cls: KillerNameText>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-M-B_C=/Game/UI/Foundation/Text/TextStyle-Base-M-B 
 			Text(TextProperty)=Killer's Name (E73381554E20DC221821FF97D8174005) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=VerticalBoxSlot_1=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	WidgetArchetype (0-0-0-0): size 705 (cls: WidgetArchetype>DeathWidget_C):
+	WidgetArchetype (0-0-0-0): size 734 (cls: WidgetArchetype>DeathWidget_C):
 		Tag array:
 			CommonTextBlock_PrimaryDeathText(ObjectProperty)=CommonTextBlock_PrimaryDeathText=WidgetArchetype 
 			CommonTextBlock_Spectating(ObjectProperty)=CommonTextBlock_Spectating=WidgetArchetype 
@@ -1043,16 +1139,17 @@ Serialized exports:
 			CommonTextBlockResurrectionTimerText(ObjectProperty)=CommonTextBlockResurrectionTimerText=WidgetArchetype 
 			CommonTextBlockSpectatingRespawningTime(ObjectProperty)=CommonTextBlockSpectatingRespawningTime=WidgetArchetype 
 			CommonTextBlockWait(ObjectProperty)=CommonTextBlockWait=WidgetArchetype 
+			DeathWidgetBody_StartDeathBox(ObjectProperty)=DeathWidgetBody_StartDeathBox=WidgetArchetype 
+			DeathWidgetBody_SwitcherRespawn(ObjectProperty)=DeathWidgetBody_SwitcherRespawn=WidgetArchetype 
 			KillerPortraitWidget(ObjectProperty)=KillerPortraitWidget=WidgetArchetype 
 			LeftMouseBase(ObjectProperty)=LeftMouseBase=WidgetArchetype 
 			PlayerBanner(ObjectProperty)=PlayerBanner=WidgetArchetype 
 			RespawnBinding(ObjectProperty)=RespawnBinding=WidgetArchetype 
 			RespawnBox(ObjectProperty)=RespawnBox=WidgetArchetype 
+			RespawnSpectatingBox(ObjectProperty)=RespawnSpectatingBox=WidgetArchetype 
 			ResurrectBinding(ObjectProperty)=ResurrectBinding=WidgetArchetype 
 			RightMouseBase(ObjectProperty)=RightMouseBase=WidgetArchetype 
 			SpectatorName(ObjectProperty)=SpectatorName=WidgetArchetype 
-			StartDeathBox(ObjectProperty)=StartDeathBox=WidgetArchetype 
-			SwitcherBody(ObjectProperty)=SwitcherBody=WidgetArchetype 
 			SwitcherRespawnTextWidget(ObjectProperty)=SwitcherRespawnTextWidget=WidgetArchetype 
 			SwitcherTitle(ObjectProperty)=SwitcherTitle=WidgetArchetype 
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
@@ -1064,9 +1161,9 @@ Serialized exports:
 	K2Node_CreateDelegate_OutputDelegate2 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate2>DelegateProperty>/Script/CoreUObject)
 	K2Node_CreateDelegate_OutputDelegate3 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate3>DelegateProperty>/Script/CoreUObject)
 	K2Node_CreateDelegate_OutputDelegate4 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate4>DelegateProperty>/Script/CoreUObject)
-	K2Node_CreateDelegate_OutputDelegate5 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate5>DelegateProperty>/Script/CoreUObject)
 	K2Node_CreateDelegate_OutputDelegate (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate>DelegateProperty>/Script/CoreUObject)
 	K2Node_CreateDelegate_OutputDelegate1 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate1>DelegateProperty>/Script/CoreUObject)
+	K2Node_CreateDelegate_OutputDelegate (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate>DelegateProperty>/Script/CoreUObject)
 	K2Node_CreateDelegate_OutputDelegate (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate>DelegateProperty>/Script/CoreUObject)
 	K2Node_Select1_Default (0-0-0-0): size 40 (cls: K2Node_Select1_Default>EnumProperty>/Script/CoreUObject)
 	K2Node_Select_Default (0-0-0-0): size 40 (cls: K2Node_Select_Default>EnumProperty>/Script/CoreUObject)
@@ -1090,8 +1187,6 @@ Serialized exports:
 	ResurrectTimeRemainingFloat (0-0-0-0): size 32 (cls: ResurrectTimeRemainingFloat>FloatProperty>/Script/CoreUObject)
 	ServerResurrectTime (0-0-0-0): size 32 (cls: ServerResurrectTime>FloatProperty>/Script/CoreUObject)
 	TimerDelay (0-0-0-0): size 32 (cls: TimerDelay>FloatProperty>/Script/CoreUObject)
-	CallFunc_GetServerWorldTimeSeconds_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetServerWorldTimeSeconds_ReturnValue>FloatProperty>/Script/CoreUObject)
-	CallFunc_Subtract_FloatFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Subtract_FloatFloat_ReturnValue>FloatProperty>/Script/CoreUObject)
 	CallFunc_GetFloatAttributeFromAbilitySystemComponent_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetFloatAttributeFromAbilitySystemComponent_ReturnValue>FloatProperty>/Script/CoreUObject)
 	HorizontalBox_0 (0-0-0-0): size 86 (cls: HorizontalBox_0>HorizontalBox>/Script/UMG):
 		Tag array:
@@ -1168,9 +1263,6 @@ Serialized exports:
 	CallFunc_Max_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Max_ReturnValue>IntProperty>/Script/CoreUObject)
 	CallFunc_Max_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Max_ReturnValue1>IntProperty>/Script/CoreUObject)
 	CallFunc_FTrunc_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_FTrunc_ReturnValue>IntProperty>/Script/CoreUObject)
-	K2Node_Select_Default (0-0-0-0): size 32 (cls: K2Node_Select_Default>IntProperty>/Script/CoreUObject)
-	Temp_int_Variable (0-0-0-0): size 32 (cls: Temp_int_Variable>IntProperty>/Script/CoreUObject)
-	Temp_int_Variable1 (0-0-0-0): size 32 (cls: Temp_int_Variable1>IntProperty>/Script/CoreUObject)
 	SwitcherTitleState_KnockDown const (0-0-0-0): size 32 (cls: SwitcherTitleState_KnockDown const>IntProperty>/Script/CoreUObject)
 	SwitcherTitleState_Spectate const (0-0-0-0): size 32 (cls: SwitcherTitleState_Spectate const>IntProperty>/Script/CoreUObject)
 	RespawnBinding (0-0-0-0): size 129 (cls: RespawnBinding>KeybindWidget_C>/Game/UI/InGame/KeybindWidget/KeybindWidget):
@@ -1214,42 +1306,28 @@ Serialized exports:
 			ObjectBindings(ArrayProperty)=[object] (inner: StructProperty)
 			PlaybackRange(StructProperty)=System.Byte[] 
 			DisplayRate(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 1954019864-1281189109-4110204034-21729088 
-	Resurrection Prompt_2 (0-0-0-0): size 1273 (cls: Resurrection Prompt_2>MovieScene>/Script/MovieScene):
+			Signature(StructProperty)=Guid: 325230573-1286168169-1470835346-4030161940 
+	ResurrectionPrompt_2_UNUSED (0-0-0-0): size 1273 (cls: ResurrectionPrompt_2_UNUSED>MovieScene>/Script/MovieScene):
 		Tag array:
 			Possessables(ArrayProperty)=[object] (inner: StructProperty)
 			ObjectBindings(ArrayProperty)=[object] (inner: StructProperty)
 			PlaybackRange(StructProperty)=System.Byte[] 
 			DisplayRate(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 3190169341-1079666227-3029482923-3660693656 
-	Resurrection Prompt (0-0-0-0): size 1273 (cls: Resurrection Prompt>MovieScene>/Script/MovieScene):
+			Signature(StructProperty)=Guid: 1277680235-1152248515-2704315574-126016265 
+	ResurrectionPrompt_UNUSED (0-0-0-0): size 1273 (cls: ResurrectionPrompt_UNUSED>MovieScene>/Script/MovieScene):
 		Tag array:
 			Possessables(ArrayProperty)=[object] (inner: StructProperty)
 			ObjectBindings(ArrayProperty)=[object] (inner: StructProperty)
 			PlaybackRange(StructProperty)=System.Byte[] 
 			DisplayRate(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 380042871-1140563457-689416873-2605476501 
-	Show Resurrect & Respawn (0-0-0-0): size 2927 (cls: Show Resurrect & Respawn>MovieScene>/Script/MovieScene):
+			Signature(StructProperty)=Guid: 1716539958-1331514849-2890407336-2365773088 
+	ShowResurrectRespawn (0-0-0-0): size 3814 (cls: ShowResurrectRespawn>MovieScene>/Script/MovieScene):
 		Tag array:
 			Possessables(ArrayProperty)=[object] (inner: StructProperty)
 			ObjectBindings(ArrayProperty)=[object] (inner: StructProperty)
 			PlaybackRange(StructProperty)=System.Byte[] 
 			DisplayRate(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 2921801909-1196822742-292535699-2387144235 
-	You Died!_1 (0-0-0-0): size 840 (cls: You Died!_1>MovieScene>/Script/MovieScene):
-		Tag array:
-			Possessables(ArrayProperty)=[object] (inner: StructProperty)
-			ObjectBindings(ArrayProperty)=[object] (inner: StructProperty)
-			PlaybackRange(StructProperty)=System.Byte[] 
-			DisplayRate(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 2493307988-1210608794-3168328874-3812696234 
-	You Died!_2 (0-0-0-0): size 840 (cls: You Died!_2>MovieScene>/Script/MovieScene):
-		Tag array:
-			Possessables(ArrayProperty)=[object] (inner: StructProperty)
-			ObjectBindings(ArrayProperty)=[object] (inner: StructProperty)
-			PlaybackRange(StructProperty)=System.Byte[] 
-			DisplayRate(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 2246593119-1157005676-3044265913-4220567550 
+			Signature(StructProperty)=Guid: 3462773316-1322578158-2331081893-3732046647 
 	You Died!_3 (0-0-0-0): size 840 (cls: You Died!_3>MovieScene>/Script/MovieScene):
 		Tag array:
 			Possessables(ArrayProperty)=[object] (inner: StructProperty)
@@ -1257,13 +1335,27 @@ Serialized exports:
 			PlaybackRange(StructProperty)=System.Byte[] 
 			DisplayRate(StructProperty)=System.Byte[] 
 			Signature(StructProperty)=Guid: 3719202003-1322204552-2150115224-2861445069 
-	You Died! (0-0-0-0): size 840 (cls: You Died!>MovieScene>/Script/MovieScene):
+	YouDied_1_UNUSED (0-0-0-0): size 840 (cls: YouDied_1_UNUSED>MovieScene>/Script/MovieScene):
 		Tag array:
 			Possessables(ArrayProperty)=[object] (inner: StructProperty)
 			ObjectBindings(ArrayProperty)=[object] (inner: StructProperty)
 			PlaybackRange(StructProperty)=System.Byte[] 
 			DisplayRate(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 839919447-1234985006-71331753-2346706153 
+			Signature(StructProperty)=Guid: 964840285-1155965794-911244973-3972919531 
+	YouDied_2_UNUSED (0-0-0-0): size 840 (cls: YouDied_2_UNUSED>MovieScene>/Script/MovieScene):
+		Tag array:
+			Possessables(ArrayProperty)=[object] (inner: StructProperty)
+			ObjectBindings(ArrayProperty)=[object] (inner: StructProperty)
+			PlaybackRange(StructProperty)=System.Byte[] 
+			DisplayRate(StructProperty)=System.Byte[] 
+			Signature(StructProperty)=Guid: 3581782222-1206589905-779666360-1832477366 
+	YouDied_UNUSED (0-0-0-0): size 840 (cls: YouDied_UNUSED>MovieScene>/Script/MovieScene):
+		Tag array:
+			Possessables(ArrayProperty)=[object] (inner: StructProperty)
+			ObjectBindings(ArrayProperty)=[object] (inner: StructProperty)
+			PlaybackRange(StructProperty)=System.Byte[] 
+			DisplayRate(StructProperty)=System.Byte[] 
+			Signature(StructProperty)=Guid: 3882016990-1278768421-3102750625-2952670665 
 	MovieScene2DTransformSection_0 (0-0-0-0): size 2394 (cls: MovieScene2DTransformSection_0>MovieScene2DTransformSection>/Script/UMG):
 		Tag array:
 			Translation(StructProperty)=System.Byte[] 
@@ -1284,12 +1376,12 @@ Serialized exports:
 			Shear(StructProperty)=System.Byte[] 
 			Easing(StructProperty)=System.Byte[] 
 			SectionRange(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 1401880140-1238176663-2949350039-3394688791 
+			Signature(StructProperty)=Guid: 1337670477-1187176630-2223196582-3280421034 
 	MovieScene2DTransformSection_0 (0-0-0-0): size 251 (cls: MovieScene2DTransformSection_0>MovieScene2DTransformSection>/Script/UMG):
 		Tag array:
 			Easing(StructProperty)=System.Byte[] 
 			SectionRange(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 3382433286-1315290166-2462446754-2346232117 
+			Signature(StructProperty)=Guid: 1160893884-1096649531-2304673705-1220153613 
 	MovieScene2DTransformSection_0 (0-0-0-0): size 251 (cls: MovieScene2DTransformSection_0>MovieScene2DTransformSection>/Script/UMG):
 		Tag array:
 			Easing(StructProperty)=System.Byte[] 
@@ -1356,6 +1448,25 @@ Serialized exports:
 			Easing(StructProperty)=System.Byte[] 
 			SectionRange(StructProperty)=System.Byte[] 
 			Signature(StructProperty)=Guid: 1901185926-1323219311-3068154511-2463716898 
+	MovieScene2DTransformSection_0 (0-0-0-0): size 5669 (cls: MovieScene2DTransformSection_0>MovieScene2DTransformSection>/Script/UMG):
+		Tag array:
+			Translation(StructProperty)=System.Byte[] 
+			Translation(StructProperty)=System.Byte[] 
+			Scale(StructProperty)=System.Byte[] 
+			Scale(StructProperty)=System.Byte[] 
+			Shear(StructProperty)=System.Byte[] 
+			Shear(StructProperty)=System.Byte[] 
+			Easing(StructProperty)=System.Byte[] 
+			SectionRange(StructProperty)=System.Byte[] 
+			Signature(StructProperty)=Guid: 2523199339-1137799730-4244402351-458302267 
+	MovieScene2DTransformSection_0 (0-0-0-0): size 5656 (cls: MovieScene2DTransformSection_0>MovieScene2DTransformSection>/Script/UMG):
+		Tag array:
+			Translation(StructProperty)=System.Byte[] 
+			Scale(StructProperty)=System.Byte[] 
+			Scale(StructProperty)=System.Byte[] 
+			Easing(StructProperty)=System.Byte[] 
+			SectionRange(StructProperty)=System.Byte[] 
+			Signature(StructProperty)=Guid: 3706638490-1231534667-2753797260-1116925556 
 	MovieScene2DTransformSection_0 (0-0-0-0): size 4079 (cls: MovieScene2DTransformSection_0>MovieScene2DTransformSection>/Script/UMG):
 		Tag array:
 			Scale(StructProperty)=System.Byte[] 
@@ -1370,14 +1481,6 @@ Serialized exports:
 			Easing(StructProperty)=System.Byte[] 
 			SectionRange(StructProperty)=System.Byte[] 
 			Signature(StructProperty)=Guid: 2687145892-1092885889-3763111058-3363809078 
-	MovieScene2DTransformSection_0 (0-0-0-0): size 5656 (cls: MovieScene2DTransformSection_0>MovieScene2DTransformSection>/Script/UMG):
-		Tag array:
-			Translation(StructProperty)=System.Byte[] 
-			Scale(StructProperty)=System.Byte[] 
-			Scale(StructProperty)=System.Byte[] 
-			Easing(StructProperty)=System.Byte[] 
-			SectionRange(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 3706638490-1231534667-2753797260-1116925556 
 	MovieScene2DTransformSection_0 (0-0-0-0): size 4982 (cls: MovieScene2DTransformSection_0>MovieScene2DTransformSection>/Script/UMG):
 		Tag array:
 			Translation(StructProperty)=System.Byte[] 
@@ -1403,13 +1506,13 @@ Serialized exports:
 			PropertyName(NameProperty)=RenderTransform 
 			PropertyPath(StrProperty)=RenderTransform 
 			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
-			Signature(StructProperty)=Guid: 1110623346-1110101256-253040797-917951434 
+			Signature(StructProperty)=Guid: 2335871038-1164572709-3539110576-3162086092 
 	MovieScene2DTransformTrack_1 (0-0-0-0): size 196 (cls: MovieScene2DTransformTrack_1>MovieScene2DTransformTrack>/Script/UMG):
 		Tag array:
 			PropertyName(NameProperty)=RenderTransform 
 			PropertyPath(StrProperty)=RenderTransform 
 			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
-			Signature(StructProperty)=Guid: 2901953864-1265528165-4213683602-600746680 
+			Signature(StructProperty)=Guid: 4196131697-1232678450-3641605769-2865602535 
 	MovieScene2DTransformTrack_0 (0-0-0-0): size 196 (cls: MovieScene2DTransformTrack_0>MovieScene2DTransformTrack>/Script/UMG):
 		Tag array:
 			PropertyName(NameProperty)=RenderTransform 
@@ -1470,6 +1573,18 @@ Serialized exports:
 			PropertyPath(StrProperty)=RenderTransform 
 			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
 			Signature(StructProperty)=Guid: 147041660-1220450344-280558729-2576184132 
+	MovieScene2DTransformTrack_7 (0-0-0-0): size 196 (cls: MovieScene2DTransformTrack_7>MovieScene2DTransformTrack>/Script/UMG):
+		Tag array:
+			PropertyName(NameProperty)=RenderTransform 
+			PropertyPath(StrProperty)=RenderTransform 
+			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
+			Signature(StructProperty)=Guid: 2309351398-1247155560-3687042693-4250886837 
+	MovieScene2DTransformTrack_0 (0-0-0-0): size 196 (cls: MovieScene2DTransformTrack_0>MovieScene2DTransformTrack>/Script/UMG):
+		Tag array:
+			PropertyName(NameProperty)=RenderTransform 
+			PropertyPath(StrProperty)=RenderTransform 
+			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
+			Signature(StructProperty)=Guid: 3127429469-1230058103-1591351938-3881138987 
 	MovieScene2DTransformTrack_0 (0-0-0-0): size 196 (cls: MovieScene2DTransformTrack_0>MovieScene2DTransformTrack>/Script/UMG):
 		Tag array:
 			PropertyName(NameProperty)=RenderTransform 
@@ -1487,13 +1602,13 @@ Serialized exports:
 			PropertyName(NameProperty)=RenderTransform 
 			PropertyPath(StrProperty)=RenderTransform 
 			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
-			Signature(StructProperty)=Guid: 3127429469-1230058103-1591351938-3881138987 
-	MovieScene2DTransformTrack_0 (0-0-0-0): size 196 (cls: MovieScene2DTransformTrack_0>MovieScene2DTransformTrack>/Script/UMG):
-		Tag array:
-			PropertyName(NameProperty)=RenderTransform 
-			PropertyPath(StrProperty)=RenderTransform 
-			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
 			Signature(StructProperty)=Guid: 3606153921-1226924644-1302765730-155810820 
+	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
 	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
 	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
 	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
@@ -1583,13 +1698,13 @@ Serialized exports:
 			FloatCurve(StructProperty)=System.Byte[] 
 			Easing(StructProperty)=System.Byte[] 
 			SectionRange(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 1703335111-1334135136-4279768255-1405359776 
+			Signature(StructProperty)=Guid: 1127797574-1201581658-3065135762-3397373035 
 	MovieSceneFloatSection_0 (0-0-0-0): size 1154 (cls: MovieSceneFloatSection_0>MovieSceneFloatSection>/Script/MovieSceneTracks):
 		Tag array:
 			FloatCurve(StructProperty)=System.Byte[] 
 			Easing(StructProperty)=System.Byte[] 
 			SectionRange(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 2674938617-1167193254-3393858238-3502296799 
+			Signature(StructProperty)=Guid: 1003167186-1113350293-2847541904-2050303127 
 	MovieSceneFloatSection_0 (0-0-0-0): size 1154 (cls: MovieSceneFloatSection_0>MovieSceneFloatSection>/Script/MovieSceneTracks):
 		Tag array:
 			FloatCurve(StructProperty)=System.Byte[] 
@@ -1650,24 +1765,35 @@ Serialized exports:
 			Easing(StructProperty)=System.Byte[] 
 			SectionRange(StructProperty)=System.Byte[] 
 			Signature(StructProperty)=Guid: 2670649030-1128618836-3732091266-3812989074 
-	MovieSceneFloatSection_0 (0-0-0-0): size 1828 (cls: MovieSceneFloatSection_0>MovieSceneFloatSection>/Script/MovieSceneTracks):
+	MovieSceneFloatSection_0 (0-0-0-0): size 758 (cls: MovieSceneFloatSection_0>MovieSceneFloatSection>/Script/MovieSceneTracks):
+		Tag array:
+			FloatCurve(StructProperty)=System.Byte[] 
+			Easing(StructProperty)=System.Byte[] 
+			Signature(StructProperty)=Guid: 3523683451-1240023085-2440535443-2150342625 
+	MovieSceneFloatSection_0 (0-0-0-0): size 1154 (cls: MovieSceneFloatSection_0>MovieSceneFloatSection>/Script/MovieSceneTracks):
 		Tag array:
 			FloatCurve(StructProperty)=System.Byte[] 
 			Easing(StructProperty)=System.Byte[] 
 			SectionRange(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 1307270-1135040757-4012946561-1422269469 
-	MovieSceneFloatSection_0 (0-0-0-0): size 1828 (cls: MovieSceneFloatSection_0>MovieSceneFloatSection>/Script/MovieSceneTracks):
-		Tag array:
-			FloatCurve(StructProperty)=System.Byte[] 
-			Easing(StructProperty)=System.Byte[] 
-			SectionRange(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 1307270-1135040757-4012946561-1422269469 
+			Signature(StructProperty)=Guid: 2563397723-1132866222-3118372242-2784503776 
 	MovieSceneFloatSection_0 (0-0-0-0): size 1154 (cls: MovieSceneFloatSection_0>MovieSceneFloatSection>/Script/MovieSceneTracks):
 		Tag array:
 			FloatCurve(StructProperty)=System.Byte[] 
 			Easing(StructProperty)=System.Byte[] 
 			SectionRange(StructProperty)=System.Byte[] 
 			Signature(StructProperty)=Guid: 3803411748-1164138903-173429665-196356481 
+	MovieSceneFloatSection_0 (0-0-0-0): size 1828 (cls: MovieSceneFloatSection_0>MovieSceneFloatSection>/Script/MovieSceneTracks):
+		Tag array:
+			FloatCurve(StructProperty)=System.Byte[] 
+			Easing(StructProperty)=System.Byte[] 
+			SectionRange(StructProperty)=System.Byte[] 
+			Signature(StructProperty)=Guid: 1307270-1135040757-4012946561-1422269469 
+	MovieSceneFloatSection_0 (0-0-0-0): size 1828 (cls: MovieSceneFloatSection_0>MovieSceneFloatSection>/Script/MovieSceneTracks):
+		Tag array:
+			FloatCurve(StructProperty)=System.Byte[] 
+			Easing(StructProperty)=System.Byte[] 
+			SectionRange(StructProperty)=System.Byte[] 
+			Signature(StructProperty)=Guid: 1307270-1135040757-4012946561-1422269469 
 	MovieSceneFloatSection_0 (0-0-0-0): size 1828 (cls: MovieSceneFloatSection_0>MovieSceneFloatSection>/Script/MovieSceneTracks):
 		Tag array:
 			FloatCurve(StructProperty)=System.Byte[] 
@@ -1691,13 +1817,13 @@ Serialized exports:
 			PropertyName(NameProperty)=RenderOpacity 
 			PropertyPath(StrProperty)=RenderOpacity 
 			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
-			Signature(StructProperty)=Guid: 2509976351-1222439954-1993485211-1037496416 
+			Signature(StructProperty)=Guid: 2954119115-1145621203-222049447-967759909 
 	MovieSceneFloatTrack_1 (0-0-0-0): size 194 (cls: MovieSceneFloatTrack_1>MovieSceneFloatTrack>/Script/MovieSceneTracks):
 		Tag array:
 			PropertyName(NameProperty)=RenderOpacity 
 			PropertyPath(StrProperty)=RenderOpacity 
 			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
-			Signature(StructProperty)=Guid: 428320998-1090901450-1373726084-1762323844 
+			Signature(StructProperty)=Guid: 416370970-1177169192-2525998213-2335353878 
 	MovieSceneFloatTrack_0 (0-0-0-0): size 194 (cls: MovieSceneFloatTrack_0>MovieSceneFloatTrack>/Script/MovieSceneTracks):
 		Tag array:
 			PropertyName(NameProperty)=RenderOpacity 
@@ -1758,24 +1884,36 @@ Serialized exports:
 			PropertyPath(StrProperty)=RenderOpacity 
 			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
 			Signature(StructProperty)=Guid: 1111315410-1328177966-2458016131-2285618928 
-	MovieSceneFloatTrack_0 (0-0-0-0): size 194 (cls: MovieSceneFloatTrack_0>MovieSceneFloatTrack>/Script/MovieSceneTracks):
+	MovieSceneFloatTrack_6 (0-0-0-0): size 194 (cls: MovieSceneFloatTrack_6>MovieSceneFloatTrack>/Script/MovieSceneTracks):
 		Tag array:
 			PropertyName(NameProperty)=RenderOpacity 
 			PropertyPath(StrProperty)=RenderOpacity 
 			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
-			Signature(StructProperty)=Guid: 346899662-1336129227-2182826158-2053685122 
-	MovieSceneFloatTrack_0 (0-0-0-0): size 194 (cls: MovieSceneFloatTrack_0>MovieSceneFloatTrack>/Script/MovieSceneTracks):
+			Signature(StructProperty)=Guid: 96231410-1219585460-303220108-1387541424 
+	MovieSceneFloatTrack_7 (0-0-0-0): size 194 (cls: MovieSceneFloatTrack_7>MovieSceneFloatTrack>/Script/MovieSceneTracks):
 		Tag array:
 			PropertyName(NameProperty)=RenderOpacity 
 			PropertyPath(StrProperty)=RenderOpacity 
 			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
-			Signature(StructProperty)=Guid: 346899662-1336129227-2182826158-2053685122 
+			Signature(StructProperty)=Guid: 1446249589-1211177856-3823493512-1720654201 
 	MovieSceneFloatTrack_0 (0-0-0-0): size 194 (cls: MovieSceneFloatTrack_0>MovieSceneFloatTrack>/Script/MovieSceneTracks):
 		Tag array:
 			PropertyName(NameProperty)=RenderOpacity 
 			PropertyPath(StrProperty)=RenderOpacity 
 			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
 			Signature(StructProperty)=Guid: 1184465343-1237646994-1797420937-1750807726 
+	MovieSceneFloatTrack_0 (0-0-0-0): size 194 (cls: MovieSceneFloatTrack_0>MovieSceneFloatTrack>/Script/MovieSceneTracks):
+		Tag array:
+			PropertyName(NameProperty)=RenderOpacity 
+			PropertyPath(StrProperty)=RenderOpacity 
+			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
+			Signature(StructProperty)=Guid: 346899662-1336129227-2182826158-2053685122 
+	MovieSceneFloatTrack_0 (0-0-0-0): size 194 (cls: MovieSceneFloatTrack_0>MovieSceneFloatTrack>/Script/MovieSceneTracks):
+		Tag array:
+			PropertyName(NameProperty)=RenderOpacity 
+			PropertyPath(StrProperty)=RenderOpacity 
+			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
+			Signature(StructProperty)=Guid: 346899662-1336129227-2182826158-2053685122 
 	MovieSceneFloatTrack_0 (0-0-0-0): size 194 (cls: MovieSceneFloatTrack_0>MovieSceneFloatTrack>/Script/MovieSceneTracks):
 		Tag array:
 			PropertyName(NameProperty)=RenderOpacity 
@@ -1800,13 +1938,21 @@ Serialized exports:
 	CallFunc_GetGameStateZone_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetGameStateZone_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetGameStateZone_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetGameStateZone_ReturnValue1>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetGameStateZone_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_GetGameStateZone_ReturnValue2>ObjectProperty>/Script/CoreUObject)
+	DeathWidgetBody_StartDeathBox (0-0-0-0): size 36 (cls: DeathWidgetBody_StartDeathBox>ObjectProperty>/Script/CoreUObject)
+	DeathWidgetBody_SwitcherRespawn (0-0-0-0): size 36 (cls: DeathWidgetBody_SwitcherRespawn>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	K2Node_Select_Default (0-0-0-0): size 36 (cls: K2Node_Select_Default>ObjectProperty>/Script/CoreUObject)
+	CallFunc_PlayAnimationAtTime_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlayAnimationAtTime_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_PlayAnimationAtTime_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_PlayAnimationAtTime_ReturnValue1>ObjectProperty>/Script/CoreUObject)
+	CallFunc_PlayAnimationForward_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlayAnimationForward_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetOwningPlayer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetOwningPlayer_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Player_Controller_Zone (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Player_Controller_Zone>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetOwningPlayer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetOwningPlayer_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Player_Controller_Zone (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Player_Controller_Zone>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetOwningPlayer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetOwningPlayer_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Player_Controller_Zone (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Player_Controller_Zone>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetGameState_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetGameState_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_AsFort_Game_State_Boss (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Game_State_Boss>ObjectProperty>/Script/CoreUObject)
 	KillerPortraitWidget (0-0-0-0): size 36 (cls: KillerPortraitWidget>ObjectProperty>/Script/CoreUObject)
 	LeftMouseBase (0-0-0-0): size 36 (cls: LeftMouseBase>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject)
@@ -1814,17 +1960,16 @@ Serialized exports:
 	CallFunc_GetContext_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue2>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetContext_ReturnValue3 (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue3>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetContext_ReturnValue4 (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue4>ObjectProperty>/Script/CoreUObject)
-	CallFunc_GetGameStateZone_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetGameStateZone_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetInputManager_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetInputManager_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetOwningPlayer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetOwningPlayer_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Player_Controller_Zone (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Player_Controller_Zone>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetContext_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue1>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetContext_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue2>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetContext_ReturnValue3 (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue3>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetInputManager_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetInputManager_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetOwningPlayer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetOwningPlayer_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Player_Controller_Zone (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Player_Controller_Zone>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetOwningPlayer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetOwningPlayer_ReturnValue>ObjectProperty>/Script/CoreUObject)
-	CallFunc_GetOwningPlayer_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetOwningPlayer_ReturnValue1>ObjectProperty>/Script/CoreUObject)
 	CallFunc_K2_GetPawn_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_GetPawn_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Pawn (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Pawn>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetOwningPlayer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetOwningPlayer_ReturnValue>ObjectProperty>/Script/CoreUObject)
@@ -1835,39 +1980,45 @@ Serialized exports:
 	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetHUD_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetHUD_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetOwningPlayer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetOwningPlayer_ReturnValue>ObjectProperty>/Script/CoreUObject)
-	CallFunc_GetPlayerController_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetPlayerController_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetOwningPlayer_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetOwningPlayer_ReturnValue1>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Player_Controller_Zone (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Player_Controller_Zone>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_UIZone (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_UIZone>ObjectProperty>/Script/CoreUObject)
 	RespawnBinding (0-0-0-0): size 36 (cls: RespawnBinding>ObjectProperty>/Script/CoreUObject)
 	RespawnBox (0-0-0-0): size 36 (cls: RespawnBox>ObjectProperty>/Script/CoreUObject)
+	RespawnSpectatingBox (0-0-0-0): size 36 (cls: RespawnSpectatingBox>ObjectProperty>/Script/CoreUObject)
 	ResurrectBinding (0-0-0-0): size 36 (cls: ResurrectBinding>ObjectProperty>/Script/CoreUObject)
-	Resurrection Prompt (0-0-0-0): size 36 (cls: Resurrection Prompt>ObjectProperty>/Script/CoreUObject)
 	Resurrection Prompt Out (0-0-0-0): size 36 (cls: Resurrection Prompt Out>ObjectProperty>/Script/CoreUObject)
 	Resurrection Prompt_1 (0-0-0-0): size 36 (cls: Resurrection Prompt_1>ObjectProperty>/Script/CoreUObject)
+	ResurrectionPrompt_UNUSED (0-0-0-0): size 36 (cls: ResurrectionPrompt_UNUSED>ObjectProperty>/Script/CoreUObject)
 	RightMouseBase (0-0-0-0): size 36 (cls: RightMouseBase>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetCurrentUIStateWidget_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetCurrentUIStateWidget_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetUIManagerWidget_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetUIManagerWidget_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsHUD (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsHUD>ObjectProperty>/Script/CoreUObject)
-	Show Resurrect & Respawn (0-0-0-0): size 36 (cls: Show Resurrect & Respawn>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetOwningPlayer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetOwningPlayer_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_AsFort_Player_State_Zone (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Player_State_Zone>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetAbilitySystemComponent_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetAbilitySystemComponent_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetPlayerController_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetPlayerController_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetPlayerStateZone_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetPlayerStateZone_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Player_Controller_Deployable_Base (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Player_Controller_Deployable_Base>ObjectProperty>/Script/CoreUObject)
+	ShowResurrectRespawn (0-0-0-0): size 36 (cls: ShowResurrectRespawn>ObjectProperty>/Script/CoreUObject)
 	SpectatorName (0-0-0-0): size 36 (cls: SpectatorName>ObjectProperty>/Script/CoreUObject)
-	StartDeathBox (0-0-0-0): size 36 (cls: StartDeathBox>ObjectProperty>/Script/CoreUObject)
-	SwitcherBody (0-0-0-0): size 36 (cls: SwitcherBody>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetOwningPlayer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetOwningPlayer_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	SwitcherRespawnTextWidget (0-0-0-0): size 36 (cls: SwitcherRespawnTextWidget>ObjectProperty>/Script/CoreUObject)
 	SwitcherTitle (0-0-0-0): size 36 (cls: SwitcherTitle>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetGameState_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetGameState_ReturnValue>ObjectProperty>/Script/CoreUObject)
-	You Died! (0-0-0-0): size 36 (cls: You Died!>ObjectProperty>/Script/CoreUObject)
-	You Died!_1 (0-0-0-0): size 36 (cls: You Died!_1>ObjectProperty>/Script/CoreUObject)
-	You Died!_2 (0-0-0-0): size 36 (cls: You Died!_2>ObjectProperty>/Script/CoreUObject)
 	You Died!_3 (0-0-0-0): size 36 (cls: You Died!_3>ObjectProperty>/Script/CoreUObject)
+	YouDied_1_UNUSED (0-0-0-0): size 36 (cls: YouDied_1_UNUSED>ObjectProperty>/Script/CoreUObject)
+	YouDied_2_UNUSED (0-0-0-0): size 36 (cls: YouDied_2_UNUSED>ObjectProperty>/Script/CoreUObject)
+	YouDied_UNUSED (0-0-0-0): size 36 (cls: YouDied_UNUSED>ObjectProperty>/Script/CoreUObject)
 	Overlay_0 (0-0-0-0): size 86 (cls: Overlay_0>Overlay>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=VerticalBoxSlot_613=WidgetArchetype 
+	Overlay_DeathWidgetBody (0-0-0-0): size 86 (cls: Overlay_DeathWidgetBody>Overlay>/Script/UMG):
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=VerticalBoxSlot_0=WidgetArchetype 
 	OverlayEmblem (0-0-0-0): size 139 (cls: OverlayEmblem>Overlay>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -1889,8 +2040,17 @@ Serialized exports:
 			VerticalAlignment(ByteProperty)=VAlign_Fill 
 			Parent(ObjectProperty)=Overlay_0=WidgetArchetype 
 			Content(ObjectProperty)=KillerBackplate=WidgetArchetype 
+	OverlaySlot_0 (0-0-0-0): size 70 (cls: OverlaySlot_0>OverlaySlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=Overlay_DeathWidgetBody=WidgetArchetype 
+			Content(ObjectProperty)=DeathWidgetBody_StartDeathBox=WidgetArchetype 
 	OverlaySlot_1 (0-0-0-0): size 70 (cls: OverlaySlot_1>OverlaySlot>/Script/UMG):
 		Tag array:
+			Parent(ObjectProperty)=Overlay_DeathWidgetBody=WidgetArchetype 
+			Content(ObjectProperty)=DeathWidgetBody_SwitcherRespawn=WidgetArchetype 
+	OverlaySlot_1 (0-0-0-0): size 243 (cls: OverlaySlot_1>OverlaySlot>/Script/UMG):
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
 			Parent(ObjectProperty)=OverlayEmblem=WidgetArchetype 
 			Content(ObjectProperty)=PlayerBanner=WidgetArchetype 
 	OverlaySlot_0 (0-0-0-0): size 152 (cls: OverlaySlot_0>OverlaySlot>/Script/UMG):
@@ -1934,7 +2094,7 @@ Serialized exports:
 	SizeBox_1 (0-0-0-0): size 96 (cls: SizeBox_1>SizeBox>/Script/UMG):
 		Tag array:
 			bOverride_MinDesiredHeight(BoolProperty)=True 
-			MinDesiredHeight(FloatProperty)=100 
+			MinDesiredHeight(FloatProperty)=200 
 			Slot(ObjectProperty)=VerticalBoxSlot_1=WidgetArchetype 
 	SizeBox_3 (0-0-0-0): size 96 (cls: SizeBox_3>SizeBox>/Script/UMG):
 		Tag array:
@@ -1952,19 +2112,21 @@ Serialized exports:
 	CallFunc_GetSpectatingPlayerName_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetSpectatingPlayerName_ReturnValue>StrProperty>/Script/CoreUObject)
 	CallFunc_K2_SetTimerDelegate_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_SetTimerDelegate_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_K2_SetTimerDelegate_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_K2_SetTimerDelegate_ReturnValue1>StructProperty>/Script/CoreUObject)
+	DeathWidgetBodyWaitToShowTimeHandle (0-0-0-0): size 36 (cls: DeathWidgetBodyWaitToShowTimeHandle>StructProperty>/Script/CoreUObject)
+	CallFunc_K2_SetTimerDelegate_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_SetTimerDelegate_ReturnValue>StructProperty>/Script/CoreUObject)
 	Input_NextTeammate (0-0-0-0): size 36 (cls: Input_NextTeammate>StructProperty>/Script/CoreUObject)
 	Input_PreviousTeammate (0-0-0-0): size 36 (cls: Input_PreviousTeammate>StructProperty>/Script/CoreUObject)
 	Input_RespawnAtBase (0-0-0-0): size 36 (cls: Input_RespawnAtBase>StructProperty>/Script/CoreUObject)
 	CallFunc_GetHeroData_HeroData (0-0-0-0): size 36 (cls: CallFunc_GetHeroData_HeroData>StructProperty>/Script/CoreUObject)
 	CallFunc_GetKillerVisualInfoFromDeathReport_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetKillerVisualInfoFromDeathReport_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_K2_SetTimerDelegate_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_SetTimerDelegate_ReturnValue>StructProperty>/Script/CoreUObject)
-	CallFunc_K2_SetTimerDelegate_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_K2_SetTimerDelegate_ReturnValue1>StructProperty>/Script/CoreUObject)
 	CallFunc_K2_SetTimerDelegate_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_SetTimerDelegate_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_GetLocalTeamTeamMemberInfo_TeamMemberInfo (0-0-0-0): size 36 (cls: CallFunc_GetLocalTeamTeamMemberInfo_TeamMemberInfo>StructProperty>/Script/CoreUObject)
 	PlayerRespawnedWatchdogTimerHandle (0-0-0-0): size 36 (cls: PlayerRespawnedWatchdogTimerHandle>StructProperty>/Script/CoreUObject)
 	RespawnTimerHandle (0-0-0-0): size 36 (cls: RespawnTimerHandle>StructProperty>/Script/CoreUObject)
 	K2Node_MakeStruct_FormatArgumentData (0-0-0-0): size 36 (cls: K2Node_MakeStruct_FormatArgumentData>StructProperty>/Script/CoreUObject)
 	K2Node_MakeStruct_FormatArgumentData1 (0-0-0-0): size 36 (cls: K2Node_MakeStruct_FormatArgumentData1>StructProperty>/Script/CoreUObject)
+	K2Node_MakeStruct_FormatArgumentData2 (0-0-0-0): size 36 (cls: K2Node_MakeStruct_FormatArgumentData2>StructProperty>/Script/CoreUObject)
 	K2Node_MakeStruct_FormatArgumentData (0-0-0-0): size 36 (cls: K2Node_MakeStruct_FormatArgumentData>StructProperty>/Script/CoreUObject)
 	K2Node_MakeStruct_SlateColor (0-0-0-0): size 36 (cls: K2Node_MakeStruct_SlateColor>StructProperty>/Script/CoreUObject)
 	K2Node_MakeStruct_SlateColor1 (0-0-0-0): size 36 (cls: K2Node_MakeStruct_SlateColor1>StructProperty>/Script/CoreUObject)
@@ -1985,23 +2147,31 @@ Serialized exports:
 	CallFunc_Conv_IntToText_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Conv_IntToText_ReturnValue1>TextProperty>/Script/CoreUObject)
 	CallFunc_Format_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Format_ReturnValue>TextProperty>/Script/CoreUObject)
 	CallFunc_Format_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Format_ReturnValue1>TextProperty>/Script/CoreUObject)
+	CallFunc_Format_ReturnValue2 (0-0-0-0): size 32 (cls: CallFunc_Format_ReturnValue2>TextProperty>/Script/CoreUObject)
+	CallFunc_GetOverrideRespawnStatusText_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetOverrideRespawnStatusText_ReturnValue>TextProperty>/Script/CoreUObject)
 	CallFunc_Conv_IntToText_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Conv_IntToText_ReturnValue>TextProperty>/Script/CoreUObject)
 	CallFunc_Format_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Format_ReturnValue>TextProperty>/Script/CoreUObject)
 	CallFunc_MakeLiteralText_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_MakeLiteralText_ReturnValue>TextProperty>/Script/CoreUObject)
 	CallFunc_MakeLiteralText_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_MakeLiteralText_ReturnValue1>TextProperty>/Script/CoreUObject)
+	DeathWidgetBody_StartDeathBox (0-0-0-0): size 112 (cls: DeathWidgetBody_StartDeathBox>VerticalBox>/Script/UMG):
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
+			bIsVariable(BoolProperty)=True 
 	VerticalBox_19 (0-0-0-0): size 61 (cls: VerticalBox_19>VerticalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 	RespawnBox (0-0-0-0): size 149 (cls: RespawnBox>VerticalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-			Slot(ObjectProperty)=WidgetSwitcherSlot_1=WidgetArchetype 
+			Slot(ObjectProperty)=WidgetSwitcherSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
 			Visibility(EnumProperty)=ESlateVisibility::Hidden 
-	RespawnSpectatingBox (0-0-0-0): size 82 (cls: RespawnSpectatingBox>VerticalBox>/Script/UMG):
+	RespawnSpectatingBox (0-0-0-0): size 108 (cls: RespawnSpectatingBox>VerticalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-			Slot(ObjectProperty)=WidgetSwitcherSlot_2=WidgetArchetype 
+			Slot(ObjectProperty)=WidgetSwitcherSlot_1=WidgetArchetype 
+			bIsVariable(BoolProperty)=True 
 	RespawnTextBox (0-0-0-0): size 86 (cls: RespawnTextBox>VerticalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -2010,11 +2180,6 @@ Serialized exports:
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=HorizontalBoxSlot_5=WidgetArchetype 
-	StartDeathBox (0-0-0-0): size 112 (cls: StartDeathBox>VerticalBox>/Script/UMG):
-		Tag array:
-			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-			Slot(ObjectProperty)=WidgetSwitcherSlot_0=WidgetArchetype 
-			bIsVariable(BoolProperty)=True 
 	VerticalBox_0 (0-0-0-0): size 90 (cls: VerticalBox_0>VerticalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -2030,6 +2195,16 @@ Serialized exports:
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=WidgetSwitcherSlot_2=WidgetArchetype 
+	VerticalBoxSlot_0 (0-0-0-0): size 156 (cls: VerticalBoxSlot_0>VerticalBoxSlot>/Script/UMG):
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			Parent(ObjectProperty)=DeathWidgetBody_StartDeathBox=WidgetArchetype 
+			Content(ObjectProperty)=CommonTextBlock_YouWillNot=WidgetArchetype 
+	VerticalBoxSlot_20 (0-0-0-0): size 156 (cls: VerticalBoxSlot_20>VerticalBoxSlot>/Script/UMG):
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			Parent(ObjectProperty)=DeathWidgetBody_StartDeathBox=WidgetArchetype 
+			Content(ObjectProperty)=CommonTextBlockResurrectionTimerText=WidgetArchetype 
 	VerticalBoxSlot_0 (0-0-0-0): size 111 (cls: VerticalBoxSlot_0>VerticalBoxSlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Center 
@@ -2070,16 +2245,6 @@ Serialized exports:
 		Tag array:
 			Parent(ObjectProperty)=ResurrectTextBox=WidgetArchetype 
 			Content(ObjectProperty)=CommonTextBlockResurrect=WidgetArchetype 
-	VerticalBoxSlot_0 (0-0-0-0): size 156 (cls: VerticalBoxSlot_0>VerticalBoxSlot>/Script/UMG):
-		Tag array:
-			Padding(StructProperty)=System.Byte[] 
-			Parent(ObjectProperty)=StartDeathBox=WidgetArchetype 
-			Content(ObjectProperty)=CommonTextBlock_YouWillNot=WidgetArchetype 
-	VerticalBoxSlot_20 (0-0-0-0): size 156 (cls: VerticalBoxSlot_20>VerticalBoxSlot>/Script/UMG):
-		Tag array:
-			Padding(StructProperty)=System.Byte[] 
-			Parent(ObjectProperty)=StartDeathBox=WidgetArchetype 
-			Content(ObjectProperty)=CommonTextBlockResurrectionTimerText=WidgetArchetype 
 	VerticalBoxSlot_11 (0-0-0-0): size 70 (cls: VerticalBoxSlot_11>VerticalBoxSlot>/Script/UMG):
 		Tag array:
 			Parent(ObjectProperty)=VerticalBox_0=WidgetArchetype 
@@ -2095,7 +2260,7 @@ Serialized exports:
 	VerticalBoxSlot_0 (0-0-0-0): size 70 (cls: VerticalBoxSlot_0>VerticalBoxSlot>/Script/UMG):
 		Tag array:
 			Parent(ObjectProperty)=VerticalBox_18=WidgetArchetype 
-			Content(ObjectProperty)=SwitcherBody=WidgetArchetype 
+			Content(ObjectProperty)=Overlay_DeathWidgetBody=WidgetArchetype 
 	VerticalBoxSlot_1 (0-0-0-0): size 70 (cls: VerticalBoxSlot_1>VerticalBoxSlot>/Script/UMG):
 		Tag array:
 			Parent(ObjectProperty)=VerticalBox_18=WidgetArchetype 
@@ -2118,8 +2283,9 @@ Serialized exports:
 			VerticalAlignment(ByteProperty)=VAlign_Top 
 			Parent(ObjectProperty)=VerticalBoxKnockedDown=WidgetArchetype 
 			Content(ObjectProperty)=CommonTextBlock_PrimaryDeathText=WidgetArchetype 
-	VerticalBoxSlot_0 (0-0-0-0): size 152 (cls: VerticalBoxSlot_0>VerticalBoxSlot>/Script/UMG):
+	VerticalBoxSlot_0 (0-0-0-0): size 238 (cls: VerticalBoxSlot_0>VerticalBoxSlot>/Script/UMG):
 		Tag array:
+			Padding(StructProperty)=System.Byte[] 
 			HorizontalAlignment(ByteProperty)=HAlign_Center 
 			VerticalAlignment(ByteProperty)=VAlign_Top 
 			Parent(ObjectProperty)=VerticalBoxSpectating=WidgetArchetype 
@@ -2142,48 +2308,37 @@ Serialized exports:
 			bLegacyFinishOnStop(BoolProperty)=False 
 			PrecompiledEvaluationTemplate(StructProperty)=System.Byte[] 
 			Signature(StructProperty)=Guid: 1775844416-1081516275-2455359412-1891855226 
-	Resurrection Prompt_1_INST (0-0-0-0): size 23551 (cls: Resurrection Prompt_1_INST>WidgetAnimation>/Script/UMG):
+	Resurrection Prompt_1_INST (0-0-0-0): size 23914 (cls: Resurrection Prompt_1_INST>WidgetAnimation>/Script/UMG):
 		Tag array:
 			MovieScene(ObjectProperty)=Resurrection Prompt_1=DeathWidget_C 
 			AnimationBindings(ArrayProperty)=[object] (inner: StructProperty)
 			bLegacyFinishOnStop(BoolProperty)=False 
 			PrecompiledEvaluationTemplate(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 376041962-1238994617-719237820-3865699417 
-	Resurrection Prompt_2_INST (0-0-0-0): size 20181 (cls: Resurrection Prompt_2_INST>WidgetAnimation>/Script/UMG):
+			Signature(StructProperty)=Guid: 3560347938-1289022780-402949775-1898848799 
+	ResurrectionPrompt_2_UNUSED_INST (0-0-0-0): size 20239 (cls: ResurrectionPrompt_2_UNUSED_INST>WidgetAnimation>/Script/UMG):
 		Tag array:
-			MovieScene(ObjectProperty)=Resurrection Prompt_2=DeathWidget_C 
+			MovieScene(ObjectProperty)=ResurrectionPrompt_2_UNUSED=DeathWidget_C 
 			AnimationBindings(ArrayProperty)=[object] (inner: StructProperty)
 			bLegacyFinishOnStop(BoolProperty)=False 
+			DisplayLabel(StrProperty)=Resurrection Prompt_2_UNUSED 
 			PrecompiledEvaluationTemplate(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 1899904167-1158177975-2923148423-3962483554 
-	Resurrection Prompt_INST (0-0-0-0): size 29409 (cls: Resurrection Prompt_INST>WidgetAnimation>/Script/UMG):
+			Signature(StructProperty)=Guid: 1549179275-1154604956-1925226407-217469181 
+	ResurrectionPrompt_UNUSED_INST (0-0-0-0): size 29465 (cls: ResurrectionPrompt_UNUSED_INST>WidgetAnimation>/Script/UMG):
 		Tag array:
-			MovieScene(ObjectProperty)=Resurrection Prompt=DeathWidget_C 
+			MovieScene(ObjectProperty)=ResurrectionPrompt_UNUSED=DeathWidget_C 
 			AnimationBindings(ArrayProperty)=[object] (inner: StructProperty)
 			bLegacyFinishOnStop(BoolProperty)=False 
+			DisplayLabel(StrProperty)=Resurrection Prompt_UNUSED 
 			PrecompiledEvaluationTemplate(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 55058294-1201599358-731777205-3290788553 
-	Show Resurrect & Respawn_INST (0-0-0-0): size 62865 (cls: Show Resurrect & Respawn_INST>WidgetAnimation>/Script/UMG):
+			Signature(StructProperty)=Guid: 2065888066-1194656905-1088293558-2370496095 
+	ShowResurrectRespawn_INST (0-0-0-0): size 93745 (cls: ShowResurrectRespawn_INST>WidgetAnimation>/Script/UMG):
 		Tag array:
-			MovieScene(ObjectProperty)=Show Resurrect & Respawn=DeathWidget_C 
+			MovieScene(ObjectProperty)=ShowResurrectRespawn=DeathWidget_C 
 			AnimationBindings(ArrayProperty)=[object] (inner: StructProperty)
 			bLegacyFinishOnStop(BoolProperty)=False 
+			DisplayLabel(StrProperty)=Show Resurrect & Respawn 
 			PrecompiledEvaluationTemplate(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 1515717689-1184990107-1155431865-3198964202 
-	You Died!_1_INST (0-0-0-0): size 16431 (cls: You Died!_1_INST>WidgetAnimation>/Script/UMG):
-		Tag array:
-			MovieScene(ObjectProperty)=You Died!_1=DeathWidget_C 
-			AnimationBindings(ArrayProperty)=[object] (inner: StructProperty)
-			bLegacyFinishOnStop(BoolProperty)=False 
-			PrecompiledEvaluationTemplate(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 3412356897-1246992330-3102182817-1535167830 
-	You Died!_2_INST (0-0-0-0): size 16431 (cls: You Died!_2_INST>WidgetAnimation>/Script/UMG):
-		Tag array:
-			MovieScene(ObjectProperty)=You Died!_2=DeathWidget_C 
-			AnimationBindings(ArrayProperty)=[object] (inner: StructProperty)
-			bLegacyFinishOnStop(BoolProperty)=False 
-			PrecompiledEvaluationTemplate(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 3875648378-1167568207-3359737755-3964919950 
+			Signature(StructProperty)=Guid: 2737705136-1276295663-940687754-3015771706 
 	You Died!_3_INST (0-0-0-0): size 16224 (cls: You Died!_3_INST>WidgetAnimation>/Script/UMG):
 		Tag array:
 			MovieScene(ObjectProperty)=You Died!_3=DeathWidget_C 
@@ -2191,17 +2346,34 @@ Serialized exports:
 			bLegacyFinishOnStop(BoolProperty)=False 
 			PrecompiledEvaluationTemplate(StructProperty)=System.Byte[] 
 			Signature(StructProperty)=Guid: 4138223961-1340632353-1137132965-2614958054 
-	You Died!_INST (0-0-0-0): size 17105 (cls: You Died!_INST>WidgetAnimation>/Script/UMG):
+	YouDied_1_UNUSED_INST (0-0-0-0): size 16479 (cls: YouDied_1_UNUSED_INST>WidgetAnimation>/Script/UMG):
 		Tag array:
-			MovieScene(ObjectProperty)=You Died!=DeathWidget_C 
+			MovieScene(ObjectProperty)=YouDied_1_UNUSED=DeathWidget_C 
 			AnimationBindings(ArrayProperty)=[object] (inner: StructProperty)
 			bLegacyFinishOnStop(BoolProperty)=False 
+			DisplayLabel(StrProperty)=You Died!_1_UNUSED 
 			PrecompiledEvaluationTemplate(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 3550149673-1185039570-1889835153-233459083 
-	SwitcherBody (0-0-0-0): size 90 (cls: SwitcherBody>WidgetSwitcher>/Script/UMG):
+			Signature(StructProperty)=Guid: 2758704031-1323656768-2782209195-3454706815 
+	YouDied_2_UNUSED_INST (0-0-0-0): size 16479 (cls: YouDied_2_UNUSED_INST>WidgetAnimation>/Script/UMG):
+		Tag array:
+			MovieScene(ObjectProperty)=YouDied_2_UNUSED=DeathWidget_C 
+			AnimationBindings(ArrayProperty)=[object] (inner: StructProperty)
+			bLegacyFinishOnStop(BoolProperty)=False 
+			DisplayLabel(StrProperty)=You Died!_2_UNUSED 
+			PrecompiledEvaluationTemplate(StructProperty)=System.Byte[] 
+			Signature(StructProperty)=Guid: 4248194969-1103876847-3578945959-3991048483 
+	YouDied_UNUSED_INST (0-0-0-0): size 17151 (cls: YouDied_UNUSED_INST>WidgetAnimation>/Script/UMG):
+		Tag array:
+			MovieScene(ObjectProperty)=YouDied_UNUSED=DeathWidget_C 
+			AnimationBindings(ArrayProperty)=[object] (inner: StructProperty)
+			bLegacyFinishOnStop(BoolProperty)=False 
+			DisplayLabel(StrProperty)=You Died!_UNUSED 
+			PrecompiledEvaluationTemplate(StructProperty)=System.Byte[] 
+			Signature(StructProperty)=Guid: 225082120-1223579879-541874080-2652083748 
+	DeathWidgetBody_SwitcherRespawn (0-0-0-0): size 86 (cls: DeathWidgetBody_SwitcherRespawn>WidgetSwitcher>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-			Slot(ObjectProperty)=VerticalBoxSlot_0=WidgetArchetype 
+			Slot(ObjectProperty)=OverlaySlot_1=WidgetArchetype 
 	SwitcherRespawnTextWidget (0-0-0-0): size 86 (cls: SwitcherRespawnTextWidget>WidgetSwitcher>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -2212,15 +2384,11 @@ Serialized exports:
 			Slot(ObjectProperty)=VerticalBoxSlot_1=WidgetArchetype 
 	WidgetSwitcherSlot_0 (0-0-0-0): size 70 (cls: WidgetSwitcherSlot_0>WidgetSwitcherSlot>/Script/UMG):
 		Tag array:
-			Parent(ObjectProperty)=SwitcherBody=WidgetArchetype 
-			Content(ObjectProperty)=StartDeathBox=WidgetArchetype 
+			Parent(ObjectProperty)=DeathWidgetBody_SwitcherRespawn=WidgetArchetype 
+			Content(ObjectProperty)=RespawnBox=WidgetArchetype 
 	WidgetSwitcherSlot_1 (0-0-0-0): size 70 (cls: WidgetSwitcherSlot_1>WidgetSwitcherSlot>/Script/UMG):
 		Tag array:
-			Parent(ObjectProperty)=SwitcherBody=WidgetArchetype 
-			Content(ObjectProperty)=RespawnBox=WidgetArchetype 
-	WidgetSwitcherSlot_2 (0-0-0-0): size 70 (cls: WidgetSwitcherSlot_2>WidgetSwitcherSlot>/Script/UMG):
-		Tag array:
-			Parent(ObjectProperty)=SwitcherBody=WidgetArchetype 
+			Parent(ObjectProperty)=DeathWidgetBody_SwitcherRespawn=WidgetArchetype 
 			Content(ObjectProperty)=RespawnSpectatingBox=WidgetArchetype 
 	WidgetSwitcherSlot_0 (0-0-0-0): size 70 (cls: WidgetSwitcherSlot_0>WidgetSwitcherSlot>/Script/UMG):
 		Tag array:

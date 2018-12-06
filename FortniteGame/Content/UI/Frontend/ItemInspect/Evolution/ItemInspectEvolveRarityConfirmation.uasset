@@ -10,8 +10,10 @@ Name table:
 	/Game/UI/Foundation/Buttons/ButtonStyles/Slot/ButtonStyle-Slot-PeopleM
 	/Game/UI/Foundation/Buttons/IconTextButton
 	/Game/UI/Foundation/Buttons/TextStyles/TextStyle-MediumButton
+	/Game/UI/Foundation/Fonts/NotoSans
 	/Game/UI/Foundation/Input/InputActionDataTable
 	/Game/UI/Foundation/Shell/Textures/T-Icon-Warning-32
+	/Game/UI/Foundation/Text/Materials/M-FontShadow
 	/Game/UI/Foundation/Text/TextScrollStyle-Base
 	/Game/UI/Foundation/Text/TextStyle-Base-S-B
 	/Game/UI/Foundation/Text/TextStyle-Base-XS-B
@@ -48,6 +50,7 @@ Name table:
 	BackgroundBlur
 	BackgroundBlurSlot
 	bAllowTemplate
+	bApplyOutlineToDropShadows
 	bCookedWidgetTree
 	bHasScriptImplementedPaint
 	bHasScriptImplementedTick
@@ -68,6 +71,7 @@ Name table:
 	BorderSlot
 	Bottom
 	Brush
+	bSeparateFillAlpha
 	bShouldSelectUponReceivingFocus
 	Button
 	ButtonStyle-Slot-PeopleM_C
@@ -246,6 +250,8 @@ Name table:
 	ExecuteUbergraph_ItemInspectEvolveRarityConfirmation
 	FloatProperty
 	Font
+	FontObject
+	FontOutlineSettings
 	Format
 	FormatArgumentData
 	FortFrontEndContext
@@ -318,6 +324,7 @@ Name table:
 	LeftSideImage
 	Less_IntInt
 	LinearColor
+	M-FontShadow
 	Margin
 	Material
 	MinWidth
@@ -332,6 +339,7 @@ Name table:
 	NoEvolutions
 	None
 	Not_PreBool
+	NotoSans
 	NotoSans-Bold
 	NumRecipes
 	Object
@@ -348,6 +356,10 @@ Name table:
 	OnEvolutionOptionUnhovered
 	OnEvolutionOptionUnhovered__DelegateSignature
 	OnShow
+	OutlineColor
+	OutlineMaterial
+	OutlineSettings
+	OutlineSize
 	OutpostQuest_T2_L1
 	OutpostQuest_T3_L1
 	OutpostQuest_T3_L6
@@ -393,6 +405,7 @@ Name table:
 	SetText
 	SetupEvolutionOptions
 	SetVisibility
+	ShadowOffset
 	Size
 	SizeRule
 	SlateBrush
@@ -443,7 +456,6 @@ Name table:
 	TriggeringInputAction
 	TypefaceFontName
 	UberGraphFrame
-	UberGraphFramePointerProperty
 	UberGraphFunction
 	UMGSequencePlayer
 	UnderlyingType
@@ -466,14 +478,13 @@ Name table:
 	WidgetTree
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	ItemInspectEvolveRarityConfirmation_C (0-0-0-0): size 649 (cls: ItemInspectEvolveRarityConfirmation_C>WidgetBlueprintGeneratedClass>/Script/UMG):
+	ItemInspectEvolveRarityConfirmation_C (0-0-0-0): size 620 (cls: ItemInspectEvolveRarityConfirmation_C>WidgetBlueprintGeneratedClass>/Script/UMG):
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
 			bValidTemplate(BoolProperty)=True 
 			TemplateAsset(SoftObjectProperty)=/Game/UI/Frontend/ItemInspect/Evolution/ItemInspectEvolveRarityConfirmation.WidgetArchetype 
 			DynamicBindingObjects(ArrayProperty)=[object] (inner: ObjectProperty)
-			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=ItemInspectEvolveRarityConfirmation_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_ItemInspectEvolveRarityConfirmation=ItemInspectEvolveRarityConfirmation_C 
 	Default__ItemInspectEvolveRarityConfirmation_C (0-0-0-0): size 146 (cls: Default__ItemInspectEvolveRarityConfirmation_C>ItemInspectEvolveRarityConfirmation_C):
 		Tag array:
@@ -491,9 +502,9 @@ Serialized exports:
 	OnEvolutionOptionSelected__DelegateSignature (0-0-0-0): size 51 (cls: OnEvolutionOptionSelected__DelegateSignature>Function>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
 	ExecuteUbergraph_ItemInspectEvolveRarityConfirmation (0-0-0-0): size 220 (cls: ExecuteUbergraph_ItemInspectEvolveRarityConfirmation>Function>/Script/CoreUObject)
-	Construct (0-0-0-0): size 58 (cls: Construct>Function>/Script/CoreUObject)
+	Construct (0-0-0-0): size 54 (cls: Construct>Function>/Script/CoreUObject)
 	Button (0-0-0-0): size 36 (cls: Button>ObjectProperty>/Script/CoreUObject)
-	BndEvt__UpgradeConfirmButton_K2Node_ComponentBoundEvent_2_CommonButtonClicked__DelegateSignature (0-0-0-0): size 72 (cls: BndEvt__UpgradeConfirmButton_K2Node_ComponentBoundEvent_2_CommonButtonClicked__DelegateSignature>Function>/Script/CoreUObject)
+	BndEvt__UpgradeConfirmButton_K2Node_ComponentBoundEvent_2_CommonButtonClicked__DelegateSignature (0-0-0-0): size 68 (cls: BndEvt__UpgradeConfirmButton_K2Node_ComponentBoundEvent_2_CommonButtonClicked__DelegateSignature>Function>/Script/CoreUObject)
 	Item (0-0-0-0): size 36 (cls: Item>ObjectProperty>/Script/CoreUObject)
 	SetItemToRepresent (0-0-0-0): size 915 (cls: SetItemToRepresent>Function>/Script/CoreUObject)
 	EvolutionIndex (0-0-0-0): size 32 (cls: EvolutionIndex>IntProperty>/Script/CoreUObject)
@@ -643,56 +654,65 @@ Serialized exports:
 			Slot(ObjectProperty)=VerticalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
 			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
-	CommonTextBlock_0 (0-0-0-0): size 277 (cls: CommonTextBlock_0>CommonTextBlock>/Script/CommonUI):
+	CommonTextBlock_0 (0-0-0-0): size 363 (cls: CommonTextBlock_0>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-S-B_C=/Game/UI/Foundation/Text/TextStyle-Base-S-B 
 			Text(TextProperty)=Requirements (8716A93A4BF5DB20B553648922FD891E) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=VerticalBoxSlot_8=WidgetArchetype 
-	DialogTitle (0-0-0-0): size 279 (cls: DialogTitle>CommonTextBlock>/Script/CommonUI):
+	DialogTitle (0-0-0-0): size 365 (cls: DialogTitle>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-S-B_C=/Game/UI/Foundation/Text/TextStyle-Base-S-B 
 			Text(TextProperty)=UPGRADE RARITY (4362D4254138BEE156C3EE8385979E9C) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=BorderSlot_1=WidgetArchetype 
-	CenterButtonTextWidget (0-0-0-0): size 367 (cls: CenterButtonTextWidget>CommonTextBlock>/Script/CommonUI):
+	CenterButtonTextWidget (0-0-0-0): size 453 (cls: CenterButtonTextWidget>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-MediumButton_C=/Game/UI/Foundation/Buttons/TextStyles/TextStyle-MediumButton 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)={Text} (99357DD44CFC5E3692A9C792F19B30DA) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Center 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	EvolutionNameText (0-0-0-0): size 331 (cls: EvolutionNameText>CommonTextBlock>/Script/CommonUI):
+	EvolutionNameText (0-0-0-0): size 417 (cls: EvolutionNameText>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B 
 			Text(TextProperty)={Upgrade Name} (0BCA27DE485A9537C9C196821F811CF4) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			AutoWrapText(BoolProperty)=True 
 			Slot(ObjectProperty)=BorderSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	EvolveRestrictionText (0-0-0-0): size 221 (cls: EvolveRestrictionText>CommonTextBlock>/Script/CommonUI):
+	EvolveRestrictionText (0-0-0-0): size 780 (cls: EvolveRestrictionText>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B-S-Red_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B-S-Red 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)={Restriction Reason} (17A65AC84EBE0277699E4895F5FF66A5) 
+			ColorAndOpacity(StructProperty)=System.Byte[] 
+			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	NoEvolutionInfo (0-0-0-0): size 360 (cls: NoEvolutionInfo>CommonTextBlock>/Script/CommonUI):
+	NoEvolutionInfo (0-0-0-0): size 446 (cls: NoEvolutionInfo>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B 
 			Text(TextProperty)=No rarity upgrades available for this item. (2C9783C74C67E45DDBF60BB6387493AF) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			AutoWrapText(BoolProperty)=True 
 			Slot(ObjectProperty)=WidgetSwitcherSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	NoEvolutionIngredientsText (0-0-0-0): size 432 (cls: NoEvolutionIngredientsText>CommonTextBlock>/Script/CommonUI):
+	NoEvolutionIngredientsText (0-0-0-0): size 518 (cls: NoEvolutionIngredientsText>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-HUD-StaminaBarMax_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-HUD-StaminaBarMax 
 			Text(TextProperty)=No Upgrade Selected (504D4E8A4803EE2A76D9B8B32DBA4CF4) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=VerticalBoxSlot_1=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
 	EvolutionInfoSwitcher (0-0-0-0): size 86 (cls: EvolutionInfoSwitcher>CommonWidgetSwitcher>/Script/CommonUI):

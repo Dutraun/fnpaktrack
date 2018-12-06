@@ -8,6 +8,7 @@ Name table:
 	/Game/UI/Foundation/Buttons/Materials/Slot/M_Slot_People_M_Empty
 	/Game/UI/Foundation/Buttons/Materials/Slot/M_Slot_People_M_Locked
 	/Game/UI/Foundation/Fonts/Burbank
+	/Game/UI/Foundation/Fonts/NotoSans
 	/Game/UI/Foundation/Items/Details/ItemDetailsHeader
 	/Game/UI/Foundation/Items/Details/ItemDetailsHeaderItemDisplayText
 	/Game/UI/Foundation/Items/Details/ItemDetailsHeaderRarityTypeText
@@ -18,6 +19,7 @@ Name table:
 	/Game/UI/Foundation/Text/Materials/M-FontShadow
 	/Game/UI/Foundation/Text/TextScrollStyle-Base
 	/Game/UI/Foundation/Text/TextScrollStyle-NoFade
+	/Game/UI/Foundation/Text/TextStyle-Base
 	/Game/UI/Foundation/Text/TextStyle-Base-M-B
 	/Game/UI/Foundation/Text/TextStyle-Base-S
 	/Game/UI/Foundation/Text/TextStyle-Base-S-B
@@ -35,9 +37,9 @@ Name table:
 	/Game/UI/Foundation/Textures/Icons/ItemTypes/T-Icon-Shotgun-64
 	/Game/UI/Foundation/Textures/Icons/ItemTypes/T-Icon-Sniper-64
 	/Game/UI/Foundation/Textures/Icons/Shell/T-Icon-Power-64
-	/Game/UI/HUD/BasicInteractionWidget
 	/Game/UI/HUD/Textures/Fort_ContextUI_Icon_Interact
 	/Game/UI/Icons/Icon_Seach_Close
+	/Game/UI/InGame/HUD/BasicInteractionWidget
 	/Game/UI/InGame/HUD/HUD-PickupItemWidget
 	/Game/UI/InGame/HUD/Interaction_DefenderBeacon
 	/Game/UI/InGame/HUD/InteractionIndicator
@@ -189,6 +191,7 @@ Name table:
 	Default__TextStyle-Base-XS-B_C
 	Default__TextStyle-Base-XS-Black_C
 	Default__TextStyle-Base-XS_C
+	Default__TextStyle-Base_C
 	Default__TextStyle-Header-M_C
 	Default__VerticalBox
 	Default__VerticalBoxSlot
@@ -362,7 +365,9 @@ Name table:
 	NamedSlot
 	NameProperty
 	None
+	NotoSans
 	NotoSans-Bold
+	NotoSans-Regular
 	Numeric Text Style
 	NumericText
 	Object
@@ -413,6 +418,7 @@ Name table:
 	SetShowProgressCountDown
 	SetText
 	SetVisibility
+	ShadowOffset
 	ShouldShowLabel
 	ShouldShowMaximumLevel
 	Show Ammo Header
@@ -470,6 +476,7 @@ Name table:
 	TextStyle-Base-XS-B_C
 	TextStyle-Base-XS-Black_C
 	TextStyle-Base-XS_C
+	TextStyle-Base_C
 	TextStyle-Header-M_C
 	TextUnderKeybindText
 	Texture2D
@@ -481,7 +488,6 @@ Name table:
 	TypefaceFontName
 	TypeTextBlock
 	UberGraphFrame
-	UberGraphFramePointerProperty
 	UberGraphFunction
 	UnderlyingType
 	UpdateDefenderBeaconWidget
@@ -514,13 +520,12 @@ Name table:
 	WrapTextAt
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	InteractionIndicator_C (0-0-0-0): size 416 (cls: InteractionIndicator_C>WidgetBlueprintGeneratedClass>/Script/UMG):
+	InteractionIndicator_C (0-0-0-0): size 387 (cls: InteractionIndicator_C>WidgetBlueprintGeneratedClass>/Script/UMG):
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
 			bValidTemplate(BoolProperty)=True 
 			TemplateAsset(SoftObjectProperty)=/Game/UI/InGame/HUD/InteractionIndicator.WidgetArchetype 
-			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=InteractionIndicator_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_InteractionIndicator=InteractionIndicator_C 
 	Default__InteractionIndicator_C (0-0-0-0): size 261 (cls: Default__InteractionIndicator_C>InteractionIndicator_C):
 		Tag array:
@@ -530,7 +535,7 @@ Serialized exports:
 			HUDElementTag(StructProperty)=GameplayTagContainer:HUD.InWorld.InteractionIndicator 
 			bHasScriptImplementedTick(BoolProperty)=False 
 			bHasScriptImplementedPaint(BoolProperty)=False 
-	BasicInteractionWidget (0-0-0-0): size 166 (cls: BasicInteractionWidget>BasicInteractionWidget_C>/Game/UI/HUD/BasicInteractionWidget):
+	BasicInteractionWidget (0-0-0-0): size 166 (cls: BasicInteractionWidget>BasicInteractionWidget_C>/Game/UI/InGame/HUD/BasicInteractionWidget):
 		Tag array:
 			TextDescription(ObjectProperty)=TextDescription=WidgetArchetype 
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
@@ -541,8 +546,8 @@ Serialized exports:
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
 	ExecuteUbergraph_InteractionIndicator (0-0-0-0): size 618 (cls: ExecuteUbergraph_InteractionIndicator>Function>/Script/CoreUObject)
 	CallFunc_IsMobileGame_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsMobileGame_ReturnValue>BoolProperty>/Script/CoreUObject)
-	Destruct (0-0-0-0): size 58 (cls: Destruct>Function>/Script/CoreUObject)
-	Construct (0-0-0-0): size 58 (cls: Construct>Function>/Script/CoreUObject)
+	Destruct (0-0-0-0): size 54 (cls: Destruct>Function>/Script/CoreUObject)
+	Construct (0-0-0-0): size 54 (cls: Construct>Function>/Script/CoreUObject)
 	Interaction (0-0-0-0): size 36 (cls: Interaction>ObjectProperty>/Script/CoreUObject)
 	HandleInteractionChanged (0-0-0-0): size 626 (cls: HandleInteractionChanged>Function>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
@@ -662,114 +667,129 @@ Serialized exports:
 			Padding(StructProperty)=System.Byte[] 
 			Background(StructProperty)=System.Byte[] 
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
-	NumericText (0-0-0-0): size 260 (cls: NumericText>CommonNumericTextBlock>/Script/CommonUI):
+	NumericText (0-0-0-0): size 465 (cls: NumericText>CommonNumericTextBlock>/Script/CommonUI):
 		Tag array:
+			Style(ObjectProperty)=TextStyle-Base_C=/Game/UI/Foundation/Text/TextStyle-Base 
 			Text(TextProperty)=Text Block (TextBlockDefaultValue) 
+			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_5=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
 			bIsVariable(BoolProperty)=True 
 	TextDescription (0-0-0-0): size 525 (cls: TextDescription>CommonTextBlock>/Script/CommonUI):
 		Tag array:
-			Style(ObjectProperty)=[object] 
-			Text(TextProperty)=It's  text block of insanely big proportions.  I mean it's gigantic.  It's humongous.  It's the biggest damn piece of text you've ever seen in one place.  And better still, it doesn't need to be localized! (38D9CBE94B49BF850B3F46988D171162) 
+			Text(TextProperty)=It's  text block of insanely big proportions.  I mean it's gigantic.  It's humongous.  It's the biggest damn piece of text you've ever seen in one place.  And better still, it doesn't need to be localized! (B7C1BD04403A004D41AF26BD9C6FB590) 
 			Font(StructProperty)=System.Byte[] 
 			WrapTextAt(FloatProperty)=300 
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	AmmoLoadedText (0-0-0-0): size 322 (cls: AmmoLoadedText>CommonTextBlock>/Script/CommonUI):
+	AmmoLoadedText (0-0-0-0): size 408 (cls: AmmoLoadedText>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-S-B_C=/Game/UI/Foundation/Text/TextStyle-Base-S-B 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-NoFade_C=/Game/UI/Foundation/Text/TextScrollStyle-NoFade 
 			Text(TextProperty)=30 (73B87E534E7D52BB00829FBF8A771A67) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	ItemDisplayName (0-0-0-0): size 371 (cls: ItemDisplayName>CommonTextBlock>/Script/CommonUI):
+	ItemDisplayName (0-0-0-0): size 428 (cls: ItemDisplayName>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-M_C=/Game/UI/Foundation/Text/TextStyle-Header-M 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)={ItemName} (C07A45474B5FAAE811D5138A157F0AE9) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			bIsVariable(BoolProperty)=True 
 			Clipping(EnumProperty)=EWidgetClipping::ClipToBounds 
-	RarityTextBlock (0-0-0-0): size 332 (cls: RarityTextBlock>CommonTextBlock>/Script/CommonUI):
+	RarityTextBlock (0-0-0-0): size 418 (cls: RarityTextBlock>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)={RarityName} (FB5500CA486863C64CFAF682510C4728) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	TypeTextBlock (0-0-0-0): size 454 (cls: TypeTextBlock>CommonTextBlock>/Script/CommonUI):
+	TypeTextBlock (0-0-0-0): size 540 (cls: TypeTextBlock>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B-70pc_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B-70pc 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)=| {TypeName} (BBB5F0E04C7D1B5FF508D38C582073F2) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_2=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	TagListTextBlock (0-0-0-0): size 422 (cls: TagListTextBlock>CommonTextBlock>/Script/CommonUI):
+	TagListTextBlock (0-0-0-0): size 508 (cls: TagListTextBlock>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B-70pc_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B-70pc 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)={TagList} (A269B5C84DF4FB3ABC3BA0A68E8FA5E0) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			bIsVariable(BoolProperty)=True 
-	CommonTextBlock_1 (0-0-0-0): size 355 (cls: CommonTextBlock_1>CommonTextBlock>/Script/CommonUI):
+	CommonTextBlock_1 (0-0-0-0): size 474 (cls: CommonTextBlock_1>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-Black_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-Black 
 			Text(TextProperty)=x (35DA723D42EB249E77653D92243F103B) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
-	TextCounter (0-0-0-0): size 416 (cls: TextCounter>CommonTextBlock>/Script/CommonUI):
+	TextCounter (0-0-0-0): size 502 (cls: TextCounter>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B-Black_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B-Black 
 			Text(TextProperty)=Text Block (TextBlockDefaultValue) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	TextInteractionFailure (0-0-0-0): size 648 (cls: TextInteractionFailure>CommonTextBlock>/Script/CommonUI):
+	TextInteractionFailure (0-0-0-0): size 734 (cls: TextInteractionFailure>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B-S-Red_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B-S-Red 
 			Text(TextProperty)=Text Block (TextBlockDefaultValue) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	CommonTextBlock_0 (0-0-0-0): size 280 (cls: CommonTextBlock_0>CommonTextBlock>/Script/CommonUI):
+	CommonTextBlock_0 (0-0-0-0): size 366 (cls: CommonTextBlock_0>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-S-B_C=/Game/UI/Foundation/Text/TextStyle-Base-S-B 
 			Text(TextProperty)=Choose Defender (C34CAE9844DDC343C340F5BF2CDC9738) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
-	CommonTextBlock_2 (0-0-0-0): size 282 (cls: CommonTextBlock_2>CommonTextBlock>/Script/CommonUI):
+	CommonTextBlock_2 (0-0-0-0): size 368 (cls: CommonTextBlock_2>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-S-B_C=/Game/UI/Foundation/Text/TextStyle-Base-S-B 
 			Text(TextProperty)=Unable to deploy! (936E563D461D0A375EC3FEBCBD0E389B) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=VerticalBoxSlot_4=WidgetArchetype 
-	DefenderLimitText (0-0-0-0): size 284 (cls: DefenderLimitText>CommonTextBlock>/Script/CommonUI):
+	DefenderLimitText (0-0-0-0): size 370 (cls: DefenderLimitText>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-S-B_C=/Game/UI/Foundation/Text/TextStyle-Base-S-B 
 			Text(TextProperty)=Defender Limit {Limit} (54227E134AF5D9037CC8BEAEFAD1A356) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			bIsVariable(BoolProperty)=True 
-	ErrorTextBlock (0-0-0-0): size 270 (cls: ErrorTextBlock>CommonTextBlock>/Script/CommonUI):
+	ErrorTextBlock (0-0-0-0): size 389 (cls: ErrorTextBlock>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-S_C=/Game/UI/Foundation/Text/TextStyle-Base-S 
 			Text(TextProperty)={Error Text} (2DC8B86E4FAFE6AF232B7FB2704154D0) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=VerticalBoxSlot_3=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	TextUnderKeybindText (0-0-0-0): size 261 (cls: TextUnderKeybindText>CommonTextBlock>/Script/CommonUI):
+	TextUnderKeybindText (0-0-0-0): size 380 (cls: TextUnderKeybindText>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS_C=/Game/UI/Foundation/Text/TextStyle-Base-XS 
 			Text(TextProperty)=Text Block (TextBlockDefaultValue) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=VerticalBoxSlot_1=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
 	DefenderLimitDisplay (0-0-0-0): size 125 (cls: DefenderLimitDisplay>DefenderLimitDisplay_C>/Game/UI/InGame/Traps/DefenderLimitDisplay):
@@ -807,10 +827,11 @@ Serialized exports:
 		Tag array:
 			bShouldCollapseWhenConditionIsFalse(BoolProperty)=True 
 			Slot(ObjectProperty)=HorizontalBoxSlot_3=WidgetArchetype 
-	CategoryIndicator (0-0-0-0): size 164 (cls: CategoryIndicator>FortItemCategoryIndicator>/Script/FortniteUI):
+	CategoryIndicator (0-0-0-0): size 193 (cls: CategoryIndicator>FortItemCategoryIndicator>/Script/FortniteUI):
 		Tag array:
 			OrdinalOfCategoryToRepresent(EnumProperty)=EFortItemCategoryOrdinal::Secondary 
 			IconBrushSize(ByteProperty)=EFortBrushSize::Medium 
+			LabelTextStyle(ObjectProperty)=TextStyle-Base_C=/Game/UI/Foundation/Text/TextStyle-Base 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
 			Visibility(EnumProperty)=ESlateVisibility::SelfHitTestInvisible 
 	CategoryIndicatorTertiary (0-0-0-0): size 219 (cls: CategoryIndicatorTertiary>FortItemCategoryIndicator>/Script/FortniteUI):

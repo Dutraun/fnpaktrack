@@ -1,4 +1,5 @@
 Name table:
+	/Engine/EngineMaterials/DefaultParticle
 	/Game/Characters/Enemies/Husk/Materials/M_Husk_DeathStrands_01
 	/Game/Characters/Enemies/Husk/Mesh/FX/St_Husk_DeathStrands_01
 	/Game/Effects/Fort_Effects/Mutators/Effects/P_Husk_Enraged_Bodysmoke_01
@@ -16,8 +17,10 @@ Name table:
 	bAlwaysInWorldSpace
 	bEnabled
 	Bias
+	BoneSocketName
+	BONESOCKETSEL_Random
+	BONESOCKETSOURCE_Bones
 	BoolProperty
-	bOrientMeshEmitters
 	Box
 	bScaleVelocityByParamValue
 	bShouldResetPeakCounts
@@ -58,9 +61,9 @@ Name table:
 	Default__ParticleModuleColor
 	Default__ParticleModuleColorScaleOverLife
 	Default__ParticleModuleLifetime
+	Default__ParticleModuleLocationBoneSocket
 	Default__ParticleModuleLocationEmitter
 	Default__ParticleModuleLocationPrimitiveSphere
-	Default__ParticleModuleLocationSkelVertSurface
 	Default__ParticleModuleMeshRotation
 	Default__ParticleModuleParameterDynamic
 	Default__ParticleModuleRequired
@@ -73,6 +76,7 @@ Name table:
 	Default__ParticleModuleTypeDataMesh
 	Default__ParticleSpriteEmitter
 	Default__ParticleSystem
+	DefaultParticle
 	DetailModeBitmask
 	Distribution
 	DistributionFloatConstant
@@ -87,7 +91,8 @@ Name table:
 	EEmitterDynamicParameterValue
 	EEmitterRenderMode
 	EInterpCurveMode
-	ELocationSkelVertSurfaceSource
+	ELocationBoneSocketSelectionMethod
+	ELocationBoneSocketSource
 	EmitterDelay
 	EmitterDuration
 	EmitterDynamicParameter
@@ -112,15 +117,7 @@ Name table:
 	hand_l
 	hand_r
 	head
-	ik_foot_l
-	ik_foot_r
-	ik_foot_root
-	ik_hand_gun
-	ik_hand_l
-	ik_hand_r
-	ik_hand_root
-	index_01_l
-	index_01_r
+	InheritVelocityScale
 	InterpCurveFloat
 	InterpCurvePointFloat
 	InterpMode
@@ -132,6 +129,7 @@ Name table:
 	Level
 	LifeMultiplier
 	Lifetime
+	LocationBoneSocketInfo
 	LockFlag
 	LODDistanceCheckTime
 	LODDistances
@@ -143,6 +141,8 @@ Name table:
 	lowerarm_r
 	lowerarm_twist_01_l
 	lowerarm_twist_01_r
+	lowerarm_twist_02_l
+	lowerarm_twist_02_r
 	M_Husk_DeathStrands_01
 	M_Husk_Enraged_Smoke_Inst_01
 	Material
@@ -150,17 +150,14 @@ Name table:
 	MaxValue
 	MaxValueVec
 	Mesh
-	middle_01_l
-	middle_01_r
 	MinValue
 	MinValueVec
 	Modules
 	NameProperty
 	neck_01
 	None
-	NormalCheckTolerance
-	NormalToCompare
 	ObjectProperty
+	Offset
 	Op
 	OpacitySourceMode
 	OSM_BlueChannel
@@ -179,9 +176,9 @@ Name table:
 	ParticleModuleColor
 	ParticleModuleColorScaleOverLife
 	ParticleModuleLifetime
+	ParticleModuleLocationBoneSocket
 	ParticleModuleLocationEmitter
 	ParticleModuleLocationPrimitiveSphere
-	ParticleModuleLocationSkelVertSurface
 	ParticleModuleMeshRotation
 	ParticleModuleParameterDynamic
 	ParticleModuleRequired
@@ -199,8 +196,6 @@ Name table:
 	PARTICLESYSTEMLODMETHOD_ActivateAutomatic
 	PeakActiveParticles
 	pelvis
-	pinky_01_l
-	pinky_01_r
 	Points
 	PSUVIM_Linear_Blend
 	RandomImageTime
@@ -210,20 +205,20 @@ Name table:
 	RawDistributionVector
 	RequiredDistributionSpawnRate
 	RequiredModule
-	ring_01_l
-	ring_01_r
 	RollPitchYawRange
-	root
+	SelectionMethod
 	Shading
 	SkelMeshActorParamName
 	SmokeSwirl
 	Source
+	SourceLocations
 	SourceMovementScale
 	SourceType
 	SpawnModule
 	SpawnRate
 	SpawnRateScale
 	spine_01
+	spine_02
 	spine_03
 	St_Husk_DeathStrands_01
 	StartAlpha
@@ -249,8 +244,6 @@ Name table:
 	thigh_r
 	thigh_twist_01_l
 	thigh_twist_01_r
-	thumb_01_l
-	thumb_01_r
 	Time
 	TimeBias
 	TimeScale
@@ -262,17 +255,18 @@ Name table:
 	upperarm_r
 	upperarm_twist_01_l
 	upperarm_twist_01_r
+	upperarm_twist_02_l
+	upperarm_twist_02_r
 	UVFlippingMode
 	V Panner Speed
 	V Scale
-	ValidAssociatedBones
 	ValueMethod
 	Values
 	Vector
 	Velocity
 	VelocityScale
-	VERTSURFACESOURCE_Surface
 Serialized exports:
+	RequiredDistributionSpawnRate (0-0-0-0): size 12 (cls: RequiredDistributionSpawnRate>DistributionFloatConstant>/Script/Engine)
 	RequiredDistributionSpawnRate (0-0-0-0): size 12 (cls: RequiredDistributionSpawnRate>DistributionFloatConstant>/Script/Engine)
 	RequiredDistributionSpawnRate (0-0-0-0): size 12 (cls: RequiredDistributionSpawnRate>DistributionFloatConstant>/Script/Engine)
 	RequiredDistributionSpawnRate (0-0-0-0): size 12 (cls: RequiredDistributionSpawnRate>DistributionFloatConstant>/Script/Engine)
@@ -305,7 +299,7 @@ Serialized exports:
 			RequiredModule(ObjectProperty)=ParticleModuleRequired_0=P_Husk_Enraged_Bodysmoke_01 
 			Modules(ArrayProperty)=[object] (inner: ObjectProperty)
 			SpawnModule(ObjectProperty)=ParticleModuleSpawn_2=P_Husk_Enraged_Bodysmoke_01 
-			PeakActiveParticles(IntProperty)=45 
+			PeakActiveParticles(IntProperty)=44 
 	ParticleLODLevel_1 (0-0-0-0): size 177 (cls: ParticleLODLevel_1>ParticleLODLevel>/Script/Engine):
 		Tag array:
 			Level(IntProperty)=2 
@@ -326,7 +320,7 @@ Serialized exports:
 			Modules(ArrayProperty)=[object] (inner: ObjectProperty)
 			TypeDataModule(ObjectProperty)=ParticleModuleTypeDataMesh_1=P_Husk_Enraged_Bodysmoke_01 
 			SpawnModule(ObjectProperty)=ParticleModuleSpawn_6=P_Husk_Enraged_Bodysmoke_01 
-			PeakActiveParticles(IntProperty)=13 
+			PeakActiveParticles(IntProperty)=12 
 	ParticleLODLevel_4 (0-0-0-0): size 226 (cls: ParticleLODLevel_4>ParticleLODLevel>/Script/Engine):
 		Tag array:
 			Level(IntProperty)=1 
@@ -343,6 +337,26 @@ Serialized exports:
 			TypeDataModule(ObjectProperty)=ParticleModuleTypeDataMesh_1=P_Husk_Enraged_Bodysmoke_01 
 			SpawnModule(ObjectProperty)=ParticleModuleSpawn_11=P_Husk_Enraged_Bodysmoke_01 
 			PeakActiveParticles(IntProperty)=5 
+	ParticleLODLevel_0 (0-0-0-0): size 144 (cls: ParticleLODLevel_0>ParticleLODLevel>/Script/Engine):
+		Tag array:
+			RequiredModule(ObjectProperty)=ParticleModuleRequired_2=P_Husk_Enraged_Bodysmoke_01 
+			Modules(ArrayProperty)=[object] (inner: ObjectProperty)
+			SpawnModule(ObjectProperty)=ParticleModuleSpawn_5=P_Husk_Enraged_Bodysmoke_01 
+			PeakActiveParticles(IntProperty)=8 
+	ParticleLODLevel_1 (0-0-0-0): size 173 (cls: ParticleLODLevel_1>ParticleLODLevel>/Script/Engine):
+		Tag array:
+			Level(IntProperty)=1 
+			RequiredModule(ObjectProperty)=ParticleModuleRequired_2=P_Husk_Enraged_Bodysmoke_01 
+			Modules(ArrayProperty)=[object] (inner: ObjectProperty)
+			SpawnModule(ObjectProperty)=ParticleModuleSpawn_5=P_Husk_Enraged_Bodysmoke_01 
+			PeakActiveParticles(IntProperty)=7 
+	ParticleLODLevel_2 (0-0-0-0): size 173 (cls: ParticleLODLevel_2>ParticleLODLevel>/Script/Engine):
+		Tag array:
+			Level(IntProperty)=2 
+			RequiredModule(ObjectProperty)=ParticleModuleRequired_2=P_Husk_Enraged_Bodysmoke_01 
+			Modules(ArrayProperty)=[object] (inner: ObjectProperty)
+			SpawnModule(ObjectProperty)=ParticleModuleSpawn_5=P_Husk_Enraged_Bodysmoke_01 
+			PeakActiveParticles(IntProperty)=7 
 	ParticleLODLevel_0 (0-0-0-0): size 221 (cls: ParticleLODLevel_0>ParticleLODLevel>/Script/Engine):
 		Tag array:
 			Level(IntProperty)=1 
@@ -362,7 +376,7 @@ Serialized exports:
 			RequiredModule(ObjectProperty)=ParticleModuleRequired_5=P_Husk_Enraged_Bodysmoke_01 
 			Modules(ArrayProperty)=[object] (inner: ObjectProperty)
 			SpawnModule(ObjectProperty)=ParticleModuleSpawn_3=P_Husk_Enraged_Bodysmoke_01 
-			PeakActiveParticles(IntProperty)=392 
+			PeakActiveParticles(IntProperty)=32 
 	ParticleModuleAcceleration_1 (0-0-0-0): size 563 (cls: ParticleModuleAcceleration_1>ParticleModuleAcceleration>/Script/Engine):
 		Tag array:
 			Acceleration(StructProperty)=System.Byte[] 
@@ -401,6 +415,10 @@ Serialized exports:
 		Tag array:
 			Lifetime(StructProperty)=System.Byte[] 
 			LODValidity(ByteProperty)=[object] 
+	ParticleModuleLifetime_2 (0-0-0-0): size 390 (cls: ParticleModuleLifetime_2>ParticleModuleLifetime>/Script/Engine):
+		Tag array:
+			Lifetime(StructProperty)=System.Byte[] 
+			LODValidity(ByteProperty)=[object] 
 	ParticleModuleLifetime_3 (0-0-0-0): size 428 (cls: ParticleModuleLifetime_3>ParticleModuleLifetime>/Script/Engine):
 		Tag array:
 			Lifetime(StructProperty)=System.Byte[] 
@@ -408,6 +426,15 @@ Serialized exports:
 	ParticleModuleLifetime_5 (0-0-0-0): size 428 (cls: ParticleModuleLifetime_5>ParticleModuleLifetime>/Script/Engine):
 		Tag array:
 			Lifetime(StructProperty)=System.Byte[] 
+			LODValidity(ByteProperty)=[object] 
+	ParticleModuleLocationBoneSocket_0 (0-0-0-0): size 3872 (cls: ParticleModuleLocationBoneSocket_0>ParticleModuleLocationBoneSocket>/Script/Engine):
+		Tag array:
+			SourceType(ByteProperty)=BONESOCKETSOURCE_Bones 
+			SourceLocations(ArrayProperty)=[object] (inner: StructProperty)
+			SelectionMethod(ByteProperty)=BONESOCKETSEL_Random 
+			bUpdatePositionEachFrame(BoolProperty)=True 
+			InheritVelocityScale(FloatProperty)=0.05 
+			SkelMeshActorParamName(NameProperty)=EnemyPawn 
 			LODValidity(ByteProperty)=[object] 
 	ParticleModuleLocationEmitter_0 (0-0-0-0): size 79 (cls: ParticleModuleLocationEmitter_0>ParticleModuleLocationEmitter>/Script/Engine):
 		Tag array:
@@ -419,16 +446,6 @@ Serialized exports:
 			Velocity(BoolProperty)=True 
 			VelocityScale(StructProperty)=System.Byte[] 
 			StartLocation(StructProperty)=System.Byte[] 
-			LODValidity(ByteProperty)=[object] 
-	ParticleModuleLocationSkelVertSurface_1 (0-0-0-0): size 683 (cls: ParticleModuleLocationSkelVertSurface_1>ParticleModuleLocationSkelVertSurface>/Script/Engine):
-		Tag array:
-			SourceType(ByteProperty)=VERTSURFACESOURCE_Surface 
-			bUpdatePositionEachFrame(BoolProperty)=True 
-			bOrientMeshEmitters(BoolProperty)=False 
-			SkelMeshActorParamName(NameProperty)=EnemyPawn 
-			ValidAssociatedBones(ArrayProperty)=root,pelvis,spine_01,spine_03,clavicle_l,upperarm_l,lowerarm_l,hand_l,index_01_l,middle_01_l,pinky_01_l,ring_01_l,thumb_01_l,lowerarm_twist_01_l,upperarm_twist_01_l,clavicle_r,upperarm_r,lowerarm_r,hand_r,index_01_r,middle_01_r,pinky_01_r,ring_01_r,thumb_01_r,lowerarm_twist_01_r,upperarm_twist_01_r,neck_01,head,jaw,thigh_l,calf_l,calf_twist_01_l,foot_l,ball_l,thigh_twist_01_l,thigh_r,calf_r,calf_twist_01_r,foot_r,ball_r,thigh_twist_01_r,ik_foot_root,ik_foot_l,ik_foot_r,ik_hand_root,ik_hand_gun,ik_hand_l,ik_hand_r (inner: NameProperty)
-			NormalToCompare(StructProperty)=Vector(0,0,1) 
-			NormalCheckTolerance(FloatProperty)=1 
 			LODValidity(ByteProperty)=[object] 
 	ParticleModuleMeshRotation_0 (0-0-0-0): size 563 (cls: ParticleModuleMeshRotation_0>ParticleModuleMeshRotation>/Script/Engine):
 		Tag array:
@@ -447,6 +464,13 @@ Serialized exports:
 			LODValidity(ByteProperty)=[object] 
 	ParticleModuleRequired_0 (0-0-0-0): size 195 (cls: ParticleModuleRequired_0>ParticleModuleRequired>/Script/Engine):
 		Tag array:
+			bUseLegacyEmitterTime(BoolProperty)=False 
+			SpawnRate(StructProperty)=System.Byte[] 
+			RandomImageTime(FloatProperty)=1 
+			LODValidity(ByteProperty)=[object] 
+	ParticleModuleRequired_2 (0-0-0-0): size 224 (cls: ParticleModuleRequired_2>ParticleModuleRequired>/Script/Engine):
+		Tag array:
+			Material(ObjectProperty)=DefaultParticle=/Engine/EngineMaterials/DefaultParticle 
 			bUseLegacyEmitterTime(BoolProperty)=False 
 			SpawnRate(StructProperty)=System.Byte[] 
 			RandomImageTime(FloatProperty)=1 
@@ -481,6 +505,10 @@ Serialized exports:
 			bEnabled(BoolProperty)=False 
 			LODValidity(ByteProperty)=[object] 
 	ParticleModuleSize_0 (0-0-0-0): size 491 (cls: ParticleModuleSize_0>ParticleModuleSize>/Script/Engine):
+		Tag array:
+			StartSize(StructProperty)=System.Byte[] 
+			LODValidity(ByteProperty)=[object] 
+	ParticleModuleSize_2 (0-0-0-0): size 520 (cls: ParticleModuleSize_2>ParticleModuleSize>/Script/Engine):
 		Tag array:
 			StartSize(StructProperty)=System.Byte[] 
 			LODValidity(ByteProperty)=[object] 
@@ -543,6 +571,12 @@ Serialized exports:
 			RateScale(StructProperty)=System.Byte[] 
 			BurstScale(StructProperty)=System.Byte[] 
 			LODValidity(ByteProperty)=[object] 
+	ParticleModuleSpawn_5 (0-0-0-0): size 1078 (cls: ParticleModuleSpawn_5>ParticleModuleSpawn>/Script/Engine):
+		Tag array:
+			Rate(StructProperty)=System.Byte[] 
+			RateScale(StructProperty)=System.Byte[] 
+			BurstScale(StructProperty)=System.Byte[] 
+			LODValidity(ByteProperty)=[object] 
 	ParticleModuleSpawn_6 (0-0-0-0): size 756 (cls: ParticleModuleSpawn_6>ParticleModuleSpawn>/Script/Engine):
 		Tag array:
 			Rate(StructProperty)=System.Byte[] 
@@ -573,13 +607,20 @@ Serialized exports:
 			bUseLegacySpawningBehavior(BoolProperty)=True 
 			LODLevels(ArrayProperty)=[object] (inner: ObjectProperty)
 			DetailModeBitmask(UInt32Property)=[object] 
+	ParticleSpriteEmitter_2 (0-0-0-0): size 190 (cls: ParticleSpriteEmitter_2>ParticleSpriteEmitter>/Script/Engine):
+		Tag array:
+			EmitterName(NameProperty)=Source 
+			EmitterRenderMode(ByteProperty)=ERM_None 
+			bUseLegacySpawningBehavior(BoolProperty)=True 
+			LODLevels(ArrayProperty)=[object] (inner: ObjectProperty)
+			DetailModeBitmask(UInt32Property)=[object] 
 	ParticleSpriteEmitter_6 (0-0-0-0): size 149 (cls: ParticleSpriteEmitter_6>ParticleSpriteEmitter>/Script/Engine):
 		Tag array:
 			EmitterName(NameProperty)=SmokeSwirl 
 			bUseLegacySpawningBehavior(BoolProperty)=True 
 			LODLevels(ArrayProperty)=[object] (inner: ObjectProperty)
 			DetailModeBitmask(UInt32Property)=[object] 
-	P_Husk_Enraged_Bodysmoke_01 (0-0-0-0): size 519 (cls: P_Husk_Enraged_Bodysmoke_01>ParticleSystem>/Script/Engine):
+	P_Husk_Enraged_Bodysmoke_01 (0-0-0-0): size 523 (cls: P_Husk_Enraged_Bodysmoke_01>ParticleSystem>/Script/Engine):
 		Tag array:
 			Emitters(ArrayProperty)=[object] (inner: ObjectProperty)
 			CurveEdSetup(ObjectProperty)=[object] 

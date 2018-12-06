@@ -68,6 +68,7 @@ Name table:
 	AppliedEffectHandles
 	ApplyShield
 	ApplyShieldToThisActor
+	AreaClass
 	Array_AddUnique
 	Array_Clear
 	Array_Get
@@ -250,6 +251,16 @@ Name table:
 	CallFunc_Greater_IntInt_ReturnValue1
 	CallFunc_Greater_IntInt_ReturnValue2
 	CallFunc_Greater_IntInt_ReturnValue3
+	CallFunc_HasAnyMatchingGameplayTags_ReturnValue
+	CallFunc_HasAnyMatchingGameplayTags_ReturnValue1
+	CallFunc_HasAnyMatchingGameplayTags_ReturnValue2
+	CallFunc_HasAnyMatchingGameplayTags_ReturnValue3
+	CallFunc_HasAnyMatchingGameplayTags_ReturnValue4
+	CallFunc_HasAnyMatchingGameplayTags_self1_CastInput
+	CallFunc_HasAnyMatchingGameplayTags_self2_CastInput
+	CallFunc_HasAnyMatchingGameplayTags_self3_CastInput
+	CallFunc_HasAnyMatchingGameplayTags_self4_CastInput
+	CallFunc_HasAnyMatchingGameplayTags_self_CastInput
 	CallFunc_HasAuthority_ReturnValue
 	CallFunc_HasAuthority_ReturnValue1
 	CallFunc_HasAuthority_ReturnValue10
@@ -263,9 +274,6 @@ Name table:
 	CallFunc_HasAuthority_ReturnValue7
 	CallFunc_HasAuthority_ReturnValue8
 	CallFunc_HasAuthority_ReturnValue9
-	CallFunc_HasMatchingGameplayTag_ReturnValue
-	CallFunc_HasMatchingGameplayTag_ReturnValue1
-	CallFunc_HasMatchingGameplayTag_ReturnValue2
 	CallFunc_IsDead_ReturnValue
 	CallFunc_IsDead_ReturnValue1
 	CallFunc_IsDead_ReturnValue10
@@ -329,6 +337,10 @@ Name table:
 	CallFunc_Multiply_FloatFloat_ReturnValue
 	CallFunc_Not_PreBool_ReturnValue
 	CallFunc_Not_PreBool_ReturnValue1
+	CallFunc_Not_PreBool_ReturnValue10
+	CallFunc_Not_PreBool_ReturnValue11
+	CallFunc_Not_PreBool_ReturnValue12
+	CallFunc_Not_PreBool_ReturnValue13
 	CallFunc_Not_PreBool_ReturnValue2
 	CallFunc_Not_PreBool_ReturnValue3
 	CallFunc_Not_PreBool_ReturnValue4
@@ -336,6 +348,7 @@ Name table:
 	CallFunc_Not_PreBool_ReturnValue6
 	CallFunc_Not_PreBool_ReturnValue7
 	CallFunc_Not_PreBool_ReturnValue8
+	CallFunc_Not_PreBool_ReturnValue9
 	CallFunc_NotEqual_BoolBool_ReturnValue
 	CallFunc_PlayAnimMontage_ReturnValue
 	CallFunc_RandomFloatInRange_ReturnValue
@@ -533,6 +546,7 @@ Name table:
 	FortFeedbackBank
 	FortKismetLibrary
 	FortLOSComponent
+	FortMetaNavArea_Obstacles
 	FortMovementComp_AIChar
 	FortniteMaterialParameters
 	FortPawn
@@ -597,8 +611,8 @@ Name table:
 	Greater_IntInt
 	Guid
 	Hair
+	HasAnyMatchingGameplayTags
 	HasAuthority
-	HasMatchingGameplayTag
 	HeadShot_Sound
 	HiddenAttach
 	HitInfo
@@ -670,9 +684,6 @@ Name table:
 	K2Node_DynamicCast_AsFort_AIPawn
 	K2Node_DynamicCast_AsFort_AIPawn1
 	K2Node_DynamicCast_AsFort_Pawn
-	K2Node_DynamicCast_AsGameplay_Tag_Asset_Interface
-	K2Node_DynamicCast_AsGameplay_Tag_Asset_Interface1
-	K2Node_DynamicCast_AsGameplay_Tag_Asset_Interface2
 	K2Node_DynamicCast_AsHusk_Pawn
 	K2Node_DynamicCast_AsShielder_Pawn
 	K2Node_DynamicCast_AsShielder_Pawn1
@@ -687,9 +698,6 @@ Name table:
 	K2Node_DynamicCast_bSuccess4
 	K2Node_DynamicCast_bSuccess5
 	K2Node_DynamicCast_bSuccess6
-	K2Node_DynamicCast_bSuccess7
-	K2Node_DynamicCast_bSuccess8
-	K2Node_DynamicCast_bSuccess9
 	K2Node_Event_Damage
 	K2Node_Event_Damage1
 	K2Node_Event_DamageCauser
@@ -787,11 +795,13 @@ Name table:
 	NPC.Ability.NonAttack.Summon
 	NPC.Ability.NonAttack.TeleportIn
 	NPC.Ability.NonAttack.TeleportOut
+	NPC.CharacterType.Shielder
 	NPC.CharacterType.Shielder.Basic
 	NPC.CharacterType.Smasher.Basic
 	NPC.CharacterType.Taker.Basic
 	NPC.EnemyType.Pawn
 	NPC.Mist.Small
+	NPC.Status.NoShielders
 	NPC.Status.Wearing.Shielder
 	NPCMiscCurves
 	NPCMiscCurvesSheet
@@ -997,16 +1007,13 @@ Name table:
 	TC_NPCAbilityNonAttackSummon
 	TC_NPCAbilityNonAttackTeleportIn
 	TC_NPCAbilityNonAttackTeleportOut
-	TC_NPCStatusWearingShielder
+	TC_TagsThatBlockShielderAttachment
 	Temp_bool_Has_Been_Initd_Variable
 	Temp_bool_IsClosed_Variable
 	Temp_bool_Option_B___If_false__use_Option_A_Variable
 	Temp_bool_Variable
 	Temp_bool_Variable1
 	Temp_bool_Variable2
-	Temp_bool_Variable3
-	Temp_bool_Variable4
-	Temp_bool_Variable5
 	Temp_byte_Variable
 	Temp_byte_Variable1
 	Temp_int_Array_Index_Variable
@@ -1034,7 +1041,6 @@ Name table:
 	Transform
 	TTFloatTrack
 	UberGraphFrame
-	UberGraphFramePointerProperty
 	UberGraphFunction
 	UI_Radar_EnemyDot_White
 	UI_Radar_PositionArrow_White
@@ -1068,7 +1074,7 @@ Name table:
 	Z
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	ShielderPawn_C (0-0-0-0): size 2068 (cls: ShielderPawn_C>BlueprintGeneratedClass>/Script/Engine):
+	ShielderPawn_C (0-0-0-0): size 2039 (cls: ShielderPawn_C>BlueprintGeneratedClass>/Script/Engine):
 		Tag array:
 			NumReplicatedProperties(IntProperty)=7 
 			bHasCookedComponentInstancingData(BoolProperty)=True 
@@ -1076,10 +1082,9 @@ Serialized exports:
 			Timelines(ArrayProperty)=[object] (inner: ObjectProperty)
 			SimpleConstructionScript(ObjectProperty)=SimpleConstructionScript_272=ShielderPawn_C 
 			InheritableComponentHandler(ObjectProperty)=InheritableComponentHandler=ShielderPawn_C 
-			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=ShielderPawn_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_ShielderPawn=ShielderPawn_C 
 			CookedComponentInstancingData(MapProperty)=[object] (inner: NameProperty)
-	Default__ShielderPawn_C (0-0-0-0): size 5026 (cls: Default__ShielderPawn_C>ShielderPawn_C):
+	Default__ShielderPawn_C (0-0-0-0): size 5013 (cls: Default__ShielderPawn_C>ShielderPawn_C):
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			GE_ShielderShield(ObjectProperty)=GE_ShielderShield_C=/Game/Abilities/NPC/Shielder/GE_ShielderShield 
@@ -1093,7 +1098,6 @@ Serialized exports:
 			OrphanTimeBeforceForceKill(FloatProperty)=30 
 			MaxTimeToReAttachByEncounter(FloatProperty)=2 
 			ShielderVisibilityDelayWhenAttachingToSpawningPawn(FloatProperty)=1.5 
-			TC_NPCStatusWearingShielder(StructProperty)=System.Byte[] 
 			TC_NPCAbilityNonAttackTeleportOut(StructProperty)=System.Byte[] 
 			TC_NPCAbilityNonAttackTeleportIn(StructProperty)=System.Byte[] 
 			TC_NPCAbilityNonAttackSummon(StructProperty)=System.Byte[] 
@@ -1112,6 +1116,7 @@ Serialized exports:
 			GE_HideOnMiniMap(ObjectProperty)=GE_HideOnMiniMap_C=/Game/Abilities/NPC/Generic/GE_HideOnMiniMap 
 			SuperShieldOffsetFromGround(FloatProperty)=70 
 			ForceKillDeathReason(StructProperty)=System.Byte[] 
+			TC_TagsThatBlockShielderAttachment(StructProperty)=GameplayTagContainer:NPC.Status.Wearing.Shielder,NPC.Status.NoShielders,NPC.CharacterType.Shielder 
 			Additive Hit React Montage(ObjectProperty)=Shielder_Hitreact_Front_Montage=/Game/Animation/Game/Enemies/Shielder/Locomotion/Shielder_Hitreact_Front_Montage 
 			SpawnFrozenHuskMesh(BoolProperty)=False 
 			Lightning_SpawnScaleRate(FloatProperty)=0 
@@ -1148,7 +1153,7 @@ Serialized exports:
 			RootComponent(ObjectProperty)=CollisionCylinder=Default__ShielderPawn_C 
 	ShielderReAttachRange (0-0-0-0): size 36 (cls: ShielderReAttachRange>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_ShielderPawn (0-0-0-0): size 12195 (cls: ExecuteUbergraph_ShielderPawn>Function>/Script/CoreUObject)
+	ExecuteUbergraph_ShielderPawn (0-0-0-0): size 11966 (cls: ExecuteUbergraph_ShielderPawn>Function>/Script/CoreUObject)
 	CallFunc_GetAllActorsOfClass_OutActors (0-0-0-0): size 36 (cls: CallFunc_GetAllActorsOfClass_OutActors>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetAllActorsOfClass_OutActors (0-0-0-0): size 36 (cls: CallFunc_GetAllActorsOfClass_OutActors>ArrayProperty>/Script/CoreUObject)
 	CallFunc_GetAllActorsOfClass_OutActors1 (0-0-0-0): size 36 (cls: CallFunc_GetAllActorsOfClass_OutActors1>ObjectProperty>/Script/CoreUObject)
@@ -1160,48 +1165,48 @@ Serialized exports:
 	FeedbackAudioComp0 (0-0-0-0): size 41 (cls: FeedbackAudioComp0>AudioComponent>/Script/Engine):
 		Tag array:
 			AttachParent(ObjectProperty)=CollisionCylinder=Default__ShielderPawn_C 
-	PostSpawnIn (0-0-0-0): size 58 (cls: PostSpawnIn>Function>/Script/CoreUObject)
+	PostSpawnIn (0-0-0-0): size 54 (cls: PostSpawnIn>Function>/Script/CoreUObject)
 	EndPlayReason (0-0-0-0): size 36 (cls: EndPlayReason>ByteProperty>/Script/CoreUObject)
-	ReceiveEndPlay (0-0-0-0): size 72 (cls: ReceiveEndPlay>Function>/Script/CoreUObject)
-	InvisibleOrphanTick (0-0-0-0): size 58 (cls: InvisibleOrphanTick>Function>/Script/CoreUObject)
-	AdditiveHitReactDelay (0-0-0-0): size 58 (cls: AdditiveHitReactDelay>Function>/Script/CoreUObject)
-	RotateShielderForward (0-0-0-0): size 60 (cls: RotateShielderForward>Function>/Script/CoreUObject)
-	InterpShielderToSpringArm (0-0-0-0): size 58 (cls: InterpShielderToSpringArm>Function>/Script/CoreUObject)
-	UnBindProxOverlap (0-0-0-0): size 58 (cls: UnBindProxOverlap>Function>/Script/CoreUObject)
-	BindProxOverlap (0-0-0-0): size 58 (cls: BindProxOverlap>Function>/Script/CoreUObject)
-	OrphanForceKillTimer (0-0-0-0): size 58 (cls: OrphanForceKillTimer>Function>/Script/CoreUObject)
+	ReceiveEndPlay (0-0-0-0): size 68 (cls: ReceiveEndPlay>Function>/Script/CoreUObject)
+	InvisibleOrphanTick (0-0-0-0): size 54 (cls: InvisibleOrphanTick>Function>/Script/CoreUObject)
+	AdditiveHitReactDelay (0-0-0-0): size 54 (cls: AdditiveHitReactDelay>Function>/Script/CoreUObject)
+	RotateShielderForward (0-0-0-0): size 56 (cls: RotateShielderForward>Function>/Script/CoreUObject)
+	InterpShielderToSpringArm (0-0-0-0): size 54 (cls: InterpShielderToSpringArm>Function>/Script/CoreUObject)
+	UnBindProxOverlap (0-0-0-0): size 54 (cls: UnBindProxOverlap>Function>/Script/CoreUObject)
+	BindProxOverlap (0-0-0-0): size 54 (cls: BindProxOverlap>Function>/Script/CoreUObject)
+	OrphanForceKillTimer (0-0-0-0): size 54 (cls: OrphanForceKillTimer>Function>/Script/CoreUObject)
 	Despawn (0-0-0-0): size 34 (cls: Despawn>BoolProperty>/Script/CoreUObject)
-	AttachPawnDead (0-0-0-0): size 72 (cls: AttachPawnDead>Function>/Script/CoreUObject)
-	AnimateSpringArm (0-0-0-0): size 58 (cls: AnimateSpringArm>Function>/Script/CoreUObject)
-	ShielderShieldBroken (0-0-0-0): size 58 (cls: ShielderShieldBroken>Function>/Script/CoreUObject)
+	AttachPawnDead (0-0-0-0): size 68 (cls: AttachPawnDead>Function>/Script/CoreUObject)
+	AnimateSpringArm (0-0-0-0): size 54 (cls: AnimateSpringArm>Function>/Script/CoreUObject)
+	ShielderShieldBroken (0-0-0-0): size 54 (cls: ShielderShieldBroken>Function>/Script/CoreUObject)
 	OverlappedComponent (0-0-0-0): size 36 (cls: OverlappedComponent>ObjectProperty>/Script/CoreUObject)
-	OnComponentEndOverlap (0-0-0-0): size 114 (cls: OnComponentEndOverlap>Function>/Script/CoreUObject)
-	UnBindEncounterSpawn (0-0-0-0): size 58 (cls: UnBindEncounterSpawn>Function>/Script/CoreUObject)
-	ReApplyShield (0-0-0-0): size 58 (cls: ReApplyShield>Function>/Script/CoreUObject)
-	BindEncounterSpawn (0-0-0-0): size 58 (cls: BindEncounterSpawn>Function>/Script/CoreUObject)
-	AttachShielderToPotentialAttachPawn (0-0-0-0): size 58 (cls: AttachShielderToPotentialAttachPawn>Function>/Script/CoreUObject)
+	OnComponentEndOverlap (0-0-0-0): size 110 (cls: OnComponentEndOverlap>Function>/Script/CoreUObject)
+	UnBindEncounterSpawn (0-0-0-0): size 54 (cls: UnBindEncounterSpawn>Function>/Script/CoreUObject)
+	ReApplyShield (0-0-0-0): size 54 (cls: ReApplyShield>Function>/Script/CoreUObject)
+	BindEncounterSpawn (0-0-0-0): size 54 (cls: BindEncounterSpawn>Function>/Script/CoreUObject)
+	AttachShielderToPotentialAttachPawn (0-0-0-0): size 54 (cls: AttachShielderToPotentialAttachPawn>Function>/Script/CoreUObject)
 	HiddenAttach (0-0-0-0): size 34 (cls: HiddenAttach>BoolProperty>/Script/CoreUObject)
-	GrabRandomPotentialAttachPawn (0-0-0-0): size 72 (cls: GrabRandomPotentialAttachPawn>Function>/Script/CoreUObject)
+	GrabRandomPotentialAttachPawn (0-0-0-0): size 68 (cls: GrabRandomPotentialAttachPawn>Function>/Script/CoreUObject)
 	PotentialAttachPawn (0-0-0-0): size 36 (cls: PotentialAttachPawn>ObjectProperty>/Script/CoreUObject)
-	VerifyPotentialAttachPawnIsValidAndAttachToIt (0-0-0-0): size 86 (cls: VerifyPotentialAttachPawnIsValidAndAttachToIt>Function>/Script/CoreUObject)
+	VerifyPotentialAttachPawnIsValidAndAttachToIt (0-0-0-0): size 82 (cls: VerifyPotentialAttachPawnIsValidAndAttachToIt>Function>/Script/CoreUObject)
 	OverlappedComponent (0-0-0-0): size 36 (cls: OverlappedComponent>ObjectProperty>/Script/CoreUObject)
-	OnComponentBeginOverlap (0-0-0-0): size 142 (cls: OnComponentBeginOverlap>Function>/Script/CoreUObject)
+	OnComponentBeginOverlap (0-0-0-0): size 138 (cls: OnComponentBeginOverlap>Function>/Script/CoreUObject)
 	Orphaned (0-0-0-0): size 34 (cls: Orphaned>BoolProperty>/Script/CoreUObject)
-	SetShielderOrphanStatus (0-0-0-0): size 100 (cls: SetShielderOrphanStatus>Function>/Script/CoreUObject)
+	SetShielderOrphanStatus (0-0-0-0): size 96 (cls: SetShielderOrphanStatus>Function>/Script/CoreUObject)
 	Encounter (0-0-0-0): size 36 (cls: Encounter>ObjectProperty>/Script/CoreUObject)
-	OnEncounterEnemySpawned (0-0-0-0): size 86 (cls: OnEncounterEnemySpawned>Function>/Script/CoreUObject)
-	ShielderAttachComplete (0-0-0-0): size 58 (cls: ShielderAttachComplete>Function>/Script/CoreUObject)
+	OnEncounterEnemySpawned (0-0-0-0): size 82 (cls: OnEncounterEnemySpawned>Function>/Script/CoreUObject)
+	ShielderAttachComplete (0-0-0-0): size 54 (cls: ShielderAttachComplete>Function>/Script/CoreUObject)
 	Damage (0-0-0-0): size 32 (cls: Damage>FloatProperty>/Script/CoreUObject)
-	OnDeathServer (0-0-0-0): size 156 (cls: OnDeathServer>Function>/Script/CoreUObject)
-	ReceiveBeginPlay (0-0-0-0): size 58 (cls: ReceiveBeginPlay>Function>/Script/CoreUObject)
-	OnKnockedback (0-0-0-0): size 58 (cls: OnKnockedback>Function>/Script/CoreUObject)
+	OnDeathServer (0-0-0-0): size 152 (cls: OnDeathServer>Function>/Script/CoreUObject)
+	ReceiveBeginPlay (0-0-0-0): size 54 (cls: ReceiveBeginPlay>Function>/Script/CoreUObject)
+	OnKnockedback (0-0-0-0): size 54 (cls: OnKnockedback>Function>/Script/CoreUObject)
 	Damage (0-0-0-0): size 32 (cls: Damage>FloatProperty>/Script/CoreUObject)
-	OnDamageServer (0-0-0-0): size 156 (cls: OnDamageServer>Function>/Script/CoreUObject)
-	OnStunned (0-0-0-0): size 58 (cls: OnStunned>Function>/Script/CoreUObject)
-	RotateShielder__UpdateFunc (0-0-0-0): size 58 (cls: RotateShielder__UpdateFunc>Function>/Script/CoreUObject)
-	RotateShielder__FinishedFunc (0-0-0-0): size 58 (cls: RotateShielder__FinishedFunc>Function>/Script/CoreUObject)
-	InterpShielderToNewLocation__UpdateFunc (0-0-0-0): size 58 (cls: InterpShielderToNewLocation__UpdateFunc>Function>/Script/CoreUObject)
-	InterpShielderToNewLocation__FinishedFunc (0-0-0-0): size 58 (cls: InterpShielderToNewLocation__FinishedFunc>Function>/Script/CoreUObject)
+	OnDamageServer (0-0-0-0): size 152 (cls: OnDamageServer>Function>/Script/CoreUObject)
+	OnStunned (0-0-0-0): size 54 (cls: OnStunned>Function>/Script/CoreUObject)
+	RotateShielder__UpdateFunc (0-0-0-0): size 54 (cls: RotateShielder__UpdateFunc>Function>/Script/CoreUObject)
+	RotateShielder__FinishedFunc (0-0-0-0): size 54 (cls: RotateShielder__FinishedFunc>Function>/Script/CoreUObject)
+	InterpShielderToNewLocation__UpdateFunc (0-0-0-0): size 54 (cls: InterpShielderToNewLocation__UpdateFunc>Function>/Script/CoreUObject)
+	InterpShielderToNewLocation__FinishedFunc (0-0-0-0): size 54 (cls: InterpShielderToNewLocation__FinishedFunc>Function>/Script/CoreUObject)
 	CallFunc_GetScalarParameterValue_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetScalarParameterValue_ReturnValue>FloatProperty>/Script/CoreUObject)
 	UserConstructionScript (0-0-0-0): size 117 (cls: UserConstructionScript>Function>/Script/CoreUObject)
 	CallFunc_HasAuthority_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasAuthority_ReturnValue>BoolProperty>/Script/CoreUObject)
@@ -1255,6 +1260,11 @@ Serialized exports:
 	CallFunc_Greater_IntInt_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_Greater_IntInt_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_Greater_IntInt_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_Greater_IntInt_ReturnValue2>BoolProperty>/Script/CoreUObject)
 	CallFunc_Greater_IntInt_ReturnValue3 (0-0-0-0): size 34 (cls: CallFunc_Greater_IntInt_ReturnValue3>BoolProperty>/Script/CoreUObject)
+	CallFunc_HasAnyMatchingGameplayTags_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasAnyMatchingGameplayTags_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_HasAnyMatchingGameplayTags_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_HasAnyMatchingGameplayTags_ReturnValue1>BoolProperty>/Script/CoreUObject)
+	CallFunc_HasAnyMatchingGameplayTags_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_HasAnyMatchingGameplayTags_ReturnValue2>BoolProperty>/Script/CoreUObject)
+	CallFunc_HasAnyMatchingGameplayTags_ReturnValue3 (0-0-0-0): size 34 (cls: CallFunc_HasAnyMatchingGameplayTags_ReturnValue3>BoolProperty>/Script/CoreUObject)
+	CallFunc_HasAnyMatchingGameplayTags_ReturnValue4 (0-0-0-0): size 34 (cls: CallFunc_HasAnyMatchingGameplayTags_ReturnValue4>BoolProperty>/Script/CoreUObject)
 	CallFunc_HasAuthority_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasAuthority_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_HasAuthority_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_HasAuthority_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_HasAuthority_ReturnValue10 (0-0-0-0): size 34 (cls: CallFunc_HasAuthority_ReturnValue10>BoolProperty>/Script/CoreUObject)
@@ -1268,9 +1278,6 @@ Serialized exports:
 	CallFunc_HasAuthority_ReturnValue7 (0-0-0-0): size 34 (cls: CallFunc_HasAuthority_ReturnValue7>BoolProperty>/Script/CoreUObject)
 	CallFunc_HasAuthority_ReturnValue8 (0-0-0-0): size 34 (cls: CallFunc_HasAuthority_ReturnValue8>BoolProperty>/Script/CoreUObject)
 	CallFunc_HasAuthority_ReturnValue9 (0-0-0-0): size 34 (cls: CallFunc_HasAuthority_ReturnValue9>BoolProperty>/Script/CoreUObject)
-	CallFunc_HasMatchingGameplayTag_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasMatchingGameplayTag_ReturnValue>BoolProperty>/Script/CoreUObject)
-	CallFunc_HasMatchingGameplayTag_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_HasMatchingGameplayTag_ReturnValue1>BoolProperty>/Script/CoreUObject)
-	CallFunc_HasMatchingGameplayTag_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_HasMatchingGameplayTag_ReturnValue2>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsDead_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsDead_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsDead_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_IsDead_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsDead_ReturnValue10 (0-0-0-0): size 34 (cls: CallFunc_IsDead_ReturnValue10>BoolProperty>/Script/CoreUObject)
@@ -1306,6 +1313,10 @@ Serialized exports:
 	CallFunc_Less_IntInt_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_Not_PreBool_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Not_PreBool_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue1>BoolProperty>/Script/CoreUObject)
+	CallFunc_Not_PreBool_ReturnValue10 (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue10>BoolProperty>/Script/CoreUObject)
+	CallFunc_Not_PreBool_ReturnValue11 (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue11>BoolProperty>/Script/CoreUObject)
+	CallFunc_Not_PreBool_ReturnValue12 (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue12>BoolProperty>/Script/CoreUObject)
+	CallFunc_Not_PreBool_ReturnValue13 (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue13>BoolProperty>/Script/CoreUObject)
 	CallFunc_Not_PreBool_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue2>BoolProperty>/Script/CoreUObject)
 	CallFunc_Not_PreBool_ReturnValue3 (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue3>BoolProperty>/Script/CoreUObject)
 	CallFunc_Not_PreBool_ReturnValue4 (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue4>BoolProperty>/Script/CoreUObject)
@@ -1313,6 +1324,7 @@ Serialized exports:
 	CallFunc_Not_PreBool_ReturnValue6 (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue6>BoolProperty>/Script/CoreUObject)
 	CallFunc_Not_PreBool_ReturnValue7 (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue7>BoolProperty>/Script/CoreUObject)
 	CallFunc_Not_PreBool_ReturnValue8 (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue8>BoolProperty>/Script/CoreUObject)
+	CallFunc_Not_PreBool_ReturnValue9 (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue9>BoolProperty>/Script/CoreUObject)
 	CallFunc_NotEqual_BoolBool_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_NotEqual_BoolBool_ReturnValue>BoolProperty>/Script/CoreUObject)
 	K2Node_CustomEvent_bFromSweep (0-0-0-0): size 34 (cls: K2Node_CustomEvent_bFromSweep>BoolProperty>/Script/CoreUObject)
 	K2Node_CustomEvent_Despawn (0-0-0-0): size 34 (cls: K2Node_CustomEvent_Despawn>BoolProperty>/Script/CoreUObject)
@@ -1327,9 +1339,6 @@ Serialized exports:
 	K2Node_DynamicCast_bSuccess4 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess4>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess5 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess5>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess6 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess6>BoolProperty>/Script/CoreUObject)
-	K2Node_DynamicCast_bSuccess7 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess7>BoolProperty>/Script/CoreUObject)
-	K2Node_DynamicCast_bSuccess8 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess8>BoolProperty>/Script/CoreUObject)
-	K2Node_DynamicCast_bSuccess9 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess9>BoolProperty>/Script/CoreUObject)
 	K2Node_SwitchEnum1_CmpSuccess (0-0-0-0): size 34 (cls: K2Node_SwitchEnum1_CmpSuccess>BoolProperty>/Script/CoreUObject)
 	K2Node_SwitchEnum2_CmpSuccess (0-0-0-0): size 34 (cls: K2Node_SwitchEnum2_CmpSuccess>BoolProperty>/Script/CoreUObject)
 	K2Node_SwitchEnum3_CmpSuccess (0-0-0-0): size 34 (cls: K2Node_SwitchEnum3_CmpSuccess>BoolProperty>/Script/CoreUObject)
@@ -1340,9 +1349,6 @@ Serialized exports:
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable1 (0-0-0-0): size 34 (cls: Temp_bool_Variable1>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable2 (0-0-0-0): size 34 (cls: Temp_bool_Variable2>BoolProperty>/Script/CoreUObject)
-	Temp_bool_Variable3 (0-0-0-0): size 34 (cls: Temp_bool_Variable3>BoolProperty>/Script/CoreUObject)
-	Temp_bool_Variable4 (0-0-0-0): size 34 (cls: Temp_bool_Variable4>BoolProperty>/Script/CoreUObject)
-	Temp_bool_Variable5 (0-0-0-0): size 34 (cls: Temp_bool_Variable5>BoolProperty>/Script/CoreUObject)
 	bFromSweep (0-0-0-0): size 34 (cls: bFromSweep>BoolProperty>/Script/CoreUObject)
 	ShieldShouldBeVisible (0-0-0-0): size 34 (cls: ShieldShouldBeVisible>BoolProperty>/Script/CoreUObject)
 	UpdateShieldFXVisibility (0-0-0-0): size 830 (cls: UpdateShieldFXVisibility>Function>/Script/CoreUObject)
@@ -1382,7 +1388,7 @@ Serialized exports:
 	CallFunc_GetTeamAffiliation_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_GetTeamAffiliation_ReturnValue2>ByteProperty>/Script/CoreUObject)
 	CallFunc_GetTeamAffiliation_ReturnValue3 (0-0-0-0): size 36 (cls: CallFunc_GetTeamAffiliation_ReturnValue3>ByteProperty>/Script/CoreUObject)
 	K2Node_Event_EndPlayReason (0-0-0-0): size 36 (cls: K2Node_Event_EndPlayReason>ByteProperty>/Script/CoreUObject)
-	K2Node_Select1_Default (0-0-0-0): size 36 (cls: K2Node_Select1_Default>ByteProperty>/Script/CoreUObject)
+	K2Node_Select3_Default (0-0-0-0): size 36 (cls: K2Node_Select3_Default>ByteProperty>/Script/CoreUObject)
 	Temp_byte_Variable (0-0-0-0): size 36 (cls: Temp_byte_Variable>ByteProperty>/Script/CoreUObject)
 	Temp_byte_Variable1 (0-0-0-0): size 36 (cls: Temp_byte_Variable1>ByteProperty>/Script/CoreUObject)
 	InterpShielderToNewLocation__Direction_4C3E0C0B4BF05DD8DEA964BC480F2112 (0-0-0-0): size 36 (cls: InterpShielderToNewLocation__Direction_4C3E0C0B4BF05DD8DEA964BC480F2112>ByteProperty>/Script/CoreUObject)
@@ -1484,7 +1490,7 @@ Serialized exports:
 			BodyInstance(StructProperty)=System.Byte[] 
 			AttachParent(ObjectProperty)=CollisionCylinder=Default__ShielderPawn_C 
 			RelativeLocation(StructProperty)=Vector(-7.5,0,-50) 
-	InheritableComponentHandler (0-0-0-0): size 4279 (cls: InheritableComponentHandler>InheritableComponentHandler>/Script/Engine):
+	InheritableComponentHandler (0-0-0-0): size 4378 (cls: InheritableComponentHandler>InheritableComponentHandler>/Script/Engine):
 		Tag array:
 			Records(ArrayProperty)=[object] (inner: StructProperty)
 	CallFunc_ForwardGameplayCueToTarget_TargetCueInterface1_CastInput (0-0-0-0): size 36 (cls: CallFunc_ForwardGameplayCueToTarget_TargetCueInterface1_CastInput>InterfaceProperty>/Script/CoreUObject)
@@ -1493,9 +1499,11 @@ Serialized exports:
 	CallFunc_DoesTagAssetInterfaceHaveTag_TagContainerInterface_CastInput (0-0-0-0): size 36 (cls: CallFunc_DoesTagAssetInterfaceHaveTag_TagContainerInterface_CastInput>InterfaceProperty>/Script/CoreUObject)
 	CallFunc_EquipFortAbilitySet_AbilitySystemInterfaceActor_CastInput (0-0-0-0): size 36 (cls: CallFunc_EquipFortAbilitySet_AbilitySystemInterfaceActor_CastInput>InterfaceProperty>/Script/CoreUObject)
 	CallFunc_ForwardGameplayCueToTarget_TargetCueInterface_CastInput (0-0-0-0): size 36 (cls: CallFunc_ForwardGameplayCueToTarget_TargetCueInterface_CastInput>InterfaceProperty>/Script/CoreUObject)
-	K2Node_DynamicCast_AsGameplay_Tag_Asset_Interface (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsGameplay_Tag_Asset_Interface>InterfaceProperty>/Script/CoreUObject)
-	K2Node_DynamicCast_AsGameplay_Tag_Asset_Interface1 (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsGameplay_Tag_Asset_Interface1>InterfaceProperty>/Script/CoreUObject)
-	K2Node_DynamicCast_AsGameplay_Tag_Asset_Interface2 (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsGameplay_Tag_Asset_Interface2>InterfaceProperty>/Script/CoreUObject)
+	CallFunc_HasAnyMatchingGameplayTags_self1_CastInput (0-0-0-0): size 36 (cls: CallFunc_HasAnyMatchingGameplayTags_self1_CastInput>InterfaceProperty>/Script/CoreUObject)
+	CallFunc_HasAnyMatchingGameplayTags_self2_CastInput (0-0-0-0): size 36 (cls: CallFunc_HasAnyMatchingGameplayTags_self2_CastInput>InterfaceProperty>/Script/CoreUObject)
+	CallFunc_HasAnyMatchingGameplayTags_self3_CastInput (0-0-0-0): size 36 (cls: CallFunc_HasAnyMatchingGameplayTags_self3_CastInput>InterfaceProperty>/Script/CoreUObject)
+	CallFunc_HasAnyMatchingGameplayTags_self4_CastInput (0-0-0-0): size 36 (cls: CallFunc_HasAnyMatchingGameplayTags_self4_CastInput>InterfaceProperty>/Script/CoreUObject)
+	CallFunc_HasAnyMatchingGameplayTags_self_CastInput (0-0-0-0): size 36 (cls: CallFunc_HasAnyMatchingGameplayTags_self_CastInput>InterfaceProperty>/Script/CoreUObject)
 	CallFunc_GetActiveGameplayEffectStackCount_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetActiveGameplayEffectStackCount_ReturnValue>IntProperty>/Script/CoreUObject)
 	CallFunc_Add_IntInt_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue>IntProperty>/Script/CoreUObject)
 	CallFunc_Add_IntInt_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue1>IntProperty>/Script/CoreUObject)
@@ -1566,7 +1574,7 @@ Serialized exports:
 	K2Node_Event_InstigatedBy (0-0-0-0): size 36 (cls: K2Node_Event_InstigatedBy>ObjectProperty>/Script/CoreUObject)
 	K2Node_Event_InstigatedBy1 (0-0-0-0): size 36 (cls: K2Node_Event_InstigatedBy1>ObjectProperty>/Script/CoreUObject)
 	K2Node_Select2_Default (0-0-0-0): size 36 (cls: K2Node_Select2_Default>ObjectProperty>/Script/CoreUObject)
-	K2Node_Select3_Default (0-0-0-0): size 36 (cls: K2Node_Select3_Default>ObjectProperty>/Script/CoreUObject)
+	K2Node_Select_Default (0-0-0-0): size 36 (cls: K2Node_Select_Default>ObjectProperty>/Script/CoreUObject)
 	InterpShielderToNewLocation (0-0-0-0): size 36 (cls: InterpShielderToNewLocation>ObjectProperty>/Script/CoreUObject)
 	OtherActor (0-0-0-0): size 36 (cls: OtherActor>ObjectProperty>/Script/CoreUObject)
 	OtherComp (0-0-0-0): size 36 (cls: OtherComp>ObjectProperty>/Script/CoreUObject)
@@ -1593,7 +1601,7 @@ Serialized exports:
 	CallFunc_FinishSpawningActor_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_FinishSpawningActor_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	K2Node_Select_Default (0-0-0-0): size 36 (cls: K2Node_Select_Default>ObjectProperty>/Script/CoreUObject)
 	SceneComponent_88 (0-0-0-0): size 12 (cls: SceneComponent_88>SceneComponent>/Script/Engine)
-	SCS_Node_6 (0-0-0-0): size 2970 (cls: SCS_Node_6>SCS_Node>/Script/Engine):
+	SCS_Node_6 (0-0-0-0): size 3069 (cls: SCS_Node_6>SCS_Node>/Script/Engine):
 		Tag array:
 			ComponentClass(ObjectProperty)=SphereComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=ShielderReAttachRange_GEN_VARIABLE=ShielderPawn_C 
@@ -1613,9 +1621,10 @@ Serialized exports:
 			RootNodes(ArrayProperty)=[object] (inner: ObjectProperty)
 			AllNodes(ArrayProperty)=[object] (inner: ObjectProperty)
 			DefaultSceneRootNode(ObjectProperty)=SCS_Node_95=ShielderPawn_C 
-	ShielderReAttachRange_GEN_VARIABLE (0-0-0-0): size 1161 (cls: ShielderReAttachRange_GEN_VARIABLE>SphereComponent>/Script/Engine):
+	ShielderReAttachRange_GEN_VARIABLE (0-0-0-0): size 1190 (cls: ShielderReAttachRange_GEN_VARIABLE>SphereComponent>/Script/Engine):
 		Tag array:
 			SphereRadius(FloatProperty)=320 
+			AreaClass(ObjectProperty)=FortMetaNavArea_Obstacles=/Script/FortniteGame 
 			CanCharacterStepUpOn(ByteProperty)=ECB_No 
 			BodyInstance(StructProperty)=System.Byte[] 
 			bCanEverAffectNavigation(BoolProperty)=False 
@@ -1682,7 +1691,7 @@ Serialized exports:
 	K2Node_Event_Momentum (0-0-0-0): size 36 (cls: K2Node_Event_Momentum>StructProperty>/Script/CoreUObject)
 	K2Node_Event_Momentum1 (0-0-0-0): size 36 (cls: K2Node_Event_Momentum1>StructProperty>/Script/CoreUObject)
 	K2Node_MakeStruct_GameplayCueParameters (0-0-0-0): size 36 (cls: K2Node_MakeStruct_GameplayCueParameters>StructProperty>/Script/CoreUObject)
-	K2Node_Select_Default (0-0-0-0): size 36 (cls: K2Node_Select_Default>StructProperty>/Script/CoreUObject)
+	K2Node_Select1_Default (0-0-0-0): size 36 (cls: K2Node_Select1_Default>StructProperty>/Script/CoreUObject)
 	Temp_struct_Variable (0-0-0-0): size 36 (cls: Temp_struct_Variable>StructProperty>/Script/CoreUObject)
 	Temp_struct_Variable1 (0-0-0-0): size 36 (cls: Temp_struct_Variable1>StructProperty>/Script/CoreUObject)
 	Temp_struct_Variable2 (0-0-0-0): size 36 (cls: Temp_struct_Variable2>StructProperty>/Script/CoreUObject)
@@ -1725,7 +1734,7 @@ Serialized exports:
 	TC_NPCAbilityNonAttackSummon (0-0-0-0): size 36 (cls: TC_NPCAbilityNonAttackSummon>StructProperty>/Script/CoreUObject)
 	TC_NPCAbilityNonAttackTeleportIn (0-0-0-0): size 36 (cls: TC_NPCAbilityNonAttackTeleportIn>StructProperty>/Script/CoreUObject)
 	TC_NPCAbilityNonAttackTeleportOut (0-0-0-0): size 36 (cls: TC_NPCAbilityNonAttackTeleportOut>StructProperty>/Script/CoreUObject)
-	TC_NPCStatusWearingShielder (0-0-0-0): size 36 (cls: TC_NPCStatusWearingShielder>StructProperty>/Script/CoreUObject)
+	TC_TagsThatBlockShielderAttachment (0-0-0-0): size 36 (cls: TC_TagsThatBlockShielderAttachment>StructProperty>/Script/CoreUObject)
 	CallFunc_Conv_StringToText_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Conv_StringToText_ReturnValue>TextProperty>/Script/CoreUObject)
 	NODE_AddTextRenderComponent-0 (0-0-0-0): size 135 (cls: NODE_AddTextRenderComponent-0>TextRenderComponent>/Script/Engine):
 		Tag array:

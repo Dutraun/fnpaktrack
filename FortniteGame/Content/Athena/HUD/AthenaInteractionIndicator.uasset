@@ -9,11 +9,13 @@ Name table:
 	/Game/UI/Foundation/Border/Materials/M-Border-ItemInfoHeader_BrightBar
 	/Game/UI/Foundation/Border/Materials/M-Border-MainL-Black
 	/Game/UI/Foundation/Fonts/Burbank
+	/Game/UI/Foundation/Fonts/NotoSans
 	/Game/UI/Foundation/Items/Details/ItemDetailsHeaderItemDisplayText
 	/Game/UI/Foundation/Items/ItemDetailsStackCounter
 	/Game/UI/Foundation/Text/Materials/M-FontShadow
 	/Game/UI/Foundation/Text/TextScrollStyle-Base
 	/Game/UI/Foundation/Text/TextScrollStyle-NoFade
+	/Game/UI/Foundation/Text/TextStyle-Base
 	/Game/UI/Foundation/Text/TextStyle-Base-S-B
 	/Game/UI/Foundation/Text/TextStyle-Base-XS
 	/Game/UI/Foundation/Text/TextStyle-Base-XS-B-70pc
@@ -22,7 +24,7 @@ Name table:
 	/Game/UI/Foundation/Text/TextStyle-Base-XS-Black
 	/Game/UI/Foundation/Text/TextStyle-Header-M
 	/Game/UI/Foundation/Textures/Icons/HUD/T-Icon-Backpack-32
-	/Game/UI/HUD/BasicInteractionWidget
+	/Game/UI/InGame/HUD/BasicInteractionWidget
 	/Game/UI/InGame/KeybindWidget/KeybindWidget
 	/Script/BlueprintContext
 	/Script/CommonUI
@@ -147,6 +149,7 @@ Name table:
 	Default__TextStyle-Base-XS-B-S-Red_C
 	Default__TextStyle-Base-XS-Black_C
 	Default__TextStyle-Base-XS_C
+	Default__TextStyle-Base_C
 	Default__TextStyle-Header-M_C
 	Default__VerticalBox
 	Default__VerticalBoxSlot
@@ -267,7 +270,9 @@ Name table:
 	NamedSlot
 	NameProperty
 	None
+	NotoSans
 	NotoSans-Bold
+	NotoSans-Regular
 	Object
 	ObjectProperty
 	OnCanInteract__DelegateSignature
@@ -309,6 +314,7 @@ Name table:
 	SetShowProgressCountDown
 	SetText
 	SetVisibility
+	ShadowOffset
 	Show Ammo Header
 	ShowBasicInteractionWidget
 	ShowPickupWidget
@@ -351,6 +357,7 @@ Name table:
 	TextStyle-Base-XS-B-S-Red_C
 	TextStyle-Base-XS-Black_C
 	TextStyle-Base-XS_C
+	TextStyle-Base_C
 	TextStyle-Header-M_C
 	TextUnderKeybindText
 	Texture2D
@@ -360,7 +367,6 @@ Name table:
 	Translation
 	TypefaceFontName
 	UberGraphFrame
-	UberGraphFramePointerProperty
 	UberGraphFunction
 	UnderlyingType
 	UpdateDescription
@@ -384,13 +390,12 @@ Name table:
 	WrapTextAt
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	AthenaInteractionIndicator_C (0-0-0-0): size 392 (cls: AthenaInteractionIndicator_C>WidgetBlueprintGeneratedClass>/Script/UMG):
+	AthenaInteractionIndicator_C (0-0-0-0): size 363 (cls: AthenaInteractionIndicator_C>WidgetBlueprintGeneratedClass>/Script/UMG):
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
 			bValidTemplate(BoolProperty)=True 
 			TemplateAsset(SoftObjectProperty)=/Game/Athena/HUD/AthenaInteractionIndicator.WidgetArchetype 
-			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=AthenaInteractionIndicator_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_AthenaInteractionIndicator=AthenaInteractionIndicator_C 
 	Default__AthenaInteractionIndicator_C (0-0-0-0): size 261 (cls: Default__AthenaInteractionIndicator_C>AthenaInteractionIndicator_C):
 		Tag array:
@@ -439,7 +444,7 @@ Serialized exports:
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=SizeBoxSlot_1=WidgetArchetype 
-	BasicInteractionWidget (0-0-0-0): size 166 (cls: BasicInteractionWidget>BasicInteractionWidget_C>/Game/UI/HUD/BasicInteractionWidget):
+	BasicInteractionWidget (0-0-0-0): size 166 (cls: BasicInteractionWidget>BasicInteractionWidget_C>/Game/UI/InGame/HUD/BasicInteractionWidget):
 		Tag array:
 			TextDescription(ObjectProperty)=TextDescription=WidgetArchetype 
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
@@ -450,8 +455,8 @@ Serialized exports:
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
 	ExecuteUbergraph_AthenaInteractionIndicator (0-0-0-0): size 618 (cls: ExecuteUbergraph_AthenaInteractionIndicator>Function>/Script/CoreUObject)
 	CallFunc_IsMobileGame_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsMobileGame_ReturnValue>BoolProperty>/Script/CoreUObject)
-	Destruct (0-0-0-0): size 58 (cls: Destruct>Function>/Script/CoreUObject)
-	Construct (0-0-0-0): size 58 (cls: Construct>Function>/Script/CoreUObject)
+	Destruct (0-0-0-0): size 54 (cls: Destruct>Function>/Script/CoreUObject)
+	Construct (0-0-0-0): size 54 (cls: Construct>Function>/Script/CoreUObject)
 	Interaction (0-0-0-0): size 36 (cls: Interaction>ObjectProperty>/Script/CoreUObject)
 	HandleInteractionChanged (0-0-0-0): size 525 (cls: HandleInteractionChanged>Function>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
@@ -547,56 +552,61 @@ Serialized exports:
 			bIsVariable(BoolProperty)=True 
 	TextDescription (0-0-0-0): size 525 (cls: TextDescription>CommonTextBlock>/Script/CommonUI):
 		Tag array:
-			Style(ObjectProperty)=[object] 
-			Text(TextProperty)=It's  text block of insanely big proportions.  I mean it's gigantic.  It's humongous.  It's the biggest damn piece of text you've ever seen in one place.  And better still, it doesn't need to be localized! (38D9CBE94B49BF850B3F46988D171162) 
+			Text(TextProperty)=It's  text block of insanely big proportions.  I mean it's gigantic.  It's humongous.  It's the biggest damn piece of text you've ever seen in one place.  And better still, it doesn't need to be localized! (B7C1BD04403A004D41AF26BD9C6FB590) 
 			Font(StructProperty)=System.Byte[] 
 			WrapTextAt(FloatProperty)=300 
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	AmmoLoadedText (0-0-0-0): size 322 (cls: AmmoLoadedText>CommonTextBlock>/Script/CommonUI):
+	AmmoLoadedText (0-0-0-0): size 408 (cls: AmmoLoadedText>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-S-B_C=/Game/UI/Foundation/Text/TextStyle-Base-S-B 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-NoFade_C=/Game/UI/Foundation/Text/TextScrollStyle-NoFade 
 			Text(TextProperty)=30 (9A7DCAA9456CD86C8D3C839F872938F7) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_4=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	ItemDisplayName (0-0-0-0): size 371 (cls: ItemDisplayName>CommonTextBlock>/Script/CommonUI):
+	ItemDisplayName (0-0-0-0): size 428 (cls: ItemDisplayName>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-M_C=/Game/UI/Foundation/Text/TextStyle-Header-M 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)={ItemName} (C07A45474B5FAAE811D5138A157F0AE9) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			bIsVariable(BoolProperty)=True 
 			Clipping(EnumProperty)=EWidgetClipping::ClipToBounds 
-	CommonTextBlock_1 (0-0-0-0): size 355 (cls: CommonTextBlock_1>CommonTextBlock>/Script/CommonUI):
+	CommonTextBlock_1 (0-0-0-0): size 474 (cls: CommonTextBlock_1>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-Black_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-Black 
 			Text(TextProperty)=x (35DA723D42EB249E77653D92243F103B) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
-	TextCounter (0-0-0-0): size 416 (cls: TextCounter>CommonTextBlock>/Script/CommonUI):
+	TextCounter (0-0-0-0): size 502 (cls: TextCounter>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B-Black_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B-Black 
 			Text(TextProperty)=Text Block (TextBlockDefaultValue) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	TextInteractionFailure (0-0-0-0): size 648 (cls: TextInteractionFailure>CommonTextBlock>/Script/CommonUI):
+	TextInteractionFailure (0-0-0-0): size 734 (cls: TextInteractionFailure>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B-S-Red_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B-S-Red 
 			Text(TextProperty)=Text Block (TextBlockDefaultValue) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	TextUnderKeybindText (0-0-0-0): size 307 (cls: TextUnderKeybindText>CommonTextBlock>/Script/CommonUI):
+	TextUnderKeybindText (0-0-0-0): size 426 (cls: TextUnderKeybindText>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS_C=/Game/UI/Foundation/Text/TextStyle-Base-XS 
 			Text(TextProperty)={Action} (75F809D841D51460CC6EE4841664BB94) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Center 
 			Slot(ObjectProperty)=VerticalBoxSlot_1=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
@@ -614,10 +624,11 @@ Serialized exports:
 	Temp_byte_Variable1 (0-0-0-0): size 40 (cls: Temp_byte_Variable1>EnumProperty>/Script/CoreUObject)
 	Temp_byte_Variable2 (0-0-0-0): size 40 (cls: Temp_byte_Variable2>EnumProperty>/Script/CoreUObject)
 	Temp_byte_Variable3 (0-0-0-0): size 40 (cls: Temp_byte_Variable3>EnumProperty>/Script/CoreUObject)
-	CategoryIndicator (0-0-0-0): size 164 (cls: CategoryIndicator>FortItemCategoryIndicator>/Script/FortniteUI):
+	CategoryIndicator (0-0-0-0): size 193 (cls: CategoryIndicator>FortItemCategoryIndicator>/Script/FortniteUI):
 		Tag array:
 			OrdinalOfCategoryToRepresent(EnumProperty)=EFortItemCategoryOrdinal::Secondary 
 			IconBrushSize(ByteProperty)=EFortBrushSize::Medium 
+			LabelTextStyle(ObjectProperty)=TextStyle-Base_C=/Game/UI/Foundation/Text/TextStyle-Base 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
 			Visibility(EnumProperty)=ESlateVisibility::SelfHitTestInvisible 
 	CategoryIndicatorTertiary (0-0-0-0): size 193 (cls: CategoryIndicatorTertiary>FortItemCategoryIndicator>/Script/FortniteUI):

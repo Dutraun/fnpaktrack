@@ -1,5 +1,5 @@
 Name table:
-	/Game/Athena/HUD/Spectator/Art/AliveIco_Blue
+	/Game/Athena/HUD/Spectator/Art/M_PlayersCount
 	/Game/Athena/HUD/Spectator/MatchStatus/AthenaBroadcastPlayersLeftWidget
 	/Game/Athena/HUD/Spectator/MatchStatus/AthenaBroadcastPlayersLeftWidget.WidgetArchetype
 	/Game/UI/Foundation/Fonts/Burbank
@@ -8,7 +8,6 @@ Name table:
 	/Script/FortniteUI
 	/Script/GameplayTags
 	/Script/UMG
-	AliveIco_Blue
 	ArrayProperty
 	AthenaBroadcastPlayersLeftWidget_C
 	AthenaPlayersLeftBase
@@ -18,6 +17,7 @@ Name table:
 	bHasScriptImplementedTick
 	bIsVariable
 	BoolProperty
+	bOverride_WidthOverride
 	Brush
 	Burbank
 	BurbankRegular-Black
@@ -33,6 +33,8 @@ Name table:
 	Default__Image
 	Default__IntProperty
 	Default__ObjectProperty
+	Default__SizeBox
+	Default__SizeBoxSlot
 	Default__StructProperty
 	Default__TextBlock
 	Default__TextProperty
@@ -41,6 +43,8 @@ Name table:
 	EHorizontalAlignment
 	Engine
 	EntryPoint
+	ESlateSizeRule
+	ESlateSizeRule::Fill
 	EVerticalAlignment
 	ExecuteUbergraph_AthenaBroadcastPlayersLeftWidget
 	FloatProperty
@@ -49,6 +53,7 @@ Name table:
 	Function
 	GameplayTag
 	GameplayTagContainer
+	HAlign_Center
 	HAlign_Left
 	HorizontalAlignment
 	HorizontalBox
@@ -59,7 +64,9 @@ Name table:
 	ImageSize
 	IntProperty
 	K2Node_Event_PlayersText
+	M_PlayersCount
 	Margin
+	Material
 	NameProperty
 	None
 	Object
@@ -78,7 +85,11 @@ Name table:
 	SetPlayersLeftText
 	SetText
 	Size
+	SizeBox
+	SizeBoxSlot
+	SizeRule
 	SlateBrush
+	SlateChildSize
 	SlateFontInfo
 	Slot
 	Slots
@@ -88,11 +99,9 @@ Name table:
 	Text
 	TextBlock
 	TextProperty
-	Texture2D
 	Top
 	TypefaceFontName
 	UberGraphFrame
-	UberGraphFramePointerProperty
 	UberGraphFunction
 	VAlign_Center
 	Vector2D
@@ -100,15 +109,15 @@ Name table:
 	WidgetArchetype
 	WidgetBlueprintGeneratedClass
 	WidgetTree
+	WidthOverride
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	AthenaBroadcastPlayersLeftWidget_C (0-0-0-0): size 296 (cls: AthenaBroadcastPlayersLeftWidget_C>WidgetBlueprintGeneratedClass>/Script/UMG):
+	AthenaBroadcastPlayersLeftWidget_C (0-0-0-0): size 267 (cls: AthenaBroadcastPlayersLeftWidget_C>WidgetBlueprintGeneratedClass>/Script/UMG):
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
 			bValidTemplate(BoolProperty)=True 
 			TemplateAsset(SoftObjectProperty)=/Game/Athena/HUD/Spectator/MatchStatus/AthenaBroadcastPlayersLeftWidget.WidgetArchetype 
-			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=AthenaBroadcastPlayersLeftWidget_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_AthenaBroadcastPlayersLeftWidget=AthenaBroadcastPlayersLeftWidget_C 
 	Default__AthenaBroadcastPlayersLeftWidget_C (0-0-0-0): size 178 (cls: Default__AthenaBroadcastPlayersLeftWidget_C>AthenaBroadcastPlayersLeftWidget_C):
 		Tag array:
@@ -127,10 +136,11 @@ Serialized exports:
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
 	ExecuteUbergraph_AthenaBroadcastPlayersLeftWidget (0-0-0-0): size 86 (cls: ExecuteUbergraph_AthenaBroadcastPlayersLeftWidget>Function>/Script/CoreUObject)
 	PlayersText (0-0-0-0): size 32 (cls: PlayersText>TextProperty>/Script/CoreUObject)
-	SetPlayersLeftText (0-0-0-0): size 72 (cls: SetPlayersLeftText>Function>/Script/CoreUObject)
-	HorizontalBox_0 (0-0-0-0): size 57 (cls: HorizontalBox_0>HorizontalBox>/Script/UMG):
+	SetPlayersLeftText (0-0-0-0): size 68 (cls: SetPlayersLeftText>Function>/Script/CoreUObject)
+	HorizontalBox_0 (0-0-0-0): size 86 (cls: HorizontalBox_0>HorizontalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
 	HorizontalBoxSlot_0 (0-0-0-0): size 238 (cls: HorizontalBoxSlot_0>HorizontalBoxSlot>/Script/UMG):
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
@@ -138,9 +148,12 @@ Serialized exports:
 			VerticalAlignment(ByteProperty)=VAlign_Center 
 			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
 			Content(ObjectProperty)=PlayersImage=WidgetArchetype 
-	HorizontalBoxSlot_2 (0-0-0-0): size 156 (cls: HorizontalBoxSlot_2>HorizontalBoxSlot>/Script/UMG):
+	HorizontalBoxSlot_2 (0-0-0-0): size 336 (cls: HorizontalBoxSlot_2>HorizontalBoxSlot>/Script/UMG):
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
+			Size(StructProperty)=System.Byte[] 
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
 			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
 			Content(ObjectProperty)=PlayersLeftText=WidgetArchetype 
 	PlayersImage (0-0-0-0): size 184 (cls: PlayersImage>Image>/Script/UMG):
@@ -148,6 +161,15 @@ Serialized exports:
 			Brush(StructProperty)=System.Byte[] 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 	PlayersImage (0-0-0-0): size 36 (cls: PlayersImage>ObjectProperty>/Script/CoreUObject)
+	SizeBox_0 (0-0-0-0): size 108 (cls: SizeBox_0>SizeBox>/Script/UMG):
+		Tag array:
+			bOverride_WidthOverride(BoolProperty)=True 
+			WidthOverride(FloatProperty)=95 
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+	SizeBoxSlot_0 (0-0-0-0): size 70 (cls: SizeBoxSlot_0>SizeBoxSlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=SizeBox_0=WidgetArchetype 
+			Content(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
 	PlayersLeftText (0-0-0-0): size 294 (cls: PlayersLeftText>TextBlock>/Script/UMG):
 		Tag array:
 			Text(TextProperty)=100 (994065D6412DC634F5BCD3871C241FC7) 
@@ -156,4 +178,4 @@ Serialized exports:
 			bIsVariable(BoolProperty)=True 
 	WidgetTree_0 (0-0-0-0): size 41 (cls: WidgetTree_0>WidgetTree>/Script/UMG):
 		Tag array:
-			RootWidget(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
+			RootWidget(ObjectProperty)=SizeBox_0=WidgetArchetype 

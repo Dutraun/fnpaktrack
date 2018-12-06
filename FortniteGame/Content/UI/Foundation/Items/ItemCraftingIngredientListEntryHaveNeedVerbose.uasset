@@ -3,8 +3,10 @@ Name table:
 	/Game/Items/Ingredients/Ingredient_Crystal_Moonglow
 	/Game/Items/Ingredients/Ingredient_Duct_Tape
 	/Game/Items/Ingredients/Ingredient_Mechanical_Parts_T05
+	/Game/UI/Foundation/Fonts/NotoSans
 	/Game/UI/Foundation/Items/ItemCraftingIngredientListEntryHaveNeedVerbose
 	/Game/UI/Foundation/Items/ItemCraftingIngredientListEntryHaveNeedVerbose.WidgetArchetype
+	/Game/UI/Foundation/Text/TextStyle-Base
 	/Game/UI/Foundation/Text/TextStyle-Base-S-B
 	/Game/UI/Foundation/Text/TextStyle-Base-S-Blue
 	/Game/UI/Foundation/Text/TextStyle-Base-XS
@@ -48,6 +50,7 @@ Name table:
 	CallFunc_RandomInteger_ReturnValue1
 	Class
 	ClassProperty
+	ColorAndOpacity
 	CommonBorder
 	CommonTextBlock
 	CommonTextStyle
@@ -82,6 +85,7 @@ Name table:
 	Default__TextStyle-Base-S-Blue_C
 	Default__TextStyle-Base-XS-B-S_C
 	Default__TextStyle-Base-XS_C
+	Default__TextStyle-Base_C
 	Default__VerticalBox
 	Default__VerticalBoxSlot
 	Default__WidgetBlueprintGeneratedClass
@@ -108,6 +112,7 @@ Name table:
 	ExecuteUbergraph_ItemCraftingIngredientListEntryHaveNeedVerbose
 	FloatProperty
 	Font
+	FontObject
 	FortIngredientItemDefinition
 	FortInventoryContext
 	FortItemCountTextBlock
@@ -156,7 +161,9 @@ Name table:
 	MinDesiredWidth
 	NameProperty
 	None
+	NotoSans
 	NotoSans-Bold
+	NotoSans-Regular
 	Object
 	ObjectProperty
 	Package
@@ -178,6 +185,7 @@ Name table:
 	SetStyle
 	SetText
 	SetVisibility
+	ShadowOffset
 	Size
 	SizeBox
 	SizeBoxSlot
@@ -210,13 +218,13 @@ Name table:
 	TextStyle-Base-S-Blue_C
 	TextStyle-Base-XS-B-S_C
 	TextStyle-Base-XS_C
+	TextStyle-Base_C
 	Texture2D
 	Tiling
 	TintColor
 	Top
 	TypefaceFontName
 	UberGraphFrame
-	UberGraphFramePointerProperty
 	UberGraphFunction
 	UnderlyingType
 	UserWidget
@@ -232,14 +240,13 @@ Name table:
 	WidthOverride
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	ItemCraftingIngredientListEntryHaveNeedVerbose_C (0-0-0-0): size 394 (cls: ItemCraftingIngredientListEntryHaveNeedVerbose_C>WidgetBlueprintGeneratedClass>/Script/UMG):
+	ItemCraftingIngredientListEntryHaveNeedVerbose_C (0-0-0-0): size 365 (cls: ItemCraftingIngredientListEntryHaveNeedVerbose_C>WidgetBlueprintGeneratedClass>/Script/UMG):
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
 			bValidTemplate(BoolProperty)=True 
 			bClassRequiresNativeTick(BoolProperty)=True 
 			TemplateAsset(SoftObjectProperty)=/Game/UI/Foundation/Items/ItemCraftingIngredientListEntryHaveNeedVerbose.WidgetArchetype 
-			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=ItemCraftingIngredientListEntryHaveNeedVerbose_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_ItemCraftingIngredientListEntryHaveNeedVerbose=ItemCraftingIngredientListEntryHaveNeedVerbose_C 
 	Default__ItemCraftingIngredientListEntryHaveNeedVerbose_C (0-0-0-0): size 172 (cls: Default__ItemCraftingIngredientListEntryHaveNeedVerbose_C>ItemCraftingIngredientListEntryHaveNeedVerbose_C):
 		Tag array:
@@ -254,9 +261,9 @@ Serialized exports:
 	ExecuteUbergraph_ItemCraftingIngredientListEntryHaveNeedVerbose (0-0-0-0): size 106 (cls: ExecuteUbergraph_ItemCraftingIngredientListEntryHaveNeedVerbose>Function>/Script/CoreUObject)
 	K2Node_Event_IsBeingReset (0-0-0-0): size 34 (cls: K2Node_Event_IsBeingReset>BoolProperty>/Script/CoreUObject)
 	K2Node_Event_IsDesignTime (0-0-0-0): size 34 (cls: K2Node_Event_IsDesignTime>BoolProperty>/Script/CoreUObject)
-	HandleDifferentItemOrQuantitySetBP (0-0-0-0): size 72 (cls: HandleDifferentItemOrQuantitySetBP>Function>/Script/CoreUObject)
+	HandleDifferentItemOrQuantitySetBP (0-0-0-0): size 68 (cls: HandleDifferentItemOrQuantitySetBP>Function>/Script/CoreUObject)
 	IsBeingReset (0-0-0-0): size 34 (cls: IsBeingReset>BoolProperty>/Script/CoreUObject)
-	PreConstruct (0-0-0-0): size 72 (cls: PreConstruct>Function>/Script/CoreUObject)
+	PreConstruct (0-0-0-0): size 68 (cls: PreConstruct>Function>/Script/CoreUObject)
 	IsDesignTime (0-0-0-0): size 34 (cls: IsDesignTime>BoolProperty>/Script/CoreUObject)
 	Temp_int_Variable (0-0-0-0): size 32 (cls: Temp_int_Variable>IntProperty>/Script/CoreUObject)
 	DoDesignTimeRandomization (0-0-0-0): size 300 (cls: DoDesignTimeRandomization>Function>/Script/CoreUObject)
@@ -277,41 +284,50 @@ Serialized exports:
 		Tag array:
 			VerticalAlignment(ByteProperty)=VAlign_Top 
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-	TextDescription (0-0-0-0): size 287 (cls: TextDescription>CommonTextBlock>/Script/CommonUI):
+	TextDescription (0-0-0-0): size 406 (cls: TextDescription>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS_C=/Game/UI/Foundation/Text/TextStyle-Base-XS 
 			Text(TextProperty)=Text Block (TextBlockDefaultValue) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			AutoWrapText(BoolProperty)=True 
 			Slot(ObjectProperty)=VerticalBoxSlot_1=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	TextSlash (0-0-0-0): size 144 (cls: TextSlash>CommonTextBlock>/Script/CommonUI):
+	TextSlash (0-0-0-0): size 349 (cls: TextSlash>CommonTextBlock>/Script/CommonUI):
 		Tag array:
+			Style(ObjectProperty)=TextStyle-Base_C=/Game/UI/Foundation/Text/TextStyle-Base 
 			Text(TextProperty)=/ (BDFADAC944992F05A7915588F486C3D3) 
+			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_3=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
 	K2Node_Select_Default (0-0-0-0): size 40 (cls: K2Node_Select_Default>EnumProperty>/Script/CoreUObject)
 	Temp_byte_Variable1 (0-0-0-0): size 40 (cls: Temp_byte_Variable1>EnumProperty>/Script/CoreUObject)
-	ItemCountHave (0-0-0-0): size 335 (cls: ItemCountHave>FortItemCountTextBlock>/Script/FortniteUI):
+	ItemCountHave (0-0-0-0): size 421 (cls: ItemCountHave>FortItemCountTextBlock>/Script/FortniteUI):
 		Tag array:
 			CountStyle(EnumProperty)=EFortItemCountStyle::OverrideCount 
 			Style(ObjectProperty)=TextStyle-Base-S-B_C=/Game/UI/Foundation/Text/TextStyle-Base-S-B 
 			Text(TextProperty)=Text Block (TextBlockDefaultValue) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	ItemCountNeed (0-0-0-0): size 335 (cls: ItemCountNeed>FortItemCountTextBlock>/Script/FortniteUI):
+	ItemCountNeed (0-0-0-0): size 421 (cls: ItemCountNeed>FortItemCountTextBlock>/Script/FortniteUI):
 		Tag array:
 			CountStyle(EnumProperty)=EFortItemCountStyle::OverrideCount 
 			Style(ObjectProperty)=TextStyle-Base-S-B_C=/Game/UI/Foundation/Text/TextStyle-Base-S-B 
 			Text(TextProperty)=Text Block (TextBlockDefaultValue) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_5=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	ItemName (0-0-0-0): size 181 (cls: ItemName>FortItemDisplayNameText>/Script/FortniteUI):
+	ItemName (0-0-0-0): size 508 (cls: ItemName>FortItemDisplayNameText>/Script/FortniteUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-S-Blue_C=/Game/UI/Foundation/Text/TextStyle-Base-S-Blue 
 			Text(TextProperty)=Item Name (66B78FFA446E290C046A1F8510A2DA67) 
+			ColorAndOpacity(StructProperty)=System.Byte[] 
+			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_8=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
 	ItemIcon (0-0-0-0): size 82 (cls: ItemIcon>FortItemIcon>/Script/FortniteUI):

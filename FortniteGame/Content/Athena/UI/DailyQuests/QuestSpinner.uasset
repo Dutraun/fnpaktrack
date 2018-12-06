@@ -8,6 +8,7 @@ Name table:
 	/Game/UI/Foundation/Border/Border_StatRow_WhiteMidOpacity
 	/Game/UI/Foundation/Border/Materials/M-Border-1pxOutline
 	/Game/UI/Foundation/Buttons/Materials/Arrows/M_Arrow_White
+	/Game/UI/Foundation/Fonts/NotoSans
 	/Game/UI/Foundation/Materials/M_UI_CompletedQuestState
 	/Game/UI/Foundation/Text/TextScrollStyle-NoFade
 	/Game/UI/Foundation/Text/TextStyle-Base-AthenaQuestProgress
@@ -36,6 +37,7 @@ Name table:
 	ArriveTangentWeight
 	Background
 	bAllowTemplate
+	bApplyOutlineToDropShadows
 	bCookedWidgetTree
 	BeginSpinDelayTimer
 	bEvaluateInPostroll
@@ -186,6 +188,7 @@ Name table:
 	Flags
 	FloatProperty
 	Font
+	FontObject
 	FontOutlineSettings
 	ForcedTime
 	FortQuestItem
@@ -281,7 +284,9 @@ Name table:
 	NewValue
 	None
 	NotifyFunctionName
+	NotoSans
 	NotoSans-Bold
+	NotoSans-Regular
 	Numerator
 	NumEvalPtrs
 	NumInitPtrs
@@ -349,7 +354,7 @@ Name table:
 	SetQuestItem
 	SetQuests
 	SetRenderTransform
-	ShadowColorAndOpacity
+	ShadowOffset
 	Shear
 	Signature
 	Size
@@ -407,7 +412,6 @@ Name table:
 	Translation
 	TypefaceFontName
 	UberGraphFrame
-	UberGraphFramePointerProperty
 	UberGraphFunction
 	UInt16Property
 	UInt32Property
@@ -437,14 +441,13 @@ Name table:
 	XpBar
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	QuestSpinner_C (0-0-0-0): size 425 (cls: QuestSpinner_C>WidgetBlueprintGeneratedClass>/Script/UMG):
+	QuestSpinner_C (0-0-0-0): size 396 (cls: QuestSpinner_C>WidgetBlueprintGeneratedClass>/Script/UMG):
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
 			bValidTemplate(BoolProperty)=True 
 			Animations(ArrayProperty)=[object] (inner: ObjectProperty)
 			TemplateAsset(SoftObjectProperty)=/Game/Athena/UI/DailyQuests/QuestSpinner.WidgetArchetype 
-			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=QuestSpinner_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_QuestSpinner=QuestSpinner_C 
 	Default__QuestSpinner_C (0-0-0-0): size 117 (cls: Default__QuestSpinner_C>QuestSpinner_C):
 		Tag array:
@@ -456,7 +459,7 @@ Serialized exports:
 	Spin (0-0-0-0): size 36 (cls: Spin>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
 	ExecuteUbergraph_QuestSpinner (0-0-0-0): size 263 (cls: ExecuteUbergraph_QuestSpinner>Function>/Script/CoreUObject)
-	OnSpinComplete (0-0-0-0): size 58 (cls: OnSpinComplete>Function>/Script/CoreUObject)
+	OnSpinComplete (0-0-0-0): size 54 (cls: OnSpinComplete>Function>/Script/CoreUObject)
 	SetQuests (0-0-0-0): size 305 (cls: SetQuests>Function>/Script/CoreUObject)
 	Quests (0-0-0-0): size 36 (cls: Quests>ObjectProperty>/Script/CoreUObject)
 	Quests (0-0-0-0): size 36 (cls: Quests>ArrayProperty>/Script/CoreUObject)
@@ -549,60 +552,64 @@ Serialized exports:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=HorizontalBoxSlot_4=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	ProgressValue (0-0-0-0): size 667 (cls: ProgressValue>CommonTextBlock>/Script/CommonUI):
+	ProgressValue (0-0-0-0): size 714 (cls: ProgressValue>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-AthenaQuestProgress_C=/Game/UI/Foundation/Text/TextStyle-Base-AthenaQuestProgress 
 			Text(TextProperty)=99/99 (001059004C63A2B3DA8EE3974886F6DD) 
 			Font(StructProperty)=System.Byte[] 
-			ShadowColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Right 
 			Slot(ObjectProperty)=OverlaySlot_1=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
 			bIsVariable(BoolProperty)=True 
-	QuestName (0-0-0-0): size 457 (cls: QuestName>CommonTextBlock>/Script/CommonUI):
+	QuestName (0-0-0-0): size 543 (cls: QuestName>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B-70pc_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B-70pc 
 			Text(TextProperty)=Text Block (TextBlockDefaultValue) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=VerticalBoxSlot_2=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
 			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
-	TaskName (0-0-0-0): size 419 (cls: TaskName>CommonTextBlock>/Script/CommonUI):
+	TaskName (0-0-0-0): size 538 (cls: TaskName>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-70pc_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-70pc 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-NoFade_C=/Game/UI/Foundation/Text/TextScrollStyle-NoFade 
 			Text(TextProperty)=Task Name  (B9430FFF4B7AAAECE59B7AA2239B40D9) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_4=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	ProgressValue (0-0-0-0): size 667 (cls: ProgressValue>CommonTextBlock>/Script/CommonUI):
+	ProgressValue (0-0-0-0): size 714 (cls: ProgressValue>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-AthenaQuestProgress_C=/Game/UI/Foundation/Text/TextStyle-Base-AthenaQuestProgress 
 			Text(TextProperty)=99/99 (001059004C63A2B3DA8EE3974886F6DD) 
 			Font(StructProperty)=System.Byte[] 
-			ShadowColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Right 
 			Slot(ObjectProperty)=OverlaySlot_1=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
 			bIsVariable(BoolProperty)=True 
-	QuestName (0-0-0-0): size 457 (cls: QuestName>CommonTextBlock>/Script/CommonUI):
+	QuestName (0-0-0-0): size 543 (cls: QuestName>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B-70pc_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B-70pc 
 			Text(TextProperty)=Text Block (TextBlockDefaultValue) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=VerticalBoxSlot_2=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
 			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
-	TaskName (0-0-0-0): size 419 (cls: TaskName>CommonTextBlock>/Script/CommonUI):
+	TaskName (0-0-0-0): size 538 (cls: TaskName>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-70pc_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-70pc 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-NoFade_C=/Game/UI/Foundation/Text/TextScrollStyle-NoFade 
 			Text(TextProperty)=Task Name  (B9430FFF4B7AAAECE59B7AA2239B40D9) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_4=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
 	DailyQuestProgressWidget (0-0-0-0): size 241 (cls: DailyQuestProgressWidget>DailyQuestProgressWidget_C>/Game/Athena/UI/DailyQuests/DailyQuestProgressWidget):

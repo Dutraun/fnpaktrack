@@ -5,6 +5,7 @@ Name table:
 	/Script/CoreUObject
 	/Script/Engine
 	/Script/FortniteGame
+	Active
 	Actor
 	Add_IntInt
 	AllNodes
@@ -32,6 +33,8 @@ Name table:
 	CallFunc_GetAllActorsOfClass_OutActors1
 	CallFunc_GetAllActorsOfClass_OutActors2
 	CallFunc_GetTimeOfDayManagerFromContext_ReturnValue
+	CallFunc_K2_SetActorTransform_ReturnValue
+	CallFunc_K2_SetActorTransform_SweepHitResult
 	CallFunc_Less_IntInt_ReturnValue
 	CallFunc_Less_IntInt_ReturnValue1
 	CameraComponent
@@ -79,11 +82,14 @@ Name table:
 	GetAllActorsOfClass
 	GetTimeOfDayManagerFromContext
 	Guid
+	HitResult
 	InternalVariableName
 	IntProperty
+	K2_SetActorTransform
 	KismetArrayLibrary
 	KismetMathLibrary
 	Less_IntInt
+	ManualActivate
 	NameProperty
 	None
 	Object
@@ -94,8 +100,13 @@ Name table:
 	ParentComponentOrVariableName
 	PointerToUberGraphFrame
 	PostProcessComponent
+	Quat
+	Reset Location
 	RootComponent
 	RootNodes
+	Rotation
+	SavedTransform
+	Scale3D
 	SceneComponent
 	ScriptStruct
 	SCS_Node
@@ -108,34 +119,38 @@ Name table:
 	Temp_int_Array_Index_Variable1
 	Temp_int_Loop_Counter_Variable
 	Temp_int_Loop_Counter_Variable1
+	Transform
+	Translation
 	TVPostProcessBP_C
 	UberGraphFrame
-	UberGraphFramePointerProperty
 	UberGraphFunction
 	UserConstructionScript
 	VariableGuid
+	Vector
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	FortnitePartyBackdrop_Camera_C (0-0-0-0): size 235 (cls: FortnitePartyBackdrop_Camera_C>BlueprintGeneratedClass>/Script/Engine):
+	FortnitePartyBackdrop_Camera_C (0-0-0-0): size 246 (cls: FortnitePartyBackdrop_Camera_C>BlueprintGeneratedClass>/Script/Engine):
 		Tag array:
 			SimpleConstructionScript(ObjectProperty)=SimpleConstructionScript_3=FortnitePartyBackdrop_Camera_C 
-			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=FortnitePartyBackdrop_Camera_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_FortnitePartyBackdrop_Camera=FortnitePartyBackdrop_Camera_C 
-	Default__FortnitePartyBackdrop_Camera_C (0-0-0-0): size 152 (cls: Default__FortnitePartyBackdrop_Camera_C>FortnitePartyBackdrop_Camera_C):
+	Default__FortnitePartyBackdrop_Camera_C (0-0-0-0): size 396 (cls: Default__FortnitePartyBackdrop_Camera_C>FortnitePartyBackdrop_Camera_C):
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
+			SavedTransform(StructProperty)=System.Byte[] 
 			CameraComponent(ObjectProperty)=CameraComponent=Default__FortnitePartyBackdrop_Camera_C 
 			SceneComponent(ObjectProperty)=SceneComponent=Default__FortnitePartyBackdrop_Camera_C 
 			RootComponent(ObjectProperty)=SceneComponent=Default__FortnitePartyBackdrop_Camera_C 
 	Arrow (0-0-0-0): size 36 (cls: Arrow>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_FortnitePartyBackdrop_Camera (0-0-0-0): size 868 (cls: ExecuteUbergraph_FortnitePartyBackdrop_Camera>Function>/Script/CoreUObject)
+	ExecuteUbergraph_FortnitePartyBackdrop_Camera (0-0-0-0): size 905 (cls: ExecuteUbergraph_FortnitePartyBackdrop_Camera>Function>/Script/CoreUObject)
 	CallFunc_GetAllActorsOfClass_OutActors (0-0-0-0): size 36 (cls: CallFunc_GetAllActorsOfClass_OutActors>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetAllActorsOfClass_OutActors (0-0-0-0): size 36 (cls: CallFunc_GetAllActorsOfClass_OutActors>ArrayProperty>/Script/CoreUObject)
 	CallFunc_GetAllActorsOfClass_OutActors1 (0-0-0-0): size 36 (cls: CallFunc_GetAllActorsOfClass_OutActors1>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetAllActorsOfClass_OutActors1 (0-0-0-0): size 36 (cls: CallFunc_GetAllActorsOfClass_OutActors1>ArrayProperty>/Script/CoreUObject)
 	CallFunc_GetAllActorsOfClass_OutActors2 (0-0-0-0): size 36 (cls: CallFunc_GetAllActorsOfClass_OutActors2>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetAllActorsOfClass_OutActors2 (0-0-0-0): size 36 (cls: CallFunc_GetAllActorsOfClass_OutActors2>ArrayProperty>/Script/CoreUObject)
+	Active (0-0-0-0): size 34 (cls: Active>BoolProperty>/Script/CoreUObject)
+	CallFunc_K2_SetActorTransform_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_K2_SetActorTransform_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Less_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Less_IntInt_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CameraComponent (0-0-0-0): size 96 (cls: CameraComponent>CameraComponent>/Script/Engine):
@@ -143,8 +158,10 @@ Serialized exports:
 			FieldOfView(FloatProperty)=55 
 			bUseFieldOfViewForLOD(BoolProperty)=False 
 			AttachParent(ObjectProperty)=SceneComponent=Default__FortnitePartyBackdrop_Camera_C 
-	OnActivated (0-0-0-0): size 58 (cls: OnActivated>Function>/Script/CoreUObject)
-	OnDeactivated (0-0-0-0): size 58 (cls: OnDeactivated>Function>/Script/CoreUObject)
+	ManualActivate (0-0-0-0): size 54 (cls: ManualActivate>Function>/Script/CoreUObject)
+	OnActivated (0-0-0-0): size 54 (cls: OnActivated>Function>/Script/CoreUObject)
+	OnDeactivated (0-0-0-0): size 54 (cls: OnDeactivated>Function>/Script/CoreUObject)
+	Reset Location (0-0-0-0): size 54 (cls: Reset Location>Function>/Script/CoreUObject)
 	UserConstructionScript (0-0-0-0): size 43 (cls: UserConstructionScript>Function>/Script/CoreUObject)
 	CallFunc_Add_IntInt_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue>IntProperty>/Script/CoreUObject)
 	CallFunc_Add_IntInt_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue1>IntProperty>/Script/CoreUObject)
@@ -179,3 +196,5 @@ Serialized exports:
 			RootNodes(ArrayProperty)=[object] (inner: ObjectProperty)
 			AllNodes(ArrayProperty)=[object] (inner: ObjectProperty)
 			DefaultSceneRootNode(ObjectProperty)=SCS_Node_5=FortnitePartyBackdrop_Camera_C 
+	CallFunc_K2_SetActorTransform_SweepHitResult (0-0-0-0): size 36 (cls: CallFunc_K2_SetActorTransform_SweepHitResult>StructProperty>/Script/CoreUObject)
+	SavedTransform (0-0-0-0): size 36 (cls: SavedTransform>StructProperty>/Script/CoreUObject)

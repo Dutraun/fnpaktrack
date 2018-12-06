@@ -13,6 +13,7 @@ Name table:
 	/Game/Athena/Effects/Particles/P_Player_ShieldBreak
 	/Game/Athena/Effects/Particles/P_PlayerRevived_Athena
 	/Game/Athena/MappedEffects/GE_Athena_Revive
+	/Game/Athena/PlayerPawn_Athena
 	/Game/Athena/PlayerPawn_Athena_Generic
 	/Game/Athena/PlayerPawn_Athena_Generic_Parent
 	/Game/Athena/Sounds/Character/Falling/Character_InAirAudioTell_Cue
@@ -48,7 +49,7 @@ Name table:
 	/Game/UI/Fort_HUD/Radar/UI_Radar_PlayerArrow_Elevation
 	/Game/UI/Fort_HUD/Radar/UI_Radar_PlayerArrow_OOB
 	/Game/UI/Fort_HUD/Radar/UI_Radar_SupplyDrop
-	/Game/UI/HUD/SpeechBubbleWidget
+	/Game/UI/InGame/Mission/SpeechBubbleWidget
 	/Game/VisualThreatManager/WindManager
 	/Game/WaterAndWind/Materials/RenderToTexture/DecayWaterLevel
 	/Game/WaterAndWind/Materials/RenderToTexture/WetnessDepthRender
@@ -56,6 +57,7 @@ Name table:
 	/Game/WaterAndWind/Particles/WaterInteraction/PlayerWaterRipple
 	/Game/Weapons/ForceFeedback/FF_Generic_DBNORevive
 	/Game/Weapons/ForceFeedback/FF_Generic_TakeDamage
+	/Game/Weapons/FORT_Melee/Blueprints/Edged/Athena_Blade/DA_Melee_Blade_Athena
 	/Game/Weapons/FORT_Shotguns/Blueprints/B_Shotgun_Generic
 	/Script/AnimationBudgetAllocator
 	/Script/ClothingSystemRuntime
@@ -84,6 +86,10 @@ Name table:
 	AnimBlueprintGeneratedClass
 	AnimClass
 	AnimMontage
+	AnimNotify_Begin
+	AnimNotify_Begin__DelegateSignature
+	AnimNotify_End
+	AnimNotify_End__DelegateSignature
 	AnimSequence
 	AnimTrailPS
 	AnimTrailPS_GEN_VARIABLE
@@ -221,6 +227,7 @@ Name table:
 	CallFunc_BooleanOR_ReturnValue
 	CallFunc_BooleanOR_ReturnValue1
 	CallFunc_BooleanOR_ReturnValue2
+	CallFunc_BooleanOR_ReturnValue3
 	CallFunc_BreakHitResult_bBlockingHit
 	CallFunc_BreakHitResult_bInitialOverlap
 	CallFunc_BreakHitResult_Distance
@@ -410,7 +417,9 @@ Name table:
 	CallFunc_IsValid_ReturnValue56
 	CallFunc_IsValid_ReturnValue57
 	CallFunc_IsValid_ReturnValue58
+	CallFunc_IsValid_ReturnValue59
 	CallFunc_IsValid_ReturnValue6
+	CallFunc_IsValid_ReturnValue60
 	CallFunc_IsValid_ReturnValue7
 	CallFunc_IsValid_ReturnValue8
 	CallFunc_IsValid_ReturnValue9
@@ -569,6 +578,7 @@ Name table:
 	CurveFloat_0
 	CurveTable
 	CurveTableRowHandle
+	DA_Melee_Blade_Athena_C
 	Damage
 	Damage_Taken
 	DamageCameraShake
@@ -599,6 +609,7 @@ Name table:
 	Default__ByteProperty
 	Default__ClassProperty
 	Default__CurveFloat
+	Default__DA_Melee_Blade_Athena_C
 	Default__DelegateProperty
 	Default__FloatProperty
 	Default__Fortnite_M_Avg_Player_AnimBlueprint_C
@@ -618,9 +629,11 @@ Name table:
 	Default__KismetMaterialLibrary
 	Default__KismetRenderingLibrary
 	Default__KismetSystemLibrary
+	Default__MulticastDelegateProperty
 	Default__NameProperty
 	Default__ObjectProperty
 	Default__ParticleSystemComponent
+	Default__PlayerPawn_Athena_C
 	Default__PlayerPawn_Athena_Generic_C
 	Default__PlayerPawn_Athena_Generic_Parent_C
 	Default__PlayerTakeDamage_CameraShake_C
@@ -817,6 +830,7 @@ Name table:
 	K2Node_DynamicCast_AsB_Player_Health_Damage_Camera_Lens_Effect
 	K2Node_DynamicCast_AsB_Player_Shield_Damage_Camera_Lens_Effect
 	K2Node_DynamicCast_AsB_Shotgun_Generic
+	K2Node_DynamicCast_AsDA_Melee_Blade_Athena
 	K2Node_DynamicCast_AsFort_Player_Controller
 	K2Node_DynamicCast_AsFort_Player_Controller1
 	K2Node_DynamicCast_AsFort_Player_Controller2
@@ -831,6 +845,7 @@ Name table:
 	K2Node_DynamicCast_AsMaterial_Instance_Dynamic4
 	K2Node_DynamicCast_AsMaterial_Instance_Dynamic5
 	K2Node_DynamicCast_AsMaterial_Instance_Dynamic6
+	K2Node_DynamicCast_AsPlayer_Pawn_Athena
 	K2Node_DynamicCast_AsWind_Manager
 	K2Node_DynamicCast_bSuccess
 	K2Node_DynamicCast_bSuccess1
@@ -840,6 +855,8 @@ Name table:
 	K2Node_DynamicCast_bSuccess13
 	K2Node_DynamicCast_bSuccess14
 	K2Node_DynamicCast_bSuccess15
+	K2Node_DynamicCast_bSuccess16
+	K2Node_DynamicCast_bSuccess17
 	K2Node_DynamicCast_bSuccess2
 	K2Node_DynamicCast_bSuccess3
 	K2Node_DynamicCast_bSuccess4
@@ -866,6 +883,9 @@ Name table:
 	K2Node_Event_Momentum
 	K2Node_Event_Momentum1
 	K2Node_Event_NewWeapon
+	K2Node_Event_OverideFirstSocketName
+	K2Node_Event_OverideSecondSocketName
+	K2Node_Event_OverrideParticleComp
 	K2Node_Event_ParticleSystemReference
 	K2Node_Event_PrevWeapon
 	K2Node_Event_SecondSocketName
@@ -958,8 +978,11 @@ Name table:
 	NewParam
 	NewWeapon
 	NODE_AddParticleSystemComponent-4
+	NODE_AddPointLightComponent-1
+	NODE_AddPointLightComponent-2
 	NODE_AddPoseableMeshComponent-1
 	NODE_AddPostProcessComponent-1
+	NODE_AddPostProcessComponent-2
 	NODE_AddSkeletalMeshComponent-13
 	NODE_AddStaticMeshComponent-1
 	NODE_AddStaticMeshComponent-2
@@ -985,6 +1008,10 @@ Name table:
 	OutputLocation
 	OutsideSafeZonePP0
 	OutsideSafeZonePPComponent
+	OverideFirstSocketName
+	OverideSecondSocketName
+	OverrideAnimTrail
+	OverrideParticleComp
 	P_DBNOResurrect
 	P_Player_HealthShield_Damage_Effect
 	P_Player_In_Water_Athena
@@ -1028,6 +1055,7 @@ Name table:
 	PlayerController
 	PlayerInWaterFX
 	PlayerLoadout_Generic
+	PlayerPawn_Athena_C
 	PlayerPawn_Athena_Generic_C
 	PlayerPawn_Athena_Generic_Parent_C
 	PlayerRunLandFX
@@ -1043,6 +1071,7 @@ Name table:
 	PlayLocalAnimMontage
 	PlaySoundAtLocation
 	PointerToUberGraphFrame
+	PointLightComponent
 	PoseableMesh
 	PoseableMeshComponent
 	PostProcessComponent
@@ -1148,6 +1177,7 @@ Name table:
 	Subtract_IntInt
 	Subtract_VectorVector
 	SwingFX
+	SwordPos_GEN_VARIABLE
 	TargettingZOffset
 	TC_GameplayCueDamageShielded
 	TeammateReviveGameplayEffect
@@ -1218,7 +1248,6 @@ Name table:
 	TranslucentSortPriority
 	TTFloatTrack
 	UberGraphFrame
-	UberGraphFramePointerProperty
 	UberGraphFunction
 	UI_Radar_PlayerArrow_Elevation
 	UI_Radar_PlayerArrow_OOB
@@ -1262,13 +1291,12 @@ Name table:
 	Z
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	PlayerPawn_Athena_Generic_C (0-0-0-0): size 1765 (cls: PlayerPawn_Athena_Generic_C>BlueprintGeneratedClass>/Script/Engine):
+	PlayerPawn_Athena_Generic_C (0-0-0-0): size 1780 (cls: PlayerPawn_Athena_Generic_C>BlueprintGeneratedClass>/Script/Engine):
 		Tag array:
 			bHasCookedComponentInstancingData(BoolProperty)=True 
 			ComponentTemplates(ArrayProperty)=[object] (inner: ObjectProperty)
 			Timelines(ArrayProperty)=[object] (inner: ObjectProperty)
 			SimpleConstructionScript(ObjectProperty)=SimpleConstructionScript_2=PlayerPawn_Athena_Generic_C 
-			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=PlayerPawn_Athena_Generic_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_PlayerPawn_Athena_Generic=PlayerPawn_Athena_Generic_C 
 			CookedComponentInstancingData(MapProperty)=[object] (inner: NameProperty)
 	Default__PlayerPawn_Athena_Generic_C (0-0-0-0): size 5302 (cls: Default__PlayerPawn_Athena_Generic_C>PlayerPawn_Athena_Generic_C):
@@ -1290,7 +1318,7 @@ Serialized exports:
 			DBNOResurrectSound(ObjectProperty)=DBNO_Resurrect_Athena_Cue=/Game/Sounds/Fort_Gadgets/Adrenaline_Rush/DBNO_Resurrect_Athena_Cue 
 			Effect_Player_LandedDust(ObjectProperty)=P_Player_Land_Effect=/Game/Effects/Fort_Effects/Gameplay/SmokeDustExplosions/Particles/P_Player_Land_Effect 
 			DamageForceFeedback(ObjectProperty)=FF_Generic_TakeDamage=/Game/Weapons/ForceFeedback/FF_Generic_TakeDamage 
-			SpeechBubbleWidgetClass(ObjectProperty)=SpeechBubbleWidget_C=/Game/UI/HUD/SpeechBubbleWidget 
+			SpeechBubbleWidgetClass(ObjectProperty)=SpeechBubbleWidget_C=/Game/UI/InGame/Mission/SpeechBubbleWidget 
 			DamageCameraShake(ObjectProperty)=PlayerTakeDamage_CameraShake_C=/Game/Blueprints/Camera/Original/PlayerTakeDamage_CameraShake 
 			WaterTraceHitLocation(StructProperty)=System.Byte[] 
 			StableVelocityVector(StructProperty)=Vector(0,0,0) 
@@ -1339,54 +1367,56 @@ Serialized exports:
 			CapsuleComponent(ObjectProperty)=CollisionCylinder=Default__PlayerPawn_Athena_Generic_C 
 			RootComponent(ObjectProperty)=CollisionCylinder=Default__PlayerPawn_Athena_Generic_C 
 	Effect_WaterInteraction_FX (0-0-0-0): size 36 (cls: Effect_WaterInteraction_FX>ObjectProperty>/Script/CoreUObject)
+	AnimNotify_Begin__DelegateSignature (0-0-0-0): size 43 (cls: AnimNotify_Begin__DelegateSignature>Function>/Script/CoreUObject)
+	AnimNotify_End__DelegateSignature (0-0-0-0): size 43 (cls: AnimNotify_End__DelegateSignature>Function>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_PlayerPawn_Athena_Generic (0-0-0-0): size 25914 (cls: ExecuteUbergraph_PlayerPawn_Athena_Generic>Function>/Script/CoreUObject)
+	ExecuteUbergraph_PlayerPawn_Athena_Generic (0-0-0-0): size 25952 (cls: ExecuteUbergraph_PlayerPawn_Athena_Generic>Function>/Script/CoreUObject)
 	EventType (0-0-0-0): size 36 (cls: EventType>ByteProperty>/Script/CoreUObject)
-	GameplayCue.Shield.Reapplied (0-0-0-0): size 86 (cls: GameplayCue.Shield.Reapplied>Function>/Script/CoreUObject)
+	GameplayCue.Shield.Reapplied (0-0-0-0): size 82 (cls: GameplayCue.Shield.Reapplied>Function>/Script/CoreUObject)
 	EventType (0-0-0-0): size 36 (cls: EventType>ByteProperty>/Script/CoreUObject)
-	GameplayCue.Shield.FullyCharged (0-0-0-0): size 86 (cls: GameplayCue.Shield.FullyCharged>Function>/Script/CoreUObject)
+	GameplayCue.Shield.FullyCharged (0-0-0-0): size 82 (cls: GameplayCue.Shield.FullyCharged>Function>/Script/CoreUObject)
 	EventType (0-0-0-0): size 36 (cls: EventType>ByteProperty>/Script/CoreUObject)
-	GameplayCue.Shield.Destroyed (0-0-0-0): size 86 (cls: GameplayCue.Shield.Destroyed>Function>/Script/CoreUObject)
+	GameplayCue.Shield.Destroyed (0-0-0-0): size 82 (cls: GameplayCue.Shield.Destroyed>Function>/Script/CoreUObject)
 	EventType (0-0-0-0): size 36 (cls: EventType>ByteProperty>/Script/CoreUObject)
-	GameplayCue.Damage.Shielded (0-0-0-0): size 86 (cls: GameplayCue.Damage.Shielded>Function>/Script/CoreUObject)
+	GameplayCue.Damage.Shielded (0-0-0-0): size 82 (cls: GameplayCue.Damage.Shielded>Function>/Script/CoreUObject)
 	EventType (0-0-0-0): size 36 (cls: EventType>ByteProperty>/Script/CoreUObject)
-	GameplayCue.Shield.PotionConsumed (0-0-0-0): size 86 (cls: GameplayCue.Shield.PotionConsumed>Function>/Script/CoreUObject)
+	GameplayCue.Shield.PotionConsumed (0-0-0-0): size 82 (cls: GameplayCue.Shield.PotionConsumed>Function>/Script/CoreUObject)
 	EventType (0-0-0-0): size 36 (cls: EventType>ByteProperty>/Script/CoreUObject)
-	GameplayCue.Abilities.SpookyMist.Loop (0-0-0-0): size 86 (cls: GameplayCue.Abilities.SpookyMist.Loop>Function>/Script/CoreUObject)
+	GameplayCue.Abilities.SpookyMist.Loop (0-0-0-0): size 82 (cls: GameplayCue.Abilities.SpookyMist.Loop>Function>/Script/CoreUObject)
 	EventType (0-0-0-0): size 36 (cls: EventType>ByteProperty>/Script/CoreUObject)
-	GameplayCue.Abilities.Death.FadeCapsule_Athena (0-0-0-0): size 86 (cls: GameplayCue.Abilities.Death.FadeCapsule_Athena>Function>/Script/CoreUObject)
-	AnimTrailsDisable (0-0-0-0): size 58 (cls: AnimTrailsDisable>Function>/Script/CoreUObject)
+	GameplayCue.Abilities.Death.FadeCapsule_Athena (0-0-0-0): size 82 (cls: GameplayCue.Abilities.Death.FadeCapsule_Athena>Function>/Script/CoreUObject)
+	AnimTrailsDisable (0-0-0-0): size 54 (cls: AnimTrailsDisable>Function>/Script/CoreUObject)
 	ParticleSystemReference (0-0-0-0): size 36 (cls: ParticleSystemReference>ObjectProperty>/Script/CoreUObject)
-	AnimTrailsSetup (0-0-0-0): size 114 (cls: AnimTrailsSetup>Function>/Script/CoreUObject)
+	AnimTrailsSetup (0-0-0-0): size 152 (cls: AnimTrailsSetup>Function>/Script/CoreUObject)
 	bActive (0-0-0-0): size 34 (cls: bActive>BoolProperty>/Script/CoreUObject)
-	AnimTrailsNotify (0-0-0-0): size 72 (cls: AnimTrailsNotify>Function>/Script/CoreUObject)
-	FadeOutCapsuleShadow (0-0-0-0): size 58 (cls: FadeOutCapsuleShadow>Function>/Script/CoreUObject)
-	BindOnDestroyed (0-0-0-0): size 58 (cls: BindOnDestroyed>Function>/Script/CoreUObject)
+	AnimTrailsNotify (0-0-0-0): size 68 (cls: AnimTrailsNotify>Function>/Script/CoreUObject)
+	FadeOutCapsuleShadow (0-0-0-0): size 54 (cls: FadeOutCapsuleShadow>Function>/Script/CoreUObject)
+	BindOnDestroyed (0-0-0-0): size 54 (cls: BindOnDestroyed>Function>/Script/CoreUObject)
 	DestroyedActor (0-0-0-0): size 36 (cls: DestroyedActor>ObjectProperty>/Script/CoreUObject)
-	CharacterDestroyed (0-0-0-0): size 72 (cls: CharacterDestroyed>Function>/Script/CoreUObject)
-	Exited/Entered WaterVolume (0-0-0-0): size 58 (cls: Exited/Entered WaterVolume>Function>/Script/CoreUObject)
+	CharacterDestroyed (0-0-0-0): size 68 (cls: CharacterDestroyed>Function>/Script/CoreUObject)
+	Exited/Entered WaterVolume (0-0-0-0): size 54 (cls: Exited/Entered WaterVolume>Function>/Script/CoreUObject)
 	Damage (0-0-0-0): size 32 (cls: Damage>FloatProperty>/Script/CoreUObject)
-	OnDeathServer (0-0-0-0): size 156 (cls: OnDeathServer>Function>/Script/CoreUObject)
-	ReceiveDestroyed (0-0-0-0): size 58 (cls: ReceiveDestroyed>Function>/Script/CoreUObject)
+	OnDeathServer (0-0-0-0): size 152 (cls: OnDeathServer>Function>/Script/CoreUObject)
+	ReceiveDestroyed (0-0-0-0): size 54 (cls: ReceiveDestroyed>Function>/Script/CoreUObject)
 	EventType (0-0-0-0): size 36 (cls: EventType>ByteProperty>/Script/CoreUObject)
-	GameplayCue.Abilities.Activation.DBNOResurrect (0-0-0-0): size 86 (cls: GameplayCue.Abilities.Activation.DBNOResurrect>Function>/Script/CoreUObject)
+	GameplayCue.Abilities.Activation.DBNOResurrect (0-0-0-0): size 82 (cls: GameplayCue.Abilities.Activation.DBNOResurrect>Function>/Script/CoreUObject)
 	EventType (0-0-0-0): size 36 (cls: EventType>ByteProperty>/Script/CoreUObject)
-	GameplayCue.Abilities.Activation.Generic.HarvestBuff.Tier2 (0-0-0-0): size 86 (cls: GameplayCue.Abilities.Activation.Generic.HarvestBuff.Tier2>Function>/Script/CoreUObject)
+	GameplayCue.Abilities.Activation.Generic.HarvestBuff.Tier2 (0-0-0-0): size 82 (cls: GameplayCue.Abilities.Activation.Generic.HarvestBuff.Tier2>Function>/Script/CoreUObject)
 	EventType (0-0-0-0): size 36 (cls: EventType>ByteProperty>/Script/CoreUObject)
-	GameplayCue.Abilities.Activation.Generic.HarvestBuff.Tier1 (0-0-0-0): size 86 (cls: GameplayCue.Abilities.Activation.Generic.HarvestBuff.Tier1>Function>/Script/CoreUObject)
-	OnCharacterPartsReinitialized (0-0-0-0): size 58 (cls: OnCharacterPartsReinitialized>Function>/Script/CoreUObject)
-	FootStepRight (0-0-0-0): size 58 (cls: FootStepRight>Function>/Script/CoreUObject)
-	FootStepLeft (0-0-0-0): size 58 (cls: FootStepLeft>Function>/Script/CoreUObject)
+	GameplayCue.Abilities.Activation.Generic.HarvestBuff.Tier1 (0-0-0-0): size 82 (cls: GameplayCue.Abilities.Activation.Generic.HarvestBuff.Tier1>Function>/Script/CoreUObject)
+	OnCharacterPartsReinitialized (0-0-0-0): size 54 (cls: OnCharacterPartsReinitialized>Function>/Script/CoreUObject)
+	FootStepRight (0-0-0-0): size 54 (cls: FootStepRight>Function>/Script/CoreUObject)
+	FootStepLeft (0-0-0-0): size 54 (cls: FootStepLeft>Function>/Script/CoreUObject)
 	NewWeapon (0-0-0-0): size 36 (cls: NewWeapon>ObjectProperty>/Script/CoreUObject)
-	OnWeaponEquipped (0-0-0-0): size 86 (cls: OnWeaponEquipped>Function>/Script/CoreUObject)
+	OnWeaponEquipped (0-0-0-0): size 82 (cls: OnWeaponEquipped>Function>/Script/CoreUObject)
 	Hit (0-0-0-0): size 36 (cls: Hit>StructProperty>/Script/CoreUObject)
-	OnLanded (0-0-0-0): size 72 (cls: OnLanded>Function>/Script/CoreUObject)
+	OnLanded (0-0-0-0): size 68 (cls: OnLanded>Function>/Script/CoreUObject)
 	Damage (0-0-0-0): size 32 (cls: Damage>FloatProperty>/Script/CoreUObject)
-	OnDamagePlayEffects (0-0-0-0): size 156 (cls: OnDamagePlayEffects>Function>/Script/CoreUObject)
-	MeleeSwingLeft (0-0-0-0): size 58 (cls: MeleeSwingLeft>Function>/Script/CoreUObject)
-	MeleeSwingRight (0-0-0-0): size 58 (cls: MeleeSwingRight>Function>/Script/CoreUObject)
-	CapsuleFadeTL__UpdateFunc (0-0-0-0): size 58 (cls: CapsuleFadeTL__UpdateFunc>Function>/Script/CoreUObject)
-	CapsuleFadeTL__FinishedFunc (0-0-0-0): size 58 (cls: CapsuleFadeTL__FinishedFunc>Function>/Script/CoreUObject)
+	OnDamagePlayEffects (0-0-0-0): size 152 (cls: OnDamagePlayEffects>Function>/Script/CoreUObject)
+	MeleeSwingLeft (0-0-0-0): size 54 (cls: MeleeSwingLeft>Function>/Script/CoreUObject)
+	MeleeSwingRight (0-0-0-0): size 54 (cls: MeleeSwingRight>Function>/Script/CoreUObject)
+	CapsuleFadeTL__UpdateFunc (0-0-0-0): size 54 (cls: CapsuleFadeTL__UpdateFunc>Function>/Script/CoreUObject)
+	CapsuleFadeTL__FinishedFunc (0-0-0-0): size 54 (cls: CapsuleFadeTL__FinishedFunc>Function>/Script/CoreUObject)
 	CallFunc_K2_GetRootComponent_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_GetRootComponent_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	UserConstructionScript (0-0-0-0): size 70 (cls: UserConstructionScript>Function>/Script/CoreUObject)
 	BodyType (0-0-0-0): size 36 (cls: BodyType>ByteProperty>/Script/CoreUObject)
@@ -1422,11 +1452,10 @@ Serialized exports:
 	FeedbackAudioComp0 (0-0-0-0): size 41 (cls: FeedbackAudioComp0>AudioComponent>/Script/Engine):
 		Tag array:
 			AttachParent(ObjectProperty)=CollisionCylinder=Default__PlayerPawn_Athena_Generic_C 
-	InAirAudioComp (0-0-0-0): size 96 (cls: InAirAudioComp>AudioComponent>/Script/Engine):
+	InAirAudioComp (0-0-0-0): size 70 (cls: InAirAudioComp>AudioComponent>/Script/Engine):
 		Tag array:
 			Sound(ObjectProperty)=Character_InAirAudioTell_Cue=/Game/Athena/Sounds/Character/Falling/Character_InAirAudioTell_Cue 
 			AttachParent(ObjectProperty)=CharacterMesh0=Default__PlayerPawn_Athena_Generic_C 
-			bAutoActivate(BoolProperty)=False 
 	DisableWaterLevelTick (0-0-0-0): size 50 (cls: DisableWaterLevelTick>Function>/Script/CoreUObject)
 	NewParam (0-0-0-0): size 34 (cls: NewParam>BoolProperty>/Script/CoreUObject)
 	Are the wind and water RTT passes enabled (0-0-0-0): size 171 (cls: Are the wind and water RTT passes enabled>Function>/Script/CoreUObject)
@@ -1467,6 +1496,7 @@ Serialized exports:
 	CallFunc_BooleanOR_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanOR_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_BooleanOR_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_BooleanOR_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_BooleanOR_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_BooleanOR_ReturnValue2>BoolProperty>/Script/CoreUObject)
+	CallFunc_BooleanOR_ReturnValue3 (0-0-0-0): size 34 (cls: CallFunc_BooleanOR_ReturnValue3>BoolProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_bBlockingHit (0-0-0-0): size 34 (cls: CallFunc_BreakHitResult_bBlockingHit>BoolProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_bInitialOverlap (0-0-0-0): size 34 (cls: CallFunc_BreakHitResult_bInitialOverlap>BoolProperty>/Script/CoreUObject)
 	CallFunc_EqualEqual_ObjectObject_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ObjectObject_ReturnValue>BoolProperty>/Script/CoreUObject)
@@ -1547,7 +1577,9 @@ Serialized exports:
 	CallFunc_IsValid_ReturnValue56 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue56>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue57 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue57>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue58 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue58>BoolProperty>/Script/CoreUObject)
+	CallFunc_IsValid_ReturnValue59 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue59>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue6 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue6>BoolProperty>/Script/CoreUObject)
+	CallFunc_IsValid_ReturnValue60 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue60>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue7 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue7>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue8 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue8>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue9 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue9>BoolProperty>/Script/CoreUObject)
@@ -1579,6 +1611,8 @@ Serialized exports:
 	K2Node_DynamicCast_bSuccess13 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess13>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess14 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess14>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess15 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess15>BoolProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_bSuccess16 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess16>BoolProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_bSuccess17 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess17>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess2 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess2>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess3 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess3>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess4 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess4>BoolProperty>/Script/CoreUObject)
@@ -1851,10 +1885,16 @@ Serialized exports:
 	Temp_int_Variable8 (0-0-0-0): size 32 (cls: Temp_int_Variable8>IntProperty>/Script/CoreUObject)
 	Temp_int_Variable9 (0-0-0-0): size 32 (cls: Temp_int_Variable9>IntProperty>/Script/CoreUObject)
 	WaterCounter (0-0-0-0): size 32 (cls: WaterCounter>IntProperty>/Script/CoreUObject)
+	AnimNotify_Begin (0-0-0-0): size 36 (cls: AnimNotify_Begin>MulticastDelegateProperty>/Script/CoreUObject)
+	AnimNotify_End (0-0-0-0): size 36 (cls: AnimNotify_End>MulticastDelegateProperty>/Script/CoreUObject)
 	FirstSocketName (0-0-0-0): size 32 (cls: FirstSocketName>NameProperty>/Script/CoreUObject)
+	OverideFirstSocketName (0-0-0-0): size 32 (cls: OverideFirstSocketName>NameProperty>/Script/CoreUObject)
+	OverideSecondSocketName (0-0-0-0): size 32 (cls: OverideSecondSocketName>NameProperty>/Script/CoreUObject)
 	SecondSocketName (0-0-0-0): size 32 (cls: SecondSocketName>NameProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_HitBoneName (0-0-0-0): size 32 (cls: CallFunc_BreakHitResult_HitBoneName>NameProperty>/Script/CoreUObject)
 	K2Node_Event_FirstSocketName (0-0-0-0): size 32 (cls: K2Node_Event_FirstSocketName>NameProperty>/Script/CoreUObject)
+	K2Node_Event_OverideFirstSocketName (0-0-0-0): size 32 (cls: K2Node_Event_OverideFirstSocketName>NameProperty>/Script/CoreUObject)
+	K2Node_Event_OverideSecondSocketName (0-0-0-0): size 32 (cls: K2Node_Event_OverideSecondSocketName>NameProperty>/Script/CoreUObject)
 	K2Node_Event_SecondSocketName (0-0-0-0): size 32 (cls: K2Node_Event_SecondSocketName>NameProperty>/Script/CoreUObject)
 	K2Node_Select1_Default (0-0-0-0): size 32 (cls: K2Node_Select1_Default>NameProperty>/Script/CoreUObject)
 	Temp_name_Variable (0-0-0-0): size 32 (cls: Temp_name_Variable>NameProperty>/Script/CoreUObject)
@@ -1864,6 +1904,7 @@ Serialized exports:
 	CallFunc_GetAttachSocketName_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetAttachSocketName_ReturnValue>NameProperty>/Script/CoreUObject)
 	AnimTrailPS (0-0-0-0): size 36 (cls: AnimTrailPS>ObjectProperty>/Script/CoreUObject)
 	AnimTrailsPS_Ref (0-0-0-0): size 36 (cls: AnimTrailsPS_Ref>ObjectProperty>/Script/CoreUObject)
+	OverrideParticleComp (0-0-0-0): size 36 (cls: OverrideParticleComp>ObjectProperty>/Script/CoreUObject)
 	CapsuleFadeTL (0-0-0-0): size 36 (cls: CapsuleFadeTL>ObjectProperty>/Script/CoreUObject)
 	CallFunc_AddComponent_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_AddComponent_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_Array_Get_Item (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item>ObjectProperty>/Script/CoreUObject)
@@ -1953,6 +1994,7 @@ Serialized exports:
 	K2Node_DynamicCast_AsB_Player_Health_Damage_Camera_Lens_Effect (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsB_Player_Health_Damage_Camera_Lens_Effect>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsB_Player_Shield_Damage_Camera_Lens_Effect (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsB_Player_Shield_Damage_Camera_Lens_Effect>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsB_Shotgun_Generic (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsB_Shotgun_Generic>ObjectProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_AsDA_Melee_Blade_Athena (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsDA_Melee_Blade_Athena>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Player_Controller (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Player_Controller>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Player_Controller1 (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Player_Controller1>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Player_Controller2 (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Player_Controller2>ObjectProperty>/Script/CoreUObject)
@@ -1965,12 +2007,14 @@ Serialized exports:
 	K2Node_DynamicCast_AsMaterial_Instance_Dynamic4 (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsMaterial_Instance_Dynamic4>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsMaterial_Instance_Dynamic5 (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsMaterial_Instance_Dynamic5>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsMaterial_Instance_Dynamic6 (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsMaterial_Instance_Dynamic6>ObjectProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_AsPlayer_Pawn_Athena (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsPlayer_Pawn_Athena>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsWind_Manager (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsWind_Manager>ObjectProperty>/Script/CoreUObject)
 	K2Node_Event_DamageCauser (0-0-0-0): size 36 (cls: K2Node_Event_DamageCauser>ObjectProperty>/Script/CoreUObject)
 	K2Node_Event_DamageCauser1 (0-0-0-0): size 36 (cls: K2Node_Event_DamageCauser1>ObjectProperty>/Script/CoreUObject)
 	K2Node_Event_InstigatedBy (0-0-0-0): size 36 (cls: K2Node_Event_InstigatedBy>ObjectProperty>/Script/CoreUObject)
 	K2Node_Event_InstigatedBy1 (0-0-0-0): size 36 (cls: K2Node_Event_InstigatedBy1>ObjectProperty>/Script/CoreUObject)
 	K2Node_Event_NewWeapon (0-0-0-0): size 36 (cls: K2Node_Event_NewWeapon>ObjectProperty>/Script/CoreUObject)
+	K2Node_Event_OverrideParticleComp (0-0-0-0): size 36 (cls: K2Node_Event_OverrideParticleComp>ObjectProperty>/Script/CoreUObject)
 	K2Node_Event_ParticleSystemReference (0-0-0-0): size 36 (cls: K2Node_Event_ParticleSystemReference>ObjectProperty>/Script/CoreUObject)
 	K2Node_Event_PrevWeapon (0-0-0-0): size 36 (cls: K2Node_Event_PrevWeapon>ObjectProperty>/Script/CoreUObject)
 	Temp_object_Variable (0-0-0-0): size 36 (cls: Temp_object_Variable>ObjectProperty>/Script/CoreUObject)
@@ -1987,6 +2031,7 @@ Serialized exports:
 	DamageCauser (0-0-0-0): size 36 (cls: DamageCauser>ObjectProperty>/Script/CoreUObject)
 	InstigatedBy (0-0-0-0): size 36 (cls: InstigatedBy>ObjectProperty>/Script/CoreUObject)
 	PrevWeapon (0-0-0-0): size 36 (cls: PrevWeapon>ObjectProperty>/Script/CoreUObject)
+	OverrideAnimTrail (0-0-0-0): size 36 (cls: OverrideAnimTrail>ObjectProperty>/Script/CoreUObject)
 	P_DBNOResurrect (0-0-0-0): size 36 (cls: P_DBNOResurrect>ObjectProperty>/Script/CoreUObject)
 	Pawn Charm Skeletal Mesh (0-0-0-0): size 36 (cls: Pawn Charm Skeletal Mesh>ObjectProperty>/Script/CoreUObject)
 	PlayerRunTemplate_Ground (0-0-0-0): size 36 (cls: PlayerRunTemplate_Ground>ObjectProperty>/Script/CoreUObject)

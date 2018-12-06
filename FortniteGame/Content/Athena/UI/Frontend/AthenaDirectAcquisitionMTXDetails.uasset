@@ -17,6 +17,7 @@ Name table:
 	/Game/UI/Foundation/Buttons/PanelButton
 	/Game/UI/Foundation/Buttons/TextStyles/TextStyle-MediumButton
 	/Game/UI/Foundation/Fonts/Burbank
+	/Game/UI/Foundation/Fonts/NotoSans
 	/Game/UI/Foundation/Input/InputActionDataTable
 	/Game/UI/Foundation/Materials/M-FoundersPanel
 	/Game/UI/Foundation/Materials/M-Store-GradientOverlay
@@ -29,6 +30,8 @@ Name table:
 	/Game/UI/Foundation/Materials/M_RedOrange_HGrad
 	/Game/UI/Foundation/Shell/Textures/T-Icon-VBucks-L
 	/Game/UI/Foundation/Shell/Textures/T-Icon-Warning-64
+	/Game/UI/Foundation/Text/DirectAcquisitionWidgetTextStyle
+	/Game/UI/Foundation/Text/Materials/M_Font_BattlePass_YellowGrad
 	/Game/UI/Foundation/Text/TextScrollStyle-Base
 	/Game/UI/Foundation/Text/TextStyle-Base-L-B
 	/Game/UI/Foundation/Text/TextStyle-Base-L-B-Yellow
@@ -241,6 +244,7 @@ Name table:
 	Default__Overlay
 	Default__OverlaySlot
 	Default__PanelButton_C
+	Default__RichTextBlock
 	Default__SafeZone
 	Default__SafeZoneSlot
 	Default__ScaleBox
@@ -275,6 +279,8 @@ Name table:
 	DelegateFunction
 	DelegateProperty
 	DelegatePropertyName
+	DescriptionBox
+	DirectAcquisitionWidgetTextStyle
 	DisclaimerText
 	DrawAs
 	DynamicBindingObjects
@@ -303,15 +309,15 @@ Name table:
 	EStretchDirection::DownOnly
 	ETextJustify
 	ETextJustify::Center
-	ETextWrappingPolicy
-	ETextWrappingPolicy::AllowPerCharacterWrapping
 	EVerticalAlignment
 	EWidgetClipping
 	EWidgetClipping::ClipToBounds
 	ExecuteUbergraph_AthenaDirectAcquisitionMTXDetails
 	FloatProperty
 	Font
+	FontMaterial
 	FontObject
+	FortActivatablePanelWithItemPreview
 	FortDirectAcquisitionOfferDetailsWidgetBase
 	FortDirectAcquisitionOfferInfo
 	FortGiftingScreen
@@ -345,6 +351,7 @@ Name table:
 	GetSalePrice
 	GetUIManagerWidget
 	GetUINavigationManager
+	GetWidgetForFramingViewedItem
 	GiftButton
 	GiftingScreen_C
 	GoldGrad
@@ -411,6 +418,7 @@ Name table:
 	M_Border_SoftGlow
 	M_Border_SoftWhiteGlow
 	M_CircledLock
+	M_Font_BattlePass_YellowGrad
 	M_FX_TriangleScroll_BattlePassSmall_Inst
 	M_Gold_HGrad
 	M_LtYellow_HGrad
@@ -429,7 +437,9 @@ Name table:
 	NavigateToFeature
 	None
 	NotEqual_ByteByte
+	NotoSans
 	NotoSans-Bold
+	NotoSans-Regular
 	Object
 	ObjectProperty
 	OnButtonClicked
@@ -469,8 +479,10 @@ Name table:
 	RenderOpacity
 	RenderTransform
 	ResourceObject
+	ReturnValue
 	RGBA0
 	RGBA1
+	RichTextBlock
 	Right
 	RightExtraContentSlot
 	RootWidget
@@ -501,6 +513,7 @@ Name table:
 	SetTextPropertyByName
 	SetVectorParameterValue
 	SetVisibility
+	ShadowOffset
 	Shear
 	ShowIcon
 	Size
@@ -543,7 +556,6 @@ Name table:
 	Temp_int_Loop_Counter_Variable
 	TemplateAsset
 	Text
-	TextDescription
 	TextName
 	TextOfferDisplayPrice
 	TextOriginalPrice
@@ -561,6 +573,7 @@ Name table:
 	TextStyle-Header-L-BrightYellow_C
 	TextStyle-Header-XL-YellowGrad-52_C
 	TextStyle-MediumButton_C
+	TextStyleSet
 	TextToUpper
 	Texture2D
 	TintColor
@@ -570,7 +583,6 @@ Name table:
 	TriggeringInputAction
 	TypefaceFontName
 	UberGraphFrame
-	UberGraphFramePointerProperty
 	UberGraphFunction
 	UnderlyingType
 	UserWidget
@@ -585,6 +597,7 @@ Name table:
 	VerticalBox
 	VerticalBoxSlot
 	Visibility
+	Widget
 	WidgetArchetype
 	WidgetBlueprintGeneratedClass
 	WidgetBlueprintLibrary
@@ -592,11 +605,10 @@ Name table:
 	WidgetTree
 	WidthOverride
 	WordmarkSB
-	WrappingPolicy
 	WrapTextAt
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	AthenaDirectAcquisitionMTXDetails_C (0-0-0-0): size 623 (cls: AthenaDirectAcquisitionMTXDetails_C>WidgetBlueprintGeneratedClass>/Script/UMG):
+	AthenaDirectAcquisitionMTXDetails_C (0-0-0-0): size 610 (cls: AthenaDirectAcquisitionMTXDetails_C>WidgetBlueprintGeneratedClass>/Script/UMG):
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
@@ -604,7 +616,6 @@ Serialized exports:
 			bClassRequiresNativeTick(BoolProperty)=True 
 			TemplateAsset(SoftObjectProperty)=/Game/Athena/UI/Frontend/AthenaDirectAcquisitionMTXDetails.WidgetArchetype 
 			DynamicBindingObjects(ArrayProperty)=[object] (inner: ObjectProperty)
-			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=AthenaDirectAcquisitionMTXDetails_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_AthenaDirectAcquisitionMTXDetails=AthenaDirectAcquisitionMTXDetails_C 
 	Default__AthenaDirectAcquisitionMTXDetails_C (0-0-0-0): size 146 (cls: Default__AthenaDirectAcquisitionMTXDetails_C>AthenaDirectAcquisitionMTXDetails_C):
 		Tag array:
@@ -614,26 +625,26 @@ Serialized exports:
 			bHasScriptImplementedPaint(BoolProperty)=False 
 	AthenaDirectAcquisitonDetails_RefundDisclaimer (0-0-0-0): size 36 (cls: AthenaDirectAcquisitonDetails_RefundDisclaimer>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_AthenaDirectAcquisitionMTXDetails (0-0-0-0): size 2270 (cls: ExecuteUbergraph_AthenaDirectAcquisitionMTXDetails>Function>/Script/CoreUObject)
+	ExecuteUbergraph_AthenaDirectAcquisitionMTXDetails (0-0-0-0): size 2245 (cls: ExecuteUbergraph_AthenaDirectAcquisitionMTXDetails>Function>/Script/CoreUObject)
 	K2Node_CustomEvent_PurchasedItems (0-0-0-0): size 36 (cls: K2Node_CustomEvent_PurchasedItems>StructProperty>/Script/CoreUObject)
 	K2Node_CustomEvent_PurchasedItems (0-0-0-0): size 36 (cls: K2Node_CustomEvent_PurchasedItems>ArrayProperty>/Script/CoreUObject)
 	bSuccess (0-0-0-0): size 34 (cls: bSuccess>BoolProperty>/Script/CoreUObject)
-	HandleRealMoneyPurchaseComplete (0-0-0-0): size 72 (cls: HandleRealMoneyPurchaseComplete>Function>/Script/CoreUObject)
+	HandleRealMoneyPurchaseComplete (0-0-0-0): size 68 (cls: HandleRealMoneyPurchaseComplete>Function>/Script/CoreUObject)
 	Button (0-0-0-0): size 36 (cls: Button>ObjectProperty>/Script/CoreUObject)
-	BndEvt__GiftButton_K2Node_ComponentBoundEvent_7_CommonButtonClicked__DelegateSignature (0-0-0-0): size 72 (cls: BndEvt__GiftButton_K2Node_ComponentBoundEvent_7_CommonButtonClicked__DelegateSignature>Function>/Script/CoreUObject)
+	BndEvt__GiftButton_K2Node_ComponentBoundEvent_7_CommonButtonClicked__DelegateSignature (0-0-0-0): size 68 (cls: BndEvt__GiftButton_K2Node_ComponentBoundEvent_7_CommonButtonClicked__DelegateSignature>Function>/Script/CoreUObject)
 	Button (0-0-0-0): size 36 (cls: Button>ObjectProperty>/Script/CoreUObject)
-	BndEvt__PurchaseButton_K2Node_ComponentBoundEvent_16_CommonButtonClicked__DelegateSignature (0-0-0-0): size 72 (cls: BndEvt__PurchaseButton_K2Node_ComponentBoundEvent_16_CommonButtonClicked__DelegateSignature>Function>/Script/CoreUObject)
+	BndEvt__PurchaseButton_K2Node_ComponentBoundEvent_16_CommonButtonClicked__DelegateSignature (0-0-0-0): size 68 (cls: BndEvt__PurchaseButton_K2Node_ComponentBoundEvent_16_CommonButtonClicked__DelegateSignature>Function>/Script/CoreUObject)
 	Button (0-0-0-0): size 36 (cls: Button>ObjectProperty>/Script/CoreUObject)
-	BndEvt__PanelButton_K2Node_ComponentBoundEvent_8_CommonButtonClicked__DelegateSignature (0-0-0-0): size 72 (cls: BndEvt__PanelButton_K2Node_ComponentBoundEvent_8_CommonButtonClicked__DelegateSignature>Function>/Script/CoreUObject)
-	Construct (0-0-0-0): size 58 (cls: Construct>Function>/Script/CoreUObject)
+	BndEvt__PanelButton_K2Node_ComponentBoundEvent_8_CommonButtonClicked__DelegateSignature (0-0-0-0): size 68 (cls: BndEvt__PanelButton_K2Node_ComponentBoundEvent_8_CommonButtonClicked__DelegateSignature>Function>/Script/CoreUObject)
+	Construct (0-0-0-0): size 54 (cls: Construct>Function>/Script/CoreUObject)
 	bSuccess (0-0-0-0): size 34 (cls: bSuccess>BoolProperty>/Script/CoreUObject)
-	HandlePurchaseComplete (0-0-0-0): size 86 (cls: HandlePurchaseComplete>Function>/Script/CoreUObject)
+	HandlePurchaseComplete (0-0-0-0): size 82 (cls: HandlePurchaseComplete>Function>/Script/CoreUObject)
 	PurchasedItems (0-0-0-0): size 36 (cls: PurchasedItems>StructProperty>/Script/CoreUObject)
 	PurchasedItems (0-0-0-0): size 36 (cls: PurchasedItems>ArrayProperty>/Script/CoreUObject)
 	PassThrough (0-0-0-0): size 34 (cls: PassThrough>BoolProperty>/Script/CoreUObject)
 	HandleBack (0-0-0-0): size 64 (cls: HandleBack>Function>/Script/CoreUObject)
 	Temp_int_Array_Index_Variable (0-0-0-0): size 32 (cls: Temp_int_Array_Index_Variable>IntProperty>/Script/CoreUObject)
-	Init (0-0-0-0): size 2554 (cls: Init>Function>/Script/CoreUObject)
+	Init (0-0-0-0): size 2550 (cls: Init>Function>/Script/CoreUObject)
 	CallFunc_GetDetailsAttributes_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetDetailsAttributes_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_GetDetailsAttributes_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetDetailsAttributes_ReturnValue>ArrayProperty>/Script/CoreUObject)
 	PlaceholderVariable (0-0-0-0): size 32 (cls: PlaceholderVariable>StrProperty>/Script/CoreUObject)
@@ -651,6 +662,7 @@ Serialized exports:
 			CommonText_BaseQuantity(ObjectProperty)=CommonText_BaseQuantity=WidgetArchetype 
 			CommonText_BonusQuantity(ObjectProperty)=CommonText_BonusQuantity=WidgetArchetype 
 			CommonTextBlock_2(ObjectProperty)=CommonTextBlock_2=WidgetArchetype 
+			DescriptionBox(ObjectProperty)=DescriptionBox=WidgetArchetype 
 			GiftButton(ObjectProperty)=GiftButton=WidgetArchetype 
 			Image_0(ObjectProperty)=Image_0=WidgetArchetype 
 			KeyArt(ObjectProperty)=KeyArt=WidgetArchetype 
@@ -665,7 +677,6 @@ Serialized exports:
 			SeasonNumberLarge(ObjectProperty)=SeasonNumberLarge=WidgetArchetype 
 			StoreMain_OfferDetailsAttribute(ObjectProperty)=StoreMain_OfferDetailsAttribute=WidgetArchetype 
 			StoreMain_OfferDetailsAttribute_C_0(ObjectProperty)=StoreMain_OfferDetailsAttribute_C_0=WidgetArchetype 
-			TextDescription(ObjectProperty)=TextDescription=WidgetArchetype 
 			TextName(ObjectProperty)=TextName=WidgetArchetype 
 			TextOfferDisplayPrice(ObjectProperty)=TextOfferDisplayPrice=WidgetArchetype 
 			TextOriginalPrice(ObjectProperty)=TextOriginalPrice=WidgetArchetype 
@@ -847,164 +858,177 @@ Serialized exports:
 			Brush(StructProperty)=System.Byte[] 
 			Slot(ObjectProperty)=ScaleBoxSlot_0=WidgetArchetype 
 			Visibility(EnumProperty)=ESlateVisibility::SelfHitTestInvisible 
-	DisclaimerText (0-0-0-0): size 394 (cls: DisclaimerText>CommonTextBlock>/Script/CommonUI):
+	DisclaimerText (0-0-0-0): size 513 (cls: DisclaimerText>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS_C=/Game/UI/Foundation/Text/TextStyle-Base-XS 
 			Text(TextProperty)=This item is not eligible for refund. (931D56F3435F2395553CC8953CA0869B) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Center 
 			WrapTextAt(FloatProperty)=450 
 			Slot(ObjectProperty)=HorizontalBoxSlot_2=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
 			RenderOpacity(FloatProperty)=0.8 
-	CommonText_BaseQuantity (0-0-0-0): size 307 (cls: CommonText_BaseQuantity>CommonTextBlock>/Script/CommonUI):
+	CommonText_BaseQuantity (0-0-0-0): size 393 (cls: CommonText_BaseQuantity>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-M-B_C=/Game/UI/Foundation/Text/TextStyle-Base-M-B 
 			Text(TextProperty)=9999 (B1BEBFA1473A5BF9EF88679953EEDE9D) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Center 
 			Slot(ObjectProperty)=VerticalBoxSlot_7=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	CommonText_Bonus (0-0-0-0): size 547 (cls: CommonText_Bonus>CommonTextBlock>/Script/CommonUI):
+	CommonText_Bonus (0-0-0-0): size 633 (cls: CommonText_Bonus>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B-Yellow_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B-Yellow 
 			Text(TextProperty)=BONUS (4B3164A94BCD3211C38531B71728D44E) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Center 
 			Slot(ObjectProperty)=VerticalBoxSlot_4=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
-	CommonText_BonusQuantity (0-0-0-0): size 307 (cls: CommonText_BonusQuantity>CommonTextBlock>/Script/CommonUI):
+	CommonText_BonusQuantity (0-0-0-0): size 515 (cls: CommonText_BonusQuantity>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-M-B-Yellow_C=/Game/UI/Foundation/Text/TextStyle-Base-M-B-Yellow 
 			Text(TextProperty)=9999 (478A46B84C4E26BA23DD8DBC56D1A5D0) 
+			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Center 
 			Slot(ObjectProperty)=VerticalBoxSlot_6=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	CommonText_Bucks (0-0-0-0): size 427 (cls: CommonText_Bucks>CommonTextBlock>/Script/CommonUI):
+	CommonText_Bucks (0-0-0-0): size 513 (cls: CommonText_Bucks>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B 
 			Text(TextProperty)=V-Bucks (F57F17B14F52C52A6611128C5939D21B) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Center 
 			Slot(ObjectProperty)=VerticalBoxSlot_1=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
-	CommonTextBlock_0 (0-0-0-0): size 403 (cls: CommonTextBlock_0>CommonTextBlock>/Script/CommonUI):
+	CommonTextBlock_0 (0-0-0-0): size 522 (cls: CommonTextBlock_0>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-70pc_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-70pc 
 			Text(TextProperty)=Future seasons may be real money store purchases. (A8C547AF45F18702760DC7B0EAAA1383) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
-	CommonTextBlock_2 (0-0-0-0): size 326 (cls: CommonTextBlock_2>CommonTextBlock>/Script/CommonUI):
+	CommonTextBlock_2 (0-0-0-0): size 505 (cls: CommonTextBlock_2>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-L-BrightYellow_C=/Game/UI/Foundation/Text/TextStyle-Header-L-BrightYellow 
 			Text(TextProperty)=SEASON (D7D23EA5465F73075E0AD9AC15581E4A) 
+			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	CommonTextBlock_7 (0-0-0-0): size 266 (cls: CommonTextBlock_7>CommonTextBlock>/Script/CommonUI):
+	CommonTextBlock_7 (0-0-0-0): size 352 (cls: CommonTextBlock_7>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-L-B_C=/Game/UI/Foundation/Text/TextStyle-Base-L-B 
 			Text(TextProperty)=+ (ADD1F8834F712761513CEB9E0745A3E8) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_9=WidgetArchetype 
-	CenterButtonTextWidget (0-0-0-0): size 367 (cls: CenterButtonTextWidget>CommonTextBlock>/Script/CommonUI):
+	CenterButtonTextWidget (0-0-0-0): size 453 (cls: CenterButtonTextWidget>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-MediumButton_C=/Game/UI/Foundation/Buttons/TextStyles/TextStyle-MediumButton 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)={Text} (99357DD44CFC5E3692A9C792F19B30DA) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Center 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	CenterButtonTextWidget (0-0-0-0): size 367 (cls: CenterButtonTextWidget>CommonTextBlock>/Script/CommonUI):
+	CenterButtonTextWidget (0-0-0-0): size 453 (cls: CenterButtonTextWidget>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-MediumButton_C=/Game/UI/Foundation/Buttons/TextStyles/TextStyle-MediumButton 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)={Text} (99357DD44CFC5E3692A9C792F19B30DA) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Center 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	SeasonNumber (0-0-0-0): size 321 (cls: SeasonNumber>CommonTextBlock>/Script/CommonUI):
+	SeasonNumber (0-0-0-0): size 500 (cls: SeasonNumber>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-L-BrightYellow_C=/Game/UI/Foundation/Text/TextStyle-Header-L-BrightYellow 
 			Text(TextProperty)=4 (C2B0ABB6423360F1EEA1DABB313654A4) 
+			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	SeasonNumberLarge (0-0-0-0): size 476 (cls: SeasonNumberLarge>CommonTextBlock>/Script/CommonUI):
+	SeasonNumberLarge (0-0-0-0): size 655 (cls: SeasonNumberLarge>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-512-Gold_C=/Game/UI/Foundation/Text/TextStyle-Header-512-Gold 
 			Text(TextProperty)=4 (C5C7A34C461E8870739CA1A46EBFEDF9) 
+			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Center 
 			Slot(ObjectProperty)=OverlaySlot_14=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
 			bIsVariable(BoolProperty)=True 
-	Name (0-0-0-0): size 261 (cls: Name>CommonTextBlock>/Script/CommonUI):
+	Name (0-0-0-0): size 380 (cls: Name>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS_C=/Game/UI/Foundation/Text/TextStyle-Base-XS 
 			Text(TextProperty)=Text Block (TextBlockDefaultValue) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_2=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	Value (0-0-0-0): size 294 (cls: Value>CommonTextBlock>/Script/CommonUI):
+	Value (0-0-0-0): size 380 (cls: Value>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B 
 			Text(TextProperty)=888 (52C9A0FB45F3A7242C124198C9286766) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=SizeBoxSlot_1=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	Name (0-0-0-0): size 261 (cls: Name>CommonTextBlock>/Script/CommonUI):
+	Name (0-0-0-0): size 380 (cls: Name>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS_C=/Game/UI/Foundation/Text/TextStyle-Base-XS 
 			Text(TextProperty)=Text Block (TextBlockDefaultValue) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_2=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	Value (0-0-0-0): size 294 (cls: Value>CommonTextBlock>/Script/CommonUI):
+	Value (0-0-0-0): size 380 (cls: Value>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B 
 			Text(TextProperty)=888 (52C9A0FB45F3A7242C124198C9286766) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=SizeBoxSlot_1=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	TextDescription (0-0-0-0): size 559 (cls: TextDescription>CommonTextBlock>/Script/CommonUI):
-		Tag array:
-			Style(ObjectProperty)=TextStyle-Base-XS-B_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B 
-			Text(TextProperty)=ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ
-Description Text Appears Here (F687E0734A91EB11FAEC3FB8E8708890) 
-			Font(StructProperty)=System.Byte[] 
-			WrappingPolicy(EnumProperty)=ETextWrappingPolicy::AllowPerCharacterWrapping 
-			AutoWrapText(BoolProperty)=True 
-			Slot(ObjectProperty)=ScrollBoxSlot_1=WidgetArchetype 
-			bIsVariable(BoolProperty)=True 
-			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
-	TextName (0-0-0-0): size 474 (cls: TextName>CommonTextBlock>/Script/CommonUI):
+	TextName (0-0-0-0): size 560 (cls: TextName>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-XL-YellowGrad-52_C=/Game/UI/Foundation/Text/TextStyle-Header-XL-YellowGrad-52 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)=BATTLE PASS (2FA04A0449CC0FD69DED689136A60E23) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=OverlaySlot_2=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
 			bIsVariable(BoolProperty)=True 
-	TextOfferDisplayPrice (0-0-0-0): size 306 (cls: TextOfferDisplayPrice>CommonTextBlock>/Script/CommonUI):
+	TextOfferDisplayPrice (0-0-0-0): size 547 (cls: TextOfferDisplayPrice>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-L-B-Yellow_C=/Game/UI/Foundation/Text/TextStyle-Base-L-B-Yellow 
 			Text(TextProperty)=$888.88 (4B30D7BA4615DF457FF4B09A80BE8512) 
+			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Center 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	TextOriginalPrice (0-0-0-0): size 310 (cls: TextOriginalPrice>CommonTextBlock>/Script/CommonUI):
+	TextOriginalPrice (0-0-0-0): size 396 (cls: TextOriginalPrice>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-M-B_C=/Game/UI/Foundation/Text/TextStyle-Base-M-B 
 			Text(TextProperty)=$888.88 (E0C3E9494BA1F925D3232599B0D004B9) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Center 
 			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
@@ -1035,6 +1059,8 @@ Description Text Appears Here (F687E0734A91EB11FAEC3FB8E8708890)
 	Temp_byte_Variable1 (0-0-0-0): size 40 (cls: Temp_byte_Variable1>EnumProperty>/Script/CoreUObject)
 	ItemViewObject (0-0-0-0): size 12 (cls: ItemViewObject>FortItemView>/Script/FortniteUI)
 	ItemViewObject (0-0-0-0): size 12 (cls: ItemViewObject>FortItemView>/Script/FortniteUI)
+	ReturnValue (0-0-0-0): size 36 (cls: ReturnValue>ObjectProperty>/Script/CoreUObject)
+	GetWidgetForFramingViewedItem (0-0-0-0): size 58 (cls: GetWidgetForFramingViewedItem>Function>/Script/CoreUObject)
 	HorizontalBoxDisclaimer (0-0-0-0): size 108 (cls: HorizontalBoxDisclaimer>HorizontalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -1444,6 +1470,7 @@ Description Text Appears Here (F687E0734A91EB11FAEC3FB8E8708890)
 	CommonText_BaseQuantity (0-0-0-0): size 36 (cls: CommonText_BaseQuantity>ObjectProperty>/Script/CoreUObject)
 	CommonText_BonusQuantity (0-0-0-0): size 36 (cls: CommonText_BonusQuantity>ObjectProperty>/Script/CoreUObject)
 	CommonTextBlock_2 (0-0-0-0): size 36 (cls: CommonTextBlock_2>ObjectProperty>/Script/CoreUObject)
+	DescriptionBox (0-0-0-0): size 36 (cls: DescriptionBox>ObjectProperty>/Script/CoreUObject)
 	CallFunc_Create_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_Create_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetContext_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue1>ObjectProperty>/Script/CoreUObject)
@@ -1492,7 +1519,6 @@ Description Text Appears Here (F687E0734A91EB11FAEC3FB8E8708890)
 	SeasonNumberLarge (0-0-0-0): size 36 (cls: SeasonNumberLarge>ObjectProperty>/Script/CoreUObject)
 	StoreMain_OfferDetailsAttribute (0-0-0-0): size 36 (cls: StoreMain_OfferDetailsAttribute>ObjectProperty>/Script/CoreUObject)
 	StoreMain_OfferDetailsAttribute_C_0 (0-0-0-0): size 36 (cls: StoreMain_OfferDetailsAttribute_C_0>ObjectProperty>/Script/CoreUObject)
-	TextDescription (0-0-0-0): size 36 (cls: TextDescription>ObjectProperty>/Script/CoreUObject)
 	TextName (0-0-0-0): size 36 (cls: TextName>ObjectProperty>/Script/CoreUObject)
 	TextOfferDisplayPrice (0-0-0-0): size 36 (cls: TextOfferDisplayPrice>ObjectProperty>/Script/CoreUObject)
 	TextOriginalPrice (0-0-0-0): size 36 (cls: TextOriginalPrice>ObjectProperty>/Script/CoreUObject)
@@ -1760,6 +1786,13 @@ Description Text Appears Here (F687E0734A91EB11FAEC3FB8E8708890)
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
 			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
+	DescriptionBox (0-0-0-0): size 332 (cls: DescriptionBox>RichTextBlock>/Script/UMG):
+		Tag array:
+			Text(TextProperty)=ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ
+Description Text Appears Here (D66BE23B4FE67E14C30BD7B1EC1C85F1) 
+			TextStyleSet(ObjectProperty)=DirectAcquisitionWidgetTextStyle=/Game/UI/Foundation/Text/DirectAcquisitionWidgetTextStyle 
+			AutoWrapText(BoolProperty)=True 
+			Slot(ObjectProperty)=ScrollBoxSlot_2=WidgetArchetype 
 	SafeZone_0 (0-0-0-0): size 108 (cls: SafeZone_0>SafeZone>/Script/UMG):
 		Tag array:
 			PadBottom(BoolProperty)=False 
@@ -1799,11 +1832,11 @@ Description Text Appears Here (F687E0734A91EB11FAEC3FB8E8708890)
 		Tag array:
 			Parent(ObjectProperty)=ScrollBoxDetails=WidgetArchetype 
 			Content(ObjectProperty)=VBoxOfferInfo=WidgetArchetype 
-	ScrollBoxSlot_1 (0-0-0-0): size 156 (cls: ScrollBoxSlot_1>ScrollBoxSlot>/Script/UMG):
+	ScrollBoxSlot_2 (0-0-0-0): size 156 (cls: ScrollBoxSlot_2>ScrollBoxSlot>/Script/UMG):
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
 			Parent(ObjectProperty)=ScrollBoxDetails=WidgetArchetype 
-			Content(ObjectProperty)=TextDescription=WidgetArchetype 
+			Content(ObjectProperty)=DescriptionBox=WidgetArchetype 
 	BonusCurrencySB (0-0-0-0): size 163 (cls: BonusCurrencySB>SizeBox>/Script/UMG):
 		Tag array:
 			bOverride_HeightOverride(BoolProperty)=True 

@@ -1,6 +1,7 @@
 Name table:
 	/Game/UI/Foundation/Border/Border_HUD_Line_Vert
 	/Game/UI/Foundation/Fonts/Burbank
+	/Game/UI/Foundation/Fonts/NotoSans
 	/Game/UI/Foundation/Text/TextStyle-Base-XS
 	/Game/UI/Foundation/Text/TextStyle-Base-XS-B
 	/Game/UI/Foundation/Text/TextStyle-Base-XS-HUD-HealthBarMax
@@ -10,12 +11,12 @@ Name table:
 	/Game/UI/Foundation/Textures/Border/T-Border-HUD-HitPointBar-LeadEdge
 	/Game/UI/Foundation/Textures/Icons/Stats/T-Icon-HealthBattery-64
 	/Game/UI/HUD/Materials/HUD-Bar_Material
-	/Game/UI/HUD/ProgressBarType
 	/Game/UI/HUD/Textures/HUD-ShieldMeter-Baseplate
 	/Game/UI/Icons/Icon-Healthbar-S
 	/Game/UI/Icons/Icon-Shieldbar-M
 	/Game/UI/InGame/HUD/HitPointBar
 	/Game/UI/InGame/HUD/HitPointBar.WidgetArchetype
+	/Game/UI/InGame/HUD/ProgressBarType
 	/Script/BlueprintContext
 	/Script/CommonUI
 	/Script/CoreUObject
@@ -78,8 +79,11 @@ Name table:
 	CallFunc_FMax_ReturnValue
 	CallFunc_FMax_ReturnValue1
 	CallFunc_GetContext_ReturnValue
+	CallFunc_GetDeltaMaterial_Result
+	CallFunc_GetDeltaMaterial_Result1
 	CallFunc_GetDynamicMaterial_ReturnValue
-	CallFunc_GetDynamicMaterial_ReturnValue1
+	CallFunc_GetFillMaterial_ReturnValue
+	CallFunc_GetFillMaterial_ReturnValue1
 	CallFunc_GetHealth_ReturnValue
 	CallFunc_GetMaxHealth_ReturnValue
 	CallFunc_GetMaxShield_ReturnValue
@@ -200,7 +204,9 @@ Name table:
 	GameplayStatics
 	Geometry
 	GetContext
+	GetDeltaMaterial
 	GetDynamicMaterial
+	GetFillMaterial
 	GetHealth
 	GetMaxHealth
 	GetMaxShield
@@ -277,6 +283,8 @@ Name table:
 	NotEqual_BoolBool
 	NotEqual_ByteByte
 	NotEqual_FloatFloat
+	NotoSans
+	NotoSans-Regular
 	Object
 	ObjectProperty
 	OnHitPointsModified__DelegateSignature
@@ -308,6 +316,8 @@ Name table:
 	R
 	Reason
 	ResourceObject
+	Result
+	ReturnValue
 	Right
 	RootWidget
 	ScriptStruct
@@ -321,6 +331,7 @@ Name table:
 	SetText
 	SetVectorParameterValue
 	SetWidthOverride
+	ShadowOffset
 	Size
 	SizeBox
 	SizeBoxHighlight
@@ -385,7 +396,6 @@ Name table:
 	Type
 	TypefaceFontName
 	UberGraphFrame
-	UberGraphFramePointerProperty
 	UberGraphFunction
 	UnderlyingType
 	Update
@@ -413,15 +423,14 @@ Name table:
 	WidthOverride
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	HitPointBar_C (0-0-0-0): size 552 (cls: HitPointBar_C>WidgetBlueprintGeneratedClass>/Script/UMG):
+	HitPointBar_C (0-0-0-0): size 555 (cls: HitPointBar_C>WidgetBlueprintGeneratedClass>/Script/UMG):
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
 			bValidTemplate(BoolProperty)=True 
 			TemplateAsset(SoftObjectProperty)=/Game/UI/InGame/HUD/HitPointBar.WidgetArchetype 
-			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=HitPointBar_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_HitPointBar=HitPointBar_C 
-	Default__HitPointBar_C (0-0-0-0): size 2977 (cls: Default__HitPointBar_C>HitPointBar_C):
+	Default__HitPointBar_C (0-0-0-0): size 3006 (cls: Default__HitPointBar_C>HitPointBar_C):
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			Type(ByteProperty)=ProgressBarType::NewEnumerator1 
@@ -432,6 +441,7 @@ Serialized exports:
 			Last Value(FloatProperty)=1000 
 			FadeUpdateRate(FloatProperty)=0.05 
 			MultiFont(StructProperty)=System.Byte[] 
+			Baseplate Texture(ObjectProperty)=T-Border-HUD-HitPointBar-Bg=/Game/UI/Foundation/Textures/Border/T-Border-HUD-HitPointBar-Bg 
 			Volatile(BoolProperty)=True 
 			bHasScriptImplementedPaint(BoolProperty)=False 
 			bIsVolatile(BoolProperty)=True 
@@ -442,8 +452,8 @@ Serialized exports:
 	K2Node_SwitchEnum_CmpSuccess (0-0-0-0): size 34 (cls: K2Node_SwitchEnum_CmpSuccess>BoolProperty>/Script/CoreUObject)
 	HasSetInitialValues (0-0-0-0): size 34 (cls: HasSetInitialValues>BoolProperty>/Script/CoreUObject)
 	MyGeometry (0-0-0-0): size 36 (cls: MyGeometry>StructProperty>/Script/CoreUObject)
-	Tick (0-0-0-0): size 86 (cls: Tick>Function>/Script/CoreUObject)
-	PreConstruct (0-0-0-0): size 72 (cls: PreConstruct>Function>/Script/CoreUObject)
+	Tick (0-0-0-0): size 82 (cls: Tick>Function>/Script/CoreUObject)
+	PreConstruct (0-0-0-0): size 68 (cls: PreConstruct>Function>/Script/CoreUObject)
 	IsDesignTime (0-0-0-0): size 34 (cls: IsDesignTime>BoolProperty>/Script/CoreUObject)
 	Max (0-0-0-0): size 32 (cls: Max>FloatProperty>/Script/CoreUObject)
 	UpdateMaxValue (0-0-0-0): size 174 (cls: UpdateMaxValue>Function>/Script/CoreUObject)
@@ -454,7 +464,7 @@ Serialized exports:
 	Current (0-0-0-0): size 32 (cls: Current>FloatProperty>/Script/CoreUObject)
 	UpdateCurrentValueWithoutReason (0-0-0-0): size 64 (cls: UpdateCurrentValueWithoutReason>Function>/Script/CoreUObject)
 	Temp_byte_Variable (0-0-0-0): size 36 (cls: Temp_byte_Variable>ByteProperty>/Script/CoreUObject)
-	Initialize Bar (0-0-0-0): size 2171 (cls: Initialize Bar>Function>/Script/CoreUObject)
+	Initialize Bar (0-0-0-0): size 2030 (cls: Initialize Bar>Function>/Script/CoreUObject)
 	CallFunc_FMax_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_FMax_ReturnValue>FloatProperty>/Script/CoreUObject)
 	Update Delta Bar (0-0-0-0): size 128 (cls: Update Delta Bar>Function>/Script/CoreUObject)
 	CallFunc_NearlyEqual_FloatFloat_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_NearlyEqual_FloatFloat_ReturnValue>BoolProperty>/Script/CoreUObject)
@@ -488,7 +498,7 @@ Serialized exports:
 	Type (0-0-0-0): size 36 (cls: Type>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	Temp_byte_Variable (0-0-0-0): size 36 (cls: Temp_byte_Variable>ByteProperty>/Script/CoreUObject)
-	K2Node_Select3_Default (0-0-0-0): size 40 (cls: K2Node_Select3_Default>ClassProperty>/Script/CoreUObject)
+	K2Node_Select_Default (0-0-0-0): size 40 (cls: K2Node_Select_Default>ClassProperty>/Script/CoreUObject)
 	Temp_class_Variable (0-0-0-0): size 40 (cls: Temp_class_Variable>ClassProperty>/Script/CoreUObject)
 	Temp_class_Variable1 (0-0-0-0): size 40 (cls: Temp_class_Variable1>ClassProperty>/Script/CoreUObject)
 	Temp_class_Variable2 (0-0-0-0): size 40 (cls: Temp_class_Variable2>ClassProperty>/Script/CoreUObject)
@@ -498,19 +508,21 @@ Serialized exports:
 			Padding(StructProperty)=System.Byte[] 
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=HorizontalBoxSlot_8=WidgetArchetype 
-	TextCurrentStat (0-0-0-0): size 303 (cls: TextCurrentStat>CommonTextBlock>/Script/CommonUI):
+	TextCurrentStat (0-0-0-0): size 422 (cls: TextCurrentStat>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS_C=/Game/UI/Foundation/Text/TextStyle-Base-XS 
 			Text(TextProperty)=999? (B5CBEAC84862C0BEAC2621BE3B937348) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Right 
 			Slot(ObjectProperty)=HorizontalBoxSlot_32=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	TextMaxStat (0-0-0-0): size 262 (cls: TextMaxStat>CommonTextBlock>/Script/CommonUI):
+	TextMaxStat (0-0-0-0): size 381 (cls: TextMaxStat>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS_C=/Game/UI/Foundation/Text/TextStyle-Base-XS 
 			Text(TextProperty)=999? (71E4F49E45D0BB03FA407ABC9FD0C4BA) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_34=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
 	K2Node_CreateDelegate_OutputDelegate (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate>DelegateProperty>/Script/CoreUObject)
@@ -546,6 +558,14 @@ Serialized exports:
 	CallFunc_Lerp_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Lerp_ReturnValue>FloatProperty>/Script/CoreUObject)
 	CallFunc_FMax_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_FMax_ReturnValue>FloatProperty>/Script/CoreUObject)
 	K2Node_Select_Default (0-0-0-0): size 32 (cls: K2Node_Select_Default>FloatProperty>/Script/CoreUObject)
+	[ProgressBar] Delta (0-0-0-0): size 36 (cls: [ProgressBar] Delta>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetDynamicMaterial_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetDynamicMaterial_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	Result (0-0-0-0): size 36 (cls: Result>ObjectProperty>/Script/CoreUObject)
+	GetDeltaMaterial (0-0-0-0): size 112 (cls: GetDeltaMaterial>Function>/Script/CoreUObject)
+	[ProgressBar] Fill (0-0-0-0): size 36 (cls: [ProgressBar] Fill>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetDynamicMaterial_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetDynamicMaterial_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	ReturnValue (0-0-0-0): size 36 (cls: ReturnValue>ObjectProperty>/Script/CoreUObject)
+	GetFillMaterial (0-0-0-0): size 116 (cls: GetFillMaterial>Function>/Script/CoreUObject)
 	WidgetArchetype (0-0-0-0): size 415 (cls: WidgetArchetype>HitPointBar_C):
 		Tag array:
 			[Horizontal Box] Stat Text(ObjectProperty)=[Horizontal Box] Stat Text=WidgetArchetype 
@@ -630,17 +650,17 @@ Serialized exports:
 	[Image] Stat Icon (0-0-0-0): size 36 (cls: [Image] Stat Icon>ObjectProperty>/Script/CoreUObject)
 	[Image] Stat Icon Shadow (0-0-0-0): size 36 (cls: [Image] Stat Icon Shadow>ObjectProperty>/Script/CoreUObject)
 	[Overlay] Bar Artwork (0-0-0-0): size 36 (cls: [Overlay] Bar Artwork>ObjectProperty>/Script/CoreUObject)
-	[ProgressBar] Delta (0-0-0-0): size 36 (cls: [ProgressBar] Delta>ObjectProperty>/Script/CoreUObject)
-	[ProgressBar] Fill (0-0-0-0): size 36 (cls: [ProgressBar] Fill>ObjectProperty>/Script/CoreUObject)
 	[Size Box] Bar (0-0-0-0): size 36 (cls: [Size Box] Bar>ObjectProperty>/Script/CoreUObject)
 	Baseplate Texture (0-0-0-0): size 36 (cls: Baseplate Texture>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	Fill Texture (0-0-0-0): size 36 (cls: Fill Texture>ObjectProperty>/Script/CoreUObject)
 	Gloss Texture (0-0-0-0): size 36 (cls: Gloss Texture>ObjectProperty>/Script/CoreUObject)
-	CallFunc_GetDynamicMaterial_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetDynamicMaterial_ReturnValue>ObjectProperty>/Script/CoreUObject)
-	CallFunc_GetDynamicMaterial_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetDynamicMaterial_ReturnValue1>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetDeltaMaterial_Result (0-0-0-0): size 36 (cls: CallFunc_GetDeltaMaterial_Result>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetDeltaMaterial_Result1 (0-0-0-0): size 36 (cls: CallFunc_GetDeltaMaterial_Result1>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetFillMaterial_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetFillMaterial_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetFillMaterial_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetFillMaterial_ReturnValue1>ObjectProperty>/Script/CoreUObject)
 	CallFunc_SlotAsOverlaySlot_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_SlotAsOverlaySlot_ReturnValue>ObjectProperty>/Script/CoreUObject)
-	K2Node_Select2_Default (0-0-0-0): size 36 (cls: K2Node_Select2_Default>ObjectProperty>/Script/CoreUObject)
+	K2Node_Select1_Default (0-0-0-0): size 36 (cls: K2Node_Select1_Default>ObjectProperty>/Script/CoreUObject)
 	Temp_object_Variable (0-0-0-0): size 36 (cls: Temp_object_Variable>ObjectProperty>/Script/CoreUObject)
 	Temp_object_Variable1 (0-0-0-0): size 36 (cls: Temp_object_Variable1>ObjectProperty>/Script/CoreUObject)
 	Temp_object_Variable2 (0-0-0-0): size 36 (cls: Temp_object_Variable2>ObjectProperty>/Script/CoreUObject)
@@ -767,11 +787,11 @@ Serialized exports:
 	Critical Color C (0-0-0-0): size 36 (cls: Critical Color C>StructProperty>/Script/CoreUObject)
 	K2Node_Event_MyGeometry (0-0-0-0): size 36 (cls: K2Node_Event_MyGeometry>StructProperty>/Script/CoreUObject)
 	K2Node_MakeStruct_Margin (0-0-0-0): size 36 (cls: K2Node_MakeStruct_Margin>StructProperty>/Script/CoreUObject)
-	K2Node_Select1_Default (0-0-0-0): size 36 (cls: K2Node_Select1_Default>StructProperty>/Script/CoreUObject)
+	K2Node_Select2_Default (0-0-0-0): size 36 (cls: K2Node_Select2_Default>StructProperty>/Script/CoreUObject)
+	K2Node_Select3_Default (0-0-0-0): size 36 (cls: K2Node_Select3_Default>StructProperty>/Script/CoreUObject)
 	K2Node_Select4_Default (0-0-0-0): size 36 (cls: K2Node_Select4_Default>StructProperty>/Script/CoreUObject)
 	K2Node_Select5_Default (0-0-0-0): size 36 (cls: K2Node_Select5_Default>StructProperty>/Script/CoreUObject)
 	K2Node_Select6_Default (0-0-0-0): size 36 (cls: K2Node_Select6_Default>StructProperty>/Script/CoreUObject)
-	K2Node_Select_Default (0-0-0-0): size 36 (cls: K2Node_Select_Default>StructProperty>/Script/CoreUObject)
 	Temp_struct_Variable (0-0-0-0): size 36 (cls: Temp_struct_Variable>StructProperty>/Script/CoreUObject)
 	Temp_struct_Variable1 (0-0-0-0): size 36 (cls: Temp_struct_Variable1>StructProperty>/Script/CoreUObject)
 	Temp_struct_Variable10 (0-0-0-0): size 36 (cls: Temp_struct_Variable10>StructProperty>/Script/CoreUObject)

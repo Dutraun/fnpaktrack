@@ -7,7 +7,7 @@ Name table:
 	/Game/Athena/UI/Progression/PlayerRankEmblem
 	/Game/Athena/UI/Season/AthenaBattlePassTrackerWidget
 	/Game/Athena/UI/Season/AthenaSeasonBPTrackerSimpleWidget
-	/Game/Items/PersistentResources/AthenaSeasonalBP
+	/Game/Items/PersistentResources/AthenaBattleStar
 	/Game/UI/Foundation/Banner/BR-Banner/M-BR-Banner-Inst-Bronze
 	/Game/UI/Foundation/Banner/M-Borderless-Banner
 	/Game/UI/Foundation/Border/Border_AthenaProgressPanelHeaderBacking
@@ -18,10 +18,12 @@ Name table:
 	/Game/UI/Foundation/Border/Materials/M_CircledLock
 	/Game/UI/Foundation/Buttons/Materials/Arrows/M_Arrow_White
 	/Game/UI/Foundation/Fonts/Burbank
+	/Game/UI/Foundation/Fonts/NotoSans
 	/Game/UI/Foundation/Profile/PlayerBanner
 	/Game/UI/Foundation/Text/Materials/M-FontShadow
 	/Game/UI/Foundation/Text/Materials/M_Font_Horizon_Dynamic
 	/Game/UI/Foundation/Text/TextScrollStyle-Base
+	/Game/UI/Foundation/Text/TextStyle-Base
 	/Game/UI/Foundation/Text/TextStyle-Base-AthenaQuestProgress
 	/Game/UI/Foundation/Text/TextStyle-Base-S-B-40pc
 	/Game/UI/Foundation/Text/TextStyle-Base-S-B-BattlePoint
@@ -47,9 +49,9 @@ Name table:
 	AthenaAccountContext
 	AthenaBattlePassTrackerWidget
 	AthenaBattlePassTrackerWidget_C
+	AthenaBattleStar
 	AthenaPlayerLevel
 	AthenaPlayerLevel_C
-	AthenaSeasonalBP
 	AthenaSeasonBPTrackerSimpleWidget
 	AthenaSeasonBPTrackerSimpleWidget_C
 	Background
@@ -161,6 +163,7 @@ Name table:
 	Default__TextStyle-Base-S-B-BattlePoint_C
 	Default__TextStyle-Base-XS-B-BattlePass-40pc_C
 	Default__TextStyle-Base-XS-B-BattlePass_C
+	Default__TextStyle-Base_C
 	Default__TextStyle-Header-L-Horizon_C
 	Default__TextStyle-Header-M-70pc_C
 	Default__TextStyle-Header-M-S_C
@@ -278,6 +281,7 @@ Name table:
 	NamedSlotBindings
 	NameProperty
 	None
+	NotoSans
 	NotoSans-Bold
 	Object
 	ObjectProperty
@@ -319,6 +323,7 @@ Name table:
 	SetupReward
 	SetVisibility
 	ShadowColorAndOpacity
+	ShadowOffset
 	Size
 	SizeBox
 	SizeBoxSlot
@@ -345,11 +350,13 @@ Name table:
 	TextBlock
 	TextProperty
 	TextScrollStyle-Base_C
+	TextStyle
 	TextStyle-Base-AthenaQuestProgress_C
 	TextStyle-Base-S-B-40pc_C
 	TextStyle-Base-S-B-BattlePoint_C
 	TextStyle-Base-XS-B-BattlePass-40pc_C
 	TextStyle-Base-XS-B-BattlePass_C
+	TextStyle-Base_C
 	TextStyle-Header-L-Horizon_C
 	TextStyle-Header-M-70pc_C
 	TextStyle-Header-M-S_C
@@ -366,7 +373,6 @@ Name table:
 	Translation
 	TypefaceFontName
 	UberGraphFrame
-	UberGraphFramePointerProperty
 	UberGraphFunction
 	UnderlyingType
 	UpsellCB
@@ -393,14 +399,13 @@ Name table:
 	XpText
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	PlayerEmblemAndXp_C (0-0-0-0): size 394 (cls: PlayerEmblemAndXp_C>WidgetBlueprintGeneratedClass>/Script/UMG):
+	PlayerEmblemAndXp_C (0-0-0-0): size 365 (cls: PlayerEmblemAndXp_C>WidgetBlueprintGeneratedClass>/Script/UMG):
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
 			bValidTemplate(BoolProperty)=True 
 			bClassRequiresNativeTick(BoolProperty)=True 
 			TemplateAsset(SoftObjectProperty)=/Game/Athena/UI/Progression/PlayerEmblemAndXp.WidgetArchetype 
-			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=PlayerEmblemAndXp_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_PlayerEmblemAndXp=PlayerEmblemAndXp_C 
 	Default__PlayerEmblemAndXp_C (0-0-0-0): size 117 (cls: Default__PlayerEmblemAndXp_C>PlayerEmblemAndXp_C):
 		Tag array:
@@ -453,8 +458,8 @@ Serialized exports:
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
 	ExecuteUbergraph_PlayerEmblemAndXp (0-0-0-0): size 77 (cls: ExecuteUbergraph_PlayerEmblemAndXp>Function>/Script/CoreUObject)
 	Result (0-0-0-0): size 36 (cls: Result>StructProperty>/Script/CoreUObject)
-	OnAccountInfoChanged (0-0-0-0): size 72 (cls: OnAccountInfoChanged>Function>/Script/CoreUObject)
-	Construct (0-0-0-0): size 58 (cls: Construct>Function>/Script/CoreUObject)
+	OnAccountInfoChanged (0-0-0-0): size 68 (cls: OnAccountInfoChanged>Function>/Script/CoreUObject)
+	Construct (0-0-0-0): size 54 (cls: Construct>Function>/Script/CoreUObject)
 	FortPublicAccountInfo (0-0-0-0): size 36 (cls: FortPublicAccountInfo>StructProperty>/Script/CoreUObject)
 	Refresh (0-0-0-0): size 635 (cls: Refresh>Function>/Script/CoreUObject)
 	CallFunc_GetNextSeasonChaseReward_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_GetNextSeasonChaseReward_ReturnValue>BoolProperty>/Script/CoreUObject)
@@ -574,115 +579,141 @@ Serialized exports:
 			Padding(StructProperty)=System.Byte[] 
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=HorizontalBoxSlot_3=WidgetArchetype 
-	LoadGuard (0-0-0-0): size 112 (cls: LoadGuard>CommonLoadGuard>/Script/CommonUI):
+	LoadGuard (0-0-0-0): size 141 (cls: LoadGuard>CommonLoadGuard>/Script/CommonUI):
 		Tag array:
 			LoadingText(TextProperty)= () 
+			TextStyle(ObjectProperty)=TextStyle-Base_C=/Game/UI/Foundation/Text/TextStyle-Base 
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
-	SurroundLoadGuard (0-0-0-0): size 153 (cls: SurroundLoadGuard>CommonLoadGuard>/Script/CommonUI):
+	SurroundLoadGuard (0-0-0-0): size 182 (cls: SurroundLoadGuard>CommonLoadGuard>/Script/CommonUI):
 		Tag array:
 			LoadingText(TextProperty)= () 
+			TextStyle(ObjectProperty)=TextStyle-Base_C=/Game/UI/Foundation/Text/TextStyle-Base 
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=OverlaySlot_1=WidgetArchetype 
 			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
-	CurrentText (0-0-0-0): size 175 (cls: CurrentText>CommonNumericTextBlock>/Script/CommonUI):
+	CurrentText (0-0-0-0): size 502 (cls: CurrentText>CommonNumericTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-S-B-BattlePoint_C=/Game/UI/Foundation/Text/TextStyle-Base-S-B-BattlePoint 
 			Text(TextProperty)=Text Block (TextBlockDefaultValue) 
+			ColorAndOpacity(StructProperty)=System.Byte[] 
+			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_2=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	DividerText (0-0-0-0): size 457 (cls: DividerText>CommonTextBlock>/Script/CommonUI):
+	DividerText (0-0-0-0): size 543 (cls: DividerText>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-S-B-40pc_C=/Game/UI/Foundation/Text/TextStyle-Base-S-B-40pc 
 			Text(TextProperty)= /  (A6D0D6B2431684B5675FDBAC92D83A50) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_3=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
 			Visibility(EnumProperty)=ESlateVisibility::Visible 
-	MaxTextBlock (0-0-0-0): size 416 (cls: MaxTextBlock>CommonTextBlock>/Script/CommonUI):
+	MaxTextBlock (0-0-0-0): size 502 (cls: MaxTextBlock>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-S-B-40pc_C=/Game/UI/Foundation/Text/TextStyle-Base-S-B-40pc 
 			Text(TextProperty)=MAX (1AB6107F4E32B78F822D2FB66359DE16) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_8=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	TotalText (0-0-0-0): size 456 (cls: TotalText>CommonTextBlock>/Script/CommonUI):
+	TotalText (0-0-0-0): size 542 (cls: TotalText>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-S-B-40pc_C=/Game/UI/Foundation/Text/TextStyle-Base-S-B-40pc 
 			Text(TextProperty)=10 (06C09CA345756F21650E76BE74F96C87) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_4=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
 			Visibility(EnumProperty)=ESlateVisibility::Visible 
-	BattlePassName (0-0-0-0): size 183 (cls: BattlePassName>CommonTextBlock>/Script/CommonUI):
+	BattlePassName (0-0-0-0): size 510 (cls: BattlePassName>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B-BattlePass-40pc_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B-BattlePass-40pc 
 			Text(TextProperty)=BATTLE PASS (68517CC24AF368487D8989B85D829CE3) 
+			ColorAndOpacity(StructProperty)=System.Byte[] 
+			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=VerticalBoxSlot_3=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	CommonTextBlock_0 (0-0-0-0): size 157 (cls: CommonTextBlock_0>CommonTextBlock>/Script/CommonUI):
+	CommonTextBlock_0 (0-0-0-0): size 484 (cls: CommonTextBlock_0>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B-BattlePass-40pc_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B-BattlePass-40pc 
 			Text(TextProperty)=BATTLE PASS (444805B84EC4D73D8A5D90B10E5C173F) 
+			ColorAndOpacity(StructProperty)=System.Byte[] 
+			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=VerticalBoxSlot_3=WidgetArchetype 
-	CommonTextBlock_1 (0-0-0-0): size 253 (cls: CommonTextBlock_1>CommonTextBlock>/Script/CommonUI):
+	CommonTextBlock_1 (0-0-0-0): size 580 (cls: CommonTextBlock_1>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B-BattlePass_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B-BattlePass 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)=Battle Pass Owners receive access to weekly challenges, and many more rewards! (7566A5D54D62EFA0AB2F669018D914C4) 
+			ColorAndOpacity(StructProperty)=System.Byte[] 
+			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=VerticalBoxSlot_4=WidgetArchetype 
-	TierText (0-0-0-0): size 178 (cls: TierText>CommonTextBlock>/Script/CommonUI):
+	TierText (0-0-0-0): size 505 (cls: TierText>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B-BattlePass_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B-BattlePass 
 			Text(TextProperty)=TIER 7 (7A043A2247E746BDF5FB07863B759109) 
+			ColorAndOpacity(StructProperty)=System.Byte[] 
+			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=VerticalBoxSlot_4=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	CommonTextBlock_1 (0-0-0-0): size 421 (cls: CommonTextBlock_1>CommonTextBlock>/Script/CommonUI):
+	CommonTextBlock_1 (0-0-0-0): size 478 (cls: CommonTextBlock_1>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-M-70pc_C=/Game/UI/Foundation/Text/TextStyle-Header-M-70pc 
 			Text(TextProperty)=LEVEL (C6346F7E40C144128D51BCAE052AD427) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
-	LevelText (0-0-0-0): size 528 (cls: LevelText>CommonTextBlock>/Script/CommonUI):
+	LevelText (0-0-0-0): size 585 (cls: LevelText>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-L-Horizon_C=/Game/UI/Foundation/Text/TextStyle-Header-L-Horizon 
 			Text(TextProperty)=25 (AE89FF0B4CD5EE356094AB9A910A2301) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	XpText (0-0-0-0): size 517 (cls: XpText>CommonTextBlock>/Script/CommonUI):
+	XpText (0-0-0-0): size 603 (cls: XpText>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-AthenaQuestProgress_C=/Game/UI/Foundation/Text/TextStyle-Base-AthenaQuestProgress 
 			Text(TextProperty)=0/123456 (4C6D5F2B4A539FFCFAD882BE35EBB20A) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Right 
 			Slot(ObjectProperty)=OverlaySlot_3=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	CommonTextBlock_2 (0-0-0-0): size 390 (cls: CommonTextBlock_2>CommonTextBlock>/Script/CommonUI):
+	CommonTextBlock_2 (0-0-0-0): size 447 (cls: CommonTextBlock_2>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-S-40pc_C=/Game/UI/Foundation/Text/TextStyle-Header-S-40pc 
 			Text(TextProperty)=LVL (E8281BE844A3BAF1A67BDEA7BF8E9DDE) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_2=WidgetArchetype 
-	MiniReward2LevelTB (0-0-0-0): size 456 (cls: MiniReward2LevelTB>CommonTextBlock>/Script/CommonUI):
+	MiniReward2LevelTB (0-0-0-0): size 513 (cls: MiniReward2LevelTB>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-S-70pc_C=/Game/UI/Foundation/Text/TextStyle-Header-S-70pc 
 			Text(TextProperty)=10 (E4610DD64FEB37D6EEBA5992995ABAB3) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Center 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	SeasonNameLabel (0-0-0-0): size 674 (cls: SeasonNameLabel>CommonTextBlock>/Script/CommonUI):
+	SeasonNameLabel (0-0-0-0): size 731 (cls: SeasonNameLabel>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-M-S_C=/Game/UI/Foundation/Text/TextStyle-Header-M-S 
 			Text(TextProperty)=SEASON 1 (224221A54A726A7D690CEE906DE128C7) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=BorderSlot_2=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
 			bIsVariable(BoolProperty)=True 
@@ -706,13 +737,13 @@ Serialized exports:
 	Temp_byte_Variable1 (0-0-0-0): size 40 (cls: Temp_byte_Variable1>EnumProperty>/Script/CoreUObject)
 	ItemIcon (0-0-0-0): size 161 (cls: ItemIcon>FortItemIcon>/Script/FortniteUI):
 		Tag array:
-			ItemDefinition(ObjectProperty)=AthenaSeasonalBP=/Game/Items/PersistentResources/AthenaSeasonalBP 
+			ItemDefinition(ObjectProperty)=AthenaBattleStar=/Game/Items/PersistentResources/AthenaBattleStar 
 			bShadow(BoolProperty)=False 
 			ShadowColorAndOpacity(StructProperty)=UE4.FLinearColor 
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
 	ItemIconMax (0-0-0-0): size 161 (cls: ItemIconMax>FortItemIcon>/Script/FortniteUI):
 		Tag array:
-			ItemDefinition(ObjectProperty)=AthenaSeasonalBP=/Game/Items/PersistentResources/AthenaSeasonalBP 
+			ItemDefinition(ObjectProperty)=AthenaBattleStar=/Game/Items/PersistentResources/AthenaBattleStar 
 			bShadow(BoolProperty)=False 
 			ShadowColorAndOpacity(StructProperty)=UE4.FLinearColor 
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 

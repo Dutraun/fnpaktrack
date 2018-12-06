@@ -9,15 +9,23 @@ Name table:
 	/Engine/Functions/Engine_MaterialFunctions02/Texturing/HeightLerp
 	/Engine/Functions/Engine_MaterialFunctions02/Texturing/ScreenAlignedPixelToPixelUVs
 	/Engine/Functions/Engine_MaterialFunctions02/Utility/BreakOutFloat2Components
+	/Engine/Functions/Engine_MaterialFunctions02/Utility/BreakOutFloat4Components
 	/Engine/Functions/Engine_MaterialFunctions02/Utility/LinearSine
 	/Engine/Functions/Engine_MaterialFunctions02/Utility/VectorLength
 	/Engine/Functions/Engine_MaterialFunctions02/WorldPositionOffset/ObjectScale
 	/Engine/MapTemplates/TilingNoise05
 	/Game/Athena/Environments/Landscape/Foliage/M_Athena_DesertGrass
+	/Game/Athena/Environments/Landscape/MaterialFunctions/MF_Athena_BiomeMask
 	/Game/Athena/Environments/Landscape/MaterialFunctions/MF_Athena_TerrainColorMatch
 	/Game/Athena/Environments/Landscape/MaterialFunctions/MF_AthenaFoliagePlayerInteract
+	/Game/Athena/Environments/Landscape/MaterialFunctions/MF_TerrainDistanceFade
+	/Game/Athena/Environments/Landscape/MaterialFunctions/Snow/MF_Athena_Holiday_SnowFall
+	/Game/Athena/Environments/Landscape/MaterialFunctions/Snow/MF_Athena_Snow_01
+	/Game/Athena/Environments/Landscape/MaterialFunctions/Utilities/MF_Athena_Terrain_Coords
 	/Game/Athena/Environments/Landscape/MPC/MPC_Landscape
 	/Game/Athena/Environments/Landscape/Textures/T_Athena_Terrain_Topo_Mask
+	/Game/Athena/WinterArt/Materials/MF_SharedWinter
+	/Game/Effects/Fort_Effects/Materials/_Functions/Color_Time_of_Day
 	/Game/Environments/Foliage/Textures/T_DesertGrass_01
 	/Game/Environments/Foliage/Textures/T_DesertGrassShadows_01
 	/Game/Environments/Foliage/Textures/T_FieldGrass_01_M
@@ -41,6 +49,7 @@ Name table:
 	BlendMode
 	BoolProperty
 	BreakOutFloat2Components
+	BreakOutFloat4Components
 	bTangentSpaceNormal
 	bUsedWithInstancedStaticMeshes
 	bUseMaterialAttributes
@@ -54,6 +63,7 @@ Name table:
 	CheapContrast
 	Class
 	Collection
+	Color_Time_of_Day
 	ColorA
 	ColorB
 	ColorC
@@ -89,6 +99,7 @@ Name table:
 	FortniteMaterialParameters
 	Function
 	Good64x64TilingNoiseHighFreq
+	GradientContrast
 	Guid
 	HeightLerp
 	HeightVarianceScale
@@ -131,8 +142,14 @@ Name table:
 	MaterialParameterCollection
 	MaterialParameterCollectionInfo
 	MaterialParameterCollectionInfos
+	MF_Athena_BiomeMask
+	MF_Athena_Holiday_SnowFall
+	MF_Athena_Snow_01
+	MF_Athena_Terrain_Coords
 	MF_Athena_TerrainColorMatch
 	MF_AthenaFoliagePlayerInteract
+	MF_SharedWinter
+	MF_TerrainDistanceFade
 	MidDistanceMaskPower
 	MPC_Landscape
 	NameProperty
@@ -164,6 +181,8 @@ Name table:
 	ShrubLeafAmounts
 	ShrubLeafContrast
 	SinkIntoGroundDist
+	Snow_GrassLowerAmount
+	SnowGrass_LowerMaskOffset
 	Spec_Max
 	Spec_Min
 	StateId
@@ -199,7 +218,7 @@ Name table:
 	WindSpeed
 	WindWaveScale
 Serialized exports:
-	M_Athena_DesertGrass (0-0-0-0): size 166699 (cls: M_Athena_DesertGrass>Material>/Script/Engine):
+	M_Athena_DesertGrass (0-0-0-0): size 239208 (cls: M_Athena_DesertGrass>Material>/Script/Engine):
 		Tag array:
 			EmissiveColor(StructProperty)=System.Byte[] 
 			BlendMode(ByteProperty)=BLEND_Masked 
@@ -213,7 +232,7 @@ Serialized exports:
 			MaterialFunctionInfos(ArrayProperty)=[object] (inner: StructProperty)
 			MaterialParameterCollectionInfos(ArrayProperty)=[object] (inner: StructProperty)
 			bUseMaterialAttributes(BoolProperty)=True 
-			StateId(StructProperty)=Guid: 1890600420-1189389167-1181640094-3714376397 
+			StateId(StructProperty)=Guid: 2448898815-1224767590-643011491-2883896580 
 			CachedQualityLevelsUsed(ArrayProperty)=[object] (inner: BoolProperty)
 	MaterialExpressionCollectionParameter_0 (0-0-0-0): size 168 (cls: MaterialExpressionCollectionParameter_0>MaterialExpressionCollectionParameter>/Script/Engine):
 		Tag array:
@@ -255,6 +274,10 @@ Serialized exports:
 		Tag array:
 			MaterialFunction(ObjectProperty)=MF_Athena_TerrainColorMatch=/Game/Athena/Environments/Landscape/MaterialFunctions/MF_Athena_TerrainColorMatch 
 			Material(ObjectProperty)=M_Athena_DesertGrass= 
+	MaterialExpressionMaterialFunctionCall_1 (0-0-0-0): size 70 (cls: MaterialExpressionMaterialFunctionCall_1>MaterialExpressionMaterialFunctionCall>/Script/Engine):
+		Tag array:
+			MaterialFunction(ObjectProperty)=MF_Athena_Holiday_SnowFall=/Game/Athena/Environments/Landscape/MaterialFunctions/Snow/MF_Athena_Holiday_SnowFall 
+			Material(ObjectProperty)=M_Athena_DesertGrass= 
 	MaterialExpressionMaterialFunctionCall_10 (0-0-0-0): size 70 (cls: MaterialExpressionMaterialFunctionCall_10>MaterialExpressionMaterialFunctionCall>/Script/Engine):
 		Tag array:
 			MaterialFunction(ObjectProperty)=CheapContrast=/Engine/Functions/Engine_MaterialFunctions01/ImageAdjustment/CheapContrast 
@@ -279,6 +302,10 @@ Serialized exports:
 		Tag array:
 			MaterialFunction(ObjectProperty)=LinearSine=/Engine/Functions/Engine_MaterialFunctions02/Utility/LinearSine 
 			Material(ObjectProperty)=M_Athena_DesertGrass= 
+	MaterialExpressionMaterialFunctionCall_2 (0-0-0-0): size 70 (cls: MaterialExpressionMaterialFunctionCall_2>MaterialExpressionMaterialFunctionCall>/Script/Engine):
+		Tag array:
+			MaterialFunction(ObjectProperty)=CheapContrast=/Engine/Functions/Engine_MaterialFunctions01/ImageAdjustment/CheapContrast 
+			Material(ObjectProperty)=M_Athena_DesertGrass= 
 	MaterialExpressionMaterialFunctionCall_21 (0-0-0-0): size 70 (cls: MaterialExpressionMaterialFunctionCall_21>MaterialExpressionMaterialFunctionCall>/Script/Engine):
 		Tag array:
 			MaterialFunction(ObjectProperty)=Fortnite_RenderToTextureEnabled=/Game/WaterAndWind/EnableOrDisableWind/Fortnite_RenderToTextureEnabled 
@@ -302,6 +329,10 @@ Serialized exports:
 	MaterialExpressionMaterialFunctionCall_5 (0-0-0-0): size 70 (cls: MaterialExpressionMaterialFunctionCall_5>MaterialExpressionMaterialFunctionCall>/Script/Engine):
 		Tag array:
 			MaterialFunction(ObjectProperty)=Lerp_Multiple_Float3=/Engine/Functions/Engine_MaterialFunctions02/Lerp_Multiple_Float3 
+			Material(ObjectProperty)=M_Athena_DesertGrass= 
+	MaterialExpressionMaterialFunctionCall_6 (0-0-0-0): size 70 (cls: MaterialExpressionMaterialFunctionCall_6>MaterialExpressionMaterialFunctionCall>/Script/Engine):
+		Tag array:
+			MaterialFunction(ObjectProperty)=MF_Athena_BiomeMask=/Game/Athena/Environments/Landscape/MaterialFunctions/MF_Athena_BiomeMask 
 			Material(ObjectProperty)=M_Athena_DesertGrass= 
 	MaterialExpressionMaterialFunctionCall_8 (0-0-0-0): size 70 (cls: MaterialExpressionMaterialFunctionCall_8>MaterialExpressionMaterialFunctionCall>/Script/Engine):
 		Tag array:
@@ -355,6 +386,17 @@ Serialized exports:
 			ParameterName(NameProperty)=CameraFadeMaskSink 
 			ExpressionGUID(StructProperty)=Guid: 3486024828-1102886473-3983001525-1791655032 
 			Material(ObjectProperty)=M_Athena_DesertGrass= 
+	MaterialExpressionScalarParameter_15 (0-0-0-0): size 168 (cls: MaterialExpressionScalarParameter_15>MaterialExpressionScalarParameter>/Script/Engine):
+		Tag array:
+			DefaultValue(FloatProperty)=3 
+			ParameterName(NameProperty)=SnowGrass_LowerMaskOffset 
+			ExpressionGUID(StructProperty)=Guid: 1596723720-1111832111-3798519484-995120786 
+			Material(ObjectProperty)=M_Athena_DesertGrass= 
+	MaterialExpressionScalarParameter_16 (0-0-0-0): size 139 (cls: MaterialExpressionScalarParameter_16>MaterialExpressionScalarParameter>/Script/Engine):
+		Tag array:
+			ParameterName(NameProperty)=GradientContrast 
+			ExpressionGUID(StructProperty)=Guid: 1179498239-1143593612-3055410862-2200678179 
+			Material(ObjectProperty)=M_Athena_DesertGrass= 
 	MaterialExpressionScalarParameter_17 (0-0-0-0): size 168 (cls: MaterialExpressionScalarParameter_17>MaterialExpressionScalarParameter>/Script/Engine):
 		Tag array:
 			DefaultValue(FloatProperty)=200 
@@ -373,7 +415,7 @@ Serialized exports:
 			Material(ObjectProperty)=M_Athena_DesertGrass= 
 	MaterialExpressionScalarParameter_2 (0-0-0-0): size 168 (cls: MaterialExpressionScalarParameter_2>MaterialExpressionScalarParameter>/Script/Engine):
 		Tag array:
-			DefaultValue(FloatProperty)=1.15 
+			DefaultValue(FloatProperty)=1 
 			ParameterName(NameProperty)=Tip_BrightnessSand 
 			ExpressionGUID(StructProperty)=Guid: 3185054059-1294364228-838682772-2208726989 
 			Material(ObjectProperty)=M_Athena_DesertGrass= 
@@ -388,6 +430,12 @@ Serialized exports:
 			DefaultValue(FloatProperty)=1 
 			ParameterName(NameProperty)=TempAAScale 
 			ExpressionGUID(StructProperty)=Guid: 1152948523-1261303202-2569722027-3776944977 
+			Material(ObjectProperty)=M_Athena_DesertGrass= 
+	MaterialExpressionScalarParameter_26 (0-0-0-0): size 168 (cls: MaterialExpressionScalarParameter_26>MaterialExpressionScalarParameter>/Script/Engine):
+		Tag array:
+			DefaultValue(FloatProperty)=-119.7634 
+			ParameterName(NameProperty)=Snow_GrassLowerAmount 
+			ExpressionGUID(StructProperty)=Guid: 2360164116-1337372701-3839156914-1766269758 
 			Material(ObjectProperty)=M_Athena_DesertGrass= 
 	MaterialExpressionScalarParameter_3 (0-0-0-0): size 168 (cls: MaterialExpressionScalarParameter_3>MaterialExpressionScalarParameter>/Script/Engine):
 		Tag array:
@@ -527,14 +575,15 @@ Serialized exports:
 			ParameterName(NameProperty)=MidDistanceMaskPower 
 			ExpressionGUID(StructProperty)=Guid: 635588842-1210338056-250387890-1209699598 
 			Material(ObjectProperty)=M_Athena_DesertGrass= 
-	MaterialExpressionScalarParameter_68 (0-0-0-0): size 139 (cls: MaterialExpressionScalarParameter_68>MaterialExpressionScalarParameter>/Script/Engine):
+	MaterialExpressionScalarParameter_68 (0-0-0-0): size 168 (cls: MaterialExpressionScalarParameter_68>MaterialExpressionScalarParameter>/Script/Engine):
 		Tag array:
+			DefaultValue(FloatProperty)=-0.5 
 			ParameterName(NameProperty)=AAA111 
 			ExpressionGUID(StructProperty)=Guid: 1342219415-1316709717-2906314113-522683163 
 			Material(ObjectProperty)=M_Athena_DesertGrass= 
 	MaterialExpressionScalarParameter_69 (0-0-0-0): size 168 (cls: MaterialExpressionScalarParameter_69>MaterialExpressionScalarParameter>/Script/Engine):
 		Tag array:
-			DefaultValue(FloatProperty)=3 
+			DefaultValue(FloatProperty)=0.5 
 			ParameterName(NameProperty)=AAA111_1 
 			ExpressionGUID(StructProperty)=Guid: 3542908967-1080319135-1982683823-837179710 
 			Material(ObjectProperty)=M_Athena_DesertGrass= 

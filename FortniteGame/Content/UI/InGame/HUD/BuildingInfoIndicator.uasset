@@ -2,6 +2,7 @@ Name table:
 	/Game/UI/Foundation/Border/Border-KeyBase-Center-M
 	/Game/UI/Foundation/Border/Border-MainL-Black
 	/Game/UI/Foundation/Border/Border_HUD_Line_Vert
+	/Game/UI/Foundation/Fonts/NotoSans
 	/Game/UI/Foundation/Items/Style/FortUIStylesheet
 	/Game/UI/Foundation/Items/Style/FortUITheme
 	/Game/UI/Foundation/Items/Style/StyleLibrary
@@ -18,6 +19,12 @@ Name table:
 	/Game/UI/InGame/HUD/BuildingInfoIndicator.WidgetArchetype
 	/Game/UI/InGame/HUD/CommonHealthBar
 	/Game/UI/InGame/KeybindWidget/KeybindWidget
+	/Game/Weapons/Prototype/ObjectMover/Blueprints/B_CreativeMoveTool_Athena
+	/Game/Weapons/Prototype/ObjectMover/Blueprints/ObjectInteractionBehaviors/DeleteObjects/CreativeInteraction_Delete
+	/Game/Weapons/Prototype/ObjectMover/Blueprints/ObjectInteractionBehaviors/MoveBuildingsOnGrid/CreativeInteraction_MoveBuildingsOnGrid
+	/Game/Weapons/Prototype/ObjectMover/Blueprints/ObjectInteractionBehaviors/MoveObjectsFreely/CreativeInteraction_MoveObjectsFreely
+	/Game/Weapons/Prototype/ObjectMover/Blueprints/ObjectInteractionBehaviors/PlaysetPreview/CreativeInteraction_PlaysetPreview
+	/Script/AnimationBudgetAllocator
 	/Script/BlueprintContext
 	/Script/CommonInput
 	/Script/CommonUI
@@ -58,7 +65,9 @@ Name table:
 	ArgumentValueType
 	ArrayProperty
 	AttachedTrapMaxDurability
+	AudioComponent
 	AutoWrapText
+	B_CreativeMoveTool_Athena_C
 	BackgroundImage
 	bAllowTemplate
 	bApplyOutlineToDropShadows
@@ -174,10 +183,12 @@ Name table:
 	CallFunc_GetTrapPickerActionName_ReturnValue
 	CallFunc_Greater_IntInt_ReturnValue
 	CallFunc_HasTrapReadyForBuilding_ReturnValue
+	CallFunc_IsCurrentWeaponTheMoveTool_Yes
 	CallFunc_IsMobileGame_ReturnValue
 	CallFunc_IsPlayerBuilt_ReturnValue
 	CallFunc_IsTrapAvailableForBuilding_ReturnValue
 	CallFunc_IsValid_ReturnValue
+	CallFunc_K2_GetPawn_ReturnValue
 	CallFunc_K2_IsValidTimerHandle_ReturnValue
 	CallFunc_K2_SetTimer_ReturnValue
 	CallFunc_Key_IsValid_ReturnValue
@@ -205,12 +216,23 @@ Name table:
 	Construct
 	Content
 	ContextualText
+	Controller
 	Conv_IntToText
+	CreativeInteraction_Delete_C
+	CreativeInteraction_Delete_GEN_VARIABLE
+	CreativeInteraction_MoveBuildingsOnGrid_C
+	CreativeInteraction_MoveBuildingsOnGrid_GEN_VARIABLE
+	CreativeInteraction_MoveObjectsFreely_C
+	CreativeInteraction_MoveObjectsFreely_GEN_VARIABLE
+	CreativeInteraction_PlaysetPreview_C
+	CreativeInteraction_PlaysetPreview_GEN_VARIABLE
 	Current Durability
 	Current Health
 	CurrentDurability
 	CurrentLevel
+	CurrentWeapon
 	Default__ArrayProperty
+	Default__B_CreativeMoveTool_Athena_C
 	Default__BlueprintContextLibrary
 	Default__BoolProperty
 	Default__Border-KeyBase-Center-M_C
@@ -259,6 +281,8 @@ Name table:
 	Default__WidgetBlueprintGeneratedClass
 	Default__WidgetSwitcherSlot
 	Default__WidgetTree
+	DefaultSceneRoot_GEN_VARIABLE
+	Degraded
 	DelegateFunction
 	DelegateProperty
 	DrawAs
@@ -303,6 +327,7 @@ Name table:
 	FloatProperty
 	FocusedBuilding
 	Font
+	FontObject
 	FontOutlineSettings
 	Format
 	FormatArgumentData
@@ -315,6 +340,8 @@ Name table:
 	FortKismetLibrary
 	FortMultiSizeBrush
 	FortMultiSizeItemCard
+	FortObjectMoverInputComponent
+	FortPawn
 	FortPlayerController
 	FortResourceItemDefinition
 	FortUIBlueprintFunctionLibrary
@@ -361,6 +388,7 @@ Name table:
 	HealthFadeTimerHandle
 	HeightOverride
 	HideHealth
+	HighlightPostProcess_GEN_VARIABLE
 	HorizontalAlignment
 	HorizontalBox
 	HorizontalBoxCycleTrap
@@ -384,6 +412,7 @@ Name table:
 	IntProperty
 	IsAnyTrapAttached
 	IsCurrentBuildingBeingRepaired
+	IsCurrentWeaponTheMoveTool
 	IsMobileGame
 	IsPlayerBuilt
 	IsPreviewTrapAttached
@@ -392,6 +421,7 @@ Name table:
 	IsValid
 	Justification
 	K2_ClearAndInvalidateTimerHandle
+	K2_GetPawn
 	K2_IsValidTimerHandle
 	K2_SetTimer
 	K2Node_CreateDelegate_OutputDelegate
@@ -403,8 +433,10 @@ Name table:
 	K2Node_CreateDelegate_OutputDelegate6
 	K2Node_CreateDelegate_OutputDelegate7
 	K2Node_CreateDelegate_OutputDelegate8
+	K2Node_DynamicCast_AsB_Creative_Move_Tool_Athena
 	K2Node_DynamicCast_AsBuilding_SMActor
 	K2Node_DynamicCast_AsBuilding_SMActor1
+	K2Node_DynamicCast_AsFort_Pawn
 	K2Node_DynamicCast_AsFort_Player_Controller
 	K2Node_DynamicCast_bSuccess
 	K2Node_DynamicCast_bSuccess1
@@ -445,6 +477,7 @@ Name table:
 	Left
 	Less_FloatFloat
 	LinearColor
+	LowAmmo
 	M-FontShadow
 	Margin
 	MarqueeImage
@@ -454,14 +487,20 @@ Name table:
 	MaxHealth
 	MinDesiredHeight
 	MinDesiredWidth
+	MoveToolInputComponent
+	MoveToolLoopingSoundComponent_GEN_VARIABLE
+	MoveToolSoundComponet_GEN_VARIABLE
 	MulticastDelegateProperty
 	NameProperty
 	NewBuildingInfo
 	NewInteractionCost
 	None
+	NormalA
+	NormalB
 	Not_PreBool
 	NotEqual_ByteByte
 	NotEqual_FloatFloat
+	NotoSans
 	NotoSans-Bold
 	Object
 	ObjectProperty
@@ -491,12 +530,14 @@ Name table:
 	Package
 	Padding
 	Parent
+	Pawn
 	Percent
 	PerformBuildingEditInteraction
 	PerformBuildingImprovementInteraction
 	PlaceTrapAvailable
 	PlayerController
 	PointerToUberGraphFrame
+	PostProcessComponent
 	ProgressBar
 	ProgressBarStyle
 	Quickbar
@@ -504,10 +545,14 @@ Name table:
 	QuickbarSlot
 	RefreshBuildingInfo
 	RelativeLocation
+	ReloadCartridge
+	ReloadEnd
+	ReloadStart
 	ResourceObject
 	ReturnValue
 	Right
 	RootWidget
+	SceneComponent
 	ScriptStruct
 	Set Display Mode
 	SetActiveWidget
@@ -516,21 +561,25 @@ Name table:
 	SetKeyBindWidgetBoundAction
 	SetText
 	SetVisibility
+	ShadowOffset
 	Size
 	SizeBox
 	SizeBoxSlot
 	SizeBoxTrapstandalone
 	SizeBoxTriOption
 	SizeRule
+	SkeletalMeshComponentBudgeted
 	SlateBrush
 	SlateChildSize
 	SlateColor
 	SlateFontInfo
 	Slot
 	Slots
+	Sm_CreativeMoveTool_Lightbeam_GEN_VARIABLE
 	SoftObjectProperty
 	Spacer
 	SpecifiedColor
+	StaticMeshComponent
 	StrProperty
 	StructProperty
 	Style
@@ -607,7 +656,6 @@ Name table:
 	TrapVerticalBox
 	TypefaceFontName
 	UberGraphFrame
-	UberGraphFramePointerProperty
 	UberGraphFunction
 	UInt64Property
 	UnderlyingType
@@ -637,6 +685,7 @@ Name table:
 	VerticalBoxPlaceTrapstandalone
 	VerticalBoxSlot
 	Visibility
+	WeaponMesh0
 	Widget
 	WidgetArchetype
 	WidgetBlueprintGeneratedClass
@@ -645,16 +694,17 @@ Name table:
 	WidgetTree
 	WidthOverride
 	WrapTextAt
+	Yes
+	Yes_Local
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	BuildingInfoIndicator_C (0-0-0-0): size 714 (cls: BuildingInfoIndicator_C>WidgetBlueprintGeneratedClass>/Script/UMG):
+	BuildingInfoIndicator_C (0-0-0-0): size 701 (cls: BuildingInfoIndicator_C>WidgetBlueprintGeneratedClass>/Script/UMG):
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
 			bValidTemplate(BoolProperty)=True 
 			bClassRequiresNativeTick(BoolProperty)=True 
 			TemplateAsset(SoftObjectProperty)=/Game/UI/InGame/HUD/BuildingInfoIndicator.WidgetArchetype 
-			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=BuildingInfoIndicator_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_BuildingInfoIndicator=BuildingInfoIndicator_C 
 	Default__BuildingInfoIndicator_C (0-0-0-0): size 902 (cls: Default__BuildingInfoIndicator_C>BuildingInfoIndicator_C):
 		Tag array:
@@ -669,11 +719,11 @@ Serialized exports:
 	[Horizontal Box] Build-Edit (0-0-0-0): size 36 (cls: [Horizontal Box] Build-Edit>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
 	ExecuteUbergraph_BuildingInfoIndicator (0-0-0-0): size 892 (cls: ExecuteUbergraph_BuildingInfoIndicator>Function>/Script/CoreUObject)
-	Construct (0-0-0-0): size 58 (cls: Construct>Function>/Script/CoreUObject)
+	Construct (0-0-0-0): size 54 (cls: Construct>Function>/Script/CoreUObject)
 	NewBuildingInfo (0-0-0-0): size 36 (cls: NewBuildingInfo>StructProperty>/Script/CoreUObject)
 	UpdateBuildingInfo (0-0-0-0): size 700 (cls: UpdateBuildingInfo>Function>/Script/CoreUObject)
 	FocusedBuilding (0-0-0-0): size 36 (cls: FocusedBuilding>ObjectProperty>/Script/CoreUObject)
-	HandleBuildingFocused (0-0-0-0): size 319 (cls: HandleBuildingFocused>Function>/Script/CoreUObject)
+	HandleBuildingFocused (0-0-0-0): size 385 (cls: HandleBuildingFocused>Function>/Script/CoreUObject)
 	Health (0-0-0-0): size 32 (cls: Health>FloatProperty>/Script/CoreUObject)
 	HandleBuildingHealthChanged (0-0-0-0): size 425 (cls: HandleBuildingHealthChanged>Function>/Script/CoreUObject)
 	CurrentDurability (0-0-0-0): size 32 (cls: CurrentDurability>FloatProperty>/Script/CoreUObject)
@@ -689,14 +739,17 @@ Serialized exports:
 	ReturnValue (0-0-0-0): size 34 (cls: ReturnValue>BoolProperty>/Script/CoreUObject)
 	IsCurrentBuildingBeingRepaired (0-0-0-0): size 121 (cls: IsCurrentBuildingBeingRepaired>Function>/Script/CoreUObject)
 	Interactable (0-0-0-0): size 34 (cls: Interactable>BoolProperty>/Script/CoreUObject)
-	UpdateBuildingInfo_InteractionWidgets (0-0-0-0): size 14816 (cls: UpdateBuildingInfo_InteractionWidgets>Function>/Script/CoreUObject)
+	UpdateBuildingInfo_InteractionWidgets (0-0-0-0): size 14758 (cls: UpdateBuildingInfo_InteractionWidgets>Function>/Script/CoreUObject)
 	K2Node_MakeArray_Array (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array>StructProperty>/Script/CoreUObject)
 	K2Node_MakeArray_Array (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array>ArrayProperty>/Script/CoreUObject)
 	K2Node_MakeArray_Array1 (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array1>StructProperty>/Script/CoreUObject)
 	K2Node_MakeArray_Array1 (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array1>ArrayProperty>/Script/CoreUObject)
 	CallFunc_IsMobileGame_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsMobileGame_ReturnValue>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
+	CallFunc_BooleanAND_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_IsCurrentWeaponTheMoveTool_Yes (0-0-0-0): size 34 (cls: CallFunc_IsCurrentWeaponTheMoveTool_Yes>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_Not_PreBool_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
 	CallFunc_BooleanAND_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_EqualEqual_ByteByte_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ByteByte_ReturnValue>BoolProperty>/Script/CoreUObject)
@@ -706,6 +759,17 @@ Serialized exports:
 	CallFunc_NotEqual_FloatFloat_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_NotEqual_FloatFloat_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_BooleanAND_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_EqualEqual_ByteByte_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ByteByte_ReturnValue>BoolProperty>/Script/CoreUObject)
+	BuildingTrap (0-0-0-0): size 36 (cls: BuildingTrap>ObjectProperty>/Script/CoreUObject)
+	HandleAttachedTrapChanged (0-0-0-0): size 76 (cls: HandleAttachedTrapChanged>Function>/Script/CoreUObject)
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	Quickbar (0-0-0-0): size 40 (cls: Quickbar>EnumProperty>/Script/CoreUObject)
+	HandleQuickbarFocusChanged (0-0-0-0): size 61 (cls: HandleQuickbarFocusChanged>Function>/Script/CoreUObject)
+	RefreshBuildingInfo (0-0-0-0): size 133 (cls: RefreshBuildingInfo>Function>/Script/CoreUObject)
+	Yes (0-0-0-0): size 34 (cls: Yes>BoolProperty>/Script/CoreUObject)
+	IsCurrentWeaponTheMoveTool (0-0-0-0): size 260 (cls: IsCurrentWeaponTheMoveTool>Function>/Script/CoreUObject)
+	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_bSuccess1 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess1>BoolProperty>/Script/CoreUObject)
+	Yes_Local (0-0-0-0): size 34 (cls: Yes_Local>BoolProperty>/Script/CoreUObject)
 	CallFunc_NotEqual_ByteByte_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_NotEqual_ByteByte_ReturnValue>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
 	CallFunc_BooleanAND_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue>BoolProperty>/Script/CoreUObject)
@@ -925,11 +989,6 @@ Serialized exports:
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
-	BuildingTrap (0-0-0-0): size 36 (cls: BuildingTrap>ObjectProperty>/Script/CoreUObject)
-	HandleAttachedTrapChanged (0-0-0-0): size 76 (cls: HandleAttachedTrapChanged>Function>/Script/CoreUObject)
-	Quickbar (0-0-0-0): size 40 (cls: Quickbar>EnumProperty>/Script/CoreUObject)
-	HandleQuickbarFocusChanged (0-0-0-0): size 61 (cls: HandleQuickbarFocusChanged>Function>/Script/CoreUObject)
-	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
@@ -1107,166 +1166,188 @@ Serialized exports:
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=VerticalBoxSlot_2=WidgetArchetype 
-	TextBuildModeHPText (0-0-0-0): size 293 (cls: TextBuildModeHPText>CommonTextBlock>/Script/CommonUI):
+	TextBuildModeHPText (0-0-0-0): size 379 (cls: TextBuildModeHPText>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B 
 			Text(TextProperty)=?? (A8A37A1A4974C4A910A415A0FC62DFD6) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=WidgetSwitcherSlot_4=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	TextCurrentHealthStat (0-0-0-0): size 335 (cls: TextCurrentHealthStat>CommonTextBlock>/Script/CommonUI):
+	TextCurrentHealthStat (0-0-0-0): size 421 (cls: TextCurrentHealthStat>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B 
 			Text(TextProperty)=888 (3D39FD3E45EB75C444040E9601B01C32) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Right 
 			Slot(ObjectProperty)=HorizontalBoxSlot_2=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	TextMaxHealthStat (0-0-0-0): size 294 (cls: TextMaxHealthStat>CommonTextBlock>/Script/CommonUI):
+	TextMaxHealthStat (0-0-0-0): size 380 (cls: TextMaxHealthStat>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B 
 			Text(TextProperty)=888 (A2937C1E47FA2338B9886BAD8DB17235) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_5=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	CommonTextBlock_75 (0-0-0-0): size 503 (cls: CommonTextBlock_75>CommonTextBlock>/Script/CommonUI):
+	CommonTextBlock_75 (0-0-0-0): size 589 (cls: CommonTextBlock_75>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-S-B-S_C=/Game/UI/Foundation/Text/TextStyle-Base-S-B-S 
 			Text(TextProperty)=Uses:  (794A5D704EBA29497C145DBABEC57BC5) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_8=WidgetArchetype 
-	TrapNameTextBlock (0-0-0-0): size 587 (cls: TrapNameTextBlock>CommonTextBlock>/Script/CommonUI):
+	TrapNameTextBlock (0-0-0-0): size 673 (cls: TrapNameTextBlock>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B-S_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B-S 
 			Text(TextProperty)=Trap Name (C419F1BB46D9B3FD47FE0F8C90A139DC) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			AutoWrapText(BoolProperty)=True 
 			WrapTextAt(FloatProperty)=150 
 			Slot(ObjectProperty)=VerticalBoxSlot_13=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	TrapUsesText (0-0-0-0): size 526 (cls: TrapUsesText>CommonTextBlock>/Script/CommonUI):
+	TrapUsesText (0-0-0-0): size 612 (cls: TrapUsesText>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-S-B-S_C=/Game/UI/Foundation/Text/TextStyle-Base-S-B-S 
 			Text(TextProperty)=X/X (9F3E4ADD424DE5A0996A6B897124E24D) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_7=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	CommonTextBlock_0 (0-0-0-0): size 569 (cls: CommonTextBlock_0>CommonTextBlock>/Script/CommonUI):
+	CommonTextBlock_0 (0-0-0-0): size 655 (cls: CommonTextBlock_0>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B-S_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B-S 
 			Text(TextProperty)=BUILD (4ABFB0AB4343D1FDEEAE57BC15BCC456) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Right 
 			Slot(ObjectProperty)=VerticalBoxSlot_4=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	CommonTextBlock_2 (0-0-0-0): size 544 (cls: CommonTextBlock_2>CommonTextBlock>/Script/CommonUI):
+	CommonTextBlock_2 (0-0-0-0): size 630 (cls: CommonTextBlock_2>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B-S_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B-S 
 			Text(TextProperty)=ROTATE (AA070EEB4831F2688A6909AC3C77B315) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Right 
 			Slot(ObjectProperty)=HorizontalBoxSlot_6=WidgetArchetype 
-	CommonTextBlock_8 (0-0-0-0): size 507 (cls: CommonTextBlock_8>CommonTextBlock>/Script/CommonUI):
+	CommonTextBlock_8 (0-0-0-0): size 593 (cls: CommonTextBlock_8>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B-S_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B-S 
 			Text(TextProperty)=PLACE TRAP (480F199F4F8EC88CCC8B86A6EB1D9D21) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_9=WidgetArchetype 
-	TextBuild-Edit (0-0-0-0): size 542 (cls: TextBuild-Edit>CommonTextBlock>/Script/CommonUI):
+	TextBuild-Edit (0-0-0-0): size 628 (cls: TextBuild-Edit>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B-S_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B-S 
 			Text(TextProperty)=EDIT (58D46A054870EC9D17E6F984B2CD76A7) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Right 
 			Slot(ObjectProperty)=HorizontalBoxSlot_5=WidgetArchetype 
-	TextConfirmLabel (0-0-0-0): size 545 (cls: TextConfirmLabel>CommonTextBlock>/Script/CommonUI):
+	TextConfirmLabel (0-0-0-0): size 631 (cls: TextConfirmLabel>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B-S_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B-S 
 			Text(TextProperty)=CONFIRM (769F74BB47DF24EA703611849604EE21) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Right 
 			Slot(ObjectProperty)=VerticalBoxSlot_0=WidgetArchetype 
-	TextEdit (0-0-0-0): size 542 (cls: TextEdit>CommonTextBlock>/Script/CommonUI):
+	TextEdit (0-0-0-0): size 628 (cls: TextEdit>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B-S_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B-S 
 			Text(TextProperty)=EDIT (E0E1E78746F90E827C63288BE4AF6D73) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Center 
 			Slot(ObjectProperty)=VerticalBoxSlot_6=WidgetArchetype 
-	TextEditLabel (0-0-0-0): size 542 (cls: TextEditLabel>CommonTextBlock>/Script/CommonUI):
+	TextEditLabel (0-0-0-0): size 628 (cls: TextEditLabel>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B-S_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B-S 
 			Text(TextProperty)=EDIT (4B289F8B4E59AE5DB8FF2E9DD758D3BF) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Center 
 			Slot(ObjectProperty)=HorizontalBoxSlot_6=WidgetArchetype 
-	TextInteractionCost (0-0-0-0): size 567 (cls: TextInteractionCost>CommonTextBlock>/Script/CommonUI):
+	TextInteractionCost (0-0-0-0): size 653 (cls: TextInteractionCost>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B-S_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B-S 
 			Text(TextProperty)=999 (A46EE6B64E27D185C269488CCD656A4E) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Right 
 			Slot(ObjectProperty)=HorizontalBoxSlot_3=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	TextInteractionCostwithRotate (0-0-0-0): size 567 (cls: TextInteractionCostwithRotate>CommonTextBlock>/Script/CommonUI):
+	TextInteractionCostwithRotate (0-0-0-0): size 653 (cls: TextInteractionCostwithRotate>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B-S_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B-S 
 			Text(TextProperty)=999 (A46EE6B64E27D185C269488CCD656A4E) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Right 
 			Slot(ObjectProperty)=HorizontalBoxSlot_3=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	TextInteractionName (0-0-0-0): size 571 (cls: TextInteractionName>CommonTextBlock>/Script/CommonUI):
+	TextInteractionName (0-0-0-0): size 657 (cls: TextInteractionName>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B-S_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B-S 
 			Text(TextProperty)=UPGRADE (CCCEFBAC4E721EAB154EF196B63A5842) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Right 
 			Slot(ObjectProperty)=VerticalBoxSlot_4=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	TextMaterial (0-0-0-0): size 546 (cls: TextMaterial>CommonTextBlock>/Script/CommonUI):
+	TextMaterial (0-0-0-0): size 632 (cls: TextMaterial>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B-S_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B-S 
 			Text(TextProperty)=MATERIAL (CE55776F4E4943541F79E8AB28A2FB10) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Right 
 			Slot(ObjectProperty)=HorizontalBoxSlot_7=WidgetArchetype 
-	TextPickTrap (0-0-0-0): size 532 (cls: TextPickTrap>CommonTextBlock>/Script/CommonUI):
+	TextPickTrap (0-0-0-0): size 618 (cls: TextPickTrap>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B-S_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B-S 
 			Text(TextProperty)=PICK TRAP (CEFB80724D1744D557340DA0AA01A6DA) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_10=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	TextPickTrapBottom (0-0-0-0): size 573 (cls: TextPickTrapBottom>CommonTextBlock>/Script/CommonUI):
+	TextPickTrapBottom (0-0-0-0): size 659 (cls: TextPickTrapBottom>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B-S_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B-S 
 			Text(TextProperty)=PICK TRAP (9CF861104052C0DCE902809B55BB6B4E) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Center 
 			Slot(ObjectProperty)=VerticalBoxSlot_2=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	TextPickTrapLabel (0-0-0-0): size 602 (cls: TextPickTrapLabel>CommonTextBlock>/Script/CommonUI):
+	TextPickTrapLabel (0-0-0-0): size 688 (cls: TextPickTrapLabel>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B-S_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B-S 
 			Text(TextProperty)=PICK TRAP (97FEFEDE448F0A1B0580849FE0430954) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Center 
 			WrapTextAt(FloatProperty)=150 
 			Slot(ObjectProperty)=VerticalBoxSlot_5=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	TextPlaceTrapLabel (0-0-0-0): size 548 (cls: TextPlaceTrapLabel>CommonTextBlock>/Script/CommonUI):
+	TextPlaceTrapLabel (0-0-0-0): size 634 (cls: TextPlaceTrapLabel>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B-S_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B-S 
 			Text(TextProperty)=PLACE TRAP (B41B92244FAAB9C6ECE8A89C78804731) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Center 
 			Slot(ObjectProperty)=VerticalBoxSlot_5=WidgetArchetype 
-	TextResetLabel (0-0-0-0): size 502 (cls: TextResetLabel>CommonTextBlock>/Script/CommonUI):
+	TextResetLabel (0-0-0-0): size 588 (cls: TextResetLabel>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B-S_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B-S 
 			Text(TextProperty)=RESET (20BCEFAC4B48E5022AF883BE8FB0BE60) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=VerticalBoxSlot_1=WidgetArchetype 
 	SwitcherHPText (0-0-0-0): size 167 (cls: SwitcherHPText>CommonWidgetSwitcher>/Script/CommonUI):
 		Tag array:
@@ -1355,8 +1436,6 @@ Serialized exports:
 			BPItemCardSize(EnumProperty)=EFortItemCardSize::S 
 			EmptyItemType(EnumProperty)=EFortItemType::AccountItem 
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
-	BuildingInfo (0-0-0-0): size 36 (cls: BuildingInfo>StructProperty>/Script/CoreUObject)
-	RefreshBuildingInfo (0-0-0-0): size 133 (cls: RefreshBuildingInfo>Function>/Script/CoreUObject)
 	[Horizontal Box] (0-0-0-0): size 90 (cls: [Horizontal Box]>HorizontalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -1771,6 +1850,10 @@ Serialized exports:
 	HorizontalBoxPlaceTrap (0-0-0-0): size 36 (cls: HorizontalBoxPlaceTrap>ObjectProperty>/Script/CoreUObject)
 	HorizontalBoxUpgradeRepair (0-0-0-0): size 36 (cls: HorizontalBoxUpgradeRepair>ObjectProperty>/Script/CoreUObject)
 	ImageResourceTypeIconwithRotate (0-0-0-0): size 36 (cls: ImageResourceTypeIconwithRotate>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetOwningPlayer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetOwningPlayer_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_K2_GetPawn_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_GetPawn_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_AsB_Creative_Move_Tool_Athena (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsB_Creative_Move_Tool_Athena>ObjectProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_AsFort_Pawn (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Pawn>ObjectProperty>/Script/CoreUObject)
 	KeybindBuild (0-0-0-0): size 36 (cls: KeybindBuild>ObjectProperty>/Script/CoreUObject)
 	KeybindCycleTrapLeft (0-0-0-0): size 36 (cls: KeybindCycleTrapLeft>ObjectProperty>/Script/CoreUObject)
 	KeybindEdit (0-0-0-0): size 36 (cls: KeybindEdit>ObjectProperty>/Script/CoreUObject)
@@ -2158,6 +2241,7 @@ Serialized exports:
 		Tag array:
 			Size(StructProperty)=Vector2D(20,1) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_12=WidgetArchetype 
+	BuildingInfo (0-0-0-0): size 36 (cls: BuildingInfo>StructProperty>/Script/CoreUObject)
 	CallFunc_K2_SetTimer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_SetTimer_ReturnValue>StructProperty>/Script/CoreUObject)
 	HealthFadeTimerHandle (0-0-0-0): size 36 (cls: HealthFadeTimerHandle>StructProperty>/Script/CoreUObject)
 	CallFunc_Get_Theme_Color_Theme_Color (0-0-0-0): size 36 (cls: CallFunc_Get_Theme_Color_Theme_Color>StructProperty>/Script/CoreUObject)

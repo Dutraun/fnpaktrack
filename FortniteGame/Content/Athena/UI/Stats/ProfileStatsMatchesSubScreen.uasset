@@ -12,7 +12,9 @@ Name table:
 	/Game/UI/Foundation/Border/Border_StatRow_WhiteLowOpacity
 	/Game/UI/Foundation/Border/Materials/M_Border_SoftGlow
 	/Game/UI/Foundation/Fonts/Burbank
+	/Game/UI/Foundation/Fonts/NotoSans
 	/Game/UI/Foundation/Input/InputActionDataTable
+	/Game/UI/Foundation/Text/Materials/MI_AthenaStat
 	/Game/UI/Foundation/Text/TextScrollStyle-Base
 	/Game/UI/Foundation/Text/TextStyle-Base-S-B-70pc
 	/Game/UI/Foundation/Text/TextStyle-Base-XS
@@ -160,6 +162,7 @@ Name table:
 	ExecuteUbergraph_ProfileStatsMatchesSubScreen
 	FloatProperty
 	Font
+	FontMaterial
 	FontObject
 	FortMultiSizeItemCard
 	FortUIManagerWidget_NUI
@@ -222,11 +225,15 @@ Name table:
 	MatchProfileStatBox
 	MatchSummaryListEntryWidget_C
 	MaterialInstanceConstant
+	MI_AthenaStat
 	MinDesiredWidth
 	MulticastDelegateProperty
 	NameProperty
 	None
+	NotoSans
 	NotoSans-Bold
+	NotoSans-Italic
+	NotoSans-Regular
 	Object
 	ObjectProperty
 	OnActivated
@@ -256,6 +263,7 @@ Name table:
 	SetInputActionHandler
 	SetMatches
 	SetStatView
+	ShadowOffset
 	Size
 	SizeBox
 	SizeBoxSlot
@@ -308,7 +316,6 @@ Name table:
 	Translation
 	TypefaceFontName
 	UberGraphFrame
-	UberGraphFramePointerProperty
 	UberGraphFunction
 	UserWidget
 	VAlign_Bottom
@@ -333,14 +340,13 @@ Name table:
 	WidthOverride
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	ProfileStatsMatchesSubScreen_C (0-0-0-0): size 457 (cls: ProfileStatsMatchesSubScreen_C>WidgetBlueprintGeneratedClass>/Script/UMG):
+	ProfileStatsMatchesSubScreen_C (0-0-0-0): size 428 (cls: ProfileStatsMatchesSubScreen_C>WidgetBlueprintGeneratedClass>/Script/UMG):
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
 			bValidTemplate(BoolProperty)=True 
 			TemplateAsset(SoftObjectProperty)=/Game/Athena/UI/Stats/ProfileStatsMatchesSubScreen.WidgetArchetype 
 			DynamicBindingObjects(ArrayProperty)=[object] (inner: ObjectProperty)
-			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=ProfileStatsMatchesSubScreen_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_ProfileStatsMatchesSubScreen=ProfileStatsMatchesSubScreen_C 
 	Default__ProfileStatsMatchesSubScreen_C (0-0-0-0): size 236 (cls: Default__ProfileStatsMatchesSubScreen_C>ProfileStatsMatchesSubScreen_C):
 		Tag array:
@@ -354,13 +360,13 @@ Serialized exports:
 	CallFunc_GetBestMatchViews_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetBestMatchViews_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetBestMatchViews_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetBestMatchViews_ReturnValue>ArrayProperty>/Script/CoreUObject)
 	Item (0-0-0-0): size 36 (cls: Item>ObjectProperty>/Script/CoreUObject)
-	BndEvt__MatchList_K2Node_ComponentBoundEvent_326_OnListItemSelectionChangedDynamic__DelegateSignature (0-0-0-0): size 86 (cls: BndEvt__MatchList_K2Node_ComponentBoundEvent_326_OnListItemSelectionChangedDynamic__DelegateSignature>Function>/Script/CoreUObject)
+	BndEvt__MatchList_K2Node_ComponentBoundEvent_326_OnListItemSelectionChangedDynamic__DelegateSignature (0-0-0-0): size 82 (cls: BndEvt__MatchList_K2Node_ComponentBoundEvent_326_OnListItemSelectionChangedDynamic__DelegateSignature>Function>/Script/CoreUObject)
 	Item (0-0-0-0): size 36 (cls: Item>ObjectProperty>/Script/CoreUObject)
-	BndEvt__MatchList_K2Node_ComponentBoundEvent_47_OnListViewItemClicked__DelegateSignature (0-0-0-0): size 86 (cls: BndEvt__MatchList_K2Node_ComponentBoundEvent_47_OnListViewItemClicked__DelegateSignature>Function>/Script/CoreUObject)
-	OnActivated (0-0-0-0): size 58 (cls: OnActivated>Function>/Script/CoreUObject)
+	BndEvt__MatchList_K2Node_ComponentBoundEvent_47_OnListViewItemClicked__DelegateSignature (0-0-0-0): size 82 (cls: BndEvt__MatchList_K2Node_ComponentBoundEvent_47_OnListViewItemClicked__DelegateSignature>Function>/Script/CoreUObject)
+	OnActivated (0-0-0-0): size 54 (cls: OnActivated>Function>/Script/CoreUObject)
 	StatView (0-0-0-0): size 36 (cls: StatView>ObjectProperty>/Script/CoreUObject)
-	HandleStatViewChanged (0-0-0-0): size 72 (cls: HandleStatViewChanged>Function>/Script/CoreUObject)
-	Construct (0-0-0-0): size 58 (cls: Construct>Function>/Script/CoreUObject)
+	HandleStatViewChanged (0-0-0-0): size 68 (cls: HandleStatViewChanged>Function>/Script/CoreUObject)
+	Construct (0-0-0-0): size 54 (cls: Construct>Function>/Script/CoreUObject)
 	PassThrough (0-0-0-0): size 34 (cls: PassThrough>BoolProperty>/Script/CoreUObject)
 	HandleBack (0-0-0-0): size 105 (cls: HandleBack>Function>/Script/CoreUObject)
 	SetMatches (0-0-0-0): size 72 (cls: SetMatches>Function>/Script/CoreUObject)
@@ -905,320 +911,377 @@ Serialized exports:
 			EntrySpacing(FloatProperty)=8 
 			EntryWidgetClass(ObjectProperty)=MatchSummaryListEntryWidget_C=/Game/Athena/UI/Stats/MatchSummaryListEntryWidget 
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
-	StatValue (0-0-0-0): size 352 (cls: StatValue>CommonNumericTextBlock>/Script/CommonUI):
+	StatValue (0-0-0-0): size 409 (cls: StatValue>CommonNumericTextBlock>/Script/CommonUI):
 		Tag array:
 			CurrentNumericValue(FloatProperty)=99 
 			Style(ObjectProperty)=TextStyle-Header-L_C=/Game/UI/Foundation/Text/TextStyle-Header-L 
 			Text(TextProperty)=Text Block (TextBlockDefaultValue) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	StatValue (0-0-0-0): size 204 (cls: StatValue>CommonNumericTextBlock>/Script/CommonUI):
+	StatValue (0-0-0-0): size 438 (cls: StatValue>CommonNumericTextBlock>/Script/CommonUI):
 		Tag array:
 			CurrentNumericValue(FloatProperty)=99 
 			Style(ObjectProperty)=TextStyle-Base-XXL-I-AthenaStat_C=/Game/UI/Foundation/Text/TextStyle-Base-XXL-I-AthenaStat 
 			Text(TextProperty)=Text Block (TextBlockDefaultValue) 
+			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=OverlaySlot_1=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	StatValue (0-0-0-0): size 290 (cls: StatValue>CommonNumericTextBlock>/Script/CommonUI):
+	StatValue (0-0-0-0): size 409 (cls: StatValue>CommonNumericTextBlock>/Script/CommonUI):
 		Tag array:
 			CurrentNumericValue(FloatProperty)=99999 
 			Style(ObjectProperty)=TextStyle-Base-XS_C=/Game/UI/Foundation/Text/TextStyle-Base-XS 
 			Text(TextProperty)=Text Block (TextBlockDefaultValue) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	StatValue (0-0-0-0): size 290 (cls: StatValue>CommonNumericTextBlock>/Script/CommonUI):
+	StatValue (0-0-0-0): size 409 (cls: StatValue>CommonNumericTextBlock>/Script/CommonUI):
 		Tag array:
 			CurrentNumericValue(FloatProperty)=99999 
 			Style(ObjectProperty)=TextStyle-Base-XS_C=/Game/UI/Foundation/Text/TextStyle-Base-XS 
 			Text(TextProperty)=Text Block (TextBlockDefaultValue) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	StatValue (0-0-0-0): size 290 (cls: StatValue>CommonNumericTextBlock>/Script/CommonUI):
+	StatValue (0-0-0-0): size 409 (cls: StatValue>CommonNumericTextBlock>/Script/CommonUI):
 		Tag array:
 			CurrentNumericValue(FloatProperty)=99999 
 			Style(ObjectProperty)=TextStyle-Base-XS_C=/Game/UI/Foundation/Text/TextStyle-Base-XS 
 			Text(TextProperty)=Text Block (TextBlockDefaultValue) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	StatValue (0-0-0-0): size 290 (cls: StatValue>CommonNumericTextBlock>/Script/CommonUI):
+	StatValue (0-0-0-0): size 409 (cls: StatValue>CommonNumericTextBlock>/Script/CommonUI):
 		Tag array:
 			CurrentNumericValue(FloatProperty)=99999 
 			Style(ObjectProperty)=TextStyle-Base-XS_C=/Game/UI/Foundation/Text/TextStyle-Base-XS 
 			Text(TextProperty)=Text Block (TextBlockDefaultValue) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	StatValue (0-0-0-0): size 290 (cls: StatValue>CommonNumericTextBlock>/Script/CommonUI):
+	StatValue (0-0-0-0): size 409 (cls: StatValue>CommonNumericTextBlock>/Script/CommonUI):
 		Tag array:
 			CurrentNumericValue(FloatProperty)=99999 
 			Style(ObjectProperty)=TextStyle-Base-XS_C=/Game/UI/Foundation/Text/TextStyle-Base-XS 
 			Text(TextProperty)=Text Block (TextBlockDefaultValue) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	StatValue (0-0-0-0): size 290 (cls: StatValue>CommonNumericTextBlock>/Script/CommonUI):
+	StatValue (0-0-0-0): size 409 (cls: StatValue>CommonNumericTextBlock>/Script/CommonUI):
 		Tag array:
 			CurrentNumericValue(FloatProperty)=99999 
 			Style(ObjectProperty)=TextStyle-Base-XS_C=/Game/UI/Foundation/Text/TextStyle-Base-XS 
 			Text(TextProperty)=Text Block (TextBlockDefaultValue) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	StatValue (0-0-0-0): size 290 (cls: StatValue>CommonNumericTextBlock>/Script/CommonUI):
+	StatValue (0-0-0-0): size 409 (cls: StatValue>CommonNumericTextBlock>/Script/CommonUI):
 		Tag array:
 			CurrentNumericValue(FloatProperty)=99999 
 			Style(ObjectProperty)=TextStyle-Base-XS_C=/Game/UI/Foundation/Text/TextStyle-Base-XS 
 			Text(TextProperty)=Text Block (TextBlockDefaultValue) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	StatValue (0-0-0-0): size 290 (cls: StatValue>CommonNumericTextBlock>/Script/CommonUI):
+	StatValue (0-0-0-0): size 409 (cls: StatValue>CommonNumericTextBlock>/Script/CommonUI):
 		Tag array:
 			CurrentNumericValue(FloatProperty)=99999 
 			Style(ObjectProperty)=TextStyle-Base-XS_C=/Game/UI/Foundation/Text/TextStyle-Base-XS 
 			Text(TextProperty)=Text Block (TextBlockDefaultValue) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	StatValue (0-0-0-0): size 290 (cls: StatValue>CommonNumericTextBlock>/Script/CommonUI):
+	StatValue (0-0-0-0): size 409 (cls: StatValue>CommonNumericTextBlock>/Script/CommonUI):
 		Tag array:
 			CurrentNumericValue(FloatProperty)=99999 
 			Style(ObjectProperty)=TextStyle-Base-XS_C=/Game/UI/Foundation/Text/TextStyle-Base-XS 
 			Text(TextProperty)=Text Block (TextBlockDefaultValue) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	StatValue (0-0-0-0): size 290 (cls: StatValue>CommonNumericTextBlock>/Script/CommonUI):
+	StatValue (0-0-0-0): size 409 (cls: StatValue>CommonNumericTextBlock>/Script/CommonUI):
 		Tag array:
 			CurrentNumericValue(FloatProperty)=99999 
 			Style(ObjectProperty)=TextStyle-Base-XS_C=/Game/UI/Foundation/Text/TextStyle-Base-XS 
 			Text(TextProperty)=Text Block (TextBlockDefaultValue) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	StatValue (0-0-0-0): size 290 (cls: StatValue>CommonNumericTextBlock>/Script/CommonUI):
+	StatValue (0-0-0-0): size 409 (cls: StatValue>CommonNumericTextBlock>/Script/CommonUI):
 		Tag array:
 			CurrentNumericValue(FloatProperty)=99999 
 			Style(ObjectProperty)=TextStyle-Base-XS_C=/Game/UI/Foundation/Text/TextStyle-Base-XS 
 			Text(TextProperty)=Text Block (TextBlockDefaultValue) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	StatValue (0-0-0-0): size 290 (cls: StatValue>CommonNumericTextBlock>/Script/CommonUI):
+	StatValue (0-0-0-0): size 409 (cls: StatValue>CommonNumericTextBlock>/Script/CommonUI):
 		Tag array:
 			CurrentNumericValue(FloatProperty)=99999 
 			Style(ObjectProperty)=TextStyle-Base-XS_C=/Game/UI/Foundation/Text/TextStyle-Base-XS 
 			Text(TextProperty)=Text Block (TextBlockDefaultValue) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	StatValue (0-0-0-0): size 302 (cls: StatValue>CommonNumericTextBlock>/Script/CommonUI):
+	StatValue (0-0-0-0): size 421 (cls: StatValue>CommonNumericTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS_C=/Game/UI/Foundation/Text/TextStyle-Base-XS 
 			Text(TextProperty)=Text Block (TextBlockDefaultValue) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Right 
 			Slot(ObjectProperty)=BorderSlot_1=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	StatValue (0-0-0-0): size 302 (cls: StatValue>CommonNumericTextBlock>/Script/CommonUI):
+	StatValue (0-0-0-0): size 421 (cls: StatValue>CommonNumericTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS_C=/Game/UI/Foundation/Text/TextStyle-Base-XS 
 			Text(TextProperty)=Text Block (TextBlockDefaultValue) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Right 
 			Slot(ObjectProperty)=BorderSlot_1=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	StatValue (0-0-0-0): size 302 (cls: StatValue>CommonNumericTextBlock>/Script/CommonUI):
+	StatValue (0-0-0-0): size 421 (cls: StatValue>CommonNumericTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS_C=/Game/UI/Foundation/Text/TextStyle-Base-XS 
 			Text(TextProperty)=Text Block (TextBlockDefaultValue) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Right 
 			Slot(ObjectProperty)=BorderSlot_1=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	StatValue (0-0-0-0): size 302 (cls: StatValue>CommonNumericTextBlock>/Script/CommonUI):
+	StatValue (0-0-0-0): size 421 (cls: StatValue>CommonNumericTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS_C=/Game/UI/Foundation/Text/TextStyle-Base-XS 
 			Text(TextProperty)=Text Block (TextBlockDefaultValue) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Right 
 			Slot(ObjectProperty)=BorderSlot_1=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	StatValue (0-0-0-0): size 302 (cls: StatValue>CommonNumericTextBlock>/Script/CommonUI):
+	StatValue (0-0-0-0): size 421 (cls: StatValue>CommonNumericTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS_C=/Game/UI/Foundation/Text/TextStyle-Base-XS 
 			Text(TextProperty)=Text Block (TextBlockDefaultValue) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Right 
 			Slot(ObjectProperty)=BorderSlot_1=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	CommonTextBlock_0 (0-0-0-0): size 305 (cls: CommonTextBlock_0>CommonTextBlock>/Script/CommonUI):
+	CommonTextBlock_0 (0-0-0-0): size 362 (cls: CommonTextBlock_0>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-M_C=/Game/UI/Foundation/Text/TextStyle-Header-M 
 			Text(TextProperty)=MATCH STATS (590388274C60B82BE641ACAADA634CDD) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
-	CommonTextBlock_1 (0-0-0-0): size 429 (cls: CommonTextBlock_1>CommonTextBlock>/Script/CommonUI):
+	CommonTextBlock_1 (0-0-0-0): size 515 (cls: CommonTextBlock_1>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-S-B-70pc_C=/Game/UI/Foundation/Text/TextStyle-Base-S-B-70pc 
 			Text(TextProperty)=# (C06F61B04A175126EEF7579420EDEEA0) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Center 
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
-	CommonTextBlock_2 (0-0-0-0): size 437 (cls: CommonTextBlock_2>CommonTextBlock>/Script/CommonUI):
+	CommonTextBlock_2 (0-0-0-0): size 523 (cls: CommonTextBlock_2>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-S-B-70pc_C=/Game/UI/Foundation/Text/TextStyle-Base-S-B-70pc 
 			Text(TextProperty)=PLACEMENT (C73B595445C66634EE836980D0867E9F) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Center 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
-	CommonTextBlock_3 (0-0-0-0): size 433 (cls: CommonTextBlock_3>CommonTextBlock>/Script/CommonUI):
+	CommonTextBlock_3 (0-0-0-0): size 519 (cls: CommonTextBlock_3>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-S-B-70pc_C=/Game/UI/Foundation/Text/TextStyle-Base-S-B-70pc 
 			Text(TextProperty)=SCORE (30CD5CB54C475E463AA8F08028C86A3B) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Right 
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
-	1stPlace1 (0-0-0-0): size 465 (cls: 1stPlace1>CommonTextBlock>/Script/CommonUI):
+	1stPlace1 (0-0-0-0): size 644 (cls: 1stPlace1>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-XL-Yellow_C=/Game/UI/Foundation/Text/TextStyle-Header-XL-Yellow 
 			Text(TextProperty)=#1 (2A8FB42748AC2C74AC607FBD0B30D96A) 
+			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_3=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
 			bIsVariable(BoolProperty)=True 
-	StatName (0-0-0-0): size 296 (cls: StatName>CommonTextBlock>/Script/CommonUI):
+	StatName (0-0-0-0): size 537 (cls: StatName>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-I-70pc_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-I-70pc 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)=Stat Name (7A9457324048C5267263768D9549598C) 
+			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	StatName (0-0-0-0): size 296 (cls: StatName>CommonTextBlock>/Script/CommonUI):
+	StatName (0-0-0-0): size 537 (cls: StatName>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-I-70pc_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-I-70pc 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)=Stat Name (7A9457324048C5267263768D9549598C) 
+			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	StatName (0-0-0-0): size 296 (cls: StatName>CommonTextBlock>/Script/CommonUI):
+	StatName (0-0-0-0): size 537 (cls: StatName>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-I-70pc_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-I-70pc 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)=Stat Name (7A9457324048C5267263768D9549598C) 
+			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	StatName (0-0-0-0): size 296 (cls: StatName>CommonTextBlock>/Script/CommonUI):
+	StatName (0-0-0-0): size 537 (cls: StatName>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-I-70pc_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-I-70pc 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)=Stat Name (7A9457324048C5267263768D9549598C) 
+			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	StatName (0-0-0-0): size 296 (cls: StatName>CommonTextBlock>/Script/CommonUI):
+	StatName (0-0-0-0): size 537 (cls: StatName>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-I-70pc_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-I-70pc 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)=Stat Name (7A9457324048C5267263768D9549598C) 
+			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	StatName (0-0-0-0): size 296 (cls: StatName>CommonTextBlock>/Script/CommonUI):
+	StatName (0-0-0-0): size 537 (cls: StatName>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-I-70pc_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-I-70pc 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)=Stat Name (7A9457324048C5267263768D9549598C) 
+			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	StatName (0-0-0-0): size 296 (cls: StatName>CommonTextBlock>/Script/CommonUI):
+	StatName (0-0-0-0): size 537 (cls: StatName>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-I-70pc_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-I-70pc 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)=Stat Name (7A9457324048C5267263768D9549598C) 
+			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	StatName (0-0-0-0): size 296 (cls: StatName>CommonTextBlock>/Script/CommonUI):
+	StatName (0-0-0-0): size 537 (cls: StatName>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-I-70pc_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-I-70pc 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)=Stat Name (7A9457324048C5267263768D9549598C) 
+			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	StatName (0-0-0-0): size 296 (cls: StatName>CommonTextBlock>/Script/CommonUI):
+	StatName (0-0-0-0): size 537 (cls: StatName>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-I-70pc_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-I-70pc 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)=Stat Name (7A9457324048C5267263768D9549598C) 
+			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	StatName (0-0-0-0): size 296 (cls: StatName>CommonTextBlock>/Script/CommonUI):
+	StatName (0-0-0-0): size 537 (cls: StatName>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-I-70pc_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-I-70pc 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)=Stat Name (7A9457324048C5267263768D9549598C) 
+			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	StatName (0-0-0-0): size 296 (cls: StatName>CommonTextBlock>/Script/CommonUI):
+	StatName (0-0-0-0): size 537 (cls: StatName>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-I-70pc_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-I-70pc 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)=Stat Name (7A9457324048C5267263768D9549598C) 
+			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	StatName (0-0-0-0): size 296 (cls: StatName>CommonTextBlock>/Script/CommonUI):
+	StatName (0-0-0-0): size 537 (cls: StatName>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-I-70pc_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-I-70pc 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)=Stat Name (7A9457324048C5267263768D9549598C) 
+			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	StatName (0-0-0-0): size 296 (cls: StatName>CommonTextBlock>/Script/CommonUI):
+	StatName (0-0-0-0): size 537 (cls: StatName>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-I-70pc_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-I-70pc 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)=Stat Name (7A9457324048C5267263768D9549598C) 
+			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	StatName (0-0-0-0): size 296 (cls: StatName>CommonTextBlock>/Script/CommonUI):
+	StatName (0-0-0-0): size 537 (cls: StatName>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-I-70pc_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-I-70pc 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)=Stat Name (7A9457324048C5267263768D9549598C) 
+			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	CommonTextBlock_1 (0-0-0-0): size 334 (cls: CommonTextBlock_1>CommonTextBlock>/Script/CommonUI):
+	CommonTextBlock_1 (0-0-0-0): size 391 (cls: CommonTextBlock_1>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-M_C=/Game/UI/Foundation/Text/TextStyle-Header-M 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)=TOP WEAPONS (37F637CC4FF7915F7FF8DAA00CA4D778) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=VerticalBoxSlot_2=WidgetArchetype 
-	StatName (0-0-0-0): size 296 (cls: StatName>CommonTextBlock>/Script/CommonUI):
+	StatName (0-0-0-0): size 537 (cls: StatName>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-I-70pc_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-I-70pc 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)=Stat Name (7A9457324048C5267263768D9549598C) 
+			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
 	ComponentDelegateBinding_0 (0-0-0-0): size 312 (cls: ComponentDelegateBinding_0>ComponentDelegateBinding>/Script/Engine):

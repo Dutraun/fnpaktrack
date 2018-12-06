@@ -7,6 +7,7 @@ Name table:
 	/Game/Athena/Items/Consumables/Grenade/GA_Athena_UtilityGrenade_WithTrajectory
 	/Game/Athena/Items/Consumables/PlaysetGrenade/B_Prj_Athena_PlaysetGrenade
 	/Game/Athena/Items/Consumables/PlaysetGrenade/BP_ProjectileTrajectory_Athena_SnapBoxToGrid
+	/Game/Athena/Items/Consumables/PlaysetGrenade/BP_ProjectileTrajectory_AthenaRed_Playset
 	/Game/Athena/Items/Consumables/PlaysetGrenade/GA_Athena_PlaysetGrenadeWithTrajectory
 	/Game/Athena/Items/Consumables/TowerGrenade/M_Grenade_TrajectoryLine_01
 	/Game/Athena/Items/Consumables/TowerGrenade/M_TrajectoryTarget
@@ -30,6 +31,7 @@ Name table:
 	Athena.Creative
 	Athena_PlayerController_C
 	AthenaProjectileSpawned
+	AudioComponent
 	B_Prj_Athena_PlaysetGrenade_C
 	bConsiderFriendlyFireWhenExcludingFriends
 	bCreateHitResultWhenNoTargetsFound
@@ -61,6 +63,7 @@ Name table:
 	BoolProperty
 	BP_DamageBalloon_Athena_C
 	BP_ProjectileTrajectory_Athena_SnapBoxToGrid_C
+	BP_ProjectileTrajectory_AthenaRed_Playset_C
 	BP_ProjectileTrajectory_C
 	BreakHitResult
 	BreakRotator
@@ -114,7 +117,7 @@ Name table:
 	CallFunc_CalculateProjectileTrajectorySplineWithHit_OutSplinePoints
 	CallFunc_CalculateProjectileTrajectorySplineWithHit_OutSplineTangents
 	CallFunc_CalculateRotation_NewRotation
-	CallFunc_CheckForOverlappingPlayspaces_ReturnValue
+	CallFunc_CheckForOverlappingVolumes_ReturnValue
 	CallFunc_ComposeRotators_ReturnValue
 	CallFunc_Conv_RotatorToVector_ReturnValue
 	CallFunc_Divide_FloatFloat_ReturnValue
@@ -150,7 +153,7 @@ Name table:
 	CallFunc_SpawnLocationAndRotation_OutRot
 	CanConsume
 	CapsuleComponent
-	CheckForOverlappingPlayspaces
+	CheckForOverlappingVolumes
 	Class
 	ClassProperty
 	CleanupTrajectoryDisplay
@@ -160,6 +163,7 @@ Name table:
 	ConePitchAngle
 	ConeYawAngle
 	Conv_RotatorToVector
+	Creative_Grenade_LoopRed_Cue_GEN_VARIABLE
 	Curve
 	CurveTable
 	CurveTableRowHandle
@@ -172,10 +176,11 @@ Name table:
 	Default__BoolProperty
 	Default__BP_DamageBalloon_Athena_C
 	Default__BP_ProjectileTrajectory_Athena_SnapBoxToGrid_C
+	Default__BP_ProjectileTrajectory_AthenaRed_Playset_C
 	Default__BP_ProjectileTrajectory_C
 	Default__ClassProperty
 	Default__FloatProperty
-	Default__FortPlayspaceManager
+	Default__FortVolumeManager
 	Default__Function
 	Default__GA_Athena_Grenade_WithTrajectory_C
 	Default__GA_Athena_PlaysetGrenadeWithTrajectory_C
@@ -234,9 +239,9 @@ Name table:
 	FortPawn
 	FortPlayerControllerAthena
 	FortPlaysetItemDefinition
-	FortPlayspaceManager
 	FortProjectileBase
 	FortTargetFilter
+	FortVolumeManager
 	Function
 	GA_Athena_Grenade_WithTrajectory_C
 	GA_Athena_PlaysetGrenadeWithTrajectory_C
@@ -292,6 +297,7 @@ Name table:
 	Less_IntInt
 	List
 	Location
+	Looping_Sound_GEN_VARIABLE
 	M_Grenade_TrajectoryLine_01
 	M_TrajectoryTarget
 	MakeVector
@@ -321,6 +327,7 @@ Name table:
 	Playset
 	PlaysetRotation
 	PointerToUberGraphFrame
+	PopupGrenade_ThrowLoop_AudioComponent_GEN_VARIABLE
 	PossibleInteractContextInfo
 	PostThrowCancelDelay
 	PrimarySource
@@ -333,6 +340,7 @@ Name table:
 	ProjectileReference
 	ProjectileTrajectoryRed
 	Range
+	RedIndicatorClass
 	RotatingMovement_GEN_VARIABLE
 	RotatingMovementComponent
 	Rotation
@@ -381,11 +389,10 @@ Name table:
 	TowerGrenade_Cook_Outro
 	TrajectoryIndicator
 	TrajectoryIndicatorClass
-	TrajectoryIndicatorRedClass
+	TrajectoryUpdateInterval
 	Transform
 	TransformComponent0
 	UberGraphFrame
-	UberGraphFramePointerProperty
 	UberGraphFunction
 	UpdateTrajectorySpline
 	Value
@@ -393,17 +400,17 @@ Name table:
 	YawOffset
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	GA_Athena_PlaysetGrenadeWithTrajectory_C (0-0-0-0): size 366 (cls: GA_Athena_PlaysetGrenadeWithTrajectory_C>BlueprintGeneratedClass>/Script/Engine):
+	GA_Athena_PlaysetGrenadeWithTrajectory_C (0-0-0-0): size 337 (cls: GA_Athena_PlaysetGrenadeWithTrajectory_C>BlueprintGeneratedClass>/Script/Engine):
 		Tag array:
-			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=GA_Athena_PlaysetGrenadeWithTrajectory_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_GA_Athena_PlaysetGrenadeWithTrajectory=GA_Athena_PlaysetGrenadeWithTrajectory_C 
-	Default__GA_Athena_PlaysetGrenadeWithTrajectory_C (0-0-0-0): size 2747 (cls: Default__GA_Athena_PlaysetGrenadeWithTrajectory_C>GA_Athena_PlaysetGrenadeWithTrajectory_C):
+	Default__GA_Athena_PlaysetGrenadeWithTrajectory_C (0-0-0-0): size 2776 (cls: Default__GA_Athena_PlaysetGrenadeWithTrajectory_C>GA_Athena_PlaysetGrenadeWithTrajectory_C):
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
-			TrajectoryIndicatorRedClass(ObjectProperty)=BP_ProjectileTrajectory_Athena_SnapBoxToGrid_C=/Game/Athena/Items/Consumables/PlaysetGrenade/BP_ProjectileTrajectory_Athena_SnapBoxToGrid 
+			RedIndicatorClass(ObjectProperty)=BP_ProjectileTrajectory_AthenaRed_Playset_C=/Game/Athena/Items/Consumables/PlaysetGrenade/BP_ProjectileTrajectory_AthenaRed_Playset 
 			Prj_Grenade(ObjectProperty)=B_Prj_Athena_PlaysetGrenade_C=/Game/Athena/Items/Consumables/PlaysetGrenade/B_Prj_Athena_PlaysetGrenade 
 			AdditionalThrowAngle(FloatProperty)=0 
 			GrenadeTargetingOriginOffset(StructProperty)=Vector(12,20,93) 
+			TrajectoryUpdateInterval(FloatProperty)=0.08 
 			TrajectoryIndicatorClass(ObjectProperty)=BP_ProjectileTrajectory_Athena_SnapBoxToGrid_C=/Game/Athena/Items/Consumables/PlaysetGrenade/BP_ProjectileTrajectory_Athena_SnapBoxToGrid 
 			ThrowWindupMontage(StructProperty)=System.Byte[] 
 			PostThrowCancelDelay(FloatProperty)=0.1 
@@ -412,21 +419,21 @@ Serialized exports:
 			MontageInfo(StructProperty)=System.Byte[] 
 	ProjectileTrajectoryRed (0-0-0-0): size 36 (cls: ProjectileTrajectoryRed>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_GA_Athena_PlaysetGrenadeWithTrajectory (0-0-0-0): size 4127 (cls: ExecuteUbergraph_GA_Athena_PlaysetGrenadeWithTrajectory>Function>/Script/CoreUObject)
+	ExecuteUbergraph_GA_Athena_PlaysetGrenadeWithTrajectory (0-0-0-0): size 4917 (cls: ExecuteUbergraph_GA_Athena_PlaysetGrenadeWithTrajectory>Function>/Script/CoreUObject)
 	CallFunc_CalculateProjectileTrajectorySplineWithHit_OutSplinePoints (0-0-0-0): size 36 (cls: CallFunc_CalculateProjectileTrajectorySplineWithHit_OutSplinePoints>StructProperty>/Script/CoreUObject)
 	CallFunc_CalculateProjectileTrajectorySplineWithHit_OutSplinePoints (0-0-0-0): size 36 (cls: CallFunc_CalculateProjectileTrajectorySplineWithHit_OutSplinePoints>ArrayProperty>/Script/CoreUObject)
 	CallFunc_CalculateProjectileTrajectorySplineWithHit_OutSplineTangents (0-0-0-0): size 36 (cls: CallFunc_CalculateProjectileTrajectorySplineWithHit_OutSplineTangents>StructProperty>/Script/CoreUObject)
 	CallFunc_CalculateProjectileTrajectorySplineWithHit_OutSplineTangents (0-0-0-0): size 36 (cls: CallFunc_CalculateProjectileTrajectorySplineWithHit_OutSplineTangents>ArrayProperty>/Script/CoreUObject)
 	bShouldNotThrow (0-0-0-0): size 34 (cls: bShouldNotThrow>BoolProperty>/Script/CoreUObject)
-	OnAbilityInputReleased (0-0-0-0): size 58 (cls: OnAbilityInputReleased>Function>/Script/CoreUObject)
+	OnAbilityInputReleased (0-0-0-0): size 54 (cls: OnAbilityInputReleased>Function>/Script/CoreUObject)
 	ProjectileReference (0-0-0-0): size 36 (cls: ProjectileReference>ObjectProperty>/Script/CoreUObject)
-	AthenaProjectileSpawned (0-0-0-0): size 74 (cls: AthenaProjectileSpawned>Function>/Script/CoreUObject)
-	InitTrajectoryVariables (0-0-0-0): size 58 (cls: InitTrajectoryVariables>Function>/Script/CoreUObject)
+	AthenaProjectileSpawned (0-0-0-0): size 68 (cls: AthenaProjectileSpawned>Function>/Script/CoreUObject)
+	InitTrajectoryVariables (0-0-0-0): size 54 (cls: InitTrajectoryVariables>Function>/Script/CoreUObject)
 	Location (0-0-0-0): size 36 (cls: Location>StructProperty>/Script/CoreUObject)
-	Server_SpawnProjectile (0-0-0-0): size 88 (cls: Server_SpawnProjectile>Function>/Script/CoreUObject)
-	CleanupTrajectoryDisplay (0-0-0-0): size 58 (cls: CleanupTrajectoryDisplay>Function>/Script/CoreUObject)
-	K2_ActivateAbility (0-0-0-0): size 58 (cls: K2_ActivateAbility>Function>/Script/CoreUObject)
-	UpdateTrajectorySpline (0-0-0-0): size 58 (cls: UpdateTrajectorySpline>Function>/Script/CoreUObject)
+	Server_SpawnProjectile (0-0-0-0): size 84 (cls: Server_SpawnProjectile>Function>/Script/CoreUObject)
+	CleanupTrajectoryDisplay (0-0-0-0): size 54 (cls: CleanupTrajectoryDisplay>Function>/Script/CoreUObject)
+	K2_ActivateAbility (0-0-0-0): size 54 (cls: K2_ActivateAbility>Function>/Script/CoreUObject)
+	UpdateTrajectorySpline (0-0-0-0): size 54 (cls: UpdateTrajectorySpline>Function>/Script/CoreUObject)
 	Temp_int_Array_Index_Variable (0-0-0-0): size 32 (cls: Temp_int_Array_Index_Variable>IntProperty>/Script/CoreUObject)
 	SetupDummyProjectileRed (0-0-0-0): size 725 (cls: SetupDummyProjectileRed>Function>/Script/CoreUObject)
 	OutData (0-0-0-0): size 36 (cls: OutData>ObjectProperty>/Script/CoreUObject)
@@ -449,10 +456,11 @@ Serialized exports:
 	CallFunc_BooleanOR_ReturnValue4 (0-0-0-0): size 34 (cls: CallFunc_BooleanOR_ReturnValue4>BoolProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_bBlockingHit (0-0-0-0): size 34 (cls: CallFunc_BreakHitResult_bBlockingHit>BoolProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_bInitialOverlap (0-0-0-0): size 34 (cls: CallFunc_BreakHitResult_bInitialOverlap>BoolProperty>/Script/CoreUObject)
-	CallFunc_CheckForOverlappingPlayspaces_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_CheckForOverlappingPlayspaces_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_CheckForOverlappingVolumes_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_CheckForOverlappingVolumes_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_HasTag_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasTag_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsLocallyControlled_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsLocallyControlled_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsServer_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsServer_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Not_PreBool_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess1 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess1>BoolProperty>/Script/CoreUObject)
@@ -468,7 +476,7 @@ Serialized exports:
 	CallFunc_Less_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess1 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess1>BoolProperty>/Script/CoreUObject)
-	TrajectoryIndicatorRedClass (0-0-0-0): size 40 (cls: TrajectoryIndicatorRedClass>ClassProperty>/Script/CoreUObject)
+	RedIndicatorClass (0-0-0-0): size 40 (cls: RedIndicatorClass>ClassProperty>/Script/CoreUObject)
 	CallFunc_Abs_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Abs_ReturnValue>FloatProperty>/Script/CoreUObject)
 	CallFunc_Abs_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Abs_ReturnValue1>FloatProperty>/Script/CoreUObject)
 	CallFunc_BreakRotator_Pitch (0-0-0-0): size 32 (cls: CallFunc_BreakRotator_Pitch>FloatProperty>/Script/CoreUObject)

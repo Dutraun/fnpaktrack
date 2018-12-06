@@ -6,8 +6,10 @@ Name table:
 	/Game/UI/Foundation/Border/Materials/M-TutorialTabGlow
 	/Game/UI/Foundation/Border/Materials/M_FlashingBang_Off
 	/Game/UI/Foundation/Fonts/Burbank
+	/Game/UI/Foundation/Fonts/NotoSans
 	/Game/UI/Foundation/Profile/BP_BannerEditorTile
 	/Game/UI/Foundation/Profile/BP_BannerEditorTile.WidgetArchetype
+	/Game/UI/Foundation/Text/TextStyle-Base
 	/Game/UI/Foundation/Text/TextStyle-Base-M-B_Black
 	/Game/UI/Foundation/Text/TextStyle-Base-XS-B-Black
 	/Game/UI/Foundation/Text/TextStyle-Header-M-Yellow
@@ -114,6 +116,7 @@ Name table:
 	Default__StructProperty
 	Default__TextStyle-Base-M-B_Black_C
 	Default__TextStyle-Base-XS-B-Black_C
+	Default__TextStyle-Base_C
 	Default__TextStyle-Header-M-Yellow_C
 	Default__WidgetBlueprintGeneratedClass
 	Default__WidgetSwitcher
@@ -213,6 +216,7 @@ Name table:
 	NormalBangWrapper
 	NormalBangWrapper_C
 	Not_PreBool
+	NotoSans
 	NotoSans-Bold
 	Object
 	ObjectProperty
@@ -237,6 +241,7 @@ Name table:
 	SetBangStateBP
 	SetBrushFromTexture
 	SetVectorParameterValue
+	ShadowOffset
 	Shear
 	Size
 	SizeBox
@@ -258,8 +263,10 @@ Name table:
 	TemplateAsset
 	Text
 	TextProperty
+	TextStyle
 	TextStyle-Base-M-B_Black_C
 	TextStyle-Base-XS-B-Black_C
+	TextStyle-Base_C
 	TextStyle-Header-M-Yellow_C
 	Texture2D
 	TintColor
@@ -269,7 +276,6 @@ Name table:
 	TutorialBorder
 	TypefaceFontName
 	UberGraphFrame
-	UberGraphFramePointerProperty
 	UberGraphFunction
 	Update Bang State
 	UserObjectListEntry
@@ -291,14 +297,13 @@ Name table:
 	WidthOverride
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	BP_BannerEditorTile_C (0-0-0-0): size 458 (cls: BP_BannerEditorTile_C>WidgetBlueprintGeneratedClass>/Script/UMG):
+	BP_BannerEditorTile_C (0-0-0-0): size 429 (cls: BP_BannerEditorTile_C>WidgetBlueprintGeneratedClass>/Script/UMG):
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
 			bValidTemplate(BoolProperty)=True 
 			bClassRequiresNativeTick(BoolProperty)=True 
 			TemplateAsset(SoftObjectProperty)=/Game/UI/Foundation/Profile/BP_BannerEditorTile.WidgetArchetype 
-			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=BP_BannerEditorTile_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_BP_BannerEditorTile=BP_BannerEditorTile_C 
 	Default__BP_BannerEditorTile_C (0-0-0-0): size 224 (cls: Default__BP_BannerEditorTile_C>BP_BannerEditorTile_C):
 		Tag array:
@@ -319,13 +324,13 @@ Serialized exports:
 	K2Node_DynamicCast_bSuccess2 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess2>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess3 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess3>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess4 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess4>BoolProperty>/Script/CoreUObject)
-	BP_OnHovered (0-0-0-0): size 58 (cls: BP_OnHovered>Function>/Script/CoreUObject)
-	BP_OnSelected (0-0-0-0): size 58 (cls: BP_OnSelected>Function>/Script/CoreUObject)
+	BP_OnHovered (0-0-0-0): size 54 (cls: BP_OnHovered>Function>/Script/CoreUObject)
+	BP_OnSelected (0-0-0-0): size 54 (cls: BP_OnSelected>Function>/Script/CoreUObject)
 	Object (0-0-0-0): size 36 (cls: Object>ObjectProperty>/Script/CoreUObject)
-	HandleBannerIconLoadGuardFinished (0-0-0-0): size 72 (cls: HandleBannerIconLoadGuardFinished>Function>/Script/CoreUObject)
-	Construct (0-0-0-0): size 58 (cls: Construct>Function>/Script/CoreUObject)
+	HandleBannerIconLoadGuardFinished (0-0-0-0): size 68 (cls: HandleBannerIconLoadGuardFinished>Function>/Script/CoreUObject)
+	Construct (0-0-0-0): size 54 (cls: Construct>Function>/Script/CoreUObject)
 	ListItemObject (0-0-0-0): size 36 (cls: ListItemObject>ObjectProperty>/Script/CoreUObject)
-	OnListItemObjectSet (0-0-0-0): size 72 (cls: OnListItemObjectSet>Function>/Script/CoreUObject)
+	OnListItemObjectSet (0-0-0-0): size 68 (cls: OnListItemObjectSet>Function>/Script/CoreUObject)
 	CallFunc_GetListItemObject_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetListItemObject_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	Update Bang State (0-0-0-0): size 199 (cls: Update Bang State>Function>/Script/CoreUObject)
 	Mark Item As Seen (0-0-0-0): size 226 (cls: Mark Item As Seen>Function>/Script/CoreUObject)
@@ -421,35 +426,39 @@ Serialized exports:
 			Slot(ObjectProperty)=OverlaySlot_3=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
 			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
-	IconLoadGuard (0-0-0-0): size 112 (cls: IconLoadGuard>CommonLoadGuard>/Script/CommonUI):
+	IconLoadGuard (0-0-0-0): size 141 (cls: IconLoadGuard>CommonLoadGuard>/Script/CommonUI):
 		Tag array:
 			LoadingText(TextProperty)= () 
+			TextStyle(ObjectProperty)=TextStyle-Base_C=/Game/UI/Foundation/Text/TextStyle-Base 
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
-	CommonTextBlock_0 (0-0-0-0): size 570 (cls: CommonTextBlock_0>CommonTextBlock>/Script/CommonUI):
+	CommonTextBlock_0 (0-0-0-0): size 656 (cls: CommonTextBlock_0>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B-Black_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B-Black 
 			Text(TextProperty)=88 (EE6FE82A447EE61E281C208F117FCCDD) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Center 
 			Slot(ObjectProperty)=SizeBoxSlot_1=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
 			bIsVariable(BoolProperty)=True 
-	CommonTextBlock_1 (0-0-0-0): size 617 (cls: CommonTextBlock_1>CommonTextBlock>/Script/CommonUI):
+	CommonTextBlock_1 (0-0-0-0): size 674 (cls: CommonTextBlock_1>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-M-Yellow_C=/Game/UI/Foundation/Text/TextStyle-Header-M-Yellow 
 			Text(TextProperty)=! (CB8A5CB44472F7683032CC87496A28E9) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=OverlaySlot_1=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
-	CountText (0-0-0-0): size 386 (cls: CountText>CommonTextBlock>/Script/CommonUI):
+	CountText (0-0-0-0): size 472 (cls: CountText>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-M-B_Black_C=/Game/UI/Foundation/Text/TextStyle-Base-M-B_Black 
 			Text(TextProperty)=25 (9FD9EB2344E6568F2ADEA8B37EEC7A7D) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=SizeBoxSlot_5=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
 	CommonWidgetSwitcher_0 (0-0-0-0): size 115 (cls: CommonWidgetSwitcher_0>CommonWidgetSwitcher>/Script/CommonUI):

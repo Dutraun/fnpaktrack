@@ -4,14 +4,16 @@ Name table:
 	/Game/Athena/UI/DailyQuests/DailyQuestProgressWidget
 	/Game/Athena/UI/DailyQuests/DailyQuestRewardInfo
 	/Game/Athena/UI/Progression/MI_Quest_Bar_Neutral
-	/Game/Items/PersistentResources/AthenaSeasonalBP
-	/Game/Items/PersistentResources/AthenaSeasonalBP.AthenaSeasonalBP
+	/Game/Items/PersistentResources/AthenaBattleStar
+	/Game/Items/PersistentResources/AthenaBattleStar.AthenaBattleStar
 	/Game/UI/Foundation/Border/Border_MediumGreen_HGrad
 	/Game/UI/Foundation/Border/Border_Outline_DkBlue
 	/Game/UI/Foundation/Border/Border_Solid_MdBlue
 	/Game/UI/Foundation/Border/Materials/M-Border-1pxOutline
 	/Game/UI/Foundation/Border/Materials/M_Border_SoftGlow
+	/Game/UI/Foundation/Border/Materials/M_CircledLock
 	/Game/UI/Foundation/Border/Materials/M_SimpleDot
+	/Game/UI/Foundation/Fonts/NotoSans
 	/Game/UI/Foundation/Rewards/RewardInfoSimpleMediumWidget
 	/Game/UI/Foundation/Text/TextScrollStyle-NoFade
 	/Game/UI/Foundation/Text/TextStyle-Base-AthenaQuestProgress
@@ -19,6 +21,7 @@ Name table:
 	/Game/UI/Foundation/Text/TextStyle-Base-XS-40pc
 	/Game/UI/Foundation/Text/TextStyle-Base-XS-70pc
 	/Game/UI/Foundation/Text/TextStyle-Base-XS-B
+	/Game/UI/Foundation/Text/TextStyle-Base-XS-B-40pc
 	/Game/UI/Foundation/Text/TextStyle-Base-XS-Red-70pc
 	/Game/UI/Foundation/Textures/Icons/Checks/T-Icon-Check-32
 	/Game/UI/Foundation/Textures/Icons/Checks/T-Icon-Check-64
@@ -41,6 +44,7 @@ Name table:
 	ArrayProperty
 	Background
 	bAllowTemplate
+	bApplyOutlineToDropShadows
 	BattleStars
 	bCookedWidgetTree
 	bHasScriptImplementedPaint
@@ -66,9 +70,12 @@ Name table:
 	bValidTemplate
 	ByteProperty
 	CallFunc_ContainsReward_ReturnValue
+	CallFunc_Conv_InterfaceToObject_ReturnValue
 	CallFunc_Conv_IntToText_ReturnValue
 	CallFunc_Conv_IntToText_ReturnValue1
 	CallFunc_Format_ReturnValue
+	CallFunc_FormatLockedReason_ReturnValue
+	CallFunc_FormatLockedReason_ReturnValue1
 	CallFunc_GetAchievedCount_OutTotalAchievedCount
 	CallFunc_GetAchievedCount_OutTotalRequiredCount
 	CallFunc_GetChallengeChainRewardInfo_ReturnValue
@@ -77,10 +84,13 @@ Name table:
 	CallFunc_GetContext_ReturnValue
 	CallFunc_GetObjectiveNeededToComplete_ReturnValue
 	CallFunc_GetObjectives_BP_ReturnValue
+	CallFunc_GetOwningPlayer_ReturnValue
 	CallFunc_GetQuestState_ReturnValue
 	CallFunc_GetRewardInfo_BP_ReturnValue
 	CallFunc_GetRewardInfo_ReturnValue
 	CallFunc_GetText_ReturnValue
+	CallFunc_GetTimeSpanValue_OutTimeSpan
+	CallFunc_GetValue_ReturnValue
 	CallFunc_GetVisualStyle_ReturnValue
 	CallFunc_Greater_IntInt_ReturnValue
 	CallFunc_HasAnyAssociatedSecretQuestsAndAllAreComplete_ReturnValue
@@ -99,6 +109,8 @@ Name table:
 	CallFunc_MakeLiteralString_ReturnValue
 	CallFunc_SpawnTooltipContext_ReturnValue
 	CallFunc_TextIsEmpty_ReturnValue
+	CallFunc_TextToUpper_ReturnValue
+	CallFunc_TextToUpper_ReturnValue1
 	ChainIndex
 	ChainLength
 	ChallengeContent
@@ -114,6 +126,7 @@ Name table:
 	CompletionSwitcher
 	ContainsReward
 	Content
+	Conv_InterfaceToObject
 	Conv_IntToText
 	Count
 	DailyQuestProgressWidget
@@ -136,11 +149,13 @@ Name table:
 	Default__DailyQuestRewardInfo_C
 	Default__EnumProperty
 	Default__FloatProperty
+	Default__FortChallengeBundleInfo
 	Default__FortTooltipContext
 	Default__Function
 	Default__HorizontalBox
 	Default__HorizontalBoxSlot
 	Default__Image
+	Default__InterfaceProperty
 	Default__IntProperty
 	Default__KismetSystemLibrary
 	Default__KismetTextLibrary
@@ -160,6 +175,7 @@ Name table:
 	Default__TextStyle-Base-S-B-70pc_C
 	Default__TextStyle-Base-XS-40pc_C
 	Default__TextStyle-Base-XS-70pc_C
+	Default__TextStyle-Base-XS-B-40pc_C
 	Default__TextStyle-Base-XS-B_C
 	Default__TextStyle-Base-XS-Red-70pc_C
 	Default__VerticalBox
@@ -171,6 +187,8 @@ Name table:
 	DisplayName
 	Dot
 	DrawAs
+	EFortChallengeBundleInfoLockedReasonCode
+	EFortChallengeBundleInfoLockedReasonCode::Unlocked
 	EFortQuestState
 	EHorizontalAlignment
 	Engine
@@ -186,24 +204,29 @@ Name table:
 	ESlateVisibility::Visible
 	ETextJustify
 	ETextJustify::Right
+	EventName
 	EVerticalAlignment
 	EWidgetClipping
 	EWidgetClipping::ClipToBounds
 	FloatProperty
 	Font
+	FontObject
 	FontOutlineSettings
 	Format
 	FormatArgumentData
+	FormatLockedReason
 	FortChallengeBundleInfo
 	FortChallengeBundleInfoLockedReason
 	FortItemDefinition
 	FortMcpQuestObjectiveInfo
 	FortPersistentResourceItemDefinition
+	FortPlayerController
 	FortQuestItem
 	FortQuestItemDefinition
 	FortQuestObjectiveInfo
 	FortRewardInfo
 	FortRewardInfoWidget
+	FortTimespanDataSource
 	FortTooltipContext
 	FortTooltipUIContext
 	Function
@@ -216,10 +239,13 @@ Name table:
 	GetContext
 	GetObjectiveNeededToComplete
 	GetObjectives_BP
+	GetOwningPlayer
 	GetQuestState
 	GetRewardInfo
 	GetRewardInfo_BP
 	GetText
+	GetTimeSpanValue
+	GetValue
 	GetVisualStyle
 	Glow
 	Greater_IntInt
@@ -236,12 +262,15 @@ Name table:
 	HorizontalBoxSlot
 	Image
 	ImageSize
+	InterfaceProperty
 	IntProperty
 	IsLinearChainQuest
 	IsQuestDefALinearChain
 	IsUnlocked
 	IsValid
 	Justification
+	K2Node_DynamicCast_AsFort_Player_Controller
+	K2Node_DynamicCast_bSuccess
 	K2Node_MakeArray_Array
 	K2Node_MakeStruct_FormatArgumentData
 	K2Node_MakeStruct_FormatArgumentData1
@@ -256,8 +285,10 @@ Name table:
 	LinearChainQuest
 	LinearColor
 	LockedText
+	LockReason
 	M-Border-1pxOutline
 	M_Border_SoftGlow
+	M_CircledLock
 	M_SimpleDot
 	MakeLiteralString
 	Margin
@@ -272,12 +303,15 @@ Name table:
 	NameProperty
 	None
 	NotEqual_ByteByte
+	NotoSans
 	NotoSans-Bold
+	NotoSans-Regular
 	Object
 	ObjectProperty
 	OutlineColor
 	OutlineSettings
 	OutlineSize
+	OutTimeSpan
 	OutTotalAchievedCount
 	OutTotalRequiredCount
 	Overlay
@@ -285,13 +319,16 @@ Name table:
 	Package
 	Padding
 	Parent
+	PlayerController
 	ProgressBar
 	ProgressText
 	ProgressValue
 	Quest
 	quest_state
 	QuestDefinition
+	ReasonCode
 	RenderTransform
+	RequiredTier
 	ResourceObject
 	ReturnCount
 	ReturnValue
@@ -313,7 +350,7 @@ Name table:
 	SetStyle
 	SetText
 	SetVisibility
-	ShadowColorAndOpacity
+	ShadowOffset
 	ShowCompletionCheck
 	ShowText
 	Size
@@ -363,16 +400,22 @@ Name table:
 	TextStyle-Base-S-B-70pc_C
 	TextStyle-Base-XS-40pc_C
 	TextStyle-Base-XS-70pc_C
+	TextStyle-Base-XS-B-40pc_C
 	TextStyle-Base-XS-B_C
 	TextStyle-Base-XS-Red-70pc_C
+	TextToUpper
 	Texture2D
+	Timespan
+	TimeSpanSource
 	Tooltip.Description.Short
 	Top
 	Translation
 	TypefaceFontName
 	UnderlyingType
 	UnknownText
+	UnlockTimespanAfterStart
 	Update
+	UpdateLockedReasonDisplay
 	UpdateName
 	UpdateProgress
 	VAlign_Center
@@ -400,7 +443,7 @@ Serialized exports:
 	StyleAsIncomplete (0-0-0-0): size 130 (cls: StyleAsIncomplete>Function>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	Temp_byte_Variable (0-0-0-0): size 40 (cls: Temp_byte_Variable>EnumProperty>/Script/CoreUObject)
-	UpdateProgress (0-0-0-0): size 1124 (cls: UpdateProgress>Function>/Script/CoreUObject)
+	UpdateProgress (0-0-0-0): size 1066 (cls: UpdateProgress>Function>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	ReturnValue (0-0-0-0): size 40 (cls: ReturnValue>EnumProperty>/Script/CoreUObject)
 	GetQuestState (0-0-0-0): size 142 (cls: GetQuestState>Function>/Script/CoreUObject)
@@ -413,15 +456,20 @@ Serialized exports:
 	StyleAsLocked (0-0-0-0): size 184 (cls: StyleAsLocked>Function>/Script/CoreUObject)
 	ChainLength (0-0-0-0): size 32 (cls: ChainLength>IntProperty>/Script/CoreUObject)
 	StyleAsLinearChain (0-0-0-0): size 269 (cls: StyleAsLinearChain>Function>/Script/CoreUObject)
-	ChallengeQuestWidget_C (0-0-0-0): size 454 (cls: ChallengeQuestWidget_C>WidgetBlueprintGeneratedClass>/Script/UMG):
+	CallFunc_GetTimeSpanValue_OutTimeSpan (0-0-0-0): size 36 (cls: CallFunc_GetTimeSpanValue_OutTimeSpan>StructProperty>/Script/CoreUObject)
+	UpdateLockedReasonDisplay (0-0-0-0): size 387 (cls: UpdateLockedReasonDisplay>Function>/Script/CoreUObject)
+	OutTimeSpan (0-0-0-0): size 36 (cls: OutTimeSpan>StructProperty>/Script/CoreUObject)
+	GetTimeSpanValue (0-0-0-0): size 206 (cls: GetTimeSpanValue>Function>/Script/CoreUObject)
+	ChallengeQuestWidget_C (0-0-0-0): size 498 (cls: ChallengeQuestWidget_C>WidgetBlueprintGeneratedClass>/Script/UMG):
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
 			bValidTemplate(BoolProperty)=True 
 			TemplateAsset(SoftObjectProperty)=/Game/Athena/UI/Challenges/ChallengeQuestWidget.WidgetArchetype 
-	Default__ChallengeQuestWidget_C (0-0-0-0): size 97 (cls: Default__ChallengeQuestWidget_C>ChallengeQuestWidget_C):
+	Default__ChallengeQuestWidget_C (0-0-0-0): size 310 (cls: Default__ChallengeQuestWidget_C>ChallengeQuestWidget_C):
 		Tag array:
-			StarsItemDefinition(SoftObjectProperty)=/Game/Items/PersistentResources/AthenaSeasonalBP.AthenaSeasonalBP 
+			StarsItemDefinition(SoftObjectProperty)=/Game/Items/PersistentResources/AthenaBattleStar.AthenaBattleStar 
+			LockReason(StructProperty)=System.Byte[] 
 			bHasScriptImplementedTick(BoolProperty)=False 
 			bHasScriptImplementedPaint(BoolProperty)=False 
 	CallFunc_GetObjectives_BP_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetObjectives_BP_ReturnValue>StructProperty>/Script/CoreUObject)
@@ -431,6 +479,7 @@ Serialized exports:
 	VisibleObjectives (0-0-0-0): size 36 (cls: VisibleObjectives>ObjectProperty>/Script/CoreUObject)
 	VisibleObjectives (0-0-0-0): size 36 (cls: VisibleObjectives>ArrayProperty>/Script/CoreUObject)
 	CallFunc_Greater_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Greater_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_ContainsReward_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_ContainsReward_ReturnValue>BoolProperty>/Script/CoreUObject)
@@ -443,6 +492,7 @@ Serialized exports:
 	K2Node_SwitchEnum_CmpSuccess (0-0-0-0): size 34 (cls: K2Node_SwitchEnum_CmpSuccess>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable1 (0-0-0-0): size 34 (cls: Temp_bool_Variable1>BoolProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	CallFunc_GetCombinedDescription_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_GetCombinedDescription_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_TextIsEmpty_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_TextIsEmpty_ReturnValue>BoolProperty>/Script/CoreUObject)
@@ -475,7 +525,7 @@ Serialized exports:
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
-	WidgetArchetype (0-0-0-0): size 676 (cls: WidgetArchetype>ChallengeQuestWidget_C):
+	WidgetArchetype (0-0-0-0): size 705 (cls: WidgetArchetype>ChallengeQuestWidget_C):
 		Tag array:
 			BattleStars(ObjectProperty)=BattleStars=WidgetArchetype 
 			ChainIndex(ObjectProperty)=ChainIndex=WidgetArchetype 
@@ -491,6 +541,7 @@ Serialized exports:
 			Image_0(ObjectProperty)=Image_0=WidgetArchetype 
 			LeftImage(ObjectProperty)=LeftImage=WidgetArchetype 
 			LinearChainQuest(ObjectProperty)=LinearChainQuest=WidgetArchetype 
+			LockedText(ObjectProperty)=LockedText=WidgetArchetype 
 			MidContentSwitcher(ObjectProperty)=MidContentSwitcher=WidgetArchetype 
 			MidProgressVB(ObjectProperty)=MidProgressVB=WidgetArchetype 
 			MidUnknownVB(ObjectProperty)=MidUnknownVB=WidgetArchetype 
@@ -529,72 +580,88 @@ Serialized exports:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=HorizontalBoxSlot_4=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	ChainIndex (0-0-0-0): size 415 (cls: ChainIndex>CommonTextBlock>/Script/CommonUI):
+	ChainIndex (0-0-0-0): size 501 (cls: ChainIndex>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-S-B-70pc_C=/Game/UI/Foundation/Text/TextStyle-Base-S-B-70pc 
 			Text(TextProperty)=99 (8556B8A64379B72E511BD1B292ECA7C1) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	ChainLength (0-0-0-0): size 415 (cls: ChainLength>CommonTextBlock>/Script/CommonUI):
+	ChainLength (0-0-0-0): size 501 (cls: ChainLength>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-S-B-70pc_C=/Game/UI/Foundation/Text/TextStyle-Base-S-B-70pc 
 			Text(TextProperty)=99 (4CC34C7B4A9592AA9BF0BDA9EDF0A128) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	CommonTextBlock_2 (0-0-0-0): size 414 (cls: CommonTextBlock_2>CommonTextBlock>/Script/CommonUI):
+	CommonTextBlock_2 (0-0-0-0): size 500 (cls: CommonTextBlock_2>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-S-B-70pc_C=/Game/UI/Foundation/Text/TextStyle-Base-S-B-70pc 
 			Text(TextProperty)=/ (3FCF37024EA19A0419E6B0A711AD9E1B) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_3=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	ProgressValue (0-0-0-0): size 667 (cls: ProgressValue>CommonTextBlock>/Script/CommonUI):
+	ProgressValue (0-0-0-0): size 714 (cls: ProgressValue>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-AthenaQuestProgress_C=/Game/UI/Foundation/Text/TextStyle-Base-AthenaQuestProgress 
 			Text(TextProperty)=99/99 (001059004C63A2B3DA8EE3974886F6DD) 
 			Font(StructProperty)=System.Byte[] 
-			ShadowColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Right 
 			Slot(ObjectProperty)=OverlaySlot_1=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
 			bIsVariable(BoolProperty)=True 
-	HardTag (0-0-0-0): size 415 (cls: HardTag>CommonTextBlock>/Script/CommonUI):
+	HardTag (0-0-0-0): size 534 (cls: HardTag>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-Red-70pc_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-Red-70pc 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-NoFade_C=/Game/UI/Foundation/Text/TextScrollStyle-NoFade 
 			Text(TextProperty)=(HARD) (44838A9847A45B51C0D07D8F9923765D) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_19=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	ProgressText (0-0-0-0): size 341 (cls: ProgressText>CommonTextBlock>/Script/CommonUI):
+	LockedText (0-0-0-0): size 510 (cls: LockedText>CommonTextBlock>/Script/CommonUI):
+		Tag array:
+			Style(ObjectProperty)=TextStyle-Base-XS-B-40pc_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B-40pc 
+			Text(TextProperty)=LOCKED TEXT (609423C84ADD4AA68424D1B7AA467E7F) 
+			ColorAndOpacity(StructProperty)=System.Byte[] 
+			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
+			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
+			bIsVariable(BoolProperty)=True 
+	ProgressText (0-0-0-0): size 427 (cls: ProgressText>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B 
 			Text(TextProperty)=999 / 999 (5F846F1D4DEFADAEE7146F8537A89E10) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Right 
 			Slot(ObjectProperty)=HorizontalBoxSlot_8=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	TaskName (0-0-0-0): size 440 (cls: TaskName>CommonTextBlock>/Script/CommonUI):
+	TaskName (0-0-0-0): size 559 (cls: TaskName>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-70pc_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-70pc 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-NoFade_C=/Game/UI/Foundation/Text/TextScrollStyle-NoFade 
 			Text(TextProperty)=Full challenge description text (AAF3E665439FC64464B5ADBEF428C1C7) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_18=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	UnknownText (0-0-0-0): size 359 (cls: UnknownText>CommonTextBlock>/Script/CommonUI):
+	UnknownText (0-0-0-0): size 478 (cls: UnknownText>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-70pc_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-70pc 
 			Text(TextProperty)=? ? ? (DC81775E403170305F8ADFBB7D0E7027) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=VerticalBoxSlot_0=WidgetArchetype 
 	DailyQuestProgressWidget (0-0-0-0): size 293 (cls: DailyQuestProgressWidget>DailyQuestProgressWidget_C>/Game/Athena/UI/DailyQuests/DailyQuestProgressWidget):
 		Tag array:
@@ -642,6 +709,10 @@ Serialized exports:
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=VerticalBoxSlot_2=WidgetArchetype 
+	HorizontalBox_1 (0-0-0-0): size 86 (cls: HorizontalBox_1>HorizontalBox>/Script/UMG):
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=WidgetSwitcherSlot_2=WidgetArchetype 
 	HorizontalBox_10 (0-0-0-0): size 86 (cls: HorizontalBox_10>HorizontalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -680,6 +751,16 @@ Serialized exports:
 		Tag array:
 			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
 			Content(ObjectProperty)=CommonTextBlock_2=WidgetArchetype 
+	HorizontalBoxSlot_0 (0-0-0-0): size 111 (cls: HorizontalBoxSlot_0>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=HorizontalBox_1=WidgetArchetype 
+			Content(ObjectProperty)=Image_1=WidgetArchetype 
+	HorizontalBoxSlot_1 (0-0-0-0): size 111 (cls: HorizontalBoxSlot_1>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=HorizontalBox_1=WidgetArchetype 
+			Content(ObjectProperty)=LockedText=WidgetArchetype 
 	HorizontalBoxSlot_18 (0-0-0-0): size 70 (cls: HorizontalBoxSlot_18>HorizontalBoxSlot>/Script/UMG):
 		Tag array:
 			Parent(ObjectProperty)=HorizontalBox_10=WidgetArchetype 
@@ -768,6 +849,13 @@ Serialized exports:
 			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
 			Slot(ObjectProperty)=WidgetSwitcherSlot_1=WidgetArchetype 
 			Visibility(EnumProperty)=ESlateVisibility::SelfHitTestInvisible 
+	Image_1 (0-0-0-0): size 251 (cls: Image_1>Image>/Script/UMG):
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
+			bIsVariable(BoolProperty)=False 
+			Visibility(EnumProperty)=ESlateVisibility::SelfHitTestInvisible 
+	TimeSpanSource (0-0-0-0): size 36 (cls: TimeSpanSource>InterfaceProperty>/Script/CoreUObject)
 	CallFunc_GetAchievedCount_OutTotalAchievedCount (0-0-0-0): size 32 (cls: CallFunc_GetAchievedCount_OutTotalAchievedCount>IntProperty>/Script/CoreUObject)
 	CallFunc_GetAchievedCount_OutTotalRequiredCount (0-0-0-0): size 32 (cls: CallFunc_GetAchievedCount_OutTotalRequiredCount>IntProperty>/Script/CoreUObject)
 	CallFunc_GetObjectiveNeededToComplete_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetObjectiveNeededToComplete_ReturnValue>IntProperty>/Script/CoreUObject)
@@ -789,12 +877,14 @@ Serialized exports:
 	CommonTextBlock_2 (0-0-0-0): size 36 (cls: CommonTextBlock_2>ObjectProperty>/Script/CoreUObject)
 	DailyQuestProgressWidget (0-0-0-0): size 36 (cls: DailyQuestProgressWidget>ObjectProperty>/Script/CoreUObject)
 	DailyQuestRewardInfo (0-0-0-0): size 36 (cls: DailyQuestRewardInfo>ObjectProperty>/Script/CoreUObject)
+	CallFunc_Conv_InterfaceToObject_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_Conv_InterfaceToObject_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	Glow (0-0-0-0): size 36 (cls: Glow>ObjectProperty>/Script/CoreUObject)
 	HardTag (0-0-0-0): size 36 (cls: HardTag>ObjectProperty>/Script/CoreUObject)
 	HiddenQuestGlow (0-0-0-0): size 36 (cls: HiddenQuestGlow>ObjectProperty>/Script/CoreUObject)
 	Image_0 (0-0-0-0): size 36 (cls: Image_0>ObjectProperty>/Script/CoreUObject)
 	LeftImage (0-0-0-0): size 36 (cls: LeftImage>ObjectProperty>/Script/CoreUObject)
 	LinearChainQuest (0-0-0-0): size 36 (cls: LinearChainQuest>ObjectProperty>/Script/CoreUObject)
+	LockedText (0-0-0-0): size 36 (cls: LockedText>ObjectProperty>/Script/CoreUObject)
 	MidContentSwitcher (0-0-0-0): size 36 (cls: MidContentSwitcher>ObjectProperty>/Script/CoreUObject)
 	MidProgressVB (0-0-0-0): size 36 (cls: MidProgressVB>ObjectProperty>/Script/CoreUObject)
 	MidUnknownVB (0-0-0-0): size 36 (cls: MidUnknownVB>ObjectProperty>/Script/CoreUObject)
@@ -806,6 +896,8 @@ Serialized exports:
 	Bundle (0-0-0-0): size 36 (cls: Bundle>ObjectProperty>/Script/CoreUObject)
 	QuestDefinition (0-0-0-0): size 36 (cls: QuestDefinition>ObjectProperty>/Script/CoreUObject)
 	TaskName (0-0-0-0): size 36 (cls: TaskName>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetOwningPlayer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetOwningPlayer_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_AsFort_Player_Controller (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Player_Controller>ObjectProperty>/Script/CoreUObject)
 	CallFunc_SpawnTooltipContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_SpawnTooltipContext_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	BattleStars (0-0-0-0): size 112 (cls: BattleStars>Overlay>/Script/UMG):
 		Tag array:
@@ -944,6 +1036,8 @@ Serialized exports:
 			Size(StructProperty)=Vector2D(8,1) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_3=WidgetArchetype 
 	CallFunc_MakeLiteralString_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_MakeLiteralString_ReturnValue>StrProperty>/Script/CoreUObject)
+	CallFunc_GetValue_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetValue_ReturnValue>StructProperty>/Script/CoreUObject)
+	LockReason (0-0-0-0): size 36 (cls: LockReason>StructProperty>/Script/CoreUObject)
 	CallFunc_GetChallengeChainRewardInfo_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetChallengeChainRewardInfo_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_GetRewardInfo_BP_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetRewardInfo_BP_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_GetRewardInfo_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetRewardInfo_ReturnValue>StructProperty>/Script/CoreUObject)
@@ -952,6 +1046,10 @@ Serialized exports:
 	K2Node_MakeStruct_FormatArgumentData1 (0-0-0-0): size 36 (cls: K2Node_MakeStruct_FormatArgumentData1>StructProperty>/Script/CoreUObject)
 	CallFunc_Conv_IntToText_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Conv_IntToText_ReturnValue>TextProperty>/Script/CoreUObject)
 	CallFunc_Conv_IntToText_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Conv_IntToText_ReturnValue1>TextProperty>/Script/CoreUObject)
+	CallFunc_FormatLockedReason_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_FormatLockedReason_ReturnValue>TextProperty>/Script/CoreUObject)
+	CallFunc_FormatLockedReason_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_FormatLockedReason_ReturnValue1>TextProperty>/Script/CoreUObject)
+	CallFunc_TextToUpper_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_TextToUpper_ReturnValue>TextProperty>/Script/CoreUObject)
+	CallFunc_TextToUpper_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_TextToUpper_ReturnValue1>TextProperty>/Script/CoreUObject)
 	CallFunc_GetCombinedDescription_OutDescription (0-0-0-0): size 32 (cls: CallFunc_GetCombinedDescription_OutDescription>TextProperty>/Script/CoreUObject)
 	CallFunc_Conv_IntToText_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Conv_IntToText_ReturnValue>TextProperty>/Script/CoreUObject)
 	CallFunc_Conv_IntToText_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Conv_IntToText_ReturnValue1>TextProperty>/Script/CoreUObject)
@@ -999,7 +1097,7 @@ Serialized exports:
 			ActiveWidgetIndex(IntProperty)=2 
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
-	MidContentSwitcher (0-0-0-0): size 86 (cls: MidContentSwitcher>WidgetSwitcher>/Script/UMG):
+	MidContentSwitcher (0-0-0-0): size 90 (cls: MidContentSwitcher>WidgetSwitcher>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=HorizontalBoxSlot_2=WidgetArchetype 
@@ -1039,6 +1137,10 @@ Serialized exports:
 		Tag array:
 			Parent(ObjectProperty)=MidContentSwitcher=WidgetArchetype 
 			Content(ObjectProperty)=MidUnknownVB=WidgetArchetype 
+	WidgetSwitcherSlot_2 (0-0-0-0): size 70 (cls: WidgetSwitcherSlot_2>WidgetSwitcherSlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=MidContentSwitcher=WidgetArchetype 
+			Content(ObjectProperty)=HorizontalBox_1=WidgetArchetype 
 	WidgetSwitcherSlot_2 (0-0-0-0): size 70 (cls: WidgetSwitcherSlot_2>WidgetSwitcherSlot>/Script/UMG):
 		Tag array:
 			Parent(ObjectProperty)=RewardSwitcher=WidgetArchetype 

@@ -2,9 +2,11 @@ Name table:
 	/Engine/Functions/Engine_MaterialFunctions01/Gradient/LinearGradient
 	/Engine/Functions/Engine_MaterialFunctions01/ImageAdjustment/CheapContrast
 	/Engine/Functions/Engine_MaterialFunctions01/Texturing/WorldAlignedTexture
+	/Engine/Functions/Engine_MaterialFunctions02/Texturing/CustomRotator
 	/Engine/Functions/Engine_MaterialFunctions02/Utility/CameraDirectionVector
 	/Game/Effects/Fort_Effects/Materials/M_Auroras
 	/Game/Effects/Fort_Effects/Textures/T_Smooth_tile
+	/Game/Effects/Fort_Effects/Textures/Tile/LowResBlurredNoise
 	/Game/Packages/Fortress_SharedMaterials/GlobalMaterialParameters/FortniteMaterialParameters
 	/Script/CoreUObject
 	/Script/Engine
@@ -24,17 +26,21 @@ Name table:
 	Collection
 	ColorLerpPower
 	ColorMaterialInput
+	Coordinates
+	CustomRotator
 	Default
 	Default__Material
 	Default__MaterialExpressionCollectionParameter
 	Default__MaterialExpressionFeatureLevelSwitch
 	Default__MaterialExpressionMaterialFunctionCall
 	Default__MaterialExpressionScalarParameter
-	Default__MaterialExpressionTextureObject
+	Default__MaterialExpressionTextureObjectParameter
+	Default__MaterialExpressionTextureSample
 	Default__MaterialExpressionVectorParameter
 	DefaultValue
 	EBlendMode
 	EdgeColor
+	EMaterialSamplerType
 	EMaterialShadingModel
 	EmissiveColor
 	ExpressionGUID
@@ -46,10 +52,12 @@ Name table:
 	Function
 	Guid
 	HeightVariance
+	HeightVariancePanSpeed
 	Hide
 	Inputs
 	LinearColor
 	LinearGradient
+	LowResBlurredNoise
 	M_Auroras
 	MaskHardness
 	Material
@@ -62,8 +70,10 @@ Name table:
 	MaterialExpressionLinearInterpolate
 	MaterialExpressionMaterialFunctionCall
 	MaterialExpressionMultiply
+	MaterialExpressionPanner
 	MaterialExpressionScalarParameter
-	MaterialExpressionTextureObject
+	MaterialExpressionTextureObjectParameter
+	MaterialExpressionTextureSample
 	MaterialExpressionVectorParameter
 	MaterialFunction
 	MaterialFunctionInfo
@@ -81,6 +91,8 @@ Name table:
 	ParameterCollection
 	ParameterId
 	ParameterName
+	SamplerType
+	SAMPLERTYPE_Grayscale
 	ShadingModel
 	StateId
 	StructProperty
@@ -91,9 +103,7 @@ Name table:
 	TwoSided
 	VectorMaterialInput
 	WaveLength
-	WaveLength2
 	WaveSpeed
-	WaveSpeed2
 	WaveStrength
 	WorldAlignedPanDirection
 	WorldAlignedPanSpeed
@@ -101,7 +111,7 @@ Name table:
 	WorldAlignedTexture
 	WorldPositionOffset
 Serialized exports:
-	M_Auroras (0-0-0-0): size 25862 (cls: M_Auroras>Material>/Script/Engine):
+	M_Auroras (0-0-0-0): size 42334 (cls: M_Auroras>Material>/Script/Engine):
 		Tag array:
 			EmissiveColor(StructProperty)=System.Byte[] 
 			BlendMode(ByteProperty)=BLEND_Additive 
@@ -112,7 +122,7 @@ Serialized exports:
 			MaterialFunctionInfos(ArrayProperty)=[object] (inner: StructProperty)
 			MaterialParameterCollectionInfos(ArrayProperty)=[object] (inner: StructProperty)
 			bCanMaskedBeAssumedOpaque(BoolProperty)=True 
-			StateId(StructProperty)=Guid: 2145333306-1177534582-120703421-2354667228 
+			StateId(StructProperty)=Guid: 2535036253-1246349199-668330917-1738627422 
 			CachedQualityLevelsUsed(ArrayProperty)=[object] (inner: BoolProperty)
 	MaterialExpressionCollectionParameter_3 (0-0-0-0): size 168 (cls: MaterialExpressionCollectionParameter_3>MaterialExpressionCollectionParameter>/Script/Engine):
 		Tag array:
@@ -148,13 +158,13 @@ Serialized exports:
 			Material(ObjectProperty)=M_Auroras= 
 	MaterialExpressionScalarParameter_0 (0-0-0-0): size 168 (cls: MaterialExpressionScalarParameter_0>MaterialExpressionScalarParameter>/Script/Engine):
 		Tag array:
-			DefaultValue(FloatProperty)=0.92 
+			DefaultValue(FloatProperty)=0.9 
 			ParameterName(NameProperty)=MaskHardness 
 			ExpressionGUID(StructProperty)=Guid: 1572956698-1330985903-122511805-2149654328 
 			Material(ObjectProperty)=M_Auroras= 
 	MaterialExpressionScalarParameter_1 (0-0-0-0): size 168 (cls: MaterialExpressionScalarParameter_1>MaterialExpressionScalarParameter>/Script/Engine):
 		Tag array:
-			DefaultValue(FloatProperty)=90000 
+			DefaultValue(FloatProperty)=80000 
 			ParameterName(NameProperty)=WorldAlignedTexScale 
 			ExpressionGUID(StructProperty)=Guid: 2325300677-1108541288-1383578538-2213531998 
 			Material(ObjectProperty)=M_Auroras= 
@@ -172,7 +182,7 @@ Serialized exports:
 			Material(ObjectProperty)=M_Auroras= 
 	MaterialExpressionScalarParameter_12 (0-0-0-0): size 168 (cls: MaterialExpressionScalarParameter_12>MaterialExpressionScalarParameter>/Script/Engine):
 		Tag array:
-			DefaultValue(FloatProperty)=10 
+			DefaultValue(FloatProperty)=5 
 			ParameterName(NameProperty)=ColorLerpPower 
 			ExpressionGUID(StructProperty)=Guid: 2100403475-1318189842-698026158-1278325000 
 			Material(ObjectProperty)=M_Auroras= 
@@ -184,7 +194,7 @@ Serialized exports:
 			Material(ObjectProperty)=M_Auroras= 
 	MaterialExpressionScalarParameter_14 (0-0-0-0): size 168 (cls: MaterialExpressionScalarParameter_14>MaterialExpressionScalarParameter>/Script/Engine):
 		Tag array:
-			DefaultValue(FloatProperty)=0.5 
+			DefaultValue(FloatProperty)=0.3 
 			ParameterName(NameProperty)=Min 
 			ExpressionGUID(StructProperty)=Guid: 4137113869-1276269844-3396259765-1328408122 
 			Material(ObjectProperty)=M_Auroras= 
@@ -196,43 +206,51 @@ Serialized exports:
 			Material(ObjectProperty)=M_Auroras= 
 	MaterialExpressionScalarParameter_3 (0-0-0-0): size 168 (cls: MaterialExpressionScalarParameter_3>MaterialExpressionScalarParameter>/Script/Engine):
 		Tag array:
-			DefaultValue(FloatProperty)=1 
+			DefaultValue(FloatProperty)=1.4 
 			ParameterName(NameProperty)=AngleFade 
 			ExpressionGUID(StructProperty)=Guid: 527118644-1296874570-1664237441-3995787229 
 			Material(ObjectProperty)=M_Auroras= 
-	MaterialExpressionScalarParameter_4 (0-0-0-0): size 168 (cls: MaterialExpressionScalarParameter_4>MaterialExpressionScalarParameter>/Script/Engine):
-		Tag array:
-			DefaultValue(FloatProperty)=140000 
-			ParameterName(NameProperty)=WaveLength2 
-			ExpressionGUID(StructProperty)=Guid: 15636808-1152317870-1625025157-3673063655 
-			Material(ObjectProperty)=M_Auroras= 
 	MaterialExpressionScalarParameter_5 (0-0-0-0): size 168 (cls: MaterialExpressionScalarParameter_5>MaterialExpressionScalarParameter>/Script/Engine):
 		Tag array:
-			DefaultValue(FloatProperty)=35 
+			DefaultValue(FloatProperty)=25 
 			ParameterName(NameProperty)=WaveStrength 
 			ExpressionGUID(StructProperty)=Guid: 500273365-1132259520-1755686274-1586922887 
 			Material(ObjectProperty)=M_Auroras= 
 	MaterialExpressionScalarParameter_6 (0-0-0-0): size 168 (cls: MaterialExpressionScalarParameter_6>MaterialExpressionScalarParameter>/Script/Engine):
 		Tag array:
-			DefaultValue(FloatProperty)=0.1 
+			DefaultValue(FloatProperty)=0.08 
 			ParameterName(NameProperty)=WaveSpeed 
 			ExpressionGUID(StructProperty)=Guid: 1916255119-1168952110-3623697038-4125206844 
 			Material(ObjectProperty)=M_Auroras= 
-	MaterialExpressionScalarParameter_7 (0-0-0-0): size 168 (cls: MaterialExpressionScalarParameter_7>MaterialExpressionScalarParameter>/Script/Engine):
+	MaterialExpressionScalarParameter_8 (0-0-0-0): size 168 (cls: MaterialExpressionScalarParameter_8>MaterialExpressionScalarParameter>/Script/Engine):
 		Tag array:
-			DefaultValue(FloatProperty)=0.04 
-			ParameterName(NameProperty)=WaveSpeed2 
-			ExpressionGUID(StructProperty)=Guid: 4181305950-1326558138-1454492340-1084554503 
+			DefaultValue(FloatProperty)=2 
+			ParameterName(NameProperty)=HeightVariancePanSpeed 
+			ExpressionGUID(StructProperty)=Guid: 2839303906-1077319087-860856463-2685583212 
 			Material(ObjectProperty)=M_Auroras= 
 	MaterialExpressionScalarParameter_9 (0-0-0-0): size 168 (cls: MaterialExpressionScalarParameter_9>MaterialExpressionScalarParameter>/Script/Engine):
 		Tag array:
-			DefaultValue(FloatProperty)=170000 
+			DefaultValue(FloatProperty)=200000 
 			ParameterName(NameProperty)=WaveLength 
 			ExpressionGUID(StructProperty)=Guid: 3096929022-1278843569-3935876515-1236497370 
 			Material(ObjectProperty)=M_Auroras= 
-	MaterialExpressionTextureObject_1 (0-0-0-0): size 70 (cls: MaterialExpressionTextureObject_1>MaterialExpressionTextureObject>/Script/Engine):
+	MaterialExpressionTextureObjectParameter_0 (0-0-0-0): size 168 (cls: MaterialExpressionTextureObjectParameter_0>MaterialExpressionTextureObjectParameter>/Script/Engine):
 		Tag array:
+			ParameterName(NameProperty)=WorldAlignedTexture 
+			ExpressionGUID(StructProperty)=Guid: 1162679805-1250393929-4254617482-3016640488 
 			Texture(ObjectProperty)=T_Smooth_tile=/Game/Effects/Fort_Effects/Textures/T_Smooth_tile 
+			Material(ObjectProperty)=M_Auroras= 
+	MaterialExpressionTextureSample_0 (0-0-0-0): size 200 (cls: MaterialExpressionTextureSample_0>MaterialExpressionTextureSample>/Script/Engine):
+		Tag array:
+			Coordinates(StructProperty)=System.Byte[] 
+			Texture(ObjectProperty)=LowResBlurredNoise=/Game/Effects/Fort_Effects/Textures/Tile/LowResBlurredNoise 
+			SamplerType(ByteProperty)=SAMPLERTYPE_Grayscale 
+			Material(ObjectProperty)=M_Auroras= 
+	MaterialExpressionTextureSample_2 (0-0-0-0): size 200 (cls: MaterialExpressionTextureSample_2>MaterialExpressionTextureSample>/Script/Engine):
+		Tag array:
+			Coordinates(StructProperty)=System.Byte[] 
+			Texture(ObjectProperty)=LowResBlurredNoise=/Game/Effects/Fort_Effects/Textures/Tile/LowResBlurredNoise 
+			SamplerType(ByteProperty)=SAMPLERTYPE_Grayscale 
 			Material(ObjectProperty)=M_Auroras= 
 	MaterialExpressionVectorParameter_0 (0-0-0-0): size 204 (cls: MaterialExpressionVectorParameter_0>MaterialExpressionVectorParameter>/Script/Engine):
 		Tag array:

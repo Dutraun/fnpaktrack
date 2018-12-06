@@ -5,6 +5,7 @@ Name table:
 	/Game/Athena/UI/Matchmaking/MatchmakingInputIndicator
 	/Game/UI/Foundation/Banner/M-CrownShine
 	/Game/UI/Foundation/Fonts/Burbank
+	/Game/UI/Foundation/Fonts/NotoSans
 	/Game/UI/Foundation/Input/InputActionDataTable
 	/Game/UI/Foundation/PowerRating/Border-PowerBar
 	/Game/UI/Foundation/PowerRating/M-ProgressBar-Power
@@ -13,6 +14,7 @@ Name table:
 	/Game/UI/Foundation/Text/Materials/M-HomeBasePower-Font
 	/Game/UI/Foundation/Text/Materials/M-HomeBasePower-OuterGlow
 	/Game/UI/Foundation/Text/Materials/M_Font_Horizon_Dynamic
+	/Game/UI/Foundation/Text/TextStyle-Base
 	/Game/UI/Foundation/Text/TextStyle-Base-XS-B-Red-Outline
 	/Game/UI/Foundation/Text/TextStyle-Header-HomeBasePower
 	/Game/UI/Foundation/Text/TextStyle-Header-L
@@ -61,6 +63,7 @@ Name table:
 	BattlePassFriendXpBoost
 	BattlePassLevel
 	BattlePassSelfXpBoost
+	bBattlePassPurchased
 	bClassRequiresNativeTick
 	bCookedWidgetTree
 	bEvaluateInPostroll
@@ -88,6 +91,7 @@ Name table:
 	BlurStrength
 	bManualEaseOut
 	BooleanAND
+	BooleanOR
 	BoolProperty
 	Border
 	Border-LeftBackplate
@@ -109,10 +113,13 @@ Name table:
 	bValidTemplate
 	ByteProperty
 	CallFunc_BooleanAND_ReturnValue
+	CallFunc_BooleanOR_ReturnValue
+	CallFunc_EqualEqual_ByteByte_ReturnValue
+	CallFunc_EqualEqual_ByteByte_ReturnValue1
 	CallFunc_GetContext_ReturnValue
 	CallFunc_GetContext_ReturnValue1
 	CallFunc_IsUsingGamepad_ReturnValue
-	CallFunc_NotEqual_ByteByte_ReturnValue
+	CallFunc_Not_PreBool_ReturnValue
 	CallFunc_PlayAnimationAtTime_ReturnValue
 	CallFunc_PlayAnimationAtTime_ReturnValue1
 	ChildTemplates
@@ -174,6 +181,7 @@ Name table:
 	Default__StructProperty
 	Default__TeamMemberPedestal_Nameplate_C
 	Default__TextStyle-Base-XS-B-Red-Outline_C
+	Default__TextStyle-Base_C
 	Default__TextStyle-Header-HomeBasePower_C
 	Default__TextStyle-Header-L_C
 	Default__TextStyle-Header-M-Horizon_C
@@ -212,6 +220,7 @@ Name table:
 	EntryPoint
 	Enum
 	EnumProperty
+	EqualEqual_ByteByte
 	ERichCurveExtrapolation
 	ERichCurveInterpMode
 	ERichCurveTangentMode
@@ -389,9 +398,11 @@ Name table:
 	NameProperty
 	NewCamera
 	None
-	NotEqual_ByteByte
+	Not_PreBool
 	NotifyFunctionName
+	NotoSans
 	NotoSans-Bold
+	NotoSans-Regular
 	NotReadyTextColor
 	NotReadyTextColor_INST
 	Numerator
@@ -407,8 +418,8 @@ Name table:
 	On Ready Change Text
 	On Ready Change Text_INST
 	OnCameraChangedDelegate__DelegateSignature
-	OnFrontEndCameraChanged
 	OnFrontendCameraChanged
+	OnFrontEndCameraChanged
 	OnReadyStatusChanged
 	OnTeamMemberEstablished
 	OutlineColor
@@ -476,6 +487,7 @@ Name table:
 	SequenceID
 	SequenceSignature
 	SetVisibility
+	ShadowOffset
 	Shear
 	ShowDualPower
 	ShowProgress
@@ -530,6 +542,7 @@ Name table:
 	Text_ReadyStatus
 	TextProperty
 	TextStyle-Base-XS-B-Red-Outline_C
+	TextStyle-Base_C
 	TextStyle-Header-HomeBasePower_C
 	TextStyle-Header-L_C
 	TextStyle-Header-M-Horizon_C
@@ -548,7 +561,6 @@ Name table:
 	Translation
 	TypefaceFontName
 	UberGraphFrame
-	UberGraphFramePointerProperty
 	UberGraphFunction
 	UInt16Property
 	UInt32Property
@@ -583,7 +595,7 @@ Name table:
 	WidthOverride
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	TeamMemberPedestal_Nameplate_C (0-0-0-0): size 463 (cls: TeamMemberPedestal_Nameplate_C>WidgetBlueprintGeneratedClass>/Script/UMG):
+	TeamMemberPedestal_Nameplate_C (0-0-0-0): size 434 (cls: TeamMemberPedestal_Nameplate_C>WidgetBlueprintGeneratedClass>/Script/UMG):
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
@@ -591,9 +603,8 @@ Serialized exports:
 			bClassRequiresNativeTick(BoolProperty)=True 
 			Animations(ArrayProperty)=[object] (inner: ObjectProperty)
 			TemplateAsset(SoftObjectProperty)=/Game/UI/Frontend/Lobby/PlayerPad/TeamMemberPedestal_Nameplate.WidgetArchetype 
-			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=TeamMemberPedestal_Nameplate_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_TeamMemberPedestal_Nameplate=TeamMemberPedestal_Nameplate_C 
-	Default__TeamMemberPedestal_Nameplate_C (0-0-0-0): size 4138 (cls: Default__TeamMemberPedestal_Nameplate_C>TeamMemberPedestal_Nameplate_C):
+	Default__TeamMemberPedestal_Nameplate_C (0-0-0-0): size 4164 (cls: Default__TeamMemberPedestal_Nameplate_C>TeamMemberPedestal_Nameplate_C):
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			TeamMemberInfo(StructProperty)=System.Byte[] 
@@ -617,10 +628,13 @@ Serialized exports:
 	bIsTalking (0-0-0-0): size 34 (cls: bIsTalking>BoolProperty>/Script/CoreUObject)
 	NotReadyTextColor (0-0-0-0): size 36 (cls: NotReadyTextColor>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_TeamMemberPedestal_Nameplate (0-0-0-0): size 733 (cls: ExecuteUbergraph_TeamMemberPedestal_Nameplate>Function>/Script/CoreUObject)
+	ExecuteUbergraph_TeamMemberPedestal_Nameplate (0-0-0-0): size 803 (cls: ExecuteUbergraph_TeamMemberPedestal_Nameplate>Function>/Script/CoreUObject)
 	CallFunc_BooleanAND_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_BooleanOR_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanOR_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_EqualEqual_ByteByte_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ByteByte_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_EqualEqual_ByteByte_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ByteByte_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsUsingGamepad_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsUsingGamepad_ReturnValue>BoolProperty>/Script/CoreUObject)
-	CallFunc_NotEqual_ByteByte_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_NotEqual_ByteByte_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_Not_PreBool_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue>BoolProperty>/Script/CoreUObject)
 	K2Node_Event_bIsReadyForMatchmaking (0-0-0-0): size 34 (cls: K2Node_Event_bIsReadyForMatchmaking>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable1 (0-0-0-0): size 34 (cls: Temp_bool_Variable1>BoolProperty>/Script/CoreUObject)
@@ -628,11 +642,11 @@ Serialized exports:
 	Temp_bool_Variable3 (0-0-0-0): size 34 (cls: Temp_bool_Variable3>BoolProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	NewCamera (0-0-0-0): size 40 (cls: NewCamera>EnumProperty>/Script/CoreUObject)
-	OnFrontendCameraChanged (0-0-0-0): size 86 (cls: OnFrontendCameraChanged>Function>/Script/CoreUObject)
-	Construct (0-0-0-0): size 58 (cls: Construct>Function>/Script/CoreUObject)
+	OnFrontendCameraChanged (0-0-0-0): size 82 (cls: OnFrontendCameraChanged>Function>/Script/CoreUObject)
+	Construct (0-0-0-0): size 54 (cls: Construct>Function>/Script/CoreUObject)
 	UniqueId (0-0-0-0): size 36 (cls: UniqueId>StructProperty>/Script/CoreUObject)
-	OnTeamMemberEstablished (0-0-0-0): size 72 (cls: OnTeamMemberEstablished>Function>/Script/CoreUObject)
-	OnReadyStatusChanged (0-0-0-0): size 72 (cls: OnReadyStatusChanged>Function>/Script/CoreUObject)
+	OnTeamMemberEstablished (0-0-0-0): size 68 (cls: OnTeamMemberEstablished>Function>/Script/CoreUObject)
+	OnReadyStatusChanged (0-0-0-0): size 68 (cls: OnReadyStatusChanged>Function>/Script/CoreUObject)
 	bIsReadyForMatchmaking (0-0-0-0): size 34 (cls: bIsReadyForMatchmaking>BoolProperty>/Script/CoreUObject)
 	Border-LeftBackplate (0-0-0-0): size 659 (cls: Border-LeftBackplate>Border>/Script/UMG):
 		Tag array:
@@ -671,54 +685,61 @@ Serialized exports:
 			Padding(StructProperty)=System.Byte[] 
 			Background(StructProperty)=System.Byte[] 
 			bIsVariable(BoolProperty)=True 
-	BuffedRatingValue (0-0-0-0): size 547 (cls: BuffedRatingValue>CommonNumericTextBlock>/Script/CommonUI):
+	BuffedRatingValue (0-0-0-0): size 604 (cls: BuffedRatingValue>CommonNumericTextBlock>/Script/CommonUI):
 		Tag array:
 			CurrentNumericValue(FloatProperty)=1 
 			InterpolationUpdateInterval(FloatProperty)=0.1 
 			Style(ObjectProperty)=TextStyle-Header-HomeBasePower_C=/Game/UI/Foundation/Text/TextStyle-Header-HomeBasePower 
 			Text(TextProperty)= () 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	RatingValue-Large (0-0-0-0): size 312 (cls: RatingValue-Large>CommonNumericTextBlock>/Script/CommonUI):
+	RatingValue-Large (0-0-0-0): size 369 (cls: RatingValue-Large>CommonNumericTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-XL_C=/Game/UI/Foundation/Text/TextStyle-Header-XL 
 			Text(TextProperty)= () 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=OverlaySlot_4=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	BaseRating-Value-Large (0-0-0-0): size 187 (cls: BaseRating-Value-Large>CommonTextBlock>/Script/CommonUI):
+	BaseRating-Value-Large (0-0-0-0): size 392 (cls: BaseRating-Value-Large>CommonTextBlock>/Script/CommonUI):
 		Tag array:
+			Style(ObjectProperty)=TextStyle-Base_C=/Game/UI/Foundation/Text/TextStyle-Base 
 			Text(TextProperty)=(0) (6CBEC63A43147802D3FB868BAD5F4172) 
+			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
 			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
-	BaseRatingValue (0-0-0-0): size 323 (cls: BaseRatingValue>CommonTextBlock>/Script/CommonUI):
+	BaseRatingValue (0-0-0-0): size 380 (cls: BaseRatingValue>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-L_C=/Game/UI/Foundation/Text/TextStyle-Header-L 
 			Text(TextProperty)=(1) (C067A1E64F17A81BAD51E8BD92FC90CC) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_2=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	CommonTextBlock_0 (0-0-0-0): size 505 (cls: CommonTextBlock_0>CommonTextBlock>/Script/CommonUI):
+	CommonTextBlock_0 (0-0-0-0): size 562 (cls: CommonTextBlock_0>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-M-Horizon_C=/Game/UI/Foundation/Text/TextStyle-Header-M-Horizon 
 			Text(TextProperty)=POWER (068BC090485EF13E5D9BB1A9F5BD8944) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 	Text_MemberName (0-0-0-0): size 484 (cls: Text_MemberName>CommonTextBlock>/Script/CommonUI):
 		Tag array:
-			Style(ObjectProperty)=[object] 
 			Text(TextProperty)=Team Member Name (6A3D7FF94E81B4F914CC488CA0E7B76A) 
 			Font(StructProperty)=System.Byte[] 
 			Slot(ObjectProperty)=VerticalBoxSlot_6=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	Text_ReadyStatus (0-0-0-0): size 614 (cls: Text_ReadyStatus>CommonTextBlock>/Script/CommonUI):
+	Text_ReadyStatus (0-0-0-0): size 700 (cls: Text_ReadyStatus>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B-Red-Outline_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B-Red-Outline 
 			Text(TextProperty)=Not Ready (F85899CA4559EF098F663BA4739FBBB2) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Center 
 			Slot(ObjectProperty)=VerticalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
@@ -730,8 +751,8 @@ Serialized exports:
 	K2Node_CustomEvent_NewCamera (0-0-0-0): size 40 (cls: K2Node_CustomEvent_NewCamera>EnumProperty>/Script/CoreUObject)
 	K2Node_CustomEvent_OldCamera (0-0-0-0): size 40 (cls: K2Node_CustomEvent_OldCamera>EnumProperty>/Script/CoreUObject)
 	K2Node_Select1_Default (0-0-0-0): size 40 (cls: K2Node_Select1_Default>EnumProperty>/Script/CoreUObject)
+	K2Node_Select2_Default (0-0-0-0): size 40 (cls: K2Node_Select2_Default>EnumProperty>/Script/CoreUObject)
 	K2Node_Select3_Default (0-0-0-0): size 40 (cls: K2Node_Select3_Default>EnumProperty>/Script/CoreUObject)
-	K2Node_Select_Default (0-0-0-0): size 40 (cls: K2Node_Select_Default>EnumProperty>/Script/CoreUObject)
 	Temp_byte_Variable (0-0-0-0): size 40 (cls: Temp_byte_Variable>EnumProperty>/Script/CoreUObject)
 	Temp_byte_Variable1 (0-0-0-0): size 40 (cls: Temp_byte_Variable1>EnumProperty>/Script/CoreUObject)
 	Temp_byte_Variable2 (0-0-0-0): size 40 (cls: Temp_byte_Variable2>EnumProperty>/Script/CoreUObject)
@@ -1033,7 +1054,7 @@ Serialized exports:
 	CallFunc_GetContext_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue1>ObjectProperty>/Script/CoreUObject)
 	CallFunc_PlayAnimationAtTime_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlayAnimationAtTime_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_PlayAnimationAtTime_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_PlayAnimationAtTime_ReturnValue1>ObjectProperty>/Script/CoreUObject)
-	K2Node_Select2_Default (0-0-0-0): size 36 (cls: K2Node_Select2_Default>ObjectProperty>/Script/CoreUObject)
+	K2Node_Select_Default (0-0-0-0): size 36 (cls: K2Node_Select_Default>ObjectProperty>/Script/CoreUObject)
 	InputActionWidget (0-0-0-0): size 36 (cls: InputActionWidget>ObjectProperty>/Script/CoreUObject)
 	On Ready Change Text (0-0-0-0): size 36 (cls: On Ready Change Text>ObjectProperty>/Script/CoreUObject)
 	ReadyTextColor (0-0-0-0): size 36 (cls: ReadyTextColor>ObjectProperty>/Script/CoreUObject)
@@ -1247,8 +1268,8 @@ Serialized exports:
 			Text_ReadyStatus(ObjectProperty)=Text_ReadyStatus=WidgetArchetype 
 			InputIndicator_ActiveInputType(ObjectProperty)=InputIndicator_ActiveInputType=WidgetArchetype 
 			PlayerTracker_CampaignPower(ObjectProperty)=PlayerTracker_CampaignPower=WidgetArchetype 
-			Text_MemberName(ObjectProperty)=Text_MemberName=WidgetArchetype 
 			Banner_MemberBanner(ObjectProperty)=Banner_MemberBanner=WidgetArchetype 
+			Text_MemberName(ObjectProperty)=Text_MemberName=WidgetArchetype 
 			Image_LeaderIcon(ObjectProperty)=Image_LeaderIcon=WidgetArchetype 
 			Image_PlatformIcon(ObjectProperty)=Image_PlatformIcon=WidgetArchetype 
 			VoiceIcon_Status(ObjectProperty)=VoiceIcon_Status=WidgetArchetype 

@@ -6,6 +6,7 @@ Name table:
 	/Game/Athena/UI/Frontend/AthenaDirectAcquisitionOfferDetailsWidget
 	/Game/Athena/UI/Frontend/AthenaDirectAcquisitionOfferWidget
 	/Game/Athena/UI/Frontend/AthenaDirectAcquisitionOfferWidget.WidgetArchetype
+	/Game/Items/PersistentResources/AthenaBattleStar
 	/Game/Sounds/Fort_UI_Sounds/FrontEnd/Fort_Athena_DirectAcquisition_Hover_Cue
 	/Game/Sounds/Fort_UI_Sounds/FrontEnd/Fort_Athena_LockerItem_Pressed
 	/Game/UI/Foundation/Border/Border_BattleLoot_ColorBG_Dynamic
@@ -17,6 +18,7 @@ Name table:
 	/Game/UI/Foundation/Buttons/ButtonStyles/ButtonStyle-Solid-SquareM-Selectable
 	/Game/UI/Foundation/Buttons/Materials/M-Button-Console-YellowOutline
 	/Game/UI/Foundation/Fonts/Burbank
+	/Game/UI/Foundation/Fonts/NotoSans
 	/Game/UI/Foundation/Items/ItemCount
 	/Game/UI/Foundation/Materials/M-BattlePassStarStoreDisplay
 	/Game/UI/Foundation/Materials/M-FoundersPanel
@@ -24,6 +26,7 @@ Name table:
 	/Game/UI/Foundation/Materials/M_UI_StrikeThrough
 	/Game/UI/Foundation/Text/Materials/M_Font_Horizon_Dynamic
 	/Game/UI/Foundation/Text/TextScrollStyle-Base
+	/Game/UI/Foundation/Text/TextStyle-Base
 	/Game/UI/Foundation/Text/TextStyle-Base-L-B
 	/Game/UI/Foundation/Text/TextStyle-Base-M-B
 	/Game/UI/Foundation/Text/TextStyle-Base-M_B_Grey
@@ -77,6 +80,7 @@ Name table:
 	ArrayProperty
 	ArriveTangent
 	ArriveTangentWeight
+	AthenaBattleStar
 	AthenaDirectAcquisitionMTXDetails_C
 	AthenaDirectAcquisitionOffer_PercentageOffBanner
 	AthenaDirectAcquisitionOffer_SalesTextBanner_C
@@ -92,6 +96,7 @@ Name table:
 	BannerOverrideTag
 	bApplyOutlineToDropShadows
 	BattlePassGlow
+	BattleStarTemplate
 	bClassRequiresNativeTick
 	bCookedWidgetTree
 	bEvalNearestSection
@@ -214,6 +219,7 @@ Name table:
 	CallFunc_GetOfferInfo_ReturnValue1
 	CallFunc_GetOfferType_ReturnValue
 	CallFunc_GetOwningPlayer_ReturnValue
+	CallFunc_GetPersistentName_ReturnValue
 	CallFunc_GetPriceItem_RequiredItemCount
 	CallFunc_GetPriceItem_ReturnValue
 	CallFunc_GetQuantityRemaining_ReturnValue
@@ -232,7 +238,6 @@ Name table:
 	CallFunc_Greater_FloatFloat_ReturnValue
 	CallFunc_Greater_FloatFloat_ReturnValue1
 	CallFunc_Greater_IntInt_ReturnValue
-	CallFunc_Greater_IntInt_ReturnValue1
 	CallFunc_GreaterEqual_IntInt_ReturnValue
 	CallFunc_HasCatalogOfferName_CatalogOfferName
 	CallFunc_HasCatalogOfferName_ReturnValue
@@ -252,6 +257,7 @@ Name table:
 	CallFunc_MakeLiteralText_ReturnValue1
 	CallFunc_Not_PreBool_ReturnValue
 	CallFunc_Not_PreBool_ReturnValue1
+	CallFunc_NotEqual_IntInt_ReturnValue
 	CallFunc_Percent_IntInt_ReturnValue
 	CallFunc_Percent_IntInt_ReturnValue1
 	CallFunc_PlayAnimationAtTime_ReturnValue
@@ -365,6 +371,7 @@ Name table:
 	Default__TextStyle-Base-XS-B-70pc_C
 	Default__TextStyle-Base-XS-B_C
 	Default__TextStyle-Base-XS-Grey_C
+	Default__TextStyle-Base_C
 	Default__TextStyle-Header-M-Horizon-SeasonPass_C
 	Default__TextStyle-Header-M-Horizon_C
 	Default__TextStyle-Header-S-Horizon-SeasonPass_C
@@ -475,11 +482,13 @@ Name table:
 	FortDirectAcquisitionOfferInfo
 	FortDirectAcquisitionOfferWidgetBase
 	FortGlobalUIContext
+	FortItemDefinition
 	FortItemView
 	FortKismetLibrary
 	FortMcpContext
 	FortMtxGradient
 	FortMtxOfferData
+	FortPersistentResourceItemDefinition
 	FortRarityData
 	FortRarityItemData
 	FortUIManagerWidget_NUI
@@ -511,6 +520,7 @@ Name table:
 	GetOfferInfo
 	GetOfferType
 	GetOwningPlayer
+	GetPersistentName
 	GetPriceItem
 	GetQuantityRemaining
 	GetRarity
@@ -703,8 +713,11 @@ Name table:
 	NormalPrice
 	not owned bundle items (local)
 	Not_PreBool
+	NotEqual_IntInt
 	NotifyFunctionName
+	NotoSans
 	NotoSans-Bold
+	NotoSans-Regular
 	Numerator
 	NumEvalPtrs
 	NumInitPtrs
@@ -819,6 +832,7 @@ Name table:
 	SetVectorParameterValue
 	SetVisibility
 	SetWidthOverride
+	ShadowOffset
 	Shear
 	ShortDescriptionText
 	Signature
@@ -879,6 +893,7 @@ Name table:
 	TextOfferDisplayPrice
 	TextProperty
 	TextScrollStyle-Base_C
+	TextStyle
 	TextStyle-Base-L-B_C
 	TextStyle-Base-M-B_C
 	TextStyle-Base-M_B_Grey_C
@@ -888,6 +903,7 @@ Name table:
 	TextStyle-Base-XS-B-70pc_C
 	TextStyle-Base-XS-B_C
 	TextStyle-Base-XS-Grey_C
+	TextStyle-Base_C
 	TextStyle-Header-M-Horizon-SeasonPass_C
 	TextStyle-Header-M-Horizon_C
 	TextStyle-Header-S-Horizon-SeasonPass_C
@@ -910,7 +926,6 @@ Name table:
 	TryToResetCarouselTimer
 	TypefaceFontName
 	UberGraphFrame
-	UberGraphFramePointerProperty
 	UberGraphFunction
 	UInt16Property
 	UInt32Property
@@ -958,7 +973,7 @@ Name table:
 	WrappingPolicy
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	AthenaDirectAcquisitionOfferWidget_C (0-0-0-0): size 1059 (cls: AthenaDirectAcquisitionOfferWidget_C>WidgetBlueprintGeneratedClass>/Script/UMG):
+	AthenaDirectAcquisitionOfferWidget_C (0-0-0-0): size 1034 (cls: AthenaDirectAcquisitionOfferWidget_C>WidgetBlueprintGeneratedClass>/Script/UMG):
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
@@ -966,13 +981,13 @@ Serialized exports:
 			bClassRequiresNativeTick(BoolProperty)=True 
 			Animations(ArrayProperty)=[object] (inner: ObjectProperty)
 			TemplateAsset(SoftObjectProperty)=/Game/Athena/UI/Frontend/AthenaDirectAcquisitionOfferWidget.WidgetArchetype 
-			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=AthenaDirectAcquisitionOfferWidget_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_AthenaDirectAcquisitionOfferWidget=AthenaDirectAcquisitionOfferWidget_C 
-	Default__AthenaDirectAcquisitionOfferWidget_C (0-0-0-0): size 1115 (cls: Default__AthenaDirectAcquisitionOfferWidget_C>AthenaDirectAcquisitionOfferWidget_C):
+	Default__AthenaDirectAcquisitionOfferWidget_C (0-0-0-0): size 1144 (cls: Default__AthenaDirectAcquisitionOfferWidget_C>AthenaDirectAcquisitionOfferWidget_C):
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			Carousel_NextItemImage(StructProperty)=System.Byte[] 
 			CarouselLoopTimer(FloatProperty)=5 
+			BattleStarTemplate(ObjectProperty)=AthenaBattleStar=/Game/Items/PersistentResources/AthenaBattleStar 
 			Style(ObjectProperty)=ButtonStyle-Solid-SquareM-Selectable_C=/Game/UI/Foundation/Buttons/ButtonStyles/ButtonStyle-Solid-SquareM-Selectable 
 			PressedSlateSoundOverride(StructProperty)=System.Byte[] 
 			HoveredSlateSoundOverride(StructProperty)=System.Byte[] 
@@ -982,25 +997,25 @@ Serialized exports:
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
 	ExecuteUbergraph_AthenaDirectAcquisitionOfferWidget (0-0-0-0): size 1918 (cls: ExecuteUbergraph_AthenaDirectAcquisitionOfferWidget>Function>/Script/CoreUObject)
 	MyGeometry (0-0-0-0): size 36 (cls: MyGeometry>StructProperty>/Script/CoreUObject)
-	Tick (0-0-0-0): size 86 (cls: Tick>Function>/Script/CoreUObject)
-	PlayAnim_CarouselTransition (0-0-0-0): size 58 (cls: PlayAnim_CarouselTransition>Function>/Script/CoreUObject)
-	BP_OnEntryReleased (0-0-0-0): size 58 (cls: BP_OnEntryReleased>Function>/Script/CoreUObject)
-	AnimEvent_Carousel_ImageSwap (0-0-0-0): size 58 (cls: AnimEvent_Carousel_ImageSwap>Function>/Script/CoreUObject)
-	OnOfferAdded (0-0-0-0): size 58 (cls: OnOfferAdded>Function>/Script/CoreUObject)
-	Construct (0-0-0-0): size 58 (cls: Construct>Function>/Script/CoreUObject)
+	Tick (0-0-0-0): size 82 (cls: Tick>Function>/Script/CoreUObject)
+	PlayAnim_CarouselTransition (0-0-0-0): size 54 (cls: PlayAnim_CarouselTransition>Function>/Script/CoreUObject)
+	BP_OnEntryReleased (0-0-0-0): size 54 (cls: BP_OnEntryReleased>Function>/Script/CoreUObject)
+	AnimEvent_Carousel_ImageSwap (0-0-0-0): size 54 (cls: AnimEvent_Carousel_ImageSwap>Function>/Script/CoreUObject)
+	OnOfferAdded (0-0-0-0): size 54 (cls: OnOfferAdded>Function>/Script/CoreUObject)
+	Construct (0-0-0-0): size 54 (cls: Construct>Function>/Script/CoreUObject)
 	ListItemObject (0-0-0-0): size 36 (cls: ListItemObject>ObjectProperty>/Script/CoreUObject)
-	OnListItemObjectSet (0-0-0-0): size 72 (cls: OnListItemObjectSet>Function>/Script/CoreUObject)
-	OnUpdateStatus (0-0-0-0): size 58 (cls: OnUpdateStatus>Function>/Script/CoreUObject)
-	BP_OnUnhovered (0-0-0-0): size 58 (cls: BP_OnUnhovered>Function>/Script/CoreUObject)
-	BP_OnHovered (0-0-0-0): size 58 (cls: BP_OnHovered>Function>/Script/CoreUObject)
+	OnListItemObjectSet (0-0-0-0): size 68 (cls: OnListItemObjectSet>Function>/Script/CoreUObject)
+	OnUpdateStatus (0-0-0-0): size 54 (cls: OnUpdateStatus>Function>/Script/CoreUObject)
+	BP_OnUnhovered (0-0-0-0): size 54 (cls: BP_OnUnhovered>Function>/Script/CoreUObject)
+	BP_OnHovered (0-0-0-0): size 54 (cls: BP_OnHovered>Function>/Script/CoreUObject)
 	bSuccess (0-0-0-0): size 34 (cls: bSuccess>BoolProperty>/Script/CoreUObject)
-	HandleOfferPurchaseComplete (0-0-0-0): size 86 (cls: HandleOfferPurchaseComplete>Function>/Script/CoreUObject)
-	BP_OnClicked (0-0-0-0): size 58 (cls: BP_OnClicked>Function>/Script/CoreUObject)
-	OnOfferSet (0-0-0-0): size 58 (cls: OnOfferSet>Function>/Script/CoreUObject)
+	HandleOfferPurchaseComplete (0-0-0-0): size 82 (cls: HandleOfferPurchaseComplete>Function>/Script/CoreUObject)
+	BP_OnClicked (0-0-0-0): size 54 (cls: BP_OnClicked>Function>/Script/CoreUObject)
+	OnOfferSet (0-0-0-0): size 54 (cls: OnOfferSet>Function>/Script/CoreUObject)
 	bIsSelected (0-0-0-0): size 34 (cls: bIsSelected>BoolProperty>/Script/CoreUObject)
-	BP_OnItemSelectionChanged (0-0-0-0): size 72 (cls: BP_OnItemSelectionChanged>Function>/Script/CoreUObject)
+	BP_OnItemSelectionChanged (0-0-0-0): size 68 (cls: BP_OnItemSelectionChanged>Function>/Script/CoreUObject)
 	bIsExpanded (0-0-0-0): size 34 (cls: bIsExpanded>BoolProperty>/Script/CoreUObject)
-	BP_OnItemExpansionChanged (0-0-0-0): size 72 (cls: BP_OnItemExpansionChanged>Function>/Script/CoreUObject)
+	BP_OnItemExpansionChanged (0-0-0-0): size 68 (cls: BP_OnItemExpansionChanged>Function>/Script/CoreUObject)
 	K2Node_CreateDelegate_OutputDelegate (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate>DelegateProperty>/Script/CoreUObject)
 	OfferSet (0-0-0-0): size 529 (cls: OfferSet>Function>/Script/CoreUObject)
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
@@ -1016,8 +1031,8 @@ Serialized exports:
 	UpdateShortDescription (0-0-0-0): size 1486 (cls: UpdateShortDescription>Function>/Script/CoreUObject)
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
 	Setup Price (0-0-0-0): size 1555 (cls: Setup Price>Function>/Script/CoreUObject)
-	Temp_text_Variable (0-0-0-0): size 32 (cls: Temp_text_Variable>TextProperty>/Script/CoreUObject)
-	UpdateSaleStatus (0-0-0-0): size 4115 (cls: UpdateSaleStatus>Function>/Script/CoreUObject)
+	CallFunc_GetPersistentName_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetPersistentName_ReturnValue>StrProperty>/Script/CoreUObject)
+	UpdateSaleStatus (0-0-0-0): size 4071 (cls: UpdateSaleStatus>Function>/Script/CoreUObject)
 	SaleText (0-0-0-0): size 32 (cls: SaleText>TextProperty>/Script/CoreUObject)
 	SetupSaleInfo (0-0-0-0): size 257 (cls: SetupSaleInfo>Function>/Script/CoreUObject)
 	CallFunc_GetOfferInfo_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetOfferInfo_ReturnValue>ObjectProperty>/Script/CoreUObject)
@@ -1177,9 +1192,9 @@ Serialized exports:
 	CallFunc_GetMetaAsBool_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_GetMetaAsBool_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_GetSalePrice_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_GetSalePrice_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Greater_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Greater_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
-	CallFunc_Greater_IntInt_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_Greater_IntInt_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_Not_PreBool_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Not_PreBool_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue1>BoolProperty>/Script/CoreUObject)
+	CallFunc_NotEqual_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_NotEqual_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_BooleanOR_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanOR_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_EqualEqual_ByteByte_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ByteByte_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_EqualEqual_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
@@ -1293,82 +1308,94 @@ Serialized exports:
 			Padding(StructProperty)=System.Byte[] 
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=VerticalBoxSlot_4=WidgetArchetype 
-	MainImageLoadGuard (0-0-0-0): size 82 (cls: MainImageLoadGuard>CommonLoadGuard>/Script/CommonUI):
+	MainImageLoadGuard (0-0-0-0): size 111 (cls: MainImageLoadGuard>CommonLoadGuard>/Script/CommonUI):
 		Tag array:
+			TextStyle(ObjectProperty)=TextStyle-Base_C=/Game/UI/Foundation/Text/TextStyle-Base 
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
-	CTextBlockPercentOff (0-0-0-0): size 327 (cls: CTextBlockPercentOff>CommonTextBlock>/Script/CommonUI):
+	CTextBlockPercentOff (0-0-0-0): size 384 (cls: CTextBlockPercentOff>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-S_C=/Game/UI/Foundation/Text/TextStyle-Header-S 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)=20% OFF (D585AE8E4682BA2532DF13B224A1E5F8) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=SizeBoxSlot_1=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	T_BattleStarInfoSupplemental (0-0-0-0): size 295 (cls: T_BattleStarInfoSupplemental>CommonTextBlock>/Script/CommonUI):
+	T_BattleStarInfoSupplemental (0-0-0-0): size 352 (cls: T_BattleStarInfoSupplemental>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-S_C=/Game/UI/Foundation/Text/TextStyle-Header-S 
 			Text(TextProperty)=+ 10 (4C73A1C445D27D53B63A20A8C62204C7) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	T_SaleInfo (0-0-0-0): size 325 (cls: T_SaleInfo>CommonTextBlock>/Script/CommonUI):
+	T_SaleInfo (0-0-0-0): size 382 (cls: T_SaleInfo>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-S_C=/Game/UI/Foundation/Text/TextStyle-Header-S 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)=SALE! (CC13197D4BBF09545E55DE90ADAE84DC) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	CommonTextBlockOfferRemainingText (0-0-0-0): size 417 (cls: CommonTextBlockOfferRemainingText>CommonTextBlock>/Script/CommonUI):
+	CommonTextBlockOfferRemainingText (0-0-0-0): size 503 (cls: CommonTextBlockOfferRemainingText>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-S-B-70pc_C=/Game/UI/Foundation/Text/TextStyle-Base-S-B-70pc 
 			Text(TextProperty)=x888 (EF2D829E486363D7AC7E289875B3018C) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=VerticalBoxSlot_2=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	NameText (0-0-0-0): size 664 (cls: NameText>CommonTextBlock>/Script/CommonUI):
+	NameText (0-0-0-0): size 721 (cls: NameText>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-M-Horizon_C=/Game/UI/Foundation/Text/TextStyle-Header-M-Horizon 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)=ITEM HEADER LONG NAME UH OH (23C627B94FB9F40DB0559982F66ACBD5) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Center 
 			WrappingPolicy(EnumProperty)=ETextWrappingPolicy::AllowPerCharacterWrapping 
 			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	OwnedText (0-0-0-0): size 459 (cls: OwnedText>CommonTextBlock>/Script/CommonUI):
+	OwnedText (0-0-0-0): size 545 (cls: OwnedText>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-S-B-70pc_C=/Game/UI/Foundation/Text/TextStyle-Base-S-B-70pc 
 			Text(TextProperty)=OWNED (7D0812E646144B4C8FBD639FD6E041DD) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Center 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	Sale_PreviousPrice (0-0-0-0): size 217 (cls: Sale_PreviousPrice>CommonTextBlock>/Script/CommonUI):
+	Sale_PreviousPrice (0-0-0-0): size 544 (cls: Sale_PreviousPrice>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-M_B_Grey_C=/Game/UI/Foundation/Text/TextStyle-Base-M_B_Grey 
 			Text(TextProperty)=1400 (0928B83A4A9BDFFED9B54D8651723BD7) 
+			ColorAndOpacity(StructProperty)=System.Byte[] 
+			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Center 
 			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	ShortDescriptionText (0-0-0-0): size 470 (cls: ShortDescriptionText>CommonTextBlock>/Script/CommonUI):
+	ShortDescriptionText (0-0-0-0): size 589 (cls: ShortDescriptionText>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-70pc_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-70pc 
 			Text(TextProperty)=Short description text. (2DCF9B4E4BF2165F968684ACC1F32566) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Center 
 			AutoWrapText(BoolProperty)=True 
 			Slot(ObjectProperty)=VerticalBoxSlot_2=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	TextOfferDisplayPrice (0-0-0-0): size 337 (cls: TextOfferDisplayPrice>CommonTextBlock>/Script/CommonUI):
+	TextOfferDisplayPrice (0-0-0-0): size 423 (cls: TextOfferDisplayPrice>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-L-B_C=/Game/UI/Foundation/Text/TextStyle-Base-L-B 
 			Text(TextProperty)=1,200 (B0077DFF4B0C8625F16E60AF9E3C993E) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Center 
 			Slot(ObjectProperty)=HorizontalBoxSlot_2=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
@@ -1650,6 +1677,7 @@ Serialized exports:
 	AthenaDirectAcquisitionOffer_PercentageOffBanner (0-0-0-0): size 36 (cls: AthenaDirectAcquisitionOffer_PercentageOffBanner>ObjectProperty>/Script/CoreUObject)
 	AthenaDirectAcquisitionOffer_SpecialBanner (0-0-0-0): size 36 (cls: AthenaDirectAcquisitionOffer_SpecialBanner>ObjectProperty>/Script/CoreUObject)
 	BattlePassGlow (0-0-0-0): size 36 (cls: BattlePassGlow>ObjectProperty>/Script/CoreUObject)
+	BattleStarTemplate (0-0-0-0): size 36 (cls: BattleStarTemplate>ObjectProperty>/Script/CoreUObject)
 	BorderRarityColored (0-0-0-0): size 36 (cls: BorderRarityColored>ObjectProperty>/Script/CoreUObject)
 	BottomBorder (0-0-0-0): size 36 (cls: BottomBorder>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetOfferInfo_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetOfferInfo_ReturnValue>ObjectProperty>/Script/CoreUObject)
@@ -2053,6 +2081,7 @@ Serialized exports:
 	CallFunc_GetSalePrice_SalePrice (0-0-0-0): size 32 (cls: CallFunc_GetSalePrice_SalePrice>TextProperty>/Script/CoreUObject)
 	CallFunc_GetSaleText_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetSaleText_ReturnValue>TextProperty>/Script/CoreUObject)
 	K2Node_Select_Default (0-0-0-0): size 32 (cls: K2Node_Select_Default>TextProperty>/Script/CoreUObject)
+	Temp_text_Variable (0-0-0-0): size 32 (cls: Temp_text_Variable>TextProperty>/Script/CoreUObject)
 	Temp_text_Variable1 (0-0-0-0): size 32 (cls: Temp_text_Variable1>TextProperty>/Script/CoreUObject)
 	CallFunc_Format_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Format_ReturnValue>TextProperty>/Script/CoreUObject)
 	CallFunc_GetName_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetName_ReturnValue>TextProperty>/Script/CoreUObject)

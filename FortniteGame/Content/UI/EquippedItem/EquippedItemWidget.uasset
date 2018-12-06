@@ -1,7 +1,9 @@
 Name table:
+	/Game/Athena/DrivableVehicles/MountedTurret
 	/Game/UI/EquippedItem/EquippedItemWidget
 	/Game/UI/EquippedItem/EquippedItemWidget.WidgetArchetype
 	/Game/UI/Foundation/Border/Border_HUD_Line_Vert
+	/Game/UI/Foundation/Fonts/NotoSans
 	/Game/UI/Foundation/Items/Style/FortUIStylesheet
 	/Game/UI/Foundation/Items/Style/FortUITheme
 	/Game/UI/Foundation/Items/Style/StyleLibrary
@@ -33,9 +35,14 @@ Name table:
 	ArgumentValueInt
 	ArgumentValueType
 	ArrayProperty
+	AudioComponent
+	AudioOnOverheat_GEN_VARIABLE
+	AudioOverheat_GEN_VARIABLE
 	B
 	bAllowTemplate
 	bApplyOutlineToDropShadows
+	BarrelGlowL_GEN_VARIABLE
+	BarrelGlowR_GEN_VARIABLE
 	bCookedWidgetTree
 	bHasScriptImplementedPaint
 	bHasScriptImplementedTick
@@ -51,6 +58,7 @@ Name table:
 	bOverride_HeightOverride
 	bOverride_WidthOverride
 	Box2D
+	BoxComponent
 	Brush
 	bSeparateFillAlpha
 	bValidTemplate
@@ -105,6 +113,7 @@ Name table:
 	CurrentQuickbar
 	CursorModeEnabled
 	CustomEvent
+	DamageSet
 	Default__ArrayProperty
 	Default__BlueprintContextLibrary
 	Default__BoolProperty
@@ -130,6 +139,7 @@ Name table:
 	Default__KeybindWidget_C
 	Default__KismetSystemLibrary
 	Default__KismetTextLibrary
+	Default__MountedTurret_C
 	Default__ObjectProperty
 	Default__Overlay
 	Default__OverlaySlot
@@ -144,6 +154,7 @@ Name table:
 	Default__WidgetBlueprintGeneratedClass
 	Default__WidgetSwitcherSlot
 	Default__WidgetTree
+	DefaultSceneRoot_GEN_VARIABLE
 	Delay
 	DelegateFunction
 	DelegateProperty
@@ -166,10 +177,12 @@ Name table:
 	ExecuteUbergraph_EquippedItemWidget
 	FloatProperty
 	Font
+	FontObject
 	FontOutlineSettings
 	ForcedHoldKeybindStatus
 	Format
 	FormatArgumentData
+	FortDamageSet
 	FortHUDContext
 	FortHUDElementWidget
 	FortInventoryContext
@@ -181,9 +194,12 @@ Name table:
 	FortUIBlueprintFunctionLibrary
 	FortUIStylesheet
 	FortUITheme
+	FortVehicleAudioVoice
+	FortVehicleSkelMeshComponent
 	FortWeap_BuildingToolBase
 	FortWeapon
 	FortWeaponRanged
+	FortWeaponRangedDualForVehicle
 	FortWeaponRangedDualMountedTurret
 	FortWorldItemDefinition
 	FTrunc
@@ -215,6 +231,7 @@ Name table:
 	HorizontalBox
 	HorizontalBoxAmmo
 	HorizontalBoxSlot
+	HostVehicleCached
 	HUD.Quickbar.Build.EquippedItem
 	HUDBasicDelegate__DelegateSignature
 	HUDElementTag
@@ -240,9 +257,11 @@ Name table:
 	K2Node_DynamicCast_AsFort_Weap_Building_Tool_Base
 	K2Node_DynamicCast_AsFort_Weapon_Ranged
 	K2Node_DynamicCast_AsFort_Weapon_Ranged_Dual_Mounted_Turret
+	K2Node_DynamicCast_AsMounted_Turret
 	K2Node_DynamicCast_bSuccess
 	K2Node_DynamicCast_bSuccess1
 	K2Node_DynamicCast_bSuccess2
+	K2Node_DynamicCast_bSuccess3
 	K2Node_MakeArray_Array
 	K2Node_MakeArray_Array1
 	K2Node_MakeStruct_FormatArgumentData
@@ -266,15 +285,19 @@ Name table:
 	LocalCount
 	LocalRemaining
 	M-FontShadow
+	MagazineGlowL_GEN_VARIABLE
+	MagazineGlowR_GEN_VARIABLE
 	Margin
 	Material
 	Max
-	MountedTurretCached
+	MountedTurret_C
 	MulticastDelegateProperty
 	NameProperty
 	NewWeapon
 	None
+	NotoSans
 	NotoSans-Bold
+	NotoSans-Regular
 	Object
 	ObjectProperty
 	OnBuildingMaterialCycled
@@ -290,11 +313,16 @@ Name table:
 	OutlineMaterial
 	OutlineSettings
 	OutlineSize
+	OverHeatScreen_L_GEN_VARIABLE
+	OverHeatScreen_R_GEN_VARIABLE
+	OverheatSmoke_GEN_VARIABLE
+	OverlapVolume_GEN_VARIABLE
 	Overlay
 	OverlaySlot
 	Package
 	Padding
 	Parent
+	ParticleSystemComponent
 	PointerToUberGraphFrame
 	PrevWeapon
 	R
@@ -305,7 +333,9 @@ Name table:
 	Right
 	RootWidget
 	Rule-Dotted-HUD
+	SceneComponent
 	ScriptStruct
+	ServoAudio_GEN_VARIABLE
 	SetActiveWidgetIndex
 	SetBrush
 	SetBrushFromLazyTexture
@@ -313,12 +343,14 @@ Name table:
 	SetOpacity
 	SetText
 	SetVisibility
+	ShadowOffset
 	ShotsFired
 	ShotsRemaining
 	ShouldDisplayAmmoCounter
 	Size
 	SizeBox
 	SizeBoxSlot
+	SkeletalMeshComponent
 	SlateBrush
 	SlateColor
 	SlateFontInfo
@@ -362,7 +394,6 @@ Name table:
 	Translation
 	TypefaceFontName
 	UberGraphFrame
-	UberGraphFramePointerProperty
 	UberGraphFunction
 	UnderlyingType
 	UpdateCurrentAmmo
@@ -385,13 +416,12 @@ Name table:
 	WidthOverride
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	EquippedItemWidget_C (0-0-0-0): size 556 (cls: EquippedItemWidget_C>WidgetBlueprintGeneratedClass>/Script/UMG):
+	EquippedItemWidget_C (0-0-0-0): size 527 (cls: EquippedItemWidget_C>WidgetBlueprintGeneratedClass>/Script/UMG):
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
 			bValidTemplate(BoolProperty)=True 
 			TemplateAsset(SoftObjectProperty)=/Game/UI/EquippedItem/EquippedItemWidget.WidgetArchetype 
-			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=EquippedItemWidget_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_EquippedItemWidget=EquippedItemWidget_C 
 	Default__EquippedItemWidget_C (0-0-0-0): size 178 (cls: Default__EquippedItemWidget_C>EquippedItemWidget_C):
 		Tag array:
@@ -401,16 +431,16 @@ Serialized exports:
 			bHasScriptImplementedPaint(BoolProperty)=False 
 	[Image] ResourceIcon (0-0-0-0): size 36 (cls: [Image] ResourceIcon>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_EquippedItemWidget (0-0-0-0): size 1224 (cls: ExecuteUbergraph_EquippedItemWidget>Function>/Script/CoreUObject)
+	ExecuteUbergraph_EquippedItemWidget (0-0-0-0): size 1275 (cls: ExecuteUbergraph_EquippedItemWidget>Function>/Script/CoreUObject)
 	ShotsRemaining (0-0-0-0): size 32 (cls: ShotsRemaining>IntProperty>/Script/CoreUObject)
-	CustomEvent_0 (0-0-0-0): size 72 (cls: CustomEvent_0>Function>/Script/CoreUObject)
-	OnBuildingMaterialCycled (0-0-0-0): size 58 (cls: OnBuildingMaterialCycled>Function>/Script/CoreUObject)
-	OnWorldItemsChanged (0-0-0-0): size 58 (cls: OnWorldItemsChanged>Function>/Script/CoreUObject)
+	CustomEvent_0 (0-0-0-0): size 68 (cls: CustomEvent_0>Function>/Script/CoreUObject)
+	OnBuildingMaterialCycled (0-0-0-0): size 54 (cls: OnBuildingMaterialCycled>Function>/Script/CoreUObject)
+	OnWorldItemsChanged (0-0-0-0): size 54 (cls: OnWorldItemsChanged>Function>/Script/CoreUObject)
 	LocalCount (0-0-0-0): size 32 (cls: LocalCount>IntProperty>/Script/CoreUObject)
-	OnLocalAmmoChanged (0-0-0-0): size 86 (cls: OnLocalAmmoChanged>Function>/Script/CoreUObject)
+	OnLocalAmmoChanged (0-0-0-0): size 82 (cls: OnLocalAmmoChanged>Function>/Script/CoreUObject)
 	NewWeapon (0-0-0-0): size 36 (cls: NewWeapon>ObjectProperty>/Script/CoreUObject)
-	OnWeaponEquipped (0-0-0-0): size 86 (cls: OnWeaponEquipped>Function>/Script/CoreUObject)
-	Construct (0-0-0-0): size 58 (cls: Construct>Function>/Script/CoreUObject)
+	OnWeaponEquipped (0-0-0-0): size 82 (cls: OnWeaponEquipped>Function>/Script/CoreUObject)
+	Construct (0-0-0-0): size 54 (cls: Construct>Function>/Script/CoreUObject)
 	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	FullUpdateAmmoDisplay (0-0-0-0): size 205 (cls: FullUpdateAmmoDisplay>Function>/Script/CoreUObject)
 	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject)
@@ -437,6 +467,7 @@ Serialized exports:
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess1 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess1>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess2 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess2>BoolProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_bSuccess3 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess3>BoolProperty>/Script/CoreUObject)
 	CallFunc_Less_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Less_IntInt_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	InfiniteAmmo (0-0-0-0): size 34 (cls: InfiniteAmmo>BoolProperty>/Script/CoreUObject)
@@ -453,8 +484,9 @@ Serialized exports:
 	Temp_bool_Variable1 (0-0-0-0): size 34 (cls: Temp_bool_Variable1>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable2 (0-0-0-0): size 34 (cls: Temp_bool_Variable2>BoolProperty>/Script/CoreUObject)
 	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject)
-	UpdateMountedTurret (0-0-0-0): size 559 (cls: UpdateMountedTurret>Function>/Script/CoreUObject)
+	UpdateMountedTurret (0-0-0-0): size 586 (cls: UpdateMountedTurret>Function>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_bSuccess1 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess1>BoolProperty>/Script/CoreUObject)
 	CallFunc_ShouldDisplayAmmoCounter_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_ShouldDisplayAmmoCounter_ReturnValue>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess1 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess1>BoolProperty>/Script/CoreUObject)
@@ -483,35 +515,39 @@ Serialized exports:
 			Brush(StructProperty)=System.Byte[] 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			Visibility(EnumProperty)=ESlateVisibility::SelfHitTestInvisible 
-	TextAmmoOutOverlay (0-0-0-0): size 760 (cls: TextAmmoOutOverlay>CommonTextBlock>/Script/CommonUI):
+	TextAmmoOutOverlay (0-0-0-0): size 846 (cls: TextAmmoOutOverlay>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-S-B-S_C=/Game/UI/Foundation/Text/TextStyle-Base-S-B-S 
 			Text(TextProperty)=Out of Ammo! (F69B9E2C461E2E0E76C8B29267A6FBBE) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Right 
 			Slot(ObjectProperty)=OverlaySlot_111=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
 			bIsVariable(BoolProperty)=True 
 			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
-	TextMagazineAmmoCount (0-0-0-0): size 491 (cls: TextMagazineAmmoCount>CommonTextBlock>/Script/CommonUI):
+	TextMagazineAmmoCount (0-0-0-0): size 610 (cls: TextMagazineAmmoCount>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-L-S_C=/Game/UI/Foundation/Text/TextStyle-Base-L-S 
 			Text(TextProperty)=0 (1440A91D4546D58B107B17A7FB0A2BF5) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_15=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	TextResourceCount (0-0-0-0): size 493 (cls: TextResourceCount>CommonTextBlock>/Script/CommonUI):
+	TextResourceCount (0-0-0-0): size 612 (cls: TextResourceCount>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-L-S_C=/Game/UI/Foundation/Text/TextStyle-Base-L-S 
 			Text(TextProperty)=999 (E264E8BA4D272F2B9B7761BF19B01A1B) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_371=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	TextTotalAmmoCount (0-0-0-0): size 491 (cls: TextTotalAmmoCount>CommonTextBlock>/Script/CommonUI):
+	TextTotalAmmoCount (0-0-0-0): size 610 (cls: TextTotalAmmoCount>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-L-S_C=/Game/UI/Foundation/Text/TextStyle-Base-L-S 
 			Text(TextProperty)=0 (D4C616B74CD37A8591B2589EB8A9D6BF) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_17=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
 	SwitcherContent (0-0-0-0): size 144 (cls: SwitcherContent>CommonWidgetSwitcher>/Script/CommonUI):
@@ -664,6 +700,7 @@ Serialized exports:
 	K2Node_DynamicCast_AsFort_Weap_Building_Tool_Base (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Weap_Building_Tool_Base>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Weapon_Ranged (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Weapon_Ranged>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Weapon_Ranged_Dual_Mounted_Turret (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Weapon_Ranged_Dual_Mounted_Turret>ObjectProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_AsMounted_Turret (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsMounted_Turret>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetEquippedWeapon_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetEquippedWeapon_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetCurrentResourceItemDefinition_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetCurrentResourceItemDefinition_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	Image_0 (0-0-0-0): size 36 (cls: Image_0>ObjectProperty>/Script/CoreUObject)
@@ -679,6 +716,7 @@ Serialized exports:
 	CallFunc_GetCurrentAmmoItemDefinition_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetCurrentAmmoItemDefinition_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetEquippedWeapon_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetEquippedWeapon_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Weapon_Ranged_Dual_Mounted_Turret (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Weapon_Ranged_Dual_Mounted_Turret>ObjectProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_AsMounted_Turret (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsMounted_Turret>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetEquippedWeapon_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetEquippedWeapon_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Weap_Building_Tool_Base (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Weap_Building_Tool_Base>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Weapon_Ranged (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Weapon_Ranged>ObjectProperty>/Script/CoreUObject)

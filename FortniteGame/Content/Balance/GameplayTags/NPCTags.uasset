@@ -258,8 +258,26 @@ Name table:
 	325
 	326
 	327
+	328
+	329
 	33
+	330
+	331
+	332
+	333
+	334
+	335
+	336
+	337
+	338
+	339
 	34
+	340
+	341
+	342
+	343
+	344
+	345
 	35
 	36
 	37
@@ -434,6 +452,8 @@ Name table:
 	NPC.Ability.Attack.Ranged.Sweep
 	NPC.Ability.Attack.Ranged.ThrowNPC
 	NPC.Ability.Attack.Summon.Minions
+	NPC.Ability.Attack.Triggered.Damage.Self
+	NPC.Ability.Attack.Triggered.Damage.Target
 	NPC.Ability.MaxActualRange
 	NPC.Ability.MaxApproachRange
 	NPC.Ability.MaxPreferredRange
@@ -527,6 +547,16 @@ Name table:
 	NPC.Behavior.Disables.Ability.Attack.AoE.FirePools
 	NPC.Behavior.Disables.Ability.Attack.AoE.SlowPools
 	NPC.Behavior.DoesNotRepositionForRangedAttacks
+	NPC.Behavior.Phase.1
+	NPC.Behavior.Phase.10
+	NPC.Behavior.Phase.2
+	NPC.Behavior.Phase.3
+	NPC.Behavior.Phase.4
+	NPC.Behavior.Phase.5
+	NPC.Behavior.Phase.6
+	NPC.Behavior.Phase.7
+	NPC.Behavior.Phase.8
+	NPC.Behavior.Phase.9
 	NPC.Behavior.Prohibits.Ability.Attack.Any
 	NPC.Behavior.Prohibits.Ability.Attack.Melee.Any
 	NPC.Behavior.Prohibits.Ability.Attack.Melee.Bump
@@ -538,6 +568,8 @@ Name table:
 	NPC.Behavior.Retreats
 	NPC.Behavior.UsesMeleeOnRangedCooldown
 	NPC.CharacterType.Blaster.Basic
+	NPC.CharacterType.Boss.1P
+	NPC.CharacterType.Boss.4P
 	NPC.CharacterType.Brute.Basic
 	NPC.CharacterType.Brute.Major
 	NPC.CharacterType.Brute.Mega
@@ -568,6 +600,7 @@ Name table:
 	NPC.CharacterType.Shielder.Super
 	NPC.CharacterType.Smasher.Basic
 	NPC.CharacterType.Smasher.Onboarding
+	NPC.CharacterType.StormKing
 	NPC.CharacterType.Survivor
 	NPC.CharacterType.Survivor.Defender
 	NPC.CharacterType.Survivor.Defender.AssaultRifle
@@ -591,6 +624,7 @@ Name table:
 	NPC.Cooldown.Ability.Attack.Melee.SoulSuck
 	NPC.Cooldown.Ability.Attack.Melee.Stun
 	NPC.Cooldown.Ability.Attack.Melee.Swoop
+	NPC.Cooldown.Ability.Attack.Melee.TargetPacing.DUDEBRO
 	NPC.Cooldown.Ability.Attack.Ranged
 	NPC.Cooldown.Ability.Attack.Ranged.MultiTarget
 	NPC.Cooldown.Ability.Attack.Ranged.Primary
@@ -660,7 +694,9 @@ Name table:
 	NPC.Status.HasStunnedTarget
 	NPC.Status.LockedInPlace
 	NPC.Status.MarkedForDeath
+	NPC.Status.NoShielders
 	NPC.Status.ReachedChargingSpeed
+	NPC.Status.ShowSpecialHealthBar
 	NPC.Status.Sleeping
 	NPC.Status.SpeedBufff
 	NPC.Status.Test.Test
@@ -674,7 +710,7 @@ Name table:
 	StrProperty
 	Tag
 Serialized exports:
-	NPCTags (0-0-0-0): size 49935 (cls: NPCTags>DataTable>/Script/Engine):
+	NPCTags (0-0-0-0): size 53540 (cls: NPCTags>DataTable>/Script/Engine):
 		DataTable:
 			0:
 				Tag(NameProperty)=Animation.FrontEnd.Inspect
@@ -962,701 +998,755 @@ Serialized exports:
 				Tag(NameProperty)=NPC.Ability.Attack.Summon.Minions
 				DevComment(StrProperty)=Summon ability to spawn allied minions for this enemy.
 			95:
+				Tag(NameProperty)=NPC.Ability.Attack.Triggered.Damage.Self
+				DevComment(StrProperty)=Triggered scripted ability that damages self.
+			96:
+				Tag(NameProperty)=NPC.Ability.Attack.Triggered.Damage.Target
+				DevComment(StrProperty)=Triggered scripted ability that damages my target.
+			97:
 				Tag(NameProperty)=NPC.Ability.MaxActualRange
 				DevComment(StrProperty)=The max range of this weapon. Not always used. Used for abilities that fire weapon definitions. Abilities that define their own target selection don't need this, since they have decorators and tests to check their max range. Actual weapons need this so the tree knows how to behave.
-			96:
+			98:
 				Tag(NameProperty)=NPC.Ability.MaxApproachRange
 				DevComment(StrProperty)=Maximum range that an NPC will attempt to close in to use an ability
-			97:
+			99:
 				Tag(NameProperty)=NPC.Ability.MaxPreferredRange
 				DevComment(StrProperty)=Maximum range of the ideal distance from a target for an NPC. Used for checking BT distances.
-			98:
+			100:
 				Tag(NameProperty)=NPC.Ability.MaxPreferredRangeEQS
 				DevComment(StrProperty)=Maximum range of the ideal distance from a target for an NPC. Used by EQS generation to not cause threshold issues using the same distance as above.
-			99:
+			101:
 				Tag(NameProperty)=NPC.Ability.MinActualRange
 				DevComment(StrProperty)=For ranged attacks. Do not attempt an attack from less than this range.
-			100:
+			102:
 				Tag(NameProperty)=NPC.Ability.MinApproachRange
 				DevComment(StrProperty)=When an NPC is below this range, it will attempt to move further away to get outside of it
-			101:
+			103:
 				Tag(NameProperty)=NPC.Ability.MinPreferredRange
 				DevComment(StrProperty)=Minimum range of the ideal distance from a target for an NPC. Used for checking BT distances.
-			102:
+			104:
 				Tag(NameProperty)=NPC.Ability.MinPreferredRangeEQS
 				DevComment(StrProperty)=Minimum range of the ideal distance from a target for an NPC. Used by EQS generation to not cause threshold issues using the same distance as above.
-			103:
+			105:
 				Tag(NameProperty)=NPC.Ability.NonAttack.Approach
 				DevComment(StrProperty)=Approach mechanic that layers on top of normal behaviors in the Behavior Tree. Controlled by a Service. EX: Rolling in a ball, digging underground, periodically turning into a ghost state, raising a shield when taking damage, etc.
-			104:
+			106:
 				Tag(NameProperty)=NPC.Ability.NonAttack.Approach.VisibleOrAlwaysPerceivedGoal.True
 				DevComment(StrProperty)=Approach mechanic for when the Goal is Visible or the location is always known. EX: Moving to ATLAS, moving to attack a player they see/know, etc.
-			105:
+			107:
 				Tag(NameProperty)=NPC.Ability.NonAttack.Approach.VisibleOrAlwaysPerceivedGoal.False
 				DevComment(StrProperty)=Approach mechanic for when the Goal is NOT Visible or the location is NOT always known. EX: Hunting behaviors.
-			106:
+			108:
 				Tag(NameProperty)=NPC.Ability.NonAttack.Avoid.Enemy
 				DevComment(StrProperty)=Ability for avoiding an enemy attack.
-			107:
+			109:
 				Tag(NameProperty)=NPC.Ability.NonAttack.BecomeChest
 				DevComment(StrProperty)=For mimics, makes them turn back into a chest.
-			108:
+			110:
 				Tag(NameProperty)=NPC.Ability.NonAttack.Charge
 				DevComment(StrProperty)=The running/charge part of the Smasher charge sequence.  Not to be confused with Melee.Charge.
-			109:
+			111:
 				Tag(NameProperty)=NPC.Ability.NonAttack.Cower
 				DevComment(StrProperty)=Tag for Cower Ability.
-			110:
+			112:
 				Tag(NameProperty)=NPC.Ability.NonAttack.Cower.False
 				DevComment(StrProperty)=Event to disable Cower.
-			111:
+			113:
 				Tag(NameProperty)=NPC.Ability.NonAttack.Cower.IndefiniteFalse
 				DevComment(StrProperty)=Stop cowering indefinitely
-			112:
+			114:
 				Tag(NameProperty)=NPC.Ability.NonAttack.Cower.IndefiniteTrue
 				DevComment(StrProperty)=Cower indefinitely until explicitly told to stop.
-			113:
+			115:
 				Tag(NameProperty)=NPC.Ability.NonAttack.Cower.True
 				DevComment(StrProperty)=Event to enable Cower.
-			114:
+			116:
 				Tag(NameProperty)=NPC.Ability.NonAttack.DBNO
 				DevComment(StrProperty)=Tag for NPC DBNO ability.
-			115:
+			117:
 				Tag(NameProperty)=NPC.Ability.NonAttack.DBNO.False
 				DevComment(StrProperty)=NPC revived from DBNO.
-			116:
+			118:
 				Tag(NameProperty)=NPC.Ability.NonAttack.DBNO.True
 				DevComment(StrProperty)=NPC goes DBNO.
-			117:
+			119:
 				Tag(NameProperty)=NPC.Ability.NonAttack.DBNORevive
 				DevComment(StrProperty)=Ability that occurs while the AI is being revived from DBNO
-			118:
+			120:
 				Tag(NameProperty)=NPC.Ability.NonAttack.Decelerate
 				DevComment(StrProperty)=Decelerate from speed.  Ex: Smasher decelerate after charging.
-			119:
+			121:
 				Tag(NameProperty)=NPC.Ability.NonAttack.DropNPC
 				DevComment(StrProperty)=Flinger drops Husk due to interruption or death.
-			120:
+			122:
 				Tag(NameProperty)=NPC.Ability.NonAttack.Evade
 				DevComment(StrProperty)=Evade gameplay ability tag.  Used by Taker Evade ability and (in the future) by ninja or other special husks or AI granted ability through an aura.
-			121:
+			123:
 				Tag(NameProperty)=NPC.Ability.NonAttack.Frustration
 				DevComment(StrProperty)=Express Frustration!  (The husk plays an animation and puts out an exclamation mark effect.)
-			122:
+			124:
 				Tag(NameProperty)=NPC.Ability.NonAttack.GrabPickup
 				DevComment(StrProperty)=Grab a pickup!
-			123:
+			125:
 				Tag(NameProperty)=NPC.Ability.NonAttack.HoldNPC
 				DevComment(StrProperty)=Flinger holds Husk before throwing.
-			124:
+			126:
 				Tag(NameProperty)=NPC.Ability.NonAttack.Hunting
 				DevComment(StrProperty)=Move to search for a goal
-			125:
+			127:
 				Tag(NameProperty)=NPC.Ability.NonAttack.LockInPlace.False
 				DevComment(StrProperty)=
-			126:
+			128:
 				Tag(NameProperty)=NPC.Ability.NonAttack.LockInPlace.Indefinite.False
 				DevComment(StrProperty)=
-			127:
+			129:
 				Tag(NameProperty)=NPC.Ability.NonAttack.LockInPlace.Indefinite.True
 				DevComment(StrProperty)=
-			128:
+			130:
 				Tag(NameProperty)=NPC.Ability.NonAttack.LockInPlace.True
 				DevComment(StrProperty)=
-			129:
+			131:
 				Tag(NameProperty)=NPC.Ability.NonAttack.MoveToSpawnSpot
 				DevComment(StrProperty)=AI moves to the spawn spot.
-			130:
+			132:
 				Tag(NameProperty)=NPC.Ability.NonAttack.NeedsAmmo
 				DevComment(StrProperty)=AI needs Ammo.
-			131:
+			133:
 				Tag(NameProperty)=NPC.Ability.NonAttack.NotIdle
 				DevComment(StrProperty)=AI ability used to simply mark itself as as not needing to despawn from lack of activity.
-			132:
+			134:
 				Tag(NameProperty)=NPC.Ability.NonAttack.Phoenix.DBNO
 				DevComment(StrProperty)=State while MiniBoss is DBNOed before resurrecting.
-			133:
+			135:
 				Tag(NameProperty)=NPC.Ability.NonAttack.Phoenix.DBNORevive
 				DevComment(StrProperty)=State while MiniBoss is recovering from DBNO and regains health, etc.
-			134:
+			136:
 				Tag(NameProperty)=NPC.Ability.NonAttack.Phoenix.Granted
 				DevComment(StrProperty)=AI ability that either temporarily or indefinitely blocks Death. Die and rebirth repeatedly.
-			135:
+			137:
 				Tag(NameProperty)=NPC.Ability.NonAttack.Phoenix.Active
 				DevComment(StrProperty)=Phoenix Ability is currently running.
-			136:
+			138:
 				Tag(NameProperty)=NPC.Ability.NonAttack.Phoenix.Setup
 				DevComment(StrProperty)=Setup Ability for Phoenix to apply correct settings to the MiniBoss.
-			137:
+			139:
 				Tag(NameProperty)=NPC.Ability.NonAttack.PickUp
 				DevComment(StrProperty)=AI has something he should go pick up. Used for the Sploder getting his Propane Tank.
-			138:
+			140:
 				Tag(NameProperty)=NPC.Ability.NonAttack.QuickHealSelf
 				DevComment(StrProperty)=Used to heal an AI when it is returning to its spawn location or guardian area to prevent player exploits.
-			139:
+			141:
 				Tag(NameProperty)=NPC.Ability.NonAttack.RangedWait
 				DevComment(StrProperty)=AI has an ability it can do while waiting to do another ranged attack. This will likely just be an animation or taunt.
-			140:
+			142:
 				Tag(NameProperty)=NPC.Ability.NonAttack.Reposition.BobAndWeave
 				DevComment(StrProperty)=Reposition by moving back and forth
-			141:
+			143:
 				Tag(NameProperty)=NPC.Ability.NonAttack.Rescue
 				DevComment(StrProperty)=NPC Rescue ability tag.
-			142:
+			144:
 				Tag(NameProperty)=NPC.Ability.NonAttack.Rescue.False
 				DevComment(StrProperty)=Cancel NPC Rescue.
-			143:
+			145:
 				Tag(NameProperty)=NPC.Ability.NonAttack.Rescue.Finish
 				DevComment(StrProperty)=Finishes the NPC Rescue and teleports out.
-			144:
+			146:
 				Tag(NameProperty)=NPC.Ability.NonAttack.Rescue.Start
 				DevComment(StrProperty)=Starts the NPC Rescue.
-			145:
+			147:
 				Tag(NameProperty)=NPC.Ability.NonAttack.Rescue.True
 				DevComment(StrProperty)=Initiate NPC rescue.
-			146:
+			148:
 				Tag(NameProperty)=NPC.Ability.NonAttack.Roar
 				DevComment(StrProperty)=Roar ability for the Flinger, Smasher, etc.
-			147:
+			149:
 				Tag(NameProperty)=NPC.Ability.NonAttack.Roar.Rampage
 				DevComment(StrProperty)=Roar ability for Boss Rampage mission
-			148:
+			150:
 				Tag(NameProperty)=NPC.Ability.NonAttack.SpawnIntro
 				DevComment(StrProperty)=Ability activated just after an AI spawns in, such as a special Smasher "Roar" (not associated with his Charge)
-			149:
+			151:
 				Tag(NameProperty)=NPC.Ability.NonAttack.Summon
 				DevComment(StrProperty)=The PATroll's Summon ability, which starts an encounter around a particular player.
-			150:
+			152:
 				Tag(NameProperty)=NPC.Ability.NonAttack.SwoopLevitate
 				DevComment(StrProperty)=The Taker's levitate ability, which is used at the start of a Swoop attack.  (Levitate->Swoop->SwoopOutro)
-			151:
+			153:
 				Tag(NameProperty)=NPC.Ability.NonAttack.SwoopOutro
 				DevComment(StrProperty)=Outro for Taker swoop attack.
-			152:
+			154:
 				Tag(NameProperty)=NPC.Ability.NonAttack.TeleportIn
 				DevComment(StrProperty)=The PATroll's Teleport In ability, which occurs when the PATroll is spawned.
-			153:
+			155:
 				Tag(NameProperty)=NPC.Ability.NonAttack.TeleportNPC.Drop
 				DevComment(StrProperty)=Tunneler was interrupted, drop Husk.
-			154:
+			156:
 				Tag(NameProperty)=NPC.Ability.NonAttack.TeleportNPC.Hold
 				DevComment(StrProperty)=After GAB spawns pawn, match up animations so it looks like Tunneler is holding his spawned Husk.
-			155:
+			157:
 				Tag(NameProperty)=NPC.Ability.NonAttack.TeleportNPC.Teleport
 				DevComment(StrProperty)=Enemy teleports NPC from his location to another chosen location. Used for Tunneler AI who digs a tunnel from himself to a point closer to the ATLAS and spawns enemies through it.
-			156:
+			158:
 				Tag(NameProperty)=NPC.Ability.NonAttack.TeleportOut
 				DevComment(StrProperty)=The PATroll's Teleport Out ability, which occurs when the PATroll is despawned.
-			157:
+			159:
 				Tag(NameProperty)=NPC.Ability.NonAttack.TeleportToFixNavigationToGoal
 				DevComment(StrProperty)=Reverses navigation from Goal to pawn, finds closest navigable point, then teleports pawn there. Used for important AI like MiniBosses so they don't get stuck or despawn.
-			158:
+			160:
 				Tag(NameProperty)=NPC.Ability.NonAttack.Tired
 				DevComment(StrProperty)=Ability played to show an AI is "tired".  Example: After the Smasher charges, he becomes "tired" briefly.
-			159:
+			161:
 				Tag(NameProperty)=NPC.Ability.NonAttack.TurnTransition
 				DevComment(StrProperty)=The gameplay ability for doing turn transitions
-			160:
+			162:
 				Tag(NameProperty)=NPC.Ability.NonAttack.Wander
 				DevComment(StrProperty)=This NPC can randomly wander. Expected that there is not yet a Goal. Just wander around.
-			161:
+			163:
 				Tag(NameProperty)=NPC.Ability.NonAttack.WanderNearGoal
 				DevComment(StrProperty)=This NPC is wandering near his Goal. If the NPC cannot reach or attack the Goal, wander around near it instead.
-			162:
+			164:
 				Tag(NameProperty)=NPC.Ability.PreferredRangeEQSDensity
 				DevComment(StrProperty)=Density of point generation for EQS. Distance between generated points.
-			163:
+			165:
 				Tag(NameProperty)=NPC.Assignment.BuildingProps
 				DevComment(StrProperty)=Tag for assignments that are building props
-			164:
+			166:
 				Tag(NameProperty)=NPC.Assignment.Decoy
 				DevComment(StrProperty)=Tag for assignments that are Decoys. Decoys will temporarily override all other goals.
-			165:
+			167:
 				Tag(NameProperty)=NPC.Assignment.Domination
 				DevComment(StrProperty)=Tag for assignments that generate a "domination" location that AI may be fighting players over.
-			166:
+			168:
 				Tag(NameProperty)=NPC.Assignment.Escort
 				DevComment(StrProperty)=Tag for assignments that generate escort locations to move to around the primary assignment goals.
-			167:
+			169:
 				Tag(NameProperty)=NPC.Assignment.PropaneTanks
 				DevComment(StrProperty)=Tag for assignment for Sploders to pick up the propane tanks in the world.
-			168:
+			170:
 				Tag(NameProperty)=NPC.Assignment.RelativeToPrimary.Circle.Blaster
 				DevComment(StrProperty)=Tag for assignments that have goal locations around primary assignment goals for Blasters
-			169:
+			171:
 				Tag(NameProperty)=NPC.Assignment.RelativeToPrimary.Circle.Flinger
 				DevComment(StrProperty)=Tag for assignments that have goal locations around primary assignment goals for Flingers
-			170:
+			172:
 				Tag(NameProperty)=NPC.Assignment.RelativeToPrimary.Circle.Husk.Bombshell
 				DevComment(StrProperty)=Tag for assignments that have goal locations around primary assignment goals for Bombshell husks
-			171:
+			173:
 				Tag(NameProperty)=NPC.Assignment.RelativeToPrimary.Circle.Husk.Bombshell.Poison
 				DevComment(StrProperty)=Tag for assignments that have goal locations around primary assignment goals for Poison Bombshell husks
-			172:
+			174:
 				Tag(NameProperty)=NPC.Assignment.RelativeToPrimary.Circle.MiniBoss
 				DevComment(StrProperty)=Tag for assignments that have goal locations around primary assignment goals for MiniBosses.
-			173:
+			175:
 				Tag(NameProperty)=NPC.Assignment.RelativeToPrimary.Circle.Taker
 				DevComment(StrProperty)=Tag for assignments that have goal locations around primary assignment goals for Takers
-			174:
+			176:
 				Tag(NameProperty)=NPC.Assignment.RelativeToPrimary.StructuralBuildings
 				DevComment(StrProperty)=Tag for assignments that have all Structural Buildings around primary (untagged) Encounter Assignment goals.
-			175:
+			177:
 				Tag(NameProperty)=NPC.Assignment.StructuralBuildings
 				DevComment(StrProperty)=Tag for assignments that have all Structural Buildings around primary (untagged) assignment goals. OLD - to be replaced
-			176:
+			178:
 				Tag(NameProperty)=NPC.Assignment.Tether
 				DevComment(StrProperty)=Tag for assignments that tether the enemy to a specific location.
-			177:
+			179:
 				Tag(NameProperty)=NPC.Assignment.TrackEndStations
 				DevComment(StrProperty)=Tag for assignments containing the end stations for the track segment in any cart- and track-related encounter.
-			178:
+			180:
 				Tag(NameProperty)=NPC.Attachment.Behavior.TreatAsPawn
 				DevComment(StrProperty)=For things that are attached to pawns (EX: Super Shielder shield) have blueprint logic treat it as if it were a pawn. Example use case is duplicating the behavior of canister grenades from the grenade launcher exploding on impact. Requires a tag check in the BP.
-			179:
+			181:
 				Tag(NameProperty)=NPC.Behavior.Advances
 				DevComment(StrProperty)=Ranged AI Advances to MinPreferredRange from time to time.
-			180:
+			182:
 				Tag(NameProperty)=NPC.Behavior.Cower
 				DevComment(StrProperty)=NPC is cowering.
-			181:
+			183:
 				Tag(NameProperty)=NPC.Behavior.DBNO
 				DevComment(StrProperty)=NPC is Down But Not Out after losing all of its health.
-			182:
+			184:
 				Tag(NameProperty)=NPC.Behavior.Disables.Ability.Attack.AoE.Bees
 				DevComment(StrProperty)=Disable Bee Trails when this tag is applied to the beehive husk.  Applied when the husk is standing in his own cloud (centrally) so he won't drop a new cloud.
-			183:
+			185:
 				Tag(NameProperty)=NPC.Behavior.Disables.Ability.Attack.AoE.AcidPools
 				DevComment(StrProperty)=Disable Acid Pools when this tag is applied to the enemy with the ability. Applied when standing in his own AoE cloud so he won't drop a new one.
-			184:
+			186:
 				Tag(NameProperty)=NPC.Behavior.Disables.Ability.Attack.AoE.SlowPools
 				DevComment(StrProperty)=Disable Slow Pools when this tag is applied to the enemy with the ability. Applied when standing in his own AoE cloud so he won't drop a new one.
-			185:
+			187:
 				Tag(NameProperty)=NPC.Behavior.Disables.Ability.Attack.AoE.BuildingBlocker
 				DevComment(StrProperty)=Disable Building Blockers when this tag is applied to the enemy with the ability. Applied when standing in his own AoE cloud so he won't drop a new one.
-			186:
+			188:
 				Tag(NameProperty)=NPC.Behavior.DoesNotRepositionForRangedAttacks
 				DevComment(StrProperty)=This AI does not use repositioning EQS queries to place himself for ranged attacks. Ranged attacks will only happen if he is naturally standing in a suitable location.
-			187:
+			189:
+				Tag(NameProperty)=NPC.Behavior.Phase.1
+				DevComment(StrProperty)=For tagging AI with Phased behaviors. When they transition from one set of behaviors to another. Can be used to shut down particular Abilities or Behavior Tree selections.
+			190:
+				Tag(NameProperty)=NPC.Behavior.Phase.2
+				DevComment(StrProperty)=For tagging AI with Phased behaviors. When they transition from one set of behaviors to another. Can be used to shut down particular Abilities or Behavior Tree selections.
+			191:
+				Tag(NameProperty)=NPC.Behavior.Phase.3
+				DevComment(StrProperty)=For tagging AI with Phased behaviors. When they transition from one set of behaviors to another. Can be used to shut down particular Abilities or Behavior Tree selections.
+			192:
+				Tag(NameProperty)=NPC.Behavior.Phase.4
+				DevComment(StrProperty)=For tagging AI with Phased behaviors. When they transition from one set of behaviors to another. Can be used to shut down particular Abilities or Behavior Tree selections.
+			193:
+				Tag(NameProperty)=NPC.Behavior.Phase.5
+				DevComment(StrProperty)=For tagging AI with Phased behaviors. When they transition from one set of behaviors to another. Can be used to shut down particular Abilities or Behavior Tree selections.
+			194:
+				Tag(NameProperty)=NPC.Behavior.Phase.6
+				DevComment(StrProperty)=For tagging AI with Phased behaviors. When they transition from one set of behaviors to another. Can be used to shut down particular Abilities or Behavior Tree selections.
+			195:
+				Tag(NameProperty)=NPC.Behavior.Phase.7
+				DevComment(StrProperty)=For tagging AI with Phased behaviors. When they transition from one set of behaviors to another. Can be used to shut down particular Abilities or Behavior Tree selections.
+			196:
+				Tag(NameProperty)=NPC.Behavior.Phase.8
+				DevComment(StrProperty)=For tagging AI with Phased behaviors. When they transition from one set of behaviors to another. Can be used to shut down particular Abilities or Behavior Tree selections.
+			197:
+				Tag(NameProperty)=NPC.Behavior.Phase.9
+				DevComment(StrProperty)=For tagging AI with Phased behaviors. When they transition from one set of behaviors to another. Can be used to shut down particular Abilities or Behavior Tree selections.
+			198:
+				Tag(NameProperty)=NPC.Behavior.Phase.10
+				DevComment(StrProperty)=For tagging AI with Phased behaviors. When they transition from one set of behaviors to another. Can be used to shut down particular Abilities or Behavior Tree selections.
+			199:
 				Tag(NameProperty)=NPC.Behavior.Prohibits.Ability.Attack.Any
 				DevComment(StrProperty)=This GoalActor cannot be attacked by ANY Ability. This check differs from the more specific tag checks. Meant to be a general go/nogo that is gated in the behavior tree.
-			188:
+			200:
 				Tag(NameProperty)=NPC.Behavior.Prohibits.Ability.Attack.Melee.Any
 				DevComment(StrProperty)=This GoalActor cannot be attacked by ANY MELEE Ability. This check differs from the more specific tag checks. Meant to be a general go/nogo that is gated in the behavior tree.
-			189:
+			201:
 				Tag(NameProperty)=NPC.Behavior.Prohibits.Ability.Attack.Melee.Bump
 				DevComment(StrProperty)=Prohibits "bump" attacks against any actor with this tag (i.e. the ATLAS).  That means the Smasher won't damage actors with this tag as he's approaching them (unlike most small debris, etc.).  Technically, it prohibits any ability that has this tag listed in "Target Blocked Tags".  NOTE: Ability.X.Y matches Ability hierarchy above.
-			190:
+			202:
 				Tag(NameProperty)=NPC.Behavior.Prohibits.Ability.Attack.Melee.Lunge
 				DevComment(StrProperty)=Prohibits lunge attacks against any actor with this tag.
-			191:
+			203:
 				Tag(NameProperty)=NPC.Behavior.Prohibits.Ability.Attack.Ranged.Any
 				DevComment(StrProperty)=This GoalActor cannot be attacked by ANY RANGED Ability. This check differs from the more specific tag checks. Meant to be a general go/nogo that is gated in the behavior tree.
-			192:
+			204:
 				Tag(NameProperty)=NPC.Behavior.Prohibits.Ability.Attack.Ranged.Primary
 				DevComment(StrProperty)=Prohibits primary ranged attacks against any actor with this tag (i.e. the ATLAS).  Technically, it prohibits any ability that has this tag listed in "Target Blocked Tags".  NOTE: Ability.X.Y matches Ability hierarchy above.
-			193:
+			205:
 				Tag(NameProperty)=NPC.Behavior.RepositionsLaterally
 				DevComment(StrProperty)=Ranged AI Repositions Laterally between each ranged attack volley.
-			194:
+			206:
 				Tag(NameProperty)=NPC.Behavior.Rescue
 				DevComment(StrProperty)=NPC is currently being rescued.
-			195:
+			207:
 				Tag(NameProperty)=NPC.Behavior.Retreats
 				DevComment(StrProperty)=Ranged AI Retreats to MaxPreferredRange from time to time.
-			196:
+			208:
 				Tag(NameProperty)=NPC.Behavior.UsesMeleeOnRangedCooldown
 				DevComment(StrProperty)=Ranged AI reverts to Melee behaviors when Ranged Ability is on Cooldown.
-			197:
+			209:
 				Tag(NameProperty)=NPC.CharacterType.Blaster.Basic
 				DevComment(StrProperty)=The basic Blaster.
-			198:
+			210:
 				Tag(NameProperty)=NPC.CharacterType.Elite.1P
 				DevComment(StrProperty)=1 Player - Generic tag for appending to other CharacterType tags to let you know this is also an Elite type enemy.
-			199:
+			211:
 				Tag(NameProperty)=NPC.CharacterType.Elite.4P
 				DevComment(StrProperty)=4 Player - Generic tag for appending to other CharacterType tags to let you know this is also an Elite type enemy.
-			200:
+			212:
 				Tag(NameProperty)=NPC.CharacterType.Flinger.Basic
 				DevComment(StrProperty)=The basic Flinger
-			201:
+			213:
 				Tag(NameProperty)=NPC.CharacterType.GhostlyLady.Basic
 				DevComment(StrProperty)=The basic "Ghostly Lady" (used in Transylvania biome).
-			202:
+			214:
 				Tag(NameProperty)=NPC.CharacterType.Husk.Armored
 				DevComment(StrProperty)=Husk wearing armor that can be knocked off easily with melee strikes.
-			203:
+			215:
 				Tag(NameProperty)=NPC.CharacterType.Husk.Basic
 				DevComment(StrProperty)=The basic Husk
-			204:
+			216:
 				Tag(NameProperty)=NPC.CharacterType.Husk.Beehive
 				DevComment(StrProperty)=Beehive Husk? probably tag should change when beehive is removed.  Arguably this should be a status effect instead.  Basic Hish with .Status.Wearing.Beehive
-			205:
+			217:
 				Tag(NameProperty)=NPC.CharacterType.Husk.Bombshell
 				DevComment(StrProperty)=Bombshell is the "standard lobber" husk.
-			206:
+			218:
 				Tag(NameProperty)=NPC.CharacterType.Husk.Digger
 				DevComment(StrProperty)=Husk that digs underground while approaching so it can't be attacked. Cannot dig under destroyable floors.
-			207:
+			219:
 				Tag(NameProperty)=NPC.CharacterType.Husk.Dwarf
 				DevComment(StrProperty)=The dwarf husk.
-			208:
+			220:
 				Tag(NameProperty)=NPC.CharacterType.Husk.Husky
 				DevComment(StrProperty)=Husky (burping) husk
-			209:
+			221:
 				Tag(NameProperty)=NPC.CharacterType.Husk.Pitcher
 				DevComment(StrProperty)=Pitcher husk
-			210:
+			222:
 				Tag(NameProperty)=NPC.CharacterType.Husk.PoisonLobber
 				DevComment(StrProperty)=Poison lobbers.  I think they should be called Belladonna
-			211:
+			223:
 				Tag(NameProperty)=NPC.CharacterType.Husk.RiotShield
 				DevComment(StrProperty)=Riot Shield Husky.
-			212:
+			224:
 				Tag(NameProperty)=NPC.CharacterType.Husk.Sploder
 				DevComment(StrProperty)="Propane Tank" husk
-			213:
+			225:
 				Tag(NameProperty)=NPC.CharacterType.Husk.Trashman
 				DevComment(StrProperty)=Trashman Husk that throws bags of garbage that unleash a bunch of homing and biting skulls.
-			214:
+			226:
 				Tag(NameProperty)=NPC.CharacterType.Husk.Zapper
 				DevComment(StrProperty)=Instant hit ranged attack Husk. Something between a Pitcher and a Blaster.
-			215:
+			227:
 				Tag(NameProperty)=NPC.CharacterType.Husk.Zapper.DarkGunslinger
 				DevComment(StrProperty)=The Dark Gunslinger Zapper Husk
-			216:
+			228:
 				Tag(NameProperty)=NPC.CharacterType.Mimic.Basic
 				DevComment(StrProperty)=The basic "Mimic", which looks like a treature chest until you try to loot it.
-			217:
+			229:
 				Tag(NameProperty)=NPC.CharacterType.MiniBoss.1P
 				DevComment(StrProperty)=1 Player - Generic tag for appending to other CharacterType tags to let you know this is also a MiniBoss type enemy.
-			218:
+			230:
 				Tag(NameProperty)=NPC.CharacterType.MiniBoss.4P
 				DevComment(StrProperty)=4 Player - Generic tag for appending to other CharacterType tags to let you know this is also a MiniBoss type enemy.
-			219:
+			231:
+				Tag(NameProperty)=NPC.CharacterType.Boss.1P
+				DevComment(StrProperty)=1 Player - Generic tag for appending to other CharacterType tags to let you know this is also a Boss type enemy.
+			232:
+				Tag(NameProperty)=NPC.CharacterType.Boss.4P
+				DevComment(StrProperty)=4 Player - Generic tag for appending to other CharacterType tags to let you know this is also a Boss type enemy.
+			233:
 				Tag(NameProperty)=NPC.CharacterType.Shielder.Basic
 				DevComment(StrProperty)=Basic Shielder enemy that attaches itself to other enemies and provides a shield for them.
-			220:
+			234:
 				Tag(NameProperty)=NPC.CharacterType.Shielder.Super
 				DevComment(StrProperty)=Super Shielder with a giant strong bubble shield.
-			221:
+			235:
 				Tag(NameProperty)=NPC.CharacterType.Smasher.Basic
 				DevComment(StrProperty)=The basic Smasher
-			222:
+			236:
 				Tag(NameProperty)=NPC.CharacterType.Smasher.Onboarding
 				DevComment(StrProperty)=Smasher for Onboarding. He acts as an assassin to only attack players and has a much larger sight/charge range to match the map.
-			223:
+			237:
+				Tag(NameProperty)=NPC.CharacterType.StormKing
+				DevComment(StrProperty)=Storm King tag
+			238:
 				Tag(NameProperty)=NPC.CharacterType.Survivor
 				DevComment(StrProperty)=The Survivor character type
-			224:
+			239:
 				Tag(NameProperty)=NPC.CharacterType.Survivor.Defender
 				DevComment(StrProperty)=The Defender character type
-			225:
+			240:
 				Tag(NameProperty)=NPC.CharacterType.Survivor.Defender.AssaultRifle
 				DevComment(StrProperty)=The Defender who specializes in Assault Rifles
-			226:
+			241:
 				Tag(NameProperty)=NPC.CharacterType.Survivor.Defender.Melee
 				DevComment(StrProperty)=The Defender who specializes in Melee
-			227:
+			242:
 				Tag(NameProperty)=NPC.CharacterType.Survivor.Defender.Pistol
 				DevComment(StrProperty)=The Defender who specializes in Pistols
-			228:
+			243:
 				Tag(NameProperty)=NPC.CharacterType.Survivor.Defender.Shotgun
 				DevComment(StrProperty)=The Defender who specializes in Shotguns
-			229:
+			244:
 				Tag(NameProperty)=NPC.CharacterType.Survivor.Defender.Sniper
 				DevComment(StrProperty)=The Defender who specializes in Sniper Rifles
-			230:
+			245:
 				Tag(NameProperty)=NPC.CharacterType.Survivor.Harvester
 				DevComment(StrProperty)=The harvester survivor
-			231:
+			246:
 				Tag(NameProperty)=NPC.CharacterType.Taker.Basic
 				DevComment(StrProperty)=The basic Taker
-			232:
+			247:
 				Tag(NameProperty)=NPC.CharacterType.Troll.Basic
 				DevComment(StrProperty)=The basic Troll
-			233:
+			248:
 				Tag(NameProperty)=NPC.CharacterType.Tunneler
 				DevComment(StrProperty)=The basic Tunneler
-			234:
+			249:
 				Tag(NameProperty)=NPC.CharacterType.Werewolf.Basic
 				DevComment(StrProperty)=The basic "Werewolf" (used in Transylvania biome).
-			235:
+			250:
 				Tag(NameProperty)=NPC.Cooldown.Ability.Attack.AoE.Primary
 				DevComment(StrProperty)=
-			236:
+			251:
 				Tag(NameProperty)=NPC.Cooldown.Ability.Attack.Melee
 				DevComment(StrProperty)=Cooldown for the Husk's Generic Melee ability (or, in fact, ANY melee attack).  If you only want to effect Primary Melee, use Melee.Primary instead.
-			237:
+			252:
 				Tag(NameProperty)=NPC.Cooldown.Ability.Attack.Melee.Charge
 				DevComment(StrProperty)=The cooldown for charge melee attacks only.  Does not affect other attacks.  (To do so, apply a Melee cooldown as well.)
-			238:
+			253:
 				Tag(NameProperty)=NPC.Cooldown.Ability.Attack.Melee.Heavy
 				DevComment(StrProperty)=Cooldown for the any Heavy Melee ability (such as the Dwarf jump-attack).
-			239:
+			254:
 				Tag(NameProperty)=NPC.Cooldown.Ability.Attack.Melee.Lunge
 				DevComment(StrProperty)=The cooldown for lunge melee attacks only.  Does not affect other attacks.  (To do so, apply a Melee cooldown as well.)
-			240:
+			255:
 				Tag(NameProperty)=NPC.Cooldown.Ability.Attack.Melee.Lunge.TargetPacing
 				DevComment(StrProperty)=Target pacing for Lunge attacks. Currently shared for all AI that can Lunge.
-			241:
+			256:
 				Tag(NameProperty)=NPC.Cooldown.Ability.Attack.Melee.Radial
 				DevComment(StrProperty)=The cooldown for radial melee attacks only.  Does not affect other attacks.  (To do so, apply a Melee cooldown as well.)
-			242:
+			257:
 				Tag(NameProperty)=NPC.Cooldown.Ability.Attack.Melee.SoulSuck
 				DevComment(StrProperty)=Cooldown for the Taker Soul Suck attack.
-			243:
+			258:
 				Tag(NameProperty)=NPC.Cooldown.Ability.Attack.Melee.Stun
 				DevComment(StrProperty)=Cooldown for Stun attack.
-			244:
+			259:
 				Tag(NameProperty)=NPC.Cooldown.Ability.Attack.Melee.Swoop
 				DevComment(StrProperty)=Cooldown for the Taker Swoop attack.
-			245:
+			260:
 				Tag(NameProperty)=NPC.Cooldown.Ability.Attack.Ranged
 				DevComment(StrProperty)=The default cooldown for ALL ranged abilities
-			246:
+			261:
 				Tag(NameProperty)=NPC.Cooldown.Ability.Attack.Ranged.Primary
 				DevComment(StrProperty)=
-			247:
+			262:
 				Tag(NameProperty)=NPC.Cooldown.Ability.Attack.Ranged.MultiTarget
 				DevComment(StrProperty)=
-			248:
+			263:
 				Tag(NameProperty)=NPC.Cooldown.Ability.Attack.Ranged.Sweep
 				DevComment(StrProperty)=
-			249:
+			264:
 				Tag(NameProperty)=NPC.Cooldown.Ability.Attack.Summon.Minions
 				DevComment(StrProperty)=
-			250:
+			265:
+				Tag(NameProperty)=NPC.Cooldown.Ability.Attack.Melee.TargetPacing.DUDEBRO
+				DevComment(StrProperty)=Target pacing for DUDEBRO melee damage overlaps.
+			266:
 				Tag(NameProperty)=NPC.Cooldown.Ability.Attack.Ranged.TargetPacing.Pitcher
 				DevComment(StrProperty)=Target pacing for the Pitcher Husk. Don't throw a bunch of bones at once.
-			251:
+			267:
 				Tag(NameProperty)=NPC.Cooldown.Ability.Attack.Ranged.TargetPacing.Zapper
 				DevComment(StrProperty)=Target pacing for the Zapper Husk.
-			252:
+			268:
 				Tag(NameProperty)=NPC.Cooldown.Ability.Triggered.OnDmgDealt.SelfHeal
 				DevComment(StrProperty)=Rate limiter for "Heal on Damage Dealt" abilities
-			253:
+			269:
 				Tag(NameProperty)=NPC.Cooldown.Ability.NonCombat.Evade
 				DevComment(StrProperty)=Cooldown for Evade gameplay ability.
-			254:
+			270:
 				Tag(NameProperty)=NPC.Cooldown.Ability.NonCombat.Roar
 				DevComment(StrProperty)=Cooldown for Roar
-			255:
+			271:
 				Tag(NameProperty)=NPC.Cooldown.Ability.NonCombat.Roar.Rampage
 				DevComment(StrProperty)=Cooldown for Rampage Roar
-			256:
+			272:
 				Tag(NameProperty)=NPC.Cooldown.Behavior.Advances
 				DevComment(StrProperty)=BT cooldown for Advancing within Preferred Range.
-			257:
+			273:
 				Tag(NameProperty)=NPC.Cooldown.Behavior.ApproachToMaxPreferredRange
 				DevComment(StrProperty)=BT cooldown for Approaching to MaxPreferredRange.
-			258:
+			274:
 				Tag(NameProperty)=NPC.Cooldown.Behavior.ApproachToMinPreferredRange
 				DevComment(StrProperty)=BT cooldown for Approaching to MinPreferredRange.
-			259:
+			275:
 				Tag(NameProperty)=NPC.Cooldown.Behavior.AvoidEnemy
 				DevComment(StrProperty)=BT cooldown for Avoiding Enemies
-			260:
+			276:
 				Tag(NameProperty)=NPC.Cooldown.Behavior.RepositionForVisibility
 				DevComment(StrProperty)=BT cooldown for Repositioning to gain Visibility of GoalActor.
-			261:
+			277:
 				Tag(NameProperty)=NPC.Cooldown.Behavior.RepositionsLaterally
 				DevComment(StrProperty)=BT cooldown for Repositioning Laterally. First implemented for instances where the EQS fails.
-			262:
+			278:
 				Tag(NameProperty)=NPC.Cooldown.Behavior.RepositionWithinPreferredRange
 				DevComment(StrProperty)=BT cooldown for Repositioning within the preferred range between Ranged attacks. This is to find a new place where you can hit the GoalActor from.
-			263:
+			279:
 				Tag(NameProperty)=NPC.Cooldown.Behavior.Retreats
 				DevComment(StrProperty)=BT cooldown for Retreating within Preferred Range.
-			264:
+			280:
 				Tag(NameProperty)=NPC.Cooldown.Behavior.SpawnSpot
 				DevComment(StrProperty)=BT cooldown for returning to our Spawn Spot
-			265:
+			281:
 				Tag(NameProperty)=NPC.Cooldown.TargetPacing.MiniBoss.Vortex
 				DevComment(StrProperty)=Target pacing for Vortex ability so it doesn't target a specific player too often.
-			266:
+			282:
 				Tag(NameProperty)=NPC.Elemental.Fire
 				DevComment(StrProperty)=Is a Fire Variant
-			267:
+			283:
 				Tag(NameProperty)=NPC.Elemental.Ice
 				DevComment(StrProperty)=Is an Ice Variant
-			268:
+			284:
 				Tag(NameProperty)=NPC.Elemental.Lightning
 				DevComment(StrProperty)=Is a Lightning Variant
-			269:
+			285:
 				Tag(NameProperty)=NPC.EnemyType.BASE
 				DevComment(StrProperty)=Tag to identify actors that pawns who care about the Constructor's BASE should consider enemies.  (I.E. the BASE!)
-			270:
+			286:
 				Tag(NameProperty)=NPC.EnemyType.Cart
 				DevComment(StrProperty)=Tag to identify actors that pawns who care about carts should consider to be enemies.
-			271:
+			287:
 				Tag(NameProperty)=NPC.EnemyType.Gadget
 				DevComment(StrProperty)=Tag to identify actors that pawns who care about gadgets should consider to be enemies.
-			272:
+			288:
 				Tag(NameProperty)=NPC.EnemyType.Pawn
 				DevComment(StrProperty)=Tag that must go on all pawns (player AND AI) so that AI that care about Pawn enemies can use it.
-			273:
+			289:
 				Tag(NameProperty)=NPC.EnemyType.StrategicBuilding
 				DevComment(StrProperty)=Tag to identify actors that pawns who care about strategic buildings should consider to be enemies.
-			274:
+			290:
 				Tag(NameProperty)=NPC.EnemyType.Trap
 				DevComment(StrProperty)=Tag to identify actors that pawns who care about "traps" should consider to be enemies.
-			275:
+			291:
 				Tag(NameProperty)=NPC.EnemyType.Turret
 				DevComment(StrProperty)=Tag to identify actors that pawns who care about turrets should consider to be enemies.
-			276:
+			292:
 				Tag(NameProperty)=NPC.GoalSelection.Assassin.Destroyer
 				DevComment(StrProperty)=Assassin goal selection that falls back to Destroyer behavior if there are no enemies around. Used for MiniBosses.
-			277:
+			293:
 				Tag(NameProperty)=NPC.GoalSelection.Destroyer.Assassin
 				DevComment(StrProperty)=Destroyer goal selection that falls back to Assassin behavior if there are no buildings around. Used for MiniBosses.
-			278:
+			294:
 				Tag(NameProperty)=NPC.Status.AOE.Bees
 				DevComment(StrProperty)=Pawn is in a Bee cloud.
-			279:
+			295:
 				Tag(NameProperty)=NPC.Status.AOE.AcidPools
 				DevComment(StrProperty)=Pawn is in an Acid Pool.
-			280:
+			296:
 				Tag(NameProperty)=NPC.Status.AOE.SlowPools
 				DevComment(StrProperty)=Pawn is in a Slow Pool.
-			281:
+			297:
 				Tag(NameProperty)=NPC.Status.AOE.BeesReEntryBuffer
 				DevComment(StrProperty)=Stops players from taking too many ticks of damage from bees.
-			282:
+			298:
 				Tag(NameProperty)=NPC.Status.AOE.AcidPoolsReEntryBuffer
 				DevComment(StrProperty)=Stops players from taking too many ticks of damage.
-			283:
+			299:
 				Tag(NameProperty)=NPC.Status.AOE.SlowPoolsReEntryBuffer
 				DevComment(StrProperty)=Stops players from taking too many ticks of damage.
-			284:
+			300:
 				Tag(NameProperty)=NPC.Status.AOE.Poison
 				DevComment(StrProperty)=Pawn is in a Poison cloud.
-			285:
+			301:
 				Tag(NameProperty)=NPC.Status.AOE.PoisonReEntryBuffer
 				DevComment(StrProperty)=Stops players from taking too many ticks of damage from poison.
-			286:
+			302:
 				Tag(NameProperty)=NPC.Status.Armored
 				DevComment(StrProperty)=Armored husk has stacks of damage reduction.
-			287:
+			303:
 				Tag(NameProperty)=NPC.Status.Carrying.Explosive.Tank
 				DevComment(StrProperty)=The Sploder is carrying a propane tank.  If he picks up other things (someday), the hierarchy is obvious.  If that's the only thing ever carried, fine, but at least the hierarchy is established.
-			288:
+			304:
 				Tag(NameProperty)=NPC.Status.ControlResistance.Decreased
 				DevComment(StrProperty)=The control resistance of the AI has been decreased.  This will allow the AI to be hit reacted or interrupted more easily.
-			289:
+			305:
 				Tag(NameProperty)=NPC.Status.ControlResistance.Increased
 				DevComment(StrProperty)=The control resistance of the AI has been increased.  This will make the AI more resistant to being hit reacted or interrupted.
-			290:
+			306:
 				Tag(NameProperty)=NPC.Status.Faceplanted
 				DevComment(StrProperty)=When the Smasher charges hard into an obstacle which he's unable to kill, he "faceplants" (actually, he falls on his butt).
-			291:
+			307:
 				Tag(NameProperty)=NPC.Status.Failed.Ability.Attack.Melee
 				DevComment(StrProperty)=Used as a stacking result counter for melee attack failures.  NOTE: Ability.X.Y matches ability hierarchy above to indicate failure to whatever level of specificity is desired.
-			292:
+			308:
 				Tag(NameProperty)=NPC.Status.Frustration
 				DevComment(StrProperty)=Used to indicate that a failure has overflowed into frustration.  Used to trigger Smaher radial ground pound after X melee failures.  If we need it to be more specific, it can add Ability hierarchy afterward.
-			293:
+			309:
 				Tag(NameProperty)=NPC.Status.HasStunnedTarget
 				DevComment(StrProperty)=Taker has stunned target that is now vulnerable for the Soul Suck attack.
-			294:
+			310:
 				Tag(NameProperty)=NPC.Status.LockedInPlace
 				DevComment(StrProperty)=The NPC is locked in place and should not move.
-			295:
+			311:
 				Tag(NameProperty)=NPC.Status.MarkedForDeath
 				DevComment(StrProperty)=Player marked for death by Taker
-			296:
+			312:
+				Tag(NameProperty)=NPC.Status.NoShielders
+				DevComment(StrProperty)=Cannot be chosen to be shielded by a Shielder
+			313:
 				Tag(NameProperty)=NPC.Status.ReachedChargingSpeed
 				DevComment(StrProperty)=Applied to the Smasher when he reaches full charge speed.
-			297:
+			314:
 				Tag(NameProperty)=NPC.Status.Wearing.Beehive
 				DevComment(StrProperty)=We've discussed a number of future possibilities for AI "wearing" various things: Armor, Catcher's Mask, Trash-Can, etc.  If we never fill them in, fine, but at least the example is established.
-			298:
+			315:
 				Tag(NameProperty)=NPC.Status.Wearing.Shielder
 				DevComment(StrProperty)=There is a Shielder attached to this enemy.
-			299:
+			316:
 				Tag(NameProperty)=NPC.Status.AttachedTo.Shield
 				DevComment(StrProperty)=NPC is attached to the Bullrush shield
-			300:
+			317:
 				Tag(NameProperty)=NPC.Status.DetachFrom.Shield
 				DevComment(StrProperty)=NPC is detaching from Bullrush shield
-			301:
+			318:
 				Tag(NameProperty)=NPC.Status.Enraged
 				DevComment(StrProperty)=NPC that has the enraged GE applied to it
-			302:
+			319:
+				Tag(NameProperty)=NPC.Status.ShowSpecialHealthBar
+				DevComment(StrProperty)=Show a special scripted health bar for this NPC
+			320:
 				Tag(NameProperty)=NPC.Status.Sleeping
 				DevComment(StrProperty)=NPC is asleep.
-			303:
+			321:
 				Tag(NameProperty)=NPC.Status.SpeedBufff
 				DevComment(StrProperty)=NPC that has the Quickened GE applied to it
-			304:
+			322:
 				Tag(NameProperty)=NPC.Cooldown.Ability.Attack.Ranged.Volcanic
 				DevComment(StrProperty)=Volcanic cooldown placed on player target.
-			305:
+			323:
 				Tag(NameProperty)=NPC.Status.AOE.FirePools
 				DevComment(StrProperty)=Pawn is in the Fire Pool
-			306:
+			324:
 				Tag(NameProperty)=NPC.Ability.Attack.AOE.FirePools
 				DevComment(StrProperty)=AOE pool ability
-			307:
+			325:
 				Tag(NameProperty)=NPC.Cooldown.Ability.Attack.FirePools
 				DevComment(StrProperty)=1, 2, Fire! cooldown placed on player target.
-			308:
+			326:
 				Tag(NameProperty)=NPC.Behavior.Disables.Ability.Attack.AoE.FirePools
 				DevComment(StrProperty)=Disable Fire Pools when this tag is applied to the enemy with the ability. Applied when standing in his own AoE cloud so he won't drop a new one.
-			309:
+			327:
 				Tag(NameProperty)=NPC.Status.AOE.FirePoolsReEntryBuffer
 				DevComment(StrProperty)=Stops enemy pawns from taking too many ticks of damage.
-			310:
+			328:
 				Tag(NameProperty)=NPC.Status.Test.Test
 				DevComment(StrProperty)=Test
-			311:
+			329:
 				Tag(NameProperty)=NPC.Miniboss.Cooldown.Modifier.DamagePulse
 				DevComment(StrProperty)=Used as an asset tag for the Damage Pulse miniboss modifier.
-			312:
+			330:
 				Tag(NameProperty)=NPC.Miniboss.OnCooldown.Modifier.DamagePulse
 				DevComment(StrProperty)=Used as the granted on cooldown tag for the Damage Pulse miniboss modifier.
-			313:
+			331:
 				Tag(NameProperty)=NPC.Miniboss.Cooldown.Modifier.Volcanic
 				DevComment(StrProperty)=Used as an asset tag for the Volcanic miniboss modifier.
-			314:
+			332:
 				Tag(NameProperty)=NPC.Miniboss.OnCooldown.Modifier.Volcanic
 				DevComment(StrProperty)=Used as the granted on cooldown tag for the Volcanic miniboss modifier.
-			315:
+			333:
 				Tag(NameProperty)=NPC.Miniboss.Cooldown.Modifier.Vampiric
 				DevComment(StrProperty)=Used as an asset tag for the Vampiric miniboss modifier.
-			316:
+			334:
 				Tag(NameProperty)=NPC.Miniboss.OnCooldown.Modifier.Vampiric
 				DevComment(StrProperty)=Used as the granted on cooldown tag for the Vampiric miniboss modifier.
-			317:
+			335:
 				Tag(NameProperty)=NPC.Miniboss.Cooldown.Modifier.HealPulse
 				DevComment(StrProperty)=Used as an asset tag for the Heal Pulse miniboss modifier.
-			318:
+			336:
 				Tag(NameProperty)=NPC.Miniboss.OnCooldown.Modifier.HealPulse
 				DevComment(StrProperty)=Used as the granted on cooldown tag for the Heal Pulse miniboss modifier.
-			319:
+			337:
 				Tag(NameProperty)=NPC.Miniboss.Cooldown.Modifier.AcidPools
 				DevComment(StrProperty)=Used as an asset tag for the Acid Pools miniboss modifier.
-			320:
+			338:
 				Tag(NameProperty)=NPC.Miniboss.OnCooldown.Modifier.AcidPools
 				DevComment(StrProperty)=Used as the granted on cooldown tag for the Acid Pools miniboss modifier.
-			321:
+			339:
 				Tag(NameProperty)=NPC.Mist.Small
 				DevComment(StrProperty)=Mist monsters with low quest contribution
-			322:
+			340:
 				Tag(NameProperty)=NPC.Mist.Large
 				DevComment(StrProperty)=Mist monsters with high quest contribution
-			323:
+			341:
 				Tag(NameProperty)=NPC.CharacterType.Fiend.Basic
 				DevComment(StrProperty)=
-			324:
+			342:
 				Tag(NameProperty)=NPC.CharacterType.Fiend.Major
 				DevComment(StrProperty)=
-			325:
+			343:
 				Tag(NameProperty)=NPC.CharacterType.Brute.Basic
 				DevComment(StrProperty)=
-			326:
+			344:
 				Tag(NameProperty)=NPC.CharacterType.Brute.Major
 				DevComment(StrProperty)=
-			327:
+			345:
 				Tag(NameProperty)=NPC.CharacterType.Brute.Mega
 				DevComment(StrProperty)=

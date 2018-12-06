@@ -1,6 +1,8 @@
 Name table:
 	/Game/Items/AccountConsumables/SmallXpBoost
 	/Game/Items/AccountConsumables/SmallXpBoost_Gift
+	/Game/UI/Foundation/Fonts/NotoSans
+	/Game/UI/Foundation/Text/TextStyle-Base
 	/Game/UI/Foundation/Text/TextStyle-Base-M-B
 	/Game/UI/Foundation/Text/TextStyle-Base-XS-70pc
 	/Game/UI/Foundation/Textures/Icons/XP/Icon-XP-L
@@ -41,6 +43,7 @@ Name table:
 	BlueprintGeneratedClass
 	BoolProperty
 	BoostAmount
+	BoostLoadGuard
 	bOverride_WidthOverride
 	Brush
 	bValidTemplate
@@ -60,6 +63,7 @@ Name table:
 	ChildTemplates
 	Class
 	ColorAndOpacity
+	CommonLoadGuard
 	CommonNumericTextBlock
 	CommonTextBlock
 	CommonUISubsystem
@@ -71,6 +75,7 @@ Name table:
 	CurrentlyViewedAccountInfoChangedDelegate__DelegateSignature
 	Default__BlueprintContextLibrary
 	Default__BoolProperty
+	Default__CommonLoadGuard
 	Default__CommonNumericTextBlock
 	Default__CommonTextBlock
 	Default__CommonUserWidget
@@ -82,6 +87,7 @@ Name table:
 	Default__IntProperty
 	Default__KismetSystemLibrary
 	Default__KismetTextLibrary
+	Default__LoadGuardSlot
 	Default__MovieScene
 	Default__MovieScene2DTransformSection
 	Default__MovieScene2DTransformTrack
@@ -94,6 +100,7 @@ Name table:
 	Default__TextProperty
 	Default__TextStyle-Base-M-B_C
 	Default__TextStyle-Base-XS-70pc_C
+	Default__TextStyle-Base_C
 	Default__UseXPBoostWidget_C
 	Default__VerticalBox
 	Default__VerticalBoxSlot
@@ -144,6 +151,7 @@ Name table:
 	FocusOn
 	FocusOn_INST
 	Font
+	FontObject
 	ForcedTime
 	FortAccountItem
 	FortConsumableAccountItemDefinition
@@ -176,6 +184,7 @@ Name table:
 	Icon-XP-L
 	ImageSize
 	ImplIndex
+	InProgress
 	InputMethodChangedDelegate__DelegateSignature
 	InterfaceProperty
 	InterpMode
@@ -203,6 +212,8 @@ Name table:
 	LeaveTangentWeight
 	Left
 	LinearColor
+	LoadGuardSlot
+	LoadingText
 	LUTIndices
 	LUTOffset
 	MakeLiteralText
@@ -248,7 +259,9 @@ Name table:
 	NewInfo
 	None
 	NotifyFunctionName
+	NotoSans
 	NotoSans-Bold
+	NotoSans-Regular
 	Numerator
 	NumEvalPtrs
 	NumInitPtrs
@@ -305,8 +318,11 @@ Name table:
 	Segments
 	SequenceID
 	SequenceSignature
+	SetBoostInProgress
+	SetIsLoading
 	SetRenderTransform
 	SetText
+	ShadowOffset
 	Shear
 	Signature
 	Size
@@ -346,8 +362,10 @@ Name table:
 	TemplateSerialNumber
 	Text
 	TextProperty
+	TextStyle
 	TextStyle-Base-M-B_C
 	TextStyle-Base-XS-70pc_C
+	TextStyle-Base_C
 	Texture2D
 	TickResolution
 	Times
@@ -358,12 +376,12 @@ Name table:
 	Translation
 	TypefaceFontName
 	UberGraphFrame
-	UberGraphFramePointerProperty
 	UberGraphFunction
 	UInt16Property
 	UInt32Property
 	Update Available Boosts
 	UpdatePersonalTextTransform
+	UseBoostParent
 	UserWidget
 	UseXPBoostWidget_C
 	VAlign_Center
@@ -387,14 +405,13 @@ Name table:
 	XpBoostChangeDelegate__DelegateSignature
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	UseXPBoostWidget_C (0-0-0-0): size 533 (cls: UseXPBoostWidget_C>WidgetBlueprintGeneratedClass>/Script/UMG):
+	UseXPBoostWidget_C (0-0-0-0): size 528 (cls: UseXPBoostWidget_C>WidgetBlueprintGeneratedClass>/Script/UMG):
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
 			bValidTemplate(BoolProperty)=True 
 			Animations(ArrayProperty)=[object] (inner: ObjectProperty)
 			TemplateAsset(SoftObjectProperty)=/Game/UI/Frontend/XpBoosts/UseXPBoostWidget.WidgetArchetype 
-			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=UseXPBoostWidget_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_UseXPBoostWidget=UseXPBoostWidget_C 
 	Default__UseXPBoostWidget_C (0-0-0-0): size 158 (cls: Default__UseXPBoostWidget_C>UseXPBoostWidget_C):
 		Tag array:
@@ -409,50 +426,61 @@ Serialized exports:
 	ExecuteUbergraph_UseXPBoostWidget (0-0-0-0): size 576 (cls: ExecuteUbergraph_UseXPBoostWidget>Function>/Script/CoreUObject)
 	CallFunc_IsUsingGamepad_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsUsingGamepad_ReturnValue>BoolProperty>/Script/CoreUObject)
 	K2Node_Event_IsDesignTime (0-0-0-0): size 34 (cls: K2Node_Event_IsDesignTime>BoolProperty>/Script/CoreUObject)
-	Destruct (0-0-0-0): size 58 (cls: Destruct>Function>/Script/CoreUObject)
+	Destruct (0-0-0-0): size 54 (cls: Destruct>Function>/Script/CoreUObject)
 	MouseEvent (0-0-0-0): size 36 (cls: MouseEvent>StructProperty>/Script/CoreUObject)
-	OnMouseLeave (0-0-0-0): size 72 (cls: OnMouseLeave>Function>/Script/CoreUObject)
+	OnMouseLeave (0-0-0-0): size 68 (cls: OnMouseLeave>Function>/Script/CoreUObject)
 	MyGeometry (0-0-0-0): size 36 (cls: MyGeometry>StructProperty>/Script/CoreUObject)
-	OnMouseEnter (0-0-0-0): size 86 (cls: OnMouseEnter>Function>/Script/CoreUObject)
+	OnMouseEnter (0-0-0-0): size 82 (cls: OnMouseEnter>Function>/Script/CoreUObject)
 	IsDesignTime (0-0-0-0): size 34 (cls: IsDesignTime>BoolProperty>/Script/CoreUObject)
-	PreConstruct (0-0-0-0): size 72 (cls: PreConstruct>Function>/Script/CoreUObject)
+	PreConstruct (0-0-0-0): size 68 (cls: PreConstruct>Function>/Script/CoreUObject)
 	BoostAmount (0-0-0-0): size 32 (cls: BoostAmount>IntProperty>/Script/CoreUObject)
-	Xp Boost Changed (0-0-0-0): size 72 (cls: Xp Boost Changed>Function>/Script/CoreUObject)
+	Xp Boost Changed (0-0-0-0): size 68 (cls: Xp Boost Changed>Function>/Script/CoreUObject)
 	NewInfo (0-0-0-0): size 36 (cls: NewInfo>StructProperty>/Script/CoreUObject)
-	HandleAccountUpdate (0-0-0-0): size 72 (cls: HandleAccountUpdate>Function>/Script/CoreUObject)
-	Construct (0-0-0-0): size 58 (cls: Construct>Function>/Script/CoreUObject)
+	HandleAccountUpdate (0-0-0-0): size 68 (cls: HandleAccountUpdate>Function>/Script/CoreUObject)
+	Construct (0-0-0-0): size 54 (cls: Construct>Function>/Script/CoreUObject)
 	CallFunc_MakeLiteralText_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_MakeLiteralText_ReturnValue>TextProperty>/Script/CoreUObject)
 	Update Available Boosts (0-0-0-0): size 425 (cls: Update Available Boosts>Function>/Script/CoreUObject)
 	Personal (0-0-0-0): size 32 (cls: Personal>IntProperty>/Script/CoreUObject)
 	GetBoostCounts (0-0-0-0): size 535 (cls: GetBoostCounts>Function>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue1>BoolProperty>/Script/CoreUObject)
-	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
-	UpdatePersonalTextTransform (0-0-0-0): size 305 (cls: UpdatePersonalTextTransform>Function>/Script/CoreUObject)
 	bIsUsingGamepad (0-0-0-0): size 34 (cls: bIsUsingGamepad>BoolProperty>/Script/CoreUObject)
+	UpdatePersonalTextTransform (0-0-0-0): size 305 (cls: UpdatePersonalTextTransform>Function>/Script/CoreUObject)
+	SetBoostInProgress (0-0-0-0): size 72 (cls: SetBoostInProgress>Function>/Script/CoreUObject)
+	InProgress (0-0-0-0): size 34 (cls: InProgress>BoolProperty>/Script/CoreUObject)
+	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
-	PersonalBoostsAvailable (0-0-0-0): size 295 (cls: PersonalBoostsAvailable>CommonNumericTextBlock>/Script/CommonUI):
+	BoostLoadGuard (0-0-0-0): size 141 (cls: BoostLoadGuard>CommonLoadGuard>/Script/CommonUI):
+		Tag array:
+			LoadingText(TextProperty)= () 
+			TextStyle(ObjectProperty)=TextStyle-Base_C=/Game/UI/Foundation/Text/TextStyle-Base 
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=SizeBoxSlot_1=WidgetArchetype 
+	PersonalBoostsAvailable (0-0-0-0): size 381 (cls: PersonalBoostsAvailable>CommonNumericTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-M-B_C=/Game/UI/Foundation/Text/TextStyle-Base-M-B 
 			Text(TextProperty)= () 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
 			Visibility(EnumProperty)=ESlateVisibility::Visible 
-	CommonTextBlock_0 (0-0-0-0): size 307 (cls: CommonTextBlock_0>CommonTextBlock>/Script/CommonUI):
+	CommonTextBlock_0 (0-0-0-0): size 393 (cls: CommonTextBlock_0>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-M-B_C=/Game/UI/Foundation/Text/TextStyle-Base-M-B 
 			Text(TextProperty)=x (9CFEF1E94F9507736EEC878ED3154372) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
 			Visibility(EnumProperty)=ESlateVisibility::Visible 
 			RenderOpacity(FloatProperty)=0.5 
-	PersonalText (0-0-0-0): size 459 (cls: PersonalText>CommonTextBlock>/Script/CommonUI):
+	PersonalText (0-0-0-0): size 578 (cls: PersonalText>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-70pc_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-70pc 
 			Text(TextProperty)=USE XP BOOST (95224FD3484DD4AACDC8389D015C515B) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			AutoWrapText(BoolProperty)=True 
 			Slot(ObjectProperty)=VerticalBoxSlot_10=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
@@ -497,13 +525,17 @@ Serialized exports:
 	pboost (0-0-0-0): size 32 (cls: pboost>IntProperty>/Script/CoreUObject)
 	tboost (0-0-0-0): size 32 (cls: tboost>IntProperty>/Script/CoreUObject)
 	Team (0-0-0-0): size 32 (cls: Team>IntProperty>/Script/CoreUObject)
-	FocusOn (0-0-0-0): size 1212 (cls: FocusOn>MovieScene>/Script/MovieScene):
+	LoadGuardSlot_0 (0-0-0-0): size 70 (cls: LoadGuardSlot_0>LoadGuardSlot>/Script/CommonUI):
+		Tag array:
+			Parent(ObjectProperty)=BoostLoadGuard=WidgetArchetype 
+			Content(ObjectProperty)=UseBoostParent=WidgetArchetype 
+	FocusOn (0-0-0-0): size 1213 (cls: FocusOn>MovieScene>/Script/MovieScene):
 		Tag array:
 			Possessables(ArrayProperty)=[object] (inner: StructProperty)
 			ObjectBindings(ArrayProperty)=[object] (inner: StructProperty)
 			PlaybackRange(StructProperty)=System.Byte[] 
 			DisplayRate(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 2195108593-1156535704-1869629569-2171710258 
+			Signature(StructProperty)=Guid: 2525172747-1228583141-3799796386-181386437 
 	MovieScene2DTransformSection_0 (0-0-0-0): size 2731 (cls: MovieScene2DTransformSection_0>MovieScene2DTransformSection>/Script/UMG):
 		Tag array:
 			Scale(StructProperty)=System.Byte[] 
@@ -535,6 +567,7 @@ Serialized exports:
 	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
 	HandleMouseEnter (0-0-0-0): size 36 (cls: HandleMouseEnter>MulticastDelegateProperty>/Script/CoreUObject)
 	HandleMouseLeave (0-0-0-0): size 36 (cls: HandleMouseLeave>MulticastDelegateProperty>/Script/CoreUObject)
+	BoostLoadGuard (0-0-0-0): size 36 (cls: BoostLoadGuard>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetGameInstanceSubsystem_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetGameInstanceSubsystem_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetGameInstanceSubsystem_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetGameInstanceSubsystem_ReturnValue1>ObjectProperty>/Script/CoreUObject)
@@ -549,6 +582,7 @@ Serialized exports:
 	PersonalText (0-0-0-0): size 36 (cls: PersonalText>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetAccountItemWithDefinition_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetAccountItemWithDefinition_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	UseBoostParent (0-0-0-0): size 36 (cls: UseBoostParent>ObjectProperty>/Script/CoreUObject)
 	SizeBox_1 (0-0-0-0): size 137 (cls: SizeBox_1>SizeBox>/Script/UMG):
 		Tag array:
 			bOverride_WidthOverride(BoolProperty)=True 
@@ -558,7 +592,7 @@ Serialized exports:
 	SizeBoxSlot_1 (0-0-0-0): size 70 (cls: SizeBoxSlot_1>SizeBoxSlot>/Script/UMG):
 		Tag array:
 			Parent(ObjectProperty)=SizeBox_1=WidgetArchetype 
-			Content(ObjectProperty)=VerticalBox_0=WidgetArchetype 
+			Content(ObjectProperty)=BoostLoadGuard=WidgetArchetype 
 	K2Node_CustomEvent_NewInfo (0-0-0-0): size 36 (cls: K2Node_CustomEvent_NewInfo>StructProperty>/Script/CoreUObject)
 	K2Node_Event_MouseEvent (0-0-0-0): size 36 (cls: K2Node_Event_MouseEvent>StructProperty>/Script/CoreUObject)
 	K2Node_Event_MouseEvent1 (0-0-0-0): size 36 (cls: K2Node_Event_MouseEvent1>StructProperty>/Script/CoreUObject)
@@ -569,35 +603,38 @@ Serialized exports:
 	Temp_struct_Variable (0-0-0-0): size 36 (cls: Temp_struct_Variable>StructProperty>/Script/CoreUObject)
 	Temp_struct_Variable1 (0-0-0-0): size 36 (cls: Temp_struct_Variable1>StructProperty>/Script/CoreUObject)
 	CallFunc_Conv_IntToText_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Conv_IntToText_ReturnValue>TextProperty>/Script/CoreUObject)
-	WidgetArchetype (0-0-0-0): size 183 (cls: WidgetArchetype>UseXPBoostWidget_C):
+	WidgetArchetype (0-0-0-0): size 241 (cls: WidgetArchetype>UseXPBoostWidget_C):
 		Tag array:
+			BoostLoadGuard(ObjectProperty)=BoostLoadGuard=WidgetArchetype 
 			HBox_Solo(ObjectProperty)=HBox_Solo=WidgetArchetype 
 			PersonalBoostImage(ObjectProperty)=PersonalBoostImage=WidgetArchetype 
 			PersonalBoostsAvailable(ObjectProperty)=PersonalBoostsAvailable=WidgetArchetype 
 			PersonalText(ObjectProperty)=PersonalText=WidgetArchetype 
+			UseBoostParent(ObjectProperty)=UseBoostParent=WidgetArchetype 
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
-	VerticalBox_0 (0-0-0-0): size 86 (cls: VerticalBox_0>VerticalBox>/Script/UMG):
+	UseBoostParent (0-0-0-0): size 112 (cls: UseBoostParent>VerticalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-			Slot(ObjectProperty)=SizeBoxSlot_1=WidgetArchetype 
+			Slot(ObjectProperty)=LoadGuardSlot_0=WidgetArchetype 
+			bIsVariable(BoolProperty)=True 
 	VerticalBoxSlot_10 (0-0-0-0): size 111 (cls: VerticalBoxSlot_10>VerticalBoxSlot>/Script/UMG):
 		Tag array:
 			VerticalAlignment(ByteProperty)=VAlign_Center 
-			Parent(ObjectProperty)=VerticalBox_0=WidgetArchetype 
+			Parent(ObjectProperty)=UseBoostParent=WidgetArchetype 
 			Content(ObjectProperty)=PersonalText=WidgetArchetype 
 	VerticalBoxSlot_8 (0-0-0-0): size 152 (cls: VerticalBoxSlot_8>VerticalBoxSlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Left 
 			VerticalAlignment(ByteProperty)=VAlign_Center 
-			Parent(ObjectProperty)=VerticalBox_0=WidgetArchetype 
+			Parent(ObjectProperty)=UseBoostParent=WidgetArchetype 
 			Content(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
 	FocusOn_INST (0-0-0-0): size 16082 (cls: FocusOn_INST>WidgetAnimation>/Script/UMG):
 		Tag array:
 			MovieScene(ObjectProperty)=FocusOn=UseXPBoostWidget_C 
 			AnimationBindings(ArrayProperty)=[object] (inner: StructProperty)
 			PrecompiledEvaluationTemplate(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 1813294527-1148902417-2328632761-682625201 
+			Signature(StructProperty)=Guid: 1922376152-1110145117-1092384943-2769478782 
 	WidgetTree_0 (0-0-0-0): size 41 (cls: WidgetTree_0>WidgetTree>/Script/UMG):
 		Tag array:
 			RootWidget(ObjectProperty)=HBox_Solo=WidgetArchetype 

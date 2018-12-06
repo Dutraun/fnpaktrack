@@ -9,6 +9,7 @@ Name table:
 	/Game/Athena/Items/QuestInteractables/ClayPidgeons/Prop_Quest_ClayPidgeonLauncher
 	/Game/Athena/Items/QuestInteractables/Generic/FX/P_Athena_QuestItem_PickupSuccess
 	/Game/Athena/Items/Quests/AthenaObjectiveStatTable
+	/Game/Athena/Items/Quests/BattlePass/Quest_BR_Chain_Custom
 	/Game/Athena/Items/Quests/BattlePass/Quest_BR_Destroy_SpecificTargets
 	/Game/Athena/Prototype/SoccerGame/hackyscoresign
 	/Game/Athena/Prototype/SoccerGame/P_Athena_SoccerGame_ScoredGoal
@@ -34,6 +35,7 @@ Name table:
 	Array_AddUnique
 	Array_Clear
 	Array_Get
+	Array_Length
 	ArrayProperty
 	Arrow
 	Arrow_GEN_VARIABLE
@@ -49,10 +51,10 @@ Name table:
 	Athena.Creative
 	Athena_CheckQuestAndObjectiveCompletion
 	Athena_CollectHiddenStarReward_Cue
-	Athena_GiveQuestUpdateToPlayers
 	AthenaObjectiveStatTable
 	AthenaQuestFunctionLibrary_C
 	AudioComponent
+	battlepass_chain_interactable_custom
 	battlepass_destroy_specifictargets_01
 	bAutoActivate
 	bCanBeDamaged
@@ -86,10 +88,13 @@ Name table:
 	ByteProperty
 	CallFunc_Add_IntInt_ReturnValue
 	CallFunc_Add_IntInt_ReturnValue1
+	CallFunc_Add_IntInt_ReturnValue2
 	CallFunc_Array_AddUnique_ReturnValue
 	CallFunc_Array_Get_Item
 	CallFunc_Array_Get_Item1
 	CallFunc_Array_Get_Item2
+	CallFunc_Array_Get_Item3
+	CallFunc_Array_Length_ReturnValue
 	CallFunc_Athena_CheckQuestAndObjectiveCompletion_ObjectiveCompleted
 	CallFunc_Athena_CheckQuestAndObjectiveCompletion_ObjectiveCompleted1
 	CallFunc_Athena_CheckQuestAndObjectiveCompletion_QuestCompleted
@@ -115,6 +120,10 @@ Name table:
 	CallFunc_GetLocalFortPlayerControllers_ReturnValue2
 	CallFunc_GetPlayerPawn_ReturnValue
 	CallFunc_GetQuestManager_ReturnValue
+	CallFunc_GetQuestManager_ReturnValue1
+	CallFunc_GetQuestManager_ReturnValue2
+	CallFunc_GetQuestWithDefinition_ReturnValue
+	CallFunc_GetQuestWithDefinition_ReturnValue1
 	CallFunc_GetServerWorldTimeSeconds_ReturnValue
 	CallFunc_Greater_IntInt_ReturnValue
 	CallFunc_GreaterEqual_IntInt_ReturnValue
@@ -125,8 +134,14 @@ Name table:
 	CallFunc_HasAuthority_ReturnValue4
 	CallFunc_HasAuthority_ReturnValue5
 	CallFunc_HasAuthority_ReturnValue6
+	CallFunc_HasCompletedObjectiveWithName_ReturnValue
+	CallFunc_HasCompletedObjectiveWithName_ReturnValue1
 	CallFunc_HasTag_ReturnValue
 	CallFunc_HasTag_ReturnValue1
+	CallFunc_IsValid_ReturnValue
+	CallFunc_IsValid_ReturnValue1
+	CallFunc_IsValid_ReturnValue2
+	CallFunc_IsValid_ReturnValue3
 	CallFunc_K2_GetActorLocation_ReturnValue
 	CallFunc_K2_GetActorLocation_ReturnValue1
 	CallFunc_K2_GetActorLocation_ReturnValue2
@@ -146,6 +161,7 @@ Name table:
 	CallFunc_Lerp_ReturnValue1
 	CallFunc_Less_IntInt_ReturnValue
 	CallFunc_Less_IntInt_ReturnValue1
+	CallFunc_Less_IntInt_ReturnValue2
 	CallFunc_LessEqual_FloatFloat_ReturnValue
 	CallFunc_MakeRotator_ReturnValue
 	CallFunc_MakeRotator_ReturnValue1
@@ -271,6 +287,7 @@ Name table:
 	FortPlayerController
 	FortPlayerControllerAthena
 	FortPlayerPawn
+	FortQuestItem
 	FortQuestItemDefinition
 	FortQuestManager
 	FullStackLoc
@@ -281,12 +298,14 @@ Name table:
 	GameplayTag
 	GameplayTagContainer
 	GameStateBase
+	generic_custom_chain_01
 	GetAthenaPlaylistContextTags
 	GetGameState
 	GetInstigatorController
 	GetLocalFortPlayerControllers
 	GetPlayerPawn
 	GetQuestManager
+	GetQuestWithDefinition
 	GetServerWorldTimeSeconds
 	GoalScore
 	Greater_IntInt
@@ -295,6 +314,7 @@ Name table:
 	hackyscoresign
 	hackyscoresign_GEN_VARIABLE
 	HasAuthority
+	HasCompletedObjectiveWithName
 	HasTag
 	HighScore
 	Hit
@@ -307,6 +327,7 @@ Name table:
 	InteractionString
 	InternalVariableName
 	IntProperty
+	IsValid
 	K2_GetActorLocation
 	K2_GetComponentLocation
 	K2_GetComponentRotation
@@ -372,10 +393,12 @@ Name table:
 	NotEqual_IntInt
 	NumReplicatedProperties
 	ObjBackendName
+	ObjBackendName2
 	Object
 	ObjectProperty
 	ObjectType
 	ObjStat
+	ObjStat2
 	OnActorHit
 	OnCurrentPlaylistLoaded
 	OnCurrentPlaylistLoaded__DelegateSignature
@@ -415,10 +438,12 @@ Name table:
 	Prop_Quest_ClayPidgeonLauncher_C
 	PropertyName
 	Quat
+	Quest_BR_Chain_Custom
 	Quest_BR_Destroy_SpecificTargets
 	QuestCompleted
 	QuestCompletedFX
 	QuestItem
+	QuestItem2
 	QuestLocallyActive
 	QuestSuccessEmitter
 	QuestSuccessSound
@@ -458,6 +483,7 @@ Name table:
 	ScriptStruct
 	SCS_Node
 	SelfActor
+	SendCustomStatEvent
 	ServerGameTimeAtSlingStart
 	SetActorEnableCollision
 	SetPlayRate
@@ -505,6 +531,8 @@ Name table:
 	Stop
 	StructProperty
 	Subtract_FloatFloat
+	Temp_int_Array_Index_Variable
+	Temp_int_Loop_Counter_Variable
 	Temp_int_Variable
 	Template
 	TextProperty
@@ -527,7 +555,6 @@ Name table:
 	TTEventTrack
 	TTFloatTrack
 	UberGraphFrame
-	UberGraphFramePointerProperty
 	UberGraphFunction
 	UpdateFunctionName
 	UserConstructionScript
@@ -539,14 +566,13 @@ Name table:
 	WinFX
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	Prop_Quest_ClayPidgeonLauncher_C (0-0-0-0): size 1021 (cls: Prop_Quest_ClayPidgeonLauncher_C>BlueprintGeneratedClass>/Script/Engine):
+	Prop_Quest_ClayPidgeonLauncher_C (0-0-0-0): size 1004 (cls: Prop_Quest_ClayPidgeonLauncher_C>BlueprintGeneratedClass>/Script/Engine):
 		Tag array:
 			NumReplicatedProperties(IntProperty)=7 
 			Timelines(ArrayProperty)=[object] (inner: ObjectProperty)
 			SimpleConstructionScript(ObjectProperty)=SimpleConstructionScript_0=Prop_Quest_ClayPidgeonLauncher_C 
-			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=Prop_Quest_ClayPidgeonLauncher_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_Prop_Quest_ClayPidgeonLauncher=Prop_Quest_ClayPidgeonLauncher_C 
-	Default__Prop_Quest_ClayPidgeonLauncher_C (0-0-0-0): size 1950 (cls: Default__Prop_Quest_ClayPidgeonLauncher_C>Prop_Quest_ClayPidgeonLauncher_C):
+	Default__Prop_Quest_ClayPidgeonLauncher_C (0-0-0-0): size 2131 (cls: Default__Prop_Quest_ClayPidgeonLauncher_C>Prop_Quest_ClayPidgeonLauncher_C):
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			ShootReloadSound(ObjectProperty)=ClayPidgeon_Shoot_TEMP_Cue=/Game/Athena/Sounds/Quests/ClayPidgeon_Shoot_TEMP_Cue 
@@ -573,6 +599,9 @@ Serialized exports:
 			Score Up Sound(ObjectProperty)=Clays_Score_Hit_Cue=/Game/Athena/Sounds/Quests/Clays_Score_Hit_Cue 
 			ResetScoreSound(ObjectProperty)=Clays_Score_Miss_Cue=/Game/Athena/Sounds/Quests/Clays_Score_Miss_Cue 
 			GoalScore(IntProperty)=3 
+			ObjBackendName2(NameProperty)=battlepass_chain_interactable_custom_1 
+			QuestItem2(ObjectProperty)=Quest_BR_Chain_Custom_1=/Game/Athena/Items/Quests/BattlePass/Quest_BR_Chain_Custom_1 
+			ObjStat2(StructProperty)=System.Byte[] 
 			StaticMesh(ObjectProperty)=SM_Trap_Thrower_Bottom=/Game/Athena/Items/QuestInteractables/ClayPidgeons/Meshes/SM_Trap_Thrower_Bottom 
 			bClearMIDWhenReturningToUndamagedState(BoolProperty)=False 
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Default__Prop_Quest_ClayPidgeonLauncher_C 
@@ -585,7 +614,7 @@ Serialized exports:
 	ContributingPlayers (0-0-0-0): size 36 (cls: ContributingPlayers>ArrayProperty>/Script/CoreUObject)
 	P_Athena_SoccerGame_ScoredGoal (0-0-0-0): size 36 (cls: P_Athena_SoccerGame_ScoredGoal>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_Prop_Quest_ClayPidgeonLauncher (0-0-0-0): size 5195 (cls: ExecuteUbergraph_Prop_Quest_ClayPidgeonLauncher>Function>/Script/CoreUObject)
+	ExecuteUbergraph_Prop_Quest_ClayPidgeonLauncher (0-0-0-0): size 6258 (cls: ExecuteUbergraph_Prop_Quest_ClayPidgeonLauncher>Function>/Script/CoreUObject)
 	CallFunc_GetLocalFortPlayerControllers_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetLocalFortPlayerControllers_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetLocalFortPlayerControllers_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetLocalFortPlayerControllers_ReturnValue>ArrayProperty>/Script/CoreUObject)
 	CallFunc_GetLocalFortPlayerControllers_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetLocalFortPlayerControllers_ReturnValue1>ObjectProperty>/Script/CoreUObject)
@@ -608,35 +637,35 @@ Serialized exports:
 		Tag array:
 			Sound(ObjectProperty)=ClayPidgeon_EngineSound_Cue=/Game/Athena/Sounds/Quests/ClayPidgeon_EngineSound_Cue 
 			bAutoActivate(BoolProperty)=False 
-	ScoreReset Sound (0-0-0-0): size 58 (cls: ScoreReset Sound>Function>/Script/CoreUObject)
-	Score Up (0-0-0-0): size 58 (cls: Score Up>Function>/Script/CoreUObject)
-	FIRE on time (0-0-0-0): size 60 (cls: FIRE on time>Function>/Script/CoreUObject)
+	ScoreReset Sound (0-0-0-0): size 54 (cls: ScoreReset Sound>Function>/Script/CoreUObject)
+	Score Up (0-0-0-0): size 54 (cls: Score Up>Function>/Script/CoreUObject)
+	FIRE on time (0-0-0-0): size 56 (cls: FIRE on time>Function>/Script/CoreUObject)
 	PlaylistName (0-0-0-0): size 32 (cls: PlaylistName>NameProperty>/Script/CoreUObject)
-	PlaylistLoaded (0-0-0-0): size 86 (cls: PlaylistLoaded>Function>/Script/CoreUObject)
-	QuestCompletedFX (0-0-0-0): size 58 (cls: QuestCompletedFX>Function>/Script/CoreUObject)
+	PlaylistLoaded (0-0-0-0): size 82 (cls: PlaylistLoaded>Function>/Script/CoreUObject)
+	QuestCompletedFX (0-0-0-0): size 54 (cls: QuestCompletedFX>Function>/Script/CoreUObject)
 	SelfActor (0-0-0-0): size 36 (cls: SelfActor>ObjectProperty>/Script/CoreUObject)
-	PidgeonHitWorld (0-0-0-0): size 114 (cls: PidgeonHitWorld>Function>/Script/CoreUObject)
-	WinFX (0-0-0-0): size 58 (cls: WinFX>Function>/Script/CoreUObject)
+	PidgeonHitWorld (0-0-0-0): size 110 (cls: PidgeonHitWorld>Function>/Script/CoreUObject)
+	WinFX (0-0-0-0): size 54 (cls: WinFX>Function>/Script/CoreUObject)
+	ShutdownEngine (0-0-0-0): size 56 (cls: ShutdownEngine>Function>/Script/CoreUObject)
+	SlingArmMotion (0-0-0-0): size 56 (cls: SlingArmMotion>Function>/Script/CoreUObject)
+	QuestCompleted (0-0-0-0): size 54 (cls: QuestCompleted>Function>/Script/CoreUObject)
+	ReceiveBeginPlay (0-0-0-0): size 54 (cls: ReceiveBeginPlay>Function>/Script/CoreUObject)
 	InteractingPawn (0-0-0-0): size 36 (cls: InteractingPawn>ObjectProperty>/Script/CoreUObject)
-	BlueprintOnInteract (0-0-0-0): size 72 (cls: BlueprintOnInteract>Function>/Script/CoreUObject)
+	BlueprintOnInteract (0-0-0-0): size 68 (cls: BlueprintOnInteract>Function>/Script/CoreUObject)
 	DamagedActor (0-0-0-0): size 36 (cls: DamagedActor>ObjectProperty>/Script/CoreUObject)
-	PidgeonShot (0-0-0-0): size 170 (cls: PidgeonShot>Function>/Script/CoreUObject)
-	ShutdownEngine (0-0-0-0): size 60 (cls: ShutdownEngine>Function>/Script/CoreUObject)
-	SlingArmMotion (0-0-0-0): size 60 (cls: SlingArmMotion>Function>/Script/CoreUObject)
-	QuestCompleted (0-0-0-0): size 58 (cls: QuestCompleted>Function>/Script/CoreUObject)
-	ReceiveBeginPlay (0-0-0-0): size 58 (cls: ReceiveBeginPlay>Function>/Script/CoreUObject)
-	PidgeonFired (0-0-0-0): size 36 (cls: PidgeonFired>ObjectProperty>/Script/CoreUObject)
-	NewPidgeonFired (0-0-0-0): size 74 (cls: NewPidgeonFired>Function>/Script/CoreUObject)
+	PidgeonShot (0-0-0-0): size 166 (cls: PidgeonShot>Function>/Script/CoreUObject)
 	PidgeonDead (0-0-0-0): size 36 (cls: PidgeonDead>ObjectProperty>/Script/CoreUObject)
-	PidgeonDead (0-0-0-0): size 72 (cls: PidgeonDead>Function>/Script/CoreUObject)
-	Timeline_0__FireTiming__EventFunc (0-0-0-0): size 58 (cls: Timeline_0__FireTiming__EventFunc>Function>/Script/CoreUObject)
-	Timeline_0__UpdateFunc (0-0-0-0): size 58 (cls: Timeline_0__UpdateFunc>Function>/Script/CoreUObject)
-	Timeline_0__FinishedFunc (0-0-0-0): size 58 (cls: Timeline_0__FinishedFunc>Function>/Script/CoreUObject)
-	ResetMotion__UpdateFunc (0-0-0-0): size 58 (cls: ResetMotion__UpdateFunc>Function>/Script/CoreUObject)
-	ResetMotion__FinishedFunc (0-0-0-0): size 58 (cls: ResetMotion__FinishedFunc>Function>/Script/CoreUObject)
-	SlingLoadTimeline__FireTiming__EventFunc (0-0-0-0): size 58 (cls: SlingLoadTimeline__FireTiming__EventFunc>Function>/Script/CoreUObject)
-	SlingLoadTimeline__UpdateFunc (0-0-0-0): size 58 (cls: SlingLoadTimeline__UpdateFunc>Function>/Script/CoreUObject)
-	SlingLoadTimeline__FinishedFunc (0-0-0-0): size 58 (cls: SlingLoadTimeline__FinishedFunc>Function>/Script/CoreUObject)
+	PidgeonDead (0-0-0-0): size 68 (cls: PidgeonDead>Function>/Script/CoreUObject)
+	PidgeonFired (0-0-0-0): size 36 (cls: PidgeonFired>ObjectProperty>/Script/CoreUObject)
+	NewPidgeonFired (0-0-0-0): size 70 (cls: NewPidgeonFired>Function>/Script/CoreUObject)
+	Timeline_0__FireTiming__EventFunc (0-0-0-0): size 54 (cls: Timeline_0__FireTiming__EventFunc>Function>/Script/CoreUObject)
+	Timeline_0__UpdateFunc (0-0-0-0): size 54 (cls: Timeline_0__UpdateFunc>Function>/Script/CoreUObject)
+	Timeline_0__FinishedFunc (0-0-0-0): size 54 (cls: Timeline_0__FinishedFunc>Function>/Script/CoreUObject)
+	ResetMotion__UpdateFunc (0-0-0-0): size 54 (cls: ResetMotion__UpdateFunc>Function>/Script/CoreUObject)
+	ResetMotion__FinishedFunc (0-0-0-0): size 54 (cls: ResetMotion__FinishedFunc>Function>/Script/CoreUObject)
+	SlingLoadTimeline__FireTiming__EventFunc (0-0-0-0): size 54 (cls: SlingLoadTimeline__FireTiming__EventFunc>Function>/Script/CoreUObject)
+	SlingLoadTimeline__UpdateFunc (0-0-0-0): size 54 (cls: SlingLoadTimeline__UpdateFunc>Function>/Script/CoreUObject)
+	SlingLoadTimeline__FinishedFunc (0-0-0-0): size 54 (cls: SlingLoadTimeline__FinishedFunc>Function>/Script/CoreUObject)
 	CallFunc_K2_GetComponentRotation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_GetComponentRotation_ReturnValue>StructProperty>/Script/CoreUObject)
 	UserConstructionScript (0-0-0-0): size 721 (cls: UserConstructionScript>Function>/Script/CoreUObject)
 	InteractingPawn (0-0-0-0): size 36 (cls: InteractingPawn>ObjectProperty>/Script/CoreUObject)
@@ -661,10 +690,17 @@ Serialized exports:
 	CallFunc_HasAuthority_ReturnValue4 (0-0-0-0): size 34 (cls: CallFunc_HasAuthority_ReturnValue4>BoolProperty>/Script/CoreUObject)
 	CallFunc_HasAuthority_ReturnValue5 (0-0-0-0): size 34 (cls: CallFunc_HasAuthority_ReturnValue5>BoolProperty>/Script/CoreUObject)
 	CallFunc_HasAuthority_ReturnValue6 (0-0-0-0): size 34 (cls: CallFunc_HasAuthority_ReturnValue6>BoolProperty>/Script/CoreUObject)
+	CallFunc_HasCompletedObjectiveWithName_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasCompletedObjectiveWithName_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_HasCompletedObjectiveWithName_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_HasCompletedObjectiveWithName_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_HasTag_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasTag_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_HasTag_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_HasTag_ReturnValue1>BoolProperty>/Script/CoreUObject)
+	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_IsValid_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue1>BoolProperty>/Script/CoreUObject)
+	CallFunc_IsValid_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue2>BoolProperty>/Script/CoreUObject)
+	CallFunc_IsValid_ReturnValue3 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue3>BoolProperty>/Script/CoreUObject)
 	CallFunc_Less_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Less_IntInt_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue1>BoolProperty>/Script/CoreUObject)
+	CallFunc_Less_IntInt_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue2>BoolProperty>/Script/CoreUObject)
 	CallFunc_LessEqual_FloatFloat_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_LessEqual_FloatFloat_ReturnValue>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess1 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess1>BoolProperty>/Script/CoreUObject)
@@ -752,13 +788,18 @@ Serialized exports:
 	CurrentScore (0-0-0-0): size 32 (cls: CurrentScore>IntProperty>/Script/CoreUObject)
 	CallFunc_Add_IntInt_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue>IntProperty>/Script/CoreUObject)
 	CallFunc_Add_IntInt_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue1>IntProperty>/Script/CoreUObject)
+	CallFunc_Add_IntInt_ReturnValue2 (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue2>IntProperty>/Script/CoreUObject)
 	CallFunc_Array_AddUnique_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Array_AddUnique_ReturnValue>IntProperty>/Script/CoreUObject)
+	CallFunc_Array_Length_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Array_Length_ReturnValue>IntProperty>/Script/CoreUObject)
+	Temp_int_Array_Index_Variable (0-0-0-0): size 32 (cls: Temp_int_Array_Index_Variable>IntProperty>/Script/CoreUObject)
+	Temp_int_Loop_Counter_Variable (0-0-0-0): size 32 (cls: Temp_int_Loop_Counter_Variable>IntProperty>/Script/CoreUObject)
 	Temp_int_Variable (0-0-0-0): size 32 (cls: Temp_int_Variable>IntProperty>/Script/CoreUObject)
 	GoalScore (0-0-0-0): size 32 (cls: GoalScore>IntProperty>/Script/CoreUObject)
 	HighScore (0-0-0-0): size 32 (cls: HighScore>IntProperty>/Script/CoreUObject)
 	K2Node_CustomEvent_BoneName (0-0-0-0): size 32 (cls: K2Node_CustomEvent_BoneName>NameProperty>/Script/CoreUObject)
 	K2Node_CustomEvent_PlaylistName (0-0-0-0): size 32 (cls: K2Node_CustomEvent_PlaylistName>NameProperty>/Script/CoreUObject)
 	ObjBackendName (0-0-0-0): size 32 (cls: ObjBackendName>NameProperty>/Script/CoreUObject)
+	ObjBackendName2 (0-0-0-0): size 32 (cls: ObjBackendName2>NameProperty>/Script/CoreUObject)
 	BoneName (0-0-0-0): size 32 (cls: BoneName>NameProperty>/Script/CoreUObject)
 	Arrow (0-0-0-0): size 36 (cls: Arrow>ObjectProperty>/Script/CoreUObject)
 	ArrowLeft (0-0-0-0): size 36 (cls: ArrowLeft>ObjectProperty>/Script/CoreUObject)
@@ -767,11 +808,16 @@ Serialized exports:
 	CallFunc_Array_Get_Item (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item>ObjectProperty>/Script/CoreUObject)
 	CallFunc_Array_Get_Item1 (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item1>ObjectProperty>/Script/CoreUObject)
 	CallFunc_Array_Get_Item2 (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item2>ObjectProperty>/Script/CoreUObject)
+	CallFunc_Array_Get_Item3 (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item3>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetGameState_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetGameState_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetGameState_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetGameState_ReturnValue1>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetInstigatorController_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetInstigatorController_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetPlayerPawn_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetPlayerPawn_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetQuestManager_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetQuestManager_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetQuestManager_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetQuestManager_ReturnValue1>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetQuestManager_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_GetQuestManager_ReturnValue2>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetQuestWithDefinition_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetQuestWithDefinition_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetQuestWithDefinition_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetQuestWithDefinition_ReturnValue1>ObjectProperty>/Script/CoreUObject)
 	CallFunc_SpawnEmitterAttached_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_SpawnEmitterAttached_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	K2Node_CustomEvent_DamageCauser (0-0-0-0): size 36 (cls: K2Node_CustomEvent_DamageCauser>ObjectProperty>/Script/CoreUObject)
 	K2Node_CustomEvent_DamagedActor (0-0-0-0): size 36 (cls: K2Node_CustomEvent_DamagedActor>ObjectProperty>/Script/CoreUObject)
@@ -798,6 +844,7 @@ Serialized exports:
 	FHitComponent (0-0-0-0): size 36 (cls: FHitComponent>ObjectProperty>/Script/CoreUObject)
 	InstigatedBy (0-0-0-0): size 36 (cls: InstigatedBy>ObjectProperty>/Script/CoreUObject)
 	QuestItem (0-0-0-0): size 36 (cls: QuestItem>ObjectProperty>/Script/CoreUObject)
+	QuestItem2 (0-0-0-0): size 36 (cls: QuestItem2>ObjectProperty>/Script/CoreUObject)
 	QuestSuccessEmitter (0-0-0-0): size 36 (cls: QuestSuccessEmitter>ObjectProperty>/Script/CoreUObject)
 	QuestSuccessSound (0-0-0-0): size 36 (cls: QuestSuccessSound>ObjectProperty>/Script/CoreUObject)
 	ResetMotion (0-0-0-0): size 36 (cls: ResetMotion>ObjectProperty>/Script/CoreUObject)
@@ -948,6 +995,7 @@ Serialized exports:
 	K2Node_CustomEvent_PlaylistContextTags (0-0-0-0): size 36 (cls: K2Node_CustomEvent_PlaylistContextTags>StructProperty>/Script/CoreUObject)
 	FullStackLoc (0-0-0-0): size 36 (cls: FullStackLoc>StructProperty>/Script/CoreUObject)
 	ObjStat (0-0-0-0): size 36 (cls: ObjStat>StructProperty>/Script/CoreUObject)
+	ObjStat2 (0-0-0-0): size 36 (cls: ObjStat2>StructProperty>/Script/CoreUObject)
 	Hit (0-0-0-0): size 36 (cls: Hit>StructProperty>/Script/CoreUObject)
 	NormalImpulse (0-0-0-0): size 36 (cls: NormalImpulse>StructProperty>/Script/CoreUObject)
 	HitLocation (0-0-0-0): size 36 (cls: HitLocation>StructProperty>/Script/CoreUObject)

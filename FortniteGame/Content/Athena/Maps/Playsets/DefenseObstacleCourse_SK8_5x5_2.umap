@@ -1,6 +1,6 @@
 Name table:
 	/Game/Athena/BuildingActors/Athena_PlaysetControlSpawner
-	/Game/Athena/Environments/Landscape/Material/Athena_Terrain_Mat_Biome_Inst
+	/Game/Athena/Items/Traps/TID_Floor_Backup
 	/Game/Athena/Maps/Playsets/DefenseObstacleCourse_SK8_5x5
 	/Game/Athena/Playset/MinigamePlayerStartPlate
 	/Game/Athena/Playset/MinigameTriggerPlate
@@ -9,12 +9,9 @@ Name table:
 	/Game/Building/ActorBlueprints/Player/Wood/L1/PBWA_W1_Solid
 	/Game/Environments/Foliage/FoliageType/GrassFoliageType
 	/Game/Environments/Foliage/Meshes/S_WavyGrass_01
-	/Game/Gadgets/Assets/Bot_Turret/Meshes/Sm_BotTurret_JetThruster_01
+	/Game/Items/Traps/Blueprints/Toys/BuildingToy
+	/Game/Items/Traps/Blueprints/Toys/ToyOptionsComponent
 	/Game/Items/Traps/Blueprints/Trap_Floor_Backup
-	/Game/Items/Traps/Floor/TID_Floor_Backup
-	/Game/Packages/DS_Fortnight/SM/Mesh/S_Asphalt_1x1
-	/Game/Weapons/FORT_TRAPS/Floor_DefenderSpawn/S_Floor_DefenderSpawn
-	/Game/Weapons/FORT_TRAPS/Ward_Trap/Meshes/SM_Ward_Trap_Folded
 	/Script/CoreUObject
 	/Script/Engine
 	/Script/Foliage
@@ -27,10 +24,10 @@ Name table:
 	Alpha
 	Ambient Light
 	Ambient Light_GEN_VARIABLE
+	AreaClass
 	ArrayProperty
 	Athena_PlaysetControlSpawner
 	Athena_PlaysetControlSpawner_C
-	Athena_Terrain_Mat_Biome_Inst
 	AttachParent
 	Audio
 	Audio_GEN_VARIABLE
@@ -41,11 +38,9 @@ Name table:
 	bAffectDynamicIndirectLighting
 	bAutoSpawnMissingNavData
 	bAutoWeld
-	bCanEverAffectNavigation
 	bEnableDensityScaling
 	bEnableNavigationSystem
 	bHasPerInstanceHitProxies
-	bHidden
 	BlueprintCreatedComponents
 	BlueprintGeneratedClass
 	BndEvt__Box_K2Node_ComponentBoundEvent_5_ComponentBeginOverlapSignature__DelegateSignature
@@ -64,6 +59,7 @@ Name table:
 	BndEvt__PawnTargetBox_K2Node_ComponentBoundEvent_3_ComponentEndOverlapSignature__DelegateSignature
 	bNetAddressable
 	BodyInstance
+	BookmarkArray
 	BoolProperty
 	Bot_StartUP_AudioComponent
 	Bot_StartUP_AudioComponent_GEN_VARIABLE
@@ -73,6 +69,7 @@ Name table:
 	BoxComponent0
 	BoxExtent
 	bReceivesDecals
+	BuildingToy_C
 	bUseAsOccluder
 	ByteProperty
 	CachedMaxDrawDistance
@@ -96,11 +93,11 @@ Name table:
 	DataVersion
 	Default__Athena_PlaysetControlSpawner_C
 	Default__BlueprintGeneratedClass
+	Default__BuildingToy_C
 	Default__DefenseObstacleCourse_SK8_5x5_2_C
 	Default__FoliageInstancedStaticMeshComponent
 	Default__FortLevelScriptActor
 	Default__FortPlayerStartCreative
-	Default__FortStaticMeshActor
 	Default__FortWorldSettings
 	Default__InstancedFoliageActor
 	Default__Level
@@ -113,6 +110,7 @@ Name table:
 	Default__PBWA_W1_Solid_C
 	Default__SimpleMinigameControlPanel_C
 	Default__TimelineComponent
+	Default__ToyOptionsComponent_C
 	Default__Trap_Floor_Backup_C
 	Default__World
 	DefaultPhysicsVolume
@@ -146,6 +144,7 @@ Name table:
 	FoliageInstancedStaticMeshComponent
 	FoliageType_InstancedStaticMesh
 	FortLevelScriptActor
+	FortMetaNavArea_Obstacles
 	FortMinigameLogic
 	FortMinigameLogic_GEN_VARIABLE
 	FortMinigameLogicComponent
@@ -156,7 +155,6 @@ Name table:
 	FortMinigameProgress_GEN_VARIABLE
 	FortMinigameProgressComponent
 	FortPlayerStartCreative
-	FortStaticMeshActor
 	FortTrapItemDefinition
 	FortWorldSettings
 	GameplayTag
@@ -191,7 +189,6 @@ Name table:
 	MarkerTimeline__FinishedFunc
 	MarkerTimeline__UpdateFunc
 	MarkerTimeline_Alpha_BCFBED24404B3CFDEE50619AB278D937
-	MaterialInstanceConstant
 	MaxAngularVelocity
 	MaxCullDistance
 	MaxCullObjectSize
@@ -277,22 +274,12 @@ Name table:
 	RootComponent
 	RootComponent0
 	Rotator
-	S_Asphalt_1x1
-	S_Floor_DefenderSpawn
-	S_Floor_DefenderSpawn2
-	S_Floor_DefenderSpawn3
-	S_Floor_DefenderSpawn4
-	S_FloorPlane3
 	S_WavyGrass_01
 	SceneComponent
 	ScriptStruct
 	SimpleMemberReference
 	SimpleMinigameControlPanel
 	SimpleMinigameControlPanel_C
-	Sm_BotTurret_JetThruster
-	Sm_BotTurret_JetThruster_01
-	SM_Ward_Trap_Folded
-	SM_Ward_Trap_Folded2
 	SoftClassPath
 	SpawnCollisionHandlingMethod
 	SpawnPoint
@@ -312,6 +299,9 @@ Name table:
 	TimelineFloatTrack
 	TimelinePostUpdateFunc
 	TL_TimelineLength
+	ToyOptionsComponent
+	ToyOptionsComponent_C
+	ToyOptionsComponent_GEN_VARIABLE
 	Trace Location
 	TraceLocation
 	TrackName
@@ -384,8 +374,9 @@ Serialized exports:
 			bNetAddressable(BoolProperty)=True 
 			CreationMethod(EnumProperty)=EComponentCreationMethod::SimpleConstructionScript 
 			UCSModifiedProperties(ArrayProperty)=[object] (inner: StructProperty)
-	BoxComponent0 (0-0-0-0): size 220 (cls: BoxComponent0>BoxComponent>/Script/Engine):
+	BoxComponent0 (0-0-0-0): size 249 (cls: BoxComponent0>BoxComponent>/Script/Engine):
 		Tag array:
+			AreaClass(ObjectProperty)=FortMetaNavArea_Obstacles=/Script/FortniteGame 
 			BodyInstance(StructProperty)=System.Byte[] 
 			RelativeLocation(StructProperty)=Vector(-1024,1024,785) 
 			RelativeScale3D(StructProperty)=Vector(6448,6448,5552) 
@@ -459,7 +450,7 @@ Serialized exports:
 			AttachParent(ObjectProperty)=PlayerStartCreative=DefenseObstacleCourse_SK8_5x5_2 
 	PlayerStartCreative (0-0-0-0): size 137 (cls: PlayerStartCreative>ChildActorComponent>/Script/Engine):
 		Tag array:
-			ChildActor(ObjectProperty)=PlayerStartCreative_GEN_VARIABLE_FortPlayerStartCreative_CAT_136=DefenseObstacleCourse_SK8_5x5_2 
+			ChildActor(ObjectProperty)=PlayerStartCreative_GEN_VARIABLE_FortPlayerStartCreative_CAT_142=DefenseObstacleCourse_SK8_5x5_2 
 			AttachParent(ObjectProperty)=StaticMeshComponent0=DefenseObstacleCourse_SK8_5x5_2 
 			bNetAddressable(BoolProperty)=True 
 			CreationMethod(EnumProperty)=EComponentCreationMethod::SimpleConstructionScript 
@@ -499,13 +490,8 @@ Serialized exports:
 			MinigameTags(StructProperty)=GameplayTagContainer:Minigame.TeamStart.Team1,Minigame.TeamStart.Team2,Minigame.TeamStart.Team3,Minigame.TeamStart.Team4,Minigame.RaceStart 
 			bNetAddressable(BoolProperty)=True 
 			CreationMethod(EnumProperty)=EComponentCreationMethod::SimpleConstructionScript 
-	FortMinigameProgress (0-0-0-0): size 284 (cls: FortMinigameProgress>FortMinigameProgressComponent>/Script/FortniteGame):
+	FortMinigameProgress (0-0-0-0): size 79 (cls: FortMinigameProgress>FortMinigameProgressComponent>/Script/FortniteGame):
 		Tag array:
-			ProgressStartedDelegate(MulticastDelegateProperty)=[object] 
-			ProgressFinishedDelegate(MulticastDelegateProperty)=[object] 
-			ProgressAbortedDelegate(MulticastDelegateProperty)=[object] 
-			MinigameStartedDelegate(MulticastDelegateProperty)=[object] 
-			MinigameEndedDelegate(MulticastDelegateProperty)=[object] 
 			bNetAddressable(BoolProperty)=True 
 			CreationMethod(EnumProperty)=EComponentCreationMethod::SimpleConstructionScript 
 	FortMinigameProgress (0-0-0-0): size 284 (cls: FortMinigameProgress>FortMinigameProgressComponent>/Script/FortniteGame):
@@ -553,7 +539,16 @@ Serialized exports:
 			MinigameEndedDelegate(MulticastDelegateProperty)=[object] 
 			bNetAddressable(BoolProperty)=True 
 			CreationMethod(EnumProperty)=EComponentCreationMethod::SimpleConstructionScript 
-	PlayerStartCreative_GEN_VARIABLE_FortPlayerStartCreative_CAT_136 (0-0-0-0): size 198 (cls: PlayerStartCreative_GEN_VARIABLE_FortPlayerStartCreative_CAT_136>FortPlayerStartCreative>/Script/FortniteGame):
+	FortMinigameProgress (0-0-0-0): size 284 (cls: FortMinigameProgress>FortMinigameProgressComponent>/Script/FortniteGame):
+		Tag array:
+			ProgressStartedDelegate(MulticastDelegateProperty)=[object] 
+			ProgressFinishedDelegate(MulticastDelegateProperty)=[object] 
+			ProgressAbortedDelegate(MulticastDelegateProperty)=[object] 
+			MinigameStartedDelegate(MulticastDelegateProperty)=[object] 
+			MinigameEndedDelegate(MulticastDelegateProperty)=[object] 
+			bNetAddressable(BoolProperty)=True 
+			CreationMethod(EnumProperty)=EComponentCreationMethod::SimpleConstructionScript 
+	PlayerStartCreative_GEN_VARIABLE_FortPlayerStartCreative_CAT_142 (0-0-0-0): size 198 (cls: PlayerStartCreative_GEN_VARIABLE_FortPlayerStartCreative_CAT_142>FortPlayerStartCreative>/Script/FortniteGame):
 		Tag array:
 			CapsuleComponent(ObjectProperty)=CollisionCapsule=DefenseObstacleCourse_SK8_5x5_2 
 			GoodSprite(ObjectProperty)=[object] 
@@ -561,57 +556,21 @@ Serialized exports:
 			SpawnCollisionHandlingMethod(EnumProperty)=ESpawnActorCollisionHandlingMethod::AlwaysSpawn 
 			RootComponent(ObjectProperty)=CollisionCapsule=DefenseObstacleCourse_SK8_5x5_2 
 			ParentComponent(ObjectProperty)=PlayerStartCreative=DefenseObstacleCourse_SK8_5x5_2 
-	S_Floor_DefenderSpawn2_3 (0-0-0-0): size 70 (cls: S_Floor_DefenderSpawn2_3>FortStaticMeshActor>/Script/FortniteGame):
-		Tag array:
-			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=DefenseObstacleCourse_SK8_5x5_2 
-			RootComponent(ObjectProperty)=StaticMeshComponent0=DefenseObstacleCourse_SK8_5x5_2 
-	S_Floor_DefenderSpawn3 (0-0-0-0): size 70 (cls: S_Floor_DefenderSpawn3>FortStaticMeshActor>/Script/FortniteGame):
-		Tag array:
-			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=DefenseObstacleCourse_SK8_5x5_2 
-			RootComponent(ObjectProperty)=StaticMeshComponent0=DefenseObstacleCourse_SK8_5x5_2 
-	S_Floor_DefenderSpawn4 (0-0-0-0): size 70 (cls: S_Floor_DefenderSpawn4>FortStaticMeshActor>/Script/FortniteGame):
-		Tag array:
-			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=DefenseObstacleCourse_SK8_5x5_2 
-			RootComponent(ObjectProperty)=StaticMeshComponent0=DefenseObstacleCourse_SK8_5x5_2 
-	S_Floor_DefenderSpawn_2 (0-0-0-0): size 70 (cls: S_Floor_DefenderSpawn_2>FortStaticMeshActor>/Script/FortniteGame):
-		Tag array:
-			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=DefenseObstacleCourse_SK8_5x5_2 
-			RootComponent(ObjectProperty)=StaticMeshComponent0=DefenseObstacleCourse_SK8_5x5_2 
-	S_FloorPlane3 (0-0-0-0): size 96 (cls: S_FloorPlane3>FortStaticMeshActor>/Script/FortniteGame):
-		Tag array:
-			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=DefenseObstacleCourse_SK8_5x5_2 
-			bHidden(BoolProperty)=True 
-			RootComponent(ObjectProperty)=StaticMeshComponent0=DefenseObstacleCourse_SK8_5x5_2 
-	Sm_BotTurret_JetThruster_01_0 (0-0-0-0): size 70 (cls: Sm_BotTurret_JetThruster_01_0>FortStaticMeshActor>/Script/FortniteGame):
-		Tag array:
-			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=DefenseObstacleCourse_SK8_5x5_2 
-			RootComponent(ObjectProperty)=StaticMeshComponent0=DefenseObstacleCourse_SK8_5x5_2 
-	Sm_BotTurret_JetThruster_2 (0-0-0-0): size 70 (cls: Sm_BotTurret_JetThruster_2>FortStaticMeshActor>/Script/FortniteGame):
-		Tag array:
-			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=DefenseObstacleCourse_SK8_5x5_2 
-			RootComponent(ObjectProperty)=StaticMeshComponent0=DefenseObstacleCourse_SK8_5x5_2 
-	SM_Ward_Trap_Folded2 (0-0-0-0): size 70 (cls: SM_Ward_Trap_Folded2>FortStaticMeshActor>/Script/FortniteGame):
-		Tag array:
-			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=DefenseObstacleCourse_SK8_5x5_2 
-			RootComponent(ObjectProperty)=StaticMeshComponent0=DefenseObstacleCourse_SK8_5x5_2 
-	SM_Ward_Trap_Folded_1 (0-0-0-0): size 70 (cls: SM_Ward_Trap_Folded_1>FortStaticMeshActor>/Script/FortniteGame):
-		Tag array:
-			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=DefenseObstacleCourse_SK8_5x5_2 
-			RootComponent(ObjectProperty)=StaticMeshComponent0=DefenseObstacleCourse_SK8_5x5_2 
-	FortWorldSettings_9 (0-0-0-0): size 321 (cls: FortWorldSettings_9>FortWorldSettings>/Script/FortniteGame):
+	FortWorldSettings_9 (0-0-0-0): size 366 (cls: FortWorldSettings_9>FortWorldSettings>/Script/FortniteGame):
 		Tag array:
 			WorldCells(ArrayProperty)=[object] (inner: IntProperty)
-			WorldCellsOrigin(StructProperty)=Vector(-2048,0,-384) 
+			WorldCellsOrigin(StructProperty)=Vector(-2048,0,0) 
 			MinCullObjectSize(FloatProperty)=64 
 			MinCullDistance(FloatProperty)=2800 
 			MaxCullObjectSize(FloatProperty)=1000 
 			MaxCullDistance(FloatProperty)=40000 
 			bEnableNavigationSystem(BoolProperty)=False 
 			NavigationSystemConfig(ObjectProperty)=NavigationSystemModuleConfig_0=DefenseObstacleCourse_SK8_5x5_2 
+			BookmarkArray(ArrayProperty)=[object] (inner: ObjectProperty)
 	InstancedFoliageActor_0 (0-0-0-0): size 53 (cls: InstancedFoliageActor_0>InstancedFoliageActor>/Script/Foliage):
 		Tag array:
 			RootComponent(ObjectProperty)=RootComponent0=DefenseObstacleCourse_SK8_5x5_2 
-	PersistentLevel (0-0-0-0): size 449 (cls: PersistentLevel>Level>/Script/Engine):
+	PersistentLevel (0-0-0-0): size 405 (cls: PersistentLevel>Level>/Script/Engine):
 		Tag array:
 			Model(ObjectProperty)=Model_9=DefenseObstacleCourse_SK8_5x5_2 
 			LevelScriptActor(ObjectProperty)=DefenseObstacleCourse_SK8_5x5_2_C_1=DefenseObstacleCourse_SK8_5x5_2 
@@ -620,11 +579,13 @@ Serialized exports:
 	LevelBounds_1 (0-0-0-0): size 41 (cls: LevelBounds_1>LevelBounds>/Script/Engine):
 		Tag array:
 			RootComponent(ObjectProperty)=BoxComponent0=DefenseObstacleCourse_SK8_5x5_2 
-	MinigamePlayerStartPlate_2 (0-0-0-0): size 387 (cls: MinigamePlayerStartPlate_2>MinigamePlayerStartPlate_C>/Game/Athena/Playset/MinigamePlayerStartPlate):
+	MinigamePlayerStartPlate_2 (0-0-0-0): size 453 (cls: MinigamePlayerStartPlate_2>MinigamePlayerStartPlate_C>/Game/Athena/Playset/MinigamePlayerStartPlate):
 		Tag array:
 			Checkpoint Collider(ObjectProperty)=Checkpoint Collider=DefenseObstacleCourse_SK8_5x5_2 
 			FortMinigamePlayerStart(ObjectProperty)=FortMinigamePlayerStart=DefenseObstacleCourse_SK8_5x5_2 
 			PlayerStartCreative(ObjectProperty)=PlayerStartCreative=DefenseObstacleCourse_SK8_5x5_2 
+			FortMinigameProgress(ObjectProperty)=FortMinigameProgress=DefenseObstacleCourse_SK8_5x5_2 
+			ToyOptionsComponent(ObjectProperty)=ToyOptionsComponent=DefenseObstacleCourse_SK8_5x5_2 
 			TraceLocation(ObjectProperty)=Trace Location=DefenseObstacleCourse_SK8_5x5_2 
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=DefenseObstacleCourse_SK8_5x5_2 
 			ParentActorToAttachTo(ObjectProperty)=PBWA_M2_Floor2=DefenseObstacleCourse_SK8_5x5_2 
@@ -1019,42 +980,6 @@ Serialized exports:
 			CachedMaxDrawDistance(FloatProperty)=22972.64 
 			RelativeLocation(StructProperty)=Vector(-768,0,0) 
 			RelativeRotation(StructProperty)=Rotator(0,-90.00001,0) 
-	StaticMeshComponent0 (0-0-0-0): size 222 (cls: StaticMeshComponent0>StaticMeshComponent>/Script/Engine):
-		Tag array:
-			StaticMesh(ObjectProperty)=S_Floor_DefenderSpawn=/Game/Weapons/FORT_TRAPS/Floor_DefenderSpawn/S_Floor_DefenderSpawn 
-			CachedMaxDrawDistance(FloatProperty)=24690.05 
-			RelativeLocation(StructProperty)=Vector(-1024,-256,8) 
-			RelativeRotation(StructProperty)=Rotator(-0.000478,-180,-180) 
-			bCanEverAffectNavigation(BoolProperty)=True 
-	StaticMeshComponent0 (0-0-0-0): size 161 (cls: StaticMeshComponent0>StaticMeshComponent>/Script/Engine):
-		Tag array:
-			StaticMesh(ObjectProperty)=S_Floor_DefenderSpawn=/Game/Weapons/FORT_TRAPS/Floor_DefenderSpawn/S_Floor_DefenderSpawn 
-			CachedMaxDrawDistance(FloatProperty)=24690.05 
-			RelativeLocation(StructProperty)=Vector(-1025,768,365) 
-			bCanEverAffectNavigation(BoolProperty)=True 
-	StaticMeshComponent0 (0-0-0-0): size 222 (cls: StaticMeshComponent0>StaticMeshComponent>/Script/Engine):
-		Tag array:
-			StaticMesh(ObjectProperty)=S_Floor_DefenderSpawn=/Game/Weapons/FORT_TRAPS/Floor_DefenderSpawn/S_Floor_DefenderSpawn 
-			CachedMaxDrawDistance(FloatProperty)=24690.05 
-			RelativeLocation(StructProperty)=Vector(-1024,768,392) 
-			RelativeRotation(StructProperty)=Rotator(-0.000478,-180,-180) 
-			bCanEverAffectNavigation(BoolProperty)=True 
-	StaticMeshComponent0 (0-0-0-0): size 161 (cls: StaticMeshComponent0>StaticMeshComponent>/Script/Engine):
-		Tag array:
-			StaticMesh(ObjectProperty)=S_Floor_DefenderSpawn=/Game/Weapons/FORT_TRAPS/Floor_DefenderSpawn/S_Floor_DefenderSpawn 
-			CachedMaxDrawDistance(FloatProperty)=24690.05 
-			RelativeLocation(StructProperty)=Vector(-1025,-256,-19) 
-			bCanEverAffectNavigation(BoolProperty)=True 
-	StaticMeshComponent0 (0-0-0-0): size 921 (cls: StaticMeshComponent0>StaticMeshComponent>/Script/Engine):
-		Tag array:
-			StaticMesh(ObjectProperty)=S_Asphalt_1x1=/Game/Packages/DS_Fortnight/SM/Mesh/S_Asphalt_1x1 
-			OverrideMaterials(ArrayProperty)=[object] (inner: ObjectProperty)
-			CachedMaxDrawDistance(FloatProperty)=40000 
-			BodyInstance(StructProperty)=System.Byte[] 
-			RelativeLocation(StructProperty)=Vector(256.0032,-256.0027,0) 
-			RelativeRotation(StructProperty)=Rotator(0,-180.0002,0) 
-			RelativeScale3D(StructProperty)=Vector(5,5,1) 
-			bCanEverAffectNavigation(BoolProperty)=True 
 	Alarm Clock (0-0-0-0): size 448 (cls: Alarm Clock>StaticMeshComponent>/Script/Engine):
 		Tag array:
 			CachedMaxDrawDistance(FloatProperty)=9839.947 
@@ -1075,40 +1000,6 @@ Serialized exports:
 			CachedMaxDrawDistance(FloatProperty)=9839.947 
 			RelativeLocation(StructProperty)=Vector(-768,0.0004730225,0) 
 			RelativeRotation(StructProperty)=Rotator(0,-90.00012,0) 
-	StaticMeshComponent0 (0-0-0-0): size 721 (cls: StaticMeshComponent0>StaticMeshComponent>/Script/Engine):
-		Tag array:
-			StaticMesh(ObjectProperty)=Sm_BotTurret_JetThruster_01=/Game/Gadgets/Assets/Bot_Turret/Meshes/Sm_BotTurret_JetThruster_01 
-			CachedMaxDrawDistance(FloatProperty)=10718.89 
-			BodyInstance(StructProperty)=System.Byte[] 
-			RelativeLocation(StructProperty)=Vector(-1020,8,-36) 
-			RelativeRotation(StructProperty)=Rotator(90,-4E-06,0) 
-			RelativeScale3D(StructProperty)=Vector(4,4,4) 
-			bCanEverAffectNavigation(BoolProperty)=True 
-	StaticMeshComponent0 (0-0-0-0): size 721 (cls: StaticMeshComponent0>StaticMeshComponent>/Script/Engine):
-		Tag array:
-			StaticMesh(ObjectProperty)=Sm_BotTurret_JetThruster_01=/Game/Gadgets/Assets/Bot_Turret/Meshes/Sm_BotTurret_JetThruster_01 
-			CachedMaxDrawDistance(FloatProperty)=10718.89 
-			BodyInstance(StructProperty)=System.Byte[] 
-			RelativeLocation(StructProperty)=Vector(-1020,1032,348) 
-			RelativeRotation(StructProperty)=Rotator(90,-4E-06,0) 
-			RelativeScale3D(StructProperty)=Vector(4,4,4) 
-			bCanEverAffectNavigation(BoolProperty)=True 
-	StaticMeshComponent0 (0-0-0-0): size 283 (cls: StaticMeshComponent0>StaticMeshComponent>/Script/Engine):
-		Tag array:
-			StaticMesh(ObjectProperty)=SM_Ward_Trap_Folded=/Game/Weapons/FORT_TRAPS/Ward_Trap/Meshes/SM_Ward_Trap_Folded 
-			CachedMaxDrawDistance(FloatProperty)=11696.29 
-			RelativeLocation(StructProperty)=Vector(-1020,1032,416) 
-			RelativeRotation(StructProperty)=Rotator(0,0,180.0002) 
-			RelativeScale3D(StructProperty)=Vector(1,1,0.5) 
-			bCanEverAffectNavigation(BoolProperty)=True 
-	StaticMeshComponent0 (0-0-0-0): size 283 (cls: StaticMeshComponent0>StaticMeshComponent>/Script/Engine):
-		Tag array:
-			StaticMesh(ObjectProperty)=SM_Ward_Trap_Folded=/Game/Weapons/FORT_TRAPS/Ward_Trap/Meshes/SM_Ward_Trap_Folded 
-			CachedMaxDrawDistance(FloatProperty)=11696.29 
-			RelativeLocation(StructProperty)=Vector(-1020,8,32) 
-			RelativeRotation(StructProperty)=Rotator(0,0,180.0002) 
-			RelativeScale3D(StructProperty)=Vector(1,1,0.5) 
-			bCanEverAffectNavigation(BoolProperty)=True 
 	StaticMeshComponent0 (0-0-0-0): size 147 (cls: StaticMeshComponent0>StaticMeshComponent>/Script/Engine):
 		Tag array:
 			OverrideMaterials(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -1144,6 +1035,10 @@ Serialized exports:
 			TheTimeline(StructProperty)=System.Byte[] 
 			bNetAddressable(BoolProperty)=True 
 			CreationMethod(EnumProperty)=EComponentCreationMethod::UserConstructionScript 
+	ToyOptionsComponent (0-0-0-0): size 79 (cls: ToyOptionsComponent>ToyOptionsComponent_C>/Game/Items/Traps/Blueprints/Toys/ToyOptionsComponent):
+		Tag array:
+			bNetAddressable(BoolProperty)=True 
+			CreationMethod(EnumProperty)=EComponentCreationMethod::SimpleConstructionScript 
 	Trap_Floor_Backup_3 (0-0-0-0): size 486 (cls: Trap_Floor_Backup_3>Trap_Floor_Backup_C>/Game/Items/Traps/Blueprints/Trap_Floor_Backup):
 		Tag array:
 			PawnTargetBox(ObjectProperty)=PawnTargetBox=DefenseObstacleCourse_SK8_5x5_2 
@@ -1153,7 +1048,7 @@ Serialized exports:
 			Bot_StartUP_AudioComponent(ObjectProperty)=Bot_StartUP_AudioComponent=DefenseObstacleCourse_SK8_5x5_2 
 			Weapon Fire Audio Component(ObjectProperty)=Weapon Fire Audio Component=DefenseObstacleCourse_SK8_5x5_2 
 			TraceLocation(ObjectProperty)=Trace Location=DefenseObstacleCourse_SK8_5x5_2 
-			TrapData(ObjectProperty)=TID_Floor_Backup=/Game/Items/Traps/Floor/TID_Floor_Backup 
+			TrapData(ObjectProperty)=TID_Floor_Backup=/Game/Athena/Items/Traps/TID_Floor_Backup 
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=DefenseObstacleCourse_SK8_5x5_2 
 			MyGuid(StructProperty)=Guid: 764017655-1328727836-3355350205-373289728 
 			DataVersion(IntProperty)=1 

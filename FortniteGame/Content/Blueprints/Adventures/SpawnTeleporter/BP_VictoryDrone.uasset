@@ -10,7 +10,7 @@ Name table:
 	/Game/Effects/Fort_Effects/Gameplay/Spawn/P_Spawn_Effect
 	/Game/Gadgets/Assets/Bot_Turret/Meshes/SK_Bot_Turret
 	/Game/Weapons/FORT_TRAPS/BaseDevice/MeshGame/BaseBotGame
-	/Script/ClothingSystemRuntime
+	/Script/AnimationBudgetAllocator
 	/Script/CoreUObject
 	/Script/Engine
 	/Script/FortniteGame
@@ -25,10 +25,12 @@ Name table:
 	AnimPlayRate
 	ArrayIndex
 	ArrayProperty
+	bApplyImpulseOnDamage
 	BaseBotGame
 	bAutoActivate
+	bAutoCalculateSignificance
+	bEnableGravity
 	bHasCookedComponentInstancingData
-	bHiddenInGame
 	bInterrupted
 	bIsValid
 	BlueprintComponentChangedPropertyInfo
@@ -42,8 +44,8 @@ Name table:
 	Bot_Turret_Spawn_Out_Montage_Athena_Lobby
 	BP_VictoryDrone_C
 	BreakRotator
+	bReplicatePhysicsToAutonomousProxy
 	bStartWithTickEnabled
-	bVisible
 	CallFunc_BreakRotator_Pitch
 	CallFunc_BreakRotator_Roll
 	CallFunc_BreakRotator_Yaw
@@ -68,8 +70,6 @@ Name table:
 	CharacterAttached
 	ChildNodes
 	Class
-	ClothingSimulationFactory
-	ClothingSimulationFactoryNv
 	CollisionProfileName
 	ComponentClass
 	ComponentTemplate
@@ -95,7 +95,7 @@ Name table:
 	Default__SceneComponent
 	Default__SCS_Node
 	Default__SimpleConstructionScript
-	Default__SkeletalMeshComponent
+	Default__SkeletalMeshComponentBudgeted
 	Default__StaticMeshComponent
 	Default__StrProperty
 	Default__StructProperty
@@ -164,7 +164,6 @@ Name table:
 	OnMontageEndedMCDelegate__DelegateSignature
 	OnSpawnOutAnimEnded
 	Opacity
-	OverrideMaterials
 	P_Player_Teleport_In_Athena
 	P_Player_Teleport_Out_Athena
 	P_Player_Teleport_Out_Athena_Lobby
@@ -200,8 +199,9 @@ Name table:
 	SimpleConstructionScript
 	SK_Bot_Turret
 	SkeletalMesh
-	SkeletalMesh_GEN_VARIABLE
 	SkeletalMeshComponent
+	SkeletalMeshComponentBudgeted
+	SkeletalMeshComponentBudgeted_GEN_VARIABLE
 	SpawnEffect
 	SpawnEffect_GEN_VARIABLE
 	SpawnEmitterAttached
@@ -226,7 +226,6 @@ Name table:
 	Temp_object_Variable4
 	Template
 	UberGraphFrame
-	UberGraphFramePointerProperty
 	UberGraphFunction
 	UserConstructionScript
 	VariableGuid
@@ -237,30 +236,29 @@ Name table:
 	Z
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	BP_VictoryDrone_C (0-0-0-0): size 381 (cls: BP_VictoryDrone_C>BlueprintGeneratedClass>/Script/Engine):
+	BP_VictoryDrone_C (0-0-0-0): size 352 (cls: BP_VictoryDrone_C>BlueprintGeneratedClass>/Script/Engine):
 		Tag array:
 			bHasCookedComponentInstancingData(BoolProperty)=True 
 			SimpleConstructionScript(ObjectProperty)=SimpleConstructionScript_3=BP_VictoryDrone_C 
-			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=BP_VictoryDrone_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_BP_VictoryDrone=BP_VictoryDrone_C 
 	Default__BP_VictoryDrone_C (0-0-0-0): size 94 (cls: Default__BP_VictoryDrone_C>BP_VictoryDrone_C):
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			AnimPlayRate(FloatProperty)=1 
-	StaticMesh (0-0-0-0): size 36 (cls: StaticMesh>ObjectProperty>/Script/CoreUObject)
+	SkeletalMeshComponentBudgeted (0-0-0-0): size 36 (cls: SkeletalMeshComponentBudgeted>ObjectProperty>/Script/CoreUObject)
 	Drone (0-0-0-0): size 36 (cls: Drone>ObjectProperty>/Script/CoreUObject)
 	SpawnOutAnimEndedDispatcher__DelegateSignature (0-0-0-0): size 47 (cls: SpawnOutAnimEndedDispatcher__DelegateSignature>Function>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_BP_VictoryDrone (0-0-0-0): size 744 (cls: ExecuteUbergraph_BP_VictoryDrone>Function>/Script/CoreUObject)
+	ExecuteUbergraph_BP_VictoryDrone (0-0-0-0): size 754 (cls: ExecuteUbergraph_BP_VictoryDrone>Function>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_K2_SetActorRotation_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_K2_SetActorRotation_ReturnValue>BoolProperty>/Script/CoreUObject)
 	K2Node_CustomEvent_bInterrupted (0-0-0-0): size 34 (cls: K2Node_CustomEvent_bInterrupted>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	DeltaSeconds (0-0-0-0): size 32 (cls: DeltaSeconds>FloatProperty>/Script/CoreUObject)
-	ReceiveTick (0-0-0-0): size 72 (cls: ReceiveTick>Function>/Script/CoreUObject)
+	ReceiveTick (0-0-0-0): size 68 (cls: ReceiveTick>Function>/Script/CoreUObject)
 	Montage (0-0-0-0): size 36 (cls: Montage>ObjectProperty>/Script/CoreUObject)
-	OnSpawnOutAnimEnded (0-0-0-0): size 86 (cls: OnSpawnOutAnimEnded>Function>/Script/CoreUObject)
-	ReceiveBeginPlay (0-0-0-0): size 58 (cls: ReceiveBeginPlay>Function>/Script/CoreUObject)
+	OnSpawnOutAnimEnded (0-0-0-0): size 82 (cls: OnSpawnOutAnimEnded>Function>/Script/CoreUObject)
+	ReceiveBeginPlay (0-0-0-0): size 54 (cls: ReceiveBeginPlay>Function>/Script/CoreUObject)
 	UserConstructionScript (0-0-0-0): size 43 (cls: UserConstructionScript>Function>/Script/CoreUObject)
 	CallFunc_CreateDynamicMaterialInstance_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_CreateDynamicMaterialInstance_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	InitDrone (0-0-0-0): size 150 (cls: InitDrone>Function>/Script/CoreUObject)
@@ -305,8 +303,8 @@ Serialized exports:
 	Temp_object_Variable2 (0-0-0-0): size 36 (cls: Temp_object_Variable2>ObjectProperty>/Script/CoreUObject)
 	Temp_object_Variable3 (0-0-0-0): size 36 (cls: Temp_object_Variable3>ObjectProperty>/Script/CoreUObject)
 	Temp_object_Variable4 (0-0-0-0): size 36 (cls: Temp_object_Variable4>ObjectProperty>/Script/CoreUObject)
-	SkeletalMesh (0-0-0-0): size 36 (cls: SkeletalMesh>ObjectProperty>/Script/CoreUObject)
 	SpawnEffect (0-0-0-0): size 36 (cls: SpawnEffect>ObjectProperty>/Script/CoreUObject)
+	StaticMesh (0-0-0-0): size 36 (cls: StaticMesh>ObjectProperty>/Script/CoreUObject)
 	StaticMeshMID (0-0-0-0): size 36 (cls: StaticMeshMID>ObjectProperty>/Script/CoreUObject)
 	TargetPlayer (0-0-0-0): size 36 (cls: TargetPlayer>ObjectProperty>/Script/CoreUObject)
 	SpawnEffect_GEN_VARIABLE (0-0-0-0): size 211 (cls: SpawnEffect_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine):
@@ -316,6 +314,14 @@ Serialized exports:
 			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
 	DefaultSceneRoot_REMOVED_605089CD4BD1BF066333ECAC6987223D (0-0-0-0): size 12 (cls: DefaultSceneRoot_REMOVED_605089CD4BD1BF066333ECAC6987223D>SceneComponent>/Script/Engine)
+	SCS_Node_0 (0-0-0-0): size 976 (cls: SCS_Node_0>SCS_Node>/Script/Engine):
+		Tag array:
+			ComponentClass(ObjectProperty)=SkeletalMeshComponentBudgeted=/Script/AnimationBudgetAllocator 
+			ComponentTemplate(ObjectProperty)=SkeletalMeshComponentBudgeted_GEN_VARIABLE=BP_VictoryDrone_C 
+			CookedComponentInstancingData(StructProperty)=System.Byte[] 
+			ChildNodes(ArrayProperty)=[object] (inner: ObjectProperty)
+			VariableGuid(StructProperty)=Guid: 277564380-1206769404-2645757613-3983042211 
+			InternalVariableName(NameProperty)=SkeletalMeshComponentBudgeted 
 	SCS_Node_1 (0-0-0-0): size 1129 (cls: SCS_Node_1>SCS_Node>/Script/Engine):
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
@@ -336,33 +342,24 @@ Serialized exports:
 			ComponentTemplate(ObjectProperty)=DefaultSceneRoot_REMOVED_605089CD4BD1BF066333ECAC6987223D=BP_VictoryDrone_C 
 			VariableGuid(StructProperty)=Guid: 1792595508-1099756653-873340299-1205636126 
 			InternalVariableName(NameProperty)=DefaultSceneRoot 
-	SCS_Node_6 (0-0-0-0): size 1174 (cls: SCS_Node_6>SCS_Node>/Script/Engine):
-		Tag array:
-			ComponentClass(ObjectProperty)=SkeletalMeshComponent=/Script/Engine 
-			ComponentTemplate(ObjectProperty)=SkeletalMesh_GEN_VARIABLE=BP_VictoryDrone_C 
-			CookedComponentInstancingData(StructProperty)=System.Byte[] 
-			ChildNodes(ArrayProperty)=[object] (inner: ObjectProperty)
-			VariableGuid(StructProperty)=Guid: 2540933941-1261658982-751892903-3945241371 
-			InternalVariableName(NameProperty)=SkeletalMesh 
 	SimpleConstructionScript_3 (0-0-0-0): size 131 (cls: SimpleConstructionScript_3>SimpleConstructionScript>/Script/Engine):
 		Tag array:
 			RootNodes(ArrayProperty)=[object] (inner: ObjectProperty)
 			AllNodes(ArrayProperty)=[object] (inner: ObjectProperty)
 			DefaultSceneRootNode(ObjectProperty)=SCS_Node_5=BP_VictoryDrone_C 
-	SkeletalMesh_GEN_VARIABLE (0-0-0-0): size 249 (cls: SkeletalMesh_GEN_VARIABLE>SkeletalMeshComponent>/Script/Engine):
+	SkeletalMeshComponentBudgeted_GEN_VARIABLE (0-0-0-0): size 202 (cls: SkeletalMeshComponentBudgeted_GEN_VARIABLE>SkeletalMeshComponentBudgeted>/Script/AnimationBudgetAllocator):
 		Tag array:
-			ClothingSimulationFactory(ObjectProperty)=ClothingSimulationFactoryNv=/Script/ClothingSystemRuntime 
+			bAutoCalculateSignificance(BoolProperty)=True 
 			SkeletalMesh(ObjectProperty)=SK_Bot_Turret=/Game/Gadgets/Assets/Bot_Turret/Meshes/SK_Bot_Turret 
-			OverrideMaterials(ArrayProperty)=[object] (inner: ObjectProperty)
+			bApplyImpulseOnDamage(BoolProperty)=False 
+			bReplicatePhysicsToAutonomousProxy(BoolProperty)=False 
 			BodyInstance(StructProperty)=System.Byte[] 
-			bVisible(BoolProperty)=False 
-			bHiddenInGame(BoolProperty)=True 
 	StaticMesh_GEN_VARIABLE (0-0-0-0): size 347 (cls: StaticMesh_GEN_VARIABLE>StaticMeshComponent>/Script/Engine):
 		Tag array:
 			StaticMesh(ObjectProperty)=BaseBotGame=/Game/Weapons/FORT_TRAPS/BaseDevice/MeshGame/BaseBotGame 
 			BodyInstance(StructProperty)=System.Byte[] 
 			RelativeLocation(StructProperty)=Vector(-3.911055E-05,2.102215,-28.65532) 
-			RelativeRotation(StructProperty)=Rotator(0,90,0) 
+			RelativeRotation(StructProperty)=Rotator(0,89.99998,0) 
 			RelativeScale3D(StructProperty)=Vector(0.4,0.3,0.3) 
 	CallFunc_Conv_BoolToString_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Conv_BoolToString_ReturnValue>StrProperty>/Script/CoreUObject)
 	CallFunc_K2_GetActorRotation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_GetActorRotation_ReturnValue>StructProperty>/Script/CoreUObject)

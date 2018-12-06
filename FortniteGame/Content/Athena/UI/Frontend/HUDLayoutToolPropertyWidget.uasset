@@ -10,6 +10,7 @@ Name table:
 	/Game/UI/Foundation/Buttons/Materials/M-ItemInfo-Blank
 	/Game/UI/Foundation/Buttons/TextRotator
 	/Game/UI/Foundation/Buttons/TextStyles/TextStyle-MediumButton
+	/Game/UI/Foundation/Fonts/NotoSans
 	/Game/UI/Foundation/Text/Materials/M-FontShadow
 	/Game/UI/Foundation/Text/TextScrollStyle-Base
 	/Game/UI/Foundation/Text/TextStyle-Base-S-B-S
@@ -70,6 +71,7 @@ Name table:
 	CenterButtonTextWidget
 	CheckBoxBox
 	Class
+	ClickMethod
 	ColorAndOpacity
 	CommonActionWidget
 	CommonBorder
@@ -135,6 +137,8 @@ Name table:
 	DisplayText
 	DrawAs
 	DynamicBindingObjects
+	EButtonClickMethod
+	EButtonClickMethod::MouseDown
 	EHorizontalAlignment
 	ELayoutPropertyType
 	Engine
@@ -157,6 +161,7 @@ Name table:
 	ExecuteUbergraph_HUDLayoutToolPropertyWidget
 	FloatProperty
 	Font
+	FontObject
 	FontOutlineSettings
 	Function
 	FunctionNameToBind
@@ -214,7 +219,9 @@ Name table:
 	NormalPadding
 	NormalThumbImage
 	Not_PreBool
+	NotoSans
 	NotoSans-Bold
+	NotoSans-Regular
 	Object
 	ObjectProperty
 	OnNewBoolValue
@@ -255,6 +262,7 @@ Name table:
 	SetActiveWidget
 	SetBoolValue
 	SetPropertyType
+	ShadowOffset
 	Show Param Name
 	Size
 	SizeBox
@@ -297,7 +305,6 @@ Name table:
 	Top
 	TypefaceFontName
 	UberGraphFrame
-	UberGraphFramePointerProperty
 	UberGraphFunction
 	UnderlyingType
 	Update Options
@@ -322,7 +329,7 @@ Name table:
 	WidthOverride
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	HUDLayoutToolPropertyWidget_C (0-0-0-0): size 455 (cls: HUDLayoutToolPropertyWidget_C>WidgetBlueprintGeneratedClass>/Script/UMG):
+	HUDLayoutToolPropertyWidget_C (0-0-0-0): size 426 (cls: HUDLayoutToolPropertyWidget_C>WidgetBlueprintGeneratedClass>/Script/UMG):
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
@@ -330,7 +337,6 @@ Serialized exports:
 			bClassRequiresNativeTick(BoolProperty)=True 
 			TemplateAsset(SoftObjectProperty)=/Game/Athena/UI/Frontend/HUDLayoutToolPropertyWidget.WidgetArchetype 
 			DynamicBindingObjects(ArrayProperty)=[object] (inner: ObjectProperty)
-			UberGraphFramePointerProperty(ObjectProperty)=UberGraphFrame=HUDLayoutToolPropertyWidget_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_HUDLayoutToolPropertyWidget=HUDLayoutToolPropertyWidget_C 
 	Default__HUDLayoutToolPropertyWidget_C (0-0-0-0): size 117 (cls: Default__HUDLayoutToolPropertyWidget_C>HUDLayoutToolPropertyWidget_C):
 		Tag array:
@@ -351,10 +357,10 @@ Serialized exports:
 	K2Node_Event_bNewValue (0-0-0-0): size 34 (cls: K2Node_Event_bNewValue>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
 	Selected Index (0-0-0-0): size 32 (cls: Selected Index>IntProperty>/Script/CoreUObject)
-	OnRotatorChanged (0-0-0-0): size 72 (cls: OnRotatorChanged>Function>/Script/CoreUObject)
-	RefreshProperties (0-0-0-0): size 58 (cls: RefreshProperties>Function>/Script/CoreUObject)
-	BndEvt__Button_BoolToggle_K2Node_ComponentBoundEvent_139_OnButtonPressedEvent__DelegateSignature (0-0-0-0): size 58 (cls: BndEvt__Button_BoolToggle_K2Node_ComponentBoundEvent_139_OnButtonPressedEvent__DelegateSignature>Function>/Script/CoreUObject)
-	SetBoolValue (0-0-0-0): size 72 (cls: SetBoolValue>Function>/Script/CoreUObject)
+	OnRotatorChanged (0-0-0-0): size 68 (cls: OnRotatorChanged>Function>/Script/CoreUObject)
+	RefreshProperties (0-0-0-0): size 54 (cls: RefreshProperties>Function>/Script/CoreUObject)
+	BndEvt__Button_BoolToggle_K2Node_ComponentBoundEvent_139_OnButtonPressedEvent__DelegateSignature (0-0-0-0): size 54 (cls: BndEvt__Button_BoolToggle_K2Node_ComponentBoundEvent_139_OnButtonPressedEvent__DelegateSignature>Function>/Script/CoreUObject)
+	SetBoolValue (0-0-0-0): size 68 (cls: SetBoolValue>Function>/Script/CoreUObject)
 	bNewValue (0-0-0-0): size 34 (cls: bNewValue>BoolProperty>/Script/CoreUObject)
 	ContentBorder (0-0-0-0): size 350 (cls: ContentBorder>Border>/Script/UMG):
 		Tag array:
@@ -403,7 +409,7 @@ Serialized exports:
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	NewPropertyType (0-0-0-0): size 40 (cls: NewPropertyType>EnumProperty>/Script/CoreUObject)
-	SetPropertyType (0-0-0-0): size 72 (cls: SetPropertyType>Function>/Script/CoreUObject)
+	SetPropertyType (0-0-0-0): size 68 (cls: SetPropertyType>Function>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	InputActionWidget (0-0-0-0): size 339 (cls: InputActionWidget>CommonActionWidget>/Script/CommonUI):
 		Tag array:
@@ -432,55 +438,61 @@ Serialized exports:
 			bIsVariable(BoolProperty)=True 
 			Visibility(EnumProperty)=ESlateVisibility::Visible 
 			Navigation(ObjectProperty)=WidgetNavigation_0=WidgetArchetype 
-	CenterButtonTextWidget (0-0-0-0): size 367 (cls: CenterButtonTextWidget>CommonTextBlock>/Script/CommonUI):
+	CenterButtonTextWidget (0-0-0-0): size 453 (cls: CenterButtonTextWidget>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-MediumButton_C=/Game/UI/Foundation/Buttons/TextStyles/TextStyle-MediumButton 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)={Text} (99357DD44CFC5E3692A9C792F19B30DA) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Center 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	CenterButtonTextWidget (0-0-0-0): size 367 (cls: CenterButtonTextWidget>CommonTextBlock>/Script/CommonUI):
+	CenterButtonTextWidget (0-0-0-0): size 453 (cls: CenterButtonTextWidget>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-MediumButton_C=/Game/UI/Foundation/Buttons/TextStyles/TextStyle-MediumButton 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)={Text} (99357DD44CFC5E3692A9C792F19B30DA) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Center 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	DisplayText (0-0-0-0): size 423 (cls: DisplayText>CommonTextBlock>/Script/CommonUI):
+	DisplayText (0-0-0-0): size 542 (cls: DisplayText>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-Blue_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-Blue 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)=Parameter Name (E06E2D784D650F324137568D968B6579) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	MyText (0-0-0-0): size 323 (cls: MyText>CommonTextBlock>/Script/CommonUI):
+	MyText (0-0-0-0): size 409 (cls: MyText>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)=Text Block (TextBlockDefaultValue) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=BorderSlot_1=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	Text_PropertyName (0-0-0-0): size 577 (cls: Text_PropertyName>CommonTextBlock>/Script/CommonUI):
+	Text_PropertyName (0-0-0-0): size 663 (cls: Text_PropertyName>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-S-B-S_C=/Game/UI/Foundation/Text/TextStyle-Base-S-B-S 
 			Text(TextProperty)=Property Name (F20E585246DB163C642E58B246625131) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Center 
 			Slot(ObjectProperty)=VerticalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	Text_PropertyValue (0-0-0-0): size 689 (cls: Text_PropertyValue>CommonTextBlock>/Script/CommonUI):
+	Text_PropertyValue (0-0-0-0): size 775 (cls: Text_PropertyValue>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-S-B-S-70pc_C=/Game/UI/Foundation/Text/TextStyle-Base-S-B-S-70pc 
 			Text(TextProperty)=0.0 (B4D6DFDC4153B0772ECC6CBFB23A252B) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Center 
 			Slot(ObjectProperty)=VerticalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
@@ -603,7 +615,7 @@ Serialized exports:
 			Text_PropertyValue(ObjectProperty)=Text_PropertyValue=WidgetArchetype 
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
-	ButtonLeft (0-0-0-0): size 673 (cls: ButtonLeft>IconTextButton_C>/Game/UI/Foundation/Buttons/IconTextButton):
+	ButtonLeft (0-0-0-0): size 714 (cls: ButtonLeft>IconTextButton_C>/Game/UI/Foundation/Buttons/IconTextButton):
 		Tag array:
 			CenterButtonTextWidget(ObjectProperty)=CenterButtonTextWidget=WidgetArchetype 
 			ContentBorder(ObjectProperty)=ContentBorder=WidgetArchetype 
@@ -613,12 +625,13 @@ Serialized exports:
 			IconBrush(StructProperty)=System.Byte[] 
 			ContentAlignment(ByteProperty)=HAlign_Center 
 			Style(ObjectProperty)=ButtonStyle-Rotator-Normal_C=/Game/UI/Foundation/Buttons/ButtonStyles/ButtonStyle-Rotator-Normal 
+			ClickMethod(ByteProperty)=EButtonClickMethod::MouseDown 
 			InputActionWidget(ObjectProperty)=InputActionWidget=WidgetArchetype 
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bIsFocusable(BoolProperty)=False 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=HorizontalBoxSlot_2=WidgetArchetype 
-	ButtonRight (0-0-0-0): size 787 (cls: ButtonRight>IconTextButton_C>/Game/UI/Foundation/Buttons/IconTextButton):
+	ButtonRight (0-0-0-0): size 828 (cls: ButtonRight>IconTextButton_C>/Game/UI/Foundation/Buttons/IconTextButton):
 		Tag array:
 			CenterButtonTextWidget(ObjectProperty)=CenterButtonTextWidget=WidgetArchetype 
 			ContentBorder(ObjectProperty)=ContentBorder=WidgetArchetype 
@@ -628,6 +641,7 @@ Serialized exports:
 			IconBrush(StructProperty)=System.Byte[] 
 			ContentAlignment(ByteProperty)=HAlign_Center 
 			Style(ObjectProperty)=ButtonStyle-Rotator-Normal_C=/Game/UI/Foundation/Buttons/ButtonStyles/ButtonStyle-Rotator-Normal 
+			ClickMethod(ByteProperty)=EButtonClickMethod::MouseDown 
 			InputActionWidget(ObjectProperty)=InputActionWidget=WidgetArchetype 
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bIsFocusable(BoolProperty)=False 

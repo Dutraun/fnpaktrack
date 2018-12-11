@@ -14,6 +14,7 @@ Name table:
 	/Script/GameplayTags
 	/Script/MovieScene
 	/Script/MovieSceneTracks
+	/Script/Slate
 	/Script/UMG
 	[Overlay]
 	ActiveEntities
@@ -64,10 +65,13 @@ Name table:
 	CallFunc_GetEndTime_ReturnValue
 	CallFunc_IsAnimationPlaying_ReturnValue
 	CallFunc_IsMobileGame_ReturnValue
+	CallFunc_IsMobileGame_ReturnValue1
+	CallFunc_IsValid_ReturnValue
 	CallFunc_Multiply_FloatFloat_ReturnValue
 	CallFunc_PlayAnimationTo_ReturnValue
 	CallFunc_PlayAnimationTo_ReturnValue1
 	CallFunc_Round_ReturnValue
+	CallFunc_SlotAsCanvasSlot_ReturnValue
 	CanvasPanel
 	CanvasPanelSlot
 	ChildTemplates
@@ -96,6 +100,7 @@ Name table:
 	Default__HorizontalBoxSlot
 	Default__Image
 	Default__IntProperty
+	Default__KismetSystemLibrary
 	Default__MovieScene
 	Default__MovieSceneColorSection
 	Default__MovieSceneColorTrack
@@ -115,6 +120,7 @@ Name table:
 	Default__VerticalBoxSlot
 	Default__WidgetAnimation
 	Default__WidgetBlueprintGeneratedClass
+	Default__WidgetLayoutLibrary
 	Default__WidgetTree
 	DefaultValue
 	Denominator
@@ -197,12 +203,17 @@ Name table:
 	IntProperty
 	IsAnimationPlaying
 	IsMobileGame
+	IsValid
 	Justification
 	K2Node_Event_VolumePerformanceMetrics
+	K2Node_MakeStruct_Anchors
 	K2Node_Select1_Default
+	K2Node_Select2_Default
+	K2Node_Select3_Default
 	K2Node_Select_Default
 	Key
 	KismetMathLibrary
+	KismetSystemLibrary
 	LastTrackIdentifier
 	LayoutData
 	LeaveTangent
@@ -312,9 +323,10 @@ Name table:
 	Segments
 	SequenceID
 	SequenceSignature
+	SetAnchors
 	SetCurrentValue
 	SetMaxValue
-	SetRenderTranslation
+	SetPosition
 	SetText
 	SetUIMetrics
 	SetValueProgress
@@ -330,6 +342,7 @@ Name table:
 	SlateChildSize
 	SlateFontInfo
 	Slot
+	SlotAsCanvasSlot
 	Slots
 	SlotWidgetName
 	SoftObjectProperty
@@ -349,10 +362,16 @@ Name table:
 	TangentWeightMode
 	Temp_bool_Variable
 	Temp_bool_Variable1
+	Temp_bool_Variable2
+	Temp_bool_Variable3
 	Temp_byte_Variable
 	Temp_byte_Variable1
 	Temp_struct_Variable
 	Temp_struct_Variable1
+	Temp_struct_Variable2
+	Temp_struct_Variable3
+	Temp_struct_Variable4
+	Temp_struct_Variable5
 	TemplateAsset
 	TemplateLedger
 	TemplateSerialNumber
@@ -393,11 +412,11 @@ Name table:
 	VerticalBoxSlot
 	Visibility
 	VolumePerformanceMetrics
-	Widget
 	WidgetAnimation
 	WidgetAnimationBinding
 	WidgetArchetype
 	WidgetBlueprintGeneratedClass
+	WidgetLayoutLibrary
 	WidgetName
 	WidgetTree
 	WidthOverride
@@ -422,19 +441,23 @@ Serialized exports:
 			Visibility(EnumProperty)=ESlateVisibility::Hidden 
 	BarFull (0-0-0-0): size 36 (cls: BarFull>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_PerformanceHUD (0-0-0-0): size 1167 (cls: ExecuteUbergraph_PerformanceHUD>Function>/Script/CoreUObject)
+	ExecuteUbergraph_PerformanceHUD (0-0-0-0): size 1632 (cls: ExecuteUbergraph_PerformanceHUD>Function>/Script/CoreUObject)
 	CallFunc_EqualEqual_FloatFloat_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_FloatFloat_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsAnimationPlaying_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsAnimationPlaying_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsMobileGame_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsMobileGame_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_IsMobileGame_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_IsMobileGame_ReturnValue1>BoolProperty>/Script/CoreUObject)
+	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable1 (0-0-0-0): size 34 (cls: Temp_bool_Variable1>BoolProperty>/Script/CoreUObject)
+	Temp_bool_Variable2 (0-0-0-0): size 34 (cls: Temp_bool_Variable2>BoolProperty>/Script/CoreUObject)
+	Temp_bool_Variable3 (0-0-0-0): size 34 (cls: Temp_bool_Variable3>BoolProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	CanvasPanel_0 (0-0-0-0): size 53 (cls: CanvasPanel_0>CanvasPanel>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-	CanvasPanelSlot_0 (0-0-0-0): size 554 (cls: CanvasPanelSlot_0>CanvasPanelSlot>/Script/UMG):
+	CanvasPanelSlot_0 (0-0-0-0): size 525 (cls: CanvasPanelSlot_0>CanvasPanelSlot>/Script/UMG):
 		Tag array:
 			LayoutData(StructProperty)=System.Byte[] 
 			bAutoSize(BoolProperty)=True 
@@ -465,7 +488,7 @@ Serialized exports:
 			Margin(StructProperty)=System.Byte[] 
 			Slot(ObjectProperty)=VerticalBoxSlot_4=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	K2Node_Select_Default (0-0-0-0): size 40 (cls: K2Node_Select_Default>EnumProperty>/Script/CoreUObject)
+	K2Node_Select3_Default (0-0-0-0): size 40 (cls: K2Node_Select3_Default>EnumProperty>/Script/CoreUObject)
 	Temp_byte_Variable (0-0-0-0): size 40 (cls: Temp_byte_Variable>EnumProperty>/Script/CoreUObject)
 	Temp_byte_Variable1 (0-0-0-0): size 40 (cls: Temp_byte_Variable1>EnumProperty>/Script/CoreUObject)
 	CallFunc_Conv_IntToFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Conv_IntToFloat_ReturnValue>FloatProperty>/Script/CoreUObject)
@@ -551,6 +574,7 @@ Serialized exports:
 			Signature(StructProperty)=Guid: 1667927498-1336185053-1822187451-2886206556 
 	CallFunc_PlayAnimationTo_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlayAnimationTo_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_PlayAnimationTo_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_PlayAnimationTo_ReturnValue1>ObjectProperty>/Script/CoreUObject)
+	CallFunc_SlotAsCanvasSlot_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_SlotAsCanvasSlot_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	ThermometerArea (0-0-0-0): size 36 (cls: ThermometerArea>ObjectProperty>/Script/CoreUObject)
 	ThermometerBar (0-0-0-0): size 36 (cls: ThermometerBar>ObjectProperty>/Script/CoreUObject)
 	ThermometerTitle (0-0-0-0): size 36 (cls: ThermometerTitle>ObjectProperty>/Script/CoreUObject)
@@ -612,9 +636,16 @@ Serialized exports:
 		Tag array:
 			Parent(ObjectProperty)=BarSizeBox=WidgetArchetype 
 			Content(ObjectProperty)=[Overlay]=WidgetArchetype 
+	K2Node_MakeStruct_Anchors (0-0-0-0): size 36 (cls: K2Node_MakeStruct_Anchors>StructProperty>/Script/CoreUObject)
 	K2Node_Select1_Default (0-0-0-0): size 36 (cls: K2Node_Select1_Default>StructProperty>/Script/CoreUObject)
+	K2Node_Select2_Default (0-0-0-0): size 36 (cls: K2Node_Select2_Default>StructProperty>/Script/CoreUObject)
+	K2Node_Select_Default (0-0-0-0): size 36 (cls: K2Node_Select_Default>StructProperty>/Script/CoreUObject)
 	Temp_struct_Variable (0-0-0-0): size 36 (cls: Temp_struct_Variable>StructProperty>/Script/CoreUObject)
 	Temp_struct_Variable1 (0-0-0-0): size 36 (cls: Temp_struct_Variable1>StructProperty>/Script/CoreUObject)
+	Temp_struct_Variable2 (0-0-0-0): size 36 (cls: Temp_struct_Variable2>StructProperty>/Script/CoreUObject)
+	Temp_struct_Variable3 (0-0-0-0): size 36 (cls: Temp_struct_Variable3>StructProperty>/Script/CoreUObject)
+	Temp_struct_Variable4 (0-0-0-0): size 36 (cls: Temp_struct_Variable4>StructProperty>/Script/CoreUObject)
+	Temp_struct_Variable5 (0-0-0-0): size 36 (cls: Temp_struct_Variable5>StructProperty>/Script/CoreUObject)
 	ThermometerBar (0-0-0-0): size 299 (cls: ThermometerBar>ThermometerBar_C>/Game/Athena/HUD/LTM/Playground/ThermometerBar):
 		Tag array:
 			BarSizeBox(ObjectProperty)=BarSizeBox=WidgetArchetype 

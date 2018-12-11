@@ -43,6 +43,7 @@ Name table:
 	ArrayProperty
 	Athena_PlaysetControlSpawner
 	Athena_PlaysetControlSpawner_C
+	AttachedTo
 	AttachParent
 	Audio
 	Audio_GEN_VARIABLE
@@ -59,13 +60,14 @@ Name table:
 	BlueprintGeneratedClass
 	BndEvt__Box_K2Node_ComponentBoundEvent_5_ComponentBeginOverlapSignature__DelegateSignature
 	BndEvt__Box_K2Node_ComponentBoundEvent_6_ComponentEndOverlapSignature__DelegateSignature
-	BndEvt__Checkpoint Collider_K2Node_ComponentBoundEvent_0_ComponentBeginOverlapSignature__DelegateSignature
 	BndEvt__FortMinigameLogic_K2Node_ComponentBoundEvent_0_OnPlayspaceEditModeChanged__DelegateSignature
 	BndEvt__FortMinigameLogic_K2Node_ComponentBoundEvent_1_SimpleDynamicMulticastDelegate__DelegateSignature
 	BndEvt__FortMinigameLogic_K2Node_ComponentBoundEvent_2_SimpleDynamicMulticastDelegate__DelegateSignature
 	BndEvt__FortMinigameProgress_K2Node_ComponentBoundEvent_10_SimpleDynamicMulticastDelegate__DelegateSignature
 	BndEvt__FortMinigameProgress_K2Node_ComponentBoundEvent_11_SimpleDynamicMulticastDelegate__DelegateSignature
 	BndEvt__FortMinigameProgress_K2Node_ComponentBoundEvent_1_PlayerProgressDelegate__DelegateSignature
+	BndEvt__FortMinigameProgress_K2Node_ComponentBoundEvent_1_SimpleDynamicMulticastDelegate__DelegateSignature
+	BndEvt__FortMinigameProgress_K2Node_ComponentBoundEvent_3_SimpleDynamicMulticastDelegate__DelegateSignature
 	BndEvt__FortMinigameProgress_K2Node_ComponentBoundEvent_8_ProgressDelegate__DelegateSignature
 	BndEvt__FortMinigameProgress_K2Node_ComponentBoundEvent_9_ProgressDelegate__DelegateSignature
 	bNetAddressable
@@ -225,6 +227,9 @@ Name table:
 	MarkerTimeline__FinishedFunc
 	MarkerTimeline__UpdateFunc
 	MarkerTimeline_Alpha_BCFBED24404B3CFDEE50619AB278D937
+	MaterialBillboard
+	MaterialBillboard_GEN_VARIABLE
+	MaterialBillboardComponent
 	MaterialInstanceConstant
 	MaterialInstanceDynamic
 	MaxAngularVelocity
@@ -586,6 +591,8 @@ Name table:
 	StaticMeshComponent0
 	StaticMeshComponent_1366__25475BC1
 	StructProperty
+	TeamNumberDisplay
+	TeamNumberDisplay_GEN_VARIABLE
 	TheTimeline
 	TID_Context_BouncePad_Athena
 	TID_Floor_Freeze_Athena_R_T01
@@ -710,10 +717,9 @@ Serialized exports:
 			BodyInstance(StructProperty)=System.Byte[] 
 			RelativeLocation(StructProperty)=Vector(-2048,2048,2818) 
 			RelativeScale3D(StructProperty)=Vector(8496,8496,7630) 
-	Checkpoint Collider (0-0-0-0): size 178 (cls: Checkpoint Collider>BoxComponent>/Script/Engine):
+	Checkpoint Collider (0-0-0-0): size 137 (cls: Checkpoint Collider>BoxComponent>/Script/Engine):
 		Tag array:
 			CachedMaxDrawDistance(FloatProperty)=24690.05 
-			OnComponentBeginOverlap(MulticastDelegateProperty)=[object] 
 			AttachParent(ObjectProperty)=StaticMeshComponent0=DefenseObstacleCourse_SK8_5x5_4 
 			bNetAddressable(BoolProperty)=True 
 			CreationMethod(EnumProperty)=EComponentCreationMethod::SimpleConstructionScript 
@@ -983,8 +989,10 @@ Serialized exports:
 			MinigameTags(StructProperty)=GameplayTagContainer:Minigame.TeamStart.Team1,Minigame.TeamStart.Team2,Minigame.TeamStart.Team3,Minigame.TeamStart.Team4,Minigame.RaceStart 
 			bNetAddressable(BoolProperty)=True 
 			CreationMethod(EnumProperty)=EComponentCreationMethod::SimpleConstructionScript 
-	FortMinigameProgress (0-0-0-0): size 79 (cls: FortMinigameProgress>FortMinigameProgressComponent>/Script/FortniteGame):
+	FortMinigameProgress (0-0-0-0): size 161 (cls: FortMinigameProgress>FortMinigameProgressComponent>/Script/FortniteGame):
 		Tag array:
+			MinigameStartedDelegate(MulticastDelegateProperty)=[object] 
+			MinigameEndedDelegate(MulticastDelegateProperty)=[object] 
 			bNetAddressable(BoolProperty)=True 
 			CreationMethod(EnumProperty)=EComponentCreationMethod::SimpleConstructionScript 
 	FortMinigameProgress (0-0-0-0): size 284 (cls: FortMinigameProgress>FortMinigameProgressComponent>/Script/FortniteGame):
@@ -1108,6 +1116,12 @@ Serialized exports:
 	LevelBounds_1 (0-0-0-0): size 41 (cls: LevelBounds_1>LevelBounds>/Script/Engine):
 		Tag array:
 			RootComponent(ObjectProperty)=BoxComponent0=DefenseObstacleCourse_SK8_5x5_4 
+	MaterialBillboard (0-0-0-0): size 137 (cls: MaterialBillboard>MaterialBillboardComponent>/Script/Engine):
+		Tag array:
+			CachedMaxDrawDistance(FloatProperty)=24690.05 
+			AttachParent(ObjectProperty)=StaticMeshComponent0=DefenseObstacleCourse_SK8_5x5_4 
+			bNetAddressable(BoolProperty)=True 
+			CreationMethod(EnumProperty)=EComponentCreationMethod::SimpleConstructionScript 
 	MaterialInstanceDynamic_0 (0-0-0-0): size 41 (cls: MaterialInstanceDynamic_0>MaterialInstanceDynamic>/Script/Engine):
 		Tag array:
 			Parent(ObjectProperty)=M_Trap_MetalSpikTrap_Inst=/Game/Weapons/FORT_TRAPS/Floor_MetalSpike_Trap/material/M_Trap_MetalSpikTrap_Inst 
@@ -1132,14 +1146,17 @@ Serialized exports:
 	MaterialInstanceDynamic_0 (0-0-0-0): size 41 (cls: MaterialInstanceDynamic_0>MaterialInstanceDynamic>/Script/Engine):
 		Tag array:
 			Parent(ObjectProperty)=M_Trap_MetalSpikTrap_Inst=/Game/Weapons/FORT_TRAPS/Floor_MetalSpike_Trap/material/M_Trap_MetalSpikTrap_Inst 
-	MinigamePlayerStartPlate_2 (0-0-0-0): size 453 (cls: MinigamePlayerStartPlate_2>MinigamePlayerStartPlate_C>/Game/Athena/Playset/MinigamePlayerStartPlate):
+	MinigamePlayerStartPlate_2 (0-0-0-0): size 548 (cls: MinigamePlayerStartPlate_2>MinigamePlayerStartPlate_C>/Game/Athena/Playset/MinigamePlayerStartPlate):
 		Tag array:
+			TeamNumberDisplay(ObjectProperty)=TeamNumberDisplay=DefenseObstacleCourse_SK8_5x5_4 
+			MaterialBillboard(ObjectProperty)=MaterialBillboard=DefenseObstacleCourse_SK8_5x5_4 
 			Checkpoint Collider(ObjectProperty)=Checkpoint Collider=DefenseObstacleCourse_SK8_5x5_4 
 			FortMinigamePlayerStart(ObjectProperty)=FortMinigamePlayerStart=DefenseObstacleCourse_SK8_5x5_4 
 			PlayerStartCreative(ObjectProperty)=PlayerStartCreative=DefenseObstacleCourse_SK8_5x5_4 
 			FortMinigameProgress(ObjectProperty)=FortMinigameProgress=DefenseObstacleCourse_SK8_5x5_4 
 			ToyOptionsComponent(ObjectProperty)=ToyOptionsComponent=DefenseObstacleCourse_SK8_5x5_4 
 			TraceLocation(ObjectProperty)=Trace Location=DefenseObstacleCourse_SK8_5x5_4 
+			AttachedTo(ObjectProperty)=PBWA_M2_Floor2=DefenseObstacleCourse_SK8_5x5_4 
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=DefenseObstacleCourse_SK8_5x5_4 
 			ParentActorToAttachTo(ObjectProperty)=PBWA_M2_Floor2=DefenseObstacleCourse_SK8_5x5_4 
 			MyGuid(StructProperty)=Guid: 3003341257-1078989833-2968416176-8721079 
@@ -1311,7 +1328,7 @@ Serialized exports:
 	NavigationSystemModuleConfig_0 (0-0-0-0): size 99 (cls: NavigationSystemModuleConfig_0>NavigationSystemModuleConfig>/Script/NavigationSystem):
 		Tag array:
 			bAutoSpawnMissingNavData(BoolProperty)=True 
-			NavigationSystemClass(StructProperty)=System.Byte[] 
+			NavigationSystemClass(StructProperty)=UE4.FSoftObjectPath 
 	ParticleSystem (0-0-0-0): size 137 (cls: ParticleSystem>ParticleSystemComponent>/Script/Engine):
 		Tag array:
 			CachedMaxDrawDistance(FloatProperty)=2800 
@@ -3370,7 +3387,7 @@ Serialized exports:
 	Trace Location (0-0-0-0): size 41 (cls: Trace Location>SceneComponent>/Script/Engine):
 		Tag array:
 			AttachParent(ObjectProperty)=StaticMeshComponent0=DefenseObstacleCourse_SK8_5x5_4 
-	SimpleMinigameControlPanel_2 (0-0-0-0): size 453 (cls: SimpleMinigameControlPanel_2>SimpleMinigameControlPanel_C>/Game/Athena/Playset/SimpleMinigameControlPanel):
+	SimpleMinigameControlPanel_2 (0-0-0-0): size 482 (cls: SimpleMinigameControlPanel_2>SimpleMinigameControlPanel_C>/Game/Athena/Playset/SimpleMinigameControlPanel):
 		Tag array:
 			Ambient Light(ObjectProperty)=Ambient Light=DefenseObstacleCourse_SK8_5x5_4 
 			God Beam(ObjectProperty)=God Beam=DefenseObstacleCourse_SK8_5x5_4 
@@ -3378,6 +3395,7 @@ Serialized exports:
 			Interaction Cylinder(ObjectProperty)=Interaction Cylinder=DefenseObstacleCourse_SK8_5x5_4 
 			FortMinigameLogic(ObjectProperty)=FortMinigameLogic=DefenseObstacleCourse_SK8_5x5_4 
 			TraceLocation(ObjectProperty)=Trace Location=DefenseObstacleCourse_SK8_5x5_4 
+			AttachedTo(ObjectProperty)=PBWA_M2_Floor2=DefenseObstacleCourse_SK8_5x5_4 
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=DefenseObstacleCourse_SK8_5x5_4 
 			ParentActorToAttachTo(ObjectProperty)=PBWA_M2_Floor2=DefenseObstacleCourse_SK8_5x5_4 
 			MyGuid(StructProperty)=Guid: 2585324721-1222940762-2215266691-2758509525 
@@ -3396,6 +3414,14 @@ Serialized exports:
 			CachedMaxDrawDistance(FloatProperty)=24690.05 
 			RelativeLocation(StructProperty)=Vector(-511.9997,1792,3840) 
 			RelativeRotation(StructProperty)=Rotator(0,6.484985E-05,0) 
+	TeamNumberDisplay (0-0-0-0): size 448 (cls: TeamNumberDisplay>StaticMeshComponent>/Script/Engine):
+		Tag array:
+			CachedMaxDrawDistance(FloatProperty)=24690.05 
+			BodyInstance(StructProperty)=System.Byte[] 
+			AttachParent(ObjectProperty)=StaticMeshComponent0=DefenseObstacleCourse_SK8_5x5_4 
+			bNetAddressable(BoolProperty)=True 
+			CreationMethod(EnumProperty)=EComponentCreationMethod::SimpleConstructionScript 
+			UCSModifiedProperties(ArrayProperty)=[object] (inner: StructProperty)
 	Marker (0-0-0-0): size 141 (cls: Marker>StaticMeshComponent>/Script/Engine):
 		Tag array:
 			CachedMaxDrawDistance(FloatProperty)=2800 

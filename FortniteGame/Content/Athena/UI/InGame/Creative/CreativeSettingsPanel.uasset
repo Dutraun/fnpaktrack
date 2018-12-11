@@ -1,4 +1,5 @@
 Name table:
+	/Game/Athena/Athena_PlayerController
 	/Game/Athena/UI/InGame/Creative/CreativeIslandOptions
 	/Game/Athena/UI/InGame/Creative/CreativeKnobsList
 	/Game/Athena/UI/InGame/Creative/CreativeSettingsPanel
@@ -11,7 +12,6 @@ Name table:
 	/Game/Sounds/Fort_UI_Sounds/FrontEnd/New_FrontEnd/Fortnite_UI_MissionObj_Cue
 	/Game/Sounds/Fort_UI_Sounds/FrontEnd/New_FrontEnd/Fortnite_UI_Options_Menu_01_Cue
 	/Game/Sounds/Fort_UI_Sounds/FrontEnd/New_FrontEnd/Fortnite_UI_StartButton_03_Cue
-	/Game/UI/Foundation/Border/Border_Notification_Rectangle
 	/Game/UI/Foundation/Buttons/ButtonStyles/ButtonStyle-TextOnlyBase
 	/Game/UI/Foundation/Buttons/ButtonStyles/ButtonStyle_SimpleCycleArrow_Left
 	/Game/UI/Foundation/Buttons/ButtonStyles/ButtonStyle_SimpleCycleArrow_Right
@@ -27,17 +27,16 @@ Name table:
 	/Game/UI/Foundation/Input/InputActionDataTable
 	/Game/UI/Foundation/Materials/M_Athena_Matchmaking_ShineAnim_Details
 	/Game/UI/Foundation/Text/TextScrollStyle-Base
-	/Game/UI/Foundation/Text/TextStyle-Header-S
 	/Game/UI/Foundation/Textures/Icons/Checks/T-Icon-CheckedBox-104
 	/Game/UI/Foundation/Textures/Icons/Checks/T-Icon-Confirmation_Empty-76
 	/Game/UI/Foundation/Textures/Icons/Checks/T-Icon-X-128
-	/Game/UI/Login/SubGameSelect/Materials/M_Notification_Right
 	/Game/UI/Materials/HollowCircularProgressBar
 	/Game/UI/SocialPanel/UserActionMenuInputButton
 	/Script/BlueprintContext
 	/Script/CommonUI
 	/Script/CoreUObject
 	/Script/Engine
+	/Script/FortniteGame
 	/Script/FortniteUI
 	/Script/MovieScene
 	/Script/UMG
@@ -50,10 +49,12 @@ Name table:
 	AnimationBindings
 	AnimationGuid
 	Animations
+	Array_Clear
 	Array_Length
 	ArrayProperty
 	ArriveTangent
 	ArriveTangentWeight
+	Athena_PlayerController_C
 	AthenaMatchmakingSpinnerButton
 	AthenaMatchmakingSpinnerButton_C
 	Background
@@ -68,8 +69,8 @@ Name table:
 	bHasScriptImplementedPaint
 	bHasScriptImplementedTick
 	BindingName
+	bInReadOnlyVolume
 	bInteractableWhenSelected
-	bIsEnabled
 	bIsFocusable
 	bIsRootWidget
 	bIsVariable
@@ -89,8 +90,6 @@ Name table:
 	BoolProperty
 	Border
 	Border_Fill
-	Border_Notification_Rectangle_C
-	BorderLTMBang
 	BorderSlot
 	Bottom
 	bOverride_HeightOverride
@@ -123,11 +122,17 @@ Name table:
 	CallFunc_Array_Length_ReturnValue
 	CallFunc_Array_Length_ReturnValue1
 	CallFunc_GetContext_ReturnValue
+	CallFunc_GetPlayerController_ReturnValue
 	CallFunc_GetUIManagerWidget_ReturnValue
 	CallFunc_GetUINavigationManager_ReturnValue
 	CallFunc_GetUINavigationManager_ReturnValue1
 	CallFunc_Greater_IntInt_ReturnValue
 	CallFunc_HandleClose_NewParam
+	CallFunc_Is_Player_in_Read_Only_Volume__bInReadOnlyVolume
+	CallFunc_Is_Player_in_Read_Only_Volume__bInReadOnlyVolume1
+	CallFunc_Is_Player_in_Read_Only_Volume__bInReadOnlyVolume2
+	CallFunc_Is_Player_in_Read_Only_Volume__bInReadOnlyVolume3
+	CallFunc_IsPlayerInReadOnlyVolume_ReturnValue
 	CallFunc_Less_IntInt_ReturnValue
 	CallFunc_PlayAnimationAtTime_ReturnValue
 	CallFunc_Subtract_IntInt_ReturnValue
@@ -173,13 +178,13 @@ Name table:
 	DataTable
 	DataTableRowHandle
 	Default__ArrayProperty
+	Default__Athena_PlayerController_C
 	Default__AthenaMatchmakingSpinnerButton_C
 	Default__BackgroundBlur
 	Default__BackgroundBlurSlot
 	Default__BlueprintContextLibrary
 	Default__BoolProperty
 	Default__Border
-	Default__Border_Notification_Rectangle_C
 	Default__BorderSlot
 	Default__ButtonStyle-Skew_Error_C
 	Default__ButtonStyle-Skew_Green_C
@@ -226,7 +231,6 @@ Name table:
 	Default__StructProperty
 	Default__TextBlock
 	Default__TextScrollStyle-Base_C
-	Default__TextStyle-Header-S_C
 	Default__TextStyle-MediumButton_C
 	Default__UserActionMenuInputButton_C
 	Default__VerticalBox
@@ -237,6 +241,7 @@ Name table:
 	Default__WidgetSwitcher
 	Default__WidgetSwitcherSlot
 	Default__WidgetTree
+	DefaultSceneRoot_GEN_VARIABLE
 	DefaultValue
 	DelegateFunction
 	DelegateProperty
@@ -281,7 +286,6 @@ Name table:
 	ESectionEvaluationFlags
 	ESectionEvaluationFlags::None
 	ESlateBrushDrawType
-	ESlateBrushDrawType::Box
 	ESlateBrushDrawType::Image
 	ESlateBrushDrawType::NoDrawType
 	ESlateSizeRule
@@ -316,13 +320,16 @@ Name table:
 	FontOutlineSettings
 	ForcedTime
 	FortCreativeSettingsFlow
+	FortGlobalUIContext
 	FortHUDContext
+	FortInteractContextInfo
 	FortMatchmakingKnobsModal
 	Fortnite_UI_MainMenu_Back_01_Cue
 	Fortnite_UI_MainMenu_Tab_03_Cue
 	Fortnite_UI_MissionObj_Cue
 	Fortnite_UI_Options_Menu_01_Cue
 	Fortnite_UI_StartButton_03_Cue
+	FortPlayerControllerAthena
 	FortUIManagerWidget_NUI
 	FortUINavigationManager
 	FrameNumber
@@ -335,8 +342,10 @@ Name table:
 	GameSettingsModal_C
 	GenericAccept
 	GenericBack
+	GenericForward
 	GenericPreview
 	GetContext
+	GetPlayerController
 	GetUIManagerWidget
 	GetUINavigationManager
 	Greater_IntInt
@@ -370,7 +379,10 @@ Name table:
 	InterfaceProperty
 	InterpMode
 	IntProperty
+	Is Player in Read Only Volume?
 	Island
+	IslandPublishBox
+	IsPlayerInReadOnlyVolume
 	Justification
 	K2Node_ComponentBoundEvent_Button
 	K2Node_ComponentBoundEvent_Button1
@@ -382,6 +394,8 @@ Name table:
 	K2Node_CreateDelegate_OutputDelegate1
 	K2Node_CreateDelegate_OutputDelegate2
 	K2Node_CreateDelegate_OutputDelegate3
+	K2Node_DynamicCast_AsAthena_Player_Controller
+	K2Node_DynamicCast_bSuccess
 	K2Node_Event_bUsingGamepad
 	K2Node_MakeArray_Array
 	K2Node_MakeStruct_DataTableRowHandle
@@ -408,7 +422,6 @@ Name table:
 	LUTIndices
 	LUTOffset
 	M_Athena_Matchmaking_ShineAnim_Details
-	M_Notification_Right
 	MainTabLeft
 	MainTabRight
 	MapProperty
@@ -421,6 +434,7 @@ Name table:
 	MetaData
 	MinDesiredHeight
 	MinDesiredWidth
+	MinWidth
 	ModalContent
 	ModalOverlay
 	ModalSize
@@ -508,11 +522,13 @@ Name table:
 	Percentage
 	PlayAnimationAtTime
 	PlaybackRange
+	PlayerController
 	PlaySound2D
 	PointerToUberGraphFrame
 	PopContentWidget
 	Possessables
 	PossessedObjectClass
+	PossibleInteractContextInfo
 	PostInfinityExtrap
 	PrecompiledEvaluationTemplate
 	PreInfinityExtrap
@@ -529,6 +545,7 @@ Name table:
 	RCIM_Cubic
 	RCTM_Auto
 	RCTWM_WeightedNone
+	RemoveAll
 	RenderOpacity
 	RenderTransform
 	ResourceObject
@@ -543,6 +560,7 @@ Name table:
 	RowName
 	Rule
 	Scale
+	SceneComponent
 	ScriptStruct
 	ScrollStyle
 	SectionEvaluationDataTree
@@ -557,8 +575,11 @@ Name table:
 	SequenceSignature
 	SetActiveWidgetIndex
 	SetInputActionHandler
+	SetInputMode
+	SetIsSelected
 	SetListDataSource
 	SetSelectionRequired
+	Setup Tabs
 	SetVisibility
 	ShadowColorAndOpacity
 	ShadowOffset
@@ -594,7 +615,6 @@ Name table:
 	T-Icon-CheckedBox-104
 	T-Icon-Confirmation_Empty-76
 	T-Icon-X-128
-	T_LTMBangText
 	TabButtonGroup
 	TabButtonList
 	Tags
@@ -617,7 +637,6 @@ Name table:
 	TextBlock_HeaderText_
 	TextProperty
 	TextScrollStyle-Base_C
-	TextStyle-Header-S_C
 	TextStyle-MediumButton_C
 	Texture2D
 	TickResolution
@@ -628,6 +647,7 @@ Name table:
 	Tracks
 	TrackSignatureToTrackIdentifier
 	TrackTemplate
+	TransformComponent0
 	TransitionCurveType
 	TransitionDuration
 	Translation
@@ -670,7 +690,7 @@ Name table:
 	WrapTextAt
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	CreativeSettingsPanel_C (0-0-0-0): size 631 (cls: CreativeSettingsPanel_C>WidgetBlueprintGeneratedClass>/Script/UMG):
+	CreativeSettingsPanel_C (0-0-0-0): size 663 (cls: CreativeSettingsPanel_C>WidgetBlueprintGeneratedClass>/Script/UMG):
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
@@ -692,7 +712,7 @@ Serialized exports:
 			RenderOpacity(FloatProperty)=0.85 
 	In (0-0-0-0): size 36 (cls: In>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_CreativeSettingsPanel (0-0-0-0): size 1850 (cls: ExecuteUbergraph_CreativeSettingsPanel>Function>/Script/CoreUObject)
+	ExecuteUbergraph_CreativeSettingsPanel (0-0-0-0): size 2410 (cls: ExecuteUbergraph_CreativeSettingsPanel>Function>/Script/CoreUObject)
 	K2Node_MakeArray_Array (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array>ObjectProperty>/Script/CoreUObject)
 	K2Node_MakeArray_Array (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array>ArrayProperty>/Script/CoreUObject)
 	TabButtonList (0-0-0-0): size 36 (cls: TabButtonList>ObjectProperty>/Script/CoreUObject)
@@ -751,33 +771,42 @@ Serialized exports:
 			Content(ObjectProperty)=ModalContent=WidgetArchetype 
 	CallFunc_Greater_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Greater_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_HandleClose_NewParam (0-0-0-0): size 34 (cls: CallFunc_HandleClose_NewParam>BoolProperty>/Script/CoreUObject)
+	CallFunc_Is_Player_in_Read_Only_Volume__bInReadOnlyVolume (0-0-0-0): size 34 (cls: CallFunc_Is_Player_in_Read_Only_Volume__bInReadOnlyVolume>BoolProperty>/Script/CoreUObject)
+	CallFunc_Is_Player_in_Read_Only_Volume__bInReadOnlyVolume1 (0-0-0-0): size 34 (cls: CallFunc_Is_Player_in_Read_Only_Volume__bInReadOnlyVolume1>BoolProperty>/Script/CoreUObject)
+	CallFunc_Is_Player_in_Read_Only_Volume__bInReadOnlyVolume2 (0-0-0-0): size 34 (cls: CallFunc_Is_Player_in_Read_Only_Volume__bInReadOnlyVolume2>BoolProperty>/Script/CoreUObject)
+	CallFunc_Is_Player_in_Read_Only_Volume__bInReadOnlyVolume3 (0-0-0-0): size 34 (cls: CallFunc_Is_Player_in_Read_Only_Volume__bInReadOnlyVolume3>BoolProperty>/Script/CoreUObject)
 	CallFunc_Less_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
 	K2Node_Event_bUsingGamepad (0-0-0-0): size 34 (cls: K2Node_Event_bUsingGamepad>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable1 (0-0-0-0): size 34 (cls: Temp_bool_Variable1>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable2 (0-0-0-0): size 34 (cls: Temp_bool_Variable2>BoolProperty>/Script/CoreUObject)
+	Setup Tabs (0-0-0-0): size 54 (cls: Setup Tabs>Function>/Script/CoreUObject)
+	BndEvt__Button_1_K2Node_ComponentBoundEvent_0_OnButtonClickedEvent__DelegateSignature (0-0-0-0): size 54 (cls: BndEvt__Button_1_K2Node_ComponentBoundEvent_0_OnButtonClickedEvent__DelegateSignature>Function>/Script/CoreUObject)
+	Construct (0-0-0-0): size 54 (cls: Construct>Function>/Script/CoreUObject)
 	Button (0-0-0-0): size 36 (cls: Button>ObjectProperty>/Script/CoreUObject)
 	BndEvt__UserActionMenuInputButton_0_K2Node_ComponentBoundEvent_8_CommonButtonClicked__DelegateSignature (0-0-0-0): size 68 (cls: BndEvt__UserActionMenuInputButton_0_K2Node_ComponentBoundEvent_8_CommonButtonClicked__DelegateSignature>Function>/Script/CoreUObject)
 	bUsingGamepad (0-0-0-0): size 34 (cls: bUsingGamepad>BoolProperty>/Script/CoreUObject)
 	OnInputModeChanged (0-0-0-0): size 68 (cls: OnInputModeChanged>Function>/Script/CoreUObject)
-	Construct (0-0-0-0): size 54 (cls: Construct>Function>/Script/CoreUObject)
+	Button (0-0-0-0): size 36 (cls: Button>ObjectProperty>/Script/CoreUObject)
+	BndEvt__CancelButton_K2Node_ComponentBoundEvent_1_CommonButtonClicked__DelegateSignature (0-0-0-0): size 68 (cls: BndEvt__CancelButton_K2Node_ComponentBoundEvent_1_CommonButtonClicked__DelegateSignature>Function>/Script/CoreUObject)
 	Button (0-0-0-0): size 36 (cls: Button>ObjectProperty>/Script/CoreUObject)
 	BndEvt__IconTextButton_C_1_K2Node_ComponentBoundEvent_5_CommonButtonClicked__DelegateSignature (0-0-0-0): size 68 (cls: BndEvt__IconTextButton_C_1_K2Node_ComponentBoundEvent_5_CommonButtonClicked__DelegateSignature>Function>/Script/CoreUObject)
 	CycleRight (0-0-0-0): size 54 (cls: CycleRight>Function>/Script/CoreUObject)
 	CycleLeft (0-0-0-0): size 54 (cls: CycleLeft>Function>/Script/CoreUObject)
 	Close (0-0-0-0): size 54 (cls: Close>Function>/Script/CoreUObject)
 	OnActivated (0-0-0-0): size 54 (cls: OnActivated>Function>/Script/CoreUObject)
-	BndEvt__Button_1_K2Node_ComponentBoundEvent_0_OnButtonClickedEvent__DelegateSignature (0-0-0-0): size 54 (cls: BndEvt__Button_1_K2Node_ComponentBoundEvent_0_OnButtonClickedEvent__DelegateSignature>Function>/Script/CoreUObject)
 	Button (0-0-0-0): size 36 (cls: Button>ObjectProperty>/Script/CoreUObject)
-	BndEvt__CancelButton_K2Node_ComponentBoundEvent_1_CommonButtonClicked__DelegateSignature (0-0-0-0): size 68 (cls: BndEvt__CancelButton_K2Node_ComponentBoundEvent_1_CommonButtonClicked__DelegateSignature>Function>/Script/CoreUObject)
-	Button (0-0-0-0): size 36 (cls: Button>ObjectProperty>/Script/CoreUObject)
-	BndEvt__IconTextButton_C_2_K2Node_ComponentBoundEvent_4_CommonButtonClicked__DelegateSignature (0-0-0-0): size 68 (cls: BndEvt__IconTextButton_C_2_K2Node_ComponentBoundEvent_4_CommonButtonClicked__DelegateSignature>Function>/Script/CoreUObject)
+	BndEvt__IconTextButton_C_0_K2Node_ComponentBoundEvent_2_CommonButtonClicked__DelegateSignature (0-0-0-0): size 68 (cls: BndEvt__IconTextButton_C_0_K2Node_ComponentBoundEvent_2_CommonButtonClicked__DelegateSignature>Function>/Script/CoreUObject)
 	Button (0-0-0-0): size 36 (cls: Button>ObjectProperty>/Script/CoreUObject)
 	BndEvt__IconTextButton_C_1_K2Node_ComponentBoundEvent_3_CommonButtonClicked__DelegateSignature (0-0-0-0): size 68 (cls: BndEvt__IconTextButton_C_1_K2Node_ComponentBoundEvent_3_CommonButtonClicked__DelegateSignature>Function>/Script/CoreUObject)
 	Button (0-0-0-0): size 36 (cls: Button>ObjectProperty>/Script/CoreUObject)
-	BndEvt__IconTextButton_C_0_K2Node_ComponentBoundEvent_2_CommonButtonClicked__DelegateSignature (0-0-0-0): size 68 (cls: BndEvt__IconTextButton_C_0_K2Node_ComponentBoundEvent_2_CommonButtonClicked__DelegateSignature>Function>/Script/CoreUObject)
+	BndEvt__IconTextButton_C_2_K2Node_ComponentBoundEvent_4_CommonButtonClicked__DelegateSignature (0-0-0-0): size 68 (cls: BndEvt__IconTextButton_C_2_K2Node_ComponentBoundEvent_4_CommonButtonClicked__DelegateSignature>Function>/Script/CoreUObject)
 	HandleClose (0-0-0-0): size 159 (cls: HandleClose>Function>/Script/CoreUObject)
 	NewParam (0-0-0-0): size 34 (cls: NewParam>BoolProperty>/Script/CoreUObject)
+	Is Player in Read Only Volume? (0-0-0-0): size 191 (cls: Is Player in Read Only Volume?>Function>/Script/CoreUObject)
+	bInReadOnlyVolume (0-0-0-0): size 34 (cls: bInReadOnlyVolume>BoolProperty>/Script/CoreUObject)
+	CallFunc_IsPlayerInReadOnlyVolume_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsPlayerInReadOnlyVolume_ReturnValue>BoolProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	Border_0 (0-0-0-0): size 285 (cls: Border_0>Border>/Script/UMG):
 		Tag array:
 			ContentColorAndOpacity(StructProperty)=UE4.FLinearColor 
@@ -914,12 +943,6 @@ Serialized exports:
 			Padding(StructProperty)=System.Byte[] 
 			Parent(ObjectProperty)=CommonBorder_Container=WidgetArchetype 
 			Content(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
-	BorderSlot_1 (0-0-0-0): size 284 (cls: BorderSlot_1>BorderSlot>/Script/UMG):
-		Tag array:
-			Padding(StructProperty)=System.Byte[] 
-			VerticalAlignment(ByteProperty)=VAlign_Center 
-			Parent(ObjectProperty)=BorderLTMBang=WidgetArchetype 
-			Content(ObjectProperty)=SizeBox_0=WidgetArchetype 
 	BorderSlot_0 (0-0-0-0): size 243 (cls: BorderSlot_0>BorderSlot>/Script/UMG):
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
@@ -1118,16 +1141,6 @@ Serialized exports:
 			Padding(StructProperty)=System.Byte[] 
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
-	BorderLTMBang (0-0-0-0): size 764 (cls: BorderLTMBang>CommonBorder>/Script/CommonUI):
-		Tag array:
-			Style(ObjectProperty)=Border_Notification_Rectangle_C=/Game/UI/Foundation/Border/Border_Notification_Rectangle 
-			VerticalAlignment(ByteProperty)=VAlign_Center 
-			Padding(StructProperty)=System.Byte[] 
-			Background(StructProperty)=System.Byte[] 
-			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-			Slot(ObjectProperty)=OverlaySlot_1=WidgetArchetype 
-			RenderTransform(StructProperty)=System.Byte[] 
-			bIsVariable(BoolProperty)=True 
 	CommonBorder_2 (0-0-0-0): size 526 (cls: CommonBorder_2>CommonBorder>/Script/CommonUI):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Center 
@@ -1178,6 +1191,13 @@ Serialized exports:
 			Font(StructProperty)=System.Byte[] 
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
+	CommonTextBlock_0 (0-0-0-0): size 490 (cls: CommonTextBlock_0>CommonTextBlock>/Script/CommonUI):
+		Tag array:
+			Text(TextProperty)=PUBLISH YOUR ISLAND (E21E04CC42CD4714FAA130B4D35C1319) 
+			Font(StructProperty)=System.Byte[] 
+			WrapTextAt(FloatProperty)=597.5659 
+			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
+			bIsVariable(BoolProperty)=True 
 	CenterButtonTextWidget (0-0-0-0): size 453 (cls: CenterButtonTextWidget>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-MediumButton_C=/Game/UI/Foundation/Buttons/TextStyles/TextStyle-MediumButton 
@@ -1224,15 +1244,6 @@ Serialized exports:
 			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Center 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
-			bIsVariable(BoolProperty)=True 
-	T_LTMBangText (0-0-0-0): size 389 (cls: T_LTMBangText>CommonTextBlock>/Script/CommonUI):
-		Tag array:
-			Style(ObjectProperty)=TextStyle-Header-S_C=/Game/UI/Foundation/Text/TextStyle-Header-S 
-			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
-			Text(TextProperty)=COMING SOON! (AFE52C904E4EE58F3EC49F84D1364E37) 
-			Font(StructProperty)=System.Byte[] 
-			ShadowOffset(StructProperty)=Vector2D(0,0) 
-			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
 	CenterButtonTextWidget (0-0-0-0): size 453 (cls: CenterButtonTextWidget>CommonTextBlock>/Script/CommonUI):
 		Tag array:
@@ -1377,17 +1388,17 @@ Serialized exports:
 	CreativeIslandOptions (0-0-0-0): size 470 (cls: CreativeIslandOptions>CreativeIslandOptions_C>/Game/Athena/UI/InGame/Creative/CreativeIslandOptions):
 		Tag array:
 			AthenaMatchmakingSpinnerButton(ObjectProperty)=AthenaMatchmakingSpinnerButton=WidgetArchetype 
-			BorderLTMBang(ObjectProperty)=BorderLTMBang=WidgetArchetype 
+			CommonTextBlock_0(ObjectProperty)=CommonTextBlock_0=WidgetArchetype 
 			IconTextButton(ObjectProperty)=IconTextButton=WidgetArchetype 
 			IconTextButton_C_0(ObjectProperty)=IconTextButton_C_0=WidgetArchetype 
-			IconTextButton_C_1(ObjectProperty)=IconTextButton_C_1=WidgetArchetype 
+			IconTextButton_C_3(ObjectProperty)=IconTextButton_C_3=WidgetArchetype 
 			ImageEmptyCheck(ObjectProperty)=ImageEmptyCheck=WidgetArchetype 
 			ImageErrorState(ObjectProperty)=ImageErrorState=WidgetArchetype 
 			ImageSelectedCheck(ObjectProperty)=ImageSelectedCheck=WidgetArchetype 
 			OptionDisplayName(ObjectProperty)=OptionDisplayName=WidgetArchetype 
 			RestoreDefaultsButton(ObjectProperty)=RestoreDefaultsButton=WidgetArchetype 
 			Switcher_UserStatus(ObjectProperty)=Switcher_UserStatus=WidgetArchetype 
-			T_LTMBangText(ObjectProperty)=T_LTMBangText=WidgetArchetype 
+			IslandPublishBox(ObjectProperty)=IslandPublishBox=WidgetArchetype 
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bIsFocusable(BoolProperty)=True 
 			bCookedWidgetTree(BoolProperty)=True 
@@ -1453,19 +1464,20 @@ Serialized exports:
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
-	HorizontalBox_0 (0-0-0-0): size 41 (cls: HorizontalBox_0>HorizontalBox>/Script/UMG):
-		Tag array:
-			Slot(ObjectProperty)=VerticalBoxSlot_1=WidgetArchetype 
 	HorizontalBox_1 (0-0-0-0): size 127 (cls: HorizontalBox_1>HorizontalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=VerticalBoxSlot_5=WidgetArchetype 
 			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
-	HorizontalBox_2 (0-0-0-0): size 131 (cls: HorizontalBox_2>HorizontalBox>/Script/UMG):
+	HorizontalBox_2 (0-0-0-0): size 127 (cls: HorizontalBox_2>HorizontalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
 			Visibility(EnumProperty)=ESlateVisibility::Visible 
+	HorizontalBox_3 (0-0-0-0): size 82 (cls: HorizontalBox_3>HorizontalBox>/Script/UMG):
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 	HorizontalBox (0-0-0-0): size 94 (cls: HorizontalBox>HorizontalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -1478,6 +1490,11 @@ Serialized exports:
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=BorderSlot_0=WidgetArchetype 
+	IslandPublishBox (0-0-0-0): size 127 (cls: IslandPublishBox>HorizontalBox>/Script/UMG):
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=VerticalBoxSlot_6=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Visible 
 	HorizontalBox (0-0-0-0): size 94 (cls: HorizontalBox>HorizontalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -1598,19 +1615,18 @@ Serialized exports:
 			VerticalAlignment(ByteProperty)=VAlign_Center 
 			Parent(ObjectProperty)=HorizontalBox_2=WidgetArchetype 
 			Content(ObjectProperty)=DisplayNameArea=WidgetArchetype 
-	HorizontalBoxSlot_1 (0-0-0-0): size 324 (cls: HorizontalBoxSlot_1>HorizontalBoxSlot>/Script/UMG):
+	HorizontalBoxSlot_1 (0-0-0-0): size 209 (cls: HorizontalBoxSlot_1>HorizontalBoxSlot>/Script/UMG):
 		Tag array:
-			Padding(StructProperty)=System.Byte[] 
 			Size(StructProperty)=System.Byte[] 
-			VerticalAlignment(ByteProperty)=VAlign_Center 
+			HorizontalAlignment(ByteProperty)=HAlign_Right 
 			Parent(ObjectProperty)=HorizontalBox_2=WidgetArchetype 
 			Content(ObjectProperty)=RestoreDefaultsButton=WidgetArchetype 
-	HorizontalBoxSlot_2 (0-0-0-0): size 283 (cls: HorizontalBoxSlot_2>HorizontalBoxSlot>/Script/UMG):
+	HorizontalBoxSlot_0 (0-0-0-0): size 197 (cls: HorizontalBoxSlot_0>HorizontalBoxSlot>/Script/UMG):
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
-			Size(StructProperty)=System.Byte[] 
-			Parent(ObjectProperty)=HorizontalBox_2=WidgetArchetype 
-			Content(ObjectProperty)=Overlay_1=WidgetArchetype 
+			HorizontalAlignment(ByteProperty)=HAlign_Left 
+			Parent(ObjectProperty)=HorizontalBox_3=WidgetArchetype 
+			Content(ObjectProperty)=CommonTextBlock_0=WidgetArchetype 
 	HorizontalBoxSlot_0 (0-0-0-0): size 382 (cls: HorizontalBoxSlot_0>HorizontalBoxSlot>/Script/UMG):
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
@@ -1689,6 +1705,18 @@ Serialized exports:
 			Padding(StructProperty)=System.Byte[] 
 			Parent(ObjectProperty)=HorizontalBox=WidgetArchetype 
 			Content(ObjectProperty)=RightExtraContentSlot=WidgetArchetype 
+	HorizontalBoxSlot_0 (0-0-0-0): size 152 (cls: HorizontalBoxSlot_0>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Left 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=IslandPublishBox=WidgetArchetype 
+			Content(ObjectProperty)=HorizontalBox_3=WidgetArchetype 
+	HorizontalBoxSlot_2 (0-0-0-0): size 209 (cls: HorizontalBoxSlot_2>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			Size(StructProperty)=System.Byte[] 
+			HorizontalAlignment(ByteProperty)=HAlign_Right 
+			Parent(ObjectProperty)=IslandPublishBox=WidgetArchetype 
+			Content(ObjectProperty)=IconTextButton_C_3=WidgetArchetype 
 	HorizontalBoxSlot_0 (0-0-0-0): size 382 (cls: HorizontalBoxSlot_0>HorizontalBoxSlot>/Script/UMG):
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
@@ -2066,7 +2094,7 @@ Serialized exports:
 			Padding(StructProperty)=System.Byte[] 
 			Parent(ObjectProperty)=HorizontalBox=WidgetArchetype 
 			Content(ObjectProperty)=RightExtraContentSlot=WidgetArchetype 
-	IconTextButton (0-0-0-0): size 511 (cls: IconTextButton>IconTextButton_C>/Game/UI/Foundation/Buttons/IconTextButton):
+	IconTextButton (0-0-0-0): size 540 (cls: IconTextButton>IconTextButton_C>/Game/UI/Foundation/Buttons/IconTextButton):
 		Tag array:
 			CenterButtonTextWidget(ObjectProperty)=CenterButtonTextWidget=WidgetArchetype 
 			ContentBorder(ObjectProperty)=ContentBorder=WidgetArchetype 
@@ -2074,12 +2102,13 @@ Serialized exports:
 			RightExtraContentSlot(ObjectProperty)=RightExtraContentSlot=WidgetArchetype 
 			ButtonText(TextProperty)=APPLY (BB731F404FDDB8A0041239B91CDBE321) 
 			ContentAlignment(ByteProperty)=HAlign_Center 
+			MinWidth(IntProperty)=400 
 			Style(ObjectProperty)=ButtonStyle-Skew_Green_C=/Game/UI/Foundation/Buttons/ButtonStyles/Skew/ButtonStyle-Skew_Green 
 			TriggeringInputAction(StructProperty)=System.Byte[] 
 			InputActionWidget(ObjectProperty)=InputActionWidget=WidgetArchetype 
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
-			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
+			Slot(ObjectProperty)=VerticalBoxSlot_2=WidgetArchetype 
 	IconTextButton_C_0 (0-0-0-0): size 671 (cls: IconTextButton_C_0>IconTextButton_C>/Game/UI/Foundation/Buttons/IconTextButton):
 		Tag array:
 			CenterButtonTextWidget(ObjectProperty)=CenterButtonTextWidget=WidgetArchetype 
@@ -2097,24 +2126,24 @@ Serialized exports:
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=OverlaySlot_1=WidgetArchetype 
 			Navigation(ObjectProperty)=WidgetNavigation_0=WidgetArchetype 
-	IconTextButton_C_1 (0-0-0-0): size 604 (cls: IconTextButton_C_1>IconTextButton_C>/Game/UI/Foundation/Buttons/IconTextButton):
+	IconTextButton_C_3 (0-0-0-0): size 604 (cls: IconTextButton_C_3>IconTextButton_C>/Game/UI/Foundation/Buttons/IconTextButton):
 		Tag array:
 			CenterButtonTextWidget(ObjectProperty)=CenterButtonTextWidget=WidgetArchetype 
 			ContentBorder(ObjectProperty)=ContentBorder=WidgetArchetype 
 			LeftSideImage(ObjectProperty)=LeftSideImage=WidgetArchetype 
 			RightExtraContentSlot(ObjectProperty)=RightExtraContentSlot=WidgetArchetype 
-			ButtonText(TextProperty)=PUBLISH MY ISLAND (8B6CF43343363E27F51499A0E269AB9A) 
+			ButtonText(TextProperty)=PUBLISH ISLAND (8B6CF43343363E27F51499A0E269AB9A) 
 			ContentAlignment(ByteProperty)=HAlign_Center 
+			MinWidth(IntProperty)=400 
 			Style(ObjectProperty)=ButtonStyle-Skew_Error_C=/Game/UI/Foundation/Buttons/ButtonStyles/Skew/ButtonStyle-Skew_Error 
 			TriggeringInputAction(StructProperty)=System.Byte[] 
 			InputActionWidget(ObjectProperty)=InputActionWidget=WidgetArchetype 
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bIsFocusable(BoolProperty)=False 
 			bCookedWidgetTree(BoolProperty)=True 
-			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
-			bIsEnabled(BoolProperty)=False 
+			Slot(ObjectProperty)=HorizontalBoxSlot_2=WidgetArchetype 
 			Navigation(ObjectProperty)=WidgetNavigation_0=WidgetArchetype 
-	RestoreDefaultsButton (0-0-0-0): size 547 (cls: RestoreDefaultsButton>IconTextButton_C>/Game/UI/Foundation/Buttons/IconTextButton):
+	RestoreDefaultsButton (0-0-0-0): size 602 (cls: RestoreDefaultsButton>IconTextButton_C>/Game/UI/Foundation/Buttons/IconTextButton):
 		Tag array:
 			CenterButtonTextWidget(ObjectProperty)=CenterButtonTextWidget=WidgetArchetype 
 			ContentBorder(ObjectProperty)=ContentBorder=WidgetArchetype 
@@ -2122,10 +2151,12 @@ Serialized exports:
 			RightExtraContentSlot(ObjectProperty)=RightExtraContentSlot=WidgetArchetype 
 			ButtonText(TextProperty)=RESET ISLAND (85CB06254C6A1726B124F4A305134321) 
 			ContentAlignment(ByteProperty)=HAlign_Center 
+			MinWidth(IntProperty)=400 
 			Style(ObjectProperty)=ButtonStyle-Skew_Error_C=/Game/UI/Foundation/Buttons/ButtonStyles/Skew/ButtonStyle-Skew_Error 
 			TriggeringInputAction(StructProperty)=System.Byte[] 
 			InputActionWidget(ObjectProperty)=InputActionWidget=WidgetArchetype 
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
+			bIsFocusable(BoolProperty)=False 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
 			Navigation(ObjectProperty)=WidgetNavigation_0=WidgetArchetype 
@@ -2401,7 +2432,7 @@ Serialized exports:
 	CallFunc_Array_Length_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Array_Length_ReturnValue1>IntProperty>/Script/CoreUObject)
 	CallFunc_Subtract_IntInt_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Subtract_IntInt_ReturnValue>IntProperty>/Script/CoreUObject)
 	K2Node_Select1_Default (0-0-0-0): size 32 (cls: K2Node_Select1_Default>IntProperty>/Script/CoreUObject)
-	K2Node_Select2_Default (0-0-0-0): size 32 (cls: K2Node_Select2_Default>IntProperty>/Script/CoreUObject)
+	K2Node_Select3_Default (0-0-0-0): size 32 (cls: K2Node_Select3_Default>IntProperty>/Script/CoreUObject)
 	Temp_int_Variable (0-0-0-0): size 32 (cls: Temp_int_Variable>IntProperty>/Script/CoreUObject)
 	Temp_int_Variable1 (0-0-0-0): size 32 (cls: Temp_int_Variable1>IntProperty>/Script/CoreUObject)
 	OptionsList (0-0-0-0): size 128 (cls: OptionsList>ListView>/Script/UMG):
@@ -2501,6 +2532,7 @@ Serialized exports:
 			Slot(ObjectProperty)=HorizontalBoxSlot_3=WidgetArchetype 
 	CreativeIslandOptions (0-0-0-0): size 36 (cls: CreativeIslandOptions>ObjectProperty>/Script/CoreUObject)
 	CreativeKnobsList (0-0-0-0): size 36 (cls: CreativeKnobsList>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetUIManagerWidget_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetUIManagerWidget_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetUINavigationManager_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetUINavigationManager_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetUINavigationManager_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetUINavigationManager_ReturnValue1>ObjectProperty>/Script/CoreUObject)
@@ -2511,9 +2543,11 @@ Serialized exports:
 	K2Node_ComponentBoundEvent_Button3 (0-0-0-0): size 36 (cls: K2Node_ComponentBoundEvent_Button3>ObjectProperty>/Script/CoreUObject)
 	K2Node_ComponentBoundEvent_Button4 (0-0-0-0): size 36 (cls: K2Node_ComponentBoundEvent_Button4>ObjectProperty>/Script/CoreUObject)
 	K2Node_ComponentBoundEvent_Button5 (0-0-0-0): size 36 (cls: K2Node_ComponentBoundEvent_Button5>ObjectProperty>/Script/CoreUObject)
-	K2Node_Select3_Default (0-0-0-0): size 36 (cls: K2Node_Select3_Default>ObjectProperty>/Script/CoreUObject)
+	K2Node_Select2_Default (0-0-0-0): size 36 (cls: K2Node_Select2_Default>ObjectProperty>/Script/CoreUObject)
 	GameSettingsModal (0-0-0-0): size 36 (cls: GameSettingsModal>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetPlayerController_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetPlayerController_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_AsAthena_Player_Controller (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsAthena_Player_Controller>ObjectProperty>/Script/CoreUObject)
 	Island (0-0-0-0): size 36 (cls: Island>ObjectProperty>/Script/CoreUObject)
 	Left (0-0-0-0): size 36 (cls: Left>ObjectProperty>/Script/CoreUObject)
 	Mode (0-0-0-0): size 36 (cls: Mode>ObjectProperty>/Script/CoreUObject)
@@ -2527,11 +2561,6 @@ Serialized exports:
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
-	Overlay_1 (0-0-0-0): size 127 (cls: Overlay_1>Overlay>/Script/UMG):
-		Tag array:
-			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-			Slot(ObjectProperty)=HorizontalBoxSlot_2=WidgetArchetype 
-			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
 	ModalOverlay (0-0-0-0): size 86 (cls: ModalOverlay>Overlay>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -2559,18 +2588,6 @@ Serialized exports:
 			VerticalAlignment(ByteProperty)=VAlign_Fill 
 			Parent(ObjectProperty)=Overlay_0=WidgetArchetype 
 			Content(ObjectProperty)=IconTextButton_C_0=WidgetArchetype 
-	OverlaySlot_0 (0-0-0-0): size 152 (cls: OverlaySlot_0>OverlaySlot>/Script/UMG):
-		Tag array:
-			HorizontalAlignment(ByteProperty)=HAlign_Fill 
-			VerticalAlignment(ByteProperty)=VAlign_Fill 
-			Parent(ObjectProperty)=Overlay_1=WidgetArchetype 
-			Content(ObjectProperty)=IconTextButton_C_1=WidgetArchetype 
-	OverlaySlot_1 (0-0-0-0): size 284 (cls: OverlaySlot_1>OverlaySlot>/Script/UMG):
-		Tag array:
-			Padding(StructProperty)=System.Byte[] 
-			HorizontalAlignment(ByteProperty)=HAlign_Center 
-			Parent(ObjectProperty)=Overlay_1=WidgetArchetype 
-			Content(ObjectProperty)=BorderLTMBang=WidgetArchetype 
 	OverlaySlot_0 (0-0-0-0): size 111 (cls: OverlaySlot_0>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Fill 
@@ -2677,23 +2694,11 @@ Serialized exports:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
 			Clipping(EnumProperty)=EWidgetClipping::ClipToBounds 
-	SizeBox_0 (0-0-0-0): size 140 (cls: SizeBox_0>SizeBox>/Script/UMG):
-		Tag array:
-			WidthOverride(FloatProperty)=320 
-			MaxDesiredWidth(FloatProperty)=320 
-			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-			Slot(ObjectProperty)=BorderSlot_1=WidgetArchetype 
 	SizeBox_1 (0-0-0-0): size 111 (cls: SizeBox_1>SizeBox>/Script/UMG):
 		Tag array:
 			HeightOverride(FloatProperty)=145.5557 
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=VerticalBoxSlot_0=WidgetArchetype 
-	SizeBox_2 (0-0-0-0): size 137 (cls: SizeBox_2>SizeBox>/Script/UMG):
-		Tag array:
-			bOverride_MinDesiredWidth(BoolProperty)=True 
-			MinDesiredWidth(FloatProperty)=406.493 
-			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-			Slot(ObjectProperty)=VerticalBoxSlot_2=WidgetArchetype 
 	ListSizeBox (0-0-0-0): size 250 (cls: ListSizeBox>SizeBox>/Script/UMG):
 		Tag array:
 			bOverride_WidthOverride(BoolProperty)=True 
@@ -2765,19 +2770,11 @@ Serialized exports:
 		Tag array:
 			Parent(ObjectProperty)=SizeBox_2=WidgetArchetype 
 			Content(ObjectProperty)=Border_4=WidgetArchetype 
-	SizeBoxSlot_0 (0-0-0-0): size 70 (cls: SizeBoxSlot_0>SizeBoxSlot>/Script/UMG):
-		Tag array:
-			Parent(ObjectProperty)=SizeBox_0=WidgetArchetype 
-			Content(ObjectProperty)=T_LTMBangText=WidgetArchetype 
 	SizeBoxSlot_0 (0-0-0-0): size 156 (cls: SizeBoxSlot_0>SizeBoxSlot>/Script/UMG):
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
 			Parent(ObjectProperty)=SizeBox_1=WidgetArchetype 
 			Content(ObjectProperty)=HorizontalBox_2=WidgetArchetype 
-	SizeBoxSlot_0 (0-0-0-0): size 70 (cls: SizeBoxSlot_0>SizeBoxSlot>/Script/UMG):
-		Tag array:
-			Parent(ObjectProperty)=SizeBox_2=WidgetArchetype 
-			Content(ObjectProperty)=IconTextButton=WidgetArchetype 
 	SizeBoxSlot_1 (0-0-0-0): size 70 (cls: SizeBoxSlot_1>SizeBoxSlot>/Script/UMG):
 		Tag array:
 			Parent(ObjectProperty)=ListSizeBox=WidgetArchetype 
@@ -2880,16 +2877,11 @@ Serialized exports:
 			Size(StructProperty)=System.Byte[] 
 			Parent(ObjectProperty)=VerticalBox_0=WidgetArchetype 
 			Content(ObjectProperty)=SizeBox_1=WidgetArchetype 
-	VerticalBoxSlot_1 (0-0-0-0): size 111 (cls: VerticalBoxSlot_1>VerticalBoxSlot>/Script/UMG):
-		Tag array:
-			HorizontalAlignment(ByteProperty)=HAlign_Center 
-			Parent(ObjectProperty)=VerticalBox_0=WidgetArchetype 
-			Content(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
 	VerticalBoxSlot_2 (0-0-0-0): size 111 (cls: VerticalBoxSlot_2>VerticalBoxSlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Right 
 			Parent(ObjectProperty)=VerticalBox_0=WidgetArchetype 
-			Content(ObjectProperty)=SizeBox_2=WidgetArchetype 
+			Content(ObjectProperty)=IconTextButton=WidgetArchetype 
 	VerticalBoxSlot_3 (0-0-0-0): size 185 (cls: VerticalBoxSlot_3>VerticalBoxSlot>/Script/UMG):
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
@@ -2900,6 +2892,11 @@ Serialized exports:
 			HorizontalAlignment(ByteProperty)=HAlign_Center 
 			Parent(ObjectProperty)=VerticalBox_0=WidgetArchetype 
 			Content(ObjectProperty)=HorizontalBox_1=WidgetArchetype 
+	VerticalBoxSlot_6 (0-0-0-0): size 185 (cls: VerticalBoxSlot_6>VerticalBoxSlot>/Script/UMG):
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			Parent(ObjectProperty)=VerticalBox_0=WidgetArchetype 
+			Content(ObjectProperty)=IslandPublishBox=WidgetArchetype 
 	VerticalBoxSlot_0 (0-0-0-0): size 226 (cls: VerticalBoxSlot_0>VerticalBoxSlot>/Script/UMG):
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 

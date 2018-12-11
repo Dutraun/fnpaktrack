@@ -41,8 +41,11 @@ Name table:
 	bHasScriptImplementedTick
 	Bind
 	BindingName
+	bIsCurated
 	bIsFeatured
+	bIsLinkCode
 	bIsRootWidget
+	bIsUserInitiatedLoad
 	bIsVariable
 	Black
 	BlendType
@@ -61,11 +64,18 @@ Name table:
 	ByteProperty
 	CallFunc_Array_Length_ReturnValue
 	CallFunc_BooleanAND_ReturnValue
+	CallFunc_Conv_StringToText_ReturnValue
+	CallFunc_EqualEqual_IntInt_ReturnValue
 	CallFunc_Format_ReturnValue
 	CallFunc_GetGameState_ReturnValue
 	CallFunc_GetLocalPlayerSubsystem_ReturnValue
+	CallFunc_Greater_IntInt_ReturnValue
 	CallFunc_IsCreativeModeAccessLimited_ReturnValue
+	CallFunc_Len_ReturnValue
+	CallFunc_Less_IntInt_ReturnValue
 	CallFunc_MakeLiteralText_ReturnValue
+	CallFunc_Not_PreBool_ReturnValue
+	CallFunc_Not_PreBool_ReturnValue1
 	CallFunc_PlayAnimationForward_ReturnValue
 	CallFunc_TextIsEmpty_ReturnValue
 	Capsule_GEN_VARIABLE
@@ -76,6 +86,7 @@ Name table:
 	CommonTextBlock
 	CompletionMode
 	Content
+	Conv_StringToText
 	Default__ArrayProperty
 	Default__BGA_IslandPortal_C
 	Default__BoolProperty
@@ -91,6 +102,7 @@ Name table:
 	Default__Image
 	Default__IntProperty
 	Default__KismetArrayLibrary
+	Default__KismetStringLibrary
 	Default__KismetSystemLibrary
 	Default__KismetTextLibrary
 	Default__MovieScene
@@ -100,6 +112,7 @@ Name table:
 	Default__MovieSceneFloatTrack
 	Default__ObjectProperty
 	Default__PortalInfoPlate_C
+	Default__StrProperty
 	Default__StructProperty
 	Default__SubsystemBlueprintLibrary
 	Default__TextProperty
@@ -114,6 +127,7 @@ Name table:
 	DefaultValue
 	DelegateProperty
 	Denominator
+	Description
 	DisplayLabel
 	DisplayRate
 	EaseIn
@@ -132,6 +146,7 @@ Name table:
 	EntryPoint
 	Enum
 	EnumProperty
+	EqualEqual_IntInt
 	ERichCurveExtrapolation
 	ERichCurveInterpMode
 	ERichCurveTangentMode
@@ -173,6 +188,7 @@ Name table:
 	GameStateBase
 	GetGameState
 	GetLocalPlayerSubsystem
+	Greater_IntInt
 	Groups
 	Guid
 	HAlign_Center
@@ -193,17 +209,23 @@ Name table:
 	intro2_INST
 	Intro_INST
 	IsCreativeModeAccessLimited
+	IslandName
 	IslandNameBox
+	IsLinkCode
 	IsMyPortal
 	Justification
 	K2Node_CreateDelegate_OutputDelegate
 	K2Node_CreateDelegate_OutputDelegate1
+	K2Node_CreateDelegate_OutputDelegate10
+	K2Node_CreateDelegate_OutputDelegate11
 	K2Node_CreateDelegate_OutputDelegate2
 	K2Node_CreateDelegate_OutputDelegate3
 	K2Node_CreateDelegate_OutputDelegate4
 	K2Node_CreateDelegate_OutputDelegate5
 	K2Node_CreateDelegate_OutputDelegate6
 	K2Node_CreateDelegate_OutputDelegate7
+	K2Node_CreateDelegate_OutputDelegate8
+	K2Node_CreateDelegate_OutputDelegate9
 	K2Node_DynamicCast_AsBGA_Island_Portal
 	K2Node_DynamicCast_bSuccess
 	K2Node_Event_InitObject
@@ -215,14 +237,18 @@ Name table:
 	Key
 	KismetArrayLibrary
 	KismetMathLibrary
+	KismetStringLibrary
 	KismetSystemLibrary
 	KismetTextLibrary
 	LastTrackIdentifier
 	LeaveTangent
 	LeaveTangentWeight
 	Left
+	Len
+	Less_IntInt
 	LimitedAccessText
 	LinearColor
+	LinkCode
 	LUTIndices
 	LUTOffset
 	M_Font_Horizon_Dynamic
@@ -271,6 +297,7 @@ Name table:
 	NewIslandName
 	NewPop
 	None
+	Not_PreBool
 	NotifyFunctionName
 	Numerator
 	NumEvalPtrs
@@ -337,8 +364,10 @@ Name table:
 	SequenceSignature
 	SetActiveWidgetIndex
 	SetCuratedSwitcher
+	SetDescription
 	SetIslandName
 	SetIslandPop
+	SetLinkCode
 	SetPlayerName
 	SetText
 	SetupPortalEventBinding
@@ -355,6 +384,7 @@ Name table:
 	Slots
 	SlotWidgetName
 	SM_Rift_GEN_VARIABLE
+	SocialImage
 	SoftObjectProperty
 	SortedSegments
 	SourceSection
@@ -378,15 +408,17 @@ Name table:
 	Temp_byte_Variable1
 	Temp_byte_Variable2
 	Temp_byte_Variable3
-	Temp_int_Variable
-	Temp_int_Variable1
 	TemplateAsset
 	TemplateLedger
 	TemplateSerialNumber
 	Text
+	Text_Description
+	Text_FeaturedPlayerName
 	Text_IslandName
 	Text_IslandPop
+	Text_LinkCode
 	Text_PlayerName
+	Text_PublishedPlayer
 	TextIsEmpty
 	TextProperty
 	TextRender_GEN_VARIABLE
@@ -408,10 +440,14 @@ Name table:
 	UInt32Property
 	UMGSequencePlayer
 	UnderlyingType
+	UpdateDescription
+	UpdateDescription__DelegateSignature
 	UpdateIsCuratedPortal
 	UpdateIsCuratedPortal__DelegateSignature
 	UpdateIslandName
 	UpdateIslandName__DelegateSignature
+	UpdateLinkCode
+	UpdateLinkCode__DelegateSignature
 	UpdatePlayerName
 	UpdatePlayerName__DelegateSignature
 	UpdatePlayerPop
@@ -435,9 +471,10 @@ Name table:
 	WidgetSwitcherSlot
 	WidgetTransform
 	WidgetTree
+	WrapTextAt
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	PortalInfoPlate_C (0-0-0-0): size 460 (cls: PortalInfoPlate_C>WidgetBlueprintGeneratedClass>/Script/UMG):
+	PortalInfoPlate_C (0-0-0-0): size 524 (cls: PortalInfoPlate_C>WidgetBlueprintGeneratedClass>/Script/UMG):
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
@@ -459,27 +496,44 @@ Serialized exports:
 	InitFromObject (0-0-0-0): size 68 (cls: InitFromObject>Function>/Script/CoreUObject)
 	PlayIntro (0-0-0-0): size 54 (cls: PlayIntro>Function>/Script/CoreUObject)
 	PlayerName (0-0-0-0): size 32 (cls: PlayerName>TextProperty>/Script/CoreUObject)
-	SetPlayerName (0-0-0-0): size 223 (cls: SetPlayerName>Function>/Script/CoreUObject)
+	SetPlayerName (0-0-0-0): size 500 (cls: SetPlayerName>Function>/Script/CoreUObject)
 	NewPop (0-0-0-0): size 32 (cls: NewPop>IntProperty>/Script/CoreUObject)
-	SetIslandPop (0-0-0-0): size 493 (cls: SetIslandPop>Function>/Script/CoreUObject)
+	SetIslandPop (0-0-0-0): size 648 (cls: SetIslandPop>Function>/Script/CoreUObject)
 	K2Node_MakeArray_Array (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array>StructProperty>/Script/CoreUObject)
 	K2Node_MakeArray_Array (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array>ArrayProperty>/Script/CoreUObject)
+	bIsCurated (0-0-0-0): size 34 (cls: bIsCurated>BoolProperty>/Script/CoreUObject)
 	CallFunc_BooleanAND_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsCreativeModeAccessLimited_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsCreativeModeAccessLimited_ReturnValue>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable1 (0-0-0-0): size 34 (cls: Temp_bool_Variable1>BoolProperty>/Script/CoreUObject)
+	IsLinkCode (0-0-0-0): size 34 (cls: IsLinkCode>BoolProperty>/Script/CoreUObject)
 	NewIslandName (0-0-0-0): size 32 (cls: NewIslandName>TextProperty>/Script/CoreUObject)
-	SetIslandName (0-0-0-0): size 223 (cls: SetIslandName>Function>/Script/CoreUObject)
+	SetIslandName (0-0-0-0): size 238 (cls: SetIslandName>Function>/Script/CoreUObject)
 	InPortal (0-0-0-0): size 36 (cls: InPortal>ObjectProperty>/Script/CoreUObject)
-	SetupPortalEventBinding (0-0-0-0): size 418 (cls: SetupPortalEventBinding>Function>/Script/CoreUObject)
-	SetCuratedSwitcher (0-0-0-0): size 165 (cls: SetCuratedSwitcher>Function>/Script/CoreUObject)
+	SetupPortalEventBinding (0-0-0-0): size 594 (cls: SetupPortalEventBinding>Function>/Script/CoreUObject)
+	SetCuratedSwitcher (0-0-0-0): size 262 (cls: SetCuratedSwitcher>Function>/Script/CoreUObject)
 	bIsFeatured (0-0-0-0): size 34 (cls: bIsFeatured>BoolProperty>/Script/CoreUObject)
-	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
+	bIsLinkCode (0-0-0-0): size 34 (cls: bIsLinkCode>BoolProperty>/Script/CoreUObject)
+	bIsUserInitiatedLoad (0-0-0-0): size 34 (cls: bIsUserInitiatedLoad>BoolProperty>/Script/CoreUObject)
+	CallFunc_BooleanAND_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_Not_PreBool_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_Not_PreBool_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue1>BoolProperty>/Script/CoreUObject)
+	Description (0-0-0-0): size 32 (cls: Description>TextProperty>/Script/CoreUObject)
+	SetDescription (0-0-0-0): size 223 (cls: SetDescription>Function>/Script/CoreUObject)
 	CallFunc_TextIsEmpty_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_TextIsEmpty_ReturnValue>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
 	CallFunc_TextIsEmpty_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_TextIsEmpty_ReturnValue>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
+	CallFunc_Greater_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Greater_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_Less_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
+	LinkCode (0-0-0-0): size 32 (cls: LinkCode>StrProperty>/Script/CoreUObject)
+	SetLinkCode (0-0-0-0): size 292 (cls: SetLinkCode>Function>/Script/CoreUObject)
+	CallFunc_EqualEqual_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
+	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
+	CallFunc_TextIsEmpty_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_TextIsEmpty_ReturnValue>BoolProperty>/Script/CoreUObject)
+	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
+	Temp_bool_Variable1 (0-0-0-0): size 34 (cls: Temp_bool_Variable1>BoolProperty>/Script/CoreUObject)
 	Bind (0-0-0-0): size 34 (cls: Bind>BoolProperty>/Script/CoreUObject)
 	Border_PlateDivider (0-0-0-0): size 369 (cls: Border_PlateDivider>Border>/Script/UMG):
 		Tag array:
@@ -499,6 +553,15 @@ Serialized exports:
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	CommonTextBlock_0 (0-0-0-0): size 613 (cls: CommonTextBlock_0>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Text(TextProperty)=FEATURED (A13E206D4D6494F875B59EBC5B58812F) 
@@ -506,11 +569,32 @@ Serialized exports:
 			ShadowOffset(StructProperty)=Vector2D(3,3) 
 			ShadowColorAndOpacity(StructProperty)=UE4.FLinearColor 
 			Justification(ByteProperty)=ETextJustify::Center 
-			Slot(ObjectProperty)=WidgetSwitcherSlot_2=WidgetArchetype 
+			Slot(ObjectProperty)=VerticalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
 	LimitedAccessText (0-0-0-0): size 751 (cls: LimitedAccessText>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Text(TextProperty)=[LIMITED ACCESS] (4FD967D0451BE7E8984FE4867D73AF4A) 
+			ColorAndOpacity(StructProperty)=System.Byte[] 
+			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(3,3) 
+			ShadowColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Justification(ByteProperty)=ETextJustify::Center 
+			Slot(ObjectProperty)=VerticalBoxSlot_1=WidgetArchetype 
+			bIsVariable(BoolProperty)=True 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
+	Text_Description (0-0-0-0): size 629 (cls: Text_Description>CommonTextBlock>/Script/CommonUI):
+		Tag array:
+			Text(TextProperty)=Come visit my special island (5E79E632493C5E29A4407AA4A9D1F649) 
+			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(3,3) 
+			ShadowColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Justification(ByteProperty)=ETextJustify::Center 
+			WrapTextAt(FloatProperty)=500 
+			Slot(ObjectProperty)=VerticalBoxSlot_2=WidgetArchetype 
+			bIsVariable(BoolProperty)=True 
+	Text_FeaturedPlayerName (0-0-0-0): size 749 (cls: Text_FeaturedPlayerName>CommonTextBlock>/Script/CommonUI):
+		Tag array:
+			Text(TextProperty)=PlayerName (D1614E09467CA6925C4ED4A64D5ADF8D) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
 			ShadowOffset(StructProperty)=Vector2D(3,3) 
@@ -537,6 +621,15 @@ Serialized exports:
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
 			bIsVariable(BoolProperty)=True 
+	Text_LinkCode (0-0-0-0): size 619 (cls: Text_LinkCode>CommonTextBlock>/Script/CommonUI):
+		Tag array:
+			Text(TextProperty)=1111-1111-1111 (F723579246BF1BA13C7AC5AD396BABC6) 
+			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(3,3) 
+			ShadowColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Justification(ByteProperty)=ETextJustify::Center 
+			Slot(ObjectProperty)=VerticalBoxSlot_0=WidgetArchetype 
+			bIsVariable(BoolProperty)=True 
 	Text_PlayerName (0-0-0-0): size 627 (cls: Text_PlayerName>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Text(TextProperty)=PlayerName (9CB5AF804EE3304E26A46F9D14EFAC6D) 
@@ -547,14 +640,29 @@ Serialized exports:
 			Slot(ObjectProperty)=VerticalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
 			Visibility(EnumProperty)=ESlateVisibility::Hidden 
+	Text_PublishedPlayer (0-0-0-0): size 749 (cls: Text_PublishedPlayer>CommonTextBlock>/Script/CommonUI):
+		Tag array:
+			Text(TextProperty)=PlayerName (2528EDBF497D04BEF12D4A913FCD4B14) 
+			ColorAndOpacity(StructProperty)=System.Byte[] 
+			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(3,3) 
+			ShadowColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Justification(ByteProperty)=ETextJustify::Center 
+			Slot(ObjectProperty)=VerticalBoxSlot_1=WidgetArchetype 
+			bIsVariable(BoolProperty)=True 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
 	K2Node_CreateDelegate_OutputDelegate (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate>DelegateProperty>/Script/CoreUObject)
 	K2Node_CreateDelegate_OutputDelegate1 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate1>DelegateProperty>/Script/CoreUObject)
+	K2Node_CreateDelegate_OutputDelegate10 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate10>DelegateProperty>/Script/CoreUObject)
+	K2Node_CreateDelegate_OutputDelegate11 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate11>DelegateProperty>/Script/CoreUObject)
 	K2Node_CreateDelegate_OutputDelegate2 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate2>DelegateProperty>/Script/CoreUObject)
 	K2Node_CreateDelegate_OutputDelegate3 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate3>DelegateProperty>/Script/CoreUObject)
 	K2Node_CreateDelegate_OutputDelegate4 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate4>DelegateProperty>/Script/CoreUObject)
 	K2Node_CreateDelegate_OutputDelegate5 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate5>DelegateProperty>/Script/CoreUObject)
 	K2Node_CreateDelegate_OutputDelegate6 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate6>DelegateProperty>/Script/CoreUObject)
 	K2Node_CreateDelegate_OutputDelegate7 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate7>DelegateProperty>/Script/CoreUObject)
+	K2Node_CreateDelegate_OutputDelegate8 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate8>DelegateProperty>/Script/CoreUObject)
+	K2Node_CreateDelegate_OutputDelegate9 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate9>DelegateProperty>/Script/CoreUObject)
 	K2Node_Select1_Default (0-0-0-0): size 40 (cls: K2Node_Select1_Default>EnumProperty>/Script/CoreUObject)
 	K2Node_Select_Default (0-0-0-0): size 40 (cls: K2Node_Select_Default>EnumProperty>/Script/CoreUObject)
 	Temp_byte_Variable (0-0-0-0): size 40 (cls: Temp_byte_Variable>EnumProperty>/Script/CoreUObject)
@@ -567,6 +675,15 @@ Serialized exports:
 	K2Node_Select_Default (0-0-0-0): size 40 (cls: K2Node_Select_Default>EnumProperty>/Script/CoreUObject)
 	Temp_byte_Variable (0-0-0-0): size 40 (cls: Temp_byte_Variable>EnumProperty>/Script/CoreUObject)
 	Temp_byte_Variable1 (0-0-0-0): size 40 (cls: Temp_byte_Variable1>EnumProperty>/Script/CoreUObject)
+	K2Node_Select_Default (0-0-0-0): size 40 (cls: K2Node_Select_Default>EnumProperty>/Script/CoreUObject)
+	Temp_byte_Variable (0-0-0-0): size 40 (cls: Temp_byte_Variable>EnumProperty>/Script/CoreUObject)
+	Temp_byte_Variable1 (0-0-0-0): size 40 (cls: Temp_byte_Variable1>EnumProperty>/Script/CoreUObject)
+	K2Node_Select1_Default (0-0-0-0): size 40 (cls: K2Node_Select1_Default>EnumProperty>/Script/CoreUObject)
+	K2Node_Select_Default (0-0-0-0): size 40 (cls: K2Node_Select_Default>EnumProperty>/Script/CoreUObject)
+	Temp_byte_Variable (0-0-0-0): size 40 (cls: Temp_byte_Variable>EnumProperty>/Script/CoreUObject)
+	Temp_byte_Variable1 (0-0-0-0): size 40 (cls: Temp_byte_Variable1>EnumProperty>/Script/CoreUObject)
+	Temp_byte_Variable2 (0-0-0-0): size 40 (cls: Temp_byte_Variable2>EnumProperty>/Script/CoreUObject)
+	Temp_byte_Variable3 (0-0-0-0): size 40 (cls: Temp_byte_Variable3>EnumProperty>/Script/CoreUObject)
 	PopulationBox (0-0-0-0): size 112 (cls: PopulationBox>HorizontalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -582,16 +699,14 @@ Serialized exports:
 		Tag array:
 			VerticalAlignment(ByteProperty)=VAlign_Center 
 			Parent(ObjectProperty)=PopulationBox=WidgetArchetype 
-			Content(ObjectProperty)=Image_0=WidgetArchetype 
-	Image_0 (0-0-0-0): size 298 (cls: Image_0>Image>/Script/UMG):
+			Content(ObjectProperty)=SocialImage=WidgetArchetype 
+	SocialImage (0-0-0-0): size 298 (cls: SocialImage>Image>/Script/UMG):
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
-	K2Node_Select_Default (0-0-0-0): size 32 (cls: K2Node_Select_Default>IntProperty>/Script/CoreUObject)
-	Temp_int_Variable (0-0-0-0): size 32 (cls: Temp_int_Variable>IntProperty>/Script/CoreUObject)
-	Temp_int_Variable1 (0-0-0-0): size 32 (cls: Temp_int_Variable1>IntProperty>/Script/CoreUObject)
 	CallFunc_Array_Length_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Array_Length_ReturnValue>IntProperty>/Script/CoreUObject)
+	CallFunc_Len_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Len_ReturnValue>IntProperty>/Script/CoreUObject)
 	intro2 (0-0-0-0): size 1630 (cls: intro2>MovieScene>/Script/MovieScene):
 		Tag array:
 			Possessables(ArrayProperty)=[object] (inner: StructProperty)
@@ -785,28 +900,36 @@ Serialized exports:
 	CallFunc_PlayAnimationForward_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlayAnimationForward_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsBGA_Island_Portal (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsBGA_Island_Portal>ObjectProperty>/Script/CoreUObject)
 	K2Node_Event_InitObject (0-0-0-0): size 36 (cls: K2Node_Event_InitObject>ObjectProperty>/Script/CoreUObject)
-	Image_0 (0-0-0-0): size 36 (cls: Image_0>ObjectProperty>/Script/CoreUObject)
 	Intro (0-0-0-0): size 36 (cls: Intro>ObjectProperty>/Script/CoreUObject)
 	IslandNameBox (0-0-0-0): size 36 (cls: IslandNameBox>ObjectProperty>/Script/CoreUObject)
 	LimitedAccessText (0-0-0-0): size 36 (cls: LimitedAccessText>ObjectProperty>/Script/CoreUObject)
 	MyBGAIslandPortal (0-0-0-0): size 36 (cls: MyBGAIslandPortal>ObjectProperty>/Script/CoreUObject)
 	PopulationBox (0-0-0-0): size 36 (cls: PopulationBox>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetGameState_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetGameState_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	SocialImage (0-0-0-0): size 36 (cls: SocialImage>ObjectProperty>/Script/CoreUObject)
 	Switcher_IslandOwner (0-0-0-0): size 36 (cls: Switcher_IslandOwner>ObjectProperty>/Script/CoreUObject)
+	Text_Description (0-0-0-0): size 36 (cls: Text_Description>ObjectProperty>/Script/CoreUObject)
+	Text_FeaturedPlayerName (0-0-0-0): size 36 (cls: Text_FeaturedPlayerName>ObjectProperty>/Script/CoreUObject)
 	Text_IslandName (0-0-0-0): size 36 (cls: Text_IslandName>ObjectProperty>/Script/CoreUObject)
 	Text_IslandPop (0-0-0-0): size 36 (cls: Text_IslandPop>ObjectProperty>/Script/CoreUObject)
+	Text_LinkCode (0-0-0-0): size 36 (cls: Text_LinkCode>ObjectProperty>/Script/CoreUObject)
 	Text_PlayerName (0-0-0-0): size 36 (cls: Text_PlayerName>ObjectProperty>/Script/CoreUObject)
-	WidgetArchetype (0-0-0-0): size 328 (cls: WidgetArchetype>PortalInfoPlate_C):
+	Text_PublishedPlayer (0-0-0-0): size 36 (cls: Text_PublishedPlayer>ObjectProperty>/Script/CoreUObject)
+	WidgetArchetype (0-0-0-0): size 444 (cls: WidgetArchetype>PortalInfoPlate_C):
 		Tag array:
 			CommonTextBlock_0(ObjectProperty)=CommonTextBlock_0=WidgetArchetype 
-			Image_0(ObjectProperty)=Image_0=WidgetArchetype 
 			IslandNameBox(ObjectProperty)=IslandNameBox=WidgetArchetype 
 			LimitedAccessText(ObjectProperty)=LimitedAccessText=WidgetArchetype 
 			PopulationBox(ObjectProperty)=PopulationBox=WidgetArchetype 
+			SocialImage(ObjectProperty)=SocialImage=WidgetArchetype 
 			Switcher_IslandOwner(ObjectProperty)=Switcher_IslandOwner=WidgetArchetype 
+			Text_Description(ObjectProperty)=Text_Description=WidgetArchetype 
+			Text_FeaturedPlayerName(ObjectProperty)=Text_FeaturedPlayerName=WidgetArchetype 
 			Text_IslandName(ObjectProperty)=Text_IslandName=WidgetArchetype 
 			Text_IslandPop(ObjectProperty)=Text_IslandPop=WidgetArchetype 
+			Text_LinkCode(ObjectProperty)=Text_LinkCode=WidgetArchetype 
 			Text_PlayerName(ObjectProperty)=Text_PlayerName=WidgetArchetype 
+			Text_PublishedPlayer(ObjectProperty)=Text_PublishedPlayer=WidgetArchetype 
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 	K2Node_MakeStruct_FormatArgumentData (0-0-0-0): size 36 (cls: K2Node_MakeStruct_FormatArgumentData>StructProperty>/Script/CoreUObject)
@@ -814,8 +937,11 @@ Serialized exports:
 	K2Node_MakeStruct_FormatArgumentData1 (0-0-0-0): size 36 (cls: K2Node_MakeStruct_FormatArgumentData1>StructProperty>/Script/CoreUObject)
 	CallFunc_Format_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Format_ReturnValue>TextProperty>/Script/CoreUObject)
 	CallFunc_MakeLiteralText_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_MakeLiteralText_ReturnValue>TextProperty>/Script/CoreUObject)
+	IslandName (0-0-0-0): size 32 (cls: IslandName>TextProperty>/Script/CoreUObject)
+	PlayerName (0-0-0-0): size 32 (cls: PlayerName>TextProperty>/Script/CoreUObject)
 	CallFunc_Format_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Format_ReturnValue>TextProperty>/Script/CoreUObject)
-	IslandNameBox (0-0-0-0): size 112 (cls: IslandNameBox>VerticalBox>/Script/UMG):
+	CallFunc_Conv_StringToText_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Conv_StringToText_ReturnValue>TextProperty>/Script/CoreUObject)
+	IslandNameBox (0-0-0-0): size 116 (cls: IslandNameBox>VerticalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=VerticalBoxSlot_0=WidgetArchetype 
@@ -827,6 +953,14 @@ Serialized exports:
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=WidgetSwitcherSlot_0=WidgetArchetype 
+	VerticalBox_2 (0-0-0-0): size 86 (cls: VerticalBox_2>VerticalBox>/Script/UMG):
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=WidgetSwitcherSlot_2=WidgetArchetype 
+	VerticalBox_3 (0-0-0-0): size 86 (cls: VerticalBox_3>VerticalBox>/Script/UMG):
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=WidgetSwitcherSlot_1=WidgetArchetype 
 	VerticalBoxSlot_0 (0-0-0-0): size 156 (cls: VerticalBoxSlot_0>VerticalBoxSlot>/Script/UMG):
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
@@ -836,6 +970,11 @@ Serialized exports:
 		Tag array:
 			Parent(ObjectProperty)=IslandNameBox=WidgetArchetype 
 			Content(ObjectProperty)=Border_PlateDivider=WidgetArchetype 
+	VerticalBoxSlot_2 (0-0-0-0): size 156 (cls: VerticalBoxSlot_2>VerticalBoxSlot>/Script/UMG):
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			Parent(ObjectProperty)=IslandNameBox=WidgetArchetype 
+			Content(ObjectProperty)=Text_Description=WidgetArchetype 
 	VerticalBoxSlot_0 (0-0-0-0): size 111 (cls: VerticalBoxSlot_0>VerticalBoxSlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Center 
@@ -861,6 +1000,22 @@ Serialized exports:
 			HorizontalAlignment(ByteProperty)=HAlign_Center 
 			Parent(ObjectProperty)=VerticalBox_1=WidgetArchetype 
 			Content(ObjectProperty)=LimitedAccessText=WidgetArchetype 
+	VerticalBoxSlot_0 (0-0-0-0): size 70 (cls: VerticalBoxSlot_0>VerticalBoxSlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=VerticalBox_2=WidgetArchetype 
+			Content(ObjectProperty)=CommonTextBlock_0=WidgetArchetype 
+	VerticalBoxSlot_1 (0-0-0-0): size 70 (cls: VerticalBoxSlot_1>VerticalBoxSlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=VerticalBox_2=WidgetArchetype 
+			Content(ObjectProperty)=Text_FeaturedPlayerName=WidgetArchetype 
+	VerticalBoxSlot_0 (0-0-0-0): size 70 (cls: VerticalBoxSlot_0>VerticalBoxSlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=VerticalBox_3=WidgetArchetype 
+			Content(ObjectProperty)=Text_LinkCode=WidgetArchetype 
+	VerticalBoxSlot_1 (0-0-0-0): size 70 (cls: VerticalBoxSlot_1>VerticalBoxSlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=VerticalBox_3=WidgetArchetype 
+			Content(ObjectProperty)=Text_PublishedPlayer=WidgetArchetype 
 	intro2_INST (0-0-0-0): size 31303 (cls: intro2_INST>WidgetAnimation>/Script/UMG):
 		Tag array:
 			MovieScene(ObjectProperty)=intro2=PortalInfoPlate_C 
@@ -875,7 +1030,7 @@ Serialized exports:
 			DisplayLabel(StrProperty)=Intro 
 			PrecompiledEvaluationTemplate(StructProperty)=System.Byte[] 
 			Signature(StructProperty)=Guid: 2560837820-1188871033-1747941504-3152238868 
-	Switcher_IslandOwner (0-0-0-0): size 86 (cls: Switcher_IslandOwner>WidgetSwitcher>/Script/UMG):
+	Switcher_IslandOwner (0-0-0-0): size 90 (cls: Switcher_IslandOwner>WidgetSwitcher>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=VerticalBoxSlot_3=WidgetArchetype 
@@ -883,10 +1038,14 @@ Serialized exports:
 		Tag array:
 			Parent(ObjectProperty)=Switcher_IslandOwner=WidgetArchetype 
 			Content(ObjectProperty)=VerticalBox_1=WidgetArchetype 
+	WidgetSwitcherSlot_1 (0-0-0-0): size 70 (cls: WidgetSwitcherSlot_1>WidgetSwitcherSlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=Switcher_IslandOwner=WidgetArchetype 
+			Content(ObjectProperty)=VerticalBox_3=WidgetArchetype 
 	WidgetSwitcherSlot_2 (0-0-0-0): size 70 (cls: WidgetSwitcherSlot_2>WidgetSwitcherSlot>/Script/UMG):
 		Tag array:
 			Parent(ObjectProperty)=Switcher_IslandOwner=WidgetArchetype 
-			Content(ObjectProperty)=CommonTextBlock_0=WidgetArchetype 
+			Content(ObjectProperty)=VerticalBox_2=WidgetArchetype 
 	WidgetTree_0 (0-0-0-0): size 41 (cls: WidgetTree_0>WidgetTree>/Script/UMG):
 		Tag array:
 			RootWidget(ObjectProperty)=VerticalBox_0=WidgetArchetype 

@@ -4,6 +4,7 @@ Name table:
 	/Game/Athena/HUD/Team/AthenaMinimapTeamIndicators
 	/Game/Athena/Items/Cosmetics/Gliders/DefaultGlider
 	/Game/Athena/Items/Cosmetics/Pickaxes/DefaultPickaxe
+	/Game/Athena/Items/Gameplay/Sword/AGID_Sword
 	/Game/Athena/Items/Weapons/Prototype/WID_CreativeTool
 	/Game/Athena/Items/Weapons/Prototype/WID_CreativeTool.WID_CreativeTool
 	/Game/Athena/Sounds/Bus/FlyingBus_Drop_Cue
@@ -23,14 +24,20 @@ Name table:
 	/Script/Engine
 	/Script/FortniteGame
 	/Script/FortniteUI
+	/Script/GameplayAbilities
 	/Script/GameplayTags
+	AbilitySystemBlueprintLibrary
+	AbilitySystemComponent
 	AcceptedItemTypes
 	ActiveMusicPackChangedDelegate__DelegateSignature
 	Actor
+	AGID_Sword
 	Array_Get
 	Array_Length
 	ArrayProperty
+	Athena.Blade.Wielder
 	Athena_PlayerController_C
+	AthenaGadgetItemDefinition
 	AthenaGliderItemDefinition
 	AthenaHUDContext
 	AthenaMinimapTeamIndicators_C
@@ -43,14 +50,17 @@ Name table:
 	B_CameraLens_Victory_Ally_C
 	B_CameraLens_Victory_Direct_C
 	B_Ranged_Generic_C
+	BladeWielderTag
 	bLeftVolumes
 	BlueprintContextLibrary
 	BlueprintGeneratedClass
 	BooleanAND
 	BooleanOR
 	BoolProperty
+	BP_BlockAbilitiesWithTags
 	BP_Camera_Shake_Pulse_Only_C
 	BP_Camera_Shake_Pulse_Zoom_C
+	BP_UnBlockAbilitiesWithTags
 	bStaticSlot
 	ByteProperty
 	CallFunc_Array_Get_Item
@@ -69,6 +79,8 @@ Name table:
 	CallFunc_EqualEqual_ByteByte_ReturnValue
 	CallFunc_EqualEqual_ByteByte_ReturnValue1
 	CallFunc_EqualEqual_ObjectObject_ReturnValue
+	CallFunc_EqualEqual_ObjectObject_ReturnValue1
+	CallFunc_GetAbilitySystemComponent_ReturnValue
 	CallFunc_GetComponentsByClass_ReturnValue
 	CallFunc_GetContext_ReturnValue
 	CallFunc_GetContext_ReturnValue1
@@ -77,6 +89,9 @@ Name table:
 	CallFunc_GetGameAccountId_ReturnValue
 	CallFunc_GetGameState_ReturnValue
 	CallFunc_GetGameState_ReturnValue1
+	CallFunc_GetItemEntry_ReturnValue
+	CallFunc_GetItemType_ReturnValue
+	CallFunc_GetPlayerPawn_ReturnValue
 	CallFunc_GetVictoryMusic_ReturnValue
 	CallFunc_GetVolumeManager_OutIsValid
 	CallFunc_GetVolumeManager_OutVolumeManager
@@ -86,8 +101,11 @@ Name table:
 	CallFunc_GiveItemToInventoryOwner_InventoryOwner1_CastInput
 	CallFunc_GiveItemToInventoryOwner_InventoryOwner_CastInput
 	CallFunc_Greater_IntInt_ReturnValue
+	CallFunc_HasAnyMatchingGameplayTags_ReturnValue
+	CallFunc_HasAnyMatchingGameplayTags_self_CastInput
 	CallFunc_IsCreativeModePlaylist_ReturnValue
 	CallFunc_IsCreativeModePlaylist_ReturnValue1
+	CallFunc_IsDead_ReturnValue
 	CallFunc_IsLocalPlayerController_ReturnValue
 	CallFunc_IsReadOnly_ReturnValue
 	CallFunc_IsValid_ReturnValue
@@ -100,6 +118,7 @@ Name table:
 	CallFunc_K2_GetActorLocation_ReturnValue
 	CallFunc_K2_GetItemQuantityOnPlayer_ReturnValue
 	CallFunc_K2_GetPawn_ReturnValue
+	CallFunc_K2_GetPawn_ReturnValue1
 	CallFunc_K2_RemoveItemFromPlayer_ReturnValue
 	CallFunc_K2_SetTimerDelegate_ReturnValue
 	CallFunc_LeftAllVolumes_bLeftVolumes
@@ -122,6 +141,7 @@ Name table:
 	CreativeTool
 	CustomizationLoadout
 	DeathCause
+	Default__AbilitySystemBlueprintLibrary
 	Default__ArrayProperty
 	Default__Athena_PlayerController_C
 	Default__AthenaMinimapTeamIndicators_C
@@ -166,8 +186,10 @@ Name table:
 	DelegateProperty
 	DisplayText
 	DoesPlayerHavePermissionToEdit
+	DropSpecificItem
 	EDeathCause
 	EEndPlayReason
+	EFortItemType
 	EFortItemType::AthenaGadget
 	EFortItemType::BuildingPiece
 	EFortItemType::Consumable
@@ -197,16 +219,21 @@ Name table:
 	FloatProperty
 	FlyingBus_Drop_Cue
 	FlyingBus_HornDoppler_Cue
+	FortAbilitySystemComponent
 	FortAthenaLoadout
 	FortGameStateAthena
 	FortInteractContextInfo
 	FortInventoryOwnerInterface
+	FortItemEntry
 	FortKismetLibrary
 	FortLevelSaveComponent
 	FortMusicContext
 	FortniteMaterialParameters
+	FortPawn
+	FortPickup
 	FortPlayerController
 	FortPlayerControllerAthena
+	FortPlayerPawn
 	FortVolume
 	FortVolumeManager
 	FortWeapon
@@ -218,15 +245,22 @@ Name table:
 	Function
 	Game
 	GamepadSettingsAssetPtr
+	Gameplay.Action.Player.InteractUse
 	GameplayStatics
 	GameplayTag
+	GameplayTagAssetInterface
+	GameplayTagContainer
 	GameStateBase
+	GetAbilitySystemComponent
 	GetComponentsByClass
 	GetContext
 	GetCurrentVolume
 	GetEquippedMusicPack
 	GetGameAccountId
 	GetGameState
+	GetItemEntry
+	GetItemType
+	GetPlayerPawn
 	GetVictoryMusic
 	GetVolumeManager
 	GetVolumesForLocation
@@ -237,6 +271,7 @@ Name table:
 	Greater_IntInt
 	Guid
 	HandlePermissions
+	HasAnyMatchingGameplayTags
 	HUD.Athena.KillFeed
 	HUD.Athena.LootStream
 	HUD.Athena.MapPackKeys
@@ -250,15 +285,19 @@ Name table:
 	HUD.TopRight.QuestUpdatesLog
 	HUDVisibilityGameplayTag
 	HUDVisibilityGameplayTags
+	InteractingItemType
+	InteractionTags
 	InterfaceProperty
 	InternalVariableName
 	IntProperty
 	IsCreativeModePlaylist
+	IsDead
 	IsLocalPlayerController
 	IsReadOnly
 	IsValid
 	IsValidSoftObjectReference
 	Item
+	ItemDefinition
 	K2_GetActorLocation
 	K2_GetItemQuantityOnPlayer
 	K2_GetPawn
@@ -277,11 +316,15 @@ Name table:
 	K2Node_CustomEvent_Loaded
 	K2Node_CustomEvent_NewMusicPack
 	K2Node_CustomEvent_Volume
+	K2Node_DynamicCast_AsFort_Ability_System_Component
 	K2Node_DynamicCast_AsFort_Game_State_Athena
 	K2Node_DynamicCast_AsFort_Game_State_Athena1
+	K2Node_DynamicCast_AsFort_Pickup
+	K2Node_DynamicCast_AsFort_Player_Pawn
 	K2Node_DynamicCast_AsFort_World_Item_Definition
 	K2Node_DynamicCast_AsFort_World_Item_Definition1
 	K2Node_DynamicCast_AsFort_World_Item_Definition2
+	K2Node_DynamicCast_AsFort_World_Item_Definition3
 	K2Node_DynamicCast_AsSound_Base
 	K2Node_DynamicCast_bSuccess
 	K2Node_DynamicCast_bSuccess1
@@ -289,10 +332,15 @@ Name table:
 	K2Node_DynamicCast_bSuccess3
 	K2Node_DynamicCast_bSuccess4
 	K2Node_DynamicCast_bSuccess5
+	K2Node_DynamicCast_bSuccess6
+	K2Node_DynamicCast_bSuccess7
+	K2Node_DynamicCast_bSuccess8
+	K2Node_DynamicCast_bSuccess9
 	K2Node_Event_DeathCause
 	K2Node_Event_EndPlayReason
 	K2Node_Event_FinisherPawn
 	K2Node_Event_FinishingWeapon
+	K2Node_Event_ReceivingActor
 	K2Node_Event_Volume
 	K2Node_Event_Volume1
 	K2Node_SwitchEnum_CmpSuccess
@@ -333,6 +381,7 @@ Name table:
 	OnEnterVolume
 	OnLeaveVolume
 	OnLoaded_F82CC70840156DFAFAF85EB0D93E5E2D
+	OnLocalInteraction
 	OnMusicPackChanged
 	OnMusicPackLoaded
 	Package
@@ -351,10 +400,12 @@ Name table:
 	QuickbarSlots
 	ReceiveBeginPlay
 	ReceiveEndPlay
+	ReceivingActor
 	Reload(Empty)_GEN_VARIABLE
 	ReloadCartridge
 	ReloadEnd
 	ReloadStart
+	RemoveItem
 	RevokeItem
 	RootComponent
 	SceneComponent
@@ -377,6 +428,9 @@ Name table:
 	Stop
 	StructProperty
 	TagName
+	Temp_bool_Has_Been_Initd_Variable
+	Temp_bool_IsClosed_Variable
+	Temp_bool_Whether_the_gate_is_currently_open_or_close_Variable
 	Temp_object_Variable
 	TextProperty
 	TimerDynamicDelegate__DelegateSignature
@@ -399,14 +453,16 @@ Name table:
 	WID_CreativeTool
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	Athena_PlayerController_C (0-0-0-0): size 398 (cls: Athena_PlayerController_C>BlueprintGeneratedClass>/Script/Engine):
+	Athena_PlayerController_C (0-0-0-0): size 442 (cls: Athena_PlayerController_C>BlueprintGeneratedClass>/Script/Engine):
 		Tag array:
 			SimpleConstructionScript(ObjectProperty)=SimpleConstructionScript_0=Athena_PlayerController_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_Athena_PlayerController=Athena_PlayerController_C 
-	Default__Athena_PlayerController_C (0-0-0-0): size 6796 (cls: Default__Athena_PlayerController_C>Athena_PlayerController_C):
+	Default__Athena_PlayerController_C (0-0-0-0): size 6918 (cls: Default__Athena_PlayerController_C>Athena_PlayerController_C):
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			CreativeTool(SoftObjectProperty)=/Game/Athena/Items/Weapons/Prototype/WID_CreativeTool.WID_CreativeTool 
+			BladeWielderTag(StructProperty)=GameplayTagContainer:Athena.Blade.Wielder 
+			InteractionTags(StructProperty)=GameplayTagContainer:Gameplay.Action.Player.InteractUse 
 			AudioOnExitAircraft(ObjectProperty)=FlyingBus_Drop_Cue=/Game/Athena/Sounds/Bus/FlyingBus_Drop_Cue 
 			AudioOnExitAircraftHornDoppler(ObjectProperty)=FlyingBus_HornDoppler_Cue=/Game/Athena/Sounds/Bus/FlyingBus_HornDoppler_Cue 
 			CustomizationLoadout(StructProperty)=System.Byte[] 
@@ -424,9 +480,12 @@ Serialized exports:
 			RootComponent(ObjectProperty)=TransformComponent0=Default__Athena_PlayerController_C 
 	ListenerOverride (0-0-0-0): size 36 (cls: ListenerOverride>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_Athena_PlayerController (0-0-0-0): size 3041 (cls: ExecuteUbergraph_Athena_PlayerController>Function>/Script/CoreUObject)
+	ExecuteUbergraph_Athena_PlayerController (0-0-0-0): size 3933 (cls: ExecuteUbergraph_Athena_PlayerController>Function>/Script/CoreUObject)
 	CallFunc_GetComponentsByClass_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetComponentsByClass_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetComponentsByClass_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetComponentsByClass_ReturnValue>ArrayProperty>/Script/CoreUObject)
+	RemoveItem (0-0-0-0): size 56 (cls: RemoveItem>Function>/Script/CoreUObject)
+	ReceivingActor (0-0-0-0): size 36 (cls: ReceivingActor>ObjectProperty>/Script/CoreUObject)
+	OnLocalInteraction (0-0-0-0): size 68 (cls: OnLocalInteraction>Function>/Script/CoreUObject)
 	PermissionsChanged (0-0-0-0): size 54 (cls: PermissionsChanged>Function>/Script/CoreUObject)
 	Item (0-0-0-0): size 36 (cls: Item>SoftObjectProperty>/Script/CoreUObject)
 	RevokeItem (0-0-0-0): size 68 (cls: RevokeItem>Function>/Script/CoreUObject)
@@ -450,7 +509,7 @@ Serialized exports:
 	OnLoaded_F82CC70840156DFAFAF85EB0D93E5E2D (0-0-0-0): size 68 (cls: OnLoaded_F82CC70840156DFAFAF85EB0D93E5E2D>Function>/Script/CoreUObject)
 	UserConstructionScript (0-0-0-0): size 43 (cls: UserConstructionScript>Function>/Script/CoreUObject)
 	bLeftVolumes (0-0-0-0): size 34 (cls: bLeftVolumes>BoolProperty>/Script/CoreUObject)
-	LeftAllVolumes (0-0-0-0): size 301 (cls: LeftAllVolumes>Function>/Script/CoreUObject)
+	LeftAllVolumes (0-0-0-0): size 431 (cls: LeftAllVolumes>Function>/Script/CoreUObject)
 	CallFunc_GetVolumesForLocation_Volumes (0-0-0-0): size 36 (cls: CallFunc_GetVolumesForLocation_Volumes>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetVolumesForLocation_Volumes (0-0-0-0): size 36 (cls: CallFunc_GetVolumesForLocation_Volumes>ArrayProperty>/Script/CoreUObject)
 	CallFunc_BooleanAND_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue>BoolProperty>/Script/CoreUObject)
@@ -464,7 +523,9 @@ Serialized exports:
 	CallFunc_EqualEqual_ByteByte_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ByteByte_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_EqualEqual_ByteByte_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ByteByte_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_EqualEqual_ObjectObject_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ObjectObject_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_EqualEqual_ObjectObject_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ObjectObject_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_Greater_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Greater_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_HasAnyMatchingGameplayTags_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasAnyMatchingGameplayTags_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsCreativeModePlaylist_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsCreativeModePlaylist_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsCreativeModePlaylist_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_IsCreativeModePlaylist_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsLocalPlayerController_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsLocalPlayerController_ReturnValue>BoolProperty>/Script/CoreUObject)
@@ -488,11 +549,24 @@ Serialized exports:
 	K2Node_DynamicCast_bSuccess3 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess3>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess4 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess4>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess5 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess5>BoolProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_bSuccess6 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess6>BoolProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_bSuccess7 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess7>BoolProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_bSuccess8 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess8>BoolProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_bSuccess9 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess9>BoolProperty>/Script/CoreUObject)
+	K2Node_SwitchEnum_CmpSuccess (0-0-0-0): size 34 (cls: K2Node_SwitchEnum_CmpSuccess>BoolProperty>/Script/CoreUObject)
+	Temp_bool_Has_Been_Initd_Variable (0-0-0-0): size 34 (cls: Temp_bool_Has_Been_Initd_Variable>BoolProperty>/Script/CoreUObject)
+	Temp_bool_IsClosed_Variable (0-0-0-0): size 34 (cls: Temp_bool_IsClosed_Variable>BoolProperty>/Script/CoreUObject)
+	Temp_bool_Whether_the_gate_is_currently_open_or_close_Variable (0-0-0-0): size 34 (cls: Temp_bool_Whether_the_gate_is_currently_open_or_close_Variable>BoolProperty>/Script/CoreUObject)
+	CallFunc_BooleanOR_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanOR_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_GetVolumesForLocation_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_GetVolumesForLocation_ReturnValue>BoolProperty>/Script/CoreUObject)
-	CallFunc_LessEqual_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_LessEqual_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_IsDead_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsDead_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_Not_PreBool_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue>BoolProperty>/Script/CoreUObject)
 	K2Node_SwitchEnum_CmpSuccess (0-0-0-0): size 34 (cls: K2Node_SwitchEnum_CmpSuccess>BoolProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	K2Node_Event_EndPlayReason (0-0-0-0): size 36 (cls: K2Node_Event_EndPlayReason>ByteProperty>/Script/CoreUObject)
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	CallFunc_GetWeaponActorClass_ReturnValue (0-0-0-0): size 40 (cls: CallFunc_GetWeaponActorClass_ReturnValue>ClassProperty>/Script/CoreUObject)
@@ -502,7 +576,9 @@ Serialized exports:
 	K2Node_CreateDelegate_OutputDelegate1 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate1>DelegateProperty>/Script/CoreUObject)
 	K2Node_CreateDelegate_OutputDelegate2 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate2>DelegateProperty>/Script/CoreUObject)
 	K2Node_CreateDelegate_OutputDelegate3 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate3>DelegateProperty>/Script/CoreUObject)
+	CallFunc_GetItemType_ReturnValue (0-0-0-0): size 40 (cls: CallFunc_GetItemType_ReturnValue>EnumProperty>/Script/CoreUObject)
 	K2Node_Event_DeathCause (0-0-0-0): size 40 (cls: K2Node_Event_DeathCause>EnumProperty>/Script/CoreUObject)
+	InteractingItemType (0-0-0-0): size 40 (cls: InteractingItemType>EnumProperty>/Script/CoreUObject)
 	CallFunc_GetVolumeManager_OutIsValid (0-0-0-0): size 40 (cls: CallFunc_GetVolumeManager_OutIsValid>EnumProperty>/Script/CoreUObject)
 	DeathCause (0-0-0-0): size 40 (cls: DeathCause>EnumProperty>/Script/CoreUObject)
 	PossibleInteractContextInfo (0-0-0-0): size 178 (cls: PossibleInteractContextInfo>FortInteractContextInfo>/Script/FortniteGame):
@@ -510,14 +586,15 @@ Serialized exports:
 			ContextText(TextProperty)= () 
 	CallFunc_GiveItemToInventoryOwner_InventoryOwner1_CastInput (0-0-0-0): size 36 (cls: CallFunc_GiveItemToInventoryOwner_InventoryOwner1_CastInput>InterfaceProperty>/Script/CoreUObject)
 	CallFunc_GiveItemToInventoryOwner_InventoryOwner_CastInput (0-0-0-0): size 36 (cls: CallFunc_GiveItemToInventoryOwner_InventoryOwner_CastInput>InterfaceProperty>/Script/CoreUObject)
+	CallFunc_HasAnyMatchingGameplayTags_self_CastInput (0-0-0-0): size 36 (cls: CallFunc_HasAnyMatchingGameplayTags_self_CastInput>InterfaceProperty>/Script/CoreUObject)
 	CallFunc_Array_Length_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Array_Length_ReturnValue>IntProperty>/Script/CoreUObject)
 	CallFunc_K2_GetItemQuantityOnPlayer_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_K2_GetItemQuantityOnPlayer_ReturnValue>IntProperty>/Script/CoreUObject)
 	CallFunc_K2_RemoveItemFromPlayer_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_K2_RemoveItemFromPlayer_ReturnValue>IntProperty>/Script/CoreUObject)
-	CallFunc_Array_Length_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Array_Length_ReturnValue>IntProperty>/Script/CoreUObject)
 	CallFunc_Array_Get_Item (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item>ObjectProperty>/Script/CoreUObject)
 	CallFunc_Conv_SoftObjectReferenceToObject_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_Conv_SoftObjectReferenceToObject_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_Conv_SoftObjectReferenceToObject_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_Conv_SoftObjectReferenceToObject_ReturnValue1>ObjectProperty>/Script/CoreUObject)
 	CallFunc_Conv_SoftObjectReferenceToObject_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_Conv_SoftObjectReferenceToObject_ReturnValue2>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetAbilitySystemComponent_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetAbilitySystemComponent_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetContext_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue1>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetCurrentVolume_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetCurrentVolume_ReturnValue>ObjectProperty>/Script/CoreUObject)
@@ -526,25 +603,31 @@ Serialized exports:
 	CallFunc_GetGameState_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetGameState_ReturnValue1>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetVictoryMusic_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetVictoryMusic_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_K2_GetPawn_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_GetPawn_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_K2_GetPawn_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_K2_GetPawn_ReturnValue1>ObjectProperty>/Script/CoreUObject)
 	CallFunc_SpawnSound2D_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_SpawnSound2D_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_SpawnSound2D_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_SpawnSound2D_ReturnValue1>ObjectProperty>/Script/CoreUObject)
 	CallFunc_SpawnSound2D_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_SpawnSound2D_ReturnValue2>ObjectProperty>/Script/CoreUObject)
 	K2Node_CustomEvent_Loaded (0-0-0-0): size 36 (cls: K2Node_CustomEvent_Loaded>ObjectProperty>/Script/CoreUObject)
 	K2Node_CustomEvent_NewMusicPack (0-0-0-0): size 36 (cls: K2Node_CustomEvent_NewMusicPack>ObjectProperty>/Script/CoreUObject)
 	K2Node_CustomEvent_Volume (0-0-0-0): size 36 (cls: K2Node_CustomEvent_Volume>ObjectProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_AsFort_Ability_System_Component (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Ability_System_Component>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Game_State_Athena (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Game_State_Athena>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Game_State_Athena1 (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Game_State_Athena1>ObjectProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_AsFort_Pickup (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Pickup>ObjectProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_AsFort_Player_Pawn (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Player_Pawn>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_World_Item_Definition (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_World_Item_Definition>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_World_Item_Definition1 (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_World_Item_Definition1>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_World_Item_Definition2 (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_World_Item_Definition2>ObjectProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_AsFort_World_Item_Definition3 (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_World_Item_Definition3>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsSound_Base (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsSound_Base>ObjectProperty>/Script/CoreUObject)
 	K2Node_Event_FinisherPawn (0-0-0-0): size 36 (cls: K2Node_Event_FinisherPawn>ObjectProperty>/Script/CoreUObject)
 	K2Node_Event_FinishingWeapon (0-0-0-0): size 36 (cls: K2Node_Event_FinishingWeapon>ObjectProperty>/Script/CoreUObject)
+	K2Node_Event_ReceivingActor (0-0-0-0): size 36 (cls: K2Node_Event_ReceivingActor>ObjectProperty>/Script/CoreUObject)
 	K2Node_Event_Volume (0-0-0-0): size 36 (cls: K2Node_Event_Volume>ObjectProperty>/Script/CoreUObject)
 	K2Node_Event_Volume1 (0-0-0-0): size 36 (cls: K2Node_Event_Volume1>ObjectProperty>/Script/CoreUObject)
 	Temp_object_Variable (0-0-0-0): size 36 (cls: Temp_object_Variable>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetPlayerPawn_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetPlayerPawn_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetVolumeManager_OutVolumeManager (0-0-0-0): size 36 (cls: CallFunc_GetVolumeManager_OutVolumeManager>ObjectProperty>/Script/CoreUObject)
-	CallFunc_K2_GetPawn_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_GetPawn_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	FinishingWeapon (0-0-0-0): size 36 (cls: FinishingWeapon>ObjectProperty>/Script/CoreUObject)
 	VictoryRoyaleAudio (0-0-0-0): size 36 (cls: VictoryRoyaleAudio>ObjectProperty>/Script/CoreUObject)
 	VictoryRoyaleMenuMusicAsset (0-0-0-0): size 36 (cls: VictoryRoyaleMenuMusicAsset>ObjectProperty>/Script/CoreUObject)
@@ -563,6 +646,9 @@ Serialized exports:
 	CreativeTool (0-0-0-0): size 36 (cls: CreativeTool>SoftObjectProperty>/Script/CoreUObject)
 	K2Node_CustomEvent_Item (0-0-0-0): size 36 (cls: K2Node_CustomEvent_Item>SoftObjectProperty>/Script/CoreUObject)
 	K2Node_CustomEvent_Item1 (0-0-0-0): size 36 (cls: K2Node_CustomEvent_Item1>SoftObjectProperty>/Script/CoreUObject)
+	BladeWielderTag (0-0-0-0): size 36 (cls: BladeWielderTag>StructProperty>/Script/CoreUObject)
 	CallFunc_GetGameAccountId_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetGameAccountId_ReturnValue>StructProperty>/Script/CoreUObject)
+	CallFunc_GetItemEntry_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetItemEntry_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_K2_SetTimerDelegate_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_SetTimerDelegate_ReturnValue>StructProperty>/Script/CoreUObject)
+	InteractionTags (0-0-0-0): size 36 (cls: InteractionTags>StructProperty>/Script/CoreUObject)
 	CallFunc_K2_GetActorLocation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_GetActorLocation_ReturnValue>StructProperty>/Script/CoreUObject)

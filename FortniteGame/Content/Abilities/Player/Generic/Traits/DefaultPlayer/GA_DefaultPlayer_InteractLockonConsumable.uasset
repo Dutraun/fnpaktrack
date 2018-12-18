@@ -5,12 +5,13 @@ Name table:
 	/Game/Athena/Items/Gameplay/Sword/BladePullCameraShake
 	/Game/Athena/Items/Gameplay/Sword/CBGA_Blade_Athena
 	/Game/Athena/Items/Gameplay/Sword/GE_Sword_Pull_LoopingGC
+	/Game/Athena/Items/Gameplay/Sword/GE_SwordPullCooldown
 	/Game/Athena/PlayerPawn_Athena
 	/Game/Blueprints/Camera/Athena/Athena_PlayerCameraModePullingBlade
 	/Game/Blueprints/Camera/Athena/Athena_PlayerCameraModePullingBlade2nd
 	/Game/Effects/Fort_Effects/Emotes/P_Toy_Teleport_BasketBall
 	/Game/Weapons/ForceFeedback/FF_Generic_Explosion_Near
-	/Game/Weapons/FORT_Melee/Blueprints/Edged/Athena_Blade/DA_Melee_Blade_Athena
+	/Game/Weapons/FORT_Melee/Blueprints/Edged/Athena_Blade/B_Melee_Blade_Real
 	/Script/AnimationBudgetAllocator
 	/Script/CoreUObject
 	/Script/Engine
@@ -21,25 +22,28 @@ Name table:
 	AbilitySystemBlueprintLibrary
 	AbilitySystemComponent
 	AbilityTags
+	ActivationBlockedTags
 	ActivationOwnedTags
 	ActiveGameplayEffectHandle
 	Actor
 	Add_FloatFloat
 	Add_VectorVector
+	AddNonReplicatedTagToPawn
 	AmbientLooping_GEN_VARIABLE
 	AnimMontage
 	AnimPlayRate
 	AnimRootMotionTranslationScale
 	ApplicationTag
 	ArrayProperty
+	Athena.Blade.PullCooldown
 	Athena_PlayerCameraModePullingBlade2nd_C
 	Athena_PlayerCameraModePullingBlade_C
 	AthenaBlade_Pull_CMM_Montage
 	AudioComponent
 	AvatarActor
+	B_Melee_Blade_Real_C
 	bFirstUpdate
 	bInitialized
-	bInteractionComplete
 	bIsInitialized
 	BladePullCameraShake_C
 	BlockAbilitiesWithTag
@@ -55,6 +59,7 @@ Name table:
 	bPlayRandomSection
 	BreakRotator
 	BreakVector
+	BuildingGameplayActorLockOnConsumable
 	bWasCancelled
 	CallFunc_Add_FloatFloat_ReturnValue
 	CallFunc_Add_FloatFloat_ReturnValue1
@@ -85,6 +90,8 @@ Name table:
 	CallFunc_GetActorInfo_ReturnValue
 	CallFunc_GetControlRotation_ReturnValue
 	CallFunc_GetFortPlayerControllerFromActor_ReturnValue
+	CallFunc_GetGameTimeInSeconds_ReturnValue
+	CallFunc_GetGameTimeInSeconds_ReturnValue1
 	CallFunc_GetMovementComponent_ReturnValue
 	CallFunc_GetScaledCapsuleRadius_ReturnValue
 	CallFunc_GetWorldDeltaSeconds_ReturnValue
@@ -109,6 +116,7 @@ Name table:
 	CallFunc_K2_SetTimerDelegate_ReturnValue1
 	CallFunc_K2_SetTimerDelegate_ReturnValue2
 	CallFunc_K2_SetTimerDelegate_ReturnValue3
+	CallFunc_K2_SetTimerDelegate_ReturnValue4
 	CallFunc_Less_FloatFloat_ReturnValue
 	CallFunc_MakeRotator_ReturnValue
 	CallFunc_MakeRotFromX_ReturnValue
@@ -118,6 +126,7 @@ Name table:
 	CallFunc_Multiply_VectorFloat_ReturnValue
 	CallFunc_Multiply_VectorFloat_ReturnValue1
 	CallFunc_Normal_ReturnValue
+	CallFunc_NotEqual_ObjectObject_ReturnValue
 	CallFunc_PlayCameraShake_ReturnValue
 	CallFunc_PlayMontageInfoAndWaitForTrigger_ReturnValue
 	CallFunc_SpawnEmitterAtLocation_ReturnValue
@@ -142,15 +151,14 @@ Name table:
 	Completed_32EFF48D4B67387E3E3673927A1B5E29
 	CurrentPosition
 	CurrentWeapon
-	DA_Melee_Blade_Athena_C
 	Default__AbilitySystemBlueprintLibrary
 	Default__Athena_PlayerCameraModePullingBlade2nd_C
 	Default__Athena_PlayerCameraModePullingBlade_C
+	Default__B_Melee_Blade_Real_C
 	Default__BladePullCameraShake_C
 	Default__BlueprintGeneratedClass
 	Default__BoolProperty
 	Default__CBGA_Blade_Athena_C
-	Default__DA_Melee_Blade_Athena_C
 	Default__DelegateProperty
 	Default__FloatProperty
 	Default__FortAbilityTask_PlayMontageWaitTarget
@@ -160,6 +168,7 @@ Name table:
 	Default__GA_DefaultPlayer_InteractLockonConsumable_C
 	Default__GameplayStatics
 	Default__GE_Sword_Pull_LoopingGC_C
+	Default__GE_SwordPullCooldown_C
 	Default__IntProperty
 	Default__KismetSystemLibrary
 	Default__ObjectProperty
@@ -171,6 +180,7 @@ Name table:
 	DelegateProperty
 	DesiredDistanceFromInteractiveItem
 	DestinationPosition
+	DisableCrouch
 	EFortGameplayAbilityMontageSectionToPlay
 	EFortGameplayAbilityMontageSectionToPlay::FirstSection
 	EndedInteractSearch
@@ -186,6 +196,8 @@ Name table:
 	FlushNetDormancy
 	FMin
 	ForceFeedbackEffect
+	forceNetUpdate
+	ForceNetUpdate
 	FortAbilityTask_PlayMontageWaitTarget
 	FortCharacterPartMontageInfo
 	FortGameplayAbility
@@ -200,7 +212,9 @@ Name table:
 	GA_DefaultPlayer_InteractLockonConsumable
 	GA_DefaultPlayer_InteractLockonConsumable_C
 	Gameplay.Action.Player.AimDownsights
+	Gameplay.Action.Player.Crouch
 	Gameplay.Action.Player.InteractLockOnSearch
+	Gameplay.Status.DisableCrouch
 	GameplayAbility
 	GameplayAbilityActorInfo
 	GameplayAbilityTargetDataHandle
@@ -211,10 +225,12 @@ Name table:
 	GameplayTask
 	GE_PullGCL
 	GE_Sword_Pull_LoopingGC_C
+	GE_SwordPullCooldown_C
 	GetAbilitySystemComponent
 	GetActorInfo
 	GetControlRotation
 	GetFortPlayerControllerFromActor
+	GetGameTimeInSeconds
 	GetMovementComponent
 	GetScaledCapsuleRadius
 	GetWorldDeltaSeconds
@@ -225,6 +241,7 @@ Name table:
 	HitResult
 	InAirAudioComp
 	InitializePawnAndControllerRot
+	InteractingPawn
 	InterpolateToPosition
 	IntProperty
 	IsValid
@@ -244,14 +261,15 @@ Name table:
 	K2Node_CreateDelegate_OutputDelegate3
 	K2Node_CreateDelegate_OutputDelegate4
 	K2Node_CreateDelegate_OutputDelegate5
+	K2Node_CreateDelegate_OutputDelegate6
 	K2Node_CustomEvent_ApplicationTag
 	K2Node_CustomEvent_ApplicationTag1
 	K2Node_CustomEvent_ApplicationTag2
 	K2Node_CustomEvent_TargetData
 	K2Node_CustomEvent_TargetData1
 	K2Node_CustomEvent_TargetData2
+	K2Node_DynamicCast_AsB_Melee_Blade_Real
 	K2Node_DynamicCast_AsCBGA_Blade_Athena
-	K2Node_DynamicCast_AsDA_Melee_Blade_Athena
 	K2Node_DynamicCast_AsFort_Player_Pawn
 	K2Node_DynamicCast_AsFort_Player_Pawn_Athena
 	K2Node_DynamicCast_AsPlayer_Pawn_Athena
@@ -286,6 +304,7 @@ Name table:
 	Normal
 	NormalA
 	NormalB
+	NotEqual_ObjectObject
 	Object
 	ObjectProperty
 	OnPullAborted
@@ -317,6 +336,7 @@ Name table:
 	ReloadCartridge
 	ReloadEnd
 	ReloadStart
+	RemoveNonReplicatedTagToPawn
 	Rotator
 	ScaleForVFXToHideRotationPop
 	SceneComponent
@@ -334,6 +354,7 @@ Name table:
 	StartInteractSearch
 	StartPos
 	StartPullAnimation
+	StartSwordPullTime
 	StopCameraShake
 	StopCameraShakes
 	StructProperty
@@ -341,6 +362,7 @@ Name table:
 	Subtract_VectorVector
 	Sword_GEN_VARIABLE
 	SwordPos_GEN_VARIABLE
+	TagName
 	TargetBladeActor
 	TargetData
 	TargetYaw
@@ -368,10 +390,10 @@ Name table:
 	YawDiffRemaining
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	GA_DefaultPlayer_InteractLockonConsumable_C (0-0-0-0): size 425 (cls: GA_DefaultPlayer_InteractLockonConsumable_C>BlueprintGeneratedClass>/Script/Engine):
+	GA_DefaultPlayer_InteractLockonConsumable_C (0-0-0-0): size 445 (cls: GA_DefaultPlayer_InteractLockonConsumable_C>BlueprintGeneratedClass>/Script/Engine):
 		Tag array:
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_GA_DefaultPlayer_InteractLockonConsumable=GA_DefaultPlayer_InteractLockonConsumable_C 
-	Default__GA_DefaultPlayer_InteractLockonConsumable_C (0-0-0-0): size 1223 (cls: Default__GA_DefaultPlayer_InteractLockonConsumable_C>GA_DefaultPlayer_InteractLockonConsumable_C):
+	Default__GA_DefaultPlayer_InteractLockonConsumable_C (0-0-0-0): size 1382 (cls: Default__GA_DefaultPlayer_InteractLockonConsumable_C>GA_DefaultPlayer_InteractLockonConsumable_C):
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			MoveTimerLength(FloatProperty)=1E-05 
@@ -385,20 +407,22 @@ Serialized exports:
 			GE_PullGCL(StructProperty)=System.Byte[] 
 			ScaleForVFXToHideRotationPop(StructProperty)=Vector(5,5,5) 
 			bNeedToUnHolster(BoolProperty)=True 
+			DisableCrouch(StructProperty)=System.Byte[] 
 			MontageInfo(StructProperty)=System.Byte[] 
 			AbilityTags(StructProperty)=GameplayTagContainer:Gameplay.Action.Player.InteractLockOnSearch 
-			BlockAbilitiesWithTag(StructProperty)=GameplayTagContainer:Gameplay.Action.Player.AimDownsights 
+			BlockAbilitiesWithTag(StructProperty)=GameplayTagContainer:Gameplay.Action.Player.AimDownsights,Gameplay.Action.Player.Crouch 
 			ActivationOwnedTags(StructProperty)=GameplayTagContainer:Gameplay.Action.Player.InteractLockOnSearch 
+			ActivationBlockedTags(StructProperty)=GameplayTagContainer:Athena.Blade.PullCooldown 
 	bFirstUpdate (0-0-0-0): size 34 (cls: bFirstUpdate>BoolProperty>/Script/CoreUObject)
-	bInteractionComplete (0-0-0-0): size 34 (cls: bInteractionComplete>BoolProperty>/Script/CoreUObject)
 	bIsInitialized (0-0-0-0): size 34 (cls: bIsInitialized>BoolProperty>/Script/CoreUObject)
 	bNeedToUnHolster (0-0-0-0): size 34 (cls: bNeedToUnHolster>BoolProperty>/Script/CoreUObject)
 	PlayerPawn (0-0-0-0): size 36 (cls: PlayerPawn>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_GA_DefaultPlayer_InteractLockonConsumable (0-0-0-0): size 2601 (cls: ExecuteUbergraph_GA_DefaultPlayer_InteractLockonConsumable>Function>/Script/CoreUObject)
+	ExecuteUbergraph_GA_DefaultPlayer_InteractLockonConsumable (0-0-0-0): size 2957 (cls: ExecuteUbergraph_GA_DefaultPlayer_InteractLockonConsumable>Function>/Script/CoreUObject)
+	forceNetUpdate (0-0-0-0): size 54 (cls: forceNetUpdate>Function>/Script/CoreUObject)
+	K2_ActivateAbility (0-0-0-0): size 54 (cls: K2_ActivateAbility>Function>/Script/CoreUObject)
 	TimeoutAndDie (0-0-0-0): size 54 (cls: TimeoutAndDie>Function>/Script/CoreUObject)
 	StartCameraTransition (0-0-0-0): size 54 (cls: StartCameraTransition>Function>/Script/CoreUObject)
-	K2_ActivateAbility (0-0-0-0): size 54 (cls: K2_ActivateAbility>Function>/Script/CoreUObject)
 	InterpolateToPosition (0-0-0-0): size 54 (cls: InterpolateToPosition>Function>/Script/CoreUObject)
 	TargetData (0-0-0-0): size 36 (cls: TargetData>StructProperty>/Script/CoreUObject)
 	Triggered_32EFF48D4B67387E3E3673927A1B5E29 (0-0-0-0): size 82 (cls: Triggered_32EFF48D4B67387E3E3673927A1B5E29>Function>/Script/CoreUObject)
@@ -407,11 +431,12 @@ Serialized exports:
 	TargetData (0-0-0-0): size 36 (cls: TargetData>StructProperty>/Script/CoreUObject)
 	Completed_32EFF48D4B67387E3E3673927A1B5E29 (0-0-0-0): size 82 (cls: Completed_32EFF48D4B67387E3E3673927A1B5E29>Function>/Script/CoreUObject)
 	bWasCancelled (0-0-0-0): size 34 (cls: bWasCancelled>BoolProperty>/Script/CoreUObject)
-	K2_OnEndAbility (0-0-0-0): size 266 (cls: K2_OnEndAbility>Function>/Script/CoreUObject)
+	K2_OnEndAbility (0-0-0-0): size 360 (cls: K2_OnEndAbility>Function>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
 	StartInteractSearch (0-0-0-0): size 183 (cls: StartInteractSearch>Function>/Script/CoreUObject)
-	EndInteractSearch (0-0-0-0): size 132 (cls: EndInteractSearch>Function>/Script/CoreUObject)
+	EndInteractSearch (0-0-0-0): size 157 (cls: EndInteractSearch>Function>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_Greater_FloatFloat_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Greater_FloatFloat_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_GreaterEqual_FloatFloat_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_GreaterEqual_FloatFloat_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_HasAuthority_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasAuthority_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_HasAuthority_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_HasAuthority_ReturnValue1>BoolProperty>/Script/CoreUObject)
@@ -424,6 +449,7 @@ Serialized exports:
 	CallFunc_K2_SetActorLocation_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_K2_SetActorLocation_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_K2_SetActorRotation_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_K2_SetActorRotation_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Less_FloatFloat_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Less_FloatFloat_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_NotEqual_ObjectObject_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_NotEqual_ObjectObject_ReturnValue>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess1 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess1>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess2 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess2>BoolProperty>/Script/CoreUObject)
@@ -452,6 +478,7 @@ Serialized exports:
 	K2Node_CreateDelegate_OutputDelegate3 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate3>DelegateProperty>/Script/CoreUObject)
 	K2Node_CreateDelegate_OutputDelegate4 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate4>DelegateProperty>/Script/CoreUObject)
 	K2Node_CreateDelegate_OutputDelegate5 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate5>DelegateProperty>/Script/CoreUObject)
+	K2Node_CreateDelegate_OutputDelegate6 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate6>DelegateProperty>/Script/CoreUObject)
 	DesiredDistanceFromInteractiveItem (0-0-0-0): size 32 (cls: DesiredDistanceFromInteractiveItem>FloatProperty>/Script/CoreUObject)
 	CallFunc_Add_FloatFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Add_FloatFloat_ReturnValue>FloatProperty>/Script/CoreUObject)
 	CallFunc_BreakRotator_Pitch (0-0-0-0): size 32 (cls: CallFunc_BreakRotator_Pitch>FloatProperty>/Script/CoreUObject)
@@ -459,9 +486,12 @@ Serialized exports:
 	CallFunc_BreakRotator_Yaw (0-0-0-0): size 32 (cls: CallFunc_BreakRotator_Yaw>FloatProperty>/Script/CoreUObject)
 	CallFunc_FInterpTo_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_FInterpTo_ReturnValue>FloatProperty>/Script/CoreUObject)
 	CallFunc_FMin_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_FMin_ReturnValue>FloatProperty>/Script/CoreUObject)
+	CallFunc_GetGameTimeInSeconds_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetGameTimeInSeconds_ReturnValue>FloatProperty>/Script/CoreUObject)
+	CallFunc_GetGameTimeInSeconds_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_GetGameTimeInSeconds_ReturnValue1>FloatProperty>/Script/CoreUObject)
 	CallFunc_GetWorldDeltaSeconds_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetWorldDeltaSeconds_ReturnValue>FloatProperty>/Script/CoreUObject)
 	CallFunc_GetWorldDeltaSeconds_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_GetWorldDeltaSeconds_ReturnValue1>FloatProperty>/Script/CoreUObject)
 	CallFunc_Multiply_FloatFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Multiply_FloatFloat_ReturnValue>FloatProperty>/Script/CoreUObject)
+	CallFunc_Subtract_FloatFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Subtract_FloatFloat_ReturnValue>FloatProperty>/Script/CoreUObject)
 	CallFunc_Add_FloatFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Add_FloatFloat_ReturnValue>FloatProperty>/Script/CoreUObject)
 	CallFunc_Add_FloatFloat_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Add_FloatFloat_ReturnValue1>FloatProperty>/Script/CoreUObject)
 	CallFunc_Add_FloatFloat_ReturnValue2 (0-0-0-0): size 32 (cls: CallFunc_Add_FloatFloat_ReturnValue2>FloatProperty>/Script/CoreUObject)
@@ -490,6 +520,7 @@ Serialized exports:
 	MoveTimerLength (0-0-0-0): size 32 (cls: MoveTimerLength>FloatProperty>/Script/CoreUObject)
 	PrevYawDiffRemaining (0-0-0-0): size 32 (cls: PrevYawDiffRemaining>FloatProperty>/Script/CoreUObject)
 	StartingYaw (0-0-0-0): size 32 (cls: StartingYaw>FloatProperty>/Script/CoreUObject)
+	StartSwordPullTime (0-0-0-0): size 32 (cls: StartSwordPullTime>FloatProperty>/Script/CoreUObject)
 	TargetYaw (0-0-0-0): size 32 (cls: TargetYaw>FloatProperty>/Script/CoreUObject)
 	YawDiffRemaining (0-0-0-0): size 32 (cls: YawDiffRemaining>FloatProperty>/Script/CoreUObject)
 	CameraShake (0-0-0-0): size 36 (cls: CameraShake>ObjectProperty>/Script/CoreUObject)
@@ -499,7 +530,7 @@ Serialized exports:
 	CallFunc_PlayCameraShake_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlayCameraShake_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_PlayMontageInfoAndWaitForTrigger_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlayMontageInfoAndWaitForTrigger_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_SpawnEmitterAtLocation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_SpawnEmitterAtLocation_ReturnValue>ObjectProperty>/Script/CoreUObject)
-	K2Node_DynamicCast_AsDA_Melee_Blade_Athena (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsDA_Melee_Blade_Athena>ObjectProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_AsB_Melee_Blade_Real (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsB_Melee_Blade_Real>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Player_Pawn (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Player_Pawn>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsPlayer_Pawn_Athena (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsPlayer_Pawn_Athena>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsPlayer_Pawn_Athena1 (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsPlayer_Pawn_Athena1>ObjectProperty>/Script/CoreUObject)
@@ -507,6 +538,7 @@ Serialized exports:
 	CallFunc_GetFortPlayerControllerFromActor_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetFortPlayerControllerFromActor_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsCBGA_Blade_Athena (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsCBGA_Blade_Athena>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Player_Pawn_Athena (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Player_Pawn_Athena>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetAbilitySystemComponent_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetAbilitySystemComponent_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Player_Pawn_Athena (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Player_Pawn_Athena>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetFortPlayerControllerFromActor_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetFortPlayerControllerFromActor_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetFortPlayerControllerFromActor_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetFortPlayerControllerFromActor_ReturnValue>ObjectProperty>/Script/CoreUObject)
@@ -515,6 +547,7 @@ Serialized exports:
 	ApplicationTag (0-0-0-0): size 36 (cls: ApplicationTag>StructProperty>/Script/CoreUObject)
 	CurrentPosition (0-0-0-0): size 36 (cls: CurrentPosition>StructProperty>/Script/CoreUObject)
 	DestinationPosition (0-0-0-0): size 36 (cls: DestinationPosition>StructProperty>/Script/CoreUObject)
+	DisableCrouch (0-0-0-0): size 36 (cls: DisableCrouch>StructProperty>/Script/CoreUObject)
 	CallFunc_BP_ApplyGameplayEffectToTarget_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_BP_ApplyGameplayEffectToTarget_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_GetActorInfo_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetActorInfo_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_K2_GetActorLocation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_GetActorLocation_ReturnValue>StructProperty>/Script/CoreUObject)
@@ -525,6 +558,7 @@ Serialized exports:
 	CallFunc_K2_SetTimerDelegate_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_K2_SetTimerDelegate_ReturnValue1>StructProperty>/Script/CoreUObject)
 	CallFunc_K2_SetTimerDelegate_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_K2_SetTimerDelegate_ReturnValue2>StructProperty>/Script/CoreUObject)
 	CallFunc_K2_SetTimerDelegate_ReturnValue3 (0-0-0-0): size 36 (cls: CallFunc_K2_SetTimerDelegate_ReturnValue3>StructProperty>/Script/CoreUObject)
+	CallFunc_K2_SetTimerDelegate_ReturnValue4 (0-0-0-0): size 36 (cls: CallFunc_K2_SetTimerDelegate_ReturnValue4>StructProperty>/Script/CoreUObject)
 	CallFunc_MakeRotator_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_MakeRotator_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_VLerp_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_VLerp_ReturnValue>StructProperty>/Script/CoreUObject)
 	K2Node_CustomEvent_ApplicationTag (0-0-0-0): size 36 (cls: K2Node_CustomEvent_ApplicationTag>StructProperty>/Script/CoreUObject)
@@ -547,6 +581,7 @@ Serialized exports:
 	CallFunc_Multiply_VectorFloat_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_Multiply_VectorFloat_ReturnValue1>StructProperty>/Script/CoreUObject)
 	CallFunc_Normal_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_Normal_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_Subtract_VectorVector_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_Subtract_VectorVector_ReturnValue>StructProperty>/Script/CoreUObject)
+	CallFunc_BP_ApplyGameplayEffectToTarget_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_BP_ApplyGameplayEffectToTarget_ReturnValue>StructProperty>/Script/CoreUObject)
 	MontagePullInfo (0-0-0-0): size 36 (cls: MontagePullInfo>StructProperty>/Script/CoreUObject)
 	ScaleForVFXToHideRotationPop (0-0-0-0): size 36 (cls: ScaleForVFXToHideRotationPop>StructProperty>/Script/CoreUObject)
 	StartPos (0-0-0-0): size 36 (cls: StartPos>StructProperty>/Script/CoreUObject)

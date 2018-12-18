@@ -8,7 +8,9 @@ Name table:
 	/Game/Athena/Balance/Movement/BallooningDirectionalSpeedMultiplierCurve
 	/Game/Athena/Balance/Movement/ParachuteDirectionalSpeedMultiplierCurve
 	/Game/Athena/Balance/Movement/SkydivingDirectionalSpeedMultiplierCurve
+	/Game/Athena/Effects/Blueprints/ColdBreath/GE_ColdBreathActivate
 	/Game/Athena/Effects/Particles/PFX_FallingVapor
+	/Game/Athena/Environments/Blueprints/SurfaceEffects/GE_SurfaceChange_Snow_Event
 	/Game/Athena/HUD/Art/cross_Shadow
 	/Game/Athena/Items/Weapons/AthenaRangedWeapons_ShootingModel2
 	/Game/Athena/MappedEffects/GE_Athena_Revive_Self
@@ -73,6 +75,7 @@ Name table:
 	AbilitySystemComponent
 	Activate
 	ActiveContrail
+	ActiveGameplayEffectHandle
 	Actor
 	ActorComponent
 	ActorHasTag
@@ -143,6 +146,7 @@ Name table:
 	bGunTrue
 	bHasBeenOutsideSafeZone
 	bHasCookedComponentInstancingData
+	BindToCalendarEvents
 	bInterruptCurrentLine
 	bIsExternalCurve
 	bIsOutsideSafeZone
@@ -206,6 +210,7 @@ Name table:
 	bOverride_WhiteTemp
 	bOverride_WhiteTint
 	Box Local Transform
+	BP_ApplyGameplayEffectToSelf
 	BP_VictoryDrone_Athena_C
 	BP_VictoryDrone_C
 	bQueueRezIn
@@ -242,6 +247,8 @@ Name table:
 	CallFunc_BooleanAND_ReturnValue
 	CallFunc_BooleanAND_ReturnValue1
 	CallFunc_BooleanOR_ReturnValue
+	CallFunc_BP_ApplyGameplayEffectToSelf_ReturnValue
+	CallFunc_BP_ApplyGameplayEffectToSelf_ReturnValue1
 	CallFunc_BreakTransform_Location
 	CallFunc_BreakTransform_Location1
 	CallFunc_BreakTransform_Rotation
@@ -278,6 +285,7 @@ Name table:
 	CallFunc_GetDissolveValues_DissolveGradientDirectionColor
 	CallFunc_GetDissolveValues_DissolveGradientDistance
 	CallFunc_GetDissolveValues_WorldDissolveLocation
+	CallFunc_GetGameMode_ReturnValue
 	CallFunc_GetGameState_ReturnValue
 	CallFunc_GetGameState_ReturnValue1
 	CallFunc_GetLocationInCircle_XY_LocationLocalSpace
@@ -287,6 +295,8 @@ Name table:
 	CallFunc_GetPI_ReturnValue
 	CallFunc_GetSocketLocation_ReturnValue
 	CallFunc_GetSocketLocation_ReturnValue1
+	CallFunc_GetTimeUntilCalendarEventEnd_bFoundEvent
+	CallFunc_GetTimeUntilCalendarEventEnd_OutTime
 	CallFunc_GetValueAtLevel_ReturnValue
 	CallFunc_GetVelocity_ReturnValue
 	CallFunc_Greater_FloatFloat_ReturnValue
@@ -294,6 +304,7 @@ Name table:
 	CallFunc_GreaterEqual_FloatFloat_ReturnValue
 	CallFunc_HasAllMatchingGameplayTags_ReturnValue
 	CallFunc_HasAllMatchingGameplayTags_TagContainerInterface_CastInput
+	CallFunc_HasAuthority_ReturnValue
 	CallFunc_HasMatchingGameplayTag_ReturnValue
 	CallFunc_HasMatchingGameplayTag_self_CastInput
 	CallFunc_IsDBNO_ReturnValue
@@ -473,6 +484,8 @@ Name table:
 	Default.SkydivingControlPassive.MaxAcceleration
 	Default.SkydivingControlPassive.MaxLateralSpeed
 	Default.SkydivingControlPassive.TerminalVelocity
+	Default.ZipLine.JumpDampening
+	Default.ZipLine.JumpFromZipLineStrength
 	Default__AbilitySystemBlueprintLibrary
 	Default__ArrayProperty
 	Default__Athena_GameState_C
@@ -496,12 +509,15 @@ Name table:
 	Default__Function
 	Default__GameplayStatics
 	Default__GE_Athena_Revive_Self_C
+	Default__GE_ColdBreathActivate_C
+	Default__GE_SurfaceChange_Snow_Event_C
 	Default__InheritableComponentHandler
 	Default__InterfaceProperty
 	Default__IntProperty
 	Default__KismetArrayLibrary
 	Default__KismetMaterialLibrary
 	Default__KismetSystemLibrary
+	Default__MulticastDelegateProperty
 	Default__NameProperty
 	Default__ObjectProperty
 	Default__PlayerPawn_Athena_C
@@ -597,6 +613,7 @@ Name table:
 	FootstepBank
 	FootstepTraceTypeQuery
 	FortFootstepAudioBank
+	FortGameModeZone
 	FortGameplayCueFunctionLibrary
 	FortGameStateAthena
 	FortGlobalUIContext
@@ -617,6 +634,7 @@ Name table:
 	FX_Head
 	G
 	Game
+	GameModeBase
 	GamePhase
 	GameplayAbilityTargetDataHandle
 	GameplayCue.Abilities.Activation.DBNOResurrect
@@ -639,12 +657,15 @@ Name table:
 	GameplayTags
 	GameStateBase
 	GE_Athena_Revive_Self_C
+	GE_ColdBreathActivate_C
+	GE_SurfaceChange_Snow_Event_C
 	GetAbilitySystemComponent
 	GetActorBounds
 	GetContext
 	GetContrailParticleSystem
 	GetDataTableRowFromName
 	GetDissolveValues
+	GetGameMode
 	GetGameState
 	GetLocationInCircle_XY
 	GetMaterials
@@ -652,6 +673,7 @@ Name table:
 	GetNumMaterials
 	GetPI
 	GetSocketLocation
+	GetTimeUntilCalendarEventEnd
 	GetValueAtLevel
 	GetVelocity
 	Glider_InAirAudio_Closed_1P_Cue
@@ -668,6 +690,7 @@ Name table:
 	GroundFriction
 	Guid
 	HasAllMatchingGameplayTags
+	HasAuthority
 	HasMatchingGameplayTag
 	HitDamageParticles_GEN_VARIABLE
 	HitGlow
@@ -716,6 +739,7 @@ Name table:
 	K2_SetTimer
 	K2_SetWorldLocation
 	K2Node_CreateDelegate_OutputDelegate
+	K2Node_CreateDelegate_OutputDelegate1
 	K2Node_CustomEvent_bSpawnGameplayCue
 	K2Node_CustomEvent_bSpawnGameplayCue1
 	K2Node_CustomEvent_GameplayTag
@@ -724,11 +748,13 @@ Name table:
 	K2Node_CustomEvent_NewWhichSafeZoneTag
 	K2Node_CustomEvent_Pawn
 	K2Node_DynamicCast_AsAthena_Game_State
+	K2Node_DynamicCast_AsFort_Game_Mode_Zone
 	K2Node_DynamicCast_AsFort_Game_State_Athena
 	K2Node_DynamicCast_AsFort_Game_State_Athena1
 	K2Node_DynamicCast_AsFort_Player_Pawn_Athena
 	K2Node_DynamicCast_bSuccess
 	K2Node_DynamicCast_bSuccess1
+	K2Node_DynamicCast_bSuccess2
 	K2Node_Event_Damage
 	K2Node_Event_DamageCauser
 	K2Node_Event_DamageTags
@@ -775,8 +801,8 @@ Name table:
 	LateralFriction
 	LaunchPadParachuteDeployTraceForGroundDistance
 	LengthMode
-	Lerp
 	LERP
+	Lerp
 	Less_FloatFloat
 	Less_IntInt
 	LessEqual_FloatFloat
@@ -875,6 +901,8 @@ Name table:
 	OnExitedWaterVolume
 	OnFinishedCharacterCustomization
 	OnFinishedCharacterCustomization__DelegateSignature
+	OnHandleMatchHasStarted
+	OnHandleMatchHasStarted__DelegateSignature
 	OnLeftReplayRelevancy
 	OnLockOnSearchCompleted
 	OnOutsideSafeZonePhaseChanged
@@ -975,7 +1003,11 @@ Name table:
 	RemoveStormFX
 	ReplicatedSpokenLine
 	ResetPetMaterials
+	ResIn
+	ResIn__DelegateSignature
 	ResourceObject
+	ResOut
+	ResOut__DelegateSignature
 	ResOutMaterials
 	RestoreCharacterMats
 	RetriggerableDelay
@@ -1025,6 +1057,7 @@ Name table:
 	SetSafeZoneTagWhenChanged
 	SetScalarParameterValue
 	Settings
+	SetupColdTag
 	SetupDissolveFX
 	SetVectorParameter
 	SetVectorParameterValue
@@ -1172,6 +1205,7 @@ Name table:
 	Timelines
 	TimelineTemplate
 	TimerHandle
+	Timespan
 	TL_LastKeyFrame
 	TraceTypeQuery10
 	TrackName
@@ -1222,9 +1256,11 @@ Name table:
 	WorldDissolveLocation
 	ZheightNormScalar
 	ZHeightParam
+	ZiplineJumpDampening
+	ZiplineJumpStrength
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	PlayerPawn_Athena_C (0-0-0-0): size 5966 (cls: PlayerPawn_Athena_C>BlueprintGeneratedClass>/Script/Engine):
+	PlayerPawn_Athena_C (0-0-0-0): size 6038 (cls: PlayerPawn_Athena_C>BlueprintGeneratedClass>/Script/Engine):
 		Tag array:
 			bHasCookedComponentInstancingData(BoolProperty)=True 
 			ComponentTemplates(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -1233,7 +1269,7 @@ Serialized exports:
 			InheritableComponentHandler(ObjectProperty)=InheritableComponentHandler=PlayerPawn_Athena_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_PlayerPawn_Athena=PlayerPawn_Athena_C 
 			CookedComponentInstancingData(MapProperty)=[object] (inner: NameProperty)
-	Default__PlayerPawn_Athena_C (0-0-0-0): size 8509 (cls: Default__PlayerPawn_Athena_C>PlayerPawn_Athena_C):
+	Default__PlayerPawn_Athena_C (0-0-0-0): size 8747 (cls: Default__PlayerPawn_Athena_C>PlayerPawn_Athena_C):
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			TC_FlakVest(StructProperty)=GameplayTagContainer:Abilities.Commando.FlakVest 
@@ -1283,6 +1319,8 @@ Serialized exports:
 			PSC_PlayerInWater(ObjectProperty)=PlayerInWaterFX=Default__PlayerPawn_Athena_C 
 			OutsideSafeZonePPComponent(ObjectProperty)=OutsideSafeZonePP0=Default__PlayerPawn_Athena_C 
 			SelfReviveGameplayEffect(ObjectProperty)=GE_Athena_Revive_Self_C=/Game/Athena/MappedEffects/GE_Athena_Revive_Self 
+			ZiplineJumpDampening(StructProperty)=System.Byte[] 
+			ZiplineJumpStrength(StructProperty)=System.Byte[] 
 			DBNOMiniMapIconBrush(StructProperty)=System.Byte[] 
 			MinimapIconColorSelf(StructProperty)=UE4.FLinearColor 
 			SlipperySlopeParams(StructProperty)=System.Byte[] 
@@ -1323,8 +1361,12 @@ Serialized exports:
 	ResOutMaterials (0-0-0-0): size 36 (cls: ResOutMaterials>ObjectProperty>/Script/CoreUObject)
 	ResOutMaterials (0-0-0-0): size 36 (cls: ResOutMaterials>ArrayProperty>/Script/CoreUObject)
 	TFX_ResOutCharacterMesh_LightIntensity_742226E94F2087597CFE2FAE7DCC91EA (0-0-0-0): size 32 (cls: TFX_ResOutCharacterMesh_LightIntensity_742226E94F2087597CFE2FAE7DCC91EA>FloatProperty>/Script/CoreUObject)
+	ResIn__DelegateSignature (0-0-0-0): size 43 (cls: ResIn__DelegateSignature>Function>/Script/CoreUObject)
+	ResOut__DelegateSignature (0-0-0-0): size 43 (cls: ResOut__DelegateSignature>Function>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_PlayerPawn_Athena (0-0-0-0): size 9260 (cls: ExecuteUbergraph_PlayerPawn_Athena>Function>/Script/CoreUObject)
+	ExecuteUbergraph_PlayerPawn_Athena (0-0-0-0): size 9663 (cls: ExecuteUbergraph_PlayerPawn_Athena>Function>/Script/CoreUObject)
+	SetupColdTag (0-0-0-0): size 54 (cls: SetupColdTag>Function>/Script/CoreUObject)
+	BindToCalendarEvents (0-0-0-0): size 54 (cls: BindToCalendarEvents>Function>/Script/CoreUObject)
 	OnReceivedStormSurgeDamage (0-0-0-0): size 54 (cls: OnReceivedStormSurgeDamage>Function>/Script/CoreUObject)
 	RemoveSafeZoneGameplayCue (0-0-0-0): size 54 (cls: RemoveSafeZoneGameplayCue>Function>/Script/CoreUObject)
 	SafeZonePhase (0-0-0-0): size 32 (cls: SafeZonePhase>IntProperty>/Script/CoreUObject)
@@ -1447,10 +1489,12 @@ Serialized exports:
 	CallFunc_BooleanAND_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_BooleanAND_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_EqualEqual_ByteByte_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ByteByte_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_GetTimeUntilCalendarEventEnd_bFoundEvent (0-0-0-0): size 34 (cls: CallFunc_GetTimeUntilCalendarEventEnd_bFoundEvent>BoolProperty>/Script/CoreUObject)
 	CallFunc_Greater_FloatFloat_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Greater_FloatFloat_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Greater_FloatFloat_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_Greater_FloatFloat_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_GreaterEqual_FloatFloat_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_GreaterEqual_FloatFloat_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_HasAllMatchingGameplayTags_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasAllMatchingGameplayTags_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_HasAuthority_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasAuthority_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsDBNO_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsDBNO_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsDedicatedServer_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsDedicatedServer_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsDedicatedServer_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_IsDedicatedServer_ReturnValue1>BoolProperty>/Script/CoreUObject)
@@ -1485,6 +1529,7 @@ Serialized exports:
 	K2Node_CustomEvent_bSpawnGameplayCue1 (0-0-0-0): size 34 (cls: K2Node_CustomEvent_bSpawnGameplayCue1>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess1 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess1>BoolProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_bSuccess2 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess2>BoolProperty>/Script/CoreUObject)
 	K2Node_SwitchEnum1_CmpSuccess (0-0-0-0): size 34 (cls: K2Node_SwitchEnum1_CmpSuccess>BoolProperty>/Script/CoreUObject)
 	K2Node_SwitchEnum2_CmpSuccess (0-0-0-0): size 34 (cls: K2Node_SwitchEnum2_CmpSuccess>BoolProperty>/Script/CoreUObject)
 	K2Node_SwitchEnum3_CmpSuccess (0-0-0-0): size 34 (cls: K2Node_SwitchEnum3_CmpSuccess>BoolProperty>/Script/CoreUObject)
@@ -1582,6 +1627,7 @@ Serialized exports:
 		Tag array:
 			FloatCurve(StructProperty)=System.Byte[] 
 	K2Node_CreateDelegate_OutputDelegate (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate>DelegateProperty>/Script/CoreUObject)
+	K2Node_CreateDelegate_OutputDelegate1 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate1>DelegateProperty>/Script/CoreUObject)
 	Out_ItemInteractionType (0-0-0-0): size 40 (cls: Out_ItemInteractionType>EnumProperty>/Script/CoreUObject)
 	%ChanceOfLightningMesh (0-0-0-0): size 32 (cls: %ChanceOfLightningMesh>FloatProperty>/Script/CoreUObject)
 	BoundsRadius (0-0-0-0): size 32 (cls: BoundsRadius>FloatProperty>/Script/CoreUObject)
@@ -1711,6 +1757,8 @@ Serialized exports:
 	Temp_int_Loop_Counter_Variable (0-0-0-0): size 32 (cls: Temp_int_Loop_Counter_Variable>IntProperty>/Script/CoreUObject)
 	Temp_int_Variable (0-0-0-0): size 32 (cls: Temp_int_Variable>IntProperty>/Script/CoreUObject)
 	WhichSafeZoneTag (0-0-0-0): size 32 (cls: WhichSafeZoneTag>IntProperty>/Script/CoreUObject)
+	ResIn (0-0-0-0): size 36 (cls: ResIn>MulticastDelegateProperty>/Script/CoreUObject)
+	ResOut (0-0-0-0): size 36 (cls: ResOut>MulticastDelegateProperty>/Script/CoreUObject)
 	MIDParam_DissolveBaseLoc (0-0-0-0): size 32 (cls: MIDParam_DissolveBaseLoc>NameProperty>/Script/CoreUObject)
 	MIDParam_DissolveDirection (0-0-0-0): size 32 (cls: MIDParam_DissolveDirection>NameProperty>/Script/CoreUObject)
 	MIDParam_DissolveDistance (0-0-0-0): size 32 (cls: MIDParam_DissolveDistance>NameProperty>/Script/CoreUObject)
@@ -1734,8 +1782,10 @@ Serialized exports:
 	CallFunc_BeginDeferredActorSpawnFromClass_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_BeginDeferredActorSpawnFromClass_ReturnValue1>ObjectProperty>/Script/CoreUObject)
 	CallFunc_FinishSpawningActor_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_FinishSpawningActor_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_FinishSpawningActor_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_FinishSpawningActor_ReturnValue1>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetAbilitySystemComponent_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetAbilitySystemComponent_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetContrailParticleSystem_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContrailParticleSystem_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetGameMode_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetGameMode_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetGameState_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetGameState_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetGameState_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetGameState_ReturnValue1>ObjectProperty>/Script/CoreUObject)
 	CallFunc_K2_GetRootComponent_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_GetRootComponent_ReturnValue>ObjectProperty>/Script/CoreUObject)
@@ -1749,6 +1799,7 @@ Serialized exports:
 	CallFunc_SpawnSoundAttached_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_SpawnSoundAttached_ReturnValue1>ObjectProperty>/Script/CoreUObject)
 	CallFunc_SpawnSoundAttached_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_SpawnSoundAttached_ReturnValue2>ObjectProperty>/Script/CoreUObject)
 	K2Node_CustomEvent_Pawn (0-0-0-0): size 36 (cls: K2Node_CustomEvent_Pawn>ObjectProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_AsFort_Game_Mode_Zone (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Game_Mode_Zone>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Game_State_Athena (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Game_State_Athena>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Game_State_Athena1 (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Game_State_Athena1>ObjectProperty>/Script/CoreUObject)
 	K2Node_Event_DamageCauser (0-0-0-0): size 36 (cls: K2Node_Event_DamageCauser>ObjectProperty>/Script/CoreUObject)
@@ -1885,7 +1936,10 @@ Serialized exports:
 	Event Data (0-0-0-0): size 36 (cls: Event Data>StructProperty>/Script/CoreUObject)
 	EventSpawnEffect (0-0-0-0): size 36 (cls: EventSpawnEffect>StructProperty>/Script/CoreUObject)
 	CallFunc_Add_VectorVector_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_Add_VectorVector_ReturnValue>StructProperty>/Script/CoreUObject)
+	CallFunc_BP_ApplyGameplayEffectToSelf_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_BP_ApplyGameplayEffectToSelf_ReturnValue>StructProperty>/Script/CoreUObject)
+	CallFunc_BP_ApplyGameplayEffectToSelf_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_BP_ApplyGameplayEffectToSelf_ReturnValue1>StructProperty>/Script/CoreUObject)
 	CallFunc_GetLocationInCircle_XY_LocationLocalSpace (0-0-0-0): size 36 (cls: CallFunc_GetLocationInCircle_XY_LocationLocalSpace>StructProperty>/Script/CoreUObject)
+	CallFunc_GetTimeUntilCalendarEventEnd_OutTime (0-0-0-0): size 36 (cls: CallFunc_GetTimeUntilCalendarEventEnd_OutTime>StructProperty>/Script/CoreUObject)
 	CallFunc_GetVelocity_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetVelocity_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_K2_GetActorLocation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_GetActorLocation_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_K2_GetComponentLocation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_GetComponentLocation_ReturnValue>StructProperty>/Script/CoreUObject)

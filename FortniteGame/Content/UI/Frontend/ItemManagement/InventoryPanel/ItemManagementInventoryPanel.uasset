@@ -498,6 +498,7 @@ Name table:
 	EFortItemCardSize
 	EFortItemCardSize::M
 	EFortItemManagementMode
+	EFortItemTier
 	EFortQuickBars
 	EHorizontalAlignment
 	EItemTileViewDisplayType
@@ -648,6 +649,7 @@ Name table:
 	HandleDifferentFrontendInventoryFilterSetBP
 	HandleDifferentItemManagementModeSetBP
 	HandleDifferentSortTypeSetBP
+	HandleFocusEquipSlotsBP
 	HandleItemWidgetCreated
 	HandlePinnedSchematicsChanged
 	HandleQuickBarChangedBP
@@ -838,6 +840,7 @@ Name table:
 	NamedSlotBindings
 	NameProperty
 	Navigation
+	NavigationTabsCenterContentSlot
 	Next
 	NextTabAction
 	NextTabActionWrapper
@@ -914,6 +917,8 @@ Name table:
 	RefreshCraftingSort
 	RefreshItem
 	RenderTransform
+	RequestedTier
+	RequestFocusEquipSlots
 	ResourceName
 	ResourceObject
 	ResourcesText
@@ -990,6 +995,7 @@ Name table:
 	SlateFontInfo
 	SlateSound
 	Slot
+	SlotActionRequestedTier
 	SlotIndex
 	Slots
 	SlotWidgetName
@@ -1184,7 +1190,7 @@ Name table:
 	WorldItemsTransfer.TrapsTab
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	ItemManagementInventoryPanel_C (0-0-0-0): size 979 (cls: ItemManagementInventoryPanel_C>WidgetBlueprintGeneratedClass>/Script/UMG):
+	ItemManagementInventoryPanel_C (0-0-0-0): size 999 (cls: ItemManagementInventoryPanel_C>WidgetBlueprintGeneratedClass>/Script/UMG):
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
@@ -1212,11 +1218,12 @@ Serialized exports:
 			bHasScriptImplementedPaint(BoolProperty)=False 
 	FadeMessage (0-0-0-0): size 36 (cls: FadeMessage>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_ItemManagementInventoryPanel (0-0-0-0): size 2185 (cls: ExecuteUbergraph_ItemManagementInventoryPanel>Function>/Script/CoreUObject)
+	ExecuteUbergraph_ItemManagementInventoryPanel (0-0-0-0): size 2237 (cls: ExecuteUbergraph_ItemManagementInventoryPanel>Function>/Script/CoreUObject)
 	CallFunc_GetUpgradeItemDefinitionsForCurrentInventory_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetUpgradeItemDefinitionsForCurrentInventory_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetUpgradeItemDefinitionsForCurrentInventory_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetUpgradeItemDefinitionsForCurrentInventory_ReturnValue>ArrayProperty>/Script/CoreUObject)
 	K2Node_MakeArray_Array (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array>StructProperty>/Script/CoreUObject)
 	K2Node_MakeArray_Array (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array>ArrayProperty>/Script/CoreUObject)
+	HandleFocusEquipSlotsBP (0-0-0-0): size 54 (cls: HandleFocusEquipSlotsBP>Function>/Script/CoreUObject)
 	BndEvt__HeaderTitle_K2Node_ComponentBoundEvent_0_BackButtonPressed__DelegateSignature (0-0-0-0): size 54 (cls: BndEvt__HeaderTitle_K2Node_ComponentBoundEvent_0_BackButtonPressed__DelegateSignature>Function>/Script/CoreUObject)
 	bCursorModeEnabled (0-0-0-0): size 34 (cls: bCursorModeEnabled>BoolProperty>/Script/CoreUObject)
 	HandleCursorModeChangedBP (0-0-0-0): size 96 (cls: HandleCursorModeChangedBP>Function>/Script/CoreUObject)
@@ -1274,8 +1281,8 @@ Serialized exports:
 	UpdateEquipSlots (0-0-0-0): size 115 (cls: UpdateEquipSlots>Function>/Script/CoreUObject)
 	K2Node_DynamicCast_AsItem_Management_Screen (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsItem_Management_Screen>ObjectProperty>/Script/CoreUObject)
 	UpdateEquipSlotsVisibility (0-0-0-0): size 694 (cls: UpdateEquipSlotsVisibility>Function>/Script/CoreUObject)
-	SelectedSlot (0-0-0-0): size 32 (cls: SelectedSlot>IntProperty>/Script/CoreUObject)
-	ProcessSlotAction (0-0-0-0): size 604 (cls: ProcessSlotAction>Function>/Script/CoreUObject)
+	RequestedTier (0-0-0-0): size 36 (cls: RequestedTier>ByteProperty>/Script/CoreUObject)
+	ProcessSlotAction (0-0-0-0): size 578 (cls: ProcessSlotAction>Function>/Script/CoreUObject)
 	Slot (0-0-0-0): size 32 (cls: Slot>IntProperty>/Script/CoreUObject)
 	GetSelectedEquipSlot (0-0-0-0): size 251 (cls: GetSelectedEquipSlot>Function>/Script/CoreUObject)
 	CallFunc_IsSelected_Selected (0-0-0-0): size 34 (cls: CallFunc_IsSelected_Selected>BoolProperty>/Script/CoreUObject)
@@ -1448,6 +1455,7 @@ Serialized exports:
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	SlotActionRequestedTier (0-0-0-0): size 36 (cls: SlotActionRequestedTier>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
@@ -2003,10 +2011,11 @@ Serialized exports:
 			Column(IntProperty)=2 
 			Parent(ObjectProperty)=GridPanel_1=WidgetArchetype 
 			Content(ObjectProperty)=SortTypeButtonWorldItems=WidgetArchetype 
-	HeaderTitle (0-0-0-0): size 296 (cls: HeaderTitle>HeaderWithNav_C>/Game/UI/Frontend/Common/HeaderWithNav):
+	HeaderTitle (0-0-0-0): size 325 (cls: HeaderTitle>HeaderWithNav_C>/Game/UI/Frontend/Common/HeaderWithNav):
 		Tag array:
 			Border_ChangeFilter(ObjectProperty)=Border_ChangeFilter=WidgetArchetype 
 			Button_Back(ObjectProperty)=Button_Back=WidgetArchetype 
+			NavigationTabsCenterContentSlot(ObjectProperty)=NavigationTabsCenterContentSlot=WidgetArchetype 
 			PageLeftBtn(ObjectProperty)=PageLeftBtn=WidgetArchetype 
 			PageRightBtn(ObjectProperty)=PageRightBtn=WidgetArchetype 
 			SizeBox_Back(ObjectProperty)=SizeBox_Back=WidgetArchetype 
@@ -2047,7 +2056,7 @@ Serialized exports:
 	HorizontalBox_0 (0-0-0-0): size 61 (cls: HorizontalBox_0>HorizontalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-	HorizontalBox_2 (0-0-0-0): size 86 (cls: HorizontalBox_2>HorizontalBox>/Script/UMG):
+	HorizontalBox_2 (0-0-0-0): size 90 (cls: HorizontalBox_2>HorizontalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=BorderSlot_0=WidgetArchetype 
@@ -2210,6 +2219,10 @@ Serialized exports:
 			VerticalAlignment(ByteProperty)=VAlign_Center 
 			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
 			Content(ObjectProperty)=Text_Header=WidgetArchetype 
+	HorizontalBoxSlot_0 (0-0-0-0): size 70 (cls: HorizontalBoxSlot_0>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=HorizontalBox_2=WidgetArchetype 
+			Content(ObjectProperty)=NavigationTabsCenterContentSlot=WidgetArchetype 
 	HorizontalBoxSlot_2 (0-0-0-0): size 152 (cls: HorizontalBoxSlot_2>HorizontalBoxSlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Right 
@@ -2591,6 +2604,7 @@ Serialized exports:
 	Temp_int_Variable (0-0-0-0): size 32 (cls: Temp_int_Variable>IntProperty>/Script/CoreUObject)
 	CallFunc_GetNumItems_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetNumItems_ReturnValue>IntProperty>/Script/CoreUObject)
 	CallFunc_GetSelectedEquipSlot_Slot (0-0-0-0): size 32 (cls: CallFunc_GetSelectedEquipSlot_Slot>IntProperty>/Script/CoreUObject)
+	SelectedSlot (0-0-0-0): size 32 (cls: SelectedSlot>IntProperty>/Script/CoreUObject)
 	CallFunc_Add_IntInt_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue>IntProperty>/Script/CoreUObject)
 	CallFunc_GetNumItems_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetNumItems_ReturnValue>IntProperty>/Script/CoreUObject)
 	CallFunc_Subtract_IntInt_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Subtract_IntInt_ReturnValue>IntProperty>/Script/CoreUObject)
@@ -2809,6 +2823,9 @@ Serialized exports:
 	RightExtraContentSlot (0-0-0-0): size 41 (cls: RightExtraContentSlot>NamedSlot>/Script/UMG):
 		Tag array:
 			Slot(ObjectProperty)=HorizontalBoxSlot_3=WidgetArchetype 
+	NavigationTabsCenterContentSlot (0-0-0-0): size 41 (cls: NavigationTabsCenterContentSlot>NamedSlot>/Script/UMG):
+		Tag array:
+			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 	ContentSlot (0-0-0-0): size 41 (cls: ContentSlot>NamedSlot>/Script/UMG):
 		Tag array:
 			Slot(ObjectProperty)=OverlaySlot_2=WidgetArchetype 
@@ -2860,6 +2877,7 @@ Serialized exports:
 	CallFunc_GetContext_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue1>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetItemToDetail_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetItemToDetail_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetOwningPlayer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetOwningPlayer_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetUINavigationManager_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetUINavigationManager_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	K2Node_ComponentBoundEvent_Button (0-0-0-0): size 36 (cls: K2Node_ComponentBoundEvent_Button>ObjectProperty>/Script/CoreUObject)
 	K2Node_ComponentBoundEvent_Button1 (0-0-0-0): size 36 (cls: K2Node_ComponentBoundEvent_Button1>ObjectProperty>/Script/CoreUObject)
 	K2Node_ComponentBoundEvent_Item (0-0-0-0): size 36 (cls: K2Node_ComponentBoundEvent_Item>ObjectProperty>/Script/CoreUObject)
@@ -2886,7 +2904,6 @@ Serialized exports:
 	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetContext_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue1>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetItemToDetail_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetItemToDetail_ReturnValue>ObjectProperty>/Script/CoreUObject)
-	CallFunc_GetUINavigationManager_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetUINavigationManager_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Schematic_Item (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Schematic_Item>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsItem_Management_Screen (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsItem_Management_Screen>ObjectProperty>/Script/CoreUObject)
 	RecycleItemCountText (0-0-0-0): size 36 (cls: RecycleItemCountText>ObjectProperty>/Script/CoreUObject)

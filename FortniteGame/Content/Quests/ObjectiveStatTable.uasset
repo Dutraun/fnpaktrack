@@ -630,6 +630,7 @@ Name table:
 	EFortQuestObjectiveStatEvent::RevivePlayer
 	EFortQuestObjectiveStatEvent::SlotInCollection
 	EFortQuestObjectiveStatEvent::TeamInteract
+	EFortQuestObjectiveStatEvent::TimeElapsed
 	EFortQuestObjectiveStatEvent::Upgrade
 	EFortQuestObjectiveStatEvent::WaveComplete
 	elder_build_deployable_base
@@ -868,6 +869,7 @@ Name table:
 	kill_husk_lifeleechattacks_pve03
 	kill_husk_little_evil_helpers
 	kill_husk_lobber_pumplauncher
+	kill_husk_lonekrampus
 	kill_husk_mall_santas
 	kill_husk_melee
 	kill_husk_metalcorrosion_pve02
@@ -955,6 +957,7 @@ Name table:
 	kill_mist_monster_halloween_outlander
 	kill_mist_monster_hydraulic
 	kill_mist_monster_vacuumtube
+	kill_mist_monster_winter2018
 	killcontribution_athena_player
 	killcontribution_blaster
 	killcontribution_smasher
@@ -1279,7 +1282,45 @@ Name table:
 	winterquest_2017_reactive_fetch_presentfiller
 	winterquest_2017_reactive_fetch_radio
 	winterquest_2017_reactive_frozentroll
+	winterquest_2018_completemissionalerts
+	winterquest_2018_frostnite_challenge_01_major
+	winterquest_2018_frostnite_challenge_01_minor
+	winterquest_2018_frostnite_challenge_02_major
+	winterquest_2018_frostnite_challenge_02_minor
+	winterquest_2018_frostnite_challenge_03_major
+	winterquest_2018_frostnite_challenge_03_minor
+	winterquest_2018_frostnite_challenge_04_major
+	winterquest_2018_frostnite_challenge_04_minor
+	winterquest_2018_frostnite_challenge_05_major
+	winterquest_2018_frostnite_challenge_05_minor
+	winterquest_2018_frostnite_challenge_06_major
+	winterquest_2018_frostnite_challenge_06_minor
+	winterquest_2018_frostnite_challenge_07_major
+	winterquest_2018_frostnite_challenge_07_minor
+	winterquest_2018_frostnite_challenge_08_major
+	winterquest_2018_frostnite_challenge_08_minor
+	winterquest_2018_frostnite_collect_bluglo
+	winterquest_2018_frostnite_craft_traps_rareplus
+	winterquest_2018_frostnite_explorezone
+	winterquest_2018_frostnite_fill_heater
+	winterquest_2018_frostnite_interact_safe
+	winterquest_2018_frostnite_interact_treasure
+	winterquest_2018_frostnite_survive_15m
+	winterquest_2018_frostnite_survive_30m
+	winterquest_2018_frostnite_survive_45m
 	winterquest_2018_hidden_watchvideo
+	winterquest_2018_killcoallobbers
+	winterquest_2018_killevilhelpers
+	winterquest_2018_killkrampus
+	winterquest_2018_killmallsantas
+	winterquest_2018_landmark_celebratenewyear
+	winterquest_2018_reactive_fetch_collectpresent
+	winterquest_2018_reactive_fetch_decorations
+	winterquest_2018_reactive_fetch_deploytrees
+	winterquest_2018_reactive_fetch_packingpresents
+	winterquest_2018_reactive_frozentroll
+	winterquest_2018_reactive_gather_fridges
+	winterquest_2018_reactive_gather_trees
 	winterquest_2107_reactive_gather_book
 	winterquest_2107_reactive_gather_fridge
 	winterquest_2107_reactive_gather_fruit
@@ -1287,7 +1328,7 @@ Name table:
 	winterquest_2107_reactive_gather_trafficlight
 	winterquest_2107_reactive_presents_hidden
 Serialized exports:
-	ObjectiveStatTable (0-0-0-0): size 407066 (cls: ObjectiveStatTable>DataTable>/Script/Engine):
+	ObjectiveStatTable (0-0-0-0): size 418448 (cls: ObjectiveStatTable>DataTable>/Script/Engine):
 		DataTable:
 			ability_base:
 				Type(EnumProperty)=EFortQuestObjectiveStatEvent::Ability
@@ -8865,6 +8906,14 @@ Serialized exports:
 				Condition(StrProperty)=(Pawn.Tags HasTag NPC.CharacterType.Husk.Bombshell || Pawn.Tags HasTag NPC.CharacterType.Husk.PoisonLobber) && (Zone.Difficulty >= 10)
 				TemplateId(StrProperty)=
 				AlternateTemplateIds(ArrayProperty)=[object]
+			kill_husk_lonekrampus:
+				Type(EnumProperty)=EFortQuestObjectiveStatEvent::KillContribution
+				TargetTags(StrProperty)=SpecialEvent.2018.Holiday.LoneKrampus
+				SourceTags(StrProperty)=
+				ContextTags(StrProperty)=Stat.Theater.Endless
+				Condition(StrProperty)=
+				TemplateId(StrProperty)=
+				AlternateTemplateIds(ArrayProperty)=[object]
 			kill_husk_mall_santas:
 				Type(EnumProperty)=EFortQuestObjectiveStatEvent::KillContribution
 				TargetTags(StrProperty)=SpecialEvent.Holiday.Santa
@@ -9591,6 +9640,14 @@ Serialized exports:
 				SourceTags(StrProperty)=WeaponSet.VacuumTube
 				ContextTags(StrProperty)=
 				Condition(StrProperty)=Zone.Difficulty >=10
+				TemplateId(StrProperty)=
+				AlternateTemplateIds(ArrayProperty)=[object]
+			kill_mist_monster_winter2018:
+				Type(EnumProperty)=EFortQuestObjectiveStatEvent::KillContribution
+				TargetTags(StrProperty)=NPC.Mist.Large
+				SourceTags(StrProperty)=
+				ContextTags(StrProperty)=Stat.Theater.Endless
+				Condition(StrProperty)=
 				TemplateId(StrProperty)=
 				AlternateTemplateIds(ArrayProperty)=[object]
 			killcontribution_athena_player:
@@ -12665,11 +12722,171 @@ Serialized exports:
 				Condition(StrProperty)=
 				TemplateId(StrProperty)=
 				AlternateTemplateIds(ArrayProperty)=[object]
+			winterquest_2018_completemissionalerts:
+				Type(EnumProperty)=EFortQuestObjectiveStatEvent::Complete
+				TargetTags(StrProperty)=Stat.Mission.Primary
+				SourceTags(StrProperty)=
+				ContextTags(StrProperty)=Stat.MissionAlert
+				Condition(StrProperty)=
+				TemplateId(StrProperty)=
+				AlternateTemplateIds(ArrayProperty)=[object]
+			winterquest_2018_frostnite_collect_bluglo:
+				Type(EnumProperty)=EFortQuestObjectiveStatEvent::TeamInteract
+				TargetTags(StrProperty)=Building.Type.Gameplay.BluGlo
+				SourceTags(StrProperty)=
+				ContextTags(StrProperty)=Stat.Theater.Endless
+				Condition(StrProperty)=
+				TemplateId(StrProperty)=
+				AlternateTemplateIds(ArrayProperty)=[object]
+			winterquest_2018_frostnite_craft_traps_rareplus:
+				Type(EnumProperty)=EFortQuestObjectiveStatEvent::Craft
+				TargetTags(StrProperty)=
+				SourceTags(StrProperty)=
+				ContextTags(StrProperty)=Stat.Theater.Endless
+				Condition(StrProperty)=Item.Rarity >= Sturdy
+				TemplateId(StrProperty)=Trap
+				AlternateTemplateIds(ArrayProperty)=[object]
+			winterquest_2018_frostnite_interact_safe:
+				Type(EnumProperty)=EFortQuestObjectiveStatEvent::TeamInteract
+				TargetTags(StrProperty)=Building.Type.Container.Safe
+				SourceTags(StrProperty)=
+				ContextTags(StrProperty)=Stat.Theater.Endless
+				Condition(StrProperty)=
+				TemplateId(StrProperty)=
+				AlternateTemplateIds(ArrayProperty)=[object]
+			winterquest_2018_frostnite_interact_treasure:
+				Type(EnumProperty)=EFortQuestObjectiveStatEvent::TeamInteract
+				TargetTags(StrProperty)=Building.Type.Container.TreasureChest
+				SourceTags(StrProperty)=
+				ContextTags(StrProperty)=Stat.Theater.Endless
+				Condition(StrProperty)=
+				TemplateId(StrProperty)=
+				AlternateTemplateIds(ArrayProperty)=[object]
+			winterquest_2018_frostnite_survive_15m:
+				Type(EnumProperty)=EFortQuestObjectiveStatEvent::TimeElapsed
+				TargetTags(StrProperty)=
+				SourceTags(StrProperty)=
+				ContextTags(StrProperty)=Stat.Theater.Endless
+				Condition(StrProperty)=Mission.TimeElapsed >= 900
+				TemplateId(StrProperty)=
+				AlternateTemplateIds(ArrayProperty)=[object]
+			winterquest_2018_frostnite_survive_30m:
+				Type(EnumProperty)=EFortQuestObjectiveStatEvent::TimeElapsed
+				TargetTags(StrProperty)=
+				SourceTags(StrProperty)=
+				ContextTags(StrProperty)=Stat.Theater.Endless
+				Condition(StrProperty)=Mission.TimeElapsed >= 1800
+				TemplateId(StrProperty)=
+				AlternateTemplateIds(ArrayProperty)=[object]
+			winterquest_2018_frostnite_survive_45m:
+				Type(EnumProperty)=EFortQuestObjectiveStatEvent::TimeElapsed
+				TargetTags(StrProperty)=
+				SourceTags(StrProperty)=
+				ContextTags(StrProperty)=Stat.Theater.Endless
+				Condition(StrProperty)=Mission.TimeElapsed >= 2700
+				TemplateId(StrProperty)=
+				AlternateTemplateIds(ArrayProperty)=[object]
 			winterquest_2018_hidden_watchvideo:
 				Type(EnumProperty)=EFortQuestObjectiveStatEvent::Client
 				TargetTags(StrProperty)=
 				SourceTags(StrProperty)=
 				ContextTags(StrProperty)=
+				Condition(StrProperty)=
+				TemplateId(StrProperty)=
+				AlternateTemplateIds(ArrayProperty)=[object]
+			winterquest_2018_killcoallobbers:
+				Type(EnumProperty)=EFortQuestObjectiveStatEvent::KillContribution
+				TargetTags(StrProperty)=SpecialEvent.Holiday.LobberCoal
+				SourceTags(StrProperty)=
+				ContextTags(StrProperty)=
+				Condition(StrProperty)=
+				TemplateId(StrProperty)=
+				AlternateTemplateIds(ArrayProperty)=[object]
+			winterquest_2018_killevilhelpers:
+				Type(EnumProperty)=EFortQuestObjectiveStatEvent::KillContribution
+				TargetTags(StrProperty)=SpecialEvent.Holiday.Elf
+				SourceTags(StrProperty)=
+				ContextTags(StrProperty)=
+				Condition(StrProperty)=
+				TemplateId(StrProperty)=
+				AlternateTemplateIds(ArrayProperty)=[object]
+			winterquest_2018_killkrampus:
+				Type(EnumProperty)=EFortQuestObjectiveStatEvent::KillContribution
+				TargetTags(StrProperty)=SpecialEvent.2018.Holiday.Krampus
+				SourceTags(StrProperty)=
+				ContextTags(StrProperty)=
+				Condition(StrProperty)=
+				TemplateId(StrProperty)=
+				AlternateTemplateIds(ArrayProperty)=[object]
+			winterquest_2018_killmallsantas:
+				Type(EnumProperty)=EFortQuestObjectiveStatEvent::KillContribution
+				TargetTags(StrProperty)=SpecialEvent.Holiday.Santa
+				SourceTags(StrProperty)=
+				ContextTags(StrProperty)=
+				Condition(StrProperty)=
+				TemplateId(StrProperty)=
+				AlternateTemplateIds(ArrayProperty)=[object]
+			winterquest_2018_landmark_celebratenewyear:
+				Type(EnumProperty)=EFortQuestObjectiveStatEvent::Complete
+				TargetTags(StrProperty)=Stat.Mission.Primary.Landmark.CelebrateNewYear
+				SourceTags(StrProperty)=
+				ContextTags(StrProperty)=
+				Condition(StrProperty)=
+				TemplateId(StrProperty)=
+				AlternateTemplateIds(ArrayProperty)=[object]
+			winterquest_2018_reactive_fetch_collectpresent:
+				Type(EnumProperty)=EFortQuestObjectiveStatEvent::Custom
+				TargetTags(StrProperty)=
+				SourceTags(StrProperty)=
+				ContextTags(StrProperty)=Theater.MainProgression
+				Condition(StrProperty)=
+				TemplateId(StrProperty)=
+				AlternateTemplateIds(ArrayProperty)=[object]
+			winterquest_2018_reactive_fetch_decorations:
+				Type(EnumProperty)=EFortQuestObjectiveStatEvent::Custom
+				TargetTags(StrProperty)=
+				SourceTags(StrProperty)=
+				ContextTags(StrProperty)=Theater.MainProgression
+				Condition(StrProperty)=
+				TemplateId(StrProperty)=
+				AlternateTemplateIds(ArrayProperty)=[object]
+			winterquest_2018_reactive_fetch_deploytrees:
+				Type(EnumProperty)=EFortQuestObjectiveStatEvent::Custom
+				TargetTags(StrProperty)=
+				SourceTags(StrProperty)=
+				ContextTags(StrProperty)=Theater.MainProgression
+				Condition(StrProperty)=
+				TemplateId(StrProperty)=
+				AlternateTemplateIds(ArrayProperty)=[object]
+			winterquest_2018_reactive_fetch_packingpresents:
+				Type(EnumProperty)=EFortQuestObjectiveStatEvent::Custom
+				TargetTags(StrProperty)=
+				SourceTags(StrProperty)=
+				ContextTags(StrProperty)=Theater.MainProgression
+				Condition(StrProperty)=
+				TemplateId(StrProperty)=
+				AlternateTemplateIds(ArrayProperty)=[object]
+			winterquest_2018_reactive_frozentroll:
+				Type(EnumProperty)=EFortQuestObjectiveStatEvent::Custom
+				TargetTags(StrProperty)=
+				SourceTags(StrProperty)=
+				ContextTags(StrProperty)=Stat.Theater.Endless
+				Condition(StrProperty)=
+				TemplateId(StrProperty)=
+				AlternateTemplateIds(ArrayProperty)=[object]
+			winterquest_2018_reactive_gather_fridges:
+				Type(EnumProperty)=EFortQuestObjectiveStatEvent::Custom
+				TargetTags(StrProperty)=
+				SourceTags(StrProperty)=
+				ContextTags(StrProperty)=Theater.MainProgression
+				Condition(StrProperty)=
+				TemplateId(StrProperty)=
+				AlternateTemplateIds(ArrayProperty)=[object]
+			winterquest_2018_reactive_gather_trees:
+				Type(EnumProperty)=EFortQuestObjectiveStatEvent::Custom
+				TargetTags(StrProperty)=
+				SourceTags(StrProperty)=
+				ContextTags(StrProperty)=Theater.MainProgression
 				Condition(StrProperty)=
 				TemplateId(StrProperty)=
 				AlternateTemplateIds(ArrayProperty)=[object]
@@ -12719,5 +12936,149 @@ Serialized exports:
 				SourceTags(StrProperty)=
 				ContextTags(StrProperty)=
 				Condition(StrProperty)=
+				TemplateId(StrProperty)=
+				AlternateTemplateIds(ArrayProperty)=[object]
+			winterquest_2018_frostnite_fill_heater:
+				Type(EnumProperty)=EFortQuestObjectiveStatEvent::TeamInteract
+				TargetTags(StrProperty)=Endless.HeaterGenerator
+				SourceTags(StrProperty)=
+				ContextTags(StrProperty)=Stat.Theater.Endless
+				Condition(StrProperty)=
+				TemplateId(StrProperty)=
+				AlternateTemplateIds(ArrayProperty)=[object]
+			winterquest_2018_frostnite_explorezone:
+				Type(EnumProperty)=EFortQuestObjectiveStatEvent::Complete
+				TargetTags(StrProperty)=Stat.Mission.Secondary.ExplorationMission
+				SourceTags(StrProperty)=
+				ContextTags(StrProperty)=Stat.Theater.Endless
+				Condition(StrProperty)=
+				TemplateId(StrProperty)=
+				AlternateTemplateIds(ArrayProperty)=[object]
+			winterquest_2018_frostnite_challenge_01_minor:
+				Type(EnumProperty)=EFortQuestObjectiveStatEvent::TimeElapsed
+				TargetTags(StrProperty)=
+				SourceTags(StrProperty)=
+				ContextTags(StrProperty)=Stat.Theater.Endless.Week01
+				Condition(StrProperty)=Mission.TimeElapsed >= 1800
+				TemplateId(StrProperty)=
+				AlternateTemplateIds(ArrayProperty)=[object]
+			winterquest_2018_frostnite_challenge_01_major:
+				Type(EnumProperty)=EFortQuestObjectiveStatEvent::TimeElapsed
+				TargetTags(StrProperty)=
+				SourceTags(StrProperty)=
+				ContextTags(StrProperty)=Stat.Theater.Endless.Week01
+				Condition(StrProperty)=Mission.TimeElapsed >= 1800
+				TemplateId(StrProperty)=
+				AlternateTemplateIds(ArrayProperty)=[object]
+			winterquest_2018_frostnite_challenge_02_minor:
+				Type(EnumProperty)=EFortQuestObjectiveStatEvent::TimeElapsed
+				TargetTags(StrProperty)=
+				SourceTags(StrProperty)=
+				ContextTags(StrProperty)=Stat.Theater.Endless.Week02
+				Condition(StrProperty)=Mission.TimeElapsed >= 1800
+				TemplateId(StrProperty)=
+				AlternateTemplateIds(ArrayProperty)=[object]
+			winterquest_2018_frostnite_challenge_02_major:
+				Type(EnumProperty)=EFortQuestObjectiveStatEvent::TimeElapsed
+				TargetTags(StrProperty)=
+				SourceTags(StrProperty)=
+				ContextTags(StrProperty)=Stat.Theater.Endless.Week02
+				Condition(StrProperty)=Mission.TimeElapsed >= 1800
+				TemplateId(StrProperty)=
+				AlternateTemplateIds(ArrayProperty)=[object]
+			winterquest_2018_frostnite_challenge_03_minor:
+				Type(EnumProperty)=EFortQuestObjectiveStatEvent::TimeElapsed
+				TargetTags(StrProperty)=
+				SourceTags(StrProperty)=
+				ContextTags(StrProperty)=Stat.Theater.Endless.Week03
+				Condition(StrProperty)=Mission.TimeElapsed >= 1800
+				TemplateId(StrProperty)=
+				AlternateTemplateIds(ArrayProperty)=[object]
+			winterquest_2018_frostnite_challenge_03_major:
+				Type(EnumProperty)=EFortQuestObjectiveStatEvent::TimeElapsed
+				TargetTags(StrProperty)=
+				SourceTags(StrProperty)=
+				ContextTags(StrProperty)=Stat.Theater.Endless.Week03
+				Condition(StrProperty)=Mission.TimeElapsed >= 1800
+				TemplateId(StrProperty)=
+				AlternateTemplateIds(ArrayProperty)=[object]
+			winterquest_2018_frostnite_challenge_04_minor:
+				Type(EnumProperty)=EFortQuestObjectiveStatEvent::TimeElapsed
+				TargetTags(StrProperty)=
+				SourceTags(StrProperty)=
+				ContextTags(StrProperty)=Stat.Theater.Endless.Week04
+				Condition(StrProperty)=Mission.TimeElapsed >= 1800
+				TemplateId(StrProperty)=
+				AlternateTemplateIds(ArrayProperty)=[object]
+			winterquest_2018_frostnite_challenge_04_major:
+				Type(EnumProperty)=EFortQuestObjectiveStatEvent::TimeElapsed
+				TargetTags(StrProperty)=
+				SourceTags(StrProperty)=
+				ContextTags(StrProperty)=Stat.Theater.Endless.Week04
+				Condition(StrProperty)=Mission.TimeElapsed >= 1800
+				TemplateId(StrProperty)=
+				AlternateTemplateIds(ArrayProperty)=[object]
+			winterquest_2018_frostnite_challenge_05_minor:
+				Type(EnumProperty)=EFortQuestObjectiveStatEvent::TimeElapsed
+				TargetTags(StrProperty)=
+				SourceTags(StrProperty)=
+				ContextTags(StrProperty)=Stat.Theater.Endless.Week05
+				Condition(StrProperty)=Mission.TimeElapsed >= 1800
+				TemplateId(StrProperty)=
+				AlternateTemplateIds(ArrayProperty)=[object]
+			winterquest_2018_frostnite_challenge_05_major:
+				Type(EnumProperty)=EFortQuestObjectiveStatEvent::TimeElapsed
+				TargetTags(StrProperty)=
+				SourceTags(StrProperty)=
+				ContextTags(StrProperty)=Stat.Theater.Endless.Week05
+				Condition(StrProperty)=Mission.TimeElapsed >= 1800
+				TemplateId(StrProperty)=
+				AlternateTemplateIds(ArrayProperty)=[object]
+			winterquest_2018_frostnite_challenge_06_minor:
+				Type(EnumProperty)=EFortQuestObjectiveStatEvent::TimeElapsed
+				TargetTags(StrProperty)=
+				SourceTags(StrProperty)=
+				ContextTags(StrProperty)=Stat.Theater.Endless.Week06
+				Condition(StrProperty)=Mission.TimeElapsed >= 1800
+				TemplateId(StrProperty)=
+				AlternateTemplateIds(ArrayProperty)=[object]
+			winterquest_2018_frostnite_challenge_06_major:
+				Type(EnumProperty)=EFortQuestObjectiveStatEvent::TimeElapsed
+				TargetTags(StrProperty)=
+				SourceTags(StrProperty)=
+				ContextTags(StrProperty)=Stat.Theater.Endless.Week06
+				Condition(StrProperty)=Mission.TimeElapsed >= 1800
+				TemplateId(StrProperty)=
+				AlternateTemplateIds(ArrayProperty)=[object]
+			winterquest_2018_frostnite_challenge_07_minor:
+				Type(EnumProperty)=EFortQuestObjectiveStatEvent::TimeElapsed
+				TargetTags(StrProperty)=
+				SourceTags(StrProperty)=
+				ContextTags(StrProperty)=Stat.Theater.Endless.Week07
+				Condition(StrProperty)=Mission.TimeElapsed >= 1800
+				TemplateId(StrProperty)=
+				AlternateTemplateIds(ArrayProperty)=[object]
+			winterquest_2018_frostnite_challenge_07_major:
+				Type(EnumProperty)=EFortQuestObjectiveStatEvent::TimeElapsed
+				TargetTags(StrProperty)=
+				SourceTags(StrProperty)=
+				ContextTags(StrProperty)=Stat.Theater.Endless.Week07
+				Condition(StrProperty)=Mission.TimeElapsed >= 1800
+				TemplateId(StrProperty)=
+				AlternateTemplateIds(ArrayProperty)=[object]
+			winterquest_2018_frostnite_challenge_08_minor:
+				Type(EnumProperty)=EFortQuestObjectiveStatEvent::TimeElapsed
+				TargetTags(StrProperty)=
+				SourceTags(StrProperty)=
+				ContextTags(StrProperty)=Stat.Theater.Endless.Week08
+				Condition(StrProperty)=Mission.TimeElapsed >= 1800
+				TemplateId(StrProperty)=
+				AlternateTemplateIds(ArrayProperty)=[object]
+			winterquest_2018_frostnite_challenge_08_major:
+				Type(EnumProperty)=EFortQuestObjectiveStatEvent::TimeElapsed
+				TargetTags(StrProperty)=
+				SourceTags(StrProperty)=
+				ContextTags(StrProperty)=Stat.Theater.Endless.Week08
+				Condition(StrProperty)=Mission.TimeElapsed >= 1800
 				TemplateId(StrProperty)=
 				AlternateTemplateIds(ArrayProperty)=[object]

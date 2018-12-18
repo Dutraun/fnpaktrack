@@ -12,6 +12,8 @@ Name table:
 	/Game/Missions/FunctionLibrary/MissionBlueprintFunctionLibrary
 	/Game/Weapons/ForceFeedback/FF_Generic_Melee_LeapAttack_Impact
 	/Game/Weapons/ForceFeedback/FF_Generic_Melee_LeapAttack_Launch
+	/Game/Weapons/FORT_Melee/Blueprints/B_Melee_Generic
+	/Script/AnimationBudgetAllocator
 	/Script/CoreUObject
 	/Script/Engine
 	/Script/FortniteGame
@@ -22,6 +24,7 @@ Name table:
 	Ability Setup
 	Ability.HeavyAttack.Melee.Hardware
 	AbilityCosts
+	AbilityLevel
 	AbilitySystemBlueprintLibrary
 	AbilityTags
 	AbilityTargetDataFromActor
@@ -38,7 +41,10 @@ Name table:
 	ActorTypeFilter
 	Add_FloatFloat
 	Add_VectorVector
+	AggregatedSourceTags
+	AggregatedTargetTags
 	AnimMontage
+	AnimTrialCompOverride_GEN_VARIABLE
 	ApplicationTag
 	ApplyGameplayEffectContainer
 	ApplyRootMotionJumpForce
@@ -46,7 +52,9 @@ Name table:
 	ApplyRootMotionMoveToActorForce
 	ApplyRootMotionMoveToActorForceDelegate__DelegateSignature
 	ArrayProperty
+	AudioComponent
 	AvatarActor
+	B_Melee_Generic_C
 	bConsiderFriendlyFireWhenExcludingFriends
 	bCreateHitResultWhenNoTargetsFound
 	bExcludeAllAttachedToInstigator
@@ -70,6 +78,7 @@ Name table:
 	bExcludeRequester
 	bExcludeWaterVolumes
 	bExcludeWithoutNavigationCorridor
+	BlueprintGameplayTagLibrary
 	BlueprintGeneratedClass
 	bOnlyApplyCostOnHit
 	BooleanAND
@@ -151,6 +160,8 @@ Name table:
 	CallFunc_MakeTransform_ReturnValue1
 	CallFunc_MakeVector_ReturnValue
 	CallFunc_Multiply_FloatFloat_ReturnValue
+	CallFunc_NotEqual_GameplayTag_ReturnValue
+	CallFunc_NotEqual_GameplayTag_ReturnValue1
 	CallFunc_Subtract_FloatFloat_ReturnValue
 	CallFunc_TargetDataHasActor_ReturnValue
 	CallFunc_WaitNetSync_ReturnValue
@@ -168,6 +179,7 @@ Name table:
 	CostSource
 	CostValue
 	CreatePlayMontageAndWaitProxy
+	CurrentWeapon
 	Curve
 	Curve_Melee_Tool_LeapAttack
 	Curve_Melee_Tool_LeapAttack_Nearby
@@ -181,6 +193,8 @@ Name table:
 	Default__AbilityTask_NetworkSyncPoint
 	Default__AbilityTask_PlayMontageAndWait
 	Default__ArrayProperty
+	Default__B_Melee_Generic_C
+	Default__BlueprintGameplayTagLibrary
 	Default__BlueprintGeneratedClass
 	Default__BoolProperty
 	Default__DelegateProperty
@@ -200,6 +214,7 @@ Name table:
 	Default__NameProperty
 	Default__ObjectProperty
 	Default__StructProperty
+	Degraded
 	Delay
 	DelegateFunction
 	DelegateProperty
@@ -208,7 +223,9 @@ Name table:
 	DisableInput
 	DistanceBetweenTwoVectors
 	Divide_FloatFloat
+	EffectCauser
 	EffectContainers
+	EffectContext
 	EFortAbilityCostSource
 	EFortAbilityCostSource::Durability
 	EFortAbilityCostSource::Stamina
@@ -260,13 +277,14 @@ Name table:
 	FortPawn
 	FortPlayerPawn
 	FortTargetFilter
+	FortWeapon
 	FTrunc
 	Function
 	GAB_Melee_Generic_EventGraph_C
 	GAB_Melee_GenericHeavyAttack_C
 	GAB_Melee_Tool_LeapAttack_C
-	Gameplay Cue Tag Impact
-	Gameplay Cue Tag Launch
+	Gameplay Cue Tag Impact Default
+	Gameplay Cue Tag Launch Default
 	Gameplay.Action.Player.BlockMove
 	Gameplay.Action.Player.Medium
 	Gameplay.Action.Player.PreventPersonalVehicle
@@ -279,10 +297,13 @@ Name table:
 	GameplayAbilityTargetDataHandle
 	GameplayCue.Weapons.Melee.Tool.LeapAttack.Impact
 	GameplayCue.Weapons.Melee.Tool.LeapAttack.Launch
+	GameplayCueParameters
 	GameplayEffectContextHandle
+	GameplayEffectLevel
 	GameplayStatics
 	GameplayTag
 	GameplayTagContainer
+	GameplayTags
 	GameplayTask
 	GapClosingPercentageWhenNearTarget
 	GE_Generic_StaminaRegenLockout_C
@@ -304,6 +325,7 @@ Name table:
 	ImpactFeedback
 	ImpactTargetingOffset
 	ImpactTargetingOffsetDistance
+	Instigator
 	IntProperty
 	IsDBNO
 	IsTargetFartherThanAdjustedDesiredLeapDistance
@@ -314,6 +336,7 @@ Name table:
 	K2_CommitAbility
 	K2_EndAbility
 	K2_ExecuteGameplayCue
+	K2_ExecuteGameplayCueWithParams
 	K2_GetActorLocation
 	K2_GetActorRotation
 	K2_OnEndAbility
@@ -349,13 +372,17 @@ Name table:
 	K2Node_CustomEvent_TargetData2
 	K2Node_CustomEvent_TargetData3
 	K2Node_CustomEvent_TimedOut
+	K2Node_DynamicCast_AsB_Melee_Generic
+	K2Node_DynamicCast_AsB_Melee_Generic1
 	K2Node_DynamicCast_AsFort_Pawn
 	K2Node_DynamicCast_AsFort_Pawn1
 	K2Node_DynamicCast_AsFort_Player_Pawn
 	K2Node_DynamicCast_bSuccess
 	K2Node_DynamicCast_bSuccess1
+	K2Node_DynamicCast_bSuccess2
 	K2Node_Event_bWasCancelled
 	K2Node_MakeArray_Array
+	K2Node_MakeStruct_GameplayCueParameters
 	K2Node_Select1_Default
 	K2Node_Select_Default
 	KismetMathLibrary
@@ -371,9 +398,14 @@ Name table:
 	LinearColor
 	LineTraceSingle
 	List
+	Location
+	LowAmmo
 	MakeTransform
 	MakeVector
+	MatchedTagName
 	MaxTargets
+	Melee Heavy Impact Gameplay Cue Tag Override
+	Melee Heavy Launch Gameplay Cue Tag Override
 	MeleeCombos
 	MissionBlueprintFunctionLibrary_C
 	MontageIntroAndLoop
@@ -387,6 +419,12 @@ Name table:
 	NearbyPathOffsetCurve
 	NetworkSyncDelegate__DelegateSignature
 	None
+	Normal
+	NormalA
+	NormalB
+	NormalizedMagnitude
+	NotEqual_GameplayTag
+	NullTag
 	Object
 	ObjectProperty
 	OnBlendOut
@@ -410,9 +448,11 @@ Name table:
 	OnPawnLanded
 	OnSync
 	OnSync_B46FACB640E1A5774627B596999DB747
+	OriginalTag
 	Outro Failsafe
 	Outro Failsafe Timer Handle
 	Package
+	ParticleSystemComponent
 	PathOffsetCurve
 	PawnLanded
 	PawnLandedSignature__DelegateSignature
@@ -423,8 +463,12 @@ Name table:
 	PrimitiveComponent
 	Quat
 	Range
+	RawMagnitude
 	ReachedFinishAbilityMontageStop
 	ReadyForActivation
+	ReloadCartridge
+	ReloadEnd
+	ReloadStart
 	ReturnValue
 	RootMotionJumpForceTask
 	RootMotionMoveToActorTask
@@ -433,17 +477,21 @@ Name table:
 	RowName
 	ScalableFloat
 	Scale3D
+	SceneComponent
 	ScriptStruct
 	SecondarySource
 	SetKnockbackImmunity
 	SetPawnCollision
 	Shape
+	SkeletalMeshComponentBudgeted
+	SourceObject
 	Stamina Lockout
 	StrProperty
 	StructProperty
 	Subtract_FloatFloat
 	TagName
 	TargetActor
+	TargetAttachComponent
 	TargetData
 	TargetDataHasActor
 	Targeted
@@ -477,16 +525,20 @@ Name table:
 	UInt64Property
 	Value
 	Vector
+	Vector_NetQuantize10
+	Vector_NetQuantizeNormal
 	WaitNetSync
 	WaitTargetSelection
 	WaitTargetSelectionDelegate__DelegateSignature
 	WeakObjectProperty
+	WeaponMesh
+	WeaponMesh0
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	GAB_Melee_Tool_LeapAttack_C (0-0-0-0): size 669 (cls: GAB_Melee_Tool_LeapAttack_C>BlueprintGeneratedClass>/Script/Engine):
+	GAB_Melee_Tool_LeapAttack_C (0-0-0-0): size 673 (cls: GAB_Melee_Tool_LeapAttack_C>BlueprintGeneratedClass>/Script/Engine):
 		Tag array:
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_GAB_Melee_Tool_LeapAttack=GAB_Melee_Tool_LeapAttack_C 
-	Default__GAB_Melee_Tool_LeapAttack_C (0-0-0-0): size 12809 (cls: Default__GAB_Melee_Tool_LeapAttack_C>GAB_Melee_Tool_LeapAttack_C):
+	Default__GAB_Melee_Tool_LeapAttack_C (0-0-0-0): size 12899 (cls: Default__GAB_Melee_Tool_LeapAttack_C>GAB_Melee_Tool_LeapAttack_C):
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			LeapDistanceNoTarget(FloatProperty)=1280 
@@ -507,8 +559,9 @@ Serialized exports:
 			NearbyPathOffsetCurve(ObjectProperty)=Curve_Melee_Tool_LeapAttack_Nearby=/Game/Abilities/Weapons/Melee/Hammer/Curve_Melee_Tool_LeapAttack_Nearby 
 			ImpactFeedback(ObjectProperty)=FF_Generic_Melee_LeapAttack_Impact=/Game/Weapons/ForceFeedback/FF_Generic_Melee_LeapAttack_Impact 
 			LaunchFeedback(ObjectProperty)=FF_Generic_Melee_LeapAttack_Launch=/Game/Weapons/ForceFeedback/FF_Generic_Melee_LeapAttack_Launch 
-			Gameplay Cue Tag Impact(StructProperty)=System.Byte[] 
-			Gameplay Cue Tag Launch(StructProperty)=System.Byte[] 
+			Gameplay Cue Tag Impact Default(StructProperty)=System.Byte[] 
+			Gameplay Cue Tag Launch Default(StructProperty)=System.Byte[] 
+			NullTag(StructProperty)=System.Byte[] 
 			EffectContainers(StructProperty)=System.Byte[] 
 			EffectContainers(StructProperty)=System.Byte[] 
 			AbilityCosts(ArrayProperty)=[object] (inner: StructProperty)
@@ -518,7 +571,7 @@ Serialized exports:
 			ActivationRequiredTags(StructProperty)=GameplayTagContainer:Gameplay.Melee.EnableHeavyAttack.Tool 
 	LeapDistanceNoTarget (0-0-0-0): size 32 (cls: LeapDistanceNoTarget>FloatProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_GAB_Melee_Tool_LeapAttack (0-0-0-0): size 3468 (cls: ExecuteUbergraph_GAB_Melee_Tool_LeapAttack>Function>/Script/CoreUObject)
+	ExecuteUbergraph_GAB_Melee_Tool_LeapAttack (0-0-0-0): size 4855 (cls: ExecuteUbergraph_GAB_Melee_Tool_LeapAttack>Function>/Script/CoreUObject)
 	K2_ActivateAbility (0-0-0-0): size 54 (cls: K2_ActivateAbility>Function>/Script/CoreUObject)
 	TryEndAbility (0-0-0-0): size 54 (cls: TryEndAbility>Function>/Script/CoreUObject)
 	Outro Failsafe (0-0-0-0): size 54 (cls: Outro Failsafe>Function>/Script/CoreUObject)
@@ -588,10 +641,14 @@ Serialized exports:
 	CallFunc_IsValid_ReturnValue6 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue6>BoolProperty>/Script/CoreUObject)
 	CallFunc_K2_CommitAbility_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_K2_CommitAbility_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_K2_CommitAbility_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_K2_CommitAbility_ReturnValue1>BoolProperty>/Script/CoreUObject)
+	CallFunc_NotEqual_GameplayTag_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_NotEqual_GameplayTag_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_NotEqual_GameplayTag_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_NotEqual_GameplayTag_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_TargetDataHasActor_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_TargetDataHasActor_ReturnValue>BoolProperty>/Script/CoreUObject)
 	K2Node_CustomEvent_DestinationReached (0-0-0-0): size 34 (cls: K2Node_CustomEvent_DestinationReached>BoolProperty>/Script/CoreUObject)
 	K2Node_CustomEvent_TimedOut (0-0-0-0): size 34 (cls: K2Node_CustomEvent_TimedOut>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_bSuccess1 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess1>BoolProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_bSuccess2 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess2>BoolProperty>/Script/CoreUObject)
 	K2Node_Event_bWasCancelled (0-0-0-0): size 34 (cls: K2Node_Event_bWasCancelled>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable1 (0-0-0-0): size 34 (cls: Temp_bool_Variable1>BoolProperty>/Script/CoreUObject)
@@ -673,6 +730,8 @@ Serialized exports:
 	CallFunc_WaitNetSync_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_WaitNetSync_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_WaitTargetSelection_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_WaitTargetSelection_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_WaitTargetSelection_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_WaitTargetSelection_ReturnValue1>ObjectProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_AsB_Melee_Generic (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsB_Melee_Generic>ObjectProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_AsB_Melee_Generic1 (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsB_Melee_Generic1>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Player_Pawn (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Player_Pawn>ObjectProperty>/Script/CoreUObject)
 	K2Node_Select1_Default (0-0-0-0): size 36 (cls: K2Node_Select1_Default>ObjectProperty>/Script/CoreUObject)
 	FortPawn (0-0-0-0): size 36 (cls: FortPawn>ObjectProperty>/Script/CoreUObject)
@@ -719,17 +778,19 @@ Serialized exports:
 	K2Node_CustomEvent_TargetData1 (0-0-0-0): size 36 (cls: K2Node_CustomEvent_TargetData1>StructProperty>/Script/CoreUObject)
 	K2Node_CustomEvent_TargetData2 (0-0-0-0): size 36 (cls: K2Node_CustomEvent_TargetData2>StructProperty>/Script/CoreUObject)
 	K2Node_CustomEvent_TargetData3 (0-0-0-0): size 36 (cls: K2Node_CustomEvent_TargetData3>StructProperty>/Script/CoreUObject)
+	K2Node_MakeStruct_GameplayCueParameters (0-0-0-0): size 36 (cls: K2Node_MakeStruct_GameplayCueParameters>StructProperty>/Script/CoreUObject)
 	Temp_struct_Variable (0-0-0-0): size 36 (cls: Temp_struct_Variable>StructProperty>/Script/CoreUObject)
 	Temp_struct_Variable1 (0-0-0-0): size 36 (cls: Temp_struct_Variable1>StructProperty>/Script/CoreUObject)
 	Temp_struct_Variable2 (0-0-0-0): size 36 (cls: Temp_struct_Variable2>StructProperty>/Script/CoreUObject)
 	Temp_struct_Variable3 (0-0-0-0): size 36 (cls: Temp_struct_Variable3>StructProperty>/Script/CoreUObject)
 	Temp_struct_Variable4 (0-0-0-0): size 36 (cls: Temp_struct_Variable4>StructProperty>/Script/CoreUObject)
 	Failsafe Timer Handle (0-0-0-0): size 36 (cls: Failsafe Timer Handle>StructProperty>/Script/CoreUObject)
-	Gameplay Cue Tag Impact (0-0-0-0): size 36 (cls: Gameplay Cue Tag Impact>StructProperty>/Script/CoreUObject)
-	Gameplay Cue Tag Launch (0-0-0-0): size 36 (cls: Gameplay Cue Tag Launch>StructProperty>/Script/CoreUObject)
+	Gameplay Cue Tag Impact Default (0-0-0-0): size 36 (cls: Gameplay Cue Tag Impact Default>StructProperty>/Script/CoreUObject)
+	Gameplay Cue Tag Launch Default (0-0-0-0): size 36 (cls: Gameplay Cue Tag Launch Default>StructProperty>/Script/CoreUObject)
 	ImpactTargetingOffset (0-0-0-0): size 36 (cls: ImpactTargetingOffset>StructProperty>/Script/CoreUObject)
 	CallFunc_K2_GetActorLocation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_GetActorLocation_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_K2_GetActorLocation_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_K2_GetActorLocation_ReturnValue1>StructProperty>/Script/CoreUObject)
+	NullTag (0-0-0-0): size 36 (cls: NullTag>StructProperty>/Script/CoreUObject)
 	FinalTargetLocation (0-0-0-0): size 36 (cls: FinalTargetLocation>StructProperty>/Script/CoreUObject)
 	Outro Failsafe Timer Handle (0-0-0-0): size 36 (cls: Outro Failsafe Timer Handle>StructProperty>/Script/CoreUObject)
 	ApplicationTag (0-0-0-0): size 36 (cls: ApplicationTag>StructProperty>/Script/CoreUObject)

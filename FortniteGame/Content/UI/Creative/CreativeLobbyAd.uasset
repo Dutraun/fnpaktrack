@@ -15,11 +15,11 @@ Name table:
 	/Script/EpicCMSUIFramework
 	/Script/FortniteUI
 	/Script/UMG
-	AdData
 	ArrayProperty
 	AutoWrapText
 	Background
 	bAllowTemplate
+	bClassRequiresNativeTick
 	bCookedWidgetTree
 	bHasScriptImplementedPaint
 	bHasScriptImplementedTick
@@ -44,10 +44,10 @@ Name table:
 	CallFunc_TextToUpper_ReturnValue1
 	CallFunc_TextToUpper_ReturnValue2
 	Class
+	CMSAdEntry
 	ColorAndOpacity
 	CommonBorder
 	CommonTextBlock
-	CommonUserWidget
 	Content
 	Conv_StringToText
 	CreativeAdData
@@ -56,18 +56,22 @@ Name table:
 	Default__BorderSlot
 	Default__CommonBorder
 	Default__CommonTextBlock
-	Default__CommonUserWidget
 	Default__CreativeLobbyAd_C
 	Default__EpicCMSImage
+	Default__FortCreativeAdTile
 	Default__Function
 	Default__HorizontalBox
 	Default__HorizontalBoxSlot
+	Default__IntProperty
 	Default__KismetTextLibrary
 	Default__ObjectProperty
 	Default__Overlay
 	Default__OverlaySlot
+	Default__ScaleBox
+	Default__ScaleBoxSlot
 	Default__SizeBox
 	Default__SizeBoxSlot
+	Default__Spacer
 	Default__StructProperty
 	Default__TextProperty
 	Default__TextScrollStyle-Base_C
@@ -82,27 +86,30 @@ Name table:
 	DrawAs
 	EHorizontalAlignment
 	Engine
+	EntryPoint
 	EpicCMSImage
 	ESlateBrushDrawType
 	ESlateBrushDrawType::Box
 	ESlateSizeRule
 	ESlateSizeRule::Fill
+	EStretchDirection
+	EStretchDirection::DownOnly
 	EVerticalAlignment
+	ExecuteUbergraph_CreativeLobbyAd
 	FloatProperty
 	Font
 	FontObject
+	FortCreativeAdTile
 	Function
 	HAlign_Fill
-	HAlign_Left
 	HAlign_Right
 	Header
 	HeightOverride
 	HorizontalAlignment
 	HorizontalBox
 	HorizontalBoxSlot
-	Image_AdIcon
+	Image_CreativeAd
 	ImageSize
-	InitAd
 	IntProperty
 	KismetTextLibrary
 	Left
@@ -115,15 +122,19 @@ Name table:
 	None
 	Object
 	ObjectProperty
+	OnCMSDataUpdated
 	Overlay
 	OverlaySlot
 	Package
 	Padding
 	Parent
+	PointerToUberGraphFrame
 	RenderTransform
 	ResourceObject
 	Right
 	RootWidget
+	ScaleBox
+	ScaleBoxSlot
 	ScriptStruct
 	ScrollStyle
 	SetText
@@ -139,7 +150,9 @@ Name table:
 	Slot
 	Slots
 	SoftObjectProperty
+	Spacer
 	SpecifiedColor
+	StretchDirection
 	StrProperty
 	StructProperty
 	Style
@@ -160,6 +173,8 @@ Name table:
 	Top
 	Translation
 	TypefaceFontName
+	UberGraphFrame
+	UberGraphFunction
 	VAlign_Bottom
 	VAlign_Center
 	VAlign_Fill
@@ -174,23 +189,24 @@ Name table:
 	WidgetTree
 	WidthOverride
 Serialized exports:
-	Image_AdIcon (0-0-0-0): size 36 (cls: Image_AdIcon>ObjectProperty>/Script/CoreUObject)
-	AdData (0-0-0-0): size 36 (cls: AdData>StructProperty>/Script/CoreUObject)
-	InitAd (0-0-0-0): size 383 (cls: InitAd>Function>/Script/CoreUObject)
-	CreativeLobbyAd_C (0-0-0-0): size 226 (cls: CreativeLobbyAd_C>WidgetBlueprintGeneratedClass>/Script/UMG):
+	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
+	CreativeLobbyAd_C (0-0-0-0): size 297 (cls: CreativeLobbyAd_C>WidgetBlueprintGeneratedClass>/Script/UMG):
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
 			bValidTemplate(BoolProperty)=True 
+			bClassRequiresNativeTick(BoolProperty)=True 
 			TemplateAsset(SoftObjectProperty)=/Game/UI/Creative/CreativeLobbyAd.WidgetArchetype 
-	Default__CreativeLobbyAd_C (0-0-0-0): size 60 (cls: Default__CreativeLobbyAd_C>CreativeLobbyAd_C):
+			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_CreativeLobbyAd=CreativeLobbyAd_C 
+	Default__CreativeLobbyAd_C (0-0-0-0): size 117 (cls: Default__CreativeLobbyAd_C>CreativeLobbyAd_C):
 		Tag array:
+			UberGraphFrame(StructProperty)=System.Byte[] 
 			bHasScriptImplementedTick(BoolProperty)=False 
 			bHasScriptImplementedPaint(BoolProperty)=False 
 	BorderSlot_0 (0-0-0-0): size 70 (cls: BorderSlot_0>BorderSlot>/Script/UMG):
 		Tag array:
 			Parent(ObjectProperty)=CommonBorder_0=WidgetArchetype 
-			Content(ObjectProperty)=Overlay_3=WidgetArchetype 
+			Content(ObjectProperty)=HorizontalBox_2=WidgetArchetype 
 	BorderSlot_1 (0-0-0-0): size 243 (cls: BorderSlot_1>BorderSlot>/Script/UMG):
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
@@ -200,7 +216,7 @@ Serialized exports:
 		Tag array:
 			Style(ObjectProperty)=Border_XP_LBlue_VGrad_C=/Game/UI/Foundation/Border/Border_XP_LBlue_VGrad 
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
+			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
 	Violator (0-0-0-0): size 668 (cls: Violator>CommonBorder>/Script/CommonUI):
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
@@ -208,23 +224,23 @@ Serialized exports:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=OverlaySlot_1=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
-	Text_Description (0-0-0-0): size 524 (cls: Text_Description>CommonTextBlock>/Script/CommonUI):
+	Text_Description (0-0-0-0): size 509 (cls: Text_Description>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-S-70pc_C=/Game/UI/Foundation/Text/TextStyle-Header-S-70pc 
-			Text(TextProperty)=500 NEW PIECES TO PLAY WITH! (16C893EE44987CDF2A114082CD337A9B) 
+			Text(TextProperty)={Description} (16C893EE44987CDF2A114082CD337A9B) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
 			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			AutoWrapText(BoolProperty)=True 
 			Slot(ObjectProperty)=VerticalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	Text_Header (0-0-0-0): size 390 (cls: Text_Header>CommonTextBlock>/Script/CommonUI):
+	Text_Header (0-0-0-0): size 384 (cls: Text_Header>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-L_C=/Game/UI/Foundation/Text/TextStyle-Header-L 
-			Text(TextProperty)=FARMHOUSE SET (8C7DAB7D4889DB521377D887017F73D2) 
+			Text(TextProperty)={TItle} (8C7DAB7D4889DB521377D887017F73D2) 
 			Font(StructProperty)=System.Byte[] 
 			ShadowOffset(StructProperty)=Vector2D(0,0) 
-			Slot(ObjectProperty)=VerticalBoxSlot_4=WidgetArchetype 
+			Slot(ObjectProperty)=ScaleBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
 	Text_SubHeader (0-0-0-0): size 381 (cls: Text_SubHeader>CommonTextBlock>/Script/CommonUI):
 		Tag array:
@@ -237,48 +253,44 @@ Serialized exports:
 			bIsVariable(BoolProperty)=True 
 	WidgetArchetype (0-0-0-0): size 183 (cls: WidgetArchetype>CreativeLobbyAd_C):
 		Tag array:
-			Image_AdIcon(ObjectProperty)=Image_AdIcon=WidgetArchetype 
 			Text_Description(ObjectProperty)=Text_Description=WidgetArchetype 
 			Text_Header(ObjectProperty)=Text_Header=WidgetArchetype 
 			Text_SubHeader(ObjectProperty)=Text_SubHeader=WidgetArchetype 
+			Image_CreativeAd(ObjectProperty)=Image_CreativeAd=WidgetArchetype 
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
-	Image_AdIcon (0-0-0-0): size 184 (cls: Image_AdIcon>EpicCMSImage>/Script/EpicCMSUIFramework):
+	Image_CreativeAd (0-0-0-0): size 184 (cls: Image_CreativeAd>EpicCMSImage>/Script/EpicCMSUIFramework):
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
-			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
-	HorizontalBox_0 (0-0-0-0): size 86 (cls: HorizontalBox_0>HorizontalBox>/Script/UMG):
-		Tag array:
-			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
-	HorizontalBoxSlot_0 (0-0-0-0): size 168 (cls: HorizontalBoxSlot_0>HorizontalBoxSlot>/Script/UMG):
-		Tag array:
-			Size(StructProperty)=System.Byte[] 
-			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
-			Content(ObjectProperty)=CommonBorder_0=WidgetArchetype 
-	HorizontalBoxSlot_1 (0-0-0-0): size 152 (cls: HorizontalBoxSlot_1>HorizontalBoxSlot>/Script/UMG):
-		Tag array:
-			HorizontalAlignment(ByteProperty)=HAlign_Left 
-			VerticalAlignment(ByteProperty)=VAlign_Center 
-			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
-			Content(ObjectProperty)=Image_AdIcon=WidgetArchetype 
 	Text_Description (0-0-0-0): size 36 (cls: Text_Description>ObjectProperty>/Script/CoreUObject)
-	Text_Header (0-0-0-0): size 36 (cls: Text_Header>ObjectProperty>/Script/CoreUObject)
 	Text_SubHeader (0-0-0-0): size 36 (cls: Text_SubHeader>ObjectProperty>/Script/CoreUObject)
-	Overlay_3 (0-0-0-0): size 82 (cls: Overlay_3>Overlay>/Script/UMG):
+	Text_Header (0-0-0-0): size 36 (cls: Text_Header>ObjectProperty>/Script/CoreUObject)
+	CallFunc_TextToUpper_ReturnValue2 (0-0-0-0): size 32 (cls: CallFunc_TextToUpper_ReturnValue2>TextProperty>/Script/CoreUObject)
+	CallFunc_Conv_StringToText_ReturnValue2 (0-0-0-0): size 32 (cls: CallFunc_Conv_StringToText_ReturnValue2>TextProperty>/Script/CoreUObject)
+	CallFunc_TextToUpper_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_TextToUpper_ReturnValue1>TextProperty>/Script/CoreUObject)
+	CallFunc_TextToUpper_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_TextToUpper_ReturnValue>TextProperty>/Script/CoreUObject)
+	CallFunc_Conv_StringToText_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Conv_StringToText_ReturnValue1>TextProperty>/Script/CoreUObject)
+	CallFunc_Conv_StringToText_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Conv_StringToText_ReturnValue>TextProperty>/Script/CoreUObject)
+	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
+	ExecuteUbergraph_CreativeLobbyAd (0-0-0-0): size 389 (cls: ExecuteUbergraph_CreativeLobbyAd>Function>/Script/CoreUObject)
+	OnCMSDataUpdated (0-0-0-0): size 54 (cls: OnCMSDataUpdated>Function>/Script/CoreUObject)
+	HorizontalBox_2 (0-0-0-0): size 86 (cls: HorizontalBox_2>HorizontalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=BorderSlot_0=WidgetArchetype 
-	Overlay_5 (0-0-0-0): size 57 (cls: Overlay_5>Overlay>/Script/UMG):
+	HorizontalBoxSlot_0 (0-0-0-0): size 168 (cls: HorizontalBoxSlot_0>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			Size(StructProperty)=System.Byte[] 
+			Parent(ObjectProperty)=HorizontalBox_2=WidgetArchetype 
+			Content(ObjectProperty)=VerticalBox_0=WidgetArchetype 
+	HorizontalBoxSlot_1 (0-0-0-0): size 70 (cls: HorizontalBoxSlot_1>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=HorizontalBox_2=WidgetArchetype 
+			Content(ObjectProperty)=Spacer_0=WidgetArchetype 
+	Overlay_5 (0-0-0-0): size 61 (cls: Overlay_5>Overlay>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-	OverlaySlot_2 (0-0-0-0): size 238 (cls: OverlaySlot_2>OverlaySlot>/Script/UMG):
-		Tag array:
-			Padding(StructProperty)=System.Byte[] 
-			HorizontalAlignment(ByteProperty)=HAlign_Fill 
-			VerticalAlignment(ByteProperty)=VAlign_Fill 
-			Parent(ObjectProperty)=Overlay_3=WidgetArchetype 
-			Content(ObjectProperty)=VerticalBox_0=WidgetArchetype 
 	OverlaySlot_0 (0-0-0-0): size 243 (cls: OverlaySlot_0>OverlaySlot>/Script/UMG):
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
@@ -290,12 +302,28 @@ Serialized exports:
 			VerticalAlignment(ByteProperty)=VAlign_Bottom 
 			Parent(ObjectProperty)=Overlay_5=WidgetArchetype 
 			Content(ObjectProperty)=Violator=WidgetArchetype 
+	OverlaySlot_2 (0-0-0-0): size 111 (cls: OverlaySlot_2>OverlaySlot>/Script/UMG):
+		Tag array:
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=Overlay_5=WidgetArchetype 
+			Content(ObjectProperty)=SizeBox_2=WidgetArchetype 
+	ScaleBox_0 (0-0-0-0): size 123 (cls: ScaleBox_0>ScaleBox>/Script/UMG):
+		Tag array:
+			StretchDirection(ByteProperty)=EStretchDirection::DownOnly 
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=VerticalBoxSlot_4=WidgetArchetype 
+	ScaleBoxSlot_0 (0-0-0-0): size 152 (cls: ScaleBoxSlot_0>ScaleBoxSlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=ScaleBox_0=WidgetArchetype 
+			Content(ObjectProperty)=Text_Header=WidgetArchetype 
 	SizeBox_0 (0-0-0-0): size 192 (cls: SizeBox_0>SizeBox>/Script/UMG):
 		Tag array:
 			bOverride_WidthOverride(BoolProperty)=True 
 			bOverride_HeightOverride(BoolProperty)=True 
-			WidthOverride(FloatProperty)=600 
-			HeightOverride(FloatProperty)=180 
+			WidthOverride(FloatProperty)=500 
+			HeightOverride(FloatProperty)=160 
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
 	SizeBox_1 (0-0-0-0): size 137 (cls: SizeBox_1>SizeBox>/Script/UMG):
@@ -304,25 +332,35 @@ Serialized exports:
 			MaxDesiredWidth(FloatProperty)=256 
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=BorderSlot_1=WidgetArchetype 
+	SizeBox_2 (0-0-0-0): size 192 (cls: SizeBox_2>SizeBox>/Script/UMG):
+		Tag array:
+			bOverride_WidthOverride(BoolProperty)=True 
+			bOverride_HeightOverride(BoolProperty)=True 
+			WidthOverride(FloatProperty)=192 
+			HeightOverride(FloatProperty)=192 
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=OverlaySlot_2=WidgetArchetype 
 	SizeBoxSlot_0 (0-0-0-0): size 70 (cls: SizeBoxSlot_0>SizeBoxSlot>/Script/UMG):
 		Tag array:
 			Parent(ObjectProperty)=SizeBox_0=WidgetArchetype 
-			Content(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
+			Content(ObjectProperty)=CommonBorder_0=WidgetArchetype 
 	SizeBoxSlot_0 (0-0-0-0): size 70 (cls: SizeBoxSlot_0>SizeBoxSlot>/Script/UMG):
 		Tag array:
 			Parent(ObjectProperty)=SizeBox_1=WidgetArchetype 
 			Content(ObjectProperty)=Text_SubHeader=WidgetArchetype 
-	CallFunc_Conv_StringToText_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Conv_StringToText_ReturnValue>TextProperty>/Script/CoreUObject)
-	CallFunc_Conv_StringToText_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Conv_StringToText_ReturnValue1>TextProperty>/Script/CoreUObject)
-	CallFunc_Conv_StringToText_ReturnValue2 (0-0-0-0): size 32 (cls: CallFunc_Conv_StringToText_ReturnValue2>TextProperty>/Script/CoreUObject)
-	CallFunc_TextToUpper_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_TextToUpper_ReturnValue>TextProperty>/Script/CoreUObject)
-	CallFunc_TextToUpper_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_TextToUpper_ReturnValue1>TextProperty>/Script/CoreUObject)
-	CallFunc_TextToUpper_ReturnValue2 (0-0-0-0): size 32 (cls: CallFunc_TextToUpper_ReturnValue2>TextProperty>/Script/CoreUObject)
+	SizeBoxSlot_0 (0-0-0-0): size 70 (cls: SizeBoxSlot_0>SizeBoxSlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=SizeBox_2=WidgetArchetype 
+			Content(ObjectProperty)=Image_CreativeAd=WidgetArchetype 
+	Spacer_0 (0-0-0-0): size 98 (cls: Spacer_0>Spacer>/Script/UMG):
+		Tag array:
+			Size(StructProperty)=Vector2D(64,1) 
+			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
 	VerticalBox_0 (0-0-0-0): size 86 (cls: VerticalBox_0>VerticalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-			Slot(ObjectProperty)=OverlaySlot_2=WidgetArchetype 
-	VerticalBoxSlot_0 (0-0-0-0): size 156 (cls: VerticalBoxSlot_0>VerticalBoxSlot>/Script/UMG):
+			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
+	VerticalBoxSlot_0 (0-0-0-0): size 185 (cls: VerticalBoxSlot_0>VerticalBoxSlot>/Script/UMG):
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
 			Parent(ObjectProperty)=VerticalBox_0=WidgetArchetype 
@@ -331,7 +369,7 @@ Serialized exports:
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
 			Parent(ObjectProperty)=VerticalBox_0=WidgetArchetype 
-			Content(ObjectProperty)=Text_Header=WidgetArchetype 
+			Content(ObjectProperty)=ScaleBox_0=WidgetArchetype 
 	WidgetTree_0 (0-0-0-0): size 41 (cls: WidgetTree_0>WidgetTree>/Script/UMG):
 		Tag array:
 			RootWidget(ObjectProperty)=Overlay_5=WidgetArchetype 

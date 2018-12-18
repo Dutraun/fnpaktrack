@@ -10,6 +10,7 @@ Name table:
 	/Game/Athena/Sounds/Quests/Doorbells/Doorbell_Poof_Cue
 	/Game/Athena/Sounds/Quests/Doorbells/Doorbell_Press_Cue
 	/Game/Athena/Sounds/Quests/Doorbells/Doorbell_Ring_Fancy
+	/Game/Athena/Sounds/Quests/Doorbells/Doorbell_Ring_Holiday_Cue
 	/Game/Athena/Sounds/Quests/Doorbells/Doorbell_Ring_Regular
 	/Game/Athena/Sounds/Quests/Doorbells/Doorbell_Ring_Rundown
 	/Game/Balance/SearchSpeed
@@ -28,7 +29,8 @@ Name table:
 	Array_Get
 	Array_Length
 	ArrayProperty
-	Athena.Creative
+	Athena.Quests.Doorbell
+	Athena_CheckCreativeMode
 	Athena_CheckQuestAndObjectiveCompletion
 	Athena_CollectHiddenStarReward_Cue
 	Athena_GiveQuestUpdateToPlayers
@@ -40,6 +42,8 @@ Name table:
 	AttributeInitCategory
 	AttributeInitKeys
 	AudioComponent
+	bAllowResourceDrop
+	bAllowWeakSpots
 	battlepass_ringdoorbell_differenthouses
 	bCanBeDamaged
 	bCanEverAffectNavigation
@@ -53,16 +57,18 @@ Name table:
 	bIsExternalCurve
 	bIsNavigationRelevant
 	bIsParentComponentNative
+	bIsSimpleInteractQuest
 	BlueprintCanInteract
-	BlueprintGameplayTagLibrary
 	BlueprintGeneratedClass
 	BlueprintGetInteractionString
 	BlueprintOnInteract
+	bNeedsDamageOverlay
 	BodyInstance
 	BooleanAND
 	BoolProperty
 	BoxComponent
 	BoxOverlapActors
+	bPlayDestructionEffects
 	bPlaylistDataIsLoaded
 	BreakdownFX
 	BreakdownNumber
@@ -73,6 +79,7 @@ Name table:
 	BuildingActor
 	BuildingAttachmentType
 	BuildingPropSimpleInteract
+	bUseComplexForWeakSpots
 	bValidatedAsWired
 	bVisible
 	ByteProperty
@@ -83,6 +90,8 @@ Name table:
 	CallFunc_Array_Get_Item2
 	CallFunc_Array_Get_Item3
 	CallFunc_Array_Length_ReturnValue
+	CallFunc_Athena_CheckCreativeMode_CanCompleteQuest
+	CallFunc_Athena_CheckCreativeMode_CanCompleteQuest1
 	CallFunc_Athena_CheckQuestAndObjectiveCompletion_ObjectiveCompleted
 	CallFunc_Athena_CheckQuestAndObjectiveCompletion_ObjectiveCompleted1
 	CallFunc_Athena_CheckQuestAndObjectiveCompletion_QuestCompleted
@@ -102,9 +111,9 @@ Name table:
 	CallFunc_EqualEqual_IntInt_ReturnValue
 	CallFunc_GetActorTeam_ReturnValue
 	CallFunc_GetActorTeam_ReturnValue1
-	CallFunc_GetAthenaPlaylistContextTags_ReturnValue
 	CallFunc_GetController_ReturnValue
 	CallFunc_GetGameState_ReturnValue
+	CallFunc_GetGameState_ReturnValue1
 	CallFunc_GetLocalFortPlayerControllers_ReturnValue
 	CallFunc_GetLocalFortPlayerControllers_ReturnValue1
 	CallFunc_GetLocalFortPlayerControllers_ReturnValue2
@@ -116,8 +125,6 @@ Name table:
 	CallFunc_GreaterEqual_IntInt_ReturnValue
 	CallFunc_HasAuthority_ReturnValue
 	CallFunc_HasAuthority_ReturnValue1
-	CallFunc_HasTag_ReturnValue
-	CallFunc_HasTag_ReturnValue1
 	CallFunc_IsValid_ReturnValue
 	CallFunc_K2_GetActorLocation_ReturnValue
 	CallFunc_K2_GetComponentLocation_ReturnValue
@@ -126,11 +133,13 @@ Name table:
 	CallFunc_K2_GetComponentRotation_ReturnValue
 	CallFunc_K2_SetTimerDelegate_ReturnValue
 	CallFunc_Less_IntInt_ReturnValue
+	CallFunc_LessEqual_IntInt_ReturnValue
 	CallFunc_LinearColorLerp_ReturnValue
 	CallFunc_LinearColorLerp_ReturnValue1
 	CallFunc_Not_PreBool_ReturnValue
 	CallFunc_NotEqual_ByteByte_ReturnValue
 	CallFunc_NotEqual_ObjectObject_ReturnValue
+	CallFunc_RandomIntegerInRange_ReturnValue
 	CallFunc_SpawnEmitterAtLocation_ReturnValue
 	CallFunc_SpawnEmitterAttached_ReturnValue
 	CallFunc_SpawnSoundAtLocation_ReturnValue
@@ -160,7 +169,6 @@ Name table:
 	Default__ArrayProperty
 	Default__AthenaQuestFunctionLibrary_C
 	Default__AudioComponent
-	Default__BlueprintGameplayTagLibrary
 	Default__BlueprintGeneratedClass
 	Default__BoolProperty
 	Default__BoxComponent
@@ -197,6 +205,7 @@ Name table:
 	Doorbell_Poof_Cue
 	Doorbell_Press_Cue
 	Doorbell_Ring_Fancy
+	Doorbell_Ring_Holiday_Cue
 	Doorbell_Ring_Regular
 	Doorbell_Ring_Rundown
 	DoorbellButtonLocation
@@ -257,7 +266,6 @@ Name table:
 	GameplayTagContainer
 	GameStateBase
 	GetActorTeam
-	GetAthenaPlaylistContextTags
 	GetController
 	GetGameState
 	GetLocalFortPlayerControllers
@@ -271,7 +279,7 @@ Name table:
 	Guid
 	Handle
 	HasAuthority
-	HasTag
+	HolidayDoorbellSound
 	HouseType
 	InsideHouseOverlap
 	InsideHouseOverlap_GEN_VARIABLE
@@ -303,6 +311,7 @@ Name table:
 	KismetSystemLibrary
 	LatentActionInfo
 	Less_IntInt
+	LessEqual_IntInt
 	LinearColor
 	LinearColorLerp
 	LocallyActive
@@ -357,6 +366,7 @@ Name table:
 	QuestSuccessEmitter
 	QuestSuccessSound
 	QuestUpdated
+	RandomIntegerInRange
 	ReceiveBeginPlay
 	RegularDoorbellSound
 	RelativeLocation
@@ -436,13 +446,13 @@ Name table:
 	Volume
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	Prop_Athena_Doorbell_Interactable_C (0-0-0-0): size 748 (cls: Prop_Athena_Doorbell_Interactable_C>BlueprintGeneratedClass>/Script/Engine):
+	Prop_Athena_Doorbell_Interactable_C (0-0-0-0): size 756 (cls: Prop_Athena_Doorbell_Interactable_C>BlueprintGeneratedClass>/Script/Engine):
 		Tag array:
 			NumReplicatedProperties(IntProperty)=2 
 			Timelines(ArrayProperty)=[object] (inner: ObjectProperty)
 			SimpleConstructionScript(ObjectProperty)=SimpleConstructionScript_0=Prop_Athena_Doorbell_Interactable_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_Prop_Athena_Doorbell_Interactable=Prop_Athena_Doorbell_Interactable_C 
-	Default__Prop_Athena_Doorbell_Interactable_C (0-0-0-0): size 1240 (cls: Default__Prop_Athena_Doorbell_Interactable_C>Prop_Athena_Doorbell_Interactable_C):
+	Default__Prop_Athena_Doorbell_Interactable_C (0-0-0-0): size 1433 (cls: Default__Prop_Athena_Doorbell_Interactable_C>Prop_Athena_Doorbell_Interactable_C):
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			ObjBackendName(NameProperty)=battlepass_ringdoorbell_differenthouses 
@@ -462,18 +472,25 @@ Serialized exports:
 			ObjectTypes(ArrayProperty)=[object] (inner: ByteProperty)
 			DownTime(FloatProperty)=20 
 			DoorbellPressSound(ObjectProperty)=Doorbell_Press_Cue=/Game/Athena/Sounds/Quests/Doorbells/Doorbell_Press_Cue 
+			bIsSimpleInteractQuest(BoolProperty)=True 
+			HolidayDoorbellSound(ObjectProperty)=Doorbell_Ring_Holiday_Cue=/Game/Athena/Sounds/Quests/Doorbells/Doorbell_Ring_Holiday_Cue 
+			bAllowResourceDrop(BoolProperty)=False 
+			bPlayDestructionEffects(BoolProperty)=False 
+			bAllowWeakSpots(BoolProperty)=False 
+			bUseComplexForWeakSpots(BoolProperty)=False 
+			bNeedsDamageOverlay(BoolProperty)=False 
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Default__Prop_Athena_Doorbell_Interactable_C 
 			BuildingAttachmentType(ByteProperty)=ATTACH_Wall 
 			AreaClass(SoftObjectProperty)=/Script/NavigationSystem.NavArea_Default 
 			AttributeInitKeys(StructProperty)=System.Byte[] 
 			bIsNavigationRelevant(BoolProperty)=False 
-			StaticGameplayTags(StructProperty)=GameplayTagContainer:Building.Type.Prop 
+			StaticGameplayTags(StructProperty)=GameplayTagContainer:Athena.Quests.Doorbell,Building.Type.Prop 
 			InteractionSpeed(StructProperty)=System.Byte[] 
 			bCanBeDamaged(BoolProperty)=False 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Default__Prop_Athena_Doorbell_Interactable_C 
 	DoorbellButtonLocation (0-0-0-0): size 36 (cls: DoorbellButtonLocation>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_Prop_Athena_Doorbell_Interactable (0-0-0-0): size 3898 (cls: ExecuteUbergraph_Prop_Athena_Doorbell_Interactable>Function>/Script/CoreUObject)
+	ExecuteUbergraph_Prop_Athena_Doorbell_Interactable (0-0-0-0): size 3953 (cls: ExecuteUbergraph_Prop_Athena_Doorbell_Interactable>Function>/Script/CoreUObject)
 	CallFunc_BoxOverlapActors_OutActors (0-0-0-0): size 36 (cls: CallFunc_BoxOverlapActors_OutActors>ObjectProperty>/Script/CoreUObject)
 	CallFunc_BoxOverlapActors_OutActors (0-0-0-0): size 36 (cls: CallFunc_BoxOverlapActors_OutActors>ArrayProperty>/Script/CoreUObject)
 	CallFunc_GetLocalFortPlayerControllers_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetLocalFortPlayerControllers_ReturnValue>ObjectProperty>/Script/CoreUObject)
@@ -490,10 +507,11 @@ Serialized exports:
 	ObjectTypes (0-0-0-0): size 36 (cls: ObjectTypes>ArrayProperty>/Script/CoreUObject)
 	DoorbellButtonLocation_GEN_VARIABLE (0-0-0-0): size 73 (cls: DoorbellButtonLocation_GEN_VARIABLE>AudioComponent>/Script/Engine):
 		Tag array:
-			RelativeLocation(StructProperty)=Vector(32,0,0) 
+			RelativeLocation(StructProperty)=Vector(32,0,-23) 
 	DoorbellLocation_GEN_VARIABLE (0-0-0-0): size 73 (cls: DoorbellLocation_GEN_VARIABLE>AudioComponent>/Script/Engine):
 		Tag array:
 			RelativeLocation(StructProperty)=Vector(-416,128,96) 
+	bIsSimpleInteractQuest (0-0-0-0): size 34 (cls: bIsSimpleInteractQuest>BoolProperty>/Script/CoreUObject)
 	StopRingFX (0-0-0-0): size 54 (cls: StopRingFX>Function>/Script/CoreUObject)
 	DoorStartsToWorkAgain (0-0-0-0): size 54 (cls: DoorStartsToWorkAgain>Function>/Script/CoreUObject)
 	ResetBreakTimer (0-0-0-0): size 54 (cls: ResetBreakTimer>Function>/Script/CoreUObject)
@@ -520,6 +538,8 @@ Serialized exports:
 	CanInteract (0-0-0-0): size 34 (cls: CanInteract>BoolProperty>/Script/CoreUObject)
 	CreativeMode (0-0-0-0): size 34 (cls: CreativeMode>BoolProperty>/Script/CoreUObject)
 	EnemyInHouse (0-0-0-0): size 34 (cls: EnemyInHouse>BoolProperty>/Script/CoreUObject)
+	CallFunc_Athena_CheckCreativeMode_CanCompleteQuest (0-0-0-0): size 34 (cls: CallFunc_Athena_CheckCreativeMode_CanCompleteQuest>BoolProperty>/Script/CoreUObject)
+	CallFunc_Athena_CheckCreativeMode_CanCompleteQuest1 (0-0-0-0): size 34 (cls: CallFunc_Athena_CheckCreativeMode_CanCompleteQuest1>BoolProperty>/Script/CoreUObject)
 	CallFunc_Athena_CheckQuestAndObjectiveCompletion_ObjectiveCompleted (0-0-0-0): size 34 (cls: CallFunc_Athena_CheckQuestAndObjectiveCompletion_ObjectiveCompleted>BoolProperty>/Script/CoreUObject)
 	CallFunc_Athena_CheckQuestAndObjectiveCompletion_ObjectiveCompleted1 (0-0-0-0): size 34 (cls: CallFunc_Athena_CheckQuestAndObjectiveCompletion_ObjectiveCompleted1>BoolProperty>/Script/CoreUObject)
 	CallFunc_Athena_CheckQuestAndObjectiveCompletion_QuestCompleted (0-0-0-0): size 34 (cls: CallFunc_Athena_CheckQuestAndObjectiveCompletion_QuestCompleted>BoolProperty>/Script/CoreUObject)
@@ -532,10 +552,9 @@ Serialized exports:
 	CallFunc_BoxOverlapActors_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BoxOverlapActors_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Greater_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Greater_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_HasAuthority_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasAuthority_ReturnValue>BoolProperty>/Script/CoreUObject)
-	CallFunc_HasTag_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasTag_ReturnValue>BoolProperty>/Script/CoreUObject)
-	CallFunc_HasTag_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_HasTag_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Less_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_LessEqual_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_LessEqual_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Not_PreBool_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_NotEqual_ByteByte_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_NotEqual_ByteByte_ReturnValue>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
@@ -553,7 +572,7 @@ Serialized exports:
 	BlueprintGetInteractionString (0-0-0-0): size 70 (cls: BlueprintGetInteractionString>Function>/Script/CoreUObject)
 	OnRep_CanInteract (0-0-0-0): size 176 (cls: OnRep_CanInteract>Function>/Script/CoreUObject)
 	Temp_byte_Variable (0-0-0-0): size 36 (cls: Temp_byte_Variable>ByteProperty>/Script/CoreUObject)
-	PlayDoorBellSound (0-0-0-0): size 415 (cls: PlayDoorBellSound>Function>/Script/CoreUObject)
+	PlayDoorBellSound (0-0-0-0): size 426 (cls: PlayDoorBellSound>Function>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
 	InsideHouseOverlap_GEN_VARIABLE (0-0-0-0): size 520 (cls: InsideHouseOverlap_GEN_VARIABLE>BoxComponent>/Script/Engine):
 		Tag array:
@@ -600,6 +619,7 @@ Serialized exports:
 	CallFunc_Athena_QuestObjectiveCounter_QuestCountAchieved1 (0-0-0-0): size 32 (cls: CallFunc_Athena_QuestObjectiveCounter_QuestCountAchieved1>IntProperty>/Script/CoreUObject)
 	CallFunc_Athena_QuestObjectiveCounter_QuestCountRequired (0-0-0-0): size 32 (cls: CallFunc_Athena_QuestObjectiveCounter_QuestCountRequired>IntProperty>/Script/CoreUObject)
 	CallFunc_Athena_QuestObjectiveCounter_QuestCountRequired1 (0-0-0-0): size 32 (cls: CallFunc_Athena_QuestObjectiveCounter_QuestCountRequired1>IntProperty>/Script/CoreUObject)
+	CallFunc_RandomIntegerInRange_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_RandomIntegerInRange_ReturnValue>IntProperty>/Script/CoreUObject)
 	Temp_int_Array_Index_Variable (0-0-0-0): size 32 (cls: Temp_int_Array_Index_Variable>IntProperty>/Script/CoreUObject)
 	Temp_int_Loop_Counter_Variable (0-0-0-0): size 32 (cls: Temp_int_Loop_Counter_Variable>IntProperty>/Script/CoreUObject)
 	K2Node_CustomEvent_PlaylistName (0-0-0-0): size 32 (cls: K2Node_CustomEvent_PlaylistName>NameProperty>/Script/CoreUObject)
@@ -621,6 +641,7 @@ Serialized exports:
 	CallFunc_CreateDynamicMaterialInstance_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_CreateDynamicMaterialInstance_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetController_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetController_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetGameState_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetGameState_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetGameState_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetGameState_ReturnValue1>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetPlayerPawn_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetPlayerPawn_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetQuestManager_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetQuestManager_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_SpawnEmitterAtLocation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_SpawnEmitterAtLocation_ReturnValue>ObjectProperty>/Script/CoreUObject)
@@ -629,6 +650,7 @@ Serialized exports:
 	K2Node_DynamicCast_AsFort_Player_Controller (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Player_Controller>ObjectProperty>/Script/CoreUObject)
 	K2Node_Event_InteractingPawn (0-0-0-0): size 36 (cls: K2Node_Event_InteractingPawn>ObjectProperty>/Script/CoreUObject)
 	FancyDoorbellSound (0-0-0-0): size 36 (cls: FancyDoorbellSound>ObjectProperty>/Script/CoreUObject)
+	HolidayDoorbellSound (0-0-0-0): size 36 (cls: HolidayDoorbellSound>ObjectProperty>/Script/CoreUObject)
 	InsideHouseOverlap (0-0-0-0): size 36 (cls: InsideHouseOverlap>ObjectProperty>/Script/CoreUObject)
 	PawnWhoRangDoorbell (0-0-0-0): size 36 (cls: PawnWhoRangDoorbell>ObjectProperty>/Script/CoreUObject)
 	CallFunc_SpawnSoundAtLocation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_SpawnSoundAtLocation_ReturnValue>ObjectProperty>/Script/CoreUObject)
@@ -693,10 +715,9 @@ Serialized exports:
 			StaticMesh(ObjectProperty)=door_bell_01=/Game/Environments/Props/Residential/Meshes/door_bell_01 
 			OverrideMaterials(ArrayProperty)=[object] (inner: ObjectProperty)
 			BodyInstance(StructProperty)=System.Byte[] 
-			RelativeLocation(StructProperty)=Vector(12,0,0) 
-			RelativeScale3D(StructProperty)=Vector(2,1,1.1) 
+			RelativeLocation(StructProperty)=Vector(4,0,0) 
+			RelativeScale3D(StructProperty)=Vector(2.5,1,1.1) 
 	BreakdownTimer (0-0-0-0): size 36 (cls: BreakdownTimer>StructProperty>/Script/CoreUObject)
-	CallFunc_GetAthenaPlaylistContextTags_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetAthenaPlaylistContextTags_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_GetUnscaledBoxExtent_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetUnscaledBoxExtent_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_K2_GetActorLocation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_GetActorLocation_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_K2_GetComponentLocation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_GetComponentLocation_ReturnValue>StructProperty>/Script/CoreUObject)

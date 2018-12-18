@@ -221,6 +221,7 @@ Name table:
 	CallFunc_GetPlayerController_ReturnValue
 	CallFunc_GetPlayerName_ReturnValue
 	CallFunc_GetPlayerPawn_ReturnValue
+	CallFunc_GetPlayerState_ReturnValue
 	CallFunc_GetPortalPosition_Location
 	CallFunc_GetTransform_ReturnValue
 	CallFunc_GetUserWidgetObject_ReturnValue
@@ -265,6 +266,7 @@ Name table:
 	CallFunc_IsDrivingVehicle_ReturnValue
 	CallFunc_IsInVehicle_ReturnValue
 	CallFunc_IsPortalInteractable_ReturnValue
+	CallFunc_IsPortalOpen_ReturnValue
 	CallFunc_IsValid_ReturnValue
 	CallFunc_IsValid_ReturnValue1
 	CallFunc_IsValid_ReturnValue2
@@ -486,6 +488,7 @@ Name table:
 	FortPlayerController
 	FortPlayerControllerAthena
 	FortPlayerPawn
+	FortPlayerStateAthena
 	FortQuestItemDefinition
 	FortScalableFloatUtils
 	FortVolume
@@ -512,6 +515,7 @@ Name table:
 	GetPlayerController
 	GetPlayerName
 	GetPlayerPawn
+	GetPlayerState
 	GetPortalPosition
 	GetTransform
 	GetUserWidgetObject
@@ -538,6 +542,7 @@ Name table:
 	IsInVehicle
 	IsMyPortal
 	IsPortalInteractable
+	IsPortalOpen
 	IsValid
 	IsValidClass
 	K2_DestroyActor
@@ -722,7 +727,6 @@ Name table:
 	OverlappingOnBeginPlay
 	OverrideMaterials
 	OwningPlayerChanged
-	OwningPlayerState
 	P_Geode_CrackExit_Rift_Short
 	P_Geode_Oddity_Boop
 	P_Rift_Idle_Loop
@@ -856,6 +860,7 @@ Name table:
 	TeleportExitDistance
 	TeleportHeight
 	TeleportingPlayersText
+	TeleportingVehiclesText
 	TeleportLocation
 	TeleportPlayer
 	TeleportPlayerPawn
@@ -1032,7 +1037,7 @@ Serialized exports:
 			Timelines(ArrayProperty)=[object] (inner: ObjectProperty)
 			SimpleConstructionScript(ObjectProperty)=SimpleConstructionScript_0=BGA_IslandPortal_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_BGA_IslandPortal=BGA_IslandPortal_C 
-	Default__BGA_IslandPortal_C (0-0-0-0): size 6372 (cls: Default__BGA_IslandPortal_C>BGA_IslandPortal_C):
+	Default__BGA_IslandPortal_C (0-0-0-0): size 6465 (cls: Default__BGA_IslandPortal_C>BGA_IslandPortal_C):
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			DeathEffects(ObjectProperty)=P_Geode_Oddity_Boop=/Game/Athena/Effects/Particles/Geode/P_Geode_Oddity_Boop 
@@ -1089,7 +1094,8 @@ Serialized exports:
 			UI_IslandCodeEntrySoftClass(SoftObjectProperty)=/Game/UI/Creative/CreativeIslandLinkScreen.CreativeIslandLinkScreen_C 
 			LoadingText(TextProperty)=Loading... (FF7D7DAC4A06FE9E2C218391ADDFA2B6) 
 			SavingText(TextProperty)=Saving... (BBEE10D54B76EA2601462C8C16DFC136) 
-			TeleportingPlayersText(TextProperty)=Teleporting Players Away... (9EDE51C14C014874B15F2C86B1B99BD3) 
+			TeleportingPlayersText(TextProperty)=Traveling to Island... (9EDE51C14C014874B15F2C86B1B99BD3) 
+			TeleportingVehiclesText(TextProperty)=Traveling to Island... (66059528435FBC4F9BB3D79B804FC142) 
 			TeleportExitDistance(StructProperty)=System.Byte[] 
 			AttributeInitKeys(StructProperty)=System.Byte[] 
 			AttributeInitKeys(StructProperty)=System.Byte[] 
@@ -1122,7 +1128,7 @@ Serialized exports:
 	LinkCode (0-0-0-0): size 32 (cls: LinkCode>StrProperty>/Script/CoreUObject)
 	UpdateLinkCode__DelegateSignature (0-0-0-0): size 47 (cls: UpdateLinkCode__DelegateSignature>Function>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_BGA_IslandPortal (0-0-0-0): size 7271 (cls: ExecuteUbergraph_BGA_IslandPortal>Function>/Script/CoreUObject)
+	ExecuteUbergraph_BGA_IslandPortal (0-0-0-0): size 7308 (cls: ExecuteUbergraph_BGA_IslandPortal>Function>/Script/CoreUObject)
 	bSaving (0-0-0-0): size 34 (cls: bSaving>BoolProperty>/Script/CoreUObject)
 	ClientSaveDisplayChanged (0-0-0-0): size 68 (cls: ClientSaveDisplayChanged>Function>/Script/CoreUObject)
 	CuratedPortalChanged (0-0-0-0): size 54 (cls: CuratedPortalChanged>Function>/Script/CoreUObject)
@@ -1213,7 +1219,7 @@ Serialized exports:
 	CallFunc_Conv_ByteToInt_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Conv_ByteToInt_ReturnValue>IntProperty>/Script/CoreUObject)
 	UpdatePopulationDisplay (0-0-0-0): size 115 (cls: UpdatePopulationDisplay>Function>/Script/CoreUObject)
 	CallFunc_Len_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Len_ReturnValue>IntProperty>/Script/CoreUObject)
-	UpdateNameDisplay (0-0-0-0): size 552 (cls: UpdateNameDisplay>Function>/Script/CoreUObject)
+	UpdateNameDisplay (0-0-0-0): size 568 (cls: UpdateNameDisplay>Function>/Script/CoreUObject)
 	InteractingPawn (0-0-0-0): size 36 (cls: InteractingPawn>ObjectProperty>/Script/CoreUObject)
 	BlueprintGetInteractionString (0-0-0-0): size 264 (cls: BlueprintGetInteractionString>Function>/Script/CoreUObject)
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
@@ -1312,6 +1318,7 @@ Serialized exports:
 	CallFunc_IsDedicatedServer_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_IsDedicatedServer_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsDedicatedServer_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_IsDedicatedServer_ReturnValue2>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsInVehicle_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsInVehicle_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_IsPortalOpen_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsPortalOpen_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue2>BoolProperty>/Script/CoreUObject)
@@ -1548,6 +1555,7 @@ Serialized exports:
 	CallFunc_GetOwningPlayer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetOwningPlayer_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetPlayerController_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetPlayerController_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetPlayerPawn_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetPlayerPawn_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetPlayerState_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetPlayerState_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetUserWidgetObject_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetUserWidgetObject_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_SpawnEmitterAtLocation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_SpawnEmitterAtLocation_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_SpawnEmitterAtLocation_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_SpawnEmitterAtLocation_ReturnValue1>ObjectProperty>/Script/CoreUObject)
@@ -1597,6 +1605,7 @@ Serialized exports:
 	TravelingVehicle (0-0-0-0): size 36 (cls: TravelingVehicle>ObjectProperty>/Script/CoreUObject)
 	Timeline_0 (0-0-0-0): size 36 (cls: Timeline_0>ObjectProperty>/Script/CoreUObject)
 	UI_PortalInfoPlate (0-0-0-0): size 36 (cls: UI_PortalInfoPlate>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetPlayerState_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetPlayerState_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Player_Controller (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Player_Controller>ObjectProperty>/Script/CoreUObject)
 	VectorScale (0-0-0-0): size 36 (cls: VectorScale>ObjectProperty>/Script/CoreUObject)
 	Vehicle (0-0-0-0): size 36 (cls: Vehicle>ObjectProperty>/Script/CoreUObject)

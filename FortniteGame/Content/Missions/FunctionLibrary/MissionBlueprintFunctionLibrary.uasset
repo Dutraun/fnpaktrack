@@ -91,6 +91,7 @@ Name table:
 	ActorA Offset
 	ActorA_StartVector
 	ActorB Offset
+	ActorsToIgnore
 	ActorToHighlight
 	ActorToRegisterWith
 	ActorToUnRegisterWith
@@ -121,6 +122,7 @@ Name table:
 	BreakVector
 	BronzeBadges
 	bSuccessfullyFoundStage
+	bTraceComplex
 	BuildingActor
 	BuildingCount
 	BuildingHealthChanged__DelegateSignature
@@ -257,7 +259,8 @@ Name table:
 	CallFunc_Subtract_FloatFloat_ReturnValue
 	CallFunc_Subtract_VectorVector_ReturnValue
 	CallFunc_VSize_ReturnValue
-	CheckBasicLineOfSight
+	CheckBasicActorLineOfSight
+	CheckBasicVectorToActorLineOfSight
 	Class
 	ClearAllBits
 	CompletedQuest
@@ -670,6 +673,7 @@ Name table:
 	Vector
 	Vector 1
 	Vector 2
+	Vector A
 	vector1
 	Vector2
 	Vector2D
@@ -745,8 +749,10 @@ Serialized exports:
 	LockedInPlace (0-0-0-0): size 34 (cls: LockedInPlace>BoolProperty>/Script/CoreUObject)
 	NPC_LockThenRotateInPlace (0-0-0-0): size 600 (cls: NPC_LockThenRotateInPlace>Function>/Script/CoreUObject)
 	Actor A (0-0-0-0): size 36 (cls: Actor A>ObjectProperty>/Script/CoreUObject)
-	CheckBasicLineOfSight (0-0-0-0): size 1622 (cls: CheckBasicLineOfSight>Function>/Script/CoreUObject)
-	MissionBlueprintFunctionLibrary_C (0-0-0-0): size 620 (cls: MissionBlueprintFunctionLibrary_C>BlueprintGeneratedClass>/Script/Engine)
+	CheckBasicActorLineOfSight (0-0-0-0): size 1630 (cls: CheckBasicActorLineOfSight>Function>/Script/CoreUObject)
+	Vector A (0-0-0-0): size 36 (cls: Vector A>StructProperty>/Script/CoreUObject)
+	CheckBasicVectorToActorLineOfSight (0-0-0-0): size 822 (cls: CheckBasicVectorToActorLineOfSight>Function>/Script/CoreUObject)
+	MissionBlueprintFunctionLibrary_C (0-0-0-0): size 636 (cls: MissionBlueprintFunctionLibrary_C>BlueprintGeneratedClass>/Script/Engine)
 	Default__MissionBlueprintFunctionLibrary_C (0-0-0-0): size 8 (cls: Default__MissionBlueprintFunctionLibrary_C>MissionBlueprintFunctionLibrary_C)
 	CallFunc_GetAllActorsOfClass_OutActors (0-0-0-0): size 36 (cls: CallFunc_GetAllActorsOfClass_OutActors>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetAllActorsOfClass_OutActors (0-0-0-0): size 36 (cls: CallFunc_GetAllActorsOfClass_OutActors>ArrayProperty>/Script/CoreUObject)
@@ -762,6 +768,8 @@ Serialized exports:
 	PlayersNearActor (0-0-0-0): size 36 (cls: PlayersNearActor>ArrayProperty>/Script/CoreUObject)
 	K2Node_MakeArray_Array (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array>ObjectProperty>/Script/CoreUObject)
 	K2Node_MakeArray_Array (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array>ArrayProperty>/Script/CoreUObject)
+	ActorsToIgnore (0-0-0-0): size 36 (cls: ActorsToIgnore>ObjectProperty>/Script/CoreUObject)
+	ActorsToIgnore (0-0-0-0): size 36 (cls: ActorsToIgnore>ArrayProperty>/Script/CoreUObject)
 	CallFunc_GetAllFortPlayerControllers_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetAllFortPlayerControllers_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetAllFortPlayerControllers_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetAllFortPlayerControllers_ReturnValue>ArrayProperty>/Script/CoreUObject)
 	CallFunc_GetAllFortPlayerControllers_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetAllFortPlayerControllers_ReturnValue>ObjectProperty>/Script/CoreUObject)
@@ -841,6 +849,7 @@ Serialized exports:
 	K2Node_MultiGate_FirstRun (0-0-0-0): size 34 (cls: K2Node_MultiGate_FirstRun>BoolProperty>/Script/CoreUObject)
 	K2Node_MultiGate_ScratchBool (0-0-0-0): size 34 (cls: K2Node_MultiGate_ScratchBool>BoolProperty>/Script/CoreUObject)
 	K2Node_SwitchEnum_CmpSuccess (0-0-0-0): size 34 (cls: K2Node_SwitchEnum_CmpSuccess>BoolProperty>/Script/CoreUObject)
+	bTraceComplex (0-0-0-0): size 34 (cls: bTraceComplex>BoolProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_bBlockingHit (0-0-0-0): size 34 (cls: CallFunc_BreakHitResult_bBlockingHit>BoolProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_bInitialOverlap (0-0-0-0): size 34 (cls: CallFunc_BreakHitResult_bInitialOverlap>BoolProperty>/Script/CoreUObject)
 	CallFunc_EqualEqual_ObjectObject_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ObjectObject_ReturnValue>BoolProperty>/Script/CoreUObject)
@@ -850,6 +859,14 @@ Serialized exports:
 	In Line Of Sight (0-0-0-0): size 34 (cls: In Line Of Sight>BoolProperty>/Script/CoreUObject)
 	Result (0-0-0-0): size 34 (cls: Result>BoolProperty>/Script/CoreUObject)
 	UseActorHalfHeightForSight (0-0-0-0): size 34 (cls: UseActorHalfHeightForSight>BoolProperty>/Script/CoreUObject)
+	bTraceComplex (0-0-0-0): size 34 (cls: bTraceComplex>BoolProperty>/Script/CoreUObject)
+	CallFunc_BreakHitResult_bBlockingHit (0-0-0-0): size 34 (cls: CallFunc_BreakHitResult_bBlockingHit>BoolProperty>/Script/CoreUObject)
+	CallFunc_BreakHitResult_bInitialOverlap (0-0-0-0): size 34 (cls: CallFunc_BreakHitResult_bInitialOverlap>BoolProperty>/Script/CoreUObject)
+	CallFunc_EqualEqual_ObjectObject_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ObjectObject_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_LineTraceSingle_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_LineTraceSingle_ReturnValue>BoolProperty>/Script/CoreUObject)
+	In Line Of Sight (0-0-0-0): size 34 (cls: In Line Of Sight>BoolProperty>/Script/CoreUObject)
+	Result (0-0-0-0): size 34 (cls: Result>BoolProperty>/Script/CoreUObject)
 	CallFunc_BooleanAND_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_GreaterEqual_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_GreaterEqual_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_HasCompletedObjectiveWithName_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasCompletedObjectiveWithName_ReturnValue>BoolProperty>/Script/CoreUObject)
@@ -977,6 +994,8 @@ Serialized exports:
 	CallFunc_EvaluateCurveTableRow_OutResult (0-0-0-0): size 36 (cls: CallFunc_EvaluateCurveTableRow_OutResult>ByteProperty>/Script/CoreUObject)
 	DrawDebugType (0-0-0-0): size 36 (cls: DrawDebugType>ByteProperty>/Script/CoreUObject)
 	TraceChannel (0-0-0-0): size 36 (cls: TraceChannel>ByteProperty>/Script/CoreUObject)
+	DrawDebugType (0-0-0-0): size 36 (cls: DrawDebugType>ByteProperty>/Script/CoreUObject)
+	TraceChannel (0-0-0-0): size 36 (cls: TraceChannel>ByteProperty>/Script/CoreUObject)
 	CallFunc_EvaluateCurveTableRow_OutResult (0-0-0-0): size 36 (cls: CallFunc_EvaluateCurveTableRow_OutResult>ByteProperty>/Script/CoreUObject)
 	BadgeType (0-0-0-0): size 36 (cls: BadgeType>ByteProperty>/Script/CoreUObject)
 	K2Node_CreateDelegate_OutputDelegate (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate>DelegateProperty>/Script/CoreUObject)
@@ -1028,6 +1047,10 @@ Serialized exports:
 	CallFunc_FClamp_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_FClamp_ReturnValue1>FloatProperty>/Script/CoreUObject)
 	Distance (0-0-0-0): size 32 (cls: Distance>FloatProperty>/Script/CoreUObject)
 	DrawTime (0-0-0-0): size 32 (cls: DrawTime>FloatProperty>/Script/CoreUObject)
+	CallFunc_BreakHitResult_Distance (0-0-0-0): size 32 (cls: CallFunc_BreakHitResult_Distance>FloatProperty>/Script/CoreUObject)
+	CallFunc_BreakHitResult_Time (0-0-0-0): size 32 (cls: CallFunc_BreakHitResult_Time>FloatProperty>/Script/CoreUObject)
+	Distance (0-0-0-0): size 32 (cls: Distance>FloatProperty>/Script/CoreUObject)
+	DrawTime (0-0-0-0): size 32 (cls: DrawTime>FloatProperty>/Script/CoreUObject)
 	CallFunc_VSize_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_VSize_ReturnValue>FloatProperty>/Script/CoreUObject)
 	Distance (0-0-0-0): size 32 (cls: Distance>FloatProperty>/Script/CoreUObject)
 	CallFunc_FClamp_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_FClamp_ReturnValue>FloatProperty>/Script/CoreUObject)
@@ -1058,6 +1081,8 @@ Serialized exports:
 	K2Node_MultiGate_Data (0-0-0-0): size 32 (cls: K2Node_MultiGate_Data>IntProperty>/Script/CoreUObject)
 	K2Node_MultiGate_ScratchIndex (0-0-0-0): size 32 (cls: K2Node_MultiGate_ScratchIndex>IntProperty>/Script/CoreUObject)
 	Temp_int_Variable (0-0-0-0): size 32 (cls: Temp_int_Variable>IntProperty>/Script/CoreUObject)
+	CallFunc_BreakHitResult_FaceIndex (0-0-0-0): size 32 (cls: CallFunc_BreakHitResult_FaceIndex>IntProperty>/Script/CoreUObject)
+	CallFunc_BreakHitResult_HitItem (0-0-0-0): size 32 (cls: CallFunc_BreakHitResult_HitItem>IntProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_FaceIndex (0-0-0-0): size 32 (cls: CallFunc_BreakHitResult_FaceIndex>IntProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_HitItem (0-0-0-0): size 32 (cls: CallFunc_BreakHitResult_HitItem>IntProperty>/Script/CoreUObject)
 	CallFunc_Add_IntInt_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue>IntProperty>/Script/CoreUObject)
@@ -1132,6 +1157,7 @@ Serialized exports:
 	Temp_int_Array_Index_Variable (0-0-0-0): size 32 (cls: Temp_int_Array_Index_Variable>IntProperty>/Script/CoreUObject)
 	Temp_int_Loop_Counter_Variable (0-0-0-0): size 32 (cls: Temp_int_Loop_Counter_Variable>IntProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_HitBoneName (0-0-0-0): size 32 (cls: CallFunc_BreakHitResult_HitBoneName>NameProperty>/Script/CoreUObject)
+	CallFunc_BreakHitResult_HitBoneName (0-0-0-0): size 32 (cls: CallFunc_BreakHitResult_HitBoneName>NameProperty>/Script/CoreUObject)
 	Quest Backend Name (0-0-0-0): size 32 (cls: Quest Backend Name>NameProperty>/Script/CoreUObject)
 	Quest Item Objective Backend Name (0-0-0-0): size 32 (cls: Quest Item Objective Backend Name>NameProperty>/Script/CoreUObject)
 	LocalBackendName (0-0-0-0): size 32 (cls: LocalBackendName>NameProperty>/Script/CoreUObject)
@@ -1152,6 +1178,11 @@ Serialized exports:
 	CallFunc_K2_SpawnPickupInWorld_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_SpawnPickupInWorld_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_K2_SpawnPickupInWorld_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_K2_SpawnPickupInWorld_ReturnValue1>ObjectProperty>/Script/CoreUObject)
 	CallFunc_K2_SpawnPickupInWorld_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_K2_SpawnPickupInWorld_ReturnValue2>ObjectProperty>/Script/CoreUObject)
+	__WorldContext (0-0-0-0): size 36 (cls: __WorldContext>ObjectProperty>/Script/CoreUObject)
+	Actor B (0-0-0-0): size 36 (cls: Actor B>ObjectProperty>/Script/CoreUObject)
+	CallFunc_BreakHitResult_HitActor (0-0-0-0): size 36 (cls: CallFunc_BreakHitResult_HitActor>ObjectProperty>/Script/CoreUObject)
+	CallFunc_BreakHitResult_HitComponent (0-0-0-0): size 36 (cls: CallFunc_BreakHitResult_HitComponent>ObjectProperty>/Script/CoreUObject)
+	CallFunc_BreakHitResult_PhysMat (0-0-0-0): size 36 (cls: CallFunc_BreakHitResult_PhysMat>ObjectProperty>/Script/CoreUObject)
 	__WorldContext (0-0-0-0): size 36 (cls: __WorldContext>ObjectProperty>/Script/CoreUObject)
 	Actor B (0-0-0-0): size 36 (cls: Actor B>ObjectProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_HitActor (0-0-0-0): size 36 (cls: CallFunc_BreakHitResult_HitActor>ObjectProperty>/Script/CoreUObject)
@@ -1295,6 +1326,16 @@ Serialized exports:
 	CallFunc_LineTraceSingle_OutHit (0-0-0-0): size 36 (cls: CallFunc_LineTraceSingle_OutHit>StructProperty>/Script/CoreUObject)
 	CallFunc_MakeVector_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_MakeVector_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_MakeVector_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_MakeVector_ReturnValue1>StructProperty>/Script/CoreUObject)
+	Actor B Location Offset (0-0-0-0): size 36 (cls: Actor B Location Offset>StructProperty>/Script/CoreUObject)
+	CallFunc_Add_VectorVector_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_Add_VectorVector_ReturnValue>StructProperty>/Script/CoreUObject)
+	CallFunc_BreakHitResult_ImpactNormal (0-0-0-0): size 36 (cls: CallFunc_BreakHitResult_ImpactNormal>StructProperty>/Script/CoreUObject)
+	CallFunc_BreakHitResult_ImpactPoint (0-0-0-0): size 36 (cls: CallFunc_BreakHitResult_ImpactPoint>StructProperty>/Script/CoreUObject)
+	CallFunc_BreakHitResult_Location (0-0-0-0): size 36 (cls: CallFunc_BreakHitResult_Location>StructProperty>/Script/CoreUObject)
+	CallFunc_BreakHitResult_Normal (0-0-0-0): size 36 (cls: CallFunc_BreakHitResult_Normal>StructProperty>/Script/CoreUObject)
+	CallFunc_BreakHitResult_TraceEnd (0-0-0-0): size 36 (cls: CallFunc_BreakHitResult_TraceEnd>StructProperty>/Script/CoreUObject)
+	CallFunc_BreakHitResult_TraceStart (0-0-0-0): size 36 (cls: CallFunc_BreakHitResult_TraceStart>StructProperty>/Script/CoreUObject)
+	CallFunc_K2_GetActorLocation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_GetActorLocation_ReturnValue>StructProperty>/Script/CoreUObject)
+	CallFunc_LineTraceSingle_OutHit (0-0-0-0): size 36 (cls: CallFunc_LineTraceSingle_OutHit>StructProperty>/Script/CoreUObject)
 	CallFunc_Subtract_VectorVector_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_Subtract_VectorVector_ReturnValue>StructProperty>/Script/CoreUObject)
 	Vector2 (0-0-0-0): size 36 (cls: Vector2>StructProperty>/Script/CoreUObject)
 	QuestObjectiveHandle (0-0-0-0): size 36 (cls: QuestObjectiveHandle>StructProperty>/Script/CoreUObject)

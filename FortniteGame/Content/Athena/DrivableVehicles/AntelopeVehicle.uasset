@@ -19,7 +19,6 @@ Name table:
 	/Game/Athena/DrivableVehicles/FX/P_Shopping_Cart_Vehicle_HitPlayer
 	/Game/Athena/DrivableVehicles/FX/Quad/P_ATV_Boost_End
 	/Game/Athena/DrivableVehicles/FX/Quad/P_ATV_Boost_Flames
-	/Game/Athena/DrivableVehicles/FX/Quad/P_ATV_Boost_Flames_Sputtering
 	/Game/Athena/DrivableVehicles/FX/Quad/P_ATV_Damaged
 	/Game/Athena/DrivableVehicles/FX/Quad/P_ATV_Engine_Ready
 	/Game/Athena/DrivableVehicles/FX/Quad/P_ATV_SkidTrails
@@ -37,6 +36,7 @@ Name table:
 	/Game/Athena/DrivableVehicles/ShoppingCartWheels
 	/Game/Athena/DrivableVehicles/Speed_CameraShake
 	/Game/Athena/DrivableVehicles/VehicleConfigsAntelopeVehicle
+	/Game/Athena/DrivableVehicles/WheeledVehicleAbilitySet
 	/Game/Athena/Sounds/HitNotifications/HitNotifyAudioBank_VehicleDefault
 	/Game/Athena/Sounds/Items/Consumable_CantApply_Cue
 	/Game/Athena/Sounds/Vehicles/GolfCart/C_GolfCart_Audio_MainMovement
@@ -126,7 +126,6 @@ Name table:
 	ApplyImpulse
 	ApplyMaterialAndUseWrapIfPossible
 	AreaClass
-	AreAnyListenersWithinRange
 	Array_Add
 	Array_AddUnique
 	Array_Contains
@@ -177,7 +176,6 @@ Name table:
 	AudioSpark_GEN_VARIABLE
 	AudioWind
 	AudioWind_GEN_VARIABLE
-	AudioWindParam
 	AutoAttachLocationRule
 	AutoAttachRotationRule
 	AutoAttachScaleRule
@@ -265,9 +263,11 @@ Name table:
 	BuildingEditModeMetadata
 	BuildingEditModeMetadata_Wall
 	BuildingProp
+	BuildingPropBigHealth
 	BuildingSMActor
 	BuildingWall
 	bUseGroundMotion
+	bUseVehicleIsOnGround
 	bVisible
 	ByteProperty
 	C_AudioCurve_LinearPitch
@@ -279,9 +279,11 @@ Name table:
 	C_Quad_PitchRamp
 	C_ShoppingCart_Audio_PitchTest
 	C_ShoppingCart_Audio_WindVolCurve
-	CachedSkidValue
+	CacheAudioPointers
+	CacheBoostSM
 	CachedSpeed
 	CacheParticleComponentPointers
+	CacheWheelBlurStaticMeshes
 	CacheWheelsBackOpacity
 	CacheWheelsFrontOpacity
 	CallFunc_Abs_ReturnValue
@@ -299,7 +301,6 @@ Name table:
 	CallFunc_Add_VectorVector_ReturnValue
 	CallFunc_Add_VectorVector_ReturnValue1
 	CallFunc_ApplyMaterialAndUseWrapIfPossible_ReturnValue
-	CallFunc_AreAnyListenersWithinRange_ReturnValue
 	CallFunc_Array_Add_ReturnValue
 	CallFunc_Array_Add_ReturnValue1
 	CallFunc_Array_Add_ReturnValue2
@@ -324,13 +325,8 @@ Name table:
 	CallFunc_BooleanAND_ReturnValue1
 	CallFunc_BooleanAND_ReturnValue2
 	CallFunc_BooleanAND_ReturnValue3
-	CallFunc_BooleanAND_ReturnValue4
-	CallFunc_BooleanAND_ReturnValue5
-	CallFunc_BooleanAND_ReturnValue6
-	CallFunc_BooleanAND_ReturnValue7
 	CallFunc_BooleanOR_ReturnValue
 	CallFunc_BooleanOR_ReturnValue1
-	CallFunc_BooleanOR_ReturnValue2
 	CallFunc_BP_ApplyGameplayEffectToTarget_ReturnValue
 	CallFunc_BreakHitResult_bBlockingHit
 	CallFunc_BreakHitResult_bInitialOverlap
@@ -356,29 +352,17 @@ Name table:
 	CallFunc_BreakVector_Z
 	CallFunc_ClientIsDriver_ReturnValue
 	CallFunc_ClientIsDriver_ReturnValue1
-	CallFunc_ClientIsDriver_ReturnValue2
 	CallFunc_Conv_BoolToFloat_ReturnValue
 	CallFunc_Conv_BoolToFloat_ReturnValue1
-	CallFunc_Conv_BoolToFloat_ReturnValue10
-	CallFunc_Conv_BoolToFloat_ReturnValue11
-	CallFunc_Conv_BoolToFloat_ReturnValue12
 	CallFunc_Conv_BoolToFloat_ReturnValue2
 	CallFunc_Conv_BoolToFloat_ReturnValue3
-	CallFunc_Conv_BoolToFloat_ReturnValue4
-	CallFunc_Conv_BoolToFloat_ReturnValue5
-	CallFunc_Conv_BoolToFloat_ReturnValue6
-	CallFunc_Conv_BoolToFloat_ReturnValue7
-	CallFunc_Conv_BoolToFloat_ReturnValue8
-	CallFunc_Conv_BoolToFloat_ReturnValue9
 	CallFunc_Conv_VectorToRotator_ReturnValue
 	CallFunc_CreateDynamicMaterialInstance_ReturnValue
 	CallFunc_CreateDynamicMaterialInstance_ReturnValue1
 	CallFunc_CreateDynamicMaterialInstance_ReturnValue2
 	CallFunc_Divide_FloatFloat_ReturnValue
-	CallFunc_Divide_FloatFloat_ReturnValue1
 	CallFunc_Dot_VectorVector_ReturnValue
 	CallFunc_Dot_VectorVector_ReturnValue1
-	CallFunc_EqualEqual_FloatFloat_ReturnValue
 	CallFunc_EqualEqual_NameName_ReturnValue
 	CallFunc_EqualEqual_ObjectObject_ReturnValue
 	CallFunc_EqualEqual_ObjectObject_ReturnValue1
@@ -386,9 +370,6 @@ Name table:
 	CallFunc_EqualEqual_ObjectObject_ReturnValue3
 	CallFunc_EqualEqual_ObjectObject_ReturnValue4
 	CallFunc_EqualEqual_ObjectObject_ReturnValue5
-	CallFunc_FClamp_ReturnValue
-	CallFunc_FMax_ReturnValue
-	CallFunc_GasPedalIsDown_ReturnValue
 	CallFunc_GetAbilitySystemComponent_ReturnValue
 	CallFunc_GetAbilitySystemComponent_ReturnValue1
 	CallFunc_GetActorForwardVector_ReturnValue
@@ -398,9 +379,6 @@ Name table:
 	CallFunc_GetAllPassengers_ReturnValue1
 	CallFunc_GetAllPassengers_ReturnValue2
 	CallFunc_GetBoostAccumulated_ReturnValue
-	CallFunc_GetBoostAccumulated_ReturnValue1
-	CallFunc_GetBoostAccumulated_ReturnValue2
-	CallFunc_GetBoostAccumulated_ReturnValue3
 	CallFunc_GetCenterOfMass_ReturnValue
 	CallFunc_GetComponentVelocity_ReturnValue
 	CallFunc_GetContext_ReturnValue
@@ -412,15 +390,11 @@ Name table:
 	CallFunc_GetController_ReturnValue
 	CallFunc_GetController_ReturnValue1
 	CallFunc_GetController_ReturnValue2
-	CallFunc_GetCurrentBudget_ReturnValue
 	CallFunc_GetCurrentDayPhase_ReturnValue
 	CallFunc_GetCurrentInputType_ReturnValue
-	CallFunc_GetDesiredForwardSpeedKmh_ReturnValue
 	CallFunc_GetDriver_ReturnValue
 	CallFunc_GetDriver_ReturnValue1
 	CallFunc_GetForwardSpeedKmh_ReturnValue
-	CallFunc_GetForwardSpeedKmh_ReturnValue1
-	CallFunc_GetForwardSpeedKmh_ReturnValue2
 	CallFunc_GetGameTimeInSeconds_ReturnValue
 	CallFunc_GetGolfCartForwardActionName_ReturnValue
 	CallFunc_GetGolfCartHonkActionName_ReturnValue
@@ -436,12 +410,10 @@ Name table:
 	CallFunc_GetPreviousLinearVelocity_ReturnValue1
 	CallFunc_GetQuadCrasherBoostActionName_ReturnValue
 	CallFunc_GetRenderingDetailMode_ReturnValue
-	CallFunc_GetRenderingDetailMode_ReturnValue1
 	CallFunc_GetSpringLengthRatio_ReturnValue
 	CallFunc_GetSpringLengthRatio_ReturnValue1
 	CallFunc_GetSpringLengthRatio_ReturnValue2
 	CallFunc_GetSpringLengthRatio_ReturnValue3
-	CallFunc_GetSpringLengthRatio_ReturnValue4
 	CallFunc_GetTimeOfDayManagerFromContext_ReturnValue
 	CallFunc_GetTimeOfDayManagerFromContext_ReturnValue1
 	CallFunc_GetValidValue_ReturnValue
@@ -458,37 +430,23 @@ Name table:
 	CallFunc_Greater_FloatFloat_ReturnValue2
 	CallFunc_Greater_FloatFloat_ReturnValue3
 	CallFunc_Greater_FloatFloat_ReturnValue4
-	CallFunc_Greater_FloatFloat_ReturnValue5
-	CallFunc_Greater_FloatFloat_ReturnValue6
-	CallFunc_Greater_FloatFloat_ReturnValue7
 	CallFunc_Greater_IntInt_ReturnValue
-	CallFunc_Greater_IntInt_ReturnValue1
 	CallFunc_GreaterEqual_FloatFloat_ReturnValue
 	CallFunc_HasAuthority_ReturnValue
 	CallFunc_HasDriver_ReturnValue
 	CallFunc_HasDriver_ReturnValue1
-	CallFunc_HasDriver_ReturnValue2
 	CallFunc_InverseTransformDirection_ReturnValue
-	CallFunc_IsAsleep_ReturnValue
 	CallFunc_IsBoosting_ReturnValue
 	CallFunc_IsBoosting_ReturnValue1
-	CallFunc_IsBoosting_ReturnValue2
-	CallFunc_IsBoosting_ReturnValue3
-	CallFunc_IsBoosting_ReturnValue4
-	CallFunc_IsBoosting_ReturnValue5
-	CallFunc_IsBoosting_ReturnValue6
 	CallFunc_IsDedicatedServer_ReturnValue
 	CallFunc_IsDedicatedServer_ReturnValue1
 	CallFunc_IsDedicatedServer_ReturnValue2
 	CallFunc_IsDedicatedServer_ReturnValue3
 	CallFunc_IsDedicatedServer_ReturnValue4
 	CallFunc_IsDedicatedServer_ReturnValue5
-	CallFunc_IsDedicatedServer_ReturnValue6
 	CallFunc_IsInAir_ReturnValue
-	CallFunc_IsInWater_ReturnValue
 	CallFunc_IsLocallyControlled_ReturnValue
 	CallFunc_IsLocallyControlled_ReturnValue1
-	CallFunc_IsLocalPlayerRiding_ReturnValue
 	CallFunc_IsPlayerBuilt_ReturnValue
 	CallFunc_IsSkydiving_ReturnValue
 	CallFunc_IsSprinting_ReturnValue
@@ -507,7 +465,6 @@ Name table:
 	CallFunc_IsValid_ReturnValue2
 	CallFunc_IsValid_ReturnValue20
 	CallFunc_IsValid_ReturnValue21
-	CallFunc_IsValid_ReturnValue22
 	CallFunc_IsValid_ReturnValue3
 	CallFunc_IsValid_ReturnValue4
 	CallFunc_IsValid_ReturnValue5
@@ -520,7 +477,6 @@ Name table:
 	CallFunc_K2_GetActorLocation_ReturnValue2
 	CallFunc_K2_GetActorLocation_ReturnValue3
 	CallFunc_K2_GetActorLocation_ReturnValue4
-	CallFunc_K2_GetActorLocation_ReturnValue5
 	CallFunc_K2_GetActorRotation_ReturnValue
 	CallFunc_K2_GetComponentToWorld_ReturnValue
 	CallFunc_K2_IsTimerActiveHandle_ReturnValue
@@ -530,14 +486,12 @@ Name table:
 	CallFunc_K2_SetTimerDelegate_ReturnValue1
 	CallFunc_K2_SetTimerDelegate_ReturnValue2
 	CallFunc_Lerp_ReturnValue
-	CallFunc_Lerp_ReturnValue1
 	CallFunc_Less_FloatFloat_ReturnValue
 	CallFunc_Less_IntInt_ReturnValue
 	CallFunc_Less_IntInt_ReturnValue1
 	CallFunc_Less_IntInt_ReturnValue2
 	CallFunc_Less_IntInt_ReturnValue3
 	CallFunc_LessEqual_FloatFloat_ReturnValue
-	CallFunc_LessEqual_IntInt_ReturnValue
 	CallFunc_MakeEffectContext_ReturnValue
 	CallFunc_MakeLiteralText_ReturnValue
 	CallFunc_MakeLiteralText_ReturnValue1
@@ -555,36 +509,16 @@ Name table:
 	CallFunc_MakeVector_ReturnValue4
 	CallFunc_MapRangeClamped_ReturnValue
 	CallFunc_MapRangeClamped_ReturnValue1
-	CallFunc_MapRangeClamped_ReturnValue2
-	CallFunc_MapRangeClamped_ReturnValue3
 	CallFunc_Multiply_FloatFloat_ReturnValue
-	CallFunc_Multiply_FloatFloat_ReturnValue1
-	CallFunc_Multiply_FloatFloat_ReturnValue2
-	CallFunc_Multiply_FloatFloat_ReturnValue3
-	CallFunc_Multiply_FloatFloat_ReturnValue4
-	CallFunc_Multiply_FloatFloat_ReturnValue5
-	CallFunc_Multiply_FloatFloat_ReturnValue6
-	CallFunc_Multiply_FloatFloat_ReturnValue7
-	CallFunc_Multiply_FloatFloat_ReturnValue8
 	CallFunc_Multiply_VectorFloat_ReturnValue
 	CallFunc_Multiply_VectorFloat_ReturnValue1
 	CallFunc_Multiply_VectorFloat_ReturnValue2
 	CallFunc_Multiply_VectorFloat_ReturnValue3
 	CallFunc_Multiply_VectorFloat_ReturnValue4
-	CallFunc_NearlyEqual_FloatFloat_ReturnValue
 	CallFunc_Normal_ReturnValue
 	CallFunc_Normal_ReturnValue1
 	CallFunc_Not_PreBool_ReturnValue
 	CallFunc_Not_PreBool_ReturnValue1
-	CallFunc_Not_PreBool_ReturnValue2
-	CallFunc_Not_PreBool_ReturnValue3
-	CallFunc_Not_PreBool_ReturnValue4
-	CallFunc_Not_PreBool_ReturnValue5
-	CallFunc_Not_PreBool_ReturnValue6
-	CallFunc_Not_PreBool_ReturnValue7
-	CallFunc_Not_PreBool_ReturnValue8
-	CallFunc_NotEqual_FloatFloat_ReturnValue
-	CallFunc_NotEqual_ObjectObject_ReturnValue
 	CallFunc_OnCollision_OutMagnitude
 	CallFunc_OnCollision_OutMagnitude1
 	CallFunc_OnCollision_OutMagnitude2
@@ -752,8 +686,6 @@ Name table:
 	DelegateFunction
 	DelegateProperty
 	DelegatePropertyName
-	DeltaSeconds
-	DestroyCooldown
 	DestroyOrDamageBuildingPiece
 	DestroyThreshold
 	Destructible
@@ -799,7 +731,6 @@ Name table:
 	EffectCauser
 	EffectContext
 	EFortDayPhase
-	EGameplayCueEvent
 	EmitterTime
 	EmoteOffset
 	EMP_Wall_HalfWallS
@@ -808,7 +739,7 @@ Name table:
 	EntryPoint
 	Enum
 	EnumProperty
-	EqualEqual_FloatFloat
+	EPhysicalSurface
 	EqualEqual_NameName
 	EqualEqual_ObjectObject
 	ERotatorQuantization
@@ -822,7 +753,6 @@ Name table:
 	EVehicleAudioTriggerDir::Forward
 	EventInstigator
 	EventName
-	EventType
 	ExecuteGameplayCueLocal
 	ExecuteUbergraph_AntelopeVehicle
 	ExitSocketName
@@ -836,7 +766,6 @@ Name table:
 	FCC_Trace_WeaponCapsule
 	FCC_Trace_WeaponMulti
 	FCC_Trace_WeaponWorldMulti
-	FClamp
 	FF_Generic_Build
 	FF_Generic_Impact_Near
 	FF_Generic_LaunchPawn
@@ -846,9 +775,9 @@ Name table:
 	FloatParams
 	FloatProperty
 	FlushNetDormancy
-	FMax
 	ForceApplicationPoint
 	ForceFeedbackEffect
+	FortAbilitySet
 	FortAIPawn
 	FortAntelopeVehicleConfigs
 	FortAntelopeVehicleConfigsClass
@@ -900,7 +829,6 @@ Name table:
 	FunctionNameToBind
 	fx_engine
 	Game
-	GameplayCue.Athena.IceWheels
 	GameplayCue.Deimos.Vehicle.ATV.HitFiend
 	GameplayCue.Deimos.Vehicle.ATV.HitPlayer
 	GameplayCueParameters
@@ -912,7 +840,6 @@ Name table:
 	GameplayTag
 	GameplayTagContainer
 	GameplayTags
-	GasPedalIsDown
 	GateValue
 	GCParamsEmpty
 	GE_Generic_Character_Launch_C
@@ -928,10 +855,8 @@ Name table:
 	GetComponentVelocity
 	GetContext
 	GetController
-	GetCurrentBudget
 	GetCurrentDayPhase
 	GetCurrentInputType
-	GetDesiredForwardSpeedKmh
 	GetDriver
 	GetForwardSpeedKmh
 	GetGameTimeInSeconds
@@ -992,6 +917,7 @@ Name table:
 	HitNormalImpulse
 	HitNotifyAudioBank_VehicleDefault
 	HitResult
+	HitSurfaceType
 	HonkAudioComp
 	HonkMulticast
 	HonkToServer
@@ -1013,13 +939,10 @@ Name table:
 	InverseTransformDirection
 	InWaterFX
 	InWaterLoop
-	IsAsleep
 	IsBoosting
 	IsDedicatedServer
 	IsInAir
-	IsInWater
 	IsLocallyControlled
-	IsLocalPlayerRiding
 	IsPlayerBuilt
 	IsSkydiving
 	IsSprinting
@@ -1097,7 +1020,6 @@ Name table:
 	K2Node_Event_DamageCauser1
 	K2Node_Event_DamageTags
 	K2Node_Event_DamageTags1
-	K2Node_Event_DeltaSeconds
 	K2Node_Event_EffectContext
 	K2Node_Event_EffectContext1
 	K2Node_Event_EndPlayReason
@@ -1109,6 +1031,7 @@ Name table:
 	K2Node_Event_HitLocation
 	K2Node_Event_HitNormal
 	K2Node_Event_HitNormalImpulse
+	K2Node_Event_HitSurfaceType
 	K2Node_Event_ImpactNormal
 	K2Node_Event_ImpactNormal1
 	K2Node_Event_ImpactPoint
@@ -1123,8 +1046,6 @@ Name table:
 	K2Node_Event_SeatIdx
 	K2Node_Event_WaterSurfacePoint
 	K2Node_Event_WaterSurfacePoint1
-	K2Node_GameplayCueEvent_EventType
-	K2Node_GameplayCueEvent_Parameters
 	K2Node_MakeArray_Array
 	K2Node_MakeArray_Array1
 	K2Node_MakeArray_Array2
@@ -1132,7 +1053,6 @@ Name table:
 	K2Node_Select1_Default
 	K2Node_Select_Default
 	K2Node_SwitchEnum1_CmpSuccess
-	K2Node_SwitchEnum2_CmpSuccess
 	K2Node_SwitchEnum_CmpSuccess
 	K2Node_SwitchInteger_CmpSuccess
 	KismetArrayLibrary
@@ -1153,7 +1073,6 @@ Name table:
 	Less_FloatFloat
 	Less_IntInt
 	LessEqual_FloatFloat
-	LessEqual_IntInt
 	LightningSpark
 	LinearColor
 	LoadedWrap
@@ -1197,7 +1116,6 @@ Name table:
 	MinVelocityToLaunch
 	Momentum
 	Montage
-	MovementParam
 	MulticastDelegateProperty
 	Multiply_FloatFloat
 	Multiply_VectorFloat
@@ -1205,7 +1123,6 @@ Name table:
 	NameProperty
 	NaturalSlideBegin
 	NaturalSlideEnd
-	NearlyEqual_FloatFloat
 	NewWeapon
 	NoCollision
 	NODE_AddStaticMeshComponent-0
@@ -1219,9 +1136,7 @@ Name table:
 	NoShake
 	Not_PreBool
 	NotEqual_ByteByte
-	NotEqual_FloatFloat
 	NotEqual_IntInt
-	NotEqual_ObjectObject
 	NoVehicleDamage
 	NumReplicatedProperties
 	Object
@@ -1260,7 +1175,6 @@ Name table:
 	OnStopTick
 	OnWeaponEquipped
 	OnWeaponEquippedDelegate
-	Opacity
 	OriginalTag
 	OtherActor
 	OtherComp
@@ -1273,7 +1187,6 @@ Name table:
 	OverrideMaterials
 	P_ATV_Boost_End
 	P_ATV_Boost_Flames
-	P_ATV_Boost_Flames_Sputtering
 	P_ATV_Damaged
 	P_ATV_Engine_Ready
 	P_ATV_Engine_Ready_GEN_VARIABLE
@@ -1289,7 +1202,6 @@ Name table:
 	P_Vehicle_In_Water_Athena
 	P_WaterSplash_Athena_Vehicle
 	Package
-	Parameters
 	ParameterValue
 	ParamRange
 	ParentBuildingContainerBlueprint_C
@@ -1315,7 +1227,6 @@ Name table:
 	PhysicalMaterial
 	PhysicsBody
 	PhysMaterialOverride
-	Pilot
 	Pitch
 	PitchConstraint
 	PitchParam
@@ -1385,7 +1296,6 @@ Name table:
 	RearWheelSockets
 	ReceiveBeginPlay
 	ReceiveEndPlay
-	ReceiveTick
 	RelativeLocation
 	RelativeRotation
 	RelativeScale3D
@@ -1405,7 +1315,6 @@ Name table:
 	ReturnValue
 	ReverseGears
 	Ribbon
-	Rings
 	RocketSpawned
 	Roll
 	RootComponent
@@ -1420,7 +1329,6 @@ Name table:
 	SavedHeadlightStateForMID
 	ScalableFloat
 	SceneComponent
-	ScrapingAmountParam
 	ScriptStruct
 	SCS_Node
 	SeatChoiceDisplayText
@@ -1446,14 +1354,12 @@ Name table:
 	SetHeadlightState
 	SetHiddenInGame
 	SetMaterial
-	SetParam
 	SetPropDestructionParams
 	SetScalarParameterValue
 	SetScalarParameterValueOnMaterials
 	SetSkidActive
 	SetTemplate
 	SetVectorParameter
-	SetVisibility
 	SetVolumeMultiplier
 	ShootingCone
 	ShoppingCartWheels
@@ -1462,8 +1368,6 @@ Name table:
 	SkeletalMesh
 	SkeletalMeshComponent
 	SkeletalMeshComponentBudgeted
-	Skid
-	SkiddingAmountParam
 	SkinnedMeshComponent
 	SlopeCompensationCameraOffset
 	SM_GolfCart_Tire
@@ -1503,6 +1407,7 @@ Name table:
 	StandingFiringOffset
 	StartDriverCameraShake
 	StartDriverRumble
+	StartupAbilitySet
 	StaticMesh
 	StaticMeshComponent
 	StaticMeshComponent0
@@ -1520,13 +1425,7 @@ Name table:
 	TagName
 	TargetAttachComponent
 	Temp_bool_Has_Been_Initd_Variable
-	Temp_bool_Has_Been_Initd_Variable1
-	Temp_bool_Has_Been_Initd_Variable2
-	Temp_bool_Has_Been_Initd_Variable3
 	Temp_bool_IsClosed_Variable
-	Temp_bool_IsClosed_Variable1
-	Temp_bool_IsClosed_Variable2
-	Temp_bool_IsClosed_Variable3
 	Temp_bool_Variable
 	Temp_bool_Variable1
 	Temp_byte_Variable
@@ -1565,7 +1464,6 @@ Name table:
 	UnderlyingType
 	UnobstructedBounceVelocity
 	Update Damage State
-	UpdateMovementCosmeticParameters
 	UserConstructionScript
 	ValidPlayerControllers
 	Value
@@ -1601,11 +1499,10 @@ Name table:
 	wheel_tilted_fr_r
 	WheelBlursBack
 	WheelBlursFront
+	WheeledVehicleAbilitySet
 	WheelOffsetLimitB
 	WheelOffsetLimitF
 	WheelSpinDampingPerSecond
-	WheelSpinVelocityBL
-	WheelSpinVelocityFR
 	WorldDynamic
 	WorldStatic
 	X
@@ -1615,14 +1512,14 @@ Name table:
 	Z
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	AntelopeVehicle_C (0-0-0-0): size 1646 (cls: AntelopeVehicle_C>BlueprintGeneratedClass>/Script/Engine):
+	AntelopeVehicle_C (0-0-0-0): size 1570 (cls: AntelopeVehicle_C>BlueprintGeneratedClass>/Script/Engine):
 		Tag array:
 			NumReplicatedProperties(IntProperty)=5 
 			bHasCookedComponentInstancingData(BoolProperty)=True 
 			DynamicBindingObjects(ArrayProperty)=[object] (inner: ObjectProperty)
 			SimpleConstructionScript(ObjectProperty)=SimpleConstructionScript_0=AntelopeVehicle_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_AntelopeVehicle=AntelopeVehicle_C 
-	Default__AntelopeVehicle_C (0-0-0-0): size 10489 (cls: Default__AntelopeVehicle_C>AntelopeVehicle_C):
+	Default__AntelopeVehicle_C (0-0-0-0): size 10570 (cls: Default__AntelopeVehicle_C>AntelopeVehicle_C):
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			OnDeathSound(ObjectProperty)=Quad_Destroy_Cue=/Game/Athena/Sounds/Vehicles/Quad/Quad_Destroy_Cue 
@@ -1702,6 +1599,7 @@ Serialized exports:
 			AttributeInitKey(StructProperty)=System.Byte[] 
 			DamageSet(ObjectProperty)=DamageSet=Default__AntelopeVehicle_C 
 			GameplayTags(StructProperty)=GameplayTagContainer:Athena.Vehicle.Antelope 
+			StartupAbilitySet(ObjectProperty)=WheeledVehicleAbilitySet=/Game/Athena/DrivableVehicles/WheeledVehicleAbilitySet 
 			ReplicatedMovement(StructProperty)=System.Byte[] 
 			RootComponent(ObjectProperty)=SkeletalMeshComponent=Default__AntelopeVehicle_C 
 	AttachedPickups (0-0-0-0): size 36 (cls: AttachedPickups>ObjectProperty>/Script/CoreUObject)
@@ -1710,7 +1608,7 @@ Serialized exports:
 	BounceIgnoreList (0-0-0-0): size 36 (cls: BounceIgnoreList>ArrayProperty>/Script/CoreUObject)
 	FortCollisionAudioHitPlayer (0-0-0-0): size 36 (cls: FortCollisionAudioHitPlayer>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_AntelopeVehicle (0-0-0-0): size 15962 (cls: ExecuteUbergraph_AntelopeVehicle>Function>/Script/CoreUObject)
+	ExecuteUbergraph_AntelopeVehicle (0-0-0-0): size 12746 (cls: ExecuteUbergraph_AntelopeVehicle>Function>/Script/CoreUObject)
 	CallFunc_GetAllPassengers_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetAllPassengers_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetAllPassengers_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetAllPassengers_ReturnValue>ArrayProperty>/Script/CoreUObject)
 	CallFunc_GetAllPassengers_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetAllPassengers_ReturnValue1>ObjectProperty>/Script/CoreUObject)
@@ -1727,8 +1625,6 @@ Serialized exports:
 	K2Node_MakeArray_Array3 (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array3>ArrayProperty>/Script/CoreUObject)
 	EventName (0-0-0-0): size 32 (cls: EventName>NameProperty>/Script/CoreUObject)
 	LightningSpark (0-0-0-0): size 110 (cls: LightningSpark>Function>/Script/CoreUObject)
-	EventType (0-0-0-0): size 36 (cls: EventType>ByteProperty>/Script/CoreUObject)
-	GameplayCue.Athena.IceWheels (0-0-0-0): size 82 (cls: GameplayCue.Athena.IceWheels>Function>/Script/CoreUObject)
 	CurrentDayPhase (0-0-0-0): size 36 (cls: CurrentDayPhase>ByteProperty>/Script/CoreUObject)
 	SetHeadlightState (0-0-0-0): size 96 (cls: SetHeadlightState>Function>/Script/CoreUObject)
 	CanHitLastDriver (0-0-0-0): size 54 (cls: CanHitLastDriver>Function>/Script/CoreUObject)
@@ -1762,7 +1658,6 @@ Serialized exports:
 	OnEnteredWaterVolume (0-0-0-0): size 68 (cls: OnEnteredWaterVolume>Function>/Script/CoreUObject)
 	Handle Spring Compression Audio (0-0-0-0): size 54 (cls: Handle Spring Compression Audio>Function>/Script/CoreUObject)
 	ReceiveBeginPlay (0-0-0-0): size 54 (cls: ReceiveBeginPlay>Function>/Script/CoreUObject)
-	DestroyCooldown (0-0-0-0): size 54 (cls: DestroyCooldown>Function>/Script/CoreUObject)
 	HitComponent (0-0-0-0): size 36 (cls: HitComponent>ObjectProperty>/Script/CoreUObject)
 	BndEvt__SkeletalMesh_K2Node_ComponentBoundEvent_2_ComponentHitSignature__DelegateSignature (0-0-0-0): size 124 (cls: BndEvt__SkeletalMesh_K2Node_ComponentBoundEvent_2_ComponentHitSignature__DelegateSignature>Function>/Script/CoreUObject)
 	NoShake (0-0-0-0): size 54 (cls: NoShake>Function>/Script/CoreUObject)
@@ -1785,12 +1680,9 @@ Serialized exports:
 	PedalForceFeedback (0-0-0-0): size 54 (cls: PedalForceFeedback>Function>/Script/CoreUObject)
 	ApplyImpulse (0-0-0-0): size 56 (cls: ApplyImpulse>Function>/Script/CoreUObject)
 	HitLocation (0-0-0-0): size 36 (cls: HitLocation>StructProperty>/Script/CoreUObject)
-	OnCollisionHitEffects (0-0-0-0): size 124 (cls: OnCollisionHitEffects>Function>/Script/CoreUObject)
-	UpdateMovementCosmeticParameters (0-0-0-0): size 54 (cls: UpdateMovementCosmeticParameters>Function>/Script/CoreUObject)
+	OnCollisionHitEffects (0-0-0-0): size 138 (cls: OnCollisionHitEffects>Function>/Script/CoreUObject)
 	Damage (0-0-0-0): size 32 (cls: Damage>FloatProperty>/Script/CoreUObject)
 	OnDeathPlayEffects (0-0-0-0): size 152 (cls: OnDeathPlayEffects>Function>/Script/CoreUObject)
-	DeltaSeconds (0-0-0-0): size 32 (cls: DeltaSeconds>FloatProperty>/Script/CoreUObject)
-	ReceiveTick (0-0-0-0): size 68 (cls: ReceiveTick>Function>/Script/CoreUObject)
 	CallFunc_CreateDynamicMaterialInstance_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_CreateDynamicMaterialInstance_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	UserConstructionScript (0-0-0-0): size 310 (cls: UserConstructionScript>Function>/Script/CoreUObject)
 	OnRep_ImpulseVector (0-0-0-0): size 85 (cls: OnRep_ImpulseVector>Function>/Script/CoreUObject)
@@ -1845,26 +1737,18 @@ Serialized exports:
 	CallFunc_Less_FloatFloat_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Less_FloatFloat_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CheckForHealth (0-0-0-0): size 34 (cls: CheckForHealth>BoolProperty>/Script/CoreUObject)
 	CallFunc_ActorHasTag_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_ActorHasTag_ReturnValue>BoolProperty>/Script/CoreUObject)
-	CallFunc_AreAnyListenersWithinRange_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_AreAnyListenersWithinRange_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Array_Contains_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Array_Contains_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Array_RemoveItem_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Array_RemoveItem_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_BooleanAND_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_BooleanAND_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_BooleanAND_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue2>BoolProperty>/Script/CoreUObject)
 	CallFunc_BooleanAND_ReturnValue3 (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue3>BoolProperty>/Script/CoreUObject)
-	CallFunc_BooleanAND_ReturnValue4 (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue4>BoolProperty>/Script/CoreUObject)
-	CallFunc_BooleanAND_ReturnValue5 (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue5>BoolProperty>/Script/CoreUObject)
-	CallFunc_BooleanAND_ReturnValue6 (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue6>BoolProperty>/Script/CoreUObject)
-	CallFunc_BooleanAND_ReturnValue7 (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue7>BoolProperty>/Script/CoreUObject)
 	CallFunc_BooleanOR_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanOR_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_BooleanOR_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_BooleanOR_ReturnValue1>BoolProperty>/Script/CoreUObject)
-	CallFunc_BooleanOR_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_BooleanOR_ReturnValue2>BoolProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_bBlockingHit (0-0-0-0): size 34 (cls: CallFunc_BreakHitResult_bBlockingHit>BoolProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_bInitialOverlap (0-0-0-0): size 34 (cls: CallFunc_BreakHitResult_bInitialOverlap>BoolProperty>/Script/CoreUObject)
 	CallFunc_ClientIsDriver_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_ClientIsDriver_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_ClientIsDriver_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_ClientIsDriver_ReturnValue1>BoolProperty>/Script/CoreUObject)
-	CallFunc_ClientIsDriver_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_ClientIsDriver_ReturnValue2>BoolProperty>/Script/CoreUObject)
-	CallFunc_EqualEqual_FloatFloat_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_FloatFloat_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_EqualEqual_NameName_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_NameName_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_EqualEqual_ObjectObject_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ObjectObject_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_EqualEqual_ObjectObject_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ObjectObject_ReturnValue1>BoolProperty>/Script/CoreUObject)
@@ -1872,42 +1756,27 @@ Serialized exports:
 	CallFunc_EqualEqual_ObjectObject_ReturnValue3 (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ObjectObject_ReturnValue3>BoolProperty>/Script/CoreUObject)
 	CallFunc_EqualEqual_ObjectObject_ReturnValue4 (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ObjectObject_ReturnValue4>BoolProperty>/Script/CoreUObject)
 	CallFunc_EqualEqual_ObjectObject_ReturnValue5 (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ObjectObject_ReturnValue5>BoolProperty>/Script/CoreUObject)
-	CallFunc_GasPedalIsDown_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_GasPedalIsDown_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Greater_FloatFloat_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Greater_FloatFloat_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Greater_FloatFloat_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_Greater_FloatFloat_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_Greater_FloatFloat_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_Greater_FloatFloat_ReturnValue2>BoolProperty>/Script/CoreUObject)
 	CallFunc_Greater_FloatFloat_ReturnValue3 (0-0-0-0): size 34 (cls: CallFunc_Greater_FloatFloat_ReturnValue3>BoolProperty>/Script/CoreUObject)
 	CallFunc_Greater_FloatFloat_ReturnValue4 (0-0-0-0): size 34 (cls: CallFunc_Greater_FloatFloat_ReturnValue4>BoolProperty>/Script/CoreUObject)
-	CallFunc_Greater_FloatFloat_ReturnValue5 (0-0-0-0): size 34 (cls: CallFunc_Greater_FloatFloat_ReturnValue5>BoolProperty>/Script/CoreUObject)
-	CallFunc_Greater_FloatFloat_ReturnValue6 (0-0-0-0): size 34 (cls: CallFunc_Greater_FloatFloat_ReturnValue6>BoolProperty>/Script/CoreUObject)
-	CallFunc_Greater_FloatFloat_ReturnValue7 (0-0-0-0): size 34 (cls: CallFunc_Greater_FloatFloat_ReturnValue7>BoolProperty>/Script/CoreUObject)
 	CallFunc_Greater_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Greater_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
-	CallFunc_Greater_IntInt_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_Greater_IntInt_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_GreaterEqual_FloatFloat_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_GreaterEqual_FloatFloat_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_HasAuthority_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasAuthority_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_HasDriver_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasDriver_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_HasDriver_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_HasDriver_ReturnValue1>BoolProperty>/Script/CoreUObject)
-	CallFunc_HasDriver_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_HasDriver_ReturnValue2>BoolProperty>/Script/CoreUObject)
-	CallFunc_IsAsleep_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsAsleep_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsBoosting_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsBoosting_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsBoosting_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_IsBoosting_ReturnValue1>BoolProperty>/Script/CoreUObject)
-	CallFunc_IsBoosting_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_IsBoosting_ReturnValue2>BoolProperty>/Script/CoreUObject)
-	CallFunc_IsBoosting_ReturnValue3 (0-0-0-0): size 34 (cls: CallFunc_IsBoosting_ReturnValue3>BoolProperty>/Script/CoreUObject)
-	CallFunc_IsBoosting_ReturnValue4 (0-0-0-0): size 34 (cls: CallFunc_IsBoosting_ReturnValue4>BoolProperty>/Script/CoreUObject)
-	CallFunc_IsBoosting_ReturnValue5 (0-0-0-0): size 34 (cls: CallFunc_IsBoosting_ReturnValue5>BoolProperty>/Script/CoreUObject)
-	CallFunc_IsBoosting_ReturnValue6 (0-0-0-0): size 34 (cls: CallFunc_IsBoosting_ReturnValue6>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsDedicatedServer_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsDedicatedServer_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsDedicatedServer_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_IsDedicatedServer_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsDedicatedServer_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_IsDedicatedServer_ReturnValue2>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsDedicatedServer_ReturnValue3 (0-0-0-0): size 34 (cls: CallFunc_IsDedicatedServer_ReturnValue3>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsDedicatedServer_ReturnValue4 (0-0-0-0): size 34 (cls: CallFunc_IsDedicatedServer_ReturnValue4>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsDedicatedServer_ReturnValue5 (0-0-0-0): size 34 (cls: CallFunc_IsDedicatedServer_ReturnValue5>BoolProperty>/Script/CoreUObject)
-	CallFunc_IsDedicatedServer_ReturnValue6 (0-0-0-0): size 34 (cls: CallFunc_IsDedicatedServer_ReturnValue6>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsInAir_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsInAir_ReturnValue>BoolProperty>/Script/CoreUObject)
-	CallFunc_IsInWater_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsInWater_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsLocallyControlled_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsLocallyControlled_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsLocallyControlled_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_IsLocallyControlled_ReturnValue1>BoolProperty>/Script/CoreUObject)
-	CallFunc_IsLocalPlayerRiding_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsLocalPlayerRiding_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsPlayerBuilt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsPlayerBuilt_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsSkydiving_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsSkydiving_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsSprinting_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsSprinting_ReturnValue>BoolProperty>/Script/CoreUObject)
@@ -1926,7 +1795,6 @@ Serialized exports:
 	CallFunc_IsValid_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue2>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue20 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue20>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue21 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue21>BoolProperty>/Script/CoreUObject)
-	CallFunc_IsValid_ReturnValue22 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue22>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue3 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue3>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue4 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue4>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue5 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue5>BoolProperty>/Script/CoreUObject)
@@ -1935,24 +1803,12 @@ Serialized exports:
 	CallFunc_IsValid_ReturnValue8 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue8>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue9 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue9>BoolProperty>/Script/CoreUObject)
 	CallFunc_K2_IsTimerActiveHandle_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_K2_IsTimerActiveHandle_ReturnValue>BoolProperty>/Script/CoreUObject)
-	CallFunc_Less_FloatFloat_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Less_FloatFloat_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Less_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Less_IntInt_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_Less_IntInt_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue2>BoolProperty>/Script/CoreUObject)
 	CallFunc_LessEqual_FloatFloat_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_LessEqual_FloatFloat_ReturnValue>BoolProperty>/Script/CoreUObject)
-	CallFunc_LessEqual_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_LessEqual_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
-	CallFunc_NearlyEqual_FloatFloat_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_NearlyEqual_FloatFloat_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Not_PreBool_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Not_PreBool_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue1>BoolProperty>/Script/CoreUObject)
-	CallFunc_Not_PreBool_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue2>BoolProperty>/Script/CoreUObject)
-	CallFunc_Not_PreBool_ReturnValue3 (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue3>BoolProperty>/Script/CoreUObject)
-	CallFunc_Not_PreBool_ReturnValue4 (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue4>BoolProperty>/Script/CoreUObject)
-	CallFunc_Not_PreBool_ReturnValue5 (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue5>BoolProperty>/Script/CoreUObject)
-	CallFunc_Not_PreBool_ReturnValue6 (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue6>BoolProperty>/Script/CoreUObject)
-	CallFunc_Not_PreBool_ReturnValue7 (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue7>BoolProperty>/Script/CoreUObject)
-	CallFunc_Not_PreBool_ReturnValue8 (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue8>BoolProperty>/Script/CoreUObject)
-	CallFunc_NotEqual_FloatFloat_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_NotEqual_FloatFloat_ReturnValue>BoolProperty>/Script/CoreUObject)
-	CallFunc_NotEqual_ObjectObject_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_NotEqual_ObjectObject_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_OnCollision_OutResult (0-0-0-0): size 34 (cls: CallFunc_OnCollision_OutResult>BoolProperty>/Script/CoreUObject)
 	CallFunc_OnCollision_OutResult1 (0-0-0-0): size 34 (cls: CallFunc_OnCollision_OutResult1>BoolProperty>/Script/CoreUObject)
 	CallFunc_OnCollision_OutResult2 (0-0-0-0): size 34 (cls: CallFunc_OnCollision_OutResult2>BoolProperty>/Script/CoreUObject)
@@ -1975,17 +1831,10 @@ Serialized exports:
 	K2Node_DynamicCast_bSuccess8 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess8>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess9 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess9>BoolProperty>/Script/CoreUObject)
 	K2Node_SwitchEnum1_CmpSuccess (0-0-0-0): size 34 (cls: K2Node_SwitchEnum1_CmpSuccess>BoolProperty>/Script/CoreUObject)
-	K2Node_SwitchEnum2_CmpSuccess (0-0-0-0): size 34 (cls: K2Node_SwitchEnum2_CmpSuccess>BoolProperty>/Script/CoreUObject)
 	K2Node_SwitchEnum_CmpSuccess (0-0-0-0): size 34 (cls: K2Node_SwitchEnum_CmpSuccess>BoolProperty>/Script/CoreUObject)
 	K2Node_SwitchInteger_CmpSuccess (0-0-0-0): size 34 (cls: K2Node_SwitchInteger_CmpSuccess>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Has_Been_Initd_Variable (0-0-0-0): size 34 (cls: Temp_bool_Has_Been_Initd_Variable>BoolProperty>/Script/CoreUObject)
-	Temp_bool_Has_Been_Initd_Variable1 (0-0-0-0): size 34 (cls: Temp_bool_Has_Been_Initd_Variable1>BoolProperty>/Script/CoreUObject)
-	Temp_bool_Has_Been_Initd_Variable2 (0-0-0-0): size 34 (cls: Temp_bool_Has_Been_Initd_Variable2>BoolProperty>/Script/CoreUObject)
-	Temp_bool_Has_Been_Initd_Variable3 (0-0-0-0): size 34 (cls: Temp_bool_Has_Been_Initd_Variable3>BoolProperty>/Script/CoreUObject)
 	Temp_bool_IsClosed_Variable (0-0-0-0): size 34 (cls: Temp_bool_IsClosed_Variable>BoolProperty>/Script/CoreUObject)
-	Temp_bool_IsClosed_Variable1 (0-0-0-0): size 34 (cls: Temp_bool_IsClosed_Variable1>BoolProperty>/Script/CoreUObject)
-	Temp_bool_IsClosed_Variable2 (0-0-0-0): size 34 (cls: Temp_bool_IsClosed_Variable2>BoolProperty>/Script/CoreUObject)
-	Temp_bool_IsClosed_Variable3 (0-0-0-0): size 34 (cls: Temp_bool_IsClosed_Variable3>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable1 (0-0-0-0): size 34 (cls: Temp_bool_Variable1>BoolProperty>/Script/CoreUObject)
 	K2Node_SwitchEnum_CmpSuccess (0-0-0-0): size 34 (cls: K2Node_SwitchEnum_CmpSuccess>BoolProperty>/Script/CoreUObject)
@@ -2022,7 +1871,7 @@ Serialized exports:
 	K2Node_CustomEvent_CurrentDayPhase (0-0-0-0): size 36 (cls: K2Node_CustomEvent_CurrentDayPhase>ByteProperty>/Script/CoreUObject)
 	K2Node_CustomEvent_PreviousDayPhase (0-0-0-0): size 36 (cls: K2Node_CustomEvent_PreviousDayPhase>ByteProperty>/Script/CoreUObject)
 	K2Node_Event_EndPlayReason (0-0-0-0): size 36 (cls: K2Node_Event_EndPlayReason>ByteProperty>/Script/CoreUObject)
-	K2Node_GameplayCueEvent_EventType (0-0-0-0): size 36 (cls: K2Node_GameplayCueEvent_EventType>ByteProperty>/Script/CoreUObject)
+	K2Node_Event_HitSurfaceType (0-0-0-0): size 36 (cls: K2Node_Event_HitSurfaceType>ByteProperty>/Script/CoreUObject)
 	Temp_byte_Variable (0-0-0-0): size 36 (cls: Temp_byte_Variable>ByteProperty>/Script/CoreUObject)
 	CallFunc_GetValidValue_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetValidValue_ReturnValue>ByteProperty>/Script/CoreUObject)
 	CallFunc_GetVehicleSeatIndex_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetVehicleSeatIndex_ReturnValue>ByteProperty>/Script/CoreUObject)
@@ -2034,6 +1883,7 @@ Serialized exports:
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	CallFunc_GetValidValue_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetValidValue_ReturnValue>ByteProperty>/Script/CoreUObject)
 	CallFunc_GetVehicleSeatIndex_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetVehicleSeatIndex_ReturnValue>ByteProperty>/Script/CoreUObject)
+	HitSurfaceType (0-0-0-0): size 36 (cls: HitSurfaceType>ByteProperty>/Script/CoreUObject)
 	PreviousDayPhase (0-0-0-0): size 36 (cls: PreviousDayPhase>ByteProperty>/Script/CoreUObject)
 	GameplayEffectClass (0-0-0-0): size 40 (cls: GameplayEffectClass>ClassProperty>/Script/CoreUObject)
 	GE_PlayerLaunched (0-0-0-0): size 40 (cls: GE_PlayerLaunched>ClassProperty>/Script/CoreUObject)
@@ -2070,9 +1920,8 @@ Serialized exports:
 	Boost (0-0-0-0): size 32 (cls: Boost>FloatProperty>/Script/CoreUObject)
 	BoostCameraOffsetLerpStart (0-0-0-0): size 32 (cls: BoostCameraOffsetLerpStart>FloatProperty>/Script/CoreUObject)
 	BounceHeight (0-0-0-0): size 32 (cls: BounceHeight>FloatProperty>/Script/CoreUObject)
-	CachedSkidValue (0-0-0-0): size 32 (cls: CachedSkidValue>FloatProperty>/Script/CoreUObject)
-	CacheWheelsBackOpacity (0-0-0-0): size 32 (cls: CacheWheelsBackOpacity>FloatProperty>/Script/CoreUObject)
-	CacheWheelsFrontOpacity (0-0-0-0): size 32 (cls: CacheWheelsFrontOpacity>FloatProperty>/Script/CoreUObject)
+	CacheWheelsBackOpacity_0 (0-0-0-0): size 32 (cls: CacheWheelsBackOpacity_0>FloatProperty>/Script/CoreUObject)
+	CacheWheelsFrontOpacity_0 (0-0-0-0): size 32 (cls: CacheWheelsFrontOpacity_0>FloatProperty>/Script/CoreUObject)
 	ColorKickBoostScale (0-0-0-0): size 32 (cls: ColorKickBoostScale>FloatProperty>/Script/CoreUObject)
 	CurrentPickups (0-0-0-0): size 32 (cls: CurrentPickups>FloatProperty>/Script/CoreUObject)
 	CallFunc_GetHealth_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetHealth_ReturnValue>FloatProperty>/Script/CoreUObject)
@@ -2082,7 +1931,6 @@ Serialized exports:
 	CallFunc_Add_FloatFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Add_FloatFloat_ReturnValue>FloatProperty>/Script/CoreUObject)
 	CallFunc_Add_FloatFloat_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Add_FloatFloat_ReturnValue1>FloatProperty>/Script/CoreUObject)
 	CallFunc_Add_FloatFloat_ReturnValue2 (0-0-0-0): size 32 (cls: CallFunc_Add_FloatFloat_ReturnValue2>FloatProperty>/Script/CoreUObject)
-	CallFunc_Add_FloatFloat_ReturnValue3 (0-0-0-0): size 32 (cls: CallFunc_Add_FloatFloat_ReturnValue3>FloatProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_Distance (0-0-0-0): size 32 (cls: CallFunc_BreakHitResult_Distance>FloatProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_Time (0-0-0-0): size 32 (cls: CallFunc_BreakHitResult_Time>FloatProperty>/Script/CoreUObject)
 	CallFunc_BreakVector_X (0-0-0-0): size 32 (cls: CallFunc_BreakVector_X>FloatProperty>/Script/CoreUObject)
@@ -2090,31 +1938,12 @@ Serialized exports:
 	CallFunc_BreakVector_Z (0-0-0-0): size 32 (cls: CallFunc_BreakVector_Z>FloatProperty>/Script/CoreUObject)
 	CallFunc_Conv_BoolToFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Conv_BoolToFloat_ReturnValue>FloatProperty>/Script/CoreUObject)
 	CallFunc_Conv_BoolToFloat_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Conv_BoolToFloat_ReturnValue1>FloatProperty>/Script/CoreUObject)
-	CallFunc_Conv_BoolToFloat_ReturnValue10 (0-0-0-0): size 32 (cls: CallFunc_Conv_BoolToFloat_ReturnValue10>FloatProperty>/Script/CoreUObject)
-	CallFunc_Conv_BoolToFloat_ReturnValue11 (0-0-0-0): size 32 (cls: CallFunc_Conv_BoolToFloat_ReturnValue11>FloatProperty>/Script/CoreUObject)
-	CallFunc_Conv_BoolToFloat_ReturnValue12 (0-0-0-0): size 32 (cls: CallFunc_Conv_BoolToFloat_ReturnValue12>FloatProperty>/Script/CoreUObject)
 	CallFunc_Conv_BoolToFloat_ReturnValue2 (0-0-0-0): size 32 (cls: CallFunc_Conv_BoolToFloat_ReturnValue2>FloatProperty>/Script/CoreUObject)
 	CallFunc_Conv_BoolToFloat_ReturnValue3 (0-0-0-0): size 32 (cls: CallFunc_Conv_BoolToFloat_ReturnValue3>FloatProperty>/Script/CoreUObject)
-	CallFunc_Conv_BoolToFloat_ReturnValue4 (0-0-0-0): size 32 (cls: CallFunc_Conv_BoolToFloat_ReturnValue4>FloatProperty>/Script/CoreUObject)
-	CallFunc_Conv_BoolToFloat_ReturnValue5 (0-0-0-0): size 32 (cls: CallFunc_Conv_BoolToFloat_ReturnValue5>FloatProperty>/Script/CoreUObject)
-	CallFunc_Conv_BoolToFloat_ReturnValue6 (0-0-0-0): size 32 (cls: CallFunc_Conv_BoolToFloat_ReturnValue6>FloatProperty>/Script/CoreUObject)
-	CallFunc_Conv_BoolToFloat_ReturnValue7 (0-0-0-0): size 32 (cls: CallFunc_Conv_BoolToFloat_ReturnValue7>FloatProperty>/Script/CoreUObject)
-	CallFunc_Conv_BoolToFloat_ReturnValue8 (0-0-0-0): size 32 (cls: CallFunc_Conv_BoolToFloat_ReturnValue8>FloatProperty>/Script/CoreUObject)
-	CallFunc_Conv_BoolToFloat_ReturnValue9 (0-0-0-0): size 32 (cls: CallFunc_Conv_BoolToFloat_ReturnValue9>FloatProperty>/Script/CoreUObject)
 	CallFunc_Divide_FloatFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Divide_FloatFloat_ReturnValue>FloatProperty>/Script/CoreUObject)
-	CallFunc_Divide_FloatFloat_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Divide_FloatFloat_ReturnValue1>FloatProperty>/Script/CoreUObject)
 	CallFunc_Dot_VectorVector_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Dot_VectorVector_ReturnValue>FloatProperty>/Script/CoreUObject)
 	CallFunc_Dot_VectorVector_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Dot_VectorVector_ReturnValue1>FloatProperty>/Script/CoreUObject)
-	CallFunc_FClamp_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_FClamp_ReturnValue>FloatProperty>/Script/CoreUObject)
-	CallFunc_FMax_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_FMax_ReturnValue>FloatProperty>/Script/CoreUObject)
-	CallFunc_GetBoostAccumulated_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetBoostAccumulated_ReturnValue>FloatProperty>/Script/CoreUObject)
-	CallFunc_GetBoostAccumulated_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_GetBoostAccumulated_ReturnValue1>FloatProperty>/Script/CoreUObject)
-	CallFunc_GetBoostAccumulated_ReturnValue2 (0-0-0-0): size 32 (cls: CallFunc_GetBoostAccumulated_ReturnValue2>FloatProperty>/Script/CoreUObject)
-	CallFunc_GetBoostAccumulated_ReturnValue3 (0-0-0-0): size 32 (cls: CallFunc_GetBoostAccumulated_ReturnValue3>FloatProperty>/Script/CoreUObject)
-	CallFunc_GetDesiredForwardSpeedKmh_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetDesiredForwardSpeedKmh_ReturnValue>FloatProperty>/Script/CoreUObject)
 	CallFunc_GetForwardSpeedKmh_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetForwardSpeedKmh_ReturnValue>FloatProperty>/Script/CoreUObject)
-	CallFunc_GetForwardSpeedKmh_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_GetForwardSpeedKmh_ReturnValue1>FloatProperty>/Script/CoreUObject)
-	CallFunc_GetForwardSpeedKmh_ReturnValue2 (0-0-0-0): size 32 (cls: CallFunc_GetForwardSpeedKmh_ReturnValue2>FloatProperty>/Script/CoreUObject)
 	CallFunc_GetGameTimeInSeconds_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetGameTimeInSeconds_ReturnValue>FloatProperty>/Script/CoreUObject)
 	CallFunc_GetHealth_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetHealth_ReturnValue>FloatProperty>/Script/CoreUObject)
 	CallFunc_GetMaxHealth_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetMaxHealth_ReturnValue>FloatProperty>/Script/CoreUObject)
@@ -2123,24 +1952,11 @@ Serialized exports:
 	CallFunc_GetSpringLengthRatio_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_GetSpringLengthRatio_ReturnValue1>FloatProperty>/Script/CoreUObject)
 	CallFunc_GetSpringLengthRatio_ReturnValue2 (0-0-0-0): size 32 (cls: CallFunc_GetSpringLengthRatio_ReturnValue2>FloatProperty>/Script/CoreUObject)
 	CallFunc_GetSpringLengthRatio_ReturnValue3 (0-0-0-0): size 32 (cls: CallFunc_GetSpringLengthRatio_ReturnValue3>FloatProperty>/Script/CoreUObject)
-	CallFunc_GetSpringLengthRatio_ReturnValue4 (0-0-0-0): size 32 (cls: CallFunc_GetSpringLengthRatio_ReturnValue4>FloatProperty>/Script/CoreUObject)
 	CallFunc_GetValueAtLevel_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetValueAtLevel_ReturnValue>FloatProperty>/Script/CoreUObject)
 	CallFunc_GetValueAtLevel_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_GetValueAtLevel_ReturnValue1>FloatProperty>/Script/CoreUObject)
 	CallFunc_Lerp_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Lerp_ReturnValue>FloatProperty>/Script/CoreUObject)
-	CallFunc_Lerp_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Lerp_ReturnValue1>FloatProperty>/Script/CoreUObject)
 	CallFunc_MapRangeClamped_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_MapRangeClamped_ReturnValue>FloatProperty>/Script/CoreUObject)
-	CallFunc_MapRangeClamped_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_MapRangeClamped_ReturnValue1>FloatProperty>/Script/CoreUObject)
-	CallFunc_MapRangeClamped_ReturnValue2 (0-0-0-0): size 32 (cls: CallFunc_MapRangeClamped_ReturnValue2>FloatProperty>/Script/CoreUObject)
-	CallFunc_MapRangeClamped_ReturnValue3 (0-0-0-0): size 32 (cls: CallFunc_MapRangeClamped_ReturnValue3>FloatProperty>/Script/CoreUObject)
 	CallFunc_Multiply_FloatFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Multiply_FloatFloat_ReturnValue>FloatProperty>/Script/CoreUObject)
-	CallFunc_Multiply_FloatFloat_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Multiply_FloatFloat_ReturnValue1>FloatProperty>/Script/CoreUObject)
-	CallFunc_Multiply_FloatFloat_ReturnValue2 (0-0-0-0): size 32 (cls: CallFunc_Multiply_FloatFloat_ReturnValue2>FloatProperty>/Script/CoreUObject)
-	CallFunc_Multiply_FloatFloat_ReturnValue3 (0-0-0-0): size 32 (cls: CallFunc_Multiply_FloatFloat_ReturnValue3>FloatProperty>/Script/CoreUObject)
-	CallFunc_Multiply_FloatFloat_ReturnValue4 (0-0-0-0): size 32 (cls: CallFunc_Multiply_FloatFloat_ReturnValue4>FloatProperty>/Script/CoreUObject)
-	CallFunc_Multiply_FloatFloat_ReturnValue5 (0-0-0-0): size 32 (cls: CallFunc_Multiply_FloatFloat_ReturnValue5>FloatProperty>/Script/CoreUObject)
-	CallFunc_Multiply_FloatFloat_ReturnValue6 (0-0-0-0): size 32 (cls: CallFunc_Multiply_FloatFloat_ReturnValue6>FloatProperty>/Script/CoreUObject)
-	CallFunc_Multiply_FloatFloat_ReturnValue7 (0-0-0-0): size 32 (cls: CallFunc_Multiply_FloatFloat_ReturnValue7>FloatProperty>/Script/CoreUObject)
-	CallFunc_Multiply_FloatFloat_ReturnValue8 (0-0-0-0): size 32 (cls: CallFunc_Multiply_FloatFloat_ReturnValue8>FloatProperty>/Script/CoreUObject)
 	CallFunc_OnCollision_OutMagnitude (0-0-0-0): size 32 (cls: CallFunc_OnCollision_OutMagnitude>FloatProperty>/Script/CoreUObject)
 	CallFunc_OnCollision_OutMagnitude1 (0-0-0-0): size 32 (cls: CallFunc_OnCollision_OutMagnitude1>FloatProperty>/Script/CoreUObject)
 	CallFunc_OnCollision_OutMagnitude2 (0-0-0-0): size 32 (cls: CallFunc_OnCollision_OutMagnitude2>FloatProperty>/Script/CoreUObject)
@@ -2150,7 +1966,6 @@ Serialized exports:
 	K2Node_CustomEvent_EmitterTime (0-0-0-0): size 32 (cls: K2Node_CustomEvent_EmitterTime>FloatProperty>/Script/CoreUObject)
 	K2Node_Event_Damage (0-0-0-0): size 32 (cls: K2Node_Event_Damage>FloatProperty>/Script/CoreUObject)
 	K2Node_Event_Damage1 (0-0-0-0): size 32 (cls: K2Node_Event_Damage1>FloatProperty>/Script/CoreUObject)
-	K2Node_Event_DeltaSeconds (0-0-0-0): size 32 (cls: K2Node_Event_DeltaSeconds>FloatProperty>/Script/CoreUObject)
 	K2Node_Select_Default (0-0-0-0): size 32 (cls: K2Node_Select_Default>FloatProperty>/Script/CoreUObject)
 	Temp_float_Variable (0-0-0-0): size 32 (cls: Temp_float_Variable>FloatProperty>/Script/CoreUObject)
 	Temp_float_Variable1 (0-0-0-0): size 32 (cls: Temp_float_Variable1>FloatProperty>/Script/CoreUObject)
@@ -2280,9 +2095,7 @@ Serialized exports:
 	CallFunc_Array_Length_ReturnValue2 (0-0-0-0): size 32 (cls: CallFunc_Array_Length_ReturnValue2>IntProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_FaceIndex (0-0-0-0): size 32 (cls: CallFunc_BreakHitResult_FaceIndex>IntProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_HitItem (0-0-0-0): size 32 (cls: CallFunc_BreakHitResult_HitItem>IntProperty>/Script/CoreUObject)
-	CallFunc_GetCurrentBudget_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetCurrentBudget_ReturnValue>IntProperty>/Script/CoreUObject)
 	CallFunc_GetRenderingDetailMode_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetRenderingDetailMode_ReturnValue>IntProperty>/Script/CoreUObject)
-	CallFunc_GetRenderingDetailMode_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_GetRenderingDetailMode_ReturnValue1>IntProperty>/Script/CoreUObject)
 	K2Node_Event_SeatIdx (0-0-0-0): size 32 (cls: K2Node_Event_SeatIdx>IntProperty>/Script/CoreUObject)
 	Temp_int_Array_Index_Variable (0-0-0-0): size 32 (cls: Temp_int_Array_Index_Variable>IntProperty>/Script/CoreUObject)
 	Temp_int_Array_Index_Variable1 (0-0-0-0): size 32 (cls: Temp_int_Array_Index_Variable1>IntProperty>/Script/CoreUObject)
@@ -2352,10 +2165,10 @@ Serialized exports:
 	AudioWind (0-0-0-0): size 36 (cls: AudioWind>ObjectProperty>/Script/CoreUObject)
 	OtherActor (0-0-0-0): size 36 (cls: OtherActor>ObjectProperty>/Script/CoreUObject)
 	OtherComp (0-0-0-0): size 36 (cls: OtherComp>ObjectProperty>/Script/CoreUObject)
-	BodyMID (0-0-0-0): size 36 (cls: BodyMID>ObjectProperty>/Script/CoreUObject)
+	BodyMID_0 (0-0-0-0): size 36 (cls: BodyMID_0>ObjectProperty>/Script/CoreUObject)
 	BoostIncreaseAudioComp (0-0-0-0): size 36 (cls: BoostIncreaseAudioComp>ObjectProperty>/Script/CoreUObject)
 	BoostMeter (0-0-0-0): size 36 (cls: BoostMeter>ObjectProperty>/Script/CoreUObject)
-	BoostMeterMID (0-0-0-0): size 36 (cls: BoostMeterMID>ObjectProperty>/Script/CoreUObject)
+	BoostMeterMID_0 (0-0-0-0): size 36 (cls: BoostMeterMID_0>ObjectProperty>/Script/CoreUObject)
 	BounceOverlapController (0-0-0-0): size 36 (cls: BounceOverlapController>ObjectProperty>/Script/CoreUObject)
 	BounceOverlapPawn (0-0-0-0): size 36 (cls: BounceOverlapPawn>ObjectProperty>/Script/CoreUObject)
 	BoundRocket (0-0-0-0): size 36 (cls: BoundRocket>ObjectProperty>/Script/CoreUObject)
@@ -2477,8 +2290,6 @@ Serialized exports:
 	CallFunc_CreateDynamicMaterialInstance_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_CreateDynamicMaterialInstance_ReturnValue1>ObjectProperty>/Script/CoreUObject)
 	CallFunc_CreateDynamicMaterialInstance_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_CreateDynamicMaterialInstance_ReturnValue2>ObjectProperty>/Script/CoreUObject)
 	VehicleHitActor (0-0-0-0): size 36 (cls: VehicleHitActor>ObjectProperty>/Script/CoreUObject)
-	WheelBlursBack (0-0-0-0): size 36 (cls: WheelBlursBack>ObjectProperty>/Script/CoreUObject)
-	WheelBlursFront (0-0-0-0): size 36 (cls: WheelBlursFront>ObjectProperty>/Script/CoreUObject)
 	P_ATV_Engine_Ready_GEN_VARIABLE (0-0-0-0): size 332 (cls: P_ATV_Engine_Ready_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine):
 		Tag array:
 			Template(ObjectProperty)=P_ATV_Engine_Ready=/Game/Athena/DrivableVehicles/FX/Quad/P_ATV_Engine_Ready 
@@ -2825,7 +2636,6 @@ Serialized exports:
 	CallFunc_K2_GetActorLocation_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_K2_GetActorLocation_ReturnValue2>StructProperty>/Script/CoreUObject)
 	CallFunc_K2_GetActorLocation_ReturnValue3 (0-0-0-0): size 36 (cls: CallFunc_K2_GetActorLocation_ReturnValue3>StructProperty>/Script/CoreUObject)
 	CallFunc_K2_GetActorLocation_ReturnValue4 (0-0-0-0): size 36 (cls: CallFunc_K2_GetActorLocation_ReturnValue4>StructProperty>/Script/CoreUObject)
-	CallFunc_K2_GetActorLocation_ReturnValue5 (0-0-0-0): size 36 (cls: CallFunc_K2_GetActorLocation_ReturnValue5>StructProperty>/Script/CoreUObject)
 	CallFunc_K2_GetActorRotation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_GetActorRotation_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_K2_GetComponentToWorld_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_GetComponentToWorld_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_K2_SetRelativeLocation_SweepHitResult (0-0-0-0): size 36 (cls: CallFunc_K2_SetRelativeLocation_SweepHitResult>StructProperty>/Script/CoreUObject)
@@ -2867,8 +2677,6 @@ Serialized exports:
 	K2Node_Event_Momentum (0-0-0-0): size 36 (cls: K2Node_Event_Momentum>StructProperty>/Script/CoreUObject)
 	K2Node_Event_WaterSurfacePoint (0-0-0-0): size 36 (cls: K2Node_Event_WaterSurfacePoint>StructProperty>/Script/CoreUObject)
 	K2Node_Event_WaterSurfacePoint1 (0-0-0-0): size 36 (cls: K2Node_Event_WaterSurfacePoint1>StructProperty>/Script/CoreUObject)
-	K2Node_GameplayCueEvent_Parameters (0-0-0-0): size 36 (cls: K2Node_GameplayCueEvent_Parameters>StructProperty>/Script/CoreUObject)
-	Parameters (0-0-0-0): size 36 (cls: Parameters>StructProperty>/Script/CoreUObject)
 	GCParamsEmpty (0-0-0-0): size 36 (cls: GCParamsEmpty>StructProperty>/Script/CoreUObject)
 	CallFunc_GetCenterOfMass_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetCenterOfMass_ReturnValue>StructProperty>/Script/CoreUObject)
 	OutExtents (0-0-0-0): size 36 (cls: OutExtents>StructProperty>/Script/CoreUObject)

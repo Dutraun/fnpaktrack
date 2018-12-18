@@ -5,6 +5,9 @@ Name table:
 	/Game/Gadgets/Assets/VinderTech_GliderChute/Glider_TacticalSanta/FX/P_Glider_TacticalSanta_flame
 	/Game/Gadgets/Assets/VinderTech_GliderChute/Glider_TacticalSanta/FX/P_Glider_TacticalSanta_light
 	/Game/Gadgets/Assets/VinderTech_GliderChute/Glider_TacticalSanta/Meshes/Tactical_Santa
+	/Game/Sounds/AudioCurveAssets/C_AudioCurve_LinearVolume
+	/Game/Sounds/AudioCurveAssets/C_AudioCurve_LinearVolumePointFiveStart
+	/Game/Sounds/Fort_Gadgets/Athena/Glider_Moth_ThrustLoop_Cue
 	/Script/AnimationBudgetAllocator
 	/Script/CoreUObject
 	/Script/Engine
@@ -17,6 +20,7 @@ Name table:
 	ArrayProperty
 	AttachParent
 	AttachToName
+	AttackSpeed
 	B_Glider_TacticalSanta_C
 	bAutoActivate
 	bHasCookedComponentInstancingData
@@ -29,6 +33,8 @@ Name table:
 	BooleanAND
 	BoolProperty
 	bStartWithTickEnabled
+	C_AudioCurve_LinearVolume
+	C_AudioCurve_LinearVolumePointFiveStart
 	CallFunc_BooleanAND_ReturnValue
 	CallFunc_GreaterEqual_FloatFloat_ReturnValue
 	CallFunc_IsGliderFullyDeployedAccordingToAnim_ReturnValue
@@ -38,12 +44,15 @@ Name table:
 	ComponentClass
 	ComponentTemplate
 	CookedComponentInstancingData
+	Curve
+	CurveFloat
 	Deactivate
 	Default__B_Glider_TacticalSanta_C
 	Default__BlueprintGeneratedClass
 	Default__BoolProperty
 	Default__FloatProperty
 	Default__FortPlayerParachute
+	Default__FortVehicleAudioVoice
 	Default__Function
 	Default__IntProperty
 	Default__ObjectProperty
@@ -55,17 +64,32 @@ Name table:
 	DefaultSceneRoot
 	DefaultSceneRoot_GEN_VARIABLE
 	DefaultSceneRootNode
+	Direction
 	Engine
 	EntryPoint
+	EnumProperty
+	EVehicleAudioInterpolationType
+	EVehicleAudioInterpolationType::None
+	EVehicleAudioTriggerDir
+	EVehicleAudioTriggerDir::Forward
 	ExecuteUbergraph_B_Glider_TacticalSanta
+	FadeWhenOutsideGate
 	FloatProperty
 	FortPlayerParachute
+	FortVehicleAudioOneshotGate
+	FortVehicleAudioParam
+	FortVehicleAudioVoice
+	FortVehicleAudioVoice_GEN_VARIABLE
 	ForwardDot
 	fronttank_jnt
 	Function
+	GateValue
+	Glider_Moth_ThrustLoop_Cue
 	GreaterEqual_FloatFloat
 	Guid
 	InternalVariableName
+	InterpType
+	InterruptFadeTime
 	IntProperty
 	IsGliderFullyDeployedAccordingToAnim
 	jetInner_jnt
@@ -74,11 +98,14 @@ Name table:
 	K2Node_Event_RightDot
 	K2Node_Event_RotationalMovementAcceleration
 	KismetMathLibrary
+	LoopingSound
+	MinTimeSinceTrigger
 	MovementLengthSquared
 	NameProperty
 	None
 	Object
 	ObjectProperty
+	OneshotGates
 	OnParachuteTrailUpdated
 	P_BlankEffect
 	P_Glider_TacticalSanta_center
@@ -91,15 +118,18 @@ Name table:
 	ParachuteMesh
 	ParachuteMesh0
 	ParachuteTrails0
+	ParamRange
 	ParentComponentOrVariableName
 	ParticleSystem
 	ParticleSystemComponent
+	PitchParam
 	PointerToUberGraphFrame
 	PrimaryComponentTick
 	PropertyName
 	PropertyScope
 	RelativeLocation
 	RelativeRotation
+	ReleaseSpeed
 	RightDot
 	RootComponent
 	RootComponent0
@@ -110,9 +140,12 @@ Name table:
 	ScriptStruct
 	SCS_Node
 	SetFloatParameter
+	SetParam
 	SimpleConstructionScript
 	SkeletalMesh
 	SkeletalMeshComponentBudgeted
+	Sound
+	SoundCue
 	StructProperty
 	Tactical_Santa
 	Temp_bool_Has_Been_Initd_Variable
@@ -125,15 +158,18 @@ Name table:
 	UberGraphFrame
 	UberGraphFunction
 	UserConstructionScript
+	Value
 	VariableGuid
 	Vector
+	Vector2D
+	VolumeParam
 	X
 	Y
 	Yaw
 	Z
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	B_Glider_TacticalSanta_C (0-0-0-0): size 240 (cls: B_Glider_TacticalSanta_C>BlueprintGeneratedClass>/Script/Engine):
+	B_Glider_TacticalSanta_C (0-0-0-0): size 244 (cls: B_Glider_TacticalSanta_C>BlueprintGeneratedClass>/Script/Engine):
 		Tag array:
 			bHasCookedComponentInstancingData(BoolProperty)=True 
 			SimpleConstructionScript(ObjectProperty)=SimpleConstructionScript_0=B_Glider_TacticalSanta_C 
@@ -144,9 +180,9 @@ Serialized exports:
 			ParachuteMesh(ObjectProperty)=ParachuteMesh0=Default__B_Glider_TacticalSanta_C 
 			TrailParticles(ObjectProperty)=ParachuteTrails0=Default__B_Glider_TacticalSanta_C 
 			RootComponent(ObjectProperty)=RootComponent0=Default__B_Glider_TacticalSanta_C 
-	P_Glider_TacticalSanta_light (0-0-0-0): size 36 (cls: P_Glider_TacticalSanta_light>ObjectProperty>/Script/CoreUObject)
+	FortVehicleAudioVoice (0-0-0-0): size 36 (cls: FortVehicleAudioVoice>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_B_Glider_TacticalSanta (0-0-0-0): size 717 (cls: ExecuteUbergraph_B_Glider_TacticalSanta>Function>/Script/CoreUObject)
+	ExecuteUbergraph_B_Glider_TacticalSanta (0-0-0-0): size 772 (cls: ExecuteUbergraph_B_Glider_TacticalSanta>Function>/Script/CoreUObject)
 	CallFunc_BooleanAND_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_GreaterEqual_FloatFloat_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_GreaterEqual_FloatFloat_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsGliderFullyDeployedAccordingToAnim_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsGliderFullyDeployedAccordingToAnim_ReturnValue>BoolProperty>/Script/CoreUObject)
@@ -162,9 +198,18 @@ Serialized exports:
 	ForwardDot (0-0-0-0): size 32 (cls: ForwardDot>FloatProperty>/Script/CoreUObject)
 	RightDot (0-0-0-0): size 32 (cls: RightDot>FloatProperty>/Script/CoreUObject)
 	RotationalMovementAcceleration (0-0-0-0): size 32 (cls: RotationalMovementAcceleration>FloatProperty>/Script/CoreUObject)
+	FortVehicleAudioVoice_GEN_VARIABLE (0-0-0-0): size 794 (cls: FortVehicleAudioVoice_GEN_VARIABLE>FortVehicleAudioVoice>/Script/FortniteGame):
+		Tag array:
+			LoopingSound(ObjectProperty)=Glider_Moth_ThrustLoop_Cue=/Game/Sounds/Fort_Gadgets/Athena/Glider_Moth_ThrustLoop_Cue 
+			OneshotGates(ArrayProperty)=[object] (inner: StructProperty)
+			VolumeParam(StructProperty)=System.Byte[] 
+			PitchParam(StructProperty)=System.Byte[] 
+			ParamRange(StructProperty)=Vector2D(0,1) 
+			RelativeRotation(StructProperty)=Rotator(0,-180,0) 
 	UserConstructionScript (0-0-0-0): size 43 (cls: UserConstructionScript>Function>/Script/CoreUObject)
 	P_Glider_TacticalSanta_center (0-0-0-0): size 36 (cls: P_Glider_TacticalSanta_center>ObjectProperty>/Script/CoreUObject)
 	P_Glider_TacticalSanta_flame (0-0-0-0): size 36 (cls: P_Glider_TacticalSanta_flame>ObjectProperty>/Script/CoreUObject)
+	P_Glider_TacticalSanta_light (0-0-0-0): size 36 (cls: P_Glider_TacticalSanta_light>ObjectProperty>/Script/CoreUObject)
 	P_Glider_TacticalSanta_center_GEN_VARIABLE (0-0-0-0): size 272 (cls: P_Glider_TacticalSanta_center_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine):
 		Tag array:
 			Template(ObjectProperty)=P_Glider_TacticalSanta_center=/Game/Gadgets/Assets/VinderTech_GliderChute/Glider_TacticalSanta/FX/P_Glider_TacticalSanta_center 
@@ -227,7 +272,16 @@ Serialized exports:
 			bIsParentComponentNative(BoolProperty)=True 
 			VariableGuid(StructProperty)=Guid: 1015391458-1082693174-901165965-3089638620 
 			InternalVariableName(NameProperty)=P_Glider_TacticalSanta_light 
-	SimpleConstructionScript_0 (0-0-0-0): size 139 (cls: SimpleConstructionScript_0>SimpleConstructionScript>/Script/Engine):
+	SCS_Node_4 (0-0-0-0): size 2079 (cls: SCS_Node_4>SCS_Node>/Script/Engine):
+		Tag array:
+			ComponentClass(ObjectProperty)=FortVehicleAudioVoice=/Script/FortniteGame 
+			ComponentTemplate(ObjectProperty)=FortVehicleAudioVoice_GEN_VARIABLE=B_Glider_TacticalSanta_C 
+			CookedComponentInstancingData(StructProperty)=System.Byte[] 
+			ParentComponentOrVariableName(NameProperty)=RootComponent0 
+			bIsParentComponentNative(BoolProperty)=True 
+			VariableGuid(StructProperty)=Guid: 2362988379-1247551368-3168208570-1690299240 
+			InternalVariableName(NameProperty)=FortVehicleAudioVoice 
+	SimpleConstructionScript_0 (0-0-0-0): size 147 (cls: SimpleConstructionScript_0>SimpleConstructionScript>/Script/Engine):
 		Tag array:
 			RootNodes(ArrayProperty)=[object] (inner: ObjectProperty)
 			AllNodes(ArrayProperty)=[object] (inner: ObjectProperty)

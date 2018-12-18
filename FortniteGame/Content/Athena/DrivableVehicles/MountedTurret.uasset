@@ -123,6 +123,7 @@ Name table:
 	bSimulatePhysics
 	bStartWithTickEnabled
 	bUseGroundMotion
+	bUseVehicleIsOnGround
 	ByteProperty
 	C_AudioCurve_LinearPitch
 	C_AudioCurve_LinearVolume
@@ -210,6 +211,9 @@ Name table:
 	CallFunc_VLerp_ReturnValue
 	Camera
 	CanCharacterStepUpOn
+	CapsuleComponent
+	CapsuleHalfHeight
+	CapsuleRadius
 	ChangedPropertyList
 	Channel
 	Character
@@ -247,6 +251,7 @@ Name table:
 	Default__BoolProperty
 	Default__BoxComponent
 	Default__ByteProperty
+	Default__CapsuleComponent
 	Default__ClassProperty
 	Default__DelegateProperty
 	Default__EnumProperty
@@ -296,6 +301,7 @@ Name table:
 	EAttachmentRule
 	EAttachmentRule::SnapToTarget
 	ECanBeCharacterBase
+	ECB_No
 	ECB_Yes
 	ECC_Vehicle
 	ECollisionChannel
@@ -401,8 +407,8 @@ Name table:
 	Guid
 	gun_base
 	gun_body_l
-	gun_body_r
 	gun_body_R
+	gun_body_r
 	Hand
 	Handle
 	Handle Rotation Audio
@@ -758,6 +764,8 @@ Name table:
 	Turret_Ballistic_GetOut_Cue
 	Turret_Ballistic_Rotate_Cue
 	Turret_Gun
+	TurretCollision
+	TurretCollision_GEN_VARIABLE
 	TurretEnterAnimation
 	TurretExitAnimation
 	TurretFireAnimation
@@ -798,13 +806,13 @@ Name table:
 	ZeroIfOverheating
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	MountedTurret_C (0-0-0-0): size 1177 (cls: MountedTurret_C>BlueprintGeneratedClass>/Script/Engine):
+	MountedTurret_C (0-0-0-0): size 1181 (cls: MountedTurret_C>BlueprintGeneratedClass>/Script/Engine):
 		Tag array:
 			NumReplicatedProperties(IntProperty)=3 
 			bHasCookedComponentInstancingData(BoolProperty)=True 
 			SimpleConstructionScript(ObjectProperty)=SimpleConstructionScript_0=MountedTurret_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_MountedTurret=MountedTurret_C 
-	Default__MountedTurret_C (0-0-0-0): size 2736 (cls: Default__MountedTurret_C>MountedTurret_C):
+	Default__MountedTurret_C (0-0-0-0): size 2762 (cls: Default__MountedTurret_C>MountedTurret_C):
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			OnDeathSound(ObjectProperty)=Turret_Ballistic_Explode_Cue=/Game/Sounds/Fort_Traps/MountedTurret/Turret_Ballistic_Explode_Cue 
@@ -845,7 +853,7 @@ Serialized exports:
 			ReplicatedMovement(StructProperty)=System.Byte[] 
 			SpawnCollisionHandlingMethod(EnumProperty)=ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn 
 			RootComponent(ObjectProperty)=SkeletalMeshComponent=Default__MountedTurret_C 
-	ServoAudio (0-0-0-0): size 36 (cls: ServoAudio>ObjectProperty>/Script/CoreUObject)
+	TurretCollision (0-0-0-0): size 36 (cls: TurretCollision>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
 	ExecuteUbergraph_MountedTurret (0-0-0-0): size 7102 (cls: ExecuteUbergraph_MountedTurret>Function>/Script/CoreUObject)
 	Start FX And Audio Timer (0-0-0-0): size 54 (cls: Start FX And Audio Timer>Function>/Script/CoreUObject)
@@ -1002,18 +1010,26 @@ Serialized exports:
 	ExitSocket (0-0-0-0): size 32 (cls: ExitSocket>NameProperty>/Script/CoreUObject)
 	OnGetExitSocketTransform (0-0-0-0): size 281 (cls: OnGetExitSocketTransform>Function>/Script/CoreUObject)
 	bOutOverriderExitSocket (0-0-0-0): size 34 (cls: bOutOverriderExitSocket>BoolProperty>/Script/CoreUObject)
-	OverlapVolume_GEN_VARIABLE (0-0-0-0): size 1037 (cls: OverlapVolume_GEN_VARIABLE>BoxComponent>/Script/Engine):
+	OverlapVolume_GEN_VARIABLE (0-0-0-0): size 1160 (cls: OverlapVolume_GEN_VARIABLE>BoxComponent>/Script/Engine):
 		Tag array:
-			BoxExtent(StructProperty)=Vector(88,88,80) 
+			BoxExtent(StructProperty)=Vector(60,50,30) 
 			AreaClass(ObjectProperty)=FortMetaNavArea_Obstacles=/Script/FortniteGame 
+			CanCharacterStepUpOn(ByteProperty)=ECB_No 
 			BodyInstance(StructProperty)=System.Byte[] 
-			RelativeLocation(StructProperty)=Vector(0,0,100) 
+			RelativeLocation(StructProperty)=Vector(0,0,139) 
 			bCanEverAffectNavigation(BoolProperty)=False 
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	K2Node_Event_EndPlayReason (0-0-0-0): size 36 (cls: K2Node_Event_EndPlayReason>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	TurretCollision_GEN_VARIABLE (0-0-0-0): size 1008 (cls: TurretCollision_GEN_VARIABLE>CapsuleComponent>/Script/Engine):
+		Tag array:
+			CapsuleHalfHeight(FloatProperty)=130 
+			CapsuleRadius(FloatProperty)=90 
+			AreaClass(ObjectProperty)=FortMetaNavArea_Obstacles=/Script/FortniteGame 
+			BodyInstance(StructProperty)=System.Byte[] 
+			RelativeLocation(StructProperty)=Vector(0,0,105) 
 	GE_BlockWeaponFire (0-0-0-0): size 40 (cls: GE_BlockWeaponFire>ClassProperty>/Script/CoreUObject)
 	GE_GrantWeapon (0-0-0-0): size 40 (cls: GE_GrantWeapon>ClassProperty>/Script/CoreUObject)
 	K2Node_CreateDelegate_OutputDelegate (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate>DelegateProperty>/Script/CoreUObject)
@@ -1188,6 +1204,7 @@ Serialized exports:
 	PlayerEnterAnimation (0-0-0-0): size 36 (cls: PlayerEnterAnimation>ObjectProperty>/Script/CoreUObject)
 	PlayerFireAnimation (0-0-0-0): size 36 (cls: PlayerFireAnimation>ObjectProperty>/Script/CoreUObject)
 	PlayerWeapon (0-0-0-0): size 36 (cls: PlayerWeapon>ObjectProperty>/Script/CoreUObject)
+	ServoAudio (0-0-0-0): size 36 (cls: ServoAudio>ObjectProperty>/Script/CoreUObject)
 	TurretEnterAnimation (0-0-0-0): size 36 (cls: TurretEnterAnimation>ObjectProperty>/Script/CoreUObject)
 	TurretExitAnimation (0-0-0-0): size 36 (cls: TurretExitAnimation>ObjectProperty>/Script/CoreUObject)
 	TurretFireAnimation (0-0-0-0): size 36 (cls: TurretFireAnimation>ObjectProperty>/Script/CoreUObject)
@@ -1302,7 +1319,16 @@ Serialized exports:
 			bIsParentComponentNative(BoolProperty)=True 
 			VariableGuid(StructProperty)=Guid: 2500729359-1244479405-3818463125-617911469 
 			InternalVariableName(NameProperty)=OverHeatScreen_R 
-	SCS_Node_25 (0-0-0-0): size 3564 (cls: SCS_Node_25>SCS_Node>/Script/Engine):
+	SCS_Node_2 (0-0-0-0): size 3168 (cls: SCS_Node_2>SCS_Node>/Script/Engine):
+		Tag array:
+			ComponentClass(ObjectProperty)=CapsuleComponent=/Script/Engine 
+			ComponentTemplate(ObjectProperty)=TurretCollision_GEN_VARIABLE=MountedTurret_C 
+			CookedComponentInstancingData(StructProperty)=System.Byte[] 
+			ParentComponentOrVariableName(NameProperty)=SkeletalMeshComponent 
+			bIsParentComponentNative(BoolProperty)=True 
+			VariableGuid(StructProperty)=Guid: 1067882579-1280424838-1657751211-28620954 
+			InternalVariableName(NameProperty)=TurretCollision 
+	SCS_Node_25 (0-0-0-0): size 3762 (cls: SCS_Node_25>SCS_Node>/Script/Engine):
 		Tag array:
 			ComponentClass(ObjectProperty)=BoxComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=OverlapVolume_GEN_VARIABLE=MountedTurret_C 
@@ -1374,7 +1400,7 @@ Serialized exports:
 			bIsParentComponentNative(BoolProperty)=True 
 			VariableGuid(StructProperty)=Guid: 1351507453-1266468418-98807449-516364352 
 			InternalVariableName(NameProperty)=AudioOnOverheat 
-	SimpleConstructionScript_0 (0-0-0-0): size 203 (cls: SimpleConstructionScript_0>SimpleConstructionScript>/Script/Engine):
+	SimpleConstructionScript_0 (0-0-0-0): size 211 (cls: SimpleConstructionScript_0>SimpleConstructionScript>/Script/Engine):
 		Tag array:
 			RootNodes(ArrayProperty)=[object] (inner: ObjectProperty)
 			AllNodes(ArrayProperty)=[object] (inner: ObjectProperty)

@@ -2,6 +2,7 @@ Name table:
 	/Game/Abilities/Player/Parents/GAT_GenericTriggeredAbility
 	/Game/Abilities/Player/Parents/GAT_GenericTriggeredAbility_Perk
 	/Game/Abilities/Player/Perks/Hero/InAPinch/GA_Perk_H_InAPinch_T01
+	/Game/Abilities/Player/Perks/Hero/InAPinch/GE_Perk_H_InAPinch_Active
 	/Game/Abilities/Player/Perks/Hero/InAPinch/GE_Perk_H_InAPinch_ReloadSpeed
 	/Game/Abilities/Player/Perks/Hero/InAPinch/GE_Perk_H_InAPinch_ShieldHeal
 	/Script/CoreUObject
@@ -16,19 +17,24 @@ Name table:
 	ActiveGameplayEffectHandle
 	ActorInfo
 	ArrayProperty
+	Asset.PerkEffect.InAPinch.ReloadSpeed
 	BlueprintGameplayTagLibrary
 	BlueprintGeneratedClass
 	BooleanOR
 	BoolProperty
 	BP_ApplyGameplayEffectToOwner
+	BP_RemoveGameplayEffectFromOwnerWithAssetTags
 	BP_RemoveGameplayEffectFromOwnerWithGrantedTags
 	ByteProperty
 	CallFunc_BooleanOR_ReturnValue
 	CallFunc_BP_ApplyGameplayEffectToOwner_ReturnValue
 	CallFunc_BP_ApplyGameplayEffectToOwner_ReturnValue1
+	CallFunc_BP_ApplyGameplayEffectToOwner_ReturnValue2
 	CallFunc_GetAbilitySystemComponent_ReturnValue
 	CallFunc_GetAmmoCostPerFire_ReturnValue
 	CallFunc_HasAllMatchingGameplayTags_ReturnValue
+	CallFunc_HasAllMatchingGameplayTags_ReturnValue1
+	CallFunc_HasAllMatchingGameplayTags_TagContainerInterface1_CastInput
 	CallFunc_HasAllMatchingGameplayTags_TagContainerInterface_CastInput
 	CallFunc_IsValid_ReturnValue
 	CallFunc_Less_IntInt_ReturnValue
@@ -46,6 +52,7 @@ Name table:
 	Default__GA_Perk_H_InAPinch_T01_C
 	Default__GAT_GenericTriggeredAbility_C
 	Default__GAT_GenericTriggeredAbility_Perk_C
+	Default__GE_Perk_H_InAPinch_Active_C
 	Default__GE_Perk_H_InAPinch_ReloadSpeed_C
 	Default__GE_Perk_H_InAPinch_ShieldHeal_C
 	Default__InterfaceProperty
@@ -80,12 +87,15 @@ Name table:
 	GameplayTagsK2Node_SwitchGameplayTag_CmpSuccess
 	GAT_GenericTriggeredAbility_C
 	GAT_GenericTriggeredAbility_Perk_C
+	GE_InAPinchActive
+	GE_Perk_H_InAPinch_Active_C
 	GE_Perk_H_InAPinch_ReloadSpeed_C
 	GE_Perk_H_InAPinch_ShieldHeal_C
 	GE_ReloadSpeed
 	GE_ShieldHeal
 	GetAbilitySystemComponent
 	GetAmmoCostPerFire
+	Granted.Perk.InAPinch.T02
 	Granted.PerkEffect.InAPinch.Active
 	HasAllMatchingGameplayTags
 	Instigator
@@ -125,6 +135,8 @@ Name table:
 	StructProperty
 	T_PerkActive
 	TagName
+	TC_InAPinchT02
+	TC_ReloadSpeed
 	TriggerSource
 	TriggerTag
 	UberGraphFrame
@@ -132,21 +144,25 @@ Name table:
 	WeaponAmmoChanged
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	GA_Perk_H_InAPinch_T01_C (0-0-0-0): size 189 (cls: GA_Perk_H_InAPinch_T01_C>BlueprintGeneratedClass>/Script/Engine):
+	GA_Perk_H_InAPinch_T01_C (0-0-0-0): size 201 (cls: GA_Perk_H_InAPinch_T01_C>BlueprintGeneratedClass>/Script/Engine):
 		Tag array:
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_GA_Perk_H_InAPinch_T01=GA_Perk_H_InAPinch_T01_C 
-	Default__GA_Perk_H_InAPinch_T01_C (0-0-0-0): size 548 (cls: Default__GA_Perk_H_InAPinch_T01_C>GA_Perk_H_InAPinch_T01_C):
+	Default__GA_Perk_H_InAPinch_T01_C (0-0-0-0): size 699 (cls: Default__GA_Perk_H_InAPinch_T01_C>GA_Perk_H_InAPinch_T01_C):
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			T_PerkActive(StructProperty)=GameplayTagContainer:Granted.PerkEffect.InAPinch.Active 
 			GE_ShieldHeal(ObjectProperty)=GE_Perk_H_InAPinch_ShieldHeal_C=/Game/Abilities/Player/Perks/Hero/InAPinch/GE_Perk_H_InAPinch_ShieldHeal 
 			GE_ReloadSpeed(ObjectProperty)=GE_Perk_H_InAPinch_ReloadSpeed_C=/Game/Abilities/Player/Perks/Hero/InAPinch/GE_Perk_H_InAPinch_ReloadSpeed 
+			TC_InAPinchT02(StructProperty)=GameplayTagContainer:Granted.Perk.InAPinch.T02 
+			GE_InAPinchActive(ObjectProperty)=GE_Perk_H_InAPinch_Active_C=/Game/Abilities/Player/Perks/Hero/InAPinch/GE_Perk_H_InAPinch_Active 
+			TC_ReloadSpeed(StructProperty)=GameplayTagContainer:Asset.PerkEffect.InAPinch.ReloadSpeed 
 			AbilityTriggers(ArrayProperty)=[object] (inner: StructProperty)
 	T_PerkActive (0-0-0-0): size 36 (cls: T_PerkActive>StructProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_GA_Perk_H_InAPinch_T01 (0-0-0-0): size 711 (cls: ExecuteUbergraph_GA_Perk_H_InAPinch_T01>Function>/Script/CoreUObject)
+	ExecuteUbergraph_GA_Perk_H_InAPinch_T01 (0-0-0-0): size 836 (cls: ExecuteUbergraph_GA_Perk_H_InAPinch_T01>Function>/Script/CoreUObject)
 	CallFunc_BooleanOR_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanOR_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_HasAllMatchingGameplayTags_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasAllMatchingGameplayTags_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_HasAllMatchingGameplayTags_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_HasAllMatchingGameplayTags_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_Less_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_LessEqual_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_LessEqual_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
 	GameplayTagsK2Node_SwitchGameplayTag_CmpSuccess (0-0-0-0): size 34 (cls: GameplayTagsK2Node_SwitchGameplayTag_CmpSuccess>BoolProperty>/Script/CoreUObject)
@@ -160,9 +176,11 @@ Serialized exports:
 	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	ReturnValue (0-0-0-0): size 34 (cls: ReturnValue>BoolProperty>/Script/CoreUObject)
+	GE_InAPinchActive (0-0-0-0): size 40 (cls: GE_InAPinchActive>ClassProperty>/Script/CoreUObject)
 	GE_ReloadSpeed (0-0-0-0): size 40 (cls: GE_ReloadSpeed>ClassProperty>/Script/CoreUObject)
 	GE_ShieldHeal (0-0-0-0): size 40 (cls: GE_ShieldHeal>ClassProperty>/Script/CoreUObject)
 	K2Node_CreateDelegate_OutputDelegate (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate>DelegateProperty>/Script/CoreUObject)
+	CallFunc_HasAllMatchingGameplayTags_TagContainerInterface1_CastInput (0-0-0-0): size 36 (cls: CallFunc_HasAllMatchingGameplayTags_TagContainerInterface1_CastInput>InterfaceProperty>/Script/CoreUObject)
 	CallFunc_HasAllMatchingGameplayTags_TagContainerInterface_CastInput (0-0-0-0): size 36 (cls: CallFunc_HasAllMatchingGameplayTags_TagContainerInterface_CastInput>InterfaceProperty>/Script/CoreUObject)
 	CallFunc_GetAmmoCostPerFire_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetAmmoCostPerFire_ReturnValue>IntProperty>/Script/CoreUObject)
 	K2Node_CustomEvent_LocalCount (0-0-0-0): size 32 (cls: K2Node_CustomEvent_LocalCount>IntProperty>/Script/CoreUObject)
@@ -174,5 +192,8 @@ Serialized exports:
 	PreviousWeapon (0-0-0-0): size 36 (cls: PreviousWeapon>ObjectProperty>/Script/CoreUObject)
 	CallFunc_BP_ApplyGameplayEffectToOwner_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_BP_ApplyGameplayEffectToOwner_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_BP_ApplyGameplayEffectToOwner_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_BP_ApplyGameplayEffectToOwner_ReturnValue1>StructProperty>/Script/CoreUObject)
+	CallFunc_BP_ApplyGameplayEffectToOwner_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_BP_ApplyGameplayEffectToOwner_ReturnValue2>StructProperty>/Script/CoreUObject)
 	K2Node_Event_EventData (0-0-0-0): size 36 (cls: K2Node_Event_EventData>StructProperty>/Script/CoreUObject)
 	Payload (0-0-0-0): size 36 (cls: Payload>StructProperty>/Script/CoreUObject)
+	TC_InAPinchT02 (0-0-0-0): size 36 (cls: TC_InAPinchT02>StructProperty>/Script/CoreUObject)
+	TC_ReloadSpeed (0-0-0-0): size 36 (cls: TC_ReloadSpeed>StructProperty>/Script/CoreUObject)

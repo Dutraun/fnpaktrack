@@ -68,6 +68,7 @@ Name table:
 	/Game/UI/Frontend/Store/StoreOpeningCardPack
 	/Game/UI/Frontend/Store/StoreOpeningCardPack.WidgetArchetype
 	/Game/UI/Frontend/Store/StoreSummary
+	/Game/UI/Frontend/Store/StoreSummaryButtonPopupMenu
 	/Game/UI/Frontend/Store/Textures/PinataStandardPack
 	/Game/UI/Frontend/Store/Textures/UI_CardFront
 	/Game/UI/HomeBase/Materials/Vertical-Red-Gradient
@@ -235,9 +236,9 @@ Name table:
 	CallFunc_Less_IntInt_ReturnValue
 	CallFunc_LessEqual_IntInt_ReturnValue
 	CallFunc_LessEqual_IntInt_ReturnValue1
-	CallFunc_PlayAnimationAtTime_ReturnValue
-	CallFunc_PlayAnimationAtTime_ReturnValue1
-	CallFunc_PlayAnimationAtTime_ReturnValue2
+	CallFunc_PlayAnimation_ReturnValue
+	CallFunc_PlayAnimation_ReturnValue1
+	CallFunc_PlayAnimation_ReturnValue2
 	CallFunc_Subtract_IntInt_ReturnValue
 	CallFunc_UnopenedPacksExist_outUnopenedPacksExist
 	Card
@@ -353,6 +354,7 @@ Name table:
 	Default__KismetTextLibrary
 	Default__LoadGuardSlot
 	Default__MainModeItemDetailsHostPanel_C
+	Default__MenuAnchor
 	Default__MiniCraftingIngredientList_C
 	Default__MiniItemCraftingIngredientsDetailWidget_C
 	Default__MovieScene
@@ -384,6 +386,7 @@ Name table:
 	Default__StoreItemCardFront_C
 	Default__StoreOpeningCardPack_C
 	Default__StoreSummary_C
+	Default__StoreSummaryButtonPopupMenu_C
 	Default__StructProperty
 	Default__SurvivorTraitsDetailWidget_C
 	Default__TextProperty
@@ -454,6 +457,7 @@ Name table:
 	EHorizontalAlignment
 	EListItemAlignment
 	EListItemAlignment::CenterAligned
+	EMenuPlacement
 	EMovieSceneBlendType
 	EMovieSceneBlendType::Absolute
 	EMovieSceneCompletionMode
@@ -699,6 +703,9 @@ Name table:
 	Mask
 	Material
 	MaterialInstanceConstant
+	MenuAnchor
+	MenuClass
+	MenuPlacement_MenuRight
 	MetaData
 	MinDesiredWidth
 	MiniCraftingIngredientList
@@ -741,6 +748,9 @@ Name table:
 	MovieSceneTrackEvalOptions
 	MovieSceneTrackIdentifier
 	MovieSceneTrackImplementationPtr
+	MulchImage
+	MulchStateBorder
+	MulchStateBox
 	MulticastDelegateProperty
 	MultiSizeBrush
 	Name
@@ -817,10 +827,12 @@ Name table:
 	PerkTiers
 	PerkTierSwitcher
 	PinataStandardPack
-	PlayAnimationAtTime
+	Placement
+	PlayAnimation
 	PlaybackRange
 	PlayerController
 	PointerToUberGraphFrame
+	PopupMenuAnchor
 	Possessables
 	PossessedObjectClass
 	PostInfinityExtrap
@@ -938,6 +950,7 @@ Name table:
 	StoreState
 	StoreStateChangedDelegate__DelegateSignature
 	StoreSummary_C
+	StoreSummaryButtonPopupMenu_C
 	Stretch
 	StretchDirection
 	Stroke
@@ -1118,7 +1131,7 @@ Serialized exports:
 	CardArray_MultiplePacks (0-0-0-0): size 36 (cls: CardArray_MultiplePacks>ArrayProperty>/Script/CoreUObject)
 	CardArray_SinglePack (0-0-0-0): size 36 (cls: CardArray_SinglePack>ObjectProperty>/Script/CoreUObject)
 	CardArray_SinglePack (0-0-0-0): size 36 (cls: CardArray_SinglePack>ArrayProperty>/Script/CoreUObject)
-	CallFunc_PlayAnimationAtTime_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlayAnimationAtTime_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_PlayAnimation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlayAnimation_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	AnimateCardSlide (0-0-0-0): size 81 (cls: AnimateCardSlide>Function>/Script/CoreUObject)
 	CallFunc_GetChildrenCount_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetChildrenCount_ReturnValue>IntProperty>/Script/CoreUObject)
 	SlideCardsToTheRight (0-0-0-0): size 151 (cls: SlideCardsToTheRight>Function>/Script/CoreUObject)
@@ -1144,7 +1157,7 @@ Serialized exports:
 	CallFunc_GetEndTime_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetEndTime_ReturnValue>FloatProperty>/Script/CoreUObject)
 	Handle CardEnter State (0-0-0-0): size 170 (cls: Handle CardEnter State>Function>/Script/CoreUObject)
 	Handle CardExit State (0-0-0-0): size 53 (cls: Handle CardExit State>Function>/Script/CoreUObject)
-	CallFunc_PlayAnimationAtTime_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlayAnimationAtTime_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_PlayAnimation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlayAnimation_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	Handle PackDestroy State (0-0-0-0): size 136 (cls: Handle PackDestroy State>Function>/Script/CoreUObject)
 	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	Handle SummaryAdd State (0-0-0-0): size 839 (cls: Handle SummaryAdd State>Function>/Script/CoreUObject)
@@ -1251,6 +1264,12 @@ Serialized exports:
 			BrushColor(StructProperty)=UE4.FLinearColor 
 			Slot(ObjectProperty)=OverlaySlot_5=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
+	MulchStateBorder (0-0-0-0): size 434 (cls: MulchStateBorder>Border>/Script/UMG):
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			Background(StructProperty)=System.Byte[] 
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=SizeBoxSlot_1=WidgetArchetype 
 	ContentBorder (0-0-0-0): size 350 (cls: ContentBorder>Border>/Script/UMG):
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
@@ -1267,6 +1286,11 @@ Serialized exports:
 			Padding(StructProperty)=System.Byte[] 
 			Parent(ObjectProperty)=HintBoxBorder=WidgetArchetype 
 			Content(ObjectProperty)=Hint_HBox=WidgetArchetype 
+	BorderSlot_0 (0-0-0-0): size 243 (cls: BorderSlot_0>BorderSlot>/Script/UMG):
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			Parent(ObjectProperty)=MulchStateBorder=WidgetArchetype 
+			Content(ObjectProperty)=Overlay_2=WidgetArchetype 
 	BorderSlot_0 (0-0-0-0): size 243 (cls: BorderSlot_0>BorderSlot>/Script/UMG):
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
@@ -1864,7 +1888,7 @@ Serialized exports:
 	PackCount (0-0-0-0): size 32 (cls: PackCount>IntProperty>/Script/CoreUObject)
 	SetCardPackCount (0-0-0-0): size 62 (cls: SetCardPackCount>Function>/Script/CoreUObject)
 	PulseCardCount_Ani (0-0-0-0): size 36 (cls: PulseCardCount_Ani>ObjectProperty>/Script/CoreUObject)
-	CallFunc_PlayAnimationAtTime_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlayAnimationAtTime_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_PlayAnimation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlayAnimation_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	StartCardPulse (0-0-0-0): size 81 (cls: StartCardPulse>Function>/Script/CoreUObject)
 	HBoxLStickPlus (0-0-0-0): size 153 (cls: HBoxLStickPlus>HorizontalBox>/Script/UMG):
 		Tag array:
@@ -2293,6 +2317,10 @@ Serialized exports:
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
 			Slot(ObjectProperty)=OverlaySlot_1670=WidgetArchetype 
+	MulchImage (0-0-0-0): size 184 (cls: MulchImage>Image>/Script/UMG):
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
 	LeftSideImage (0-0-0-0): size 196 (cls: LeftSideImage>Image>/Script/UMG):
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
@@ -2495,6 +2523,11 @@ Serialized exports:
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
 			Visibility(EnumProperty)=ESlateVisibility::Hidden 
+	PopupMenuAnchor (0-0-0-0): size 123 (cls: PopupMenuAnchor>MenuAnchor>/Script/UMG):
+		Tag array:
+			MenuClass(ObjectProperty)=StoreSummaryButtonPopupMenu_C=/Game/UI/Frontend/Store/StoreSummaryButtonPopupMenu 
+			Placement(ByteProperty)=MenuPlacement_MenuRight 
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 	MiniCraftingIngredientList (0-0-0-0): size 125 (cls: MiniCraftingIngredientList>MiniCraftingIngredientList_C>/Game/UI/Foundation/Items/Details/MiniCraftingIngredientList):
 		Tag array:
 			EntriesWrapBox(ObjectProperty)=EntriesWrapBox=WidgetArchetype 
@@ -2798,17 +2831,17 @@ Serialized exports:
 	CallFunc_Create_Basic_Tooltip_Output (0-0-0-0): size 36 (cls: CallFunc_Create_Basic_Tooltip_Output>ObjectProperty>/Script/CoreUObject)
 	CallFunc_Create_Basic_Tooltip_Output (0-0-0-0): size 36 (cls: CallFunc_Create_Basic_Tooltip_Output>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetOwningPlayer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetOwningPlayer_ReturnValue>ObjectProperty>/Script/CoreUObject)
-	CallFunc_PlayAnimationAtTime_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlayAnimationAtTime_ReturnValue>ObjectProperty>/Script/CoreUObject)
-	CallFunc_PlayAnimationAtTime_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlayAnimationAtTime_ReturnValue>ObjectProperty>/Script/CoreUObject)
-	CallFunc_PlayAnimationAtTime_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_PlayAnimationAtTime_ReturnValue1>ObjectProperty>/Script/CoreUObject)
-	CallFunc_PlayAnimationAtTime_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlayAnimationAtTime_ReturnValue>ObjectProperty>/Script/CoreUObject)
-	CallFunc_PlayAnimationAtTime_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_PlayAnimationAtTime_ReturnValue1>ObjectProperty>/Script/CoreUObject)
-	CallFunc_PlayAnimationAtTime_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_PlayAnimationAtTime_ReturnValue2>ObjectProperty>/Script/CoreUObject)
+	CallFunc_PlayAnimation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlayAnimation_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_PlayAnimation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlayAnimation_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_PlayAnimation_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_PlayAnimation_ReturnValue1>ObjectProperty>/Script/CoreUObject)
+	CallFunc_PlayAnimation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlayAnimation_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_PlayAnimation_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_PlayAnimation_ReturnValue1>ObjectProperty>/Script/CoreUObject)
+	CallFunc_PlayAnimation_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_PlayAnimation_ReturnValue2>ObjectProperty>/Script/CoreUObject)
 	CallFunc_Create_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_Create_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetChildAt_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetChildAt_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetContext_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue1>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetOwningPlayer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetOwningPlayer_ReturnValue>ObjectProperty>/Script/CoreUObject)
-	CallFunc_PlayAnimationAtTime_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlayAnimationAtTime_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_PlayAnimation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlayAnimation_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsStore_Item_Card (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsStore_Item_Card>ObjectProperty>/Script/CoreUObject)
 	HBoxLStickPlus (0-0-0-0): size 36 (cls: HBoxLStickPlus>ObjectProperty>/Script/CoreUObject)
 	HideHoldingRow (0-0-0-0): size 36 (cls: HideHoldingRow>ObjectProperty>/Script/CoreUObject)
@@ -2825,7 +2858,7 @@ Serialized exports:
 	ScootSummary (0-0-0-0): size 36 (cls: ScootSummary>ObjectProperty>/Script/CoreUObject)
 	ShowHoldingRow (0-0-0-0): size 36 (cls: ShowHoldingRow>ObjectProperty>/Script/CoreUObject)
 	ShowSummary (0-0-0-0): size 36 (cls: ShowSummary>ObjectProperty>/Script/CoreUObject)
-	CallFunc_PlayAnimationAtTime_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlayAnimationAtTime_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_PlayAnimation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlayAnimation_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	Store_Item_Card (0-0-0-0): size 36 (cls: Store_Item_Card>ObjectProperty>/Script/CoreUObject)
 	Store_Summary (0-0-0-0): size 36 (cls: Store_Summary>ObjectProperty>/Script/CoreUObject)
 	Switcher (0-0-0-0): size 36 (cls: Switcher>ObjectProperty>/Script/CoreUObject)
@@ -2869,18 +2902,23 @@ Serialized exports:
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=ScaleBoxSlot_171=WidgetArchetype 
-	CardOverlay (0-0-0-0): size 86 (cls: CardOverlay>Overlay>/Script/UMG):
+	CardOverlay (0-0-0-0): size 90 (cls: CardOverlay>Overlay>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=SizeBoxSlot_855=WidgetArchetype 
-	Overlay_0 (0-0-0-0): size 57 (cls: Overlay_0>Overlay>/Script/UMG):
+	Overlay_0 (0-0-0-0): size 86 (cls: Overlay_0>Overlay>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=PanelSlot_0=WidgetArchetype 
 	Overlay_1 (0-0-0-0): size 123 (cls: Overlay_1>Overlay>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=OverlaySlot_2=WidgetArchetype 
 			Visibility(EnumProperty)=ESlateVisibility::Hidden 
+	Overlay_2 (0-0-0-0): size 82 (cls: Overlay_2>Overlay>/Script/UMG):
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=BorderSlot_0=WidgetArchetype 
 	Overlay_305 (0-0-0-0): size 86 (cls: Overlay_305>Overlay>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -3048,6 +3086,12 @@ Serialized exports:
 			VerticalAlignment(ByteProperty)=VAlign_Fill 
 			Parent(ObjectProperty)=Overlay_0=WidgetArchetype 
 			Content(ObjectProperty)=Mask=WidgetArchetype 
+	OverlaySlot_1 (0-0-0-0): size 152 (cls: OverlaySlot_1>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=CardOverlay=WidgetArchetype 
+			Content(ObjectProperty)=MulchStateBox=WidgetArchetype 
 	OverlaySlot_14442 (0-0-0-0): size 197 (cls: OverlaySlot_14442>OverlaySlot>/Script/UMG):
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
@@ -3074,6 +3118,12 @@ Serialized exports:
 		Tag array:
 			Parent(ObjectProperty)=Overlay_1=WidgetArchetype 
 			Content(ObjectProperty)=InputActionWidget=WidgetArchetype 
+	OverlaySlot_0 (0-0-0-0): size 152 (cls: OverlaySlot_0>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=Overlay_2=WidgetArchetype 
+			Content(ObjectProperty)=MulchImage=WidgetArchetype 
 	OverlaySlot_1 (0-0-0-0): size 152 (cls: OverlaySlot_1>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Center 
@@ -3207,6 +3257,10 @@ Serialized exports:
 			VerticalAlignment(ByteProperty)=VAlign_Fill 
 			Parent(ObjectProperty)=Overlay_0=WidgetArchetype 
 			Content(ObjectProperty)=DetailsContainerSlotWidget=WidgetArchetype 
+	PanelSlot_0 (0-0-0-0): size 70 (cls: PanelSlot_0>PanelSlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=PopupMenuAnchor=WidgetArchetype 
+			Content(ObjectProperty)=Overlay_0=WidgetArchetype 
 	PanelSlot_1 (0-0-0-0): size 70 (cls: PanelSlot_1>PanelSlot>/Script/UMG):
 		Tag array:
 			Parent(ObjectProperty)=DetailsContainerSlotWidget=WidgetArchetype 
@@ -3343,6 +3397,12 @@ Serialized exports:
 			WidthOverride(FloatProperty)=340 
 			HeightOverride(FloatProperty)=414 
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+	MulchStateBox (0-0-0-0): size 149 (cls: MulchStateBox>SizeBox>/Script/UMG):
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=OverlaySlot_1=WidgetArchetype 
+			bIsVariable(BoolProperty)=True 
+			Visibility(EnumProperty)=ESlateVisibility::Hidden 
 	SizeBox_913 (0-0-0-0): size 192 (cls: SizeBox_913>SizeBox>/Script/UMG):
 		Tag array:
 			bOverride_WidthOverride(BoolProperty)=True 
@@ -3455,6 +3515,10 @@ Serialized exports:
 		Tag array:
 			Parent(ObjectProperty)=SizeBox_0=WidgetArchetype 
 			Content(ObjectProperty)=Card_ScaleBox=WidgetArchetype 
+	SizeBoxSlot_1 (0-0-0-0): size 70 (cls: SizeBoxSlot_1>SizeBoxSlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=MulchStateBox=WidgetArchetype 
+			Content(ObjectProperty)=MulchStateBorder=WidgetArchetype 
 	SizeBoxSlot_855 (0-0-0-0): size 267 (cls: SizeBoxSlot_855>SizeBoxSlot>/Script/UMG):
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
@@ -3552,10 +3616,13 @@ Serialized exports:
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
-	Store_Item_Card (0-0-0-0): size 183 (cls: Store_Item_Card>StoreItemCard_C>/Game/UI/Frontend/Store/StoreItemCard):
+	Store_Item_Card (0-0-0-0): size 270 (cls: Store_Item_Card>StoreItemCard_C>/Game/UI/Frontend/Store/StoreItemCard):
 		Tag array:
 			CardFront(ObjectProperty)=CardFront=WidgetArchetype 
 			ImageFoil(ObjectProperty)=ImageFoil=WidgetArchetype 
+			MulchImage(ObjectProperty)=MulchImage=WidgetArchetype 
+			MulchStateBox(ObjectProperty)=MulchStateBox=WidgetArchetype 
+			PopupMenuAnchor(ObjectProperty)=PopupMenuAnchor=WidgetArchetype 
 			InputActionWidget(ObjectProperty)=InputActionWidget=WidgetArchetype 
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
@@ -4026,7 +4093,7 @@ Serialized exports:
 			RootWidget(ObjectProperty)=Overlay_114=WidgetArchetype 
 	WidgetTree_0 (0-0-0-0): size 41 (cls: WidgetTree_0>WidgetTree>/Script/UMG):
 		Tag array:
-			RootWidget(ObjectProperty)=Overlay_0=WidgetArchetype 
+			RootWidget(ObjectProperty)=PopupMenuAnchor=WidgetArchetype 
 	WidgetTree_0 (0-0-0-0): size 41 (cls: WidgetTree_0>WidgetTree>/Script/UMG):
 		Tag array:
 			RootWidget(ObjectProperty)=SizeBox_0=WidgetArchetype 

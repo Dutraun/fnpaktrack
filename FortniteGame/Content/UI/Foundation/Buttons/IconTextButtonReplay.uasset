@@ -23,6 +23,7 @@ Name table:
 	Background
 	bAllowTemplate
 	bApplyAlphaOnDisable
+	bClassRequiresNativeTick
 	bCookedWidgetTree
 	bHasScriptImplementedPaint
 	bHasScriptImplementedTick
@@ -99,7 +100,6 @@ Name table:
 	Default__ByteProperty
 	Default__ClassProperty
 	Default__CommonActionWidget
-	Default__CommonButton
 	Default__CommonTextBlock
 	Default__ComponentDelegateBinding
 	Default__EnumProperty
@@ -109,6 +109,7 @@ Name table:
 	Default__HorizontalBoxSlot
 	Default__IconTextButton_C
 	Default__IconTextButtonReplay_C
+	Default__IconTextButtonSpectatorBase
 	Default__Image
 	Default__IntProperty
 	Default__KismetSystemLibrary
@@ -182,6 +183,7 @@ Name table:
 	IconBrush
 	IconTextButton_C
 	IconTextButtonReplay_C
+	IconTextButtonSpectatorBase
 	Image
 	ImageSize
 	ImageType
@@ -199,7 +201,9 @@ Name table:
 	K2Node_Event_IsDesignTime
 	K2Node_Event_NewTriggeredAction
 	K2Node_Event_TabLabelInfo
+	K2Node_Event_Text
 	K2Node_Select1_Default
+	K2Node_Select2_Default
 	K2Node_Select_Default
 	KismetMathLibrary
 	KismetSystemLibrary
@@ -241,7 +245,6 @@ Name table:
 	ScrollStyle
 	SelectedColor
 	Set Icon
-	Set Text
 	SetBrush
 	SetBrushColor
 	SetContentAlignment
@@ -272,11 +275,15 @@ Name table:
 	TabLabelInfo
 	Temp_bool_Variable
 	Temp_bool_Variable1
+	Temp_bool_Variable2
 	Temp_byte_Variable
 	Temp_byte_Variable1
 	Temp_byte_Variable2
 	Temp_byte_Variable3
+	Temp_byte_Variable4
+	Temp_byte_Variable5
 	TemplateAsset
+	Text
 	TextIsEmpty
 	TextProperty
 	TextScrollStyle-Base_C
@@ -307,11 +314,12 @@ Name table:
 	WidgetTree
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	IconTextButtonReplay_C (0-0-0-0): size 789 (cls: IconTextButtonReplay_C>WidgetBlueprintGeneratedClass>/Script/UMG):
+	IconTextButtonReplay_C (0-0-0-0): size 815 (cls: IconTextButtonReplay_C>WidgetBlueprintGeneratedClass>/Script/UMG):
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
 			bValidTemplate(BoolProperty)=True 
+			bClassRequiresNativeTick(BoolProperty)=True 
 			NamedSlots(ArrayProperty)=RightExtraContentSlot (inner: NameProperty)
 			TemplateAsset(SoftObjectProperty)=/Game/UI/Foundation/Buttons/IconTextButtonReplay.WidgetArchetype 
 			DynamicBindingObjects(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -334,7 +342,9 @@ Serialized exports:
 			bHasScriptImplementedPaint(BoolProperty)=False 
 	Background (0-0-0-0): size 36 (cls: Background>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_IconTextButtonReplay (0-0-0-0): size 907 (cls: ExecuteUbergraph_IconTextButtonReplay>Function>/Script/CoreUObject)
+	ExecuteUbergraph_IconTextButtonReplay (0-0-0-0): size 1103 (cls: ExecuteUbergraph_IconTextButtonReplay>Function>/Script/CoreUObject)
+	Text (0-0-0-0): size 32 (cls: Text>TextProperty>/Script/CoreUObject)
+	SetText (0-0-0-0): size 68 (cls: SetText>Function>/Script/CoreUObject)
 	BP_OnDeselected (0-0-0-0): size 54 (cls: BP_OnDeselected>Function>/Script/CoreUObject)
 	BP_OnSelected (0-0-0-0): size 54 (cls: BP_OnSelected>Function>/Script/CoreUObject)
 	BP_OnUnhovered (0-0-0-0): size 54 (cls: BP_OnUnhovered>Function>/Script/CoreUObject)
@@ -351,24 +361,22 @@ Serialized exports:
 	CallFunc_EqualEqual_ByteByte_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ByteByte_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_EqualEqual_SlateBrush_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_SlateBrush_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_HasAnyChildren_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasAnyChildren_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_TextIsEmpty_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_TextIsEmpty_ReturnValue>BoolProperty>/Script/CoreUObject)
 	K2Node_ComponentBoundEvent_bUsingGamepad (0-0-0-0): size 34 (cls: K2Node_ComponentBoundEvent_bUsingGamepad>BoolProperty>/Script/CoreUObject)
 	K2Node_Event_IsDesignTime (0-0-0-0): size 34 (cls: K2Node_Event_IsDesignTime>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable1 (0-0-0-0): size 34 (cls: Temp_bool_Variable1>BoolProperty>/Script/CoreUObject)
+	Temp_bool_Variable2 (0-0-0-0): size 34 (cls: Temp_bool_Variable2>BoolProperty>/Script/CoreUObject)
 	TabLabelInfo (0-0-0-0): size 36 (cls: TabLabelInfo>StructProperty>/Script/CoreUObject)
 	SetTabLabelInfo (0-0-0-0): size 68 (cls: SetTabLabelInfo>Function>/Script/CoreUObject)
 	IsDesignTime (0-0-0-0): size 34 (cls: IsDesignTime>BoolProperty>/Script/CoreUObject)
 	PreConstruct (0-0-0-0): size 68 (cls: PreConstruct>Function>/Script/CoreUObject)
 	OnCurrentTextStyleChanged (0-0-0-0): size 54 (cls: OnCurrentTextStyleChanged>Function>/Script/CoreUObject)
-	ButtonText (0-0-0-0): size 32 (cls: ButtonText>TextProperty>/Script/CoreUObject)
-	Set Text (0-0-0-0): size 238 (cls: Set Text>Function>/Script/CoreUObject)
 	IconBrush (0-0-0-0): size 36 (cls: IconBrush>StructProperty>/Script/CoreUObject)
 	Set Icon (0-0-0-0): size 91 (cls: Set Icon>Function>/Script/CoreUObject)
 	CallFunc_GetBrushResource_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetBrushResource_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	InitializeButton (0-0-0-0): size 194 (cls: InitializeButton>Function>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
-	CallFunc_TextIsEmpty_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_TextIsEmpty_ReturnValue>BoolProperty>/Script/CoreUObject)
-	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
 	bUsingGamepad (0-0-0-0): size 34 (cls: bUsingGamepad>BoolProperty>/Script/CoreUObject)
 	UpdateTextAndStyle (0-0-0-0): size 82 (cls: UpdateTextAndStyle>Function>/Script/CoreUObject)
 	ControllerInputStyle (0-0-0-0): size 40 (cls: ControllerInputStyle>ClassProperty>/Script/CoreUObject)
@@ -450,14 +458,14 @@ Serialized exports:
 	CallFunc_GetCurrentInputType_ReturnValue (0-0-0-0): size 40 (cls: CallFunc_GetCurrentInputType_ReturnValue>EnumProperty>/Script/CoreUObject)
 	CallFunc_GetCurrentInputType_ReturnValue1 (0-0-0-0): size 40 (cls: CallFunc_GetCurrentInputType_ReturnValue1>EnumProperty>/Script/CoreUObject)
 	K2Node_Select1_Default (0-0-0-0): size 40 (cls: K2Node_Select1_Default>EnumProperty>/Script/CoreUObject)
+	K2Node_Select2_Default (0-0-0-0): size 40 (cls: K2Node_Select2_Default>EnumProperty>/Script/CoreUObject)
 	K2Node_Select_Default (0-0-0-0): size 40 (cls: K2Node_Select_Default>EnumProperty>/Script/CoreUObject)
 	Temp_byte_Variable (0-0-0-0): size 40 (cls: Temp_byte_Variable>EnumProperty>/Script/CoreUObject)
 	Temp_byte_Variable1 (0-0-0-0): size 40 (cls: Temp_byte_Variable1>EnumProperty>/Script/CoreUObject)
 	Temp_byte_Variable2 (0-0-0-0): size 40 (cls: Temp_byte_Variable2>EnumProperty>/Script/CoreUObject)
 	Temp_byte_Variable3 (0-0-0-0): size 40 (cls: Temp_byte_Variable3>EnumProperty>/Script/CoreUObject)
-	K2Node_Select_Default (0-0-0-0): size 40 (cls: K2Node_Select_Default>EnumProperty>/Script/CoreUObject)
-	Temp_byte_Variable (0-0-0-0): size 40 (cls: Temp_byte_Variable>EnumProperty>/Script/CoreUObject)
-	Temp_byte_Variable1 (0-0-0-0): size 40 (cls: Temp_byte_Variable1>EnumProperty>/Script/CoreUObject)
+	Temp_byte_Variable4 (0-0-0-0): size 40 (cls: Temp_byte_Variable4>EnumProperty>/Script/CoreUObject)
+	Temp_byte_Variable5 (0-0-0-0): size 40 (cls: Temp_byte_Variable5>EnumProperty>/Script/CoreUObject)
 	CallFunc_GetCurrentInputType_ReturnValue (0-0-0-0): size 40 (cls: CallFunc_GetCurrentInputType_ReturnValue>EnumProperty>/Script/CoreUObject)
 	CallFunc_GetCurrentInputType_ReturnValue (0-0-0-0): size 40 (cls: CallFunc_GetCurrentInputType_ReturnValue>EnumProperty>/Script/CoreUObject)
 	K2Node_Event_HeldPercent (0-0-0-0): size 32 (cls: K2Node_Event_HeldPercent>FloatProperty>/Script/CoreUObject)
@@ -525,6 +533,7 @@ Serialized exports:
 	PressedColor (0-0-0-0): size 36 (cls: PressedColor>StructProperty>/Script/CoreUObject)
 	SelectedColor (0-0-0-0): size 36 (cls: SelectedColor>StructProperty>/Script/CoreUObject)
 	ButtonText (0-0-0-0): size 32 (cls: ButtonText>TextProperty>/Script/CoreUObject)
+	K2Node_Event_Text (0-0-0-0): size 32 (cls: K2Node_Event_Text>TextProperty>/Script/CoreUObject)
 	CallFunc_GetDisplayText_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetDisplayText_ReturnValue>TextProperty>/Script/CoreUObject)
 	K2Node_Select_Default (0-0-0-0): size 32 (cls: K2Node_Select_Default>TextProperty>/Script/CoreUObject)
 	VerticalBox_0 (0-0-0-0): size 86 (cls: VerticalBox_0>VerticalBox>/Script/UMG):

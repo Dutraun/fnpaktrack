@@ -20,6 +20,9 @@ Name table:
 	AnimationBindings
 	AnimationGuid
 	Animations
+	Array_Add
+	Array_Length
+	Array_Remove
 	ArrayProperty
 	ArriveTangent
 	ArriveTangentWeight
@@ -28,6 +31,7 @@ Name table:
 	AthenaScoreAlertStyles
 	AthenaWinConditionMsgBase
 	bAllowTemplate
+	bCanStartMessage
 	bCookedWidgetTree
 	bDisplayingCriticalMsg
 	bEvaluateInPostroll
@@ -38,6 +42,7 @@ Name table:
 	BindingName
 	BindToAnimationFinished
 	bIsRootWidget
+	bIsTeamBased
 	bIsVariable
 	bLegacyFinishOnStop
 	BlendType
@@ -49,14 +54,22 @@ Name table:
 	Burbank-Black
 	bValidTemplate
 	ByteProperty
+	CallFunc_Array_Add_ReturnValue
+	CallFunc_Array_Length_ReturnValue
 	CallFunc_BooleanAND_ReturnValue
 	CallFunc_BooleanOR_ReturnValue
+	CallFunc_BooleanOR_ReturnValue1
+	CallFunc_BooleanOR_ReturnValue2
 	CallFunc_Conv_IntToFloat_ReturnValue
 	CallFunc_Conv_IntToFloat_ReturnValue1
 	CallFunc_EqualEqual_ByteByte_ReturnValue
 	CallFunc_EqualEqual_ByteByte_ReturnValue1
+	CallFunc_EqualEqual_ByteByte_ReturnValue2
+	CallFunc_EqualEqual_ByteByte_ReturnValue3
+	CallFunc_EqualEqual_ByteByte_ReturnValue4
 	CallFunc_EqualEqual_IntInt_ReturnValue
 	CallFunc_GetGameState_ReturnValue
+	CallFunc_Greater_IntInt_ReturnValue
 	CallFunc_IsValid_ReturnValue
 	CallFunc_MakeVector2D_ReturnValue
 	CallFunc_MakeVector2D_ReturnValue1
@@ -64,9 +77,9 @@ Name table:
 	CallFunc_NotEqual_ByteByte_ReturnValue
 	CallFunc_NotEqual_ByteByte_ReturnValue1
 	CallFunc_NotEqual_ByteByte_ReturnValue2
-	CallFunc_PlayAnimationAtTime_ReturnValue
-	CallFunc_PlayAnimationAtTime_ReturnValue1
-	CallFunc_PlayAnimationAtTime_ReturnValue2
+	CallFunc_PlayAnimation_ReturnValue
+	CallFunc_PlayAnimation_ReturnValue1
+	CallFunc_PlayAnimation_ReturnValue2
 	ChildTemplates
 	Class
 	ColorAndOpacity
@@ -76,6 +89,7 @@ Name table:
 	Conv_IntToFloat
 	CustomEvent
 	DataTable
+	Default__ArrayProperty
 	Default__AthenaScoreAlert_C
 	Default__AthenaWinConditionMsgBase
 	Default__BoolProperty
@@ -86,6 +100,7 @@ Name table:
 	Default__Function
 	Default__GameplayStatics
 	Default__IntProperty
+	Default__KismetArrayLibrary
 	Default__KismetSystemLibrary
 	Default__MovieScene
 	Default__MovieScene2DTransformSection
@@ -110,12 +125,14 @@ Name table:
 	DelegateProperty
 	Denominator
 	DisplayRate
+	DisplayTime
 	EaseIn
 	EaseInFunction
 	EaseOut
 	EaseOutFunction
 	Easing
 	EAthenaGameMsgType
+	EAthenaGameMsgType::None
 	EEvaluationMethod
 	EEvaluationMethod::Static
 	EHorizontalAlignment
@@ -168,6 +185,7 @@ Name table:
 	GameplayTagContainer
 	GameStateBase
 	GetGameState
+	Greater_IntInt
 	Groups
 	Guid
 	HAlign_Center
@@ -196,6 +214,7 @@ Name table:
 	K2Node_Select_Default
 	K2Node_SwitchEnum_CmpSuccess
 	Key
+	KismetArrayLibrary
 	KismetMathLibrary
 	KismetSystemLibrary
 	LastTrackIdentifier
@@ -250,6 +269,8 @@ Name table:
 	MovieSceneTrackIdentifier
 	MovieSceneTrackImplementationPtr
 	MsgData
+	MsgDelay
+	MsgSound
 	MsgText
 	MsgType
 	MulticastDelegateProperty
@@ -283,7 +304,7 @@ Name table:
 	Padding
 	Parent
 	ParentGuid
-	PlayAnimationAtTime
+	PlayAnimation
 	PlaybackRange
 	PlaySound2D
 	PlaySoundFromType
@@ -297,6 +318,8 @@ Name table:
 	PropertyData
 	PropertyName
 	PropertyPath
+	QueuedMessages
+	QueuedMsg
 	Ranges
 	RCCE_Constant
 	RCIM_Cubic
@@ -347,6 +370,7 @@ Name table:
 	Tangent
 	TangentMode
 	TangentWeightMode
+	TeamIndex
 	Temp_bool_Variable
 	Temp_bool_Variable1
 	Temp_byte_Variable
@@ -425,7 +449,7 @@ Name table:
 	WidgetTree
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	AthenaScoreAlert_C (0-0-0-0): size 404 (cls: AthenaScoreAlert_C>WidgetBlueprintGeneratedClass>/Script/UMG):
+	AthenaScoreAlert_C (0-0-0-0): size 416 (cls: AthenaScoreAlert_C>WidgetBlueprintGeneratedClass>/Script/UMG):
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
@@ -433,29 +457,40 @@ Serialized exports:
 			Animations(ArrayProperty)=[object] (inner: ObjectProperty)
 			TemplateAsset(SoftObjectProperty)=/Game/Athena/HUD/AthenaScoreAlert.WidgetArchetype 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_AthenaScoreAlert=AthenaScoreAlert_C 
-	Default__AthenaScoreAlert_C (0-0-0-0): size 236 (cls: Default__AthenaScoreAlert_C>AthenaScoreAlert_C):
+	Default__AthenaScoreAlert_C (0-0-0-0): size 532 (cls: Default__AthenaScoreAlert_C>AthenaScoreAlert_C):
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			TestMessageType(IntProperty)=4 
 			NonCriticalOffset(IntProperty)=45 
+			bCanStartMessage(BoolProperty)=True 
+			QueuedMsg(StructProperty)=System.Byte[] 
 			HUDElementTag(StructProperty)=GameplayTagContainer:HUD.Athena.HideOnSpectate 
 			bHasScriptImplementedTick(BoolProperty)=False 
 			bHasScriptImplementedPaint(BoolProperty)=False 
+	QueuedMessages (0-0-0-0): size 36 (cls: QueuedMessages>StructProperty>/Script/CoreUObject)
+	QueuedMessages (0-0-0-0): size 36 (cls: QueuedMessages>ArrayProperty>/Script/CoreUObject)
 	WidgetArchetype (0-0-0-0): size 125 (cls: WidgetArchetype>AthenaScoreAlert_C):
 		Tag array:
 			Content(ObjectProperty)=Content=WidgetArchetype 
 			Message(ObjectProperty)=Message=WidgetArchetype 
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
+	bCanStartMessage (0-0-0-0): size 34 (cls: bCanStartMessage>BoolProperty>/Script/CoreUObject)
 	bDisplayingCriticalMsg (0-0-0-0): size 34 (cls: bDisplayingCriticalMsg>BoolProperty>/Script/CoreUObject)
 	Exclamation (0-0-0-0): size 36 (cls: Exclamation>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_AthenaScoreAlert (0-0-0-0): size 2448 (cls: ExecuteUbergraph_AthenaScoreAlert>Function>/Script/CoreUObject)
+	ExecuteUbergraph_AthenaScoreAlert (0-0-0-0): size 2796 (cls: ExecuteUbergraph_AthenaScoreAlert>Function>/Script/CoreUObject)
 	CallFunc_BooleanAND_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_BooleanOR_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanOR_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_BooleanOR_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_BooleanOR_ReturnValue1>BoolProperty>/Script/CoreUObject)
+	CallFunc_BooleanOR_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_BooleanOR_ReturnValue2>BoolProperty>/Script/CoreUObject)
 	CallFunc_EqualEqual_ByteByte_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ByteByte_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_EqualEqual_ByteByte_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ByteByte_ReturnValue1>BoolProperty>/Script/CoreUObject)
+	CallFunc_EqualEqual_ByteByte_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ByteByte_ReturnValue2>BoolProperty>/Script/CoreUObject)
+	CallFunc_EqualEqual_ByteByte_ReturnValue3 (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ByteByte_ReturnValue3>BoolProperty>/Script/CoreUObject)
+	CallFunc_EqualEqual_ByteByte_ReturnValue4 (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ByteByte_ReturnValue4>BoolProperty>/Script/CoreUObject)
 	CallFunc_EqualEqual_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_Greater_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Greater_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Not_PreBool_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_NotEqual_ByteByte_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_NotEqual_ByteByte_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_NotEqual_ByteByte_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_NotEqual_ByteByte_ReturnValue1>BoolProperty>/Script/CoreUObject)
@@ -496,6 +531,8 @@ Serialized exports:
 	Temp_float_Variable7 (0-0-0-0): size 32 (cls: Temp_float_Variable7>FloatProperty>/Script/CoreUObject)
 	Temp_float_Variable8 (0-0-0-0): size 32 (cls: Temp_float_Variable8>FloatProperty>/Script/CoreUObject)
 	Temp_float_Variable9 (0-0-0-0): size 32 (cls: Temp_float_Variable9>FloatProperty>/Script/CoreUObject)
+	CallFunc_Array_Add_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Array_Add_ReturnValue>IntProperty>/Script/CoreUObject)
+	CallFunc_Array_Length_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Array_Length_ReturnValue>IntProperty>/Script/CoreUObject)
 	Temp_int_Variable (0-0-0-0): size 32 (cls: Temp_int_Variable>IntProperty>/Script/CoreUObject)
 	NonCriticalOffset (0-0-0-0): size 32 (cls: NonCriticalOffset>IntProperty>/Script/CoreUObject)
 	TestMessageType (0-0-0-0): size 32 (cls: TestMessageType>IntProperty>/Script/CoreUObject)
@@ -614,9 +651,9 @@ Serialized exports:
 			Signature(StructProperty)=Guid: 1122716842-1125971023-2504294327-2820662081 
 	Content (0-0-0-0): size 36 (cls: Content>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetGameState_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetGameState_ReturnValue>ObjectProperty>/Script/CoreUObject)
-	CallFunc_PlayAnimationAtTime_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlayAnimationAtTime_ReturnValue>ObjectProperty>/Script/CoreUObject)
-	CallFunc_PlayAnimationAtTime_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_PlayAnimationAtTime_ReturnValue1>ObjectProperty>/Script/CoreUObject)
-	CallFunc_PlayAnimationAtTime_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_PlayAnimationAtTime_ReturnValue2>ObjectProperty>/Script/CoreUObject)
+	CallFunc_PlayAnimation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlayAnimation_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_PlayAnimation_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_PlayAnimation_ReturnValue1>ObjectProperty>/Script/CoreUObject)
+	CallFunc_PlayAnimation_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_PlayAnimation_ReturnValue2>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Game_State_Athena (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Game_State_Athena>ObjectProperty>/Script/CoreUObject)
 	Intro (0-0-0-0): size 36 (cls: Intro>ObjectProperty>/Script/CoreUObject)
 	Message (0-0-0-0): size 36 (cls: Message>ObjectProperty>/Script/CoreUObject)
@@ -663,6 +700,7 @@ Serialized exports:
 	K2Node_Select_Default (0-0-0-0): size 36 (cls: K2Node_Select_Default>StructProperty>/Script/CoreUObject)
 	Temp_struct_Variable (0-0-0-0): size 36 (cls: Temp_struct_Variable>StructProperty>/Script/CoreUObject)
 	Temp_struct_Variable1 (0-0-0-0): size 36 (cls: Temp_struct_Variable1>StructProperty>/Script/CoreUObject)
+	QueuedMsg (0-0-0-0): size 36 (cls: QueuedMsg>StructProperty>/Script/CoreUObject)
 	TextBlock_0 (0-0-0-0): size 797 (cls: TextBlock_0>TextBlock>/Script/UMG):
 		Tag array:
 			Text(TextProperty)=! (FD81051647EA9EFE8318D7B7AE210690) 

@@ -32,7 +32,7 @@ Name table:
 	AnimGraphNode_AnimDynamics_A92F8AF04A31919A29FEB0A590674DBC
 	AnimGraphNode_AnimDynamics_CD8635CC4F6671FC9B4A8BA67EF7B34A
 	AnimGraphNode_AnimDynamics_EBC45AB14853C7B1ACE9D097519377CE
-	AnimGraphNode_BlendListByBool_E4358016473F45BBAD8381A2045556A7
+	AnimGraphNode_BlendListByBool_A8CE39AD4A904E9B51E298AA5EE441BB
 	AnimGraphNode_ComponentToLocalSpace_24A1ABD447BB45359CDDE39D1D84E449
 	AnimGraphNode_CopyPoseFromMesh_5F6A845B42189B7ACC8FD9860CA27455
 	AnimGraphNode_LayeredBoneBlend_E050A7744E6FD7726C555CADBDA32203
@@ -106,6 +106,7 @@ Name table:
 	bMeshSpaceRotationBlend
 	BoneName
 	BoneReference
+	BooleanOR
 	BoolProperty
 	BoundBone
 	BoundFunction
@@ -117,7 +118,10 @@ Name table:
 	BranchFilter
 	BranchFilters
 	bResetChildOnActivation
+	bRigidBodyEnabled
 	bTransferBoneVelocities
+	bUpdateAllPawnProperties
+	bUpdateOwnerAnimInputProperty
 	bUseAttachedParent
 	bUseGravityOverride
 	bUsePlanarLimit
@@ -126,7 +130,9 @@ Name table:
 	ByteProperty
 	CachedBoundsScale
 	CachePoseName
+	CallFunc_BooleanOR_ReturnValue
 	CallFunc_Greater_IntInt_ReturnValue
+	CallFunc_Not_PreBool_ReturnValue
 	ChainEnd
 	ClampMax
 	ClampMin
@@ -179,12 +185,13 @@ Name table:
 	ESimulationSpace
 	ESimulationSpace::BaseBoneSpace
 	EvaluateGraphExposedInputs
-	EvaluateGraphExposedInputs_ExecuteUbergraph_M_MED_Werewolf_01_FaceAcc_AnimBP_AnimGraphNode_BlendListByBool_E4358016473F45BBAD8381A2045556A7
+	EvaluateGraphExposedInputs_ExecuteUbergraph_M_MED_Werewolf_01_FaceAcc_AnimBP_AnimGraphNode_BlendListByBool_A8CE39AD4A904E9B51E298AA5EE441BB
 	ExecuteUbergraph_M_MED_Werewolf_01_FaceAcc_AnimBP
 	ExposedValueCopyRecord
 	ExposedValueHandler
 	ExternalForce
 	FloatProperty
+	FortAnimInstance
 	Function
 	GravityOverride
 	GravityScale
@@ -225,6 +232,7 @@ Name table:
 	Min
 	NameProperty
 	None
+	Not_PreBool
 	NumSolverIterationsPostUpdate
 	NumSolverIterationsPreUpdate
 	ObjectProperty
@@ -274,7 +282,7 @@ Serialized exports:
 			OrderedSavedPoseIndices(ArrayProperty)=[object] (inner: IntProperty)
 			EvaluateGraphExposedInputs(ArrayProperty)=[object] (inner: StructProperty)
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_M_MED_Werewolf_01_FaceAcc_AnimBP=M_MED_Werewolf_01_FaceAcc_AnimBP_C 
-	Default__M_MED_Werewolf_01_FaceAcc_AnimBP_C (0-0-0-0): size 33774 (cls: Default__M_MED_Werewolf_01_FaceAcc_AnimBP_C>M_MED_Werewolf_01_FaceAcc_AnimBP_C):
+	Default__M_MED_Werewolf_01_FaceAcc_AnimBP_C (0-0-0-0): size 33826 (cls: Default__M_MED_Werewolf_01_FaceAcc_AnimBP_C>M_MED_Werewolf_01_FaceAcc_AnimBP_C):
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			AnimGraphNode_CopyPoseFromMesh_5F6A845B42189B7ACC8FD9860CA27455(StructProperty)=System.Byte[] 
@@ -291,17 +299,21 @@ Serialized exports:
 			AnimGraphNode_AnimDynamics_36405BDA4E8B60C4C57014876F923702(StructProperty)=System.Byte[] 
 			AnimGraphNode_Root_03C5ADB34E68C4D1306B2DBAFB946427(StructProperty)=System.Byte[] 
 			AnimGraphNode_SequencePlayer_2F05F9104199AD62F4FD5AB115AF4BD7(StructProperty)=System.Byte[] 
-			AnimGraphNode_BlendListByBool_E4358016473F45BBAD8381A2045556A7(StructProperty)=System.Byte[] 
 			AnimGraphNode_SaveCachedPose_05C369FB4A47F89D55ED6AB860717482(StructProperty)=System.Byte[] 
 			AnimGraphNode_LayeredBoneBlend_E050A7744E6FD7726C555CADBDA32203(StructProperty)=System.Byte[] 
 			AnimGraphNode_UseCachedPose_325AF1954CC1DC6B40990BBC22A7DE72(StructProperty)=System.Byte[] 
 			AnimGraphNode_UseCachedPose_10A6E1D749C362C2C0B126B4D3A5B2B2(StructProperty)=System.Byte[] 
+			AnimGraphNode_BlendListByBool_A8CE39AD4A904E9B51E298AA5EE441BB(StructProperty)=System.Byte[] 
+			bUpdateOwnerAnimInputProperty(BoolProperty)=True 
+			bUpdateAllPawnProperties(BoolProperty)=True 
 			bUsingCopyPoseFromMesh(BoolProperty)=True 
 	AnimGraphNode_CopyPoseFromMesh_5F6A845B42189B7ACC8FD9860CA27455 (0-0-0-0): size 36 (cls: AnimGraphNode_CopyPoseFromMesh_5F6A845B42189B7ACC8FD9860CA27455>StructProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_M_MED_Werewolf_01_FaceAcc_AnimBP (0-0-0-0): size 95 (cls: ExecuteUbergraph_M_MED_Werewolf_01_FaceAcc_AnimBP>Function>/Script/CoreUObject)
+	ExecuteUbergraph_M_MED_Werewolf_01_FaceAcc_AnimBP (0-0-0-0): size 142 (cls: ExecuteUbergraph_M_MED_Werewolf_01_FaceAcc_AnimBP>Function>/Script/CoreUObject)
+	CallFunc_BooleanOR_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanOR_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Greater_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Greater_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
-	EvaluateGraphExposedInputs_ExecuteUbergraph_M_MED_Werewolf_01_FaceAcc_AnimBP_AnimGraphNode_BlendListByBool_E4358016473F45BBAD8381A2045556A7 (0-0-0-0): size 54 (cls: EvaluateGraphExposedInputs_ExecuteUbergraph_M_MED_Werewolf_01_FaceAcc_AnimBP_AnimGraphNode_BlendListByBool_E4358016473F45BBAD8381A2045556A7>Function>/Script/CoreUObject)
+	CallFunc_Not_PreBool_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue>BoolProperty>/Script/CoreUObject)
+	EvaluateGraphExposedInputs_ExecuteUbergraph_M_MED_Werewolf_01_FaceAcc_AnimBP_AnimGraphNode_BlendListByBool_A8CE39AD4A904E9B51E298AA5EE441BB (0-0-0-0): size 54 (cls: EvaluateGraphExposedInputs_ExecuteUbergraph_M_MED_Werewolf_01_FaceAcc_AnimBP_AnimGraphNode_BlendListByBool_A8CE39AD4A904E9B51E298AA5EE441BB>Function>/Script/CoreUObject)
 	AnimGraphNode_AnimDynamics_03CB941D41B50ECA402188878986E5D4 (0-0-0-0): size 36 (cls: AnimGraphNode_AnimDynamics_03CB941D41B50ECA402188878986E5D4>StructProperty>/Script/CoreUObject)
 	AnimGraphNode_AnimDynamics_0C092C9A4557F126EEAEFEB190D05208 (0-0-0-0): size 36 (cls: AnimGraphNode_AnimDynamics_0C092C9A4557F126EEAEFEB190D05208>StructProperty>/Script/CoreUObject)
 	AnimGraphNode_AnimDynamics_36405BDA4E8B60C4C57014876F923702 (0-0-0-0): size 36 (cls: AnimGraphNode_AnimDynamics_36405BDA4E8B60C4C57014876F923702>StructProperty>/Script/CoreUObject)
@@ -310,7 +322,7 @@ Serialized exports:
 	AnimGraphNode_AnimDynamics_A92F8AF04A31919A29FEB0A590674DBC (0-0-0-0): size 36 (cls: AnimGraphNode_AnimDynamics_A92F8AF04A31919A29FEB0A590674DBC>StructProperty>/Script/CoreUObject)
 	AnimGraphNode_AnimDynamics_CD8635CC4F6671FC9B4A8BA67EF7B34A (0-0-0-0): size 36 (cls: AnimGraphNode_AnimDynamics_CD8635CC4F6671FC9B4A8BA67EF7B34A>StructProperty>/Script/CoreUObject)
 	AnimGraphNode_AnimDynamics_EBC45AB14853C7B1ACE9D097519377CE (0-0-0-0): size 36 (cls: AnimGraphNode_AnimDynamics_EBC45AB14853C7B1ACE9D097519377CE>StructProperty>/Script/CoreUObject)
-	AnimGraphNode_BlendListByBool_E4358016473F45BBAD8381A2045556A7 (0-0-0-0): size 36 (cls: AnimGraphNode_BlendListByBool_E4358016473F45BBAD8381A2045556A7>StructProperty>/Script/CoreUObject)
+	AnimGraphNode_BlendListByBool_A8CE39AD4A904E9B51E298AA5EE441BB (0-0-0-0): size 36 (cls: AnimGraphNode_BlendListByBool_A8CE39AD4A904E9B51E298AA5EE441BB>StructProperty>/Script/CoreUObject)
 	AnimGraphNode_ComponentToLocalSpace_24A1ABD447BB45359CDDE39D1D84E449 (0-0-0-0): size 36 (cls: AnimGraphNode_ComponentToLocalSpace_24A1ABD447BB45359CDDE39D1D84E449>StructProperty>/Script/CoreUObject)
 	AnimGraphNode_LayeredBoneBlend_E050A7744E6FD7726C555CADBDA32203 (0-0-0-0): size 36 (cls: AnimGraphNode_LayeredBoneBlend_E050A7744E6FD7726C555CADBDA32203>StructProperty>/Script/CoreUObject)
 	AnimGraphNode_LocalToComponentSpace_7F4593A94A1AD024C985C398DF482D21 (0-0-0-0): size 36 (cls: AnimGraphNode_LocalToComponentSpace_7F4593A94A1AD024C985C398DF482D21>StructProperty>/Script/CoreUObject)

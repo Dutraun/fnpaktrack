@@ -25,15 +25,19 @@ Name table:
 	AthenaGadgetItemDefinition
 	AthenaGameData
 	AudioComponent
-	BlockAbilitiesWithTag
+	bKeepBuildingMaterialsOnDropAll
 	BlockAbilitiesWithTags
-	BlockedAbilityTags
+	BlueprintGameplayTagLibrary
 	BlueprintGeneratedClass
 	BoneName
 	BoolProperty
 	BP_ApplyGameplayEffectToOwner
 	BP_BlockAbilitiesWithTags
 	BP_UnBlockAbilitiesWithTags
+	BuildingAllowed
+	BuildingEnabled
+	BuildingHudTag
+	bWasCancelled
 	ByteProperty
 	CallFunc_BP_ApplyGameplayEffectToOwner_ReturnValue
 	CallFunc_BP_ApplyGameplayEffectToOwner_ReturnValue1
@@ -46,6 +50,7 @@ Name table:
 	CallFunc_GetHealth_ReturnValue
 	CallFunc_GetMaxHealth_ReturnValue
 	CallFunc_GetValueAtLevel_ReturnValue
+	CallFunc_Greater_FloatFloat_ReturnValue
 	CallFunc_HasMatchingGameplayTag_ReturnValue
 	CallFunc_HasMatchingGameplayTag_ReturnValue1
 	CallFunc_HasMatchingGameplayTag_self1_CastInput
@@ -53,6 +58,8 @@ Name table:
 	CallFunc_IsDBNO_ReturnValue
 	CallFunc_K2_SetTimerDelegate_ReturnValue
 	CallFunc_Less_FloatFloat_ReturnValue
+	CallFunc_MakeGameplayTagContainerFromTag_ReturnValue
+	CallFunc_MakeGameplayTagContainerFromTag_ReturnValue1
 	CapsuleComponent
 	CharacterMesh0
 	CharMoveComp
@@ -65,8 +72,10 @@ Name table:
 	Damage
 	DamageCauser
 	DamagedActor
+	Default.Sword.BuildingEnabled
 	Default.Sword.RegenTickRate
 	Default__AbilitySystemBlueprintLibrary
+	Default__BlueprintGameplayTagLibrary
 	Default__BlueprintGeneratedClass
 	Default__BoolProperty
 	Default__DelegateProperty
@@ -113,18 +122,13 @@ Name table:
 	FortMovementComp_CharacterAthena
 	FortPawn
 	FortPlayerController
+	FortPlayerControllerGameplay
 	FortPlayerPawnAthena
 	FortScalableFloatUtils
 	Function
 	GA_Sword_Passive_Setup_C
-	Gameplay.Action.Player.AthenaDrivingVehicle
-	Gameplay.Action.Player.AthenaEnterVehicle
-	Gameplay.Action.Player.AthenaInTurret
-	Gameplay.Action.Player.AthenaInVehicle
 	Gameplay.Action.Player.ChangeEquipment
 	Gameplay.Action.Player.ChangeEquipment.Primary
-	Gameplay.Action.Player.OpenParachute
-	Gameplay.Action.Player.OperatingTurret
 	GameplayAbility
 	GameplayTag
 	GameplayTagAssetInterface
@@ -139,8 +143,11 @@ Name table:
 	GetHealth
 	GetMaxHealth
 	GetValueAtLevel
+	Greater_FloatFloat
 	HasMatchingGameplayTag
+	HideHUDElements
 	HitLocation
+	HUD.Athena.HidePrimaryForAbility
 	InAirAudioComp
 	InstancingPolicy
 	InstigatedBy
@@ -148,6 +155,7 @@ Name table:
 	IntProperty
 	IsDBNO
 	K2_ActivateAbility
+	K2_OnEndAbility
 	K2_SetTimerDelegate
 	K2Node_CreateDelegate_OutputDelegate
 	K2Node_CreateDelegate_OutputDelegate1
@@ -161,15 +169,20 @@ Name table:
 	K2Node_CustomEvent_InstigatedBy
 	K2Node_CustomEvent_Momentum
 	K2Node_DynamicCast_AsFort_Ability_System_Component
+	K2Node_DynamicCast_AsFort_Player_Controller_Gameplay
 	K2Node_DynamicCast_AsPlayer_Pawn_Athena
 	K2Node_DynamicCast_bSuccess
+	K2Node_Event_bWasCancelled
 	KismetMathLibrary
 	KismetSystemLibrary
 	Less_FloatFloat
+	LinearColor
+	MakeGameplayTagContainerFromTag
 	Momentum
 	MulticastDelegateProperty
 	NameProperty
 	NetExecutionPolicy
+	NoBuilding!
 	NODE_AddPointLightComponent-1
 	NODE_AddPointLightComponent-2
 	NODE_AddPostProcessComponent-2
@@ -194,11 +207,14 @@ Name table:
 	PointLightComponent
 	PostProcessComponent
 	PrimitiveComponent
+	PrintString
 	RemoveNonReplicatedTagToPawn
 	RowName
 	ScalableFloat
 	SceneComponent
 	ScriptStruct
+	SetHUDElementVisibility
+	ShowHUD
 	SkeletalMeshComponentBudgeted
 	StructProperty
 	TagName
@@ -213,68 +229,95 @@ Name table:
 	Vector
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	GA_Sword_Passive_Setup_C (0-0-0-0): size 245 (cls: GA_Sword_Passive_Setup_C>BlueprintGeneratedClass>/Script/Engine):
+	GA_Sword_Passive_Setup_C (0-0-0-0): size 309 (cls: GA_Sword_Passive_Setup_C>BlueprintGeneratedClass>/Script/Engine):
 		Tag array:
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_GA_Sword_Passive_Setup=GA_Sword_Passive_Setup_C 
-	Default__GA_Sword_Passive_Setup_C (0-0-0-0): size 711 (cls: Default__GA_Sword_Passive_Setup_C>GA_Sword_Passive_Setup_C):
+	Default__GA_Sword_Passive_Setup_C (0-0-0-0): size 958 (cls: Default__GA_Sword_Passive_Setup_C>GA_Sword_Passive_Setup_C):
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
-			BlockedAbilityTags(StructProperty)=GameplayTagContainer:Gameplay.Action.Player.OpenParachute,Gameplay.Action.Player.OperatingTurret,Gameplay.Action.Player.AthenaInTurret,Gameplay.Action.Player.AthenaDrivingVehicle,Gameplay.Action.Player.AthenaEnterVehicle,Gameplay.Action.Player.AthenaInVehicle,Gameplay.Action.Player.ChangeEquipment 
+			BuildingAllowed(StructProperty)=GameplayTagContainer:Gameplay.Action.Player.ChangeEquipment.Primary 
 			FirstWielderTag(StructProperty)=System.Byte[] 
 			AGID_Sword(ObjectProperty)=AGID_Sword=/Game/Athena/Items/Gameplay/Sword/AGID_Sword 
 			TickRate(FloatProperty)=0.1 
 			TickRateRow(StructProperty)=System.Byte[] 
+			BuildingEnabled(StructProperty)=System.Byte[] 
+			NoBuilding!(StructProperty)=GameplayTagContainer:Gameplay.Action.Player.ChangeEquipment 
+			BuildingHudTag(StructProperty)=System.Byte[] 
 			ActivationType(EnumProperty)=EFortGameplayAbilityActivation::Passive 
 			InstancingPolicy(ByteProperty)=EGameplayAbilityInstancingPolicy::InstancedPerActor 
 			NetExecutionPolicy(ByteProperty)=EGameplayAbilityNetExecutionPolicy::ServerInitiated 
-			BlockAbilitiesWithTag(StructProperty)=GameplayTagContainer:Gameplay.Action.Player.ChangeEquipment.Primary 
+	bKeepBuildingMaterialsOnDropAll (0-0-0-0): size 34 (cls: bKeepBuildingMaterialsOnDropAll>BoolProperty>/Script/CoreUObject)
 	PlayerPawn (0-0-0-0): size 36 (cls: PlayerPawn>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_GA_Sword_Passive_Setup (0-0-0-0): size 1004 (cls: ExecuteUbergraph_GA_Sword_Passive_Setup>Function>/Script/CoreUObject)
+	ExecuteUbergraph_GA_Sword_Passive_Setup (0-0-0-0): size 972 (cls: ExecuteUbergraph_GA_Sword_Passive_Setup>Function>/Script/CoreUObject)
+	bWasCancelled (0-0-0-0): size 34 (cls: bWasCancelled>BoolProperty>/Script/CoreUObject)
+	K2_OnEndAbility (0-0-0-0): size 68 (cls: K2_OnEndAbility>Function>/Script/CoreUObject)
 	K2_ActivateAbility (0-0-0-0): size 54 (cls: K2_ActivateAbility>Function>/Script/CoreUObject)
 	ApplyHealthOrShield (0-0-0-0): size 54 (cls: ApplyHealthOrShield>Function>/Script/CoreUObject)
 	DamagedActor (0-0-0-0): size 36 (cls: DamagedActor>ObjectProperty>/Script/CoreUObject)
 	EventDamaged (0-0-0-0): size 166 (cls: EventDamaged>Function>/Script/CoreUObject)
 	OnPlayerStartDBNO_Event_0 (0-0-0-0): size 54 (cls: OnPlayerStartDBNO_Event_0>Function>/Script/CoreUObject)
-	CallFunc_GetAbilitySystemComponent_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetAbilitySystemComponent_ReturnValue>ObjectProperty>/Script/CoreUObject)
-	BlockAbilitiesWithTags (0-0-0-0): size 158 (cls: BlockAbilitiesWithTags>Function>/Script/CoreUObject)
+	CallFunc_GetFortPlayerControllerFromActor_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetFortPlayerControllerFromActor_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	BlockAbilitiesWithTags (0-0-0-0): size 518 (cls: BlockAbilitiesWithTags>Function>/Script/CoreUObject)
+	CallFunc_Greater_FloatFloat_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Greater_FloatFloat_ReturnValue>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	CallFunc_HasMatchingGameplayTag_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasMatchingGameplayTag_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_HasMatchingGameplayTag_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_HasMatchingGameplayTag_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsDBNO_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsDBNO_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Less_FloatFloat_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Less_FloatFloat_ReturnValue>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
-	CallFunc_GetAbilitySystemComponent_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetAbilitySystemComponent_ReturnValue>ObjectProperty>/Script/CoreUObject)
-	UnblockAbilitiesWithTags (0-0-0-0): size 158 (cls: UnblockAbilitiesWithTags>Function>/Script/CoreUObject)
+	K2Node_Event_bWasCancelled (0-0-0-0): size 34 (cls: K2Node_Event_bWasCancelled>BoolProperty>/Script/CoreUObject)
+	CallFunc_MakeGameplayTagContainerFromTag_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_MakeGameplayTagContainerFromTag_ReturnValue>StructProperty>/Script/CoreUObject)
+	HideHUDElements (0-0-0-0): size 389 (cls: HideHUDElements>Function>/Script/CoreUObject)
+	CallFunc_Greater_FloatFloat_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Greater_FloatFloat_ReturnValue>BoolProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
+	CallFunc_MakeGameplayTagContainerFromTag_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_MakeGameplayTagContainerFromTag_ReturnValue>StructProperty>/Script/CoreUObject)
+	ShowHUD (0-0-0-0): size 389 (cls: ShowHUD>Function>/Script/CoreUObject)
+	CallFunc_Greater_FloatFloat_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Greater_FloatFloat_ReturnValue>BoolProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
+	CallFunc_GetValueAtLevel_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetValueAtLevel_ReturnValue>FloatProperty>/Script/CoreUObject)
+	UnblockAbilitiesWithTags (0-0-0-0): size 394 (cls: UnblockAbilitiesWithTags>Function>/Script/CoreUObject)
+	CallFunc_Greater_FloatFloat_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Greater_FloatFloat_ReturnValue>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	K2Node_CreateDelegate_OutputDelegate (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate>DelegateProperty>/Script/CoreUObject)
 	K2Node_CreateDelegate_OutputDelegate1 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate1>DelegateProperty>/Script/CoreUObject)
 	K2Node_CreateDelegate_OutputDelegate2 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate2>DelegateProperty>/Script/CoreUObject)
+	CallFunc_GetValueAtLevel_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetValueAtLevel_ReturnValue>FloatProperty>/Script/CoreUObject)
 	Damage (0-0-0-0): size 32 (cls: Damage>FloatProperty>/Script/CoreUObject)
 	CallFunc_GetHealth_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetHealth_ReturnValue>FloatProperty>/Script/CoreUObject)
 	CallFunc_GetMaxHealth_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetMaxHealth_ReturnValue>FloatProperty>/Script/CoreUObject)
 	CallFunc_GetValueAtLevel_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetValueAtLevel_ReturnValue>FloatProperty>/Script/CoreUObject)
 	K2Node_CustomEvent_Damage (0-0-0-0): size 32 (cls: K2Node_CustomEvent_Damage>FloatProperty>/Script/CoreUObject)
+	CallFunc_GetValueAtLevel_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetValueAtLevel_ReturnValue>FloatProperty>/Script/CoreUObject)
+	CallFunc_GetValueAtLevel_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetValueAtLevel_ReturnValue>FloatProperty>/Script/CoreUObject)
 	TickRate (0-0-0-0): size 32 (cls: TickRate>FloatProperty>/Script/CoreUObject)
 	CallFunc_HasMatchingGameplayTag_self1_CastInput (0-0-0-0): size 36 (cls: CallFunc_HasMatchingGameplayTag_self1_CastInput>InterfaceProperty>/Script/CoreUObject)
 	CallFunc_HasMatchingGameplayTag_self_CastInput (0-0-0-0): size 36 (cls: CallFunc_HasMatchingGameplayTag_self_CastInput>InterfaceProperty>/Script/CoreUObject)
 	BoneName (0-0-0-0): size 32 (cls: BoneName>NameProperty>/Script/CoreUObject)
 	K2Node_CustomEvent_BoneName (0-0-0-0): size 32 (cls: K2Node_CustomEvent_BoneName>NameProperty>/Script/CoreUObject)
 	AGID_Sword (0-0-0-0): size 36 (cls: AGID_Sword>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetAbilitySystemComponent_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetAbilitySystemComponent_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetFortPlayerControllerFromActor_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetFortPlayerControllerFromActor_ReturnValue1>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Ability_System_Component (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Ability_System_Component>ObjectProperty>/Script/CoreUObject)
 	DamageCauser (0-0-0-0): size 36 (cls: DamageCauser>ObjectProperty>/Script/CoreUObject)
 	FHitComponent (0-0-0-0): size 36 (cls: FHitComponent>ObjectProperty>/Script/CoreUObject)
 	InstigatedBy (0-0-0-0): size 36 (cls: InstigatedBy>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetAvatarActorFromActorInfo_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetAvatarActorFromActorInfo_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetFortPlayerControllerFromActor_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetFortPlayerControllerFromActor_ReturnValue>ObjectProperty>/Script/CoreUObject)
-	CallFunc_GetFortPlayerControllerFromActor_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetFortPlayerControllerFromActor_ReturnValue1>ObjectProperty>/Script/CoreUObject)
 	K2Node_CustomEvent_DamageCauser (0-0-0-0): size 36 (cls: K2Node_CustomEvent_DamageCauser>ObjectProperty>/Script/CoreUObject)
 	K2Node_CustomEvent_DamagedActor (0-0-0-0): size 36 (cls: K2Node_CustomEvent_DamagedActor>ObjectProperty>/Script/CoreUObject)
 	K2Node_CustomEvent_FHitComponent (0-0-0-0): size 36 (cls: K2Node_CustomEvent_FHitComponent>ObjectProperty>/Script/CoreUObject)
 	K2Node_CustomEvent_InstigatedBy (0-0-0-0): size 36 (cls: K2Node_CustomEvent_InstigatedBy>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsPlayer_Pawn_Athena (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsPlayer_Pawn_Athena>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetFortPlayerControllerFromActor_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetFortPlayerControllerFromActor_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_AsFort_Player_Controller_Gameplay (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Player_Controller_Gameplay>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetFortPlayerControllerFromActor_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetFortPlayerControllerFromActor_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_AsFort_Player_Controller_Gameplay (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Player_Controller_Gameplay>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetAbilitySystemComponent_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetAbilitySystemComponent_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Ability_System_Component (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Ability_System_Component>ObjectProperty>/Script/CoreUObject)
-	BlockedAbilityTags (0-0-0-0): size 36 (cls: BlockedAbilityTags>StructProperty>/Script/CoreUObject)
+	BuildingAllowed (0-0-0-0): size 36 (cls: BuildingAllowed>StructProperty>/Script/CoreUObject)
+	BuildingEnabled (0-0-0-0): size 36 (cls: BuildingEnabled>StructProperty>/Script/CoreUObject)
+	BuildingHudTag (0-0-0-0): size 36 (cls: BuildingHudTag>StructProperty>/Script/CoreUObject)
 	HitLocation (0-0-0-0): size 36 (cls: HitLocation>StructProperty>/Script/CoreUObject)
 	Momentum (0-0-0-0): size 36 (cls: Momentum>StructProperty>/Script/CoreUObject)
 	CallFunc_BP_ApplyGameplayEffectToOwner_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_BP_ApplyGameplayEffectToOwner_ReturnValue>StructProperty>/Script/CoreUObject)
@@ -285,4 +328,7 @@ Serialized exports:
 	K2Node_CustomEvent_HitLocation (0-0-0-0): size 36 (cls: K2Node_CustomEvent_HitLocation>StructProperty>/Script/CoreUObject)
 	K2Node_CustomEvent_Momentum (0-0-0-0): size 36 (cls: K2Node_CustomEvent_Momentum>StructProperty>/Script/CoreUObject)
 	FirstWielderTag (0-0-0-0): size 36 (cls: FirstWielderTag>StructProperty>/Script/CoreUObject)
+	CallFunc_MakeGameplayTagContainerFromTag_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_MakeGameplayTagContainerFromTag_ReturnValue1>StructProperty>/Script/CoreUObject)
+	NoBuilding! (0-0-0-0): size 36 (cls: NoBuilding!>StructProperty>/Script/CoreUObject)
+	CallFunc_MakeGameplayTagContainerFromTag_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_MakeGameplayTagContainerFromTag_ReturnValue1>StructProperty>/Script/CoreUObject)
 	TickRateRow (0-0-0-0): size 36 (cls: TickRateRow>StructProperty>/Script/CoreUObject)

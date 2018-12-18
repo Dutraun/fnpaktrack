@@ -16,6 +16,7 @@ Name table:
 	/Script/SlateCore
 	/Script/UMG
 	Ability.GliderPack.Equipped
+	ActionName
 	ActiveEntities
 	ActiveSequences
 	AnimationBindings
@@ -45,6 +46,7 @@ Name table:
 	bHasDefaultValue
 	bHasScriptImplementedPaint
 	BindingName
+	bIsBallooning
 	bIsRootWidget
 	BlendType
 	BlueprintContextLibrary
@@ -53,6 +55,7 @@ Name table:
 	BoolProperty
 	Border
 	BrushPropertyNamePath
+	bUsingBalloonMovement
 	ByteProperty
 	CallFunc_BooleanOR_ReturnValue
 	CallFunc_BooleanOR_ReturnValue1
@@ -63,9 +66,12 @@ Name table:
 	CallFunc_GetContext_ReturnValue1
 	CallFunc_GetContext_ReturnValue2
 	CallFunc_GetContext_ReturnValue3
+	CallFunc_GetCrouchActionName_ReturnValue
+	CallFunc_GetCrouchActionName_ReturnValue1
 	CallFunc_GetGameState_ReturnValue
 	CallFunc_GetGameState_ReturnValue1
 	CallFunc_GetJumpActionName_ReturnValue
+	CallFunc_GetLocalPlayerSubsystem_ReturnValue
 	CallFunc_GetOwningPlayer_ReturnValue
 	CallFunc_GetOwningPlayerPawn_ReturnValue
 	CallFunc_Greater_FloatFloat_ReturnValue
@@ -79,7 +85,8 @@ Name table:
 	CallFunc_MakeLiteralText_ReturnValue
 	CallFunc_MakeLiteralText_ReturnValue1
 	CallFunc_Not_PreBool_ReturnValue
-	CallFunc_PlayAnimationTo_ReturnValue
+	CallFunc_PlayAnimation_ReturnValue
+	CallFunc_PlayAnimationTimeRange_ReturnValue
 	CanRedeploy
 	Character
 	CharacterMovement
@@ -125,6 +132,7 @@ Name table:
 	Default__NameProperty
 	Default__ObjectProperty
 	Default__StructProperty
+	Default__SubsystemBlueprintLibrary
 	Default__TextProperty
 	Default__WidgetAnimation
 	Default__WidgetBlueprintGeneratedClass
@@ -188,6 +196,8 @@ Name table:
 	FortItemDefinition
 	FortKeybindWidget
 	FortPlayerControllerAthena
+	FortPlayerControllerGameplay
+	FortPlayerControllerZone
 	FortPlayerPawn
 	FrameNumber
 	FrameRate
@@ -202,8 +212,10 @@ Name table:
 	Geometry
 	GetAerialPhase
 	GetContext
+	GetCrouchActionName
 	GetGameState
 	GetJumpActionName
+	GetLocalPlayerSubsystem
 	GetOwningPlayer
 	GetOwningPlayerPawn
 	Glider
@@ -211,6 +223,7 @@ Name table:
 	Groups
 	Guid
 	Handle
+	HandleBalloonJumpFeedback
 	HandleEnteredSkydivingFeedback
 	HandleFallingStarted
 	HasMatchingGameplayTag
@@ -223,6 +236,7 @@ Name table:
 	Intro
 	Intro_1_INST
 	Intro_INST
+	InvalidateLayoutAndVolatility
 	IsFalling
 	IsSkydiving
 	IsSkydivingFromBus
@@ -234,10 +248,14 @@ Name table:
 	K2Node_CreateDelegate_OutputDelegate2
 	K2Node_CreateDelegate_OutputDelegate3
 	K2Node_CreateDelegate_OutputDelegate4
+	K2Node_CreateDelegate_OutputDelegate5
+	K2Node_CustomEvent_ActionName
+	K2Node_CustomEvent_bUsingBalloonMovement
 	K2Node_CustomEvent_GamePhaseStep
 	K2Node_DynamicCast_AsAthena_Game_State
 	K2Node_DynamicCast_AsAthena_Player_Controller
 	K2Node_DynamicCast_AsFort_Game_State_Athena
+	K2Node_DynamicCast_AsFort_Player_Controller_Zone
 	K2Node_DynamicCast_AsFort_Player_Pawn
 	K2Node_DynamicCast_bSuccess
 	K2Node_DynamicCast_bSuccess1
@@ -315,6 +333,8 @@ Name table:
 	ObjectBindings
 	ObjectGuid
 	ObjectProperty
+	OnBalloonMovementChanged
+	OnBalloonMovementChanged__DelegateSignature
 	OnForwardStartedFalling
 	OnForwardStartedFalling__DelegateSignature
 	OnGamePhaseStepChanged__DelegateSignature
@@ -331,7 +351,8 @@ Name table:
 	ParameterName
 	ParentGuid
 	Pawn
-	PlayAnimationTo
+	PlayAnimation
+	PlayAnimationTimeRange
 	PlaybackRange
 	PlayerController
 	PlayerPawn
@@ -374,6 +395,7 @@ Name table:
 	SequenceID
 	SequenceSignature
 	SetBoundAction
+	SetNewBoundAction
 	SetText
 	SetVisibility
 	Shear
@@ -384,11 +406,13 @@ Name table:
 	SourceTrack
 	StrProperty
 	StructProperty
+	SubsystemBlueprintLibrary
 	SubTemplateSerialNumbers
 	Tags
 	Tangent
 	TangentMode
 	TangentWeightMode
+	Temp_bool_Variable
 	Temp_byte_Variable
 	Temp_text_Variable
 	Temp_text_Variable1
@@ -421,6 +445,7 @@ Name table:
 	Values
 	VectorParameterNameAndCurves
 	Vectors
+	Widget
 	WidgetAnimation
 	WidgetAnimationBinding
 	WidgetBlueprintGeneratedClass
@@ -428,7 +453,7 @@ Name table:
 	WidgetTree
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	AthenaAerialFeedback_C (0-0-0-0): size 447 (cls: AthenaAerialFeedback_C>WidgetBlueprintGeneratedClass>/Script/UMG):
+	AthenaAerialFeedback_C (0-0-0-0): size 483 (cls: AthenaAerialFeedback_C>WidgetBlueprintGeneratedClass>/Script/UMG):
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
@@ -442,24 +467,29 @@ Serialized exports:
 			bHasScriptImplementedPaint(BoolProperty)=False 
 	Intro_1 (0-0-0-0): size 36 (cls: Intro_1>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_AthenaAerialFeedback (0-0-0-0): size 1033 (cls: ExecuteUbergraph_AthenaAerialFeedback>Function>/Script/CoreUObject)
+	ExecuteUbergraph_AthenaAerialFeedback (0-0-0-0): size 1587 (cls: ExecuteUbergraph_AthenaAerialFeedback>Function>/Script/CoreUObject)
+	ActionName (0-0-0-0): size 32 (cls: ActionName>NameProperty>/Script/CoreUObject)
+	SetNewBoundAction (0-0-0-0): size 68 (cls: SetNewBoundAction>Function>/Script/CoreUObject)
+	MyGeometry (0-0-0-0): size 36 (cls: MyGeometry>StructProperty>/Script/CoreUObject)
+	Tick (0-0-0-0): size 82 (cls: Tick>Function>/Script/CoreUObject)
+	bUsingBalloonMovement (0-0-0-0): size 34 (cls: bUsingBalloonMovement>BoolProperty>/Script/CoreUObject)
+	HandleBalloonJumpFeedback (0-0-0-0): size 68 (cls: HandleBalloonJumpFeedback>Function>/Script/CoreUObject)
 	HandleEnteredSkydivingFeedback (0-0-0-0): size 54 (cls: HandleEnteredSkydivingFeedback>Function>/Script/CoreUObject)
 	CheckFallingForGlider (0-0-0-0): size 54 (cls: CheckFallingForGlider>Function>/Script/CoreUObject)
 	HandleFallingStarted (0-0-0-0): size 54 (cls: HandleFallingStarted>Function>/Script/CoreUObject)
-	MyGeometry (0-0-0-0): size 36 (cls: MyGeometry>StructProperty>/Script/CoreUObject)
-	Tick (0-0-0-0): size 82 (cls: Tick>Function>/Script/CoreUObject)
 	Construct (0-0-0-0): size 54 (cls: Construct>Function>/Script/CoreUObject)
+	OnLocalPlayerBeginSkydiving_Bind (0-0-0-0): size 54 (cls: OnLocalPlayerBeginSkydiving_Bind>Function>/Script/CoreUObject)
 	OnKeybindsChanged_Bind (0-0-0-0): size 54 (cls: OnKeybindsChanged_Bind>Function>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	GamePhaseStep (0-0-0-0): size 40 (cls: GamePhaseStep>EnumProperty>/Script/CoreUObject)
 	GamePhaseStepChanged (0-0-0-0): size 68 (cls: GamePhaseStepChanged>Function>/Script/CoreUObject)
-	OnLocalPlayerBeginSkydiving_Bind (0-0-0-0): size 54 (cls: OnLocalPlayerBeginSkydiving_Bind>Function>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	LocalVisibility (0-0-0-0): size 40 (cls: LocalVisibility>EnumProperty>/Script/CoreUObject)
-	Update (0-0-0-0): size 1756 (cls: Update>Function>/Script/CoreUObject)
+	Update (0-0-0-0): size 1904 (cls: Update>Function>/Script/CoreUObject)
 	K2Node_MakeArray_Array (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array>StructProperty>/Script/CoreUObject)
 	K2Node_MakeArray_Array (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array>ArrayProperty>/Script/CoreUObject)
 	bEnteredSkydiving (0-0-0-0): size 34 (cls: bEnteredSkydiving>BoolProperty>/Script/CoreUObject)
+	bIsBallooning (0-0-0-0): size 34 (cls: bIsBallooning>BoolProperty>/Script/CoreUObject)
 	ReturnValue (0-0-0-0): size 34 (cls: ReturnValue>BoolProperty>/Script/CoreUObject)
 	CheckPawnForGliderDeploy (0-0-0-0): size 615 (cls: CheckPawnForGliderDeploy>Function>/Script/CoreUObject)
 	bCanRedeploy (0-0-0-0): size 34 (cls: bCanRedeploy>BoolProperty>/Script/CoreUObject)
@@ -475,9 +505,12 @@ Serialized exports:
 	K2Node_DynamicCast_bSuccess1 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess1>BoolProperty>/Script/CoreUObject)
 	CallFunc_CheckPawnForGliderDeploy_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_CheckPawnForGliderDeploy_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsFalling_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsFalling_ReturnValue>BoolProperty>/Script/CoreUObject)
+	K2Node_CustomEvent_bUsingBalloonMovement (0-0-0-0): size 34 (cls: K2Node_CustomEvent_bUsingBalloonMovement>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess1 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess1>BoolProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_bSuccess2 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess2>BoolProperty>/Script/CoreUObject)
 	K2Node_SwitchEnum_CmpSuccess (0-0-0-0): size 34 (cls: K2Node_SwitchEnum_CmpSuccess>BoolProperty>/Script/CoreUObject)
+	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess1 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess1>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess2 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess2>BoolProperty>/Script/CoreUObject)
@@ -491,6 +524,7 @@ Serialized exports:
 	K2Node_CreateDelegate_OutputDelegate2 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate2>DelegateProperty>/Script/CoreUObject)
 	K2Node_CreateDelegate_OutputDelegate3 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate3>DelegateProperty>/Script/CoreUObject)
 	K2Node_CreateDelegate_OutputDelegate4 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate4>DelegateProperty>/Script/CoreUObject)
+	K2Node_CreateDelegate_OutputDelegate5 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate5>DelegateProperty>/Script/CoreUObject)
 	K2Node_CustomEvent_GamePhaseStep (0-0-0-0): size 40 (cls: K2Node_CustomEvent_GamePhaseStep>EnumProperty>/Script/CoreUObject)
 	CallFunc_GetAerialPhase_ReturnValue (0-0-0-0): size 40 (cls: CallFunc_GetAerialPhase_ReturnValue>EnumProperty>/Script/CoreUObject)
 	Temp_byte_Variable (0-0-0-0): size 40 (cls: Temp_byte_Variable>EnumProperty>/Script/CoreUObject)
@@ -636,6 +670,11 @@ Serialized exports:
 			TrackName(NameProperty)=Font.OutlineSettings 
 			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
 			Signature(StructProperty)=Guid: 331521823-1227714973-3879701170-1502267170 
+	CallFunc_GetCrouchActionName_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetCrouchActionName_ReturnValue>NameProperty>/Script/CoreUObject)
+	CallFunc_GetCrouchActionName_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_GetCrouchActionName_ReturnValue1>NameProperty>/Script/CoreUObject)
+	CallFunc_GetJumpActionName_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetJumpActionName_ReturnValue>NameProperty>/Script/CoreUObject)
+	K2Node_CustomEvent_ActionName (0-0-0-0): size 32 (cls: K2Node_CustomEvent_ActionName>NameProperty>/Script/CoreUObject)
+	K2Node_Select_Default (0-0-0-0): size 32 (cls: K2Node_Select_Default>NameProperty>/Script/CoreUObject)
 	CallFunc_GetJumpActionName_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetJumpActionName_ReturnValue>NameProperty>/Script/CoreUObject)
 	CallFunc_GetGameState_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetGameState_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetOwningPlayerPawn_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetOwningPlayerPawn_ReturnValue>ObjectProperty>/Script/CoreUObject)
@@ -647,15 +686,20 @@ Serialized exports:
 	CallFunc_GetContext_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue2>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetContext_ReturnValue3 (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue3>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetGameState_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetGameState_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetLocalPlayerSubsystem_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetLocalPlayerSubsystem_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetOwningPlayer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetOwningPlayer_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetOwningPlayerPawn_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetOwningPlayerPawn_ReturnValue>ObjectProperty>/Script/CoreUObject)
-	CallFunc_PlayAnimationTo_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlayAnimationTo_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_PlayAnimation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlayAnimation_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_PlayAnimationTimeRange_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlayAnimationTimeRange_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Game_State_Athena (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Game_State_Athena>ObjectProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_AsFort_Player_Controller_Zone (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Player_Controller_Zone>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Player_Pawn (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Player_Pawn>ObjectProperty>/Script/CoreUObject)
 	FeedbackLine (0-0-0-0): size 36 (cls: FeedbackLine>ObjectProperty>/Script/CoreUObject)
 	FeedbackText (0-0-0-0): size 36 (cls: FeedbackText>ObjectProperty>/Script/CoreUObject)
 	Flare (0-0-0-0): size 36 (cls: Flare>ObjectProperty>/Script/CoreUObject)
 	Intro (0-0-0-0): size 36 (cls: Intro>ObjectProperty>/Script/CoreUObject)
 	KeyBind (0-0-0-0): size 36 (cls: KeyBind>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetGameState_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetGameState_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetGameState_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetGameState_ReturnValue1>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetOwningPlayer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetOwningPlayer_ReturnValue>ObjectProperty>/Script/CoreUObject)

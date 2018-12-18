@@ -2,6 +2,7 @@ Name table:
 	/Engine/Functions/Engine_MaterialFunctions02/HueShift
 	/Game/Abilities/Player/Generic/Gadgets/DiscoGrenade/M_Disco_Lightrays
 	/Game/Effects/Fort_Effects/Gameplay/SmokeDustExplosions/Textures/T_NoisePack_01
+	/Game/Effects/Fort_Effects/Materials/_Functions/Near_Camera_Fade
 	/Game/Effects/Fort_Effects/Textures/Outlander/T_InTheZone_LightRays_01
 	/Script/CoreUObject
 	/Script/Engine
@@ -21,16 +22,20 @@ Name table:
 	Center Brightness
 	Center Exponent
 	Class
+	Color_01
+	Color_02
 	ColorMaterialInput
 	Coordinates
 	Default
 	Default__Material
 	Default__MaterialExpressionDynamicParameter
+	Default__MaterialExpressionFeatureLevelSwitch
 	Default__MaterialExpressionMaterialFunctionCall
 	Default__MaterialExpressionQualitySwitch
 	Default__MaterialExpressionScalarParameter
 	Default__MaterialExpressionStaticSwitchParameter
 	Default__MaterialExpressionTextureSample
+	Default__MaterialExpressionVectorParameter
 	DefaultValue
 	Depth Fade Distance
 	EBlendMode
@@ -45,6 +50,8 @@ Name table:
 	Gradient Tile B
 	Guid
 	HueShift
+	HueShift_Amount
+	HueShift_Fixed
 	HueShiftSpeed
 	Inputs
 	LinearColor
@@ -54,18 +61,24 @@ Name table:
 	MaterialExpressionConstant
 	MaterialExpressionDepthFade
 	MaterialExpressionDynamicParameter
+	MaterialExpressionFeatureLevelSwitch
 	MaterialExpressionMaterialFunctionCall
 	MaterialExpressionMultiply
 	MaterialExpressionPanner
+	MaterialExpressionParticleColor
 	MaterialExpressionQualitySwitch
+	MaterialExpressionReroute
 	MaterialExpressionScalarParameter
 	MaterialExpressionStaticSwitchParameter
 	MaterialExpressionTextureSample
+	MaterialExpressionVectorParameter
 	MaterialFunction
 	MaterialFunctionInfo
 	MaterialFunctionInfos
 	MSM_Unlit
 	NameProperty
+	Near_Camera_Fade
+	NearCamFade_Distance
 	None
 	NotDiscoLights
 	ObjectProperty
@@ -82,8 +95,12 @@ Name table:
 	T_NoisePack_01
 	Texture
 	Texture2D
+	Use_ColorRange_Instead_of_RandomColor?
+	Use_Fixed_HueShift_Value?
+	Use_MobilePerf_Settings
+	Use_NearCamFade?
 Serialized exports:
-	M_Disco_Lightrays (0-0-0-0): size 111115 (cls: M_Disco_Lightrays>Material>/Script/Engine):
+	M_Disco_Lightrays (0-0-0-0): size 111522 (cls: M_Disco_Lightrays>Material>/Script/Engine):
 		Tag array:
 			EmissiveColor(StructProperty)=System.Byte[] 
 			BlendMode(ByteProperty)=BLEND_Additive 
@@ -93,7 +110,7 @@ Serialized exports:
 			Expressions(ArrayProperty)=[object] (inner: ObjectProperty)
 			MaterialFunctionInfos(ArrayProperty)=[object] (inner: StructProperty)
 			bCanMaskedBeAssumedOpaque(BoolProperty)=True 
-			StateId(StructProperty)=Guid: 1579352387-1261452958-4290160565-3357554899 
+			StateId(StructProperty)=Guid: 4125476303-1329209999-4289890184-643232546 
 			CachedQualityLevelsUsed(ArrayProperty)=[object] (inner: BoolProperty)
 	MaterialExpressionDynamicParameter_1 (0-0-0-0): size 198 (cls: MaterialExpressionDynamicParameter_1>MaterialExpressionDynamicParameter>/Script/Engine):
 		Tag array:
@@ -105,9 +122,19 @@ Serialized exports:
 			ParamNames(ArrayProperty)=[object] (inner: StrProperty)
 			DefaultValue(StructProperty)=UE4.FLinearColor 
 			Material(ObjectProperty)=M_Disco_Lightrays= 
+	MaterialExpressionFeatureLevelSwitch_0 (0-0-0-0): size 308 (cls: MaterialExpressionFeatureLevelSwitch_0>MaterialExpressionFeatureLevelSwitch>/Script/Engine):
+		Tag array:
+			Default(StructProperty)=System.Byte[] 
+			Inputs(StructProperty)=System.Byte[] 
+			Inputs(StructProperty)=System.Byte[] 
+			Material(ObjectProperty)=M_Disco_Lightrays= 
 	MaterialExpressionMaterialFunctionCall_0 (0-0-0-0): size 70 (cls: MaterialExpressionMaterialFunctionCall_0>MaterialExpressionMaterialFunctionCall>/Script/Engine):
 		Tag array:
 			MaterialFunction(ObjectProperty)=HueShift=/Engine/Functions/Engine_MaterialFunctions02/HueShift 
+			Material(ObjectProperty)=M_Disco_Lightrays= 
+	MaterialExpressionMaterialFunctionCall_1 (0-0-0-0): size 70 (cls: MaterialExpressionMaterialFunctionCall_1>MaterialExpressionMaterialFunctionCall>/Script/Engine):
+		Tag array:
+			MaterialFunction(ObjectProperty)=Near_Camera_Fade=/Game/Effects/Fort_Effects/Materials/_Functions/Near_Camera_Fade 
 			Material(ObjectProperty)=M_Disco_Lightrays= 
 	MaterialExpressionQualitySwitch_13 (0-0-0-0): size 397 (cls: MaterialExpressionQualitySwitch_13>MaterialExpressionQualitySwitch>/Script/Engine):
 		Tag array:
@@ -182,12 +209,58 @@ Serialized exports:
 			ParameterName(NameProperty)=Ceil Brightness 
 			ExpressionGUID(StructProperty)=Guid: 2430505420-1082857897-3902853798-1144171539 
 			Material(ObjectProperty)=M_Disco_Lightrays= 
+	MaterialExpressionScalarParameter_7 (0-0-0-0): size 168 (cls: MaterialExpressionScalarParameter_7>MaterialExpressionScalarParameter>/Script/Engine):
+		Tag array:
+			DefaultValue(FloatProperty)=1.2 
+			ParameterName(NameProperty)=HueShift_Fixed 
+			ExpressionGUID(StructProperty)=Guid: 492210418-1098304082-2908302485-2909000587 
+			Material(ObjectProperty)=M_Disco_Lightrays= 
+	MaterialExpressionScalarParameter_8 (0-0-0-0): size 168 (cls: MaterialExpressionScalarParameter_8>MaterialExpressionScalarParameter>/Script/Engine):
+		Tag array:
+			DefaultValue(FloatProperty)=1 
+			ParameterName(NameProperty)=HueShift_Amount 
+			ExpressionGUID(StructProperty)=Guid: 1208850914-1163539136-1487176597-3422603694 
+			Material(ObjectProperty)=M_Disco_Lightrays= 
+	MaterialExpressionScalarParameter_9 (0-0-0-0): size 168 (cls: MaterialExpressionScalarParameter_9>MaterialExpressionScalarParameter>/Script/Engine):
+		Tag array:
+			DefaultValue(FloatProperty)=250 
+			ParameterName(NameProperty)=NearCamFade_Distance 
+			ExpressionGUID(StructProperty)=Guid: 1860802620-1097116706-250722714-4231317940 
+			Material(ObjectProperty)=M_Disco_Lightrays= 
 	MaterialExpressionStaticSwitchParameter_0 (0-0-0-0): size 317 (cls: MaterialExpressionStaticSwitchParameter_0>MaterialExpressionStaticSwitchParameter>/Script/Engine):
 		Tag array:
 			A(StructProperty)=System.Byte[] 
 			B(StructProperty)=System.Byte[] 
 			ParameterName(NameProperty)=NotDiscoLights 
 			ExpressionGUID(StructProperty)=Guid: 2450521503-1240760474-2822276013-281604952 
+			Material(ObjectProperty)=M_Disco_Lightrays= 
+	MaterialExpressionStaticSwitchParameter_1 (0-0-0-0): size 317 (cls: MaterialExpressionStaticSwitchParameter_1>MaterialExpressionStaticSwitchParameter>/Script/Engine):
+		Tag array:
+			A(StructProperty)=System.Byte[] 
+			B(StructProperty)=System.Byte[] 
+			ParameterName(NameProperty)=Use_MobilePerf_Settings 
+			ExpressionGUID(StructProperty)=Guid: 4120459630-1182957316-3117226935-3398079371 
+			Material(ObjectProperty)=M_Disco_Lightrays= 
+	MaterialExpressionStaticSwitchParameter_3 (0-0-0-0): size 317 (cls: MaterialExpressionStaticSwitchParameter_3>MaterialExpressionStaticSwitchParameter>/Script/Engine):
+		Tag array:
+			A(StructProperty)=System.Byte[] 
+			B(StructProperty)=System.Byte[] 
+			ParameterName(NameProperty)=Use_ColorRange_Instead_of_RandomColor? 
+			ExpressionGUID(StructProperty)=Guid: 623121921-1218795925-2006742437-4065602933 
+			Material(ObjectProperty)=M_Disco_Lightrays= 
+	MaterialExpressionStaticSwitchParameter_4 (0-0-0-0): size 317 (cls: MaterialExpressionStaticSwitchParameter_4>MaterialExpressionStaticSwitchParameter>/Script/Engine):
+		Tag array:
+			A(StructProperty)=System.Byte[] 
+			B(StructProperty)=System.Byte[] 
+			ParameterName(NameProperty)=Use_Fixed_HueShift_Value? 
+			ExpressionGUID(StructProperty)=Guid: 3455782407-1308687347-1290218889-3344553025 
+			Material(ObjectProperty)=M_Disco_Lightrays= 
+	MaterialExpressionStaticSwitchParameter_5 (0-0-0-0): size 317 (cls: MaterialExpressionStaticSwitchParameter_5>MaterialExpressionStaticSwitchParameter>/Script/Engine):
+		Tag array:
+			A(StructProperty)=System.Byte[] 
+			B(StructProperty)=System.Byte[] 
+			ParameterName(NameProperty)=Use_NearCamFade? 
+			ExpressionGUID(StructProperty)=Guid: 2881640955-1093068874-3750018467-2063655255 
 			Material(ObjectProperty)=M_Disco_Lightrays= 
 	MaterialExpressionTextureSample_0 (0-0-0-0): size 159 (cls: MaterialExpressionTextureSample_0>MaterialExpressionTextureSample>/Script/Engine):
 		Tag array:
@@ -208,4 +281,16 @@ Serialized exports:
 		Tag array:
 			Coordinates(StructProperty)=System.Byte[] 
 			Texture(ObjectProperty)=T_InTheZone_LightRays_01=/Game/Effects/Fort_Effects/Textures/Outlander/T_InTheZone_LightRays_01 
+			Material(ObjectProperty)=M_Disco_Lightrays= 
+	MaterialExpressionVectorParameter_0 (0-0-0-0): size 204 (cls: MaterialExpressionVectorParameter_0>MaterialExpressionVectorParameter>/Script/Engine):
+		Tag array:
+			DefaultValue(StructProperty)=UE4.FLinearColor 
+			ParameterName(NameProperty)=Color_01 
+			ExpressionGUID(StructProperty)=Guid: 3125057433-1276518104-2950691762-382626664 
+			Material(ObjectProperty)=M_Disco_Lightrays= 
+	MaterialExpressionVectorParameter_1 (0-0-0-0): size 204 (cls: MaterialExpressionVectorParameter_1>MaterialExpressionVectorParameter>/Script/Engine):
+		Tag array:
+			DefaultValue(StructProperty)=UE4.FLinearColor 
+			ParameterName(NameProperty)=Color_02 
+			ExpressionGUID(StructProperty)=Guid: 824556469-1192251069-844462241-3924046595 
 			Material(ObjectProperty)=M_Disco_Lightrays= 

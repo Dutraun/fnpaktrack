@@ -33,6 +33,7 @@ Name table:
 	bHasScriptImplementedTick
 	bIsVariable
 	BlueprintGeneratedClass
+	BooleanAND
 	BoolProperty
 	Border_StatFocus_C
 	Border_StatRow_DarkBlue_C
@@ -48,12 +49,15 @@ Name table:
 	BrushSize
 	bValidTemplate
 	ByteProperty
-	CallFunc_IsValid_ReturnValue
+	CallFunc_BooleanAND_ReturnValue
+	CallFunc_IsHeroLoadoutSystemEnabled_ReturnValue
+	CallFunc_Not_PreBool_ReturnValue
 	Class
 	ColorAndOpacity
 	CommonBorder
 	CommonTextBlock
 	CommonWidgetSwitcher
+	Construct
 	Content
 	ContentColorAndOpacity
 	Default__BoolProperty
@@ -66,6 +70,7 @@ Name table:
 	Default__CommonTextBlock
 	Default__CommonWidgetSwitcher
 	Default__EnumProperty
+	Default__FortGlobals
 	Default__FortHeroSupportPerkWidget_C
 	Default__FortItemDetailElementWidget
 	Default__FortMultiSizeImage
@@ -75,7 +80,6 @@ Name table:
 	Default__HorizontalBoxSlot
 	Default__Image
 	Default__IntProperty
-	Default__KismetSystemLibrary
 	Default__ObjectProperty
 	Default__Overlay
 	Default__OverlaySlot
@@ -119,6 +123,7 @@ Name table:
 	FloatProperty
 	Font
 	FontObject
+	FortGlobals
 	FortHero
 	FortHeroSupportPerkWidget
 	FortHeroSupportPerkWidget_C
@@ -141,12 +146,12 @@ Name table:
 	IntProperty
 	InvalidForSlotImage
 	InvalidSlotText
-	IsValid
+	IsHeroLoadoutSystemEnabled
 	ItemToDetail
 	K2Node_DynamicCast_AsFort_Hero
 	K2Node_DynamicCast_bSuccess
 	K2Node_Select_Default
-	KismetSystemLibrary
+	KismetMathLibrary
 	Left
 	LinearColor
 	LockedPerkImage
@@ -156,6 +161,7 @@ Name table:
 	NameProperty
 	NameText
 	None
+	Not_PreBool
 	NotoSans
 	NotoSans-Bold
 	NotoSans-Regular
@@ -173,6 +179,7 @@ Name table:
 	RenderTransform
 	ResourceObject
 	Right
+	RootVisibilityBox
 	RootWidget
 	ScriptStruct
 	SetHeroToRepresent
@@ -227,6 +234,8 @@ Name table:
 	UnlockText
 	Update
 	UpdatePerkWidgets
+	UpdateRootVisibility
+	UserWidget
 	VAlign_Center
 	VAlign_Fill
 	VAlign_Top
@@ -244,7 +253,7 @@ Name table:
 	WidthOverride
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	HeroSquadBonusesDetailWidget_C (0-0-0-0): size 309 (cls: HeroSquadBonusesDetailWidget_C>WidgetBlueprintGeneratedClass>/Script/UMG):
+	HeroSquadBonusesDetailWidget_C (0-0-0-0): size 345 (cls: HeroSquadBonusesDetailWidget_C>WidgetBlueprintGeneratedClass>/Script/UMG):
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
@@ -257,12 +266,19 @@ Serialized exports:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			bHasScriptImplementedTick(BoolProperty)=False 
 			bHasScriptImplementedPaint(BoolProperty)=False 
-	SupportPerkWidget (0-0-0-0): size 36 (cls: SupportPerkWidget>ObjectProperty>/Script/CoreUObject)
+	RootVisibilityBox (0-0-0-0): size 36 (cls: RootVisibilityBox>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_HeroSquadBonusesDetailWidget (0-0-0-0): size 311 (cls: ExecuteUbergraph_HeroSquadBonusesDetailWidget>Function>/Script/CoreUObject)
-	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
+	ExecuteUbergraph_HeroSquadBonusesDetailWidget (0-0-0-0): size 198 (cls: ExecuteUbergraph_HeroSquadBonusesDetailWidget>Function>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
+	Construct (0-0-0-0): size 54 (cls: Construct>Function>/Script/CoreUObject)
+	HandlePostDifferentItemToDetailSet (0-0-0-0): size 54 (cls: HandlePostDifferentItemToDetailSet>Function>/Script/CoreUObject)
+	UpdatePerkWidgets (0-0-0-0): size 97 (cls: UpdatePerkWidgets>Function>/Script/CoreUObject)
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
+	UpdateRootVisibility (0-0-0-0): size 277 (cls: UpdateRootVisibility>Function>/Script/CoreUObject)
+	CallFunc_BooleanAND_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_IsHeroLoadoutSystemEnabled_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsHeroLoadoutSystemEnabled_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_Not_PreBool_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue>BoolProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	BorderSlot_0 (0-0-0-0): size 243 (cls: BorderSlot_0>BorderSlot>/Script/UMG):
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
@@ -503,11 +519,9 @@ Serialized exports:
 		Tag array:
 			BrushSize(ByteProperty)=EFortBrushSize::Large 
 			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
-	HandlePostDifferentItemToDetailSet (0-0-0-0): size 54 (cls: HandlePostDifferentItemToDetailSet>Function>/Script/CoreUObject)
-	TacticalPerkWidget (0-0-0-0): size 36 (cls: TacticalPerkWidget>ObjectProperty>/Script/CoreUObject)
-	UpdatePerkWidgets (0-0-0-0): size 97 (cls: UpdatePerkWidgets>Function>/Script/CoreUObject)
-	WidgetArchetype (0-0-0-0): size 125 (cls: WidgetArchetype>HeroSquadBonusesDetailWidget_C):
+	WidgetArchetype (0-0-0-0): size 154 (cls: WidgetArchetype>HeroSquadBonusesDetailWidget_C):
 		Tag array:
+			RootVisibilityBox(ObjectProperty)=RootVisibilityBox=WidgetArchetype 
 			SupportPerkWidget(ObjectProperty)=SupportPerkWidget=WidgetArchetype 
 			TacticalPerkWidget(ObjectProperty)=TacticalPerkWidget=WidgetArchetype 
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
@@ -681,6 +695,9 @@ Serialized exports:
 			Brush(StructProperty)=System.Byte[] 
 			Slot(ObjectProperty)=HorizontalBoxSlot_4=WidgetArchetype 
 	K2Node_DynamicCast_AsFort_Hero (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Hero>ObjectProperty>/Script/CoreUObject)
+	SupportPerkWidget (0-0-0-0): size 36 (cls: SupportPerkWidget>ObjectProperty>/Script/CoreUObject)
+	TacticalPerkWidget (0-0-0-0): size 36 (cls: TacticalPerkWidget>ObjectProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_AsFort_Hero (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Hero>ObjectProperty>/Script/CoreUObject)
 	Overlay_0 (0-0-0-0): size 90 (cls: Overlay_0>Overlay>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -771,9 +788,10 @@ Serialized exports:
 			VerticalAlignment(ByteProperty)=VAlign_Fill 
 			Parent(ObjectProperty)=Overlay_2=WidgetArchetype 
 			Content(ObjectProperty)=StatFocus=WidgetArchetype 
-	SizeBox_0 (0-0-0-0): size 53 (cls: SizeBox_0>SizeBox>/Script/UMG):
+	RootVisibilityBox (0-0-0-0): size 79 (cls: RootVisibilityBox>SizeBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			bIsVariable(BoolProperty)=True 
 	SizeBox_1 (0-0-0-0): size 137 (cls: SizeBox_1>SizeBox>/Script/UMG):
 		Tag array:
 			bOverride_MinDesiredHeight(BoolProperty)=True 
@@ -798,7 +816,7 @@ Serialized exports:
 			Slot(ObjectProperty)=HorizontalBoxSlot_2=WidgetArchetype 
 	SizeBoxSlot_0 (0-0-0-0): size 70 (cls: SizeBoxSlot_0>SizeBoxSlot>/Script/UMG):
 		Tag array:
-			Parent(ObjectProperty)=SizeBox_0=WidgetArchetype 
+			Parent(ObjectProperty)=RootVisibilityBox=WidgetArchetype 
 			Content(ObjectProperty)=VerticalBox_0=WidgetArchetype 
 	SizeBoxSlot_0 (0-0-0-0): size 111 (cls: SizeBoxSlot_0>SizeBoxSlot>/Script/UMG):
 		Tag array:
@@ -912,7 +930,7 @@ Serialized exports:
 			Content(ObjectProperty)=InvalidSlotText=WidgetArchetype 
 	WidgetTree_0 (0-0-0-0): size 41 (cls: WidgetTree_0>WidgetTree>/Script/UMG):
 		Tag array:
-			RootWidget(ObjectProperty)=SizeBox_0=WidgetArchetype 
+			RootWidget(ObjectProperty)=RootVisibilityBox=WidgetArchetype 
 	WidgetTree_0 (0-0-0-0): size 41 (cls: WidgetTree_0>WidgetTree>/Script/UMG):
 		Tag array:
 			RootWidget(ObjectProperty)=BorderShell=WidgetArchetype 

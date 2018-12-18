@@ -9,8 +9,12 @@ Name table:
 	AbilityTags
 	ActivationOwnedTags
 	Actor
+	AnimInstance
 	AnimMontage
 	ApplicationTag
+	bAbilityStopped
+	bHolstered
+	bHolsterWeapon
 	BlueprintGeneratedClass
 	BodyType
 	BoolProperty
@@ -20,11 +24,13 @@ Name table:
 	CallFunc_GetActivatingPawn_ReturnValue
 	CallFunc_GetActivatingPawn_ReturnValue1
 	CallFunc_GetAnimation_ReturnValue
+	CallFunc_GetAnimInstance_ReturnValue
 	CallFunc_GetBodyTypeAndGender_BodyType
 	CallFunc_GetBodyTypeAndGender_Gender
 	CallFunc_GetCharacterBodyType_ReturnValue
 	CallFunc_GetCharacterGender_ReturnValue
 	CallFunc_GetCurrentSourceObject_ReturnValue
+	CallFunc_GetCurrentSourceObject_ReturnValue1
 	CallFunc_GetDefaultBlendOutTime_ReturnValue
 	CallFunc_GetInstigatorController_ReturnValue
 	CallFunc_GetMontageToPlay_ReturnValue
@@ -36,6 +42,7 @@ Name table:
 	CallFunc_PlayMontageInfoAndWaitForTrigger_ReturnValue
 	Cancelled
 	Cancelled_DE7019AA4E006879EDD264899869FEE2
+	Character
 	Class
 	Completed
 	Completed_DE7019AA4E006879EDD264899869FEE2
@@ -66,6 +73,7 @@ Name table:
 	EGameplayAbilityNetExecutionPolicy
 	EGameplayAbilityNetExecutionPolicy::ServerInitiated
 	EmoteAsset
+	EmoteHolsterId
 	EmoteStarted
 	EmoteStopped
 	Engine
@@ -75,6 +83,7 @@ Name table:
 	ExecuteUbergraph_GAB_Emote_Generic
 	FloatProperty
 	ForceNetUpdate
+	ForceStopMontage
 	FortAbilityTask_PlayMontageWaitTarget
 	FortGameplayAbility
 	FortGameplayAbilityMontageInfo
@@ -95,6 +104,7 @@ Name table:
 	Gender
 	GetActivatingPawn
 	GetAnimation
+	GetAnimInstance
 	GetBodyTypeAndGender
 	GetCharacterBodyType
 	GetCharacterGender
@@ -125,16 +135,20 @@ Name table:
 	K2Node_CustomEvent_TargetData2
 	K2Node_DynamicCast_AsAnim_Montage
 	K2Node_DynamicCast_AsFort_Montage_Item_Definition_Base
+	K2Node_DynamicCast_AsFort_Montage_Item_Definition_Base1
 	K2Node_DynamicCast_AsFort_Player_Controller_Zone
 	K2Node_DynamicCast_AsFort_Player_Pawn
 	K2Node_DynamicCast_bSuccess
 	K2Node_DynamicCast_bSuccess1
 	K2Node_DynamicCast_bSuccess2
+	K2Node_DynamicCast_bSuccess3
 	K2Node_Select_Default
 	KismetSystemLibrary
 	LatentActionInfo
 	LoadAsset
 	Loaded
+	Mesh
+	Montage_Stop
 	MontageInfo
 	MontageOverrideSection
 	MontageSectionToPlay
@@ -160,10 +174,12 @@ Name table:
 	ResetHUDElementVisibilityToSettings
 	ReticleHUDElementTags
 	ReturnValue
+	SafeHolsterWeapon
 	ScriptStruct
 	SetHUDElementVisibility
 	SetReticleVisibility
 	ShouldHide
+	SkeletalMeshComponent
 	SoftObjectProperty
 	StructProperty
 	TargetData
@@ -181,20 +197,23 @@ Name table:
 	WaitTargetSelectionDelegate__DelegateSignature
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	GAB_Emote_Generic_C (0-0-0-0): size 321 (cls: GAB_Emote_Generic_C>BlueprintGeneratedClass>/Script/Engine):
+	GAB_Emote_Generic_C (0-0-0-0): size 349 (cls: GAB_Emote_Generic_C>BlueprintGeneratedClass>/Script/Engine):
 		Tag array:
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_GAB_Emote_Generic=GAB_Emote_Generic_C 
-	Default__GAB_Emote_Generic_C (0-0-0-0): size 326 (cls: Default__GAB_Emote_Generic_C>GAB_Emote_Generic_C):
+	Default__GAB_Emote_Generic_C (0-0-0-0): size 359 (cls: Default__GAB_Emote_Generic_C>GAB_Emote_Generic_C):
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			PostTriggerCancelDelay(FloatProperty)=0.4 
 			ReticleHUDElementTags(StructProperty)=GameplayTagContainer:HUD.Center.Reticle,HUD.InWorld.ActorCanvas 
+			EmoteHolsterId(NameProperty)=EmoteHolsterId 
 			AbilityTags(StructProperty)=GameplayTagContainer:Gameplay.Action.Player.Emote.Dance 
 			NetExecutionPolicy(ByteProperty)=EGameplayAbilityNetExecutionPolicy::ServerInitiated 
 			ActivationOwnedTags(StructProperty)=GameplayTagContainer:Gameplay.Action.Player.Emote.Dance 
+	bAbilityStopped (0-0-0-0): size 34 (cls: bAbilityStopped>BoolProperty>/Script/CoreUObject)
+	bHolstered (0-0-0-0): size 34 (cls: bHolstered>BoolProperty>/Script/CoreUObject)
 	PlayerPawn (0-0-0-0): size 36 (cls: PlayerPawn>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_GAB_Emote_Generic (0-0-0-0): size 1336 (cls: ExecuteUbergraph_GAB_Emote_Generic>Function>/Script/CoreUObject)
+	ExecuteUbergraph_GAB_Emote_Generic (0-0-0-0): size 1537 (cls: ExecuteUbergraph_GAB_Emote_Generic>Function>/Script/CoreUObject)
 	CallFunc_IsAssetNull_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsAssetNull_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue1>BoolProperty>/Script/CoreUObject)
@@ -202,6 +221,7 @@ Serialized exports:
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess1 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess1>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess2 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess2>BoolProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_bSuccess3 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess3>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
 	PlayInitialEmoteMontage (0-0-0-0): size 54 (cls: PlayInitialEmoteMontage>Function>/Script/CoreUObject)
 	OnMontageStartedPlaying (0-0-0-0): size 54 (cls: OnMontageStartedPlaying>Function>/Script/CoreUObject)
@@ -215,16 +235,20 @@ Serialized exports:
 	TargetData (0-0-0-0): size 36 (cls: TargetData>StructProperty>/Script/CoreUObject)
 	Completed_DE7019AA4E006879EDD264899869FEE2 (0-0-0-0): size 82 (cls: Completed_DE7019AA4E006879EDD264899869FEE2>Function>/Script/CoreUObject)
 	bWasCancelled (0-0-0-0): size 34 (cls: bWasCancelled>BoolProperty>/Script/CoreUObject)
-	K2_OnEndAbility (0-0-0-0): size 224 (cls: K2_OnEndAbility>Function>/Script/CoreUObject)
+	K2_OnEndAbility (0-0-0-0): size 289 (cls: K2_OnEndAbility>Function>/Script/CoreUObject)
 	BodyType (0-0-0-0): size 36 (cls: BodyType>ByteProperty>/Script/CoreUObject)
 	GetBodyTypeAndGender (0-0-0-0): size 249 (cls: GetBodyTypeAndGender>Function>/Script/CoreUObject)
-	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
-	HideReticle (0-0-0-0): size 34 (cls: HideReticle>BoolProperty>/Script/CoreUObject)
-	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	EmoteAsset (0-0-0-0): size 36 (cls: EmoteAsset>ObjectProperty>/Script/CoreUObject)
 	GetMontageToPlay (0-0-0-0): size 122 (cls: GetMontageToPlay>Function>/Script/CoreUObject)
 	ShouldHide (0-0-0-0): size 34 (cls: ShouldHide>BoolProperty>/Script/CoreUObject)
 	SetReticleVisibility (0-0-0-0): size 248 (cls: SetReticleVisibility>Function>/Script/CoreUObject)
+	CallFunc_GetActivatingPawn_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetActivatingPawn_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	ForceStopMontage (0-0-0-0): size 345 (cls: ForceStopMontage>Function>/Script/CoreUObject)
+	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_IsValid_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue1>BoolProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
+	HideReticle (0-0-0-0): size 34 (cls: HideReticle>BoolProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsServer_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsServer_ReturnValue>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	CallFunc_GetBodyTypeAndGender_BodyType (0-0-0-0): size 36 (cls: CallFunc_GetBodyTypeAndGender_BodyType>ByteProperty>/Script/CoreUObject)
@@ -245,17 +269,22 @@ Serialized exports:
 	Temp_byte_Variable (0-0-0-0): size 40 (cls: Temp_byte_Variable>EnumProperty>/Script/CoreUObject)
 	Temp_byte_Variable1 (0-0-0-0): size 40 (cls: Temp_byte_Variable1>EnumProperty>/Script/CoreUObject)
 	CallFunc_GetDefaultBlendOutTime_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetDefaultBlendOutTime_ReturnValue>FloatProperty>/Script/CoreUObject)
+	CallFunc_GetDefaultBlendOutTime_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetDefaultBlendOutTime_ReturnValue>FloatProperty>/Script/CoreUObject)
 	PostTriggerCancelDelay (0-0-0-0): size 32 (cls: PostTriggerCancelDelay>FloatProperty>/Script/CoreUObject)
+	EmoteHolsterId (0-0-0-0): size 32 (cls: EmoteHolsterId>NameProperty>/Script/CoreUObject)
 	MontageOverrideSection (0-0-0-0): size 32 (cls: MontageOverrideSection>NameProperty>/Script/CoreUObject)
 	CallFunc_GetActivatingPawn_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetActivatingPawn_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetActivatingPawn_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetActivatingPawn_ReturnValue1>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetCurrentSourceObject_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetCurrentSourceObject_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetCurrentSourceObject_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetCurrentSourceObject_ReturnValue1>ObjectProperty>/Script/CoreUObject)
 	CallFunc_PlayMontageInfoAndWaitForTrigger_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlayMontageInfoAndWaitForTrigger_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	K2Node_CustomEvent_Loaded (0-0-0-0): size 36 (cls: K2Node_CustomEvent_Loaded>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsAnim_Montage (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsAnim_Montage>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Montage_Item_Definition_Base (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Montage_Item_Definition_Base>ObjectProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_AsFort_Montage_Item_Definition_Base1 (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Montage_Item_Definition_Base1>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Player_Pawn (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Player_Pawn>ObjectProperty>/Script/CoreUObject)
 	Temp_object_Variable (0-0-0-0): size 36 (cls: Temp_object_Variable>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetAnimInstance_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetAnimInstance_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetActivatingPawn_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetActivatingPawn_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Player_Pawn (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Player_Pawn>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetActivatingPawn_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetActivatingPawn_ReturnValue>ObjectProperty>/Script/CoreUObject)

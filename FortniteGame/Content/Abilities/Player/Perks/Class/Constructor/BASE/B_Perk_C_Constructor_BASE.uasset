@@ -6,7 +6,6 @@ Name table:
 	/Game/Abilities/Player/Constructor/Perks/ExitPlan/GE_Constructor_ExitPlanApplied
 	/Game/Abilities/Player/Constructor/Perks/FasterExit/GE_Constructor_FasterExitApplied
 	/Game/Abilities/Player/Constructor/Perks/FeelTheBase/FX/P_FeeltheBase_Chargup
-	/Game/Abilities/Player/Constructor/Perks/ShieldCapacitor/GE_Constructor_ShieldCapacitorApplied
 	/Game/Abilities/Player/Constructor/Perks/TrapReloadRate/GE_Constructor_TrapReloadRate_Applied
 	/Game/Abilities/Player/Pawns/PlayerPawn_Constructor
 	/Game/Abilities/Player/Perks/Class/Constructor/BASE/B_Perk_C_Constructor_BASE
@@ -15,6 +14,8 @@ Name table:
 	/Game/Abilities/Player/Perks/Hero/BASEMD/GE_Perk_H_BASEMD_HealthRegen
 	/Game/Abilities/Player/Perks/Hero/ElectrifiedFloors/GE_Perk_H_ElectrifiedFloors_T01_Damage
 	/Game/Abilities/Player/Perks/Hero/FeelTheBASE/GE_Perk_H_FeelTheBase_Applied
+	/Game/Abilities/Player/Perks/Hero/FrozenCastle/GE_Perk_H_FrozenCastle_FreezeOnHit_Applied
+	/Game/Abilities/Player/Perks/Hero/FrozenCastle/GE_Perk_H_FrozenCastle_Snare
 	/Game/Abilities/Player/Perks/Hero/FullyContained/GE_Perk_H_FullyContained_Applied
 	/Game/Abilities/Player/Perks/Hero/LoftyArchitecture/GE_Perk_H_LoftyArchitecture_Applied
 	/Game/Abilities/Player/Perks/Hero/PowerModulation/GE_Perk_H_PowerModulation_Applied_T01
@@ -131,7 +132,6 @@ Name table:
 	Abilities.Constructor.Perks.Trap.Damage
 	Abilities.Constructor.Perks.Trap.ReloadRate
 	Abilities.Constructor.Recycling
-	Abilities.Constructor.SlowUnit
 	Ability System Component
 	AbilityComponent
 	AbilitySystemBlueprintLibrary
@@ -257,6 +257,7 @@ Name table:
 	CallFunc_Array_Add_ReturnValue
 	CallFunc_Array_Add_ReturnValue1
 	CallFunc_Array_Add_ReturnValue2
+	CallFunc_Array_Add_ReturnValue3
 	CallFunc_Array_Get_Item
 	CallFunc_Array_Get_Item1
 	CallFunc_Array_Get_Item2
@@ -467,13 +468,14 @@ Name table:
 	Default__GE_Constructor_ContainmentUnit_Applied_C
 	Default__GE_Constructor_ExitPlanApplied_C
 	Default__GE_Constructor_FasterExitApplied_C
-	Default__GE_Constructor_ShieldCapacitorApplied_C
 	Default__GE_Constructor_TrapReloadRate_Applied_C
 	Default__GE_Perk_C_Constructor_BASEOutgoingDamageMod_C
 	Default__GE_Perk_C_Constructor_BASEOutgoingHealMod_C
 	Default__GE_Perk_H_BASEMD_HealthRegen_C
 	Default__GE_Perk_H_ElectrifiedFloors_T01_Damage_C
 	Default__GE_Perk_H_FeelTheBase_Applied_C
+	Default__GE_Perk_H_FrozenCastle_FreezeOnHit_Applied_C
+	Default__GE_Perk_H_FrozenCastle_Snare_C
 	Default__GE_Perk_H_FullyContained_Applied_C
 	Default__GE_Perk_H_LoftyArchitecture_Applied_C
 	Default__GE_Perk_H_PowerModulation_Applied_T01_C
@@ -650,11 +652,12 @@ Name table:
 	GE_Constructor_ContainmentUnit_Applied_C
 	GE_Constructor_ExitPlanApplied_C
 	GE_Constructor_FasterExitApplied_C
-	GE_Constructor_ShieldCapacitorApplied_C
 	GE_Constructor_TrapReloadRate_Applied_C
 	GE_ElectrifiedFloors
 	GE_FeelTheBase
+	GE_FrozenCastle
 	GE_FullyContained_T01
+	GE_Grant_Trigger_FreezeOnHit
 	GE_Grant_TriggerReflectDamage_FromBASEWall
 	GE_LoftyArchitecture
 	GE_OutgoingHealAmp
@@ -663,6 +666,8 @@ Name table:
 	GE_Perk_H_BASEMD_HealthRegen_C
 	GE_Perk_H_ElectrifiedFloors_T01_Damage_C
 	GE_Perk_H_FeelTheBase_Applied_C
+	GE_Perk_H_FrozenCastle_FreezeOnHit_Applied_C
+	GE_Perk_H_FrozenCastle_Snare_C
 	GE_Perk_H_FullyContained_Applied_C
 	GE_Perk_H_LoftyArchitecture_Applied_C
 	GE_Perk_H_PowerModulation_Applied_T01_C
@@ -670,7 +675,6 @@ Name table:
 	GE_Perk_L_SuperchargedTraps_TrapDamag_Mult_C
 	GE_Power_Modulation_T02
 	GE_PowerModulation_T01
-	GE_SlowUnit
 	GE_TrapDamage
 	GE_TrapReloadRate
 	GetAbilitySystemComponent
@@ -688,6 +692,8 @@ Name table:
 	Granted.Perk.BASEMD.T01
 	Granted.Perk.ElectrifiedFloors.T01
 	Granted.Perk.FeelTheBASE.T01
+	Granted.Perk.FrozenCastle.T01
+	Granted.Perk.FrozenCastle.T02
 	Granted.Perk.FullyContained.T01
 	Granted.Perk.LoftyArchitecture.T01
 	Granted.Perk.MegaBASE.T01
@@ -765,6 +771,7 @@ Name table:
 	K2Node_MakeStruct_BASEGameplayEffect
 	K2Node_MakeStruct_BASEGameplayEffect1
 	K2Node_MakeStruct_BASEGameplayEffect2
+	K2Node_MakeStruct_BASEGameplayEffect3
 	K2Node_MakeStruct_FormatArgumentData
 	K2Node_MakeStruct_FormatArgumentData1
 	K2Node_MakeStruct_FormatArgumentData2
@@ -1030,9 +1037,11 @@ Name table:
 	TC_ElectrifiedFloors
 	TC_Empty
 	TC_FeelTheBASE_T01
+	TC_FrozenCastle_T01
+	TC_FrozenCastle_T02
 	TC_FullyContained
 	TC_FullyContained_T01
-	TC_LoftyArchitecture
+	TC_LoftyArchitecture_T01
 	TC_MegaBASE
 	TC_MegaBASE_T01
 	TC_MegaBASE_T02
@@ -1040,7 +1049,6 @@ Name table:
 	TC_PowerModulation_T02
 	TC_Recycling
 	TC_Recycling_T01
-	TC_SlowUnit
 	TC_SuperchargedTraps
 	TC_TrapReloadRate
 	Technician_Base_Activate_Cue
@@ -1085,13 +1093,13 @@ Name table:
 	WorldStatic
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	B_Perk_C_Constructor_BASE_C (0-0-0-0): size 1256 (cls: B_Perk_C_Constructor_BASE_C>BlueprintGeneratedClass>/Script/Engine):
+	B_Perk_C_Constructor_BASE_C (0-0-0-0): size 1264 (cls: B_Perk_C_Constructor_BASE_C>BlueprintGeneratedClass>/Script/Engine):
 		Tag array:
 			NumReplicatedProperties(IntProperty)=6 
 			DynamicBindingObjects(ArrayProperty)=[object] (inner: ObjectProperty)
 			SimpleConstructionScript(ObjectProperty)=SimpleConstructionScript_1=B_Perk_C_Constructor_BASE_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_B_Perk_C_Constructor_BASE=B_Perk_C_Constructor_BASE_C 
-	Default__B_Perk_C_Constructor_BASE_C (0-0-0-0): size 8260 (cls: Default__B_Perk_C_Constructor_BASE_C>B_Perk_C_Constructor_BASE_C):
+	Default__B_Perk_C_Constructor_BASE_C (0-0-0-0): size 8350 (cls: Default__B_Perk_C_Constructor_BASE_C>B_Perk_C_Constructor_BASE_C):
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			MinimapIcon(ObjectProperty)=Skill_Technician_BASE=/Game/UI/Icons/Skills/Skill_Technician_BASE 
@@ -1106,11 +1114,11 @@ Serialized exports:
 			GE_PowerModulation_T01(ObjectProperty)=GE_Perk_H_PowerModulation_Applied_T01_C=/Game/Abilities/Player/Perks/Hero/PowerModulation/GE_Perk_H_PowerModulation_Applied_T01 
 			DefensiveIntegrationLevel(IntProperty)=-1 
 			GE_LoftyArchitecture(ObjectProperty)=GE_Perk_H_LoftyArchitecture_Applied_C=/Game/Abilities/Player/Perks/Hero/LoftyArchitecture/GE_Perk_H_LoftyArchitecture_Applied 
-			TC_LoftyArchitecture(StructProperty)=GameplayTagContainer:Granted.Perk.LoftyArchitecture.T01 
+			TC_LoftyArchitecture_T01(StructProperty)=GameplayTagContainer:Granted.Perk.LoftyArchitecture.T01 
 			BasePowerLevel(FloatProperty)=1 
 			ResourceLimit(IntProperty)=450 
-			TC_SlowUnit(StructProperty)=GameplayTagContainer:Abilities.Constructor.SlowUnit 
-			GE_SlowUnit(ObjectProperty)=GE_Constructor_ShieldCapacitorApplied_C=/Game/Abilities/Player/Constructor/Perks/ShieldCapacitor/GE_Constructor_ShieldCapacitorApplied 
+			TC_FrozenCastle_T01(StructProperty)=GameplayTagContainer:Granted.Perk.FrozenCastle.T01 
+			GE_FrozenCastle(ObjectProperty)=GE_Perk_H_FrozenCastle_Snare_C=/Game/Abilities/Player/Perks/Hero/FrozenCastle/GE_Perk_H_FrozenCastle_Snare 
 			TC_ContainmentUnit(StructProperty)=GameplayTagContainer:Abilities.Constructor.ContainmentUnit 
 			GE_Grant_TriggerReflectDamage_FromBASEWall(ObjectProperty)=GE_Constructor_ContainmentUnit_Applied_C=/Game/Abilities/Player/Constructor/Perks/ContainmentUnit/GE_Constructor_ContainmentUnit_Applied 
 			TC_BASEMD_T01(StructProperty)=GameplayTagContainer:Granted.Perk.BASEMD.T01 
@@ -1158,6 +1166,8 @@ Serialized exports:
 			T3Amount(StructProperty)=System.Byte[] 
 			MaximumResourceSpawned(StructProperty)=System.Byte[] 
 			MaximumResourceLimit(StructProperty)=System.Byte[] 
+			GE_Grant_Trigger_FreezeOnHit(ObjectProperty)=GE_Perk_H_FrozenCastle_FreezeOnHit_Applied_C=/Game/Abilities/Player/Perks/Hero/FrozenCastle/GE_Perk_H_FrozenCastle_FreezeOnHit_Applied 
+			TC_FrozenCastle_T02(StructProperty)=GameplayTagContainer:Granted.Perk.FrozenCastle.T02 
 			BASEBuildingApplicationEffects(ArrayProperty)=[object] (inner: StructProperty)
 			BASEFriendlyApplicationEffects(ArrayProperty)=[object] (inner: StructProperty)
 			InBASETag(StructProperty)=System.Byte[] 
@@ -1212,7 +1222,7 @@ Serialized exports:
 	Instigator Ability System (0-0-0-0): size 36 (cls: Instigator Ability System>ObjectProperty>/Script/CoreUObject)
 	Setup Base Effect Array (0-0-0-0): size 176 (cls: Setup Base Effect Array>Function>/Script/CoreUObject)
 	AbilitySystemComponent (0-0-0-0): size 36 (cls: AbilitySystemComponent>ObjectProperty>/Script/CoreUObject)
-	SetupBuildingEffects (0-0-0-0): size 666 (cls: SetupBuildingEffects>Function>/Script/CoreUObject)
+	SetupBuildingEffects (0-0-0-0): size 826 (cls: SetupBuildingEffects>Function>/Script/CoreUObject)
 	AbilitySystemComponent (0-0-0-0): size 36 (cls: AbilitySystemComponent>ObjectProperty>/Script/CoreUObject)
 	SetupFriendlyEffects (0-0-0-0): size 231 (cls: SetupFriendlyEffects>Function>/Script/CoreUObject)
 	AbilitySystemComponent (0-0-0-0): size 36 (cls: AbilitySystemComponent>ObjectProperty>/Script/CoreUObject)
@@ -1368,6 +1378,7 @@ Serialized exports:
 	CallFunc_HasAllMatchingGameplayTags_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_HasAllMatchingGameplayTags_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_HasAllMatchingGameplayTags_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_HasAllMatchingGameplayTags_ReturnValue2>BoolProperty>/Script/CoreUObject)
 	CallFunc_HasAllMatchingGameplayTags_ReturnValue3 (0-0-0-0): size 34 (cls: CallFunc_HasAllMatchingGameplayTags_ReturnValue3>BoolProperty>/Script/CoreUObject)
+	CallFunc_HasAllMatchingGameplayTags_ReturnValue4 (0-0-0-0): size 34 (cls: CallFunc_HasAllMatchingGameplayTags_ReturnValue4>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
 	CallFunc_HasAllMatchingGameplayTags_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasAllMatchingGameplayTags_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_HasAllMatchingGameplayTags_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasAllMatchingGameplayTags_ReturnValue>BoolProperty>/Script/CoreUObject)
@@ -1409,13 +1420,14 @@ Serialized exports:
 	GE_Constructor_BASEOutgoingDamageMod (0-0-0-0): size 40 (cls: GE_Constructor_BASEOutgoingDamageMod>ClassProperty>/Script/CoreUObject)
 	GE_ElectrifiedFloors (0-0-0-0): size 40 (cls: GE_ElectrifiedFloors>ClassProperty>/Script/CoreUObject)
 	GE_FeelTheBase (0-0-0-0): size 40 (cls: GE_FeelTheBase>ClassProperty>/Script/CoreUObject)
+	GE_FrozenCastle (0-0-0-0): size 40 (cls: GE_FrozenCastle>ClassProperty>/Script/CoreUObject)
 	GE_FullyContained_T01 (0-0-0-0): size 40 (cls: GE_FullyContained_T01>ClassProperty>/Script/CoreUObject)
+	GE_Grant_Trigger_FreezeOnHit (0-0-0-0): size 40 (cls: GE_Grant_Trigger_FreezeOnHit>ClassProperty>/Script/CoreUObject)
 	GE_Grant_TriggerReflectDamage_FromBASEWall (0-0-0-0): size 40 (cls: GE_Grant_TriggerReflectDamage_FromBASEWall>ClassProperty>/Script/CoreUObject)
 	GE_LoftyArchitecture (0-0-0-0): size 40 (cls: GE_LoftyArchitecture>ClassProperty>/Script/CoreUObject)
 	GE_OutgoingHealAmp (0-0-0-0): size 40 (cls: GE_OutgoingHealAmp>ClassProperty>/Script/CoreUObject)
 	GE_Power_Modulation_T02 (0-0-0-0): size 40 (cls: GE_Power_Modulation_T02>ClassProperty>/Script/CoreUObject)
 	GE_PowerModulation_T01 (0-0-0-0): size 40 (cls: GE_PowerModulation_T01>ClassProperty>/Script/CoreUObject)
-	GE_SlowUnit (0-0-0-0): size 40 (cls: GE_SlowUnit>ClassProperty>/Script/CoreUObject)
 	GE_TrapDamage (0-0-0-0): size 40 (cls: GE_TrapDamage>ClassProperty>/Script/CoreUObject)
 	GE_TrapReloadRate (0-0-0-0): size 40 (cls: GE_TrapReloadRate>ClassProperty>/Script/CoreUObject)
 	OutGE (0-0-0-0): size 40 (cls: OutGE>ClassProperty>/Script/CoreUObject)
@@ -1478,6 +1490,7 @@ Serialized exports:
 	CallFunc_HasAllMatchingGameplayTags_TagContainerInterface1_CastInput (0-0-0-0): size 36 (cls: CallFunc_HasAllMatchingGameplayTags_TagContainerInterface1_CastInput>InterfaceProperty>/Script/CoreUObject)
 	CallFunc_HasAllMatchingGameplayTags_TagContainerInterface2_CastInput (0-0-0-0): size 36 (cls: CallFunc_HasAllMatchingGameplayTags_TagContainerInterface2_CastInput>InterfaceProperty>/Script/CoreUObject)
 	CallFunc_HasAllMatchingGameplayTags_TagContainerInterface3_CastInput (0-0-0-0): size 36 (cls: CallFunc_HasAllMatchingGameplayTags_TagContainerInterface3_CastInput>InterfaceProperty>/Script/CoreUObject)
+	CallFunc_HasAllMatchingGameplayTags_TagContainerInterface4_CastInput (0-0-0-0): size 36 (cls: CallFunc_HasAllMatchingGameplayTags_TagContainerInterface4_CastInput>InterfaceProperty>/Script/CoreUObject)
 	CallFunc_HasAllMatchingGameplayTags_TagContainerInterface_CastInput (0-0-0-0): size 36 (cls: CallFunc_HasAllMatchingGameplayTags_TagContainerInterface_CastInput>InterfaceProperty>/Script/CoreUObject)
 	CallFunc_HasAllMatchingGameplayTags_TagContainerInterface_CastInput (0-0-0-0): size 36 (cls: CallFunc_HasAllMatchingGameplayTags_TagContainerInterface_CastInput>InterfaceProperty>/Script/CoreUObject)
 	CallFunc_HasAllMatchingGameplayTags_TagContainerInterface1_CastInput (0-0-0-0): size 36 (cls: CallFunc_HasAllMatchingGameplayTags_TagContainerInterface1_CastInput>InterfaceProperty>/Script/CoreUObject)
@@ -1561,6 +1574,7 @@ Serialized exports:
 	CallFunc_Array_Add_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Array_Add_ReturnValue>IntProperty>/Script/CoreUObject)
 	CallFunc_Array_Add_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Array_Add_ReturnValue1>IntProperty>/Script/CoreUObject)
 	CallFunc_Array_Add_ReturnValue2 (0-0-0-0): size 32 (cls: CallFunc_Array_Add_ReturnValue2>IntProperty>/Script/CoreUObject)
+	CallFunc_Array_Add_ReturnValue3 (0-0-0-0): size 32 (cls: CallFunc_Array_Add_ReturnValue3>IntProperty>/Script/CoreUObject)
 	CallFunc_Array_Add_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Array_Add_ReturnValue>IntProperty>/Script/CoreUObject)
 	CallFunc_Array_Add_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Array_Add_ReturnValue>IntProperty>/Script/CoreUObject)
 	CallFunc_Array_Add_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Array_Add_ReturnValue1>IntProperty>/Script/CoreUObject)
@@ -1813,6 +1827,7 @@ Serialized exports:
 	K2Node_MakeStruct_BASEGameplayEffect (0-0-0-0): size 36 (cls: K2Node_MakeStruct_BASEGameplayEffect>StructProperty>/Script/CoreUObject)
 	K2Node_MakeStruct_BASEGameplayEffect1 (0-0-0-0): size 36 (cls: K2Node_MakeStruct_BASEGameplayEffect1>StructProperty>/Script/CoreUObject)
 	K2Node_MakeStruct_BASEGameplayEffect2 (0-0-0-0): size 36 (cls: K2Node_MakeStruct_BASEGameplayEffect2>StructProperty>/Script/CoreUObject)
+	K2Node_MakeStruct_BASEGameplayEffect3 (0-0-0-0): size 36 (cls: K2Node_MakeStruct_BASEGameplayEffect3>StructProperty>/Script/CoreUObject)
 	K2Node_MakeStruct_BASEGameplayEffect (0-0-0-0): size 36 (cls: K2Node_MakeStruct_BASEGameplayEffect>StructProperty>/Script/CoreUObject)
 	K2Node_MakeStruct_BASEGameplayEffect (0-0-0-0): size 36 (cls: K2Node_MakeStruct_BASEGameplayEffect>StructProperty>/Script/CoreUObject)
 	K2Node_MakeStruct_BASEGameplayEffect1 (0-0-0-0): size 36 (cls: K2Node_MakeStruct_BASEGameplayEffect1>StructProperty>/Script/CoreUObject)
@@ -1832,9 +1847,11 @@ Serialized exports:
 	TC_ContainmentUnit (0-0-0-0): size 36 (cls: TC_ContainmentUnit>StructProperty>/Script/CoreUObject)
 	TC_ElectrifiedFloors (0-0-0-0): size 36 (cls: TC_ElectrifiedFloors>StructProperty>/Script/CoreUObject)
 	TC_FeelTheBASE_T01 (0-0-0-0): size 36 (cls: TC_FeelTheBASE_T01>StructProperty>/Script/CoreUObject)
+	TC_FrozenCastle_T01 (0-0-0-0): size 36 (cls: TC_FrozenCastle_T01>StructProperty>/Script/CoreUObject)
+	TC_FrozenCastle_T02 (0-0-0-0): size 36 (cls: TC_FrozenCastle_T02>StructProperty>/Script/CoreUObject)
 	TC_FullyContained (0-0-0-0): size 36 (cls: TC_FullyContained>StructProperty>/Script/CoreUObject)
 	TC_FullyContained_T01 (0-0-0-0): size 36 (cls: TC_FullyContained_T01>StructProperty>/Script/CoreUObject)
-	TC_LoftyArchitecture (0-0-0-0): size 36 (cls: TC_LoftyArchitecture>StructProperty>/Script/CoreUObject)
+	TC_LoftyArchitecture_T01 (0-0-0-0): size 36 (cls: TC_LoftyArchitecture_T01>StructProperty>/Script/CoreUObject)
 	TC_MegaBASE (0-0-0-0): size 36 (cls: TC_MegaBASE>StructProperty>/Script/CoreUObject)
 	TC_MegaBASE_T01 (0-0-0-0): size 36 (cls: TC_MegaBASE_T01>StructProperty>/Script/CoreUObject)
 	TC_MegaBASE_T02 (0-0-0-0): size 36 (cls: TC_MegaBASE_T02>StructProperty>/Script/CoreUObject)
@@ -1842,7 +1859,6 @@ Serialized exports:
 	TC_PowerModulation_T02 (0-0-0-0): size 36 (cls: TC_PowerModulation_T02>StructProperty>/Script/CoreUObject)
 	TC_Recycling (0-0-0-0): size 36 (cls: TC_Recycling>StructProperty>/Script/CoreUObject)
 	TC_Recycling_T01 (0-0-0-0): size 36 (cls: TC_Recycling_T01>StructProperty>/Script/CoreUObject)
-	TC_SlowUnit (0-0-0-0): size 36 (cls: TC_SlowUnit>StructProperty>/Script/CoreUObject)
 	TC_SuperchargedTraps (0-0-0-0): size 36 (cls: TC_SuperchargedTraps>StructProperty>/Script/CoreUObject)
 	TC_TrapReloadRate (0-0-0-0): size 36 (cls: TC_TrapReloadRate>StructProperty>/Script/CoreUObject)
 	CallFunc_Format_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Format_ReturnValue>TextProperty>/Script/CoreUObject)

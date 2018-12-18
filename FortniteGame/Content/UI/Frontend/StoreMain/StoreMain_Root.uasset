@@ -6,6 +6,7 @@ Name table:
 	/Game/UI/Foundation/Border/Border_StatRow_WhiteLowOpacity
 	/Game/UI/Foundation/Border/Materials/M_AthenaStore_OfferHeader
 	/Game/UI/Foundation/Border/Materials/M_AthenaStore_OfferHeaderBacking
+	/Game/UI/Foundation/Buttons/ButtonStyles/ButtonStyle-Solid-SquareM
 	/Game/UI/Foundation/Fonts/Burbank
 	/Game/UI/Foundation/Fonts/NotoSans
 	/Game/UI/Foundation/Input/InputActionDataTable
@@ -29,7 +30,6 @@ Name table:
 	/Script/UMG
 	Add_IntInt
 	AddChildToGrid
-	AddOffer
 	Ambient Sound
 	ArgumentName
 	ArgumentValue
@@ -41,6 +41,7 @@ Name table:
 	AudioComponent
 	Back
 	Background
+	bAllowCodeRedemptionInSubgameSelect
 	bAllowTemplate
 	bClassRequiresNativeTick
 	bCookedWidgetTree
@@ -71,6 +72,7 @@ Name table:
 	bShowingCampaignUpsell
 	Burbank
 	Burbank-Black
+	ButtonStyle-Solid-SquareM_C
 	bValidTemplate
 	ByteProperty
 	CallFunc_Add_IntInt_ReturnValue
@@ -81,7 +83,7 @@ Name table:
 	CallFunc_CreateSound2D_ReturnValue
 	CallFunc_Divide_IntInt_ReturnValue
 	CallFunc_EqualEqual_ByteByte_ReturnValue
-	CallFunc_EqualEqual_StrStr_ReturnValue
+	CallFunc_EqualEqual_NameName_ReturnValue
 	CallFunc_Format_ReturnValue
 	CallFunc_Get_Main_Tab_Reference_ReturnValue
 	CallFunc_GetActiveWidget_ReturnValue
@@ -133,6 +135,7 @@ Name table:
 	CurrencyMessageLocText
 	CurrencyNotificationBorder
 	CurrencyNotificationText
+	CurrencyStorefront
 	DataTable
 	DataTableRowHandle
 	Default__ArrayProperty
@@ -144,6 +147,7 @@ Name table:
 	Default__Border_Solid_DkBlue_C
 	Default__Border_StatRow_WhiteLowOpacity_C
 	Default__BorderSlot
+	Default__ButtonStyle-Solid-SquareM_C
 	Default__ByteProperty
 	Default__CommonBorder
 	Default__CommonTextBlock
@@ -161,10 +165,10 @@ Name table:
 	Default__HorizontalBoxSlot
 	Default__Image
 	Default__IntProperty
-	Default__KismetStringLibrary
 	Default__KismetSystemLibrary
 	Default__KismetTextLibrary
 	Default__MainTabsScreen_C
+	Default__NameProperty
 	Default__ObjectProperty
 	Default__Overlay
 	Default__OverlaySlot
@@ -207,7 +211,7 @@ Name table:
 	Enum
 	EnumProperty
 	EqualEqual_ByteByte
-	EqualEqual_StrStr
+	EqualEqual_NameName
 	ESlateBrushDrawType
 	ESlateBrushDrawType::Box
 	ESlateBrushDrawType::NoDrawType
@@ -238,14 +242,16 @@ Name table:
 	FortFrontEndContext
 	FortGlobalUIContext
 	FortKismetLibrary
-	FortMtxStoreOfferBase
 	FortMtxStoreRootBase
 	FortRuntimeOptions
 	FortStoreContext
+	FortStoreFrontOfferInfo
+	FortStoreFrontOfferWidgetBase
 	FortUIManagerWidget_NUI
 	FortUINavigationManager
 	Function
 	GameplayStatics
+	GenerateOfferWidget
 	Get Main Tab Reference
 	GetActiveWidget
 	GetCachedWidget
@@ -292,7 +298,7 @@ Name table:
 	K2Node_DynamicCast_bSuccess
 	K2Node_Event_CurrencyMessageLocText
 	K2Node_Event_HasOtherPlatformCurrency
-	K2Node_Event_MtxOffer
+	K2Node_Event_OfferData
 	K2Node_MakeArray_Array
 	K2Node_MakeStruct_DataTableRowHandle
 	K2Node_MakeStruct_DataTableRowHandle1
@@ -301,7 +307,6 @@ Name table:
 	K2Node_Select2_Default
 	K2Node_Select_Default
 	KismetMathLibrary
-	KismetStringLibrary
 	KismetSystemLibrary
 	KismetTextLibrary
 	LayoutVBuckTiles
@@ -318,11 +323,10 @@ Name table:
 	MaterialInstanceConstant
 	Mtx Offer
 	MtxBreakdown
-	MtxOffer
-	MtxOfferWidgetClass
 	MtxStoreSelectionClass
 	NameProperty
 	Navigation
+	NewLocalVar
 	Next
 	None
 	NoOffersAvailable
@@ -333,12 +337,13 @@ Name table:
 	NotoSans-Regular
 	Object
 	ObjectProperty
+	OfferData
 	OfferScaleBoxRoot
 	OnActivated
 	OnAddedToActivationStack
 	OnDeactivated
-	OnMtxOfferGenerated
 	OnOffersGenerated
+	OnPurchasingDisabled
 	OnRemovedFromActivationStack
 	OnStartReadingOffers
 	OnUpdateOtherPlatformMTXMessage
@@ -358,6 +363,7 @@ Name table:
 	PopContentWidget
 	Previous
 	ProgressSpinner
+	PurchasingDisabledBox
 	QueueActivatablePanelIntoModalLayer
 	Redeem
 	RedeemFriendCodeWindow_C
@@ -374,6 +380,7 @@ Name table:
 	ScaleBoxSlot
 	ScriptStruct
 	SetActiveWidget
+	SetClassPropertyByName
 	SetColumn
 	SetFrontEndCamera
 	SetInputActionHandler
@@ -382,6 +389,7 @@ Name table:
 	SetTIleSize
 	SetupFirstFocusableTile
 	SetupForCampaignUpsell
+	SetupOffer
 	SetVisibility
 	ShadowOffset
 	Size
@@ -465,7 +473,7 @@ Name table:
 	WidgetTree
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	StoreMain_Root_C (0-0-0-0): size 665 (cls: StoreMain_Root_C>WidgetBlueprintGeneratedClass>/Script/UMG):
+	StoreMain_Root_C (0-0-0-0): size 669 (cls: StoreMain_Root_C>WidgetBlueprintGeneratedClass>/Script/UMG):
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
@@ -473,17 +481,19 @@ Serialized exports:
 			bClassRequiresNativeTick(BoolProperty)=True 
 			TemplateAsset(SoftObjectProperty)=/Game/UI/Frontend/StoreMain/StoreMain_Root.WidgetArchetype 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_StoreMain_Root=StoreMain_Root_C 
-	Default__StoreMain_Root_C (0-0-0-0): size 252 (cls: Default__StoreMain_Root_C>StoreMain_Root_C):
+	Default__StoreMain_Root_C (0-0-0-0): size 223 (cls: Default__StoreMain_Root_C>StoreMain_Root_C):
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
-			MtxOfferWidgetClass(ObjectProperty)=StoreMain_MTXOffer_C=/Game/UI/Frontend/StoreMain/StoreMain_MTXOffer 
 			MtxStoreSelectionClass(ObjectProperty)=StoreSelectionPopup_C=/Game/UI/Frontend/StoreMain/StoreSelectionPopup 
 			StorefrontNames(ArrayProperty)=[object] (inner: StrProperty)
 			bHasScriptImplementedTick(BoolProperty)=False 
 			bHasScriptImplementedPaint(BoolProperty)=False 
 	BorderPlatformMTX (0-0-0-0): size 36 (cls: BorderPlatformMTX>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_StoreMain_Root (0-0-0-0): size 1300 (cls: ExecuteUbergraph_StoreMain_Root>Function>/Script/CoreUObject)
+	ExecuteUbergraph_StoreMain_Root (0-0-0-0): size 1792 (cls: ExecuteUbergraph_StoreMain_Root>Function>/Script/CoreUObject)
+	OnPurchasingDisabled (0-0-0-0): size 54 (cls: OnPurchasingDisabled>Function>/Script/CoreUObject)
+	OfferData (0-0-0-0): size 36 (cls: OfferData>ObjectProperty>/Script/CoreUObject)
+	GenerateOfferWidget (0-0-0-0): size 68 (cls: GenerateOfferWidget>Function>/Script/CoreUObject)
 	HasOtherPlatformCurrency (0-0-0-0): size 34 (cls: HasOtherPlatformCurrency>BoolProperty>/Script/CoreUObject)
 	OnUpdateOtherPlatformMTXMessage (0-0-0-0): size 82 (cls: OnUpdateOtherPlatformMTXMessage>Function>/Script/CoreUObject)
 	OnRemovedFromActivationStack (0-0-0-0): size 54 (cls: OnRemovedFromActivationStack>Function>/Script/CoreUObject)
@@ -493,11 +503,7 @@ Serialized exports:
 	OnDeactivated (0-0-0-0): size 54 (cls: OnDeactivated>Function>/Script/CoreUObject)
 	OnActivated (0-0-0-0): size 54 (cls: OnActivated>Function>/Script/CoreUObject)
 	OnOffersGenerated (0-0-0-0): size 54 (cls: OnOffersGenerated>Function>/Script/CoreUObject)
-	MtxOffer (0-0-0-0): size 36 (cls: MtxOffer>ObjectProperty>/Script/CoreUObject)
-	OnMtxOfferGenerated (0-0-0-0): size 68 (cls: OnMtxOfferGenerated>Function>/Script/CoreUObject)
 	NoOffersAvailable (0-0-0-0): size 54 (cls: NoOffersAvailable>Function>/Script/CoreUObject)
-	MtxOffer (0-0-0-0): size 36 (cls: MtxOffer>ObjectProperty>/Script/CoreUObject)
-	AddOffer (0-0-0-0): size 399 (cls: AddOffer>Function>/Script/CoreUObject)
 	CallFunc_GetUINavigationManager_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetUINavigationManager_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	Focus (0-0-0-0): size 99 (cls: Focus>Function>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
@@ -511,16 +517,16 @@ Serialized exports:
 	LayoutVBuckTiles (0-0-0-0): size 634 (cls: LayoutVBuckTiles>Function>/Script/CoreUObject)
 	CallFunc_GetChildAt_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetChildAt_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	SetupFirstFocusableTile (0-0-0-0): size 185 (cls: SetupFirstFocusableTile>Function>/Script/CoreUObject)
-	K2Node_CreateDelegate_OutputDelegate (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate>DelegateProperty>/Script/CoreUObject)
-	SetupForCampaignUpsell (0-0-0-0): size 324 (cls: SetupForCampaignUpsell>Function>/Script/CoreUObject)
+	NewLocalVar_0 (0-0-0-0): size 36 (cls: NewLocalVar_0>ObjectProperty>/Script/CoreUObject)
+	SetupForCampaignUpsell (0-0-0-0): size 382 (cls: SetupForCampaignUpsell>Function>/Script/CoreUObject)
 	K2Node_MakeArray_Array (0-0-0-0): size 32 (cls: K2Node_MakeArray_Array>StrProperty>/Script/CoreUObject)
 	K2Node_MakeArray_Array (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array>ArrayProperty>/Script/CoreUObject)
 	K2Node_MakeArray_Array (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array>StructProperty>/Script/CoreUObject)
 	K2Node_MakeArray_Array (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array>ArrayProperty>/Script/CoreUObject)
-	CallFunc_EqualEqual_StrStr_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_StrStr_ReturnValue>BoolProperty>/Script/CoreUObject)
 	bShowingCampaignUpsell (0-0-0-0): size 34 (cls: bShowingCampaignUpsell>BoolProperty>/Script/CoreUObject)
 	CallFunc_BooleanAND_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_EqualEqual_ByteByte_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ByteByte_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_EqualEqual_NameName_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_NameName_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Get_Main_Tab_Reference_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Get_Main_Tab_Reference_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_GetEnableSplitWalletTextNotice_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_GetEnableSplitWalletTextNotice_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_HasAnyChildren_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasAnyChildren_ReturnValue>BoolProperty>/Script/CoreUObject)
@@ -618,6 +624,12 @@ Serialized exports:
 			HorizontalAlignment(ByteProperty)=HAlign_Center 
 			Parent(ObjectProperty)=NoOffersBox=WidgetArchetype 
 			Content(ObjectProperty)=SizeBox_7=WidgetArchetype 
+	BorderSlot_0 (0-0-0-0): size 284 (cls: BorderSlot_0>BorderSlot>/Script/UMG):
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			Parent(ObjectProperty)=PurchasingDisabledBox=WidgetArchetype 
+			Content(ObjectProperty)=SizeBox_0=WidgetArchetype 
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
@@ -684,6 +696,22 @@ Serialized exports:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=WidgetSwitcherSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
+	PurchasingDisabledBox (0-0-0-0): size 351 (cls: PurchasingDisabledBox>CommonBorder>/Script/CommonUI):
+		Tag array:
+			Style(ObjectProperty)=Border_StatRow_WhiteLowOpacity_C=/Game/UI/Foundation/Border/Border_StatRow_WhiteLowOpacity 
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			Padding(StructProperty)=System.Byte[] 
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=WidgetSwitcherSlot_2=WidgetArchetype 
+			bIsVariable(BoolProperty)=True 
+	CommonTextBlock_0 (0-0-0-0): size 507 (cls: CommonTextBlock_0>CommonTextBlock>/Script/CommonUI):
+		Tag array:
+			Style(ObjectProperty)=TextStyle-Base-XS-B-70pc_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B-70pc 
+			Text(TextProperty)=Purchasing Temporarily Unavailable (972D9B824D2D8BD89E0F82AD02E746EE) 
+			ColorAndOpacity(StructProperty)=System.Byte[] 
+			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
+			Slot(ObjectProperty)=SizeBoxSlot_2=WidgetArchetype 
 	CommonTextBlock_142 (0-0-0-0): size 451 (cls: CommonTextBlock_142>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-S-70pc_C=/Game/UI/Foundation/Text/TextStyle-Header-S-70pc 
@@ -725,11 +753,12 @@ Serialized exports:
 			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	SwitcherItemsProgress (0-0-0-0): size 119 (cls: SwitcherItemsProgress>CommonWidgetSwitcher>/Script/CommonUI):
+	SwitcherItemsProgress (0-0-0-0): size 123 (cls: SwitcherItemsProgress>CommonWidgetSwitcher>/Script/CommonUI):
 		Tag array:
 			TransitionDuration(FloatProperty)=0 
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=VerticalBoxSlot_0=WidgetArchetype 
+	K2Node_CreateDelegate_OutputDelegate (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate>DelegateProperty>/Script/CoreUObject)
 	K2Node_CreateDelegate_OutputDelegate1 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate1>DelegateProperty>/Script/CoreUObject)
 	CallFunc_GetSubGame_ReturnValue (0-0-0-0): size 40 (cls: CallFunc_GetSubGame_ReturnValue>EnumProperty>/Script/CoreUObject)
 	K2Node_Select1_Default (0-0-0-0): size 40 (cls: K2Node_Select1_Default>EnumProperty>/Script/CoreUObject)
@@ -826,17 +855,20 @@ Serialized exports:
 	CallFunc_GetChildrenCount_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_GetChildrenCount_ReturnValue1>IntProperty>/Script/CoreUObject)
 	CallFunc_Percent_IntInt_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Percent_IntInt_ReturnValue>IntProperty>/Script/CoreUObject)
 	CallFunc_Subtract_IntInt_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Subtract_IntInt_ReturnValue>IntProperty>/Script/CoreUObject)
-	CallFunc_AddChildToGrid_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_AddChildToGrid_ReturnValue>ObjectProperty>/Script/CoreUObject)
-	CallFunc_AddChildToGrid_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_AddChildToGrid_ReturnValue1>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetStorefrontName_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetStorefrontName_ReturnValue>NameProperty>/Script/CoreUObject)
 	Ambient Sound (0-0-0-0): size 36 (cls: Ambient Sound>ObjectProperty>/Script/CoreUObject)
 	CurrencyNotificationBorder (0-0-0-0): size 36 (cls: CurrencyNotificationBorder>ObjectProperty>/Script/CoreUObject)
 	CurrencyNotificationText (0-0-0-0): size 36 (cls: CurrencyNotificationText>ObjectProperty>/Script/CoreUObject)
+	CallFunc_AddChildToGrid_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_AddChildToGrid_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_AddChildToGrid_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_AddChildToGrid_ReturnValue1>ObjectProperty>/Script/CoreUObject)
+	CallFunc_Create_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_Create_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetContext_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue1>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetContext_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue2>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetContext_ReturnValue3 (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue3>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetOwningPlayer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetOwningPlayer_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetRuntimeOptions_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetRuntimeOptions_ReturnValue>ObjectProperty>/Script/CoreUObject)
-	K2Node_Event_MtxOffer (0-0-0-0): size 36 (cls: K2Node_Event_MtxOffer>ObjectProperty>/Script/CoreUObject)
+	K2Node_Event_OfferData (0-0-0-0): size 36 (cls: K2Node_Event_OfferData>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetActiveWidget_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetActiveWidget_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetCachedWidget_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetCachedWidget_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetUIManagerWidget_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetUIManagerWidget_ReturnValue>ObjectProperty>/Script/CoreUObject)
@@ -858,8 +890,10 @@ Serialized exports:
 	OfferScaleBoxRoot (0-0-0-0): size 36 (cls: OfferScaleBoxRoot>ObjectProperty>/Script/CoreUObject)
 	OverlayProgressSpinner (0-0-0-0): size 36 (cls: OverlayProgressSpinner>ObjectProperty>/Script/CoreUObject)
 	ProgressSpinner (0-0-0-0): size 36 (cls: ProgressSpinner>ObjectProperty>/Script/CoreUObject)
+	PurchasingDisabledBox (0-0-0-0): size 36 (cls: PurchasingDisabledBox>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetChildAt_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetChildAt_ReturnValue1>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetRuntimeOptions_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetRuntimeOptions_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	SplitCurrencyText (0-0-0-0): size 36 (cls: SplitCurrencyText>ObjectProperty>/Script/CoreUObject)
 	CallFunc_CreateSound2D_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_CreateSound2D_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	SwitcherItemsProgress (0-0-0-0): size 36 (cls: SwitcherItemsProgress>ObjectProperty>/Script/CoreUObject)
@@ -922,6 +956,12 @@ Serialized exports:
 			VerticalAlignment(ByteProperty)=VAlign_Fill 
 			Parent(ObjectProperty)=ScaleBox_0=WidgetArchetype 
 			Content(ObjectProperty)=VerticalBox_1=WidgetArchetype 
+	SizeBox_0 (0-0-0-0): size 137 (cls: SizeBox_0>SizeBox>/Script/UMG):
+		Tag array:
+			bOverride_HeightOverride(BoolProperty)=True 
+			HeightOverride(FloatProperty)=48 
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=BorderSlot_0=WidgetArchetype 
 	SizeBox_1 (0-0-0-0): size 96 (cls: SizeBox_1>SizeBox>/Script/UMG):
 		Tag array:
 			bOverride_HeightOverride(BoolProperty)=True 
@@ -949,6 +989,11 @@ Serialized exports:
 			HeightOverride(FloatProperty)=48 
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=BorderSlot_0=WidgetArchetype 
+	SizeBoxSlot_2 (0-0-0-0): size 243 (cls: SizeBoxSlot_2>SizeBoxSlot>/Script/UMG):
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			Parent(ObjectProperty)=SizeBox_0=WidgetArchetype 
+			Content(ObjectProperty)=CommonTextBlock_0=WidgetArchetype 
 	SizeBoxSlot_1 (0-0-0-0): size 70 (cls: SizeBoxSlot_1>SizeBoxSlot>/Script/UMG):
 		Tag array:
 			Parent(ObjectProperty)=SizeBox_2=WidgetArchetype 
@@ -973,7 +1018,7 @@ Serialized exports:
 	Spacer_1 (0-0-0-0): size 41 (cls: Spacer_1>Spacer>/Script/UMG):
 		Tag array:
 			Slot(ObjectProperty)=HorizontalBoxSlot_4=WidgetArchetype 
-	WidgetArchetype (0-0-0-0): size 502 (cls: WidgetArchetype>StoreMain_Root_C):
+	WidgetArchetype (0-0-0-0): size 531 (cls: WidgetArchetype>StoreMain_Root_C):
 		Tag array:
 			BorderPlatformMTX(ObjectProperty)=BorderPlatformMTX=WidgetArchetype 
 			CurrencyNotificationBorder(ObjectProperty)=CurrencyNotificationBorder=WidgetArchetype 
@@ -985,6 +1030,7 @@ Serialized exports:
 			OfferScaleBoxRoot(ObjectProperty)=OfferScaleBoxRoot=WidgetArchetype 
 			OverlayProgressSpinner(ObjectProperty)=OverlayProgressSpinner=WidgetArchetype 
 			ProgressSpinner(ObjectProperty)=ProgressSpinner=WidgetArchetype 
+			PurchasingDisabledBox(ObjectProperty)=PurchasingDisabledBox=WidgetArchetype 
 			SplitCurrencyText(ObjectProperty)=SplitCurrencyText=WidgetArchetype 
 			SwitcherItemsProgress(ObjectProperty)=SwitcherItemsProgress=WidgetArchetype 
 			VBOffers(ObjectProperty)=VBOffers=WidgetArchetype 
@@ -992,7 +1038,6 @@ Serialized exports:
 			VBuckOffersSection(ObjectProperty)=VBuckOffersSection=WidgetArchetype 
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
-	CallFunc_GetStorefrontName_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetStorefrontName_ReturnValue>StrProperty>/Script/CoreUObject)
 	K2Node_MakeStruct_DataTableRowHandle (0-0-0-0): size 36 (cls: K2Node_MakeStruct_DataTableRowHandle>StructProperty>/Script/CoreUObject):
 		DataTable:
 	K2Node_MakeStruct_DataTableRowHandle1 (0-0-0-0): size 36 (cls: K2Node_MakeStruct_DataTableRowHandle1>StructProperty>/Script/CoreUObject):
@@ -1083,6 +1128,12 @@ Serialized exports:
 			VerticalAlignment(ByteProperty)=VAlign_Center 
 			Parent(ObjectProperty)=SwitcherItemsProgress=WidgetArchetype 
 			Content(ObjectProperty)=VBOffers=WidgetArchetype 
+	WidgetSwitcherSlot_2 (0-0-0-0): size 152 (cls: WidgetSwitcherSlot_2>WidgetSwitcherSlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=SwitcherItemsProgress=WidgetArchetype 
+			Content(ObjectProperty)=PurchasingDisabledBox=WidgetArchetype 
 	WidgetSwitcherSlot_3 (0-0-0-0): size 152 (cls: WidgetSwitcherSlot_3>WidgetSwitcherSlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Center 

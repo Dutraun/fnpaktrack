@@ -10,8 +10,6 @@ Name table:
 	/Script/CoreUObject
 	/Script/Engine
 	/Script/FortniteGame
-	AmmoDespawnTime
-	AmmoStormDespawnTime
 	ArrayProperty
 	ArrowComponent
 	AthenaCompositeGD_Disco
@@ -25,6 +23,7 @@ Name table:
 	BonusPointsEarnedPerSecond
 	BoolProperty
 	BoxComponent
+	CameraDistance
 	Capture_Pulse_Enemy_GEN_VARIABLE
 	Capture_Pulse_Friend_GEN_VARIABLE
 	CaptureComponent
@@ -54,6 +53,9 @@ Name table:
 	Curve
 	CurveTable
 	CurveTableRowHandle
+	Default.Respawn.MinRespawnDistanceFromGround
+	Default.Respawn.MinRespawnHeight
+	Default.Respawn.TraceHeight
 	Default.RespawnCameraDistance
 	Default__BlueprintGeneratedClass
 	Default__DiscoMutator_C
@@ -65,11 +67,9 @@ Name table:
 	DefaultSceneRoot
 	DefaultSceneRoot_GEN_VARIABLE
 	DefaultSceneRootNode
+	DirectionDeviation
 	DisableDelayTime
 	DisableInSafeZonePhase
-	Disco.AmmoDespawnTime
-	Disco.AmmoDespawnTime.Storm
-	Disco.AmmoDropPercent
 	Disco.CtrlPoint0.DelayTime
 	Disco.CtrlPoint0.DisableDelayTime
 	Disco.CtrlPoint0.DisableInSafeZonePhase
@@ -135,6 +135,31 @@ Name table:
 	Disco.CtrlPoint12.SpawnDirection.Deviation
 	Disco.CtrlPoint12.SpawnDistance.Center.Max
 	Disco.CtrlPoint12.SpawnDistance.Center.Min
+	Disco.CtrlPoint14.DisableDelayTime
+	Disco.CtrlPoint14.DisableInSafeZonePhase
+	Disco.CtrlPoint14.EnableInSafeZonePhase
+	Disco.CtrlPoint14.PointsPerSecond
+	Disco.CtrlPoint14.PointsPerSecond.Bonus
+	Disco.CtrlPoint14.SafeZone.Spawn.When
+	Disco.CtrlPoint14.SafeZone.Spawn.Where
+	Disco.CtrlPoint14.SpawnDelay
+	Disco.CtrlPoint14.SpawnDirection
+	Disco.CtrlPoint14.SpawnDirection.Deviation
+	Disco.CtrlPoint14.SpawnDistance.Center.Max
+	Disco.CtrlPoint14.SpawnDistance.Center.Min
+	Disco.CtrlPoint15.DelayTime
+	Disco.CtrlPoint15.DisableDelayTime
+	Disco.CtrlPoint15.DisableInSafeZonePhase
+	Disco.CtrlPoint15.EnableInSafeZonePhase
+	Disco.CtrlPoint15.PointsPerSecond
+	Disco.CtrlPoint15.PointsPerSecond.Bonus
+	Disco.CtrlPoint15.SafeZone.Spawn.When
+	Disco.CtrlPoint15.SafeZone.Spawn.Where
+	Disco.CtrlPoint15.SpawnDelay
+	Disco.CtrlPoint15.SpawnDirection
+	Disco.CtrlPoint15.SpawnDirection.Deviation
+	Disco.CtrlPoint15.SpawnDistance.Center.Max
+	Disco.CtrlPoint15.SpawnDistance.Center.Min
 	Disco.CtrlPoint2.DelayTime
 	Disco.CtrlPoint2.DisableDelayTime
 	Disco.CtrlPoint2.DisableInSafeZonePhase
@@ -244,8 +269,6 @@ Name table:
 	Disco.RespawnDirectionDeviation
 	Disco.RespawnDistance.Center.Max
 	Disco.RespawnDistance.Center.Min
-	Disco.RespawnDistance.Ground.Max
-	Disco.RespawnDistance.Ground.Min
 	Disco.ScoreToWin
 	DiscoAudio_ShepardTone_GEN_VARIABLE
 	DiscoBallAudio_GEN_VARIABLE
@@ -276,6 +299,7 @@ Name table:
 	EnumProperty
 	FloatProperty
 	FortAthenaMutator_Disco
+	FortRespawnLogicData
 	GameMsg_AlliesAboutToWin
 	GameMsg_AlliesCapturedAllPoints
 	GameMsg_AllyCapturePointLost
@@ -293,6 +317,7 @@ Name table:
 	Girders_GEN_VARIABLE
 	GoalScoreToWin
 	Guid
+	HolidayDecoMesh_GEN_VARIABLE
 	IconMaterialIndex
 	InternalVariableName
 	IntProperty
@@ -311,12 +336,12 @@ Name table:
 	LTM_Disco_UIMsg_Negative_Cue
 	LTM_Disco_UIMsg_Neutral_Cue
 	LTM_Disco_UIMsg_Positive_Cue
-	MaxRespawnDistanceFromCenter
-	MaxRespawnDistanceFromGround
+	MaxDistFromCenterPercent
 	MaxSpawnDistanceFromCenter
+	MinDistFromCenterPercent
+	MinHeightFromGround
+	MinHeightFromZero
 	MinimapIconScale
-	MinRespawnDistanceFromCenter
-	MinRespawnDistanceFromGround
 	MinSpawnDistanceFromCenter
 	MsgDelay
 	MsgSound
@@ -336,12 +361,11 @@ Name table:
 	P_Spotlight_4_GEN_VARIABLE
 	Package
 	ParticleSystemComponent
-	PercentAmmoToDrop
 	PointAccrualFrequency
 	PointsEarnedPerSecond
 	Prop_DanceClub_SpeakerCluster_01_GEN_VARIABLE
-	RespawnCameraDistance
-	RespawnDirectionDeviation
+	RespawnLogicData
+	RespawnTraceHeight
 	RootComponent
 	RowName
 	SafeZonePhaseWhenToSpawn
@@ -350,6 +374,7 @@ Name table:
 	SceneComponent
 	SCS_Node
 	SimpleConstructionScript
+	SM_ChristmasTree_2_GEN_VARIABLE
 	SoundCue
 	SpawnDelayTime
 	SpawnDirection
@@ -374,8 +399,24 @@ Name table:
 	StaticMesh2_GEN_VARIABLE
 	StaticMesh3_GEN_VARIABLE
 	StaticMesh4_GEN_VARIABLE
+	StaticMesh56_GEN_VARIABLE
+	StaticMesh57_GEN_VARIABLE
+	StaticMesh58_GEN_VARIABLE
+	StaticMesh59_GEN_VARIABLE
 	StaticMesh5_GEN_VARIABLE
+	StaticMesh60_GEN_VARIABLE
+	StaticMesh61_GEN_VARIABLE
+	StaticMesh62_GEN_VARIABLE
+	StaticMesh63_GEN_VARIABLE
+	StaticMesh64_GEN_VARIABLE
+	StaticMesh65_GEN_VARIABLE
+	StaticMesh66_GEN_VARIABLE
+	StaticMesh67_GEN_VARIABLE
+	StaticMesh68_GEN_VARIABLE
+	StaticMesh69_GEN_VARIABLE
 	StaticMesh6_GEN_VARIABLE
+	StaticMesh70_GEN_VARIABLE
+	StaticMesh71_GEN_VARIABLE
 	StaticMesh7_GEN_VARIABLE
 	StaticMesh8_GEN_VARIABLE
 	StaticMesh9_GEN_VARIABLE
@@ -390,21 +431,13 @@ Serialized exports:
 	DiscoMutator_C (0-0-0-0): size 105 (cls: DiscoMutator_C>BlueprintGeneratedClass>/Script/Engine):
 		Tag array:
 			SimpleConstructionScript(ObjectProperty)=SimpleConstructionScript_0=DiscoMutator_C 
-	Default__DiscoMutator_C (0-0-0-0): size 45034 (cls: Default__DiscoMutator_C>DiscoMutator_C):
+	Default__DiscoMutator_C (0-0-0-0): size 50547 (cls: Default__DiscoMutator_C>DiscoMutator_C):
 		Tag array:
 			GoalScoreToWin(StructProperty)=System.Byte[] 
 			PointAccrualFrequency(StructProperty)=System.Byte[] 
 			LastRespawnableSafeZone(StructProperty)=System.Byte[] 
 			LastSafeZone(StructProperty)=System.Byte[] 
-			RespawnCameraDistance(StructProperty)=System.Byte[] 
-			RespawnDirectionDeviation(StructProperty)=System.Byte[] 
-			MinRespawnDistanceFromCenter(StructProperty)=System.Byte[] 
-			MaxRespawnDistanceFromCenter(StructProperty)=System.Byte[] 
-			MinRespawnDistanceFromGround(StructProperty)=System.Byte[] 
-			MaxRespawnDistanceFromGround(StructProperty)=System.Byte[] 
-			PercentAmmoToDrop(StructProperty)=System.Byte[] 
-			AmmoDespawnTime(StructProperty)=System.Byte[] 
-			AmmoStormDespawnTime(StructProperty)=System.Byte[] 
+			RespawnLogicData(StructProperty)=System.Byte[] 
 			ControlPointAssets(StructProperty)=System.Byte[] 
 			ControlPointSpawnData(ArrayProperty)=[object] (inner: StructProperty)
 			GameMsg_Intro(StructProperty)=System.Byte[] 

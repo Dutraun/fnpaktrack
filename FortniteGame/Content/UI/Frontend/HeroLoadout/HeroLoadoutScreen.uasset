@@ -26,6 +26,8 @@ Name table:
 	/Game/UI/Foundation/Fonts/Burbank
 	/Game/UI/Foundation/Fonts/NotoSans
 	/Game/UI/Foundation/Input/InputActionDataTable
+	/Game/UI/Foundation/Items/Details/HeroLoadoutPerkDetailRow
+	/Game/UI/Foundation/Items/Details/HeroLoadoutPerksDetailWidget
 	/Game/UI/Foundation/Items/Details/ItemAlterationsListDetailWidget
 	/Game/UI/Foundation/Items/Details/ItemCalledOutAttributesDetailWidget
 	/Game/UI/Foundation/Items/Details/ItemDetailsHeader
@@ -37,22 +39,26 @@ Name table:
 	/Game/UI/Foundation/Perks/PerksList
 	/Game/UI/Foundation/Stats/LargeStat
 	/Game/UI/Foundation/Stats/StatNumericTextBlock
-	/Game/UI/Foundation/Text/Materials/M-FontShadow
 	/Game/UI/Foundation/Text/TextScrollStyle-Base
 	/Game/UI/Foundation/Text/TextScrollStyle-NoFade
 	/Game/UI/Foundation/Text/TextStyle-Base
 	/Game/UI/Foundation/Text/TextStyle-Base-M-B
 	/Game/UI/Foundation/Text/TextStyle-Base-S
 	/Game/UI/Foundation/Text/TextStyle-Base-S-B
+	/Game/UI/Foundation/Text/TextStyle-Base-S-B-Blue
+	/Game/UI/Foundation/Text/TextStyle-Base-S-B-Blue-40
 	/Game/UI/Foundation/Text/TextStyle-Base-S-B-NavyBlue
 	/Game/UI/Foundation/Text/TextStyle-Base-XS
 	/Game/UI/Foundation/Text/TextStyle-Base-XS-70pc
 	/Game/UI/Foundation/Text/TextStyle-Base-XS-B
 	/Game/UI/Foundation/Text/TextStyle-Base-XS-B-70pc
 	/Game/UI/Foundation/Text/TextStyle-Base-XS-B-Black
+	/Game/UI/Foundation/Text/TextStyle-Base-XS-B-Red-Outline
 	/Game/UI/Foundation/Text/TextStyle-Base-XS-Black
+	/Game/UI/Foundation/Text/TextStyle-Base-XXS-B
 	/Game/UI/Foundation/Text/TextStyle-Header-L
 	/Game/UI/Foundation/Text/TextStyle-Header-M
+	/Game/UI/Foundation/Text/TextStyle-Header-M-BrightBlue
 	/Game/UI/Foundation/Text/TextStyle-Header-S
 	/Game/UI/Foundation/Text/TextStyle-Header-S-S
 	/Game/UI/Foundation/Textures/Border/T-Border-TabM2
@@ -60,6 +66,7 @@ Name table:
 	/Game/UI/Foundation/Textures/Icons/Items/T-FNBR-MysteryItem-L
 	/Game/UI/Foundation/Textures/Icons/Locks/T-Icon-Lock-32
 	/Game/UI/Foundation/Textures/Icons/Locks/T-Icon-Lock-64
+	/Game/UI/Foundation/Textures/Icons/Locks/T-SlotIcon-Locked-Stroke-32
 	/Game/UI/Foundation/Textures/Icons/Shell/T-Icon-Power-64
 	/Game/UI/Foundation/Textures/Icons/Stars/T-Stars-TierNumber-1-32
 	/Game/UI/Foundation/Textures/Icons/Stats/T-Icon-Leader-32
@@ -68,8 +75,6 @@ Name table:
 	/Game/UI/Frontend/HeroLoadout/Details/HeroLoadoutCommanderAbilitiesListDetailWidget
 	/Game/UI/Frontend/HeroLoadout/Details/HeroLoadoutCommanderDetailsHostPanel
 	/Game/UI/Frontend/HeroLoadout/Details/HeroLoadoutItemDetailsHeader
-	/Game/UI/Frontend/HeroLoadout/Details/HeroLoadoutPerkDetailRow
-	/Game/UI/Frontend/HeroLoadout/Details/HeroLoadoutPerksDetailWidget
 	/Game/UI/Frontend/HeroLoadout/Details/HeroLoadoutPickerDetailsPanel
 	/Game/UI/Frontend/HeroLoadout/Details/M_UI_Loadout_HeroCard_Back
 	/Game/UI/Frontend/HeroLoadout/Details/M_UI_Loadout_HeroCard_Front
@@ -82,6 +87,7 @@ Name table:
 	/Game/UI/Frontend/HeroLoadout/HeroSlots/HeroLoadoutCrewSlotLeadPerkContributionIndicator
 	/Game/UI/Frontend/HeroLoadout/HeroSlots/HeroLoadoutCrewSlotRowButton
 	/Game/UI/Frontend/HeroLoadout/HeroSlots/HeroLoadoutCrewSlotRowContent
+	/Game/UI/Frontend/HeroLoadout/HeroSlots/HeroLoadoutLeaderCrewSlotLeadPerkContributionIndicator
 	/Game/UI/Frontend/HeroLoadout/Picker/HeroLoadoutHeroPicker
 	/Game/UI/Frontend/HeroLoadout/Picker/HeroLoadoutHeroPickerTileButton
 	/Game/UI/Frontend/HeroLoadout/Picker/HeroLoadoutPickerPanel
@@ -102,6 +108,8 @@ Name table:
 	[SizeBox]
 	A
 	Activate
+	ActivationIndicatorText
+	ActiveLeadPerkStatusTextStyle
 	Add_IntInt
 	AddWidget
 	AlterationsWidget
@@ -130,7 +138,6 @@ Name table:
 	BackgroundBorder
 	bAllowTemplate
 	bApplyAlphaOnDisable
-	bApplyOutlineToDropShadows
 	BasicPairBuffArrow
 	bClassRequiresNativeTick
 	bCookedWidgetTree
@@ -140,6 +147,8 @@ Name table:
 	bIncludeShortDescription
 	Bindings
 	bInteractableWhenSelected
+	bIsAlreadyOnContentPanelStack
+	bIsOpen
 	bIsVariable
 	BlueprintComponentDelegateBinding
 	BlueprintContextLibrary
@@ -151,6 +160,7 @@ Name table:
 	BndEvt__CrewSlot1_K2Node_ComponentBoundEvent_4_OnRequestChangeHero__DelegateSignature
 	BndEvt__CrewSlot2_K2Node_ComponentBoundEvent_5_OnRequestChangeHero__DelegateSignature
 	BndEvt__CrewSlot3_K2Node_ComponentBoundEvent_6_OnRequestChangeHero__DelegateSignature
+	BndEvt__GadgetsMenuAnchor_K2Node_ComponentBoundEvent_7_OnMenuOpenChangedEvent__DelegateSignature
 	BndEvt__HeaderWithNav_K2Node_ComponentBoundEvent_0_BackButtonPressed__DelegateSignature
 	BndEvt__NewPickerPanel_K2Node_ComponentBoundEvent_11_OnHeroCommitted__DelegateSignature
 	BndEvt__PickerPanel_K2Node_ComponentBoundEvent_15_OnHeroSelected__DelegateSignature
@@ -186,8 +196,6 @@ Name table:
 	BrushColor
 	BrushSize
 	bSelectable
-	bSelectionRequired
-	bSeparateFillAlpha
 	bShouldCollapseWhenConditionIsFalse
 	bShouldSelectUponReceivingFocus
 	bShowActiveAbilitiesOnly
@@ -215,6 +223,7 @@ Name table:
 	CallFunc_Array_Length_ReturnValue
 	CallFunc_Array_Length_ReturnValue1
 	CallFunc_BooleanAND_ReturnValue
+	CallFunc_Conv_IntToText_ReturnValue
 	CallFunc_Create_ReturnValue
 	CallFunc_EqualEqual_NameName_ReturnValue
 	CallFunc_EqualEqual_ObjectObject_ReturnValue
@@ -222,6 +231,7 @@ Name table:
 	CallFunc_GetAbilityKitForTeamLeadPerk_ReturnValue
 	CallFunc_GetActiveWidget_ReturnValue
 	CallFunc_GetButtonAtIndex_ReturnValue
+	CallFunc_GetButtonCount_ReturnValue
 	CallFunc_GetCombinedDescription_OutDescription
 	CallFunc_GetCombinedDescription_ReturnValue
 	CallFunc_GetContext_ReturnValue
@@ -232,12 +242,15 @@ Name table:
 	CallFunc_GetHeroBySlotName_ReturnValue
 	CallFunc_GetHeroBySlotName_ReturnValue1
 	CallFunc_GetItemDefinitionBP_ReturnValue
+	CallFunc_GetLeaderHero_ReturnValue
+	CallFunc_GetLoadoutOrdinal_ReturnValue
 	CallFunc_GetOwningPlayer_ReturnValue
-	CallFunc_GetSelectedButtonIndex_ReturnValue
 	CallFunc_GetTargetLoadoutSlot_TargetHeroLoadout
 	CallFunc_GetTargetLoadoutSlot_TargetSlotName
+	CallFunc_GetTeamLeadPerkActivationLevel_ReturnValue
 	CallFunc_GetTeamLeadPerkActivationLevelAndSatisfyingSlotIndices_OutSatisfyingSlotIndices
 	CallFunc_GetTeamLeadPerkActivationLevelAndSatisfyingSlotIndices_ReturnValue
+	CallFunc_GetTeamLeadPerkMaxActivationLevel_ReturnValue
 	CallFunc_GetUIManagerWidget_ReturnValue
 	CallFunc_GetUINavigationManager_ReturnValue
 	CallFunc_GetUnlockingQuestDefinitionForHeroLoadoutSlot_ReturnValue
@@ -245,21 +258,27 @@ Name table:
 	CallFunc_HasHeroUnlockedTeamLeadPerk_ReturnValue
 	CallFunc_IsHeroLoadoutSlotUnlocked_ReturnValue
 	CallFunc_IsTeamLeadPerkActive_ReturnValue
+	CallFunc_IsTeamLeadPerkActive_ReturnValue1
+	CallFunc_IsTeamLeadPerkActive_ReturnValue2
+	CallFunc_IsTeamLeadPerkProgressive_ReturnValue
+	CallFunc_IsTeamLeadPerkUnlockedForHero_ReturnValue
 	CallFunc_IsValid_ReturnValue
 	CallFunc_IsValid_ReturnValue1
 	CallFunc_IsValid_ReturnValue2
-	CallFunc_IsValid_ReturnValue3
 	CallFunc_Less_IntInt_ReturnValue
 	CallFunc_Less_IntInt_ReturnValue1
+	CallFunc_LessEqual_IntInt_ReturnValue
 	CallFunc_MakeBrushFromTexture_ReturnValue
 	CallFunc_MakeLiteralText_ReturnValue
 	CallFunc_MakeLiteralText_ReturnValue1
 	CallFunc_Not_PreBool_ReturnValue
+	CallFunc_Not_PreBool_ReturnValue1
 	CallFunc_NotEqual_ObjectObject_ReturnValue
 	CallFunc_ShowSimpleConfirmationDialog_NUI_ReturnValue
 	CallFunc_ShowSimpleConfirmationDialog_NUI_ReturnValue1
 	CallFunc_SpawnObject_ReturnValue
 	CallFunc_SpawnTooltipContextWithSource_ReturnValue
+	CallFunc_Subtract_IntInt_ReturnValue
 	CameraFramingWidget
 	Cancel
 	CancelPickerInputAction
@@ -269,13 +288,17 @@ Name table:
 	CenterPicker
 	CenterWidget
 	Class
+	ClassProperty
 	Clipping
 	ColorAndOpacity
+	Column
+	ColumnFill
 	Comitted Item
 	CommanderDetailsHostPanel
 	CommanderGadgetsBox
 	CommanderPerkBox
 	CommanderPerkDetailRow
+	CommanderPerkExplanationText
 	CommanderSlot
 	CommanderSlotBox
 	CommanderSlotButton
@@ -291,6 +314,7 @@ Name table:
 	CommonNumericTextBlock
 	CommonPopupMenu
 	CommonTextBlock
+	CommonTextStyle
 	CommonWidgetGroupBase
 	CommonWidgetSwitcher
 	ComparisonArrowImage
@@ -302,14 +326,15 @@ Name table:
 	Content
 	ContentBorder
 	ContentSlot
+	Conv_IntToText
 	Create
 	CrewLeaderAbilityBonusDetailsBox
 	CrewLeaderBonusDescriptionText
 	CrewLeaderBonusNameText
 	CrewLeaderBonusStatusText
 	CrewLeaderBonusTextLabel
-	CrewLeaderBonusTotalIndicatorPlaceHolder
 	CrewLeaderPerkBox
+	CrewLeaderPerkExplanationText
 	CrewLeaderSlot
 	CrewLeaderSlotBox
 	CrewSlot0
@@ -345,6 +370,7 @@ Name table:
 	Default__ButtonStyle_PageArrow_Left_C
 	Default__ButtonStyle_PageArrow_Right_C
 	Default__ByteProperty
+	Default__ClassProperty
 	Default__CommonActionWidget
 	Default__CommonBorder
 	Default__CommonLazyImage
@@ -372,6 +398,8 @@ Name table:
 	Default__FortUpgradeIndicator
 	Default__Function
 	Default__GameplayStatics
+	Default__GridPanel
+	Default__GridSlot
 	Default__HeaderWithNav_C
 	Default__HeroLoadoutCommanderAbilitiesListDetailWidget_C
 	Default__HeroLoadoutCommanderDetailsHostPanel_C
@@ -384,6 +412,7 @@ Name table:
 	Default__HeroLoadoutHeroPicker_C
 	Default__HeroLoadoutHeroPickerTileButton_C
 	Default__HeroLoadoutItemDetailsHeader_C
+	Default__HeroLoadoutLeaderCrewSlotLeadPerkContributionIndicator_C
 	Default__HeroLoadoutPerkDetailRow_C
 	Default__HeroLoadoutPerksDetailWidget_C
 	Default__HeroLoadoutPickerDetailsPanel_C
@@ -433,17 +462,22 @@ Name table:
 	Default__TextScrollStyle-Base_C
 	Default__TextScrollStyle-NoFade_C
 	Default__TextStyle-Base-M-B_C
+	Default__TextStyle-Base-S-B-Blue-40_C
+	Default__TextStyle-Base-S-B-Blue_C
 	Default__TextStyle-Base-S-B-NavyBlue_C
 	Default__TextStyle-Base-S-B_C
 	Default__TextStyle-Base-S_C
 	Default__TextStyle-Base-XS-70pc_C
 	Default__TextStyle-Base-XS-B-70pc_C
 	Default__TextStyle-Base-XS-B-Black_C
+	Default__TextStyle-Base-XS-B-Red-Outline_C
 	Default__TextStyle-Base-XS-B_C
 	Default__TextStyle-Base-XS-Black_C
 	Default__TextStyle-Base-XS_C
+	Default__TextStyle-Base-XXS-B_C
 	Default__TextStyle-Base_C
 	Default__TextStyle-Header-L_C
+	Default__TextStyle-Header-M-BrightBlue_C
 	Default__TextStyle-Header-M_C
 	Default__TextStyle-Header-S-S_C
 	Default__TextStyle-Header-S_C
@@ -463,11 +497,11 @@ Name table:
 	DelegateRuntimeBinding
 	Description Padding
 	DetailsContainerSlotWidget
-	DetailsSwitcher
 	DialogResult
 	DialogResult_B0DD2D5B45A30C6262E5688F9BB4CDA3
 	DialogResult_E34C11714DA65D954BDF0099ACE455A3
 	DisplayName
+	DisplayType
 	Divider
 	Down
 	DrawAs
@@ -479,6 +513,9 @@ Name table:
 	EFortBrushSize::Medium
 	EFortBrushSize::Small
 	EFortDialogResult
+	EFortHeroLoadoutPerkType
+	EFortHeroLoadoutPerkType::Leader
+	EFortHeroLoadoutPerkType::Standard
 	EFortItemCardSize
 	EFortItemCardSize::M
 	EFortItemCategoryOrdinal
@@ -487,10 +524,11 @@ Name table:
 	EFortItemType
 	EFortItemType::AccountItem
 	EHorizontalAlignment
+	EItemTileViewDisplayType
+	EItemTileViewDisplayType::Account
 	EMenuPlacement
 	EmptyItemType
 	EmptySlot
-	EmptySlotPrompText
 	EmptyText
 	Engine
 	EntryPoint
@@ -529,6 +567,7 @@ Name table:
 	FollowerSlot2
 	FollowerSlot3
 	FollowerSlot4
+	FollowerSlotsBox
 	Font
 	FontObject
 	FontOutlineSettings
@@ -536,6 +575,7 @@ Name table:
 	Format
 	FormatArgumentData
 	FortAbilityKit
+	FortActivatablePanel
 	FortActivatablePanelWithItemPreview
 	FortAsyncAction_ShowConfirmation_NUI
 	FortCampaignHeroLoadoutItem
@@ -583,24 +623,31 @@ Name table:
 	GetAbilityKitForTeamLeadPerk
 	GetActiveWidget
 	GetButtonAtIndex
+	GetButtonCount
 	GetCombinedDescription
 	GetContext
 	GetDisplayName
 	GetGadgetsPopupMenu
 	GetHeroBySlotName
 	GetItemDefinitionBP
+	GetLeaderHero
+	GetLoadoutOrdinal
 	GetOwningPlayer
-	GetSelectedButtonIndex
 	GetTargetLoadoutSlot
+	GetTeamLeadPerkActivationLevel
 	GetTeamLeadPerkActivationLevelAndSatisfyingSlotIndices
+	GetTeamLeadPerkMaxActivationLevel
 	GetUIManagerWidget
 	GetUINavigationManager
 	GetUnlockingQuestDefinitionForHeroLoadoutSlot
 	GetWidgetForFramingViewedItem
+	GridPanel
+	GridSlot
 	HAlign_Center
 	HAlign_Fill
 	HAlign_Left
 	HAlign_Right
+	HandleAnyPickerOpenStateChanged
 	HandleBackInputAction
 	HandleCancelPickerInputAction
 	HandleCurrentLoadoutChanged
@@ -613,6 +660,7 @@ Name table:
 	HeaderWithNav
 	HeaderWithNav_C
 	HeightOverride
+	HeroDetailsBox
 	HeroLoadout
 	HeroLoadoutCommanderAbilitiesListDetailWidget
 	HeroLoadoutCommanderAbilitiesListDetailWidget_C
@@ -627,6 +675,7 @@ Name table:
 	HeroLoadoutHeroPicker_C
 	HeroLoadoutHeroPickerTileButton_C
 	HeroLoadoutItemDetailsHeader_C
+	HeroLoadoutLeaderCrewSlotLeadPerkContributionIndicator_C
 	HeroLoadoutPerkDetailRow_C
 	HeroLoadoutPerkDetailWidget
 	HeroLoadoutPerksDetailWidget_C
@@ -635,7 +684,6 @@ Name table:
 	HeroLoadoutScreen_C
 	HeroLoadoutStatsOverview_C
 	HeroPortrait
-	HeroSelectedDetailsBox
 	HID_Commando_007_R
 	HollowCircularProgressBar
 	HomeBaseContext
@@ -656,6 +704,7 @@ Name table:
 	ImagePerkIcon
 	ImageSize
 	ImageTier
+	InactiveLeadPerkStatusTextStyle
 	InfoSwitcher
 	InnerSlotPadding
 	InputActionDataTable
@@ -664,8 +713,12 @@ Name table:
 	InputActionVerticalAlignment
 	InputActionWidget
 	IntProperty
+	Is Any Picker Open
+	IsDesignTime
 	IsHeroLoadoutSlotUnlocked
 	IsTeamLeadPerkActive
+	IsTeamLeadPerkProgressive
+	IsTeamLeadPerkUnlockedForHero
 	IsValid
 	Item
 	ItemAlterationsListDetailWidget
@@ -685,6 +738,7 @@ Name table:
 	ItemRatingIndicator
 	ItemRatingIndicator_C
 	Justification
+	K2Node_ComponentBoundEvent_bIsOpen
 	K2Node_ComponentBoundEvent_Button
 	K2Node_ComponentBoundEvent_Button1
 	K2Node_ComponentBoundEvent_Button2
@@ -704,11 +758,14 @@ Name table:
 	K2Node_DynamicCast_AsFort_Hero_Type
 	K2Node_DynamicCast_bSuccess
 	K2Node_Event_HeroLoadout
+	K2Node_Event_IsDesignTime
 	K2Node_MakeArray_Array
 	K2Node_MakeArray_Array1
 	K2Node_MakeArray_Array2
 	K2Node_MakeStruct_FormatArgumentData
 	K2Node_Select1_Default
+	K2Node_Select2_Default
+	K2Node_Select3_Default
 	K2Node_Select_Default
 	Kind
 	KismetArrayLibrary
@@ -720,6 +777,8 @@ Name table:
 	LargeInfo
 	LargeName
 	LargeStat_C
+	LastWidgetThatPickerWasOpenedFor
+	LeaderCrewSlotLeadPerkContributionIndicator
 	LeaderIndicatorImage
 	LeaderPerkDetailRow
 	LeaderSlot
@@ -730,6 +789,7 @@ Name table:
 	LeftSideOverlay
 	LeftSideSwitcher
 	Less_IntInt
+	LessEqual_IntInt
 	LevelBar
 	LevelIndicator
 	LevelTextNew
@@ -737,15 +797,17 @@ Name table:
 	ListenForChanges
 	LoadGuardSlot
 	LoadingBackgroundBrush
+	LoadoutDisplayNameTextBlock
 	LoadoutInfoBox
 	LoadoutStatsOverview
+	LockedLeadPerkStatusTextStyle
+	LockedPerkIconImage
 	LockedShadow
 	LockedShawdow
 	LockedUnlockedDivider
 	M-Border-ItemInfoHeader_BrightBar
 	M-Border-MainL-Black
 	M-Button-Console-YellowOutline
-	M-FontShadow
 	M-Global-VGradient
 	M_Slot_Gadget_S_Empty
 	M_UI_Loadout_HeroCard_Back
@@ -771,8 +833,8 @@ Name table:
 	NamedSlotBindings
 	NameProperty
 	Navigation
+	NavigationTabsCenterContentSlot
 	Next
-	NoHeroSelectedDetailsBox
 	None
 	NormalPerkBox
 	Not_PreBool
@@ -793,11 +855,12 @@ Name table:
 	OnHeroCommitted
 	OnHeroSelected
 	OnItemChanged
+	OnMenuOpenChanged
+	OnRemovedFromActivationStack
 	OnRequestChangeHero
 	Open
 	OrdinalOfCategoryToRepresent
 	OutlineColor
-	OutlineMaterial
 	OutlineSettings
 	OutlineSize
 	OverflowIndicator
@@ -812,6 +875,7 @@ Name table:
 	PanelSlot
 	Parent
 	Percentage
+	Perk Type To Represent
 	PerkDivider_C
 	PerkIconSizeBox
 	PerksLeftColumn
@@ -833,7 +897,6 @@ Name table:
 	PickerHealthStat
 	PickerLoadoutStatsOverview
 	PickerPanel
-	PickerPowerStat
 	PickerShieldStat
 	PickerStatSummaryBox
 	PickerTileView
@@ -846,6 +909,7 @@ Name table:
 	PortraitOverlay
 	PowerRatingIconImage
 	PowerRatingText
+	PreConstruct
 	PressedSlateSoundOverride
 	Previous
 	ProgressMaterialBrush
@@ -864,6 +928,7 @@ Name table:
 	RequestStatsUpdate
 	RequirementIconsBox
 	ResourceObject
+	RestoreCenterWidget
 	Result
 	ResultName
 	ReturnValue
@@ -872,7 +937,10 @@ Name table:
 	RightSidePanelBackgroundBlurWidget
 	RightSideStack
 	RootSafeZone
+	RootVisibilityBox
 	RootWidget
+	Row
+	RowFill
 	RowName
 	RowPadding
 	Rule
@@ -888,14 +956,17 @@ Name table:
 	Segments
 	Selected Item
 	SetActiveWidget
-	SetBoolPropertyByName
 	SetContextProvider
 	SetCurrentlyViewedHeroLoadout
 	SetFrontEndCamera
 	SetHeroLoadout
 	SetInputActionHandler
+	SetIsInteractionEnabled
+	SetIsSelectable
+	SetIsSelected
 	SetItemToCompareWith
 	SetObjectPropertyByName
+	SetStyle
 	SetTargetLoadoutSlot
 	SetText
 	SetVisibility
@@ -905,6 +976,7 @@ Name table:
 	ShouldShowPicker
 	ShowModalDialogForLockedSlot
 	ShowSimpleConfirmationDialog_NUI
+	ShowTabs
 	SimpleButtonGroupDelegate__DelegateSignature
 	Size
 	SizeBox
@@ -918,9 +990,11 @@ Name table:
 	SlateSound
 	Slot
 	SlotButtonGroup
+	SlotDescription
 	SlotName
 	Slots
-	SlottingRestrictionText
+	SlottingRestrictionsBox
+	SlottingRestrictionsTextBlock
 	SmallDescription
 	SmallInfo
 	SmallName
@@ -932,12 +1006,15 @@ Name table:
 	SpawnTooltipContextWithSource
 	SpecifiedColor
 	StandardPerkDetailRow
+	StandardPerkExplanationText
 	StatNumericTextBlock_C
 	StatTag
 	StatusImage
 	StrProperty
 	StructProperty
 	Style
+	Subtract_IntInt
+	SupportTeamSlotsBox
 	T-Border-TabM2
 	T-FNBR-MysteryItem-L
 	T-Icon-Check-32
@@ -946,6 +1023,7 @@ Name table:
 	T-Icon-Lock-64
 	T-Icon-MaxHealth-128
 	T-Icon-Power-64
+	T-SlotIcon-Locked-Stroke-32
 	T-Stars-TierNumber-1-32
 	TagListBox
 	TagListTextBlock
@@ -953,12 +1031,15 @@ Name table:
 	Temp_bool_True_if_break_was_hit_Variable
 	Temp_bool_Variable
 	Temp_bool_Variable1
+	Temp_bool_Variable2
+	Temp_bool_Variable3
 	Temp_byte_Variable
 	Temp_byte_Variable1
 	Temp_int_Array_Index_Variable
 	Temp_int_Array_Index_Variable1
 	Temp_int_Loop_Counter_Variable
 	Temp_int_Loop_Counter_Variable1
+	Temp_int_Variable
 	Temp_name_Variable
 	Temp_name_Variable1
 	Temp_object_Variable
@@ -975,17 +1056,22 @@ Name table:
 	TextScrollStyle-NoFade_C
 	TextStyle
 	TextStyle-Base-M-B_C
+	TextStyle-Base-S-B-Blue-40_C
+	TextStyle-Base-S-B-Blue_C
 	TextStyle-Base-S-B-NavyBlue_C
 	TextStyle-Base-S-B_C
 	TextStyle-Base-S_C
 	TextStyle-Base-XS-70pc_C
 	TextStyle-Base-XS-B-70pc_C
 	TextStyle-Base-XS-B-Black_C
+	TextStyle-Base-XS-B-Red-Outline_C
 	TextStyle-Base-XS-B_C
 	TextStyle-Base-XS-Black_C
 	TextStyle-Base-XS_C
+	TextStyle-Base-XXS-B_C
 	TextStyle-Base_C
 	TextStyle-Header-L_C
+	TextStyle-Header-M-BrightBlue_C
 	TextStyle-Header-M_C
 	TextStyle-Header-S-S_C
 	TextStyle-Header-S_C
@@ -996,7 +1082,6 @@ Name table:
 	Tooltip-Buff-Arrow
 	Tooltip.Token.Attribute.MaxHealth
 	Tooltip.Token.Attribute.Shield
-	Tooltip.Token.UIRating
 	Top
 	TopLeftBox
 	Translation
@@ -1008,6 +1093,7 @@ Name table:
 	UnderlyingType
 	UnlockedShadow
 	Up
+	Update State
 	UpdateFromLoadout
 	UpdatePickerPanelVisibility
 	UpdateState
@@ -1041,7 +1127,7 @@ Name table:
 	WrapBox
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	HeroLoadoutScreen_C (0-0-0-0): size 1404 (cls: HeroLoadoutScreen_C>WidgetBlueprintGeneratedClass>/Script/UMG):
+	HeroLoadoutScreen_C (0-0-0-0): size 1484 (cls: HeroLoadoutScreen_C>WidgetBlueprintGeneratedClass>/Script/UMG):
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
@@ -1051,11 +1137,14 @@ Serialized exports:
 			TemplateAsset(SoftObjectProperty)=/Game/UI/Frontend/HeroLoadout/HeroLoadoutScreen.WidgetArchetype 
 			DynamicBindingObjects(ArrayProperty)=[object] (inner: ObjectProperty)
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_HeroLoadoutScreen=HeroLoadoutScreen_C 
-	Default__HeroLoadoutScreen_C (0-0-0-0): size 355 (cls: Default__HeroLoadoutScreen_C>HeroLoadoutScreen_C):
+	Default__HeroLoadoutScreen_C (0-0-0-0): size 442 (cls: Default__HeroLoadoutScreen_C>HeroLoadoutScreen_C):
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			BackButtonInputAction(StructProperty)=System.Byte[] 
 			CancelPickerInputAction(StructProperty)=System.Byte[] 
+			InactiveLeadPerkStatusTextStyle(ObjectProperty)=TextStyle-Base-S-B-NavyBlue_C=/Game/UI/Foundation/Text/TextStyle-Base-S-B-NavyBlue 
+			ActiveLeadPerkStatusTextStyle(ObjectProperty)=TextStyle-Base-S-B-Blue_C=/Game/UI/Foundation/Text/TextStyle-Base-S-B-Blue 
+			LockedLeadPerkStatusTextStyle(ObjectProperty)=TextStyle-Base-S-B-Blue-40_C=/Game/UI/Foundation/Text/TextStyle-Base-S-B-Blue-40 
 			bHasScriptImplementedTick(BoolProperty)=False 
 			bHasScriptImplementedPaint(BoolProperty)=False 
 	AlterationsWidget (0-0-0-0): size 296 (cls: AlterationsWidget>AlterationsWidget_C>/Game/UI/Foundation/Alterations/AlterationsWidget):
@@ -1072,13 +1161,18 @@ Serialized exports:
 			bCookedWidgetTree(BoolProperty)=True 
 	CameraFramingWidget (0-0-0-0): size 36 (cls: CameraFramingWidget>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_HeroLoadoutScreen (0-0-0-0): size 3315 (cls: ExecuteUbergraph_HeroLoadoutScreen>Function>/Script/CoreUObject)
+	ExecuteUbergraph_HeroLoadoutScreen (0-0-0-0): size 3172 (cls: ExecuteUbergraph_HeroLoadoutScreen>Function>/Script/CoreUObject)
 	K2Node_MakeArray_Array (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array>StructProperty>/Script/CoreUObject)
 	K2Node_MakeArray_Array (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array>ArrayProperty>/Script/CoreUObject)
 	K2Node_MakeArray_Array1 (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array1>ObjectProperty>/Script/CoreUObject)
 	K2Node_MakeArray_Array1 (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array1>ArrayProperty>/Script/CoreUObject)
 	K2Node_MakeArray_Array2 (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array2>ObjectProperty>/Script/CoreUObject)
 	K2Node_MakeArray_Array2 (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array2>ArrayProperty>/Script/CoreUObject)
+	OnRemovedFromActivationStack (0-0-0-0): size 54 (cls: OnRemovedFromActivationStack>Function>/Script/CoreUObject)
+	bIsOpen (0-0-0-0): size 34 (cls: bIsOpen>BoolProperty>/Script/CoreUObject)
+	BndEvt__GadgetsMenuAnchor_K2Node_ComponentBoundEvent_7_OnMenuOpenChangedEvent__DelegateSignature (0-0-0-0): size 68 (cls: BndEvt__GadgetsMenuAnchor_K2Node_ComponentBoundEvent_7_OnMenuOpenChangedEvent__DelegateSignature>Function>/Script/CoreUObject)
+	IsDesignTime (0-0-0-0): size 34 (cls: IsDesignTime>BoolProperty>/Script/CoreUObject)
+	PreConstruct (0-0-0-0): size 68 (cls: PreConstruct>Function>/Script/CoreUObject)
 	Button (0-0-0-0): size 36 (cls: Button>ObjectProperty>/Script/CoreUObject)
 	BndEvt__CrewSlot3_K2Node_ComponentBoundEvent_6_OnRequestChangeHero__DelegateSignature (0-0-0-0): size 68 (cls: BndEvt__CrewSlot3_K2Node_ComponentBoundEvent_6_OnRequestChangeHero__DelegateSignature>Function>/Script/CoreUObject)
 	Button (0-0-0-0): size 36 (cls: Button>ObjectProperty>/Script/CoreUObject)
@@ -1116,9 +1210,9 @@ Serialized exports:
 	K2Node_CreateDelegate_OutputDelegate (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate>DelegateProperty>/Script/CoreUObject)
 	HandlePreDifferentLoadoutSet (0-0-0-0): size 132 (cls: HandlePreDifferentLoadoutSet>Function>/Script/CoreUObject)
 	ShouldShowPicker (0-0-0-0): size 34 (cls: ShouldShowPicker>BoolProperty>/Script/CoreUObject)
-	UpdatePickerPanelVisibility (0-0-0-0): size 700 (cls: UpdatePickerPanelVisibility>Function>/Script/CoreUObject)
-	SlotName (0-0-0-0): size 32 (cls: SlotName>NameProperty>/Script/CoreUObject)
-	RequestOpenPickerForHeroSlot (0-0-0-0): size 206 (cls: RequestOpenPickerForHeroSlot>Function>/Script/CoreUObject)
+	UpdatePickerPanelVisibility (0-0-0-0): size 651 (cls: UpdatePickerPanelVisibility>Function>/Script/CoreUObject)
+	Button (0-0-0-0): size 36 (cls: Button>ObjectProperty>/Script/CoreUObject)
+	RequestOpenPickerForHeroSlot (0-0-0-0): size 270 (cls: RequestOpenPickerForHeroSlot>Function>/Script/CoreUObject)
 	CallFunc_GetActiveWidget_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetActiveWidget_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	RegisterInputActions (0-0-0-0): size 215 (cls: RegisterInputActions>Function>/Script/CoreUObject)
 	bPassThru (0-0-0-0): size 34 (cls: bPassThru>BoolProperty>/Script/CoreUObject)
@@ -1128,11 +1222,11 @@ Serialized exports:
 	A (0-0-0-0): size 34 (cls: A>BoolProperty>/Script/CoreUObject)
 	HandleCurrentLoadoutChanged (0-0-0-0): size 65 (cls: HandleCurrentLoadoutChanged>Function>/Script/CoreUObject)
 	Temp_int_Array_Index_Variable (0-0-0-0): size 32 (cls: Temp_int_Array_Index_Variable>IntProperty>/Script/CoreUObject)
-	UpdateFromLoadout (0-0-0-0): size 2339 (cls: UpdateFromLoadout>Function>/Script/CoreUObject)
+	UpdateFromLoadout (0-0-0-0): size 3023 (cls: UpdateFromLoadout>Function>/Script/CoreUObject)
 	ReturnValue (0-0-0-0): size 36 (cls: ReturnValue>ObjectProperty>/Script/CoreUObject)
 	GetGadgetsPopupMenu (0-0-0-0): size 62 (cls: GetGadgetsPopupMenu>Function>/Script/CoreUObject)
 	Gadget Slot (0-0-0-0): size 36 (cls: Gadget Slot>ObjectProperty>/Script/CoreUObject)
-	RequestOpenPickerForGadgetSlot (0-0-0-0): size 93 (cls: RequestOpenPickerForGadgetSlot>Function>/Script/CoreUObject)
+	RequestOpenPickerForGadgetSlot (0-0-0-0): size 201 (cls: RequestOpenPickerForGadgetSlot>Function>/Script/CoreUObject)
 	Button (0-0-0-0): size 36 (cls: Button>ObjectProperty>/Script/CoreUObject)
 	HandleSlotButtonClicked (0-0-0-0): size 497 (cls: HandleSlotButtonClicked>Function>/Script/CoreUObject)
 	K2Node_MakeArray_Array (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array>ObjectProperty>/Script/CoreUObject)
@@ -1228,12 +1322,17 @@ Serialized exports:
 	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue2>BoolProperty>/Script/CoreUObject)
-	CallFunc_IsValid_ReturnValue3 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue3>BoolProperty>/Script/CoreUObject)
 	CallFunc_Less_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Less_IntInt_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_NotEqual_ObjectObject_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_NotEqual_ObjectObject_ReturnValue>BoolProperty>/Script/CoreUObject)
+	K2Node_ComponentBoundEvent_bIsOpen (0-0-0-0): size 34 (cls: K2Node_ComponentBoundEvent_bIsOpen>BoolProperty>/Script/CoreUObject)
+	K2Node_Event_IsDesignTime (0-0-0-0): size 34 (cls: K2Node_Event_IsDesignTime>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
-	Temp_bool_Variable1 (0-0-0-0): size 34 (cls: Temp_bool_Variable1>BoolProperty>/Script/CoreUObject)
+	Is Any Picker Open (0-0-0-0): size 34 (cls: Is Any Picker Open>BoolProperty>/Script/CoreUObject)
+	HandleAnyPickerOpenStateChanged (0-0-0-0): size 528 (cls: HandleAnyPickerOpenStateChanged>Function>/Script/CoreUObject)
+	CallFunc_LessEqual_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_LessEqual_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_Not_PreBool_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_Not_PreBool_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	B (0-0-0-0): size 34 (cls: B>BoolProperty>/Script/CoreUObject)
 	C (0-0-0-0): size 34 (cls: C>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
@@ -1249,13 +1348,20 @@ Serialized exports:
 	CallFunc_GetCombinedDescription_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_GetCombinedDescription_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_HasHeroUnlockedTeamLeadPerk_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasHeroUnlockedTeamLeadPerk_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsTeamLeadPerkActive_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsTeamLeadPerkActive_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_IsTeamLeadPerkActive_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_IsTeamLeadPerkActive_ReturnValue1>BoolProperty>/Script/CoreUObject)
+	CallFunc_IsTeamLeadPerkActive_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_IsTeamLeadPerkActive_ReturnValue2>BoolProperty>/Script/CoreUObject)
+	CallFunc_IsTeamLeadPerkProgressive_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsTeamLeadPerkProgressive_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_IsTeamLeadPerkUnlockedForHero_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsTeamLeadPerkUnlockedForHero_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_Less_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Less_IntInt_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue1>BoolProperty>/Script/CoreUObject)
+	CallFunc_Not_PreBool_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable1 (0-0-0-0): size 34 (cls: Temp_bool_Variable1>BoolProperty>/Script/CoreUObject)
+	Temp_bool_Variable2 (0-0-0-0): size 34 (cls: Temp_bool_Variable2>BoolProperty>/Script/CoreUObject)
+	Temp_bool_Variable3 (0-0-0-0): size 34 (cls: Temp_bool_Variable3>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable1 (0-0-0-0): size 34 (cls: Temp_bool_Variable1>BoolProperty>/Script/CoreUObject)
 	BackgroundBorder (0-0-0-0): size 338 (cls: BackgroundBorder>Border>/Script/UMG):
@@ -1436,6 +1542,11 @@ Serialized exports:
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	ActiveLeadPerkStatusTextStyle (0-0-0-0): size 40 (cls: ActiveLeadPerkStatusTextStyle>ClassProperty>/Script/CoreUObject)
+	InactiveLeadPerkStatusTextStyle (0-0-0-0): size 40 (cls: InactiveLeadPerkStatusTextStyle>ClassProperty>/Script/CoreUObject)
+	LockedLeadPerkStatusTextStyle (0-0-0-0): size 40 (cls: LockedLeadPerkStatusTextStyle>ClassProperty>/Script/CoreUObject)
+	K2Node_Select3_Default (0-0-0-0): size 40 (cls: K2Node_Select3_Default>ClassProperty>/Script/CoreUObject)
+	K2Node_Select_Default (0-0-0-0): size 40 (cls: K2Node_Select_Default>ClassProperty>/Script/CoreUObject)
 	InputActionWidget (0-0-0-0): size 380 (cls: InputActionWidget>CommonActionWidget>/Script/CommonUI):
 		Tag array:
 			IconRimBrush(StructProperty)=System.Byte[] 
@@ -1534,16 +1645,17 @@ Serialized exports:
 			Style(ObjectProperty)=Border_StatRow_Unlocked_C=/Game/UI/Foundation/Border/Border_StatRow_Unlocked 
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			bIsVariable(BoolProperty)=True 
-	CommonBorder_1 (0-0-0-0): size 111 (cls: CommonBorder_1>CommonBorder>/Script/CommonUI):
+	CommonBorder_1 (0-0-0-0): size 152 (cls: CommonBorder_1>CommonBorder>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=Border_StatRow_Unlocked_C=/Game/UI/Foundation/Border/Border_StatRow_Unlocked 
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=VerticalBoxSlot_0=WidgetArchetype 
+			Clipping(EnumProperty)=EWidgetClipping::ClipToBounds 
 	CommonBorder_2 (0-0-0-0): size 111 (cls: CommonBorder_2>CommonBorder>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=Border_StatRow_Unlocked_C=/Game/UI/Foundation/Border/Border_StatRow_Unlocked 
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-			Slot(ObjectProperty)=VerticalBoxSlot_1=WidgetArchetype 
+			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
 	BackgroundBorder (0-0-0-0): size 108 (cls: BackgroundBorder>CommonBorder>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=Border_StatRow_Unlocked_C=/Game/UI/Foundation/Border/Border_StatRow_Unlocked 
@@ -1719,42 +1831,6 @@ Serialized exports:
 			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	Value (0-0-0-0): size 409 (cls: Value>CommonNumericTextBlock>/Script/CommonUI):
-		Tag array:
-			CurrentNumericValue(FloatProperty)=9999 
-			Style(ObjectProperty)=TextStyle-Header-L_C=/Game/UI/Foundation/Text/TextStyle-Header-L 
-			Text(TextProperty)=Text Block (TextBlockDefaultValue) 
-			Font(StructProperty)=System.Byte[] 
-			ShadowOffset(StructProperty)=Vector2D(0,0) 
-			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
-			bIsVariable(BoolProperty)=True 
-	Value (0-0-0-0): size 409 (cls: Value>CommonNumericTextBlock>/Script/CommonUI):
-		Tag array:
-			CurrentNumericValue(FloatProperty)=9999 
-			Style(ObjectProperty)=TextStyle-Header-L_C=/Game/UI/Foundation/Text/TextStyle-Header-L 
-			Text(TextProperty)=Text Block (TextBlockDefaultValue) 
-			Font(StructProperty)=System.Byte[] 
-			ShadowOffset(StructProperty)=Vector2D(0,0) 
-			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
-			bIsVariable(BoolProperty)=True 
-	Value (0-0-0-0): size 409 (cls: Value>CommonNumericTextBlock>/Script/CommonUI):
-		Tag array:
-			CurrentNumericValue(FloatProperty)=9999 
-			Style(ObjectProperty)=TextStyle-Header-L_C=/Game/UI/Foundation/Text/TextStyle-Header-L 
-			Text(TextProperty)=Text Block (TextBlockDefaultValue) 
-			Font(StructProperty)=System.Byte[] 
-			ShadowOffset(StructProperty)=Vector2D(0,0) 
-			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
-			bIsVariable(BoolProperty)=True 
-	Value (0-0-0-0): size 409 (cls: Value>CommonNumericTextBlock>/Script/CommonUI):
-		Tag array:
-			CurrentNumericValue(FloatProperty)=9999 
-			Style(ObjectProperty)=TextStyle-Header-L_C=/Game/UI/Foundation/Text/TextStyle-Header-L 
-			Text(TextProperty)=Text Block (TextBlockDefaultValue) 
-			Font(StructProperty)=System.Byte[] 
-			ShadowOffset(StructProperty)=Vector2D(0,0) 
-			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
-			bIsVariable(BoolProperty)=True 
 	NumericText (0-0-0-0): size 465 (cls: NumericText>CommonNumericTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base_C=/Game/UI/Foundation/Text/TextStyle-Base 
@@ -1763,6 +1839,24 @@ Serialized exports:
 			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_5=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
+			bIsVariable(BoolProperty)=True 
+	Value (0-0-0-0): size 409 (cls: Value>CommonNumericTextBlock>/Script/CommonUI):
+		Tag array:
+			CurrentNumericValue(FloatProperty)=9999 
+			Style(ObjectProperty)=TextStyle-Header-L_C=/Game/UI/Foundation/Text/TextStyle-Header-L 
+			Text(TextProperty)=Text Block (TextBlockDefaultValue) 
+			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
+			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
+			bIsVariable(BoolProperty)=True 
+	Value (0-0-0-0): size 409 (cls: Value>CommonNumericTextBlock>/Script/CommonUI):
+		Tag array:
+			CurrentNumericValue(FloatProperty)=9999 
+			Style(ObjectProperty)=TextStyle-Header-L_C=/Game/UI/Foundation/Text/TextStyle-Header-L 
+			Text(TextProperty)=Text Block (TextBlockDefaultValue) 
+			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
+			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
 	ItemDisplayName (0-0-0-0): size 428 (cls: ItemDisplayName>CommonTextBlock>/Script/CommonUI):
 		Tag array:
@@ -1888,7 +1982,7 @@ Serialized exports:
 			Text(TextProperty)=SUPPORT TEAM (0F8E276A4DD0BD40AAD00C8FB08E8A24) 
 			Font(StructProperty)=System.Byte[] 
 			ShadowOffset(StructProperty)=Vector2D(0,0) 
-			Slot(ObjectProperty)=VerticalBoxSlot_3=WidgetArchetype 
+			Slot(ObjectProperty)=VerticalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
 	CenterButtonTextWidget (0-0-0-0): size 453 (cls: CenterButtonTextWidget>CommonTextBlock>/Script/CommonUI):
 		Tag array:
@@ -1908,73 +2002,58 @@ Serialized exports:
 			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_4=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	Name (0-0-0-0): size 617 (cls: Name>CommonTextBlock>/Script/CommonUI):
+	ActivationIndicatorText (0-0-0-0): size 502 (cls: ActivationIndicatorText>CommonTextBlock>/Script/CommonUI):
 		Tag array:
-			Style(ObjectProperty)=TextStyle-Base-XS-70pc_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-70pc 
-			Text(TextProperty)=Stat (0359A05D4123755AA2E7A9ACD5121E31) 
+			Style(ObjectProperty)=TextStyle-Header-M-BrightBlue_C=/Game/UI/Foundation/Text/TextStyle-Header-M-BrightBlue 
+			Text(TextProperty)={N} (34363202477E7CF49F77C4B01D857690) 
 			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
 			ShadowOffset(StructProperty)=Vector2D(0,0) 
-			Slot(ObjectProperty)=OverlaySlot_1=WidgetArchetype 
-			RenderTransform(StructProperty)=System.Byte[] 
+			Slot(ObjectProperty)=WidgetSwitcherSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	Name (0-0-0-0): size 617 (cls: Name>CommonTextBlock>/Script/CommonUI):
+	LoadoutDisplayNameTextBlock (0-0-0-0): size 390 (cls: LoadoutDisplayNameTextBlock>CommonTextBlock>/Script/CommonUI):
 		Tag array:
-			Style(ObjectProperty)=TextStyle-Base-XS-70pc_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-70pc 
-			Text(TextProperty)=Stat (0359A05D4123755AA2E7A9ACD5121E31) 
-			ColorAndOpacity(StructProperty)=System.Byte[] 
-			Font(StructProperty)=System.Byte[] 
-			ShadowOffset(StructProperty)=Vector2D(0,0) 
-			Slot(ObjectProperty)=OverlaySlot_1=WidgetArchetype 
-			RenderTransform(StructProperty)=System.Byte[] 
-			bIsVariable(BoolProperty)=True 
-	Name (0-0-0-0): size 617 (cls: Name>CommonTextBlock>/Script/CommonUI):
-		Tag array:
-			Style(ObjectProperty)=TextStyle-Base-XS-70pc_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-70pc 
-			Text(TextProperty)=Stat (0359A05D4123755AA2E7A9ACD5121E31) 
-			ColorAndOpacity(StructProperty)=System.Byte[] 
-			Font(StructProperty)=System.Byte[] 
-			ShadowOffset(StructProperty)=Vector2D(0,0) 
-			Slot(ObjectProperty)=OverlaySlot_1=WidgetArchetype 
-			RenderTransform(StructProperty)=System.Byte[] 
-			bIsVariable(BoolProperty)=True 
-	Name (0-0-0-0): size 617 (cls: Name>CommonTextBlock>/Script/CommonUI):
-		Tag array:
-			Style(ObjectProperty)=TextStyle-Base-XS-70pc_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-70pc 
-			Text(TextProperty)=Stat (0359A05D4123755AA2E7A9ACD5121E31) 
-			ColorAndOpacity(StructProperty)=System.Byte[] 
-			Font(StructProperty)=System.Byte[] 
-			ShadowOffset(StructProperty)=Vector2D(0,0) 
-			Slot(ObjectProperty)=OverlaySlot_1=WidgetArchetype 
-			RenderTransform(StructProperty)=System.Byte[] 
-			bIsVariable(BoolProperty)=True 
-	Name (0-0-0-0): size 617 (cls: Name>CommonTextBlock>/Script/CommonUI):
-		Tag array:
-			Style(ObjectProperty)=TextStyle-Base-XS-70pc_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-70pc 
-			Text(TextProperty)=Stat (0359A05D4123755AA2E7A9ACD5121E31) 
-			ColorAndOpacity(StructProperty)=System.Byte[] 
-			Font(StructProperty)=System.Byte[] 
-			ShadowOffset(StructProperty)=Vector2D(0,0) 
-			Slot(ObjectProperty)=OverlaySlot_1=WidgetArchetype 
-			RenderTransform(StructProperty)=System.Byte[] 
-			bIsVariable(BoolProperty)=True 
-	Name (0-0-0-0): size 617 (cls: Name>CommonTextBlock>/Script/CommonUI):
-		Tag array:
-			Style(ObjectProperty)=TextStyle-Base-XS-70pc_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-70pc 
-			Text(TextProperty)=Stat (0359A05D4123755AA2E7A9ACD5121E31) 
-			ColorAndOpacity(StructProperty)=System.Byte[] 
-			Font(StructProperty)=System.Byte[] 
-			ShadowOffset(StructProperty)=Vector2D(0,0) 
-			Slot(ObjectProperty)=OverlaySlot_1=WidgetArchetype 
-			RenderTransform(StructProperty)=System.Byte[] 
-			bIsVariable(BoolProperty)=True 
-	EmptySlotPrompText (0-0-0-0): size 379 (cls: EmptySlotPrompText>CommonTextBlock>/Script/CommonUI):
-		Tag array:
-			Style(ObjectProperty)=TextStyle-Base_C=/Game/UI/Foundation/Text/TextStyle-Base 
-			Text(TextProperty)=Select a hero to slot. - TODO: Give slot specific prompt. (EF18E38E4B70244407A4E1979A2C2439) 
+			Style(ObjectProperty)=TextStyle-Header-M_C=/Game/UI/Foundation/Text/TextStyle-Header-M 
+			Text(TextProperty)={LoadoutName} (2204A47C4EF677966373679AA073C18B) 
 			Font(StructProperty)=System.Byte[] 
 			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
+			bIsVariable(BoolProperty)=True 
+	Name (0-0-0-0): size 617 (cls: Name>CommonTextBlock>/Script/CommonUI):
+		Tag array:
+			Style(ObjectProperty)=TextStyle-Base-XS-70pc_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-70pc 
+			Text(TextProperty)=Stat (0359A05D4123755AA2E7A9ACD5121E31) 
+			ColorAndOpacity(StructProperty)=System.Byte[] 
+			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
+			Slot(ObjectProperty)=OverlaySlot_1=WidgetArchetype 
+			RenderTransform(StructProperty)=System.Byte[] 
+			bIsVariable(BoolProperty)=True 
+	Name (0-0-0-0): size 617 (cls: Name>CommonTextBlock>/Script/CommonUI):
+		Tag array:
+			Style(ObjectProperty)=TextStyle-Base-XS-70pc_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-70pc 
+			Text(TextProperty)=Stat (0359A05D4123755AA2E7A9ACD5121E31) 
+			ColorAndOpacity(StructProperty)=System.Byte[] 
+			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
+			Slot(ObjectProperty)=OverlaySlot_1=WidgetArchetype 
+			RenderTransform(StructProperty)=System.Byte[] 
+			bIsVariable(BoolProperty)=True 
+	CommonTextBlock_0 (0-0-0-0): size 338 (cls: CommonTextBlock_0>CommonTextBlock>/Script/CommonUI):
+		Tag array:
+			Style(ObjectProperty)=TextStyle-Base_C=/Game/UI/Foundation/Text/TextStyle-Base 
+			Text(TextProperty)=Sorting by Power (F10F277B49FA471DA0529682A89225EF) 
+			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
+			Slot(ObjectProperty)=VerticalBoxSlot_0=WidgetArchetype 
+	CommonTextBlock_14 (0-0-0-0): size 643 (cls: CommonTextBlock_14>CommonTextBlock>/Script/CommonUI):
+		Tag array:
+			Style(ObjectProperty)=TextStyle-Base-XS-B-Red-Outline_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B-Red-Outline 
+			Text(TextProperty)=Slotting Restricted (ED295398428B5671EEBDFAB71C9BE98B) 
+			ColorAndOpacity(StructProperty)=System.Byte[] 
+			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
+			Slot(ObjectProperty)=GridSlot_1=WidgetArchetype 
 	AmmoLoadedText (0-0-0-0): size 408 (cls: AmmoLoadedText>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-S-B_C=/Game/UI/Foundation/Text/TextStyle-Base-S-B 
@@ -2041,7 +2120,7 @@ Serialized exports:
 	LargeName (0-0-0-0): size 409 (cls: LargeName>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B 
-			Text(TextProperty)={Name} (C6F487384C0D5C03EC7C84B4FCAE8BC1) 
+			Text(TextProperty)={Name} (350A97464251D8DBFAD9608104F2269F) 
 			Font(StructProperty)=System.Byte[] 
 			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			AutoWrapText(BoolProperty)=True 
@@ -2050,7 +2129,7 @@ Serialized exports:
 	LevelTextNew (0-0-0-0): size 420 (cls: LevelTextNew>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B 
-			Text(TextProperty)=99 (D8543ABD475ADB1BE45852BFBC1AB9EC) 
+			Text(TextProperty)=99 (1151C9F34ACF11CE53FC8C86A1E23081) 
 			Font(StructProperty)=System.Byte[] 
 			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Center 
@@ -2059,7 +2138,7 @@ Serialized exports:
 	SmallDescription (0-0-0-0): size 416 (cls: SmallDescription>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS_C=/Game/UI/Foundation/Text/TextStyle-Base-XS 
-			Text(TextProperty)={Description} (E170A30D4551CEE0E9A3078D63670693) 
+			Text(TextProperty)={Description} (F80F18D74F6F00143A3B65836D36E018) 
 			Font(StructProperty)=System.Byte[] 
 			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			AutoWrapText(BoolProperty)=True 
@@ -2068,37 +2147,53 @@ Serialized exports:
 	SmallName (0-0-0-0): size 409 (cls: SmallName>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B 
-			Text(TextProperty)={Name} (0070DA384D03899BC13635A0CF98E0A7) 
+			Text(TextProperty)={Name} (43206F224091000840938DA3C26D4260) 
 			Font(StructProperty)=System.Byte[] 
 			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			AutoWrapText(BoolProperty)=True 
 			Slot(ObjectProperty)=VerticalBoxSlot_1=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	CommonTextBlock_0 (0-0-0-0): size 568 (cls: CommonTextBlock_0>CommonTextBlock>/Script/CommonUI):
+	CommanderPerkExplanationText (0-0-0-0): size 419 (cls: CommanderPerkExplanationText>CommonTextBlock>/Script/CommonUI):
 		Tag array:
-			Style(ObjectProperty)=TextStyle-Header-S-S_C=/Game/UI/Foundation/Text/TextStyle-Header-S-S 
-			Text(TextProperty)=Commander Perk (CCD4333A41C80C5327ED37B3A069E3E4) 
+			Style(ObjectProperty)=TextStyle-Base-XXS-B_C=/Game/UI/Foundation/Text/TextStyle-Base-XXS-B 
+			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
+			Text(TextProperty)=- Replaces the standard perk if this hero is slotted as a Commander. (39A7111C4C04529C15030086E74925A1) 
 			Font(StructProperty)=System.Byte[] 
 			ShadowOffset(StructProperty)=Vector2D(0,0) 
-			Slot(ObjectProperty)=VerticalBoxSlot_2=WidgetArchetype 
-	CommonTextBlock_1 (0-0-0-0): size 578 (cls: CommonTextBlock_1>CommonTextBlock>/Script/CommonUI):
+			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
+	CommonTextBlock_0 (0-0-0-0): size 336 (cls: CommonTextBlock_0>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-S-S_C=/Game/UI/Foundation/Text/TextStyle-Header-S-S 
-			Text(TextProperty)=Support Team Leader Perk (2F9D2E204323E9D2D1AF01B9099BA2D0) 
+			Text(TextProperty)=Commander Perk (E2D1AD954DA3E044B38265B792A40BFE) 
 			Font(StructProperty)=System.Byte[] 
 			ShadowOffset(StructProperty)=Vector2D(0,0) 
-			Slot(ObjectProperty)=VerticalBoxSlot_3=WidgetArchetype 
-	CommonTextBlock_2 (0-0-0-0): size 567 (cls: CommonTextBlock_2>CommonTextBlock>/Script/CommonUI):
+			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
+	CommonTextBlock_1 (0-0-0-0): size 346 (cls: CommonTextBlock_1>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-S-S_C=/Game/UI/Foundation/Text/TextStyle-Header-S-S 
-			Text(TextProperty)=Standard Perk (7F70E33C4E45C4B2FC5192BEA33B9406) 
+			Text(TextProperty)=Support Team Leader Perk (FC72DCEC492DA7FD582AF6AA95FB67FE) 
 			Font(StructProperty)=System.Byte[] 
 			ShadowOffset(StructProperty)=Vector2D(0,0) 
-			Slot(ObjectProperty)=VerticalBoxSlot_3=WidgetArchetype 
+			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
+	CommonTextBlock_2 (0-0-0-0): size 335 (cls: CommonTextBlock_2>CommonTextBlock>/Script/CommonUI):
+		Tag array:
+			Style(ObjectProperty)=TextStyle-Header-S-S_C=/Game/UI/Foundation/Text/TextStyle-Header-S-S 
+			Text(TextProperty)=Standard Perk (A243968444568A318221D6A740E9C6C9) 
+			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
+			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
+	CrewLeaderPerkExplanationText (0-0-0-0): size 444 (cls: CrewLeaderPerkExplanationText>CommonTextBlock>/Script/CommonUI):
+		Tag array:
+			Style(ObjectProperty)=TextStyle-Base-XXS-B_C=/Game/UI/Foundation/Text/TextStyle-Base-XXS-B 
+			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
+			Text(TextProperty)=- Support team members may activate this bonus if this hero is slotted a Support Team Leader. (BEEF887240292455594252A6B368A403) 
+			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
+			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
 	LargeName (0-0-0-0): size 409 (cls: LargeName>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B 
-			Text(TextProperty)={Name} (C6F487384C0D5C03EC7C84B4FCAE8BC1) 
+			Text(TextProperty)={Name} (350A97464251D8DBFAD9608104F2269F) 
 			Font(StructProperty)=System.Byte[] 
 			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			AutoWrapText(BoolProperty)=True 
@@ -2107,7 +2202,7 @@ Serialized exports:
 	LevelTextNew (0-0-0-0): size 420 (cls: LevelTextNew>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B 
-			Text(TextProperty)=99 (D8543ABD475ADB1BE45852BFBC1AB9EC) 
+			Text(TextProperty)=99 (1151C9F34ACF11CE53FC8C86A1E23081) 
 			Font(StructProperty)=System.Byte[] 
 			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Center 
@@ -2116,7 +2211,7 @@ Serialized exports:
 	SmallDescription (0-0-0-0): size 416 (cls: SmallDescription>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS_C=/Game/UI/Foundation/Text/TextStyle-Base-XS 
-			Text(TextProperty)={Description} (E170A30D4551CEE0E9A3078D63670693) 
+			Text(TextProperty)={Description} (F80F18D74F6F00143A3B65836D36E018) 
 			Font(StructProperty)=System.Byte[] 
 			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			AutoWrapText(BoolProperty)=True 
@@ -2125,7 +2220,7 @@ Serialized exports:
 	SmallName (0-0-0-0): size 409 (cls: SmallName>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B 
-			Text(TextProperty)={Name} (0070DA384D03899BC13635A0CF98E0A7) 
+			Text(TextProperty)={Name} (43206F224091000840938DA3C26D4260) 
 			Font(StructProperty)=System.Byte[] 
 			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			AutoWrapText(BoolProperty)=True 
@@ -2134,7 +2229,7 @@ Serialized exports:
 	LargeName (0-0-0-0): size 409 (cls: LargeName>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B 
-			Text(TextProperty)={Name} (C6F487384C0D5C03EC7C84B4FCAE8BC1) 
+			Text(TextProperty)={Name} (350A97464251D8DBFAD9608104F2269F) 
 			Font(StructProperty)=System.Byte[] 
 			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			AutoWrapText(BoolProperty)=True 
@@ -2143,7 +2238,7 @@ Serialized exports:
 	LevelTextNew (0-0-0-0): size 420 (cls: LevelTextNew>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B 
-			Text(TextProperty)=99 (D8543ABD475ADB1BE45852BFBC1AB9EC) 
+			Text(TextProperty)=99 (1151C9F34ACF11CE53FC8C86A1E23081) 
 			Font(StructProperty)=System.Byte[] 
 			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Justification(ByteProperty)=ETextJustify::Center 
@@ -2152,7 +2247,7 @@ Serialized exports:
 	SmallDescription (0-0-0-0): size 416 (cls: SmallDescription>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS_C=/Game/UI/Foundation/Text/TextStyle-Base-XS 
-			Text(TextProperty)={Description} (E170A30D4551CEE0E9A3078D63670693) 
+			Text(TextProperty)={Description} (F80F18D74F6F00143A3B65836D36E018) 
 			Font(StructProperty)=System.Byte[] 
 			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			AutoWrapText(BoolProperty)=True 
@@ -2161,12 +2256,20 @@ Serialized exports:
 	SmallName (0-0-0-0): size 409 (cls: SmallName>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B 
-			Text(TextProperty)={Name} (0070DA384D03899BC13635A0CF98E0A7) 
+			Text(TextProperty)={Name} (43206F224091000840938DA3C26D4260) 
 			Font(StructProperty)=System.Byte[] 
 			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			AutoWrapText(BoolProperty)=True 
 			Slot(ObjectProperty)=VerticalBoxSlot_1=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
+	StandardPerkExplanationText (0-0-0-0): size 417 (cls: StandardPerkExplanationText>CommonTextBlock>/Script/CommonUI):
+		Tag array:
+			Style(ObjectProperty)=TextStyle-Base-XXS-B_C=/Game/UI/Foundation/Text/TextStyle-Base-XXS-B 
+			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
+			Text(TextProperty)=- Passive bonus granted if this hero is slotted in a Hero Loadout. (135ADD524AE619034023799E3D8EC568) 
+			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
+			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
 	EmptyText (0-0-0-0): size 463 (cls: EmptyText>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B 
@@ -2177,14 +2280,43 @@ Serialized exports:
 			Slot(ObjectProperty)=BorderSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
 			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
-	SlottingRestrictionText (0-0-0-0): size 449 (cls: SlottingRestrictionText>CommonTextBlock>/Script/CommonUI):
+	Name (0-0-0-0): size 617 (cls: Name>CommonTextBlock>/Script/CommonUI):
+		Tag array:
+			Style(ObjectProperty)=TextStyle-Base-XS-70pc_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-70pc 
+			Text(TextProperty)=Stat (0359A05D4123755AA2E7A9ACD5121E31) 
+			ColorAndOpacity(StructProperty)=System.Byte[] 
+			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
+			Slot(ObjectProperty)=OverlaySlot_1=WidgetArchetype 
+			RenderTransform(StructProperty)=System.Byte[] 
+			bIsVariable(BoolProperty)=True 
+	Name (0-0-0-0): size 617 (cls: Name>CommonTextBlock>/Script/CommonUI):
+		Tag array:
+			Style(ObjectProperty)=TextStyle-Base-XS-70pc_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-70pc 
+			Text(TextProperty)=Stat (0359A05D4123755AA2E7A9ACD5121E31) 
+			ColorAndOpacity(StructProperty)=System.Byte[] 
+			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
+			Slot(ObjectProperty)=OverlaySlot_1=WidgetArchetype 
+			RenderTransform(StructProperty)=System.Byte[] 
+			bIsVariable(BoolProperty)=True 
+	SlotDescription (0-0-0-0): size 391 (cls: SlotDescription>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base_C=/Game/UI/Foundation/Text/TextStyle-Base 
-			Text(TextProperty)=This hero can not be slotted here. TODO: Implement restriction reason text. (202192A541EBE2B57A4CBFA7638AAF6A) 
+			Text(TextProperty)={SlotDescription} (EF18E38E4B70244407A4E1979A2C2439) 
 			Font(StructProperty)=System.Byte[] 
 			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			AutoWrapText(BoolProperty)=True 
 			Slot(ObjectProperty)=VerticalBoxSlot_1=WidgetArchetype 
+			bIsVariable(BoolProperty)=True 
+	SlottingRestrictionsTextBlock (0-0-0-0): size 675 (cls: SlottingRestrictionsTextBlock>CommonTextBlock>/Script/CommonUI):
+		Tag array:
+			Style(ObjectProperty)=TextStyle-Base-XS-B-Red-Outline_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B-Red-Outline 
+			Text(TextProperty)={SlottingRestrictionList} (64EC36A3401B018E350659AD11F6263F) 
+			ColorAndOpacity(StructProperty)=System.Byte[] 
+			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
+			Slot(ObjectProperty)=GridSlot_2=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
 	PerkTierSwitcher (0-0-0-0): size 86 (cls: PerkTierSwitcher>CommonWidgetSwitcher>/Script/CommonUI):
 		Tag array:
@@ -2206,7 +2338,7 @@ Serialized exports:
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=HorizontalBoxSlot_5=WidgetArchetype 
-	ComponentDelegateBinding_0 (0-0-0-0): size 1061 (cls: ComponentDelegateBinding_0>ComponentDelegateBinding>/Script/Engine):
+	ComponentDelegateBinding_0 (0-0-0-0): size 1168 (cls: ComponentDelegateBinding_0>ComponentDelegateBinding>/Script/Engine):
 		Tag array:
 			ComponentDelegateBindings(ArrayProperty)=[object] (inner: StructProperty)
 	K2Node_CreateDelegate_OutputDelegate (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate>DelegateProperty>/Script/CoreUObject)
@@ -2279,9 +2411,11 @@ Serialized exports:
 			IconBrushSize(ByteProperty)=EFortBrushSize::Medium 
 			LabelTextStyle(ObjectProperty)=TextStyle-Base_C=/Game/UI/Foundation/Text/TextStyle-Base 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
-	PickerTileView (0-0-0-0): size 41 (cls: PickerTileView>FortItemTileView>/Script/FortniteUI):
+	PickerTileView (0-0-0-0): size 111 (cls: PickerTileView>FortItemTileView>/Script/FortniteUI):
 		Tag array:
+			DisplayType(EnumProperty)=EItemTileViewDisplayType::Account 
 			EntryWidgetClass(ObjectProperty)=HeroLoadoutHeroPickerTileButton_C=/Game/UI/Frontend/HeroLoadout/Picker/HeroLoadoutHeroPickerTileButton 
+			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
 	LevelIndicator (0-0-0-0): size 163 (cls: LevelIndicator>FortLevelIndicator>/Script/FortniteUI):
 		Tag array:
 			ShouldShowLabel(BoolProperty)=True 
@@ -2331,15 +2465,46 @@ Serialized exports:
 			BrushSize(ByteProperty)=EFortBrushSize::Small 
 			Slot(ObjectProperty)=HorizontalBoxSlot_4=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
-	HeaderWithNav (0-0-0-0): size 358 (cls: HeaderWithNav>HeaderWithNav_C>/Game/UI/Frontend/Common/HeaderWithNav):
+	SlottingRestrictionsBox (0-0-0-0): size 247 (cls: SlottingRestrictionsBox>GridPanel>/Script/UMG):
+		Tag array:
+			ColumnFill(ArrayProperty)=0.000,1.000 (inner: FloatProperty)
+			RowFill(ArrayProperty)=0.000,1.000 (inner: FloatProperty)
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=VerticalBoxSlot_3=WidgetArchetype 
+			bIsVariable(BoolProperty)=True 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
+	GridSlot_0 (0-0-0-0): size 296 (cls: GridSlot_0>GridSlot>/Script/UMG):
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=SlottingRestrictionsBox=WidgetArchetype 
+			Content(ObjectProperty)=Image_2=WidgetArchetype 
+	GridSlot_1 (0-0-0-0): size 140 (cls: GridSlot_1>GridSlot>/Script/UMG):
+		Tag array:
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Column(IntProperty)=1 
+			Parent(ObjectProperty)=SlottingRestrictionsBox=WidgetArchetype 
+			Content(ObjectProperty)=CommonTextBlock_14=WidgetArchetype 
+	GridSlot_2 (0-0-0-0): size 214 (cls: GridSlot_2>GridSlot>/Script/UMG):
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			Row(IntProperty)=1 
+			Column(IntProperty)=1 
+			Parent(ObjectProperty)=SlottingRestrictionsBox=WidgetArchetype 
+			Content(ObjectProperty)=SlottingRestrictionsTextBlock=WidgetArchetype 
+	HeaderWithNav (0-0-0-0): size 569 (cls: HeaderWithNav>HeaderWithNav_C>/Game/UI/Frontend/Common/HeaderWithNav):
 		Tag array:
 			Border_ChangeFilter(ObjectProperty)=Border_ChangeFilter=WidgetArchetype 
 			Button_Back(ObjectProperty)=Button_Back=WidgetArchetype 
+			NavigationTabsCenterContentSlot(ObjectProperty)=NavigationTabsCenterContentSlot=WidgetArchetype 
 			PageLeftBtn(ObjectProperty)=PageLeftBtn=WidgetArchetype 
 			PageRightBtn(ObjectProperty)=PageRightBtn=WidgetArchetype 
 			SizeBox_Back(ObjectProperty)=SizeBox_Back=WidgetArchetype 
 			Text_Header(ObjectProperty)=Text_Header=WidgetArchetype 
 			HeaderText(TextProperty)=HERO LOADOUT (7E4623C343125AE3C4D16A8AB52B5114) 
+			ShowTabs(BoolProperty)=True 
+			NamedSlotBindings(ArrayProperty)=[object] (inner: StructProperty)
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
@@ -2365,14 +2530,11 @@ Serialized exports:
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
-	CommanderSlotButton (0-0-0-0): size 290 (cls: CommanderSlotButton>HeroLoadoutCommanderSlotButton_C>/Game/UI/Frontend/HeroLoadout/HeroSlots/HeroLoadoutCommanderSlotButton):
+	CommanderSlotButton (0-0-0-0): size 212 (cls: CommanderSlotButton>HeroLoadoutCommanderSlotButton_C>/Game/UI/Frontend/HeroLoadout/HeroSlots/HeroLoadoutCommanderSlotButton):
 		Tag array:
 			CommanderDetailsHostPanel(ObjectProperty)=CommanderDetailsHostPanel=WidgetArchetype 
 			CommanderSlot(ObjectProperty)=CommanderSlot=WidgetArchetype 
 			MenuAnchor(ObjectProperty)=MenuAnchor=WidgetArchetype 
-			bSelectable(BoolProperty)=True 
-			bShouldSelectUponReceivingFocus(BoolProperty)=True 
-			bInteractableWhenSelected(BoolProperty)=True 
 			InputActionWidget(ObjectProperty)=InputActionWidget=WidgetArchetype 
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
@@ -2401,62 +2563,49 @@ Serialized exports:
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=OverlaySlot_1=WidgetArchetype 
-	CrewLeaderSlot (0-0-0-0): size 294 (cls: CrewLeaderSlot>HeroLoadoutCrewSlotRowButton_C>/Game/UI/Frontend/HeroLoadout/HeroSlots/HeroLoadoutCrewSlotRowButton):
+	CrewLeaderSlot (0-0-0-0): size 268 (cls: CrewLeaderSlot>HeroLoadoutCrewSlotRowButton_C>/Game/UI/Frontend/HeroLoadout/HeroSlots/HeroLoadoutCrewSlotRowButton):
 		Tag array:
 			HeroLoadoutCrewSlotRowContent(ObjectProperty)=HeroLoadoutCrewSlotRowContent=WidgetArchetype 
 			MenuAnchor(ObjectProperty)=MenuAnchor=WidgetArchetype 
 			SlotName(NameProperty)=LeaderSlot 
-			bSelectable(BoolProperty)=True 
 			bShouldSelectUponReceivingFocus(BoolProperty)=True 
 			bInteractableWhenSelected(BoolProperty)=True 
 			InputActionWidget(ObjectProperty)=InputActionWidget=WidgetArchetype 
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=VerticalBoxSlot_4=WidgetArchetype 
-	CrewSlot0 (0-0-0-0): size 294 (cls: CrewSlot0>HeroLoadoutCrewSlotRowButton_C>/Game/UI/Frontend/HeroLoadout/HeroSlots/HeroLoadoutCrewSlotRowButton):
+	CrewSlot0 (0-0-0-0): size 216 (cls: CrewSlot0>HeroLoadoutCrewSlotRowButton_C>/Game/UI/Frontend/HeroLoadout/HeroSlots/HeroLoadoutCrewSlotRowButton):
 		Tag array:
 			HeroLoadoutCrewSlotRowContent(ObjectProperty)=HeroLoadoutCrewSlotRowContent=WidgetArchetype 
 			MenuAnchor(ObjectProperty)=MenuAnchor=WidgetArchetype 
 			SlotName(NameProperty)=FollowerSlot1 
-			bSelectable(BoolProperty)=True 
-			bShouldSelectUponReceivingFocus(BoolProperty)=True 
-			bInteractableWhenSelected(BoolProperty)=True 
 			InputActionWidget(ObjectProperty)=InputActionWidget=WidgetArchetype 
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
-	CrewSlot1 (0-0-0-0): size 294 (cls: CrewSlot1>HeroLoadoutCrewSlotRowButton_C>/Game/UI/Frontend/HeroLoadout/HeroSlots/HeroLoadoutCrewSlotRowButton):
+	CrewSlot1 (0-0-0-0): size 216 (cls: CrewSlot1>HeroLoadoutCrewSlotRowButton_C>/Game/UI/Frontend/HeroLoadout/HeroSlots/HeroLoadoutCrewSlotRowButton):
 		Tag array:
 			HeroLoadoutCrewSlotRowContent(ObjectProperty)=HeroLoadoutCrewSlotRowContent=WidgetArchetype 
 			MenuAnchor(ObjectProperty)=MenuAnchor=WidgetArchetype 
 			SlotName(NameProperty)=FollowerSlot2 
-			bSelectable(BoolProperty)=True 
-			bShouldSelectUponReceivingFocus(BoolProperty)=True 
-			bInteractableWhenSelected(BoolProperty)=True 
 			InputActionWidget(ObjectProperty)=InputActionWidget=WidgetArchetype 
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
-	CrewSlot2 (0-0-0-0): size 294 (cls: CrewSlot2>HeroLoadoutCrewSlotRowButton_C>/Game/UI/Frontend/HeroLoadout/HeroSlots/HeroLoadoutCrewSlotRowButton):
+	CrewSlot2 (0-0-0-0): size 216 (cls: CrewSlot2>HeroLoadoutCrewSlotRowButton_C>/Game/UI/Frontend/HeroLoadout/HeroSlots/HeroLoadoutCrewSlotRowButton):
 		Tag array:
 			HeroLoadoutCrewSlotRowContent(ObjectProperty)=HeroLoadoutCrewSlotRowContent=WidgetArchetype 
 			MenuAnchor(ObjectProperty)=MenuAnchor=WidgetArchetype 
 			SlotName(NameProperty)=FollowerSlot3 
-			bSelectable(BoolProperty)=True 
-			bShouldSelectUponReceivingFocus(BoolProperty)=True 
-			bInteractableWhenSelected(BoolProperty)=True 
 			InputActionWidget(ObjectProperty)=InputActionWidget=WidgetArchetype 
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
-	CrewSlot3 (0-0-0-0): size 294 (cls: CrewSlot3>HeroLoadoutCrewSlotRowButton_C>/Game/UI/Frontend/HeroLoadout/HeroSlots/HeroLoadoutCrewSlotRowButton):
+	CrewSlot3 (0-0-0-0): size 216 (cls: CrewSlot3>HeroLoadoutCrewSlotRowButton_C>/Game/UI/Frontend/HeroLoadout/HeroSlots/HeroLoadoutCrewSlotRowButton):
 		Tag array:
 			HeroLoadoutCrewSlotRowContent(ObjectProperty)=HeroLoadoutCrewSlotRowContent=WidgetArchetype 
 			MenuAnchor(ObjectProperty)=MenuAnchor=WidgetArchetype 
 			SlotName(NameProperty)=FollowerSlot4 
-			bSelectable(BoolProperty)=True 
-			bShouldSelectUponReceivingFocus(BoolProperty)=True 
-			bInteractableWhenSelected(BoolProperty)=True 
 			InputActionWidget(ObjectProperty)=InputActionWidget=WidgetArchetype 
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
@@ -2556,7 +2705,7 @@ Serialized exports:
 			PickerTileView(ObjectProperty)=PickerTileView=WidgetArchetype 
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
-			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
+			Slot(ObjectProperty)=VerticalBoxSlot_1=WidgetArchetype 
 	HeaderWidget (0-0-0-0): size 473 (cls: HeaderWidget>HeroLoadoutItemDetailsHeader_C>/Game/UI/Frontend/HeroLoadout/Details/HeroLoadoutItemDetailsHeader):
 		Tag array:
 			BackgroundBorder(ObjectProperty)=BackgroundBorder=WidgetArchetype 
@@ -2575,7 +2724,15 @@ Serialized exports:
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
-	CommanderPerkDetailRow (0-0-0-0): size 415 (cls: CommanderPerkDetailRow>HeroLoadoutPerkDetailRow_C>/Game/UI/Frontend/HeroLoadout/Details/HeroLoadoutPerkDetailRow):
+	LeaderCrewSlotLeadPerkContributionIndicator (0-0-0-0): size 183 (cls: LeaderCrewSlotLeadPerkContributionIndicator>HeroLoadoutLeaderCrewSlotLeadPerkContributionIndicator_C>/Game/UI/Frontend/HeroLoadout/HeroSlots/HeroLoadoutLeaderCrewSlotLeadPerkContributionIndicator):
+		Tag array:
+			ActivationIndicatorText(ObjectProperty)=ActivationIndicatorText=WidgetArchetype 
+			LockedPerkIconImage(ObjectProperty)=LockedPerkIconImage=WidgetArchetype 
+			WidgetSwitcher(ObjectProperty)=WidgetSwitcher=WidgetArchetype 
+			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
+			bCookedWidgetTree(BoolProperty)=True 
+			Slot(ObjectProperty)=OverlaySlot_1=WidgetArchetype 
+	CommanderPerkDetailRow (0-0-0-0): size 415 (cls: CommanderPerkDetailRow>HeroLoadoutPerkDetailRow_C>/Game/UI/Foundation/Items/Details/HeroLoadoutPerkDetailRow):
 		Tag array:
 			ImageLockPerk(ObjectProperty)=ImageLockPerk=WidgetArchetype 
 			ImagePerkIcon(ObjectProperty)=ImagePerkIcon=WidgetArchetype 
@@ -2591,7 +2748,7 @@ Serialized exports:
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=VerticalBoxSlot_0=WidgetArchetype 
-	LeaderPerkDetailRow (0-0-0-0): size 415 (cls: LeaderPerkDetailRow>HeroLoadoutPerkDetailRow_C>/Game/UI/Frontend/HeroLoadout/Details/HeroLoadoutPerkDetailRow):
+	LeaderPerkDetailRow (0-0-0-0): size 456 (cls: LeaderPerkDetailRow>HeroLoadoutPerkDetailRow_C>/Game/UI/Foundation/Items/Details/HeroLoadoutPerkDetailRow):
 		Tag array:
 			ImageLockPerk(ObjectProperty)=ImageLockPerk=WidgetArchetype 
 			ImagePerkIcon(ObjectProperty)=ImagePerkIcon=WidgetArchetype 
@@ -2604,10 +2761,11 @@ Serialized exports:
 			SmallDescription(ObjectProperty)=SmallDescription=WidgetArchetype 
 			SmallInfo(ObjectProperty)=SmallInfo=WidgetArchetype 
 			SmallName(ObjectProperty)=SmallName=WidgetArchetype 
+			Perk Type To Represent(EnumProperty)=EFortHeroLoadoutPerkType::Leader 
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=VerticalBoxSlot_0=WidgetArchetype 
-	StandardPerkDetailRow (0-0-0-0): size 415 (cls: StandardPerkDetailRow>HeroLoadoutPerkDetailRow_C>/Game/UI/Frontend/HeroLoadout/Details/HeroLoadoutPerkDetailRow):
+	StandardPerkDetailRow (0-0-0-0): size 456 (cls: StandardPerkDetailRow>HeroLoadoutPerkDetailRow_C>/Game/UI/Foundation/Items/Details/HeroLoadoutPerkDetailRow):
 		Tag array:
 			ImageLockPerk(ObjectProperty)=ImageLockPerk=WidgetArchetype 
 			ImagePerkIcon(ObjectProperty)=ImagePerkIcon=WidgetArchetype 
@@ -2620,16 +2778,18 @@ Serialized exports:
 			SmallDescription(ObjectProperty)=SmallDescription=WidgetArchetype 
 			SmallInfo(ObjectProperty)=SmallInfo=WidgetArchetype 
 			SmallName(ObjectProperty)=SmallName=WidgetArchetype 
+			Perk Type To Represent(EnumProperty)=EFortHeroLoadoutPerkType::Standard 
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=VerticalBoxSlot_0=WidgetArchetype 
-	HeroLoadoutPerkDetailWidget (0-0-0-0): size 270 (cls: HeroLoadoutPerkDetailWidget>HeroLoadoutPerksDetailWidget_C>/Game/UI/Frontend/HeroLoadout/Details/HeroLoadoutPerksDetailWidget):
+	HeroLoadoutPerkDetailWidget (0-0-0-0): size 299 (cls: HeroLoadoutPerkDetailWidget>HeroLoadoutPerksDetailWidget_C>/Game/UI/Foundation/Items/Details/HeroLoadoutPerksDetailWidget):
 		Tag array:
 			CommanderPerkBox(ObjectProperty)=CommanderPerkBox=WidgetArchetype 
 			CommanderPerkDetailRow(ObjectProperty)=CommanderPerkDetailRow=WidgetArchetype 
 			CrewLeaderPerkBox(ObjectProperty)=CrewLeaderPerkBox=WidgetArchetype 
 			LeaderPerkDetailRow(ObjectProperty)=LeaderPerkDetailRow=WidgetArchetype 
 			NormalPerkBox(ObjectProperty)=NormalPerkBox=WidgetArchetype 
+			RootVisibilityBox(ObjectProperty)=RootVisibilityBox=WidgetArchetype 
 			StandardPerkDetailRow(ObjectProperty)=StandardPerkDetailRow=WidgetArchetype 
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
@@ -2646,17 +2806,18 @@ Serialized exports:
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=VerticalBoxSlot_0=WidgetArchetype 
-	PickerPanel (0-0-0-0): size 270 (cls: PickerPanel>HeroLoadoutPickerPanel_C>/Game/UI/Frontend/HeroLoadout/Picker/HeroLoadoutPickerPanel):
+	PickerPanel (0-0-0-0): size 299 (cls: PickerPanel>HeroLoadoutPickerPanel_C>/Game/UI/Frontend/HeroLoadout/Picker/HeroLoadoutPickerPanel):
 		Tag array:
-			DetailsSwitcher(ObjectProperty)=DetailsSwitcher=WidgetArchetype 
-			HeroSelectedDetailsBox(ObjectProperty)=HeroSelectedDetailsBox=WidgetArchetype 
-			NoHeroSelectedDetailsBox(ObjectProperty)=NoHeroSelectedDetailsBox=WidgetArchetype 
+			HeroDetailsBox(ObjectProperty)=HeroDetailsBox=WidgetArchetype 
 			Picker(ObjectProperty)=Picker=WidgetArchetype 
 			PickerDetailsPanel(ObjectProperty)=PickerDetailsPanel=WidgetArchetype 
-			SlottingRestrictionText(ObjectProperty)=SlottingRestrictionText=WidgetArchetype 
+			PickerLoadoutStatsOverview(ObjectProperty)=PickerLoadoutStatsOverview=WidgetArchetype 
+			SlotDescription(ObjectProperty)=SlotDescription=WidgetArchetype 
+			SlottingRestrictionsBox(ObjectProperty)=SlottingRestrictionsBox=WidgetArchetype 
+			SlottingRestrictionsTextBlock(ObjectProperty)=SlottingRestrictionsTextBlock=WidgetArchetype 
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
-			Slot(ObjectProperty)=VerticalBoxSlot_5=WidgetArchetype 
+			Slot(ObjectProperty)=PanelSlot_0=WidgetArchetype 
 	WidgetArchetype (0-0-0-0): size 937 (cls: WidgetArchetype>HeroLoadoutScreen_C):
 		Tag array:
 			CameraFramingWidget(ObjectProperty)=CameraFramingWidget=WidgetArchetype 
@@ -2664,7 +2825,6 @@ Serialized exports:
 			CrewLeaderBonusDescriptionText(ObjectProperty)=CrewLeaderBonusDescriptionText=WidgetArchetype 
 			CrewLeaderBonusNameText(ObjectProperty)=CrewLeaderBonusNameText=WidgetArchetype 
 			CrewLeaderBonusStatusText(ObjectProperty)=CrewLeaderBonusStatusText=WidgetArchetype 
-			CrewLeaderBonusTotalIndicatorPlaceHolder(ObjectProperty)=CrewLeaderBonusTotalIndicatorPlaceHolder=WidgetArchetype 
 			CrewLeaderSlot(ObjectProperty)=CrewLeaderSlot=WidgetArchetype 
 			CrewSlot0(ObjectProperty)=CrewSlot0=WidgetArchetype 
 			CrewSlot0LeadPerkContributionIndicator(ObjectProperty)=CrewSlot0LeadPerkContributionIndicator=WidgetArchetype 
@@ -2679,34 +2839,33 @@ Serialized exports:
 			GadgetSlot2(ObjectProperty)=GadgetSlot2=WidgetArchetype 
 			GadgetsMenuAnchor(ObjectProperty)=GadgetsMenuAnchor=WidgetArchetype 
 			HeaderWithNav(ObjectProperty)=HeaderWithNav=WidgetArchetype 
+			LeaderCrewSlotLeadPerkContributionIndicator(ObjectProperty)=LeaderCrewSlotLeadPerkContributionIndicator=WidgetArchetype 
 			LeftSideDefaultContent(ObjectProperty)=LeftSideDefaultContent=WidgetArchetype 
 			LeftSideSwitcher(ObjectProperty)=LeftSideSwitcher=WidgetArchetype 
+			LoadoutDisplayNameTextBlock(ObjectProperty)=LoadoutDisplayNameTextBlock=WidgetArchetype 
 			LoadoutInfoBox(ObjectProperty)=LoadoutInfoBox=WidgetArchetype 
 			LoadoutStatsOverview(ObjectProperty)=LoadoutStatsOverview=WidgetArchetype 
 			PickerBox(ObjectProperty)=PickerBox=WidgetArchetype 
-			PickerLoadoutStatsOverview(ObjectProperty)=PickerLoadoutStatsOverview=WidgetArchetype 
 			PickerPanel(ObjectProperty)=PickerPanel=WidgetArchetype 
 			RightSidePanelBackgroundBlurWidget(ObjectProperty)=RightSidePanelBackgroundBlurWidget=WidgetArchetype 
 			RootSafeZone(ObjectProperty)=RootSafeZone=WidgetArchetype 
 			TopLeftBox(ObjectProperty)=TopLeftBox=WidgetArchetype 
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
-	LoadoutStatsOverview (0-0-0-0): size 183 (cls: LoadoutStatsOverview>HeroLoadoutStatsOverview_C>/Game/UI/Frontend/HeroLoadout/HeroLoadoutStatsOverview):
+	LoadoutStatsOverview (0-0-0-0): size 154 (cls: LoadoutStatsOverview>HeroLoadoutStatsOverview_C>/Game/UI/Frontend/HeroLoadout/HeroLoadoutStatsOverview):
 		Tag array:
 			PickerHealthStat(ObjectProperty)=PickerHealthStat=WidgetArchetype 
-			PickerPowerStat(ObjectProperty)=PickerPowerStat=WidgetArchetype 
 			PickerShieldStat(ObjectProperty)=PickerShieldStat=WidgetArchetype 
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=VerticalBoxSlot_2=WidgetArchetype 
-	PickerLoadoutStatsOverview (0-0-0-0): size 183 (cls: PickerLoadoutStatsOverview>HeroLoadoutStatsOverview_C>/Game/UI/Frontend/HeroLoadout/HeroLoadoutStatsOverview):
+	PickerLoadoutStatsOverview (0-0-0-0): size 154 (cls: PickerLoadoutStatsOverview>HeroLoadoutStatsOverview_C>/Game/UI/Frontend/HeroLoadout/HeroLoadoutStatsOverview):
 		Tag array:
 			PickerHealthStat(ObjectProperty)=PickerHealthStat=WidgetArchetype 
-			PickerPowerStat(ObjectProperty)=PickerPowerStat=WidgetArchetype 
 			PickerShieldStat(ObjectProperty)=PickerShieldStat=WidgetArchetype 
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
-			Slot(ObjectProperty)=VerticalBoxSlot_4=WidgetArchetype 
+			Slot(ObjectProperty)=VerticalBoxSlot_3=WidgetArchetype 
 	CommanderGadgetsBox (0-0-0-0): size 86 (cls: CommanderGadgetsBox>HorizontalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -2820,7 +2979,7 @@ Serialized exports:
 	HorizontalBox_0 (0-0-0-0): size 61 (cls: HorizontalBox_0>HorizontalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-	HorizontalBox_2 (0-0-0-0): size 86 (cls: HorizontalBox_2>HorizontalBox>/Script/UMG):
+	HorizontalBox_2 (0-0-0-0): size 90 (cls: HorizontalBox_2>HorizontalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=BorderSlot_0=WidgetArchetype 
@@ -2851,38 +3010,7 @@ Serialized exports:
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
-	HorizontalBox_1 (0-0-0-0): size 57 (cls: HorizontalBox_1>HorizontalBox>/Script/UMG):
-		Tag array:
-			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-	HorizontalBox_3 (0-0-0-0): size 86 (cls: HorizontalBox_3>HorizontalBox>/Script/UMG):
-		Tag array:
-			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
-	PickerStatSummaryBox (0-0-0-0): size 61 (cls: PickerStatSummaryBox>HorizontalBox>/Script/UMG):
-		Tag array:
-			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-	HorizontalBox_1 (0-0-0-0): size 57 (cls: HorizontalBox_1>HorizontalBox>/Script/UMG):
-		Tag array:
-			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-	HorizontalBox_3 (0-0-0-0): size 86 (cls: HorizontalBox_3>HorizontalBox>/Script/UMG):
-		Tag array:
-			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
-	HorizontalBox_1 (0-0-0-0): size 57 (cls: HorizontalBox_1>HorizontalBox>/Script/UMG):
-		Tag array:
-			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-	HorizontalBox_3 (0-0-0-0): size 86 (cls: HorizontalBox_3>HorizontalBox>/Script/UMG):
-		Tag array:
-			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
-	HorizontalBox_1 (0-0-0-0): size 57 (cls: HorizontalBox_1>HorizontalBox>/Script/UMG):
-		Tag array:
-			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-	HorizontalBox_3 (0-0-0-0): size 86 (cls: HorizontalBox_3>HorizontalBox>/Script/UMG):
-		Tag array:
-			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
-	PickerStatSummaryBox (0-0-0-0): size 61 (cls: PickerStatSummaryBox>HorizontalBox>/Script/UMG):
+	PickerStatSummaryBox (0-0-0-0): size 57 (cls: PickerStatSummaryBox>HorizontalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 	HorizontalBox_2 (0-0-0-0): size 57 (cls: HorizontalBox_2>HorizontalBox>/Script/UMG):
@@ -2938,6 +3066,18 @@ Serialized exports:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=BorderSlot_1=WidgetArchetype 
 			Visibility(EnumProperty)=ESlateVisibility::Visible 
+	HorizontalBox_0 (0-0-0-0): size 86 (cls: HorizontalBox_0>HorizontalBox>/Script/UMG):
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=VerticalBoxSlot_2=WidgetArchetype 
+	HorizontalBox_1 (0-0-0-0): size 86 (cls: HorizontalBox_1>HorizontalBox>/Script/UMG):
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=VerticalBoxSlot_3=WidgetArchetype 
+	HorizontalBox_2 (0-0-0-0): size 86 (cls: HorizontalBox_2>HorizontalBox>/Script/UMG):
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=VerticalBoxSlot_3=WidgetArchetype 
 	HorizontalBox_1 (0-0-0-0): size 131 (cls: HorizontalBox_1>HorizontalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -2952,6 +3092,23 @@ Serialized exports:
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=BorderSlot_0=WidgetArchetype 
+	HorizontalBox_1 (0-0-0-0): size 57 (cls: HorizontalBox_1>HorizontalBox>/Script/UMG):
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+	HorizontalBox_3 (0-0-0-0): size 86 (cls: HorizontalBox_3>HorizontalBox>/Script/UMG):
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
+	HorizontalBox_1 (0-0-0-0): size 57 (cls: HorizontalBox_1>HorizontalBox>/Script/UMG):
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+	HorizontalBox_3 (0-0-0-0): size 86 (cls: HorizontalBox_3>HorizontalBox>/Script/UMG):
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
+	PickerStatSummaryBox (0-0-0-0): size 57 (cls: PickerStatSummaryBox>HorizontalBox>/Script/UMG):
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 	HorizontalBoxSlot_0 (0-0-0-0): size 70 (cls: HorizontalBoxSlot_0>HorizontalBoxSlot>/Script/UMG):
 		Tag array:
 			Parent(ObjectProperty)=CommanderGadgetsBox=WidgetArchetype 
@@ -3337,6 +3494,10 @@ Serialized exports:
 			VerticalAlignment(ByteProperty)=VAlign_Center 
 			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
 			Content(ObjectProperty)=Text_Header=WidgetArchetype 
+	HorizontalBoxSlot_0 (0-0-0-0): size 70 (cls: HorizontalBoxSlot_0>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=HorizontalBox_2=WidgetArchetype 
+			Content(ObjectProperty)=NavigationTabsCenterContentSlot=WidgetArchetype 
 	HorizontalBoxSlot_2 (0-0-0-0): size 152 (cls: HorizontalBoxSlot_2>HorizontalBoxSlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Right 
@@ -3423,31 +3584,6 @@ Serialized exports:
 			VerticalAlignment(ByteProperty)=VAlign_Top 
 			Parent(ObjectProperty)=HorizontalBox_3=WidgetArchetype 
 			Content(ObjectProperty)=BasicPairBuffArrow=WidgetArchetype 
-	HorizontalBoxSlot_1 (0-0-0-0): size 156 (cls: HorizontalBoxSlot_1>HorizontalBoxSlot>/Script/UMG):
-		Tag array:
-			Padding(StructProperty)=System.Byte[] 
-			Parent(ObjectProperty)=HorizontalBox_1=WidgetArchetype 
-			Content(ObjectProperty)=Overlay_2=WidgetArchetype 
-	HorizontalBoxSlot_3 (0-0-0-0): size 111 (cls: HorizontalBoxSlot_3>HorizontalBoxSlot>/Script/UMG):
-		Tag array:
-			VerticalAlignment(ByteProperty)=VAlign_Top 
-			Parent(ObjectProperty)=HorizontalBox_1=WidgetArchetype 
-			Content(ObjectProperty)=SizeBox_0=WidgetArchetype 
-	HorizontalBoxSlot_0 (0-0-0-0): size 70 (cls: HorizontalBoxSlot_0>HorizontalBoxSlot>/Script/UMG):
-		Tag array:
-			Parent(ObjectProperty)=HorizontalBox_3=WidgetArchetype 
-			Content(ObjectProperty)=Value=WidgetArchetype 
-	HorizontalBoxSlot_1 (0-0-0-0): size 267 (cls: HorizontalBoxSlot_1>HorizontalBoxSlot>/Script/UMG):
-		Tag array:
-			Padding(StructProperty)=System.Byte[] 
-			HorizontalAlignment(ByteProperty)=HAlign_Left 
-			VerticalAlignment(ByteProperty)=VAlign_Top 
-			Parent(ObjectProperty)=HorizontalBox_3=WidgetArchetype 
-			Content(ObjectProperty)=BasicPairBuffArrow=WidgetArchetype 
-	HorizontalBoxSlot_0 (0-0-0-0): size 70 (cls: HorizontalBoxSlot_0>HorizontalBoxSlot>/Script/UMG):
-		Tag array:
-			Parent(ObjectProperty)=PickerStatSummaryBox=WidgetArchetype 
-			Content(ObjectProperty)=PickerPowerStat=WidgetArchetype 
 	HorizontalBoxSlot_1 (0-0-0-0): size 70 (cls: HorizontalBoxSlot_1>HorizontalBoxSlot>/Script/UMG):
 		Tag array:
 			Parent(ObjectProperty)=PickerStatSummaryBox=WidgetArchetype 
@@ -3456,91 +3592,18 @@ Serialized exports:
 		Tag array:
 			Parent(ObjectProperty)=PickerStatSummaryBox=WidgetArchetype 
 			Content(ObjectProperty)=PickerShieldStat=WidgetArchetype 
-	HorizontalBoxSlot_1 (0-0-0-0): size 156 (cls: HorizontalBoxSlot_1>HorizontalBoxSlot>/Script/UMG):
+	HorizontalBoxSlot_1 (0-0-0-0): size 341 (cls: HorizontalBoxSlot_1>HorizontalBoxSlot>/Script/UMG):
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
-			Parent(ObjectProperty)=HorizontalBox_1=WidgetArchetype 
-			Content(ObjectProperty)=Overlay_2=WidgetArchetype 
-	HorizontalBoxSlot_3 (0-0-0-0): size 111 (cls: HorizontalBoxSlot_3>HorizontalBoxSlot>/Script/UMG):
-		Tag array:
-			VerticalAlignment(ByteProperty)=VAlign_Top 
-			Parent(ObjectProperty)=HorizontalBox_1=WidgetArchetype 
-			Content(ObjectProperty)=SizeBox_0=WidgetArchetype 
-	HorizontalBoxSlot_0 (0-0-0-0): size 70 (cls: HorizontalBoxSlot_0>HorizontalBoxSlot>/Script/UMG):
-		Tag array:
-			Parent(ObjectProperty)=HorizontalBox_3=WidgetArchetype 
-			Content(ObjectProperty)=Value=WidgetArchetype 
-	HorizontalBoxSlot_1 (0-0-0-0): size 267 (cls: HorizontalBoxSlot_1>HorizontalBoxSlot>/Script/UMG):
-		Tag array:
-			Padding(StructProperty)=System.Byte[] 
-			HorizontalAlignment(ByteProperty)=HAlign_Left 
-			VerticalAlignment(ByteProperty)=VAlign_Top 
-			Parent(ObjectProperty)=HorizontalBox_3=WidgetArchetype 
-			Content(ObjectProperty)=BasicPairBuffArrow=WidgetArchetype 
-	HorizontalBoxSlot_1 (0-0-0-0): size 156 (cls: HorizontalBoxSlot_1>HorizontalBoxSlot>/Script/UMG):
-		Tag array:
-			Padding(StructProperty)=System.Byte[] 
-			Parent(ObjectProperty)=HorizontalBox_1=WidgetArchetype 
-			Content(ObjectProperty)=Overlay_2=WidgetArchetype 
-	HorizontalBoxSlot_3 (0-0-0-0): size 111 (cls: HorizontalBoxSlot_3>HorizontalBoxSlot>/Script/UMG):
-		Tag array:
-			VerticalAlignment(ByteProperty)=VAlign_Top 
-			Parent(ObjectProperty)=HorizontalBox_1=WidgetArchetype 
-			Content(ObjectProperty)=SizeBox_0=WidgetArchetype 
-	HorizontalBoxSlot_0 (0-0-0-0): size 70 (cls: HorizontalBoxSlot_0>HorizontalBoxSlot>/Script/UMG):
-		Tag array:
-			Parent(ObjectProperty)=HorizontalBox_3=WidgetArchetype 
-			Content(ObjectProperty)=Value=WidgetArchetype 
-	HorizontalBoxSlot_1 (0-0-0-0): size 267 (cls: HorizontalBoxSlot_1>HorizontalBoxSlot>/Script/UMG):
-		Tag array:
-			Padding(StructProperty)=System.Byte[] 
-			HorizontalAlignment(ByteProperty)=HAlign_Left 
-			VerticalAlignment(ByteProperty)=VAlign_Top 
-			Parent(ObjectProperty)=HorizontalBox_3=WidgetArchetype 
-			Content(ObjectProperty)=BasicPairBuffArrow=WidgetArchetype 
-	HorizontalBoxSlot_1 (0-0-0-0): size 156 (cls: HorizontalBoxSlot_1>HorizontalBoxSlot>/Script/UMG):
-		Tag array:
-			Padding(StructProperty)=System.Byte[] 
-			Parent(ObjectProperty)=HorizontalBox_1=WidgetArchetype 
-			Content(ObjectProperty)=Overlay_2=WidgetArchetype 
-	HorizontalBoxSlot_3 (0-0-0-0): size 111 (cls: HorizontalBoxSlot_3>HorizontalBoxSlot>/Script/UMG):
-		Tag array:
-			VerticalAlignment(ByteProperty)=VAlign_Top 
-			Parent(ObjectProperty)=HorizontalBox_1=WidgetArchetype 
-			Content(ObjectProperty)=SizeBox_0=WidgetArchetype 
-	HorizontalBoxSlot_0 (0-0-0-0): size 70 (cls: HorizontalBoxSlot_0>HorizontalBoxSlot>/Script/UMG):
-		Tag array:
-			Parent(ObjectProperty)=HorizontalBox_3=WidgetArchetype 
-			Content(ObjectProperty)=Value=WidgetArchetype 
-	HorizontalBoxSlot_1 (0-0-0-0): size 267 (cls: HorizontalBoxSlot_1>HorizontalBoxSlot>/Script/UMG):
-		Tag array:
-			Padding(StructProperty)=System.Byte[] 
-			HorizontalAlignment(ByteProperty)=HAlign_Left 
-			VerticalAlignment(ByteProperty)=VAlign_Top 
-			Parent(ObjectProperty)=HorizontalBox_3=WidgetArchetype 
-			Content(ObjectProperty)=BasicPairBuffArrow=WidgetArchetype 
-	HorizontalBoxSlot_0 (0-0-0-0): size 70 (cls: HorizontalBoxSlot_0>HorizontalBoxSlot>/Script/UMG):
-		Tag array:
-			Parent(ObjectProperty)=PickerStatSummaryBox=WidgetArchetype 
-			Content(ObjectProperty)=PickerPowerStat=WidgetArchetype 
-	HorizontalBoxSlot_1 (0-0-0-0): size 70 (cls: HorizontalBoxSlot_1>HorizontalBoxSlot>/Script/UMG):
-		Tag array:
-			Parent(ObjectProperty)=PickerStatSummaryBox=WidgetArchetype 
-			Content(ObjectProperty)=PickerHealthStat=WidgetArchetype 
-	HorizontalBoxSlot_2 (0-0-0-0): size 70 (cls: HorizontalBoxSlot_2>HorizontalBoxSlot>/Script/UMG):
-		Tag array:
-			Parent(ObjectProperty)=PickerStatSummaryBox=WidgetArchetype 
-			Content(ObjectProperty)=PickerShieldStat=WidgetArchetype 
-	HorizontalBoxSlot_1 (0-0-0-0): size 168 (cls: HorizontalBoxSlot_1>HorizontalBoxSlot>/Script/UMG):
-		Tag array:
 			Size(StructProperty)=System.Byte[] 
 			Parent(ObjectProperty)=HorizontalBox_2=WidgetArchetype 
-			Content(ObjectProperty)=Picker=WidgetArchetype 
-	HorizontalBoxSlot_2 (0-0-0-0): size 168 (cls: HorizontalBoxSlot_2>HorizontalBoxSlot>/Script/UMG):
+			Content(ObjectProperty)=VerticalBox_1=WidgetArchetype 
+	HorizontalBoxSlot_2 (0-0-0-0): size 341 (cls: HorizontalBoxSlot_2>HorizontalBoxSlot>/Script/UMG):
 		Tag array:
+			Padding(StructProperty)=System.Byte[] 
 			Size(StructProperty)=System.Byte[] 
 			Parent(ObjectProperty)=HorizontalBox_2=WidgetArchetype 
-			Content(ObjectProperty)=DetailsSwitcher=WidgetArchetype 
+			Content(ObjectProperty)=VerticalBox_0=WidgetArchetype 
 	HorizontalBoxSlot_0 (0-0-0-0): size 70 (cls: HorizontalBoxSlot_0>HorizontalBoxSlot>/Script/UMG):
 		Tag array:
 			Parent(ObjectProperty)=EvolutionAndTierBox=WidgetArchetype 
@@ -3685,6 +3748,36 @@ Serialized exports:
 			Size(StructProperty)=System.Byte[] 
 			Parent(ObjectProperty)=HorizontalBox_1=WidgetArchetype 
 			Content(ObjectProperty)=InfoSwitcher=WidgetArchetype 
+	HorizontalBoxSlot_0 (0-0-0-0): size 70 (cls: HorizontalBoxSlot_0>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
+			Content(ObjectProperty)=CommonTextBlock_0=WidgetArchetype 
+	HorizontalBoxSlot_1 (0-0-0-0): size 209 (cls: HorizontalBoxSlot_1>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			Size(StructProperty)=System.Byte[] 
+			VerticalAlignment(ByteProperty)=VAlign_Bottom 
+			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
+			Content(ObjectProperty)=CommanderPerkExplanationText=WidgetArchetype 
+	HorizontalBoxSlot_0 (0-0-0-0): size 70 (cls: HorizontalBoxSlot_0>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=HorizontalBox_1=WidgetArchetype 
+			Content(ObjectProperty)=CommonTextBlock_2=WidgetArchetype 
+	HorizontalBoxSlot_1 (0-0-0-0): size 209 (cls: HorizontalBoxSlot_1>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			Size(StructProperty)=System.Byte[] 
+			VerticalAlignment(ByteProperty)=VAlign_Bottom 
+			Parent(ObjectProperty)=HorizontalBox_1=WidgetArchetype 
+			Content(ObjectProperty)=StandardPerkExplanationText=WidgetArchetype 
+	HorizontalBoxSlot_0 (0-0-0-0): size 70 (cls: HorizontalBoxSlot_0>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=HorizontalBox_2=WidgetArchetype 
+			Content(ObjectProperty)=CommonTextBlock_1=WidgetArchetype 
+	HorizontalBoxSlot_1 (0-0-0-0): size 209 (cls: HorizontalBoxSlot_1>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			Size(StructProperty)=System.Byte[] 
+			VerticalAlignment(ByteProperty)=VAlign_Bottom 
+			Parent(ObjectProperty)=HorizontalBox_2=WidgetArchetype 
+			Content(ObjectProperty)=CrewLeaderPerkExplanationText=WidgetArchetype 
 	HorizontalBoxSlot_1 (0-0-0-0): size 152 (cls: HorizontalBoxSlot_1>HorizontalBoxSlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Center 
@@ -3736,6 +3829,56 @@ Serialized exports:
 			Size(StructProperty)=System.Byte[] 
 			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
 			Content(ObjectProperty)=ContainerWrapBox=WidgetArchetype 
+	HorizontalBoxSlot_1 (0-0-0-0): size 156 (cls: HorizontalBoxSlot_1>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			Parent(ObjectProperty)=HorizontalBox_1=WidgetArchetype 
+			Content(ObjectProperty)=Overlay_2=WidgetArchetype 
+	HorizontalBoxSlot_3 (0-0-0-0): size 111 (cls: HorizontalBoxSlot_3>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			VerticalAlignment(ByteProperty)=VAlign_Top 
+			Parent(ObjectProperty)=HorizontalBox_1=WidgetArchetype 
+			Content(ObjectProperty)=SizeBox_0=WidgetArchetype 
+	HorizontalBoxSlot_0 (0-0-0-0): size 70 (cls: HorizontalBoxSlot_0>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=HorizontalBox_3=WidgetArchetype 
+			Content(ObjectProperty)=Value=WidgetArchetype 
+	HorizontalBoxSlot_1 (0-0-0-0): size 267 (cls: HorizontalBoxSlot_1>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			HorizontalAlignment(ByteProperty)=HAlign_Left 
+			VerticalAlignment(ByteProperty)=VAlign_Top 
+			Parent(ObjectProperty)=HorizontalBox_3=WidgetArchetype 
+			Content(ObjectProperty)=BasicPairBuffArrow=WidgetArchetype 
+	HorizontalBoxSlot_1 (0-0-0-0): size 156 (cls: HorizontalBoxSlot_1>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			Parent(ObjectProperty)=HorizontalBox_1=WidgetArchetype 
+			Content(ObjectProperty)=Overlay_2=WidgetArchetype 
+	HorizontalBoxSlot_3 (0-0-0-0): size 111 (cls: HorizontalBoxSlot_3>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			VerticalAlignment(ByteProperty)=VAlign_Top 
+			Parent(ObjectProperty)=HorizontalBox_1=WidgetArchetype 
+			Content(ObjectProperty)=SizeBox_0=WidgetArchetype 
+	HorizontalBoxSlot_0 (0-0-0-0): size 70 (cls: HorizontalBoxSlot_0>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=HorizontalBox_3=WidgetArchetype 
+			Content(ObjectProperty)=Value=WidgetArchetype 
+	HorizontalBoxSlot_1 (0-0-0-0): size 267 (cls: HorizontalBoxSlot_1>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			HorizontalAlignment(ByteProperty)=HAlign_Left 
+			VerticalAlignment(ByteProperty)=VAlign_Top 
+			Parent(ObjectProperty)=HorizontalBox_3=WidgetArchetype 
+			Content(ObjectProperty)=BasicPairBuffArrow=WidgetArchetype 
+	HorizontalBoxSlot_1 (0-0-0-0): size 70 (cls: HorizontalBoxSlot_1>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=PickerStatSummaryBox=WidgetArchetype 
+			Content(ObjectProperty)=PickerHealthStat=WidgetArchetype 
+	HorizontalBoxSlot_2 (0-0-0-0): size 70 (cls: HorizontalBoxSlot_2>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=PickerStatSummaryBox=WidgetArchetype 
+			Content(ObjectProperty)=PickerShieldStat=WidgetArchetype 
 	Button_Back (0-0-0-0): size 398 (cls: Button_Back>IconTextButton_C>/Game/UI/Foundation/Buttons/IconTextButton):
 		Tag array:
 			CenterButtonTextWidget(ObjectProperty)=CenterButtonTextWidget=WidgetArchetype 
@@ -3903,6 +4046,10 @@ Serialized exports:
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
 			Slot(ObjectProperty)=HorizontalBoxSlot_2=WidgetArchetype 
+	LockedPerkIconImage (0-0-0-0): size 127 (cls: LockedPerkIconImage>Image>/Script/UMG):
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			Slot(ObjectProperty)=WidgetSwitcherSlot_1=WidgetArchetype 
 	BasicPairBuffArrow (0-0-0-0): size 184 (cls: BasicPairBuffArrow>Image>/Script/UMG):
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
@@ -3919,38 +4066,11 @@ Serialized exports:
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
-	BasicPairBuffArrow (0-0-0-0): size 184 (cls: BasicPairBuffArrow>Image>/Script/UMG):
+	Image_2 (0-0-0-0): size 153 (cls: Image_2>Image>/Script/UMG):
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
-			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
-	Icon (0-0-0-0): size 184 (cls: Icon>Image>/Script/UMG):
-		Tag array:
-			Brush(StructProperty)=System.Byte[] 
-			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
-	BasicPairBuffArrow (0-0-0-0): size 184 (cls: BasicPairBuffArrow>Image>/Script/UMG):
-		Tag array:
-			Brush(StructProperty)=System.Byte[] 
-			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
-	Icon (0-0-0-0): size 184 (cls: Icon>Image>/Script/UMG):
-		Tag array:
-			Brush(StructProperty)=System.Byte[] 
-			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
-	BasicPairBuffArrow (0-0-0-0): size 184 (cls: BasicPairBuffArrow>Image>/Script/UMG):
-		Tag array:
-			Brush(StructProperty)=System.Byte[] 
-			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
-	Icon (0-0-0-0): size 184 (cls: Icon>Image>/Script/UMG):
-		Tag array:
-			Brush(StructProperty)=System.Byte[] 
-			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
-	BasicPairBuffArrow (0-0-0-0): size 184 (cls: BasicPairBuffArrow>Image>/Script/UMG):
-		Tag array:
-			Brush(StructProperty)=System.Byte[] 
-			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
-	Icon (0-0-0-0): size 184 (cls: Icon>Image>/Script/UMG):
-		Tag array:
-			Brush(StructProperty)=System.Byte[] 
-			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
+			Slot(ObjectProperty)=GridSlot_0=WidgetArchetype 
+			bIsVariable(BoolProperty)=False 
 	PowerRatingIconImage (0-0-0-0): size 184 (cls: PowerRatingIconImage>Image>/Script/UMG):
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
@@ -4037,15 +4157,34 @@ Serialized exports:
 			RenderTransform(StructProperty)=System.Byte[] 
 			bIsVariable(BoolProperty)=False 
 			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
+	BasicPairBuffArrow (0-0-0-0): size 184 (cls: BasicPairBuffArrow>Image>/Script/UMG):
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
+	Icon (0-0-0-0): size 184 (cls: Icon>Image>/Script/UMG):
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
+	BasicPairBuffArrow (0-0-0-0): size 184 (cls: BasicPairBuffArrow>Image>/Script/UMG):
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
+	Icon (0-0-0-0): size 184 (cls: Icon>Image>/Script/UMG):
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
 	CallFunc_Add_IntInt_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue>IntProperty>/Script/CoreUObject)
 	CallFunc_Add_IntInt_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue1>IntProperty>/Script/CoreUObject)
 	CallFunc_Array_Length_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Array_Length_ReturnValue>IntProperty>/Script/CoreUObject)
 	CallFunc_Array_Length_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Array_Length_ReturnValue1>IntProperty>/Script/CoreUObject)
-	CallFunc_GetSelectedButtonIndex_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetSelectedButtonIndex_ReturnValue>IntProperty>/Script/CoreUObject)
 	Temp_int_Array_Index_Variable (0-0-0-0): size 32 (cls: Temp_int_Array_Index_Variable>IntProperty>/Script/CoreUObject)
 	Temp_int_Array_Index_Variable1 (0-0-0-0): size 32 (cls: Temp_int_Array_Index_Variable1>IntProperty>/Script/CoreUObject)
 	Temp_int_Loop_Counter_Variable (0-0-0-0): size 32 (cls: Temp_int_Loop_Counter_Variable>IntProperty>/Script/CoreUObject)
 	Temp_int_Loop_Counter_Variable1 (0-0-0-0): size 32 (cls: Temp_int_Loop_Counter_Variable1>IntProperty>/Script/CoreUObject)
+	CallFunc_Add_IntInt_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue>IntProperty>/Script/CoreUObject)
+	CallFunc_GetButtonCount_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetButtonCount_ReturnValue>IntProperty>/Script/CoreUObject)
+	CallFunc_Subtract_IntInt_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Subtract_IntInt_ReturnValue>IntProperty>/Script/CoreUObject)
+	Temp_int_Variable (0-0-0-0): size 32 (cls: Temp_int_Variable>IntProperty>/Script/CoreUObject)
 	ButtonIndex (0-0-0-0): size 32 (cls: ButtonIndex>IntProperty>/Script/CoreUObject)
 	CallFunc_Add_IntInt_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue>IntProperty>/Script/CoreUObject)
 	CallFunc_Array_Length_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Array_Length_ReturnValue>IntProperty>/Script/CoreUObject)
@@ -4055,11 +4194,13 @@ Serialized exports:
 	CallFunc_Add_IntInt_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue1>IntProperty>/Script/CoreUObject)
 	CallFunc_Array_Length_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Array_Length_ReturnValue>IntProperty>/Script/CoreUObject)
 	CallFunc_Array_Length_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Array_Length_ReturnValue1>IntProperty>/Script/CoreUObject)
+	CallFunc_GetLoadoutOrdinal_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetLoadoutOrdinal_ReturnValue>IntProperty>/Script/CoreUObject)
+	CallFunc_GetTeamLeadPerkActivationLevel_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetTeamLeadPerkActivationLevel_ReturnValue>IntProperty>/Script/CoreUObject)
 	CallFunc_GetTeamLeadPerkActivationLevelAndSatisfyingSlotIndices_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetTeamLeadPerkActivationLevelAndSatisfyingSlotIndices_ReturnValue>IntProperty>/Script/CoreUObject)
+	CallFunc_GetTeamLeadPerkMaxActivationLevel_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetTeamLeadPerkMaxActivationLevel_ReturnValue>IntProperty>/Script/CoreUObject)
 	Temp_int_Array_Index_Variable1 (0-0-0-0): size 32 (cls: Temp_int_Array_Index_Variable1>IntProperty>/Script/CoreUObject)
 	Temp_int_Loop_Counter_Variable (0-0-0-0): size 32 (cls: Temp_int_Loop_Counter_Variable>IntProperty>/Script/CoreUObject)
 	Temp_int_Loop_Counter_Variable1 (0-0-0-0): size 32 (cls: Temp_int_Loop_Counter_Variable1>IntProperty>/Script/CoreUObject)
-	CallFunc_GetSelectedButtonIndex_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetSelectedButtonIndex_ReturnValue>IntProperty>/Script/CoreUObject)
 	ItemAlterationsListDetailWidget (0-0-0-0): size 125 (cls: ItemAlterationsListDetailWidget>ItemAlterationsListDetailWidget_C>/Game/UI/Foundation/Items/Details/ItemAlterationsListDetailWidget):
 		Tag array:
 			AlterationsWidget(ObjectProperty)=AlterationsWidget=WidgetArchetype 
@@ -4169,16 +4310,6 @@ Serialized exports:
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
-	PickerPowerStat (0-0-0-0): size 302 (cls: PickerPowerStat>LargeStat_C>/Game/UI/Foundation/Stats/LargeStat):
-		Tag array:
-			BasicPairBuffArrow(ObjectProperty)=BasicPairBuffArrow=WidgetArchetype 
-			Icon(ObjectProperty)=Icon=WidgetArchetype 
-			Name(ObjectProperty)=Name=WidgetArchetype 
-			Value(ObjectProperty)=Value=WidgetArchetype 
-			StatTag(StructProperty)=System.Byte[] 
-			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
-			bCookedWidgetTree(BoolProperty)=True 
-			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 	PickerShieldStat (0-0-0-0): size 302 (cls: PickerShieldStat>LargeStat_C>/Game/UI/Foundation/Stats/LargeStat):
 		Tag array:
 			BasicPairBuffArrow(ObjectProperty)=BasicPairBuffArrow=WidgetArchetype 
@@ -4199,16 +4330,6 @@ Serialized exports:
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
-	PickerPowerStat (0-0-0-0): size 302 (cls: PickerPowerStat>LargeStat_C>/Game/UI/Foundation/Stats/LargeStat):
-		Tag array:
-			BasicPairBuffArrow(ObjectProperty)=BasicPairBuffArrow=WidgetArchetype 
-			Icon(ObjectProperty)=Icon=WidgetArchetype 
-			Name(ObjectProperty)=Name=WidgetArchetype 
-			Value(ObjectProperty)=Value=WidgetArchetype 
-			StatTag(StructProperty)=System.Byte[] 
-			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
-			bCookedWidgetTree(BoolProperty)=True 
-			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 	PickerShieldStat (0-0-0-0): size 302 (cls: PickerShieldStat>LargeStat_C>/Game/UI/Foundation/Stats/LargeStat):
 		Tag array:
 			BasicPairBuffArrow(ObjectProperty)=BasicPairBuffArrow=WidgetArchetype 
@@ -4286,6 +4407,10 @@ Serialized exports:
 	RightExtraContentSlot (0-0-0-0): size 41 (cls: RightExtraContentSlot>NamedSlot>/Script/UMG):
 		Tag array:
 			Slot(ObjectProperty)=HorizontalBoxSlot_3=WidgetArchetype 
+	NavigationTabsCenterContentSlot (0-0-0-0): size 82 (cls: NavigationTabsCenterContentSlot>NamedSlot>/Script/UMG):
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 	ContentSlot (0-0-0-0): size 41 (cls: ContentSlot>NamedSlot>/Script/UMG):
 		Tag array:
 			Slot(ObjectProperty)=OverlaySlot_2=WidgetArchetype 
@@ -4318,11 +4443,11 @@ Serialized exports:
 	K2Node_CustomEvent_SlotName (0-0-0-0): size 32 (cls: K2Node_CustomEvent_SlotName>NameProperty>/Script/CoreUObject)
 	Temp_name_Variable (0-0-0-0): size 32 (cls: Temp_name_Variable>NameProperty>/Script/CoreUObject)
 	Temp_name_Variable1 (0-0-0-0): size 32 (cls: Temp_name_Variable1>NameProperty>/Script/CoreUObject)
+	SlotName (0-0-0-0): size 32 (cls: SlotName>NameProperty>/Script/CoreUObject)
 	CommanderSlotButton (0-0-0-0): size 36 (cls: CommanderSlotButton>ObjectProperty>/Script/CoreUObject)
 	CrewLeaderBonusDescriptionText (0-0-0-0): size 36 (cls: CrewLeaderBonusDescriptionText>ObjectProperty>/Script/CoreUObject)
 	CrewLeaderBonusNameText (0-0-0-0): size 36 (cls: CrewLeaderBonusNameText>ObjectProperty>/Script/CoreUObject)
 	CrewLeaderBonusStatusText (0-0-0-0): size 36 (cls: CrewLeaderBonusStatusText>ObjectProperty>/Script/CoreUObject)
-	CrewLeaderBonusTotalIndicatorPlaceHolder (0-0-0-0): size 36 (cls: CrewLeaderBonusTotalIndicatorPlaceHolder>ObjectProperty>/Script/CoreUObject)
 	CrewLeaderSlot (0-0-0-0): size 36 (cls: CrewLeaderSlot>ObjectProperty>/Script/CoreUObject)
 	CrewSlot0 (0-0-0-0): size 36 (cls: CrewSlot0>ObjectProperty>/Script/CoreUObject)
 	CrewSlot0LeadPerkContributionIndicator (0-0-0-0): size 36 (cls: CrewSlot0LeadPerkContributionIndicator>ObjectProperty>/Script/CoreUObject)
@@ -4337,7 +4462,6 @@ Serialized exports:
 	CallFunc_Array_Get_Item (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item>ObjectProperty>/Script/CoreUObject)
 	CallFunc_Array_Get_Item1 (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item1>ObjectProperty>/Script/CoreUObject)
 	CallFunc_Create_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_Create_ReturnValue>ObjectProperty>/Script/CoreUObject)
-	CallFunc_GetButtonAtIndex_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetButtonAtIndex_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetContext_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue1>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetContext_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue2>ObjectProperty>/Script/CoreUObject)
@@ -4358,23 +4482,26 @@ Serialized exports:
 	K2Node_ComponentBoundEvent_Comitted_Item (0-0-0-0): size 36 (cls: K2Node_ComponentBoundEvent_Comitted_Item>ObjectProperty>/Script/CoreUObject)
 	K2Node_ComponentBoundEvent_Selected_Item (0-0-0-0): size 36 (cls: K2Node_ComponentBoundEvent_Selected_Item>ObjectProperty>/Script/CoreUObject)
 	K2Node_Event_HeroLoadout (0-0-0-0): size 36 (cls: K2Node_Event_HeroLoadout>ObjectProperty>/Script/CoreUObject)
-	K2Node_Select1_Default (0-0-0-0): size 36 (cls: K2Node_Select1_Default>ObjectProperty>/Script/CoreUObject)
 	K2Node_Select_Default (0-0-0-0): size 36 (cls: K2Node_Select_Default>ObjectProperty>/Script/CoreUObject)
 	Temp_object_Variable (0-0-0-0): size 36 (cls: Temp_object_Variable>ObjectProperty>/Script/CoreUObject)
 	GadgetSlot1 (0-0-0-0): size 36 (cls: GadgetSlot1>ObjectProperty>/Script/CoreUObject)
 	GadgetSlot2 (0-0-0-0): size 36 (cls: GadgetSlot2>ObjectProperty>/Script/CoreUObject)
 	GadgetsMenuAnchor (0-0-0-0): size 36 (cls: GadgetsMenuAnchor>ObjectProperty>/Script/CoreUObject)
 	GadgetsPopupMenu (0-0-0-0): size 36 (cls: GadgetsPopupMenu>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetButtonAtIndex_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetButtonAtIndex_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetUINavigationManager_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetUINavigationManager_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetUIManagerWidget_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetUIManagerWidget_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_Array_Get_Item (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item>ObjectProperty>/Script/CoreUObject)
 	HeaderWithNav (0-0-0-0): size 36 (cls: HeaderWithNav>ObjectProperty>/Script/CoreUObject)
+	LastWidgetThatPickerWasOpenedFor (0-0-0-0): size 36 (cls: LastWidgetThatPickerWasOpenedFor>ObjectProperty>/Script/CoreUObject)
+	LeaderCrewSlotLeadPerkContributionIndicator (0-0-0-0): size 36 (cls: LeaderCrewSlotLeadPerkContributionIndicator>ObjectProperty>/Script/CoreUObject)
 	LeftSideDefaultContent (0-0-0-0): size 36 (cls: LeftSideDefaultContent>ObjectProperty>/Script/CoreUObject)
 	LeftSideSwitcher (0-0-0-0): size 36 (cls: LeftSideSwitcher>ObjectProperty>/Script/CoreUObject)
+	LoadoutDisplayNameTextBlock (0-0-0-0): size 36 (cls: LoadoutDisplayNameTextBlock>ObjectProperty>/Script/CoreUObject)
 	LoadoutInfoBox (0-0-0-0): size 36 (cls: LoadoutInfoBox>ObjectProperty>/Script/CoreUObject)
 	LoadoutStatsOverview (0-0-0-0): size 36 (cls: LoadoutStatsOverview>ObjectProperty>/Script/CoreUObject)
 	PickerBox (0-0-0-0): size 36 (cls: PickerBox>ObjectProperty>/Script/CoreUObject)
-	PickerLoadoutStatsOverview (0-0-0-0): size 36 (cls: PickerLoadoutStatsOverview>ObjectProperty>/Script/CoreUObject)
 	PickerPanel (0-0-0-0): size 36 (cls: PickerPanel>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	RightSidePanelBackgroundBlurWidget (0-0-0-0): size 36 (cls: RightSidePanelBackgroundBlurWidget>ObjectProperty>/Script/CoreUObject)
@@ -4389,11 +4516,10 @@ Serialized exports:
 	CallFunc_GetHeroBySlotName_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetHeroBySlotName_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetHeroBySlotName_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetHeroBySlotName_ReturnValue1>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetItemDefinitionBP_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetItemDefinitionBP_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetLeaderHero_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetLeaderHero_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetOwningPlayer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetOwningPlayer_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_SpawnTooltipContextWithSource_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_SpawnTooltipContextWithSource_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Hero_Type (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Hero_Type>ObjectProperty>/Script/CoreUObject)
-	CallFunc_GetButtonAtIndex_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetButtonAtIndex_ReturnValue>ObjectProperty>/Script/CoreUObject)
-	CallFunc_GetUINavigationManager_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetUINavigationManager_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	K2Node_Select_Default (0-0-0-0): size 36 (cls: K2Node_Select_Default>ObjectProperty>/Script/CoreUObject)
 	LeftSideOverlay (0-0-0-0): size 86 (cls: LeftSideOverlay>Overlay>/Script/UMG):
 		Tag array:
@@ -4503,46 +4629,30 @@ Serialized exports:
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
-	Overlay_2 (0-0-0-0): size 86 (cls: Overlay_2>Overlay>/Script/UMG):
-		Tag array:
-			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
 	Overlay_0 (0-0-0-0): size 86 (cls: Overlay_0>Overlay>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-			Slot(ObjectProperty)=VerticalBoxSlot_7=WidgetArchetype 
+			Slot(ObjectProperty)=VerticalBoxSlot_0=WidgetArchetype 
 	Overlay_1 (0-0-0-0): size 86 (cls: Overlay_1>Overlay>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-			Slot(ObjectProperty)=VerticalBoxSlot_8=WidgetArchetype 
+			Slot(ObjectProperty)=VerticalBoxSlot_1=WidgetArchetype 
 	Overlay_2 (0-0-0-0): size 86 (cls: Overlay_2>Overlay>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-			Slot(ObjectProperty)=VerticalBoxSlot_9=WidgetArchetype 
+			Slot(ObjectProperty)=VerticalBoxSlot_2=WidgetArchetype 
 	Overlay_3 (0-0-0-0): size 86 (cls: Overlay_3>Overlay>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-			Slot(ObjectProperty)=VerticalBoxSlot_10=WidgetArchetype 
-	Overlay_4 (0-0-0-0): size 86 (cls: Overlay_4>Overlay>/Script/UMG):
-		Tag array:
-			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-			Slot(ObjectProperty)=VerticalBoxSlot_0=WidgetArchetype 
+			Slot(ObjectProperty)=VerticalBoxSlot_3=WidgetArchetype 
 	Overlay_5 (0-0-0-0): size 86 (cls: Overlay_5>Overlay>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=VerticalBoxSlot_0=WidgetArchetype 
-	Overlay_2 (0-0-0-0): size 86 (cls: Overlay_2>Overlay>/Script/UMG):
+	Overlay_6 (0-0-0-0): size 86 (cls: Overlay_6>Overlay>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
-	Overlay_2 (0-0-0-0): size 86 (cls: Overlay_2>Overlay>/Script/UMG):
-		Tag array:
-			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
-	Overlay_2 (0-0-0-0): size 86 (cls: Overlay_2>Overlay>/Script/UMG):
-		Tag array:
-			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
+			Slot(ObjectProperty)=VerticalBoxSlot_1=WidgetArchetype 
 	Overlay_0 (0-0-0-0): size 86 (cls: Overlay_0>Overlay>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -4599,6 +4709,14 @@ Serialized exports:
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=VerticalBoxSlot_1=WidgetArchetype 
+	Overlay_2 (0-0-0-0): size 86 (cls: Overlay_2>Overlay>/Script/UMG):
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
+	Overlay_2 (0-0-0-0): size 86 (cls: Overlay_2>Overlay>/Script/UMG):
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
 	OverlaySlot_0 (0-0-0-0): size 70 (cls: OverlaySlot_0>OverlaySlot>/Script/UMG):
 		Tag array:
 			Parent(ObjectProperty)=LeftSideOverlay=WidgetArchetype 
@@ -4909,15 +5027,6 @@ Serialized exports:
 			VerticalAlignment(ByteProperty)=VAlign_Bottom 
 			Parent(ObjectProperty)=Overlay_2=WidgetArchetype 
 			Content(ObjectProperty)=Name=WidgetArchetype 
-	OverlaySlot_0 (0-0-0-0): size 70 (cls: OverlaySlot_0>OverlaySlot>/Script/UMG):
-		Tag array:
-			Parent(ObjectProperty)=Overlay_2=WidgetArchetype 
-			Content(ObjectProperty)=HorizontalBox_3=WidgetArchetype 
-	OverlaySlot_1 (0-0-0-0): size 111 (cls: OverlaySlot_1>OverlaySlot>/Script/UMG):
-		Tag array:
-			VerticalAlignment(ByteProperty)=VAlign_Bottom 
-			Parent(ObjectProperty)=Overlay_2=WidgetArchetype 
-			Content(ObjectProperty)=Name=WidgetArchetype 
 	OverlaySlot_0 (0-0-0-0): size 111 (cls: OverlaySlot_0>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Fill 
@@ -4962,15 +5071,6 @@ Serialized exports:
 			VerticalAlignment(ByteProperty)=VAlign_Center 
 			Parent(ObjectProperty)=Overlay_3=WidgetArchetype 
 			Content(ObjectProperty)=CrewSlot3LeadPerkContributionIndicator=WidgetArchetype 
-	OverlaySlot_0 (0-0-0-0): size 70 (cls: OverlaySlot_0>OverlaySlot>/Script/UMG):
-		Tag array:
-			Parent(ObjectProperty)=Overlay_4=WidgetArchetype 
-			Content(ObjectProperty)=CrewLeaderBonusTotalIndicatorPlaceHolder=WidgetArchetype 
-	OverlaySlot_3 (0-0-0-0): size 111 (cls: OverlaySlot_3>OverlaySlot>/Script/UMG):
-		Tag array:
-			HorizontalAlignment(ByteProperty)=HAlign_Fill 
-			Parent(ObjectProperty)=Overlay_4=WidgetArchetype 
-			Content(ObjectProperty)=CrewLeaderAbilityBonusDetailsBox=WidgetArchetype 
 	OverlaySlot_0 (0-0-0-0): size 152 (cls: OverlaySlot_0>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Fill 
@@ -4982,33 +5082,17 @@ Serialized exports:
 			Padding(StructProperty)=System.Byte[] 
 			Parent(ObjectProperty)=Overlay_5=WidgetArchetype 
 			Content(ObjectProperty)=GadgetsMenuAnchor=WidgetArchetype 
-	OverlaySlot_0 (0-0-0-0): size 70 (cls: OverlaySlot_0>OverlaySlot>/Script/UMG):
+	OverlaySlot_0 (0-0-0-0): size 152 (cls: OverlaySlot_0>OverlaySlot>/Script/UMG):
 		Tag array:
-			Parent(ObjectProperty)=Overlay_2=WidgetArchetype 
-			Content(ObjectProperty)=HorizontalBox_3=WidgetArchetype 
-	OverlaySlot_1 (0-0-0-0): size 111 (cls: OverlaySlot_1>OverlaySlot>/Script/UMG):
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=Overlay_6=WidgetArchetype 
+			Content(ObjectProperty)=CommonBorder_2=WidgetArchetype 
+	OverlaySlot_1 (0-0-0-0): size 156 (cls: OverlaySlot_1>OverlaySlot>/Script/UMG):
 		Tag array:
-			VerticalAlignment(ByteProperty)=VAlign_Bottom 
-			Parent(ObjectProperty)=Overlay_2=WidgetArchetype 
-			Content(ObjectProperty)=Name=WidgetArchetype 
-	OverlaySlot_0 (0-0-0-0): size 70 (cls: OverlaySlot_0>OverlaySlot>/Script/UMG):
-		Tag array:
-			Parent(ObjectProperty)=Overlay_2=WidgetArchetype 
-			Content(ObjectProperty)=HorizontalBox_3=WidgetArchetype 
-	OverlaySlot_1 (0-0-0-0): size 111 (cls: OverlaySlot_1>OverlaySlot>/Script/UMG):
-		Tag array:
-			VerticalAlignment(ByteProperty)=VAlign_Bottom 
-			Parent(ObjectProperty)=Overlay_2=WidgetArchetype 
-			Content(ObjectProperty)=Name=WidgetArchetype 
-	OverlaySlot_0 (0-0-0-0): size 70 (cls: OverlaySlot_0>OverlaySlot>/Script/UMG):
-		Tag array:
-			Parent(ObjectProperty)=Overlay_2=WidgetArchetype 
-			Content(ObjectProperty)=HorizontalBox_3=WidgetArchetype 
-	OverlaySlot_1 (0-0-0-0): size 111 (cls: OverlaySlot_1>OverlaySlot>/Script/UMG):
-		Tag array:
-			VerticalAlignment(ByteProperty)=VAlign_Bottom 
-			Parent(ObjectProperty)=Overlay_2=WidgetArchetype 
-			Content(ObjectProperty)=Name=WidgetArchetype 
+			Padding(StructProperty)=System.Byte[] 
+			Parent(ObjectProperty)=Overlay_6=WidgetArchetype 
+			Content(ObjectProperty)=LeaderCrewSlotLeadPerkContributionIndicator=WidgetArchetype 
 	OverlaySlot_0 (0-0-0-0): size 152 (cls: OverlaySlot_0>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Fill 
@@ -5178,6 +5262,24 @@ Serialized exports:
 			VerticalAlignment(ByteProperty)=VAlign_Fill 
 			Parent(ObjectProperty)=Overlay_2=WidgetArchetype 
 			Content(ObjectProperty)=BorderUnlocked=WidgetArchetype 
+	OverlaySlot_0 (0-0-0-0): size 70 (cls: OverlaySlot_0>OverlaySlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=Overlay_2=WidgetArchetype 
+			Content(ObjectProperty)=HorizontalBox_3=WidgetArchetype 
+	OverlaySlot_1 (0-0-0-0): size 111 (cls: OverlaySlot_1>OverlaySlot>/Script/UMG):
+		Tag array:
+			VerticalAlignment(ByteProperty)=VAlign_Bottom 
+			Parent(ObjectProperty)=Overlay_2=WidgetArchetype 
+			Content(ObjectProperty)=Name=WidgetArchetype 
+	OverlaySlot_0 (0-0-0-0): size 70 (cls: OverlaySlot_0>OverlaySlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=Overlay_2=WidgetArchetype 
+			Content(ObjectProperty)=HorizontalBox_3=WidgetArchetype 
+	OverlaySlot_1 (0-0-0-0): size 111 (cls: OverlaySlot_1>OverlaySlot>/Script/UMG):
+		Tag array:
+			VerticalAlignment(ByteProperty)=VAlign_Bottom 
+			Parent(ObjectProperty)=Overlay_2=WidgetArchetype 
+			Content(ObjectProperty)=Name=WidgetArchetype 
 	Button (0-0-0-0): size 589 (cls: Button>PanelButton_C>/Game/UI/Foundation/Buttons/PanelButton):
 		Tag array:
 			ContentSlot(ObjectProperty)=ContentSlot=WidgetArchetype 
@@ -5286,8 +5388,12 @@ Serialized exports:
 			Content(ObjectProperty)=CommanderGadgetsBox=WidgetArchetype 
 	PanelSlot_0 (0-0-0-0): size 70 (cls: PanelSlot_0>PanelSlot>/Script/UMG):
 		Tag array:
+			Parent(ObjectProperty)=NavigationTabsCenterContentSlot=WidgetArchetype 
+			Content(ObjectProperty)=SizeBox_0=WidgetArchetype 
+	PanelSlot_0 (0-0-0-0): size 70 (cls: PanelSlot_0>PanelSlot>/Script/UMG):
+		Tag array:
 			Parent(ObjectProperty)=ContentSlot=WidgetArchetype 
-			Content(ObjectProperty)=VerticalBox_1=WidgetArchetype 
+			Content(ObjectProperty)=PickerPanel=WidgetArchetype 
 	PanelSlot_0 (0-0-0-0): size 70 (cls: PanelSlot_0>PanelSlot>/Script/UMG):
 		Tag array:
 			Parent(ObjectProperty)=DetailsContainerSlotWidget=WidgetArchetype 
@@ -5460,48 +5566,14 @@ Serialized exports:
 			HeightOverride(FloatProperty)=88 
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=HorizontalBoxSlot_3=WidgetArchetype 
-	SizeBox_0 (0-0-0-0): size 192 (cls: SizeBox_0>SizeBox>/Script/UMG):
-		Tag array:
-			bOverride_WidthOverride(BoolProperty)=True 
-			bOverride_HeightOverride(BoolProperty)=True 
-			WidthOverride(FloatProperty)=88 
-			HeightOverride(FloatProperty)=88 
-			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-			Slot(ObjectProperty)=HorizontalBoxSlot_3=WidgetArchetype 
 	PickerBox (0-0-0-0): size 108 (cls: PickerBox>SizeBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=WidgetSwitcherSlot_1=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	SizeBox_0 (0-0-0-0): size 192 (cls: SizeBox_0>SizeBox>/Script/UMG):
-		Tag array:
-			bOverride_WidthOverride(BoolProperty)=True 
-			bOverride_HeightOverride(BoolProperty)=True 
-			WidthOverride(FloatProperty)=88 
-			HeightOverride(FloatProperty)=88 
-			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-			Slot(ObjectProperty)=HorizontalBoxSlot_3=WidgetArchetype 
-	SizeBox_0 (0-0-0-0): size 192 (cls: SizeBox_0>SizeBox>/Script/UMG):
-		Tag array:
-			bOverride_WidthOverride(BoolProperty)=True 
-			bOverride_HeightOverride(BoolProperty)=True 
-			WidthOverride(FloatProperty)=88 
-			HeightOverride(FloatProperty)=88 
-			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-			Slot(ObjectProperty)=HorizontalBoxSlot_3=WidgetArchetype 
-	SizeBox_0 (0-0-0-0): size 192 (cls: SizeBox_0>SizeBox>/Script/UMG):
-		Tag array:
-			bOverride_WidthOverride(BoolProperty)=True 
-			bOverride_HeightOverride(BoolProperty)=True 
-			WidthOverride(FloatProperty)=88 
-			HeightOverride(FloatProperty)=88 
-			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-			Slot(ObjectProperty)=HorizontalBoxSlot_3=WidgetArchetype 
-	NoHeroSelectedDetailsBox (0-0-0-0): size 108 (cls: NoHeroSelectedDetailsBox>SizeBox>/Script/UMG):
+	SizeBox_0 (0-0-0-0): size 53 (cls: SizeBox_0>SizeBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-			Slot(ObjectProperty)=WidgetSwitcherSlot_1=WidgetArchetype 
-			bIsVariable(BoolProperty)=True 
 	[SizeBox] (0-0-0-0): size 218 (cls: [SizeBox]>SizeBox>/Script/UMG):
 		Tag array:
 			bOverride_HeightOverride(BoolProperty)=True 
@@ -5583,6 +5655,10 @@ Serialized exports:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=HorizontalBoxSlot_3=WidgetArchetype 
 			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
+	RootVisibilityBox (0-0-0-0): size 79 (cls: RootVisibilityBox>SizeBox>/Script/UMG):
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			bIsVariable(BoolProperty)=True 
 	LargeInfo (0-0-0-0): size 108 (cls: LargeInfo>SizeBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -5606,6 +5682,26 @@ Serialized exports:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=HorizontalBoxSlot_3=WidgetArchetype 
 			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
+	SizeBox_0 (0-0-0-0): size 192 (cls: SizeBox_0>SizeBox>/Script/UMG):
+		Tag array:
+			bOverride_WidthOverride(BoolProperty)=True 
+			bOverride_HeightOverride(BoolProperty)=True 
+			WidthOverride(FloatProperty)=88 
+			HeightOverride(FloatProperty)=88 
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=HorizontalBoxSlot_3=WidgetArchetype 
+	SizeBox_0 (0-0-0-0): size 192 (cls: SizeBox_0>SizeBox>/Script/UMG):
+		Tag array:
+			bOverride_WidthOverride(BoolProperty)=True 
+			bOverride_HeightOverride(BoolProperty)=True 
+			WidthOverride(FloatProperty)=88 
+			HeightOverride(FloatProperty)=88 
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=HorizontalBoxSlot_3=WidgetArchetype 
+	SizeBox_0 (0-0-0-0): size 82 (cls: SizeBox_0>SizeBox>/Script/UMG):
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=PanelSlot_0=WidgetArchetype 
 	TopLeftBox (0-0-0-0): size 108 (cls: TopLeftBox>SizeBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -5667,10 +5763,6 @@ Serialized exports:
 		Tag array:
 			Parent(ObjectProperty)=SizeBox_0=WidgetArchetype 
 			Content(ObjectProperty)=Icon=WidgetArchetype 
-	SizeBoxSlot_0 (0-0-0-0): size 70 (cls: SizeBoxSlot_0>SizeBoxSlot>/Script/UMG):
-		Tag array:
-			Parent(ObjectProperty)=SizeBox_0=WidgetArchetype 
-			Content(ObjectProperty)=Icon=WidgetArchetype 
 	SizeBoxSlot_1 (0-0-0-0): size 70 (cls: SizeBoxSlot_1>SizeBoxSlot>/Script/UMG):
 		Tag array:
 			Parent(ObjectProperty)=PickerBox=WidgetArchetype 
@@ -5678,19 +5770,7 @@ Serialized exports:
 	SizeBoxSlot_0 (0-0-0-0): size 70 (cls: SizeBoxSlot_0>SizeBoxSlot>/Script/UMG):
 		Tag array:
 			Parent(ObjectProperty)=SizeBox_0=WidgetArchetype 
-			Content(ObjectProperty)=Icon=WidgetArchetype 
-	SizeBoxSlot_0 (0-0-0-0): size 70 (cls: SizeBoxSlot_0>SizeBoxSlot>/Script/UMG):
-		Tag array:
-			Parent(ObjectProperty)=SizeBox_0=WidgetArchetype 
-			Content(ObjectProperty)=Icon=WidgetArchetype 
-	SizeBoxSlot_0 (0-0-0-0): size 70 (cls: SizeBoxSlot_0>SizeBoxSlot>/Script/UMG):
-		Tag array:
-			Parent(ObjectProperty)=SizeBox_0=WidgetArchetype 
-			Content(ObjectProperty)=Icon=WidgetArchetype 
-	SizeBoxSlot_0 (0-0-0-0): size 70 (cls: SizeBoxSlot_0>SizeBoxSlot>/Script/UMG):
-		Tag array:
-			Parent(ObjectProperty)=NoHeroSelectedDetailsBox=WidgetArchetype 
-			Content(ObjectProperty)=EmptySlotPrompText=WidgetArchetype 
+			Content(ObjectProperty)=PickerTileView=WidgetArchetype 
 	SizeBoxSlot_221 (0-0-0-0): size 70 (cls: SizeBoxSlot_221>SizeBoxSlot>/Script/UMG):
 		Tag array:
 			Parent(ObjectProperty)=[SizeBox]=WidgetArchetype 
@@ -5739,6 +5819,10 @@ Serialized exports:
 			Content(ObjectProperty)=Overlay_5=WidgetArchetype 
 	SizeBoxSlot_0 (0-0-0-0): size 70 (cls: SizeBoxSlot_0>SizeBoxSlot>/Script/UMG):
 		Tag array:
+			Parent(ObjectProperty)=RootVisibilityBox=WidgetArchetype 
+			Content(ObjectProperty)=VerticalBox_0=WidgetArchetype 
+	SizeBoxSlot_0 (0-0-0-0): size 70 (cls: SizeBoxSlot_0>SizeBoxSlot>/Script/UMG):
+		Tag array:
 			Parent(ObjectProperty)=LargeInfo=WidgetArchetype 
 			Content(ObjectProperty)=LargeName=WidgetArchetype 
 	SizeBoxSlot_0 (0-0-0-0): size 70 (cls: SizeBoxSlot_0>SizeBoxSlot>/Script/UMG):
@@ -5752,15 +5836,26 @@ Serialized exports:
 			Content(ObjectProperty)=Overlay_5=WidgetArchetype 
 	SizeBoxSlot_0 (0-0-0-0): size 70 (cls: SizeBoxSlot_0>SizeBoxSlot>/Script/UMG):
 		Tag array:
+			Parent(ObjectProperty)=SizeBox_0=WidgetArchetype 
+			Content(ObjectProperty)=Icon=WidgetArchetype 
+	SizeBoxSlot_0 (0-0-0-0): size 70 (cls: SizeBoxSlot_0>SizeBoxSlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=SizeBox_0=WidgetArchetype 
+			Content(ObjectProperty)=Icon=WidgetArchetype 
+	SizeBoxSlot_0 (0-0-0-0): size 325 (cls: SizeBoxSlot_0>SizeBoxSlot>/Script/UMG):
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=SizeBox_0=WidgetArchetype 
+			Content(ObjectProperty)=LoadoutDisplayNameTextBlock=WidgetArchetype 
+	SizeBoxSlot_0 (0-0-0-0): size 70 (cls: SizeBoxSlot_0>SizeBoxSlot>/Script/UMG):
+		Tag array:
 			Parent(ObjectProperty)=TopLeftBox=WidgetArchetype 
 			Content(ObjectProperty)=VerticalBox_0=WidgetArchetype 
 	Spacer_1 (0-0-0-0): size 41 (cls: Spacer_1>Spacer>/Script/UMG):
 		Tag array:
 			Slot(ObjectProperty)=HorizontalBoxSlot_3=WidgetArchetype 
-	CrewLeaderBonusTotalIndicatorPlaceHolder (0-0-0-0): size 67 (cls: CrewLeaderBonusTotalIndicatorPlaceHolder>Spacer>/Script/UMG):
-		Tag array:
-			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
-			bIsVariable(BoolProperty)=True 
 	Spacer_1 (0-0-0-0): size 41 (cls: Spacer_1>Spacer>/Script/UMG):
 		Tag array:
 			Slot(ObjectProperty)=HorizontalBoxSlot_3=WidgetArchetype 
@@ -5815,9 +5910,10 @@ Serialized exports:
 	CallFunc_GetDisplayName_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetDisplayName_ReturnValue>TextProperty>/Script/CoreUObject)
 	CallFunc_MakeLiteralText_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_MakeLiteralText_ReturnValue>TextProperty>/Script/CoreUObject)
 	CallFunc_MakeLiteralText_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_MakeLiteralText_ReturnValue1>TextProperty>/Script/CoreUObject)
+	CallFunc_Conv_IntToText_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Conv_IntToText_ReturnValue>TextProperty>/Script/CoreUObject)
 	CallFunc_GetCombinedDescription_OutDescription (0-0-0-0): size 32 (cls: CallFunc_GetCombinedDescription_OutDescription>TextProperty>/Script/CoreUObject)
 	K2Node_Select1_Default (0-0-0-0): size 32 (cls: K2Node_Select1_Default>TextProperty>/Script/CoreUObject)
-	K2Node_Select_Default (0-0-0-0): size 32 (cls: K2Node_Select_Default>TextProperty>/Script/CoreUObject)
+	K2Node_Select2_Default (0-0-0-0): size 32 (cls: K2Node_Select2_Default>TextProperty>/Script/CoreUObject)
 	Temp_text_Variable (0-0-0-0): size 32 (cls: Temp_text_Variable>TextProperty>/Script/CoreUObject)
 	Temp_text_Variable1 (0-0-0-0): size 32 (cls: Temp_text_Variable1>TextProperty>/Script/CoreUObject)
 	Temp_text_Variable2 (0-0-0-0): size 32 (cls: Temp_text_Variable2>TextProperty>/Script/CoreUObject)
@@ -5875,20 +5971,24 @@ Serialized exports:
 	CrewLeaderAbilityBonusDetailsBox (0-0-0-0): size 86 (cls: CrewLeaderAbilityBonusDetailsBox>VerticalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-			Slot(ObjectProperty)=OverlaySlot_3=WidgetArchetype 
-	CrewLeaderSlotBox (0-0-0-0): size 90 (cls: CrewLeaderSlotBox>VerticalBox>/Script/UMG):
+			Slot(ObjectProperty)=VerticalBoxSlot_0=WidgetArchetype 
+	CrewLeaderSlotBox (0-0-0-0): size 86 (cls: CrewLeaderSlotBox>VerticalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-			Slot(ObjectProperty)=VerticalBoxSlot_6=WidgetArchetype 
+			Slot(ObjectProperty)=VerticalBoxSlot_1=WidgetArchetype 
+	FollowerSlotsBox (0-0-0-0): size 94 (cls: FollowerSlotsBox>VerticalBox>/Script/UMG):
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=VerticalBoxSlot_2=WidgetArchetype 
 	LeftSideDefaultContent (0-0-0-0): size 112 (cls: LeftSideDefaultContent>VerticalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=WidgetSwitcherSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	HeroSelectedDetailsBox (0-0-0-0): size 112 (cls: HeroSelectedDetailsBox>VerticalBox>/Script/UMG):
+	HeroDetailsBox (0-0-0-0): size 112 (cls: HeroDetailsBox>VerticalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-			Slot(ObjectProperty)=WidgetSwitcherSlot_0=WidgetArchetype 
+			Slot(ObjectProperty)=VerticalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
 	VerticalBox_0 (0-0-0-0): size 135 (cls: VerticalBox_0>VerticalBox>/Script/UMG):
 		Tag array:
@@ -5959,9 +6059,10 @@ Serialized exports:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=WidgetSwitcherSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	VerticalBox_0 (0-0-0-0): size 61 (cls: VerticalBox_0>VerticalBox>/Script/UMG):
+	VerticalBox_0 (0-0-0-0): size 90 (cls: VerticalBox_0>VerticalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
 	VerticalBox_0 (0-0-0-0): size 53 (cls: VerticalBox_0>VerticalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -5989,18 +6090,30 @@ Serialized exports:
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=ScrollBoxSlot_0=WidgetArchetype 
-	RightSideStack (0-0-0-0): size 102 (cls: RightSideStack>VerticalBox>/Script/UMG):
+	VerticalBox_0 (0-0-0-0): size 86 (cls: VerticalBox_0>VerticalBox>/Script/UMG):
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=HorizontalBoxSlot_2=WidgetArchetype 
+	VerticalBox_1 (0-0-0-0): size 86 (cls: VerticalBox_1>VerticalBox>/Script/UMG):
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
+	VerticalBox_2 (0-0-0-0): size 86 (cls: VerticalBox_2>VerticalBox>/Script/UMG):
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=VerticalBoxSlot_1=WidgetArchetype 
+	RightSideStack (0-0-0-0): size 86 (cls: RightSideStack>VerticalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=PanelSlot_0=WidgetArchetype 
+	SupportTeamSlotsBox (0-0-0-0): size 90 (cls: SupportTeamSlotsBox>VerticalBox>/Script/UMG):
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=VerticalBoxSlot_0=WidgetArchetype 
 	VerticalBox_0 (0-0-0-0): size 86 (cls: VerticalBox_0>VerticalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
-	VerticalBox_1 (0-0-0-0): size 86 (cls: VerticalBox_1>VerticalBox>/Script/UMG):
-		Tag array:
-			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-			Slot(ObjectProperty)=PanelSlot_0=WidgetArchetype 
 	VerticalBoxSlot_0 (0-0-0-0): size 70 (cls: VerticalBoxSlot_0>VerticalBoxSlot>/Script/UMG):
 		Tag array:
 			Parent(ObjectProperty)=CommanderSlotBox=WidgetArchetype 
@@ -6064,26 +6177,44 @@ Serialized exports:
 		Tag array:
 			Parent(ObjectProperty)=CommanderSlotBox=WidgetArchetype 
 			Content(ObjectProperty)=Overlay_2=WidgetArchetype 
-	VerticalBoxSlot_0 (0-0-0-0): size 70 (cls: VerticalBoxSlot_0>VerticalBoxSlot>/Script/UMG):
+	VerticalBoxSlot_0 (0-0-0-0): size 168 (cls: VerticalBoxSlot_0>VerticalBoxSlot>/Script/UMG):
 		Tag array:
+			Size(StructProperty)=System.Byte[] 
 			Parent(ObjectProperty)=CrewLeaderAbilityBonusDetailsBox=WidgetArchetype 
 			Content(ObjectProperty)=CommonBorder_1=WidgetArchetype 
 	VerticalBoxSlot_1 (0-0-0-0): size 70 (cls: VerticalBoxSlot_1>VerticalBoxSlot>/Script/UMG):
 		Tag array:
 			Parent(ObjectProperty)=CrewLeaderAbilityBonusDetailsBox=WidgetArchetype 
-			Content(ObjectProperty)=CommonBorder_2=WidgetArchetype 
-	VerticalBoxSlot_0 (0-0-0-0): size 70 (cls: VerticalBoxSlot_0>VerticalBoxSlot>/Script/UMG):
+			Content(ObjectProperty)=Overlay_6=WidgetArchetype 
+	VerticalBoxSlot_0 (0-0-0-0): size 168 (cls: VerticalBoxSlot_0>VerticalBoxSlot>/Script/UMG):
 		Tag array:
+			Size(StructProperty)=System.Byte[] 
 			Parent(ObjectProperty)=CrewLeaderSlotBox=WidgetArchetype 
-			Content(ObjectProperty)=Overlay_4=WidgetArchetype 
-	VerticalBoxSlot_3 (0-0-0-0): size 70 (cls: VerticalBoxSlot_3>VerticalBoxSlot>/Script/UMG):
-		Tag array:
-			Parent(ObjectProperty)=CrewLeaderSlotBox=WidgetArchetype 
-			Content(ObjectProperty)=CrewSlotsLabel=WidgetArchetype 
+			Content(ObjectProperty)=CrewLeaderAbilityBonusDetailsBox=WidgetArchetype 
 	VerticalBoxSlot_4 (0-0-0-0): size 70 (cls: VerticalBoxSlot_4>VerticalBoxSlot>/Script/UMG):
 		Tag array:
 			Parent(ObjectProperty)=CrewLeaderSlotBox=WidgetArchetype 
 			Content(ObjectProperty)=CrewLeaderSlot=WidgetArchetype 
+	VerticalBoxSlot_0 (0-0-0-0): size 185 (cls: VerticalBoxSlot_0>VerticalBoxSlot>/Script/UMG):
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			Parent(ObjectProperty)=FollowerSlotsBox=WidgetArchetype 
+			Content(ObjectProperty)=Overlay_0=WidgetArchetype 
+	VerticalBoxSlot_1 (0-0-0-0): size 185 (cls: VerticalBoxSlot_1>VerticalBoxSlot>/Script/UMG):
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			Parent(ObjectProperty)=FollowerSlotsBox=WidgetArchetype 
+			Content(ObjectProperty)=Overlay_1=WidgetArchetype 
+	VerticalBoxSlot_2 (0-0-0-0): size 185 (cls: VerticalBoxSlot_2>VerticalBoxSlot>/Script/UMG):
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			Parent(ObjectProperty)=FollowerSlotsBox=WidgetArchetype 
+			Content(ObjectProperty)=Overlay_2=WidgetArchetype 
+	VerticalBoxSlot_3 (0-0-0-0): size 185 (cls: VerticalBoxSlot_3>VerticalBoxSlot>/Script/UMG):
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			Parent(ObjectProperty)=FollowerSlotsBox=WidgetArchetype 
+			Content(ObjectProperty)=Overlay_3=WidgetArchetype 
 	VerticalBoxSlot_0 (0-0-0-0): size 152 (cls: VerticalBoxSlot_0>VerticalBoxSlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Left 
@@ -6097,12 +6228,12 @@ Serialized exports:
 			Content(ObjectProperty)=CameraFramingWidget=WidgetArchetype 
 	VerticalBoxSlot_0 (0-0-0-0): size 70 (cls: VerticalBoxSlot_0>VerticalBoxSlot>/Script/UMG):
 		Tag array:
-			Parent(ObjectProperty)=HeroSelectedDetailsBox=WidgetArchetype 
+			Parent(ObjectProperty)=HeroDetailsBox=WidgetArchetype 
 			Content(ObjectProperty)=PickerDetailsPanel=WidgetArchetype 
-	VerticalBoxSlot_1 (0-0-0-0): size 70 (cls: VerticalBoxSlot_1>VerticalBoxSlot>/Script/UMG):
+	VerticalBoxSlot_3 (0-0-0-0): size 70 (cls: VerticalBoxSlot_3>VerticalBoxSlot>/Script/UMG):
 		Tag array:
-			Parent(ObjectProperty)=HeroSelectedDetailsBox=WidgetArchetype 
-			Content(ObjectProperty)=SlottingRestrictionText=WidgetArchetype 
+			Parent(ObjectProperty)=HeroDetailsBox=WidgetArchetype 
+			Content(ObjectProperty)=SlottingRestrictionsBox=WidgetArchetype 
 	VerticalBoxSlot_1 (0-0-0-0): size 70 (cls: VerticalBoxSlot_1>VerticalBoxSlot>/Script/UMG):
 		Tag array:
 			Parent(ObjectProperty)=VerticalBox_0=WidgetArchetype 
@@ -6152,7 +6283,7 @@ Serialized exports:
 	VerticalBoxSlot_2 (0-0-0-0): size 70 (cls: VerticalBoxSlot_2>VerticalBoxSlot>/Script/UMG):
 		Tag array:
 			Parent(ObjectProperty)=CommanderPerkBox=WidgetArchetype 
-			Content(ObjectProperty)=CommonTextBlock_0=WidgetArchetype 
+			Content(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
 	VerticalBoxSlot_1 (0-0-0-0): size 111 (cls: VerticalBoxSlot_1>VerticalBoxSlot>/Script/UMG):
 		Tag array:
 			VerticalAlignment(ByteProperty)=VAlign_Center 
@@ -6170,7 +6301,7 @@ Serialized exports:
 	VerticalBoxSlot_3 (0-0-0-0): size 70 (cls: VerticalBoxSlot_3>VerticalBoxSlot>/Script/UMG):
 		Tag array:
 			Parent(ObjectProperty)=CrewLeaderPerkBox=WidgetArchetype 
-			Content(ObjectProperty)=CommonTextBlock_1=WidgetArchetype 
+			Content(ObjectProperty)=HorizontalBox_2=WidgetArchetype 
 	VerticalBoxSlot_1 (0-0-0-0): size 111 (cls: VerticalBoxSlot_1>VerticalBoxSlot>/Script/UMG):
 		Tag array:
 			VerticalAlignment(ByteProperty)=VAlign_Center 
@@ -6188,7 +6319,7 @@ Serialized exports:
 	VerticalBoxSlot_3 (0-0-0-0): size 70 (cls: VerticalBoxSlot_3>VerticalBoxSlot>/Script/UMG):
 		Tag array:
 			Parent(ObjectProperty)=NormalPerkBox=WidgetArchetype 
-			Content(ObjectProperty)=CommonTextBlock_2=WidgetArchetype 
+			Content(ObjectProperty)=HorizontalBox_1=WidgetArchetype 
 	VerticalBoxSlot_1 (0-0-0-0): size 111 (cls: VerticalBoxSlot_1>VerticalBoxSlot>/Script/UMG):
 		Tag array:
 			VerticalAlignment(ByteProperty)=VAlign_Center 
@@ -6260,36 +6391,57 @@ Serialized exports:
 		Tag array:
 			Parent(ObjectProperty)=VerticalBox_1=WidgetArchetype 
 			Content(ObjectProperty)=HeroLoadoutPerkDetailWidget=WidgetArchetype 
-	VerticalBoxSlot_10 (0-0-0-0): size 185 (cls: VerticalBoxSlot_10>VerticalBoxSlot>/Script/UMG):
+	VerticalBoxSlot_0 (0-0-0-0): size 70 (cls: VerticalBoxSlot_0>VerticalBoxSlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=VerticalBox_0=WidgetArchetype 
+			Content(ObjectProperty)=HeroDetailsBox=WidgetArchetype 
+	VerticalBoxSlot_1 (0-0-0-0): size 243 (cls: VerticalBoxSlot_1>VerticalBoxSlot>/Script/UMG):
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
+			Parent(ObjectProperty)=VerticalBox_0=WidgetArchetype 
+			Content(ObjectProperty)=SlotDescription=WidgetArchetype 
+	VerticalBoxSlot_1 (0-0-0-0): size 168 (cls: VerticalBoxSlot_1>VerticalBoxSlot>/Script/UMG):
+		Tag array:
+			Size(StructProperty)=System.Byte[] 
+			Parent(ObjectProperty)=VerticalBox_1=WidgetArchetype 
+			Content(ObjectProperty)=VerticalBox_2=WidgetArchetype 
+	VerticalBoxSlot_3 (0-0-0-0): size 156 (cls: VerticalBoxSlot_3>VerticalBoxSlot>/Script/UMG):
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			Parent(ObjectProperty)=VerticalBox_1=WidgetArchetype 
+			Content(ObjectProperty)=PickerLoadoutStatsOverview=WidgetArchetype 
+	VerticalBoxSlot_0 (0-0-0-0): size 70 (cls: VerticalBoxSlot_0>VerticalBoxSlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=VerticalBox_2=WidgetArchetype 
+			Content(ObjectProperty)=CommonTextBlock_0=WidgetArchetype 
+	VerticalBoxSlot_1 (0-0-0-0): size 168 (cls: VerticalBoxSlot_1>VerticalBoxSlot>/Script/UMG):
+		Tag array:
+			Size(StructProperty)=System.Byte[] 
+			Parent(ObjectProperty)=VerticalBox_2=WidgetArchetype 
+			Content(ObjectProperty)=Picker=WidgetArchetype 
+	VerticalBoxSlot_0 (0-0-0-0): size 168 (cls: VerticalBoxSlot_0>VerticalBoxSlot>/Script/UMG):
+		Tag array:
+			Size(StructProperty)=System.Byte[] 
 			Parent(ObjectProperty)=RightSideStack=WidgetArchetype 
-			Content(ObjectProperty)=Overlay_3=WidgetArchetype 
+			Content(ObjectProperty)=SupportTeamSlotsBox=WidgetArchetype 
 	VerticalBoxSlot_12 (0-0-0-0): size 185 (cls: VerticalBoxSlot_12>VerticalBoxSlot>/Script/UMG):
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
 			Parent(ObjectProperty)=RightSideStack=WidgetArchetype 
 			Content(ObjectProperty)=CommanderSlotBox=WidgetArchetype 
-	VerticalBoxSlot_6 (0-0-0-0): size 185 (cls: VerticalBoxSlot_6>VerticalBoxSlot>/Script/UMG):
+	VerticalBoxSlot_0 (0-0-0-0): size 70 (cls: VerticalBoxSlot_0>VerticalBoxSlot>/Script/UMG):
 		Tag array:
-			Padding(StructProperty)=System.Byte[] 
-			Parent(ObjectProperty)=RightSideStack=WidgetArchetype 
+			Parent(ObjectProperty)=SupportTeamSlotsBox=WidgetArchetype 
+			Content(ObjectProperty)=CrewSlotsLabel=WidgetArchetype 
+	VerticalBoxSlot_1 (0-0-0-0): size 168 (cls: VerticalBoxSlot_1>VerticalBoxSlot>/Script/UMG):
+		Tag array:
+			Size(StructProperty)=System.Byte[] 
+			Parent(ObjectProperty)=SupportTeamSlotsBox=WidgetArchetype 
 			Content(ObjectProperty)=CrewLeaderSlotBox=WidgetArchetype 
-	VerticalBoxSlot_7 (0-0-0-0): size 185 (cls: VerticalBoxSlot_7>VerticalBoxSlot>/Script/UMG):
+	VerticalBoxSlot_2 (0-0-0-0): size 70 (cls: VerticalBoxSlot_2>VerticalBoxSlot>/Script/UMG):
 		Tag array:
-			Padding(StructProperty)=System.Byte[] 
-			Parent(ObjectProperty)=RightSideStack=WidgetArchetype 
-			Content(ObjectProperty)=Overlay_0=WidgetArchetype 
-	VerticalBoxSlot_8 (0-0-0-0): size 185 (cls: VerticalBoxSlot_8>VerticalBoxSlot>/Script/UMG):
-		Tag array:
-			Padding(StructProperty)=System.Byte[] 
-			Parent(ObjectProperty)=RightSideStack=WidgetArchetype 
-			Content(ObjectProperty)=Overlay_1=WidgetArchetype 
-	VerticalBoxSlot_9 (0-0-0-0): size 185 (cls: VerticalBoxSlot_9>VerticalBoxSlot>/Script/UMG):
-		Tag array:
-			Padding(StructProperty)=System.Byte[] 
-			Parent(ObjectProperty)=RightSideStack=WidgetArchetype 
-			Content(ObjectProperty)=Overlay_2=WidgetArchetype 
+			Parent(ObjectProperty)=SupportTeamSlotsBox=WidgetArchetype 
+			Content(ObjectProperty)=FollowerSlotsBox=WidgetArchetype 
 	VerticalBoxSlot_0 (0-0-0-0): size 70 (cls: VerticalBoxSlot_0>VerticalBoxSlot>/Script/UMG):
 		Tag array:
 			Parent(ObjectProperty)=VerticalBox_0=WidgetArchetype 
@@ -6298,14 +6450,6 @@ Serialized exports:
 		Tag array:
 			Parent(ObjectProperty)=VerticalBox_0=WidgetArchetype 
 			Content(ObjectProperty)=LoadoutStatsOverview=WidgetArchetype 
-	VerticalBoxSlot_4 (0-0-0-0): size 70 (cls: VerticalBoxSlot_4>VerticalBoxSlot>/Script/UMG):
-		Tag array:
-			Parent(ObjectProperty)=VerticalBox_1=WidgetArchetype 
-			Content(ObjectProperty)=PickerLoadoutStatsOverview=WidgetArchetype 
-	VerticalBoxSlot_5 (0-0-0-0): size 70 (cls: VerticalBoxSlot_5>VerticalBoxSlot>/Script/UMG):
-		Tag array:
-			Parent(ObjectProperty)=VerticalBox_1=WidgetArchetype 
-			Content(ObjectProperty)=PickerPanel=WidgetArchetype 
 	WidgetNavigation_0 (0-0-0-0): size 600 (cls: WidgetNavigation_0>WidgetNavigation>/Script/UMG):
 		Tag array:
 			Up(StructProperty)=System.Byte[] 
@@ -6314,14 +6458,13 @@ Serialized exports:
 			Right(StructProperty)=System.Byte[] 
 			Next(StructProperty)=System.Byte[] 
 			Previous(StructProperty)=System.Byte[] 
+	WidgetSwitcher (0-0-0-0): size 57 (cls: WidgetSwitcher>WidgetSwitcher>/Script/UMG):
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 	LeftSideSwitcher (0-0-0-0): size 86 (cls: LeftSideSwitcher>WidgetSwitcher>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
-	DetailsSwitcher (0-0-0-0): size 86 (cls: DetailsSwitcher>WidgetSwitcher>/Script/UMG):
-		Tag array:
-			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-			Slot(ObjectProperty)=HorizontalBoxSlot_2=WidgetArchetype 
 	RatingSwitcher (0-0-0-0): size 86 (cls: RatingSwitcher>WidgetSwitcher>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -6334,6 +6477,18 @@ Serialized exports:
 		Tag array:
 			Parent(ObjectProperty)=PerkTierSwitcher=WidgetArchetype 
 			Content(ObjectProperty)=PerksNoTiers=WidgetArchetype 
+	WidgetSwitcherSlot_0 (0-0-0-0): size 152 (cls: WidgetSwitcherSlot_0>WidgetSwitcherSlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Right 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=WidgetSwitcher=WidgetArchetype 
+			Content(ObjectProperty)=ActivationIndicatorText=WidgetArchetype 
+	WidgetSwitcherSlot_1 (0-0-0-0): size 152 (cls: WidgetSwitcherSlot_1>WidgetSwitcherSlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Right 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=WidgetSwitcher=WidgetArchetype 
+			Content(ObjectProperty)=LockedPerkIconImage=WidgetArchetype 
 	WidgetSwitcherSlot_0 (0-0-0-0): size 70 (cls: WidgetSwitcherSlot_0>WidgetSwitcherSlot>/Script/UMG):
 		Tag array:
 			Parent(ObjectProperty)=LeftSideSwitcher=WidgetArchetype 
@@ -6342,14 +6497,6 @@ Serialized exports:
 		Tag array:
 			Parent(ObjectProperty)=LeftSideSwitcher=WidgetArchetype 
 			Content(ObjectProperty)=PickerBox=WidgetArchetype 
-	WidgetSwitcherSlot_0 (0-0-0-0): size 70 (cls: WidgetSwitcherSlot_0>WidgetSwitcherSlot>/Script/UMG):
-		Tag array:
-			Parent(ObjectProperty)=DetailsSwitcher=WidgetArchetype 
-			Content(ObjectProperty)=HeroSelectedDetailsBox=WidgetArchetype 
-	WidgetSwitcherSlot_1 (0-0-0-0): size 70 (cls: WidgetSwitcherSlot_1>WidgetSwitcherSlot>/Script/UMG):
-		Tag array:
-			Parent(ObjectProperty)=DetailsSwitcher=WidgetArchetype 
-			Content(ObjectProperty)=NoHeroSelectedDetailsBox=WidgetArchetype 
 	WidgetSwitcherSlot_0 (0-0-0-0): size 70 (cls: WidgetSwitcherSlot_0>WidgetSwitcherSlot>/Script/UMG):
 		Tag array:
 			Parent(ObjectProperty)=RatingSwitcher=WidgetArchetype 
@@ -6498,10 +6645,10 @@ Serialized exports:
 			RootWidget(ObjectProperty)=Overlay_0=WidgetArchetype 
 	WidgetTree_0 (0-0-0-0): size 41 (cls: WidgetTree_0>WidgetTree>/Script/UMG):
 		Tag array:
-			RootWidget(ObjectProperty)=PickerStatSummaryBox=WidgetArchetype 
+			RootWidget(ObjectProperty)=WidgetSwitcher=WidgetArchetype 
 	WidgetTree_0 (0-0-0-0): size 41 (cls: WidgetTree_0>WidgetTree>/Script/UMG):
 		Tag array:
-			RootWidget(ObjectProperty)=HorizontalBox_1=WidgetArchetype 
+			RootWidget(ObjectProperty)=PickerStatSummaryBox=WidgetArchetype 
 	WidgetTree_0 (0-0-0-0): size 41 (cls: WidgetTree_0>WidgetTree>/Script/UMG):
 		Tag array:
 			RootWidget(ObjectProperty)=HorizontalBox_1=WidgetArchetype 
@@ -6513,22 +6660,10 @@ Serialized exports:
 			RootWidget(ObjectProperty)=BackgroundBlur_0=WidgetArchetype 
 	WidgetTree_0 (0-0-0-0): size 41 (cls: WidgetTree_0>WidgetTree>/Script/UMG):
 		Tag array:
-			RootWidget(ObjectProperty)=PickerStatSummaryBox=WidgetArchetype 
-	WidgetTree_0 (0-0-0-0): size 41 (cls: WidgetTree_0>WidgetTree>/Script/UMG):
-		Tag array:
-			RootWidget(ObjectProperty)=HorizontalBox_1=WidgetArchetype 
-	WidgetTree_0 (0-0-0-0): size 41 (cls: WidgetTree_0>WidgetTree>/Script/UMG):
-		Tag array:
-			RootWidget(ObjectProperty)=HorizontalBox_1=WidgetArchetype 
-	WidgetTree_0 (0-0-0-0): size 41 (cls: WidgetTree_0>WidgetTree>/Script/UMG):
-		Tag array:
-			RootWidget(ObjectProperty)=HorizontalBox_1=WidgetArchetype 
-	WidgetTree_0 (0-0-0-0): size 41 (cls: WidgetTree_0>WidgetTree>/Script/UMG):
-		Tag array:
 			RootWidget(ObjectProperty)=HorizontalBox_2=WidgetArchetype 
 	WidgetTree_0 (0-0-0-0): size 41 (cls: WidgetTree_0>WidgetTree>/Script/UMG):
 		Tag array:
-			RootWidget(ObjectProperty)=PickerTileView=WidgetArchetype 
+			RootWidget(ObjectProperty)=SizeBox_0=WidgetArchetype 
 	WidgetTree_0 (0-0-0-0): size 41 (cls: WidgetTree_0>WidgetTree>/Script/UMG):
 		Tag array:
 			RootWidget(ObjectProperty)=DetailsContainerSlotWidget=WidgetArchetype 
@@ -6561,7 +6696,7 @@ Serialized exports:
 			RootWidget(ObjectProperty)=PerksListLoadGuard=WidgetArchetype 
 	WidgetTree_0 (0-0-0-0): size 41 (cls: WidgetTree_0>WidgetTree>/Script/UMG):
 		Tag array:
-			RootWidget(ObjectProperty)=VerticalBox_0=WidgetArchetype 
+			RootWidget(ObjectProperty)=RootVisibilityBox=WidgetArchetype 
 	WidgetTree_0 (0-0-0-0): size 41 (cls: WidgetTree_0>WidgetTree>/Script/UMG):
 		Tag array:
 			RootWidget(ObjectProperty)=CommonBorder_0=WidgetArchetype 
@@ -6583,6 +6718,15 @@ Serialized exports:
 	WidgetTree_0 (0-0-0-0): size 41 (cls: WidgetTree_0>WidgetTree>/Script/UMG):
 		Tag array:
 			RootWidget(ObjectProperty)=CommonBorder_1=WidgetArchetype 
+	WidgetTree_0 (0-0-0-0): size 41 (cls: WidgetTree_0>WidgetTree>/Script/UMG):
+		Tag array:
+			RootWidget(ObjectProperty)=PickerStatSummaryBox=WidgetArchetype 
+	WidgetTree_0 (0-0-0-0): size 41 (cls: WidgetTree_0>WidgetTree>/Script/UMG):
+		Tag array:
+			RootWidget(ObjectProperty)=HorizontalBox_1=WidgetArchetype 
+	WidgetTree_0 (0-0-0-0): size 41 (cls: WidgetTree_0>WidgetTree>/Script/UMG):
+		Tag array:
+			RootWidget(ObjectProperty)=HorizontalBox_1=WidgetArchetype 
 	WidgetTree_0 (0-0-0-0): size 41 (cls: WidgetTree_0>WidgetTree>/Script/UMG):
 		Tag array:
 			RootWidget(ObjectProperty)=BackgroundBlur_0=WidgetArchetype 

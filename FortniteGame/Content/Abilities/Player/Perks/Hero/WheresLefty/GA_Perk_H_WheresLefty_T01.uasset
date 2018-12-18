@@ -1,7 +1,9 @@
 Name table:
+	/Game/Abilities/Player/Parents/GAT_GenericTriggeredAbility
 	/Game/Abilities/Player/Parents/GAT_GenericTriggeredAbility_Perk
 	/Game/Abilities/Player/Perks/Hero/WheresLefty/GA_Perk_H_WheresLefty_T01
-	/Game/Abilities/Player/Perks/Hero/WheresLefty/GE_Perk_H_WheresLefty_ActiveCDR
+	/Game/Abilities/Player/Perks/Hero/WheresLefty/GE_Perk_H_WheresLefty_ActiveCDR_T01
+	/Game/Abilities/Player/Perks/Hero/WheresLefty/GE_Perk_H_WheresLefty_ActiveCDR_T02
 	/Script/CoreUObject
 	/Script/Engine
 	/Script/FortniteGame
@@ -18,6 +20,8 @@ Name table:
 	BlueprintGeneratedClass
 	BoolProperty
 	ByteProperty
+	CallFunc_HasAllMatchingGameplayTags_ReturnValue
+	CallFunc_HasAllMatchingGameplayTags_TagContainerInterface_CastInput
 	CallFunc_HasAllTags_ReturnValue
 	CallFunc_K2_ApplyGameplayEffectSpecToOwner_ReturnValue
 	CallFunc_MakeOutgoingGameplayEffectSpec_ReturnValue
@@ -29,8 +33,11 @@ Name table:
 	Default__ClassProperty
 	Default__Function
 	Default__GA_Perk_H_WheresLefty_T01_C
+	Default__GAT_GenericTriggeredAbility_C
 	Default__GAT_GenericTriggeredAbility_Perk_C
-	Default__GE_Perk_H_WheresLefty_ActiveCDR_C
+	Default__GE_Perk_H_WheresLefty_ActiveCDR_T01_C
+	Default__GE_Perk_H_WheresLefty_ActiveCDR_T02_C
+	Default__InterfaceProperty
 	Default__IntProperty
 	Default__ObjectProperty
 	Default__StructProperty
@@ -42,6 +49,7 @@ Name table:
 	EventData
 	ExecuteUbergraph_GA_Perk_H_WheresLefty_T01
 	FortPawn
+	FortPlayerPawn
 	Function
 	GA_Perk_H_WheresLefty_T01_C
 	GameplayAbility
@@ -50,12 +58,18 @@ Name table:
 	GameplayEffectSpecHandle
 	GameplayEventData
 	GameplayTag
+	GameplayTagAssetInterface
 	GameplayTagContainer
+	GAT_GenericTriggeredAbility_C
 	GAT_GenericTriggeredAbility_Perk_C
-	GE_CooldownReduction
-	GE_Perk_H_WheresLefty_ActiveCDR_C
+	GE_CooldownReduction_T01
+	GE_CooldownReduction_T02
+	GE_Perk_H_WheresLefty_ActiveCDR_T01_C
+	GE_Perk_H_WheresLefty_ActiveCDR_T02_C
+	HasAllMatchingGameplayTags
 	HasAllTags
 	InstigatorTags
+	InterfaceProperty
 	IntProperty
 	K2_ActivateAbilityFromEvent
 	K2_ApplyGameplayEffectSpecToOwner
@@ -64,6 +78,7 @@ Name table:
 	K2Node_DynamicCast_AsFort_Pawn
 	K2Node_DynamicCast_bSuccess
 	K2Node_Event_EventData
+	K2Node_Select_Default
 	MakeOutgoingGameplayEffectSpec
 	NameProperty
 	None
@@ -78,6 +93,8 @@ Name table:
 	TagName
 	Target
 	TC_Pistol
+	TC_WheresLefty_T02
+	Temp_bool_Variable
 	TriggerSource
 	TriggerTag
 	UberGraphFrame
@@ -85,19 +102,23 @@ Name table:
 	Weapon.Ranged.Pistol
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	GA_Perk_H_WheresLefty_T01_C (0-0-0-0): size 165 (cls: GA_Perk_H_WheresLefty_T01_C>BlueprintGeneratedClass>/Script/Engine):
+	GA_Perk_H_WheresLefty_T01_C (0-0-0-0): size 173 (cls: GA_Perk_H_WheresLefty_T01_C>BlueprintGeneratedClass>/Script/Engine):
 		Tag array:
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_GA_Perk_H_WheresLefty_T01=GA_Perk_H_WheresLefty_T01_C 
-	Default__GA_Perk_H_WheresLefty_T01_C (0-0-0-0): size 441 (cls: Default__GA_Perk_H_WheresLefty_T01_C>GA_Perk_H_WheresLefty_T01_C):
+	Default__GA_Perk_H_WheresLefty_T01_C (0-0-0-0): size 523 (cls: Default__GA_Perk_H_WheresLefty_T01_C>GA_Perk_H_WheresLefty_T01_C):
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
-			GE_CooldownReduction(ObjectProperty)=GE_Perk_H_WheresLefty_ActiveCDR_C=/Game/Abilities/Player/Perks/Hero/WheresLefty/GE_Perk_H_WheresLefty_ActiveCDR 
+			GE_CooldownReduction_T01(ObjectProperty)=GE_Perk_H_WheresLefty_ActiveCDR_T01_C=/Game/Abilities/Player/Perks/Hero/WheresLefty/GE_Perk_H_WheresLefty_ActiveCDR_T01 
 			TC_Pistol(StructProperty)=GameplayTagContainer:Weapon.Ranged.Pistol 
+			TC_WheresLefty_T02(StructProperty)=GameplayTagContainer: 
+			GE_CooldownReduction_T02(ObjectProperty)=GE_Perk_H_WheresLefty_ActiveCDR_T02_C=/Game/Abilities/Player/Perks/Hero/WheresLefty/GE_Perk_H_WheresLefty_ActiveCDR_T02 
 			AbilityTags(StructProperty)=GameplayTagContainer:Ability.Perk.WheresLefty 
 			AbilityTriggers(ArrayProperty)=[object] (inner: StructProperty)
-	GE_CooldownReduction (0-0-0-0): size 40 (cls: GE_CooldownReduction>ClassProperty>/Script/CoreUObject)
+	GE_CooldownReduction_T01 (0-0-0-0): size 40 (cls: GE_CooldownReduction_T01>ClassProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_GA_Perk_H_WheresLefty_T01 (0-0-0-0): size 133 (cls: ExecuteUbergraph_GA_Perk_H_WheresLefty_T01>Function>/Script/CoreUObject)
+	ExecuteUbergraph_GA_Perk_H_WheresLefty_T01 (0-0-0-0): size 248 (cls: ExecuteUbergraph_GA_Perk_H_WheresLefty_T01>Function>/Script/CoreUObject)
+	CallFunc_HasAllMatchingGameplayTags_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasAllMatchingGameplayTags_ReturnValue>BoolProperty>/Script/CoreUObject)
+	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
 	EventData (0-0-0-0): size 36 (cls: EventData>StructProperty>/Script/CoreUObject)
 	K2_ActivateAbilityFromEvent (0-0-0-0): size 68 (cls: K2_ActivateAbilityFromEvent>Function>/Script/CoreUObject)
 	ActorInfo (0-0-0-0): size 36 (cls: ActorInfo>StructProperty>/Script/CoreUObject)
@@ -105,9 +126,13 @@ Serialized exports:
 	CallFunc_HasAllTags_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasAllTags_ReturnValue>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	ReturnValue (0-0-0-0): size 34 (cls: ReturnValue>BoolProperty>/Script/CoreUObject)
+	K2Node_Select_Default (0-0-0-0): size 40 (cls: K2Node_Select_Default>ClassProperty>/Script/CoreUObject)
+	GE_CooldownReduction_T02 (0-0-0-0): size 40 (cls: GE_CooldownReduction_T02>ClassProperty>/Script/CoreUObject)
+	CallFunc_HasAllMatchingGameplayTags_TagContainerInterface_CastInput (0-0-0-0): size 36 (cls: CallFunc_HasAllMatchingGameplayTags_TagContainerInterface_CastInput>InterfaceProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Pawn (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Pawn>ObjectProperty>/Script/CoreUObject)
 	CallFunc_K2_ApplyGameplayEffectSpecToOwner_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_ApplyGameplayEffectSpecToOwner_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_MakeOutgoingGameplayEffectSpec_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_MakeOutgoingGameplayEffectSpec_ReturnValue>StructProperty>/Script/CoreUObject)
 	K2Node_Event_EventData (0-0-0-0): size 36 (cls: K2Node_Event_EventData>StructProperty>/Script/CoreUObject)
 	Payload (0-0-0-0): size 36 (cls: Payload>StructProperty>/Script/CoreUObject)
 	TC_Pistol (0-0-0-0): size 36 (cls: TC_Pistol>StructProperty>/Script/CoreUObject)
+	TC_WheresLefty_T02 (0-0-0-0): size 36 (cls: TC_WheresLefty_T02>StructProperty>/Script/CoreUObject)

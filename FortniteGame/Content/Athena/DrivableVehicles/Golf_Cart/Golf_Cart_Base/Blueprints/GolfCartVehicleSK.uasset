@@ -44,6 +44,7 @@ Name table:
 	/Game/Athena/DrivableVehicles/ShoppingCartWheels
 	/Game/Athena/DrivableVehicles/Speed_CameraShake
 	/Game/Athena/DrivableVehicles/VehicleConfigsGolfCart
+	/Game/Athena/DrivableVehicles/WheeledVehicleAbilitySet
 	/Game/Athena/Items/Weapons/Abilities/RCRocket/B_PrjPawn_Athena_RCRocket
 	/Game/Athena/Sounds/HitNotifications/HitNotifyAudioBank_VehicleDefault
 	/Game/Athena/Sounds/Vehicles/GolfCart/C_GolfCart_Audio_BatteryVolume
@@ -276,7 +277,9 @@ Name table:
 	BuildingProp
 	BuildingSMActor
 	BuildingWall
+	bUpdateOverlapsOnAnimationFinalize
 	bUseGroundMotion
+	bUseVehicleIsOnGround
 	bValidatedAsWired
 	bVisible
 	ByteProperty
@@ -764,6 +767,7 @@ Name table:
 	EntryPoint
 	Enum
 	EnumProperty
+	EPhysicalSurface
 	EqualEqual_ObjectObject
 	ERotatorQuantization
 	ERotatorQuantization::ShortComponents
@@ -807,6 +811,7 @@ Name table:
 	ForceApplicationPoint
 	ForceDetachFromRemoteControlledPawn
 	ForceFeedbackEffect
+	FortAbilitySet
 	FortAIPawn
 	FortAthenaGoatVehicle
 	FortAthenaSKMotorVehicle
@@ -973,6 +978,7 @@ Name table:
 	HitNormalImpulse
 	HitNotifyAudioBank_VehicleDefault
 	HitResult
+	HitSurfaceType
 	HonkAudioComp
 	IgnoreHitLastDriver
 	ImpactLocation
@@ -1123,6 +1129,7 @@ Name table:
 	K2Node_Event_HitLocation
 	K2Node_Event_HitNormal
 	K2Node_Event_HitNormalImpulse
+	K2Node_Event_HitSurfaceType
 	K2Node_Event_ImpactNormal
 	K2Node_Event_ImpactPoint
 	K2Node_Event_InstigatedBy
@@ -1517,6 +1524,7 @@ Name table:
 	StartBoostRumble
 	StartDriverCameraShake
 	StartDriverRumble
+	StartupAbilitySet
 	StaticMesh
 	StaticMeshComponent
 	StaticMeshComponent0
@@ -1627,6 +1635,7 @@ Name table:
 	WeaponHitNotifyAudioBank
 	WeaponMesh0
 	wheel_bl
+	WheeledVehicleAbilitySet
 	WheelOffsetLimitB
 	WheelOffsetLimitF
 	WheelSpinDampingPerSecond
@@ -1647,7 +1656,7 @@ Serialized exports:
 			Timelines(ArrayProperty)=[object] (inner: ObjectProperty)
 			SimpleConstructionScript(ObjectProperty)=SimpleConstructionScript_0=GolfCartVehicleSK_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_GolfCartVehicleSK=GolfCartVehicleSK_C 
-	Default__GolfCartVehicleSK_C (0-0-0-0): size 13624 (cls: Default__GolfCartVehicleSK_C>GolfCartVehicleSK_C):
+	Default__GolfCartVehicleSK_C (0-0-0-0): size 13757 (cls: Default__GolfCartVehicleSK_C>GolfCartVehicleSK_C):
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			OnDeathSound(ObjectProperty)=GolfCart_Destroy_Cue=/Game/Athena/Sounds/Vehicles/GolfCart/GolfCart_Destroy_Cue 
@@ -1721,6 +1730,7 @@ Serialized exports:
 			AttributeInitKey(StructProperty)=System.Byte[] 
 			DamageSet(ObjectProperty)=DamageSet=Default__GolfCartVehicleSK_C 
 			GameplayTags(StructProperty)=GameplayTagContainer:Athena.Vehicle.GolfCart 
+			StartupAbilitySet(ObjectProperty)=WheeledVehicleAbilitySet=/Game/Athena/DrivableVehicles/WheeledVehicleAbilitySet 
 			ReplicatedMovement(StructProperty)=System.Byte[] 
 			RootComponent(ObjectProperty)=SkeletalMeshComponent=Default__GolfCartVehicleSK_C 
 	AttachedPickups (0-0-0-0): size 36 (cls: AttachedPickups>ObjectProperty>/Script/CoreUObject)
@@ -1729,7 +1739,7 @@ Serialized exports:
 	BounceIgnoreList (0-0-0-0): size 36 (cls: BounceIgnoreList>ArrayProperty>/Script/CoreUObject)
 	GolfCart_Horn_Cue (0-0-0-0): size 36 (cls: GolfCart_Horn_Cue>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_GolfCartVehicleSK (0-0-0-0): size 15485 (cls: ExecuteUbergraph_GolfCartVehicleSK>Function>/Script/CoreUObject)
+	ExecuteUbergraph_GolfCartVehicleSK (0-0-0-0): size 15489 (cls: ExecuteUbergraph_GolfCartVehicleSK>Function>/Script/CoreUObject)
 	CallFunc_GetAllPassengers_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetAllPassengers_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetAllPassengers_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetAllPassengers_ReturnValue>ArrayProperty>/Script/CoreUObject)
 	CallFunc_GetAllPassengers_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetAllPassengers_ReturnValue1>ObjectProperty>/Script/CoreUObject)
@@ -1805,7 +1815,7 @@ Serialized exports:
 	BndEvt__Box_K2Node_ComponentBoundEvent_0_ComponentBeginOverlapSignature__DelegateSignature (0-0-0-0): size 138 (cls: BndEvt__Box_K2Node_ComponentBoundEvent_0_ComponentBeginOverlapSignature__DelegateSignature>Function>/Script/CoreUObject)
 	ApplyImpulse (0-0-0-0): size 56 (cls: ApplyImpulse>Function>/Script/CoreUObject)
 	HitLocation (0-0-0-0): size 36 (cls: HitLocation>StructProperty>/Script/CoreUObject)
-	OnCollisionHitEffects (0-0-0-0): size 124 (cls: OnCollisionHitEffects>Function>/Script/CoreUObject)
+	OnCollisionHitEffects (0-0-0-0): size 138 (cls: OnCollisionHitEffects>Function>/Script/CoreUObject)
 	UpdateMovementCosmeticParameters (0-0-0-0): size 54 (cls: UpdateMovementCosmeticParameters>Function>/Script/CoreUObject)
 	Damage (0-0-0-0): size 32 (cls: Damage>FloatProperty>/Script/CoreUObject)
 	OnDeathPlayEffects (0-0-0-0): size 152 (cls: OnDeathPlayEffects>Function>/Script/CoreUObject)
@@ -2024,6 +2034,7 @@ Serialized exports:
 	K2Node_CustomEvent_CurrentDayPhase (0-0-0-0): size 36 (cls: K2Node_CustomEvent_CurrentDayPhase>ByteProperty>/Script/CoreUObject)
 	K2Node_CustomEvent_PreviousDayPhase (0-0-0-0): size 36 (cls: K2Node_CustomEvent_PreviousDayPhase>ByteProperty>/Script/CoreUObject)
 	K2Node_Event_EndPlayReason (0-0-0-0): size 36 (cls: K2Node_Event_EndPlayReason>ByteProperty>/Script/CoreUObject)
+	K2Node_Event_HitSurfaceType (0-0-0-0): size 36 (cls: K2Node_Event_HitSurfaceType>ByteProperty>/Script/CoreUObject)
 	Temp_byte_Variable (0-0-0-0): size 36 (cls: Temp_byte_Variable>ByteProperty>/Script/CoreUObject)
 	Temp_byte_Variable1 (0-0-0-0): size 36 (cls: Temp_byte_Variable1>ByteProperty>/Script/CoreUObject)
 	CallFunc_GetValidValue_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetValidValue_ReturnValue>ByteProperty>/Script/CoreUObject)
@@ -2035,6 +2046,7 @@ Serialized exports:
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	CallFunc_GetValidValue_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetValidValue_ReturnValue>ByteProperty>/Script/CoreUObject)
 	CallFunc_GetVehicleSeatIndex_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetVehicleSeatIndex_ReturnValue>ByteProperty>/Script/CoreUObject)
+	HitSurfaceType (0-0-0-0): size 36 (cls: HitSurfaceType>ByteProperty>/Script/CoreUObject)
 	PreviousDayPhase (0-0-0-0): size 36 (cls: PreviousDayPhase>ByteProperty>/Script/CoreUObject)
 	GameplayEffectClass (0-0-0-0): size 40 (cls: GameplayEffectClass>ClassProperty>/Script/CoreUObject)
 	GE_PlayerLaunched (0-0-0-0): size 40 (cls: GE_PlayerLaunched>ClassProperty>/Script/CoreUObject)
@@ -2236,9 +2248,10 @@ Serialized exports:
 			VolumeParam(StructProperty)=System.Byte[] 
 			PitchParam(StructProperty)=System.Byte[] 
 			ParamRange(StructProperty)=Vector2D(0,50) 
-	SkeletalMeshComponent (0-0-0-0): size 477 (cls: SkeletalMeshComponent>FortVehicleSkelMeshComponent>/Script/FortniteGame):
+	SkeletalMeshComponent (0-0-0-0): size 503 (cls: SkeletalMeshComponent>FortVehicleSkelMeshComponent>/Script/FortniteGame):
 		Tag array:
 			AnimClass(ObjectProperty)=GolfCartVehicleSK_AnimBP_Base_C=/Game/Athena/DrivableVehicles/Golf_Cart/Golf_Cart_Base/Mesh/GolfCartVehicleSK_AnimBP_Base 
+			bUpdateOverlapsOnAnimationFinalize(BoolProperty)=False 
 			bEnablePhysicsOnDedicatedServer(BoolProperty)=True 
 			SkeletalMesh(ObjectProperty)=SK_Golf_Cart=/Game/Athena/DrivableVehicles/Golf_Cart/Golf_Cart_Base/Mesh/SK_Golf_Cart 
 			OverrideMaterials(ArrayProperty)=[object] (inner: ObjectProperty)

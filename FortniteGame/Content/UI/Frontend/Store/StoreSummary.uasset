@@ -53,6 +53,7 @@ Name table:
 	/Game/UI/Foundation/Textures/Icons/Shell/T-Icon-Power-64
 	/Game/UI/Foundation/Textures/Rule/Rule-Dotted-HUD
 	/Game/UI/Frontend/ItemManagement/CustomItemDetailsWidgets/MainModeItemDetailsHostPanel
+	/Game/UI/Frontend/ItemManagement/MulchConfirmationModal/MulchConfirmationModalWidget
 	/Game/UI/Frontend/ItemManagement/PerkDivider
 	/Game/UI/Frontend/Store/StoreItemCard
 	/Game/UI/Frontend/Store/StoreSummary
@@ -91,6 +92,7 @@ Name table:
 	bIncludeName
 	bIncludeShortDescription
 	bIsHovered
+	bIsOpen
 	bIsSelected
 	bIsVariable
 	BlueprintComponentDelegateBinding
@@ -149,13 +151,17 @@ Name table:
 	CallFunc_Array_Get_Item
 	CallFunc_Array_Length_ReturnValue
 	CallFunc_BP_GetSelectedItem_ReturnValue
+	CallFunc_CheckForPendingMulch_HasPendingMulch
 	CallFunc_ExitSummary_ReturnValue
 	CallFunc_GetContext_ReturnValue
 	CallFunc_GetFilterCategory_ReturnValue
+	CallFunc_GetNumItemsToMulch_ReturnValue
 	CallFunc_GetUIManagerWidget_ReturnValue
 	CallFunc_GetVisibility_ReturnValue
+	CallFunc_Greater_IntInt_ReturnValue
 	CallFunc_IsValid_ReturnValue
 	CallFunc_Less_IntInt_ReturnValue
+	CallFunc_Not_PreBool_ReturnValue
 	CallFunc_SelectObject_ReturnValue
 	CallFunc_SelectObject_ReturnValue1
 	Card
@@ -163,8 +169,10 @@ Name table:
 	CategoryIndicator
 	CategoryIndicatorTertiary
 	CenterButtonTextWidget
+	CheckForPendingMulch
 	Class
 	Clipping
+	CloseSummaryScreen
 	ColorAndOpacity
 	CommonActionWidget
 	CommonBorder
@@ -248,6 +256,7 @@ Name table:
 	Default__MainModeItemDetailsHostPanel_C
 	Default__MiniCraftingIngredientList_C
 	Default__MiniItemCraftingIngredientsDetailWidget_C
+	Default__MulchConfirmationModalWidget_C
 	Default__NamedSlot
 	Default__ObjectProperty
 	Default__Overlay
@@ -343,6 +352,7 @@ Name table:
 	ExitSummary
 	ExtraIndicatorSlot
 	FavoriteIndicator
+	FinalizeFavoriteStatus
 	FloatProperty
 	Focus
 	Font
@@ -350,6 +360,7 @@ Name table:
 	FortClientEventName
 	FortEvolveIndicator
 	FortFavoriteIndicator
+	FortInventoryContext
 	FortInventoryOverflowIndicator
 	FortItemCategoryIndicator
 	FortItemCategoryIndicator2Icon
@@ -368,12 +379,16 @@ Name table:
 	FunctionNameToBind
 	GetContext
 	GetFilterCategory
+	GetNumItemsToMulch
 	GetUIManagerWidget
 	GetVisibility
+	Greater_IntInt
 	HAlign_Center
 	HAlign_Fill
 	HAlign_Left
 	HAlign_Right
+	HandleContextMenuOpenChangedBP
+	HasPendingMulch
 	HeaderWidget
 	HeightOverride
 	HideItemDescription
@@ -427,6 +442,7 @@ Name table:
 	K2Node_ComponentBoundEvent_Item1
 	K2Node_DynamicCast_AsStore_Card_Object
 	K2Node_DynamicCast_bSuccess
+	K2Node_Event_bIsOpen
 	K2Node_SwitchEnum1_CmpSuccess
 	K2Node_SwitchEnum_CmpSuccess
 	KismetArrayLibrary
@@ -461,6 +477,8 @@ Name table:
 	MiniCraftingIngredientList_C
 	MiniItemCraftingIngredientsDetailWidget
 	MiniItemCraftingIngredientsDetailWidget_C
+	MulchConfirmationModalClass
+	MulchConfirmationModalWidget_C
 	MultiSizeBrush
 	Name
 	NamedSlot
@@ -470,6 +488,7 @@ Name table:
 	Navigation
 	Next
 	None
+	Not_PreBool
 	NotEqual_ByteByte
 	NotoSans
 	NotoSans-Bold
@@ -543,6 +562,7 @@ Name table:
 	ShouldShowIcon
 	ShouldShowLabel
 	ShouldShowMaximumLevel
+	ShowMulchConfirmationModal
 	ShowSurvivorDetails
 	Size
 	SizeBox
@@ -640,7 +660,7 @@ Name table:
 	WrapBox
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	StoreSummary_C (0-0-0-0): size 426 (cls: StoreSummary_C>WidgetBlueprintGeneratedClass>/Script/UMG):
+	StoreSummary_C (0-0-0-0): size 474 (cls: StoreSummary_C>WidgetBlueprintGeneratedClass>/Script/UMG):
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
@@ -649,9 +669,10 @@ Serialized exports:
 			TemplateAsset(SoftObjectProperty)=/Game/UI/Frontend/Store/StoreSummary.WidgetArchetype 
 			DynamicBindingObjects(ArrayProperty)=[object] (inner: ObjectProperty)
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_StoreSummary=StoreSummary_C 
-	Default__StoreSummary_C (0-0-0-0): size 117 (cls: Default__StoreSummary_C>StoreSummary_C):
+	Default__StoreSummary_C (0-0-0-0): size 146 (cls: Default__StoreSummary_C>StoreSummary_C):
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
+			MulchConfirmationModalClass(ObjectProperty)=MulchConfirmationModalWidget_C=/Game/UI/Frontend/ItemManagement/MulchConfirmationModal/MulchConfirmationModalWidget 
 			bHasScriptImplementedTick(BoolProperty)=False 
 			bHasScriptImplementedPaint(BoolProperty)=False 
 	AlterationsWidget (0-0-0-0): size 296 (cls: AlterationsWidget>AlterationsWidget_C>/Game/UI/Foundation/Alterations/AlterationsWidget):
@@ -668,7 +689,10 @@ Serialized exports:
 			bCookedWidgetTree(BoolProperty)=True 
 	ButtonClose (0-0-0-0): size 36 (cls: ButtonClose>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_StoreSummary (0-0-0-0): size 1247 (cls: ExecuteUbergraph_StoreSummary>Function>/Script/CoreUObject)
+	ExecuteUbergraph_StoreSummary (0-0-0-0): size 1356 (cls: ExecuteUbergraph_StoreSummary>Function>/Script/CoreUObject)
+	bIsOpen (0-0-0-0): size 34 (cls: bIsOpen>BoolProperty>/Script/CoreUObject)
+	HandleContextMenuOpenChangedBP (0-0-0-0): size 68 (cls: HandleContextMenuOpenChangedBP>Function>/Script/CoreUObject)
+	CloseSummaryScreen (0-0-0-0): size 54 (cls: CloseSummaryScreen>Function>/Script/CoreUObject)
 	Item (0-0-0-0): size 36 (cls: Item>ObjectProperty>/Script/CoreUObject)
 	BndEvt__TileView_K2Node_ComponentBoundEvent_17_OnListViewItemClicked__DelegateSignature (0-0-0-0): size 82 (cls: BndEvt__TileView_K2Node_ComponentBoundEvent_17_OnListViewItemClicked__DelegateSignature>Function>/Script/CoreUObject)
 	Item (0-0-0-0): size 36 (cls: Item>ObjectProperty>/Script/CoreUObject)
@@ -719,11 +743,17 @@ Serialized exports:
 			Content(ObjectProperty)=BorderLockedR=WidgetArchetype 
 	bIsHovered (0-0-0-0): size 34 (cls: bIsHovered>BoolProperty>/Script/CoreUObject)
 	bIsSelected (0-0-0-0): size 34 (cls: bIsSelected>BoolProperty>/Script/CoreUObject)
+	HasPendingMulch (0-0-0-0): size 34 (cls: HasPendingMulch>BoolProperty>/Script/CoreUObject)
+	CheckForPendingMulch (0-0-0-0): size 154 (cls: CheckForPendingMulch>Function>/Script/CoreUObject)
+	CallFunc_Greater_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Greater_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_CheckForPendingMulch_HasPendingMulch (0-0-0-0): size 34 (cls: CallFunc_CheckForPendingMulch_HasPendingMulch>BoolProperty>/Script/CoreUObject)
 	CallFunc_ExitSummary_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_ExitSummary_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_Not_PreBool_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue>BoolProperty>/Script/CoreUObject)
 	K2Node_ComponentBoundEvent_bIsHovered (0-0-0-0): size 34 (cls: K2Node_ComponentBoundEvent_bIsHovered>BoolProperty>/Script/CoreUObject)
 	K2Node_ComponentBoundEvent_bIsSelected (0-0-0-0): size 34 (cls: K2Node_ComponentBoundEvent_bIsSelected>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
+	K2Node_Event_bIsOpen (0-0-0-0): size 34 (cls: K2Node_Event_bIsOpen>BoolProperty>/Script/CoreUObject)
 	K2Node_SwitchEnum1_CmpSuccess (0-0-0-0): size 34 (cls: K2Node_SwitchEnum1_CmpSuccess>BoolProperty>/Script/CoreUObject)
 	K2Node_SwitchEnum_CmpSuccess (0-0-0-0): size 34 (cls: K2Node_SwitchEnum_CmpSuccess>BoolProperty>/Script/CoreUObject)
 	CallFunc_Less_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
@@ -1614,6 +1644,7 @@ Serialized exports:
 			Brush(StructProperty)=System.Byte[] 
 			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
 			Slot(ObjectProperty)=VerticalBoxSlot_3=WidgetArchetype 
+	CallFunc_GetNumItemsToMulch_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetNumItemsToMulch_ReturnValue>IntProperty>/Script/CoreUObject)
 	CallFunc_Add_IntInt_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue>IntProperty>/Script/CoreUObject)
 	CallFunc_Array_Add_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Array_Add_ReturnValue>IntProperty>/Script/CoreUObject)
 	CallFunc_Array_Length_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Array_Length_ReturnValue>IntProperty>/Script/CoreUObject)
@@ -1762,6 +1793,7 @@ Serialized exports:
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
+	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetUIManagerWidget_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetUIManagerWidget_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_SelectObject_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_SelectObject_ReturnValue>ObjectProperty>/Script/CoreUObject)

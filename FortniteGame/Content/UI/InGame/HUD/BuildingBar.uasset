@@ -11,6 +11,7 @@ Name table:
 	/Game/UI/HUD/Materials/HUD-Bar_Material
 	/Game/UI/InGame/HUD/BuildingBar
 	/Game/UI/InGame/HUD/BuildingBar.WidgetArchetype
+	/Game/UI/InGame/HUD/CommonBigHealthBar
 	/Game/UI/InGame/HUD/CommonHealthBar
 	/Script/CommonUI
 	/Script/CoreUObject
@@ -45,6 +46,8 @@ Name table:
 	bCookedWidgetTree
 	bHasScriptImplementedPaint
 	bHasScriptImplementedTick
+	BigHealth
+	BigHealthSwitcher
 	bIsVariable
 	BlueprintGeneratedClass
 	BoolProperty
@@ -79,6 +82,8 @@ Name table:
 	Class
 	ColorAndOpacity
 	ColorUseRule
+	CommonBigHealthBar
+	CommonBigHealthBar_C
 	CommonBorder
 	CommonHealthBar
 	CommonHealthBar_C
@@ -101,6 +106,7 @@ Name table:
 	Default__BorderSlot
 	Default__BuildingBar_C
 	Default__ByteProperty
+	Default__CommonBigHealthBar_C
 	Default__CommonBorder
 	Default__CommonHealthBar_C
 	Default__CommonTextBlock
@@ -130,6 +136,7 @@ Name table:
 	Default__VerticalBox
 	Default__VerticalBoxSlot
 	Default__WidgetBlueprintGeneratedClass
+	Default__WidgetSwitcher
 	Default__WidgetSwitcherSlot
 	Default__WidgetTree
 	DisplayMode
@@ -183,6 +190,7 @@ Name table:
 	HorizontalBoxSlot
 	HP FadeTimer
 	HP FadeUpdateRate
+	HP Text
 	HUD-Bar_Material
 	Image
 	ImageHPBevel
@@ -238,6 +246,10 @@ Name table:
 	Round
 	ScriptStruct
 	Set Display Mode
+	SetActiveWidgetIndex
+	SetBigHealthMode
+	SetBigHealthPercentFill
+	SetBigHealthValue
 	SetColorAndOpacity
 	SetColors
 	SetDeltaVisibility
@@ -323,6 +335,8 @@ Name table:
 	Update Current Durability Value
 	Update Current HP Value
 	Update Durability Text
+	Update HP Fill
+	Update HP Text
 	Update Max Durability Value
 	Update Max HP Value
 	UpdateBuildingTrap
@@ -336,12 +350,13 @@ Name table:
 	WidgetArchetype
 	WidgetBlueprintGeneratedClass
 	WidgetStyle
+	WidgetSwitcher
 	WidgetSwitcherSlot
 	WidgetTree
 	WidthOverride
 	WrapTextAt
 Serialized exports:
-	CommonHealthBar (0-0-0-0): size 36 (cls: CommonHealthBar>ObjectProperty>/Script/CoreUObject)
+	BigHealthSwitcher (0-0-0-0): size 36 (cls: BigHealthSwitcher>ObjectProperty>/Script/CoreUObject)
 	Max (0-0-0-0): size 32 (cls: Max>FloatProperty>/Script/CoreUObject)
 	Update Max HP Value (0-0-0-0): size 76 (cls: Update Max HP Value>Function>/Script/CoreUObject)
 	Current (0-0-0-0): size 32 (cls: Current>FloatProperty>/Script/CoreUObject)
@@ -357,7 +372,13 @@ Serialized exports:
 	Set Display Mode (0-0-0-0): size 1663 (cls: Set Display Mode>Function>/Script/CoreUObject)
 	BuildingTrap (0-0-0-0): size 36 (cls: BuildingTrap>ObjectProperty>/Script/CoreUObject)
 	UpdateBuildingTrap (0-0-0-0): size 608 (cls: UpdateBuildingTrap>Function>/Script/CoreUObject)
-	BuildingBar_C (0-0-0-0): size 386 (cls: BuildingBar_C>WidgetBlueprintGeneratedClass>/Script/UMG):
+	BigHealth (0-0-0-0): size 34 (cls: BigHealth>BoolProperty>/Script/CoreUObject)
+	SetBigHealthMode (0-0-0-0): size 120 (cls: SetBigHealthMode>Function>/Script/CoreUObject)
+	HP Text (0-0-0-0): size 32 (cls: HP Text>TextProperty>/Script/CoreUObject)
+	SetBigHealthValue (0-0-0-0): size 76 (cls: SetBigHealthValue>Function>/Script/CoreUObject)
+	Percent (0-0-0-0): size 32 (cls: Percent>FloatProperty>/Script/CoreUObject)
+	SetBigHealthPercentFill (0-0-0-0): size 76 (cls: SetBigHealthPercentFill>Function>/Script/CoreUObject)
+	BuildingBar_C (0-0-0-0): size 442 (cls: BuildingBar_C>WidgetBlueprintGeneratedClass>/Script/UMG):
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
@@ -397,8 +418,10 @@ Serialized exports:
 			Padding(StructProperty)=System.Byte[] 
 			Parent(ObjectProperty)=CommonBorder_6=WidgetArchetype 
 			Content(ObjectProperty)=SizeBox_1=WidgetArchetype 
-	WidgetArchetype (0-0-0-0): size 212 (cls: WidgetArchetype>BuildingBar_C):
+	WidgetArchetype (0-0-0-0): size 270 (cls: WidgetArchetype>BuildingBar_C):
 		Tag array:
+			BigHealthSwitcher(ObjectProperty)=BigHealthSwitcher=WidgetArchetype 
+			CommonBigHealthBar(ObjectProperty)=CommonBigHealthBar=WidgetArchetype 
 			CommonHealthBar(ObjectProperty)=CommonHealthBar=WidgetArchetype 
 			TrapItemCard(ObjectProperty)=TrapItemCard=WidgetArchetype 
 			TrapNameTextBlock(ObjectProperty)=TrapNameTextBlock=WidgetArchetype 
@@ -422,6 +445,21 @@ Serialized exports:
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	CommonBigHealthBar (0-0-0-0): size 386 (cls: CommonBigHealthBar>CommonBigHealthBar_C>/Game/UI/InGame/HUD/CommonBigHealthBar):
+		Tag array:
+			[Horizontal Box] Health Stat Text(ObjectProperty)=[Horizontal Box] Health Stat Text=WidgetArchetype 
+			[Image] HP Baseplate(ObjectProperty)=[Image] HP Baseplate=WidgetArchetype 
+			[Overlay] HP Bar Artwork(ObjectProperty)=[Overlay] HP Bar Artwork=WidgetArchetype 
+			[ProgressBar] HP Fill(ObjectProperty)=[ProgressBar] HP Fill=WidgetArchetype 
+			[Size Box] HP Bar(ObjectProperty)=[Size Box] HP Bar=WidgetArchetype 
+			[Size Box] HP Bevel(ObjectProperty)=[Size Box] HP Bevel=WidgetArchetype 
+			ImageHPBevel(ObjectProperty)=ImageHPBevel=WidgetArchetype 
+			SwitcherHPText(ObjectProperty)=SwitcherHPText=WidgetArchetype 
+			TextBuildModeHPText(ObjectProperty)=TextBuildModeHPText=WidgetArchetype 
+			TextCurrentHealthStat(ObjectProperty)=TextCurrentHealthStat=WidgetArchetype 
+			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
+			bCookedWidgetTree(BoolProperty)=True 
+			Slot(ObjectProperty)=WidgetSwitcherSlot_1=WidgetArchetype 
 	CommonBorder_3 (0-0-0-0): size 284 (cls: CommonBorder_3>CommonBorder>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=Border-MainL-Black_C=/Game/UI/Foundation/Border/Border-MainL-Black 
@@ -450,7 +488,24 @@ Serialized exports:
 			TextMaxHealthStat(ObjectProperty)=TextMaxHealthStat=WidgetArchetype 
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
-			Slot(ObjectProperty)=VerticalBoxSlot_2=WidgetArchetype 
+			Slot(ObjectProperty)=WidgetSwitcherSlot_0=WidgetArchetype 
+	TextBuildModeHPText (0-0-0-0): size 379 (cls: TextBuildModeHPText>CommonTextBlock>/Script/CommonUI):
+		Tag array:
+			Style(ObjectProperty)=TextStyle-Base-XS-B_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B 
+			Text(TextProperty)=?? (51A1D6CA413A48E46AA46D83A707CDD4) 
+			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
+			Slot(ObjectProperty)=WidgetSwitcherSlot_4=WidgetArchetype 
+			bIsVariable(BoolProperty)=True 
+	TextCurrentHealthStat (0-0-0-0): size 433 (cls: TextCurrentHealthStat>CommonTextBlock>/Script/CommonUI):
+		Tag array:
+			Style(ObjectProperty)=TextStyle-Base-XS-B_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B 
+			Text(TextProperty)=BIG HEALTH LEFT (432FA53849109B309EC46492BB0EFC7D) 
+			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
+			Justification(ByteProperty)=ETextJustify::Right 
+			Slot(ObjectProperty)=HorizontalBoxSlot_2=WidgetArchetype 
+			bIsVariable(BoolProperty)=True 
 	TextBuildModeHPText (0-0-0-0): size 379 (cls: TextBuildModeHPText>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B 
@@ -508,6 +563,13 @@ Serialized exports:
 			bOutroPanelBelow(BoolProperty)=False 
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=OverlaySlot_2=WidgetArchetype 
+	SwitcherHPText (0-0-0-0): size 167 (cls: SwitcherHPText>CommonWidgetSwitcher>/Script/CommonUI):
+		Tag array:
+			TransitionDuration(FloatProperty)=0 
+			bWidgetActivationEnabled(BoolProperty)=False 
+			bOutroPanelBelow(BoolProperty)=False 
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=OverlaySlot_2=WidgetArchetype 
 	DisplayMode (0-0-0-0): size 40 (cls: DisplayMode>EnumProperty>/Script/CoreUObject)
 	K2Node_Select_Default (0-0-0-0): size 40 (cls: K2Node_Select_Default>EnumProperty>/Script/CoreUObject)
 	Temp_byte_Variable (0-0-0-0): size 40 (cls: Temp_byte_Variable>EnumProperty>/Script/CoreUObject)
@@ -530,6 +592,11 @@ Serialized exports:
 			BPItemCardSize(EnumProperty)=EFortItemCardSize::S 
 			EmptyItemType(EnumProperty)=EFortItemType::AccountItem 
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
+	[Horizontal Box] Health Stat Text (0-0-0-0): size 108 (cls: [Horizontal Box] Health Stat Text>HorizontalBox>/Script/UMG):
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=WidgetSwitcherSlot_3=WidgetArchetype 
+			bIsVariable(BoolProperty)=True 
 	[Horizontal Box] Health Stat Text (0-0-0-0): size 116 (cls: [Horizontal Box] Health Stat Text>HorizontalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -543,6 +610,12 @@ Serialized exports:
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=VerticalBoxSlot_14=WidgetArchetype 
+	HorizontalBoxSlot_2 (0-0-0-0): size 197 (cls: HorizontalBoxSlot_2>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=[Horizontal Box] Health Stat Text=WidgetArchetype 
+			Content(ObjectProperty)=TextCurrentHealthStat=WidgetArchetype 
 	HorizontalBoxSlot_1 (0-0-0-0): size 284 (cls: HorizontalBoxSlot_1>HorizontalBoxSlot>/Script/UMG):
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
@@ -590,6 +663,16 @@ Serialized exports:
 			Brush(StructProperty)=System.Byte[] 
 			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
+	[Image] HP Baseplate (0-0-0-0): size 364 (cls: [Image] HP Baseplate>Image>/Script/UMG):
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=OverlaySlot_213=WidgetArchetype 
+	ImageHPBevel (0-0-0-0): size 376 (cls: ImageHPBevel>Image>/Script/UMG):
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
 	Current Durability Value (0-0-0-0): size 32 (cls: Current Durability Value>IntProperty>/Script/CoreUObject)
 	Max Durability Value (0-0-0-0): size 32 (cls: Max Durability Value>IntProperty>/Script/CoreUObject)
 	K2Node_Select1_Default (0-0-0-0): size 32 (cls: K2Node_Select1_Default>IntProperty>/Script/CoreUObject)
@@ -604,6 +687,8 @@ Serialized exports:
 	CallFunc_Round_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Round_ReturnValue>IntProperty>/Script/CoreUObject)
 	CallFunc_Round_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Round_ReturnValue>IntProperty>/Script/CoreUObject)
 	CallFunc_GetTrapLevel_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetTrapLevel_ReturnValue>IntProperty>/Script/CoreUObject)
+	CommonBigHealthBar (0-0-0-0): size 36 (cls: CommonBigHealthBar>ObjectProperty>/Script/CoreUObject)
+	CommonHealthBar (0-0-0-0): size 36 (cls: CommonHealthBar>ObjectProperty>/Script/CoreUObject)
 	TemporaryTrapInstance (0-0-0-0): size 36 (cls: TemporaryTrapInstance>ObjectProperty>/Script/CoreUObject)
 	TrapItemCard (0-0-0-0): size 36 (cls: TrapItemCard>ObjectProperty>/Script/CoreUObject)
 	TrapNameTextBlock (0-0-0-0): size 36 (cls: TrapNameTextBlock>ObjectProperty>/Script/CoreUObject)
@@ -614,11 +699,49 @@ Serialized exports:
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=SizeBoxSlot_676=WidgetArchetype 
+	[Overlay] HP Bar Artwork (0-0-0-0): size 116 (cls: [Overlay] HP Bar Artwork>Overlay>/Script/UMG):
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
+			bIsVariable(BoolProperty)=True 
+	[Overlay] (0-0-0-0): size 86 (cls: [Overlay]>Overlay>/Script/UMG):
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=SizeBoxSlot_676=WidgetArchetype 
 	[Overlay] HP Bar Artwork (0-0-0-0): size 120 (cls: [Overlay] HP Bar Artwork>Overlay>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
+	OverlaySlot_213 (0-0-0-0): size 152 (cls: OverlaySlot_213>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=[Overlay] HP Bar Artwork=WidgetArchetype 
+			Content(ObjectProperty)=[Image] HP Baseplate=WidgetArchetype 
+	OverlaySlot_214 (0-0-0-0): size 111 (cls: OverlaySlot_214>OverlaySlot>/Script/UMG):
+		Tag array:
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=[Overlay] HP Bar Artwork=WidgetArchetype 
+			Content(ObjectProperty)=[Size Box] HP Bevel=WidgetArchetype 
+	OverlaySlot_6927 (0-0-0-0): size 152 (cls: OverlaySlot_6927>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=[Overlay] HP Bar Artwork=WidgetArchetype 
+			Content(ObjectProperty)=[ProgressBar] HP Fill=WidgetArchetype 
+	OverlaySlot_0 (0-0-0-0): size 152 (cls: OverlaySlot_0>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=[Overlay]=WidgetArchetype 
+			Content(ObjectProperty)=[Overlay] HP Bar Artwork=WidgetArchetype 
+	OverlaySlot_2 (0-0-0-0): size 197 (cls: OverlaySlot_2>OverlaySlot>/Script/UMG):
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=[Overlay]=WidgetArchetype 
+			Content(ObjectProperty)=SwitcherHPText=WidgetArchetype 
 	OverlaySlot_213 (0-0-0-0): size 152 (cls: OverlaySlot_213>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Fill 
@@ -654,6 +777,11 @@ Serialized exports:
 			VerticalAlignment(ByteProperty)=VAlign_Center 
 			Parent(ObjectProperty)=[Overlay]=WidgetArchetype 
 			Content(ObjectProperty)=SwitcherHPText=WidgetArchetype 
+	[ProgressBar] HP Fill (0-0-0-0): size 894 (cls: [ProgressBar] HP Fill>ProgressBar>/Script/UMG):
+		Tag array:
+			WidgetStyle(StructProperty)=System.Byte[] 
+			Percent(FloatProperty)=1 
+			Slot(ObjectProperty)=OverlaySlot_6927=WidgetArchetype 
 	[ProgressBar] HP Delta (0-0-0-0): size 951 (cls: [ProgressBar] HP Delta>ProgressBar>/Script/UMG):
 		Tag array:
 			WidgetStyle(StructProperty)=System.Byte[] 
@@ -664,6 +792,21 @@ Serialized exports:
 			WidgetStyle(StructProperty)=System.Byte[] 
 			Percent(FloatProperty)=1 
 			Slot(ObjectProperty)=OverlaySlot_6927=WidgetArchetype 
+	[Size Box] HP Bar (0-0-0-0): size 189 (cls: [Size Box] HP Bar>SizeBox>/Script/UMG):
+		Tag array:
+			bOverride_WidthOverride(BoolProperty)=True 
+			bOverride_HeightOverride(BoolProperty)=True 
+			WidthOverride(FloatProperty)=288 
+			HeightOverride(FloatProperty)=24 
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			bIsVariable(BoolProperty)=True 
+	[Size Box] HP Bevel (0-0-0-0): size 163 (cls: [Size Box] HP Bevel>SizeBox>/Script/UMG):
+		Tag array:
+			bOverride_WidthOverride(BoolProperty)=True 
+			WidthOverride(FloatProperty)=288 
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=OverlaySlot_214=WidgetArchetype 
+			bIsVariable(BoolProperty)=True 
 	[Size Box] HP Bar (0-0-0-0): size 189 (cls: [Size Box] HP Bar>SizeBox>/Script/UMG):
 		Tag array:
 			bOverride_WidthOverride(BoolProperty)=True 
@@ -699,6 +842,15 @@ Serialized exports:
 			MinDesiredWidth(FloatProperty)=288 
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=VerticalBoxSlot_1=WidgetArchetype 
+	SizeBoxSlot_676 (0-0-0-0): size 70 (cls: SizeBoxSlot_676>SizeBoxSlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=[Size Box] HP Bar=WidgetArchetype 
+			Content(ObjectProperty)=[Overlay]=WidgetArchetype 
+	SizeBoxSlot_0 (0-0-0-0): size 111 (cls: SizeBoxSlot_0>SizeBoxSlot>/Script/UMG):
+		Tag array:
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=[Size Box] HP Bevel=WidgetArchetype 
+			Content(ObjectProperty)=ImageHPBevel=WidgetArchetype 
 	SizeBoxSlot_676 (0-0-0-0): size 70 (cls: SizeBoxSlot_676>SizeBoxSlot>/Script/UMG):
 		Tag array:
 			Parent(ObjectProperty)=[Size Box] HP Bar=WidgetArchetype 
@@ -774,7 +926,7 @@ Serialized exports:
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Center 
 			Parent(ObjectProperty)=VerticalBox_0=WidgetArchetype 
-			Content(ObjectProperty)=CommonHealthBar=WidgetArchetype 
+			Content(ObjectProperty)=BigHealthSwitcher=WidgetArchetype 
 	VerticalBoxSlot_13 (0-0-0-0): size 70 (cls: VerticalBoxSlot_13>VerticalBoxSlot>/Script/UMG):
 		Tag array:
 			Parent(ObjectProperty)=VerticalBox_1=WidgetArchetype 
@@ -783,6 +935,29 @@ Serialized exports:
 		Tag array:
 			Parent(ObjectProperty)=VerticalBox_1=WidgetArchetype 
 			Content(ObjectProperty)=HorizontalBox_2=WidgetArchetype 
+	BigHealthSwitcher (0-0-0-0): size 86 (cls: BigHealthSwitcher>WidgetSwitcher>/Script/UMG):
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=VerticalBoxSlot_2=WidgetArchetype 
+	WidgetSwitcherSlot_0 (0-0-0-0): size 70 (cls: WidgetSwitcherSlot_0>WidgetSwitcherSlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=BigHealthSwitcher=WidgetArchetype 
+			Content(ObjectProperty)=CommonHealthBar=WidgetArchetype 
+	WidgetSwitcherSlot_1 (0-0-0-0): size 70 (cls: WidgetSwitcherSlot_1>WidgetSwitcherSlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=BigHealthSwitcher=WidgetArchetype 
+			Content(ObjectProperty)=CommonBigHealthBar=WidgetArchetype 
+	WidgetSwitcherSlot_3 (0-0-0-0): size 70 (cls: WidgetSwitcherSlot_3>WidgetSwitcherSlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=SwitcherHPText=WidgetArchetype 
+			Content(ObjectProperty)=[Horizontal Box] Health Stat Text=WidgetArchetype 
+	WidgetSwitcherSlot_4 (0-0-0-0): size 238 (cls: WidgetSwitcherSlot_4>WidgetSwitcherSlot>/Script/UMG):
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			HorizontalAlignment(ByteProperty)=HAlign_Left 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=SwitcherHPText=WidgetArchetype 
+			Content(ObjectProperty)=TextBuildModeHPText=WidgetArchetype 
 	WidgetSwitcherSlot_3 (0-0-0-0): size 70 (cls: WidgetSwitcherSlot_3>WidgetSwitcherSlot>/Script/UMG):
 		Tag array:
 			Parent(ObjectProperty)=SwitcherHPText=WidgetArchetype 
@@ -797,6 +972,9 @@ Serialized exports:
 	WidgetTree_0 (0-0-0-0): size 41 (cls: WidgetTree_0>WidgetTree>/Script/UMG):
 		Tag array:
 			RootWidget(ObjectProperty)=VerticalBox_0=WidgetArchetype 
+	WidgetTree_0 (0-0-0-0): size 41 (cls: WidgetTree_0>WidgetTree>/Script/UMG):
+		Tag array:
+			RootWidget(ObjectProperty)=[Size Box] HP Bar=WidgetArchetype 
 	WidgetTree_0 (0-0-0-0): size 41 (cls: WidgetTree_0>WidgetTree>/Script/UMG):
 		Tag array:
 			RootWidget(ObjectProperty)=[Size Box] HP Bar=WidgetArchetype 

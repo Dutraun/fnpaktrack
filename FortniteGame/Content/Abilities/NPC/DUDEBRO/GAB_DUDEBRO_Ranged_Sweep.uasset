@@ -42,7 +42,6 @@ Name table:
 	AggregatedTargetTags
 	AllHitActorsThisTargetSelection
 	AnimMontage
-	AnimPlayRate
 	ApplicationTag
 	ApplyGameplayEffectContainer
 	Array_Add
@@ -94,6 +93,7 @@ Name table:
 	BoolProperty
 	BreakHitResult
 	BreakRotator
+	BreakTransform
 	BreakVector
 	bShouldAttachedActorsObstructTarget
 	bStartPenetrating
@@ -152,15 +152,20 @@ Name table:
 	CallFunc_BreakHitResult_TraceStart
 	CallFunc_BreakHitResult_TraceStart1
 	CallFunc_BreakRotator_Pitch
+	CallFunc_BreakRotator_Pitch1
 	CallFunc_BreakRotator_Roll
+	CallFunc_BreakRotator_Roll1
 	CallFunc_BreakRotator_Yaw
+	CallFunc_BreakRotator_Yaw1
+	CallFunc_BreakTransform_Location
+	CallFunc_BreakTransform_Rotation
+	CallFunc_BreakTransform_Scale
 	CallFunc_BreakVector_X
 	CallFunc_BreakVector_Y
 	CallFunc_BreakVector_Z
 	CallFunc_Conv_IntToFloat_ReturnValue
 	CallFunc_Conv_RotatorToVector_ReturnValue
 	CallFunc_Divide_FloatFloat_ReturnValue
-	CallFunc_Divide_FloatFloat_ReturnValue1
 	CallFunc_Dot_VectorVector_ReturnValue
 	CallFunc_DUDEBRO_RangedSweepHeadTransform_Transform
 	CallFunc_GetActivatingPawn_ReturnValue
@@ -169,25 +174,23 @@ Name table:
 	CallFunc_GetAvatarActorFromActorInfo_ReturnValue
 	CallFunc_GetControlRotation_ReturnValue
 	CallFunc_GetDataCountFromTargetData_ReturnValue
-	CallFunc_GetDefaultBlendOutTime_ReturnValue
-	CallFunc_GetGameTimeInSeconds_ReturnValue
-	CallFunc_GetGameTimeInSeconds_ReturnValue1
 	CallFunc_GetHitResultFromTargetData_ReturnValue
 	CallFunc_GetOwnedGameplayTags_TagContainer
-	CallFunc_GetPlayLength_ReturnValue
 	CallFunc_Greater_FloatFloat_ReturnValue
+	CallFunc_Greater_FloatFloat_ReturnValue1
 	CallFunc_Greater_IntInt_ReturnValue
 	CallFunc_HasTag_ReturnValue
 	CallFunc_IsValid_ReturnValue
 	CallFunc_IsValid_ReturnValue1
 	CallFunc_IsValid_ReturnValue2
 	CallFunc_IsValid_ReturnValue3
+	CallFunc_IsValid_ReturnValue4
 	CallFunc_K2_GetActorLocation_ReturnValue
 	CallFunc_K2_GetActorRotation_ReturnValue
 	CallFunc_K2_SetTimer_ReturnValue
 	CallFunc_Less_IntInt_ReturnValue
 	CallFunc_LessEqual_IntInt_ReturnValue
-	CallFunc_MakeLiteralBool_ReturnValue
+	CallFunc_MakeLiteralInt_ReturnValue
 	CallFunc_MakeVector_ReturnValue
 	CallFunc_Map_Find_ReturnValue
 	CallFunc_Map_Find_Value
@@ -195,9 +198,6 @@ Name table:
 	CallFunc_Normal_ReturnValue
 	CallFunc_Not_PreBool_ReturnValue
 	CallFunc_PlayMontageInfoAndWaitForTrigger_ReturnValue
-	CallFunc_Subtract_FloatFloat_ReturnValue
-	CallFunc_Subtract_FloatFloat_ReturnValue1
-	CallFunc_Subtract_FloatFloat_ReturnValue2
 	CallFunc_Subtract_IntInt_ReturnValue
 	CallFunc_Subtract_VectorVector_ReturnValue
 	CallFunc_WaitTargetSelection_ReturnValue
@@ -376,11 +376,8 @@ Name table:
 	GetControlRotation
 	GetCustomAbilitySourceTransform
 	GetDataCountFromTargetData
-	GetDefaultBlendOutTime
-	GetGameTimeInSeconds
 	GetHitResultFromTargetData
 	GetOwnedGameplayTags
-	GetPlayLength
 	GoalSelectionCylinder_GEN_VARIABLE
 	Greater_FloatFloat
 	Greater_IntInt
@@ -434,13 +431,14 @@ Name table:
 	KismetArrayLibrary
 	KismetMathLibrary
 	KismetSystemLibrary
+	LastValidTargetSelectionPitch
 	Less_IntInt
 	LessEqual_IntInt
 	List
 	Location
 	M_AOEActor_GEN_VARIABLE
 	M_AOEActor_GEN_VARIABLE_M_AOEActor_C_CAT
-	MakeLiteralBool
+	MakeLiteralInt
 	MakeVector
 	Map_Find
 	Map_Keys
@@ -474,7 +472,6 @@ Name table:
 	NPC.Elemental.Ice
 	NPC.Elemental.Lightning
 	NPCDamage
-	NumberOfSweepTargetSelections
 	Object
 	ObjectProperty
 	OriginalTag
@@ -515,7 +512,6 @@ Name table:
 	SelectElementProjAndAppTag
 	Shape
 	SourceObject
-	StartTime
 	StaticMeshComponent
 	Storm Pants Audio_GEN_VARIABLE
 	StormKing_Head_Beam_Montage
@@ -523,7 +519,6 @@ Name table:
 	StrProperty
 	StructProperty
 	StructureDestroyer_GEN_VARIABLE
-	Subtract_FloatFloat
 	Subtract_IntInt
 	Subtract_VectorVector
 	SweepAttackLoop
@@ -559,8 +554,6 @@ Name table:
 	TextRenderComponent
 	Time
 	TimerHandle
-	TotalMontageTimeMinusBlendOut
-	TotalSweepDuration
 	TraceEnd
 	TraceStart
 	Transform
@@ -600,7 +593,7 @@ Name table:
 	Z
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	GAB_DUDEBRO_Ranged_Sweep_C (0-0-0-0): size 389 (cls: GAB_DUDEBRO_Ranged_Sweep_C>BlueprintGeneratedClass>/Script/Engine):
+	GAB_DUDEBRO_Ranged_Sweep_C (0-0-0-0): size 377 (cls: GAB_DUDEBRO_Ranged_Sweep_C>BlueprintGeneratedClass>/Script/Engine):
 		Tag array:
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_GAB_DUDEBRO_Ranged_Sweep=GAB_DUDEBRO_Ranged_Sweep_C 
 	Default__GAB_DUDEBRO_Ranged_Sweep_C (0-0-0-0): size 17266 (cls: Default__GAB_DUDEBRO_Ranged_Sweep_C>GAB_DUDEBRO_Ranged_Sweep_C):
@@ -609,7 +602,7 @@ Serialized exports:
 			ProjToSpawn(ObjectProperty)=B_Prj_DUDEBRO_Parent_C=/Game/Abilities/NPC/DUDEBRO/B_Prj_DUDEBRO_Parent 
 			ProjElementMap(MapProperty)=[object] (inner: StructProperty)
 			DamageAppTag(StructProperty)=System.Byte[] 
-			NumberOfSweepTargetSelections(IntProperty)=40 
+			LastValidTargetSelectionPitch(FloatProperty)=-90 
 			CurrentSweepTargetSelectionOrigin(StructProperty)=Vector(0,0,0) 
 			CurrentSweepTargetData(StructProperty)=System.Byte[] 
 			CurrentSweepTargetSelectionApplicationTag(StructProperty)=System.Byte[] 
@@ -638,16 +631,16 @@ Serialized exports:
 	AllHitActorsThisTargetSelection (0-0-0-0): size 36 (cls: AllHitActorsThisTargetSelection>ArrayProperty>/Script/CoreUObject)
 	ProjToSpawn (0-0-0-0): size 40 (cls: ProjToSpawn>ClassProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_GAB_DUDEBRO_Ranged_Sweep (0-0-0-0): size 3967 (cls: ExecuteUbergraph_GAB_DUDEBRO_Ranged_Sweep>Function>/Script/CoreUObject)
+	ExecuteUbergraph_GAB_DUDEBRO_Ranged_Sweep (0-0-0-0): size 3968 (cls: ExecuteUbergraph_GAB_DUDEBRO_Ranged_Sweep>Function>/Script/CoreUObject)
 	CallFunc_ApplyGameplayEffectContainer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_ApplyGameplayEffectContainer_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_ApplyGameplayEffectContainer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_ApplyGameplayEffectContainer_ReturnValue>ArrayProperty>/Script/CoreUObject)
 	CallFunc_GetActorsFromTargetData_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetActorsFromTargetData_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetActorsFromTargetData_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetActorsFromTargetData_ReturnValue>ArrayProperty>/Script/CoreUObject)
+	ApplicationTag (0-0-0-0): size 36 (cls: ApplicationTag>StructProperty>/Script/CoreUObject)
+	K2_TriggerFromAnimation (0-0-0-0): size 68 (cls: K2_TriggerFromAnimation>Function>/Script/CoreUObject)
 	SweepAttackLoop (0-0-0-0): size 54 (cls: SweepAttackLoop>Function>/Script/CoreUObject)
 	bWasCancelled (0-0-0-0): size 34 (cls: bWasCancelled>BoolProperty>/Script/CoreUObject)
 	K2_OnEndAbility (0-0-0-0): size 68 (cls: K2_OnEndAbility>Function>/Script/CoreUObject)
-	ApplicationTag (0-0-0-0): size 36 (cls: ApplicationTag>StructProperty>/Script/CoreUObject)
-	K2_TriggerFromAnimation (0-0-0-0): size 68 (cls: K2_TriggerFromAnimation>Function>/Script/CoreUObject)
 	K2_ActivateAbility (0-0-0-0): size 54 (cls: K2_ActivateAbility>Function>/Script/CoreUObject)
 	TargetData (0-0-0-0): size 36 (cls: TargetData>StructProperty>/Script/CoreUObject)
 	Targeted_448BAD5F4C34EC062EDD1FBCADD6285C (0-0-0-0): size 82 (cls: Targeted_448BAD5F4C34EC062EDD1FBCADD6285C>Function>/Script/CoreUObject)
@@ -670,11 +663,13 @@ Serialized exports:
 	CallFunc_BreakHitResult_bInitialOverlap (0-0-0-0): size 34 (cls: CallFunc_BreakHitResult_bInitialOverlap>BoolProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_bInitialOverlap1 (0-0-0-0): size 34 (cls: CallFunc_BreakHitResult_bInitialOverlap1>BoolProperty>/Script/CoreUObject)
 	CallFunc_Greater_FloatFloat_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Greater_FloatFloat_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_Greater_FloatFloat_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_Greater_FloatFloat_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_Greater_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Greater_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue2>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue3 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue3>BoolProperty>/Script/CoreUObject)
+	CallFunc_IsValid_ReturnValue4 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue4>BoolProperty>/Script/CoreUObject)
 	CallFunc_Less_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_LessEqual_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_LessEqual_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
@@ -682,9 +677,8 @@ Serialized exports:
 	K2Node_DynamicCast_bSuccess2 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess2>BoolProperty>/Script/CoreUObject)
 	K2Node_Event_bWasCancelled (0-0-0-0): size 34 (cls: K2Node_Event_bWasCancelled>BoolProperty>/Script/CoreUObject)
 	ActorInfo (0-0-0-0): size 36 (cls: ActorInfo>StructProperty>/Script/CoreUObject)
-	K2_CanActivateAbility (0-0-0-0): size 372 (cls: K2_CanActivateAbility>Function>/Script/CoreUObject)
+	K2_CanActivateAbility (0-0-0-0): size 337 (cls: K2_CanActivateAbility>Function>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
-	CallFunc_MakeLiteralBool_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_MakeLiteralBool_ReturnValue>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess1 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess1>BoolProperty>/Script/CoreUObject)
 	ReturnValue (0-0-0-0): size 34 (cls: ReturnValue>BoolProperty>/Script/CoreUObject)
@@ -708,26 +702,19 @@ Serialized exports:
 	CallFunc_BreakHitResult_Time (0-0-0-0): size 32 (cls: CallFunc_BreakHitResult_Time>FloatProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_Time1 (0-0-0-0): size 32 (cls: CallFunc_BreakHitResult_Time1>FloatProperty>/Script/CoreUObject)
 	CallFunc_BreakRotator_Pitch (0-0-0-0): size 32 (cls: CallFunc_BreakRotator_Pitch>FloatProperty>/Script/CoreUObject)
+	CallFunc_BreakRotator_Pitch1 (0-0-0-0): size 32 (cls: CallFunc_BreakRotator_Pitch1>FloatProperty>/Script/CoreUObject)
 	CallFunc_BreakRotator_Roll (0-0-0-0): size 32 (cls: CallFunc_BreakRotator_Roll>FloatProperty>/Script/CoreUObject)
+	CallFunc_BreakRotator_Roll1 (0-0-0-0): size 32 (cls: CallFunc_BreakRotator_Roll1>FloatProperty>/Script/CoreUObject)
 	CallFunc_BreakRotator_Yaw (0-0-0-0): size 32 (cls: CallFunc_BreakRotator_Yaw>FloatProperty>/Script/CoreUObject)
+	CallFunc_BreakRotator_Yaw1 (0-0-0-0): size 32 (cls: CallFunc_BreakRotator_Yaw1>FloatProperty>/Script/CoreUObject)
 	CallFunc_BreakVector_X (0-0-0-0): size 32 (cls: CallFunc_BreakVector_X>FloatProperty>/Script/CoreUObject)
 	CallFunc_BreakVector_Y (0-0-0-0): size 32 (cls: CallFunc_BreakVector_Y>FloatProperty>/Script/CoreUObject)
 	CallFunc_BreakVector_Z (0-0-0-0): size 32 (cls: CallFunc_BreakVector_Z>FloatProperty>/Script/CoreUObject)
 	CallFunc_Conv_IntToFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Conv_IntToFloat_ReturnValue>FloatProperty>/Script/CoreUObject)
 	CallFunc_Divide_FloatFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Divide_FloatFloat_ReturnValue>FloatProperty>/Script/CoreUObject)
-	CallFunc_Divide_FloatFloat_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Divide_FloatFloat_ReturnValue1>FloatProperty>/Script/CoreUObject)
 	CallFunc_Dot_VectorVector_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Dot_VectorVector_ReturnValue>FloatProperty>/Script/CoreUObject)
-	CallFunc_GetDefaultBlendOutTime_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetDefaultBlendOutTime_ReturnValue>FloatProperty>/Script/CoreUObject)
-	CallFunc_GetGameTimeInSeconds_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetGameTimeInSeconds_ReturnValue>FloatProperty>/Script/CoreUObject)
-	CallFunc_GetGameTimeInSeconds_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_GetGameTimeInSeconds_ReturnValue1>FloatProperty>/Script/CoreUObject)
-	CallFunc_GetPlayLength_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetPlayLength_ReturnValue>FloatProperty>/Script/CoreUObject)
-	CallFunc_Subtract_FloatFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Subtract_FloatFloat_ReturnValue>FloatProperty>/Script/CoreUObject)
-	CallFunc_Subtract_FloatFloat_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Subtract_FloatFloat_ReturnValue1>FloatProperty>/Script/CoreUObject)
-	CallFunc_Subtract_FloatFloat_ReturnValue2 (0-0-0-0): size 32 (cls: CallFunc_Subtract_FloatFloat_ReturnValue2>FloatProperty>/Script/CoreUObject)
-	StartTime (0-0-0-0): size 32 (cls: StartTime>FloatProperty>/Script/CoreUObject)
+	LastValidTargetSelectionPitch (0-0-0-0): size 32 (cls: LastValidTargetSelectionPitch>FloatProperty>/Script/CoreUObject)
 	SweepTargetSelectionDelay (0-0-0-0): size 32 (cls: SweepTargetSelectionDelay>FloatProperty>/Script/CoreUObject)
-	TotalMontageTimeMinusBlendOut (0-0-0-0): size 32 (cls: TotalMontageTimeMinusBlendOut>FloatProperty>/Script/CoreUObject)
-	TotalSweepDuration (0-0-0-0): size 32 (cls: TotalSweepDuration>FloatProperty>/Script/CoreUObject)
 	CallFunc_DUDEBRO_RangedSweepHeadTransform_Transform (0-0-0-0): size 36 (cls: CallFunc_DUDEBRO_RangedSweepHeadTransform_Transform>StructProperty>/Script/CoreUObject)
 	ReturnValue (0-0-0-0): size 36 (cls: ReturnValue>StructProperty>/Script/CoreUObject)
 	GetCustomAbilitySourceTransform (0-0-0-0): size 99 (cls: GetCustomAbilitySourceTransform>Function>/Script/CoreUObject)
@@ -746,12 +733,12 @@ Serialized exports:
 	CallFunc_BreakHitResult_HitItem (0-0-0-0): size 32 (cls: CallFunc_BreakHitResult_HitItem>IntProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_HitItem1 (0-0-0-0): size 32 (cls: CallFunc_BreakHitResult_HitItem1>IntProperty>/Script/CoreUObject)
 	CallFunc_GetDataCountFromTargetData_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetDataCountFromTargetData_ReturnValue>IntProperty>/Script/CoreUObject)
+	CallFunc_MakeLiteralInt_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_MakeLiteralInt_ReturnValue>IntProperty>/Script/CoreUObject)
 	CallFunc_Subtract_IntInt_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Subtract_IntInt_ReturnValue>IntProperty>/Script/CoreUObject)
 	Temp_int_Array_Index_Variable (0-0-0-0): size 32 (cls: Temp_int_Array_Index_Variable>IntProperty>/Script/CoreUObject)
 	Temp_int_Loop_Counter_Variable (0-0-0-0): size 32 (cls: Temp_int_Loop_Counter_Variable>IntProperty>/Script/CoreUObject)
 	Temp_int_Variable (0-0-0-0): size 32 (cls: Temp_int_Variable>IntProperty>/Script/CoreUObject)
 	Temp_int_Variable1 (0-0-0-0): size 32 (cls: Temp_int_Variable1>IntProperty>/Script/CoreUObject)
-	NumberOfSweepTargetSelections (0-0-0-0): size 32 (cls: NumberOfSweepTargetSelections>IntProperty>/Script/CoreUObject)
 	CallFunc_Add_IntInt_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue>IntProperty>/Script/CoreUObject)
 	CallFunc_Array_Length_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Array_Length_ReturnValue>IntProperty>/Script/CoreUObject)
 	Temp_int_Loop_Counter_Variable (0-0-0-0): size 32 (cls: Temp_int_Loop_Counter_Variable>IntProperty>/Script/CoreUObject)
@@ -799,7 +786,11 @@ Serialized exports:
 	CallFunc_BreakHitResult_TraceEnd1 (0-0-0-0): size 36 (cls: CallFunc_BreakHitResult_TraceEnd1>StructProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_TraceStart (0-0-0-0): size 36 (cls: CallFunc_BreakHitResult_TraceStart>StructProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_TraceStart1 (0-0-0-0): size 36 (cls: CallFunc_BreakHitResult_TraceStart1>StructProperty>/Script/CoreUObject)
+	CallFunc_BreakTransform_Location (0-0-0-0): size 36 (cls: CallFunc_BreakTransform_Location>StructProperty>/Script/CoreUObject)
+	CallFunc_BreakTransform_Rotation (0-0-0-0): size 36 (cls: CallFunc_BreakTransform_Rotation>StructProperty>/Script/CoreUObject)
+	CallFunc_BreakTransform_Scale (0-0-0-0): size 36 (cls: CallFunc_BreakTransform_Scale>StructProperty>/Script/CoreUObject)
 	CallFunc_Conv_RotatorToVector_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_Conv_RotatorToVector_ReturnValue>StructProperty>/Script/CoreUObject)
+	CallFunc_DUDEBRO_RangedSweepHeadTransform_Transform (0-0-0-0): size 36 (cls: CallFunc_DUDEBRO_RangedSweepHeadTransform_Transform>StructProperty>/Script/CoreUObject)
 	CallFunc_GetControlRotation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetControlRotation_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_GetHitResultFromTargetData_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetHitResultFromTargetData_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_K2_GetActorLocation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_GetActorLocation_ReturnValue>StructProperty>/Script/CoreUObject)

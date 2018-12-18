@@ -57,7 +57,6 @@ Name table:
 	bEvaluateInPreroll
 	bHasDefaultValue
 	bHasScriptImplementedPaint
-	bHasScriptImplementedTick
 	BindingName
 	bInteractableWhenSelected
 	bIsRootWidget
@@ -96,8 +95,8 @@ Name table:
 	CallFunc_Add_IntInt_ReturnValue1
 	CallFunc_BooleanOR_ReturnValue
 	CallFunc_Create_ReturnValue
-	CallFunc_Divide_FloatFloat_ReturnValue
 	CallFunc_GetChildAt_ReturnValue
+	CallFunc_GetChildIndex_ReturnValue
 	CallFunc_GetChildrenCount_ReturnValue
 	CallFunc_GetChildrenCount_ReturnValue1
 	CallFunc_GetContext_ReturnValue
@@ -108,16 +107,17 @@ Name table:
 	CallFunc_GetSafeZonePadding_SpillOverPadding
 	CallFunc_Greater_IntInt_ReturnValue
 	CallFunc_Greater_IntInt_ReturnValue1
+	CallFunc_IsValid_ReturnValue
 	CallFunc_Less_IntInt_ReturnValue
 	CallFunc_LessEqual_IntInt_ReturnValue
-	CallFunc_PlayAnimationAtTime_ReturnValue
-	CallFunc_Round_ReturnValue
+	CallFunc_PlayAnimation_ReturnValue
 	CallFunc_SlotAsOverlaySlot_ReturnValue
 	CallFunc_Subtract_FloatFloat_ReturnValue
 	CallFunc_Subtract_FloatFloat_ReturnValue1
 	CallFunc_Subtract_FloatFloat_ReturnValue2
 	CallFunc_Subtract_FloatFloat_ReturnValue3
 	CallFunc_Subtract_IntInt_ReturnValue
+	CallFunc_Subtract_IntInt_ReturnValue1
 	CenterButtonTextWidget
 	ChildTemplates
 	CircleArrowButton_C
@@ -156,6 +156,7 @@ Name table:
 	Create
 	CurrentNumericValue
 	CurrentOffset
+	CurrentWidget
 	CustomDelegate
 	DataTable
 	DataTableRowHandle
@@ -181,6 +182,7 @@ Name table:
 	Default__HorizontalBoxSlot
 	Default__Image
 	Default__IntProperty
+	Default__KismetSystemLibrary
 	Default__LiveViolator_C
 	Default__MovieScene
 	Default__MovieScene2DTransformSection
@@ -227,7 +229,6 @@ Name table:
 	DEVPinScore
 	DEVShowPin
 	DisplayRate
-	Divide_FloatFloat
 	Down
 	DrawAs
 	DynamicBindingObjects
@@ -322,7 +323,9 @@ Name table:
 	FunctionName
 	FunctionNameToBind
 	FutureEventViolator
+	Geometry
 	GetChildAt
+	GetChildIndex
 	GetChildrenCount
 	GetContext
 	GetOwningPlayer
@@ -352,6 +355,7 @@ Name table:
 	Image_TileFade
 	ImageSize
 	ImplIndex
+	InDeltaTime
 	Input_ShowAbout
 	Input_ShowDetails
 	InputActionDataTable
@@ -362,22 +366,27 @@ Name table:
 	Intro
 	Intro_INST
 	IsDesignTime
+	IsValid
 	Justification
 	K2Node_ComponentBoundEvent_Button
 	K2Node_ComponentBoundEvent_Button1
 	K2Node_ComponentBoundEvent_CurrentOffset
+	K2Node_CustomEvent_CurrentWidget
 	K2Node_DynamicCast_AsShowdown_Tournament_Tile
 	K2Node_DynamicCast_AsShowdown_Tournament_Tile1
 	K2Node_DynamicCast_bSuccess
 	K2Node_DynamicCast_bSuccess1
 	K2Node_Event_bUsingGamepad
+	K2Node_Event_InDeltaTime
 	K2Node_Event_IsDesignTime
+	K2Node_Event_MyGeometry
 	K2Node_Event_SelectedTournament
 	K2Node_MakeStruct_Margin
 	K2Node_Select1_Default
 	K2Node_Select_Default
 	Key
 	KismetMathLibrary
+	KismetSystemLibrary
 	LastTrackIdentifier
 	LeaveTangent
 	LeaveTangentWeight
@@ -443,6 +452,7 @@ Name table:
 	MovieSceneTrackIdentifier
 	MovieSceneTrackImplementationPtr
 	MovieSceneWidgetMaterialTrack
+	MyGeometry
 	Name
 	NameProperty
 	NavigateTournamentLeft
@@ -501,7 +511,7 @@ Name table:
 	PinIcon
 	PinInfoSwitcher
 	PinScoreText
-	PlayAnimationAtTime
+	PlayAnimation
 	PlaybackRange
 	PlayerController
 	PointerToUberGraphFrame
@@ -536,7 +546,6 @@ Name table:
 	RightShadowBrush
 	RootWidget
 	Rotation
-	Round
 	RowName
 	Rule
 	SafeZone
@@ -554,6 +563,7 @@ Name table:
 	ScrollBox_TournamentList
 	ScrollBoxSlot
 	ScrollBoxStyle
+	ScrollWidgetIntoView
 	SectionEvaluationDataTree
 	SectionRange
 	Sections
@@ -561,6 +571,7 @@ Name table:
 	SegmentIdentifierToIndex
 	SegmentPtrLUT
 	Segments
+	SelectedTile
 	SelectedTournament
 	SequenceID
 	SequenceSignature
@@ -631,6 +642,7 @@ Name table:
 	TextBlock
 	TextProperty
 	Texture2D
+	Tick
 	TickResolution
 	TileItemClass
 	TimeRemainingFormat
@@ -641,6 +653,7 @@ Name table:
 	Top
 	TopShadowBrush
 	TournamentDateText
+	TournamentListSelect
 	TournamentsContent
 	TournamentTitle1
 	TournamentTitle2
@@ -700,7 +713,7 @@ Name table:
 	Z
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	ShowdownScreen_C (0-0-0-0): size 583 (cls: ShowdownScreen_C>WidgetBlueprintGeneratedClass>/Script/UMG):
+	ShowdownScreen_C (0-0-0-0): size 619 (cls: ShowdownScreen_C>WidgetBlueprintGeneratedClass>/Script/UMG):
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
@@ -710,21 +723,21 @@ Serialized exports:
 			TemplateAsset(SoftObjectProperty)=/Game/UI/Frontend/Showdown/ShowdownScreen.WidgetArchetype 
 			DynamicBindingObjects(ArrayProperty)=[object] (inner: ObjectProperty)
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_ShowdownScreen=ShowdownScreen_C 
-	Default__ShowdownScreen_C (0-0-0-0): size 547 (cls: Default__ShowdownScreen_C>ShowdownScreen_C):
+	Default__ShowdownScreen_C (0-0-0-0): size 521 (cls: Default__ShowdownScreen_C>ShowdownScreen_C):
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			Input_ShowAbout(StructProperty)=System.Byte[] 
 			PrimaryColor(StructProperty)=System.Byte[] 
 			Input_ShowDetails(StructProperty)=System.Byte[] 
 			TileItemClass(ObjectProperty)=ShowdownTournamentTile_C=/Game/UI/Frontend/Showdown/ShowdownTournamentTile 
-			bHasScriptImplementedTick(BoolProperty)=False 
 			bHasScriptImplementedPaint(BoolProperty)=False 
 	Outro (0-0-0-0): size 36 (cls: Outro>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_ShowdownScreen (0-0-0-0): size 1698 (cls: ExecuteUbergraph_ShowdownScreen>Function>/Script/CoreUObject)
+	ExecuteUbergraph_ShowdownScreen (0-0-0-0): size 1802 (cls: ExecuteUbergraph_ShowdownScreen>Function>/Script/CoreUObject)
 	CallFunc_BooleanOR_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanOR_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Greater_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Greater_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Greater_IntInt_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_Greater_IntInt_ReturnValue1>BoolProperty>/Script/CoreUObject)
+	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Less_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_LessEqual_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_LessEqual_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
@@ -733,10 +746,18 @@ Serialized exports:
 	K2Node_Event_IsDesignTime (0-0-0-0): size 34 (cls: K2Node_Event_IsDesignTime>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable1 (0-0-0-0): size 34 (cls: Temp_bool_Variable1>BoolProperty>/Script/CoreUObject)
+	MyGeometry (0-0-0-0): size 36 (cls: MyGeometry>StructProperty>/Script/CoreUObject)
+	Tick (0-0-0-0): size 82 (cls: Tick>Function>/Script/CoreUObject)
+	CurrentWidget (0-0-0-0): size 36 (cls: CurrentWidget>ObjectProperty>/Script/CoreUObject)
+	TournamentListSelect (0-0-0-0): size 68 (cls: TournamentListSelect>Function>/Script/CoreUObject)
 	OnInputModeChanged (0-0-0-0): size 68 (cls: OnInputModeChanged>Function>/Script/CoreUObject)
 	bUsingGamepad (0-0-0-0): size 34 (cls: bUsingGamepad>BoolProperty>/Script/CoreUObject)
 	BndEvt__SwipePanel_K2Node_ComponentBoundEvent_4_OnFortSwipeEvent__DelegateSignature (0-0-0-0): size 54 (cls: BndEvt__SwipePanel_K2Node_ComponentBoundEvent_4_OnFortSwipeEvent__DelegateSignature>Function>/Script/CoreUObject)
 	BndEvt__SwipePanel_K2Node_ComponentBoundEvent_3_OnFortSwipeEvent__DelegateSignature (0-0-0-0): size 54 (cls: BndEvt__SwipePanel_K2Node_ComponentBoundEvent_3_OnFortSwipeEvent__DelegateSignature>Function>/Script/CoreUObject)
+	OnActivated (0-0-0-0): size 54 (cls: OnActivated>Function>/Script/CoreUObject)
+	Construct (0-0-0-0): size 54 (cls: Construct>Function>/Script/CoreUObject)
+	SelectedTournament (0-0-0-0): size 32 (cls: SelectedTournament>StrProperty>/Script/CoreUObject)
+	ShowTournamentDetails (0-0-0-0): size 68 (cls: ShowTournamentDetails>Function>/Script/CoreUObject)
 	CurrentOffset (0-0-0-0): size 32 (cls: CurrentOffset>FloatProperty>/Script/CoreUObject)
 	BndEvt__ScrollBox_TournamentList_K2Node_ComponentBoundEvent_2_OnUserScrolledEvent__DelegateSignature (0-0-0-0): size 68 (cls: BndEvt__ScrollBox_TournamentList_K2Node_ComponentBoundEvent_2_OnUserScrolledEvent__DelegateSignature>Function>/Script/CoreUObject)
 	Button (0-0-0-0): size 36 (cls: Button>ObjectProperty>/Script/CoreUObject)
@@ -1270,23 +1291,19 @@ Please try back later. (AC35E95A452317CB8F53B88A9D072AB2)
 		Tag array:
 			LoadingBackgroundBrush(StructProperty)=System.Byte[] 
 			Slot(ObjectProperty)=OverlaySlot_3=WidgetArchetype 
-	CallFunc_Divide_FloatFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Divide_FloatFloat_ReturnValue>FloatProperty>/Script/CoreUObject)
 	CallFunc_Subtract_FloatFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Subtract_FloatFloat_ReturnValue>FloatProperty>/Script/CoreUObject)
 	CallFunc_Subtract_FloatFloat_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Subtract_FloatFloat_ReturnValue1>FloatProperty>/Script/CoreUObject)
 	CallFunc_Subtract_FloatFloat_ReturnValue2 (0-0-0-0): size 32 (cls: CallFunc_Subtract_FloatFloat_ReturnValue2>FloatProperty>/Script/CoreUObject)
 	CallFunc_Subtract_FloatFloat_ReturnValue3 (0-0-0-0): size 32 (cls: CallFunc_Subtract_FloatFloat_ReturnValue3>FloatProperty>/Script/CoreUObject)
 	K2Node_ComponentBoundEvent_CurrentOffset (0-0-0-0): size 32 (cls: K2Node_ComponentBoundEvent_CurrentOffset>FloatProperty>/Script/CoreUObject)
+	K2Node_Event_InDeltaTime (0-0-0-0): size 32 (cls: K2Node_Event_InDeltaTime>FloatProperty>/Script/CoreUObject)
+	InDeltaTime (0-0-0-0): size 32 (cls: InDeltaTime>FloatProperty>/Script/CoreUObject)
 	SwipePanel (0-0-0-0): size 134 (cls: SwipePanel>FortSwipePanel>/Script/FortniteUI):
 		Tag array:
 			bBeginSwipeOnPointerEnter(BoolProperty)=False 
 			bConsumePointerInput(BoolProperty)=False 
 			Slot(ObjectProperty)=OverlaySlot_1=WidgetArchetype 
 			Visibility(EnumProperty)=ESlateVisibility::SelfHitTestInvisible 
-	Construct (0-0-0-0): size 54 (cls: Construct>Function>/Script/CoreUObject)
-	OnActivated (0-0-0-0): size 54 (cls: OnActivated>Function>/Script/CoreUObject)
-	K2Node_Event_SelectedTournament (0-0-0-0): size 32 (cls: K2Node_Event_SelectedTournament>StrProperty>/Script/CoreUObject)
-	SelectedTournament (0-0-0-0): size 32 (cls: SelectedTournament>StrProperty>/Script/CoreUObject)
-	ShowTournamentDetails (0-0-0-0): size 68 (cls: ShowTournamentDetails>Function>/Script/CoreUObject)
 	HorizontalBox_0 (0-0-0-0): size 86 (cls: HorizontalBox_0>HorizontalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -1533,10 +1550,11 @@ Please try back later. (AC35E95A452317CB8F53B88A9D072AB2)
 			bIsVariable(BoolProperty)=False 
 	CallFunc_Add_IntInt_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue>IntProperty>/Script/CoreUObject)
 	CallFunc_Add_IntInt_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue1>IntProperty>/Script/CoreUObject)
+	CallFunc_GetChildIndex_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetChildIndex_ReturnValue>IntProperty>/Script/CoreUObject)
 	CallFunc_GetChildrenCount_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetChildrenCount_ReturnValue>IntProperty>/Script/CoreUObject)
 	CallFunc_GetChildrenCount_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_GetChildrenCount_ReturnValue1>IntProperty>/Script/CoreUObject)
-	CallFunc_Round_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Round_ReturnValue>IntProperty>/Script/CoreUObject)
 	CallFunc_Subtract_IntInt_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Subtract_IntInt_ReturnValue>IntProperty>/Script/CoreUObject)
+	CallFunc_Subtract_IntInt_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Subtract_IntInt_ReturnValue1>IntProperty>/Script/CoreUObject)
 	Temp_int_Variable (0-0-0-0): size 32 (cls: Temp_int_Variable>IntProperty>/Script/CoreUObject)
 	LiveViolator (0-0-0-0): size 96 (cls: LiveViolator>LiveViolator_C>/Game/UI/Frontend/Showdown/LiveViolator):
 		Tag array:
@@ -1675,10 +1693,11 @@ Please try back later. (AC35E95A452317CB8F53B88A9D072AB2)
 	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetContext_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue1>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetOwningPlayer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetOwningPlayer_ReturnValue>ObjectProperty>/Script/CoreUObject)
-	CallFunc_PlayAnimationAtTime_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlayAnimationAtTime_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_PlayAnimation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlayAnimation_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_SlotAsOverlaySlot_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_SlotAsOverlaySlot_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	K2Node_ComponentBoundEvent_Button (0-0-0-0): size 36 (cls: K2Node_ComponentBoundEvent_Button>ObjectProperty>/Script/CoreUObject)
 	K2Node_ComponentBoundEvent_Button1 (0-0-0-0): size 36 (cls: K2Node_ComponentBoundEvent_Button1>ObjectProperty>/Script/CoreUObject)
+	K2Node_CustomEvent_CurrentWidget (0-0-0-0): size 36 (cls: K2Node_CustomEvent_CurrentWidget>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsShowdown_Tournament_Tile (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsShowdown_Tournament_Tile>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsShowdown_Tournament_Tile1 (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsShowdown_Tournament_Tile1>ObjectProperty>/Script/CoreUObject)
 	K2Node_Select_Default (0-0-0-0): size 36 (cls: K2Node_Select_Default>ObjectProperty>/Script/CoreUObject)
@@ -1686,6 +1705,7 @@ Please try back later. (AC35E95A452317CB8F53B88A9D072AB2)
 	Intro (0-0-0-0): size 36 (cls: Intro>ObjectProperty>/Script/CoreUObject)
 	NoTournamentsContent (0-0-0-0): size 36 (cls: NoTournamentsContent>ObjectProperty>/Script/CoreUObject)
 	Overlay_NoTournamentContent (0-0-0-0): size 36 (cls: Overlay_NoTournamentContent>ObjectProperty>/Script/CoreUObject)
+	SelectedTile (0-0-0-0): size 36 (cls: SelectedTile>ObjectProperty>/Script/CoreUObject)
 	ShowdownTournamentTile (0-0-0-0): size 36 (cls: ShowdownTournamentTile>ObjectProperty>/Script/CoreUObject)
 	ShowdownTournamentTile_0 (0-0-0-0): size 36 (cls: ShowdownTournamentTile_0>ObjectProperty>/Script/CoreUObject)
 	ShowdownTournamentTile_1 (0-0-0-0): size 36 (cls: ShowdownTournamentTile_1>ObjectProperty>/Script/CoreUObject)
@@ -2848,9 +2868,11 @@ Please try back later. (AC35E95A452317CB8F53B88A9D072AB2)
 			VerticalAlignment(ByteProperty)=VAlign_Bottom 
 			Parent(ObjectProperty)=SizeBox_Posters=WidgetArchetype 
 			Content(ObjectProperty)=ScrollBox_TournamentList=WidgetArchetype 
+	K2Node_Event_SelectedTournament (0-0-0-0): size 32 (cls: K2Node_Event_SelectedTournament>StrProperty>/Script/CoreUObject)
 	CallFunc_GetSafeZonePadding_SafePadding (0-0-0-0): size 36 (cls: CallFunc_GetSafeZonePadding_SafePadding>StructProperty>/Script/CoreUObject)
 	CallFunc_GetSafeZonePadding_SafePaddingScale (0-0-0-0): size 36 (cls: CallFunc_GetSafeZonePadding_SafePaddingScale>StructProperty>/Script/CoreUObject)
 	CallFunc_GetSafeZonePadding_SpillOverPadding (0-0-0-0): size 36 (cls: CallFunc_GetSafeZonePadding_SpillOverPadding>StructProperty>/Script/CoreUObject)
+	K2Node_Event_MyGeometry (0-0-0-0): size 36 (cls: K2Node_Event_MyGeometry>StructProperty>/Script/CoreUObject)
 	K2Node_MakeStruct_Margin (0-0-0-0): size 36 (cls: K2Node_MakeStruct_Margin>StructProperty>/Script/CoreUObject)
 	Input_ShowAbout (0-0-0-0): size 36 (cls: Input_ShowAbout>StructProperty>/Script/CoreUObject)
 	Input_ShowDetails (0-0-0-0): size 36 (cls: Input_ShowDetails>StructProperty>/Script/CoreUObject)

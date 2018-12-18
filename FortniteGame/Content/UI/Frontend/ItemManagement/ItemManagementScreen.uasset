@@ -78,7 +78,6 @@ Name table:
 	/Game/UI/Foundation/Stats/StatNumericTextBlock
 	/Game/UI/Foundation/Stats/StatsListWidget
 	/Game/UI/Foundation/TabbedView/HorizontalTabList
-	/Game/UI/Foundation/Text/Materials/M-FontShadow
 	/Game/UI/Foundation/Text/TextScrollStyle-Base
 	/Game/UI/Foundation/Text/TextScrollStyle-NoFade
 	/Game/UI/Foundation/Text/TextStyle-Base
@@ -135,6 +134,7 @@ Name table:
 	/Game/UI/Frontend/ItemManagement/DetailsPanel/ItemMulchMode/ItemManagementMulchDetailsPanel
 	/Game/UI/Frontend/ItemManagement/DetailsPanel/ItemMulchMode/ItemManagementMulchModeBox
 	/Game/UI/Frontend/ItemManagement/DetailsPanel/ItemMulchMode/MulchRefundItemQuantityList
+	/Game/UI/Frontend/ItemManagement/DownTierCraftModal/DownTierCraftModalWidget
 	/Game/UI/Frontend/ItemManagement/InventoryPanel/ItemManagementEquipSlot
 	/Game/UI/Frontend/ItemManagement/InventoryPanel/ItemManagementFocusSwitcher
 	/Game/UI/Frontend/ItemManagement/InventoryPanel/ItemManagementInventoryLimitStatusIndicator
@@ -228,7 +228,6 @@ Name table:
 	BangType
 	BangWrapper
 	bApplyAlphaOnDisable
-	bApplyOutlineToDropShadows
 	Bar
 	bAutoListenForInput
 	bClassRequiresNativeTick
@@ -304,7 +303,6 @@ Name table:
 	Brush_S
 	BrushColor
 	BrushSize
-	bSeparateFillAlpha
 	bShouldCollapseWhenConditionIsFalse
 	Burbank
 	Burbank-Black
@@ -354,6 +352,7 @@ Name table:
 	CallFunc_EqualEqual_StrStr_ReturnValue
 	CallFunc_Format_ReturnValue
 	CallFunc_GetBackpackOverflowFromAddingItem_ReturnValue
+	CallFunc_GetCachedWidget_ReturnValue
 	CallFunc_GetCombinedDescription_OutDescription
 	CallFunc_GetCombinedDescription_ReturnValue
 	CallFunc_GetContext_ReturnValue
@@ -400,6 +399,7 @@ Name table:
 	CallFunc_IsValid_ReturnValue
 	CallFunc_IsValid_ReturnValue1
 	CallFunc_IsValid_ReturnValue2
+	CallFunc_IsValid_ReturnValue3
 	CallFunc_MakeLiteralByte_ReturnValue
 	CallFunc_Map_Find_ReturnValue
 	CallFunc_Map_Find_Value
@@ -466,7 +466,7 @@ Name table:
 	ControllerInputStyle
 	Count
 	CountText
-	CraftAndSlot
+	CraftAndSlotInternal
 	CraftAndSlotSchematic
 	Crafting
 	CraftingBar
@@ -532,6 +532,7 @@ Name table:
 	Default__CraftingBar_C
 	Default__CustomFilterModal_C
 	Default__DelegateProperty
+	Default__DownTierCraftModalWidget_C
 	Default__EnumProperty
 	Default__FortAsyncAction_MCPContextConsumeItem
 	Default__FortAsyncAction_ShowConfirmation_NUI
@@ -679,6 +680,7 @@ Name table:
 	DoesMatchSearchString
 	DoneButton
 	Down
+	DownTierCraftModalWidget_C
 	DragDropOperation
 	DraggedThumbImage
 	DrawAs
@@ -709,6 +711,7 @@ Name table:
 	EFortItemCategoryOrdinal
 	EFortItemCategoryOrdinal::Secondary
 	EFortItemCategoryOrdinal::Tertiary
+	EFortItemTier
 	EFortItemType
 	EFrontEndCamera
 	EFrontEndCamera::Manage1
@@ -794,7 +797,6 @@ Name table:
 	FocusSwitcher
 	Font
 	FontObject
-	FontOutlineSettings
 	Force
 	Format
 	FormatArgumentData
@@ -813,6 +815,7 @@ Name table:
 	FortInventoryOverflowIndicator
 	FortItem
 	FortItemCategoryIndicator
+	FortItemCraftingOptionsActivatablePanel
 	FortItemDefinition
 	FortItemManagementInventoryFilterTabLabelInfo
 	FortItemManagementInventoryPanel
@@ -849,6 +852,7 @@ Name table:
 	GameplayTagContainer
 	Geometry
 	GetBackpackOverflowFromAddingItem
+	GetCachedWidget
 	GetCombinedDescription
 	GetContext
 	GetCurrentInputType
@@ -884,6 +888,7 @@ Name table:
 	HAlign_Right
 	HandleClose
 	HandleConsumeItemBP
+	HandleCraftAndSlotItemBP
 	HandleCraftItemBP
 	HandleDifferentItemManagementModeSetBP
 	HandleDifferentModeSet
@@ -898,6 +903,7 @@ Name table:
 	HandleItemWidgetCreated
 	HandleMulchItemsCallback
 	HandleMulchQuantitySelection
+	HandleOpenCraftingOptionsBP
 	HandleTransfer
 	HandleTransferItemBP
 	HandleTransferItemsCallback
@@ -1031,6 +1037,7 @@ Name table:
 	K2Node_CustomEvent_Result1
 	K2Node_CustomEvent_ResultName
 	K2Node_CustomEvent_ResultName1
+	K2Node_DynamicCast_AsDown_Tier_Craft_Modal_Widget
 	K2Node_DynamicCast_AsFort_Item
 	K2Node_DynamicCast_AsFort_Player_Controller
 	K2Node_DynamicCast_AsFort_Player_Controller_Deployable_Base
@@ -1042,13 +1049,18 @@ Name table:
 	K2Node_DynamicCast_bSuccess
 	K2Node_DynamicCast_bSuccess1
 	K2Node_DynamicCast_bSuccess2
+	K2Node_DynamicCast_bSuccess3
 	K2Node_Event_ConsumableItem
 	K2Node_Event_Item
 	K2Node_Event_Item1
 	K2Node_Event_Item2
 	K2Node_Event_Item3
 	K2Node_Event_Item4
+	K2Node_Event_RequestedTier
+	K2Node_Event_RequestedTier1
 	K2Node_Event_SchematicItem
+	K2Node_Event_SchematicItem1
+	K2Node_Event_SchematicItem2
 	K2Node_MakeArray_Array
 	K2Node_MakeStruct_FormatArgumentData
 	K2Node_Select_Default
@@ -1076,7 +1088,6 @@ Name table:
 	M-Border-ItemInfoHeader_BrightBar
 	M-Border-MainL-Black
 	M-Button-Console-YellowOutline
-	M-FontShadow
 	M-Global-VGradient
 	M-TutorialTabGlow
 	M_Border_DropShadow
@@ -1143,6 +1154,7 @@ Name table:
 	NamedSlotBindings
 	NameProperty
 	Navigation
+	NavigationTabsCenterContentSlot
 	Next
 	NextTabAction
 	NextTabActionWrapper
@@ -1176,10 +1188,6 @@ Name table:
 	OnMCPRequestComplete_D020DD864A3EFC9A31973C87076269CA
 	Operation
 	OrdinalOfCategoryToRepresent
-	OutlineColor
-	OutlineMaterial
-	OutlineSettings
-	OutlineSize
 	OverflowIndicator
 	Overlay
 	Overlay_Container
@@ -1244,6 +1252,7 @@ Name table:
 	RefreshScreenAfterFilterChange
 	RemoveItemFromQuickBar
 	RenderTransform
+	RequestedTier
 	ResourceList
 	ResourceListWidgetSwitcher
 	ResourceName
@@ -1288,6 +1297,7 @@ Name table:
 	SelectedTileButton
 	Selection
 	SelectionPromptText
+	SetBaseSchematicItem
 	SetBytePropertyByName
 	SetConsumeItemRequestInProgress
 	SetFrontEndCamera
@@ -1296,6 +1306,7 @@ Name table:
 	SetHeightOverride
 	SetHideCraftingBar
 	SetIndex
+	SetItemManagementScreen
 	SetObjectPropertyByName
 	SetScrollFocusOnMulchDetailsPanel
 	SetSplitData
@@ -1537,7 +1548,7 @@ Name table:
 	WrapBox
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	ItemManagementScreen_C (0-0-0-0): size 981 (cls: ItemManagementScreen_C>WidgetBlueprintGeneratedClass>/Script/UMG):
+	ItemManagementScreen_C (0-0-0-0): size 1013 (cls: ItemManagementScreen_C>WidgetBlueprintGeneratedClass>/Script/UMG):
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
@@ -1592,7 +1603,7 @@ Serialized exports:
 			bCookedWidgetTree(BoolProperty)=True 
 	CraftingBar (0-0-0-0): size 36 (cls: CraftingBar>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_ItemManagementScreen (0-0-0-0): size 3791 (cls: ExecuteUbergraph_ItemManagementScreen>Function>/Script/CoreUObject)
+	ExecuteUbergraph_ItemManagementScreen (0-0-0-0): size 4088 (cls: ExecuteUbergraph_ItemManagementScreen>Function>/Script/CoreUObject)
 	K2Node_MakeArray_Array (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array>StructProperty>/Script/CoreUObject)
 	K2Node_MakeArray_Array (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array>ArrayProperty>/Script/CoreUObject)
 	BackgroundBlur_0 (0-0-0-0): size 108 (cls: BackgroundBlur_0>BackgroundBlur>/Script/UMG):
@@ -1717,6 +1728,12 @@ Serialized exports:
 			Padding(StructProperty)=System.Byte[] 
 			Parent(ObjectProperty)=BackgroundBlur_6=WidgetArchetype 
 			Content(ObjectProperty)=BorderLockedR=WidgetArchetype 
+	SchematicItem (0-0-0-0): size 36 (cls: SchematicItem>ObjectProperty>/Script/CoreUObject)
+	HandleCraftAndSlotItemBP (0-0-0-0): size 82 (cls: HandleCraftAndSlotItemBP>Function>/Script/CoreUObject)
+	SchematicItem (0-0-0-0): size 36 (cls: SchematicItem>ObjectProperty>/Script/CoreUObject)
+	HandleOpenCraftingOptionsBP (0-0-0-0): size 68 (cls: HandleOpenCraftingOptionsBP>Function>/Script/CoreUObject)
+	Item (0-0-0-0): size 36 (cls: Item>ObjectProperty>/Script/CoreUObject)
+	HandleInspectItemBP (0-0-0-0): size 68 (cls: HandleInspectItemBP>Function>/Script/CoreUObject)
 	Construct (0-0-0-0): size 54 (cls: Construct>Function>/Script/CoreUObject)
 	inIndex (0-0-0-0): size 32 (cls: inIndex>IntProperty>/Script/CoreUObject)
 	HandleFilterChangeViaHeader (0-0-0-0): size 68 (cls: HandleFilterChangeViaHeader>Function>/Script/CoreUObject)
@@ -1729,14 +1746,12 @@ Serialized exports:
 	HandleDropItemBP (0-0-0-0): size 68 (cls: HandleDropItemBP>Function>/Script/CoreUObject)
 	Item (0-0-0-0): size 36 (cls: Item>ObjectProperty>/Script/CoreUObject)
 	HandleTransferItemBP (0-0-0-0): size 68 (cls: HandleTransferItemBP>Function>/Script/CoreUObject)
-	OnActivated (0-0-0-0): size 54 (cls: OnActivated>Function>/Script/CoreUObject)
-	Item (0-0-0-0): size 36 (cls: Item>ObjectProperty>/Script/CoreUObject)
-	HandleInspectItemBP (0-0-0-0): size 68 (cls: HandleInspectItemBP>Function>/Script/CoreUObject)
 	ConsumableItem (0-0-0-0): size 36 (cls: ConsumableItem>ObjectProperty>/Script/CoreUObject)
 	HandleConsumeItemBP (0-0-0-0): size 68 (cls: HandleConsumeItemBP>Function>/Script/CoreUObject)
+	OnActivated (0-0-0-0): size 54 (cls: OnActivated>Function>/Script/CoreUObject)
 	DefaultActionRefresh (0-0-0-0): size 54 (cls: DefaultActionRefresh>Function>/Script/CoreUObject)
 	SchematicItem (0-0-0-0): size 36 (cls: SchematicItem>ObjectProperty>/Script/CoreUObject)
-	HandleCraftItemBP (0-0-0-0): size 68 (cls: HandleCraftItemBP>Function>/Script/CoreUObject)
+	HandleCraftItemBP (0-0-0-0): size 82 (cls: HandleCraftItemBP>Function>/Script/CoreUObject)
 	Item (0-0-0-0): size 36 (cls: Item>ObjectProperty>/Script/CoreUObject)
 	HandleEquipItemBP (0-0-0-0): size 68 (cls: HandleEquipItemBP>Function>/Script/CoreUObject)
 	HandleDifferentItemManagementModeSetBP (0-0-0-0): size 54 (cls: HandleDifferentItemManagementModeSetBP>Function>/Script/CoreUObject)
@@ -1758,9 +1773,9 @@ Serialized exports:
 	CallFunc_EqualEqual_ByteByte_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ByteByte_ReturnValue>BoolProperty>/Script/CoreUObject)
 	SizeInventoryPanel (0-0-0-0): size 278 (cls: SizeInventoryPanel>Function>/Script/CoreUObject)
 	Item (0-0-0-0): size 36 (cls: Item>ObjectProperty>/Script/CoreUObject)
-	HandleEquip (0-0-0-0): size 559 (cls: HandleEquip>Function>/Script/CoreUObject)
+	HandleEquip (0-0-0-0): size 561 (cls: HandleEquip>Function>/Script/CoreUObject)
 	SchematicItem (0-0-0-0): size 36 (cls: SchematicItem>ObjectProperty>/Script/CoreUObject)
-	CraftAndSlot (0-0-0-0): size 728 (cls: CraftAndSlot>Function>/Script/CoreUObject)
+	CraftAndSlotInternal (0-0-0-0): size 757 (cls: CraftAndSlotInternal>Function>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	FailCause (0-0-0-0): size 40 (cls: FailCause>EnumProperty>/Script/CoreUObject)
 	ShowCraftError (0-0-0-0): size 47 (cls: ShowCraftError>Function>/Script/CoreUObject)
@@ -1804,6 +1819,7 @@ Serialized exports:
 	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue2>BoolProperty>/Script/CoreUObject)
+	CallFunc_IsValid_ReturnValue3 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue3>BoolProperty>/Script/CoreUObject)
 	CallFunc_Map_Find_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Map_Find_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Not_PreBool_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Not_PreBool_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue1>BoolProperty>/Script/CoreUObject)
@@ -1812,6 +1828,7 @@ Serialized exports:
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess1 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess1>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess2 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess2>BoolProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_bSuccess3 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess3>BoolProperty>/Script/CoreUObject)
 	K2Node_SwitchInteger_CmpSuccess (0-0-0-0): size 34 (cls: K2Node_SwitchInteger_CmpSuccess>BoolProperty>/Script/CoreUObject)
 	CallFunc_GetCombinedDescription_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_GetCombinedDescription_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
@@ -2239,13 +2256,18 @@ Serialized exports:
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	RequestedTier (0-0-0-0): size 36 (cls: RequestedTier>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	CallFunc_MakeLiteralByte_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_MakeLiteralByte_ReturnValue>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	K2Node_Event_RequestedTier (0-0-0-0): size 36 (cls: K2Node_Event_RequestedTier>ByteProperty>/Script/CoreUObject)
+	K2Node_Event_RequestedTier1 (0-0-0-0): size 36 (cls: K2Node_Event_RequestedTier1>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	RequestedTier (0-0-0-0): size 36 (cls: RequestedTier>ByteProperty>/Script/CoreUObject)
+	RequestedTier (0-0-0-0): size 36 (cls: RequestedTier>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
@@ -2837,7 +2859,7 @@ Serialized exports:
 			Slot(ObjectProperty)=HorizontalBoxSlot_5=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
 			bIsVariable(BoolProperty)=True 
-	CraftingText (0-0-0-0): size 617 (cls: CraftingText>CommonTextBlock>/Script/CommonUI):
+	CraftingText (0-0-0-0): size 356 (cls: CraftingText>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B-S_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B-S 
 			Text(TextProperty)=Crafting (C7BEF65D482813B50443DD943F307B62) 
@@ -3773,10 +3795,11 @@ Serialized exports:
 			Column(IntProperty)=2 
 			Parent(ObjectProperty)=GridPanel_1=WidgetArchetype 
 			Content(ObjectProperty)=SortTypeButtonWorldItems=WidgetArchetype 
-	HeaderTitle (0-0-0-0): size 296 (cls: HeaderTitle>HeaderWithNav_C>/Game/UI/Frontend/Common/HeaderWithNav):
+	HeaderTitle (0-0-0-0): size 325 (cls: HeaderTitle>HeaderWithNav_C>/Game/UI/Frontend/Common/HeaderWithNav):
 		Tag array:
 			Border_ChangeFilter(ObjectProperty)=Border_ChangeFilter=WidgetArchetype 
 			Button_Back(ObjectProperty)=Button_Back=WidgetArchetype 
+			NavigationTabsCenterContentSlot(ObjectProperty)=NavigationTabsCenterContentSlot=WidgetArchetype 
 			PageLeftBtn(ObjectProperty)=PageLeftBtn=WidgetArchetype 
 			PageRightBtn(ObjectProperty)=PageRightBtn=WidgetArchetype 
 			SizeBox_Back(ObjectProperty)=SizeBox_Back=WidgetArchetype 
@@ -3821,7 +3844,7 @@ Serialized exports:
 	HorizontalBox_0 (0-0-0-0): size 61 (cls: HorizontalBox_0>HorizontalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-	HorizontalBox_2 (0-0-0-0): size 86 (cls: HorizontalBox_2>HorizontalBox>/Script/UMG):
+	HorizontalBox_2 (0-0-0-0): size 90 (cls: HorizontalBox_2>HorizontalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=BorderSlot_0=WidgetArchetype 
@@ -4200,6 +4223,10 @@ Serialized exports:
 			VerticalAlignment(ByteProperty)=VAlign_Center 
 			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
 			Content(ObjectProperty)=Text_Header=WidgetArchetype 
+	HorizontalBoxSlot_0 (0-0-0-0): size 70 (cls: HorizontalBoxSlot_0>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=HorizontalBox_2=WidgetArchetype 
+			Content(ObjectProperty)=NavigationTabsCenterContentSlot=WidgetArchetype 
 	HorizontalBoxSlot_2 (0-0-0-0): size 152 (cls: HorizontalBoxSlot_2>HorizontalBoxSlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Right 
@@ -6035,6 +6062,9 @@ Serialized exports:
 	RightExtraContentSlot (0-0-0-0): size 41 (cls: RightExtraContentSlot>NamedSlot>/Script/UMG):
 		Tag array:
 			Slot(ObjectProperty)=HorizontalBoxSlot_3=WidgetArchetype 
+	NavigationTabsCenterContentSlot (0-0-0-0): size 41 (cls: NavigationTabsCenterContentSlot>NamedSlot>/Script/UMG):
+		Tag array:
+			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 	ContentSlot (0-0-0-0): size 41 (cls: ContentSlot>NamedSlot>/Script/UMG):
 		Tag array:
 			Slot(ObjectProperty)=OverlaySlot_2=WidgetArchetype 
@@ -6132,6 +6162,7 @@ Serialized exports:
 	CallFunc_ConsumeItem_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_ConsumeItem_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_Create_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_Create_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_Create_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_Create_ReturnValue1>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetCachedWidget_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetCachedWidget_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetContext_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue1>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetContext_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue2>ObjectProperty>/Script/CoreUObject)
@@ -6143,8 +6174,10 @@ Serialized exports:
 	CallFunc_GetContext_ReturnValue8 (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue8>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetInputManager_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetInputManager_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetOwningPlayer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetOwningPlayer_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetUIManagerWidget_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetUIManagerWidget_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_ShowSimpleConfirmationDialog_NUI_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_ShowSimpleConfirmationDialog_NUI_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_ShowSimpleConfirmationDialog_NUI_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_ShowSimpleConfirmationDialog_NUI_ReturnValue1>ObjectProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_AsDown_Tier_Craft_Modal_Widget (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsDown_Tier_Craft_Modal_Widget>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsItem_Management_Inventory_Panel (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsItem_Management_Inventory_Panel>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsItem_Management_Inventory_Panel1 (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsItem_Management_Inventory_Panel1>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsItem_Management_Item_Tile_Button (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsItem_Management_Item_Tile_Button>ObjectProperty>/Script/CoreUObject)
@@ -6155,6 +6188,8 @@ Serialized exports:
 	K2Node_Event_Item3 (0-0-0-0): size 36 (cls: K2Node_Event_Item3>ObjectProperty>/Script/CoreUObject)
 	K2Node_Event_Item4 (0-0-0-0): size 36 (cls: K2Node_Event_Item4>ObjectProperty>/Script/CoreUObject)
 	K2Node_Event_SchematicItem (0-0-0-0): size 36 (cls: K2Node_Event_SchematicItem>ObjectProperty>/Script/CoreUObject)
+	K2Node_Event_SchematicItem1 (0-0-0-0): size 36 (cls: K2Node_Event_SchematicItem1>ObjectProperty>/Script/CoreUObject)
+	K2Node_Event_SchematicItem2 (0-0-0-0): size 36 (cls: K2Node_Event_SchematicItem2>ObjectProperty>/Script/CoreUObject)
 	FortniteDefaultBackgroundBlurWidget (0-0-0-0): size 36 (cls: FortniteDefaultBackgroundBlurWidget>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetItemDefinitionBP_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetItemDefinitionBP_ReturnValue>ObjectProperty>/Script/CoreUObject)

@@ -31,11 +31,13 @@ Name table:
 	/Game/UI/Foundation/Fonts/BurbankSmall
 	/Game/UI/Foundation/Fonts/NotoSans
 	/Game/UI/Foundation/Input/InputActionDataTable
+	/Game/UI/Foundation/Input/ItemCameraInputActionDataTable
 	/Game/UI/Foundation/Items/ItemInfoHeaderWidget
 	/Game/UI/Foundation/Materials/Athena_LockerCategory_Tag
 	/Game/UI/Foundation/Materials/Athena_LockerCategory_Tag_Large
 	/Game/UI/Foundation/Materials/Athena_LockerSlot_CardS
 	/Game/UI/Foundation/Materials/Athena_LockerType_Tag_Large
+	/Game/UI/Foundation/Materials/M_Athena_LockerSlot_ShineAnim
 	/Game/UI/Foundation/Modals/ProgressModal/ProgressModalWidget
 	/Game/UI/Foundation/Profile/BP_LocalPlayerProfileModal
 	/Game/UI/Foundation/Profile/PlayerBanner
@@ -134,6 +136,7 @@ Name table:
 	BigBang
 	BigBangCount
 	BindingName
+	BindToAnimationFinished
 	bIsFocusable
 	bIsRootWidget
 	bIsVariable
@@ -193,6 +196,7 @@ Name table:
 	CallFunc_GetContext_ReturnValue1
 	CallFunc_GetContext_ReturnValue2
 	CallFunc_GetContext_ReturnValue3
+	CallFunc_GetEndTime_ReturnValue
 	CallFunc_GetFavoriteItemForCategory_ReturnValue
 	CallFunc_GetGameAccountId_ReturnValue
 	CallFunc_GetItemDefinitionBP_ReturnValue
@@ -204,6 +208,7 @@ Name table:
 	CallFunc_GetPlayerController_ReturnValue
 	CallFunc_GetRandomDefaultAthenaCharacterDefinition_ReturnValue
 	CallFunc_GetUIManagerWidget_ReturnValue
+	CallFunc_GetUIManagerWidget_ReturnValue1
 	CallFunc_GetUINavigationManager_ReturnValue
 	CallFunc_IsMobileGame_ReturnValue
 	CallFunc_IsValid_ReturnValue
@@ -213,9 +218,13 @@ Name table:
 	CallFunc_Less_IntInt_ReturnValue2
 	CallFunc_Less_IntInt_ReturnValue3
 	CallFunc_NoResourceBrush_ReturnValue
+	CallFunc_PlayAnimation_ReturnValue
+	CallFunc_PlayAnimationForward_ReturnValue
+	CallFunc_PlayAnimationTimeRange_ReturnValue
 	CallingCardSlot
 	CameraFramingWidget
 	Cancel
+	CanControlCamera
 	CanShowEmpty
 	CanShowEmptyForType
 	Card
@@ -240,6 +249,8 @@ Name table:
 	ComponentDelegateBinding
 	ComponentDelegateBindings
 	ComponentPropertyName
+	ConfirmSelectionFlash
+	ConfirmSelectionShine
 	Construct
 	Content
 	ContrailSlot
@@ -251,6 +262,11 @@ Name table:
 	CurrentSubslotIndex
 	CustimizationSubSlotLastChanged
 	CustomizationCategoryLastChanged
+	CustomizationCategorySubslotIndexToUse
+	CustomizationCategoryToTransitionTo
+	CustomizationHeaderToUse
+	CustomizationSelectionBeingProcessed
+	CustomizationSlotButtonToPlayConfirmationOn
 	CustomizationType
 	DanceSlot1
 	DanceSlot2
@@ -287,6 +303,7 @@ Name table:
 	Default__ComponentDelegateBinding
 	Default__DelegateProperty
 	Default__EnumProperty
+	Default__FloatProperty
 	Default__FortKismetLibrary
 	Default__FortMultiSizeItemCard
 	Default__FortUIManagerWidget_NUI
@@ -347,6 +364,7 @@ Name table:
 	Default__WidgetSwitcherSlot
 	Default__WidgetTree
 	DefaultValue
+	DelegateFunction
 	DelegateProperty
 	DelegatePropertyName
 	Denominator
@@ -492,6 +510,7 @@ Name table:
 	GetAthenaProfile
 	GetCategoryDisplayName
 	GetContext
+	GetEndTime
 	GetFavoriteItemForCategory
 	GetGameAccountId
 	GetItemDefinitionBP
@@ -537,21 +556,23 @@ Name table:
 	InterfaceProperty
 	InterpMode
 	IntProperty
+	Intro
+	Intro_INST
 	IsMobileGame
 	IsValid
+	ItemCameraInputActionDataTable
 	ItemCardL
+	ItemCategoryTag
 	ItemCustomizationSelector
 	ItemDescriptionTextStyle
 	ItemInfo
 	ItemInfoHeaderWidget
 	ItemInfoHeaderWidget_C
-	ItemInforInfoOutro
-	ItemInforInfoOutro_INST
 	ItemOverlay
 	ItemTypeDisplayNames
-	ItemTypeTag
 	ItemViewObject
 	ItemViewRotateInputAction
+	ItemViewUnifiedSupportsCameraControlInputAction
 	ItemViewUnifiedZoomInputAction
 	ItemWidget
 	ItemWrapsHB
@@ -568,6 +589,7 @@ Name table:
 	K2Node_ComponentBoundEvent_Button1
 	K2Node_CreateDelegate_OutputDelegate
 	K2Node_CreateDelegate_OutputDelegate1
+	K2Node_DynamicCast_AsAthena_Customization_Slot_Button
 	K2Node_DynamicCast_AsFort_Player_Controller
 	K2Node_DynamicCast_bSuccess
 	K2Node_Event_bUsingGamepad
@@ -602,6 +624,7 @@ Name table:
 	M-BR-Banner-Inst-Bronze
 	M-Button-Console-YellowOutline
 	M-TutorialTabGlow
+	M_Athena_LockerSlot_ShineAnim
 	M_Border_SoftGlow
 	M_FlashingBang_Off
 	M_Font_SimpleGradient_Dynamic
@@ -688,8 +711,10 @@ Name table:
 	OnActivated
 	OnButtonClicked
 	OnButtonHovered
+	OnConfirmedSelection
 	OnDeactivated
 	OnInputModeChanged
+	OnSelected
 	OnSlotClicked
 	OnSlotClicked__DelegateSignature
 	OnSlotHovered
@@ -709,10 +734,14 @@ Name table:
 	ParentGuid
 	PickingCosmetic
 	PickingRestoreFocusWidget
+	PlayAnimation
+	PlayAnimationForward
+	PlayAnimationTimeRange
 	PlaybackRange
 	PlayerBanner
 	PlayerBanner_C
 	PlayerController
+	PlaySlotClickedAnimation
 	PointerToUberGraphFrame
 	Possessables
 	PossessedObjectClass
@@ -720,6 +749,7 @@ Name table:
 	PrecompiledEvaluationTemplate
 	PreInfinityExtrap
 	PressedSlateSoundOverride
+	ProccesTransitionToSelector
 	ProcessLoadoutChanged
 	ProgressModal
 	ProgressModalWidget_C
@@ -814,6 +844,7 @@ Name table:
 	SlotImageOverlay
 	Slots
 	SlottedItemCardSize
+	SlotToPlayAnimOn
 	SlotWidgetName
 	SmallBang
 	SmallBangCount
@@ -913,12 +944,14 @@ Name table:
 	TutorialBorder
 	Type
 	TypefaceFontName
+	TypeOverlay
 	TypeTextBlock
 	UberGraphFrame
 	UberGraphFunction
 	UIManager
 	UInt16Property
 	UInt32Property
+	UMGSequencePlayer
 	UnderlyingType
 	UnifiedRotateItem
 	UnifiedZoomItem
@@ -944,6 +977,7 @@ Name table:
 	Widget
 	WidgetAnimation
 	WidgetAnimationBinding
+	WidgetAnimationDynamicEvent__DelegateSignature
 	WidgetArchetype
 	WidgetBlueprintGeneratedClass
 	WidgetBlueprintLibrary
@@ -960,7 +994,7 @@ Name table:
 	WrapsTag
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	AthenaLockerTab_C (0-0-0-0): size 939 (cls: AthenaLockerTab_C>WidgetBlueprintGeneratedClass>/Script/UMG):
+	AthenaLockerTab_C (0-0-0-0): size 991 (cls: AthenaLockerTab_C>WidgetBlueprintGeneratedClass>/Script/UMG):
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
@@ -970,7 +1004,7 @@ Serialized exports:
 			TemplateAsset(SoftObjectProperty)=/Game/Athena/UI/Customization/AthenaLockerTab.WidgetArchetype 
 			DynamicBindingObjects(ArrayProperty)=[object] (inner: ObjectProperty)
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_AthenaLockerTab=AthenaLockerTab_C 
-	Default__AthenaLockerTab_C (0-0-0-0): size 2764 (cls: Default__AthenaLockerTab_C>AthenaLockerTab_C):
+	Default__AthenaLockerTab_C (0-0-0-0): size 2883 (cls: Default__AthenaLockerTab_C>AthenaLockerTab_C):
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			CurrentSubslotIndex(IntProperty)=-1 
@@ -1005,15 +1039,16 @@ Serialized exports:
 			ItemTypeDisplayNames(TextProperty)=MUSIC (F7CF65954F4D6B0DCBE712814ED988F1) 
 			ItemTypeDisplayNames(TextProperty)=WARP (828C8C54471C908BFF5FBCBF10D015D8) 
 			ItemViewObject(ObjectProperty)=ItemViewObject=Default__AthenaLockerTab_C 
+			ItemViewUnifiedSupportsCameraControlInputAction(StructProperty)=System.Byte[] 
 			ItemViewUnifiedZoomInputAction(StructProperty)=System.Byte[] 
 			ItemViewRotateInputAction(StructProperty)=System.Byte[] 
 			bHasScriptImplementedTick(BoolProperty)=False 
 			bHasScriptImplementedPaint(BoolProperty)=False 
 	AllSlots (0-0-0-0): size 36 (cls: AllSlots>ObjectProperty>/Script/CoreUObject)
 	AllSlots (0-0-0-0): size 36 (cls: AllSlots>ArrayProperty>/Script/CoreUObject)
-	OutroToPicker (0-0-0-0): size 36 (cls: OutroToPicker>ObjectProperty>/Script/CoreUObject)
+	Intro (0-0-0-0): size 36 (cls: Intro>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_AthenaLockerTab (0-0-0-0): size 1606 (cls: ExecuteUbergraph_AthenaLockerTab>Function>/Script/CoreUObject)
+	ExecuteUbergraph_AthenaLockerTab (0-0-0-0): size 2053 (cls: ExecuteUbergraph_AthenaLockerTab>Function>/Script/CoreUObject)
 	K2Node_MakeArray_Array (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array>ObjectProperty>/Script/CoreUObject)
 	K2Node_MakeArray_Array (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array>ArrayProperty>/Script/CoreUObject)
 	BannerSlot (0-0-0-0): size 212 (cls: BannerSlot>AthenaCustomizationBannerButton_C>/Game/Athena/UI/Customization/AthenaCustomizationBannerButton):
@@ -1025,8 +1060,10 @@ Serialized exports:
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=HorizontalBoxSlot_3=WidgetArchetype 
 			Navigation(ObjectProperty)=WidgetNavigation_0=WidgetArchetype 
-	SlotButton (0-0-0-0): size 483 (cls: SlotButton>AthenaCustomizationSlotButton_C>/Game/Athena/UI/Customization/AthenaCustomizationSlotButton):
+	SlotButton (0-0-0-0): size 541 (cls: SlotButton>AthenaCustomizationSlotButton_C>/Game/Athena/UI/Customization/AthenaCustomizationSlotButton):
 		Tag array:
+			ConfirmSelectionFlash(ObjectProperty)=ConfirmSelectionFlash=WidgetArchetype 
+			ConfirmSelectionShine(ObjectProperty)=ConfirmSelectionShine=WidgetArchetype 
 			EmptyImage(ObjectProperty)=EmptyImage=WidgetArchetype 
 			ImageSlotType(ObjectProperty)=ImageSlotType=WidgetArchetype 
 			NormalBangWrapper(ObjectProperty)=NormalBangWrapper=WidgetArchetype 
@@ -1039,8 +1076,10 @@ Serialized exports:
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
-	SlotButton (0-0-0-0): size 483 (cls: SlotButton>AthenaCustomizationSlotButton_C>/Game/Athena/UI/Customization/AthenaCustomizationSlotButton):
+	SlotButton (0-0-0-0): size 541 (cls: SlotButton>AthenaCustomizationSlotButton_C>/Game/Athena/UI/Customization/AthenaCustomizationSlotButton):
 		Tag array:
+			ConfirmSelectionFlash(ObjectProperty)=ConfirmSelectionFlash=WidgetArchetype 
+			ConfirmSelectionShine(ObjectProperty)=ConfirmSelectionShine=WidgetArchetype 
 			EmptyImage(ObjectProperty)=EmptyImage=WidgetArchetype 
 			ImageSlotType(ObjectProperty)=ImageSlotType=WidgetArchetype 
 			NormalBangWrapper(ObjectProperty)=NormalBangWrapper=WidgetArchetype 
@@ -1053,8 +1092,10 @@ Serialized exports:
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
-	SlotButton (0-0-0-0): size 483 (cls: SlotButton>AthenaCustomizationSlotButton_C>/Game/Athena/UI/Customization/AthenaCustomizationSlotButton):
+	SlotButton (0-0-0-0): size 541 (cls: SlotButton>AthenaCustomizationSlotButton_C>/Game/Athena/UI/Customization/AthenaCustomizationSlotButton):
 		Tag array:
+			ConfirmSelectionFlash(ObjectProperty)=ConfirmSelectionFlash=WidgetArchetype 
+			ConfirmSelectionShine(ObjectProperty)=ConfirmSelectionShine=WidgetArchetype 
 			EmptyImage(ObjectProperty)=EmptyImage=WidgetArchetype 
 			ImageSlotType(ObjectProperty)=ImageSlotType=WidgetArchetype 
 			NormalBangWrapper(ObjectProperty)=NormalBangWrapper=WidgetArchetype 
@@ -1067,8 +1108,10 @@ Serialized exports:
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
-	SlotButton (0-0-0-0): size 483 (cls: SlotButton>AthenaCustomizationSlotButton_C>/Game/Athena/UI/Customization/AthenaCustomizationSlotButton):
+	SlotButton (0-0-0-0): size 541 (cls: SlotButton>AthenaCustomizationSlotButton_C>/Game/Athena/UI/Customization/AthenaCustomizationSlotButton):
 		Tag array:
+			ConfirmSelectionFlash(ObjectProperty)=ConfirmSelectionFlash=WidgetArchetype 
+			ConfirmSelectionShine(ObjectProperty)=ConfirmSelectionShine=WidgetArchetype 
 			EmptyImage(ObjectProperty)=EmptyImage=WidgetArchetype 
 			ImageSlotType(ObjectProperty)=ImageSlotType=WidgetArchetype 
 			NormalBangWrapper(ObjectProperty)=NormalBangWrapper=WidgetArchetype 
@@ -1081,8 +1124,10 @@ Serialized exports:
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
-	SlotButton (0-0-0-0): size 483 (cls: SlotButton>AthenaCustomizationSlotButton_C>/Game/Athena/UI/Customization/AthenaCustomizationSlotButton):
+	SlotButton (0-0-0-0): size 541 (cls: SlotButton>AthenaCustomizationSlotButton_C>/Game/Athena/UI/Customization/AthenaCustomizationSlotButton):
 		Tag array:
+			ConfirmSelectionFlash(ObjectProperty)=ConfirmSelectionFlash=WidgetArchetype 
+			ConfirmSelectionShine(ObjectProperty)=ConfirmSelectionShine=WidgetArchetype 
 			EmptyImage(ObjectProperty)=EmptyImage=WidgetArchetype 
 			ImageSlotType(ObjectProperty)=ImageSlotType=WidgetArchetype 
 			NormalBangWrapper(ObjectProperty)=NormalBangWrapper=WidgetArchetype 
@@ -1095,8 +1140,10 @@ Serialized exports:
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
-	SlotButton (0-0-0-0): size 483 (cls: SlotButton>AthenaCustomizationSlotButton_C>/Game/Athena/UI/Customization/AthenaCustomizationSlotButton):
+	SlotButton (0-0-0-0): size 541 (cls: SlotButton>AthenaCustomizationSlotButton_C>/Game/Athena/UI/Customization/AthenaCustomizationSlotButton):
 		Tag array:
+			ConfirmSelectionFlash(ObjectProperty)=ConfirmSelectionFlash=WidgetArchetype 
+			ConfirmSelectionShine(ObjectProperty)=ConfirmSelectionShine=WidgetArchetype 
 			EmptyImage(ObjectProperty)=EmptyImage=WidgetArchetype 
 			ImageSlotType(ObjectProperty)=ImageSlotType=WidgetArchetype 
 			NormalBangWrapper(ObjectProperty)=NormalBangWrapper=WidgetArchetype 
@@ -1109,8 +1156,10 @@ Serialized exports:
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
-	SlotButton (0-0-0-0): size 483 (cls: SlotButton>AthenaCustomizationSlotButton_C>/Game/Athena/UI/Customization/AthenaCustomizationSlotButton):
+	SlotButton (0-0-0-0): size 541 (cls: SlotButton>AthenaCustomizationSlotButton_C>/Game/Athena/UI/Customization/AthenaCustomizationSlotButton):
 		Tag array:
+			ConfirmSelectionFlash(ObjectProperty)=ConfirmSelectionFlash=WidgetArchetype 
+			ConfirmSelectionShine(ObjectProperty)=ConfirmSelectionShine=WidgetArchetype 
 			EmptyImage(ObjectProperty)=EmptyImage=WidgetArchetype 
 			ImageSlotType(ObjectProperty)=ImageSlotType=WidgetArchetype 
 			NormalBangWrapper(ObjectProperty)=NormalBangWrapper=WidgetArchetype 
@@ -1123,8 +1172,10 @@ Serialized exports:
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
-	SlotButton (0-0-0-0): size 483 (cls: SlotButton>AthenaCustomizationSlotButton_C>/Game/Athena/UI/Customization/AthenaCustomizationSlotButton):
+	SlotButton (0-0-0-0): size 541 (cls: SlotButton>AthenaCustomizationSlotButton_C>/Game/Athena/UI/Customization/AthenaCustomizationSlotButton):
 		Tag array:
+			ConfirmSelectionFlash(ObjectProperty)=ConfirmSelectionFlash=WidgetArchetype 
+			ConfirmSelectionShine(ObjectProperty)=ConfirmSelectionShine=WidgetArchetype 
 			EmptyImage(ObjectProperty)=EmptyImage=WidgetArchetype 
 			ImageSlotType(ObjectProperty)=ImageSlotType=WidgetArchetype 
 			NormalBangWrapper(ObjectProperty)=NormalBangWrapper=WidgetArchetype 
@@ -1137,8 +1188,10 @@ Serialized exports:
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
-	SlotButton (0-0-0-0): size 483 (cls: SlotButton>AthenaCustomizationSlotButton_C>/Game/Athena/UI/Customization/AthenaCustomizationSlotButton):
+	SlotButton (0-0-0-0): size 541 (cls: SlotButton>AthenaCustomizationSlotButton_C>/Game/Athena/UI/Customization/AthenaCustomizationSlotButton):
 		Tag array:
+			ConfirmSelectionFlash(ObjectProperty)=ConfirmSelectionFlash=WidgetArchetype 
+			ConfirmSelectionShine(ObjectProperty)=ConfirmSelectionShine=WidgetArchetype 
 			EmptyImage(ObjectProperty)=EmptyImage=WidgetArchetype 
 			ImageSlotType(ObjectProperty)=ImageSlotType=WidgetArchetype 
 			NormalBangWrapper(ObjectProperty)=NormalBangWrapper=WidgetArchetype 
@@ -1151,8 +1204,10 @@ Serialized exports:
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
-	SlotButton (0-0-0-0): size 483 (cls: SlotButton>AthenaCustomizationSlotButton_C>/Game/Athena/UI/Customization/AthenaCustomizationSlotButton):
+	SlotButton (0-0-0-0): size 541 (cls: SlotButton>AthenaCustomizationSlotButton_C>/Game/Athena/UI/Customization/AthenaCustomizationSlotButton):
 		Tag array:
+			ConfirmSelectionFlash(ObjectProperty)=ConfirmSelectionFlash=WidgetArchetype 
+			ConfirmSelectionShine(ObjectProperty)=ConfirmSelectionShine=WidgetArchetype 
 			EmptyImage(ObjectProperty)=EmptyImage=WidgetArchetype 
 			ImageSlotType(ObjectProperty)=ImageSlotType=WidgetArchetype 
 			NormalBangWrapper(ObjectProperty)=NormalBangWrapper=WidgetArchetype 
@@ -1165,8 +1220,10 @@ Serialized exports:
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
-	SlotButton (0-0-0-0): size 483 (cls: SlotButton>AthenaCustomizationSlotButton_C>/Game/Athena/UI/Customization/AthenaCustomizationSlotButton):
+	SlotButton (0-0-0-0): size 541 (cls: SlotButton>AthenaCustomizationSlotButton_C>/Game/Athena/UI/Customization/AthenaCustomizationSlotButton):
 		Tag array:
+			ConfirmSelectionFlash(ObjectProperty)=ConfirmSelectionFlash=WidgetArchetype 
+			ConfirmSelectionShine(ObjectProperty)=ConfirmSelectionShine=WidgetArchetype 
 			EmptyImage(ObjectProperty)=EmptyImage=WidgetArchetype 
 			ImageSlotType(ObjectProperty)=ImageSlotType=WidgetArchetype 
 			NormalBangWrapper(ObjectProperty)=NormalBangWrapper=WidgetArchetype 
@@ -1179,8 +1236,10 @@ Serialized exports:
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
-	SlotButton (0-0-0-0): size 483 (cls: SlotButton>AthenaCustomizationSlotButton_C>/Game/Athena/UI/Customization/AthenaCustomizationSlotButton):
+	SlotButton (0-0-0-0): size 541 (cls: SlotButton>AthenaCustomizationSlotButton_C>/Game/Athena/UI/Customization/AthenaCustomizationSlotButton):
 		Tag array:
+			ConfirmSelectionFlash(ObjectProperty)=ConfirmSelectionFlash=WidgetArchetype 
+			ConfirmSelectionShine(ObjectProperty)=ConfirmSelectionShine=WidgetArchetype 
 			EmptyImage(ObjectProperty)=EmptyImage=WidgetArchetype 
 			ImageSlotType(ObjectProperty)=ImageSlotType=WidgetArchetype 
 			NormalBangWrapper(ObjectProperty)=NormalBangWrapper=WidgetArchetype 
@@ -1193,8 +1252,10 @@ Serialized exports:
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
-	SlotButton (0-0-0-0): size 483 (cls: SlotButton>AthenaCustomizationSlotButton_C>/Game/Athena/UI/Customization/AthenaCustomizationSlotButton):
+	SlotButton (0-0-0-0): size 541 (cls: SlotButton>AthenaCustomizationSlotButton_C>/Game/Athena/UI/Customization/AthenaCustomizationSlotButton):
 		Tag array:
+			ConfirmSelectionFlash(ObjectProperty)=ConfirmSelectionFlash=WidgetArchetype 
+			ConfirmSelectionShine(ObjectProperty)=ConfirmSelectionShine=WidgetArchetype 
 			EmptyImage(ObjectProperty)=EmptyImage=WidgetArchetype 
 			ImageSlotType(ObjectProperty)=ImageSlotType=WidgetArchetype 
 			NormalBangWrapper(ObjectProperty)=NormalBangWrapper=WidgetArchetype 
@@ -1207,8 +1268,10 @@ Serialized exports:
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
-	SlotButton (0-0-0-0): size 483 (cls: SlotButton>AthenaCustomizationSlotButton_C>/Game/Athena/UI/Customization/AthenaCustomizationSlotButton):
+	SlotButton (0-0-0-0): size 541 (cls: SlotButton>AthenaCustomizationSlotButton_C>/Game/Athena/UI/Customization/AthenaCustomizationSlotButton):
 		Tag array:
+			ConfirmSelectionFlash(ObjectProperty)=ConfirmSelectionFlash=WidgetArchetype 
+			ConfirmSelectionShine(ObjectProperty)=ConfirmSelectionShine=WidgetArchetype 
 			EmptyImage(ObjectProperty)=EmptyImage=WidgetArchetype 
 			ImageSlotType(ObjectProperty)=ImageSlotType=WidgetArchetype 
 			NormalBangWrapper(ObjectProperty)=NormalBangWrapper=WidgetArchetype 
@@ -1221,8 +1284,10 @@ Serialized exports:
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
-	SlotButton (0-0-0-0): size 483 (cls: SlotButton>AthenaCustomizationSlotButton_C>/Game/Athena/UI/Customization/AthenaCustomizationSlotButton):
+	SlotButton (0-0-0-0): size 541 (cls: SlotButton>AthenaCustomizationSlotButton_C>/Game/Athena/UI/Customization/AthenaCustomizationSlotButton):
 		Tag array:
+			ConfirmSelectionFlash(ObjectProperty)=ConfirmSelectionFlash=WidgetArchetype 
+			ConfirmSelectionShine(ObjectProperty)=ConfirmSelectionShine=WidgetArchetype 
 			EmptyImage(ObjectProperty)=EmptyImage=WidgetArchetype 
 			ImageSlotType(ObjectProperty)=ImageSlotType=WidgetArchetype 
 			NormalBangWrapper(ObjectProperty)=NormalBangWrapper=WidgetArchetype 
@@ -1235,8 +1300,10 @@ Serialized exports:
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
-	SlotButton (0-0-0-0): size 483 (cls: SlotButton>AthenaCustomizationSlotButton_C>/Game/Athena/UI/Customization/AthenaCustomizationSlotButton):
+	SlotButton (0-0-0-0): size 541 (cls: SlotButton>AthenaCustomizationSlotButton_C>/Game/Athena/UI/Customization/AthenaCustomizationSlotButton):
 		Tag array:
+			ConfirmSelectionFlash(ObjectProperty)=ConfirmSelectionFlash=WidgetArchetype 
+			ConfirmSelectionShine(ObjectProperty)=ConfirmSelectionShine=WidgetArchetype 
 			EmptyImage(ObjectProperty)=EmptyImage=WidgetArchetype 
 			ImageSlotType(ObjectProperty)=ImageSlotType=WidgetArchetype 
 			NormalBangWrapper(ObjectProperty)=NormalBangWrapper=WidgetArchetype 
@@ -1249,8 +1316,10 @@ Serialized exports:
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
-	SlotButton (0-0-0-0): size 483 (cls: SlotButton>AthenaCustomizationSlotButton_C>/Game/Athena/UI/Customization/AthenaCustomizationSlotButton):
+	SlotButton (0-0-0-0): size 541 (cls: SlotButton>AthenaCustomizationSlotButton_C>/Game/Athena/UI/Customization/AthenaCustomizationSlotButton):
 		Tag array:
+			ConfirmSelectionFlash(ObjectProperty)=ConfirmSelectionFlash=WidgetArchetype 
+			ConfirmSelectionShine(ObjectProperty)=ConfirmSelectionShine=WidgetArchetype 
 			EmptyImage(ObjectProperty)=EmptyImage=WidgetArchetype 
 			ImageSlotType(ObjectProperty)=ImageSlotType=WidgetArchetype 
 			NormalBangWrapper(ObjectProperty)=NormalBangWrapper=WidgetArchetype 
@@ -1263,8 +1332,10 @@ Serialized exports:
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
-	SlotButton (0-0-0-0): size 483 (cls: SlotButton>AthenaCustomizationSlotButton_C>/Game/Athena/UI/Customization/AthenaCustomizationSlotButton):
+	SlotButton (0-0-0-0): size 541 (cls: SlotButton>AthenaCustomizationSlotButton_C>/Game/Athena/UI/Customization/AthenaCustomizationSlotButton):
 		Tag array:
+			ConfirmSelectionFlash(ObjectProperty)=ConfirmSelectionFlash=WidgetArchetype 
+			ConfirmSelectionShine(ObjectProperty)=ConfirmSelectionShine=WidgetArchetype 
 			EmptyImage(ObjectProperty)=EmptyImage=WidgetArchetype 
 			ImageSlotType(ObjectProperty)=ImageSlotType=WidgetArchetype 
 			NormalBangWrapper(ObjectProperty)=NormalBangWrapper=WidgetArchetype 
@@ -1277,8 +1348,10 @@ Serialized exports:
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
-	SlotButton (0-0-0-0): size 483 (cls: SlotButton>AthenaCustomizationSlotButton_C>/Game/Athena/UI/Customization/AthenaCustomizationSlotButton):
+	SlotButton (0-0-0-0): size 541 (cls: SlotButton>AthenaCustomizationSlotButton_C>/Game/Athena/UI/Customization/AthenaCustomizationSlotButton):
 		Tag array:
+			ConfirmSelectionFlash(ObjectProperty)=ConfirmSelectionFlash=WidgetArchetype 
+			ConfirmSelectionShine(ObjectProperty)=ConfirmSelectionShine=WidgetArchetype 
 			EmptyImage(ObjectProperty)=EmptyImage=WidgetArchetype 
 			ImageSlotType(ObjectProperty)=ImageSlotType=WidgetArchetype 
 			NormalBangWrapper(ObjectProperty)=NormalBangWrapper=WidgetArchetype 
@@ -1291,8 +1364,10 @@ Serialized exports:
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
-	SlotButton (0-0-0-0): size 483 (cls: SlotButton>AthenaCustomizationSlotButton_C>/Game/Athena/UI/Customization/AthenaCustomizationSlotButton):
+	SlotButton (0-0-0-0): size 541 (cls: SlotButton>AthenaCustomizationSlotButton_C>/Game/Athena/UI/Customization/AthenaCustomizationSlotButton):
 		Tag array:
+			ConfirmSelectionFlash(ObjectProperty)=ConfirmSelectionFlash=WidgetArchetype 
+			ConfirmSelectionShine(ObjectProperty)=ConfirmSelectionShine=WidgetArchetype 
 			EmptyImage(ObjectProperty)=EmptyImage=WidgetArchetype 
 			ImageSlotType(ObjectProperty)=ImageSlotType=WidgetArchetype 
 			NormalBangWrapper(ObjectProperty)=NormalBangWrapper=WidgetArchetype 
@@ -1305,8 +1380,10 @@ Serialized exports:
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
-	SlotButton (0-0-0-0): size 483 (cls: SlotButton>AthenaCustomizationSlotButton_C>/Game/Athena/UI/Customization/AthenaCustomizationSlotButton):
+	SlotButton (0-0-0-0): size 541 (cls: SlotButton>AthenaCustomizationSlotButton_C>/Game/Athena/UI/Customization/AthenaCustomizationSlotButton):
 		Tag array:
+			ConfirmSelectionFlash(ObjectProperty)=ConfirmSelectionFlash=WidgetArchetype 
+			ConfirmSelectionShine(ObjectProperty)=ConfirmSelectionShine=WidgetArchetype 
 			EmptyImage(ObjectProperty)=EmptyImage=WidgetArchetype 
 			ImageSlotType(ObjectProperty)=ImageSlotType=WidgetArchetype 
 			NormalBangWrapper(ObjectProperty)=NormalBangWrapper=WidgetArchetype 
@@ -1319,8 +1396,10 @@ Serialized exports:
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
-	SlotButton (0-0-0-0): size 483 (cls: SlotButton>AthenaCustomizationSlotButton_C>/Game/Athena/UI/Customization/AthenaCustomizationSlotButton):
+	SlotButton (0-0-0-0): size 541 (cls: SlotButton>AthenaCustomizationSlotButton_C>/Game/Athena/UI/Customization/AthenaCustomizationSlotButton):
 		Tag array:
+			ConfirmSelectionFlash(ObjectProperty)=ConfirmSelectionFlash=WidgetArchetype 
+			ConfirmSelectionShine(ObjectProperty)=ConfirmSelectionShine=WidgetArchetype 
 			EmptyImage(ObjectProperty)=EmptyImage=WidgetArchetype 
 			ImageSlotType(ObjectProperty)=ImageSlotType=WidgetArchetype 
 			NormalBangWrapper(ObjectProperty)=NormalBangWrapper=WidgetArchetype 
@@ -1333,8 +1412,10 @@ Serialized exports:
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
-	SlotButton (0-0-0-0): size 483 (cls: SlotButton>AthenaCustomizationSlotButton_C>/Game/Athena/UI/Customization/AthenaCustomizationSlotButton):
+	SlotButton (0-0-0-0): size 541 (cls: SlotButton>AthenaCustomizationSlotButton_C>/Game/Athena/UI/Customization/AthenaCustomizationSlotButton):
 		Tag array:
+			ConfirmSelectionFlash(ObjectProperty)=ConfirmSelectionFlash=WidgetArchetype 
+			ConfirmSelectionShine(ObjectProperty)=ConfirmSelectionShine=WidgetArchetype 
 			EmptyImage(ObjectProperty)=EmptyImage=WidgetArchetype 
 			ImageSlotType(ObjectProperty)=ImageSlotType=WidgetArchetype 
 			NormalBangWrapper(ObjectProperty)=NormalBangWrapper=WidgetArchetype 
@@ -1347,8 +1428,10 @@ Serialized exports:
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
-	SlotButton (0-0-0-0): size 483 (cls: SlotButton>AthenaCustomizationSlotButton_C>/Game/Athena/UI/Customization/AthenaCustomizationSlotButton):
+	SlotButton (0-0-0-0): size 541 (cls: SlotButton>AthenaCustomizationSlotButton_C>/Game/Athena/UI/Customization/AthenaCustomizationSlotButton):
 		Tag array:
+			ConfirmSelectionFlash(ObjectProperty)=ConfirmSelectionFlash=WidgetArchetype 
+			ConfirmSelectionShine(ObjectProperty)=ConfirmSelectionShine=WidgetArchetype 
 			EmptyImage(ObjectProperty)=EmptyImage=WidgetArchetype 
 			ImageSlotType(ObjectProperty)=ImageSlotType=WidgetArchetype 
 			NormalBangWrapper(ObjectProperty)=NormalBangWrapper=WidgetArchetype 
@@ -1361,8 +1444,10 @@ Serialized exports:
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
-	SlotButton (0-0-0-0): size 483 (cls: SlotButton>AthenaCustomizationSlotButton_C>/Game/Athena/UI/Customization/AthenaCustomizationSlotButton):
+	SlotButton (0-0-0-0): size 541 (cls: SlotButton>AthenaCustomizationSlotButton_C>/Game/Athena/UI/Customization/AthenaCustomizationSlotButton):
 		Tag array:
+			ConfirmSelectionFlash(ObjectProperty)=ConfirmSelectionFlash=WidgetArchetype 
+			ConfirmSelectionShine(ObjectProperty)=ConfirmSelectionShine=WidgetArchetype 
 			EmptyImage(ObjectProperty)=EmptyImage=WidgetArchetype 
 			ImageSlotType(ObjectProperty)=ImageSlotType=WidgetArchetype 
 			NormalBangWrapper(ObjectProperty)=NormalBangWrapper=WidgetArchetype 
@@ -1375,8 +1460,10 @@ Serialized exports:
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
-	SlotButton (0-0-0-0): size 483 (cls: SlotButton>AthenaCustomizationSlotButton_C>/Game/Athena/UI/Customization/AthenaCustomizationSlotButton):
+	SlotButton (0-0-0-0): size 541 (cls: SlotButton>AthenaCustomizationSlotButton_C>/Game/Athena/UI/Customization/AthenaCustomizationSlotButton):
 		Tag array:
+			ConfirmSelectionFlash(ObjectProperty)=ConfirmSelectionFlash=WidgetArchetype 
+			ConfirmSelectionShine(ObjectProperty)=ConfirmSelectionShine=WidgetArchetype 
 			EmptyImage(ObjectProperty)=EmptyImage=WidgetArchetype 
 			ImageSlotType(ObjectProperty)=ImageSlotType=WidgetArchetype 
 			NormalBangWrapper(ObjectProperty)=NormalBangWrapper=WidgetArchetype 
@@ -1772,6 +1859,7 @@ Serialized exports:
 		Tag array:
 			BlurStrength(FloatProperty)=8 
 			Slot(ObjectProperty)=OverlaySlot_1=WidgetArchetype 
+	ProccesTransitionToSelector (0-0-0-0): size 54 (cls: ProccesTransitionToSelector>Function>/Script/CoreUObject)
 	Button (0-0-0-0): size 36 (cls: Button>ObjectProperty>/Script/CoreUObject)
 	BndEvt__BannerSlot_K2Node_ComponentBoundEvent_547_CommonButtonClicked__DelegateSignature (0-0-0-0): size 68 (cls: BndEvt__BannerSlot_K2Node_ComponentBoundEvent_547_CommonButtonClicked__DelegateSignature>Function>/Script/CoreUObject)
 	Button (0-0-0-0): size 36 (cls: Button>ObjectProperty>/Script/CoreUObject)
@@ -1780,9 +1868,9 @@ Serialized exports:
 	Destruct (0-0-0-0): size 54 (cls: Destruct>Function>/Script/CoreUObject)
 	Construct (0-0-0-0): size 54 (cls: Construct>Function>/Script/CoreUObject)
 	OnDeactivated (0-0-0-0): size 54 (cls: OnDeactivated>Function>/Script/CoreUObject)
-	OnActivated (0-0-0-0): size 54 (cls: OnActivated>Function>/Script/CoreUObject)
 	bUsingGamepad (0-0-0-0): size 34 (cls: bUsingGamepad>BoolProperty>/Script/CoreUObject)
 	OnInputModeChanged (0-0-0-0): size 68 (cls: OnInputModeChanged>Function>/Script/CoreUObject)
+	OnActivated (0-0-0-0): size 54 (cls: OnActivated>Function>/Script/CoreUObject)
 	RegisterInputActions (0-0-0-0): size 73 (cls: RegisterInputActions>Function>/Script/CoreUObject)
 	SelectInitialWidgetForGamepad (0-0-0-0): size 53 (cls: SelectInitialWidgetForGamepad>Function>/Script/CoreUObject)
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
@@ -1793,7 +1881,7 @@ Serialized exports:
 	SelectFirstWidget (0-0-0-0): size 171 (cls: SelectFirstWidget>Function>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	Type (0-0-0-0): size 40 (cls: Type>EnumProperty>/Script/CoreUObject)
-	HandleSlotHovered (0-0-0-0): size 561 (cls: HandleSlotHovered>Function>/Script/CoreUObject)
+	HandleSlotHovered (0-0-0-0): size 572 (cls: HandleSlotHovered>Function>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	CustomizationType (0-0-0-0): size 40 (cls: CustomizationType>EnumProperty>/Script/CoreUObject)
 	ShowVaultItemByCategory (0-0-0-0): size 924 (cls: ShowVaultItemByCategory>Function>/Script/CoreUObject)
@@ -1805,8 +1893,8 @@ Serialized exports:
 	HandleSlotClicked (0-0-0-0): size 47 (cls: HandleSlotClicked>Function>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	Category (0-0-0-0): size 40 (cls: Category>EnumProperty>/Script/CoreUObject)
-	BeginPickingCustomization (0-0-0-0): size 317 (cls: BeginPickingCustomization>Function>/Script/CoreUObject)
-	CallFunc_IsMobileGame_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsMobileGame_ReturnValue>BoolProperty>/Script/CoreUObject)
+	BeginPickingCustomization (0-0-0-0): size 280 (cls: BeginPickingCustomization>Function>/Script/CoreUObject)
+	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	SetHeaderToBanner (0-0-0-0): size 317 (cls: SetHeaderToBanner>Function>/Script/CoreUObject)
 	InSelection (0-0-0-0): size 36 (cls: InSelection>ObjectProperty>/Script/CoreUObject)
 	SelectWidget (0-0-0-0): size 175 (cls: SelectWidget>Function>/Script/CoreUObject)
@@ -1833,7 +1921,10 @@ Serialized exports:
 	Temp_bool_Variable7 (0-0-0-0): size 34 (cls: Temp_bool_Variable7>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable8 (0-0-0-0): size 34 (cls: Temp_bool_Variable8>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable9 (0-0-0-0): size 34 (cls: Temp_bool_Variable9>BoolProperty>/Script/CoreUObject)
+	CustomizationSelectionBeingProcessed (0-0-0-0): size 34 (cls: CustomizationSelectionBeingProcessed>BoolProperty>/Script/CoreUObject)
 	DoUnhoveredBehavior (0-0-0-0): size 34 (cls: DoUnhoveredBehavior>BoolProperty>/Script/CoreUObject)
+	CallFunc_IsMobileGame_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsMobileGame_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Less_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Less_IntInt_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_Less_IntInt_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue2>BoolProperty>/Script/CoreUObject)
@@ -1871,6 +1962,7 @@ Serialized exports:
 			Padding(StructProperty)=System.Byte[] 
 			Parent(ObjectProperty)=RootBackground=WidgetArchetype 
 			Content(ObjectProperty)=Overlay_4=WidgetArchetype 
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
@@ -4750,13 +4842,13 @@ Serialized exports:
 			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=SizeBoxSlot_5=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	ShortDescriptionText (0-0-0-0): size 386 (cls: ShortDescriptionText>CommonTextBlock>/Script/CommonUI):
+	ShortDescriptionText (0-0-0-0): size 392 (cls: ShortDescriptionText>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			ScrollStyle(ObjectProperty)=TextScrollStyle-NoFade_C=/Game/UI/Foundation/Text/TextScrollStyle-NoFade 
-			Text(TextProperty)=ITEM TYPE (7D608D474731F16B06306297460C3514) 
+			Text(TextProperty)=HARVESTING TOOL (76177FAB460EEEA4EBFF8995B80CADEC) 
 			Font(StructProperty)=System.Byte[] 
 			ShadowOffset(StructProperty)=Vector2D(0,0) 
-			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
+			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
 	StatsHeader (0-0-0-0): size 638 (cls: StatsHeader>CommonTextBlock>/Script/CommonUI):
 		Tag array:
@@ -4870,14 +4962,17 @@ Serialized exports:
 		Tag array:
 			ComponentDelegateBindings(ArrayProperty)=[object] (inner: StructProperty)
 	K2Node_CreateDelegate_OutputDelegate (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate>DelegateProperty>/Script/CoreUObject)
+	K2Node_CreateDelegate_OutputDelegate (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate>DelegateProperty>/Script/CoreUObject)
 	K2Node_CreateDelegate_OutputDelegate1 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate1>DelegateProperty>/Script/CoreUObject)
 	Temp_byte_Variable (0-0-0-0): size 40 (cls: Temp_byte_Variable>EnumProperty>/Script/CoreUObject)
 	CurrentCustomizationType (0-0-0-0): size 40 (cls: CurrentCustomizationType>EnumProperty>/Script/CoreUObject)
 	CustomizationCategoryLastChanged (0-0-0-0): size 40 (cls: CustomizationCategoryLastChanged>EnumProperty>/Script/CoreUObject)
+	CustomizationCategoryToTransitionTo (0-0-0-0): size 40 (cls: CustomizationCategoryToTransitionTo>EnumProperty>/Script/CoreUObject)
 	LastHoveredCustomizationType (0-0-0-0): size 40 (cls: LastHoveredCustomizationType>EnumProperty>/Script/CoreUObject)
 	K2Node_Select_Default (0-0-0-0): size 40 (cls: K2Node_Select_Default>EnumProperty>/Script/CoreUObject)
 	Temp_byte_Variable (0-0-0-0): size 40 (cls: Temp_byte_Variable>EnumProperty>/Script/CoreUObject)
 	Temp_byte_Variable1 (0-0-0-0): size 40 (cls: Temp_byte_Variable1>EnumProperty>/Script/CoreUObject)
+	CallFunc_GetEndTime_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetEndTime_ReturnValue>FloatProperty>/Script/CoreUObject)
 	ItemViewObject (0-0-0-0): size 12 (cls: ItemViewObject>FortItemView>/Script/FortniteUI)
 	ItemViewObject (0-0-0-0): size 12 (cls: ItemViewObject>FortItemView>/Script/FortniteUI)
 	ItemWidget (0-0-0-0): size 123 (cls: ItemWidget>FortMultiSizeItemCard>/Script/FortniteUI):
@@ -5015,6 +5110,9 @@ Serialized exports:
 			BPItemCardSize(EnumProperty)=EFortItemCardSize::S 
 			EmptyItemType(EnumProperty)=EFortItemType::AthenaPickaxe 
 			Slot(ObjectProperty)=OverlaySlot_1=WidgetArchetype 
+	CallFunc_PlayAnimation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlayAnimation_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	SlotToPlayAnimOn (0-0-0-0): size 36 (cls: SlotToPlayAnimOn>ObjectProperty>/Script/CoreUObject)
+	PlaySlotClickedAnimation (0-0-0-0): size 113 (cls: PlaySlotClickedAnimation>Function>/Script/CoreUObject)
 	AccountHB (0-0-0-0): size 86 (cls: AccountHB>HorizontalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -5089,6 +5187,10 @@ Serialized exports:
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=SafeZoneSlot_0=WidgetArchetype 
+	HorizontalBox_6 (0-0-0-0): size 82 (cls: HorizontalBox_6>HorizontalBox>/Script/UMG):
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
 	HorizontalBox_1 (0-0-0-0): size 90 (cls: HorizontalBox_1>HorizontalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -5338,14 +5440,14 @@ Serialized exports:
 			HorizontalAlignment(ByteProperty)=HAlign_Right 
 			VerticalAlignment(ByteProperty)=VAlign_Bottom 
 			Parent(ObjectProperty)=HorizontalBox_3=WidgetArchetype 
-			Content(ObjectProperty)=Overlay_17=WidgetArchetype 
-	HorizontalBoxSlot_1 (0-0-0-0): size 238 (cls: HorizontalBoxSlot_1>HorizontalBoxSlot>/Script/UMG):
+			Content(ObjectProperty)=ItemCategoryTag=WidgetArchetype 
+	HorizontalBoxSlot_2 (0-0-0-0): size 238 (cls: HorizontalBoxSlot_2>HorizontalBoxSlot>/Script/UMG):
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
 			HorizontalAlignment(ByteProperty)=HAlign_Left 
-			VerticalAlignment(ByteProperty)=VAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Bottom 
 			Parent(ObjectProperty)=HorizontalBox_3=WidgetArchetype 
-			Content(ObjectProperty)=ItemTypeTag=WidgetArchetype 
+			Content(ObjectProperty)=TypeOverlay=WidgetArchetype 
 	HorizontalBoxSlot_0 (0-0-0-0): size 267 (cls: HorizontalBoxSlot_0>HorizontalBoxSlot>/Script/UMG):
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
@@ -5358,6 +5460,12 @@ Serialized exports:
 			Size(StructProperty)=System.Byte[] 
 			Parent(ObjectProperty)=HorizontalBox_4=WidgetArchetype 
 			Content(ObjectProperty)=Overlay_3=WidgetArchetype 
+	HorizontalBoxSlot_0 (0-0-0-0): size 226 (cls: HorizontalBoxSlot_0>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=HorizontalBox_6=WidgetArchetype 
+			Content(ObjectProperty)=ShortDescriptionText=WidgetArchetype 
 	HorizontalBoxSlot_0 (0-0-0-0): size 267 (cls: HorizontalBoxSlot_0>HorizontalBoxSlot>/Script/UMG):
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
@@ -5536,6 +5644,17 @@ Serialized exports:
 			VerticalAlignment(ByteProperty)=VAlign_Top 
 			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
 			Content(ObjectProperty)=SlotButton=WidgetArchetype 
+	ConfirmSelectionFlash (0-0-0-0): size 147 (cls: ConfirmSelectionFlash>Image>/Script/UMG):
+		Tag array:
+			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=OverlaySlot_2=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
+	ConfirmSelectionShine (0-0-0-0): size 233 (cls: ConfirmSelectionShine>Image>/Script/UMG):
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=OverlaySlot_4=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
 	EmptyImage (0-0-0-0): size 168 (cls: EmptyImage>Image>/Script/UMG):
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
@@ -5585,6 +5704,17 @@ Serialized exports:
 			Brush(StructProperty)=System.Byte[] 
 			Slot(ObjectProperty)=LoadGuardSlot_0=WidgetArchetype 
 			Visibility(EnumProperty)=ESlateVisibility::SelfHitTestInvisible 
+	ConfirmSelectionFlash (0-0-0-0): size 147 (cls: ConfirmSelectionFlash>Image>/Script/UMG):
+		Tag array:
+			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=OverlaySlot_2=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
+	ConfirmSelectionShine (0-0-0-0): size 233 (cls: ConfirmSelectionShine>Image>/Script/UMG):
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=OverlaySlot_4=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
 	EmptyImage (0-0-0-0): size 168 (cls: EmptyImage>Image>/Script/UMG):
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
@@ -5610,6 +5740,17 @@ Serialized exports:
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
 			Slot(ObjectProperty)=SizeBoxSlot_2=WidgetArchetype 
+	ConfirmSelectionFlash (0-0-0-0): size 147 (cls: ConfirmSelectionFlash>Image>/Script/UMG):
+		Tag array:
+			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=OverlaySlot_2=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
+	ConfirmSelectionShine (0-0-0-0): size 233 (cls: ConfirmSelectionShine>Image>/Script/UMG):
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=OverlaySlot_4=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
 	EmptyImage (0-0-0-0): size 168 (cls: EmptyImage>Image>/Script/UMG):
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
@@ -5635,6 +5776,17 @@ Serialized exports:
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
 			Slot(ObjectProperty)=SizeBoxSlot_2=WidgetArchetype 
+	ConfirmSelectionFlash (0-0-0-0): size 147 (cls: ConfirmSelectionFlash>Image>/Script/UMG):
+		Tag array:
+			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=OverlaySlot_2=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
+	ConfirmSelectionShine (0-0-0-0): size 233 (cls: ConfirmSelectionShine>Image>/Script/UMG):
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=OverlaySlot_4=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
 	EmptyImage (0-0-0-0): size 168 (cls: EmptyImage>Image>/Script/UMG):
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
@@ -5660,6 +5812,17 @@ Serialized exports:
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
 			Slot(ObjectProperty)=SizeBoxSlot_2=WidgetArchetype 
+	ConfirmSelectionFlash (0-0-0-0): size 147 (cls: ConfirmSelectionFlash>Image>/Script/UMG):
+		Tag array:
+			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=OverlaySlot_2=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
+	ConfirmSelectionShine (0-0-0-0): size 233 (cls: ConfirmSelectionShine>Image>/Script/UMG):
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=OverlaySlot_4=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
 	EmptyImage (0-0-0-0): size 168 (cls: EmptyImage>Image>/Script/UMG):
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
@@ -5685,6 +5848,17 @@ Serialized exports:
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
 			Slot(ObjectProperty)=SizeBoxSlot_2=WidgetArchetype 
+	ConfirmSelectionFlash (0-0-0-0): size 147 (cls: ConfirmSelectionFlash>Image>/Script/UMG):
+		Tag array:
+			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=OverlaySlot_2=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
+	ConfirmSelectionShine (0-0-0-0): size 233 (cls: ConfirmSelectionShine>Image>/Script/UMG):
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=OverlaySlot_4=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
 	EmptyImage (0-0-0-0): size 168 (cls: EmptyImage>Image>/Script/UMG):
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
@@ -5710,6 +5884,17 @@ Serialized exports:
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
 			Slot(ObjectProperty)=SizeBoxSlot_2=WidgetArchetype 
+	ConfirmSelectionFlash (0-0-0-0): size 147 (cls: ConfirmSelectionFlash>Image>/Script/UMG):
+		Tag array:
+			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=OverlaySlot_2=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
+	ConfirmSelectionShine (0-0-0-0): size 233 (cls: ConfirmSelectionShine>Image>/Script/UMG):
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=OverlaySlot_4=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
 	EmptyImage (0-0-0-0): size 168 (cls: EmptyImage>Image>/Script/UMG):
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
@@ -5735,6 +5920,17 @@ Serialized exports:
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
 			Slot(ObjectProperty)=SizeBoxSlot_2=WidgetArchetype 
+	ConfirmSelectionFlash (0-0-0-0): size 147 (cls: ConfirmSelectionFlash>Image>/Script/UMG):
+		Tag array:
+			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=OverlaySlot_2=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
+	ConfirmSelectionShine (0-0-0-0): size 233 (cls: ConfirmSelectionShine>Image>/Script/UMG):
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=OverlaySlot_4=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
 	EmptyImage (0-0-0-0): size 168 (cls: EmptyImage>Image>/Script/UMG):
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
@@ -5760,6 +5956,17 @@ Serialized exports:
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
 			Slot(ObjectProperty)=SizeBoxSlot_2=WidgetArchetype 
+	ConfirmSelectionFlash (0-0-0-0): size 147 (cls: ConfirmSelectionFlash>Image>/Script/UMG):
+		Tag array:
+			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=OverlaySlot_2=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
+	ConfirmSelectionShine (0-0-0-0): size 233 (cls: ConfirmSelectionShine>Image>/Script/UMG):
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=OverlaySlot_4=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
 	EmptyImage (0-0-0-0): size 168 (cls: EmptyImage>Image>/Script/UMG):
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
@@ -5785,6 +5992,17 @@ Serialized exports:
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
 			Slot(ObjectProperty)=SizeBoxSlot_2=WidgetArchetype 
+	ConfirmSelectionFlash (0-0-0-0): size 147 (cls: ConfirmSelectionFlash>Image>/Script/UMG):
+		Tag array:
+			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=OverlaySlot_2=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
+	ConfirmSelectionShine (0-0-0-0): size 233 (cls: ConfirmSelectionShine>Image>/Script/UMG):
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=OverlaySlot_4=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
 	EmptyImage (0-0-0-0): size 168 (cls: EmptyImage>Image>/Script/UMG):
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
@@ -5810,6 +6028,17 @@ Serialized exports:
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
 			Slot(ObjectProperty)=SizeBoxSlot_2=WidgetArchetype 
+	ConfirmSelectionFlash (0-0-0-0): size 147 (cls: ConfirmSelectionFlash>Image>/Script/UMG):
+		Tag array:
+			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=OverlaySlot_2=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
+	ConfirmSelectionShine (0-0-0-0): size 233 (cls: ConfirmSelectionShine>Image>/Script/UMG):
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=OverlaySlot_4=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
 	EmptyImage (0-0-0-0): size 168 (cls: EmptyImage>Image>/Script/UMG):
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
@@ -5835,6 +6064,17 @@ Serialized exports:
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
 			Slot(ObjectProperty)=SizeBoxSlot_2=WidgetArchetype 
+	ConfirmSelectionFlash (0-0-0-0): size 147 (cls: ConfirmSelectionFlash>Image>/Script/UMG):
+		Tag array:
+			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=OverlaySlot_2=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
+	ConfirmSelectionShine (0-0-0-0): size 233 (cls: ConfirmSelectionShine>Image>/Script/UMG):
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=OverlaySlot_4=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
 	EmptyImage (0-0-0-0): size 168 (cls: EmptyImage>Image>/Script/UMG):
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
@@ -5860,6 +6100,17 @@ Serialized exports:
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
 			Slot(ObjectProperty)=SizeBoxSlot_2=WidgetArchetype 
+	ConfirmSelectionFlash (0-0-0-0): size 147 (cls: ConfirmSelectionFlash>Image>/Script/UMG):
+		Tag array:
+			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=OverlaySlot_2=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
+	ConfirmSelectionShine (0-0-0-0): size 233 (cls: ConfirmSelectionShine>Image>/Script/UMG):
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=OverlaySlot_4=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
 	EmptyImage (0-0-0-0): size 168 (cls: EmptyImage>Image>/Script/UMG):
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
@@ -5885,6 +6136,17 @@ Serialized exports:
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
 			Slot(ObjectProperty)=SizeBoxSlot_2=WidgetArchetype 
+	ConfirmSelectionFlash (0-0-0-0): size 147 (cls: ConfirmSelectionFlash>Image>/Script/UMG):
+		Tag array:
+			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=OverlaySlot_2=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
+	ConfirmSelectionShine (0-0-0-0): size 233 (cls: ConfirmSelectionShine>Image>/Script/UMG):
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=OverlaySlot_4=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
 	EmptyImage (0-0-0-0): size 168 (cls: EmptyImage>Image>/Script/UMG):
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
@@ -5917,13 +6179,13 @@ Serialized exports:
 			bIsVariable(BoolProperty)=False 
 			Visibility(EnumProperty)=ESlateVisibility::SelfHitTestInvisible 
 			RenderOpacity(FloatProperty)=0.3 
-	Image_19 (0-0-0-0): size 407 (cls: Image_19>Image>/Script/UMG):
+	Image_1 (0-0-0-0): size 407 (cls: Image_1>Image>/Script/UMG):
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
 			Slot(ObjectProperty)=OverlaySlot_2=WidgetArchetype 
 			bIsVariable(BoolProperty)=False 
 			Visibility(EnumProperty)=ESlateVisibility::SelfHitTestInvisible 
-	Image_20 (0-0-0-0): size 407 (cls: Image_20>Image>/Script/UMG):
+	Image_19 (0-0-0-0): size 407 (cls: Image_19>Image>/Script/UMG):
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
 			Slot(ObjectProperty)=OverlaySlot_2=WidgetArchetype 
@@ -5977,6 +6239,17 @@ Serialized exports:
 			Slot(ObjectProperty)=OverlaySlot_3=WidgetArchetype 
 			bIsVariable(BoolProperty)=False 
 			Visibility(EnumProperty)=ESlateVisibility::SelfHitTestInvisible 
+	ConfirmSelectionFlash (0-0-0-0): size 147 (cls: ConfirmSelectionFlash>Image>/Script/UMG):
+		Tag array:
+			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=OverlaySlot_2=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
+	ConfirmSelectionShine (0-0-0-0): size 233 (cls: ConfirmSelectionShine>Image>/Script/UMG):
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=OverlaySlot_4=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
 	EmptyImage (0-0-0-0): size 168 (cls: EmptyImage>Image>/Script/UMG):
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
@@ -6002,6 +6275,17 @@ Serialized exports:
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
 			Slot(ObjectProperty)=SizeBoxSlot_2=WidgetArchetype 
+	ConfirmSelectionFlash (0-0-0-0): size 147 (cls: ConfirmSelectionFlash>Image>/Script/UMG):
+		Tag array:
+			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=OverlaySlot_2=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
+	ConfirmSelectionShine (0-0-0-0): size 233 (cls: ConfirmSelectionShine>Image>/Script/UMG):
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=OverlaySlot_4=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
 	EmptyImage (0-0-0-0): size 168 (cls: EmptyImage>Image>/Script/UMG):
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
@@ -6027,6 +6311,17 @@ Serialized exports:
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
 			Slot(ObjectProperty)=SizeBoxSlot_2=WidgetArchetype 
+	ConfirmSelectionFlash (0-0-0-0): size 147 (cls: ConfirmSelectionFlash>Image>/Script/UMG):
+		Tag array:
+			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=OverlaySlot_2=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
+	ConfirmSelectionShine (0-0-0-0): size 233 (cls: ConfirmSelectionShine>Image>/Script/UMG):
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=OverlaySlot_4=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
 	EmptyImage (0-0-0-0): size 168 (cls: EmptyImage>Image>/Script/UMG):
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
@@ -6052,6 +6347,17 @@ Serialized exports:
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
 			Slot(ObjectProperty)=SizeBoxSlot_2=WidgetArchetype 
+	ConfirmSelectionFlash (0-0-0-0): size 147 (cls: ConfirmSelectionFlash>Image>/Script/UMG):
+		Tag array:
+			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=OverlaySlot_2=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
+	ConfirmSelectionShine (0-0-0-0): size 233 (cls: ConfirmSelectionShine>Image>/Script/UMG):
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=OverlaySlot_4=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
 	EmptyImage (0-0-0-0): size 168 (cls: EmptyImage>Image>/Script/UMG):
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
@@ -6077,6 +6383,17 @@ Serialized exports:
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
 			Slot(ObjectProperty)=SizeBoxSlot_2=WidgetArchetype 
+	ConfirmSelectionFlash (0-0-0-0): size 147 (cls: ConfirmSelectionFlash>Image>/Script/UMG):
+		Tag array:
+			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=OverlaySlot_2=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
+	ConfirmSelectionShine (0-0-0-0): size 233 (cls: ConfirmSelectionShine>Image>/Script/UMG):
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=OverlaySlot_4=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
 	EmptyImage (0-0-0-0): size 168 (cls: EmptyImage>Image>/Script/UMG):
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
@@ -6102,6 +6419,17 @@ Serialized exports:
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
 			Slot(ObjectProperty)=SizeBoxSlot_2=WidgetArchetype 
+	ConfirmSelectionFlash (0-0-0-0): size 147 (cls: ConfirmSelectionFlash>Image>/Script/UMG):
+		Tag array:
+			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=OverlaySlot_2=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
+	ConfirmSelectionShine (0-0-0-0): size 233 (cls: ConfirmSelectionShine>Image>/Script/UMG):
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=OverlaySlot_4=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
 	EmptyImage (0-0-0-0): size 168 (cls: EmptyImage>Image>/Script/UMG):
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
@@ -6127,6 +6455,17 @@ Serialized exports:
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
 			Slot(ObjectProperty)=SizeBoxSlot_2=WidgetArchetype 
+	ConfirmSelectionFlash (0-0-0-0): size 147 (cls: ConfirmSelectionFlash>Image>/Script/UMG):
+		Tag array:
+			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=OverlaySlot_2=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
+	ConfirmSelectionShine (0-0-0-0): size 233 (cls: ConfirmSelectionShine>Image>/Script/UMG):
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=OverlaySlot_4=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
 	EmptyImage (0-0-0-0): size 168 (cls: EmptyImage>Image>/Script/UMG):
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
@@ -6152,6 +6491,17 @@ Serialized exports:
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
 			Slot(ObjectProperty)=SizeBoxSlot_2=WidgetArchetype 
+	ConfirmSelectionFlash (0-0-0-0): size 147 (cls: ConfirmSelectionFlash>Image>/Script/UMG):
+		Tag array:
+			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=OverlaySlot_2=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
+	ConfirmSelectionShine (0-0-0-0): size 233 (cls: ConfirmSelectionShine>Image>/Script/UMG):
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=OverlaySlot_4=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
 	EmptyImage (0-0-0-0): size 168 (cls: EmptyImage>Image>/Script/UMG):
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
@@ -6177,6 +6527,17 @@ Serialized exports:
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
 			Slot(ObjectProperty)=SizeBoxSlot_2=WidgetArchetype 
+	ConfirmSelectionFlash (0-0-0-0): size 147 (cls: ConfirmSelectionFlash>Image>/Script/UMG):
+		Tag array:
+			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=OverlaySlot_2=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
+	ConfirmSelectionShine (0-0-0-0): size 233 (cls: ConfirmSelectionShine>Image>/Script/UMG):
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=OverlaySlot_4=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
 	EmptyImage (0-0-0-0): size 168 (cls: EmptyImage>Image>/Script/UMG):
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
@@ -6230,6 +6591,17 @@ Serialized exports:
 			Slot(ObjectProperty)=OverlaySlot_2=WidgetArchetype 
 			bIsVariable(BoolProperty)=False 
 			Visibility(EnumProperty)=ESlateVisibility::SelfHitTestInvisible 
+	ConfirmSelectionFlash (0-0-0-0): size 147 (cls: ConfirmSelectionFlash>Image>/Script/UMG):
+		Tag array:
+			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=OverlaySlot_2=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
+	ConfirmSelectionShine (0-0-0-0): size 233 (cls: ConfirmSelectionShine>Image>/Script/UMG):
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=OverlaySlot_4=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
 	EmptyImage (0-0-0-0): size 168 (cls: EmptyImage>Image>/Script/UMG):
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
@@ -6255,6 +6627,17 @@ Serialized exports:
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
 			Slot(ObjectProperty)=SizeBoxSlot_2=WidgetArchetype 
+	ConfirmSelectionFlash (0-0-0-0): size 147 (cls: ConfirmSelectionFlash>Image>/Script/UMG):
+		Tag array:
+			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=OverlaySlot_2=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
+	ConfirmSelectionShine (0-0-0-0): size 233 (cls: ConfirmSelectionShine>Image>/Script/UMG):
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=OverlaySlot_4=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
 	EmptyImage (0-0-0-0): size 168 (cls: EmptyImage>Image>/Script/UMG):
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
@@ -6280,6 +6663,17 @@ Serialized exports:
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
 			Slot(ObjectProperty)=SizeBoxSlot_2=WidgetArchetype 
+	ConfirmSelectionFlash (0-0-0-0): size 147 (cls: ConfirmSelectionFlash>Image>/Script/UMG):
+		Tag array:
+			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=OverlaySlot_2=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
+	ConfirmSelectionShine (0-0-0-0): size 233 (cls: ConfirmSelectionShine>Image>/Script/UMG):
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=OverlaySlot_4=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
 	EmptyImage (0-0-0-0): size 168 (cls: EmptyImage>Image>/Script/UMG):
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
@@ -6308,6 +6702,7 @@ Serialized exports:
 	Subslot Index (0-0-0-0): size 32 (cls: Subslot Index>IntProperty>/Script/CoreUObject)
 	CurrentSubslotIndex (0-0-0-0): size 32 (cls: CurrentSubslotIndex>IntProperty>/Script/CoreUObject)
 	CustimizationSubSlotLastChanged (0-0-0-0): size 32 (cls: CustimizationSubSlotLastChanged>IntProperty>/Script/CoreUObject)
+	CustomizationCategorySubslotIndexToUse (0-0-0-0): size 32 (cls: CustomizationCategorySubslotIndexToUse>IntProperty>/Script/CoreUObject)
 	CallFunc_Add_IntInt_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue>IntProperty>/Script/CoreUObject)
 	CallFunc_Add_IntInt_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue1>IntProperty>/Script/CoreUObject)
 	CallFunc_Add_IntInt_ReturnValue2 (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue2>IntProperty>/Script/CoreUObject)
@@ -6356,20 +6751,20 @@ Serialized exports:
 		Tag array:
 			Parent(ObjectProperty)=SurroundLoadGuard=WidgetArchetype 
 			Content(ObjectProperty)=SurroundImage=WidgetArchetype 
-	ItemInforInfoOutro (0-0-0-0): size 792 (cls: ItemInforInfoOutro>MovieScene>/Script/MovieScene):
+	Intro (0-0-0-0): size 3204 (cls: Intro>MovieScene>/Script/MovieScene):
 		Tag array:
 			Possessables(ArrayProperty)=[object] (inner: StructProperty)
 			ObjectBindings(ArrayProperty)=[object] (inner: StructProperty)
 			PlaybackRange(StructProperty)=System.Byte[] 
 			DisplayRate(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 3676007292-1166982074-797158799-689898857 
-	OutroToPicker (0-0-0-0): size 802 (cls: OutroToPicker>MovieScene>/Script/MovieScene):
+			Signature(StructProperty)=Guid: 4103175432-1183324414-3481909395-3476930356 
+	OutroToPicker (0-0-0-0): size 3204 (cls: OutroToPicker>MovieScene>/Script/MovieScene):
 		Tag array:
 			Possessables(ArrayProperty)=[object] (inner: StructProperty)
 			ObjectBindings(ArrayProperty)=[object] (inner: StructProperty)
 			PlaybackRange(StructProperty)=System.Byte[] 
 			DisplayRate(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 362783547-1153888339-2151330217-3865002368 
+			Signature(StructProperty)=Guid: 4133348106-1132133522-2063966877-2086329265 
 	MovieScene2DTransformSection_0 (0-0-0-0): size 2623 (cls: MovieScene2DTransformSection_0>MovieScene2DTransformSection>/Script/UMG):
 		Tag array:
 			Translation(StructProperty)=System.Byte[] 
@@ -6377,26 +6772,233 @@ Serialized exports:
 			Shear(StructProperty)=System.Byte[] 
 			Easing(StructProperty)=System.Byte[] 
 			SectionRange(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 4011187900-1308403058-2687585922-2502455923 
+			Signature(StructProperty)=Guid: 839296716-1173582797-267418801-2655480403 
+	MovieScene2DTransformSection_0 (0-0-0-0): size 2623 (cls: MovieScene2DTransformSection_0>MovieScene2DTransformSection>/Script/UMG):
+		Tag array:
+			Translation(StructProperty)=System.Byte[] 
+			Shear(StructProperty)=System.Byte[] 
+			Shear(StructProperty)=System.Byte[] 
+			Easing(StructProperty)=System.Byte[] 
+			SectionRange(StructProperty)=System.Byte[] 
+			Signature(StructProperty)=Guid: 264816740-1303556374-4054968505-657707734 
+	MovieScene2DTransformSection_0 (0-0-0-0): size 2623 (cls: MovieScene2DTransformSection_0>MovieScene2DTransformSection>/Script/UMG):
+		Tag array:
+			Translation(StructProperty)=System.Byte[] 
+			Shear(StructProperty)=System.Byte[] 
+			Shear(StructProperty)=System.Byte[] 
+			Easing(StructProperty)=System.Byte[] 
+			SectionRange(StructProperty)=System.Byte[] 
+			Signature(StructProperty)=Guid: 3426663002-1081042966-2835599285-783862537 
 	MovieScene2DTransformSection_0 (0-0-0-0): size 2057 (cls: MovieScene2DTransformSection_0>MovieScene2DTransformSection>/Script/UMG):
 		Tag array:
 			Scale(StructProperty)=System.Byte[] 
 			Scale(StructProperty)=System.Byte[] 
 			Easing(StructProperty)=System.Byte[] 
 			SectionRange(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 1305271164-1129887241-3999639198-10883254 
+			Signature(StructProperty)=Guid: 481742683-1318178256-2559922327-989827290 
+	MovieScene2DTransformSection_0 (0-0-0-0): size 1154 (cls: MovieScene2DTransformSection_0>MovieScene2DTransformSection>/Script/UMG):
+		Tag array:
+			Translation(StructProperty)=System.Byte[] 
+			Easing(StructProperty)=System.Byte[] 
+			SectionRange(StructProperty)=System.Byte[] 
+			Signature(StructProperty)=Guid: 3356947544-1169773993-3118679715-2390337284 
+	MovieScene2DTransformSection_0 (0-0-0-0): size 2623 (cls: MovieScene2DTransformSection_0>MovieScene2DTransformSection>/Script/UMG):
+		Tag array:
+			Translation(StructProperty)=System.Byte[] 
+			Shear(StructProperty)=System.Byte[] 
+			Shear(StructProperty)=System.Byte[] 
+			Easing(StructProperty)=System.Byte[] 
+			SectionRange(StructProperty)=System.Byte[] 
+			Signature(StructProperty)=Guid: 1721226260-1253488919-1982581419-3133449815 
+	MovieScene2DTransformSection_0 (0-0-0-0): size 2623 (cls: MovieScene2DTransformSection_0>MovieScene2DTransformSection>/Script/UMG):
+		Tag array:
+			Translation(StructProperty)=System.Byte[] 
+			Shear(StructProperty)=System.Byte[] 
+			Shear(StructProperty)=System.Byte[] 
+			Easing(StructProperty)=System.Byte[] 
+			SectionRange(StructProperty)=System.Byte[] 
+			Signature(StructProperty)=Guid: 2409329837-1247432355-3275934091-3696519751 
+	MovieScene2DTransformSection_0 (0-0-0-0): size 2623 (cls: MovieScene2DTransformSection_0>MovieScene2DTransformSection>/Script/UMG):
+		Tag array:
+			Translation(StructProperty)=System.Byte[] 
+			Shear(StructProperty)=System.Byte[] 
+			Shear(StructProperty)=System.Byte[] 
+			Easing(StructProperty)=System.Byte[] 
+			SectionRange(StructProperty)=System.Byte[] 
+			Signature(StructProperty)=Guid: 3735583432-1144316936-1670013069-1483300957 
+	MovieScene2DTransformSection_0 (0-0-0-0): size 2057 (cls: MovieScene2DTransformSection_0>MovieScene2DTransformSection>/Script/UMG):
+		Tag array:
+			Translation(StructProperty)=System.Byte[] 
+			Shear(StructProperty)=System.Byte[] 
+			Easing(StructProperty)=System.Byte[] 
+			SectionRange(StructProperty)=System.Byte[] 
+			Signature(StructProperty)=Guid: 1660578344-1267872467-2056128410-178287911 
+	MovieScene2DTransformSection_0 (0-0-0-0): size 2057 (cls: MovieScene2DTransformSection_0>MovieScene2DTransformSection>/Script/UMG):
+		Tag array:
+			Translation(StructProperty)=System.Byte[] 
+			Shear(StructProperty)=System.Byte[] 
+			Easing(StructProperty)=System.Byte[] 
+			SectionRange(StructProperty)=System.Byte[] 
+			Signature(StructProperty)=Guid: 616851781-1333147100-3057853886-3525699536 
+	MovieScene2DTransformSection_0 (0-0-0-0): size 2057 (cls: MovieScene2DTransformSection_0>MovieScene2DTransformSection>/Script/UMG):
+		Tag array:
+			Translation(StructProperty)=System.Byte[] 
+			Shear(StructProperty)=System.Byte[] 
+			Easing(StructProperty)=System.Byte[] 
+			SectionRange(StructProperty)=System.Byte[] 
+			Signature(StructProperty)=Guid: 1542827679-1103963167-3894108804-684512710 
+	MovieScene2DTransformSection_0 (0-0-0-0): size 2057 (cls: MovieScene2DTransformSection_0>MovieScene2DTransformSection>/Script/UMG):
+		Tag array:
+			Translation(StructProperty)=System.Byte[] 
+			Shear(StructProperty)=System.Byte[] 
+			Easing(StructProperty)=System.Byte[] 
+			SectionRange(StructProperty)=System.Byte[] 
+			Signature(StructProperty)=Guid: 3689998243-1110517012-509265543-3563113092 
+	MovieScene2DTransformSection_0 (0-0-0-0): size 1154 (cls: MovieScene2DTransformSection_0>MovieScene2DTransformSection>/Script/UMG):
+		Tag array:
+			Translation(StructProperty)=System.Byte[] 
+			Easing(StructProperty)=System.Byte[] 
+			SectionRange(StructProperty)=System.Byte[] 
+			Signature(StructProperty)=Guid: 3035933444-1103494307-4205129399-1457228218 
+	MovieScene2DTransformSection_0 (0-0-0-0): size 2057 (cls: MovieScene2DTransformSection_0>MovieScene2DTransformSection>/Script/UMG):
+		Tag array:
+			Scale(StructProperty)=System.Byte[] 
+			Scale(StructProperty)=System.Byte[] 
+			Easing(StructProperty)=System.Byte[] 
+			SectionRange(StructProperty)=System.Byte[] 
+			Signature(StructProperty)=Guid: 2504041456-1230719139-2030947485-2108378541 
+	MovieScene2DTransformTrack_1 (0-0-0-0): size 196 (cls: MovieScene2DTransformTrack_1>MovieScene2DTransformTrack>/Script/UMG):
+		Tag array:
+			PropertyName(NameProperty)=RenderTransform 
+			PropertyPath(StrProperty)=RenderTransform 
+			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
+			Signature(StructProperty)=Guid: 1135989329-1115117409-2802790570-911116250 
+	MovieScene2DTransformTrack_10 (0-0-0-0): size 196 (cls: MovieScene2DTransformTrack_10>MovieScene2DTransformTrack>/Script/UMG):
+		Tag array:
+			PropertyName(NameProperty)=RenderTransform 
+			PropertyPath(StrProperty)=RenderTransform 
+			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
+			Signature(StructProperty)=Guid: 1361485421-1313931262-4242979217-1926523614 
+	MovieScene2DTransformTrack_11 (0-0-0-0): size 196 (cls: MovieScene2DTransformTrack_11>MovieScene2DTransformTrack>/Script/UMG):
+		Tag array:
+			PropertyName(NameProperty)=RenderTransform 
+			PropertyPath(StrProperty)=RenderTransform 
+			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
+			Signature(StructProperty)=Guid: 1596612294-1200054324-2275479428-1389019700 
+	MovieScene2DTransformTrack_12 (0-0-0-0): size 196 (cls: MovieScene2DTransformTrack_12>MovieScene2DTransformTrack>/Script/UMG):
+		Tag array:
+			PropertyName(NameProperty)=RenderTransform 
+			PropertyPath(StrProperty)=RenderTransform 
+			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
+			Signature(StructProperty)=Guid: 1853511804-1271108823-582628992-4232195260 
+	MovieScene2DTransformTrack_13 (0-0-0-0): size 196 (cls: MovieScene2DTransformTrack_13>MovieScene2DTransformTrack>/Script/UMG):
+		Tag array:
+			PropertyName(NameProperty)=RenderTransform 
+			PropertyPath(StrProperty)=RenderTransform 
+			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
+			Signature(StructProperty)=Guid: 2008025509-1323158078-852950950-2552995757 
+	MovieScene2DTransformTrack_3 (0-0-0-0): size 196 (cls: MovieScene2DTransformTrack_3>MovieScene2DTransformTrack>/Script/UMG):
+		Tag array:
+			PropertyName(NameProperty)=RenderTransform 
+			PropertyPath(StrProperty)=RenderTransform 
+			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
+			Signature(StructProperty)=Guid: 3082428913-1090845540-3930105738-4285504614 
+	MovieScene2DTransformTrack_9 (0-0-0-0): size 196 (cls: MovieScene2DTransformTrack_9>MovieScene2DTransformTrack>/Script/UMG):
+		Tag array:
+			PropertyName(NameProperty)=RenderTransform 
+			PropertyPath(StrProperty)=RenderTransform 
+			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
+			Signature(StructProperty)=Guid: 3507138506-1166110354-3258042762-535616478 
 	MovieScene2DTransformTrack_0 (0-0-0-0): size 196 (cls: MovieScene2DTransformTrack_0>MovieScene2DTransformTrack>/Script/UMG):
 		Tag array:
 			PropertyName(NameProperty)=RenderTransform 
 			PropertyPath(StrProperty)=RenderTransform 
 			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
-			Signature(StructProperty)=Guid: 1996372783-1130652947-332757396-367558388 
-	MovieScene2DTransformTrack_0 (0-0-0-0): size 196 (cls: MovieScene2DTransformTrack_0>MovieScene2DTransformTrack>/Script/UMG):
+			Signature(StructProperty)=Guid: 1701689501-1090398410-1893962144-3981625483 
+	MovieScene2DTransformTrack_1 (0-0-0-0): size 196 (cls: MovieScene2DTransformTrack_1>MovieScene2DTransformTrack>/Script/UMG):
 		Tag array:
 			PropertyName(NameProperty)=RenderTransform 
 			PropertyPath(StrProperty)=RenderTransform 
 			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
-			Signature(StructProperty)=Guid: 808269774-1304829925-685673381-2011761743 
+			Signature(StructProperty)=Guid: 84085268-1290082482-3711510149-1564121282 
+	MovieScene2DTransformTrack_2 (0-0-0-0): size 196 (cls: MovieScene2DTransformTrack_2>MovieScene2DTransformTrack>/Script/UMG):
+		Tag array:
+			PropertyName(NameProperty)=RenderTransform 
+			PropertyPath(StrProperty)=RenderTransform 
+			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
+			Signature(StructProperty)=Guid: 2183990568-1248483529-845267903-1182634128 
+	MovieScene2DTransformTrack_3 (0-0-0-0): size 196 (cls: MovieScene2DTransformTrack_3>MovieScene2DTransformTrack>/Script/UMG):
+		Tag array:
+			PropertyName(NameProperty)=RenderTransform 
+			PropertyPath(StrProperty)=RenderTransform 
+			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
+			Signature(StructProperty)=Guid: 719881786-1271638770-2108913062-2153687255 
+	MovieScene2DTransformTrack_4 (0-0-0-0): size 196 (cls: MovieScene2DTransformTrack_4>MovieScene2DTransformTrack>/Script/UMG):
+		Tag array:
+			PropertyName(NameProperty)=RenderTransform 
+			PropertyPath(StrProperty)=RenderTransform 
+			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
+			Signature(StructProperty)=Guid: 104661190-1289923666-466865836-856775174 
+	MovieScene2DTransformTrack_5 (0-0-0-0): size 196 (cls: MovieScene2DTransformTrack_5>MovieScene2DTransformTrack>/Script/UMG):
+		Tag array:
+			PropertyName(NameProperty)=RenderTransform 
+			PropertyPath(StrProperty)=RenderTransform 
+			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
+			Signature(StructProperty)=Guid: 3505103755-1332829507-1494157754-190553782 
+	MovieScene2DTransformTrack_7 (0-0-0-0): size 196 (cls: MovieScene2DTransformTrack_7>MovieScene2DTransformTrack>/Script/UMG):
+		Tag array:
+			PropertyName(NameProperty)=RenderTransform 
+			PropertyPath(StrProperty)=RenderTransform 
+			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
+			Signature(StructProperty)=Guid: 1010774140-1122098012-2871003294-811069526 
+	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
 	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
 	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
 	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
@@ -6410,25 +7012,169 @@ Serialized exports:
 			FloatCurve(StructProperty)=System.Byte[] 
 			Easing(StructProperty)=System.Byte[] 
 			SectionRange(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 3115094265-1292364235-1889740460-4022309227 
+			Signature(StructProperty)=Guid: 3810086247-1276683129-883911835-3575765290 
 	MovieSceneFloatSection_0 (0-0-0-0): size 1154 (cls: MovieSceneFloatSection_0>MovieSceneFloatSection>/Script/MovieSceneTracks):
 		Tag array:
 			FloatCurve(StructProperty)=System.Byte[] 
 			Easing(StructProperty)=System.Byte[] 
 			SectionRange(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 3415859433-1109050442-1759523239-1531651340 
+			Signature(StructProperty)=Guid: 866604401-1212142545-3042304912-2683577273 
+	MovieSceneFloatSection_0 (0-0-0-0): size 1154 (cls: MovieSceneFloatSection_0>MovieSceneFloatSection>/Script/MovieSceneTracks):
+		Tag array:
+			FloatCurve(StructProperty)=System.Byte[] 
+			Easing(StructProperty)=System.Byte[] 
+			SectionRange(StructProperty)=System.Byte[] 
+			Signature(StructProperty)=Guid: 1418832285-1133095102-3416777624-1627095335 
+	MovieSceneFloatSection_0 (0-0-0-0): size 1154 (cls: MovieSceneFloatSection_0>MovieSceneFloatSection>/Script/MovieSceneTracks):
+		Tag array:
+			FloatCurve(StructProperty)=System.Byte[] 
+			Easing(StructProperty)=System.Byte[] 
+			SectionRange(StructProperty)=System.Byte[] 
+			Signature(StructProperty)=Guid: 3923583864-1080273157-2625139375-118749253 
+	MovieSceneFloatSection_0 (0-0-0-0): size 1154 (cls: MovieSceneFloatSection_0>MovieSceneFloatSection>/Script/MovieSceneTracks):
+		Tag array:
+			FloatCurve(StructProperty)=System.Byte[] 
+			Easing(StructProperty)=System.Byte[] 
+			SectionRange(StructProperty)=System.Byte[] 
+			Signature(StructProperty)=Guid: 4185996424-1157468196-470622635-1277414906 
+	MovieSceneFloatSection_0 (0-0-0-0): size 1154 (cls: MovieSceneFloatSection_0>MovieSceneFloatSection>/Script/MovieSceneTracks):
+		Tag array:
+			FloatCurve(StructProperty)=System.Byte[] 
+			Easing(StructProperty)=System.Byte[] 
+			SectionRange(StructProperty)=System.Byte[] 
+			Signature(StructProperty)=Guid: 1058619162-1304961511-1746985609-2211437262 
+	MovieSceneFloatSection_0 (0-0-0-0): size 1154 (cls: MovieSceneFloatSection_0>MovieSceneFloatSection>/Script/MovieSceneTracks):
+		Tag array:
+			FloatCurve(StructProperty)=System.Byte[] 
+			Easing(StructProperty)=System.Byte[] 
+			SectionRange(StructProperty)=System.Byte[] 
+			Signature(StructProperty)=Guid: 1826626235-1248075528-275759491-4183730224 
+	MovieSceneFloatSection_0 (0-0-0-0): size 1154 (cls: MovieSceneFloatSection_0>MovieSceneFloatSection>/Script/MovieSceneTracks):
+		Tag array:
+			FloatCurve(StructProperty)=System.Byte[] 
+			Easing(StructProperty)=System.Byte[] 
+			SectionRange(StructProperty)=System.Byte[] 
+			Signature(StructProperty)=Guid: 60884019-1305372661-4196703420-1622886568 
+	MovieSceneFloatSection_0 (0-0-0-0): size 1154 (cls: MovieSceneFloatSection_0>MovieSceneFloatSection>/Script/MovieSceneTracks):
+		Tag array:
+			FloatCurve(StructProperty)=System.Byte[] 
+			Easing(StructProperty)=System.Byte[] 
+			SectionRange(StructProperty)=System.Byte[] 
+			Signature(StructProperty)=Guid: 2542676761-1092623993-416918195-977170266 
+	MovieSceneFloatSection_0 (0-0-0-0): size 1154 (cls: MovieSceneFloatSection_0>MovieSceneFloatSection>/Script/MovieSceneTracks):
+		Tag array:
+			FloatCurve(StructProperty)=System.Byte[] 
+			Easing(StructProperty)=System.Byte[] 
+			SectionRange(StructProperty)=System.Byte[] 
+			Signature(StructProperty)=Guid: 1396998067-1096925887-912479392-4170727036 
+	MovieSceneFloatSection_0 (0-0-0-0): size 1154 (cls: MovieSceneFloatSection_0>MovieSceneFloatSection>/Script/MovieSceneTracks):
+		Tag array:
+			FloatCurve(StructProperty)=System.Byte[] 
+			Easing(StructProperty)=System.Byte[] 
+			SectionRange(StructProperty)=System.Byte[] 
+			Signature(StructProperty)=Guid: 2200206433-1084979154-1490753409-2195252315 
+	MovieSceneFloatSection_0 (0-0-0-0): size 1154 (cls: MovieSceneFloatSection_0>MovieSceneFloatSection>/Script/MovieSceneTracks):
+		Tag array:
+			FloatCurve(StructProperty)=System.Byte[] 
+			Easing(StructProperty)=System.Byte[] 
+			SectionRange(StructProperty)=System.Byte[] 
+			Signature(StructProperty)=Guid: 3060044925-1298553697-4294812823-2510705611 
+	MovieSceneFloatSection_0 (0-0-0-0): size 1154 (cls: MovieSceneFloatSection_0>MovieSceneFloatSection>/Script/MovieSceneTracks):
+		Tag array:
+			FloatCurve(StructProperty)=System.Byte[] 
+			Easing(StructProperty)=System.Byte[] 
+			SectionRange(StructProperty)=System.Byte[] 
+			Signature(StructProperty)=Guid: 3681534621-1247113452-472020104-1928816506 
+	MovieSceneFloatSection_0 (0-0-0-0): size 1154 (cls: MovieSceneFloatSection_0>MovieSceneFloatSection>/Script/MovieSceneTracks):
+		Tag array:
+			FloatCurve(StructProperty)=System.Byte[] 
+			Easing(StructProperty)=System.Byte[] 
+			SectionRange(StructProperty)=System.Byte[] 
+			Signature(StructProperty)=Guid: 1656916083-1171291063-1876125845-1679713403 
+	MovieSceneFloatTrack_1 (0-0-0-0): size 194 (cls: MovieSceneFloatTrack_1>MovieSceneFloatTrack>/Script/MovieSceneTracks):
+		Tag array:
+			PropertyName(NameProperty)=RenderOpacity 
+			PropertyPath(StrProperty)=RenderOpacity 
+			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
+			Signature(StructProperty)=Guid: 307958925-1337425868-3657727636-4116273620 
+	MovieSceneFloatTrack_10 (0-0-0-0): size 194 (cls: MovieSceneFloatTrack_10>MovieSceneFloatTrack>/Script/MovieSceneTracks):
+		Tag array:
+			PropertyName(NameProperty)=RenderOpacity 
+			PropertyPath(StrProperty)=RenderOpacity 
+			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
+			Signature(StructProperty)=Guid: 2113547891-1075395248-1959474579-2821064890 
+	MovieSceneFloatTrack_11 (0-0-0-0): size 194 (cls: MovieSceneFloatTrack_11>MovieSceneFloatTrack>/Script/MovieSceneTracks):
+		Tag array:
+			PropertyName(NameProperty)=RenderOpacity 
+			PropertyPath(StrProperty)=RenderOpacity 
+			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
+			Signature(StructProperty)=Guid: 456712184-1230225502-3264918428-2422317404 
+	MovieSceneFloatTrack_13 (0-0-0-0): size 194 (cls: MovieSceneFloatTrack_13>MovieSceneFloatTrack>/Script/MovieSceneTracks):
+		Tag array:
+			PropertyName(NameProperty)=RenderOpacity 
+			PropertyPath(StrProperty)=RenderOpacity 
+			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
+			Signature(StructProperty)=Guid: 140952641-1204876052-1366534557-3534970356 
+	MovieSceneFloatTrack_14 (0-0-0-0): size 194 (cls: MovieSceneFloatTrack_14>MovieSceneFloatTrack>/Script/MovieSceneTracks):
+		Tag array:
+			PropertyName(NameProperty)=RenderOpacity 
+			PropertyPath(StrProperty)=RenderOpacity 
+			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
+			Signature(StructProperty)=Guid: 760757869-1152674799-4238710457-3228893589 
+	MovieSceneFloatTrack_2 (0-0-0-0): size 194 (cls: MovieSceneFloatTrack_2>MovieSceneFloatTrack>/Script/MovieSceneTracks):
+		Tag array:
+			PropertyName(NameProperty)=RenderOpacity 
+			PropertyPath(StrProperty)=RenderOpacity 
+			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
+			Signature(StructProperty)=Guid: 1022875942-1272442531-798483874-1484697206 
+	MovieSceneFloatTrack_9 (0-0-0-0): size 194 (cls: MovieSceneFloatTrack_9>MovieSceneFloatTrack>/Script/MovieSceneTracks):
+		Tag array:
+			PropertyName(NameProperty)=RenderOpacity 
+			PropertyPath(StrProperty)=RenderOpacity 
+			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
+			Signature(StructProperty)=Guid: 2554914307-1140616148-1685001088-3952917786 
 	MovieSceneFloatTrack_0 (0-0-0-0): size 194 (cls: MovieSceneFloatTrack_0>MovieSceneFloatTrack>/Script/MovieSceneTracks):
 		Tag array:
 			PropertyName(NameProperty)=RenderOpacity 
 			PropertyPath(StrProperty)=RenderOpacity 
 			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
-			Signature(StructProperty)=Guid: 1661363039-1325349642-3359573177-2915083190 
-	MovieSceneFloatTrack_0 (0-0-0-0): size 194 (cls: MovieSceneFloatTrack_0>MovieSceneFloatTrack>/Script/MovieSceneTracks):
+			Signature(StructProperty)=Guid: 1901712734-1190962828-1078738608-450246168 
+	MovieSceneFloatTrack_1 (0-0-0-0): size 194 (cls: MovieSceneFloatTrack_1>MovieSceneFloatTrack>/Script/MovieSceneTracks):
 		Tag array:
 			PropertyName(NameProperty)=RenderOpacity 
 			PropertyPath(StrProperty)=RenderOpacity 
 			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
-			Signature(StructProperty)=Guid: 3214742912-1146456352-15553412-1174031960 
+			Signature(StructProperty)=Guid: 2729820465-1174059486-3939495063-1262007930 
+	MovieSceneFloatTrack_2 (0-0-0-0): size 194 (cls: MovieSceneFloatTrack_2>MovieSceneFloatTrack>/Script/MovieSceneTracks):
+		Tag array:
+			PropertyName(NameProperty)=RenderOpacity 
+			PropertyPath(StrProperty)=RenderOpacity 
+			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
+			Signature(StructProperty)=Guid: 2092312481-1273315095-412535958-2697553005 
+	MovieSceneFloatTrack_3 (0-0-0-0): size 194 (cls: MovieSceneFloatTrack_3>MovieSceneFloatTrack>/Script/MovieSceneTracks):
+		Tag array:
+			PropertyName(NameProperty)=RenderOpacity 
+			PropertyPath(StrProperty)=RenderOpacity 
+			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
+			Signature(StructProperty)=Guid: 3081910031-1261830176-1932136589-8154108 
+	MovieSceneFloatTrack_4 (0-0-0-0): size 194 (cls: MovieSceneFloatTrack_4>MovieSceneFloatTrack>/Script/MovieSceneTracks):
+		Tag array:
+			PropertyName(NameProperty)=RenderOpacity 
+			PropertyPath(StrProperty)=RenderOpacity 
+			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
+			Signature(StructProperty)=Guid: 498586024-1084746717-3856661918-2657806741 
+	MovieSceneFloatTrack_5 (0-0-0-0): size 194 (cls: MovieSceneFloatTrack_5>MovieSceneFloatTrack>/Script/MovieSceneTracks):
+		Tag array:
+			PropertyName(NameProperty)=RenderOpacity 
+			PropertyPath(StrProperty)=RenderOpacity 
+			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
+			Signature(StructProperty)=Guid: 1609911834-1331532037-1540355742-3448788259 
+	MovieSceneFloatTrack_6 (0-0-0-0): size 194 (cls: MovieSceneFloatTrack_6>MovieSceneFloatTrack>/Script/MovieSceneTracks):
+		Tag array:
+			PropertyName(NameProperty)=RenderOpacity 
+			PropertyPath(StrProperty)=RenderOpacity 
+			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
+			Signature(StructProperty)=Guid: 2720432505-1293789341-850525630-3783655567 
 	Content (0-0-0-0): size 82 (cls: Content>NamedSlot>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -7053,7 +7799,8 @@ Serialized exports:
 	BackpackSlot (0-0-0-0): size 36 (cls: BackpackSlot>ObjectProperty>/Script/CoreUObject)
 	BannerSlot (0-0-0-0): size 36 (cls: BannerSlot>ObjectProperty>/Script/CoreUObject)
 	BattleBusSlot (0-0-0-0): size 36 (cls: BattleBusSlot>ObjectProperty>/Script/CoreUObject)
-	CallFunc_GetUIManagerWidget_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetUIManagerWidget_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_PlayAnimation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlayAnimation_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_AsAthena_Customization_Slot_Button (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsAthena_Customization_Slot_Button>ObjectProperty>/Script/CoreUObject)
 	WidgetToReturnFocusTo (0-0-0-0): size 36 (cls: WidgetToReturnFocusTo>ObjectProperty>/Script/CoreUObject)
 	CallingCardSlot (0-0-0-0): size 36 (cls: CallingCardSlot>ObjectProperty>/Script/CoreUObject)
 	CameraFramingWidget (0-0-0-0): size 36 (cls: CameraFramingWidget>ObjectProperty>/Script/CoreUObject)
@@ -7062,6 +7809,7 @@ Serialized exports:
 	CommonTextBlock_2 (0-0-0-0): size 36 (cls: CommonTextBlock_2>ObjectProperty>/Script/CoreUObject)
 	CommonTextBlock_3 (0-0-0-0): size 36 (cls: CommonTextBlock_3>ObjectProperty>/Script/CoreUObject)
 	ContrailSlot (0-0-0-0): size 36 (cls: ContrailSlot>ObjectProperty>/Script/CoreUObject)
+	CustomizationSlotButtonToPlayConfirmationOn (0-0-0-0): size 36 (cls: CustomizationSlotButtonToPlayConfirmationOn>ObjectProperty>/Script/CoreUObject)
 	DanceSlot1 (0-0-0-0): size 36 (cls: DanceSlot1>ObjectProperty>/Script/CoreUObject)
 	DanceSlot2 (0-0-0-0): size 36 (cls: DanceSlot2>ObjectProperty>/Script/CoreUObject)
 	DanceSlot3 (0-0-0-0): size 36 (cls: DanceSlot3>ObjectProperty>/Script/CoreUObject)
@@ -7079,6 +7827,9 @@ Serialized exports:
 	CallFunc_GetOwningPlayer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetOwningPlayer_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetOwningPlayer_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetOwningPlayer_ReturnValue1>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetUIManagerWidget_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetUIManagerWidget_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetUIManagerWidget_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetUIManagerWidget_ReturnValue1>ObjectProperty>/Script/CoreUObject)
+	CallFunc_PlayAnimationForward_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlayAnimationForward_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_PlayAnimationTimeRange_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlayAnimationTimeRange_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	K2Node_ComponentBoundEvent_Button (0-0-0-0): size 36 (cls: K2Node_ComponentBoundEvent_Button>ObjectProperty>/Script/CoreUObject)
 	K2Node_ComponentBoundEvent_Button1 (0-0-0-0): size 36 (cls: K2Node_ComponentBoundEvent_Button1>ObjectProperty>/Script/CoreUObject)
 	GearOvr (0-0-0-0): size 36 (cls: GearOvr>ObjectProperty>/Script/CoreUObject)
@@ -7090,7 +7841,6 @@ Serialized exports:
 	HatSlot (0-0-0-0): size 36 (cls: HatSlot>ObjectProperty>/Script/CoreUObject)
 	ItemCustomizationSelector (0-0-0-0): size 36 (cls: ItemCustomizationSelector>ObjectProperty>/Script/CoreUObject)
 	ItemInfoHeaderWidget (0-0-0-0): size 36 (cls: ItemInfoHeaderWidget>ObjectProperty>/Script/CoreUObject)
-	ItemInforInfoOutro (0-0-0-0): size 36 (cls: ItemInforInfoOutro>ObjectProperty>/Script/CoreUObject)
 	ItemWrapSlot1 (0-0-0-0): size 36 (cls: ItemWrapSlot1>ObjectProperty>/Script/CoreUObject)
 	ItemWrapSlot2 (0-0-0-0): size 36 (cls: ItemWrapSlot2>ObjectProperty>/Script/CoreUObject)
 	ItemWrapSlot3 (0-0-0-0): size 36 (cls: ItemWrapSlot3>ObjectProperty>/Script/CoreUObject)
@@ -7102,6 +7852,7 @@ Serialized exports:
 	MapMarkerSlot (0-0-0-0): size 36 (cls: MapMarkerSlot>ObjectProperty>/Script/CoreUObject)
 	MusicPackSlot (0-0-0-0): size 36 (cls: MusicPackSlot>ObjectProperty>/Script/CoreUObject)
 	NewLocalPlayerWidget (0-0-0-0): size 36 (cls: NewLocalPlayerWidget>ObjectProperty>/Script/CoreUObject)
+	OutroToPicker (0-0-0-0): size 36 (cls: OutroToPicker>ObjectProperty>/Script/CoreUObject)
 	PickingRestoreFocusWidget (0-0-0-0): size 36 (cls: PickingRestoreFocusWidget>ObjectProperty>/Script/CoreUObject)
 	ProgressModal (0-0-0-0): size 36 (cls: ProgressModal>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetUINavigationManager_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetUINavigationManager_ReturnValue>ObjectProperty>/Script/CoreUObject)
@@ -7135,7 +7886,7 @@ Serialized exports:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
 			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
-	ItemOverlay (0-0-0-0): size 86 (cls: ItemOverlay>Overlay>/Script/UMG):
+	ItemOverlay (0-0-0-0): size 94 (cls: ItemOverlay>Overlay>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=PanelSlot_0=WidgetArchetype 
@@ -7204,7 +7955,7 @@ Serialized exports:
 	Overlay_0 (0-0-0-0): size 57 (cls: Overlay_0>Overlay>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-	ItemOverlay (0-0-0-0): size 86 (cls: ItemOverlay>Overlay>/Script/UMG):
+	ItemOverlay (0-0-0-0): size 94 (cls: ItemOverlay>Overlay>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=PanelSlot_0=WidgetArchetype 
@@ -7242,7 +7993,7 @@ Serialized exports:
 			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
 			bIsVariable(BoolProperty)=True 
-	ItemOverlay (0-0-0-0): size 86 (cls: ItemOverlay>Overlay>/Script/UMG):
+	ItemOverlay (0-0-0-0): size 94 (cls: ItemOverlay>Overlay>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=PanelSlot_0=WidgetArchetype 
@@ -7280,7 +8031,7 @@ Serialized exports:
 			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
 			bIsVariable(BoolProperty)=True 
-	ItemOverlay (0-0-0-0): size 86 (cls: ItemOverlay>Overlay>/Script/UMG):
+	ItemOverlay (0-0-0-0): size 94 (cls: ItemOverlay>Overlay>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=PanelSlot_0=WidgetArchetype 
@@ -7318,7 +8069,7 @@ Serialized exports:
 			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
 			bIsVariable(BoolProperty)=True 
-	ItemOverlay (0-0-0-0): size 86 (cls: ItemOverlay>Overlay>/Script/UMG):
+	ItemOverlay (0-0-0-0): size 94 (cls: ItemOverlay>Overlay>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=PanelSlot_0=WidgetArchetype 
@@ -7356,7 +8107,7 @@ Serialized exports:
 			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
 			bIsVariable(BoolProperty)=True 
-	ItemOverlay (0-0-0-0): size 86 (cls: ItemOverlay>Overlay>/Script/UMG):
+	ItemOverlay (0-0-0-0): size 94 (cls: ItemOverlay>Overlay>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=PanelSlot_0=WidgetArchetype 
@@ -7394,7 +8145,7 @@ Serialized exports:
 			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
 			bIsVariable(BoolProperty)=True 
-	ItemOverlay (0-0-0-0): size 86 (cls: ItemOverlay>Overlay>/Script/UMG):
+	ItemOverlay (0-0-0-0): size 94 (cls: ItemOverlay>Overlay>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=PanelSlot_0=WidgetArchetype 
@@ -7432,7 +8183,7 @@ Serialized exports:
 			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
 			bIsVariable(BoolProperty)=True 
-	ItemOverlay (0-0-0-0): size 86 (cls: ItemOverlay>Overlay>/Script/UMG):
+	ItemOverlay (0-0-0-0): size 94 (cls: ItemOverlay>Overlay>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=PanelSlot_0=WidgetArchetype 
@@ -7470,7 +8221,7 @@ Serialized exports:
 			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
 			bIsVariable(BoolProperty)=True 
-	ItemOverlay (0-0-0-0): size 86 (cls: ItemOverlay>Overlay>/Script/UMG):
+	ItemOverlay (0-0-0-0): size 94 (cls: ItemOverlay>Overlay>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=PanelSlot_0=WidgetArchetype 
@@ -7508,7 +8259,7 @@ Serialized exports:
 			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
 			bIsVariable(BoolProperty)=True 
-	ItemOverlay (0-0-0-0): size 86 (cls: ItemOverlay>Overlay>/Script/UMG):
+	ItemOverlay (0-0-0-0): size 94 (cls: ItemOverlay>Overlay>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=PanelSlot_0=WidgetArchetype 
@@ -7546,7 +8297,7 @@ Serialized exports:
 			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
 			bIsVariable(BoolProperty)=True 
-	ItemOverlay (0-0-0-0): size 86 (cls: ItemOverlay>Overlay>/Script/UMG):
+	ItemOverlay (0-0-0-0): size 94 (cls: ItemOverlay>Overlay>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=PanelSlot_0=WidgetArchetype 
@@ -7604,7 +8355,7 @@ Serialized exports:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
 			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
-	ItemOverlay (0-0-0-0): size 86 (cls: ItemOverlay>Overlay>/Script/UMG):
+	ItemOverlay (0-0-0-0): size 94 (cls: ItemOverlay>Overlay>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=PanelSlot_0=WidgetArchetype 
@@ -7642,7 +8393,7 @@ Serialized exports:
 			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
 			bIsVariable(BoolProperty)=True 
-	ItemOverlay (0-0-0-0): size 86 (cls: ItemOverlay>Overlay>/Script/UMG):
+	ItemOverlay (0-0-0-0): size 94 (cls: ItemOverlay>Overlay>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=PanelSlot_0=WidgetArchetype 
@@ -7680,7 +8431,7 @@ Serialized exports:
 			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
 			bIsVariable(BoolProperty)=True 
-	ItemOverlay (0-0-0-0): size 86 (cls: ItemOverlay>Overlay>/Script/UMG):
+	ItemOverlay (0-0-0-0): size 94 (cls: ItemOverlay>Overlay>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=PanelSlot_0=WidgetArchetype 
@@ -7718,6 +8469,10 @@ Serialized exports:
 			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
 			bIsVariable(BoolProperty)=True 
+	ItemCategoryTag (0-0-0-0): size 86 (cls: ItemCategoryTag>Overlay>/Script/UMG):
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 	ItemCardL (0-0-0-0): size 86 (cls: ItemCardL>Overlay>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -7734,11 +8489,7 @@ Serialized exports:
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=VerticalBoxSlot_0=WidgetArchetype 
-	ItemTypeTag (0-0-0-0): size 86 (cls: ItemTypeTag>Overlay>/Script/UMG):
-		Tag array:
-			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
-	ItemOverlay (0-0-0-0): size 86 (cls: ItemOverlay>Overlay>/Script/UMG):
+	ItemOverlay (0-0-0-0): size 94 (cls: ItemOverlay>Overlay>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=PanelSlot_0=WidgetArchetype 
@@ -7776,7 +8527,7 @@ Serialized exports:
 			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
 			bIsVariable(BoolProperty)=True 
-	ItemOverlay (0-0-0-0): size 86 (cls: ItemOverlay>Overlay>/Script/UMG):
+	ItemOverlay (0-0-0-0): size 94 (cls: ItemOverlay>Overlay>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=PanelSlot_0=WidgetArchetype 
@@ -7814,7 +8565,7 @@ Serialized exports:
 			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
 			bIsVariable(BoolProperty)=True 
-	ItemOverlay (0-0-0-0): size 86 (cls: ItemOverlay>Overlay>/Script/UMG):
+	ItemOverlay (0-0-0-0): size 94 (cls: ItemOverlay>Overlay>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=PanelSlot_0=WidgetArchetype 
@@ -7852,7 +8603,7 @@ Serialized exports:
 			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
 			bIsVariable(BoolProperty)=True 
-	ItemOverlay (0-0-0-0): size 86 (cls: ItemOverlay>Overlay>/Script/UMG):
+	ItemOverlay (0-0-0-0): size 94 (cls: ItemOverlay>Overlay>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=PanelSlot_0=WidgetArchetype 
@@ -7890,7 +8641,7 @@ Serialized exports:
 			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
 			bIsVariable(BoolProperty)=True 
-	ItemOverlay (0-0-0-0): size 86 (cls: ItemOverlay>Overlay>/Script/UMG):
+	ItemOverlay (0-0-0-0): size 94 (cls: ItemOverlay>Overlay>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=PanelSlot_0=WidgetArchetype 
@@ -7928,7 +8679,7 @@ Serialized exports:
 			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
 			bIsVariable(BoolProperty)=True 
-	ItemOverlay (0-0-0-0): size 86 (cls: ItemOverlay>Overlay>/Script/UMG):
+	ItemOverlay (0-0-0-0): size 94 (cls: ItemOverlay>Overlay>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=PanelSlot_0=WidgetArchetype 
@@ -7971,7 +8722,7 @@ Serialized exports:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	ItemOverlay (0-0-0-0): size 86 (cls: ItemOverlay>Overlay>/Script/UMG):
+	ItemOverlay (0-0-0-0): size 94 (cls: ItemOverlay>Overlay>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=PanelSlot_0=WidgetArchetype 
@@ -8009,7 +8760,7 @@ Serialized exports:
 			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
 			bIsVariable(BoolProperty)=True 
-	ItemOverlay (0-0-0-0): size 86 (cls: ItemOverlay>Overlay>/Script/UMG):
+	ItemOverlay (0-0-0-0): size 94 (cls: ItemOverlay>Overlay>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=PanelSlot_0=WidgetArchetype 
@@ -8047,7 +8798,7 @@ Serialized exports:
 			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
 			bIsVariable(BoolProperty)=True 
-	ItemOverlay (0-0-0-0): size 86 (cls: ItemOverlay>Overlay>/Script/UMG):
+	ItemOverlay (0-0-0-0): size 94 (cls: ItemOverlay>Overlay>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=PanelSlot_0=WidgetArchetype 
@@ -8089,15 +8840,11 @@ Serialized exports:
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
-	Overlay_17 (0-0-0-0): size 86 (cls: Overlay_17>Overlay>/Script/UMG):
-		Tag array:
-			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 	Overlay_3 (0-0-0-0): size 86 (cls: Overlay_3>Overlay>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
-	ItemOverlay (0-0-0-0): size 86 (cls: ItemOverlay>Overlay>/Script/UMG):
+	ItemOverlay (0-0-0-0): size 94 (cls: ItemOverlay>Overlay>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=PanelSlot_0=WidgetArchetype 
@@ -8135,7 +8882,11 @@ Serialized exports:
 			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
 			bIsVariable(BoolProperty)=True 
-	ItemOverlay (0-0-0-0): size 86 (cls: ItemOverlay>Overlay>/Script/UMG):
+	TypeOverlay (0-0-0-0): size 86 (cls: TypeOverlay>Overlay>/Script/UMG):
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=HorizontalBoxSlot_2=WidgetArchetype 
+	ItemOverlay (0-0-0-0): size 94 (cls: ItemOverlay>Overlay>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=PanelSlot_0=WidgetArchetype 
@@ -8173,7 +8924,7 @@ Serialized exports:
 			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
 			bIsVariable(BoolProperty)=True 
-	ItemOverlay (0-0-0-0): size 86 (cls: ItemOverlay>Overlay>/Script/UMG):
+	ItemOverlay (0-0-0-0): size 94 (cls: ItemOverlay>Overlay>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=PanelSlot_0=WidgetArchetype 
@@ -8241,12 +8992,24 @@ Serialized exports:
 			VerticalAlignment(ByteProperty)=VAlign_Center 
 			Parent(ObjectProperty)=AccountTag=WidgetArchetype 
 			Content(ObjectProperty)=CommonTextBlock_3=WidgetArchetype 
+	OverlaySlot_2 (0-0-0-0): size 152 (cls: OverlaySlot_2>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
+			Content(ObjectProperty)=ConfirmSelectionFlash=WidgetArchetype 
 	OverlaySlot_3 (0-0-0-0): size 152 (cls: OverlaySlot_3>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Center 
 			VerticalAlignment(ByteProperty)=VAlign_Bottom 
 			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
 			Content(ObjectProperty)=InputActionWidget=WidgetArchetype 
+	OverlaySlot_4 (0-0-0-0): size 152 (cls: OverlaySlot_4>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
+			Content(ObjectProperty)=ConfirmSelectionShine=WidgetArchetype 
 	OverlaySlot_5 (0-0-0-0): size 152 (cls: OverlaySlot_5>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Fill 
@@ -8511,12 +9274,24 @@ Serialized exports:
 			VerticalAlignment(ByteProperty)=VAlign_Fill 
 			Parent(ObjectProperty)=Overlay_0=WidgetArchetype 
 			Content(ObjectProperty)=SurroundLoadGuard=WidgetArchetype 
+	OverlaySlot_2 (0-0-0-0): size 152 (cls: OverlaySlot_2>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
+			Content(ObjectProperty)=ConfirmSelectionFlash=WidgetArchetype 
 	OverlaySlot_3 (0-0-0-0): size 152 (cls: OverlaySlot_3>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Center 
 			VerticalAlignment(ByteProperty)=VAlign_Bottom 
 			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
 			Content(ObjectProperty)=InputActionWidget=WidgetArchetype 
+	OverlaySlot_4 (0-0-0-0): size 152 (cls: OverlaySlot_4>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
+			Content(ObjectProperty)=ConfirmSelectionShine=WidgetArchetype 
 	OverlaySlot_5 (0-0-0-0): size 152 (cls: OverlaySlot_5>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Fill 
@@ -8648,12 +9423,24 @@ Serialized exports:
 		Tag array:
 			Parent(ObjectProperty)=SlotImageOverlay=WidgetArchetype 
 			Content(ObjectProperty)=ImageSlotType=WidgetArchetype 
+	OverlaySlot_2 (0-0-0-0): size 152 (cls: OverlaySlot_2>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
+			Content(ObjectProperty)=ConfirmSelectionFlash=WidgetArchetype 
 	OverlaySlot_3 (0-0-0-0): size 152 (cls: OverlaySlot_3>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Center 
 			VerticalAlignment(ByteProperty)=VAlign_Bottom 
 			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
 			Content(ObjectProperty)=InputActionWidget=WidgetArchetype 
+	OverlaySlot_4 (0-0-0-0): size 152 (cls: OverlaySlot_4>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
+			Content(ObjectProperty)=ConfirmSelectionShine=WidgetArchetype 
 	OverlaySlot_5 (0-0-0-0): size 152 (cls: OverlaySlot_5>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Fill 
@@ -8785,12 +9572,24 @@ Serialized exports:
 		Tag array:
 			Parent(ObjectProperty)=SlotImageOverlay=WidgetArchetype 
 			Content(ObjectProperty)=ImageSlotType=WidgetArchetype 
+	OverlaySlot_2 (0-0-0-0): size 152 (cls: OverlaySlot_2>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
+			Content(ObjectProperty)=ConfirmSelectionFlash=WidgetArchetype 
 	OverlaySlot_3 (0-0-0-0): size 152 (cls: OverlaySlot_3>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Center 
 			VerticalAlignment(ByteProperty)=VAlign_Bottom 
 			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
 			Content(ObjectProperty)=InputActionWidget=WidgetArchetype 
+	OverlaySlot_4 (0-0-0-0): size 152 (cls: OverlaySlot_4>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
+			Content(ObjectProperty)=ConfirmSelectionShine=WidgetArchetype 
 	OverlaySlot_5 (0-0-0-0): size 152 (cls: OverlaySlot_5>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Fill 
@@ -8922,12 +9721,24 @@ Serialized exports:
 		Tag array:
 			Parent(ObjectProperty)=SlotImageOverlay=WidgetArchetype 
 			Content(ObjectProperty)=ImageSlotType=WidgetArchetype 
+	OverlaySlot_2 (0-0-0-0): size 152 (cls: OverlaySlot_2>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
+			Content(ObjectProperty)=ConfirmSelectionFlash=WidgetArchetype 
 	OverlaySlot_3 (0-0-0-0): size 152 (cls: OverlaySlot_3>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Center 
 			VerticalAlignment(ByteProperty)=VAlign_Bottom 
 			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
 			Content(ObjectProperty)=InputActionWidget=WidgetArchetype 
+	OverlaySlot_4 (0-0-0-0): size 152 (cls: OverlaySlot_4>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
+			Content(ObjectProperty)=ConfirmSelectionShine=WidgetArchetype 
 	OverlaySlot_5 (0-0-0-0): size 152 (cls: OverlaySlot_5>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Fill 
@@ -9059,12 +9870,24 @@ Serialized exports:
 		Tag array:
 			Parent(ObjectProperty)=SlotImageOverlay=WidgetArchetype 
 			Content(ObjectProperty)=ImageSlotType=WidgetArchetype 
+	OverlaySlot_2 (0-0-0-0): size 152 (cls: OverlaySlot_2>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
+			Content(ObjectProperty)=ConfirmSelectionFlash=WidgetArchetype 
 	OverlaySlot_3 (0-0-0-0): size 152 (cls: OverlaySlot_3>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Center 
 			VerticalAlignment(ByteProperty)=VAlign_Bottom 
 			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
 			Content(ObjectProperty)=InputActionWidget=WidgetArchetype 
+	OverlaySlot_4 (0-0-0-0): size 152 (cls: OverlaySlot_4>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
+			Content(ObjectProperty)=ConfirmSelectionShine=WidgetArchetype 
 	OverlaySlot_5 (0-0-0-0): size 152 (cls: OverlaySlot_5>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Fill 
@@ -9196,12 +10019,24 @@ Serialized exports:
 		Tag array:
 			Parent(ObjectProperty)=SlotImageOverlay=WidgetArchetype 
 			Content(ObjectProperty)=ImageSlotType=WidgetArchetype 
+	OverlaySlot_2 (0-0-0-0): size 152 (cls: OverlaySlot_2>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
+			Content(ObjectProperty)=ConfirmSelectionFlash=WidgetArchetype 
 	OverlaySlot_3 (0-0-0-0): size 152 (cls: OverlaySlot_3>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Center 
 			VerticalAlignment(ByteProperty)=VAlign_Bottom 
 			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
 			Content(ObjectProperty)=InputActionWidget=WidgetArchetype 
+	OverlaySlot_4 (0-0-0-0): size 152 (cls: OverlaySlot_4>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
+			Content(ObjectProperty)=ConfirmSelectionShine=WidgetArchetype 
 	OverlaySlot_5 (0-0-0-0): size 152 (cls: OverlaySlot_5>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Fill 
@@ -9333,12 +10168,24 @@ Serialized exports:
 		Tag array:
 			Parent(ObjectProperty)=SlotImageOverlay=WidgetArchetype 
 			Content(ObjectProperty)=ImageSlotType=WidgetArchetype 
+	OverlaySlot_2 (0-0-0-0): size 152 (cls: OverlaySlot_2>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
+			Content(ObjectProperty)=ConfirmSelectionFlash=WidgetArchetype 
 	OverlaySlot_3 (0-0-0-0): size 152 (cls: OverlaySlot_3>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Center 
 			VerticalAlignment(ByteProperty)=VAlign_Bottom 
 			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
 			Content(ObjectProperty)=InputActionWidget=WidgetArchetype 
+	OverlaySlot_4 (0-0-0-0): size 152 (cls: OverlaySlot_4>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
+			Content(ObjectProperty)=ConfirmSelectionShine=WidgetArchetype 
 	OverlaySlot_5 (0-0-0-0): size 152 (cls: OverlaySlot_5>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Fill 
@@ -9470,12 +10317,24 @@ Serialized exports:
 		Tag array:
 			Parent(ObjectProperty)=SlotImageOverlay=WidgetArchetype 
 			Content(ObjectProperty)=ImageSlotType=WidgetArchetype 
+	OverlaySlot_2 (0-0-0-0): size 152 (cls: OverlaySlot_2>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
+			Content(ObjectProperty)=ConfirmSelectionFlash=WidgetArchetype 
 	OverlaySlot_3 (0-0-0-0): size 152 (cls: OverlaySlot_3>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Center 
 			VerticalAlignment(ByteProperty)=VAlign_Bottom 
 			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
 			Content(ObjectProperty)=InputActionWidget=WidgetArchetype 
+	OverlaySlot_4 (0-0-0-0): size 152 (cls: OverlaySlot_4>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
+			Content(ObjectProperty)=ConfirmSelectionShine=WidgetArchetype 
 	OverlaySlot_5 (0-0-0-0): size 152 (cls: OverlaySlot_5>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Fill 
@@ -9607,12 +10466,24 @@ Serialized exports:
 		Tag array:
 			Parent(ObjectProperty)=SlotImageOverlay=WidgetArchetype 
 			Content(ObjectProperty)=ImageSlotType=WidgetArchetype 
+	OverlaySlot_2 (0-0-0-0): size 152 (cls: OverlaySlot_2>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
+			Content(ObjectProperty)=ConfirmSelectionFlash=WidgetArchetype 
 	OverlaySlot_3 (0-0-0-0): size 152 (cls: OverlaySlot_3>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Center 
 			VerticalAlignment(ByteProperty)=VAlign_Bottom 
 			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
 			Content(ObjectProperty)=InputActionWidget=WidgetArchetype 
+	OverlaySlot_4 (0-0-0-0): size 152 (cls: OverlaySlot_4>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
+			Content(ObjectProperty)=ConfirmSelectionShine=WidgetArchetype 
 	OverlaySlot_5 (0-0-0-0): size 152 (cls: OverlaySlot_5>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Fill 
@@ -9744,12 +10615,24 @@ Serialized exports:
 		Tag array:
 			Parent(ObjectProperty)=SlotImageOverlay=WidgetArchetype 
 			Content(ObjectProperty)=ImageSlotType=WidgetArchetype 
+	OverlaySlot_2 (0-0-0-0): size 152 (cls: OverlaySlot_2>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
+			Content(ObjectProperty)=ConfirmSelectionFlash=WidgetArchetype 
 	OverlaySlot_3 (0-0-0-0): size 152 (cls: OverlaySlot_3>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Center 
 			VerticalAlignment(ByteProperty)=VAlign_Bottom 
 			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
 			Content(ObjectProperty)=InputActionWidget=WidgetArchetype 
+	OverlaySlot_4 (0-0-0-0): size 152 (cls: OverlaySlot_4>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
+			Content(ObjectProperty)=ConfirmSelectionShine=WidgetArchetype 
 	OverlaySlot_5 (0-0-0-0): size 152 (cls: OverlaySlot_5>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Fill 
@@ -9931,12 +10814,24 @@ Serialized exports:
 			VerticalAlignment(ByteProperty)=VAlign_Center 
 			Parent(ObjectProperty)=GearTag=WidgetArchetype 
 			Content(ObjectProperty)=Text_UserName=WidgetArchetype 
+	OverlaySlot_2 (0-0-0-0): size 152 (cls: OverlaySlot_2>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
+			Content(ObjectProperty)=ConfirmSelectionFlash=WidgetArchetype 
 	OverlaySlot_3 (0-0-0-0): size 152 (cls: OverlaySlot_3>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Center 
 			VerticalAlignment(ByteProperty)=VAlign_Bottom 
 			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
 			Content(ObjectProperty)=InputActionWidget=WidgetArchetype 
+	OverlaySlot_4 (0-0-0-0): size 152 (cls: OverlaySlot_4>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
+			Content(ObjectProperty)=ConfirmSelectionShine=WidgetArchetype 
 	OverlaySlot_5 (0-0-0-0): size 152 (cls: OverlaySlot_5>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Fill 
@@ -10068,12 +10963,24 @@ Serialized exports:
 		Tag array:
 			Parent(ObjectProperty)=SlotImageOverlay=WidgetArchetype 
 			Content(ObjectProperty)=ImageSlotType=WidgetArchetype 
+	OverlaySlot_2 (0-0-0-0): size 152 (cls: OverlaySlot_2>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
+			Content(ObjectProperty)=ConfirmSelectionFlash=WidgetArchetype 
 	OverlaySlot_3 (0-0-0-0): size 152 (cls: OverlaySlot_3>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Center 
 			VerticalAlignment(ByteProperty)=VAlign_Bottom 
 			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
 			Content(ObjectProperty)=InputActionWidget=WidgetArchetype 
+	OverlaySlot_4 (0-0-0-0): size 152 (cls: OverlaySlot_4>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
+			Content(ObjectProperty)=ConfirmSelectionShine=WidgetArchetype 
 	OverlaySlot_5 (0-0-0-0): size 152 (cls: OverlaySlot_5>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Fill 
@@ -10205,12 +11112,24 @@ Serialized exports:
 		Tag array:
 			Parent(ObjectProperty)=SlotImageOverlay=WidgetArchetype 
 			Content(ObjectProperty)=ImageSlotType=WidgetArchetype 
+	OverlaySlot_2 (0-0-0-0): size 152 (cls: OverlaySlot_2>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
+			Content(ObjectProperty)=ConfirmSelectionFlash=WidgetArchetype 
 	OverlaySlot_3 (0-0-0-0): size 152 (cls: OverlaySlot_3>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Center 
 			VerticalAlignment(ByteProperty)=VAlign_Bottom 
 			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
 			Content(ObjectProperty)=InputActionWidget=WidgetArchetype 
+	OverlaySlot_4 (0-0-0-0): size 152 (cls: OverlaySlot_4>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
+			Content(ObjectProperty)=ConfirmSelectionShine=WidgetArchetype 
 	OverlaySlot_5 (0-0-0-0): size 152 (cls: OverlaySlot_5>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Fill 
@@ -10342,6 +11261,19 @@ Serialized exports:
 		Tag array:
 			Parent(ObjectProperty)=SlotImageOverlay=WidgetArchetype 
 			Content(ObjectProperty)=ImageSlotType=WidgetArchetype 
+	OverlaySlot_0 (0-0-0-0): size 325 (cls: OverlaySlot_0>OverlaySlot>/Script/UMG):
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=ItemCategoryTag=WidgetArchetype 
+			Content(ObjectProperty)=StatsHeader=WidgetArchetype 
+	OverlaySlot_2 (0-0-0-0): size 152 (cls: OverlaySlot_2>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=ItemCategoryTag=WidgetArchetype 
+			Content(ObjectProperty)=Image_19=WidgetArchetype 
 	OverlaySlot_0 (0-0-0-0): size 152 (cls: OverlaySlot_0>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Fill 
@@ -10398,25 +11330,24 @@ Serialized exports:
 			VerticalAlignment(ByteProperty)=VAlign_Fill 
 			Parent(ObjectProperty)=Overlay_5=WidgetArchetype 
 			Content(ObjectProperty)=ItemCardL=WidgetArchetype 
-	OverlaySlot_0 (0-0-0-0): size 325 (cls: OverlaySlot_0>OverlaySlot>/Script/UMG):
-		Tag array:
-			Padding(StructProperty)=System.Byte[] 
-			HorizontalAlignment(ByteProperty)=HAlign_Fill 
-			VerticalAlignment(ByteProperty)=VAlign_Center 
-			Parent(ObjectProperty)=ItemTypeTag=WidgetArchetype 
-			Content(ObjectProperty)=ShortDescriptionText=WidgetArchetype 
 	OverlaySlot_2 (0-0-0-0): size 152 (cls: OverlaySlot_2>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Fill 
 			VerticalAlignment(ByteProperty)=VAlign_Fill 
-			Parent(ObjectProperty)=ItemTypeTag=WidgetArchetype 
-			Content(ObjectProperty)=Image_20=WidgetArchetype 
+			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
+			Content(ObjectProperty)=ConfirmSelectionFlash=WidgetArchetype 
 	OverlaySlot_3 (0-0-0-0): size 152 (cls: OverlaySlot_3>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Center 
 			VerticalAlignment(ByteProperty)=VAlign_Bottom 
 			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
 			Content(ObjectProperty)=InputActionWidget=WidgetArchetype 
+	OverlaySlot_4 (0-0-0-0): size 152 (cls: OverlaySlot_4>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
+			Content(ObjectProperty)=ConfirmSelectionShine=WidgetArchetype 
 	OverlaySlot_5 (0-0-0-0): size 152 (cls: OverlaySlot_5>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Fill 
@@ -10548,12 +11479,24 @@ Serialized exports:
 		Tag array:
 			Parent(ObjectProperty)=SlotImageOverlay=WidgetArchetype 
 			Content(ObjectProperty)=ImageSlotType=WidgetArchetype 
+	OverlaySlot_2 (0-0-0-0): size 152 (cls: OverlaySlot_2>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
+			Content(ObjectProperty)=ConfirmSelectionFlash=WidgetArchetype 
 	OverlaySlot_3 (0-0-0-0): size 152 (cls: OverlaySlot_3>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Center 
 			VerticalAlignment(ByteProperty)=VAlign_Bottom 
 			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
 			Content(ObjectProperty)=InputActionWidget=WidgetArchetype 
+	OverlaySlot_4 (0-0-0-0): size 152 (cls: OverlaySlot_4>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
+			Content(ObjectProperty)=ConfirmSelectionShine=WidgetArchetype 
 	OverlaySlot_5 (0-0-0-0): size 152 (cls: OverlaySlot_5>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Fill 
@@ -10685,12 +11628,24 @@ Serialized exports:
 		Tag array:
 			Parent(ObjectProperty)=SlotImageOverlay=WidgetArchetype 
 			Content(ObjectProperty)=ImageSlotType=WidgetArchetype 
+	OverlaySlot_2 (0-0-0-0): size 152 (cls: OverlaySlot_2>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
+			Content(ObjectProperty)=ConfirmSelectionFlash=WidgetArchetype 
 	OverlaySlot_3 (0-0-0-0): size 152 (cls: OverlaySlot_3>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Center 
 			VerticalAlignment(ByteProperty)=VAlign_Bottom 
 			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
 			Content(ObjectProperty)=InputActionWidget=WidgetArchetype 
+	OverlaySlot_4 (0-0-0-0): size 152 (cls: OverlaySlot_4>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
+			Content(ObjectProperty)=ConfirmSelectionShine=WidgetArchetype 
 	OverlaySlot_5 (0-0-0-0): size 152 (cls: OverlaySlot_5>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Fill 
@@ -10822,12 +11777,24 @@ Serialized exports:
 		Tag array:
 			Parent(ObjectProperty)=SlotImageOverlay=WidgetArchetype 
 			Content(ObjectProperty)=ImageSlotType=WidgetArchetype 
+	OverlaySlot_2 (0-0-0-0): size 152 (cls: OverlaySlot_2>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
+			Content(ObjectProperty)=ConfirmSelectionFlash=WidgetArchetype 
 	OverlaySlot_3 (0-0-0-0): size 152 (cls: OverlaySlot_3>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Center 
 			VerticalAlignment(ByteProperty)=VAlign_Bottom 
 			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
 			Content(ObjectProperty)=InputActionWidget=WidgetArchetype 
+	OverlaySlot_4 (0-0-0-0): size 152 (cls: OverlaySlot_4>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
+			Content(ObjectProperty)=ConfirmSelectionShine=WidgetArchetype 
 	OverlaySlot_5 (0-0-0-0): size 152 (cls: OverlaySlot_5>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Fill 
@@ -10959,12 +11926,24 @@ Serialized exports:
 		Tag array:
 			Parent(ObjectProperty)=SlotImageOverlay=WidgetArchetype 
 			Content(ObjectProperty)=ImageSlotType=WidgetArchetype 
+	OverlaySlot_2 (0-0-0-0): size 152 (cls: OverlaySlot_2>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
+			Content(ObjectProperty)=ConfirmSelectionFlash=WidgetArchetype 
 	OverlaySlot_3 (0-0-0-0): size 152 (cls: OverlaySlot_3>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Center 
 			VerticalAlignment(ByteProperty)=VAlign_Bottom 
 			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
 			Content(ObjectProperty)=InputActionWidget=WidgetArchetype 
+	OverlaySlot_4 (0-0-0-0): size 152 (cls: OverlaySlot_4>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
+			Content(ObjectProperty)=ConfirmSelectionShine=WidgetArchetype 
 	OverlaySlot_5 (0-0-0-0): size 152 (cls: OverlaySlot_5>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Fill 
@@ -11096,12 +12075,24 @@ Serialized exports:
 		Tag array:
 			Parent(ObjectProperty)=SlotImageOverlay=WidgetArchetype 
 			Content(ObjectProperty)=ImageSlotType=WidgetArchetype 
+	OverlaySlot_2 (0-0-0-0): size 152 (cls: OverlaySlot_2>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
+			Content(ObjectProperty)=ConfirmSelectionFlash=WidgetArchetype 
 	OverlaySlot_3 (0-0-0-0): size 152 (cls: OverlaySlot_3>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Center 
 			VerticalAlignment(ByteProperty)=VAlign_Bottom 
 			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
 			Content(ObjectProperty)=InputActionWidget=WidgetArchetype 
+	OverlaySlot_4 (0-0-0-0): size 152 (cls: OverlaySlot_4>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
+			Content(ObjectProperty)=ConfirmSelectionShine=WidgetArchetype 
 	OverlaySlot_5 (0-0-0-0): size 152 (cls: OverlaySlot_5>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Fill 
@@ -11246,12 +12237,24 @@ Serialized exports:
 			VerticalAlignment(ByteProperty)=VAlign_Fill 
 			Parent(ObjectProperty)=ItemWrapsOvr=WidgetArchetype 
 			Content(ObjectProperty)=Shadow4=WidgetArchetype 
+	OverlaySlot_2 (0-0-0-0): size 152 (cls: OverlaySlot_2>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
+			Content(ObjectProperty)=ConfirmSelectionFlash=WidgetArchetype 
 	OverlaySlot_3 (0-0-0-0): size 152 (cls: OverlaySlot_3>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Center 
 			VerticalAlignment(ByteProperty)=VAlign_Bottom 
 			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
 			Content(ObjectProperty)=InputActionWidget=WidgetArchetype 
+	OverlaySlot_4 (0-0-0-0): size 152 (cls: OverlaySlot_4>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
+			Content(ObjectProperty)=ConfirmSelectionShine=WidgetArchetype 
 	OverlaySlot_5 (0-0-0-0): size 152 (cls: OverlaySlot_5>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Fill 
@@ -11383,12 +12386,24 @@ Serialized exports:
 		Tag array:
 			Parent(ObjectProperty)=SlotImageOverlay=WidgetArchetype 
 			Content(ObjectProperty)=ImageSlotType=WidgetArchetype 
+	OverlaySlot_2 (0-0-0-0): size 152 (cls: OverlaySlot_2>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
+			Content(ObjectProperty)=ConfirmSelectionFlash=WidgetArchetype 
 	OverlaySlot_3 (0-0-0-0): size 152 (cls: OverlaySlot_3>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Center 
 			VerticalAlignment(ByteProperty)=VAlign_Bottom 
 			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
 			Content(ObjectProperty)=InputActionWidget=WidgetArchetype 
+	OverlaySlot_4 (0-0-0-0): size 152 (cls: OverlaySlot_4>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
+			Content(ObjectProperty)=ConfirmSelectionShine=WidgetArchetype 
 	OverlaySlot_5 (0-0-0-0): size 152 (cls: OverlaySlot_5>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Fill 
@@ -11520,12 +12535,24 @@ Serialized exports:
 		Tag array:
 			Parent(ObjectProperty)=SlotImageOverlay=WidgetArchetype 
 			Content(ObjectProperty)=ImageSlotType=WidgetArchetype 
+	OverlaySlot_2 (0-0-0-0): size 152 (cls: OverlaySlot_2>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
+			Content(ObjectProperty)=ConfirmSelectionFlash=WidgetArchetype 
 	OverlaySlot_3 (0-0-0-0): size 152 (cls: OverlaySlot_3>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Center 
 			VerticalAlignment(ByteProperty)=VAlign_Bottom 
 			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
 			Content(ObjectProperty)=InputActionWidget=WidgetArchetype 
+	OverlaySlot_4 (0-0-0-0): size 152 (cls: OverlaySlot_4>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
+			Content(ObjectProperty)=ConfirmSelectionShine=WidgetArchetype 
 	OverlaySlot_5 (0-0-0-0): size 152 (cls: OverlaySlot_5>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Fill 
@@ -11669,19 +12696,6 @@ Serialized exports:
 			VerticalAlignment(ByteProperty)=VAlign_Fill 
 			Parent(ObjectProperty)=Overlay_0=WidgetArchetype 
 			Content(ObjectProperty)=BackgroundBlur_0=WidgetArchetype 
-	OverlaySlot_0 (0-0-0-0): size 325 (cls: OverlaySlot_0>OverlaySlot>/Script/UMG):
-		Tag array:
-			Padding(StructProperty)=System.Byte[] 
-			HorizontalAlignment(ByteProperty)=HAlign_Fill 
-			VerticalAlignment(ByteProperty)=VAlign_Center 
-			Parent(ObjectProperty)=Overlay_17=WidgetArchetype 
-			Content(ObjectProperty)=StatsHeader=WidgetArchetype 
-	OverlaySlot_2 (0-0-0-0): size 152 (cls: OverlaySlot_2>OverlaySlot>/Script/UMG):
-		Tag array:
-			HorizontalAlignment(ByteProperty)=HAlign_Fill 
-			VerticalAlignment(ByteProperty)=VAlign_Fill 
-			Parent(ObjectProperty)=Overlay_17=WidgetArchetype 
-			Content(ObjectProperty)=Image_19=WidgetArchetype 
 	OverlaySlot_0 (0-0-0-0): size 152 (cls: OverlaySlot_0>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Fill 
@@ -11695,12 +12709,24 @@ Serialized exports:
 			VerticalAlignment(ByteProperty)=VAlign_Bottom 
 			Parent(ObjectProperty)=Overlay_3=WidgetArchetype 
 			Content(ObjectProperty)=ItemInfo=WidgetArchetype 
+	OverlaySlot_2 (0-0-0-0): size 152 (cls: OverlaySlot_2>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
+			Content(ObjectProperty)=ConfirmSelectionFlash=WidgetArchetype 
 	OverlaySlot_3 (0-0-0-0): size 152 (cls: OverlaySlot_3>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Center 
 			VerticalAlignment(ByteProperty)=VAlign_Bottom 
 			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
 			Content(ObjectProperty)=InputActionWidget=WidgetArchetype 
+	OverlaySlot_4 (0-0-0-0): size 152 (cls: OverlaySlot_4>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
+			Content(ObjectProperty)=ConfirmSelectionShine=WidgetArchetype 
 	OverlaySlot_5 (0-0-0-0): size 152 (cls: OverlaySlot_5>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Fill 
@@ -11832,12 +12858,37 @@ Serialized exports:
 		Tag array:
 			Parent(ObjectProperty)=SlotImageOverlay=WidgetArchetype 
 			Content(ObjectProperty)=ImageSlotType=WidgetArchetype 
+	OverlaySlot_0 (0-0-0-0): size 267 (cls: OverlaySlot_0>OverlaySlot>/Script/UMG):
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=TypeOverlay=WidgetArchetype 
+			Content(ObjectProperty)=HorizontalBox_6=WidgetArchetype 
+	OverlaySlot_2 (0-0-0-0): size 152 (cls: OverlaySlot_2>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=TypeOverlay=WidgetArchetype 
+			Content(ObjectProperty)=Image_1=WidgetArchetype 
+	OverlaySlot_2 (0-0-0-0): size 152 (cls: OverlaySlot_2>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
+			Content(ObjectProperty)=ConfirmSelectionFlash=WidgetArchetype 
 	OverlaySlot_3 (0-0-0-0): size 152 (cls: OverlaySlot_3>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Center 
 			VerticalAlignment(ByteProperty)=VAlign_Bottom 
 			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
 			Content(ObjectProperty)=InputActionWidget=WidgetArchetype 
+	OverlaySlot_4 (0-0-0-0): size 152 (cls: OverlaySlot_4>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
+			Content(ObjectProperty)=ConfirmSelectionShine=WidgetArchetype 
 	OverlaySlot_5 (0-0-0-0): size 152 (cls: OverlaySlot_5>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Fill 
@@ -11969,12 +13020,24 @@ Serialized exports:
 		Tag array:
 			Parent(ObjectProperty)=SlotImageOverlay=WidgetArchetype 
 			Content(ObjectProperty)=ImageSlotType=WidgetArchetype 
+	OverlaySlot_2 (0-0-0-0): size 152 (cls: OverlaySlot_2>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
+			Content(ObjectProperty)=ConfirmSelectionFlash=WidgetArchetype 
 	OverlaySlot_3 (0-0-0-0): size 152 (cls: OverlaySlot_3>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Center 
 			VerticalAlignment(ByteProperty)=VAlign_Bottom 
 			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
 			Content(ObjectProperty)=InputActionWidget=WidgetArchetype 
+	OverlaySlot_4 (0-0-0-0): size 152 (cls: OverlaySlot_4>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=ItemOverlay=WidgetArchetype 
+			Content(ObjectProperty)=ConfirmSelectionShine=WidgetArchetype 
 	OverlaySlot_5 (0-0-0-0): size 152 (cls: OverlaySlot_5>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Fill 
@@ -15415,11 +16478,12 @@ Serialized exports:
 	CallFunc_NoResourceBrush_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_NoResourceBrush_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_GetGameAccountId_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetGameAccountId_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_GetLoadoutForPlayer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetLoadoutForPlayer_ReturnValue>StructProperty>/Script/CoreUObject)
-	CallFunc_GetCategoryDisplayName_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetCategoryDisplayName_ReturnValue>TextProperty>/Script/CoreUObject)
-	CallFunc_GetItemTypeDisplayNames_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetItemTypeDisplayNames_ReturnValue>TextProperty>/Script/CoreUObject)
 	HeaderText (0-0-0-0): size 32 (cls: HeaderText>TextProperty>/Script/CoreUObject)
 	CurrentCategoryName (0-0-0-0): size 32 (cls: CurrentCategoryName>TextProperty>/Script/CoreUObject)
 	CurrentSlotDescriptionText (0-0-0-0): size 32 (cls: CurrentSlotDescriptionText>TextProperty>/Script/CoreUObject)
+	CustomizationHeaderToUse (0-0-0-0): size 32 (cls: CustomizationHeaderToUse>TextProperty>/Script/CoreUObject)
+	CallFunc_GetCategoryDisplayName_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetCategoryDisplayName_ReturnValue>TextProperty>/Script/CoreUObject)
+	CallFunc_GetItemTypeDisplayNames_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetItemTypeDisplayNames_ReturnValue>TextProperty>/Script/CoreUObject)
 	CallFunc_GetCategoryDisplayName_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetCategoryDisplayName_ReturnValue>TextProperty>/Script/CoreUObject)
 	DescriptionText (0-0-0-0): size 32 (cls: DescriptionText>TextProperty>/Script/CoreUObject)
 	HeaderText (0-0-0-0): size 32 (cls: HeaderText>TextProperty>/Script/CoreUObject)
@@ -15530,20 +16594,20 @@ Serialized exports:
 			HorizontalAlignment(ByteProperty)=HAlign_Left 
 			Parent(ObjectProperty)=LockerSlotsVB=WidgetArchetype 
 			Content(ObjectProperty)=HorizontalBox_3=WidgetArchetype 
-	ItemInforInfoOutro_INST (0-0-0-0): size 11410 (cls: ItemInforInfoOutro_INST>WidgetAnimation>/Script/UMG):
+	Intro_INST (0-0-0-0): size 69575 (cls: Intro_INST>WidgetAnimation>/Script/UMG):
 		Tag array:
-			MovieScene(ObjectProperty)=ItemInforInfoOutro=AthenaLockerTab_C 
+			MovieScene(ObjectProperty)=Intro=AthenaLockerTab_C 
 			AnimationBindings(ArrayProperty)=[object] (inner: StructProperty)
-			DisplayLabel(StrProperty)=ItemInforInfoOutro 
+			DisplayLabel(StrProperty)=Intro 
 			PrecompiledEvaluationTemplate(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 339526744-1250583567-1353027006-161041478 
-	OutroToPicker_INST (0-0-0-0): size 11068 (cls: OutroToPicker_INST>WidgetAnimation>/Script/UMG):
+			Signature(StructProperty)=Guid: 1586865377-1309748867-550080903-2152073356 
+	OutroToPicker_INST (0-0-0-0): size 68235 (cls: OutroToPicker_INST>WidgetAnimation>/Script/UMG):
 		Tag array:
 			MovieScene(ObjectProperty)=OutroToPicker=AthenaLockerTab_C 
 			AnimationBindings(ArrayProperty)=[object] (inner: StructProperty)
 			DisplayLabel(StrProperty)=OutroToPicker 
 			PrecompiledEvaluationTemplate(StructProperty)=System.Byte[] 
-			Signature(StructProperty)=Guid: 2505155622-1097816938-1890950794-3269065040 
+			Signature(StructProperty)=Guid: 3409996869-1141010404-3068669870-3897074417 
 	WidgetNavigation_0 (0-0-0-0): size 172 (cls: WidgetNavigation_0>WidgetNavigation>/Script/UMG):
 		Tag array:
 			Down(StructProperty)=System.Byte[] 

@@ -46,6 +46,7 @@ Name table:
 	BoolProperty
 	BP_ApplyGameplayEffectToTarget
 	BP_BlockAbilitiesWithTags
+	BP_RemoveGameplayEffectFromOwnerWithGrantedTags
 	BP_UnBlockAbilitiesWithTags
 	bPassedFiltersAndWasExecuted
 	bWasCancelled
@@ -62,10 +63,12 @@ Name table:
 	CallFunc_CreateProxyObjectForPlayMontage_ReturnValue2
 	CallFunc_CreateProxyObjectForPlayMontage_ReturnValue3
 	CallFunc_EqualEqual_IntInt_ReturnValue
+	CallFunc_EqualEqual_ObjectObject_ReturnValue
+	CallFunc_EqualEqual_ObjectObject_ReturnValue1
 	CallFunc_GetAbilitySystemComponent_ReturnValue
-	CallFunc_GetAbilitySystemComponent_ReturnValue1
-	CallFunc_GetAbilitySystemComponent_ReturnValue2
 	CallFunc_GetActorInfo_ReturnValue
+	CallFunc_GetCurrentMontage_ReturnValue
+	CallFunc_GetCurrentMontage_ReturnValue1
 	CallFunc_GetCurrentSourceWeapon_ReturnValue
 	CallFunc_GetCurrentSourceWeapon_ReturnValue1
 	CallFunc_GetFortPlayerControllerFromActor_ReturnValue
@@ -85,7 +88,6 @@ Name table:
 	CallFunc_LessEqual_FloatFloat_ReturnValue
 	CallFunc_Not_PreBool_ReturnValue
 	CallFunc_PickGrappleMontage_SectionName
-	CallFunc_RemoveActiveEffectsWithTags_ReturnValue
 	CallFunc_SpawnEmitterAttached_ReturnValue
 	CallFunc_WaitGameplayEvent_ReturnValue
 	CallFunc_WaitGameplayEvent_ReturnValue1
@@ -124,6 +126,7 @@ Name table:
 	Default__StructProperty
 	DefaultSceneRoot_GEN_VARIABLE
 	Degraded
+	Delay
 	DelegateFunction
 	DelegateProperty
 	Down
@@ -131,14 +134,13 @@ Name table:
 	EFortGameplayAbilityActivation::Triggered
 	EGameplayAbilityInstancingPolicy
 	EGameplayAbilityInstancingPolicy::InstancedPerActor
-	EGameplayAbilityReplicationPolicy
-	EGameplayAbilityReplicationPolicy::ReplicateYes
 	EGameplayAbilityTriggerSource
 	EGameplayAbilityTriggerSource::GameplayEvent
 	Engine
 	EntryPoint
 	EnumProperty
 	EqualEqual_IntInt
+	EqualEqual_ObjectObject
 	Event.Weapons.Fire
 	EventReceived
 	EventReceived_056D82C6464BB95E4DA717BEB307DB74
@@ -172,6 +174,7 @@ Name table:
 	GE_Generic_StaminaRegenLockout_C
 	GetAbilitySystemComponent
 	GetActorInfo
+	GetCurrentMontage
 	GetCurrentSourceWeapon
 	GetFortPlayerControllerFromActor
 	GetInventoryGUID
@@ -241,8 +244,6 @@ Name table:
 	K2Node_DynamicCast_AsB_Hookgun_Athena
 	K2Node_DynamicCast_AsB_Prj_Hook_Athena
 	K2Node_DynamicCast_AsFort_Ability_System_Component
-	K2Node_DynamicCast_AsFort_Ability_System_Component1
-	K2Node_DynamicCast_AsFort_Ability_System_Component2
 	K2Node_DynamicCast_AsFort_Athena_Jackal_Vehicle
 	K2Node_DynamicCast_AsFort_Player_Pawn
 	K2Node_DynamicCast_bSuccess
@@ -250,11 +251,10 @@ Name table:
 	K2Node_DynamicCast_bSuccess2
 	K2Node_DynamicCast_bSuccess3
 	K2Node_DynamicCast_bSuccess4
-	K2Node_DynamicCast_bSuccess5
-	K2Node_DynamicCast_bSuccess6
 	KismetArrayLibrary
 	KismetMathLibrary
 	KismetSystemLibrary
+	LatentActionInfo
 	LaunchAngleVariations
 	LaunchPad
 	Less_IntInt
@@ -276,6 +276,7 @@ Name table:
 	NormalB
 	Not_PreBool
 	NotifyName
+	NullMontage
 	Object
 	ObjectProperty
 	OnBlendOut
@@ -323,9 +324,8 @@ Name table:
 	ReloadCartridge
 	ReloadEnd
 	ReloadStart
-	RemoveActiveEffectsWithTags
 	RemoveNonReplicatedTagToPawn
-	ReplicationPolicy
+	ResetDoOnce
 	RopeActiveTag
 	SceneComponent
 	ScriptStruct
@@ -367,10 +367,10 @@ Name table:
 	WrapBandages_Athena
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	GA_Athena_HookDestroy_C (0-0-0-0): size 581 (cls: GA_Athena_HookDestroy_C>BlueprintGeneratedClass>/Script/Engine):
+	GA_Athena_HookDestroy_C (0-0-0-0): size 601 (cls: GA_Athena_HookDestroy_C>BlueprintGeneratedClass>/Script/Engine):
 		Tag array:
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_GA_Athena_HookDestroy=GA_Athena_HookDestroy_C 
-	Default__GA_Athena_HookDestroy_C (0-0-0-0): size 1295 (cls: Default__GA_Athena_HookDestroy_C>GA_Athena_HookDestroy_C):
+	Default__GA_Athena_HookDestroy_C (0-0-0-0): size 1254 (cls: Default__GA_Athena_HookDestroy_C>GA_Athena_HookDestroy_C):
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			SwitchLockGE(StructProperty)=System.Byte[] 
@@ -381,18 +381,19 @@ Serialized exports:
 			RopeActiveTag(StructProperty)=System.Byte[] 
 			ActivationType(EnumProperty)=EFortGameplayAbilityActivation::Triggered 
 			MontageInfo(StructProperty)=System.Byte[] 
-			ReplicationPolicy(ByteProperty)=EGameplayAbilityReplicationPolicy::ReplicateYes 
 			InstancingPolicy(ByteProperty)=EGameplayAbilityInstancingPolicy::InstancedPerActor 
 			AbilityTriggers(ArrayProperty)=[object] (inner: StructProperty)
 	PlayerPawn (0-0-0-0): size 36 (cls: PlayerPawn>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_GA_Athena_HookDestroy (0-0-0-0): size 3613 (cls: ExecuteUbergraph_GA_Athena_HookDestroy>Function>/Script/CoreUObject)
+	ExecuteUbergraph_GA_Athena_HookDestroy (0-0-0-0): size 3624 (cls: ExecuteUbergraph_GA_Athena_HookDestroy>Function>/Script/CoreUObject)
 	CallFunc_BP_ApplyGameplayEffectToTarget_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_BP_ApplyGameplayEffectToTarget_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_BP_ApplyGameplayEffectToTarget_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_BP_ApplyGameplayEffectToTarget_ReturnValue>ArrayProperty>/Script/CoreUObject)
 	LaunchAngleVariations (0-0-0-0): size 36 (cls: LaunchAngleVariations>StructProperty>/Script/CoreUObject)
 	LaunchAngleVariations (0-0-0-0): size 36 (cls: LaunchAngleVariations>ArrayProperty>/Script/CoreUObject)
 	Debug (0-0-0-0): size 34 (cls: Debug>BoolProperty>/Script/CoreUObject)
 	CallFunc_EqualEqual_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_EqualEqual_ObjectObject_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ObjectObject_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_EqualEqual_ObjectObject_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ObjectObject_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue2>BoolProperty>/Script/CoreUObject)
@@ -406,11 +407,10 @@ Serialized exports:
 	K2Node_DynamicCast_bSuccess2 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess2>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess3 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess3>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess4 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess4>BoolProperty>/Script/CoreUObject)
-	K2Node_DynamicCast_bSuccess5 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess5>BoolProperty>/Script/CoreUObject)
-	K2Node_DynamicCast_bSuccess6 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess6>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Has_Been_Initd_Variable (0-0-0-0): size 34 (cls: Temp_bool_Has_Been_Initd_Variable>BoolProperty>/Script/CoreUObject)
 	Temp_bool_IsClosed_Variable (0-0-0-0): size 34 (cls: Temp_bool_IsClosed_Variable>BoolProperty>/Script/CoreUObject)
 	Hit? (0-0-0-0): size 34 (cls: Hit?>BoolProperty>/Script/CoreUObject)
+	ResetDoOnce (0-0-0-0): size 54 (cls: ResetDoOnce>Function>/Script/CoreUObject)
 	K2_ActivateAbility (0-0-0-0): size 54 (cls: K2_ActivateAbility>Function>/Script/CoreUObject)
 	NotifyName (0-0-0-0): size 32 (cls: NotifyName>NameProperty>/Script/CoreUObject)
 	OnCompleted_7CDAB77949F908D1F388AB845AE6C282 (0-0-0-0): size 68 (cls: OnCompleted_7CDAB77949F908D1F388AB845AE6C282>Function>/Script/CoreUObject)
@@ -459,7 +459,7 @@ Serialized exports:
 	OnRep_AmmoReserves (0-0-0-0): size 43 (cls: OnRep_AmmoReserves>Function>/Script/CoreUObject)
 	PitchAngle (0-0-0-0): size 32 (cls: PitchAngle>FloatProperty>/Script/CoreUObject)
 	PickGrappleMontage (0-0-0-0): size 513 (cls: PickGrappleMontage>Function>/Script/CoreUObject)
-	K2_OnEndAbility (0-0-0-0): size 162 (cls: K2_OnEndAbility>Function>/Script/CoreUObject)
+	K2_OnEndAbility (0-0-0-0): size 212 (cls: K2_OnEndAbility>Function>/Script/CoreUObject)
 	bWasCancelled (0-0-0-0): size 34 (cls: bWasCancelled>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	CallFunc_BooleanAND_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue>BoolProperty>/Script/CoreUObject)
@@ -492,7 +492,6 @@ Serialized exports:
 	CallFunc_ClampAngle_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_ClampAngle_ReturnValue>FloatProperty>/Script/CoreUObject)
 	CallFunc_GetLocalMagazineAmmoCount_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetLocalMagazineAmmoCount_ReturnValue>IntProperty>/Script/CoreUObject)
 	CallFunc_K2_RemoveItemFromPlayerByGuid_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_K2_RemoveItemFromPlayerByGuid_ReturnValue>IntProperty>/Script/CoreUObject)
-	CallFunc_RemoveActiveEffectsWithTags_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_RemoveActiveEffectsWithTags_ReturnValue>IntProperty>/Script/CoreUObject)
 	CallFunc_Add_IntInt_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue>IntProperty>/Script/CoreUObject)
 	CallFunc_Array_Length_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Array_Length_ReturnValue>IntProperty>/Script/CoreUObject)
 	Temp_int_Array_Index_Variable (0-0-0-0): size 32 (cls: Temp_int_Array_Index_Variable>IntProperty>/Script/CoreUObject)
@@ -528,8 +527,8 @@ Serialized exports:
 	CallFunc_CreateProxyObjectForPlayMontage_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_CreateProxyObjectForPlayMontage_ReturnValue2>ObjectProperty>/Script/CoreUObject)
 	CallFunc_CreateProxyObjectForPlayMontage_ReturnValue3 (0-0-0-0): size 36 (cls: CallFunc_CreateProxyObjectForPlayMontage_ReturnValue3>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetAbilitySystemComponent_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetAbilitySystemComponent_ReturnValue>ObjectProperty>/Script/CoreUObject)
-	CallFunc_GetAbilitySystemComponent_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetAbilitySystemComponent_ReturnValue1>ObjectProperty>/Script/CoreUObject)
-	CallFunc_GetAbilitySystemComponent_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_GetAbilitySystemComponent_ReturnValue2>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetCurrentMontage_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetCurrentMontage_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetCurrentMontage_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetCurrentMontage_ReturnValue1>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetCurrentSourceWeapon_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetCurrentSourceWeapon_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetCurrentSourceWeapon_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetCurrentSourceWeapon_ReturnValue1>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetFortPlayerControllerFromActor_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetFortPlayerControllerFromActor_ReturnValue>ObjectProperty>/Script/CoreUObject)
@@ -540,12 +539,11 @@ Serialized exports:
 	K2Node_DynamicCast_AsB_Hookgun_Athena (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsB_Hookgun_Athena>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsB_Prj_Hook_Athena (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsB_Prj_Hook_Athena>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Ability_System_Component (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Ability_System_Component>ObjectProperty>/Script/CoreUObject)
-	K2Node_DynamicCast_AsFort_Ability_System_Component1 (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Ability_System_Component1>ObjectProperty>/Script/CoreUObject)
-	K2Node_DynamicCast_AsFort_Ability_System_Component2 (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Ability_System_Component2>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Athena_Jackal_Vehicle (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Athena_Jackal_Vehicle>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Player_Pawn (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Player_Pawn>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetAbilitySystemComponent_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetAbilitySystemComponent_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Ability_System_Component (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Ability_System_Component>ObjectProperty>/Script/CoreUObject)
+	NullMontage (0-0-0-0): size 36 (cls: NullMontage>ObjectProperty>/Script/CoreUObject)
 	TravelMontage (0-0-0-0): size 36 (cls: TravelMontage>ObjectProperty>/Script/CoreUObject)
 	WeaponActor (0-0-0-0): size 36 (cls: WeaponActor>ObjectProperty>/Script/CoreUObject)
 	ChangeEquipmentTag (0-0-0-0): size 36 (cls: ChangeEquipmentTag>StructProperty>/Script/CoreUObject)

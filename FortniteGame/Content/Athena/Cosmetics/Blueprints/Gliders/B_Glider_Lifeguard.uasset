@@ -2,8 +2,8 @@ Name table:
 	/Game/Athena/Cosmetics/Blueprints/Gliders/B_Glider_Lifeguard
 	/Game/Athena/Effects/Particles/Gliders/P_GliderContrail_LifeGuard_DownWash
 	/Game/Athena/Effects/Particles/Gliders/P_GliderContrail_LifeGuard_Left
-	/Game/Athena/Effects/Particles/Gliders/P_GliderContrail_LifeGuard_Left_FrontEnd
 	/Game/Athena/Effects/Particles/Gliders/P_GliderContrail_LifeGuard_Right
+	/Game/Gadgets/Assets/VinderTech_GliderChute/Blueprints/SummerHeroes_Glider_AnimBP
 	/Game/Gadgets/Assets/VinderTech_GliderChute/Glider_Summer_Heroes/Meshes/SK_Glider_Summer_Heroes
 	/Game/Sounds/AudioCurveAssets/C_AudioCurve_LinearPitch
 	/Game/Sounds/AudioCurveAssets/C_AudioCurve_LinearVolume
@@ -17,6 +17,9 @@ Name table:
 	Actor
 	ActorComponentTickFunction
 	AllNodes
+	AnimBlueprintGeneratedClass
+	AnimClass
+	AnimInstance
 	ArrayIndex
 	ArrayProperty
 	AttachParent
@@ -25,7 +28,6 @@ Name table:
 	B_Glider_Lifeguard_C
 	bAutoActivate
 	bHasCookedComponentInstancingData
-	bIsFrontEndPreview
 	bIsParentComponentNative
 	bIsValid
 	BlueprintComponentChangedPropertyInfo
@@ -38,6 +40,8 @@ Name table:
 	C_AudioCurve_LinearVolume
 	C_AudioCurve_LinearVolumePointFiveStart
 	CallFunc_BooleanAND_ReturnValue
+	CallFunc_GetAnimInstance_ReturnValue
+	CallFunc_GetAnimInstance_ReturnValue1
 	CallFunc_Greater_FloatFloat_ReturnValue
 	CallFunc_IsGliderFullyDeployedAccordingToAnim_ReturnValue
 	ChangedPropertyList
@@ -52,6 +56,7 @@ Name table:
 	Default__B_Glider_Lifeguard_C
 	Default__BlueprintGeneratedClass
 	Default__BoolProperty
+	Default__DelegateProperty
 	Default__FloatProperty
 	Default__FortPlayerParachute
 	Default__FortVehicleAudioVoice
@@ -63,23 +68,24 @@ Name table:
 	Default__SCS_Node
 	Default__SimpleConstructionScript
 	Default__StructProperty
+	Default__SummerHeroes_Glider_AnimBP_C
 	DefaultSceneRoot
 	DefaultSceneRoot_GEN_VARIABLE
 	DefaultSceneRootNode
+	DelegateProperty
 	Engine
 	EngineFX_L
-	EngineFX_L_FrontEnd
-	EngineFX_L_FrontEnd_GEN_VARIABLE
 	EngineFX_L_GEN_VARIABLE
 	EngineFX_R
-	EngineFX_R_FrontEnd
-	EngineFX_R_FrontEnd_GEN_VARIABLE
 	EngineFX_R_GEN_VARIABLE
 	EntryPoint
 	EnumProperty
 	EVehicleAudioInterpolationType
 	EVehicleAudioInterpolationType::CustomCurve
 	ExecuteUbergraph_B_Glider_Lifeguard
+	FE_IdleStart
+	FE_IdleStart__DelegateSignature
+	FE_IdleVFX
 	FloatParams
 	FloatProperty
 	FortPlayerParachute
@@ -89,6 +95,7 @@ Name table:
 	FortVehicleAudioVoice_GEN_VARIABLE
 	ForwardDot
 	Function
+	GetAnimInstance
 	Glider_LifeGuard_RunLoop_Cue
 	Greater_FloatFloat
 	Guid
@@ -96,6 +103,11 @@ Name table:
 	InterpType
 	IntProperty
 	IsGliderFullyDeployedAccordingToAnim
+	K2Node_CreateDelegate_OutputDelegate
+	K2Node_DynamicCast_AsSummer_Heroes_Glider_Anim_BP
+	K2Node_DynamicCast_AsSummer_Heroes_Glider_Anim_BP1
+	K2Node_DynamicCast_bSuccess
+	K2Node_DynamicCast_bSuccess1
 	K2Node_Event_ForwardDot
 	K2Node_Event_MovementLengthSquared
 	K2Node_Event_RightDot
@@ -103,6 +115,7 @@ Name table:
 	KismetMathLibrary
 	LoopingSound
 	MovementLengthSquared
+	MulticastDelegateProperty
 	Name
 	NameProperty
 	None
@@ -111,7 +124,6 @@ Name table:
 	OnParachuteTrailUpdated
 	P_GliderContrail_LifeGuard_DownWash
 	P_GliderContrail_LifeGuard_Left
-	P_GliderContrail_LifeGuard_Left_FrontEnd
 	P_GliderContrail_LifeGuard_Right
 	Package
 	ParachuteMesh
@@ -127,12 +139,10 @@ Name table:
 	PropertyName
 	PropertyScope
 	ReceiveBeginPlay
-	RelativeLocation
+	ReceiveDestroyed
 	RelativeRotation
-	RelativeScale3D
 	ReleaseSpeed
 	RightDot
-	Roll
 	RootComponent
 	RootComponent0
 	RootNodes
@@ -141,15 +151,16 @@ Name table:
 	SceneComponent
 	ScriptStruct
 	SCS_Node
-	SetAutoActivate
 	SetParam
 	SimpleConstructionScript
 	SK_Glider_Summer_Heroes
 	SkeletalMesh
+	SkeletalMeshComponent
 	SkeletalMeshComponentBudgeted
 	SoundCue
 	Speed
 	StructProperty
+	SummerHeroes_Glider_AnimBP_C
 	Template
 	TrailParticles
 	turbine_L
@@ -159,16 +170,13 @@ Name table:
 	UserConstructionScript
 	Value
 	VariableGuid
-	Vector
 	Vector2D
 	VolumeParam
-	X
 	Y
 	Yaw
-	Z
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	B_Glider_Lifeguard_C (0-0-0-0): size 248 (cls: B_Glider_Lifeguard_C>BlueprintGeneratedClass>/Script/Engine):
+	B_Glider_Lifeguard_C (0-0-0-0): size 272 (cls: B_Glider_Lifeguard_C>BlueprintGeneratedClass>/Script/Engine):
 		Tag array:
 			bHasCookedComponentInstancingData(BoolProperty)=True 
 			SimpleConstructionScript(ObjectProperty)=SimpleConstructionScript_0=B_Glider_Lifeguard_C 
@@ -181,14 +189,19 @@ Serialized exports:
 			RootComponent(ObjectProperty)=RootComponent0=Default__B_Glider_Lifeguard_C 
 	FortVehicleAudioVoice (0-0-0-0): size 36 (cls: FortVehicleAudioVoice>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_B_Glider_Lifeguard (0-0-0-0): size 442 (cls: ExecuteUbergraph_B_Glider_Lifeguard>Function>/Script/CoreUObject)
+	ExecuteUbergraph_B_Glider_Lifeguard (0-0-0-0): size 671 (cls: ExecuteUbergraph_B_Glider_Lifeguard>Function>/Script/CoreUObject)
 	CallFunc_BooleanAND_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Greater_FloatFloat_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Greater_FloatFloat_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsGliderFullyDeployedAccordingToAnim_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsGliderFullyDeployedAccordingToAnim_ReturnValue>BoolProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_bSuccess1 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess1>BoolProperty>/Script/CoreUObject)
+	K2Node_CreateDelegate_OutputDelegate (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate>DelegateProperty>/Script/CoreUObject)
 	K2Node_Event_ForwardDot (0-0-0-0): size 32 (cls: K2Node_Event_ForwardDot>FloatProperty>/Script/CoreUObject)
 	K2Node_Event_MovementLengthSquared (0-0-0-0): size 32 (cls: K2Node_Event_MovementLengthSquared>FloatProperty>/Script/CoreUObject)
 	K2Node_Event_RightDot (0-0-0-0): size 32 (cls: K2Node_Event_RightDot>FloatProperty>/Script/CoreUObject)
 	K2Node_Event_RotationalMovementAcceleration (0-0-0-0): size 32 (cls: K2Node_Event_RotationalMovementAcceleration>FloatProperty>/Script/CoreUObject)
+	ReceiveDestroyed (0-0-0-0): size 54 (cls: ReceiveDestroyed>Function>/Script/CoreUObject)
+	FE_IdleVFX (0-0-0-0): size 54 (cls: FE_IdleVFX>Function>/Script/CoreUObject)
 	ReceiveBeginPlay (0-0-0-0): size 54 (cls: ReceiveBeginPlay>Function>/Script/CoreUObject)
 	MovementLengthSquared (0-0-0-0): size 32 (cls: MovementLengthSquared>FloatProperty>/Script/CoreUObject)
 	OnParachuteTrailUpdated (0-0-0-0): size 110 (cls: OnParachuteTrailUpdated>Function>/Script/CoreUObject)
@@ -205,29 +218,15 @@ Serialized exports:
 			RelativeRotation(StructProperty)=Rotator(0,-89.99999,0) 
 	UserConstructionScript (0-0-0-0): size 43 (cls: UserConstructionScript>Function>/Script/CoreUObject)
 	EngineFX_L (0-0-0-0): size 36 (cls: EngineFX_L>ObjectProperty>/Script/CoreUObject)
-	EngineFX_L_FrontEnd (0-0-0-0): size 36 (cls: EngineFX_L_FrontEnd>ObjectProperty>/Script/CoreUObject)
 	EngineFX_R (0-0-0-0): size 36 (cls: EngineFX_R>ObjectProperty>/Script/CoreUObject)
-	EngineFX_R_FrontEnd (0-0-0-0): size 36 (cls: EngineFX_R_FrontEnd>ObjectProperty>/Script/CoreUObject)
-	EngineFX_L_FrontEnd_GEN_VARIABLE (0-0-0-0): size 333 (cls: EngineFX_L_FrontEnd_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine):
-		Tag array:
-			Template(ObjectProperty)=P_GliderContrail_LifeGuard_Left_FrontEnd=/Game/Athena/Effects/Particles/Gliders/P_GliderContrail_LifeGuard_Left_FrontEnd 
-			RelativeLocation(StructProperty)=Vector(-152.2876,0.4667358,43.87931) 
-			RelativeRotation(StructProperty)=Rotator(0,90.00002,180) 
-			RelativeScale3D(StructProperty)=Vector(1,0.9999999,1) 
-			PrimaryComponentTick(StructProperty)=System.Byte[] 
-			bAutoActivate(BoolProperty)=False 
+	CallFunc_GetAnimInstance_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetAnimInstance_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetAnimInstance_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetAnimInstance_ReturnValue1>ObjectProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_AsSummer_Heroes_Glider_Anim_BP (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsSummer_Heroes_Glider_Anim_BP>ObjectProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_AsSummer_Heroes_Glider_Anim_BP1 (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsSummer_Heroes_Glider_Anim_BP1>ObjectProperty>/Script/CoreUObject)
 	EngineFX_L_GEN_VARIABLE (0-0-0-0): size 211 (cls: EngineFX_L_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine):
 		Tag array:
 			Template(ObjectProperty)=P_GliderContrail_LifeGuard_Left=/Game/Athena/Effects/Particles/Gliders/P_GliderContrail_LifeGuard_Left 
 			RelativeRotation(StructProperty)=Rotator(0,-89.99999,0) 
-			PrimaryComponentTick(StructProperty)=System.Byte[] 
-			bAutoActivate(BoolProperty)=False 
-	EngineFX_R_FrontEnd_GEN_VARIABLE (0-0-0-0): size 333 (cls: EngineFX_R_FrontEnd_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine):
-		Tag array:
-			Template(ObjectProperty)=P_GliderContrail_LifeGuard_Left_FrontEnd=/Game/Athena/Effects/Particles/Gliders/P_GliderContrail_LifeGuard_Left_FrontEnd 
-			RelativeLocation(StructProperty)=Vector(-152.2876,0.4667358,43.87931) 
-			RelativeRotation(StructProperty)=Rotator(0,90.00002,180) 
-			RelativeScale3D(StructProperty)=Vector(1,0.9999999,1) 
 			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
 	EngineFX_R_GEN_VARIABLE (0-0-0-0): size 211 (cls: EngineFX_R_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine):
@@ -269,24 +268,6 @@ Serialized exports:
 			bIsParentComponentNative(BoolProperty)=True 
 			VariableGuid(StructProperty)=Guid: 1646425202-1196598525-2128589997-12541483 
 			InternalVariableName(NameProperty)=EngineFX_R 
-	SCS_Node_3 (0-0-0-0): size 1683 (cls: SCS_Node_3>SCS_Node>/Script/Engine):
-		Tag array:
-			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
-			ComponentTemplate(ObjectProperty)=EngineFX_L_FrontEnd_GEN_VARIABLE=B_Glider_Lifeguard_C 
-			CookedComponentInstancingData(StructProperty)=System.Byte[] 
-			ParentComponentOrVariableName(NameProperty)=ParachuteMesh0 
-			bIsParentComponentNative(BoolProperty)=True 
-			VariableGuid(StructProperty)=Guid: 2672160044-1156921791-889183366-2769906682 
-			InternalVariableName(NameProperty)=EngineFX_L_FrontEnd 
-	SCS_Node_4 (0-0-0-0): size 1683 (cls: SCS_Node_4>SCS_Node>/Script/Engine):
-		Tag array:
-			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
-			ComponentTemplate(ObjectProperty)=EngineFX_R_FrontEnd_GEN_VARIABLE=B_Glider_Lifeguard_C 
-			CookedComponentInstancingData(StructProperty)=System.Byte[] 
-			ParentComponentOrVariableName(NameProperty)=ParachuteMesh0 
-			bIsParentComponentNative(BoolProperty)=True 
-			VariableGuid(StructProperty)=Guid: 2264722492-1157451239-1767168902-3681539520 
-			InternalVariableName(NameProperty)=EngineFX_R_FrontEnd 
 	SCS_Node_5 (0-0-0-0): size 1881 (cls: SCS_Node_5>SCS_Node>/Script/Engine):
 		Tag array:
 			ComponentClass(ObjectProperty)=FortVehicleAudioVoice=/Script/FortniteGame 
@@ -296,13 +277,14 @@ Serialized exports:
 			bIsParentComponentNative(BoolProperty)=True 
 			VariableGuid(StructProperty)=Guid: 1071060112-1220446054-2728856502-3310297800 
 			InternalVariableName(NameProperty)=FortVehicleAudioVoice 
-	SimpleConstructionScript_0 (0-0-0-0): size 155 (cls: SimpleConstructionScript_0>SimpleConstructionScript>/Script/Engine):
+	SimpleConstructionScript_0 (0-0-0-0): size 139 (cls: SimpleConstructionScript_0>SimpleConstructionScript>/Script/Engine):
 		Tag array:
 			RootNodes(ArrayProperty)=[object] (inner: ObjectProperty)
 			AllNodes(ArrayProperty)=[object] (inner: ObjectProperty)
 			DefaultSceneRootNode(ObjectProperty)=SCS_Node_0=B_Glider_Lifeguard_C 
-	ParachuteMesh0 (0-0-0-0): size 131 (cls: ParachuteMesh0>SkeletalMeshComponentBudgeted>/Script/AnimationBudgetAllocator):
+	ParachuteMesh0 (0-0-0-0): size 160 (cls: ParachuteMesh0>SkeletalMeshComponentBudgeted>/Script/AnimationBudgetAllocator):
 		Tag array:
+			AnimClass(ObjectProperty)=SummerHeroes_Glider_AnimBP_C=/Game/Gadgets/Assets/VinderTech_GliderChute/Blueprints/SummerHeroes_Glider_AnimBP 
 			SkeletalMesh(ObjectProperty)=SK_Glider_Summer_Heroes=/Game/Gadgets/Assets/VinderTech_GliderChute/Glider_Summer_Heroes/Meshes/SK_Glider_Summer_Heroes 
 			AttachParent(ObjectProperty)=RootComponent0=Default__B_Glider_Lifeguard_C 
 			RelativeRotation(StructProperty)=Rotator(0,90,0) 

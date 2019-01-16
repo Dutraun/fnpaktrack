@@ -107,8 +107,9 @@ Name table:
 	CachedPlayerNameArray
 	CallFunc_Array_Length_ReturnValue
 	CallFunc_BooleanAND_ReturnValue
+	CallFunc_BooleanAND_ReturnValue1
 	CallFunc_BooleanOR_ReturnValue
-	CallFunc_BooleanOR_ReturnValue1
+	CallFunc_CanSendFeedback_ReturnValue
 	CallFunc_EqualEqual_ByteByte_ReturnValue
 	CallFunc_EqualEqual_ByteByte_ReturnValue1
 	CallFunc_EqualEqual_IntInt_ReturnValue
@@ -125,9 +126,9 @@ Name table:
 	CallFunc_GetUINavigationManager_ReturnValue
 	CallFunc_Handled_ReturnValue
 	CallFunc_HasKiller_ReturnValue
+	CallFunc_HasSelectedCategory_ReturnValue
+	CallFunc_HasSelectedPlayer_ReturnValue
 	CallFunc_HasSpectateTarget_ReturnValue
-	CallFunc_IsAllTextNotEmpty_ReturnValue
-	CallFunc_IsAllTextNotEmpty_ReturnValue1
 	CallFunc_Not_PreBool_ReturnValue
 	CallFunc_Not_PreBool_ReturnValue1
 	CallFunc_Not_PreBool_ReturnValue2
@@ -137,6 +138,7 @@ Name table:
 	Cancel
 	CancelButton
 	CancelFeedback
+	CanSendFeedback
 	CategoryContainer
 	CategoryIndex
 	CategoryLabel
@@ -302,6 +304,8 @@ Name table:
 	Handled
 	HandleTextChanged
 	HasKiller
+	HasSelectedCategory
+	HasSelectedPlayer
 	HasSpectateTarget
 	HB_AutofillPlayerNameContainer
 	HeightOverride
@@ -319,7 +323,6 @@ Name table:
 	InputActionWidget
 	InteractableVBox
 	IntProperty
-	IsAllTextNotEmpty
 	Justification
 	K2Node_ComponentBoundEvent_Button
 	K2Node_ComponentBoundEvent_Button1
@@ -424,6 +427,7 @@ Name table:
 	PropertyName
 	PropertyPathSegment
 	RenderOpacity
+	ResetCategoryText
 	ResourceObject
 	ReturnValue
 	Right
@@ -512,6 +516,7 @@ Name table:
 	UberGraphFunction
 	UnderlyingType
 	Up
+	UpdateSendButtonEnabled
 	UserWidget
 	VAlign_Center
 	VAlign_Fill
@@ -538,7 +543,7 @@ Name table:
 	WindowTitleBarArea
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	Feedback_C (0-0-0-0): size 1283 (cls: Feedback_C>WidgetBlueprintGeneratedClass>/Script/UMG):
+	Feedback_C (0-0-0-0): size 1315 (cls: Feedback_C>WidgetBlueprintGeneratedClass>/Script/UMG):
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
@@ -565,22 +570,7 @@ Serialized exports:
 			Content(ObjectProperty)=Lightbox=WidgetArchetype 
 	BugButton (0-0-0-0): size 36 (cls: BugButton>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_Feedback (0-0-0-0): size 2114 (cls: ExecuteUbergraph_Feedback>Function>/Script/CoreUObject)
-	CallFunc_BooleanOR_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanOR_ReturnValue>BoolProperty>/Script/CoreUObject)
-	CallFunc_EqualEqual_ByteByte_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ByteByte_ReturnValue>BoolProperty>/Script/CoreUObject)
-	CallFunc_EqualEqual_ByteByte_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ByteByte_ReturnValue1>BoolProperty>/Script/CoreUObject)
-	CallFunc_EqualEqual_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
-	CallFunc_GetSelected_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_GetSelected_ReturnValue>BoolProperty>/Script/CoreUObject)
-	CallFunc_HasKiller_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasKiller_ReturnValue>BoolProperty>/Script/CoreUObject)
-	CallFunc_HasSpectateTarget_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasSpectateTarget_ReturnValue>BoolProperty>/Script/CoreUObject)
-	CallFunc_IsAllTextNotEmpty_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsAllTextNotEmpty_ReturnValue>BoolProperty>/Script/CoreUObject)
-	CallFunc_IsAllTextNotEmpty_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_IsAllTextNotEmpty_ReturnValue1>BoolProperty>/Script/CoreUObject)
-	CallFunc_TextIsEmpty_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_TextIsEmpty_ReturnValue>BoolProperty>/Script/CoreUObject)
-	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
-	Temp_bool_Variable1 (0-0-0-0): size 34 (cls: Temp_bool_Variable1>BoolProperty>/Script/CoreUObject)
-	Temp_bool_Variable2 (0-0-0-0): size 34 (cls: Temp_bool_Variable2>BoolProperty>/Script/CoreUObject)
-	Temp_bool_Variable3 (0-0-0-0): size 34 (cls: Temp_bool_Variable3>BoolProperty>/Script/CoreUObject)
-	Temp_bool_Variable4 (0-0-0-0): size 34 (cls: Temp_bool_Variable4>BoolProperty>/Script/CoreUObject)
+	ExecuteUbergraph_Feedback (0-0-0-0): size 2049 (cls: ExecuteUbergraph_Feedback>Function>/Script/CoreUObject)
 	Construct (0-0-0-0): size 54 (cls: Construct>Function>/Script/CoreUObject)
 	OnInitiateDebugInfoForFeedbackComplete (0-0-0-0): size 54 (cls: OnInitiateDebugInfoForFeedbackComplete>Function>/Script/CoreUObject)
 	Button (0-0-0-0): size 36 (cls: Button>ObjectProperty>/Script/CoreUObject)
@@ -612,21 +602,43 @@ Serialized exports:
 	BindDelegates (0-0-0-0): size 156 (cls: BindDelegates>Function>/Script/CoreUObject)
 	AddButtonFeedbackTypes (0-0-0-0): size 95 (cls: AddButtonFeedbackTypes>Function>/Script/CoreUObject)
 	ReturnValue (0-0-0-0): size 34 (cls: ReturnValue>BoolProperty>/Script/CoreUObject)
-	IsAllTextNotEmpty (0-0-0-0): size 433 (cls: IsAllTextNotEmpty>Function>/Script/CoreUObject)
+	CanSendFeedback (0-0-0-0): size 491 (cls: CanSendFeedback>Function>/Script/CoreUObject)
 	CallFunc_BooleanAND_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_BooleanAND_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_BooleanOR_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanOR_ReturnValue>BoolProperty>/Script/CoreUObject)
-	CallFunc_BooleanOR_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_BooleanOR_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_EqualEqual_ByteByte_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ByteByte_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_HasSelectedCategory_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasSelectedCategory_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_HasSelectedPlayer_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasSelectedPlayer_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Not_PreBool_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Not_PreBool_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_Not_PreBool_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue2>BoolProperty>/Script/CoreUObject)
 	CallFunc_TextIsEmpty_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_TextIsEmpty_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_TextIsEmpty_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_TextIsEmpty_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_TextIsEmpty_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_TextIsEmpty_ReturnValue2>BoolProperty>/Script/CoreUObject)
+	CallFunc_BooleanOR_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanOR_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_CanSendFeedback_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_CanSendFeedback_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_EqualEqual_ByteByte_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ByteByte_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_EqualEqual_ByteByte_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ByteByte_ReturnValue1>BoolProperty>/Script/CoreUObject)
+	CallFunc_EqualEqual_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_GetSelected_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_GetSelected_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_HasKiller_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasKiller_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_HasSpectateTarget_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasSpectateTarget_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_TextIsEmpty_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_TextIsEmpty_ReturnValue>BoolProperty>/Script/CoreUObject)
+	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
+	Temp_bool_Variable1 (0-0-0-0): size 34 (cls: Temp_bool_Variable1>BoolProperty>/Script/CoreUObject)
+	Temp_bool_Variable2 (0-0-0-0): size 34 (cls: Temp_bool_Variable2>BoolProperty>/Script/CoreUObject)
+	Temp_bool_Variable3 (0-0-0-0): size 34 (cls: Temp_bool_Variable3>BoolProperty>/Script/CoreUObject)
+	Temp_bool_Variable4 (0-0-0-0): size 34 (cls: Temp_bool_Variable4>BoolProperty>/Script/CoreUObject)
 	InitializeFeedback (0-0-0-0): size 180 (cls: InitializeFeedback>Function>/Script/CoreUObject)
 	PlayerName (0-0-0-0): size 32 (cls: PlayerName>TextProperty>/Script/CoreUObject)
 	Setup For Reporting Player (0-0-0-0): size 136 (cls: Setup For Reporting Player>Function>/Script/CoreUObject)
 	CallFunc_TextIsEmpty_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_TextIsEmpty_ReturnValue>BoolProperty>/Script/CoreUObject)
+	KillersName (0-0-0-0): size 32 (cls: KillersName>TextProperty>/Script/CoreUObject)
+	SetupAutoFillPlayerFields (0-0-0-0): size 151 (cls: SetupAutoFillPlayerFields>Function>/Script/CoreUObject)
+	MyGeometry (0-0-0-0): size 36 (cls: MyGeometry>StructProperty>/Script/CoreUObject)
+	TouchToClose (0-0-0-0): size 114 (cls: TouchToClose>Function>/Script/CoreUObject)
+	UpdateSendButtonEnabled (0-0-0-0): size 92 (cls: UpdateSendButtonEnabled>Function>/Script/CoreUObject)
+	CallFunc_CanSendFeedback_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_CanSendFeedback_ReturnValue>BoolProperty>/Script/CoreUObject)
 	ContentBorder (0-0-0-0): size 350 (cls: ContentBorder>Border>/Script/UMG):
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
@@ -1205,17 +1217,8 @@ Serialized exports:
 			BodyEditable_SingleLine(ObjectProperty)=BodyEditable_SingleLine=WidgetArchetype 
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
-	HB_AutofillPlayerNameContainer (0-0-0-0): size 36 (cls: HB_AutofillPlayerNameContainer>ObjectProperty>/Script/CoreUObject)
-	PlayerButton (0-0-0-0): size 36 (cls: PlayerButton>ObjectProperty>/Script/CoreUObject)
-	CommentButton (0-0-0-0): size 36 (cls: CommentButton>ObjectProperty>/Script/CoreUObject)
-	SpectatingName (0-0-0-0): size 32 (cls: SpectatingName>TextProperty>/Script/CoreUObject)
-	KillersName (0-0-0-0): size 32 (cls: KillersName>TextProperty>/Script/CoreUObject)
-	SetupAutoFillPlayerFields (0-0-0-0): size 151 (cls: SetupAutoFillPlayerFields>Function>/Script/CoreUObject)
-	CallFunc_Handled_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_Handled_ReturnValue>StructProperty>/Script/CoreUObject)
-	ReturnValue (0-0-0-0): size 36 (cls: ReturnValue>StructProperty>/Script/CoreUObject)
-	MouseEvent (0-0-0-0): size 36 (cls: MouseEvent>StructProperty>/Script/CoreUObject)
-	MyGeometry (0-0-0-0): size 36 (cls: MyGeometry>StructProperty>/Script/CoreUObject)
-	TouchToClose (0-0-0-0): size 114 (cls: TouchToClose>Function>/Script/CoreUObject)
+	CategoryLabel (0-0-0-0): size 36 (cls: CategoryLabel>ObjectProperty>/Script/CoreUObject)
+	ResetCategoryText (0-0-0-0): size 124 (cls: ResetCategoryText>Function>/Script/CoreUObject)
 	HorizontalBox (0-0-0-0): size 94 (cls: HorizontalBox>HorizontalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -1227,7 +1230,7 @@ Serialized exports:
 	CategoryContainer (0-0-0-0): size 153 (cls: CategoryContainer>HorizontalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-			Slot(ObjectProperty)=VerticalBoxSlot_2=WidgetArchetype 
+			Slot(ObjectProperty)=VerticalBoxSlot_5=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
 			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
 	HorizontalBox (0-0-0-0): size 94 (cls: HorizontalBox>HorizontalBox>/Script/UMG):
@@ -1864,7 +1867,7 @@ Serialized exports:
 			Slot(ObjectProperty)=HorizontalBoxSlot_3=WidgetArchetype 
 	CancelButton (0-0-0-0): size 36 (cls: CancelButton>ObjectProperty>/Script/CoreUObject)
 	CategoryContainer (0-0-0-0): size 36 (cls: CategoryContainer>ObjectProperty>/Script/CoreUObject)
-	CategoryLabel (0-0-0-0): size 36 (cls: CategoryLabel>ObjectProperty>/Script/CoreUObject)
+	CommentButton (0-0-0-0): size 36 (cls: CommentButton>ObjectProperty>/Script/CoreUObject)
 	CommonTextBlock_0 (0-0-0-0): size 36 (cls: CommonTextBlock_0>ObjectProperty>/Script/CoreUObject)
 	ContentButton (0-0-0-0): size 36 (cls: ContentButton>ObjectProperty>/Script/CoreUObject)
 	EntryProgressSwitcher (0-0-0-0): size 36 (cls: EntryProgressSwitcher>ObjectProperty>/Script/CoreUObject)
@@ -1879,10 +1882,12 @@ Serialized exports:
 	K2Node_ComponentBoundEvent_Button4 (0-0-0-0): size 36 (cls: K2Node_ComponentBoundEvent_Button4>ObjectProperty>/Script/CoreUObject)
 	K2Node_ComponentBoundEvent_Button5 (0-0-0-0): size 36 (cls: K2Node_ComponentBoundEvent_Button5>ObjectProperty>/Script/CoreUObject)
 	K2Node_Select5_Default (0-0-0-0): size 36 (cls: K2Node_Select5_Default>ObjectProperty>/Script/CoreUObject)
+	HB_AutofillPlayerNameContainer (0-0-0-0): size 36 (cls: HB_AutofillPlayerNameContainer>ObjectProperty>/Script/CoreUObject)
 	Image_0 (0-0-0-0): size 36 (cls: Image_0>ObjectProperty>/Script/CoreUObject)
 	InteractableVBox (0-0-0-0): size 36 (cls: InteractableVBox>ObjectProperty>/Script/CoreUObject)
 	Lightbox (0-0-0-0): size 36 (cls: Lightbox>ObjectProperty>/Script/CoreUObject)
 	MainIcon (0-0-0-0): size 36 (cls: MainIcon>ObjectProperty>/Script/CoreUObject)
+	PlayerButton (0-0-0-0): size 36 (cls: PlayerButton>ObjectProperty>/Script/CoreUObject)
 	PlayerNameContainer (0-0-0-0): size 36 (cls: PlayerNameContainer>ObjectProperty>/Script/CoreUObject)
 	PopulateName_Killer_Button (0-0-0-0): size 36 (cls: PopulateName_Killer_Button>ObjectProperty>/Script/CoreUObject)
 	PopulateName_Spectator_Button (0-0-0-0): size 36 (cls: PopulateName_Spectator_Button>ObjectProperty>/Script/CoreUObject)
@@ -2022,6 +2027,12 @@ Serialized exports:
 			Parent(ObjectProperty)=SizeBox_2=WidgetArchetype 
 			Content(ObjectProperty)=CommonBorder_0=WidgetArchetype 
 	CallFunc_GetPlayerNameInfoContainer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetPlayerNameInfoContainer_ReturnValue>StructProperty>/Script/CoreUObject)
+	CallFunc_Handled_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_Handled_ReturnValue>StructProperty>/Script/CoreUObject)
+	MouseEvent (0-0-0-0): size 36 (cls: MouseEvent>StructProperty>/Script/CoreUObject)
+	ReturnValue (0-0-0-0): size 36 (cls: ReturnValue>StructProperty>/Script/CoreUObject)
+	CallFunc_GetText_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetText_ReturnValue>TextProperty>/Script/CoreUObject)
+	CallFunc_GetText_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_GetText_ReturnValue1>TextProperty>/Script/CoreUObject)
+	CallFunc_GetText_ReturnValue2 (0-0-0-0): size 32 (cls: CallFunc_GetText_ReturnValue2>TextProperty>/Script/CoreUObject)
 	CallFunc_GetDisplayTextForPlayerReportingCategoryBP_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetDisplayTextForPlayerReportingCategoryBP_ReturnValue>TextProperty>/Script/CoreUObject)
 	K2Node_CustomEvent_Text (0-0-0-0): size 32 (cls: K2Node_CustomEvent_Text>TextProperty>/Script/CoreUObject)
 	K2Node_Event_Name (0-0-0-0): size 32 (cls: K2Node_Event_Name>TextProperty>/Script/CoreUObject)
@@ -2032,10 +2043,8 @@ Serialized exports:
 	Temp_text_Variable2 (0-0-0-0): size 32 (cls: Temp_text_Variable2>TextProperty>/Script/CoreUObject)
 	Temp_text_Variable3 (0-0-0-0): size 32 (cls: Temp_text_Variable3>TextProperty>/Script/CoreUObject)
 	Temp_text_Variable4 (0-0-0-0): size 32 (cls: Temp_text_Variable4>TextProperty>/Script/CoreUObject)
-	CallFunc_GetText_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetText_ReturnValue>TextProperty>/Script/CoreUObject)
-	CallFunc_GetText_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_GetText_ReturnValue1>TextProperty>/Script/CoreUObject)
-	CallFunc_GetText_ReturnValue2 (0-0-0-0): size 32 (cls: CallFunc_GetText_ReturnValue2>TextProperty>/Script/CoreUObject)
 	KillersName (0-0-0-0): size 32 (cls: KillersName>TextProperty>/Script/CoreUObject)
+	SpectatingName (0-0-0-0): size 32 (cls: SpectatingName>TextProperty>/Script/CoreUObject)
 	SpectatingName (0-0-0-0): size 32 (cls: SpectatingName>TextProperty>/Script/CoreUObject)
 	EntryVBox (0-0-0-0): size 141 (cls: EntryVBox>VerticalBox>/Script/UMG):
 		Tag array:
@@ -2133,16 +2142,16 @@ Serialized exports:
 			Padding(StructProperty)=System.Byte[] 
 			Parent(ObjectProperty)=VerticalBox_2=WidgetArchetype 
 			Content(ObjectProperty)=HB_AutofillPlayerNameContainer=WidgetArchetype 
-	VerticalBoxSlot_2 (0-0-0-0): size 156 (cls: VerticalBoxSlot_2>VerticalBoxSlot>/Script/UMG):
-		Tag array:
-			Padding(StructProperty)=System.Byte[] 
-			Parent(ObjectProperty)=VerticalBox_2=WidgetArchetype 
-			Content(ObjectProperty)=CategoryContainer=WidgetArchetype 
 	VerticalBoxSlot_3 (0-0-0-0): size 156 (cls: VerticalBoxSlot_3>VerticalBoxSlot>/Script/UMG):
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
 			Parent(ObjectProperty)=VerticalBox_2=WidgetArchetype 
 			Content(ObjectProperty)=PlayerButton=WidgetArchetype 
+	VerticalBoxSlot_5 (0-0-0-0): size 156 (cls: VerticalBoxSlot_5>VerticalBoxSlot>/Script/UMG):
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			Parent(ObjectProperty)=VerticalBox_2=WidgetArchetype 
+			Content(ObjectProperty)=CategoryContainer=WidgetArchetype 
 	VerticalBoxSlot_6 (0-0-0-0): size 156 (cls: VerticalBoxSlot_6>VerticalBoxSlot>/Script/UMG):
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 

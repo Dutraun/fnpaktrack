@@ -60,9 +60,6 @@ Name table:
 	CallFunc_GetDisplayName_ReturnValue3
 	CallFunc_GetEmptyText_ReturnValue
 	CallFunc_GetItemDefinitionBP_ReturnValue
-	CallFunc_GetItemSmallPreviewImageBrush_ReturnValue
-	CallFunc_GetItemSmallPreviewImageBrush_ReturnValue1
-	CallFunc_GetItemSmallPreviewImageBrush_ReturnValue2
 	CallFunc_GetNumInStack_ReturnValue
 	CallFunc_GetNumInStack_ReturnValue1
 	CallFunc_GetPrimaryCategory_ItemCategoryText
@@ -71,6 +68,9 @@ Name table:
 	CallFunc_GetPrimaryCategory_ReturnValue1
 	CallFunc_GetRarityColor_ReturnValue
 	CallFunc_GetRarityColor_ReturnValue1
+	CallFunc_GetSmallPreviewImage_ReturnValue
+	CallFunc_GetSmallPreviewImage_ReturnValue1
+	CallFunc_GetSmallPreviewImage_ReturnValue2
 	CallFunc_GetType_ReturnValue
 	CallFunc_GetType_ReturnValue1
 	CallFunc_Greater_IntInt_ReturnValue
@@ -81,6 +81,7 @@ Name table:
 	ColorAndOpacity
 	ColorUseRule
 	CommonBorder
+	CommonLazyImage
 	CommonNumericTextBlock
 	CommonTextBlock
 	CommonUserWidget
@@ -98,6 +99,7 @@ Name table:
 	Default__BoolProperty
 	Default__ByteProperty
 	Default__CommonBorder
+	Default__CommonLazyImage
 	Default__CommonNumericTextBlock
 	Default__CommonTextBlock
 	Default__CommonUserWidget
@@ -105,7 +107,6 @@ Name table:
 	Default__EnumProperty
 	Default__FloatProperty
 	Default__FortMultiSizeItemCard
-	Default__FortUIBlueprintFunctionLibrary
 	Default__Function
 	Default__HorizontalBox
 	Default__HorizontalBoxSlot
@@ -118,6 +119,7 @@ Name table:
 	Default__RewardsListEntry_C
 	Default__SizeBox
 	Default__SizeBoxSlot
+	Default__SoftObjectProperty
 	Default__Spacer
 	Default__StructProperty
 	Default__TextProperty
@@ -146,6 +148,7 @@ Name table:
 	ESlateSizeRule::Fill
 	ESlateVisibility
 	ESlateVisibility::Collapsed
+	ESlateVisibility::SelfHitTestInvisible
 	ETextJustify
 	ETextJustify::Center
 	EventCurrency_Scaling
@@ -163,7 +166,6 @@ Name table:
 	FortItemWidget_NUI
 	FortMultiSizeItemCard
 	FortPersistentResourceItemDefinition
-	FortUIBlueprintFunctionLibrary
 	Function
 	GameplayTag
 	GameplayTags
@@ -171,10 +173,10 @@ Name table:
 	GetDisplayName
 	GetEmptyText
 	GetItemDefinitionBP
-	GetItemSmallPreviewImageBrush
 	GetNumInStack
 	GetPrimaryCategory
 	GetRarityColor
+	GetSmallPreviewImage
 	GetType
 	Greater_IntInt
 	HAlign_Center
@@ -207,6 +209,7 @@ Name table:
 	K2Node_SwitchEnum_CmpSuccess
 	KismetMathLibrary
 	KismetTextLibrary
+	LazyImageRewardIcon
 	Left
 	LinearColor
 	M-Border-Bang
@@ -229,7 +232,6 @@ Name table:
 	RenderTransform
 	ResourceObject
 	RewardCount
-	RewardIcon
 	RewardItem
 	RewardListEntryType
 	RewardName
@@ -240,7 +242,7 @@ Name table:
 	ScriptStruct
 	ScrollStyle
 	SetActiveWidgetIndex
-	SetBrush
+	SetBrushFromLazyTexture
 	SetColorAndOpacity
 	SetCurrentValue
 	SetItemToRepresent
@@ -337,7 +339,7 @@ Serialized exports:
 			bHasScriptImplementedPaint(BoolProperty)=False 
 	CommonTextBlock_5 (0-0-0-0): size 36 (cls: CommonTextBlock_5>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_RewardsListEntry (0-0-0-0): size 3358 (cls: ExecuteUbergraph_RewardsListEntry>Function>/Script/CoreUObject)
+	ExecuteUbergraph_RewardsListEntry (0-0-0-0): size 3340 (cls: ExecuteUbergraph_RewardsListEntry>Function>/Script/CoreUObject)
 	K2Node_MakeArray_Array (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array>StructProperty>/Script/CoreUObject)
 	K2Node_MakeArray_Array (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array>ArrayProperty>/Script/CoreUObject)
 	K2Node_MakeArray_Array1 (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array1>StructProperty>/Script/CoreUObject)
@@ -401,6 +403,11 @@ Serialized exports:
 			Slot(ObjectProperty)=OverlaySlot_13=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
 			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
+	LazyImageRewardIcon (0-0-0-0): size 225 (cls: LazyImageRewardIcon>CommonLazyImage>/Script/CommonUI):
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			Slot(ObjectProperty)=WidgetSwitcherSlot_2=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::SelfHitTestInvisible 
 	RewardCount (0-0-0-0): size 369 (cls: RewardCount>CommonNumericTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B 
@@ -534,10 +541,6 @@ Serialized exports:
 			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
 			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
-	RewardIcon (0-0-0-0): size 184 (cls: RewardIcon>Image>/Script/UMG):
-		Tag array:
-			Brush(StructProperty)=System.Byte[] 
-			Slot(ObjectProperty)=WidgetSwitcherSlot_0=WidgetArchetype 
 	CallFunc_GetNumInStack_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetNumInStack_ReturnValue>IntProperty>/Script/CoreUObject)
 	CallFunc_GetNumInStack_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_GetNumInStack_ReturnValue1>IntProperty>/Script/CoreUObject)
 	K2Node_Select_Default (0-0-0-0): size 32 (cls: K2Node_Select_Default>IntProperty>/Script/CoreUObject)
@@ -552,8 +555,8 @@ Serialized exports:
 	ImageFoundersReward (0-0-0-0): size 36 (cls: ImageFoundersReward>ObjectProperty>/Script/CoreUObject)
 	ImageMaxLimitWarning (0-0-0-0): size 36 (cls: ImageMaxLimitWarning>ObjectProperty>/Script/CoreUObject)
 	Itemdef (0-0-0-0): size 36 (cls: Itemdef>ObjectProperty>/Script/CoreUObject)
+	LazyImageRewardIcon (0-0-0-0): size 36 (cls: LazyImageRewardIcon>ObjectProperty>/Script/CoreUObject)
 	RewardCount (0-0-0-0): size 36 (cls: RewardCount>ObjectProperty>/Script/CoreUObject)
-	RewardIcon (0-0-0-0): size 36 (cls: RewardIcon>ObjectProperty>/Script/CoreUObject)
 	RewardItem (0-0-0-0): size 36 (cls: RewardItem>ObjectProperty>/Script/CoreUObject)
 	RewardName (0-0-0-0): size 36 (cls: RewardName>ObjectProperty>/Script/CoreUObject)
 	SwitcherRewardType (0-0-0-0): size 36 (cls: SwitcherRewardType>ObjectProperty>/Script/CoreUObject)
@@ -601,8 +604,8 @@ Serialized exports:
 			Image_4(ObjectProperty)=Image_4=WidgetArchetype 
 			ImageFoundersReward(ObjectProperty)=ImageFoundersReward=WidgetArchetype 
 			ImageMaxLimitWarning(ObjectProperty)=ImageMaxLimitWarning=WidgetArchetype 
+			LazyImageRewardIcon(ObjectProperty)=LazyImageRewardIcon=WidgetArchetype 
 			RewardCount(ObjectProperty)=RewardCount=WidgetArchetype 
-			RewardIcon(ObjectProperty)=RewardIcon=WidgetArchetype 
 			RewardName(ObjectProperty)=RewardName=WidgetArchetype 
 			SwitcherRewardType(ObjectProperty)=SwitcherRewardType=WidgetArchetype 
 			SwitcherSpecialRewardType(ObjectProperty)=SwitcherSpecialRewardType=WidgetArchetype 
@@ -643,13 +646,13 @@ Serialized exports:
 		Tag array:
 			Parent(ObjectProperty)=SizeBoxMissionAlert=WidgetArchetype 
 			Content(ObjectProperty)=Overlay_3=WidgetArchetype 
+	CallFunc_GetSmallPreviewImage_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetSmallPreviewImage_ReturnValue>SoftObjectProperty>/Script/CoreUObject)
+	CallFunc_GetSmallPreviewImage_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetSmallPreviewImage_ReturnValue1>SoftObjectProperty>/Script/CoreUObject)
+	CallFunc_GetSmallPreviewImage_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_GetSmallPreviewImage_ReturnValue2>SoftObjectProperty>/Script/CoreUObject)
 	Spacer_0 (0-0-0-0): size 98 (cls: Spacer_0>Spacer>/Script/UMG):
 		Tag array:
 			Size(StructProperty)=Vector2D(8,1) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_7=WidgetArchetype 
-	CallFunc_GetItemSmallPreviewImageBrush_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetItemSmallPreviewImageBrush_ReturnValue>StructProperty>/Script/CoreUObject)
-	CallFunc_GetItemSmallPreviewImageBrush_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetItemSmallPreviewImageBrush_ReturnValue1>StructProperty>/Script/CoreUObject)
-	CallFunc_GetItemSmallPreviewImageBrush_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_GetItemSmallPreviewImageBrush_ReturnValue2>StructProperty>/Script/CoreUObject)
 	CallFunc_GetRarityColor_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetRarityColor_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_GetRarityColor_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetRarityColor_ReturnValue1>StructProperty>/Script/CoreUObject)
 	K2Node_MakeStruct_FormatArgumentData (0-0-0-0): size 36 (cls: K2Node_MakeStruct_FormatArgumentData>StructProperty>/Script/CoreUObject)
@@ -667,18 +670,18 @@ Serialized exports:
 	CallFunc_GetEmptyText_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetEmptyText_ReturnValue>TextProperty>/Script/CoreUObject)
 	CallFunc_GetPrimaryCategory_ItemCategoryText (0-0-0-0): size 32 (cls: CallFunc_GetPrimaryCategory_ItemCategoryText>TextProperty>/Script/CoreUObject)
 	CallFunc_GetPrimaryCategory_ItemCategoryText1 (0-0-0-0): size 32 (cls: CallFunc_GetPrimaryCategory_ItemCategoryText1>TextProperty>/Script/CoreUObject)
-	WidgetSwitcherSlot_0 (0-0-0-0): size 152 (cls: WidgetSwitcherSlot_0>WidgetSwitcherSlot>/Script/UMG):
-		Tag array:
-			HorizontalAlignment(ByteProperty)=HAlign_Left 
-			VerticalAlignment(ByteProperty)=VAlign_Center 
-			Parent(ObjectProperty)=SwitcherRewardType=WidgetArchetype 
-			Content(ObjectProperty)=RewardIcon=WidgetArchetype 
 	WidgetSwitcherSlot_1 (0-0-0-0): size 152 (cls: WidgetSwitcherSlot_1>WidgetSwitcherSlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Center 
 			VerticalAlignment(ByteProperty)=VAlign_Center 
 			Parent(ObjectProperty)=SwitcherRewardType=WidgetArchetype 
 			Content(ObjectProperty)=FortItemCard_XXSSchematicItemCard=WidgetArchetype 
+	WidgetSwitcherSlot_2 (0-0-0-0): size 152 (cls: WidgetSwitcherSlot_2>WidgetSwitcherSlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Left 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=SwitcherRewardType=WidgetArchetype 
+			Content(ObjectProperty)=LazyImageRewardIcon=WidgetArchetype 
 	WidgetSwitcherSlot_1 (0-0-0-0): size 70 (cls: WidgetSwitcherSlot_1>WidgetSwitcherSlot>/Script/UMG):
 		Tag array:
 			Parent(ObjectProperty)=SwitcherSpecialRewardType=WidgetArchetype 

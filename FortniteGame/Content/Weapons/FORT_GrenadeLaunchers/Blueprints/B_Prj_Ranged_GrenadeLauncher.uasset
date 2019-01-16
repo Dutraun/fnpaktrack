@@ -10,7 +10,7 @@ Name table:
 	/Game/Weapons/FORT_GrenadeLaunchers/Effects/P_Bounce_Generic
 	/Game/Weapons/FORT_GrenadeLaunchers/Effects/P_Bounce_Water
 	/Game/Weapons/FORT_GrenadeLaunchers/Effects/P_GL_Ribbon_SmokeTrail
-	/Game/Weapons/FORT_GrenadeLaunchers/Effects/P_GrenadeLauncher_Explosion
+	/Game/Weapons/FORT_GrenadeLaunchers/Effects/P_GrenadeLauncher_Explosion_Athena
 	/Game/Weapons/FORT_GrenadeLaunchers/Effects/P_RestInWater
 	/Game/Weapons/FORT_GrenadeLaunchers/Mesh/Sm_Frag_Temp
 	/Script/CoreUObject
@@ -152,6 +152,7 @@ Name table:
 	DelayBeforeExplode_
 	Distance
 	DoExplosion
+	DoExplosionAtLocation
 	ECC_WorldStatic
 	ECollisionChannel
 	ECollisionEnabled
@@ -170,6 +171,7 @@ Name table:
 	Explosion_PSC
 	ExplosionForceFeedbackFar
 	ExplosionForceFeedbackNear
+	ExplosionLocation
 	FaceIndex
 	FF_Generic_Explosion_Far
 	FF_Generic_Explosion_Near
@@ -245,6 +247,7 @@ Name table:
 	Normal
 	NotEqual_ByteByte
 	NPC.Attachment.Behavior.TreatAsPawn
+	NPC.CharacterType.Boss.4P
 	Object
 	ObjectProperty
 	ObjectsToTraceAgainst
@@ -258,7 +261,7 @@ Name table:
 	P_Bounce_Generic
 	P_Bounce_Water
 	P_GL_Ribbon_SmokeTrail
-	P_GrenadeLauncher_Explosion
+	P_GrenadeLauncher_Explosion_Athena
 	P_Player_Health_Damage
 	P_RestInWater
 	Package
@@ -344,14 +347,14 @@ Name table:
 	Z
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	B_Prj_Ranged_GrenadeLauncher_C (0-0-0-0): size 662 (cls: B_Prj_Ranged_GrenadeLauncher_C>BlueprintGeneratedClass>/Script/Engine):
+	B_Prj_Ranged_GrenadeLauncher_C (0-0-0-0): size 666 (cls: B_Prj_Ranged_GrenadeLauncher_C>BlueprintGeneratedClass>/Script/Engine):
 		Tag array:
 			bHasCookedComponentInstancingData(BoolProperty)=True 
 			ComponentTemplates(ArrayProperty)=[object] (inner: ObjectProperty)
 			SimpleConstructionScript(ObjectProperty)=SimpleConstructionScript_0__57659476=B_Prj_Ranged_GrenadeLauncher_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_B_Prj_Ranged_GrenadeLauncher=B_Prj_Ranged_GrenadeLauncher_C 
 			CookedComponentInstancingData(MapProperty)=[object] (inner: NameProperty)
-	Default__B_Prj_Ranged_GrenadeLauncher_C (0-0-0-0): size 2634 (cls: Default__B_Prj_Ranged_GrenadeLauncher_C>B_Prj_Ranged_GrenadeLauncher_C):
+	Default__B_Prj_Ranged_GrenadeLauncher_C (0-0-0-0): size 2703 (cls: Default__B_Prj_Ranged_GrenadeLauncher_C>B_Prj_Ranged_GrenadeLauncher_C):
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			RibbonTrail_PS(ObjectProperty)=P_GL_Ribbon_SmokeTrail=/Game/Weapons/FORT_GrenadeLaunchers/Effects/P_GL_Ribbon_SmokeTrail 
@@ -359,7 +362,7 @@ Serialized exports:
 			WaterPhysMat(ByteProperty)=SurfaceType8 
 			Bounce_WaterSplash_PS(ObjectProperty)=P_Bounce_Water=/Game/Weapons/FORT_GrenadeLaunchers/Effects/P_Bounce_Water 
 			Bounce_Generic_PS(ObjectProperty)=P_Bounce_Generic=/Game/Weapons/FORT_GrenadeLaunchers/Effects/P_Bounce_Generic 
-			Explosion_PS(ObjectProperty)=P_GrenadeLauncher_Explosion=/Game/Weapons/FORT_GrenadeLaunchers/Effects/P_GrenadeLauncher_Explosion 
+			Explosion_PS(ObjectProperty)=P_GrenadeLauncher_Explosion_Athena=/Game/Weapons/FORT_GrenadeLaunchers/Effects/P_GrenadeLauncher_Explosion_Athena 
 			StopLocation(StructProperty)=Vector(0,0,0) 
 			ObjectsToTraceAgainst(ArrayProperty)=[object] (inner: ByteProperty)
 			StopRotX(StructProperty)=Rotator(0,0,0) 
@@ -373,9 +376,10 @@ Serialized exports:
 			StopRotZ(StructProperty)=Rotator(0,0,0) 
 			ExplosionForceFeedbackNear(ObjectProperty)=FF_Generic_Explosion_Near=/Game/Weapons/ForceFeedback/FF_Generic_Explosion_Near 
 			ExplosionForceFeedbackFar(ObjectProperty)=FF_Generic_Explosion_Far=/Game/Weapons/ForceFeedback/FF_Generic_Explosion_Far 
-			TC_ActorTagsThatShouldExplodeOnImpact(StructProperty)=GameplayTagContainer:NPC.Attachment.Behavior.TreatAsPawn 
+			TC_ActorTagsThatShouldExplodeOnImpact(StructProperty)=GameplayTagContainer:NPC.Attachment.Behavior.TreatAsPawn,NPC.CharacterType.Boss.4P 
 			Grenade_Bounce_Water_Sound(ObjectProperty)=Grenade_Projectile_Bounce_Cue=/Game/Sounds/Fort_GamePlay_Sounds/Explosives/Grenade_Projectile_Bounce_Cue 
 			Grenade_Bounce_Sound(ObjectProperty)=Grenade_Projectile_Bounce_Cue=/Game/Sounds/Fort_GamePlay_Sounds/Explosives/Grenade_Projectile_Bounce_Cue 
+			ExplosionLocation(StructProperty)=Vector(0,0,0) 
 			VerticleFireOffset(StructProperty)=System.Byte[] 
 			InitialSpeed(StructProperty)=System.Byte[] 
 			MaxSpeed(StructProperty)=System.Byte[] 
@@ -387,7 +391,7 @@ Serialized exports:
 			RootComponent(ObjectProperty)=CollisionCapsule0=Default__B_Prj_Ranged_GrenadeLauncher_C 
 	Mesh (0-0-0-0): size 36 (cls: Mesh>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_B_Prj_Ranged_GrenadeLauncher (0-0-0-0): size 2415 (cls: ExecuteUbergraph_B_Prj_Ranged_GrenadeLauncher>Function>/Script/CoreUObject)
+	ExecuteUbergraph_B_Prj_Ranged_GrenadeLauncher (0-0-0-0): size 2573 (cls: ExecuteUbergraph_B_Prj_Ranged_GrenadeLauncher>Function>/Script/CoreUObject)
 	K2Node_Event_HitActors (0-0-0-0): size 36 (cls: K2Node_Event_HitActors>ObjectProperty>/Script/CoreUObject)
 	K2Node_Event_HitActors (0-0-0-0): size 36 (cls: K2Node_Event_HitActors>ArrayProperty>/Script/CoreUObject)
 	K2Node_Event_HitResults (0-0-0-0): size 36 (cls: K2Node_Event_HitResults>StructProperty>/Script/CoreUObject)
@@ -549,6 +553,7 @@ Serialized exports:
 	CallFunc_SpawnBounceFX_HitResultRotation (0-0-0-0): size 36 (cls: CallFunc_SpawnBounceFX_HitResultRotation>StructProperty>/Script/CoreUObject)
 	K2Node_Event_Hit (0-0-0-0): size 36 (cls: K2Node_Event_Hit>StructProperty>/Script/CoreUObject)
 	K2Node_Event_Hit1 (0-0-0-0): size 36 (cls: K2Node_Event_Hit1>StructProperty>/Script/CoreUObject)
+	ExplosionLocation (0-0-0-0): size 36 (cls: ExplosionLocation>StructProperty>/Script/CoreUObject)
 	OnBounceHitResult (0-0-0-0): size 36 (cls: OnBounceHitResult>StructProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_ImpactNormal (0-0-0-0): size 36 (cls: CallFunc_BreakHitResult_ImpactNormal>StructProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_ImpactPoint (0-0-0-0): size 36 (cls: CallFunc_BreakHitResult_ImpactPoint>StructProperty>/Script/CoreUObject)

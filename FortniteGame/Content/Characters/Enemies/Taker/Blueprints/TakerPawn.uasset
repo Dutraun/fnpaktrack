@@ -10,8 +10,8 @@ Name table:
 	/Game/Characters/Enemies/Husk/Curves/ColorFadeOutTrack
 	/Game/Characters/Enemies/Husk/Curves/SpawnAI_EventTrack
 	/Game/Characters/Enemies/Husk/Curves/SpawnAI_FadeIn
-	/Game/Characters/Enemies/Husk/Effects/P_Husk_Death_HQ_01
-	/Game/Characters/Enemies/Husk/Effects/P_Husk_Death_LQ_01
+	/Game/Characters/Enemies/Husk/Effects/P_Husk_Death_Additive
+	/Game/Characters/Enemies/Husk/Effects/P_Husk_Death_New
 	/Game/Characters/Enemies/Husk/Effects/P_Husk_Elemental_ElectricBody_01
 	/Game/Characters/Enemies/Husk/Effects/P_Husk_Sleeping_Effect
 	/Game/Characters/Enemies/Husk/Effects/P_Husk_Sleeping_Wake_Effect
@@ -72,6 +72,7 @@ Name table:
 	Add_IntInt
 	Add_VectorVector
 	AddComponent
+	Additive_Death_Effects
 	AdditiveHitReactDelay
 	Addressee
 	AgentHeight
@@ -141,6 +142,10 @@ Name table:
 	bOverrideAttenuation
 	BoxComponent
 	BoxExtent
+	BP_Hight
+	BP_MonsterColor
+	BP_Radius
+	BP_SpawnRate
 	BreakHitResult
 	BreakRotator
 	BreakTransform
@@ -180,6 +185,7 @@ Name table:
 	CallFunc_Array_Length_ReturnValue2
 	CallFunc_BooleanAND_ReturnValue
 	CallFunc_BooleanAND_ReturnValue1
+	CallFunc_BooleanAND_ReturnValue2
 	CallFunc_BooleanOR_ReturnValue
 	CallFunc_BreakHitResult_bBlockingHit
 	CallFunc_BreakHitResult_bBlockingHit1
@@ -241,18 +247,21 @@ Name table:
 	CallFunc_BreakVector_X3
 	CallFunc_BreakVector_X4
 	CallFunc_BreakVector_X5
+	CallFunc_BreakVector_X6
 	CallFunc_BreakVector_Y
 	CallFunc_BreakVector_Y1
 	CallFunc_BreakVector_Y2
 	CallFunc_BreakVector_Y3
 	CallFunc_BreakVector_Y4
 	CallFunc_BreakVector_Y5
+	CallFunc_BreakVector_Y6
 	CallFunc_BreakVector_Z
 	CallFunc_BreakVector_Z1
 	CallFunc_BreakVector_Z2
 	CallFunc_BreakVector_Z3
 	CallFunc_BreakVector_Z4
 	CallFunc_BreakVector_Z5
+	CallFunc_BreakVector_Z6
 	CallFunc_CapsuleTraceSingleForObjects_OutHit
 	CallFunc_CapsuleTraceSingleForObjects_ReturnValue
 	CallFunc_Conv_RotatorToVector_ReturnValue
@@ -293,10 +302,13 @@ Name table:
 	CallFunc_GetCentroid_ReturnValue
 	CallFunc_GetComponentBounds_BoxExtent
 	CallFunc_GetComponentBounds_BoxExtent1
+	CallFunc_GetComponentBounds_BoxExtent2
 	CallFunc_GetComponentBounds_Origin
 	CallFunc_GetComponentBounds_Origin1
+	CallFunc_GetComponentBounds_Origin2
 	CallFunc_GetComponentBounds_SphereRadius
 	CallFunc_GetComponentBounds_SphereRadius1
+	CallFunc_GetComponentBounds_SphereRadius2
 	CallFunc_GetController_ReturnValue
 	CallFunc_GetController_ReturnValue1
 	CallFunc_GetFortPhysicalSurface_ReturnValue
@@ -359,6 +371,8 @@ Name table:
 	CallFunc_IsValid_ReturnValue2
 	CallFunc_IsValid_ReturnValue20
 	CallFunc_IsValid_ReturnValue21
+	CallFunc_IsValid_ReturnValue22
+	CallFunc_IsValid_ReturnValue23
 	CallFunc_IsValid_ReturnValue3
 	CallFunc_IsValid_ReturnValue4
 	CallFunc_IsValid_ReturnValue5
@@ -381,6 +395,8 @@ Name table:
 	CallFunc_K2_GetComponentLocation_ReturnValue
 	CallFunc_K2_GetComponentLocation_ReturnValue1
 	CallFunc_K2_GetComponentLocation_ReturnValue2
+	CallFunc_K2_GetComponentLocation_ReturnValue3
+	CallFunc_K2_GetComponentLocation_ReturnValue4
 	CallFunc_K2_GetComponentScale_ReturnValue
 	CallFunc_K2_GetPawn_ReturnValue
 	CallFunc_K2_GetRootComponent_ReturnValue
@@ -417,6 +433,8 @@ Name table:
 	CallFunc_MakeVector_ReturnValue5
 	CallFunc_Multiply_FloatFloat_ReturnValue
 	CallFunc_Multiply_FloatFloat_ReturnValue1
+	CallFunc_Multiply_FloatFloat_ReturnValue10
+	CallFunc_Multiply_FloatFloat_ReturnValue11
 	CallFunc_Multiply_FloatFloat_ReturnValue2
 	CallFunc_Multiply_FloatFloat_ReturnValue3
 	CallFunc_Multiply_FloatFloat_ReturnValue4
@@ -445,6 +463,7 @@ Name table:
 	CallFunc_SpawnEmitterAtLocation_ReturnValue
 	CallFunc_SpawnEmitterAtLocation_ReturnValue1
 	CallFunc_SpawnEmitterAtLocation_ReturnValue2
+	CallFunc_SpawnEmitterAtLocation_ReturnValue3
 	CallFunc_SpawnEmitterAttached_ReturnValue
 	CallFunc_SpawnEmitterAttached_ReturnValue1
 	CallFunc_SpawnEmitterAttached_ReturnValue2
@@ -513,8 +532,13 @@ Name table:
 	DataTableRowHandle
 	Deactivate
 	Death Effects
+	Death_Effects_ColorOvrride
 	Death_FX
+	DeathFX Customize Visuals
 	DeathHitSocket
+	DeathParticleSystem_Additive
+	DeathParticleSystem_Additive_On?
+	DeathParticleSystem_Additive_Rate
 	Debug
 	Default Material
 	Default__AbilitySystemBlueprintLibrary
@@ -598,6 +622,7 @@ Name table:
 	EndPos
 	EndTakerSwoopAttack
 	Enemy Indirect Shadow Min Occlusion
+	Enemy Vortex Audio_GEN_VARIABLE
 	Enemy_Impact_Stick
 	Enemy_Taker_Feedback
 	EnemyPawn
@@ -658,6 +683,7 @@ Name table:
 	Function
 	FunctionName
 	FunctionNameToBind
+	FX_Chest
 	FX_Feet
 	FX_MeleeImpact
 	Game
@@ -850,10 +876,14 @@ Name table:
 	K2Node_GameplayCueEvent_Parameters4
 	K2Node_MakeArray_Array
 	K2Node_MakeArray_Array1
+	K2Node_MakeArray_Array2
 	K2Node_MakeStruct_ParticleSysParam
 	K2Node_MakeStruct_ParticleSysParam1
 	K2Node_MakeStruct_ParticleSysParam2
 	K2Node_MakeStruct_ParticleSysParam3
+	K2Node_MakeStruct_ParticleSysParam4
+	K2Node_MakeStruct_ParticleSysParam5
+	K2Node_MakeStruct_ParticleSysParam6
 	K2Node_Select1_Default
 	K2Node_Select2_Default
 	K2Node_Select3_Default
@@ -968,8 +998,8 @@ Name table:
 	OverrideMaterialAndCopyParametersOnCharacterMesh
 	Owner
 	P_FireElemental_Ambient_Taker
-	P_Husk_Death_HQ_01
-	P_Husk_Death_LQ_01
+	P_Husk_Death_Additive
+	P_Husk_Death_New
 	P_Husk_Elemental_ElectricBody_01
 	P_Husk_Sleeping_Effect
 	P_Husk_Sleeping_Wake_Effect
@@ -1003,7 +1033,6 @@ Name table:
 	PawnBumpedByTaker
 	PawnDamageZones
 	PawnStatHandle
-	Pelvis
 	PendingSpokenLine
 	PhysicalMaterial
 	Player_Impact_Flesh_Cue
@@ -1073,10 +1102,10 @@ Name table:
 	SelectFloat
 	SelectRotator
 	SelectVector
-	SetActive
 	SetActorParameter
 	SetBoxExtent
 	SetCapsuleIndirectShadowMinVisibility
+	SetColorParameter
 	SetCullDistance
 	SetFloatParameter
 	SetFNameBasedOnHitDirection
@@ -1134,6 +1163,7 @@ Name table:
 	SpawnRateScale
 	SpawnRift
 	SpecialAttack
+	Sphere_GEN_VARIABLE
 	SphereComponent
 	SphereOffset_GEN_VARIABLE
 	SpringArm_GEN_VARIABLE
@@ -1148,7 +1178,6 @@ Name table:
 	StopDeathFX
 	StopMaterialTimeline
 	StopOverlapBox
-	Storm_Small_Vortex_Cue_GEN_VARIABLE
 	StructProperty
 	Subtract_VectorVector
 	Success
@@ -1284,7 +1313,7 @@ Name table:
 	ZZZ
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	TakerPawn_C (0-0-0-0): size 2770 (cls: TakerPawn_C>BlueprintGeneratedClass>/Script/Engine):
+	TakerPawn_C (0-0-0-0): size 2794 (cls: TakerPawn_C>BlueprintGeneratedClass>/Script/Engine):
 		Tag array:
 			NumReplicatedProperties(IntProperty)=3 
 			bHasCookedComponentInstancingData(BoolProperty)=True 
@@ -1294,7 +1323,7 @@ Serialized exports:
 			SimpleConstructionScript(ObjectProperty)=SimpleConstructionScript_330=TakerPawn_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_TakerPawn=TakerPawn_C 
 			CookedComponentInstancingData(MapProperty)=[object] (inner: NameProperty)
-	Default__TakerPawn_C (0-0-0-0): size 4786 (cls: Default__TakerPawn_C>TakerPawn_C):
+	Default__TakerPawn_C (0-0-0-0): size 4935 (cls: Default__TakerPawn_C>TakerPawn_C):
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			CanDoHitReact(BoolProperty)=True 
@@ -1327,15 +1356,19 @@ Serialized exports:
 			TakerDefaultRotationRate(StructProperty)=Rotator(0,0,0) 
 			TakerAirborneTraceLength(FloatProperty)=2000 
 			TakerAirborneThreshold(FloatProperty)=200 
-			HQ Death Particle System(ObjectProperty)=P_Husk_Death_HQ_01=/Game/Characters/Enemies/Husk/Effects/P_Husk_Death_HQ_01 
+			HQ Death Particle System(ObjectProperty)=P_Husk_Death_New=/Game/Characters/Enemies/Husk/Effects/P_Husk_Death_New 
 			HQ_DeathFX_SpawnRateScale(FloatProperty)=1 
-			LQ Death Particle System(ObjectProperty)=P_Husk_Death_LQ_01=/Game/Characters/Enemies/Husk/Effects/P_Husk_Death_LQ_01 
+			LQ Death Particle System(ObjectProperty)=P_Husk_Death_New=/Game/Characters/Enemies/Husk/Effects/P_Husk_Death_New 
 			LQ_DeathFX_CylinderHeight(FloatProperty)=120 
 			LQ_DeathFX_CylinderRadius(FloatProperty)=20 
 			LQ_DeathFX_SpawnRateScale(FloatProperty)=0.5 
 			PushDuration(FloatProperty)=0.375 
 			PushYawAngle(FloatProperty)=90 
 			PushVelocity(FloatProperty)=150 
+			DeathParticleSystem_Additive_On?(BoolProperty)=True 
+			DeathParticleSystem_Additive(ObjectProperty)=P_Husk_Death_Additive=/Game/Characters/Enemies/Husk/Effects/P_Husk_Death_Additive 
+			Death_Effects_ColorOvrride(StructProperty)=UE4.FLinearColor 
+			DeathParticleSystem_Additive_Rate(FloatProperty)=1.5 
 			BehaviorTree(ObjectProperty)=BT_Taker=/Game/AI/BehaviorTrees/EnemyBTs/BT_Taker 
 			DefaultNavFilter(ObjectProperty)=NavFilter_TakerUsePortals_C=/Game/AI/NavFilters/NavFilter_TakerUsePortals 
 			MovementStyles(ByteProperty)=EFortMovementStyle::Walking 
@@ -1379,7 +1412,7 @@ Serialized exports:
 			RootComponent(ObjectProperty)=CollisionCylinder=Default__TakerPawn_C 
 	SwoopOverlapBox (0-0-0-0): size 36 (cls: SwoopOverlapBox>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_TakerPawn (0-0-0-0): size 16375 (cls: ExecuteUbergraph_TakerPawn>Function>/Script/CoreUObject)
+	ExecuteUbergraph_TakerPawn (0-0-0-0): size 17604 (cls: ExecuteUbergraph_TakerPawn>Function>/Script/CoreUObject)
 	Delay Amount (0-0-0-0): size 32 (cls: Delay Amount>FloatProperty>/Script/CoreUObject)
 	RestorePreviousMaterialDelay (0-0-0-0): size 68 (cls: RestorePreviousMaterialDelay>Function>/Script/CoreUObject)
 	RestorePreviousMaterialDelayCompleted (0-0-0-0): size 54 (cls: RestorePreviousMaterialDelayCompleted>Function>/Script/CoreUObject)
@@ -1421,6 +1454,8 @@ Serialized exports:
 	K2Node_MakeArray_Array (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array>ArrayProperty>/Script/CoreUObject)
 	K2Node_MakeArray_Array1 (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array1>StructProperty>/Script/CoreUObject)
 	K2Node_MakeArray_Array1 (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array1>ArrayProperty>/Script/CoreUObject)
+	K2Node_MakeArray_Array2 (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array2>StructProperty>/Script/CoreUObject)
+	K2Node_MakeArray_Array2 (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array2>ArrayProperty>/Script/CoreUObject)
 	SpawnDeathFX (0-0-0-0): size 54 (cls: SpawnDeathFX>Function>/Script/CoreUObject)
 	AdditiveHitReactDelay (0-0-0-0): size 54 (cls: AdditiveHitReactDelay>Function>/Script/CoreUObject)
 	Damage (0-0-0-0): size 32 (cls: Damage>FloatProperty>/Script/CoreUObject)
@@ -1516,8 +1551,11 @@ Serialized exports:
 	K2Node_DynamicCast_bSuccess1 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess1>BoolProperty>/Script/CoreUObject)
 	bFromSweep (0-0-0-0): size 34 (cls: bFromSweep>BoolProperty>/Script/CoreUObject)
 	CanDoHitReact (0-0-0-0): size 34 (cls: CanDoHitReact>BoolProperty>/Script/CoreUObject)
+	DeathFX Customize Visuals (0-0-0-0): size 34 (cls: DeathFX Customize Visuals>BoolProperty>/Script/CoreUObject)
+	DeathParticleSystem_Additive_On? (0-0-0-0): size 34 (cls: DeathParticleSystem_Additive_On?>BoolProperty>/Script/CoreUObject)
 	CallFunc_BooleanAND_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_BooleanAND_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue1>BoolProperty>/Script/CoreUObject)
+	CallFunc_BooleanAND_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue2>BoolProperty>/Script/CoreUObject)
 	CallFunc_BooleanOR_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanOR_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_bBlockingHit (0-0-0-0): size 34 (cls: CallFunc_BreakHitResult_bBlockingHit>BoolProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_bBlockingHit1 (0-0-0-0): size 34 (cls: CallFunc_BreakHitResult_bBlockingHit1>BoolProperty>/Script/CoreUObject)
@@ -1555,6 +1593,8 @@ Serialized exports:
 	CallFunc_IsValid_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue2>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue20 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue20>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue21 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue21>BoolProperty>/Script/CoreUObject)
+	CallFunc_IsValid_ReturnValue22 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue22>BoolProperty>/Script/CoreUObject)
+	CallFunc_IsValid_ReturnValue23 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue23>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue3 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue3>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue4 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue4>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue5 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue5>BoolProperty>/Script/CoreUObject)
@@ -1621,7 +1661,7 @@ Serialized exports:
 	SoulSuckMelee (0-0-0-0): size 34 (cls: SoulSuckMelee>BoolProperty>/Script/CoreUObject)
 	Sleeping (0-0-0-0): size 34 (cls: Sleeping>BoolProperty>/Script/CoreUObject)
 	SoulSuckEffectActivated (0-0-0-0): size 34 (cls: SoulSuckEffectActivated>BoolProperty>/Script/CoreUObject)
-	StopDeathFX (0-0-0-0): size 160 (cls: StopDeathFX>Function>/Script/CoreUObject)
+	StopDeathFX (0-0-0-0): size 158 (cls: StopDeathFX>Function>/Script/CoreUObject)
 	CallFunc_IsDedicatedServer_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsDedicatedServer_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
 	StopMaterialTimeline (0-0-0-0): size 109 (cls: StopMaterialTimeline>Function>/Script/CoreUObject)
@@ -1675,6 +1715,7 @@ Serialized exports:
 	CallFunc_BreakVector_Z (0-0-0-0): size 32 (cls: CallFunc_BreakVector_Z>FloatProperty>/Script/CoreUObject)
 	CallFunc_GetComponentBounds_SphereRadius (0-0-0-0): size 32 (cls: CallFunc_GetComponentBounds_SphereRadius>FloatProperty>/Script/CoreUObject)
 	CallFunc_GetComponentBounds_SphereRadius1 (0-0-0-0): size 32 (cls: CallFunc_GetComponentBounds_SphereRadius1>FloatProperty>/Script/CoreUObject)
+	DeathParticleSystem_Additive_Rate (0-0-0-0): size 32 (cls: DeathParticleSystem_Additive_Rate>FloatProperty>/Script/CoreUObject)
 	CallFunc_Abs_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Abs_ReturnValue>FloatProperty>/Script/CoreUObject)
 	CallFunc_Add_FloatFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Add_FloatFloat_ReturnValue>FloatProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_Distance (0-0-0-0): size 32 (cls: CallFunc_BreakHitResult_Distance>FloatProperty>/Script/CoreUObject)
@@ -1689,18 +1730,21 @@ Serialized exports:
 	CallFunc_BreakVector_X3 (0-0-0-0): size 32 (cls: CallFunc_BreakVector_X3>FloatProperty>/Script/CoreUObject)
 	CallFunc_BreakVector_X4 (0-0-0-0): size 32 (cls: CallFunc_BreakVector_X4>FloatProperty>/Script/CoreUObject)
 	CallFunc_BreakVector_X5 (0-0-0-0): size 32 (cls: CallFunc_BreakVector_X5>FloatProperty>/Script/CoreUObject)
+	CallFunc_BreakVector_X6 (0-0-0-0): size 32 (cls: CallFunc_BreakVector_X6>FloatProperty>/Script/CoreUObject)
 	CallFunc_BreakVector_Y (0-0-0-0): size 32 (cls: CallFunc_BreakVector_Y>FloatProperty>/Script/CoreUObject)
 	CallFunc_BreakVector_Y1 (0-0-0-0): size 32 (cls: CallFunc_BreakVector_Y1>FloatProperty>/Script/CoreUObject)
 	CallFunc_BreakVector_Y2 (0-0-0-0): size 32 (cls: CallFunc_BreakVector_Y2>FloatProperty>/Script/CoreUObject)
 	CallFunc_BreakVector_Y3 (0-0-0-0): size 32 (cls: CallFunc_BreakVector_Y3>FloatProperty>/Script/CoreUObject)
 	CallFunc_BreakVector_Y4 (0-0-0-0): size 32 (cls: CallFunc_BreakVector_Y4>FloatProperty>/Script/CoreUObject)
 	CallFunc_BreakVector_Y5 (0-0-0-0): size 32 (cls: CallFunc_BreakVector_Y5>FloatProperty>/Script/CoreUObject)
+	CallFunc_BreakVector_Y6 (0-0-0-0): size 32 (cls: CallFunc_BreakVector_Y6>FloatProperty>/Script/CoreUObject)
 	CallFunc_BreakVector_Z (0-0-0-0): size 32 (cls: CallFunc_BreakVector_Z>FloatProperty>/Script/CoreUObject)
 	CallFunc_BreakVector_Z1 (0-0-0-0): size 32 (cls: CallFunc_BreakVector_Z1>FloatProperty>/Script/CoreUObject)
 	CallFunc_BreakVector_Z2 (0-0-0-0): size 32 (cls: CallFunc_BreakVector_Z2>FloatProperty>/Script/CoreUObject)
 	CallFunc_BreakVector_Z3 (0-0-0-0): size 32 (cls: CallFunc_BreakVector_Z3>FloatProperty>/Script/CoreUObject)
 	CallFunc_BreakVector_Z4 (0-0-0-0): size 32 (cls: CallFunc_BreakVector_Z4>FloatProperty>/Script/CoreUObject)
 	CallFunc_BreakVector_Z5 (0-0-0-0): size 32 (cls: CallFunc_BreakVector_Z5>FloatProperty>/Script/CoreUObject)
+	CallFunc_BreakVector_Z6 (0-0-0-0): size 32 (cls: CallFunc_BreakVector_Z6>FloatProperty>/Script/CoreUObject)
 	CallFunc_Divide_FloatFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Divide_FloatFloat_ReturnValue>FloatProperty>/Script/CoreUObject)
 	CallFunc_Divide_FloatFloat_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Divide_FloatFloat_ReturnValue1>FloatProperty>/Script/CoreUObject)
 	CallFunc_Divide_FloatFloat_ReturnValue2 (0-0-0-0): size 32 (cls: CallFunc_Divide_FloatFloat_ReturnValue2>FloatProperty>/Script/CoreUObject)
@@ -1717,6 +1761,7 @@ Serialized exports:
 	CallFunc_FClamp_ReturnValue3 (0-0-0-0): size 32 (cls: CallFunc_FClamp_ReturnValue3>FloatProperty>/Script/CoreUObject)
 	CallFunc_GetComponentBounds_SphereRadius (0-0-0-0): size 32 (cls: CallFunc_GetComponentBounds_SphereRadius>FloatProperty>/Script/CoreUObject)
 	CallFunc_GetComponentBounds_SphereRadius1 (0-0-0-0): size 32 (cls: CallFunc_GetComponentBounds_SphereRadius1>FloatProperty>/Script/CoreUObject)
+	CallFunc_GetComponentBounds_SphereRadius2 (0-0-0-0): size 32 (cls: CallFunc_GetComponentBounds_SphereRadius2>FloatProperty>/Script/CoreUObject)
 	CallFunc_Lerp_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Lerp_ReturnValue>FloatProperty>/Script/CoreUObject)
 	CallFunc_Lerp_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Lerp_ReturnValue1>FloatProperty>/Script/CoreUObject)
 	CallFunc_MakeLiteralFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_MakeLiteralFloat_ReturnValue>FloatProperty>/Script/CoreUObject)
@@ -1724,6 +1769,8 @@ Serialized exports:
 	CallFunc_MakeLiteralFloat_ReturnValue2 (0-0-0-0): size 32 (cls: CallFunc_MakeLiteralFloat_ReturnValue2>FloatProperty>/Script/CoreUObject)
 	CallFunc_Multiply_FloatFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Multiply_FloatFloat_ReturnValue>FloatProperty>/Script/CoreUObject)
 	CallFunc_Multiply_FloatFloat_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Multiply_FloatFloat_ReturnValue1>FloatProperty>/Script/CoreUObject)
+	CallFunc_Multiply_FloatFloat_ReturnValue10 (0-0-0-0): size 32 (cls: CallFunc_Multiply_FloatFloat_ReturnValue10>FloatProperty>/Script/CoreUObject)
+	CallFunc_Multiply_FloatFloat_ReturnValue11 (0-0-0-0): size 32 (cls: CallFunc_Multiply_FloatFloat_ReturnValue11>FloatProperty>/Script/CoreUObject)
 	CallFunc_Multiply_FloatFloat_ReturnValue2 (0-0-0-0): size 32 (cls: CallFunc_Multiply_FloatFloat_ReturnValue2>FloatProperty>/Script/CoreUObject)
 	CallFunc_Multiply_FloatFloat_ReturnValue3 (0-0-0-0): size 32 (cls: CallFunc_Multiply_FloatFloat_ReturnValue3>FloatProperty>/Script/CoreUObject)
 	CallFunc_Multiply_FloatFloat_ReturnValue4 (0-0-0-0): size 32 (cls: CallFunc_Multiply_FloatFloat_ReturnValue4>FloatProperty>/Script/CoreUObject)
@@ -1842,6 +1889,7 @@ Serialized exports:
 	SpawnFeedbackEventName (0-0-0-0): size 32 (cls: SpawnFeedbackEventName>NameProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_HitBoneName (0-0-0-0): size 32 (cls: CallFunc_BreakHitResult_HitBoneName>NameProperty>/Script/CoreUObject)
 	TakerCapsuleDefaultCollisionProfileName (0-0-0-0): size 32 (cls: TakerCapsuleDefaultCollisionProfileName>NameProperty>/Script/CoreUObject)
+	Additive_Death_Effects (0-0-0-0): size 36 (cls: Additive_Death_Effects>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetBuildingMeshComponent_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetBuildingMeshComponent_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetBuildingMeshComponent_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetBuildingMeshComponent_ReturnValue1>ObjectProperty>/Script/CoreUObject)
 	CallFunc_SpawnEmitterAtLocation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_SpawnEmitterAtLocation_ReturnValue>ObjectProperty>/Script/CoreUObject)
@@ -1850,6 +1898,7 @@ Serialized exports:
 	OtherActor (0-0-0-0): size 36 (cls: OtherActor>ObjectProperty>/Script/CoreUObject)
 	OtherComp (0-0-0-0): size 36 (cls: OtherComp>ObjectProperty>/Script/CoreUObject)
 	Death Effects (0-0-0-0): size 36 (cls: Death Effects>ObjectProperty>/Script/CoreUObject)
+	DeathParticleSystem_Additive (0-0-0-0): size 36 (cls: DeathParticleSystem_Additive>ObjectProperty>/Script/CoreUObject)
 	Default Material (0-0-0-0): size 36 (cls: Default Material>ObjectProperty>/Script/CoreUObject)
 	DuplicateCharacterMesh (0-0-0-0): size 36 (cls: DuplicateCharacterMesh>ObjectProperty>/Script/CoreUObject)
 	Dynamic Material Instance (0-0-0-0): size 36 (cls: Dynamic Material Instance>ObjectProperty>/Script/CoreUObject)
@@ -1889,6 +1938,7 @@ Serialized exports:
 	CallFunc_SpawnEmitterAtLocation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_SpawnEmitterAtLocation_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_SpawnEmitterAtLocation_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_SpawnEmitterAtLocation_ReturnValue1>ObjectProperty>/Script/CoreUObject)
 	CallFunc_SpawnEmitterAtLocation_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_SpawnEmitterAtLocation_ReturnValue2>ObjectProperty>/Script/CoreUObject)
+	CallFunc_SpawnEmitterAtLocation_ReturnValue3 (0-0-0-0): size 36 (cls: CallFunc_SpawnEmitterAtLocation_ReturnValue3>ObjectProperty>/Script/CoreUObject)
 	CallFunc_SpawnEmitterAttached_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_SpawnEmitterAttached_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_SpawnEmitterAttached_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_SpawnEmitterAttached_ReturnValue1>ObjectProperty>/Script/CoreUObject)
 	CallFunc_SpawnEmitterAttached_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_SpawnEmitterAttached_ReturnValue2>ObjectProperty>/Script/CoreUObject)
@@ -1917,7 +1967,7 @@ Serialized exports:
 	K2Node_Event_NewController (0-0-0-0): size 36 (cls: K2Node_Event_NewController>ObjectProperty>/Script/CoreUObject)
 	K2Node_Event_NewMaterialToApply (0-0-0-0): size 36 (cls: K2Node_Event_NewMaterialToApply>ObjectProperty>/Script/CoreUObject)
 	K2Node_Event_Task (0-0-0-0): size 36 (cls: K2Node_Event_Task>ObjectProperty>/Script/CoreUObject)
-	K2Node_Select3_Default (0-0-0-0): size 36 (cls: K2Node_Select3_Default>ObjectProperty>/Script/CoreUObject)
+	K2Node_Select_Default (0-0-0-0): size 36 (cls: K2Node_Select_Default>ObjectProperty>/Script/CoreUObject)
 	Temp_object_Variable (0-0-0-0): size 36 (cls: Temp_object_Variable>ObjectProperty>/Script/CoreUObject)
 	Temp_object_Variable1 (0-0-0-0): size 36 (cls: Temp_object_Variable1>ObjectProperty>/Script/CoreUObject)
 	Temp_object_Variable2 (0-0-0-0): size 36 (cls: Temp_object_Variable2>ObjectProperty>/Script/CoreUObject)
@@ -2070,6 +2120,7 @@ Serialized exports:
 	Portal Out Direction (0-0-0-0): size 36 (cls: Portal Out Direction>StructProperty>/Script/CoreUObject)
 	PortalRotation (0-0-0-0): size 36 (cls: PortalRotation>StructProperty>/Script/CoreUObject)
 	SweepResult (0-0-0-0): size 36 (cls: SweepResult>StructProperty>/Script/CoreUObject)
+	Death_Effects_ColorOvrride (0-0-0-0): size 36 (cls: Death_Effects_ColorOvrride>StructProperty>/Script/CoreUObject)
 	PortalOutDirection (0-0-0-0): size 36 (cls: PortalOutDirection>StructProperty>/Script/CoreUObject)
 	PortalOutDirection (0-0-0-0): size 36 (cls: PortalOutDirection>StructProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_ImpactNormal (0-0-0-0): size 36 (cls: CallFunc_BreakHitResult_ImpactNormal>StructProperty>/Script/CoreUObject)
@@ -2102,8 +2153,10 @@ Serialized exports:
 	CallFunc_GetCameraLocation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetCameraLocation_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_GetComponentBounds_BoxExtent (0-0-0-0): size 36 (cls: CallFunc_GetComponentBounds_BoxExtent>StructProperty>/Script/CoreUObject)
 	CallFunc_GetComponentBounds_BoxExtent1 (0-0-0-0): size 36 (cls: CallFunc_GetComponentBounds_BoxExtent1>StructProperty>/Script/CoreUObject)
+	CallFunc_GetComponentBounds_BoxExtent2 (0-0-0-0): size 36 (cls: CallFunc_GetComponentBounds_BoxExtent2>StructProperty>/Script/CoreUObject)
 	CallFunc_GetComponentBounds_Origin (0-0-0-0): size 36 (cls: CallFunc_GetComponentBounds_Origin>StructProperty>/Script/CoreUObject)
 	CallFunc_GetComponentBounds_Origin1 (0-0-0-0): size 36 (cls: CallFunc_GetComponentBounds_Origin1>StructProperty>/Script/CoreUObject)
+	CallFunc_GetComponentBounds_Origin2 (0-0-0-0): size 36 (cls: CallFunc_GetComponentBounds_Origin2>StructProperty>/Script/CoreUObject)
 	CallFunc_GetHitResult_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetHitResult_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_GetHitResult_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetHitResult_ReturnValue1>StructProperty>/Script/CoreUObject)
 	CallFunc_GetSocketLocation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetSocketLocation_ReturnValue>StructProperty>/Script/CoreUObject)
@@ -2129,12 +2182,15 @@ Serialized exports:
 	CallFunc_K2_GetComponentLocation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_GetComponentLocation_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_K2_GetComponentLocation_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_K2_GetComponentLocation_ReturnValue1>StructProperty>/Script/CoreUObject)
 	CallFunc_K2_GetComponentLocation_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_K2_GetComponentLocation_ReturnValue2>StructProperty>/Script/CoreUObject)
+	CallFunc_K2_GetComponentLocation_ReturnValue3 (0-0-0-0): size 36 (cls: CallFunc_K2_GetComponentLocation_ReturnValue3>StructProperty>/Script/CoreUObject)
+	CallFunc_K2_GetComponentLocation_ReturnValue4 (0-0-0-0): size 36 (cls: CallFunc_K2_GetComponentLocation_ReturnValue4>StructProperty>/Script/CoreUObject)
 	CallFunc_K2_GetComponentScale_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_GetComponentScale_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_K2_SetRelativeLocation_SweepHitResult (0-0-0-0): size 36 (cls: CallFunc_K2_SetRelativeLocation_SweepHitResult>StructProperty>/Script/CoreUObject)
 	CallFunc_K2_SetRelativeLocation_SweepHitResult1 (0-0-0-0): size 36 (cls: CallFunc_K2_SetRelativeLocation_SweepHitResult1>StructProperty>/Script/CoreUObject)
 	CallFunc_K2_SetTimer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_SetTimer_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_K2_SetTimer_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_K2_SetTimer_ReturnValue1>StructProperty>/Script/CoreUObject)
 	CallFunc_K2_SetTimerDelegate_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_SetTimerDelegate_ReturnValue>StructProperty>/Script/CoreUObject)
+	CallFunc_K2_SetWorldLocation_SweepHitResult (0-0-0-0): size 36 (cls: CallFunc_K2_SetWorldLocation_SweepHitResult>StructProperty>/Script/CoreUObject)
 	CallFunc_K2_SetWorldTransform_SweepHitResult (0-0-0-0): size 36 (cls: CallFunc_K2_SetWorldTransform_SweepHitResult>StructProperty>/Script/CoreUObject)
 	CallFunc_MakeRotator_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_MakeRotator_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_MakeRotFromX_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_MakeRotFromX_ReturnValue>StructProperty>/Script/CoreUObject)
@@ -2185,9 +2241,12 @@ Serialized exports:
 	K2Node_MakeStruct_ParticleSysParam1 (0-0-0-0): size 36 (cls: K2Node_MakeStruct_ParticleSysParam1>StructProperty>/Script/CoreUObject)
 	K2Node_MakeStruct_ParticleSysParam2 (0-0-0-0): size 36 (cls: K2Node_MakeStruct_ParticleSysParam2>StructProperty>/Script/CoreUObject)
 	K2Node_MakeStruct_ParticleSysParam3 (0-0-0-0): size 36 (cls: K2Node_MakeStruct_ParticleSysParam3>StructProperty>/Script/CoreUObject)
+	K2Node_MakeStruct_ParticleSysParam4 (0-0-0-0): size 36 (cls: K2Node_MakeStruct_ParticleSysParam4>StructProperty>/Script/CoreUObject)
+	K2Node_MakeStruct_ParticleSysParam5 (0-0-0-0): size 36 (cls: K2Node_MakeStruct_ParticleSysParam5>StructProperty>/Script/CoreUObject)
+	K2Node_MakeStruct_ParticleSysParam6 (0-0-0-0): size 36 (cls: K2Node_MakeStruct_ParticleSysParam6>StructProperty>/Script/CoreUObject)
 	K2Node_Select1_Default (0-0-0-0): size 36 (cls: K2Node_Select1_Default>StructProperty>/Script/CoreUObject)
 	K2Node_Select2_Default (0-0-0-0): size 36 (cls: K2Node_Select2_Default>StructProperty>/Script/CoreUObject)
-	K2Node_Select_Default (0-0-0-0): size 36 (cls: K2Node_Select_Default>StructProperty>/Script/CoreUObject)
+	K2Node_Select3_Default (0-0-0-0): size 36 (cls: K2Node_Select3_Default>StructProperty>/Script/CoreUObject)
 	Temp_struct_Variable (0-0-0-0): size 36 (cls: Temp_struct_Variable>StructProperty>/Script/CoreUObject)
 	Temp_struct_Variable1 (0-0-0-0): size 36 (cls: Temp_struct_Variable1>StructProperty>/Script/CoreUObject)
 	Temp_struct_Variable2 (0-0-0-0): size 36 (cls: Temp_struct_Variable2>StructProperty>/Script/CoreUObject)

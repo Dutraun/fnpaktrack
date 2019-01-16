@@ -1,17 +1,12 @@
 Name table:
 	/Engine/BasicShapes/Cube
 	/Game/Athena/Deimos/AIDirector/EQS/Deimos_EQS_RiftSlots
-	/Game/Athena/Deimos/Spawners/RiftSpawners/Assets/CubeGrowth/FloatingRunes/SM_CubeRunes
 	/Game/Athena/Deimos/Spawners/RiftSpawners/Assets/CubeGrowth/Fog/M_RiftVolumeFog
 	/Game/Athena/Deimos/Spawners/RiftSpawners/Assets/CubeGrowth/M_RiftSpawner_CubeGrowth_Static
 	/Game/Athena/Deimos/Spawners/RiftSpawners/Assets/CubeGrowth/M_RiftSpawner_CubeGrowth_Static_LOD1
-	/Game/Athena/Deimos/Spawners/RiftSpawners/Assets/CubeGrowth/SM_CubeGrowth_Spawner02
-	/Game/Athena/Deimos/Spawners/RiftSpawners/Assets/CubeGrowth/SM_CubeGrowth_Spawner02_Base
-	/Game/Athena/Deimos/Spawners/RiftSpawners/Assets/FX/P_Deimos_Rift_Dying
-	/Game/Athena/Deimos/Spawners/RiftSpawners/Assets/FX/P_Deimos_RiftSpawn_Dmg_02
 	/Game/Athena/Deimos/Spawners/RiftSpawners/Assets/FX/P_Rift_IdleFog
 	/Game/Athena/Deimos/Spawners/RiftSpawners/BP_DeimosRift
-	/Game/Athena/Deimos/Spawners/RiftSpawners/GE/GE_DamageResistanceVsHeavySniper
+	/Game/Athena/Deimos/Spawners/RiftSpawners/GE/GE_RiftSpawnerDamageResistances
 	/Game/Athena/Deimos/Spawners/RiftSpawners/GE/GE_RiftSpawnerDamgePerSpawn_Static
 	/Game/Athena/Deimos/Spawners/RiftSpawners/GE/GE_RiftSpawnerDestroyed
 	/Game/Athena/HUD/Spectator/DeimosRiftMapIcon
@@ -115,6 +110,7 @@ Name table:
 	CallFunc_GetAbilitySystemComponent_ReturnValue1
 	CallFunc_GetAbilitySystemComponent_ReturnValue2
 	CallFunc_GetGameTimeInSeconds_ReturnValue
+	CallFunc_GetGameTimeInSeconds_ReturnValue1
 	CallFunc_GetHealthPercent_ReturnValue
 	CallFunc_GetMaterial_ReturnValue
 	CallFunc_Greater_IntInt_ReturnValue
@@ -137,6 +133,7 @@ Name table:
 	CentroidOffset
 	ChangedPropertyList
 	Channel
+	ChargeUpFXGC
 	ChildNodes
 	Class
 	ClassProperty
@@ -190,7 +187,7 @@ Name table:
 	Default__FortGameplayCueFunctionLibrary
 	Default__Function
 	Default__GameplayStatics
-	Default__GE_DamageResistanceVsHeavySniper_C
+	Default__GE_RiftSpawnerDamageResistances_C
 	Default__GE_RiftSpawnerDamgePerSpawn_Static_C
 	Default__GE_RiftSpawnerDestroyed_C
 	Default__IntProperty
@@ -219,12 +216,14 @@ Name table:
 	DeimosSpawner_Stage1Explosion_Cue
 	DeimosSpawner_Stage2Explosion_Cue
 	DeimosSpawner_Stage3Buildup_Cue
+	Delay
 	DelegateFunction
 	DelegateProperty
 	Destructible
 	DestructionLootTierGroup
 	DetailMode
 	DM_High
+	DoSpawnEffects
 	Dying
 	EAbilitySystemComponentCreationPolicy
 	EAbilitySystemComponentCreationPolicy::Lazy
@@ -264,6 +263,7 @@ Name table:
 	FadeOut
 	FCC_Object_Projectile
 	FHitComponent
+	FiendSpawnFXGC
 	FlashCubeMaterial
 	FloatProperty
 	FlushNetDormancy
@@ -280,6 +280,7 @@ Name table:
 	G
 	Game
 	GameplayCue.Deimos.RiftSpawner.ChargeUp
+	GameplayCue.Deimos.RiftSpawner.Create
 	GameplayCue.Deimos.RiftSpawner.SpawnFiend
 	GameplayCueParameters
 	GameplayEffect
@@ -291,8 +292,8 @@ Name table:
 	GameplayTags
 	GE_DamagePerSpawn
 	GE_DamageReduction
-	GE_DamageResistanceVsHeavySniper_C
 	GE_Destroyed
+	GE_RiftSpawnerDamageResistances_C
 	GE_RiftSpawnerDamgePerSpawn_Static_C
 	GE_RiftSpawnerDestroyed_C
 	GetAbilitySystemComponent
@@ -347,11 +348,13 @@ Name table:
 	K2Node_Event_Momentum1
 	K2Node_Event_SpawnedAI
 	K2Node_MakeStruct_GameplayCueParameters
+	K2Node_MakeStruct_GameplayCueParameters1
 	K2Node_MakeStruct_Vector_NetQuantize10
 	K2Node_SwitchInteger_CmpSuccess
 	KismetMaterialLibrary
 	KismetMathLibrary
 	KismetSystemLibrary
+	LatentActionInfo
 	LDMaxDrawDistance
 	LessEqual_FloatFloat
 	LightColor
@@ -372,6 +375,7 @@ Name table:
 	MaterialInterface
 	MaxPathLengthToPoint
 	MaxSpawnDelay
+	MeshComponent
 	MinDistance
 	MinSpawnDelay
 	Mobility
@@ -406,7 +410,6 @@ Name table:
 	P_Deimos_Rift_Dying_GEN_VARIABLE
 	P_Deimos_RiftSpawn_DamageState
 	P_Deimos_RiftSpawn_DamageState_GEN_VARIABLE
-	P_Deimos_RiftSpawn_Dmg_02
 	P_Rift_IdleFog
 	P_Rift_IdleFog_GEN_VARIABLE
 	Package
@@ -454,14 +457,15 @@ Name table:
 	SetIntParameter
 	SetMaterial
 	SetScalarParameterValue
+	SetScalarParameterValueOnMaterials
+	SetSound
 	SimpleConstructionScript
 	SlateBrush
-	SM_CubeGrowth_Spawner02
-	SM_CubeGrowth_Spawner02_Base
 	SM_CubeRunes
 	SM_CubeRunes_GEN_VARIABLE
 	SnapGridSize
 	Sound
+	Sound_DeimosSpawnerLoop
 	Sound_StageOneExplode
 	Sound_StageThreeBuildup
 	Sound_StageTwoExplode
@@ -469,8 +473,13 @@ Name table:
 	SoundCue
 	SourceObject
 	Spawn
+	Spawn_AnimLength
+	Spawn_CurrentTime
+	SpawnAnimDuration
 	SpawnedAI
+	SpawnEffects
 	SpawnerStatic
+	SpawnFXGC
 	SpectatorMapIcon
 	SpectatorMapIndicatorBrush
 	SphereComponent
@@ -483,6 +492,7 @@ Name table:
 	TargetAttachComponent
 	Team
 	Template
+	TestDynamicRiftSpawn
 	Texture2D
 	UberGraphFrame
 	UberGraphFunction
@@ -507,13 +517,13 @@ Name table:
 	Z
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	BP_DeimosRift_C (0-0-0-0): size 529 (cls: BP_DeimosRift_C>BlueprintGeneratedClass>/Script/Engine):
+	BP_DeimosRift_C (0-0-0-0): size 585 (cls: BP_DeimosRift_C>BlueprintGeneratedClass>/Script/Engine):
 		Tag array:
 			NumReplicatedProperties(IntProperty)=1 
 			bHasCookedComponentInstancingData(BoolProperty)=True 
 			SimpleConstructionScript(ObjectProperty)=SimpleConstructionScript_0=BP_DeimosRift_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_BP_DeimosRift=BP_DeimosRift_C 
-	Default__BP_DeimosRift_C (0-0-0-0): size 5803 (cls: Default__BP_DeimosRift_C>BP_DeimosRift_C):
+	Default__BP_DeimosRift_C (0-0-0-0): size 6131 (cls: Default__BP_DeimosRift_C>BP_DeimosRift_C):
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			BaseMaterial(ObjectProperty)=M_RiftSpawner_CubeGrowth_Static=/Game/Athena/Deimos/Spawners/RiftSpawners/Assets/CubeGrowth/M_RiftSpawner_CubeGrowth_Static 
@@ -526,9 +536,14 @@ Serialized exports:
 			BaseLODMaterial(ObjectProperty)=M_RiftSpawner_CubeGrowth_Static_LOD1=/Game/Athena/Deimos/Spawners/RiftSpawners/Assets/CubeGrowth/M_RiftSpawner_CubeGrowth_Static_LOD1 
 			Sound_StageOneExplode(ObjectProperty)=DeimosSpawner_Stage1Explosion_Cue=/Game/Sounds/Fort_Monster_Deimos/Spawner/DeimosSpawner_Stage1Explosion_Cue 
 			Sound_StageTwoExplode(ObjectProperty)=DeimosSpawner_Stage2Explosion_Cue=/Game/Sounds/Fort_Monster_Deimos/Spawner/DeimosSpawner_Stage2Explosion_Cue 
+			Sound_DeimosSpawnerLoop(ObjectProperty)=Deimos_Spawner_Loop1_Cue=/Game/Sounds/Fort_Monster_Deimos/Spawner/Deimos_Spawner_Loop1_Cue 
 			Sound_StageThreeBuildup(ObjectProperty)=DeimosSpawner_Stage3Buildup_Cue=/Game/Sounds/Fort_Monster_Deimos/Spawner/DeimosSpawner_Stage3Buildup_Cue 
 			GE_DamagePerSpawn(ObjectProperty)=GE_RiftSpawnerDamgePerSpawn_Static_C=/Game/Athena/Deimos/Spawners/RiftSpawners/GE/GE_RiftSpawnerDamgePerSpawn_Static 
-			GE_DamageReduction(ObjectProperty)=GE_DamageResistanceVsHeavySniper_C=/Game/Athena/Deimos/Spawners/RiftSpawners/GE/GE_DamageResistanceVsHeavySniper 
+			GE_DamageReduction(ObjectProperty)=GE_RiftSpawnerDamageResistances_C=/Game/Athena/Deimos/Spawners/RiftSpawners/GE/GE_RiftSpawnerDamageResistances 
+			SpawnAnimDuration(FloatProperty)=0.9 
+			FiendSpawnFXGC(StructProperty)=System.Byte[] 
+			ChargeUpFXGC(StructProperty)=System.Byte[] 
+			SpawnFXGC(StructProperty)=System.Byte[] 
 			bSendMissionEvents(BoolProperty)=True 
 			bDelayDeath(BoolProperty)=True 
 			MinSpawnDelay(FloatProperty)=0.1 
@@ -568,14 +583,17 @@ Serialized exports:
 			Sound(ObjectProperty)=Deimos_Spawner_Loop1_Cue=/Game/Sounds/Fort_Monster_Deimos/Spawner/Deimos_Spawner_Loop1_Cue 
 			RelativeLocation(StructProperty)=Vector(0,0,200) 
 			bAutoActivate(BoolProperty)=False 
+	DoSpawnEffects (0-0-0-0): size 34 (cls: DoSpawnEffects>BoolProperty>/Script/CoreUObject)
 	P_Rift_IdleFog (0-0-0-0): size 36 (cls: P_Rift_IdleFog>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_BP_DeimosRift (0-0-0-0): size 2173 (cls: ExecuteUbergraph_BP_DeimosRift>Function>/Script/CoreUObject)
+	ExecuteUbergraph_BP_DeimosRift (0-0-0-0): size 2890 (cls: ExecuteUbergraph_BP_DeimosRift>Function>/Script/CoreUObject)
 	CallFunc_HasAuthority_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasAuthority_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_LessEqual_FloatFloat_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_LessEqual_FloatFloat_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_LessEqual_FloatFloat_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_LessEqual_FloatFloat_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_LessEqual_FloatFloat_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_LessEqual_FloatFloat_ReturnValue2>BoolProperty>/Script/CoreUObject)
+	SpawnEffects (0-0-0-0): size 56 (cls: SpawnEffects>Function>/Script/CoreUObject)
+	TestDynamicRiftSpawn (0-0-0-0): size 54 (cls: TestDynamicRiftSpawn>Function>/Script/CoreUObject)
 	OnBuildingRiftSpawnedAI_Bind (0-0-0-0): size 54 (cls: OnBuildingRiftSpawnedAI_Bind>Function>/Script/CoreUObject)
 	BP_Cosmetic_ShouldDie (0-0-0-0): size 54 (cls: BP_Cosmetic_ShouldDie>Function>/Script/CoreUObject)
 	DamagedActor (0-0-0-0): size 36 (cls: DamagedActor>ObjectProperty>/Script/CoreUObject)
@@ -585,11 +603,11 @@ Serialized exports:
 	OnStartedEncounterSpawn (0-0-0-0): size 68 (cls: OnStartedEncounterSpawn>Function>/Script/CoreUObject)
 	BP_Cosmetic_Idle (0-0-0-0): size 54 (cls: BP_Cosmetic_Idle>Function>/Script/CoreUObject)
 	BP_Cosmetic_Intro (0-0-0-0): size 54 (cls: BP_Cosmetic_Intro>Function>/Script/CoreUObject)
+	BP_Cosmetic_RampUp (0-0-0-0): size 54 (cls: BP_Cosmetic_RampUp>Function>/Script/CoreUObject)
 	Damage (0-0-0-0): size 32 (cls: Damage>FloatProperty>/Script/CoreUObject)
 	OnDeathServer (0-0-0-0): size 152 (cls: OnDeathServer>Function>/Script/CoreUObject)
 	Damage (0-0-0-0): size 32 (cls: Damage>FloatProperty>/Script/CoreUObject)
 	OnDeathPlayEffects (0-0-0-0): size 152 (cls: OnDeathPlayEffects>Function>/Script/CoreUObject)
-	BP_Cosmetic_RampUp (0-0-0-0): size 54 (cls: BP_Cosmetic_RampUp>Function>/Script/CoreUObject)
 	CallFunc_GetMaterial_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetMaterial_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	UserConstructionScript (0-0-0-0): size 352 (cls: UserConstructionScript>Function>/Script/CoreUObject)
 	OnRep_DamageState (0-0-0-0): size 1089 (cls: OnRep_DamageState>Function>/Script/CoreUObject)
@@ -614,6 +632,7 @@ Serialized exports:
 	CallFunc_BreakVector_Y (0-0-0-0): size 32 (cls: CallFunc_BreakVector_Y>FloatProperty>/Script/CoreUObject)
 	CallFunc_BreakVector_Z (0-0-0-0): size 32 (cls: CallFunc_BreakVector_Z>FloatProperty>/Script/CoreUObject)
 	CallFunc_GetGameTimeInSeconds_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetGameTimeInSeconds_ReturnValue>FloatProperty>/Script/CoreUObject)
+	CallFunc_GetGameTimeInSeconds_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_GetGameTimeInSeconds_ReturnValue1>FloatProperty>/Script/CoreUObject)
 	CallFunc_GetHealthPercent_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetHealthPercent_ReturnValue>FloatProperty>/Script/CoreUObject)
 	K2Node_CustomEvent_Damage (0-0-0-0): size 32 (cls: K2Node_CustomEvent_Damage>FloatProperty>/Script/CoreUObject)
 	K2Node_Event_Damage (0-0-0-0): size 32 (cls: K2Node_Event_Damage>FloatProperty>/Script/CoreUObject)
@@ -623,6 +642,7 @@ Serialized exports:
 	Damage (0-0-0-0): size 32 (cls: Damage>FloatProperty>/Script/CoreUObject)
 	CallFunc_Conv_BoolToFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Conv_BoolToFloat_ReturnValue>FloatProperty>/Script/CoreUObject)
 	CallFunc_Conv_BoolToFloat_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Conv_BoolToFloat_ReturnValue1>FloatProperty>/Script/CoreUObject)
+	SpawnAnimDuration (0-0-0-0): size 32 (cls: SpawnAnimDuration>FloatProperty>/Script/CoreUObject)
 	FortSpectateClickableMapIcon (0-0-0-0): size 155 (cls: FortSpectateClickableMapIcon>FortSpectateClickableMapIcon>/Script/FortniteGame):
 		Tag array:
 			SpectatorMapIndicatorBrush(StructProperty)=System.Byte[] 
@@ -666,15 +686,15 @@ Serialized exports:
 	P_Deimos_RiftSpawn_DamageState (0-0-0-0): size 36 (cls: P_Deimos_RiftSpawn_DamageState>ObjectProperty>/Script/CoreUObject)
 	PointLight (0-0-0-0): size 36 (cls: PointLight>ObjectProperty>/Script/CoreUObject)
 	SM_CubeRunes (0-0-0-0): size 36 (cls: SM_CubeRunes>ObjectProperty>/Script/CoreUObject)
+	Sound_DeimosSpawnerLoop (0-0-0-0): size 36 (cls: Sound_DeimosSpawnerLoop>ObjectProperty>/Script/CoreUObject)
 	Sound_StageOneExplode (0-0-0-0): size 36 (cls: Sound_StageOneExplode>ObjectProperty>/Script/CoreUObject)
 	Sound_StageThreeBuildup (0-0-0-0): size 36 (cls: Sound_StageThreeBuildup>ObjectProperty>/Script/CoreUObject)
 	Sound_StageTwoExplode (0-0-0-0): size 36 (cls: Sound_StageTwoExplode>ObjectProperty>/Script/CoreUObject)
 	CallFunc_CreateDynamicMaterialInstance_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_CreateDynamicMaterialInstance_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_CreateDynamicMaterialInstance_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_CreateDynamicMaterialInstance_ReturnValue1>ObjectProperty>/Script/CoreUObject)
 	CallFunc_CreateDynamicMaterialInstance_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_CreateDynamicMaterialInstance_ReturnValue2>ObjectProperty>/Script/CoreUObject)
-	P_Deimos_Rift_Dying_GEN_VARIABLE (0-0-0-0): size 358 (cls: P_Deimos_Rift_Dying_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine):
+	P_Deimos_Rift_Dying_GEN_VARIABLE (0-0-0-0): size 329 (cls: P_Deimos_Rift_Dying_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine):
 		Tag array:
-			Template(ObjectProperty)=P_Deimos_Rift_Dying=/Game/Athena/Deimos/Spawners/RiftSpawners/Assets/FX/P_Deimos_Rift_Dying 
 			bAutoManageAttachment(BoolProperty)=True 
 			AutoAttachSocketName(NameProperty)=FX_Center 
 			AutoAttachLocationRule(EnumProperty)=EAttachmentRule::SnapToTarget 
@@ -683,9 +703,8 @@ Serialized exports:
 			bAbsoluteScale(BoolProperty)=True 
 			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
-	P_Deimos_RiftSpawn_DamageState_GEN_VARIABLE (0-0-0-0): size 358 (cls: P_Deimos_RiftSpawn_DamageState_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine):
+	P_Deimos_RiftSpawn_DamageState_GEN_VARIABLE (0-0-0-0): size 329 (cls: P_Deimos_RiftSpawn_DamageState_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine):
 		Tag array:
-			Template(ObjectProperty)=P_Deimos_RiftSpawn_Dmg_02=/Game/Athena/Deimos/Spawners/RiftSpawners/Assets/FX/P_Deimos_RiftSpawn_Dmg_02 
 			bAutoManageAttachment(BoolProperty)=True 
 			AutoAttachSocketName(NameProperty)=FX_Center 
 			AutoAttachLocationRule(EnumProperty)=EAttachmentRule::SnapToTarget 
@@ -720,7 +739,7 @@ Serialized exports:
 			ComponentTemplate(ObjectProperty)=DefaultSceneRoot_GEN_VARIABLE=BP_DeimosRift_C 
 			VariableGuid(StructProperty)=Guid: 3316445101-1241643621-1083178160-3409378475 
 			InternalVariableName(NameProperty)=DefaultSceneRoot 
-	SCS_Node_1 (0-0-0-0): size 1934 (cls: SCS_Node_1>SCS_Node>/Script/Engine):
+	SCS_Node_1 (0-0-0-0): size 1637 (cls: SCS_Node_1>SCS_Node>/Script/Engine):
 		Tag array:
 			ComponentClass(ObjectProperty)=StaticMeshComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=CubeMesh_GEN_VARIABLE=BP_DeimosRift_C 
@@ -739,7 +758,7 @@ Serialized exports:
 			bIsParentComponentNative(BoolProperty)=True 
 			VariableGuid(StructProperty)=Guid: 2757758436-1230109117-449892003-2172448332 
 			InternalVariableName(NameProperty)=PointLight 
-	SCS_Node_2 (0-0-0-0): size 1360 (cls: SCS_Node_2>SCS_Node>/Script/Engine):
+	SCS_Node_2 (0-0-0-0): size 1261 (cls: SCS_Node_2>SCS_Node>/Script/Engine):
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=P_Deimos_RiftSpawn_DamageState_GEN_VARIABLE=BP_DeimosRift_C 
@@ -747,14 +766,14 @@ Serialized exports:
 			AttachToName(NameProperty)=FX_Center 
 			VariableGuid(StructProperty)=Guid: 4189958289-1287144765-600228262-1138945151 
 			InternalVariableName(NameProperty)=P_Deimos_RiftSpawn_DamageState 
-	SCS_Node_3 (0-0-0-0): size 832 (cls: SCS_Node_3>SCS_Node>/Script/Engine):
+	SCS_Node_3 (0-0-0-0): size 733 (cls: SCS_Node_3>SCS_Node>/Script/Engine):
 		Tag array:
 			ComponentClass(ObjectProperty)=StaticMeshComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=CosmeticBaseMesh_GEN_VARIABLE=BP_DeimosRift_C 
 			CookedComponentInstancingData(StructProperty)=System.Byte[] 
 			VariableGuid(StructProperty)=Guid: 3783619774-1115757683-2264744070-2938526445 
 			InternalVariableName(NameProperty)=CosmeticBaseMesh 
-	SCS_Node_4 (0-0-0-0): size 1360 (cls: SCS_Node_4>SCS_Node>/Script/Engine):
+	SCS_Node_4 (0-0-0-0): size 1261 (cls: SCS_Node_4>SCS_Node>/Script/Engine):
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=P_Deimos_Rift_Dying_GEN_VARIABLE=BP_DeimosRift_C 
@@ -789,7 +808,7 @@ Serialized exports:
 			bIsParentComponentNative(BoolProperty)=True 
 			VariableGuid(StructProperty)=Guid: 3490884122-1082953822-529360822-3625777331 
 			InternalVariableName(NameProperty)=Deimos_Spawner_Loop_Sound 
-	SCS_Node_8 (0-0-0-0): size 2614 (cls: SCS_Node_8>SCS_Node>/Script/Engine):
+	SCS_Node_8 (0-0-0-0): size 2515 (cls: SCS_Node_8>SCS_Node>/Script/Engine):
 		Tag array:
 			ComponentClass(ObjectProperty)=StaticMeshComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=SM_CubeRunes_GEN_VARIABLE=BP_DeimosRift_C 
@@ -811,15 +830,12 @@ Serialized exports:
 			AllNodes(ArrayProperty)=[object] (inner: ObjectProperty)
 			DefaultSceneRootNode(ObjectProperty)=SCS_Node_0=BP_DeimosRift_C 
 	CollisionSphere (0-0-0-0): size 12 (cls: CollisionSphere>SphereComponent>/Script/Engine)
-	CosmeticBaseMesh_GEN_VARIABLE (0-0-0-0): size 202 (cls: CosmeticBaseMesh_GEN_VARIABLE>StaticMeshComponent>/Script/Engine):
+	CosmeticBaseMesh_GEN_VARIABLE (0-0-0-0): size 173 (cls: CosmeticBaseMesh_GEN_VARIABLE>StaticMeshComponent>/Script/Engine):
 		Tag array:
-			StaticMesh(ObjectProperty)=SM_CubeGrowth_Spawner02_Base=/Game/Athena/Deimos/Spawners/RiftSpawners/Assets/CubeGrowth/SM_CubeGrowth_Spawner02_Base 
 			bGenerateOverlapEvents(BoolProperty)=False 
 			BodyInstance(StructProperty)=System.Byte[] 
-	CubeMesh_GEN_VARIABLE (0-0-0-0): size 417 (cls: CubeMesh_GEN_VARIABLE>StaticMeshComponent>/Script/Engine):
+	CubeMesh_GEN_VARIABLE (0-0-0-0): size 347 (cls: CubeMesh_GEN_VARIABLE>StaticMeshComponent>/Script/Engine):
 		Tag array:
-			StaticMesh(ObjectProperty)=SM_CubeGrowth_Spawner02=/Game/Athena/Deimos/Spawners/RiftSpawners/Assets/CubeGrowth/SM_CubeGrowth_Spawner02 
-			OverrideMaterials(ArrayProperty)=[object] (inner: ObjectProperty)
 			bGenerateOverlapEvents(BoolProperty)=False 
 			bReceivesDecals(BoolProperty)=False 
 			BodyInstance(StructProperty)=System.Byte[] 
@@ -840,9 +856,8 @@ Serialized exports:
 			RelativeLocation(StructProperty)=Vector(0,0,70) 
 			RelativeScale3D(StructProperty)=Vector(35,35,10) 
 			DetailMode(ByteProperty)=DM_High 
-	SM_CubeRunes_GEN_VARIABLE (0-0-0-0): size 756 (cls: SM_CubeRunes_GEN_VARIABLE>StaticMeshComponent>/Script/Engine):
+	SM_CubeRunes_GEN_VARIABLE (0-0-0-0): size 727 (cls: SM_CubeRunes_GEN_VARIABLE>StaticMeshComponent>/Script/Engine):
 		Tag array:
-			StaticMesh(ObjectProperty)=SM_CubeRunes=/Game/Athena/Deimos/Spawners/RiftSpawners/Assets/CubeGrowth/FloatingRunes/SM_CubeRunes 
 			bGenerateOverlapEvents(BoolProperty)=False 
 			bAffectDistanceFieldLighting(BoolProperty)=False 
 			bCastDynamicShadow(BoolProperty)=False 
@@ -851,6 +866,7 @@ Serialized exports:
 			BodyInstance(StructProperty)=System.Byte[] 
 			RelativeLocation(StructProperty)=Vector(-57.95242,-9.86699,381.0749) 
 			bUseAttachParentBound(BoolProperty)=True 
+	ChargeUpFXGC (0-0-0-0): size 36 (cls: ChargeUpFXGC>StructProperty>/Script/CoreUObject)
 	CueParamsChargeUp (0-0-0-0): size 36 (cls: CueParamsChargeUp>StructProperty>/Script/CoreUObject)
 	CueParamsCreate (0-0-0-0): size 36 (cls: CueParamsCreate>StructProperty>/Script/CoreUObject)
 	CueParamsRiftSpawn (0-0-0-0): size 36 (cls: CueParamsRiftSpawn>StructProperty>/Script/CoreUObject)
@@ -871,7 +887,9 @@ Serialized exports:
 	K2Node_Event_Momentum (0-0-0-0): size 36 (cls: K2Node_Event_Momentum>StructProperty>/Script/CoreUObject)
 	K2Node_Event_Momentum1 (0-0-0-0): size 36 (cls: K2Node_Event_Momentum1>StructProperty>/Script/CoreUObject)
 	K2Node_MakeStruct_GameplayCueParameters (0-0-0-0): size 36 (cls: K2Node_MakeStruct_GameplayCueParameters>StructProperty>/Script/CoreUObject)
+	K2Node_MakeStruct_GameplayCueParameters1 (0-0-0-0): size 36 (cls: K2Node_MakeStruct_GameplayCueParameters1>StructProperty>/Script/CoreUObject)
 	K2Node_MakeStruct_Vector_NetQuantize10 (0-0-0-0): size 36 (cls: K2Node_MakeStruct_Vector_NetQuantize10>StructProperty>/Script/CoreUObject)
+	FiendSpawnFXGC (0-0-0-0): size 36 (cls: FiendSpawnFXGC>StructProperty>/Script/CoreUObject)
 	HitLocation (0-0-0-0): size 36 (cls: HitLocation>StructProperty>/Script/CoreUObject)
 	Momentum (0-0-0-0): size 36 (cls: Momentum>StructProperty>/Script/CoreUObject)
 	DamageTags (0-0-0-0): size 36 (cls: DamageTags>StructProperty>/Script/CoreUObject)
@@ -883,3 +901,4 @@ Serialized exports:
 	HitInfo (0-0-0-0): size 36 (cls: HitInfo>StructProperty>/Script/CoreUObject)
 	Momentum (0-0-0-0): size 36 (cls: Momentum>StructProperty>/Script/CoreUObject)
 	CallFunc_K2_GetComponentLocation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_GetComponentLocation_ReturnValue>StructProperty>/Script/CoreUObject)
+	SpawnFXGC (0-0-0-0): size 36 (cls: SpawnFXGC>StructProperty>/Script/CoreUObject)

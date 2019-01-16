@@ -63,6 +63,7 @@ Name table:
 	bBankDefined
 	bCanEverAffectNavigation
 	bCanExportNavigationCollisions
+	bHideOnDeath
 	bInitialVelocityInLocalSpace
 	bIsDynamic
 	bIsExternalCurve
@@ -155,13 +156,14 @@ Name table:
 	CallFunc_GreaterEqual_IntInt_ReturnValue1
 	CallFunc_HasAuthority_ReturnValue
 	CallFunc_HasAuthority_ReturnValue1
+	CallFunc_HasAuthority_ReturnValue2
 	CallFunc_IsDedicatedServer_ReturnValue
 	CallFunc_IsDedicatedServer_ReturnValue1
-	CallFunc_IsDedicatedServer_ReturnValue2
 	CallFunc_K2_AttachTo_ReturnValue
 	CallFunc_K2_AttachTo_ReturnValue1
 	CallFunc_K2_GetActorLocation_ReturnValue
 	CallFunc_K2_GetActorLocation_ReturnValue1
+	CallFunc_K2_SetTimerDelegate_ReturnValue
 	CallFunc_K2_SpawnPickupInWorld_ReturnValue
 	CallFunc_Less_IntInt_ReturnValue
 	CallFunc_LessEqual_IntInt_ReturnValue
@@ -189,7 +191,6 @@ Name table:
 	CallFunc_SpawnProjectile_ReturnValue
 	CallFunc_SpawnSoundAttached_ReturnValue
 	CallFunc_SpawnSoundAttached_ReturnValue1
-	CallFunc_SpawnSoundAttached_ReturnValue2
 	CallFunc_SplitCraftingDrops_NumberToDrop
 	CallFunc_SplitCraftingDrops_NumberToDrop1
 	CallFunc_SplitCraftingDrops_NumberToDrop2
@@ -247,6 +248,7 @@ Name table:
 	Default__ByteProperty
 	Default__ClassProperty
 	Default__CurveFloat
+	Default__DelegateProperty
 	Default__FloatProperty
 	Default__FortKismetLibrary
 	Default__Function
@@ -272,6 +274,8 @@ Name table:
 	DeformationCenter
 	DeformationVector
 	Delay
+	DelegateFunction
+	DelegateProperty
 	Deploy Finished
 	Destruction_LootLlama_Crystal
 	Destruction_LootLlama_Ore
@@ -365,7 +369,9 @@ Name table:
 	ItemToSpawn
 	K2_AttachTo
 	K2_GetActorLocation
+	K2_SetTimerDelegate
 	K2_SpawnPickupInWorld
+	K2Node_CreateDelegate_OutputDelegate
 	K2Node_DynamicCast_AsFort_Player_Controller
 	K2Node_DynamicCast_AsFort_Player_Controller1
 	K2Node_DynamicCast_AsFort_World_Item_Definition
@@ -376,32 +382,25 @@ Name table:
 	K2Node_Event_Damage
 	K2Node_Event_Damage1
 	K2Node_Event_Damage2
-	K2Node_Event_Damage3
 	K2Node_Event_DamageCauser
 	K2Node_Event_DamageCauser1
 	K2Node_Event_DamageCauser2
-	K2Node_Event_DamageCauser3
 	K2Node_Event_DamageTags
 	K2Node_Event_DamageTags1
 	K2Node_Event_DamageTags2
-	K2Node_Event_DamageTags3
 	K2Node_Event_Data
 	K2Node_Event_EffectContext
 	K2Node_Event_EffectContext1
 	K2Node_Event_EffectContext2
-	K2Node_Event_EffectContext3
 	K2Node_Event_HitInfo
 	K2Node_Event_HitInfo1
 	K2Node_Event_HitInfo2
-	K2Node_Event_HitInfo3
 	K2Node_Event_InstigatedBy
 	K2Node_Event_InstigatedBy1
 	K2Node_Event_InstigatedBy2
-	K2Node_Event_InstigatedBy3
 	K2Node_Event_Momentum
 	K2Node_Event_Momentum1
 	K2Node_Event_Momentum2
-	K2Node_Event_Momentum3
 	Keys
 	KismetArrayLibrary
 	KismetMathLibrary
@@ -467,9 +466,11 @@ Name table:
 	MinRandomVector
 	Momentum
 	MovementComponent
+	MultiFirstExposion
 	Multiply_FloatFloat
 	Multiply_IntFloat
 	Multiply_IntInt
+	MultiSecondDamagePhase
 	NameProperty
 	NavigationObstacleOverride
 	NODE_AddStaticMeshComponent-0
@@ -489,8 +490,8 @@ Name table:
 	OnBounceAnimationUpdate
 	OnDamagePlayEffects
 	OnDamageServer
-	OnDeathPlayEffects
 	OnDeathServer
+	OnRep_IsDying
 	OreDrops
 	OreDropsUpgrade
 	OverrideMaterials
@@ -552,7 +553,6 @@ Name table:
 	SetWorldScale3D
 	Show SkeletalMesh
 	ShowHideModels
-	SilentDie
 	SimpleConstructionScript
 	SingleAnimationPlayData
 	SK_Llama2
@@ -595,10 +595,16 @@ Name table:
 	Temp_bool_Has_Been_Initd_Variable1
 	Temp_bool_Has_Been_Initd_Variable2
 	Temp_bool_Has_Been_Initd_Variable3
+	Temp_bool_Has_Been_Initd_Variable4
+	Temp_bool_Has_Been_Initd_Variable5
+	Temp_bool_Has_Been_Initd_Variable6
 	Temp_bool_IsClosed_Variable
 	Temp_bool_IsClosed_Variable1
 	Temp_bool_IsClosed_Variable2
 	Temp_bool_IsClosed_Variable3
+	Temp_bool_IsClosed_Variable4
+	Temp_bool_IsClosed_Variable5
+	Temp_bool_IsClosed_Variable6
 	Temp_int_Array_Index_Variable
 	Temp_int_Loop_Counter_Variable
 	Temp_int_Variable
@@ -606,7 +612,6 @@ Name table:
 	TextProperty
 	The First Llama Death Animation is Finished
 	TheHeadProjectileHasSpawned
-	TheHeadWasSpawnedOnTheServerCallback
 	ThresholdMax_Pct
 	ThresholdMin_Pct
 	TierGroupName
@@ -622,6 +627,8 @@ Name table:
 	Timelines
 	TimelineTemplate
 	TimeoutSetsIsDying
+	TimerDynamicDelegate__DelegateSignature
+	TimerHandle
 	TookDamage
 	tooltip
 	TotalDamage
@@ -643,14 +650,14 @@ Name table:
 	WSDeformationCenter
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	Prop_Outlander_Fragment_Llama_C (0-0-0-0): size 1045 (cls: Prop_Outlander_Fragment_Llama_C>BlueprintGeneratedClass>/Script/Engine):
+	Prop_Outlander_Fragment_Llama_C (0-0-0-0): size 1061 (cls: Prop_Outlander_Fragment_Llama_C>BlueprintGeneratedClass>/Script/Engine):
 		Tag array:
 			NumReplicatedProperties(IntProperty)=3 
 			ComponentTemplates(ArrayProperty)=[object] (inner: ObjectProperty)
 			Timelines(ArrayProperty)=[object] (inner: ObjectProperty)
 			SimpleConstructionScript(ObjectProperty)=SimpleConstructionScript_355=Prop_Outlander_Fragment_Llama_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_Prop_Outlander_Fragment_Llama=Prop_Outlander_Fragment_Llama_C 
-	Default__Prop_Outlander_Fragment_Llama_C (0-0-0-0): size 2318 (cls: Default__Prop_Outlander_Fragment_Llama_C>Prop_Outlander_Fragment_Llama_C):
+	Default__Prop_Outlander_Fragment_Llama_C (0-0-0-0): size 2344 (cls: Default__Prop_Outlander_Fragment_Llama_C>Prop_Outlander_Fragment_Llama_C):
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			Wood(ObjectProperty)=WoodItemData=/Game/Items/ResourcePickups/WoodItemData 
@@ -702,12 +709,13 @@ Serialized exports:
 			AmmoMinimumThreshold(FloatProperty)=0.66 
 			AmmoMaxThreshold(FloatProperty)=1 
 			StaticMesh(ObjectProperty)=Llama=/Game/Gadgets/Assets/Llama/Mesh/Llama 
+			bHideOnDeath(BoolProperty)=False 
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Default__Prop_Outlander_Fragment_Llama_C 
 			DisplayName(TextProperty)=Loot Pinata!!! (CF472ABC477E0D027BEF6C97C14388C0) 
 			AttributeInitKeys(StructProperty)=System.Byte[] 
 			AttributeInitKeys(StructProperty)=System.Byte[] 
 			PrimarySurfaceType(ByteProperty)=SurfaceType3 
-			LifespanAfterDeath(FloatProperty)=9 
+			LifespanAfterDeath(FloatProperty)=4 
 			NavigationObstacleOverride(EnumProperty)=ENavigationObstacleOverride::ForceEnabled 
 			bIsNavigationModifier(BoolProperty)=True 
 			bCanExportNavigationCollisions(BoolProperty)=True 
@@ -719,17 +727,16 @@ Serialized exports:
 	MIDs (0-0-0-0): size 36 (cls: MIDs>ArrayProperty>/Script/CoreUObject)
 	LLama_SkeletalMesh (0-0-0-0): size 36 (cls: LLama_SkeletalMesh>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_Prop_Outlander_Fragment_Llama (0-0-0-0): size 3688 (cls: ExecuteUbergraph_Prop_Outlander_Fragment_Llama>Function>/Script/CoreUObject)
+	ExecuteUbergraph_Prop_Outlander_Fragment_Llama (0-0-0-0): size 3644 (cls: ExecuteUbergraph_Prop_Outlander_Fragment_Llama>Function>/Script/CoreUObject)
+	MultiFirstExposion (0-0-0-0): size 56 (cls: MultiFirstExposion>Function>/Script/CoreUObject)
 	SpawnAmmo (0-0-0-0): size 54 (cls: SpawnAmmo>Function>/Script/CoreUObject)
 	TimeoutSetsIsDying (0-0-0-0): size 54 (cls: TimeoutSetsIsDying>Function>/Script/CoreUObject)
 	Deploy Finished (0-0-0-0): size 54 (cls: Deploy Finished>Function>/Script/CoreUObject)
 	The First Llama Death Animation is Finished (0-0-0-0): size 54 (cls: The First Llama Death Animation is Finished>Function>/Script/CoreUObject)
 	LlamaDeathMontageIsComplete (0-0-0-0): size 54 (cls: LlamaDeathMontageIsComplete>Function>/Script/CoreUObject)
-	TheHeadWasSpawnedOnTheServerCallback (0-0-0-0): size 54 (cls: TheHeadWasSpawnedOnTheServerCallback>Function>/Script/CoreUObject)
+	MultiSecondDamagePhase (0-0-0-0): size 56 (cls: MultiSecondDamagePhase>Function>/Script/CoreUObject)
 	Data (0-0-0-0): size 36 (cls: Data>StructProperty>/Script/CoreUObject)
 	OnBounceAnimationUpdate (0-0-0-0): size 68 (cls: OnBounceAnimationUpdate>Function>/Script/CoreUObject)
-	Damage (0-0-0-0): size 32 (cls: Damage>FloatProperty>/Script/CoreUObject)
-	OnDeathPlayEffects (0-0-0-0): size 152 (cls: OnDeathPlayEffects>Function>/Script/CoreUObject)
 	Damage (0-0-0-0): size 32 (cls: Damage>FloatProperty>/Script/CoreUObject)
 	OnDamagePlayEffects (0-0-0-0): size 152 (cls: OnDamagePlayEffects>Function>/Script/CoreUObject)
 	DiamondLlama (0-0-0-0): size 54 (cls: DiamondLlama>Function>/Script/CoreUObject)
@@ -750,7 +757,7 @@ Serialized exports:
 	SpawnHeadProjectile (0-0-0-0): size 543 (cls: SpawnHeadProjectile>Function>/Script/CoreUObject)
 	Skeletal Mesh (0-0-0-0): size 36 (cls: Skeletal Mesh>ObjectProperty>/Script/CoreUObject)
 	CreateAndAttachEyes (0-0-0-0): size 629 (cls: CreateAndAttachEyes>Function>/Script/CoreUObject)
-	LlamaLifespanExpired (0-0-0-0): size 53 (cls: LlamaLifespanExpired>Function>/Script/CoreUObject)
+	LlamaLifespanExpired (0-0-0-0): size 43 (cls: LlamaLifespanExpired>Function>/Script/CoreUObject)
 	Show SkeletalMesh (0-0-0-0): size 34 (cls: Show SkeletalMesh>BoolProperty>/Script/CoreUObject)
 	ShowHideModels (0-0-0-0): size 125 (cls: ShowHideModels>Function>/Script/CoreUObject)
 	ThresholdMin_Pct (0-0-0-0): size 32 (cls: ThresholdMin_Pct>FloatProperty>/Script/CoreUObject)
@@ -792,9 +799,9 @@ Serialized exports:
 	CallFunc_EqualEqual_FloatFloat_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_FloatFloat_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_HasAuthority_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasAuthority_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_HasAuthority_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_HasAuthority_ReturnValue1>BoolProperty>/Script/CoreUObject)
+	CallFunc_HasAuthority_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_HasAuthority_ReturnValue2>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsDedicatedServer_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsDedicatedServer_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsDedicatedServer_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_IsDedicatedServer_ReturnValue1>BoolProperty>/Script/CoreUObject)
-	CallFunc_IsDedicatedServer_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_IsDedicatedServer_ReturnValue2>BoolProperty>/Script/CoreUObject)
 	CallFunc_Less_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Not_PreBool_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
@@ -804,16 +811,24 @@ Serialized exports:
 	Temp_bool_Has_Been_Initd_Variable1 (0-0-0-0): size 34 (cls: Temp_bool_Has_Been_Initd_Variable1>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Has_Been_Initd_Variable2 (0-0-0-0): size 34 (cls: Temp_bool_Has_Been_Initd_Variable2>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Has_Been_Initd_Variable3 (0-0-0-0): size 34 (cls: Temp_bool_Has_Been_Initd_Variable3>BoolProperty>/Script/CoreUObject)
+	Temp_bool_Has_Been_Initd_Variable4 (0-0-0-0): size 34 (cls: Temp_bool_Has_Been_Initd_Variable4>BoolProperty>/Script/CoreUObject)
+	Temp_bool_Has_Been_Initd_Variable5 (0-0-0-0): size 34 (cls: Temp_bool_Has_Been_Initd_Variable5>BoolProperty>/Script/CoreUObject)
+	Temp_bool_Has_Been_Initd_Variable6 (0-0-0-0): size 34 (cls: Temp_bool_Has_Been_Initd_Variable6>BoolProperty>/Script/CoreUObject)
 	Temp_bool_IsClosed_Variable (0-0-0-0): size 34 (cls: Temp_bool_IsClosed_Variable>BoolProperty>/Script/CoreUObject)
 	Temp_bool_IsClosed_Variable1 (0-0-0-0): size 34 (cls: Temp_bool_IsClosed_Variable1>BoolProperty>/Script/CoreUObject)
 	Temp_bool_IsClosed_Variable2 (0-0-0-0): size 34 (cls: Temp_bool_IsClosed_Variable2>BoolProperty>/Script/CoreUObject)
 	Temp_bool_IsClosed_Variable3 (0-0-0-0): size 34 (cls: Temp_bool_IsClosed_Variable3>BoolProperty>/Script/CoreUObject)
+	Temp_bool_IsClosed_Variable4 (0-0-0-0): size 34 (cls: Temp_bool_IsClosed_Variable4>BoolProperty>/Script/CoreUObject)
+	Temp_bool_IsClosed_Variable5 (0-0-0-0): size 34 (cls: Temp_bool_IsClosed_Variable5>BoolProperty>/Script/CoreUObject)
+	Temp_bool_IsClosed_Variable6 (0-0-0-0): size 34 (cls: Temp_bool_IsClosed_Variable6>BoolProperty>/Script/CoreUObject)
 	Headspawned (0-0-0-0): size 34 (cls: Headspawned>BoolProperty>/Script/CoreUObject)
 	IsDiamondLlama (0-0-0-0): size 34 (cls: IsDiamondLlama>BoolProperty>/Script/CoreUObject)
 	IsDying (0-0-0-0): size 34 (cls: IsDying>BoolProperty>/Script/CoreUObject)
 	LlamaDropsAmmo (0-0-0-0): size 34 (cls: LlamaDropsAmmo>BoolProperty>/Script/CoreUObject)
 	LlamaDropsAmmoTactical (0-0-0-0): size 34 (cls: LlamaDropsAmmoTactical>BoolProperty>/Script/CoreUObject)
 	LlamaSkelMeshVisibility (0-0-0-0): size 34 (cls: LlamaSkelMeshVisibility>BoolProperty>/Script/CoreUObject)
+	OnRep_IsDying (0-0-0-0): size 295 (cls: OnRep_IsDying>Function>/Script/CoreUObject)
+	CallFunc_IsDedicatedServer_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsDedicatedServer_ReturnValue>BoolProperty>/Script/CoreUObject)
 	PinataExpired (0-0-0-0): size 34 (cls: PinataExpired>BoolProperty>/Script/CoreUObject)
 	PlayDeathSound (0-0-0-0): size 34 (cls: PlayDeathSound>BoolProperty>/Script/CoreUObject)
 	CallFunc_Less_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
@@ -827,6 +842,7 @@ Serialized exports:
 	CurveFloat_0 (0-0-0-0): size 209 (cls: CurveFloat_0>CurveFloat>/Script/Engine):
 		Tag array:
 			FloatCurve(StructProperty)=System.Byte[] 
+	K2Node_CreateDelegate_OutputDelegate (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate>DelegateProperty>/Script/CoreUObject)
 	AmmoMaxThreshold (0-0-0-0): size 32 (cls: AmmoMaxThreshold>FloatProperty>/Script/CoreUObject)
 	AmmoMinimumThreshold (0-0-0-0): size 32 (cls: AmmoMinimumThreshold>FloatProperty>/Script/CoreUObject)
 	CallFunc_Divide_FloatFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Divide_FloatFloat_ReturnValue>FloatProperty>/Script/CoreUObject)
@@ -859,7 +875,6 @@ Serialized exports:
 	ThresholdMax_Pct (0-0-0-0): size 32 (cls: ThresholdMax_Pct>FloatProperty>/Script/CoreUObject)
 	DealtDamage (0-0-0-0): size 32 (cls: DealtDamage>FloatProperty>/Script/CoreUObject)
 	DeathDelay (0-0-0-0): size 32 (cls: DeathDelay>FloatProperty>/Script/CoreUObject)
-	CallFunc_Add_FloatFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Add_FloatFloat_ReturnValue>FloatProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_Distance (0-0-0-0): size 32 (cls: CallFunc_BreakHitResult_Distance>FloatProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_Time (0-0-0-0): size 32 (cls: CallFunc_BreakHitResult_Time>FloatProperty>/Script/CoreUObject)
 	CallFunc_Divide_FloatFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Divide_FloatFloat_ReturnValue>FloatProperty>/Script/CoreUObject)
@@ -867,7 +882,6 @@ Serialized exports:
 	K2Node_Event_Damage (0-0-0-0): size 32 (cls: K2Node_Event_Damage>FloatProperty>/Script/CoreUObject)
 	K2Node_Event_Damage1 (0-0-0-0): size 32 (cls: K2Node_Event_Damage1>FloatProperty>/Script/CoreUObject)
 	K2Node_Event_Damage2 (0-0-0-0): size 32 (cls: K2Node_Event_Damage2>FloatProperty>/Script/CoreUObject)
-	K2Node_Event_Damage3 (0-0-0-0): size 32 (cls: K2Node_Event_Damage3>FloatProperty>/Script/CoreUObject)
 	Llama_BodyOpacityMask (0-0-0-0): size 32 (cls: Llama_BodyOpacityMask>FloatProperty>/Script/CoreUObject)
 	LlamaLifespan (0-0-0-0): size 32 (cls: LlamaLifespan>FloatProperty>/Script/CoreUObject)
 	MaxRandomVector (0-0-0-0): size 32 (cls: MaxRandomVector>FloatProperty>/Script/CoreUObject)
@@ -1000,21 +1014,17 @@ Serialized exports:
 	CallFunc_GetAnimInstance_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetAnimInstance_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_SpawnEmitterAtLocation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_SpawnEmitterAtLocation_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_SpawnEmitterAtLocation_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_SpawnEmitterAtLocation_ReturnValue1>ObjectProperty>/Script/CoreUObject)
-	CallFunc_SpawnEmitterAttached_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_SpawnEmitterAttached_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_SpawnSoundAttached_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_SpawnSoundAttached_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_SpawnSoundAttached_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_SpawnSoundAttached_ReturnValue1>ObjectProperty>/Script/CoreUObject)
-	CallFunc_SpawnSoundAttached_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_SpawnSoundAttached_ReturnValue2>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Player_Controller (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Player_Controller>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Player_Controller1 (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Player_Controller1>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsLlama_Anim_BP (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsLlama_Anim_BP>ObjectProperty>/Script/CoreUObject)
 	K2Node_Event_DamageCauser (0-0-0-0): size 36 (cls: K2Node_Event_DamageCauser>ObjectProperty>/Script/CoreUObject)
 	K2Node_Event_DamageCauser1 (0-0-0-0): size 36 (cls: K2Node_Event_DamageCauser1>ObjectProperty>/Script/CoreUObject)
 	K2Node_Event_DamageCauser2 (0-0-0-0): size 36 (cls: K2Node_Event_DamageCauser2>ObjectProperty>/Script/CoreUObject)
-	K2Node_Event_DamageCauser3 (0-0-0-0): size 36 (cls: K2Node_Event_DamageCauser3>ObjectProperty>/Script/CoreUObject)
 	K2Node_Event_InstigatedBy (0-0-0-0): size 36 (cls: K2Node_Event_InstigatedBy>ObjectProperty>/Script/CoreUObject)
 	K2Node_Event_InstigatedBy1 (0-0-0-0): size 36 (cls: K2Node_Event_InstigatedBy1>ObjectProperty>/Script/CoreUObject)
 	K2Node_Event_InstigatedBy2 (0-0-0-0): size 36 (cls: K2Node_Event_InstigatedBy2>ObjectProperty>/Script/CoreUObject)
-	K2Node_Event_InstigatedBy3 (0-0-0-0): size 36 (cls: K2Node_Event_InstigatedBy3>ObjectProperty>/Script/CoreUObject)
 	Eyes01 (0-0-0-0): size 36 (cls: Eyes01>ObjectProperty>/Script/CoreUObject)
 	Eyes01_Skeletal (0-0-0-0): size 36 (cls: Eyes01_Skeletal>ObjectProperty>/Script/CoreUObject)
 	Eyes02 (0-0-0-0): size 36 (cls: Eyes02>ObjectProperty>/Script/CoreUObject)
@@ -1037,8 +1047,8 @@ Serialized exports:
 	InstigatedBy (0-0-0-0): size 36 (cls: InstigatedBy>ObjectProperty>/Script/CoreUObject)
 	DamageCauser (0-0-0-0): size 36 (cls: DamageCauser>ObjectProperty>/Script/CoreUObject)
 	InstigatedBy (0-0-0-0): size 36 (cls: InstigatedBy>ObjectProperty>/Script/CoreUObject)
-	DamageCauser (0-0-0-0): size 36 (cls: DamageCauser>ObjectProperty>/Script/CoreUObject)
-	InstigatedBy (0-0-0-0): size 36 (cls: InstigatedBy>ObjectProperty>/Script/CoreUObject)
+	CallFunc_SpawnEmitterAttached_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_SpawnEmitterAttached_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_SpawnSoundAttached_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_SpawnSoundAttached_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	OverrideStaticMeshMat (0-0-0-0): size 36 (cls: OverrideStaticMeshMat>ObjectProperty>/Script/CoreUObject)
 	ProjectileReturnValue (0-0-0-0): size 36 (cls: ProjectileReturnValue>ObjectProperty>/Script/CoreUObject)
 	Sound_Death (0-0-0-0): size 36 (cls: Sound_Death>ObjectProperty>/Script/CoreUObject)
@@ -1119,29 +1129,22 @@ Serialized exports:
 	CallFunc_GetSocketLocation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetSocketLocation_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_K2_GetActorLocation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_GetActorLocation_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_K2_GetActorLocation_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_K2_GetActorLocation_ReturnValue1>StructProperty>/Script/CoreUObject)
+	CallFunc_K2_SetTimerDelegate_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_SetTimerDelegate_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_MakeRotFromX_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_MakeRotFromX_ReturnValue>StructProperty>/Script/CoreUObject)
 	K2Node_Event_DamageTags (0-0-0-0): size 36 (cls: K2Node_Event_DamageTags>StructProperty>/Script/CoreUObject)
 	K2Node_Event_DamageTags1 (0-0-0-0): size 36 (cls: K2Node_Event_DamageTags1>StructProperty>/Script/CoreUObject)
 	K2Node_Event_DamageTags2 (0-0-0-0): size 36 (cls: K2Node_Event_DamageTags2>StructProperty>/Script/CoreUObject)
-	K2Node_Event_DamageTags3 (0-0-0-0): size 36 (cls: K2Node_Event_DamageTags3>StructProperty>/Script/CoreUObject)
 	K2Node_Event_Data (0-0-0-0): size 36 (cls: K2Node_Event_Data>StructProperty>/Script/CoreUObject)
 	K2Node_Event_EffectContext (0-0-0-0): size 36 (cls: K2Node_Event_EffectContext>StructProperty>/Script/CoreUObject)
 	K2Node_Event_EffectContext1 (0-0-0-0): size 36 (cls: K2Node_Event_EffectContext1>StructProperty>/Script/CoreUObject)
 	K2Node_Event_EffectContext2 (0-0-0-0): size 36 (cls: K2Node_Event_EffectContext2>StructProperty>/Script/CoreUObject)
-	K2Node_Event_EffectContext3 (0-0-0-0): size 36 (cls: K2Node_Event_EffectContext3>StructProperty>/Script/CoreUObject)
 	K2Node_Event_HitInfo (0-0-0-0): size 36 (cls: K2Node_Event_HitInfo>StructProperty>/Script/CoreUObject)
 	K2Node_Event_HitInfo1 (0-0-0-0): size 36 (cls: K2Node_Event_HitInfo1>StructProperty>/Script/CoreUObject)
 	K2Node_Event_HitInfo2 (0-0-0-0): size 36 (cls: K2Node_Event_HitInfo2>StructProperty>/Script/CoreUObject)
-	K2Node_Event_HitInfo3 (0-0-0-0): size 36 (cls: K2Node_Event_HitInfo3>StructProperty>/Script/CoreUObject)
 	K2Node_Event_Momentum (0-0-0-0): size 36 (cls: K2Node_Event_Momentum>StructProperty>/Script/CoreUObject)
 	K2Node_Event_Momentum1 (0-0-0-0): size 36 (cls: K2Node_Event_Momentum1>StructProperty>/Script/CoreUObject)
 	K2Node_Event_Momentum2 (0-0-0-0): size 36 (cls: K2Node_Event_Momentum2>StructProperty>/Script/CoreUObject)
-	K2Node_Event_Momentum3 (0-0-0-0): size 36 (cls: K2Node_Event_Momentum3>StructProperty>/Script/CoreUObject)
 	FeedbackPain (0-0-0-0): size 36 (cls: FeedbackPain>StructProperty>/Script/CoreUObject)
-	DamageTags (0-0-0-0): size 36 (cls: DamageTags>StructProperty>/Script/CoreUObject)
-	EffectContext (0-0-0-0): size 36 (cls: EffectContext>StructProperty>/Script/CoreUObject)
-	HitInfo (0-0-0-0): size 36 (cls: HitInfo>StructProperty>/Script/CoreUObject)
-	Momentum (0-0-0-0): size 36 (cls: Momentum>StructProperty>/Script/CoreUObject)
 	DamageTags (0-0-0-0): size 36 (cls: DamageTags>StructProperty>/Script/CoreUObject)
 	EffectContext (0-0-0-0): size 36 (cls: EffectContext>StructProperty>/Script/CoreUObject)
 	HitInfo (0-0-0-0): size 36 (cls: HitInfo>StructProperty>/Script/CoreUObject)

@@ -29,6 +29,7 @@ Name table:
 	/Script/Engine
 	/Script/FortniteGame
 	/Script/FortniteUI
+	/Script/SlateCore
 	/Script/UMG
 	AddInputActionHandler
 	ArgumentName
@@ -238,6 +239,7 @@ Name table:
 	ESlateVisibility::HitTestInvisible
 	ETextJustify
 	ETextJustify::Center
+	EUINavigation
 	EUINavigationRule
 	EUINavigationRule::Custom
 	EUINavigationRule::Stop
@@ -270,9 +272,8 @@ Name table:
 	HAlign_Left
 	HAlign_Right
 	HandleClose
+	HandleHorizontalNavigation
 	HandleInputTypeChanged
-	HandleNavigateLeft
-	HandleNavigateRight
 	HeightOverride
 	HollowCircularProgressBar
 	HorizontalAlignment
@@ -313,6 +314,7 @@ Name table:
 	K2Node_MakeStruct_FormatArgumentData
 	K2Node_MakeStruct_FormatArgumentData1
 	K2Node_Select_Default
+	K2Node_SwitchEnum_CmpSuccess
 	KismetMathLibrary
 	KismetTextLibrary
 	Left
@@ -344,6 +346,7 @@ Name table:
 	NewTargetItem
 	Next
 	None
+	NotEqual_ByteByte
 	NotoSans
 	NotoSans-Bold
 	Object
@@ -371,6 +374,7 @@ Name table:
 	RenderOpacity
 	RenderTransform
 	ResourceObject
+	ReturnValue
 	Right
 	RightArrowButton
 	RightExtraContentSlot
@@ -449,6 +453,7 @@ Name table:
 	VerticalBox
 	VerticalBoxSlot
 	Visibility
+	Widget
 	WidgetArchetype
 	WidgetBlueprintGeneratedClass
 	WidgetNavigation
@@ -464,7 +469,7 @@ Name table:
 	WindowTitleBarArea
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	DownTierCraftModalWidget_C (0-0-0-0): size 666 (cls: DownTierCraftModalWidget_C>WidgetBlueprintGeneratedClass>/Script/UMG):
+	DownTierCraftModalWidget_C (0-0-0-0): size 650 (cls: DownTierCraftModalWidget_C>WidgetBlueprintGeneratedClass>/Script/UMG):
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
@@ -483,12 +488,10 @@ Serialized exports:
 			bHasScriptImplementedPaint(BoolProperty)=False 
 	CancelButton (0-0-0-0): size 36 (cls: CancelButton>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_DownTierCraftModalWidget (0-0-0-0): size 580 (cls: ExecuteUbergraph_DownTierCraftModalWidget>Function>/Script/CoreUObject)
+	ExecuteUbergraph_DownTierCraftModalWidget (0-0-0-0): size 558 (cls: ExecuteUbergraph_DownTierCraftModalWidget>Function>/Script/CoreUObject)
 	Button (0-0-0-0): size 36 (cls: Button>ObjectProperty>/Script/CoreUObject)
 	BndEvt__CraftAndSlotButton_K2Node_ComponentBoundEvent_4_CommonButtonClicked__DelegateSignature (0-0-0-0): size 68 (cls: BndEvt__CraftAndSlotButton_K2Node_ComponentBoundEvent_4_CommonButtonClicked__DelegateSignature>Function>/Script/CoreUObject)
 	Destruct (0-0-0-0): size 54 (cls: Destruct>Function>/Script/CoreUObject)
-	HandleNavigateRight (0-0-0-0): size 54 (cls: HandleNavigateRight>Function>/Script/CoreUObject)
-	HandleNavigateLeft (0-0-0-0): size 54 (cls: HandleNavigateLeft>Function>/Script/CoreUObject)
 	OnBeginIntro (0-0-0-0): size 54 (cls: OnBeginIntro>Function>/Script/CoreUObject)
 	OnActivated (0-0-0-0): size 54 (cls: OnActivated>Function>/Script/CoreUObject)
 	NewBaseItem (0-0-0-0): size 36 (cls: NewBaseItem>ObjectProperty>/Script/CoreUObject)
@@ -535,6 +538,13 @@ Serialized exports:
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	Temp_byte_Variable (0-0-0-0): size 40 (cls: Temp_byte_Variable>EnumProperty>/Script/CoreUObject)
 	UpdateCraftAndSlotButtonVisibility (0-0-0-0): size 340 (cls: UpdateCraftAndSlotButtonVisibility>Function>/Script/CoreUObject)
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	InputType (0-0-0-0): size 40 (cls: InputType>EnumProperty>/Script/CoreUObject)
+	HandleInputTypeChanged (0-0-0-0): size 57 (cls: HandleInputTypeChanged>Function>/Script/CoreUObject)
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	Navigation (0-0-0-0): size 40 (cls: Navigation>EnumProperty>/Script/CoreUObject)
+	HandleHorizontalNavigation (0-0-0-0): size 267 (cls: HandleHorizontalNavigation>Function>/Script/CoreUObject)
+	K2Node_SwitchEnum_CmpSuccess (0-0-0-0): size 34 (cls: K2Node_SwitchEnum_CmpSuccess>BoolProperty>/Script/CoreUObject)
 	CallFunc_BooleanAND_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_EqualEqual_ByteByte_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ByteByte_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsInZone_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsInZone_ReturnValue>BoolProperty>/Script/CoreUObject)
@@ -612,9 +622,6 @@ Serialized exports:
 			Padding(StructProperty)=System.Byte[] 
 			Parent(ObjectProperty)=TitleBar=WidgetArchetype 
 			Content(ObjectProperty)=CommonTextBlock_0=WidgetArchetype 
-	InputType (0-0-0-0): size 40 (cls: InputType>EnumProperty>/Script/CoreUObject)
-	HandleInputTypeChanged (0-0-0-0): size 57 (cls: HandleInputTypeChanged>Function>/Script/CoreUObject)
-	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
@@ -1020,6 +1027,7 @@ Serialized exports:
 	K2Node_Event_NewBaseItem (0-0-0-0): size 36 (cls: K2Node_Event_NewBaseItem>ObjectProperty>/Script/CoreUObject)
 	K2Node_Event_NewTargetItem (0-0-0-0): size 36 (cls: K2Node_Event_NewTargetItem>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetUIManagerWidget_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetUIManagerWidget_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	ReturnValue (0-0-0-0): size 36 (cls: ReturnValue>ObjectProperty>/Script/CoreUObject)
 	ItemCard (0-0-0-0): size 36 (cls: ItemCard>ObjectProperty>/Script/CoreUObject)
 	ItemCraftingIngredientList (0-0-0-0): size 36 (cls: ItemCraftingIngredientList>ObjectProperty>/Script/CoreUObject)
 	LeftArrowButton (0-0-0-0): size 36 (cls: LeftArrowButton>ObjectProperty>/Script/CoreUObject)
@@ -1275,18 +1283,14 @@ Serialized exports:
 			HorizontalAlignment(ByteProperty)=HAlign_Left 
 			Parent(ObjectProperty)=VerticalBox_0=WidgetArchetype 
 			Content(ObjectProperty)=CraftAndSlotButton=WidgetArchetype 
-	WidgetNavigation_0 (0-0-0-0): size 642 (cls: WidgetNavigation_0>WidgetNavigation>/Script/UMG):
+	WidgetNavigation_0 (0-0-0-0): size 306 (cls: WidgetNavigation_0>WidgetNavigation>/Script/UMG):
 		Tag array:
 			Down(StructProperty)=System.Byte[] 
-			Left(StructProperty)=System.Byte[] 
-			Right(StructProperty)=System.Byte[] 
 			Next(StructProperty)=System.Byte[] 
 			Previous(StructProperty)=System.Byte[] 
-	WidgetNavigation_0 (0-0-0-0): size 642 (cls: WidgetNavigation_0>WidgetNavigation>/Script/UMG):
+	WidgetNavigation_0 (0-0-0-0): size 306 (cls: WidgetNavigation_0>WidgetNavigation>/Script/UMG):
 		Tag array:
 			Up(StructProperty)=System.Byte[] 
-			Left(StructProperty)=System.Byte[] 
-			Right(StructProperty)=System.Byte[] 
 			Next(StructProperty)=System.Byte[] 
 			Previous(StructProperty)=System.Byte[] 
 	WidgetNavigation_0 (0-0-0-0): size 600 (cls: WidgetNavigation_0>WidgetNavigation>/Script/UMG):
@@ -1297,7 +1301,7 @@ Serialized exports:
 			Right(StructProperty)=System.Byte[] 
 			Next(StructProperty)=System.Byte[] 
 			Previous(StructProperty)=System.Byte[] 
-	WidgetNavigation_0 (0-0-0-0): size 600 (cls: WidgetNavigation_0>WidgetNavigation>/Script/UMG):
+	WidgetNavigation_0 (0-0-0-0): size 740 (cls: WidgetNavigation_0>WidgetNavigation>/Script/UMG):
 		Tag array:
 			Up(StructProperty)=System.Byte[] 
 			Down(StructProperty)=System.Byte[] 

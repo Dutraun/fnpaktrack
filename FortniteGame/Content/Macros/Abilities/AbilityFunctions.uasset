@@ -12,6 +12,7 @@ Name table:
 	AbilityFunctions_C
 	AbilitySystemBlueprintLibrary
 	AbilitySystemComponent
+	ActiveGameplayEffectHandle
 	Actor
 	Actor1
 	Actor2
@@ -19,12 +20,14 @@ Name table:
 	Add_IntInt
 	Add_VectorVector
 	Angle (Degrees)
+	ApplySlowFall
 	Array_Add
 	Array_Clear
 	Array_Get
 	Array_Length
 	ArrayProperty
 	ArrayToSet
+	AssignTagSetByCallerMagnitude
 	At Level
 	Balance Value
 	BlueprintFunctionLibrary
@@ -41,6 +44,7 @@ Name table:
 	CallFunc_Array_Add_ReturnValue
 	CallFunc_Array_Get_Item
 	CallFunc_Array_Length_ReturnValue
+	CallFunc_AssignTagSetByCallerMagnitude_ReturnValue
 	CallFunc_BooleanAND_ReturnValue
 	CallFunc_BooleanAND_ReturnValue1
 	CallFunc_BooleanOR_ReturnValue
@@ -58,6 +62,7 @@ Name table:
 	CallFunc_EqualEqual_FloatFloat_ReturnValue2
 	CallFunc_GetActorForwardVector_ReturnValue
 	CallFunc_GetActorsFromTargetData_ReturnValue
+	CallFunc_GetAvatarActorFromActorInfo_ReturnValue
 	CallFunc_GetCurrentPawn_ReturnValue
 	CallFunc_GetDataCountFromTargetData_ReturnValue
 	CallFunc_GetGameplayEffectCount_ReturnValue
@@ -68,10 +73,12 @@ Name table:
 	CallFunc_HasAllTags_ReturnValue1
 	CallFunc_IsValid_ReturnValue
 	CallFunc_IsValid_ReturnValue1
+	CallFunc_K2_ApplyGameplayEffectSpecToOwner_ReturnValue
 	CallFunc_K2_GetActorLocation_ReturnValue
 	CallFunc_K2_GetActorLocation_ReturnValue1
 	CallFunc_Less_IntInt_ReturnValue
 	CallFunc_LessEqual_IntInt_ReturnValue
+	CallFunc_MakeOutgoingGameplayEffectSpec_ReturnValue
 	CallFunc_MakeVector_ReturnValue
 	CallFunc_Multiply_VectorFloat_ReturnValue
 	CallFunc_Normal_ReturnValue
@@ -81,6 +88,8 @@ Name table:
 	CallFunc_Subtract_IntInt_ReturnValue
 	CallFunc_Subtract_VectorVector_ReturnValue
 	CallFunc_VSize_ReturnValue
+	Character
+	CharacterMovement
 	Class
 	ClassProperty
 	ConvertRangeToTiles
@@ -110,6 +119,7 @@ Name table:
 	Divide_FloatFloat
 	DoNOTUse-BuildArrayOfHitActors
 	Dot_VectorVector
+	EffectSpecHandle
 	EffectsToCount
 	Engine
 	EqualEqual_FloatFloat
@@ -118,6 +128,7 @@ Name table:
 	FloatProperty
 	FortAbilityTargetSelection
 	FortAbilityTargetSelectionList
+	FortGameplayAbility
 	FortGameplayEffectContainer
 	FortGameplayEffectContainerSpec
 	FortPawn
@@ -129,14 +140,18 @@ Name table:
 	GA_Constructor_HammerHitsHeal_C
 	GA_Ninja_SwordHitsHeal_C
 	GA_Ninja_Tactical_MeleeHitsHeal_C
+	GameplayAbility
 	GameplayAbilityTargetDataHandle
 	GameplayEffect
+	GameplayEffectSpecHandle
 	GameplayEventData
+	GameplayTag
 	GE Container
 	GE Container Spec
 	GetActorForwardVector
 	GetActorsFromTargetData
 	GetAngleBetweenTwoVectors
+	GetAvatarActorFromActorInfo
 	GetCurrentPawn
 	GetDataCountFromTargetData
 	GetDistanceBetweenActors
@@ -155,6 +170,7 @@ Name table:
 	InstigatorTags
 	IntProperty
 	IsValid
+	K2_ApplyGameplayEffectSpecToOwner
 	K2_GetActorLocation
 	K2Node_DynamicCast_AsFort_Pawn
 	K2Node_DynamicCast_AsFort_Player_State_Zone
@@ -170,7 +186,9 @@ Name table:
 	LessEqual_IntInt
 	List
 	LocalHitActors
+	MakeOutgoingGameplayEffectSpec
 	MakeVector
+	MovementComponent
 	MovementDistance
 	Multiply_VectorFloat
 	NewLocalVar
@@ -190,10 +208,13 @@ Name table:
 	ScalableFloat
 	ScriptStruct
 	SelectVector
+	SelfReference
 	SetArrayOfHitActors
+	SetByCaller.Duration
 	Should Override T01
 	ShouldHammerHitsHealRespondToEvent
 	ShouldSwordHitsHealRespondToEvent
+	SlowFallDuration
 	StructProperty
 	Subtract_IntInt
 	Subtract_VectorVector
@@ -217,6 +238,7 @@ Name table:
 	Vector
 	VectorA
 	VectorB
+	Velocity
 	VSize
 Serialized exports:
 	TargetData (0-0-0-0): size 36 (cls: TargetData>StructProperty>/Script/CoreUObject)
@@ -246,7 +268,9 @@ Serialized exports:
 	GetPawnFromPlayerStateZone (0-0-0-0): size 297 (cls: GetPawnFromPlayerStateZone>Function>/Script/CoreUObject)
 	Actor1 (0-0-0-0): size 36 (cls: Actor1>ObjectProperty>/Script/CoreUObject)
 	GetDistanceBetweenActors (0-0-0-0): size 197 (cls: GetDistanceBetweenActors>Function>/Script/CoreUObject)
-	AbilityFunctions_C (0-0-0-0): size 284 (cls: AbilityFunctions_C>BlueprintGeneratedClass>/Script/Engine)
+	SlowFallDuration (0-0-0-0): size 32 (cls: SlowFallDuration>FloatProperty>/Script/CoreUObject)
+	ApplySlowFall (0-0-0-0): size 387 (cls: ApplySlowFall>Function>/Script/CoreUObject)
+	AbilityFunctions_C (0-0-0-0): size 300 (cls: AbilityFunctions_C>BlueprintGeneratedClass>/Script/Engine)
 	Default__AbilityFunctions_C (0-0-0-0): size 8 (cls: Default__AbilityFunctions_C>AbilityFunctions_C)
 	CallFunc_GetActorsFromTargetData_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetActorsFromTargetData_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetActorsFromTargetData_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetActorsFromTargetData_ReturnValue>ArrayProperty>/Script/CoreUObject)
@@ -258,6 +282,7 @@ Serialized exports:
 	ArrayToSet (0-0-0-0): size 36 (cls: ArrayToSet>ArrayProperty>/Script/CoreUObject)
 	CallFunc_GetActorsFromTargetData_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetActorsFromTargetData_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetActorsFromTargetData_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetActorsFromTargetData_ReturnValue>ArrayProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	CallFunc_LessEqual_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_LessEqual_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_NotEqual_ObjectObject_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_NotEqual_ObjectObject_ReturnValue>BoolProperty>/Script/CoreUObject)
 	Owns T02 (0-0-0-0): size 34 (cls: Owns T02>BoolProperty>/Script/CoreUObject)
@@ -290,6 +315,7 @@ Serialized exports:
 	CallFunc_HasAllTags_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_HasAllTags_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	ReturnValue (0-0-0-0): size 34 (cls: ReturnValue>BoolProperty>/Script/CoreUObject)
+	GameplayEffect (0-0-0-0): size 40 (cls: GameplayEffect>ClassProperty>/Script/CoreUObject)
 	CallFunc_Array_Get_Item (0-0-0-0): size 40 (cls: CallFunc_Array_Get_Item>ClassProperty>/Script/CoreUObject)
 	CallFunc_Divide_FloatFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Divide_FloatFloat_ReturnValue>FloatProperty>/Script/CoreUObject)
 	OutTile (0-0-0-0): size 32 (cls: OutTile>FloatProperty>/Script/CoreUObject)
@@ -337,6 +363,10 @@ Serialized exports:
 	CallFunc_Subtract_IntInt_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Subtract_IntInt_ReturnValue>IntProperty>/Script/CoreUObject)
 	Temp_int_Variable (0-0-0-0): size 32 (cls: Temp_int_Variable>IntProperty>/Script/CoreUObject)
 	__WorldContext (0-0-0-0): size 36 (cls: __WorldContext>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetAvatarActorFromActorInfo_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetAvatarActorFromActorInfo_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_AsFort_Pawn (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Pawn>ObjectProperty>/Script/CoreUObject)
+	SelfReference (0-0-0-0): size 36 (cls: SelfReference>ObjectProperty>/Script/CoreUObject)
+	__WorldContext (0-0-0-0): size 36 (cls: __WorldContext>ObjectProperty>/Script/CoreUObject)
 	__WorldContext (0-0-0-0): size 36 (cls: __WorldContext>ObjectProperty>/Script/CoreUObject)
 	CallFunc_Array_Get_Item (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item>ObjectProperty>/Script/CoreUObject)
 	__WorldContext (0-0-0-0): size 36 (cls: __WorldContext>ObjectProperty>/Script/CoreUObject)
@@ -358,6 +388,11 @@ Serialized exports:
 	K2Node_DynamicCast_AsFort_Pawn (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Pawn>ObjectProperty>/Script/CoreUObject)
 	__WorldContext (0-0-0-0): size 36 (cls: __WorldContext>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Pawn (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Pawn>ObjectProperty>/Script/CoreUObject)
+	CallFunc_AssignTagSetByCallerMagnitude_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_AssignTagSetByCallerMagnitude_ReturnValue>StructProperty>/Script/CoreUObject)
+	CallFunc_K2_ApplyGameplayEffectSpecToOwner_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_ApplyGameplayEffectSpecToOwner_ReturnValue>StructProperty>/Script/CoreUObject)
+	CallFunc_MakeOutgoingGameplayEffectSpec_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_MakeOutgoingGameplayEffectSpec_ReturnValue>StructProperty>/Script/CoreUObject)
+	CallFunc_MakeVector_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_MakeVector_ReturnValue>StructProperty>/Script/CoreUObject)
+	EffectSpecHandle (0-0-0-0): size 36 (cls: EffectSpecHandle>StructProperty>/Script/CoreUObject)
 	Balance Value (0-0-0-0): size 36 (cls: Balance Value>StructProperty>/Script/CoreUObject)
 	K2Node_MakeStruct_ScalableFloat (0-0-0-0): size 36 (cls: K2Node_MakeStruct_ScalableFloat>StructProperty>/Script/CoreUObject)
 	K2Node_Select1_Default (0-0-0-0): size 36 (cls: K2Node_Select1_Default>StructProperty>/Script/CoreUObject)

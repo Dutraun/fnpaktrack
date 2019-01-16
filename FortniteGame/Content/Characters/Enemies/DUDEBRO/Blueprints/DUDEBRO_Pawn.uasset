@@ -35,6 +35,7 @@ Name table:
 	/Game/Characters/Enemies/Husk/Curves/ColorFadeOutTrack
 	/Game/Characters/Enemies/Husk/Curves/SpawnAI_EventTrack
 	/Game/Characters/Enemies/Husk/Curves/SpawnAI_FadeIn
+	/Game/Characters/Enemies/Husk/Materials/ElementalEnum
 	/Game/Characters/Enemies/Interfaces/IMeleeWhileMoving
 	/Game/Characters/Enemies/Shielder/Blueprints/ShielderSpringArm
 	/Game/Characters/Enemies/Shielder/Materials/M_Shielder_Eyes_Temp
@@ -272,6 +273,7 @@ Name table:
 	CallFunc_Add_IntInt_ReturnValue3
 	CallFunc_Add_IntInt_ReturnValue4
 	CallFunc_Add_IntInt_ReturnValue5
+	CallFunc_Add_IntInt_ReturnValue6
 	CallFunc_Add_VectorVector_ReturnValue
 	CallFunc_Add_VectorVector_ReturnValue1
 	CallFunc_Add_VectorVector_ReturnValue2
@@ -530,6 +532,12 @@ Name table:
 	CallFunc_CreateDynamicMaterialInstance_ReturnValue4
 	CallFunc_CreateDynamicMaterialInstance_ReturnValue5
 	CallFunc_Divide_FloatFloat_ReturnValue
+	CallFunc_DoesTagAssetInterfaceHaveTag_ReturnValue
+	CallFunc_DoesTagAssetInterfaceHaveTag_ReturnValue1
+	CallFunc_DoesTagAssetInterfaceHaveTag_ReturnValue2
+	CallFunc_DoesTagAssetInterfaceHaveTag_TagContainerInterface1_CastInput
+	CallFunc_DoesTagAssetInterfaceHaveTag_TagContainerInterface2_CastInput
+	CallFunc_DoesTagAssetInterfaceHaveTag_TagContainerInterface_CastInput
 	CallFunc_Dot_VectorVector_ReturnValue
 	CallFunc_Dot_VectorVector_ReturnValue1
 	CallFunc_Dot_VectorVector_ReturnValue2
@@ -666,8 +674,12 @@ Name table:
 	CallFunc_LessEqual_FloatFloat_ReturnValue3
 	CallFunc_LessEqual_FloatFloat_ReturnValue4
 	CallFunc_LessEqual_FloatFloat_ReturnValue5
+	CallFunc_LessEqual_IntInt_ReturnValue
 	CallFunc_MakeHitResult_ReturnValue
 	CallFunc_MakeHitResult_ReturnValue1
+	CallFunc_MakeLiteralGameplayTag_ReturnValue
+	CallFunc_MakeLiteralGameplayTag_ReturnValue1
+	CallFunc_MakeLiteralGameplayTag_ReturnValue2
 	CallFunc_MakeLiteralGameplayTagContainer_ReturnValue
 	CallFunc_MakeLiteralName_ReturnValue
 	CallFunc_MakeLiteralName_ReturnValue1
@@ -938,6 +950,7 @@ Name table:
 	DirectionPropertyName
 	DisplayName
 	Divide_FloatFloat
+	DoesTagAssetInterfaceHaveTag
 	Dot_VectorVector
 	DrawDebugLine
 	DUDEBRO
@@ -956,6 +969,7 @@ Name table:
 	DUDEBRO Debug Summon
 	DUDEBRO Debug Sweep
 	DUDEBRO DisableAllWeakPoints
+	DUDEBRO Elemental
 	DUDEBRO ExecuteGameplayCue
 	DUDEBRO ForceAOE
 	DUDEBRO GetNearbyPawns
@@ -1013,10 +1027,12 @@ Name table:
 	EFortTeamAffiliation
 	EGameplayCueEvent
 	Elemental_Layer_Audio_Loop_GEN_VARIABLE
+	ElementalEnum
 	ElementToHighlight
 	EMovementMode
 	EndFlashFX
 	Enemy Indirect Shadow Min Occlusion
+	Enemy Vortex Audio_GEN_VARIABLE
 	Enemy_Impact_Stick
 	EnemyPawn_Parent_C
 	EnemySpawnLoc_GEN_VARIABLE
@@ -1296,6 +1312,7 @@ Name table:
 	K2Node_CustomEvent_Location1
 	K2Node_CustomEvent_Location2
 	K2Node_CustomEvent_Location3
+	K2Node_CustomEvent_PlayerLateJoin
 	K2Node_CustomEvent_WeakPoint
 	K2Node_CustomEvent_WP_ID
 	K2Node_DynamicCast_AsB_AOE_FXActor
@@ -1380,6 +1397,10 @@ Name table:
 	K2Node_MakeStruct_GameplayEventData2
 	K2Node_MakeStruct_LinearColor
 	K2Node_Select1_Default
+	K2Node_Select2_Default
+	K2Node_Select3_Default
+	K2Node_Select4_Default
+	K2Node_Select5_Default
 	K2Node_Select_Default
 	K2Node_SwitchEnum1_CmpSuccess
 	K2Node_SwitchEnum2_CmpSuccess
@@ -1403,6 +1424,7 @@ Name table:
 	Less_FloatFloat
 	Less_IntInt
 	LessEqual_FloatFloat
+	LessEqual_IntInt
 	Lightning_ElecFresExp
 	Lightning_SizeScale
 	Lightning_SpawnScaleRate
@@ -1420,6 +1442,7 @@ Name table:
 	M_Shielder_Eyes_Temp
 	M_StormSkirtInside_Inst
 	MakeHitResult
+	MakeLiteralGameplayTag
 	MakeLiteralGameplayTagContainer
 	MakeLiteralName
 	MakeRotator
@@ -1518,6 +1541,9 @@ Name table:
 	NPC.CharacterType.StormKing
 	NPC.Cooldown
 	NPC.Cooldown.Ability.Attack.AoE.Primary
+	NPC.Elemental.Fire
+	NPC.Elemental.Ice
+	NPC.Elemental.Lightning
 	NPC.EnemyType.Pawn
 	NPC.Mist.Large
 	NPC.Status.NoShielders
@@ -1608,6 +1634,7 @@ Name table:
 	Player_Impact_Flesh_Cue
 	PlayerBlocker
 	PlayerBlocker_GEN_VARIABLE
+	PlayerLateJoin
 	PlayFromStart
 	PlaySound2D
 	PlaySoundAtLocation
@@ -1746,6 +1773,7 @@ Name table:
 	SpawnRift
 	SpawnSoundAtLocation
 	SpawnSoundAttached
+	Sphere_GEN_VARIABLE
 	SphereComponent
 	SphereOffset_GEN_VARIABLE
 	spine_01
@@ -1766,7 +1794,6 @@ Name table:
 	Stop Storm Pants Audio
 	Storm Pants Audio
 	Storm Pants Audio_GEN_VARIABLE
-	Storm_Small_Vortex_Cue_GEN_VARIABLE
 	StormKing_AnimBP_C
 	StormKing_AOE_Impact_Cue
 	StormKing_Armored_Impact_Cue
@@ -1815,10 +1842,19 @@ Name table:
 	Temp_bool_Has_Been_Initd_Variable1
 	Temp_bool_IsClosed_Variable
 	Temp_bool_IsClosed_Variable1
+	Temp_bool_Option_B___If_false__use_Option_A_Variable
 	Temp_bool_Variable
 	Temp_bool_Variable1
+	Temp_bool_Variable2
+	Temp_bool_Variable3
+	Temp_bool_Variable4
+	Temp_bool_Variable5
 	Temp_bool_Whether_the_gate_is_currently_open_or_close_Variable
 	Temp_byte_Variable
+	Temp_byte_Variable1
+	Temp_byte_Variable2
+	Temp_byte_Variable3
+	Temp_byte_Variable4
 	Temp_int_Array_Index_Variable
 	Temp_int_Array_Index_Variable1
 	Temp_int_Array_Index_Variable2
@@ -1830,6 +1866,7 @@ Name table:
 	Temp_int_Variable
 	Temp_int_Variable1
 	Temp_int_Variable2
+	Temp_int_Variable3
 	Temp_object_Variable
 	Temp_object_Variable1
 	Temp_object_Variable2
@@ -1992,6 +2029,7 @@ Name table:
 	UpdateWeakSpotMaterial
 	UseChestMesh
 	UserConstructionScript
+	UserDefinedEnum
 	Valid
 	ValidAIPawnGoals
 	ValidBuildingActorGoals
@@ -2013,8 +2051,8 @@ Name table:
 	WallAttackGameplayAbilityTags
 	WeakObjectProperty
 	WeakPoint
-	WeakPointDestroyed
 	WeakpointDestroyed
+	WeakPointDestroyed
 	WeakPointDisabled
 	WeakPointDisabledForLowerDifficultyLevels
 	WeakPointID
@@ -2080,9 +2118,9 @@ Name table:
 	YawRate
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	DUDEBRO_Pawn_C (0-0-0-0): size 3075 (cls: DUDEBRO_Pawn_C>BlueprintGeneratedClass>/Script/Engine):
+	DUDEBRO_Pawn_C (0-0-0-0): size 3079 (cls: DUDEBRO_Pawn_C>BlueprintGeneratedClass>/Script/Engine):
 		Tag array:
-			NumReplicatedProperties(IntProperty)=8 
+			NumReplicatedProperties(IntProperty)=10 
 			DynamicBindingObjects(ArrayProperty)=[object] (inner: ObjectProperty)
 			ComponentTemplates(ArrayProperty)=[object] (inner: ObjectProperty)
 			Timelines(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -2209,7 +2247,7 @@ Serialized exports:
 	DebugMenuBlackboardKeyList (0-0-0-0): size 36 (cls: DebugMenuBlackboardKeyList>ArrayProperty>/Script/CoreUObject)
 	P_Dudebro_EyeLights (0-0-0-0): size 36 (cls: P_Dudebro_EyeLights>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_DUDEBRO_Pawn (0-0-0-0): size 20629 (cls: ExecuteUbergraph_DUDEBRO_Pawn>Function>/Script/CoreUObject)
+	ExecuteUbergraph_DUDEBRO_Pawn (0-0-0-0): size 21535 (cls: ExecuteUbergraph_DUDEBRO_Pawn>Function>/Script/CoreUObject)
 	StormPantsCheckInitialOverlap (0-0-0-0): size 54 (cls: StormPantsCheckInitialOverlap>Function>/Script/CoreUObject)
 	StormPantsCheck (0-0-0-0): size 54 (cls: StormPantsCheck>Function>/Script/CoreUObject)
 	Late Joiners (0-0-0-0): size 36 (cls: Late Joiners>ObjectProperty>/Script/CoreUObject)
@@ -2242,7 +2280,7 @@ Serialized exports:
 	WP-ID (0-0-0-0): size 32 (cls: WP-ID>IntProperty>/Script/CoreUObject)
 	UpdateWeakSpotMaterial (0-0-0-0): size 98 (cls: UpdateWeakSpotMaterial>Function>/Script/CoreUObject)
 	IsHornRightSide (0-0-0-0): size 34 (cls: IsHornRightSide>BoolProperty>/Script/CoreUObject)
-	UpdateHornMaterial (0-0-0-0): size 98 (cls: UpdateHornMaterial>Function>/Script/CoreUObject)
+	UpdateHornMaterial (0-0-0-0): size 112 (cls: UpdateHornMaterial>Function>/Script/CoreUObject)
 	CE_UpdateStormSkirt (0-0-0-0): size 54 (cls: CE_UpdateStormSkirt>Function>/Script/CoreUObject)
 	Stop DBNO Music (0-0-0-0): size 56 (cls: Stop DBNO Music>Function>/Script/CoreUObject)
 	Play DBNO Music (0-0-0-0): size 56 (cls: Play DBNO Music>Function>/Script/CoreUObject)
@@ -2372,9 +2410,9 @@ Serialized exports:
 	CallFunc_BreakGameplayTagContainer_GameplayTags (0-0-0-0): size 36 (cls: CallFunc_BreakGameplayTagContainer_GameplayTags>StructProperty>/Script/CoreUObject)
 	CallFunc_BreakGameplayTagContainer_GameplayTags (0-0-0-0): size 36 (cls: CallFunc_BreakGameplayTagContainer_GameplayTags>ArrayProperty>/Script/CoreUObject)
 	Vulnerable? (0-0-0-0): size 34 (cls: Vulnerable?>BoolProperty>/Script/CoreUObject)
-	DUDEBRO SetHornMeleeVulnerability (0-0-0-0): size 738 (cls: DUDEBRO SetHornMeleeVulnerability>Function>/Script/CoreUObject)
+	DUDEBRO SetHornMeleeVulnerability (0-0-0-0): size 740 (cls: DUDEBRO SetHornMeleeVulnerability>Function>/Script/CoreUObject)
 	Temp_int_Loop_Counter_Variable (0-0-0-0): size 32 (cls: Temp_int_Loop_Counter_Variable>IntProperty>/Script/CoreUObject)
-	DUDEBRO ManageDestroyedHorns (0-0-0-0): size 901 (cls: DUDEBRO ManageDestroyedHorns>Function>/Script/CoreUObject)
+	DUDEBRO ManageDestroyedHorns (0-0-0-0): size 913 (cls: DUDEBRO ManageDestroyedHorns>Function>/Script/CoreUObject)
 	HornBroken (0-0-0-0): size 34 (cls: HornBroken>BoolProperty>/Script/CoreUObject)
 	DUDEBRO TriggerDBNO (0-0-0-0): size 1164 (cls: DUDEBRO TriggerDBNO>Function>/Script/CoreUObject)
 	DBNO PressYourLuckFailureAOE (0-0-0-0): size 34 (cls: DBNO PressYourLuckFailureAOE>BoolProperty>/Script/CoreUObject)
@@ -2673,6 +2711,9 @@ Serialized exports:
 	CallFunc_BreakHitResult_bInitialOverlap5 (0-0-0-0): size 34 (cls: CallFunc_BreakHitResult_bInitialOverlap5>BoolProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_bInitialOverlap6 (0-0-0-0): size 34 (cls: CallFunc_BreakHitResult_bInitialOverlap6>BoolProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_bInitialOverlap7 (0-0-0-0): size 34 (cls: CallFunc_BreakHitResult_bInitialOverlap7>BoolProperty>/Script/CoreUObject)
+	CallFunc_DoesTagAssetInterfaceHaveTag_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_DoesTagAssetInterfaceHaveTag_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_DoesTagAssetInterfaceHaveTag_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_DoesTagAssetInterfaceHaveTag_ReturnValue1>BoolProperty>/Script/CoreUObject)
+	CallFunc_DoesTagAssetInterfaceHaveTag_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_DoesTagAssetInterfaceHaveTag_ReturnValue2>BoolProperty>/Script/CoreUObject)
 	CallFunc_DUDEBRO_BuildingCanBePossibleGoal_Valid (0-0-0-0): size 34 (cls: CallFunc_DUDEBRO_BuildingCanBePossibleGoal_Valid>BoolProperty>/Script/CoreUObject)
 	CallFunc_EqualEqual_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_GreaterEqual_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_GreaterEqual_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
@@ -2697,6 +2738,7 @@ Serialized exports:
 	CallFunc_Less_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Less_IntInt_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_Less_IntInt_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue2>BoolProperty>/Script/CoreUObject)
+	CallFunc_LessEqual_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_LessEqual_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Not_PreBool_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Not_PreBool_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_Not_PreBool_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue2>BoolProperty>/Script/CoreUObject)
@@ -2717,6 +2759,7 @@ Serialized exports:
 	K2Node_CustomEvent_IsHornVulnerable (0-0-0-0): size 34 (cls: K2Node_CustomEvent_IsHornVulnerable>BoolProperty>/Script/CoreUObject)
 	K2Node_CustomEvent_IsWP_Destroyed (0-0-0-0): size 34 (cls: K2Node_CustomEvent_IsWP_Destroyed>BoolProperty>/Script/CoreUObject)
 	K2Node_CustomEvent_IsWP_Disabled (0-0-0-0): size 34 (cls: K2Node_CustomEvent_IsWP_Disabled>BoolProperty>/Script/CoreUObject)
+	K2Node_CustomEvent_PlayerLateJoin (0-0-0-0): size 34 (cls: K2Node_CustomEvent_PlayerLateJoin>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess1 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess1>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess10 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess10>BoolProperty>/Script/CoreUObject)
@@ -2737,8 +2780,13 @@ Serialized exports:
 	Temp_bool_Has_Been_Initd_Variable1 (0-0-0-0): size 34 (cls: Temp_bool_Has_Been_Initd_Variable1>BoolProperty>/Script/CoreUObject)
 	Temp_bool_IsClosed_Variable (0-0-0-0): size 34 (cls: Temp_bool_IsClosed_Variable>BoolProperty>/Script/CoreUObject)
 	Temp_bool_IsClosed_Variable1 (0-0-0-0): size 34 (cls: Temp_bool_IsClosed_Variable1>BoolProperty>/Script/CoreUObject)
+	Temp_bool_Option_B___If_false__use_Option_A_Variable (0-0-0-0): size 34 (cls: Temp_bool_Option_B___If_false__use_Option_A_Variable>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable1 (0-0-0-0): size 34 (cls: Temp_bool_Variable1>BoolProperty>/Script/CoreUObject)
+	Temp_bool_Variable2 (0-0-0-0): size 34 (cls: Temp_bool_Variable2>BoolProperty>/Script/CoreUObject)
+	Temp_bool_Variable3 (0-0-0-0): size 34 (cls: Temp_bool_Variable3>BoolProperty>/Script/CoreUObject)
+	Temp_bool_Variable4 (0-0-0-0): size 34 (cls: Temp_bool_Variable4>BoolProperty>/Script/CoreUObject)
+	Temp_bool_Variable5 (0-0-0-0): size 34 (cls: Temp_bool_Variable5>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Whether_the_gate_is_currently_open_or_close_Variable (0-0-0-0): size 34 (cls: Temp_bool_Whether_the_gate_is_currently_open_or_close_Variable>BoolProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_bBlockingHit (0-0-0-0): size 34 (cls: CallFunc_BreakHitResult_bBlockingHit>BoolProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_bInitialOverlap (0-0-0-0): size 34 (cls: CallFunc_BreakHitResult_bInitialOverlap>BoolProperty>/Script/CoreUObject)
@@ -2769,6 +2817,7 @@ Serialized exports:
 	RightHornDestroyed (0-0-0-0): size 34 (cls: RightHornDestroyed>BoolProperty>/Script/CoreUObject)
 	IsHornDestroyed (0-0-0-0): size 34 (cls: IsHornDestroyed>BoolProperty>/Script/CoreUObject)
 	IsHornVulnerable (0-0-0-0): size 34 (cls: IsHornVulnerable>BoolProperty>/Script/CoreUObject)
+	PlayerLateJoin (0-0-0-0): size 34 (cls: PlayerLateJoin>BoolProperty>/Script/CoreUObject)
 	IsWP-Destroyed (0-0-0-0): size 34 (cls: IsWP-Destroyed>BoolProperty>/Script/CoreUObject)
 	IsWP-Disabled (0-0-0-0): size 34 (cls: IsWP-Disabled>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
@@ -2782,6 +2831,7 @@ Serialized exports:
 	WeakpointRevealWaitingForAbilityToFinish (0-0-0-0): size 34 (cls: WeakpointRevealWaitingForAbilityToFinish>BoolProperty>/Script/CoreUObject)
 	WipeAOE (0-0-0-0): size 34 (cls: WipeAOE>BoolProperty>/Script/CoreUObject)
 	AbilitySkinFX__Direction_3DF1DCE94394BC837E781AB9C830403D (0-0-0-0): size 36 (cls: AbilitySkinFX__Direction_3DF1DCE94394BC837E781AB9C830403D>ByteProperty>/Script/CoreUObject)
+	DUDEBRO Elemental (0-0-0-0): size 36 (cls: DUDEBRO Elemental>ByteProperty>/Script/CoreUObject)
 	CallFunc_GetDamageZone_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetDamageZone_ReturnValue>ByteProperty>/Script/CoreUObject)
 	CallFunc_GetFortPhysicalSurface_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetFortPhysicalSurface_ReturnValue>ByteProperty>/Script/CoreUObject)
 	CallFunc_GetTeamAffiliation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetTeamAffiliation_ReturnValue>ByteProperty>/Script/CoreUObject)
@@ -2793,7 +2843,14 @@ Serialized exports:
 	K2Node_GameplayCueEvent_EventType2 (0-0-0-0): size 36 (cls: K2Node_GameplayCueEvent_EventType2>ByteProperty>/Script/CoreUObject)
 	K2Node_GameplayCueEvent_EventType3 (0-0-0-0): size 36 (cls: K2Node_GameplayCueEvent_EventType3>ByteProperty>/Script/CoreUObject)
 	K2Node_GameplayCueEvent_EventType4 (0-0-0-0): size 36 (cls: K2Node_GameplayCueEvent_EventType4>ByteProperty>/Script/CoreUObject)
+	K2Node_Select3_Default (0-0-0-0): size 36 (cls: K2Node_Select3_Default>ByteProperty>/Script/CoreUObject)
+	K2Node_Select4_Default (0-0-0-0): size 36 (cls: K2Node_Select4_Default>ByteProperty>/Script/CoreUObject)
+	K2Node_Select5_Default (0-0-0-0): size 36 (cls: K2Node_Select5_Default>ByteProperty>/Script/CoreUObject)
 	Temp_byte_Variable (0-0-0-0): size 36 (cls: Temp_byte_Variable>ByteProperty>/Script/CoreUObject)
+	Temp_byte_Variable1 (0-0-0-0): size 36 (cls: Temp_byte_Variable1>ByteProperty>/Script/CoreUObject)
+	Temp_byte_Variable2 (0-0-0-0): size 36 (cls: Temp_byte_Variable2>ByteProperty>/Script/CoreUObject)
+	Temp_byte_Variable3 (0-0-0-0): size 36 (cls: Temp_byte_Variable3>ByteProperty>/Script/CoreUObject)
+	Temp_byte_Variable4 (0-0-0-0): size 36 (cls: Temp_byte_Variable4>ByteProperty>/Script/CoreUObject)
 	FadingOutStormPantsFX__Direction_0832B5D844106C486B6BAF9AD8D1BCDF (0-0-0-0): size 36 (cls: FadingOutStormPantsFX__Direction_0832B5D844106C486B6BAF9AD8D1BCDF>ByteProperty>/Script/CoreUObject)
 	StormSkirtFadeOut2__Direction_1D5C0FE042A2A5603D4E6DB2361FE56A (0-0-0-0): size 36 (cls: StormSkirtFadeOut2__Direction_1D5C0FE042A2A5603D4E6DB2361FE56A>ByteProperty>/Script/CoreUObject)
 	Timeline_0__Direction_731622E44BFDA0CE03E8C8BCE0C86390 (0-0-0-0): size 36 (cls: Timeline_0__Direction_731622E44BFDA0CE03E8C8BCE0C86390>ByteProperty>/Script/CoreUObject)
@@ -3123,6 +3180,9 @@ Serialized exports:
 		Tag array:
 			Records(ArrayProperty)=[object] (inner: StructProperty)
 	CallFunc_GetOwnedGameplayTags_self_CastInput (0-0-0-0): size 36 (cls: CallFunc_GetOwnedGameplayTags_self_CastInput>InterfaceProperty>/Script/CoreUObject)
+	CallFunc_DoesTagAssetInterfaceHaveTag_TagContainerInterface1_CastInput (0-0-0-0): size 36 (cls: CallFunc_DoesTagAssetInterfaceHaveTag_TagContainerInterface1_CastInput>InterfaceProperty>/Script/CoreUObject)
+	CallFunc_DoesTagAssetInterfaceHaveTag_TagContainerInterface2_CastInput (0-0-0-0): size 36 (cls: CallFunc_DoesTagAssetInterfaceHaveTag_TagContainerInterface2_CastInput>InterfaceProperty>/Script/CoreUObject)
+	CallFunc_DoesTagAssetInterfaceHaveTag_TagContainerInterface_CastInput (0-0-0-0): size 36 (cls: CallFunc_DoesTagAssetInterfaceHaveTag_TagContainerInterface_CastInput>InterfaceProperty>/Script/CoreUObject)
 	OtherBodyIndex (0-0-0-0): size 32 (cls: OtherBodyIndex>IntProperty>/Script/CoreUObject)
 	OtherBodyIndex (0-0-0-0): size 32 (cls: OtherBodyIndex>IntProperty>/Script/CoreUObject)
 	OtherBodyIndex (0-0-0-0): size 32 (cls: OtherBodyIndex>IntProperty>/Script/CoreUObject)
@@ -3214,6 +3274,7 @@ Serialized exports:
 	CallFunc_Add_IntInt_ReturnValue3 (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue3>IntProperty>/Script/CoreUObject)
 	CallFunc_Add_IntInt_ReturnValue4 (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue4>IntProperty>/Script/CoreUObject)
 	CallFunc_Add_IntInt_ReturnValue5 (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue5>IntProperty>/Script/CoreUObject)
+	CallFunc_Add_IntInt_ReturnValue6 (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue6>IntProperty>/Script/CoreUObject)
 	CallFunc_Array_AddUnique_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Array_AddUnique_ReturnValue>IntProperty>/Script/CoreUObject)
 	CallFunc_Array_AddUnique_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Array_AddUnique_ReturnValue1>IntProperty>/Script/CoreUObject)
 	CallFunc_Array_AddUnique_ReturnValue2 (0-0-0-0): size 32 (cls: CallFunc_Array_AddUnique_ReturnValue2>IntProperty>/Script/CoreUObject)
@@ -3245,6 +3306,7 @@ Serialized exports:
 	K2Node_ComponentBoundEvent_OtherBodyIndex3 (0-0-0-0): size 32 (cls: K2Node_ComponentBoundEvent_OtherBodyIndex3>IntProperty>/Script/CoreUObject)
 	K2Node_ComponentBoundEvent_OtherBodyIndex4 (0-0-0-0): size 32 (cls: K2Node_ComponentBoundEvent_OtherBodyIndex4>IntProperty>/Script/CoreUObject)
 	K2Node_CustomEvent_WP_ID (0-0-0-0): size 32 (cls: K2Node_CustomEvent_WP_ID>IntProperty>/Script/CoreUObject)
+	K2Node_Select1_Default (0-0-0-0): size 32 (cls: K2Node_Select1_Default>IntProperty>/Script/CoreUObject)
 	Temp_int_Array_Index_Variable (0-0-0-0): size 32 (cls: Temp_int_Array_Index_Variable>IntProperty>/Script/CoreUObject)
 	Temp_int_Array_Index_Variable1 (0-0-0-0): size 32 (cls: Temp_int_Array_Index_Variable1>IntProperty>/Script/CoreUObject)
 	Temp_int_Array_Index_Variable2 (0-0-0-0): size 32 (cls: Temp_int_Array_Index_Variable2>IntProperty>/Script/CoreUObject)
@@ -3254,6 +3316,7 @@ Serialized exports:
 	Temp_int_Variable (0-0-0-0): size 32 (cls: Temp_int_Variable>IntProperty>/Script/CoreUObject)
 	Temp_int_Variable1 (0-0-0-0): size 32 (cls: Temp_int_Variable1>IntProperty>/Script/CoreUObject)
 	Temp_int_Variable2 (0-0-0-0): size 32 (cls: Temp_int_Variable2>IntProperty>/Script/CoreUObject)
+	Temp_int_Variable3 (0-0-0-0): size 32 (cls: Temp_int_Variable3>IntProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_FaceIndex (0-0-0-0): size 32 (cls: CallFunc_BreakHitResult_FaceIndex>IntProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_HitItem (0-0-0-0): size 32 (cls: CallFunc_BreakHitResult_HitItem>IntProperty>/Script/CoreUObject)
 	Music Phase (0-0-0-0): size 32 (cls: Music Phase>IntProperty>/Script/CoreUObject)
@@ -3450,7 +3513,7 @@ Serialized exports:
 	K2Node_Event_InstigatedBy1 (0-0-0-0): size 36 (cls: K2Node_Event_InstigatedBy1>ObjectProperty>/Script/CoreUObject)
 	K2Node_Event_InstigatedBy2 (0-0-0-0): size 36 (cls: K2Node_Event_InstigatedBy2>ObjectProperty>/Script/CoreUObject)
 	K2Node_Event_InstigatedBy3 (0-0-0-0): size 36 (cls: K2Node_Event_InstigatedBy3>ObjectProperty>/Script/CoreUObject)
-	K2Node_Select1_Default (0-0-0-0): size 36 (cls: K2Node_Select1_Default>ObjectProperty>/Script/CoreUObject)
+	K2Node_Select2_Default (0-0-0-0): size 36 (cls: K2Node_Select2_Default>ObjectProperty>/Script/CoreUObject)
 	K2Node_Select_Default (0-0-0-0): size 36 (cls: K2Node_Select_Default>ObjectProperty>/Script/CoreUObject)
 	Temp_object_Variable (0-0-0-0): size 36 (cls: Temp_object_Variable>ObjectProperty>/Script/CoreUObject)
 	Temp_object_Variable1 (0-0-0-0): size 36 (cls: Temp_object_Variable1>ObjectProperty>/Script/CoreUObject)
@@ -4181,6 +4244,9 @@ Serialized exports:
 	CallFunc_K2_SetWorldTransform_SweepHitResult (0-0-0-0): size 36 (cls: CallFunc_K2_SetWorldTransform_SweepHitResult>StructProperty>/Script/CoreUObject)
 	CallFunc_MakeHitResult_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_MakeHitResult_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_MakeHitResult_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_MakeHitResult_ReturnValue1>StructProperty>/Script/CoreUObject)
+	CallFunc_MakeLiteralGameplayTag_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_MakeLiteralGameplayTag_ReturnValue>StructProperty>/Script/CoreUObject)
+	CallFunc_MakeLiteralGameplayTag_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_MakeLiteralGameplayTag_ReturnValue1>StructProperty>/Script/CoreUObject)
+	CallFunc_MakeLiteralGameplayTag_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_MakeLiteralGameplayTag_ReturnValue2>StructProperty>/Script/CoreUObject)
 	CallFunc_MakeRotFromX_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_MakeRotFromX_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_MakeTransform_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_MakeTransform_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_MakeTransform_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_MakeTransform_ReturnValue1>StructProperty>/Script/CoreUObject)

@@ -2,9 +2,8 @@ Name table:
 	/Game/AIDirector/EQS/EQS_RiftSlots
 	/Game/Building/ActorBlueprints/Prop/Car_Copper
 	/Game/Packages/Fortress_SharedMaterials/GlobalMaterialParameters/FortniteMaterialParameters
-	/Game/Sounds/Fort_GamePlay_Sounds/Portal/EnemyPortal_Loop_Cue
 	/Game/Sounds/Fort_GamePlay_Sounds/Portal/EnemyPortal_Spawn_Cue
-	/Game/Sounds/Fort_GamePlay_Sounds/Storms/Storm_Small_Vortex_Cue
+	/Game/Sounds/Fort_GamePlay_Sounds/Storms/Storm_EnemyPortal_Vortex_Cue
 	/Game/Sounds/Fort_Monster_Husk/SFX/husk_spawn_yells_Cue
 	/Game/Tools/Turntable/Mesh/1x1plane
 	/Game/UI/Fort_HUD/Radar/UI_Radar_ThreatCloud_Spawners
@@ -36,6 +35,7 @@ Name table:
 	Add_VectorVector
 	AddMIDAnimationFloat
 	AllNodes
+	AreaClass
 	Array_Add
 	Array_Get
 	Array_Length
@@ -43,7 +43,6 @@ Name table:
 	ArrayOfNearbyCars
 	ArrayProperty
 	AttenuationRadius
-	Audio1
 	AudioComponent
 	Axis Offset Amount
 	B
@@ -53,6 +52,7 @@ Name table:
 	bAbsoluteScale
 	bAffectTranslucentLighting
 	bAutoActivate
+	bFromSweep
 	bGenerateOverlapEvents
 	bHasCookedComponentInstancingData
 	BillboardComponent
@@ -61,8 +61,11 @@ Name table:
 	bIsValid
 	Bloat
 	BlueprintComponentChangedPropertyInfo
+	BlueprintComponentDelegateBinding
 	BlueprintCookedComponentInstancingData
 	BlueprintGeneratedClass
+	BndEvt__Sphere_K2Node_ComponentBoundEvent_0_ComponentBeginOverlapSignature__DelegateSignature
+	BndEvt__Sphere_K2Node_ComponentBoundEvent_1_ComponentEndOverlapSignature__DelegateSignature
 	BodyInstance
 	BoolProperty
 	BoostLight
@@ -191,6 +194,9 @@ Name table:
 	CollisionSphere
 	Color
 	ComponentClass
+	ComponentDelegateBinding
+	ComponentDelegateBindings
+	ComponentPropertyName
 	ComponentTemplate
 	Conv_VectorToLinearColor
 	CookedComponentInstancingData
@@ -210,6 +216,7 @@ Name table:
 	Default__BuildingRift
 	Default__ByteProperty
 	Default__Car_Copper_C
+	Default__ComponentDelegateBinding
 	Default__CurveFloat
 	Default__FloatProperty
 	Default__FortFXManager
@@ -228,6 +235,7 @@ Name table:
 	Default__SceneComponent
 	Default__SCS_Node
 	Default__SimpleConstructionScript
+	Default__SphereComponent
 	Default__StaticMeshComponent
 	Default__StructProperty
 	Default__TimelineTemplate
@@ -235,10 +243,12 @@ Name table:
 	DefaultSceneRoot
 	DefaultSceneRootNode
 	Delay
+	DelegatePropertyName
 	DetailMode
 	DirectionPropertyName
 	Divide_FloatFloat
 	DM_Medium
+	DynamicBindingObjects
 	EAIParamType
 	EAIParamType::Float
 	ECanBeCharacterBase
@@ -255,7 +265,8 @@ Name table:
 	EFortVisibilityBehavior::AlwaysSeen
 	EmptyStaticMesh_GEN_VARIABLE
 	EndPlayReason
-	EnemyPortal_Loop_Cue
+	Enemy Vortex Audio
+	Enemy Vortex Audio_GEN_VARIABLE
 	EnemyPortal_Spawn_Cue
 	EntryPoint
 	Enum
@@ -270,14 +281,17 @@ Name table:
 	Explosion Radius
 	Explosion Wind Vector Mesh MID
 	ExplosionWindVector_ForMeshes
+	FadeIn
 	FadeLightIn
 	FadeLightOut
+	FadeOut
 	FinishedFunctionName
 	FireOffCarAlarm
 	FloatCurve
 	FloatProperty
 	FloatTracks
 	FortFXManager
+	FortMetaNavArea_Obstacles
 	FortMiniMap
 	FortMiniMap_GEN_VARIABLE
 	FortMiniMapComponent
@@ -287,6 +301,7 @@ Name table:
 	FortWindImpulseHandle
 	FortWindManager
 	Function
+	FunctionNameToBind
 	G
 	Game
 	GameplayStatics
@@ -300,6 +315,7 @@ Name table:
 	Greater_FloatFloat
 	GreaterEqual_FloatFloat
 	Guid
+	Handle
 	HitResult
 	husk_spawn_yells_Cue
 	IconScale
@@ -318,6 +334,16 @@ Name table:
 	K2_GetActorLocation
 	K2_GetComponentLocation
 	K2_SetRelativeLocation
+	K2Node_ComponentBoundEvent_bFromSweep
+	K2Node_ComponentBoundEvent_OtherActor
+	K2Node_ComponentBoundEvent_OtherActor1
+	K2Node_ComponentBoundEvent_OtherBodyIndex
+	K2Node_ComponentBoundEvent_OtherBodyIndex1
+	K2Node_ComponentBoundEvent_OtherComp
+	K2Node_ComponentBoundEvent_OtherComp1
+	K2Node_ComponentBoundEvent_OverlappedComponent
+	K2Node_ComponentBoundEvent_OverlappedComponent1
+	K2Node_ComponentBoundEvent_SweepResult
 	K2Node_CustomEvent_Delay
 	K2Node_CustomEvent_RiftLightningDuration
 	K2Node_CustomEvent_SpawnImpactParticles
@@ -381,6 +407,7 @@ Name table:
 	Model Height
 	Multiply_FloatFloat
 	NameProperty
+	NewVar
 	NoCollision
 	NODE_AddDecalComponent-0
 	NODE_AddParticleSystemComponent-4
@@ -397,11 +424,17 @@ Name table:
 	ObjectProperty
 	ObjectType
 	OnActivated
+	OnComponentBeginOverlap
+	OnComponentEndOverlap
 	OnDeactivated
 	OnPlaced
 	OnRemoved
 	OnSpawnAI
 	Opacity
+	OtherActor
+	OtherBodyIndex
+	OtherComp
+	OverlappedComponent
 	Overlapping Actors
 	OverrideMaterials
 	P_Rift_Active
@@ -489,16 +522,19 @@ Name table:
 	SpawnImpactParticles
 	Spawntime
 	SpectatorMapIcon
+	Sphere
+	Sphere_GEN_VARIABLE
 	SphereComponent
 	SphereOverlapActors
+	SphereRadius
 	SpotLightComponent
 	StaticMesh
 	StaticMeshComponent
 	StaticMeshComponent0
-	Storm_Small_Vortex_Cue
-	Storm_Small_Vortex_Cue_GEN_VARIABLE
+	Storm_EnemyPortal_Vortex_Cue
 	StructProperty
 	Subtract_FloatFloat
+	SweepResult
 	SwipeMaterial
 	Temp_bool_Has_Been_Initd_Variable
 	Temp_bool_IsClosed_Variable
@@ -518,6 +554,7 @@ Name table:
 	TimelineLength
 	Timelines
 	TimelineTemplate
+	TimerHandle
 	TimestampA
 	TimestampAFade
 	TimestampB
@@ -537,6 +574,7 @@ Name table:
 	UberGraphFunction
 	UI_Radar_ThreatCloud_Spawners
 	UID
+	UInt64Property
 	UpdateFunctionName
 	UserConstructionScript
 	UV Tile Multiplier Max
@@ -581,13 +619,14 @@ Name table:
 	Z
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	B_Rift_Portals_C (0-0-0-0): size 797 (cls: B_Rift_Portals_C>BlueprintGeneratedClass>/Script/Engine):
+	B_Rift_Portals_C (0-0-0-0): size 874 (cls: B_Rift_Portals_C>BlueprintGeneratedClass>/Script/Engine):
 		Tag array:
 			bHasCookedComponentInstancingData(BoolProperty)=True 
+			DynamicBindingObjects(ArrayProperty)=[object] (inner: ObjectProperty)
 			Timelines(ArrayProperty)=[object] (inner: ObjectProperty)
 			SimpleConstructionScript(ObjectProperty)=SimpleConstructionScript_819=B_Rift_Portals_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_B_Rift_Portals=B_Rift_Portals_C 
-	Default__B_Rift_Portals_C (0-0-0-0): size 1963 (cls: Default__B_Rift_Portals_C>B_Rift_Portals_C):
+	Default__B_Rift_Portals_C (0-0-0-0): size 2053 (cls: Default__B_Rift_Portals_C>B_Rift_Portals_C):
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			Plasma Particles(ObjectProperty)=P_Rift_Player_Spawn=/Game/VisualThreatManager/Rifts/Particles/P_Rift_Player_Spawn 
@@ -626,6 +665,7 @@ Serialized exports:
 			Lightning Bloat(FloatProperty)=26 
 			RiftVortexFadeInTime(FloatProperty)=0.15 
 			RiftVortexFadeOutTime(FloatProperty)=0.4 
+			NewVar_0(StructProperty)=System.Byte[] 
 			EnvironmentQuery(ObjectProperty)=EQS_RiftSlots=/Game/AIDirector/EQS/EQS_RiftSlots 
 			QueryParams(ArrayProperty)=[object] (inner: StructProperty)
 			QueryRadius(FloatProperty)=768 
@@ -633,9 +673,9 @@ Serialized exports:
 			RootComponent(ObjectProperty)=CollisionSphere=Default__B_Rift_Portals_C 
 	ArrayOfNearbyCars (0-0-0-0): size 36 (cls: ArrayOfNearbyCars>ObjectProperty>/Script/CoreUObject)
 	ArrayOfNearbyCars (0-0-0-0): size 36 (cls: ArrayOfNearbyCars>ArrayProperty>/Script/CoreUObject)
-	Wind Vector Explosion (0-0-0-0): size 36 (cls: Wind Vector Explosion>ObjectProperty>/Script/CoreUObject)
+	Sphere (0-0-0-0): size 36 (cls: Sphere>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_B_Rift_Portals (0-0-0-0): size 4915 (cls: ExecuteUbergraph_B_Rift_Portals>Function>/Script/CoreUObject)
+	ExecuteUbergraph_B_Rift_Portals (0-0-0-0): size 5030 (cls: ExecuteUbergraph_B_Rift_Portals>Function>/Script/CoreUObject)
 	CallFunc_SphereOverlapActors_OutActors (0-0-0-0): size 36 (cls: CallFunc_SphereOverlapActors_OutActors>ObjectProperty>/Script/CoreUObject)
 	CallFunc_SphereOverlapActors_OutActors (0-0-0-0): size 36 (cls: CallFunc_SphereOverlapActors_OutActors>ArrayProperty>/Script/CoreUObject)
 	K2Node_MakeArray_Array (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array>ByteProperty>/Script/CoreUObject)
@@ -644,13 +684,16 @@ Serialized exports:
 	Temp_object_Variable (0-0-0-0): size 36 (cls: Temp_object_Variable>ArrayProperty>/Script/CoreUObject)
 	Overlapping Actors (0-0-0-0): size 36 (cls: Overlapping Actors>ObjectProperty>/Script/CoreUObject)
 	Overlapping Actors (0-0-0-0): size 36 (cls: Overlapping Actors>ArrayProperty>/Script/CoreUObject)
-	AudioComponent_284 (0-0-0-0): size 102 (cls: AudioComponent_284>AudioComponent>/Script/Engine):
+	Enemy Vortex Audio_GEN_VARIABLE (0-0-0-0): size 128 (cls: Enemy Vortex Audio_GEN_VARIABLE>AudioComponent>/Script/Engine):
 		Tag array:
-			Sound(ObjectProperty)=EnemyPortal_Loop_Cue=/Game/Sounds/Fort_GamePlay_Sounds/Portal/EnemyPortal_Loop_Cue 
+			Sound(ObjectProperty)=Storm_EnemyPortal_Vortex_Cue=/Game/Sounds/Fort_GamePlay_Sounds/Storms/Storm_EnemyPortal_Vortex_Cue 
 			RelativeLocation(StructProperty)=Vector(0,-6.103516E-05,196.6561) 
-	Storm_Small_Vortex_Cue_GEN_VARIABLE (0-0-0-0): size 41 (cls: Storm_Small_Vortex_Cue_GEN_VARIABLE>AudioComponent>/Script/Engine):
-		Tag array:
-			Sound(ObjectProperty)=Storm_Small_Vortex_Cue=/Game/Sounds/Fort_GamePlay_Sounds/Storms/Storm_Small_Vortex_Cue 
+			bAutoActivate(BoolProperty)=False 
+	OverlappedComponent (0-0-0-0): size 36 (cls: OverlappedComponent>ObjectProperty>/Script/CoreUObject)
+	BndEvt__Sphere_K2Node_ComponentBoundEvent_1_ComponentEndOverlapSignature__DelegateSignature (0-0-0-0): size 110 (cls: BndEvt__Sphere_K2Node_ComponentBoundEvent_1_ComponentEndOverlapSignature__DelegateSignature>Function>/Script/CoreUObject)
+	OverlappedComponent (0-0-0-0): size 36 (cls: OverlappedComponent>ObjectProperty>/Script/CoreUObject)
+	BndEvt__Sphere_K2Node_ComponentBoundEvent_0_ComponentBeginOverlapSignature__DelegateSignature (0-0-0-0): size 138 (cls: BndEvt__Sphere_K2Node_ComponentBoundEvent_0_ComponentBeginOverlapSignature__DelegateSignature>Function>/Script/CoreUObject)
+	bFromSweep (0-0-0-0): size 34 (cls: bFromSweep>BoolProperty>/Script/CoreUObject)
 	CallFunc_GreaterEqual_FloatFloat_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_GreaterEqual_FloatFloat_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsDedicatedServer_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsDedicatedServer_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsDedicatedServer_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_IsDedicatedServer_ReturnValue1>BoolProperty>/Script/CoreUObject)
@@ -658,6 +701,7 @@ Serialized exports:
 	CallFunc_Less_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Less_IntInt_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_SphereOverlapActors_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_SphereOverlapActors_ReturnValue>BoolProperty>/Script/CoreUObject)
+	K2Node_ComponentBoundEvent_bFromSweep (0-0-0-0): size 34 (cls: K2Node_ComponentBoundEvent_bFromSweep>BoolProperty>/Script/CoreUObject)
 	K2Node_CustomEvent_SpawnImpactParticles (0-0-0-0): size 34 (cls: K2Node_CustomEvent_SpawnImpactParticles>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess1 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess1>BoolProperty>/Script/CoreUObject)
@@ -696,6 +740,9 @@ Serialized exports:
 	BoostLight__Direction_B8E171DC42A8E999600BC085D7EDCE3D (0-0-0-0): size 36 (cls: BoostLight__Direction_B8E171DC42A8E999600BC085D7EDCE3D>ByteProperty>/Script/CoreUObject)
 	K2Node_Event_EndPlayReason (0-0-0-0): size 36 (cls: K2Node_Event_EndPlayReason>ByteProperty>/Script/CoreUObject)
 	ScaleLightOnOff__Direction_9100A5CB43D5BF71190A45AB7C00C2B9 (0-0-0-0): size 36 (cls: ScaleLightOnOff__Direction_9100A5CB43D5BF71190A45AB7C00C2B9>ByteProperty>/Script/CoreUObject)
+	ComponentDelegateBinding_0 (0-0-0-0): size 312 (cls: ComponentDelegateBinding_0>ComponentDelegateBinding>/Script/Engine):
+		Tag array:
+			ComponentDelegateBindings(ArrayProperty)=[object] (inner: StructProperty)
 	CurveFloat_1 (0-0-0-0): size 263 (cls: CurveFloat_1>CurveFloat>/Script/Engine):
 		Tag array:
 			FloatCurve(StructProperty)=System.Byte[] 
@@ -793,21 +840,29 @@ Serialized exports:
 			MiniMapData(StructProperty)=System.Byte[] 
 			VisibilityBehavior(EnumProperty)=EFortVisibilityBehavior::AlwaysSeen 
 	FortSpectateClickableMapIcon (0-0-0-0): size 12 (cls: FortSpectateClickableMapIcon>FortSpectateClickableMapIcon>/Script/FortniteGame)
+	OtherBodyIndex (0-0-0-0): size 32 (cls: OtherBodyIndex>IntProperty>/Script/CoreUObject)
+	OtherBodyIndex (0-0-0-0): size 32 (cls: OtherBodyIndex>IntProperty>/Script/CoreUObject)
 	CallFunc_Add_IntInt_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue>IntProperty>/Script/CoreUObject)
 	CallFunc_Add_IntInt_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue1>IntProperty>/Script/CoreUObject)
 	CallFunc_Array_Add_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Array_Add_ReturnValue>IntProperty>/Script/CoreUObject)
 	CallFunc_Array_Length_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Array_Length_ReturnValue>IntProperty>/Script/CoreUObject)
 	CallFunc_Array_Length_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Array_Length_ReturnValue1>IntProperty>/Script/CoreUObject)
 	CallFunc_GetVisualEffectQuality_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetVisualEffectQuality_ReturnValue>IntProperty>/Script/CoreUObject)
+	K2Node_ComponentBoundEvent_OtherBodyIndex (0-0-0-0): size 32 (cls: K2Node_ComponentBoundEvent_OtherBodyIndex>IntProperty>/Script/CoreUObject)
+	K2Node_ComponentBoundEvent_OtherBodyIndex1 (0-0-0-0): size 32 (cls: K2Node_ComponentBoundEvent_OtherBodyIndex1>IntProperty>/Script/CoreUObject)
 	Temp_int_Array_Index_Variable (0-0-0-0): size 32 (cls: Temp_int_Array_Index_Variable>IntProperty>/Script/CoreUObject)
 	Temp_int_Array_Index_Variable1 (0-0-0-0): size 32 (cls: Temp_int_Array_Index_Variable1>IntProperty>/Script/CoreUObject)
 	Temp_int_Loop_Counter_Variable (0-0-0-0): size 32 (cls: Temp_int_Loop_Counter_Variable>IntProperty>/Script/CoreUObject)
 	Temp_int_Loop_Counter_Variable1 (0-0-0-0): size 32 (cls: Temp_int_Loop_Counter_Variable1>IntProperty>/Script/CoreUObject)
 	CallFunc_GetVisualEffectQuality_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetVisualEffectQuality_ReturnValue>IntProperty>/Script/CoreUObject)
-	Audio1 (0-0-0-0): size 36 (cls: Audio1>ObjectProperty>/Script/CoreUObject)
+	OtherActor (0-0-0-0): size 36 (cls: OtherActor>ObjectProperty>/Script/CoreUObject)
+	OtherComp (0-0-0-0): size 36 (cls: OtherComp>ObjectProperty>/Script/CoreUObject)
+	OtherActor (0-0-0-0): size 36 (cls: OtherActor>ObjectProperty>/Script/CoreUObject)
+	OtherComp (0-0-0-0): size 36 (cls: OtherComp>ObjectProperty>/Script/CoreUObject)
 	BoostLight (0-0-0-0): size 36 (cls: BoostLight>ObjectProperty>/Script/CoreUObject)
 	Decal (0-0-0-0): size 36 (cls: Decal>ObjectProperty>/Script/CoreUObject)
 	Decal Material (0-0-0-0): size 36 (cls: Decal Material>ObjectProperty>/Script/CoreUObject)
+	Enemy Vortex Audio (0-0-0-0): size 36 (cls: Enemy Vortex Audio>ObjectProperty>/Script/CoreUObject)
 	CallFunc_Array_Get_Item (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item>ObjectProperty>/Script/CoreUObject)
 	CallFunc_Array_Get_Item1 (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item1>ObjectProperty>/Script/CoreUObject)
 	CallFunc_CreateDynamicMaterialInstance_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_CreateDynamicMaterialInstance_ReturnValue>ObjectProperty>/Script/CoreUObject)
@@ -816,6 +871,12 @@ Serialized exports:
 	CallFunc_SpawnDecalAtLocation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_SpawnDecalAtLocation_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_SpawnEmitterAtLocation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_SpawnEmitterAtLocation_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_SpawnEmitterAtLocation_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_SpawnEmitterAtLocation_ReturnValue1>ObjectProperty>/Script/CoreUObject)
+	K2Node_ComponentBoundEvent_OtherActor (0-0-0-0): size 36 (cls: K2Node_ComponentBoundEvent_OtherActor>ObjectProperty>/Script/CoreUObject)
+	K2Node_ComponentBoundEvent_OtherActor1 (0-0-0-0): size 36 (cls: K2Node_ComponentBoundEvent_OtherActor1>ObjectProperty>/Script/CoreUObject)
+	K2Node_ComponentBoundEvent_OtherComp (0-0-0-0): size 36 (cls: K2Node_ComponentBoundEvent_OtherComp>ObjectProperty>/Script/CoreUObject)
+	K2Node_ComponentBoundEvent_OtherComp1 (0-0-0-0): size 36 (cls: K2Node_ComponentBoundEvent_OtherComp1>ObjectProperty>/Script/CoreUObject)
+	K2Node_ComponentBoundEvent_OverlappedComponent (0-0-0-0): size 36 (cls: K2Node_ComponentBoundEvent_OverlappedComponent>ObjectProperty>/Script/CoreUObject)
+	K2Node_ComponentBoundEvent_OverlappedComponent1 (0-0-0-0): size 36 (cls: K2Node_ComponentBoundEvent_OverlappedComponent1>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsCar_Copper (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsCar_Copper>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsWind_Manager (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsWind_Manager>ObjectProperty>/Script/CoreUObject)
 	Explosion Wind Vector Mesh MID (0-0-0-0): size 36 (cls: Explosion Wind Vector Mesh MID>ObjectProperty>/Script/CoreUObject)
@@ -831,13 +892,13 @@ Serialized exports:
 	RiftVortexMID (0-0-0-0): size 36 (cls: RiftVortexMID>ObjectProperty>/Script/CoreUObject)
 	ScaleLightOnOff (0-0-0-0): size 36 (cls: ScaleLightOnOff>ObjectProperty>/Script/CoreUObject)
 	SpawnCloud (0-0-0-0): size 36 (cls: SpawnCloud>ObjectProperty>/Script/CoreUObject)
-	Storm_Small_Vortex_Cue (0-0-0-0): size 36 (cls: Storm_Small_Vortex_Cue>ObjectProperty>/Script/CoreUObject)
 	SwipeMaterial (0-0-0-0): size 36 (cls: SwipeMaterial>ObjectProperty>/Script/CoreUObject)
 	CallFunc_CreateDynamicMaterialInstance_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_CreateDynamicMaterialInstance_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_CreateDynamicMaterialInstance_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_CreateDynamicMaterialInstance_ReturnValue1>ObjectProperty>/Script/CoreUObject)
 	CallFunc_CreateDynamicMaterialInstance_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_CreateDynamicMaterialInstance_ReturnValue2>ObjectProperty>/Script/CoreUObject)
 	CallFunc_CreateDynamicMaterialInstance_ReturnValue3 (0-0-0-0): size 36 (cls: CallFunc_CreateDynamicMaterialInstance_ReturnValue3>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetGameUserSettings_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetGameUserSettings_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	Wind Vector Explosion (0-0-0-0): size 36 (cls: Wind Vector Explosion>ObjectProperty>/Script/CoreUObject)
 	Wind Vortex MID (0-0-0-0): size 36 (cls: Wind Vortex MID>ObjectProperty>/Script/CoreUObject)
 	WindVectorVortex (0-0-0-0): size 36 (cls: WindVectorVortex>ObjectProperty>/Script/CoreUObject)
 	P_Rift_Active_GEN_VARIABLE (0-0-0-0): size 211 (cls: P_Rift_Active_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine):
@@ -871,15 +932,15 @@ Serialized exports:
 			ComponentTemplate(ObjectProperty)=SceneComponent_0=B_Rift_Portals_C 
 			VariableGuid(StructProperty)=Guid: 1455200153-3298092774-840778389-2103358230 
 			InternalVariableName(NameProperty)=DefaultSceneRoot 
-	SCS_Node_1 (0-0-0-0): size 792 (cls: SCS_Node_1>SCS_Node>/Script/Engine):
+	SCS_Node_1 (0-0-0-0): size 891 (cls: SCS_Node_1>SCS_Node>/Script/Engine):
 		Tag array:
 			ComponentClass(ObjectProperty)=AudioComponent=/Script/Engine 
-			ComponentTemplate(ObjectProperty)=AudioComponent_284=B_Rift_Portals_C 
+			ComponentTemplate(ObjectProperty)=Enemy Vortex Audio_GEN_VARIABLE=B_Rift_Portals_C 
 			CookedComponentInstancingData(StructProperty)=System.Byte[] 
 			ParentComponentOrVariableName(NameProperty)=CollisionSphere 
 			bIsParentComponentNative(BoolProperty)=True 
 			VariableGuid(StructProperty)=Guid: 1217030610-2449923677-2874917385-472831659 
-			InternalVariableName(NameProperty)=Audio1 
+			InternalVariableName(NameProperty)=Enemy Vortex Audio 
 	SCS_Node_2 (0-0-0-0): size 990 (cls: SCS_Node_2>SCS_Node>/Script/Engine):
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
@@ -889,15 +950,15 @@ Serialized exports:
 			bIsParentComponentNative(BoolProperty)=True 
 			VariableGuid(StructProperty)=Guid: 1612398858-1139211228-3748330174-1473308425 
 			InternalVariableName(NameProperty)=P_Rift_RandomLightning_01 
-	SCS_Node_3 (0-0-0-0): size 495 (cls: SCS_Node_3>SCS_Node>/Script/Engine):
+	SCS_Node_3 (0-0-0-0): size 1188 (cls: SCS_Node_3>SCS_Node>/Script/Engine):
 		Tag array:
-			ComponentClass(ObjectProperty)=AudioComponent=/Script/Engine 
-			ComponentTemplate(ObjectProperty)=Storm_Small_Vortex_Cue_GEN_VARIABLE=B_Rift_Portals_C 
+			ComponentClass(ObjectProperty)=SphereComponent=/Script/Engine 
+			ComponentTemplate(ObjectProperty)=Sphere_GEN_VARIABLE=B_Rift_Portals_C 
 			CookedComponentInstancingData(StructProperty)=System.Byte[] 
 			ParentComponentOrVariableName(NameProperty)=CollisionSphere 
 			bIsParentComponentNative(BoolProperty)=True 
-			VariableGuid(StructProperty)=Guid: 3425911194-1182643196-4032995773-922406550 
-			InternalVariableName(NameProperty)=Storm_Small_Vortex_Cue 
+			VariableGuid(StructProperty)=Guid: 1821569887-1110123527-2267271306-3435074715 
+			InternalVariableName(NameProperty)=Sphere 
 	SCS_Node_4 (0-0-0-0): size 2079 (cls: SCS_Node_4>SCS_Node>/Script/Engine):
 		Tag array:
 			ComponentClass(ObjectProperty)=PointLightComponent=/Script/Engine 
@@ -955,6 +1016,12 @@ Serialized exports:
 			RootNodes(ArrayProperty)=[object] (inner: ObjectProperty)
 			AllNodes(ArrayProperty)=[object] (inner: ObjectProperty)
 			DefaultSceneRootNode(ObjectProperty)=SCS_Node_0=B_Rift_Portals_C 
+	Sphere_GEN_VARIABLE (0-0-0-0): size 192 (cls: Sphere_GEN_VARIABLE>SphereComponent>/Script/Engine):
+		Tag array:
+			SphereRadius(FloatProperty)=800 
+			AreaClass(ObjectProperty)=FortMetaNavArea_Obstacles=/Script/FortniteGame 
+			RelativeLocation(StructProperty)=Vector(0,0,196.6561) 
+			RelativeScale3D(StructProperty)=Vector(0.9907606,0.9907606,0.9624012) 
 	CollisionSphere (0-0-0-0): size 12 (cls: CollisionSphere>SphereComponent>/Script/Engine)
 	RiftVortex_GEN_VARIABLE (0-0-0-0): size 550 (cls: RiftVortex_GEN_VARIABLE>StaticMeshComponent>/Script/Engine):
 		Tag array:
@@ -985,6 +1052,7 @@ Serialized exports:
 			BodyInstance(StructProperty)=System.Byte[] 
 			RelativeScale3D(StructProperty)=Vector(1200,1200,1200) 
 			bVisible(BoolProperty)=False 
+	SweepResult (0-0-0-0): size 36 (cls: SweepResult>StructProperty>/Script/CoreUObject)
 	CallFunc_Add_VectorVector_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_Add_VectorVector_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_Conv_VectorToLinearColor_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_Conv_VectorToLinearColor_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_K2_AddWorldRotation_SweepHitResult (0-0-0-0): size 36 (cls: CallFunc_K2_AddWorldRotation_SweepHitResult>StructProperty>/Script/CoreUObject)
@@ -996,10 +1064,12 @@ Serialized exports:
 	CallFunc_MakeRotator_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_MakeRotator_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_MakeVector_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_MakeVector_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_MakeVector_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_MakeVector_ReturnValue1>StructProperty>/Script/CoreUObject)
+	K2Node_ComponentBoundEvent_SweepResult (0-0-0-0): size 36 (cls: K2Node_ComponentBoundEvent_SweepResult>StructProperty>/Script/CoreUObject)
 	ImpactLocation (0-0-0-0): size 36 (cls: ImpactLocation>StructProperty>/Script/CoreUObject)
 	Light Color Active (0-0-0-0): size 36 (cls: Light Color Active>StructProperty>/Script/CoreUObject)
 	Light Color Idle (0-0-0-0): size 36 (cls: Light Color Idle>StructProperty>/Script/CoreUObject)
 	Lightning Spawn Loc (0-0-0-0): size 36 (cls: Lightning Spawn Loc>StructProperty>/Script/CoreUObject)
+	NewVar_0 (0-0-0-0): size 36 (cls: NewVar_0>StructProperty>/Script/CoreUObject)
 	CallFunc_Conv_VectorToLinearColor_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_Conv_VectorToLinearColor_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_GetLightColor_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetLightColor_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_K2_GetComponentLocation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_GetComponentLocation_ReturnValue>StructProperty>/Script/CoreUObject)

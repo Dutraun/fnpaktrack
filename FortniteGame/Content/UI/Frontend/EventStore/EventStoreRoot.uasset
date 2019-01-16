@@ -8,15 +8,20 @@ Name table:
 	/Game/UI/Foundation/Border/Border_StatRow_WhiteLowOpacity
 	/Game/UI/Foundation/Fonts/Burbank
 	/Game/UI/Foundation/Fonts/NotoSans
+	/Game/UI/Foundation/Materials/M-ResearchPoint
 	/Game/UI/Foundation/Materials/Throbber_Material-Monochrome
+	/Game/UI/Foundation/Text/TextStyle-Base-M-B
+	/Game/UI/Foundation/Text/TextStyle-Base-M-B-40pc
 	/Game/UI/Foundation/Text/TextStyle-Base-S-B
 	/Game/UI/Foundation/Text/TextStyle-Base-XS-B
 	/Game/UI/Foundation/Text/TextStyle-Base-XS-B-70pc
 	/Game/UI/Foundation/Text/TextStyle-Header-S-70pc
 	/Game/UI/Foundation/Textures/Icons/Items/T-Item-GoldBars-S
 	/Game/UI/Foundation/Textures/Icons/Items/T-Items-DailyCoin-S
+	/Game/UI/Frontend/Command/PointsCounter
 	/Game/UI/Frontend/EventStore/EventStoreRoot
 	/Game/UI/Frontend/EventStore/EventStoreRoot.WidgetArchetype
+	/Game/UI/Frontend/Store/StoreCurrencyDisplayStack
 	/Script/BlueprintContext
 	/Script/CommonUI
 	/Script/CoreUObject
@@ -85,6 +90,7 @@ Name table:
 	CallFunc_GetNumInStack_ReturnValue1
 	CallFunc_GetNumItems_ReturnValue
 	CallFunc_GetSeasonStoreEndDate_ReturnValue
+	CallFunc_GetStoreCurrencies_ReturnValue
 	CallFunc_GetStorefrontName_ReturnValue
 	CallFunc_GetWeeklyStoreEndDate_ReturnValue
 	CallFunc_Greater_IntInt_ReturnValue
@@ -100,6 +106,7 @@ Name table:
 	CommonActivatablePanel
 	CommonBorder
 	CommonDateTimeTextBlock
+	CommonNumericTextBlock
 	CommonTextBlock
 	CommonTileView
 	CommonWidgetSwitcher
@@ -123,6 +130,7 @@ Name table:
 	Default__BorderSlot
 	Default__CommonBorder
 	Default__CommonDateTimeTextBlock
+	Default__CommonNumericTextBlock
 	Default__CommonTextBlock
 	Default__CommonTileView
 	Default__CommonWidgetSwitcher
@@ -142,13 +150,19 @@ Name table:
 	Default__ObjectProperty
 	Default__Overlay
 	Default__OverlaySlot
+	Default__PointsCounter_C
 	Default__SafeZone
 	Default__SafeZoneSlot
+	Default__ScaleBox
+	Default__ScaleBoxSlot
 	Default__SizeBox
 	Default__SizeBoxSlot
+	Default__StoreCurrencyDisplayStack_C
 	Default__StrProperty
 	Default__StructProperty
 	Default__TextProperty
+	Default__TextStyle-Base-M-B-40pc_C
+	Default__TextStyle-Base-M-B_C
 	Default__TextStyle-Base-S-B_C
 	Default__TextStyle-Base-XS-B-70pc_C
 	Default__TextStyle-Base-XS-B_C
@@ -161,6 +175,7 @@ Name table:
 	Default__WidgetTree
 	DelegateProperty
 	DelegatePropertyName
+	Display Icon
 	Down
 	DynamicBindingObjects
 	EHorizontalAlignment
@@ -176,6 +191,9 @@ Name table:
 	ESlateSizeRule::Fill
 	ESlateVisibility
 	ESlateVisibility::Collapsed
+	ESlateVisibility::Visible
+	EStretch
+	EStretch::None
 	ETextJustify
 	ETextJustify::Center
 	EUINavigationRule
@@ -215,6 +233,7 @@ Name table:
 	GetNumInStack
 	GetNumItems
 	GetSeasonStoreEndDate
+	GetStoreCurrencies
 	GetStorefrontName
 	GetWeeklyStoreEndDate
 	Greater_IntInt
@@ -223,12 +242,16 @@ Name table:
 	HAlign_Left
 	HAlign_Right
 	HandleOnItemFocused
+	HBox_Content
+	HBoxNeed
 	HBoxOffers
 	HeightOverride
 	HorizontalAlignment
 	HorizontalBox
 	HorizontalBoxSlot
+	IconShouldScale
 	Image
+	imageIcon
 	ImageSize
 	IntProperty
 	IsActivated
@@ -250,6 +273,7 @@ Name table:
 	KismetStringLibrary
 	KismetSystemLibrary
 	KismetTextLibrary
+	Label
 	LastEventItemSelectedIndex
 	LastSelectedTileViewItems
 	LastWeeklyItemSelectedIndex
@@ -257,8 +281,10 @@ Name table:
 	Less_IntInt
 	LinearColor
 	ListView
+	M-ResearchPoint
 	Margin
 	Material
+	MaterialInstanceConstant
 	MaxDesiredWidth
 	MaxStackSize
 	MinDesiredWidth
@@ -272,6 +298,8 @@ Name table:
 	Not_PreBool
 	NotoSans
 	NotoSans-Bold
+	NumericTextNeedValue
+	NumericTextValue
 	Object
 	ObjectProperty
 	OfferData
@@ -287,14 +315,20 @@ Name table:
 	PadTop
 	Parent
 	PointerToUberGraphFrame
+	PointsCounter
+	PointsCounter_C
 	Previous
 	ProgressSpinner
+	RenderTransform
 	ResourceObject
 	Right
 	RootWidget
 	Rule
 	SafeZone
 	SafeZoneSlot
+	Scale
+	ScaleBox
+	ScaleBoxSlot
 	ScriptStruct
 	SetActiveWidget
 	SetDateTimeValue
@@ -315,7 +349,10 @@ Name table:
 	SoftObjectProperty
 	SpecialCurrency_Daily
 	SpecifiedColor
+	StoreCurrencyDisplayStack
+	StoreCurrencyDisplayStack_C
 	StorefrontNames
+	Stretch
 	StrProperty
 	StructProperty
 	Style
@@ -332,6 +369,9 @@ Name table:
 	TextGoldBar
 	TextGoldCap
 	TextProperty
+	TextSlash
+	TextStyle-Base-M-B-40pc_C
+	TextStyle-Base-M-B_C
 	TextStyle-Base-S-B_C
 	TextStyle-Base-XS-B-70pc_C
 	TextStyle-Base-XS-B_C
@@ -349,6 +389,7 @@ Name table:
 	UberGraphFunction
 	Up
 	Update Currency
+	UpdateCurrencies
 	UserWidget
 	VAlign_Bottom
 	VAlign_Center
@@ -366,11 +407,12 @@ Name table:
 	WidgetNavigationData
 	WidgetSwitcherSlot
 	WidgetToFocus
+	WidgetTransform
 	WidgetTree
 	WidthOverride
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	EventStoreRoot_C (0-0-0-0): size 646 (cls: EventStoreRoot_C>WidgetBlueprintGeneratedClass>/Script/UMG):
+	EventStoreRoot_C (0-0-0-0): size 650 (cls: EventStoreRoot_C>WidgetBlueprintGeneratedClass>/Script/UMG):
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
@@ -389,7 +431,9 @@ Serialized exports:
 			bHasScriptImplementedPaint(BoolProperty)=False 
 	CommonTextBlock_0 (0-0-0-0): size 36 (cls: CommonTextBlock_0>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_EventStoreRoot (0-0-0-0): size 701 (cls: ExecuteUbergraph_EventStoreRoot>Function>/Script/CoreUObject)
+	ExecuteUbergraph_EventStoreRoot (0-0-0-0): size 766 (cls: ExecuteUbergraph_EventStoreRoot>Function>/Script/CoreUObject)
+	CallFunc_GetStoreCurrencies_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetStoreCurrencies_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetStoreCurrencies_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetStoreCurrencies_ReturnValue>ArrayProperty>/Script/CoreUObject)
 	Item (0-0-0-0): size 36 (cls: Item>ObjectProperty>/Script/CoreUObject)
 	BndEvt__TileViewWeeklyItems_K2Node_ComponentBoundEvent_3_OnListItemSelectionChangedDynamic__DelegateSignature (0-0-0-0): size 82 (cls: BndEvt__TileViewWeeklyItems_K2Node_ComponentBoundEvent_3_OnListItemSelectionChangedDynamic__DelegateSignature>Function>/Script/CoreUObject)
 	Item (0-0-0-0): size 36 (cls: Item>ObjectProperty>/Script/CoreUObject)
@@ -469,6 +513,11 @@ Serialized exports:
 			HorizontalAlignment(ByteProperty)=HAlign_Center 
 			Parent(ObjectProperty)=NoOffersBox=WidgetArchetype 
 			Content(ObjectProperty)=SizeBox_0=WidgetArchetype 
+	BorderSlot_0 (0-0-0-0): size 243 (cls: BorderSlot_0>BorderSlot>/Script/UMG):
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			Parent(ObjectProperty)=CommonBorder_0=WidgetArchetype 
+			Content(ObjectProperty)=HBox_Content=WidgetArchetype 
 	BorderEventItems (0-0-0-0): size 284 (cls: BorderEventItems>CommonBorder>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=Border_AthenaStore_OfferHeaderBacking_C=/Game/UI/Foundation/Border/Border_AthenaStore_OfferHeaderBacking 
@@ -509,6 +558,11 @@ Serialized exports:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=WidgetSwitcherSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
+	CommonBorder_0 (0-0-0-0): size 255 (cls: CommonBorder_0>CommonBorder>/Script/CommonUI):
+		Tag array:
+			Style(ObjectProperty)=Border-SolidBG_C=/Game/UI/Foundation/Border/Border-SolidBG 
+			Padding(StructProperty)=System.Byte[] 
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 	EventCountdown (0-0-0-0): size 380 (cls: EventCountdown>CommonDateTimeTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-S-B_C=/Game/UI/Foundation/Text/TextStyle-Base-S-B 
@@ -524,6 +578,23 @@ Serialized exports:
 			Font(StructProperty)=System.Byte[] 
 			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_2=WidgetArchetype 
+			bIsVariable(BoolProperty)=True 
+	NumericTextNeedValue (0-0-0-0): size 473 (cls: NumericTextNeedValue>CommonNumericTextBlock>/Script/CommonUI):
+		Tag array:
+			Style(ObjectProperty)=TextStyle-Base-M-B-40pc_C=/Game/UI/Foundation/Text/TextStyle-Base-M-B-40pc 
+			Text(TextProperty)=Text Block (TextBlockDefaultValue) 
+			ColorAndOpacity(StructProperty)=System.Byte[] 
+			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
+			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
+			bIsVariable(BoolProperty)=True 
+	NumericTextValue (0-0-0-0): size 351 (cls: NumericTextValue>CommonNumericTextBlock>/Script/CommonUI):
+		Tag array:
+			Style(ObjectProperty)=TextStyle-Base-M-B_C=/Game/UI/Foundation/Text/TextStyle-Base-M-B 
+			Text(TextProperty)=Text Block (TextBlockDefaultValue) 
+			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
+			Slot(ObjectProperty)=HorizontalBoxSlot_5=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
 	CommonTextBlock_0 (0-0-0-0): size 419 (cls: CommonTextBlock_0>CommonTextBlock>/Script/CommonUI):
 		Tag array:
@@ -558,6 +629,22 @@ Serialized exports:
 			Font(StructProperty)=System.Byte[] 
 			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=SizeBoxSlot_2=WidgetArchetype 
+	Label (0-0-0-0): size 354 (cls: Label>CommonTextBlock>/Script/CommonUI):
+		Tag array:
+			Style(ObjectProperty)=TextStyle-Base-M-B_C=/Game/UI/Foundation/Text/TextStyle-Base-M-B 
+			Text(TextProperty)=POINTS (DAEA77F045F8BCEC740C908E0F826920) 
+			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
+			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
+			bIsVariable(BoolProperty)=True 
+	TextSlash (0-0-0-0): size 349 (cls: TextSlash>CommonTextBlock>/Script/CommonUI):
+		Tag array:
+			Style(ObjectProperty)=TextStyle-Base-M-B_C=/Game/UI/Foundation/Text/TextStyle-Base-M-B 
+			Text(TextProperty)=/ (11BFC164493BCEF10C150A93A817E93D) 
+			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
+			Slot(ObjectProperty)=HorizontalBoxSlot_2=WidgetArchetype 
+			bIsVariable(BoolProperty)=True 
 	TextDailyCoin (0-0-0-0): size 419 (cls: TextDailyCoin>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B 
@@ -605,7 +692,7 @@ Serialized exports:
 	ComponentDelegateBinding_0 (0-0-0-0): size 526 (cls: ComponentDelegateBinding_0>ComponentDelegateBinding>/Script/Engine):
 		Tag array:
 			ComponentDelegateBindings(ArrayProperty)=[object] (inner: StructProperty)
-	WidgetArchetype (0-0-0-0): size 473 (cls: WidgetArchetype>EventStoreRoot_C):
+	WidgetArchetype (0-0-0-0): size 502 (cls: WidgetArchetype>EventStoreRoot_C):
 		Tag array:
 			CommonTextBlock_0(ObjectProperty)=CommonTextBlock_0=WidgetArchetype 
 			EventCountdown(ObjectProperty)=EventCountdown=WidgetArchetype 
@@ -613,6 +700,7 @@ Serialized exports:
 			NoOffersBox(ObjectProperty)=NoOffersBox=WidgetArchetype 
 			OverlayProgressSpinner(ObjectProperty)=OverlayProgressSpinner=WidgetArchetype 
 			ProgressSpinner(ObjectProperty)=ProgressSpinner=WidgetArchetype 
+			StoreCurrencyDisplayStack(ObjectProperty)=StoreCurrencyDisplayStack=WidgetArchetype 
 			SwitcherItemsProgress(ObjectProperty)=SwitcherItemsProgress=WidgetArchetype 
 			TextDailyCoin(ObjectProperty)=TextDailyCoin=WidgetArchetype 
 			TextGoldBar(ObjectProperty)=TextGoldBar=WidgetArchetype 
@@ -650,6 +738,20 @@ Serialized exports:
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=BorderSlot_0=WidgetArchetype 
+	HBox_Content (0-0-0-0): size 108 (cls: HBox_Content>HorizontalBox>/Script/UMG):
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=BorderSlot_0=WidgetArchetype 
+			bIsVariable(BoolProperty)=True 
+	HBoxNeed (0-0-0-0): size 153 (cls: HBoxNeed>HorizontalBox>/Script/UMG):
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=HorizontalBoxSlot_2=WidgetArchetype 
+			bIsVariable(BoolProperty)=True 
+			Visibility(EnumProperty)=ESlateVisibility::Visible 
+	HorizontalBox_0 (0-0-0-0): size 65 (cls: HorizontalBox_0>HorizontalBox>/Script/UMG):
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 	HorizontalBoxSlot_0 (0-0-0-0): size 197 (cls: HorizontalBoxSlot_0>HorizontalBoxSlot>/Script/UMG):
 		Tag array:
 			Size(StructProperty)=System.Byte[] 
@@ -750,6 +852,48 @@ Serialized exports:
 			VerticalAlignment(ByteProperty)=VAlign_Center 
 			Parent(ObjectProperty)=HorizontalBox_8=WidgetArchetype 
 			Content(ObjectProperty)=TextDailyCoin=WidgetArchetype 
+	HorizontalBoxSlot_0 (0-0-0-0): size 152 (cls: HorizontalBoxSlot_0>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=HBox_Content=WidgetArchetype 
+			Content(ObjectProperty)=PointsCounter=WidgetArchetype 
+	HorizontalBoxSlot_0 (0-0-0-0): size 111 (cls: HorizontalBoxSlot_0>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=HBoxNeed=WidgetArchetype 
+			Content(ObjectProperty)=NumericTextNeedValue=WidgetArchetype 
+	HorizontalBoxSlot_2 (0-0-0-0): size 226 (cls: HorizontalBoxSlot_2>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=HBoxNeed=WidgetArchetype 
+			Content(ObjectProperty)=TextSlash=WidgetArchetype 
+	HorizontalBoxSlot_0 (0-0-0-0): size 238 (cls: HorizontalBoxSlot_0>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			HorizontalAlignment(ByteProperty)=HAlign_Left 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
+			Content(ObjectProperty)=Label=WidgetArchetype 
+	HorizontalBoxSlot_1 (0-0-0-0): size 152 (cls: HorizontalBoxSlot_1>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Left 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
+			Content(ObjectProperty)=ScaleBox_0=WidgetArchetype 
+	HorizontalBoxSlot_2 (0-0-0-0): size 111 (cls: HorizontalBoxSlot_2>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
+			Content(ObjectProperty)=HBoxNeed=WidgetArchetype 
+	HorizontalBoxSlot_5 (0-0-0-0): size 238 (cls: HorizontalBoxSlot_5>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			HorizontalAlignment(ByteProperty)=HAlign_Left 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
+			Content(ObjectProperty)=NumericTextValue=WidgetArchetype 
 	Currency1ItemImage (0-0-0-0): size 210 (cls: Currency1ItemImage>Image>/Script/UMG):
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
@@ -765,6 +909,11 @@ Serialized exports:
 			Brush(StructProperty)=System.Byte[] 
 			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
 			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
+	imageIcon (0-0-0-0): size 298 (cls: imageIcon>Image>/Script/UMG):
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			Slot(ObjectProperty)=ScaleBoxSlot_0=WidgetArchetype 
+			RenderTransform(StructProperty)=System.Byte[] 
 	CallFunc_GetNumItems_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetNumItems_ReturnValue>IntProperty>/Script/CoreUObject)
 	CallFunc_Add_IntInt_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue>IntProperty>/Script/CoreUObject)
 	CallFunc_Array_Length_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Array_Length_ReturnValue>IntProperty>/Script/CoreUObject)
@@ -796,6 +945,7 @@ Serialized exports:
 	NoOffersBox (0-0-0-0): size 36 (cls: NoOffersBox>ObjectProperty>/Script/CoreUObject)
 	OverlayProgressSpinner (0-0-0-0): size 36 (cls: OverlayProgressSpinner>ObjectProperty>/Script/CoreUObject)
 	ProgressSpinner (0-0-0-0): size 36 (cls: ProgressSpinner>ObjectProperty>/Script/CoreUObject)
+	StoreCurrencyDisplayStack (0-0-0-0): size 36 (cls: StoreCurrencyDisplayStack>ObjectProperty>/Script/CoreUObject)
 	SwitcherItemsProgress (0-0-0-0): size 36 (cls: SwitcherItemsProgress>ObjectProperty>/Script/CoreUObject)
 	TextDailyCoin (0-0-0-0): size 36 (cls: TextDailyCoin>ObjectProperty>/Script/CoreUObject)
 	TextGoldBar (0-0-0-0): size 36 (cls: TextGoldBar>ObjectProperty>/Script/CoreUObject)
@@ -817,6 +967,20 @@ Serialized exports:
 			Padding(StructProperty)=System.Byte[] 
 			Parent(ObjectProperty)=OverlayProgressSpinner=WidgetArchetype 
 			Content(ObjectProperty)=ProgressSpinner=WidgetArchetype 
+	PointsCounter (0-0-0-0): size 439 (cls: PointsCounter>PointsCounter_C>/Game/UI/Frontend/Command/PointsCounter):
+		Tag array:
+			HBoxNeed(ObjectProperty)=HBoxNeed=WidgetArchetype 
+			imageIcon(ObjectProperty)=imageIcon=WidgetArchetype 
+			Label(ObjectProperty)=Label=WidgetArchetype 
+			NumericTextNeedValue(ObjectProperty)=NumericTextNeedValue=WidgetArchetype 
+			NumericTextValue(ObjectProperty)=NumericTextValue=WidgetArchetype 
+			ScaleBox_0(ObjectProperty)=ScaleBox_0=WidgetArchetype 
+			TextSlash(ObjectProperty)=TextSlash=WidgetArchetype 
+			Display Icon(StructProperty)=System.Byte[] 
+			IconShouldScale(BoolProperty)=True 
+			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
+			bCookedWidgetTree(BoolProperty)=True 
+			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 	SafeZone_0 (0-0-0-0): size 131 (cls: SafeZone_0>SafeZone>/Script/UMG):
 		Tag array:
 			PadTop(BoolProperty)=False 
@@ -827,19 +991,30 @@ Serialized exports:
 		Tag array:
 			Parent(ObjectProperty)=SafeZone_0=WidgetArchetype 
 			Content(ObjectProperty)=VerticalBox_0=WidgetArchetype 
+	ScaleBox_0 (0-0-0-0): size 149 (cls: ScaleBox_0>ScaleBox>/Script/UMG):
+		Tag array:
+			Stretch(ByteProperty)=EStretch::None 
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
+			bIsVariable(BoolProperty)=True 
+	ScaleBoxSlot_0 (0-0-0-0): size 70 (cls: ScaleBoxSlot_0>ScaleBoxSlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=ScaleBox_0=WidgetArchetype 
+			Content(ObjectProperty)=imageIcon=WidgetArchetype 
 	SizeBox_0 (0-0-0-0): size 137 (cls: SizeBox_0>SizeBox>/Script/UMG):
 		Tag array:
 			bOverride_HeightOverride(BoolProperty)=True 
 			HeightOverride(FloatProperty)=48 
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=BorderSlot_0=WidgetArchetype 
-	SizeBox_1 (0-0-0-0): size 166 (cls: SizeBox_1>SizeBox>/Script/UMG):
+	SizeBox_1 (0-0-0-0): size 207 (cls: SizeBox_1>SizeBox>/Script/UMG):
 		Tag array:
 			bOverride_HeightOverride(BoolProperty)=True 
 			HeightOverride(FloatProperty)=62 
 			MinDesiredWidth(FloatProperty)=200 
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=VerticalBoxSlot_2=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
 	SizeBox_10 (0-0-0-0): size 70 (cls: SizeBox_10>SizeBox>/Script/UMG):
 		Tag array:
 			MaxDesiredWidth(FloatProperty)=132 
@@ -850,6 +1025,12 @@ Serialized exports:
 			HeightOverride(FloatProperty)=48 
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=BorderSlot_1=WidgetArchetype 
+	SizeBox_3 (0-0-0-0): size 137 (cls: SizeBox_3>SizeBox>/Script/UMG):
+		Tag array:
+			bOverride_HeightOverride(BoolProperty)=True 
+			HeightOverride(FloatProperty)=76 
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=VerticalBoxSlot_0=WidgetArchetype 
 	SizeBox_4 (0-0-0-0): size 137 (cls: SizeBox_4>SizeBox>/Script/UMG):
 		Tag array:
 			bOverride_HeightOverride(BoolProperty)=True 
@@ -892,6 +1073,10 @@ Serialized exports:
 		Tag array:
 			Parent(ObjectProperty)=SizeBox_2=WidgetArchetype 
 			Content(ObjectProperty)=HorizontalBox_1=WidgetArchetype 
+	SizeBoxSlot_0 (0-0-0-0): size 70 (cls: SizeBoxSlot_0>SizeBoxSlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=SizeBox_3=WidgetArchetype 
+			Content(ObjectProperty)=StoreCurrencyDisplayStack=WidgetArchetype 
 	SizeBoxSlot_1 (0-0-0-0): size 70 (cls: SizeBoxSlot_1>SizeBoxSlot>/Script/UMG):
 		Tag array:
 			Parent(ObjectProperty)=SizeBox_4=WidgetArchetype 
@@ -904,6 +1089,13 @@ Serialized exports:
 		Tag array:
 			Parent(ObjectProperty)=SizeBox_7=WidgetArchetype 
 			Content(ObjectProperty)=VerticalBox_4=WidgetArchetype 
+	StoreCurrencyDisplayStack (0-0-0-0): size 154 (cls: StoreCurrencyDisplayStack>StoreCurrencyDisplayStack_C>/Game/UI/Frontend/Store/StoreCurrencyDisplayStack):
+		Tag array:
+			HBox_Content(ObjectProperty)=HBox_Content=WidgetArchetype 
+			PointsCounter(ObjectProperty)=PointsCounter=WidgetArchetype 
+			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
+			bCookedWidgetTree(BoolProperty)=True 
+			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
 	CallFunc_Array_Get_Item (0-0-0-0): size 32 (cls: CallFunc_Array_Get_Item>StrProperty>/Script/CoreUObject)
 	CallFunc_GetSeasonStoreEndDate_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetSeasonStoreEndDate_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_GetWeeklyStoreEndDate_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetWeeklyStoreEndDate_ReturnValue>StructProperty>/Script/CoreUObject)
@@ -911,7 +1103,7 @@ Serialized exports:
 	CallFunc_Conv_IntToText_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Conv_IntToText_ReturnValue>TextProperty>/Script/CoreUObject)
 	CallFunc_Conv_IntToText_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Conv_IntToText_ReturnValue>TextProperty>/Script/CoreUObject)
 	CallFunc_Conv_IntToText_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Conv_IntToText_ReturnValue1>TextProperty>/Script/CoreUObject)
-	VBoxOffers (0-0-0-0): size 112 (cls: VBoxOffers>VerticalBox>/Script/UMG):
+	VBoxOffers (0-0-0-0): size 116 (cls: VBoxOffers>VerticalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=WidgetSwitcherSlot_1=WidgetArchetype 
@@ -930,6 +1122,13 @@ Serialized exports:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=SizeBoxSlot_1=WidgetArchetype 
 			Navigation(ObjectProperty)=WidgetNavigation_1=WidgetArchetype 
+	VerticalBoxSlot_0 (0-0-0-0): size 267 (cls: VerticalBoxSlot_0>VerticalBoxSlot>/Script/UMG):
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=VBoxOffers=WidgetArchetype 
+			Content(ObjectProperty)=SizeBox_3=WidgetArchetype 
 	VerticalBoxSlot_1 (0-0-0-0): size 168 (cls: VerticalBoxSlot_1>VerticalBoxSlot>/Script/UMG):
 		Tag array:
 			Size(StructProperty)=System.Byte[] 
@@ -1001,3 +1200,9 @@ Serialized exports:
 	WidgetTree_0 (0-0-0-0): size 41 (cls: WidgetTree_0>WidgetTree>/Script/UMG):
 		Tag array:
 			RootWidget(ObjectProperty)=SafeZone_0=WidgetArchetype 
+	WidgetTree_0 (0-0-0-0): size 41 (cls: WidgetTree_0>WidgetTree>/Script/UMG):
+		Tag array:
+			RootWidget(ObjectProperty)=CommonBorder_0=WidgetArchetype 
+	WidgetTree_0 (0-0-0-0): size 41 (cls: WidgetTree_0>WidgetTree>/Script/UMG):
+		Tag array:
+			RootWidget(ObjectProperty)=HorizontalBox_0=WidgetArchetype 

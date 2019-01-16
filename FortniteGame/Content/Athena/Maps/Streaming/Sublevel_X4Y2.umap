@@ -17,6 +17,7 @@ Name table:
 	/Game/Athena/Environments/Blueprints/Athena_Tree_Pine_01_MT
 	/Game/Athena/Environments/Blueprints/Athena_Tree_Pine_03_MT
 	/Game/Athena/Environments/Blueprints/Athena_Tree_WeepingWillow_01
+	/Game/Athena/Environments/Blueprints/BP_Athena_SpeedSign
 	/Game/Athena/Environments/Blueprints/LF_1x1_Foundation
 	/Game/Athena/Environments/Blueprints/Tiered_Athena_FloorLoot_01
 	/Game/Athena/Environments/Landscape/Foliage/Athena_SM_WavyGrass_TopologyColor
@@ -64,6 +65,7 @@ Name table:
 	/Game/Effects/Fort_Effects/BluePrints/Frosty/BP_Frosty_Progression_SnowSpline_OpenArea_Master
 	/Game/Environments/Foliage/FoliageType/GrassFoliageType_Athena
 	/Game/Environments/Props/Golf_Course/Materials/M_GolfCourse_Sign_Numbers
+	/Game/Environments/Props/Street/Materials/ElectronicSignChallenge
 	/Game/Environments/Sets/Gym/Materials/MI_Gym_StabilityBall_StaticColor
 	/Game/Environments/Sets/Gym/Meshes/Prop_Gym_StabilityBall
 	/Game/Environments/World/Foundations/Materials/M_Foundation_Texture
@@ -77,7 +79,7 @@ Name table:
 	/Script/FortniteGame.FortNavSystem
 	/Script/GameplayTags
 	/Script/NavigationSystem
-	76927B120C6645ACB9200E7FB8896AC3_E6C478A84B0525552943BC8B267F857F_22ACA90A_76B2292B_FCE4710E_ProxyLODMeshReduction
+	76927B120C6645ACB9200E7FB8896AC3_E6C478A84B0525552943BC8B267F857F_22ACA90A_76B2292B_09B7703D_ProxyLODMeshReduction
 	Actor_13_6A42496A4663E346C97AFEB9993C68F7
 	ActorData
 	AdditionalWorlds
@@ -155,6 +157,7 @@ Name table:
 	battlepass_athena_score_hole_02
 	battlepass_athena_score_hole_03
 	battlepass_athena_score_hole_04
+	battlepass_br_recordspeed_radarsigns_02
 	bAutoSpawnMissingNavData
 	bAutoWeld
 	bCanEverAffectNavigation
@@ -170,6 +173,7 @@ Name table:
 	BlueprintCreatedComponents
 	BlueprintGeneratedClass
 	bMirrored
+	BndEvt__Box_K2Node_ComponentBoundEvent_0_ComponentBeginOverlapSignature__DelegateSignature
 	BndEvt__HoleCollision_K2Node_ComponentBoundEvent_0_ComponentBeginOverlapSignature__DelegateSignature
 	BndEvt__TriggerBox_K2Node_ComponentBoundEvent_0_ComponentBeginOverlapSignature__DelegateSignature
 	bNetAddressable
@@ -182,10 +186,13 @@ Name table:
 	BounceCar__UpdateFunc
 	BounceCar_Vertical_Bounce_Component_05733C554001D77C015F47B548F45A12
 	Box
+	Box_GEN_VARIABLE
 	BoxComponent
 	BoxComponent0
 	BoxExtent
 	BoxSphereBounds
+	BP_Athena_SpeedSign_02
+	BP_Athena_SpeedSign_C
 	BP_CalendarProps_Progressive_AlwaysRelevant_C
 	BP_CalendarProps_Progressive_C
 	BP_Frosty_Progression_Large_Ambient_Master_C
@@ -255,6 +262,7 @@ Name table:
 	Default__B_GolfMinigame_Hole_C
 	Default__B_GolfMinigame_TeeBox_C
 	Default__BlueprintGeneratedClass
+	Default__BP_Athena_SpeedSign_C
 	Default__BP_CalendarProps_Progressive_AlwaysRelevant_C
 	Default__BP_CalendarProps_Progressive_C
 	Default__BP_Frosty_Progression_Large_Ambient_Master_C
@@ -279,6 +287,7 @@ Name table:
 	Default__LevelBounds
 	Default__LF_1x1_Foundation_C
 	Default__LODActor
+	Default__MaterialInstanceDynamic
 	Default__Model
 	Default__NavigationSystemModuleConfig
 	Default__Prop_GolfCourse_Tee_Sign1_C
@@ -298,6 +307,7 @@ Name table:
 	DefaultSceneRoot_GEN_VARIABLE
 	DelegateProperty
 	DirectionPropertyName
+	DynamicMat
 	EBrushType
 	ECanBeCharacterBase
 	ECB_Yes
@@ -313,6 +323,7 @@ Name table:
 	EComponentMobility::Static
 	ECR_Ignore
 	EditMode(Don'tTouch)
+	ElectronicSignChallenge
 	Engine
 	EnumProperty
 	ESpawnActorCollisionHandlingMethod
@@ -415,7 +426,9 @@ Name table:
 	M_Athena_GolfBunker_01
 	M_Foundation_Texture
 	M_GolfCourse_Sign_Numbers
+	Material
 	MaterialInstanceConstant
+	MaterialInstanceDynamic
 	MaxAngularVelocity
 	MaxCullDistance
 	MaxCullObjectSize
@@ -460,6 +473,7 @@ Name table:
 	NODE_AddStaticMeshComponent-1
 	None
 	NumBuiltInstances
+	ObjBackendName
 	Object
 	ObjectiveBackendName
 	ObjectProperty
@@ -472,6 +486,7 @@ Name table:
 	P_Loot_Effect_Vending
 	P_Loot_Effect_Vending_GEN_VARIABLE
 	Package
+	Parent
 	ParentActorToAttachTo
 	ParticleSystemComponent
 	PersistentLevel
@@ -499,6 +514,7 @@ Name table:
 	PropertySetObject
 	Proxy
 	Quat
+	record_speed_radar_sign_02
 	RelativeLocation
 	RelativeRotation
 	RelativeScale3D
@@ -1701,12 +1717,35 @@ Serialized exports:
 			bNetAddressable(BoolProperty)=True 
 			CreationMethod(EnumProperty)=EComponentCreationMethod::SimpleConstructionScript 
 			UCSModifiedProperties(ArrayProperty)=[object] (inner: StructProperty)
+	Box (0-0-0-0): size 422 (cls: Box>BoxComponent>/Script/Engine):
+		Tag array:
+			BoxExtent(StructProperty)=Vector(768,1990.384,367.2888) 
+			CachedMaxDrawDistance(FloatProperty)=14164.14 
+			OnComponentBeginOverlap(MulticastDelegateProperty)=[object] 
+			AttachParent(ObjectProperty)=StaticMeshComponent0=Sublevel_X4Y2 
+			RelativeLocation(StructProperty)=Vector(-298.5161,1622.705,193.6342) 
+			RelativeRotation(StructProperty)=Rotator(0,-14.36064,8E-06) 
+			RelativeScale3D(StructProperty)=Vector(0.75,1,1) 
+			bNetAddressable(BoolProperty)=True 
+			CreationMethod(EnumProperty)=EComponentCreationMethod::SimpleConstructionScript 
 	BoxComponent0 (0-0-0-0): size 275 (cls: BoxComponent0>BoxComponent>/Script/Engine):
 		Tag array:
 			AreaClass(ObjectProperty)=FortMetaNavArea_Obstacles=/Script/FortniteGame 
 			BodyInstance(StructProperty)=System.Byte[] 
 			RelativeLocation(StructProperty)=Vector(-599.6172,3820,2782.439) 
 			RelativeScale3D(StructProperty)=Vector(40742.17,48088,9380.878) 
+	BP_Athena_SpeedSign_02 (0-0-0-0): size 415 (cls: BP_Athena_SpeedSign_02>BP_Athena_SpeedSign_C>/Game/Athena/Environments/Blueprints/BP_Athena_SpeedSign):
+		Tag array:
+			Box(ObjectProperty)=Box=Sublevel_X4Y2 
+			DynamicMat(ObjectProperty)=MaterialInstanceDynamic_0=Sublevel_X4Y2 
+			ObjBackendName(NameProperty)=battlepass_br_recordspeed_radarsigns_02 
+			ObjStat(StructProperty)=System.Byte[] 
+			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Sublevel_X4Y2 
+			MyGuid(StructProperty)=Guid: 480323718-1301043000-3583060660-1535603340 
+			DataVersion(IntProperty)=1 
+			CullDistance(FloatProperty)=14164.14 
+			RootComponent(ObjectProperty)=StaticMeshComponent0=Sublevel_X4Y2 
+			BlueprintCreatedComponents(ArrayProperty)=[object] (inner: ObjectProperty)
 	Calendar_Snow_X4Y2 (0-0-0-0): size 1670 (cls: Calendar_Snow_X4Y2>BP_CalendarProps_Progressive_AlwaysRelevant_C>/Game/Athena/Prototype/Blueprints/CalendarProps/BP_CalendarProps_Progressive_AlwaysRelevant):
 		Tag array:
 			Scene(ObjectProperty)=Scene=Sublevel_X4Y2 
@@ -1720,7 +1759,7 @@ Serialized exports:
 	BuildingFoundation3x38 (0-0-0-0): size 287 (cls: BuildingFoundation3x38>BuildingFoundation3x3>/Script/FortniteGame):
 		Tag array:
 			AdditionalWorlds(ArrayProperty)=[object] (inner: SoftObjectProperty)
-			StreamingBoundingBox(StructProperty)=Box(Min(Vector(-1280,-256.0002,-40)) Max(Vector(256.0002,1280,-8)),14081) 
+			StreamingBoundingBox(StructProperty)=Box(Min(Vector(-1280,-256.0002,-40)) Max(Vector(256.0002,1280,-8)),18177) 
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Sublevel_X4Y2 
 			MyGuid(StructProperty)=Guid: 232303597-1152668552-840154548-234858684 
 			DataVersion(IntProperty)=1 
@@ -1728,7 +1767,7 @@ Serialized exports:
 	BuildingFoundation3x79 (0-0-0-0): size 287 (cls: BuildingFoundation3x79>BuildingFoundation3x3>/Script/FortniteGame):
 		Tag array:
 			AdditionalWorlds(ArrayProperty)=[object] (inner: SoftObjectProperty)
-			StreamingBoundingBox(StructProperty)=Box(Min(Vector(-1280,-256.0002,-40)) Max(Vector(256.0002,1280,-8)),14081) 
+			StreamingBoundingBox(StructProperty)=Box(Min(Vector(-1280,-256.0002,-40)) Max(Vector(256.0002,1280,-8)),18177) 
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Sublevel_X4Y2 
 			MyGuid(StructProperty)=Guid: 3505953294-1084898467-3345446286-1688687907 
 			DataVersion(IntProperty)=1 
@@ -1736,7 +1775,7 @@ Serialized exports:
 	BuildingFoundation5x77 (0-0-0-0): size 287 (cls: BuildingFoundation5x77>BuildingFoundation5x5>/Script/FortniteGame):
 		Tag array:
 			AdditionalWorlds(ArrayProperty)=[object] (inner: SoftObjectProperty)
-			StreamingBoundingBox(StructProperty)=Box(Min(Vector(-2304,-256.0003,-40)) Max(Vector(256.0002,2304,-8)),14081) 
+			StreamingBoundingBox(StructProperty)=Box(Min(Vector(-2304,-256.0003,-40)) Max(Vector(256.0002,2304,-8)),18177) 
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Sublevel_X4Y2 
 			MyGuid(StructProperty)=Guid: 1154252420-1234492987-2154152344-4247848815 
 			DataVersion(IntProperty)=1 
@@ -1904,7 +1943,7 @@ Serialized exports:
 		Tag array:
 			SortedInstances(ArrayProperty)=[object] (inner: IntProperty)
 			NumBuiltInstances(IntProperty)=973 
-			BuiltInstanceBounds(StructProperty)=Box(Min(Vector(16040.94,-14162.26,-5.004639)) Max(Vector(19803.07,-7843.442,32.80694)),41217) 
+			BuiltInstanceBounds(StructProperty)=Box(Min(Vector(16040.94,-14162.26,-5.004639)) Max(Vector(19803.07,-7843.442,32.80694)),41985) 
 			bEnableDensityScaling(BoolProperty)=True 
 			CacheMeshExtendedBounds(StructProperty)=System.Byte[] 
 			InstanceCountToRender(IntProperty)=973 
@@ -2104,10 +2143,10 @@ Serialized exports:
 	InstancedFoliageActor_0 (0-0-0-0): size 53 (cls: InstancedFoliageActor_0>InstancedFoliageActor>/Script/Foliage):
 		Tag array:
 			RootComponent(ObjectProperty)=RootComponent0=Sublevel_X4Y2 
-	PersistentLevel (0-0-0-0): size 1144 (cls: PersistentLevel>Level>/Script/Engine):
+	PersistentLevel (0-0-0-0): size 1148 (cls: PersistentLevel>Level>/Script/Engine):
 		Tag array:
 			Model(ObjectProperty)=Model_0=Sublevel_X4Y2 
-			LevelScriptActor(ObjectProperty)=Sublevel_X4Y2_C_2=Sublevel_X4Y2 
+			LevelScriptActor(ObjectProperty)=Sublevel_X4Y2_C_0=Sublevel_X4Y2 
 			LevelBuildDataId(StructProperty)=Guid: 3982462796-1085738323-452537989-141778236 
 			WorldSettings(ObjectProperty)=FortWorldSettings=Sublevel_X4Y2 
 	LevelBounds_0 (0-0-0-0): size 41 (cls: LevelBounds_0>LevelBounds>/Script/Engine):
@@ -2117,7 +2156,7 @@ Serialized exports:
 		Tag array:
 			BuildingGroups(ArrayProperty)=[object] (inner: ObjectProperty)
 			AdditionalWorlds(ArrayProperty)=[object] (inner: SoftObjectProperty)
-			StreamingBoundingBox(StructProperty)=Box(Min(Vector(-256.0001,-256.0002,0)) Max(Vector(256.0001,256.0001,47.60808)),14081) 
+			StreamingBoundingBox(StructProperty)=Box(Min(Vector(-256.0001,-256.0002,0)) Max(Vector(256.0001,256.0001,47.60808)),18177) 
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Sublevel_X4Y2 
 			MyGuid(StructProperty)=Guid: 1071838075-1136808600-3955244974-3668943051 
 			DataVersion(IntProperty)=1 
@@ -2126,7 +2165,7 @@ Serialized exports:
 		Tag array:
 			BuildingGroups(ArrayProperty)=[object] (inner: ObjectProperty)
 			AdditionalWorlds(ArrayProperty)=[object] (inner: SoftObjectProperty)
-			StreamingBoundingBox(StructProperty)=Box(Min(Vector(-256.0001,-256.0002,0)) Max(Vector(256.0001,256.0001,47.60808)),14081) 
+			StreamingBoundingBox(StructProperty)=Box(Min(Vector(-256.0001,-256.0002,0)) Max(Vector(256.0001,256.0001,47.60808)),18177) 
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Sublevel_X4Y2 
 			MyGuid(StructProperty)=Guid: 128977741-1170152683-2573502601-390169752 
 			DataVersion(IntProperty)=1 
@@ -2135,7 +2174,7 @@ Serialized exports:
 		Tag array:
 			BuildingGroups(ArrayProperty)=[object] (inner: ObjectProperty)
 			AdditionalWorlds(ArrayProperty)=[object] (inner: SoftObjectProperty)
-			StreamingBoundingBox(StructProperty)=Box(Min(Vector(-256.0001,-256.0002,0)) Max(Vector(256.0001,256.0001,47.60808)),14081) 
+			StreamingBoundingBox(StructProperty)=Box(Min(Vector(-256.0001,-256.0002,0)) Max(Vector(256.0001,256.0001,47.60808)),18177) 
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Sublevel_X4Y2 
 			MyGuid(StructProperty)=Guid: 3594162546-1250340054-1955042958-1361198907 
 			DataVersion(IntProperty)=1 
@@ -2144,11 +2183,14 @@ Serialized exports:
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Sublevel_X4Y2 
 			Proxy(ObjectProperty)=Sublevel_X4Y2_0_HLOD=/Game/Athena/Maps/Streaming/HLOD/Sublevel_X4Y2_0_HLOD 
-			Key(NameProperty)=76927B120C6645ACB9200E7FB8896AC3_E6C478A84B0525552943BC8B267F857F_22ACA90A_76B2292B_FCE4710E_ProxyLODMeshReduction 
+			Key(NameProperty)=76927B120C6645ACB9200E7FB8896AC3_E6C478A84B0525552943BC8B267F857F_22ACA90A_76B2292B_09B7703D_ProxyLODMeshReduction 
 			LODDrawDistance(FloatProperty)=76334.66 
 			LODLevel(IntProperty)=1 
 			SubActors(ArrayProperty)=[object] (inner: ObjectProperty)
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Sublevel_X4Y2 
+	MaterialInstanceDynamic_0 (0-0-0-0): size 41 (cls: MaterialInstanceDynamic_0>MaterialInstanceDynamic>/Script/Engine):
+		Tag array:
+			Parent(ObjectProperty)=ElectronicSignChallenge=/Game/Environments/Props/Street/Materials/ElectronicSignChallenge 
 	Model_4 (0-0-0-0): size 3006 (cls: Model_4>Model>/Script/Engine)
 	Model_4 (0-0-0-0): size 3018 (cls: Model_4>Model>/Script/Engine)
 	Model_4 (0-0-0-0): size 3018 (cls: Model_4>Model>/Script/Engine)
@@ -2166,7 +2208,7 @@ Serialized exports:
 			CreationMethod(EnumProperty)=EComponentCreationMethod::SimpleConstructionScript 
 	TrasureLight (0-0-0-0): size 231 (cls: TrasureLight>PointLightComponent>/Script/Engine):
 		Tag array:
-			MaxDrawDistance(FloatProperty)=14141.88 
+			MaxDrawDistance(FloatProperty)=14181.11 
 			MaxDistanceFadeRange(FloatProperty)=2048 
 			LightGuid(StructProperty)=Guid: 1209128625-1113852643-1202543025-1889685133 
 			AttachParent(ObjectProperty)=StaticMeshComponent0=Sublevel_X4Y2 
@@ -2174,7 +2216,7 @@ Serialized exports:
 			CreationMethod(EnumProperty)=EComponentCreationMethod::SimpleConstructionScript 
 	TrasureLight (0-0-0-0): size 231 (cls: TrasureLight>PointLightComponent>/Script/Engine):
 		Tag array:
-			MaxDrawDistance(FloatProperty)=14141.87 
+			MaxDrawDistance(FloatProperty)=14181.11 
 			MaxDistanceFadeRange(FloatProperty)=2048 
 			LightGuid(StructProperty)=Guid: 3256626224-1330059595-1689223821-3433090215 
 			AttachParent(ObjectProperty)=StaticMeshComponent0=Sublevel_X4Y2 
@@ -2182,7 +2224,7 @@ Serialized exports:
 			CreationMethod(EnumProperty)=EComponentCreationMethod::SimpleConstructionScript 
 	TrasureLight (0-0-0-0): size 231 (cls: TrasureLight>PointLightComponent>/Script/Engine):
 		Tag array:
-			MaxDrawDistance(FloatProperty)=14141.87 
+			MaxDrawDistance(FloatProperty)=14181.11 
 			MaxDistanceFadeRange(FloatProperty)=2048 
 			LightGuid(StructProperty)=Guid: 3626948377-1155754389-1941435794-3197580848 
 			AttachParent(ObjectProperty)=StaticMeshComponent0=Sublevel_X4Y2 
@@ -2390,7 +2432,7 @@ Serialized exports:
 	NODE_AddSpotLightComponent-1 (0-0-0-0): size 327 (cls: NODE_AddSpotLightComponent-1>SpotLightComponent>/Script/Engine):
 		Tag array:
 			MaxDistanceFadeRange(FloatProperty)=2048 
-			LightGuid(StructProperty)=Guid: 1612257657-1212308615-4046826883-193256455 
+			LightGuid(StructProperty)=Guid: 631200171-1250607473-3608247706-2759450438 
 			VolumetricScatteringIntensity(FloatProperty)=0 
 			AttachParent(ObjectProperty)=StaticMeshComponent0=Sublevel_X4Y2 
 			RelativeLocation(StructProperty)=Vector(-531.1011,100.5061,103.6691) 
@@ -2399,7 +2441,7 @@ Serialized exports:
 	NODE_AddSpotLightComponent-2 (0-0-0-0): size 327 (cls: NODE_AddSpotLightComponent-2>SpotLightComponent>/Script/Engine):
 		Tag array:
 			MaxDistanceFadeRange(FloatProperty)=2048 
-			LightGuid(StructProperty)=Guid: 3725472630-1092106973-3728197048-3415963460 
+			LightGuid(StructProperty)=Guid: 3707055018-1339015037-2582752918-2128381715 
 			VolumetricScatteringIntensity(FloatProperty)=0 
 			AttachParent(ObjectProperty)=StaticMeshComponent0=Sublevel_X4Y2 
 			RelativeLocation(StructProperty)=Vector(-531.1009,-101.0354,103.6691) 
@@ -2408,7 +2450,7 @@ Serialized exports:
 	NODE_AddSpotLightComponent-3 (0-0-0-0): size 266 (cls: NODE_AddSpotLightComponent-3>SpotLightComponent>/Script/Engine):
 		Tag array:
 			MaxDistanceFadeRange(FloatProperty)=2048 
-			LightGuid(StructProperty)=Guid: 1936273924-1285265961-2146385822-281613138 
+			LightGuid(StructProperty)=Guid: 2509059845-1304289611-2853258373-2677156154 
 			VolumetricScatteringIntensity(FloatProperty)=0 
 			AttachParent(ObjectProperty)=StaticMeshComponent0=Sublevel_X4Y2 
 			RelativeLocation(StructProperty)=Vector(153.3906,-94.49038,74.11678) 
@@ -2416,7 +2458,7 @@ Serialized exports:
 	NODE_AddSpotLightComponent-5 (0-0-0-0): size 266 (cls: NODE_AddSpotLightComponent-5>SpotLightComponent>/Script/Engine):
 		Tag array:
 			MaxDistanceFadeRange(FloatProperty)=2048 
-			LightGuid(StructProperty)=Guid: 1268830121-1091081177-333459889-1789949840 
+			LightGuid(StructProperty)=Guid: 227548137-1297145096-1126593468-1277862725 
 			VolumetricScatteringIntensity(FloatProperty)=0 
 			AttachParent(ObjectProperty)=StaticMeshComponent0=Sublevel_X4Y2 
 			RelativeLocation(StructProperty)=Vector(153.3905,96.76579,74.11678) 
@@ -3384,6 +3426,13 @@ Serialized exports:
 			bNetAddressable(BoolProperty)=True 
 			CreationMethod(EnumProperty)=EComponentCreationMethod::SimpleConstructionScript 
 			UCSModifiedProperties(ArrayProperty)=[object] (inner: StructProperty)
+	StaticMeshComponent0 (0-0-0-0): size 295 (cls: StaticMeshComponent0>StaticMeshComponent>/Script/Engine):
+		Tag array:
+			OverrideMaterials(ArrayProperty)=[object] (inner: ObjectProperty)
+			CachedMaxDrawDistance(FloatProperty)=14164.14 
+			BodyInstance(StructProperty)=System.Byte[] 
+			RelativeLocation(StructProperty)=Vector(-1338.711,3873.512,34.04409) 
+			RelativeRotation(StructProperty)=Rotator(1.37297,-399.3538,0.151965) 
 	StaticMeshComponent0 (0-0-0-0): size 164 (cls: StaticMeshComponent0>StaticMeshComponent>/Script/Engine):
 		Tag array:
 			RelativeLocation(StructProperty)=Vector(4096,7680,0) 
@@ -3896,7 +3945,7 @@ Serialized exports:
 			RelativeLocation(StructProperty)=Vector(6324,14720,28) 
 	S_Chest_SmokeSheet (0-0-0-0): size 141 (cls: S_Chest_SmokeSheet>StaticMeshComponent>/Script/Engine):
 		Tag array:
-			CachedMaxDrawDistance(FloatProperty)=14141.88 
+			CachedMaxDrawDistance(FloatProperty)=14181.11 
 			AttachParent(ObjectProperty)=StaticMeshComponent0=Sublevel_X4Y2 
 			bNetAddressable(BoolProperty)=True 
 			CreationMethod(EnumProperty)=EComponentCreationMethod::SimpleConstructionScript 
@@ -3904,12 +3953,12 @@ Serialized exports:
 		Tag array:
 			OverrideMaterials(ArrayProperty)=[object] (inner: ObjectProperty)
 			LDMaxDrawDistance(FloatProperty)=0 
-			CachedMaxDrawDistance(FloatProperty)=14141.88 
+			CachedMaxDrawDistance(FloatProperty)=14181.11 
 			RelativeLocation(StructProperty)=Vector(3537.594,2043.742,1383.102) 
 			RelativeRotation(StructProperty)=Rotator(-0.9766909,118.2993,-2.641459) 
 	S_Chest_SmokeSheet (0-0-0-0): size 141 (cls: S_Chest_SmokeSheet>StaticMeshComponent>/Script/Engine):
 		Tag array:
-			CachedMaxDrawDistance(FloatProperty)=14141.87 
+			CachedMaxDrawDistance(FloatProperty)=14181.11 
 			AttachParent(ObjectProperty)=StaticMeshComponent0=Sublevel_X4Y2 
 			bNetAddressable(BoolProperty)=True 
 			CreationMethod(EnumProperty)=EComponentCreationMethod::SimpleConstructionScript 
@@ -3917,12 +3966,12 @@ Serialized exports:
 		Tag array:
 			OverrideMaterials(ArrayProperty)=[object] (inner: ObjectProperty)
 			LDMaxDrawDistance(FloatProperty)=0 
-			CachedMaxDrawDistance(FloatProperty)=14141.87 
+			CachedMaxDrawDistance(FloatProperty)=14181.11 
 			RelativeLocation(StructProperty)=Vector(1719,421,1308) 
 			RelativeRotation(StructProperty)=Rotator(-16.61902,105.4834,-15.48318) 
 	S_Chest_SmokeSheet (0-0-0-0): size 141 (cls: S_Chest_SmokeSheet>StaticMeshComponent>/Script/Engine):
 		Tag array:
-			CachedMaxDrawDistance(FloatProperty)=14141.87 
+			CachedMaxDrawDistance(FloatProperty)=14181.11 
 			AttachParent(ObjectProperty)=StaticMeshComponent0=Sublevel_X4Y2 
 			bNetAddressable(BoolProperty)=True 
 			CreationMethod(EnumProperty)=EComponentCreationMethod::SimpleConstructionScript 
@@ -3930,7 +3979,7 @@ Serialized exports:
 		Tag array:
 			OverrideMaterials(ArrayProperty)=[object] (inner: ObjectProperty)
 			LDMaxDrawDistance(FloatProperty)=0 
-			CachedMaxDrawDistance(FloatProperty)=14141.87 
+			CachedMaxDrawDistance(FloatProperty)=14181.11 
 			RelativeLocation(StructProperty)=Vector(-6064,-15124,3948) 
 			RelativeRotation(StructProperty)=Rotator(0,0,-8.4375) 
 	StaticMeshComponent0 (0-0-0-0): size 399 (cls: StaticMeshComponent0>StaticMeshComponent>/Script/Engine):
@@ -3965,7 +4014,7 @@ Serialized exports:
 			LODParentPrimitive(ObjectProperty)=StaticMeshComponent0=Sublevel_X4Y2 
 			RelativeLocation(StructProperty)=Vector(3623.766,2182.059,1223.618) 
 			RelativeRotation(StructProperty)=Rotator(88.62172,57.89877,89.99815) 
-	Sublevel_X4Y2_C_2 (0-0-0-0): size 12 (cls: Sublevel_X4Y2_C_2>Sublevel_X4Y2_C)
+	Sublevel_X4Y2_C_0 (0-0-0-0): size 12 (cls: Sublevel_X4Y2_C_0>Sublevel_X4Y2_C)
 	Tiered_Athena_FloorLoot_11 (0-0-0-0): size 279 (cls: Tiered_Athena_FloorLoot_11>Tiered_Athena_FloorLoot_01_C>/Game/Athena/Environments/Blueprints/Tiered_Athena_FloorLoot_01):
 		Tag array:
 			SearchSpeed(StructProperty)=System.Byte[] 
@@ -4043,7 +4092,7 @@ Serialized exports:
 			ParentActorToAttachTo(ObjectProperty)=Vehicle_Athena_Bus4=Sublevel_X4Y2 
 			MyGuid(StructProperty)=Guid: 2545714241-1245873036-3343774101-2838234988 
 			DataVersion(IntProperty)=1 
-			CullDistance(FloatProperty)=14141.88 
+			CullDistance(FloatProperty)=14181.11 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Sublevel_X4Y2 
 			BlueprintCreatedComponents(ArrayProperty)=[object] (inner: ObjectProperty)
 	Tiered_Chest_Athena46_2 (0-0-0-0): size 522 (cls: Tiered_Chest_Athena46_2>Tiered_Chest_Athena_C>/Game/Building/ActorBlueprints/Containers/Tiered_Chest_Athena):
@@ -4058,7 +4107,7 @@ Serialized exports:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Sublevel_X4Y2 
 			MyGuid(StructProperty)=Guid: 2077969989-1095735832-3660557452-1455999942 
 			DataVersion(IntProperty)=1 
-			CullDistance(FloatProperty)=14141.87 
+			CullDistance(FloatProperty)=14181.11 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Sublevel_X4Y2 
 			BlueprintCreatedComponents(ArrayProperty)=[object] (inner: ObjectProperty)
 	Tiered_Chest_Athena_2 (0-0-0-0): size 522 (cls: Tiered_Chest_Athena_2>Tiered_Chest_Athena_C>/Game/Building/ActorBlueprints/Containers/Tiered_Chest_Athena):
@@ -4073,7 +4122,7 @@ Serialized exports:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Sublevel_X4Y2 
 			MyGuid(StructProperty)=Guid: 83097018-1231488672-677740164-3347122046 
 			DataVersion(IntProperty)=1 
-			CullDistance(FloatProperty)=14141.87 
+			CullDistance(FloatProperty)=14181.11 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Sublevel_X4Y2 
 			BlueprintCreatedComponents(ArrayProperty)=[object] (inner: ObjectProperty)
 	SwitchHitch (0-0-0-0): size 848 (cls: SwitchHitch>TimelineComponent>/Script/Engine):

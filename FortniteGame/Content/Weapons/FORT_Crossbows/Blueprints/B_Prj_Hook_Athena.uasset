@@ -82,6 +82,7 @@ Name table:
 	BoolProperty
 	BoomerangLocation
 	Bounciness
+	bOverrideWalkableSlopeOnInstance
 	BoxComponent
 	BP_ApplyGameplayEffectToTarget
 	BP_Hook_Camera_LensEffect_C
@@ -181,6 +182,7 @@ Name table:
 	CallFunc_IsValid_ReturnValue2
 	CallFunc_IsValid_ReturnValue3
 	CallFunc_IsValid_ReturnValue4
+	CallFunc_IsZiplining_ReturnValue
 	CallFunc_K2_AddActorLocalOffset_SweepHitResult
 	CallFunc_K2_GetActorLocation_ReturnValue
 	CallFunc_K2_GetActorLocation_ReturnValue1
@@ -352,6 +354,7 @@ Name table:
 	ECR_Ignore
 	ECR_Overlap
 	EmitterCameraLensEffectBase
+	EndZiplining
 	ENetRole
 	Engine
 	EntryPoint
@@ -360,6 +363,7 @@ Name table:
 	ETimelineDirection
 	EventMagnitude
 	EventTag
+	EWalkableSlopeBehavior
 	ExecuteUbergraph_B_Prj_Hook_Athena
 	FallingAudio_GEN_VARIABLE
 	FCC_Object_PawnAI
@@ -470,6 +474,7 @@ Name table:
 	IsLocallyControlled
 	IsSkydiving
 	IsValid
+	IsZiplining
 	ItemMovement
 	JackalArc
 	JackalForceMultiplier
@@ -797,6 +802,9 @@ Name table:
 	Visibility
 	VLerp
 	VSize
+	WalkableSlope_Unwalkable
+	WalkableSlopeBehavior
+	WalkableSlopeOverride
 	Weapon Actor
 	WeaponCheck
 	WeaponMesh0
@@ -875,7 +883,7 @@ Serialized exports:
 	bInHoverboard (0-0-0-0): size 34 (cls: bInHoverboard>BoolProperty>/Script/CoreUObject)
 	ParticleSystem (0-0-0-0): size 36 (cls: ParticleSystem>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_B_Prj_Hook_Athena (0-0-0-0): size 7638 (cls: ExecuteUbergraph_B_Prj_Hook_Athena>Function>/Script/CoreUObject)
+	ExecuteUbergraph_B_Prj_Hook_Athena (0-0-0-0): size 7704 (cls: ExecuteUbergraph_B_Prj_Hook_Athena>Function>/Script/CoreUObject)
 	ReceiveBeginPlay (0-0-0-0): size 54 (cls: ReceiveBeginPlay>Function>/Script/CoreUObject)
 	LaunchCheck (0-0-0-0): size 56 (cls: LaunchCheck>Function>/Script/CoreUObject)
 	GrappleVehicle (0-0-0-0): size 54 (cls: GrappleVehicle>Function>/Script/CoreUObject)
@@ -952,6 +960,7 @@ Serialized exports:
 	CallFunc_IsValid_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue2>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue3 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue3>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue4 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue4>BoolProperty>/Script/CoreUObject)
+	CallFunc_IsZiplining_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsZiplining_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_K2_SetActorLocation_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_K2_SetActorLocation_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Less_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_LessEqual_FloatFloat_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_LessEqual_FloatFloat_ReturnValue>BoolProperty>/Script/CoreUObject)
@@ -1051,7 +1060,7 @@ Serialized exports:
 	Comeback__Direction_CA913F9B4BFA9A9384E1D2AFF544018C (0-0-0-0): size 36 (cls: Comeback__Direction_CA913F9B4BFA9A9384E1D2AFF544018C>ByteProperty>/Script/CoreUObject)
 	CallFunc_GetLocalRole_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetLocalRole_ReturnValue>ByteProperty>/Script/CoreUObject)
 	CallFunc_GetLocalRole_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetLocalRole_ReturnValue1>ByteProperty>/Script/CoreUObject)
-	Capsule_GEN_VARIABLE (0-0-0-0): size 864 (cls: Capsule_GEN_VARIABLE>CapsuleComponent>/Script/Engine):
+	Capsule_GEN_VARIABLE (0-0-0-0): size 988 (cls: Capsule_GEN_VARIABLE>CapsuleComponent>/Script/Engine):
 		Tag array:
 			CapsuleHalfHeight(FloatProperty)=22 
 			CapsuleRadius(FloatProperty)=9 
@@ -1060,7 +1069,7 @@ Serialized exports:
 			BodyInstance(StructProperty)=System.Byte[] 
 			RelativeLocation(StructProperty)=Vector(-4,-3.814697E-06,-1.430512E-06) 
 			RelativeRotation(StructProperty)=Rotator(-90,180,540) 
-	CollisionCapsule0 (0-0-0-0): size 305 (cls: CollisionCapsule0>CapsuleComponent>/Script/Engine):
+	CollisionCapsule0 (0-0-0-0): size 429 (cls: CollisionCapsule0>CapsuleComponent>/Script/Engine):
 		Tag array:
 			CapsuleHalfHeight(FloatProperty)=6 
 			CapsuleRadius(FloatProperty)=6 
@@ -1282,7 +1291,7 @@ Serialized exports:
 			bIsParentComponentNative(BoolProperty)=True 
 			VariableGuid(StructProperty)=Guid: 2305244092-1216420596-2035677580-3345331424 
 			InternalVariableName(NameProperty)=StaticMesh3 
-	SCS_Node_2 (0-0-0-0): size 3168 (cls: SCS_Node_2>SCS_Node>/Script/Engine):
+	SCS_Node_2 (0-0-0-0): size 3465 (cls: SCS_Node_2>SCS_Node>/Script/Engine):
 		Tag array:
 			ComponentClass(ObjectProperty)=CapsuleComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=Capsule_GEN_VARIABLE=B_Prj_Hook_Athena_C 

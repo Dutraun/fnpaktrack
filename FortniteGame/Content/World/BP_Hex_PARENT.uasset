@@ -6,6 +6,7 @@ Name table:
 	/Game/Environments/Hexmap/HexSelection/M_Hex_MouseoverGlow_Inst_Selected
 	/Game/Environments/Hexmap/HexSelection/M_TheaterScreenIcons
 	/Game/Environments/Hexmap/HexSelection/M_TheaterScreenIcons_Inst_Pinned
+	/Game/Environments/Hexmap/HexSelection/M_TileThrobber
 	/Game/Environments/Hexmap/HexSelection/S_HexMouseover01
 	/Game/Environments/Hexmap/HexSelection/T_MissionIcon_Locked01
 	/Game/Environments/Hexmap/HexTile/S_HexBase_Basic
@@ -142,6 +143,7 @@ Name table:
 	CallFunc_HasCompletedQuest_ReturnValue
 	CallFunc_HasValidMissionData_ReturnValue
 	CallFunc_IsMissionAlertTile_ReturnValue
+	CallFunc_IsTeamRatingDataValid_ReturnValue
 	CallFunc_IsTileHidden_ReturnValue
 	CallFunc_IsTileLocked_ReturnValue
 	CallFunc_IsTilePlayable_ReturnValue
@@ -340,6 +342,7 @@ Name table:
 	IsMissionAlertTile
 	IsOutpost
 	IsQuickplayMission
+	IsTeamRatingDataValid
 	IsTileHidden
 	IsTileLocked
 	IsTilePlayable
@@ -393,6 +396,7 @@ Name table:
 	M_Hex_MouseoverGlow_Inst_Selected
 	M_TheaterScreenIcons
 	M_TheaterScreenIcons_Inst_Pinned
+	M_TileThrobber
 	MakeGameplayTagQuery
 	MakeLiteralByte
 	MassInKgOverride
@@ -539,6 +543,8 @@ Name table:
 	SoundBase
 	SoundCue
 	SourceMaterial
+	SpinnerIconMesh
+	SpinnerIconMesh_GEN_VARIABLE
 	StaticMesh
 	StaticMeshComponent
 	StaticMeshComponent0
@@ -630,7 +636,7 @@ Name table:
 	WorldStatic
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	BP_Hex_PARENT_C (0-0-0-0): size 996 (cls: BP_Hex_PARENT_C>BlueprintGeneratedClass>/Script/Engine):
+	BP_Hex_PARENT_C (0-0-0-0): size 1000 (cls: BP_Hex_PARENT_C>BlueprintGeneratedClass>/Script/Engine):
 		Tag array:
 			ComponentTemplates(ArrayProperty)=[object] (inner: ObjectProperty)
 			Timelines(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -655,9 +661,9 @@ Serialized exports:
 			OnBeginCursorOver(MulticastDelegateProperty)=[object] 
 			OnEndCursorOver(MulticastDelegateProperty)=[object] 
 			OnReleased(MulticastDelegateProperty)=[object] 
-	P_StrongStormAffected (0-0-0-0): size 36 (cls: P_StrongStormAffected>ObjectProperty>/Script/CoreUObject)
+	SpinnerIconMesh (0-0-0-0): size 36 (cls: SpinnerIconMesh>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_BP_Hex_PARENT (0-0-0-0): size 5397 (cls: ExecuteUbergraph_BP_Hex_PARENT>Function>/Script/CoreUObject)
+	ExecuteUbergraph_BP_Hex_PARENT (0-0-0-0): size 5499 (cls: ExecuteUbergraph_BP_Hex_PARENT>Function>/Script/CoreUObject)
 	CallFunc_GetAllActorsOfClass_OutActors (0-0-0-0): size 36 (cls: CallFunc_GetAllActorsOfClass_OutActors>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetAllActorsOfClass_OutActors (0-0-0-0): size 36 (cls: CallFunc_GetAllActorsOfClass_OutActors>ArrayProperty>/Script/CoreUObject)
 	RefreshTile (0-0-0-0): size 54 (cls: RefreshTile>Function>/Script/CoreUObject)
@@ -724,6 +730,7 @@ Serialized exports:
 	CallFunc_GetTileMissionDetails_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_GetTileMissionDetails_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_Greater_FloatFloat_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Greater_FloatFloat_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_HasValidMissionData_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasValidMissionData_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_IsTeamRatingDataValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsTeamRatingDataValid_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsTileHidden_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsTileHidden_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsTileLocked_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsTileLocked_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsTilePlayable_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsTilePlayable_ReturnValue>BoolProperty>/Script/CoreUObject)
@@ -882,6 +889,7 @@ Serialized exports:
 	MouseoverMesh (0-0-0-0): size 36 (cls: MouseoverMesh>ObjectProperty>/Script/CoreUObject)
 	P_CloudTwister_RandomLightning_01 (0-0-0-0): size 36 (cls: P_CloudTwister_RandomLightning_01>ObjectProperty>/Script/CoreUObject)
 	P_StormAffected (0-0-0-0): size 36 (cls: P_StormAffected>ObjectProperty>/Script/CoreUObject)
+	P_StrongStormAffected (0-0-0-0): size 36 (cls: P_StrongStormAffected>ObjectProperty>/Script/CoreUObject)
 	PinnedQuestIcon (0-0-0-0): size 36 (cls: PinnedQuestIcon>ObjectProperty>/Script/CoreUObject)
 	SelectedIndicatorMesh (0-0-0-0): size 36 (cls: SelectedIndicatorMesh>ObjectProperty>/Script/CoreUObject)
 	StormZoneIndicator (0-0-0-0): size 36 (cls: StormZoneIndicator>ObjectProperty>/Script/CoreUObject)
@@ -912,6 +920,14 @@ Serialized exports:
 			PrimaryComponentTick(StructProperty)=System.Byte[] 
 			bAutoActivate(BoolProperty)=False 
 	SceneComponent_60 (0-0-0-0): size 12 (cls: SceneComponent_60>SceneComponent>/Script/Engine)
+	SCS_Node_0 (0-0-0-0): size 227 (cls: SCS_Node_0>SCS_Node>/Script/Engine):
+		Tag array:
+			ComponentClass(ObjectProperty)=StaticMeshComponent=/Script/Engine 
+			ComponentTemplate(ObjectProperty)=SpinnerIconMesh_GEN_VARIABLE=BP_Hex_PARENT_C 
+			ParentComponentOrVariableName(NameProperty)=StaticMeshComponent0 
+			bIsParentComponentNative(BoolProperty)=True 
+			VariableGuid(StructProperty)=Guid: 871151034-1131612194-1791976356-3627241957 
+			InternalVariableName(NameProperty)=SpinnerIconMesh 
 	SCS_Node_1 (0-0-0-0): size 227 (cls: SCS_Node_1>SCS_Node>/Script/Engine):
 		Tag array:
 			ComponentClass(ObjectProperty)=ParticleSystemComponent=/Script/Engine 
@@ -990,7 +1006,7 @@ Serialized exports:
 			ComponentTemplate(ObjectProperty)=SceneComponent_60=BP_Hex_PARENT_C 
 			VariableGuid(StructProperty)=Guid: 1295648158-0-0-0 
 			InternalVariableName(NameProperty)=DefaultSceneRoot 
-	SimpleConstructionScript_17 (0-0-0-0): size 187 (cls: SimpleConstructionScript_17>SimpleConstructionScript>/Script/Engine):
+	SimpleConstructionScript_17 (0-0-0-0): size 195 (cls: SimpleConstructionScript_17>SimpleConstructionScript>/Script/Engine):
 		Tag array:
 			RootNodes(ArrayProperty)=[object] (inner: ObjectProperty)
 			AllNodes(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -1056,6 +1072,22 @@ Serialized exports:
 			RelativeLocation(StructProperty)=Vector(0,0,5.877129) 
 			bVisible(BoolProperty)=False 
 			bEditableWhenInherited(BoolProperty)=False 
+	SpinnerIconMesh_GEN_VARIABLE (0-0-0-0): size 953 (cls: SpinnerIconMesh_GEN_VARIABLE>StaticMeshComponent>/Script/Engine):
+		Tag array:
+			StaticMesh(ObjectProperty)=S_plane_01=/Game/Environments/World/Backgrounds/Universal/TechContent/S_plane_01 
+			OverrideMaterials(ArrayProperty)=[object] (inner: ObjectProperty)
+			bGenerateOverlapEvents(BoolProperty)=False 
+			bVisibleInReflectionCaptures(BoolProperty)=False 
+			bReceivesDecals(BoolProperty)=False 
+			bAffectDynamicIndirectLighting(BoolProperty)=False 
+			bAffectDistanceFieldLighting(BoolProperty)=False 
+			bCastDynamicShadow(BoolProperty)=False 
+			bCastStaticShadow(BoolProperty)=False 
+			TranslucencySortPriority(IntProperty)=1 
+			BodyInstance(StructProperty)=System.Byte[] 
+			RelativeLocation(StructProperty)=Vector(0,0,16.12794) 
+			RelativeRotation(StructProperty)=Rotator(0,90.0001,0) 
+			bVisible(BoolProperty)=False 
 	StaticMeshComponent0 (0-0-0-0): size 1046 (cls: StaticMeshComponent0>StaticMeshComponent>/Script/Engine):
 		Tag array:
 			StaticMesh(ObjectProperty)=S_HexBase_Basic=/Game/Environments/Hexmap/HexTile/S_HexBase_Basic 

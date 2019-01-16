@@ -35,9 +35,12 @@ Name table:
 	CallFunc_Add_FloatFloat_ReturnValue1
 	CallFunc_AddChild_ReturnValue
 	CallFunc_BooleanAND_ReturnValue
+	CallFunc_Contains_ReturnValue
+	CallFunc_Conv_TextToString_ReturnValue
 	CallFunc_Create_ReturnValue
 	CallFunc_Format_ReturnValue
 	CallFunc_Format_ReturnValue1
+	CallFunc_Format_ReturnValue2
 	CallFunc_GetChildAt_ReturnValue
 	CallFunc_GetEmptyText_ReturnValue
 	CallFunc_GetHeightEstimate_Height
@@ -60,7 +63,9 @@ Name table:
 	Class
 	ClearChildren
 	CommonUserWidget
+	Contains
 	Content
+	Conv_TextToString
 	Create
 	CreateRichTextBlock
 	Default__ArrayProperty
@@ -76,6 +81,7 @@ Name table:
 	Default__HorizontalBox
 	Default__HorizontalBoxSlot
 	Default__IntProperty
+	Default__KismetStringLibrary
 	Default__KismetSystemLibrary
 	Default__KismetTextLibrary
 	Default__MissionObjectiveContentWidgetInterface_C
@@ -83,6 +89,7 @@ Name table:
 	Default__MissionRichText_C
 	Default__NamedSlot
 	Default__ObjectProperty
+	Default__StrProperty
 	Default__StructProperty
 	Default__TextProperty
 	Default__VerticalBox
@@ -154,10 +161,14 @@ Name table:
 	K2Node_Event_Objective
 	K2Node_MakeArray_Array
 	K2Node_MakeArray_Array1
+	K2Node_MakeArray_Array2
 	K2Node_MakeStruct_FormatArgumentData
 	K2Node_MakeStruct_FormatArgumentData1
 	K2Node_MakeStruct_FormatArgumentData2
+	K2Node_MakeStruct_FormatArgumentData3
+	K2Node_Select_Default
 	KismetMathLibrary
+	KismetStringLibrary
 	KismetSystemLibrary
 	KismetTextLibrary
 	MissionObjectiveContentWidgetInterface_C
@@ -207,6 +218,7 @@ Name table:
 	SoftObjectProperty
 	StrProperty
 	StructProperty
+	Temp_bool_Variable
 	TemplateAsset
 	Text
 	TextIsEmpty
@@ -259,11 +271,13 @@ Serialized exports:
 	Objective (0-0-0-0): size 36 (cls: Objective>ObjectProperty>/Script/CoreUObject)
 	Setup (0-0-0-0): size 82 (cls: Setup>Function>/Script/CoreUObject)
 	TimerText (0-0-0-0): size 32 (cls: TimerText>TextProperty>/Script/CoreUObject)
-	Update (0-0-0-0): size 1645 (cls: Update>Function>/Script/CoreUObject)
+	Update (0-0-0-0): size 2265 (cls: Update>Function>/Script/CoreUObject)
 	K2Node_MakeArray_Array (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array>StructProperty>/Script/CoreUObject)
 	K2Node_MakeArray_Array (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array>ArrayProperty>/Script/CoreUObject)
 	K2Node_MakeArray_Array1 (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array1>StructProperty>/Script/CoreUObject)
 	K2Node_MakeArray_Array1 (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array1>ArrayProperty>/Script/CoreUObject)
+	K2Node_MakeArray_Array2 (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array2>StructProperty>/Script/CoreUObject)
+	K2Node_MakeArray_Array2 (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array2>ArrayProperty>/Script/CoreUObject)
 	bConfigureAsHUD (0-0-0-0): size 34 (cls: bConfigureAsHUD>BoolProperty>/Script/CoreUObject)
 	K2Node_CustomEvent_bNewVisibility (0-0-0-0): size 34 (cls: K2Node_CustomEvent_bNewVisibility>BoolProperty>/Script/CoreUObject)
 	K2Node_Event_bInConfigureAsHUD (0-0-0-0): size 34 (cls: K2Node_Event_bInConfigureAsHUD>BoolProperty>/Script/CoreUObject)
@@ -284,12 +298,14 @@ Serialized exports:
 	bNewVisibility (0-0-0-0): size 34 (cls: bNewVisibility>BoolProperty>/Script/CoreUObject)
 	bInConfigureAsHUD (0-0-0-0): size 34 (cls: bInConfigureAsHUD>BoolProperty>/Script/CoreUObject)
 	CallFunc_BooleanAND_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_Contains_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Contains_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Greater_FloatFloat_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Greater_FloatFloat_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsTimerVisible_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsTimerVisible_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_Not_PreBool_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_TextIsEmpty_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_TextIsEmpty_ReturnValue>BoolProperty>/Script/CoreUObject)
+	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
 	CallFunc_K2_IsTimerActiveHandle_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_K2_IsTimerActiveHandle_ReturnValue>BoolProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
@@ -347,16 +363,20 @@ Serialized exports:
 	TrackedObjective (0-0-0-0): size 36 (cls: TrackedObjective>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetRichTextBlock_MissionRichTextBlock (0-0-0-0): size 36 (cls: CallFunc_GetRichTextBlock_MissionRichTextBlock>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetTimerComponent_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetTimerComponent_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_Conv_TextToString_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Conv_TextToString_ReturnValue>StrProperty>/Script/CoreUObject)
 	RefreshTimerHandle (0-0-0-0): size 36 (cls: RefreshTimerHandle>StructProperty>/Script/CoreUObject)
 	K2Node_MakeStruct_FormatArgumentData (0-0-0-0): size 36 (cls: K2Node_MakeStruct_FormatArgumentData>StructProperty>/Script/CoreUObject)
 	K2Node_MakeStruct_FormatArgumentData1 (0-0-0-0): size 36 (cls: K2Node_MakeStruct_FormatArgumentData1>StructProperty>/Script/CoreUObject)
 	K2Node_MakeStruct_FormatArgumentData2 (0-0-0-0): size 36 (cls: K2Node_MakeStruct_FormatArgumentData2>StructProperty>/Script/CoreUObject)
+	K2Node_MakeStruct_FormatArgumentData3 (0-0-0-0): size 36 (cls: K2Node_MakeStruct_FormatArgumentData3>StructProperty>/Script/CoreUObject)
 	CallFunc_K2_SetTimerDelegate_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_SetTimerDelegate_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_Format_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Format_ReturnValue>TextProperty>/Script/CoreUObject)
 	CallFunc_Format_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Format_ReturnValue1>TextProperty>/Script/CoreUObject)
+	CallFunc_Format_ReturnValue2 (0-0-0-0): size 32 (cls: CallFunc_Format_ReturnValue2>TextProperty>/Script/CoreUObject)
 	CallFunc_GetEmptyText_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetEmptyText_ReturnValue>TextProperty>/Script/CoreUObject)
 	CallFunc_GetObjectiveDisplayString_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetObjectiveDisplayString_ReturnValue>TextProperty>/Script/CoreUObject)
 	CallFunc_GetTimeText_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetTimeText_ReturnValue>TextProperty>/Script/CoreUObject)
+	K2Node_Select_Default (0-0-0-0): size 32 (cls: K2Node_Select_Default>TextProperty>/Script/CoreUObject)
 	ProgressBarBox (0-0-0-0): size 38 (cls: ProgressBarBox>VerticalBox>/Script/UMG):
 		Tag array:
 			bIsVariable(BoolProperty)=True 

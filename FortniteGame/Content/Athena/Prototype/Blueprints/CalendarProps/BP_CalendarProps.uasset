@@ -4,6 +4,7 @@ Name table:
 	/Script/CoreUObject
 	/Script/Engine
 	/Script/FortniteGame
+	/Script/GameplayTags
 	Activate
 	Actor
 	Actor_13_6A42496A4663E346C97AFEB9993C68F7
@@ -44,6 +45,10 @@ Name table:
 	CallFunc_EqualEqual_StriStri_ReturnValue
 	CallFunc_FinishSpawningActor_ReturnValue
 	CallFunc_FinishSpawningActor_ReturnValue1
+	CallFunc_GetCalendarEventInformation_bIsEventActive
+	CallFunc_GetCalendarEventInformation_TimeSinceBegin
+	CallFunc_GetCalendarEventInformation_TimeSpanRatio
+	CallFunc_GetCalendarEventInformation_TimeUntilEnd
 	CallFunc_GetObjectClass_ReturnValue
 	CallFunc_GetTransform_ReturnValue
 	CallFunc_GetTransform_ReturnValue1
@@ -56,7 +61,7 @@ Name table:
 	CallFunc_Less_IntInt_ReturnValue1
 	CallFunc_Less_IntInt_ReturnValue2
 	CallFunc_MakeRelativeTransform_ReturnValue
-	CallFunc_WatchCalendarEvent_ReturnValue
+	CallFunc_PlaylistDataReadyAsync_ReturnValue
 	ChildNodes
 	Class
 	ClassProperty
@@ -70,7 +75,9 @@ Name table:
 	Default__BP_CalendarProps_C
 	Default__ClassProperty
 	Default__DelegateProperty
-	Default__FortAsyncAction_CalendarEventWatcher
+	Default__FloatProperty
+	Default__FortAsyncAction_CurrentPlaylistReady
+	Default__FortKismetLibrary
 	Default__Function
 	Default__GameplayStatics
 	Default__IntProperty
@@ -98,10 +105,15 @@ Name table:
 	ExecuteUbergraph_BP_CalendarProps
 	FinishSpawningActor
 	FloatProperty
-	FortAsyncAction_CalendarEventWatcher
-	FortAsyncAction_CalendarEventWatcherBase
+	FortAsyncAction_CurrentPlaylistReady
+	FortGameStateAthena
+	FortKismetLibrary
+	FortPlaylist
 	Function
 	GameplayStatics
+	GameplayTagContainer
+	GameState
+	GetCalendarEventInformation
 	GetObjectClass
 	GetTransform
 	Guid
@@ -111,18 +123,10 @@ Name table:
 	IsValid
 	K2_DestroyActor
 	K2Node_CreateDelegate_OutputDelegate
-	K2Node_CreateDelegate_OutputDelegate1
-	K2Node_CreateDelegate_OutputDelegate2
 	K2Node_CustomEvent_EventName
-	K2Node_CustomEvent_EventName1
-	K2Node_CustomEvent_EventName2
-	K2Node_CustomEvent_EventName3
-	K2Node_CustomEvent_TimeSinceBegin
-	K2Node_CustomEvent_TimeSinceBegin1
-	K2Node_CustomEvent_TimeSinceBegin2
-	K2Node_CustomEvent_TimeUntilEnd
-	K2Node_CustomEvent_TimeUntilEnd1
-	K2Node_CustomEvent_TimeUntilEnd2
+	K2Node_CustomEvent_GameState
+	K2Node_CustomEvent_Playlist
+	K2Node_CustomEvent_PlaylistContextTags
 	K2Node_MakeStruct_CalendarPropData
 	KismetArrayLibrary
 	KismetMathLibrary
@@ -136,15 +140,14 @@ Name table:
 	None
 	Object
 	ObjectProperty
-	OnClientEventFlagChanged__DelegateSignature
-	OnEventActive
-	OnEventActive_2E7297FD4DCB83C9ED56E388992AC7CF
-	OnEventEnded
-	OnEventEnded_2E7297FD4DCB83C9ED56E388992AC7CF
-	OnEventUpdated
-	OnEventUpdated_2E7297FD4DCB83C9ED56E388992AC7CF
+	OnReady
+	OnReady_141C51BE4694AC2A0A9B64BDD6315601
 	OnRep_GrowthStage
 	Package
+	Playlist
+	PlaylistContextTags
+	PlaylistDataReadyAsync
+	PlaylistReadyAsyncDelegate__DelegateSignature
 	PointerToUberGraphFrame
 	PrimaryActorTick
 	ProgressAppear_21_5B07DA4E4FFA7913E1C2EF864C0BDC68
@@ -168,12 +171,10 @@ Name table:
 	Temp_int_Loop_Counter_Variable
 	Temp_int_Loop_Counter_Variable1
 	Temp_int_Loop_Counter_Variable2
-	Temp_string_Variable
+	Temp_object_Variable
+	Temp_object_Variable1
 	Temp_struct_Variable
-	Temp_struct_Variable1
-	TimeSinceBegin
 	Timespan
-	TimeUntilEnd
 	Transform
 	Transform_11_CE6EB422421FE49E3943BDB094B64C74
 	UberGraphFrame
@@ -181,10 +182,9 @@ Name table:
 	UserConstructionScript
 	UserDefinedStruct
 	VariableGuid
-	WatchCalendarEvent
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	BP_CalendarProps_C (0-0-0-0): size 342 (cls: BP_CalendarProps_C>BlueprintGeneratedClass>/Script/Engine):
+	BP_CalendarProps_C (0-0-0-0): size 310 (cls: BP_CalendarProps_C>BlueprintGeneratedClass>/Script/Engine):
 		Tag array:
 			SimpleConstructionScript(ObjectProperty)=SimpleConstructionScript_0=BP_CalendarProps_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_BP_CalendarProps=BP_CalendarProps_C 
@@ -204,8 +204,9 @@ Serialized exports:
 	EditMode(Don'tTouch) (0-0-0-0): size 34 (cls: EditMode(Don'tTouch)>BoolProperty>/Script/CoreUObject)
 	Billboard (0-0-0-0): size 36 (cls: Billboard>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_BP_CalendarProps (0-0-0-0): size 2236 (cls: ExecuteUbergraph_BP_CalendarProps>Function>/Script/CoreUObject)
+	ExecuteUbergraph_BP_CalendarProps (0-0-0-0): size 2092 (cls: ExecuteUbergraph_BP_CalendarProps>Function>/Script/CoreUObject)
 	CallFunc_EqualEqual_StriStri_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_StriStri_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_GetCalendarEventInformation_bIsEventActive (0-0-0-0): size 34 (cls: CallFunc_GetCalendarEventInformation_bIsEventActive>BoolProperty>/Script/CoreUObject)
 	CallFunc_HasAuthority_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasAuthority_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue1>BoolProperty>/Script/CoreUObject)
@@ -214,33 +215,18 @@ Serialized exports:
 	CallFunc_Less_IntInt_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue2>BoolProperty>/Script/CoreUObject)
 	CallFunc_GetObjectClass_ReturnValue (0-0-0-0): size 40 (cls: CallFunc_GetObjectClass_ReturnValue>ClassProperty>/Script/CoreUObject)
 	K2Node_CreateDelegate_OutputDelegate (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate>DelegateProperty>/Script/CoreUObject)
-	K2Node_CreateDelegate_OutputDelegate1 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate1>DelegateProperty>/Script/CoreUObject)
-	K2Node_CreateDelegate_OutputDelegate2 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate2>DelegateProperty>/Script/CoreUObject)
+	CallFunc_GetCalendarEventInformation_TimeSpanRatio (0-0-0-0): size 32 (cls: CallFunc_GetCalendarEventInformation_TimeSpanRatio>FloatProperty>/Script/CoreUObject)
 	EditActors (0-0-0-0): size 54 (cls: EditActors>Function>/Script/CoreUObject)
 	K2Node_CustomEvent_EventName (0-0-0-0): size 32 (cls: K2Node_CustomEvent_EventName>StrProperty>/Script/CoreUObject)
 	EventName (0-0-0-0): size 32 (cls: EventName>StrProperty>/Script/CoreUObject)
 	Event (0-0-0-0): size 68 (cls: Event>Function>/Script/CoreUObject)
-	K2Node_CustomEvent_TimeSinceBegin (0-0-0-0): size 36 (cls: K2Node_CustomEvent_TimeSinceBegin>StructProperty>/Script/CoreUObject)
-	K2Node_CustomEvent_TimeUntilEnd (0-0-0-0): size 36 (cls: K2Node_CustomEvent_TimeUntilEnd>StructProperty>/Script/CoreUObject)
-	K2Node_CustomEvent_EventName1 (0-0-0-0): size 32 (cls: K2Node_CustomEvent_EventName1>StrProperty>/Script/CoreUObject)
-	TimeSinceBegin (0-0-0-0): size 36 (cls: TimeSinceBegin>StructProperty>/Script/CoreUObject)
-	TimeUntilEnd (0-0-0-0): size 36 (cls: TimeUntilEnd>StructProperty>/Script/CoreUObject)
-	EventName (0-0-0-0): size 32 (cls: EventName>StrProperty>/Script/CoreUObject)
-	OnEventActive_2E7297FD4DCB83C9ED56E388992AC7CF (0-0-0-0): size 96 (cls: OnEventActive_2E7297FD4DCB83C9ED56E388992AC7CF>Function>/Script/CoreUObject)
-	K2Node_CustomEvent_TimeSinceBegin2 (0-0-0-0): size 36 (cls: K2Node_CustomEvent_TimeSinceBegin2>StructProperty>/Script/CoreUObject)
-	K2Node_CustomEvent_TimeUntilEnd2 (0-0-0-0): size 36 (cls: K2Node_CustomEvent_TimeUntilEnd2>StructProperty>/Script/CoreUObject)
-	K2Node_CustomEvent_EventName3 (0-0-0-0): size 32 (cls: K2Node_CustomEvent_EventName3>StrProperty>/Script/CoreUObject)
-	TimeSinceBegin (0-0-0-0): size 36 (cls: TimeSinceBegin>StructProperty>/Script/CoreUObject)
-	TimeUntilEnd (0-0-0-0): size 36 (cls: TimeUntilEnd>StructProperty>/Script/CoreUObject)
-	EventName (0-0-0-0): size 32 (cls: EventName>StrProperty>/Script/CoreUObject)
-	OnEventEnded_2E7297FD4DCB83C9ED56E388992AC7CF (0-0-0-0): size 96 (cls: OnEventEnded_2E7297FD4DCB83C9ED56E388992AC7CF>Function>/Script/CoreUObject)
-	K2Node_CustomEvent_TimeSinceBegin1 (0-0-0-0): size 36 (cls: K2Node_CustomEvent_TimeSinceBegin1>StructProperty>/Script/CoreUObject)
-	K2Node_CustomEvent_TimeUntilEnd1 (0-0-0-0): size 36 (cls: K2Node_CustomEvent_TimeUntilEnd1>StructProperty>/Script/CoreUObject)
-	K2Node_CustomEvent_EventName2 (0-0-0-0): size 32 (cls: K2Node_CustomEvent_EventName2>StrProperty>/Script/CoreUObject)
-	TimeSinceBegin (0-0-0-0): size 36 (cls: TimeSinceBegin>StructProperty>/Script/CoreUObject)
-	TimeUntilEnd (0-0-0-0): size 36 (cls: TimeUntilEnd>StructProperty>/Script/CoreUObject)
-	EventName (0-0-0-0): size 32 (cls: EventName>StrProperty>/Script/CoreUObject)
-	OnEventUpdated_2E7297FD4DCB83C9ED56E388992AC7CF (0-0-0-0): size 96 (cls: OnEventUpdated_2E7297FD4DCB83C9ED56E388992AC7CF>Function>/Script/CoreUObject)
+	K2Node_CustomEvent_PlaylistContextTags (0-0-0-0): size 36 (cls: K2Node_CustomEvent_PlaylistContextTags>StructProperty>/Script/CoreUObject)
+	K2Node_CustomEvent_Playlist (0-0-0-0): size 36 (cls: K2Node_CustomEvent_Playlist>ObjectProperty>/Script/CoreUObject)
+	K2Node_CustomEvent_GameState (0-0-0-0): size 36 (cls: K2Node_CustomEvent_GameState>ObjectProperty>/Script/CoreUObject)
+	PlaylistContextTags (0-0-0-0): size 36 (cls: PlaylistContextTags>StructProperty>/Script/CoreUObject)
+	Playlist (0-0-0-0): size 36 (cls: Playlist>ObjectProperty>/Script/CoreUObject)
+	GameState (0-0-0-0): size 36 (cls: GameState>ObjectProperty>/Script/CoreUObject)
+	OnReady_141C51BE4694AC2A0A9B64BDD6315601 (0-0-0-0): size 96 (cls: OnReady_141C51BE4694AC2A0A9B64BDD6315601>Function>/Script/CoreUObject)
 	OnRep_GrowthStage (0-0-0-0): size 53 (cls: OnRep_GrowthStage>Function>/Script/CoreUObject)
 	ReceiveBeginPlay (0-0-0-0): size 54 (cls: ReceiveBeginPlay>Function>/Script/CoreUObject)
 	Save/HarvestActors (0-0-0-0): size 54 (cls: Save/HarvestActors>Function>/Script/CoreUObject)
@@ -265,7 +251,9 @@ Serialized exports:
 	CallFunc_BeginDeferredActorSpawnFromClass_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_BeginDeferredActorSpawnFromClass_ReturnValue1>ObjectProperty>/Script/CoreUObject)
 	CallFunc_FinishSpawningActor_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_FinishSpawningActor_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_FinishSpawningActor_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_FinishSpawningActor_ReturnValue1>ObjectProperty>/Script/CoreUObject)
-	CallFunc_WatchCalendarEvent_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_WatchCalendarEvent_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_PlaylistDataReadyAsync_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlaylistDataReadyAsync_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	Temp_object_Variable (0-0-0-0): size 36 (cls: Temp_object_Variable>ObjectProperty>/Script/CoreUObject)
+	Temp_object_Variable1 (0-0-0-0): size 36 (cls: Temp_object_Variable1>ObjectProperty>/Script/CoreUObject)
 	Scene (0-0-0-0): size 36 (cls: Scene>ObjectProperty>/Script/CoreUObject)
 	DefaultSceneRoot_GEN_VARIABLE (0-0-0-0): size 12 (cls: DefaultSceneRoot_GEN_VARIABLE>SceneComponent>/Script/Engine)
 	Scene_GEN_VARIABLE (0-0-0-0): size 12 (cls: Scene_GEN_VARIABLE>SceneComponent>/Script/Engine)
@@ -294,11 +282,12 @@ Serialized exports:
 			AllNodes(ArrayProperty)=[object] (inner: ObjectProperty)
 			DefaultSceneRootNode(ObjectProperty)=SCS_Node_0=BP_CalendarProps_C 
 	EventName (0-0-0-0): size 32 (cls: EventName>StrProperty>/Script/CoreUObject)
-	Temp_string_Variable (0-0-0-0): size 32 (cls: Temp_string_Variable>StrProperty>/Script/CoreUObject)
 	CallFunc_Array_Get_Item1 (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item1>StructProperty>/Script/CoreUObject)
 	CallFunc_Array_Get_Item2 (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item2>StructProperty>/Script/CoreUObject)
 	CallFunc_ComposeTransforms_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_ComposeTransforms_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_ComposeTransforms_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_ComposeTransforms_ReturnValue1>StructProperty>/Script/CoreUObject)
+	CallFunc_GetCalendarEventInformation_TimeSinceBegin (0-0-0-0): size 36 (cls: CallFunc_GetCalendarEventInformation_TimeSinceBegin>StructProperty>/Script/CoreUObject)
+	CallFunc_GetCalendarEventInformation_TimeUntilEnd (0-0-0-0): size 36 (cls: CallFunc_GetCalendarEventInformation_TimeUntilEnd>StructProperty>/Script/CoreUObject)
 	CallFunc_GetTransform_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetTransform_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_GetTransform_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetTransform_ReturnValue1>StructProperty>/Script/CoreUObject)
 	CallFunc_GetTransform_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_GetTransform_ReturnValue2>StructProperty>/Script/CoreUObject)
@@ -306,4 +295,3 @@ Serialized exports:
 	CallFunc_MakeRelativeTransform_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_MakeRelativeTransform_ReturnValue>StructProperty>/Script/CoreUObject)
 	K2Node_MakeStruct_CalendarPropData (0-0-0-0): size 36 (cls: K2Node_MakeStruct_CalendarPropData>StructProperty>/Script/CoreUObject)
 	Temp_struct_Variable (0-0-0-0): size 36 (cls: Temp_struct_Variable>StructProperty>/Script/CoreUObject)
-	Temp_struct_Variable1 (0-0-0-0): size 36 (cls: Temp_struct_Variable1>StructProperty>/Script/CoreUObject)

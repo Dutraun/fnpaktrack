@@ -20,6 +20,7 @@ Name table:
 	/Game/UI/Foundation/Textures/Buttons/T-SlotIcon-Recycle-64
 	/Game/UI/Foundation/Textures/Icons/Craftable/T-Icon-NotCraftable-32
 	/Game/UI/Foundation/Textures/Icons/Locks/T-Icon-Lock-32
+	/Game/UI/Foundation/Textures/Icons/SkillTree/T-Icon-Reset-32
 	/Game/UI/Foundation/Textures/Icons/SkillTree/T-Icon-ST-CollectionBook-32
 	/Game/UI/Frontend/ItemManagement/InventoryPanel/ItemManagementInventoryPanel
 	/Game/UI/Frontend/ItemManagement/InventoryPanel/ItemManagementItemTileButton
@@ -62,6 +63,7 @@ Name table:
 	BangType
 	bClassRequiresNativeTick
 	bCookedWidgetTree
+	bEnableItemRefundingInStw
 	bEvaluateInPostroll
 	bEvaluateInPreroll
 	bHasDefaultValue
@@ -142,6 +144,7 @@ Name table:
 	CallFunc_GetOrLoadSynchronously_ReturnValue
 	CallFunc_GetOwningPlayer_ReturnValue
 	CallFunc_GetPlayerController_ReturnValue
+	CallFunc_GetRuntimeOptions_ReturnValue
 	CallFunc_GetSchematicQuantityProduced_ReturnValue
 	CallFunc_GetSmallPreviewImage_ReturnValue
 	CallFunc_GetSquadIcon_ReturnValue
@@ -169,8 +172,8 @@ Name table:
 	ChildTemplates
 	Class
 	ClassProperty
+	CollectionBookAndRefundIndicatorLayer
 	CollectionBookIndicator
-	CollectionBookIndicatorLayer
 	ColorAndOpacity
 	CommonActionWidget
 	CommonBorder
@@ -208,6 +211,7 @@ Name table:
 	Default__FortGlobals
 	Default__FortItemManagementItemTileButton
 	Default__FortMultiSizeItemCard
+	Default__FortRuntimeOptions
 	Default__FortUIBlueprintFunctionLibrary
 	Default__Function
 	Default__GameplayStatics
@@ -358,6 +362,7 @@ Name table:
 	FortItemWidget_NUI
 	FortMultiSizeBrush
 	FortMultiSizeItemCard
+	FortRuntimeOptions
 	FortSchematicItem
 	FortUIBlueprintFunctionLibrary
 	FortWorldItem
@@ -378,6 +383,7 @@ Name table:
 	GetOrLoadSynchronously
 	GetOwningPlayer
 	GetPlayerController
+	GetRuntimeOptions
 	GetSchematicQuantityProduced
 	GetSmallPreviewImage
 	GetSquadIcon
@@ -395,6 +401,7 @@ Name table:
 	HandleItemChangedBP
 	HandleItemMulchStateChanged
 	HandleShowCollectionBookIndicatorChanged
+	HandleShowRefundIndicatorChanged
 	HandleSlottedSurvivor
 	HasAnItemMarkedForMulching
 	HasItemBeenSeen
@@ -607,6 +614,7 @@ Name table:
 	RCTM_Auto
 	RCTM_User
 	RCTWM_WeightedNone
+	RefundIndicator
 	RenderOpacity
 	RenderTransform
 	ResourceObject
@@ -643,6 +651,7 @@ Name table:
 	Shear
 	ShowCollectionBookIndicator
 	ShowEquipSlotDragTargets
+	ShowRefundIndicator
 	Signature
 	Size
 	SizeBox
@@ -673,6 +682,7 @@ Name table:
 	T-Bang-Replacement
 	T-Icon-Lock-32
 	T-Icon-NotCraftable-32
+	T-Icon-Reset-32
 	T-Icon-ST-CollectionBook-32
 	T-SlotIcon-EquippedTo1-64
 	T-SlotIcon-EquippedTo2-64
@@ -734,7 +744,7 @@ Name table:
 	UnderlyingType
 	Unhandled
 	UpdateBangState
-	UpdateCollectionBookIndicator
+	UpdateCollectionBookAndRefundIndicators
 	UpdateInteractionWidgetVisibility
 	UpdateMulchStateBox
 	UpdateQuantityProduced
@@ -771,7 +781,7 @@ Name table:
 	WrapBoxSlot
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	ItemManagementItemTileButton_C (0-0-0-0): size 1332 (cls: ItemManagementItemTileButton_C>WidgetBlueprintGeneratedClass>/Script/UMG):
+	ItemManagementItemTileButton_C (0-0-0-0): size 1352 (cls: ItemManagementItemTileButton_C>WidgetBlueprintGeneratedClass>/Script/UMG):
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
@@ -795,6 +805,7 @@ Serialized exports:
 	Intro (0-0-0-0): size 36 (cls: Intro>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
 	ExecuteUbergraph_ItemManagementItemTileButton (0-0-0-0): size 1740 (cls: ExecuteUbergraph_ItemManagementItemTileButton>Function>/Script/CoreUObject)
+	HandleShowRefundIndicatorChanged (0-0-0-0): size 54 (cls: HandleShowRefundIndicatorChanged>Function>/Script/CoreUObject)
 	HandleShowCollectionBookIndicatorChanged (0-0-0-0): size 54 (cls: HandleShowCollectionBookIndicatorChanged>Function>/Script/CoreUObject)
 	BndEvt__PopupMenuAnchor_K2Node_ComponentBoundEvent_0_OnMenuOpenChangedEvent__DelegateSignature (0-0-0-0): size 68 (cls: BndEvt__PopupMenuAnchor_K2Node_ComponentBoundEvent_0_OnMenuOpenChangedEvent__DelegateSignature>Function>/Script/CoreUObject)
 	bIsOpen (0-0-0-0): size 34 (cls: bIsOpen>BoolProperty>/Script/CoreUObject)
@@ -853,7 +864,7 @@ Serialized exports:
 	CallFunc_EqualEqual_StrStr_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_StrStr_ReturnValue>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
-	UpdateCollectionBookIndicator (0-0-0-0): size 155 (cls: UpdateCollectionBookIndicator>Function>/Script/CoreUObject)
+	UpdateCollectionBookAndRefundIndicators (0-0-0-0): size 475 (cls: UpdateCollectionBookAndRefundIndicators>Function>/Script/CoreUObject)
 	ReturnValue (0-0-0-0): size 34 (cls: ReturnValue>BoolProperty>/Script/CoreUObject)
 	IsItemMulchable (0-0-0-0): size 232 (cls: IsItemMulchable>Function>/Script/CoreUObject)
 	CallFunc_BooleanAND_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue>BoolProperty>/Script/CoreUObject)
@@ -875,6 +886,10 @@ Serialized exports:
 	CallFunc_SeenInFrontend_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_SeenInFrontend_ReturnValue>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess1 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess1>BoolProperty>/Script/CoreUObject)
+	CallFunc_BooleanAND_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_BooleanOR_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanOR_ReturnValue>BoolProperty>/Script/CoreUObject)
+	Temp_bool_Variable1 (0-0-0-0): size 34 (cls: Temp_bool_Variable1>BoolProperty>/Script/CoreUObject)
+	Temp_bool_Variable2 (0-0-0-0): size 34 (cls: Temp_bool_Variable2>BoolProperty>/Script/CoreUObject)
 	CallFunc_BooleanAND_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_BooleanOR_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanOR_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_BooleanOR_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_BooleanOR_ReturnValue1>BoolProperty>/Script/CoreUObject)
@@ -908,7 +923,7 @@ Serialized exports:
 	K2Node_SwitchEnum_CmpSuccess (0-0-0-0): size 34 (cls: K2Node_SwitchEnum_CmpSuccess>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable1 (0-0-0-0): size 34 (cls: Temp_bool_Variable1>BoolProperty>/Script/CoreUObject)
-	CollectionBookIndicatorLayer (0-0-0-0): size 428 (cls: CollectionBookIndicatorLayer>Border>/Script/UMG):
+	CollectionBookAndRefundIndicatorLayer (0-0-0-0): size 428 (cls: CollectionBookAndRefundIndicatorLayer>Border>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Center 
 			VerticalAlignment(ByteProperty)=VAlign_Center 
@@ -974,8 +989,8 @@ Serialized exports:
 			Padding(StructProperty)=System.Byte[] 
 			HorizontalAlignment(ByteProperty)=HAlign_Center 
 			VerticalAlignment(ByteProperty)=VAlign_Center 
-			Parent(ObjectProperty)=CollectionBookIndicatorLayer=WidgetArchetype 
-			Content(ObjectProperty)=CollectionBookIndicator=WidgetArchetype 
+			Parent(ObjectProperty)=CollectionBookAndRefundIndicatorLayer=WidgetArchetype 
+			Content(ObjectProperty)=VerticalBox_0=WidgetArchetype 
 	BorderSlot_1 (0-0-0-0): size 325 (cls: BorderSlot_1>BorderSlot>/Script/UMG):
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
@@ -1010,6 +1025,12 @@ Serialized exports:
 			VerticalAlignment(ByteProperty)=VAlign_Center 
 			Parent(ObjectProperty)=VaultOverflowedIndicatorLayer=WidgetArchetype 
 			Content(ObjectProperty)=VaultOverflowedIndicator=WidgetArchetype 
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
@@ -1195,9 +1216,15 @@ Serialized exports:
 	Temp_byte_Variable5 (0-0-0-0): size 40 (cls: Temp_byte_Variable5>EnumProperty>/Script/CoreUObject)
 	CallFunc_GetItemManagementMode_ReturnValue (0-0-0-0): size 40 (cls: CallFunc_GetItemManagementMode_ReturnValue>EnumProperty>/Script/CoreUObject)
 	CallFunc_GetCurrentInputType_ReturnValue (0-0-0-0): size 40 (cls: CallFunc_GetCurrentInputType_ReturnValue>EnumProperty>/Script/CoreUObject)
+	K2Node_Select1_Default (0-0-0-0): size 40 (cls: K2Node_Select1_Default>EnumProperty>/Script/CoreUObject)
+	K2Node_Select2_Default (0-0-0-0): size 40 (cls: K2Node_Select2_Default>EnumProperty>/Script/CoreUObject)
 	K2Node_Select_Default (0-0-0-0): size 40 (cls: K2Node_Select_Default>EnumProperty>/Script/CoreUObject)
 	Temp_byte_Variable (0-0-0-0): size 40 (cls: Temp_byte_Variable>EnumProperty>/Script/CoreUObject)
 	Temp_byte_Variable1 (0-0-0-0): size 40 (cls: Temp_byte_Variable1>EnumProperty>/Script/CoreUObject)
+	Temp_byte_Variable2 (0-0-0-0): size 40 (cls: Temp_byte_Variable2>EnumProperty>/Script/CoreUObject)
+	Temp_byte_Variable3 (0-0-0-0): size 40 (cls: Temp_byte_Variable3>EnumProperty>/Script/CoreUObject)
+	Temp_byte_Variable4 (0-0-0-0): size 40 (cls: Temp_byte_Variable4>EnumProperty>/Script/CoreUObject)
+	Temp_byte_Variable5 (0-0-0-0): size 40 (cls: Temp_byte_Variable5>EnumProperty>/Script/CoreUObject)
 	CallFunc_CanCraftSchematic_FailCause (0-0-0-0): size 40 (cls: CallFunc_CanCraftSchematic_FailCause>EnumProperty>/Script/CoreUObject)
 	CallFunc_GetType_ReturnValue (0-0-0-0): size 40 (cls: CallFunc_GetType_ReturnValue>EnumProperty>/Script/CoreUObject)
 	K2Node_Select1_Default (0-0-0-0): size 40 (cls: K2Node_Select1_Default>EnumProperty>/Script/CoreUObject)
@@ -1240,7 +1267,7 @@ Serialized exports:
 	CollectionBookIndicator (0-0-0-0): size 127 (cls: CollectionBookIndicator>Image>/Script/UMG):
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
-			Slot(ObjectProperty)=BorderSlot_0=WidgetArchetype 
+			Slot(ObjectProperty)=VerticalBoxSlot_0=WidgetArchetype 
 	EquipSlotOverlay (0-0-0-0): size 184 (cls: EquipSlotOverlay>Image>/Script/UMG):
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
@@ -1276,6 +1303,10 @@ Serialized exports:
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
 			Slot(ObjectProperty)=SizeBoxSlot_2=WidgetArchetype 
+	RefundIndicator (0-0-0-0): size 127 (cls: RefundIndicator>Image>/Script/UMG):
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			Slot(ObjectProperty)=VerticalBoxSlot_2=WidgetArchetype 
 	TileDimmer (0-0-0-0): size 168 (cls: TileDimmer>Image>/Script/UMG):
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
@@ -1288,10 +1319,10 @@ Serialized exports:
 	K2Node_Event_EquipSlot (0-0-0-0): size 32 (cls: K2Node_Event_EquipSlot>IntProperty>/Script/CoreUObject)
 	CallFunc_GetMaxTransferCount_Count (0-0-0-0): size 32 (cls: CallFunc_GetMaxTransferCount_Count>IntProperty>/Script/CoreUObject)
 	CallFunc_GetSchematicQuantityProduced_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetSchematicQuantityProduced_ReturnValue>IntProperty>/Script/CoreUObject)
-	WidgetArchetype (0-0-0-0): size 821 (cls: WidgetArchetype>ItemManagementItemTileButton_C):
+	WidgetArchetype (0-0-0-0): size 850 (cls: WidgetArchetype>ItemManagementItemTileButton_C):
 		Tag array:
+			CollectionBookAndRefundIndicatorLayer(ObjectProperty)=CollectionBookAndRefundIndicatorLayer=WidgetArchetype 
 			CollectionBookIndicator(ObjectProperty)=CollectionBookIndicator=WidgetArchetype 
-			CollectionBookIndicatorLayer(ObjectProperty)=CollectionBookIndicatorLayer=WidgetArchetype 
 			CurrentlySlottedIndicatorLayer(ObjectProperty)=CurrentlySlottedIndicatorLayer=WidgetArchetype 
 			EquipSlotBorder(ObjectProperty)=EquipSlotBorder=WidgetArchetype 
 			EquipSlotOverlay(ObjectProperty)=EquipSlotOverlay=WidgetArchetype 
@@ -1309,6 +1340,7 @@ Serialized exports:
 			NotCraftableIconVerticalBox(ObjectProperty)=NotCraftableIconVerticalBox=WidgetArchetype 
 			QuantityProducedOverlay(ObjectProperty)=QuantityProducedOverlay=WidgetArchetype 
 			QuantityProducedText(ObjectProperty)=QuantityProducedText=WidgetArchetype 
+			RefundIndicator(ObjectProperty)=RefundIndicator=WidgetArchetype 
 			TileDimmer(ObjectProperty)=TileDimmer=WidgetArchetype 
 			VaultOverflowedIndicator(ObjectProperty)=VaultOverflowedIndicator=WidgetArchetype 
 			VaultOverflowedIndicatorLayer(ObjectProperty)=VaultOverflowedIndicatorLayer=WidgetArchetype 
@@ -1387,8 +1419,8 @@ Serialized exports:
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=OverlaySlot_4=WidgetArchetype 
+	CollectionBookAndRefundIndicatorLayer (0-0-0-0): size 36 (cls: CollectionBookAndRefundIndicatorLayer>ObjectProperty>/Script/CoreUObject)
 	CollectionBookIndicator (0-0-0-0): size 36 (cls: CollectionBookIndicator>ObjectProperty>/Script/CoreUObject)
-	CollectionBookIndicatorLayer (0-0-0-0): size 36 (cls: CollectionBookIndicatorLayer>ObjectProperty>/Script/CoreUObject)
 	CurrentlySlottedIndicatorLayer (0-0-0-0): size 36 (cls: CurrentlySlottedIndicatorLayer>ObjectProperty>/Script/CoreUObject)
 	EquipSlotBorder (0-0-0-0): size 36 (cls: EquipSlotBorder>ObjectProperty>/Script/CoreUObject)
 	EquipSlotOverlay (0-0-0-0): size 36 (cls: EquipSlotOverlay>ObjectProperty>/Script/CoreUObject)
@@ -1425,9 +1457,11 @@ Serialized exports:
 	Operation (0-0-0-0): size 36 (cls: Operation>ObjectProperty>/Script/CoreUObject)
 	QuantityProducedOverlay (0-0-0-0): size 36 (cls: QuantityProducedOverlay>ObjectProperty>/Script/CoreUObject)
 	QuantityProducedText (0-0-0-0): size 36 (cls: QuantityProducedText>ObjectProperty>/Script/CoreUObject)
+	RefundIndicator (0-0-0-0): size 36 (cls: RefundIndicator>ObjectProperty>/Script/CoreUObject)
 	TileDimmer (0-0-0-0): size 36 (cls: TileDimmer>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Account_Item (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Account_Item>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_World_Item (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_World_Item>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetRuntimeOptions_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetRuntimeOptions_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetContext_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue1>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetListItemObject_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetListItemObject_ReturnValue>ObjectProperty>/Script/CoreUObject)
@@ -1686,7 +1720,7 @@ Serialized exports:
 			HorizontalAlignment(ByteProperty)=HAlign_Fill 
 			VerticalAlignment(ByteProperty)=VAlign_Fill 
 			Parent(ObjectProperty)=RootOverlay=WidgetArchetype 
-			Content(ObjectProperty)=CollectionBookIndicatorLayer=WidgetArchetype 
+			Content(ObjectProperty)=CollectionBookAndRefundIndicatorLayer=WidgetArchetype 
 	PanelSlot_0 (0-0-0-0): size 70 (cls: PanelSlot_0>PanelSlot>/Script/UMG):
 		Tag array:
 			Parent(ObjectProperty)=Content=WidgetArchetype 
@@ -1856,6 +1890,10 @@ Serialized exports:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=OverlaySlot_1=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
+	VerticalBox_0 (0-0-0-0): size 86 (cls: VerticalBox_0>VerticalBox>/Script/UMG):
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=BorderSlot_0=WidgetArchetype 
 	VerticalBoxSlot_0 (0-0-0-0): size 243 (cls: VerticalBoxSlot_0>VerticalBoxSlot>/Script/UMG):
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
@@ -1865,6 +1903,20 @@ Serialized exports:
 		Tag array:
 			Parent(ObjectProperty)=NotCraftableIconVerticalBox=WidgetArchetype 
 			Content(ObjectProperty)=Spacer_0=WidgetArchetype 
+	VerticalBoxSlot_0 (0-0-0-0): size 267 (cls: VerticalBoxSlot_0>VerticalBoxSlot>/Script/UMG):
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=VerticalBox_0=WidgetArchetype 
+			Content(ObjectProperty)=CollectionBookIndicator=WidgetArchetype 
+	VerticalBoxSlot_2 (0-0-0-0): size 267 (cls: VerticalBoxSlot_2>VerticalBoxSlot>/Script/UMG):
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=VerticalBox_0=WidgetArchetype 
+			Content(ObjectProperty)=RefundIndicator=WidgetArchetype 
 	Intro_INST (0-0-0-0): size 11973 (cls: Intro_INST>WidgetAnimation>/Script/UMG):
 		Tag array:
 			MovieScene(ObjectProperty)=Intro=ItemManagementItemTileButton_C 

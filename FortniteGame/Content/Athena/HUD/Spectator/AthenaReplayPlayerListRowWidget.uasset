@@ -14,6 +14,7 @@ Name table:
 	/Game/UI/Foundation/Text/TextStyle-Base-XS-70pc
 	/Game/UI/Foundation/Text/TextStyle-Base-XS-B
 	/Game/UI/Foundation/Textures/Icons/Replay/T-Icon-Replay-CurrentPlayer-L
+	/Script/BlueprintContext
 	/Script/CommonUI
 	/Script/CoreUObject
 	/Script/Engine
@@ -21,11 +22,13 @@ Name table:
 	/Script/FortniteUI
 	/Script/UMG
 	ArrayProperty
+	AthenaRemotePlayerViewData
 	AthenaReplayPlayerListRowWidget_C
 	AthenaSpectatorHitPointBar_C
 	AthenaSpectatorHitPointBarBase
 	AthenaSpectatorPlayerListEntryWidget
 	AthenaSpectatorPlayerListRowData
+	AthenaSpectatorUIContext
 	Background
 	bAllowTemplate
 	Bar
@@ -36,6 +39,7 @@ Name table:
 	bHasScriptImplementedTick
 	bInteractableWhenSelected
 	bIsVariable
+	BlueprintContextLibrary
 	BlueprintGeneratedClass
 	BoolProperty
 	Border
@@ -53,8 +57,11 @@ Name table:
 	ByteProperty
 	CallFunc_Conv_IntToText_ReturnValue
 	CallFunc_Conv_StringToText_ReturnValue
+	CallFunc_GetContext_ReturnValue
 	CallFunc_GetGameState_ReturnValue
+	CallFunc_GetPlayerData_ReturnValue
 	CallFunc_GetPlayerState_ReturnValue
+	CallFunc_GetUniqueID_ReturnValue
 	CallFunc_IsValid_ReturnValue
 	CallFunc_IsValid_ReturnValue1
 	CallFunc_Less_ByteByte_ReturnValue
@@ -74,6 +81,7 @@ Name table:
 	Default__AthenaReplayPlayerListRowWidget_C
 	Default__AthenaSpectatorHitPointBar_C
 	Default__AthenaSpectatorPlayerListEntryWidget
+	Default__BlueprintContextLibrary
 	Default__BoolProperty
 	Default__Border-MainL-Black_C
 	Default__Border_AthenaStore_OfferHeaderBacking_C
@@ -115,8 +123,8 @@ Name table:
 	DrawAs
 	DVR_CamOptions_Hover_Cue
 	DVR_CamOptions_Select_Cue
-	EAthenaSpectatorHitPointBarType
-	EAthenaSpectatorHitPointBarType::Shield
+	EHealthBarType
+	EHealthBarType::Shield
 	EHorizontalAlignment
 	Engine
 	EntryPoint
@@ -136,13 +144,17 @@ Name table:
 	Font
 	FontObject
 	FortGameStateAthena
+	FortPlayerState
 	FortPlayerStateAthena
 	Function
 	GamePhase
 	GameplayStatics
 	GameStateBase
+	GetContext
 	GetGameState
+	GetPlayerData
 	GetPlayerState
+	GetUniqueID
 	HAlign_Center
 	HAlign_Fill
 	HAlign_Left
@@ -209,7 +221,7 @@ Name table:
 	RootWidget
 	ScriptStruct
 	SetBrushColor
-	SetPlayerState
+	SetPlayerData
 	SetText
 	SetVisibility
 	ShadowOffset
@@ -252,10 +264,9 @@ Name table:
 	UberGraphFrame
 	UberGraphFunction
 	UnderlyingType
+	UniqueNetIdRepl
 	VAlign_Center
 	VAlign_Fill
-	ValueCurrent
-	ValueLast
 	Vector2D
 	VerticalAlignment
 	VerticalBox
@@ -300,28 +311,24 @@ Serialized exports:
 			TeamNumber(ObjectProperty)=TeamNumber=WidgetArchetype 
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
-	HealthBar (0-0-0-0): size 212 (cls: HealthBar>AthenaSpectatorHitPointBar_C>/Game/Athena/HUD/Spectator/AthenaSpectatorHitPointBar):
+	HealthBar (0-0-0-0): size 154 (cls: HealthBar>AthenaSpectatorHitPointBar_C>/Game/Athena/HUD/Spectator/AthenaSpectatorHitPointBar):
 		Tag array:
 			ProgressBarDelta(ObjectProperty)=ProgressBarDelta=WidgetArchetype 
 			ProgressBarFill(ObjectProperty)=ProgressBarFill=WidgetArchetype 
-			ValueCurrent(FloatProperty)=0.666667 
-			ValueLast(FloatProperty)=0.780953 
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=VerticalBoxSlot_2=WidgetArchetype 
-	ShieldBar (0-0-0-0): size 253 (cls: ShieldBar>AthenaSpectatorHitPointBar_C>/Game/Athena/HUD/Spectator/AthenaSpectatorHitPointBar):
+	ShieldBar (0-0-0-0): size 195 (cls: ShieldBar>AthenaSpectatorHitPointBar_C>/Game/Athena/HUD/Spectator/AthenaSpectatorHitPointBar):
 		Tag array:
 			ProgressBarDelta(ObjectProperty)=ProgressBarDelta=WidgetArchetype 
 			ProgressBarFill(ObjectProperty)=ProgressBarFill=WidgetArchetype 
-			BarType(EnumProperty)=EAthenaSpectatorHitPointBarType::Shield 
-			ValueCurrent(FloatProperty)=0.485714 
-			ValueLast(FloatProperty)=0.609524 
+			BarType(EnumProperty)=EHealthBarType::Shield 
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=VerticalBoxSlot_0=WidgetArchetype 
 	HealthBar (0-0-0-0): size 36 (cls: HealthBar>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_AthenaReplayPlayerListRowWidget (0-0-0-0): size 269 (cls: ExecuteUbergraph_AthenaReplayPlayerListRowWidget>Function>/Script/CoreUObject)
+	ExecuteUbergraph_AthenaReplayPlayerListRowWidget (0-0-0-0): size 374 (cls: ExecuteUbergraph_AthenaReplayPlayerListRowWidget>Function>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	OnEntryDataSet (0-0-0-0): size 54 (cls: OnEntryDataSet>Function>/Script/CoreUObject)
@@ -456,6 +463,8 @@ Serialized exports:
 			Brush(StructProperty)=System.Byte[] 
 			Slot(ObjectProperty)=SizeBoxSlot_1=WidgetArchetype 
 			Visibility(EnumProperty)=ESlateVisibility::Hidden 
+	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetPlayerData_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetPlayerData_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetPlayerState_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetPlayerState_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	Kills (0-0-0-0): size 36 (cls: Kills>ObjectProperty>/Script/CoreUObject)
 	PlayerName (0-0-0-0): size 36 (cls: PlayerName>ObjectProperty>/Script/CoreUObject)
@@ -592,6 +601,7 @@ Serialized exports:
 			VerticalAlignment(ByteProperty)=VAlign_Center 
 			Parent(ObjectProperty)=SizeBox_5=WidgetArchetype 
 			Content(ObjectProperty)=VerticalBox_0=WidgetArchetype 
+	CallFunc_GetUniqueID_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetUniqueID_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_Conv_IntToText_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Conv_IntToText_ReturnValue>TextProperty>/Script/CoreUObject)
 	CallFunc_Conv_IntToText_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Conv_IntToText_ReturnValue>TextProperty>/Script/CoreUObject)
 	CallFunc_Conv_StringToText_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Conv_StringToText_ReturnValue>TextProperty>/Script/CoreUObject)

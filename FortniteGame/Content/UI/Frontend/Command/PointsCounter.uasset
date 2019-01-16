@@ -14,9 +14,16 @@ Name table:
 	/Script/Engine
 	/Script/FortniteGame
 	/Script/FortniteUI
+	/Script/Slate
 	/Script/SlateCore
 	/Script/UMG
 	AnimateValue
+	ArgumentName
+	ArgumentValue
+	ArgumentValueFloat
+	ArgumentValueGender
+	ArgumentValueInt
+	ArgumentValueType
 	ArrayProperty
 	AutomaticallyRefreshPoints
 	bAllowTemplate
@@ -38,6 +45,7 @@ Name table:
 	ByteProperty
 	CallFunc_BooleanOR_ReturnValue
 	CallFunc_Conv_IntToFloat_ReturnValue
+	CallFunc_Format_ReturnValue
 	CallFunc_GetContext_ReturnValue
 	CallFunc_GetContext_ReturnValue1
 	CallFunc_GetHaveValue_Value
@@ -77,8 +85,11 @@ Name table:
 	Default__Image
 	Default__IntProperty
 	Default__KismetSystemLibrary
+	Default__KismetTextLibrary
 	Default__ObjectProperty
 	Default__PointsCounter_C
+	Default__ScaleBox
+	Default__ScaleBoxSlot
 	Default__StructProperty
 	Default__TextProperty
 	Default__TextStyle-Base-M-B-40pc_C
@@ -110,11 +121,15 @@ Name table:
 	ESlateColorStylingMode::UseColor_Specified
 	ESlateVisibility
 	ESlateVisibility::Visible
+	EStretch
+	EStretch::None
 	EVerticalAlignment
 	ExecuteUbergraph_PointsCounter
 	FloatProperty
 	Font
 	FontObject
+	Format
+	FormatArgumentData
 	FortInventoryContext
 	FortItemDefinition
 	FortItemInstanceQuantityPair
@@ -139,6 +154,7 @@ Name table:
 	HorizontalBox
 	HorizontalBoxSlot
 	Icon Visibility
+	IconShouldScale
 	Image
 	imageIcon
 	ImageSize
@@ -171,10 +187,13 @@ Name table:
 	K2Node_CustomEvent_Quantity
 	K2Node_CustomEvent_UniqueId
 	K2Node_Event_IsDesignTime
+	K2Node_MakeArray_Array
+	K2Node_MakeStruct_FormatArgumentData
 	K2Node_Select1_Default
 	K2Node_Select_Default
 	KismetMathLibrary
 	KismetSystemLibrary
+	KismetTextLibrary
 	Label
 	Label Display Text
 	Label Style
@@ -216,11 +235,14 @@ Name table:
 	Right
 	RootWidget
 	Scale
+	ScaleBox
+	ScaleBoxSlot
 	ScriptStruct
 	SetBrush
 	SetCurrentValue
 	SetNeedValue
 	SetParameters
+	SetStretch
 	SetStyle
 	SetText
 	SetVisibility
@@ -234,6 +256,8 @@ Name table:
 	Slots
 	SoftObjectProperty
 	SpecifiedColor
+	Stretch
+	StrProperty
 	StructProperty
 	Style
 	Temp_bool_Variable
@@ -278,7 +302,7 @@ Name table:
 	WidgetTree
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	PointsCounter_C (0-0-0-0): size 635 (cls: PointsCounter_C>WidgetBlueprintGeneratedClass>/Script/UMG):
+	PointsCounter_C (0-0-0-0): size 643 (cls: PointsCounter_C>WidgetBlueprintGeneratedClass>/Script/UMG):
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
@@ -308,8 +332,6 @@ Serialized exports:
 	HandleResourceCollectorClaimed (0-0-0-0): size 68 (cls: HandleResourceCollectorClaimed>Function>/Script/CoreUObject)
 	CollectorList (0-0-0-0): size 36 (cls: CollectorList>StructProperty>/Script/CoreUObject)
 	CollectorList (0-0-0-0): size 36 (cls: CollectorList>ArrayProperty>/Script/CoreUObject)
-	AnimateValue (0-0-0-0): size 34 (cls: AnimateValue>BoolProperty>/Script/CoreUObject)
-	AutomaticallyRefreshPoints (0-0-0-0): size 34 (cls: AutomaticallyRefreshPoints>BoolProperty>/Script/CoreUObject)
 	UniqueId (0-0-0-0): size 36 (cls: UniqueId>StructProperty>/Script/CoreUObject)
 	HandlePlayerInfoChanged (0-0-0-0): size 68 (cls: HandlePlayerInfoChanged>Function>/Script/CoreUObject)
 	Construct (0-0-0-0): size 54 (cls: Construct>Function>/Script/CoreUObject)
@@ -324,24 +346,29 @@ Serialized exports:
 	UnbindDelegates (0-0-0-0): size 213 (cls: UnbindDelegates>Function>/Script/CoreUObject)
 	K2Node_CreateDelegate_OutputDelegate (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate>DelegateProperty>/Script/CoreUObject)
 	BindItemDefinitionDelegate (0-0-0-0): size 132 (cls: BindItemDefinitionDelegate>Function>/Script/CoreUObject)
-	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
-	K2Node_Event_IsDesignTime (0-0-0-0): size 34 (cls: K2Node_Event_IsDesignTime>BoolProperty>/Script/CoreUObject)
 	K2Node_CreateDelegate_OutputDelegate (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate>DelegateProperty>/Script/CoreUObject)
 	UnbindItemDefinitionDelegate (0-0-0-0): size 132 (cls: UnbindItemDefinitionDelegate>Function>/Script/CoreUObject)
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
-	UpdateLabel (0-0-0-0): size 184 (cls: UpdateLabel>Function>/Script/CoreUObject)
+	UpdateLabel (0-0-0-0): size 376 (cls: UpdateLabel>Function>/Script/CoreUObject)
+	K2Node_MakeArray_Array (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array>StructProperty>/Script/CoreUObject)
+	K2Node_MakeArray_Array (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array>ArrayProperty>/Script/CoreUObject)
+	AnimateValue (0-0-0-0): size 34 (cls: AnimateValue>BoolProperty>/Script/CoreUObject)
+	AutomaticallyRefreshPoints (0-0-0-0): size 34 (cls: AutomaticallyRefreshPoints>BoolProperty>/Script/CoreUObject)
+	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
+	K2Node_Event_IsDesignTime (0-0-0-0): size 34 (cls: K2Node_Event_IsDesignTime>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
 	UpdateNeedValue (0-0-0-0): size 326 (cls: UpdateNeedValue>Function>/Script/CoreUObject)
 	HaveValue (0-0-0-0): size 32 (cls: HaveValue>FloatProperty>/Script/CoreUObject)
 	UpdateHaveValue (0-0-0-0): size 201 (cls: UpdateHaveValue>Function>/Script/CoreUObject)
 	UpdateTextStyle (0-0-0-0): size 118 (cls: UpdateTextStyle>Function>/Script/CoreUObject)
-	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
-	UpdateIcon (0-0-0-0): size 236 (cls: UpdateIcon>Function>/Script/CoreUObject)
+	Temp_byte_Variable (0-0-0-0): size 36 (cls: Temp_byte_Variable>ByteProperty>/Script/CoreUObject)
+	UpdateIcon (0-0-0-0): size 344 (cls: UpdateIcon>Function>/Script/CoreUObject)
 	Quantity (0-0-0-0): size 32 (cls: Quantity>IntProperty>/Script/CoreUObject)
 	SetNeedValue (0-0-0-0): size 72 (cls: SetNeedValue>Function>/Script/CoreUObject)
 	Value (0-0-0-0): size 32 (cls: Value>IntProperty>/Script/CoreUObject)
 	GetHaveValue (0-0-0-0): size 189 (cls: GetHaveValue>Function>/Script/CoreUObject)
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
+	IconShouldScale (0-0-0-0): size 34 (cls: IconShouldScale>BoolProperty>/Script/CoreUObject)
 	OverrideIconFromItemDef (0-0-0-0): size 34 (cls: OverrideIconFromItemDef>BoolProperty>/Script/CoreUObject)
 	OverrideValueFromItemDef (0-0-0-0): size 34 (cls: OverrideValueFromItemDef>BoolProperty>/Script/CoreUObject)
 	InAnimateValue (0-0-0-0): size 34 (cls: InAnimateValue>BoolProperty>/Script/CoreUObject)
@@ -353,11 +380,15 @@ Serialized exports:
 	Show Quantity Needed (0-0-0-0): size 34 (cls: Show Quantity Needed>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_BooleanOR_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanOR_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Not_PreBool_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue>BoolProperty>/Script/CoreUObject)
+	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
 	CallFunc_Greater_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Greater_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable1 (0-0-0-0): size 34 (cls: Temp_bool_Variable1>BoolProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	K2Node_Select_Default (0-0-0-0): size 36 (cls: K2Node_Select_Default>ByteProperty>/Script/CoreUObject)
+	Temp_byte_Variable1 (0-0-0-0): size 36 (cls: Temp_byte_Variable1>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
@@ -450,7 +481,7 @@ Serialized exports:
 			HorizontalAlignment(ByteProperty)=HAlign_Left 
 			VerticalAlignment(ByteProperty)=VAlign_Center 
 			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
-			Content(ObjectProperty)=imageIcon=WidgetArchetype 
+			Content(ObjectProperty)=ScaleBox_0=WidgetArchetype 
 	HorizontalBoxSlot_2 (0-0-0-0): size 111 (cls: HorizontalBoxSlot_2>HorizontalBoxSlot>/Script/UMG):
 		Tag array:
 			VerticalAlignment(ByteProperty)=VAlign_Center 
@@ -466,7 +497,7 @@ Serialized exports:
 	imageIcon (0-0-0-0): size 298 (cls: imageIcon>Image>/Script/UMG):
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
-			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
+			Slot(ObjectProperty)=ScaleBoxSlot_0=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
 	DisplayValue (0-0-0-0): size 32 (cls: DisplayValue>IntProperty>/Script/CoreUObject)
 	K2Node_CustomEvent_Quantity (0-0-0-0): size 32 (cls: K2Node_CustomEvent_Quantity>IntProperty>/Script/CoreUObject)
@@ -478,6 +509,7 @@ Serialized exports:
 	InQuantityNeeded (0-0-0-0): size 32 (cls: InQuantityNeeded>IntProperty>/Script/CoreUObject)
 	CallFunc_GetHaveValue_Value (0-0-0-0): size 32 (cls: CallFunc_GetHaveValue_Value>IntProperty>/Script/CoreUObject)
 	CallFunc_GetHaveValue_Value (0-0-0-0): size 32 (cls: CallFunc_GetHaveValue_Value>IntProperty>/Script/CoreUObject)
+	CallFunc_GetHaveValue_Value (0-0-0-0): size 32 (cls: CallFunc_GetHaveValue_Value>IntProperty>/Script/CoreUObject)
 	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetContext_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue1>ObjectProperty>/Script/CoreUObject)
 	K2Node_CustomEvent_ItemDefinition (0-0-0-0): size 36 (cls: K2Node_CustomEvent_ItemDefinition>ObjectProperty>/Script/CoreUObject)
@@ -487,26 +519,40 @@ Serialized exports:
 	Label (0-0-0-0): size 36 (cls: Label>ObjectProperty>/Script/CoreUObject)
 	NumericTextNeedValue (0-0-0-0): size 36 (cls: NumericTextNeedValue>ObjectProperty>/Script/CoreUObject)
 	NumericTextValue (0-0-0-0): size 36 (cls: NumericTextValue>ObjectProperty>/Script/CoreUObject)
+	ScaleBox_0 (0-0-0-0): size 36 (cls: ScaleBox_0>ObjectProperty>/Script/CoreUObject)
 	InItemDefinition (0-0-0-0): size 36 (cls: InItemDefinition>ObjectProperty>/Script/CoreUObject)
 	TextSlash (0-0-0-0): size 36 (cls: TextSlash>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetContext_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue1>ObjectProperty>/Script/CoreUObject)
-	WidgetArchetype (0-0-0-0): size 241 (cls: WidgetArchetype>PointsCounter_C):
+	WidgetArchetype (0-0-0-0): size 270 (cls: WidgetArchetype>PointsCounter_C):
 		Tag array:
 			HBoxNeed(ObjectProperty)=HBoxNeed=WidgetArchetype 
 			imageIcon(ObjectProperty)=imageIcon=WidgetArchetype 
 			Label(ObjectProperty)=Label=WidgetArchetype 
 			NumericTextNeedValue(ObjectProperty)=NumericTextNeedValue=WidgetArchetype 
 			NumericTextValue(ObjectProperty)=NumericTextValue=WidgetArchetype 
+			ScaleBox_0(ObjectProperty)=ScaleBox_0=WidgetArchetype 
 			TextSlash(ObjectProperty)=TextSlash=WidgetArchetype 
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
+	ScaleBox_0 (0-0-0-0): size 149 (cls: ScaleBox_0>ScaleBox>/Script/UMG):
+		Tag array:
+			Stretch(ByteProperty)=EStretch::None 
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
+			bIsVariable(BoolProperty)=True 
+	ScaleBoxSlot_0 (0-0-0-0): size 70 (cls: ScaleBoxSlot_0>ScaleBoxSlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=ScaleBox_0=WidgetArchetype 
+			Content(ObjectProperty)=imageIcon=WidgetArchetype 
 	Display Icon (0-0-0-0): size 36 (cls: Display Icon>StructProperty>/Script/CoreUObject)
 	K2Node_CustomEvent_UniqueId (0-0-0-0): size 36 (cls: K2Node_CustomEvent_UniqueId>StructProperty>/Script/CoreUObject)
 	InDisplayIcon (0-0-0-0): size 36 (cls: InDisplayIcon>StructProperty>/Script/CoreUObject)
 	CallFunc_GetSmallPreviewImageBrush_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetSmallPreviewImageBrush_ReturnValue>StructProperty>/Script/CoreUObject)
+	K2Node_MakeStruct_FormatArgumentData (0-0-0-0): size 36 (cls: K2Node_MakeStruct_FormatArgumentData>StructProperty>/Script/CoreUObject)
 	Label Display Text (0-0-0-0): size 32 (cls: Label Display Text>TextProperty>/Script/CoreUObject)
 	InLabelDisplayText (0-0-0-0): size 32 (cls: InLabelDisplayText>TextProperty>/Script/CoreUObject)
+	CallFunc_Format_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Format_ReturnValue>TextProperty>/Script/CoreUObject)
 	WidgetTree_0 (0-0-0-0): size 41 (cls: WidgetTree_0>WidgetTree>/Script/UMG):
 		Tag array:
 			RootWidget(ObjectProperty)=HorizontalBox_0=WidgetArchetype 

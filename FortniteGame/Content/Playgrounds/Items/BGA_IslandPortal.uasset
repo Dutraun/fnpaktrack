@@ -19,6 +19,7 @@ Name table:
 	/Game/Athena/Items/Quests/BattlePass/Quest_BR_Use_RiftPortals
 	/Game/Missions/FunctionLibrary/MissionBlueprintFunctionLibrary
 	/Game/Playgrounds/Items/BGA_IslandPortal
+	/Game/Playgrounds/Items/M_IslandThumbail
 	/Game/Playgrounds/Items/PlaygroundIslandData
 	/Game/Playgrounds/Items/Portals/BP_PortalLightPillar
 	/Game/Playgrounds/Items/Portals/UI/IslandSelect_UI
@@ -31,6 +32,7 @@ Name table:
 	/Game/Sounds/Fort_GamePlay_Sounds/Player/RiftPortal/RiftPortal_Creative_Teleport_Enter_3P_Cue
 	/Game/Sounds/Fort_GamePlay_Sounds/Player/RiftPortal/RiftPortal_Creative_Teleport_Exit_3P_Cue
 	/Game/Sounds/Fort_GamePlay_Sounds/Player/RiftPortal/RiftPortal_Expand_Cue
+	/Game/Tools/Turntable/Mesh/1x1plane
 	/Game/UI/Creative/CreativeIslandLinkScreen
 	/Game/UI/Creative/CreativeIslandLinkScreen.CreativeIslandLinkScreen_C
 	/Script/CoreUObject
@@ -39,6 +41,7 @@ Name table:
 	/Script/GameplayAbilities
 	/Script/GameplayTags
 	/Script/UMG
+	1x1plane
 	A
 	Abilities.Generic.Rift.Trigger
 	AbilitySystemBlueprintLibrary
@@ -122,6 +125,7 @@ Name table:
 	bHasCookedComponentInstancingData
 	bHiddenInGame
 	bIgnoreNextFallingDamage
+	bIsBeingDisplayed
 	bIsCurated
 	bIsCuratedPortal
 	bIsDBNO
@@ -131,6 +135,8 @@ Name table:
 	bIsValid
 	BlendRadius
 	BlendWeight
+	Blueprint_GetSizeX
+	Blueprint_GetSizeY
 	BlueprintCanInteract
 	BlueprintComponentChangedPropertyInfo
 	BlueprintComponentDelegateBinding
@@ -183,9 +189,12 @@ Name table:
 	CallFunc_Athena_CheckQuestAndObjectiveCompletion_QuestCompleted
 	CallFunc_Athena_CheckQuestAndObjectiveCompletion_QuestIsValid
 	CallFunc_BeginDeferredActorSpawnFromClass_ReturnValue
+	CallFunc_Blueprint_GetSizeX_ReturnValue
+	CallFunc_Blueprint_GetSizeY_ReturnValue
 	CallFunc_BooleanAND_ReturnValue
 	CallFunc_BooleanAND_ReturnValue1
 	CallFunc_BooleanOR_ReturnValue
+	CallFunc_BooleanOR_ReturnValue1
 	CallFunc_BreakVector_X
 	CallFunc_BreakVector_X1
 	CallFunc_BreakVector_X2
@@ -197,6 +206,8 @@ Name table:
 	CallFunc_BreakVector_Z2
 	CallFunc_Conv_ByteToInt_ReturnValue
 	CallFunc_Conv_FloatToVector_ReturnValue
+	CallFunc_Conv_IntToFloat_ReturnValue
+	CallFunc_Conv_IntToFloat_ReturnValue1
 	CallFunc_Conv_IntToString_ReturnValue
 	CallFunc_Conv_StringToText_ReturnValue
 	CallFunc_Conv_StringToText_ReturnValue1
@@ -204,7 +215,10 @@ Name table:
 	CallFunc_Create_ReturnValue
 	CallFunc_Create_ReturnValue1
 	CallFunc_Create_ReturnValue2
+	CallFunc_CreateDynamicMaterialInstance_ReturnValue
 	CallFunc_DistanceBetweenTwoVectors_Distance
+	CallFunc_Divide_FloatFloat_ReturnValue
+	CallFunc_Divide_FloatFloat_ReturnValue1
 	CallFunc_EqualEqual_ObjectObject_ReturnValue
 	CallFunc_FinishSpawningActor_ReturnValue
 	CallFunc_GetActorForwardVector_ReturnValue
@@ -272,6 +286,7 @@ Name table:
 	CallFunc_IsValid_ReturnValue2
 	CallFunc_IsValid_ReturnValue3
 	CallFunc_IsValid_ReturnValue4
+	CallFunc_IsValid_ReturnValue5
 	CallFunc_IsValidClass_ReturnValue
 	CallFunc_IsValidClass_ReturnValue1
 	CallFunc_K2_GetActorLocation_ReturnValue
@@ -286,6 +301,7 @@ Name table:
 	CallFunc_K2_SetRelativeRotation_SweepHitResult
 	CallFunc_K2_SetRelativeRotation_SweepHitResult1
 	CallFunc_K2_SetTimerDelegate_ReturnValue
+	CallFunc_K2_SetWorldRotation_SweepHitResult
 	CallFunc_Len_ReturnValue
 	CallFunc_Less_FloatFloat_ReturnValue
 	CallFunc_Less_IntInt_ReturnValue
@@ -305,6 +321,7 @@ Name table:
 	CallFunc_Not_PreBool_ReturnValue
 	CallFunc_RandomFloatInRange_ReturnValue
 	CallFunc_RandomFloatInRange_ReturnValue1
+	CallFunc_ScaleThumbnailPlaneByTextureSize_ReturnValue
 	CallFunc_SelectFloat_ReturnValue
 	CallFunc_SelectFloat_ReturnValue1
 	CallFunc_SelectFloat_ReturnValue2
@@ -335,6 +352,7 @@ Name table:
 	CollisionProfileName
 	CollisionResponse
 	CollisionResponses
+	Color
 	ColorOffsetShadows
 	ComponentClass
 	ComponentDelegateBinding
@@ -344,11 +362,13 @@ Name table:
 	Controller
 	Conv_ByteToInt
 	Conv_FloatToVector
+	Conv_IntToFloat
 	Conv_IntToString
 	Conv_StringToText
 	CookedComponentInstancingData
 	CrackExitRift
 	Create
+	CreateDynamicMaterialInstance
 	CreativeMode
 	CreatorName
 	CuratedPortalChanged
@@ -429,6 +449,7 @@ Name table:
 	DirectionPropertyName
 	DisplayNameChanged
 	DistanceBetweenTwoVectors
+	Divide_FloatFloat
 	DORM_Awake
 	DrawSize
 	DynamicBindingObjects
@@ -437,6 +458,7 @@ Name table:
 	ECC_WorldStatic
 	ECollisionChannel
 	ECollisionEnabled
+	ECollisionEnabled::NoCollision
 	ECollisionEnabled::QueryAndPhysics
 	ECollisionResponse
 	ECR_Block
@@ -552,6 +574,7 @@ Name table:
 	K2_GetPawn
 	K2_SetRelativeRotation
 	K2_SetTimerDelegate
+	K2_SetWorldRotation
 	K2Node_ClassDynamicCast_AsUser_Widget
 	K2Node_ClassDynamicCast_AsUser_Widget1
 	K2Node_ClassDynamicCast_AsUser_Widget2
@@ -585,6 +608,7 @@ Name table:
 	K2Node_CustomEvent_Loaded
 	K2Node_CustomEvent_Loaded1
 	K2Node_CustomEvent_Loaded2
+	K2Node_CustomEvent_Location
 	K2Node_CustomEvent_PlayerLocation
 	K2Node_CustomEvent_RequestingController
 	K2Node_DynamicCast_AsBGA_Island_Portal
@@ -673,6 +697,7 @@ Name table:
 	LoadingText
 	LoadIslandUI
 	Location
+	M_IslandThumbail
 	M_Shard_Portal
 	M_Shard_Portal_Gold_Inst
 	MakeRotator
@@ -680,6 +705,7 @@ Name table:
 	MassInKgOverride
 	Material
 	MaterialInstanceConstant
+	MaterialInstanceDynamic
 	MaxSpawnHeightMultiplier
 	Mesh
 	MeshComponent
@@ -695,6 +721,7 @@ Name table:
 	NewIslandName
 	NewPlayerName
 	NewPop
+	NoCollision
 	None
 	Not_PreBool
 	NotifyTeleportedPlayerPawn
@@ -715,6 +742,7 @@ Name table:
 	OnRep_PlayerPawn
 	OnRep_TeleportLocation
 	OnRep_Vehicle
+	OnThumbnailTextureReady
 	Open
 	OtherActor
 	OtherBodyIndex
@@ -726,6 +754,7 @@ Name table:
 	OverlappedComponent
 	OverlappingOnBeginPlay
 	OverrideMaterials
+	OwnedThumbnailColor
 	OwningPlayerChanged
 	P_Geode_CrackExit_Rift_Short
 	P_Geode_Oddity_Boop
@@ -750,6 +779,7 @@ Name table:
 	PhysicsBody
 	PillarSound_GEN_VARIABLE
 	Play
+	Play Rift Exit Sound
 	PlayCosmeticFX
 	PlayerController
 	PlayerExitSkyCrack
@@ -806,6 +836,7 @@ Name table:
 	RowName
 	SavingText
 	ScalableFloat
+	ScaleThumbnailPlaneByTextureSize
 	SceneColorTint
 	SceneComponent
 	SceneFringeIntensity
@@ -815,6 +846,7 @@ Name table:
 	SelectFloat
 	SendGameplayEventToActor
 	ServerTeleportToPlaygroundLobbyIsland
+	SetAbsolute
 	SetCullDistance
 	SetFloatParameter
 	SetHiddenInGame
@@ -823,9 +855,12 @@ Name table:
 	SetRelativeScale3D
 	SetScalarParameterValueOnMaterials
 	SetSphereRadius
+	SetTextureParameterValue
 	Settings
+	SetVectorParameterValue
 	SetVolumeMultiplier
 	SetWidget
+	SetWorldScale3D
 	ShouldSpawnRift?
 	Show
 	SimpleConstructionScript
@@ -935,6 +970,12 @@ Name table:
 	TextRender
 	TextRender_GEN_VARIABLE
 	TextRenderComponent
+	Texture
+	Texture2D
+	ThumbnailPlane
+	ThumbnailPlane_GEN_VARIABLE
+	ThumbnailTexture
+	ThumbnailWorldSizeScale
 	Timeline
 	Timeline_0__Direction_D988993744202060C85FC18A08065960
 	Timeline_0__FinishedFunc
@@ -965,6 +1006,7 @@ Name table:
 	UIDistanceCheckTimer
 	UInt64Property
 	UIShowDistance
+	UnownedThumbnailColor
 	UpdateDescription
 	UpdateDescription__DelegateSignature
 	UpdateFunctionName
@@ -1029,7 +1071,7 @@ Name table:
 	Z
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	BGA_IslandPortal_C (0-0-0-0): size 1475 (cls: BGA_IslandPortal_C>BlueprintGeneratedClass>/Script/Engine):
+	BGA_IslandPortal_C (0-0-0-0): size 1543 (cls: BGA_IslandPortal_C>BlueprintGeneratedClass>/Script/Engine):
 		Tag array:
 			NumReplicatedProperties(IntProperty)=1 
 			bHasCookedComponentInstancingData(BoolProperty)=True 
@@ -1037,7 +1079,7 @@ Serialized exports:
 			Timelines(ArrayProperty)=[object] (inner: ObjectProperty)
 			SimpleConstructionScript(ObjectProperty)=SimpleConstructionScript_0=BGA_IslandPortal_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_BGA_IslandPortal=BGA_IslandPortal_C 
-	Default__BGA_IslandPortal_C (0-0-0-0): size 6465 (cls: Default__BGA_IslandPortal_C>BGA_IslandPortal_C):
+	Default__BGA_IslandPortal_C (0-0-0-0): size 6624 (cls: Default__BGA_IslandPortal_C>BGA_IslandPortal_C):
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			DeathEffects(ObjectProperty)=P_Geode_Oddity_Boop=/Game/Athena/Effects/Particles/Geode/P_Geode_Oddity_Boop 
@@ -1092,6 +1134,9 @@ Serialized exports:
 			UI_PortalInfoPlateSoftClass(SoftObjectProperty)=/Game/Playgrounds/Items/Portals/UI/PortalInfoPlate.PortalInfoPlate_C 
 			UI_IslandSelectSoftClass(SoftObjectProperty)=/Game/Playgrounds/Items/Portals/UI/IslandSelect_UI.IslandSelect_UI_C 
 			UI_IslandCodeEntrySoftClass(SoftObjectProperty)=/Game/UI/Creative/CreativeIslandLinkScreen.CreativeIslandLinkScreen_C 
+			ThumbnailWorldSizeScale(FloatProperty)=210 
+			OwnedThumbnailColor(StructProperty)=UE4.FLinearColor 
+			UnownedThumbnailColor(StructProperty)=UE4.FLinearColor 
 			LoadingText(TextProperty)=Loading... (FF7D7DAC4A06FE9E2C218391ADDFA2B6) 
 			SavingText(TextProperty)=Saving... (BBEE10D54B76EA2601462C8C16DFC136) 
 			TeleportingPlayersText(TextProperty)=Traveling to Island... (9EDE51C14C014874B15F2C86B1B99BD3) 
@@ -1112,7 +1157,7 @@ Serialized exports:
 			bGenerateOverlapEventsDuringLevelStreaming(BoolProperty)=True 
 			NetDormancy(ByteProperty)=DORM_Awake 
 			NetCullDistanceSquared(FloatProperty)=2E+09 
-	TextRender (0-0-0-0): size 36 (cls: TextRender>ObjectProperty>/Script/CoreUObject)
+	ThumbnailPlane (0-0-0-0): size 36 (cls: ThumbnailPlane>ObjectProperty>/Script/CoreUObject)
 	NewPlayerName (0-0-0-0): size 32 (cls: NewPlayerName>TextProperty>/Script/CoreUObject)
 	UpdatePlayerName__DelegateSignature (0-0-0-0): size 47 (cls: UpdatePlayerName__DelegateSignature>Function>/Script/CoreUObject)
 	NewPop (0-0-0-0): size 32 (cls: NewPop>IntProperty>/Script/CoreUObject)
@@ -1128,7 +1173,10 @@ Serialized exports:
 	LinkCode (0-0-0-0): size 32 (cls: LinkCode>StrProperty>/Script/CoreUObject)
 	UpdateLinkCode__DelegateSignature (0-0-0-0): size 47 (cls: UpdateLinkCode__DelegateSignature>Function>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_BGA_IslandPortal (0-0-0-0): size 7308 (cls: ExecuteUbergraph_BGA_IslandPortal>Function>/Script/CoreUObject)
+	ExecuteUbergraph_BGA_IslandPortal (0-0-0-0): size 7724 (cls: ExecuteUbergraph_BGA_IslandPortal>Function>/Script/CoreUObject)
+	OnThumbnailTextureReady (0-0-0-0): size 54 (cls: OnThumbnailTextureReady>Function>/Script/CoreUObject)
+	Location (0-0-0-0): size 36 (cls: Location>StructProperty>/Script/CoreUObject)
+	Play Rift Exit Sound (0-0-0-0): size 70 (cls: Play Rift Exit Sound>Function>/Script/CoreUObject)
 	bSaving (0-0-0-0): size 34 (cls: bSaving>BoolProperty>/Script/CoreUObject)
 	ClientSaveDisplayChanged (0-0-0-0): size 68 (cls: ClientSaveDisplayChanged>Function>/Script/CoreUObject)
 	CuratedPortalChanged (0-0-0-0): size 54 (cls: CuratedPortalChanged>Function>/Script/CoreUObject)
@@ -1201,6 +1249,7 @@ Serialized exports:
 		Tag array:
 			Sound(ObjectProperty)=RiftPortal_InWorld_Loop_Creative_Cue=/Game/Sounds/Creative/Gadgets/Portal/RiftPortal_InWorld_Loop_Creative_Cue 
 	bCanPlayerInteract (0-0-0-0): size 34 (cls: bCanPlayerInteract>BoolProperty>/Script/CoreUObject)
+	bIsBeingDisplayed (0-0-0-0): size 34 (cls: bIsBeingDisplayed>BoolProperty>/Script/CoreUObject)
 	Location (0-0-0-0): size 36 (cls: Location>StructProperty>/Script/CoreUObject)
 	GetPortalPosition (0-0-0-0): size 427 (cls: GetPortalPosition>Function>/Script/CoreUObject)
 	InteractingPawn (0-0-0-0): size 36 (cls: InteractingPawn>ObjectProperty>/Script/CoreUObject)
@@ -1215,7 +1264,7 @@ Serialized exports:
 	RequestingController (0-0-0-0): size 36 (cls: RequestingController>ObjectProperty>/Script/CoreUObject)
 	TeleportToLobbyIsland (0-0-0-0): size 669 (cls: TeleportToLobbyIsland>Function>/Script/CoreUObject)
 	Show (0-0-0-0): size 34 (cls: Show>BoolProperty>/Script/CoreUObject)
-	SetPortalUIVisibility (0-0-0-0): size 151 (cls: SetPortalUIVisibility>Function>/Script/CoreUObject)
+	SetPortalUIVisibility (0-0-0-0): size 162 (cls: SetPortalUIVisibility>Function>/Script/CoreUObject)
 	CallFunc_Conv_ByteToInt_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Conv_ByteToInt_ReturnValue>IntProperty>/Script/CoreUObject)
 	UpdatePopulationDisplay (0-0-0-0): size 115 (cls: UpdatePopulationDisplay>Function>/Script/CoreUObject)
 	CallFunc_Len_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Len_ReturnValue>IntProperty>/Script/CoreUObject)
@@ -1307,6 +1356,7 @@ Serialized exports:
 	Temp_bool_Variable9 (0-0-0-0): size 34 (cls: Temp_bool_Variable9>BoolProperty>/Script/CoreUObject)
 	CreativeMode (0-0-0-0): size 34 (cls: CreativeMode>BoolProperty>/Script/CoreUObject)
 	CallFunc_BooleanOR_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanOR_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_BooleanOR_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_BooleanOR_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_EqualEqual_ObjectObject_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ObjectObject_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Greater_FloatFloat_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Greater_FloatFloat_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Greater_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Greater_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
@@ -1324,6 +1374,7 @@ Serialized exports:
 	CallFunc_IsValid_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue2>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue3 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue3>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue4 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue4>BoolProperty>/Script/CoreUObject)
+	CallFunc_IsValid_ReturnValue5 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue5>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValidClass_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValidClass_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValidClass_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_IsValidClass_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_Less_FloatFloat_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Less_FloatFloat_ReturnValue>BoolProperty>/Script/CoreUObject)
@@ -1348,7 +1399,12 @@ Serialized exports:
 	K2Node_Event_bSaving (0-0-0-0): size 34 (cls: K2Node_Event_bSaving>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Has_Been_Initd_Variable (0-0-0-0): size 34 (cls: Temp_bool_Has_Been_Initd_Variable>BoolProperty>/Script/CoreUObject)
 	Temp_bool_IsClosed_Variable (0-0-0-0): size 34 (cls: Temp_bool_IsClosed_Variable>BoolProperty>/Script/CoreUObject)
+	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
 	IsMyPortal (0-0-0-0): size 34 (cls: IsMyPortal>BoolProperty>/Script/CoreUObject)
+	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
+	ReturnValue (0-0-0-0): size 36 (cls: ReturnValue>StructProperty>/Script/CoreUObject)
+	ScaleThumbnailPlaneByTextureSize (0-0-0-0): size 391 (cls: ScaleThumbnailPlaneByTextureSize>Function>/Script/CoreUObject)
+	CallFunc_Greater_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Greater_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
 	CallFunc_Not_PreBool_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue>BoolProperty>/Script/CoreUObject)
 	WasHidden (0-0-0-0): size 34 (cls: WasHidden>BoolProperty>/Script/CoreUObject)
@@ -1436,11 +1492,16 @@ Serialized exports:
 	CallFunc_GetValueAtLevel_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_GetValueAtLevel_ReturnValue1>FloatProperty>/Script/CoreUObject)
 	CallFunc_Multiply_IntFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Multiply_IntFloat_ReturnValue>FloatProperty>/Script/CoreUObject)
 	CallFunc_Multiply_IntFloat_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Multiply_IntFloat_ReturnValue1>FloatProperty>/Script/CoreUObject)
+	CallFunc_Conv_IntToFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Conv_IntToFloat_ReturnValue>FloatProperty>/Script/CoreUObject)
+	CallFunc_Conv_IntToFloat_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Conv_IntToFloat_ReturnValue1>FloatProperty>/Script/CoreUObject)
+	CallFunc_Divide_FloatFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Divide_FloatFloat_ReturnValue>FloatProperty>/Script/CoreUObject)
+	CallFunc_Divide_FloatFloat_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Divide_FloatFloat_ReturnValue1>FloatProperty>/Script/CoreUObject)
 	TeleportDelay (0-0-0-0): size 32 (cls: TeleportDelay>FloatProperty>/Script/CoreUObject)
 	CallFunc_BreakVector_X (0-0-0-0): size 32 (cls: CallFunc_BreakVector_X>FloatProperty>/Script/CoreUObject)
 	CallFunc_BreakVector_Y (0-0-0-0): size 32 (cls: CallFunc_BreakVector_Y>FloatProperty>/Script/CoreUObject)
 	CallFunc_BreakVector_Z (0-0-0-0): size 32 (cls: CallFunc_BreakVector_Z>FloatProperty>/Script/CoreUObject)
 	CallFunc_GetValueAtLevel_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetValueAtLevel_ReturnValue>FloatProperty>/Script/CoreUObject)
+	ThumbnailWorldSizeScale (0-0-0-0): size 32 (cls: ThumbnailWorldSizeScale>FloatProperty>/Script/CoreUObject)
 	Timeline_0_Open_D988993744202060C85FC18A08065960 (0-0-0-0): size 32 (cls: Timeline_0_Open_D988993744202060C85FC18A08065960>FloatProperty>/Script/CoreUObject)
 	UIShowDistance (0-0-0-0): size 32 (cls: UIShowDistance>FloatProperty>/Script/CoreUObject)
 	VectorScale_Open_7AB95DD3448038155AB954ABBF1B806E (0-0-0-0): size 32 (cls: VectorScale_Open_7AB95DD3448038155AB954ABBF1B806E>FloatProperty>/Script/CoreUObject)
@@ -1491,6 +1552,8 @@ Serialized exports:
 	MaxSpawnHeightMultiplier (0-0-0-0): size 32 (cls: MaxSpawnHeightMultiplier>IntProperty>/Script/CoreUObject)
 	PortalCount (0-0-0-0): size 32 (cls: PortalCount>IntProperty>/Script/CoreUObject)
 	RiftLocationNum (0-0-0-0): size 32 (cls: RiftLocationNum>IntProperty>/Script/CoreUObject)
+	CallFunc_Blueprint_GetSizeX_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Blueprint_GetSizeX_ReturnValue>IntProperty>/Script/CoreUObject)
+	CallFunc_Blueprint_GetSizeY_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Blueprint_GetSizeY_ReturnValue>IntProperty>/Script/CoreUObject)
 	UpdateDescription (0-0-0-0): size 36 (cls: UpdateDescription>MulticastDelegateProperty>/Script/CoreUObject)
 	UpdateIsCuratedPortal (0-0-0-0): size 36 (cls: UpdateIsCuratedPortal>MulticastDelegateProperty>/Script/CoreUObject)
 	UpdateIslandName (0-0-0-0): size 36 (cls: UpdateIslandName>MulticastDelegateProperty>/Script/CoreUObject)
@@ -1547,6 +1610,7 @@ Serialized exports:
 	CallFunc_Create_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_Create_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_Create_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_Create_ReturnValue1>ObjectProperty>/Script/CoreUObject)
 	CallFunc_Create_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_Create_ReturnValue2>ObjectProperty>/Script/CoreUObject)
+	CallFunc_CreateDynamicMaterialInstance_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_CreateDynamicMaterialInstance_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_FinishSpawningActor_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_FinishSpawningActor_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetController_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetController_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetController_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetController_ReturnValue1>ObjectProperty>/Script/CoreUObject)
@@ -1603,6 +1667,7 @@ Serialized exports:
 	CallFunc_GetPlayerPawn_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetPlayerPawn_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	TravelingPawn (0-0-0-0): size 36 (cls: TravelingPawn>ObjectProperty>/Script/CoreUObject)
 	TravelingVehicle (0-0-0-0): size 36 (cls: TravelingVehicle>ObjectProperty>/Script/CoreUObject)
+	TextRender (0-0-0-0): size 36 (cls: TextRender>ObjectProperty>/Script/CoreUObject)
 	Timeline_0 (0-0-0-0): size 36 (cls: Timeline_0>ObjectProperty>/Script/CoreUObject)
 	UI_PortalInfoPlate (0-0-0-0): size 36 (cls: UI_PortalInfoPlate>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetPlayerState_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetPlayerState_ReturnValue>ObjectProperty>/Script/CoreUObject)
@@ -1654,7 +1719,7 @@ Serialized exports:
 			ChildNodes(ArrayProperty)=[object] (inner: ObjectProperty)
 			VariableGuid(StructProperty)=Guid: 333214150-1333672605-2827189647-4005655406 
 			InternalVariableName(NameProperty)=PostProcessRadius 
-	SCS_Node_10 (0-0-0-0): size 3364 (cls: SCS_Node_10>SCS_Node>/Script/Engine):
+	SCS_Node_10 (0-0-0-0): size 3368 (cls: SCS_Node_10>SCS_Node>/Script/Engine):
 		Tag array:
 			ComponentClass(ObjectProperty)=CapsuleComponent=/Script/Engine 
 			ComponentTemplate(ObjectProperty)=Capsule_GEN_VARIABLE=BGA_IslandPortal_C 
@@ -1669,6 +1734,13 @@ Serialized exports:
 			CookedComponentInstancingData(StructProperty)=System.Byte[] 
 			VariableGuid(StructProperty)=Guid: 311612426-1130419042-699553713-2133788950 
 			InternalVariableName(NameProperty)=P_RiftClosingUp 
+	SCS_Node_13 (0-0-0-0): size 2515 (cls: SCS_Node_13>SCS_Node>/Script/Engine):
+		Tag array:
+			ComponentClass(ObjectProperty)=StaticMeshComponent=/Script/Engine 
+			ComponentTemplate(ObjectProperty)=ThumbnailPlane_GEN_VARIABLE=BGA_IslandPortal_C 
+			CookedComponentInstancingData(StructProperty)=System.Byte[] 
+			VariableGuid(StructProperty)=Guid: 4015282499-1311582391-1791321729-1846576675 
+			InternalVariableName(NameProperty)=ThumbnailPlane 
 	SCS_Node_2 (0-0-0-0): size 436 (cls: SCS_Node_2>SCS_Node>/Script/Engine):
 		Tag array:
 			ComponentClass(ObjectProperty)=AudioComponent=/Script/Engine 
@@ -1727,7 +1799,7 @@ Serialized exports:
 			CookedComponentInstancingData(StructProperty)=System.Byte[] 
 			VariableGuid(StructProperty)=Guid: 3252075351-1094567115-3466752145-675240275 
 			InternalVariableName(NameProperty)=P_Rift_Idle_Loop 
-	SimpleConstructionScript_0 (0-0-0-0): size 163 (cls: SimpleConstructionScript_0>SimpleConstructionScript>/Script/Engine):
+	SimpleConstructionScript_0 (0-0-0-0): size 167 (cls: SimpleConstructionScript_0>SimpleConstructionScript>/Script/Engine):
 		Tag array:
 			RootNodes(ArrayProperty)=[object] (inner: ObjectProperty)
 			AllNodes(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -1754,6 +1826,14 @@ Serialized exports:
 			CanCharacterStepUpOn(ByteProperty)=ECB_No 
 			BodyInstance(StructProperty)=System.Byte[] 
 			RelativeLocation(StructProperty)=Vector(0,0,100) 
+	ThumbnailPlane_GEN_VARIABLE (0-0-0-0): size 713 (cls: ThumbnailPlane_GEN_VARIABLE>StaticMeshComponent>/Script/Engine):
+		Tag array:
+			StaticMesh(ObjectProperty)=1x1plane=/Game/Tools/Turntable/Mesh/1x1plane 
+			OverrideMaterials(ArrayProperty)=[object] (inner: ObjectProperty)
+			BodyInstance(StructProperty)=System.Byte[] 
+			RelativeLocation(StructProperty)=Vector(0,0,310) 
+			RelativeScale3D(StructProperty)=Vector(250,250,250) 
+			bHiddenInGame(BoolProperty)=True 
 	CallFunc_Conv_IntToString_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Conv_IntToString_ReturnValue>StrProperty>/Script/CoreUObject)
 	CallFunc_GetPlayerName_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetPlayerName_ReturnValue>StrProperty>/Script/CoreUObject)
 	ActorOriginalLocation (0-0-0-0): size 36 (cls: ActorOriginalLocation>StructProperty>/Script/CoreUObject)
@@ -1782,6 +1862,7 @@ Serialized exports:
 	CallFunc_K2_SetRelativeRotation_SweepHitResult (0-0-0-0): size 36 (cls: CallFunc_K2_SetRelativeRotation_SweepHitResult>StructProperty>/Script/CoreUObject)
 	CallFunc_K2_SetRelativeRotation_SweepHitResult1 (0-0-0-0): size 36 (cls: CallFunc_K2_SetRelativeRotation_SweepHitResult1>StructProperty>/Script/CoreUObject)
 	CallFunc_K2_SetTimerDelegate_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_SetTimerDelegate_ReturnValue>StructProperty>/Script/CoreUObject)
+	CallFunc_K2_SetWorldRotation_SweepHitResult (0-0-0-0): size 36 (cls: CallFunc_K2_SetWorldRotation_SweepHitResult>StructProperty>/Script/CoreUObject)
 	CallFunc_MakeRotator_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_MakeRotator_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_MakeRotator_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_MakeRotator_ReturnValue1>StructProperty>/Script/CoreUObject)
 	CallFunc_MakeRotator_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_MakeRotator_ReturnValue2>StructProperty>/Script/CoreUObject)
@@ -1790,11 +1871,14 @@ Serialized exports:
 	CallFunc_MakeVector_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_MakeVector_ReturnValue2>StructProperty>/Script/CoreUObject)
 	CallFunc_Multiply_VectorFloat_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_Multiply_VectorFloat_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_Multiply_VectorFloat_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_Multiply_VectorFloat_ReturnValue1>StructProperty>/Script/CoreUObject)
+	CallFunc_ScaleThumbnailPlaneByTextureSize_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_ScaleThumbnailPlaneByTextureSize_ReturnValue>StructProperty>/Script/CoreUObject)
 	K2Node_ComponentBoundEvent_SweepResult (0-0-0-0): size 36 (cls: K2Node_ComponentBoundEvent_SweepResult>StructProperty>/Script/CoreUObject)
 	K2Node_ComponentBoundEvent_SweepResult1 (0-0-0-0): size 36 (cls: K2Node_ComponentBoundEvent_SweepResult1>StructProperty>/Script/CoreUObject)
 	K2Node_CustomEvent_DestinationLocation (0-0-0-0): size 36 (cls: K2Node_CustomEvent_DestinationLocation>StructProperty>/Script/CoreUObject)
 	K2Node_CustomEvent_DestinationLocation1 (0-0-0-0): size 36 (cls: K2Node_CustomEvent_DestinationLocation1>StructProperty>/Script/CoreUObject)
+	K2Node_CustomEvent_Location (0-0-0-0): size 36 (cls: K2Node_CustomEvent_Location>StructProperty>/Script/CoreUObject)
 	K2Node_CustomEvent_PlayerLocation (0-0-0-0): size 36 (cls: K2Node_CustomEvent_PlayerLocation>StructProperty>/Script/CoreUObject)
+	K2Node_Select_Default (0-0-0-0): size 36 (cls: K2Node_Select_Default>StructProperty>/Script/CoreUObject)
 	CallFunc_K2_GetActorLocation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_GetActorLocation_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_MakeVector_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_MakeVector_ReturnValue>StructProperty>/Script/CoreUObject)
 	Hangtime (0-0-0-0): size 36 (cls: Hangtime>StructProperty>/Script/CoreUObject)
@@ -1823,8 +1907,12 @@ Serialized exports:
 	ObjStatLoc_7 (0-0-0-0): size 36 (cls: ObjStatLoc_7>StructProperty>/Script/CoreUObject)
 	ObjStatLoc_8 (0-0-0-0): size 36 (cls: ObjStatLoc_8>StructProperty>/Script/CoreUObject)
 	ObjStatLoc_9 (0-0-0-0): size 36 (cls: ObjStatLoc_9>StructProperty>/Script/CoreUObject)
+	OwnedThumbnailColor (0-0-0-0): size 36 (cls: OwnedThumbnailColor>StructProperty>/Script/CoreUObject)
 	CallFunc_K2_GetComponentLocation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_GetComponentLocation_ReturnValue>StructProperty>/Script/CoreUObject)
 	DestinationLocation (0-0-0-0): size 36 (cls: DestinationLocation>StructProperty>/Script/CoreUObject)
+	CallFunc_MakeVector_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_MakeVector_ReturnValue>StructProperty>/Script/CoreUObject)
+	CallFunc_MakeVector_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_MakeVector_ReturnValue1>StructProperty>/Script/CoreUObject)
+	K2Node_Select_Default (0-0-0-0): size 36 (cls: K2Node_Select_Default>StructProperty>/Script/CoreUObject)
 	ShouldSpawnRift? (0-0-0-0): size 36 (cls: ShouldSpawnRift?>StructProperty>/Script/CoreUObject)
 	StarterIslandTeleportHeight (0-0-0-0): size 36 (cls: StarterIslandTeleportHeight>StructProperty>/Script/CoreUObject)
 	TeleportExitDistance_0 (0-0-0-0): size 36 (cls: TeleportExitDistance_0>StructProperty>/Script/CoreUObject)
@@ -1835,6 +1923,7 @@ Serialized exports:
 	CallFunc_MakeVector_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_MakeVector_ReturnValue>StructProperty>/Script/CoreUObject)
 	Destination (0-0-0-0): size 36 (cls: Destination>StructProperty>/Script/CoreUObject)
 	UIDistanceCheckTimer (0-0-0-0): size 36 (cls: UIDistanceCheckTimer>StructProperty>/Script/CoreUObject)
+	UnownedThumbnailColor (0-0-0-0): size 36 (cls: UnownedThumbnailColor>StructProperty>/Script/CoreUObject)
 	XPortalSeparation (0-0-0-0): size 36 (cls: XPortalSeparation>StructProperty>/Script/CoreUObject)
 	YPortalSeparation (0-0-0-0): size 36 (cls: YPortalSeparation>StructProperty>/Script/CoreUObject)
 	K2Node_Select_Default (0-0-0-0): size 32 (cls: K2Node_Select_Default>TextProperty>/Script/CoreUObject)

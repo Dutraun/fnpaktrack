@@ -69,6 +69,7 @@ Name table:
 	BrushSize
 	bSeparateFillAlpha
 	bShowCountDown
+	bSuppressInteractionWidget
 	Burbank
 	Burbank-Black
 	bUsePickupWidget
@@ -86,6 +87,7 @@ Name table:
 	CallFunc_GetUseActionName_ReturnValue
 	CallFunc_Greater_FloatFloat_ReturnValue
 	CallFunc_Greater_FloatFloat_ReturnValue1
+	CallFunc_IsInteractionWidgetSuppressed_IsSuppressed
 	CallFunc_IsMobileGame_ReturnValue
 	CallFunc_IsValid_ReturnValue
 	CallFunc_PickedUp_ReturnValue
@@ -233,7 +235,9 @@ Name table:
 	Interaction
 	InteractionKeybindBox
 	IntProperty
+	IsInteractionWidgetSuppressed
 	IsMobileGame
+	IsSuppressed
 	IsValid
 	ItemDetailsHeader
 	ItemDetailsHeaderItemDisplayText
@@ -371,6 +375,7 @@ Name table:
 	UnderlyingType
 	UpdateDescription
 	UpdateKeybinds
+	UpdateWidgetVisibility
 	UserWidget
 	ValidInteraction
 	VAlign_Center
@@ -390,7 +395,7 @@ Name table:
 	WrapTextAt
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	AthenaInteractionIndicator_C (0-0-0-0): size 363 (cls: AthenaInteractionIndicator_C>WidgetBlueprintGeneratedClass>/Script/UMG):
+	AthenaInteractionIndicator_C (0-0-0-0): size 395 (cls: AthenaInteractionIndicator_C>WidgetBlueprintGeneratedClass>/Script/UMG):
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
@@ -458,17 +463,22 @@ Serialized exports:
 	Destruct (0-0-0-0): size 54 (cls: Destruct>Function>/Script/CoreUObject)
 	Construct (0-0-0-0): size 54 (cls: Construct>Function>/Script/CoreUObject)
 	Interaction (0-0-0-0): size 36 (cls: Interaction>ObjectProperty>/Script/CoreUObject)
-	HandleInteractionChanged (0-0-0-0): size 525 (cls: HandleInteractionChanged>Function>/Script/CoreUObject)
+	HandleInteractionChanged (0-0-0-0): size 540 (cls: HandleInteractionChanged>Function>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_PickedUp_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_PickedUp_ReturnValue>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
 	ValidInteraction (0-0-0-0): size 34 (cls: ValidInteraction>BoolProperty>/Script/CoreUObject)
 	Pickup (0-0-0-0): size 36 (cls: Pickup>ObjectProperty>/Script/CoreUObject)
-	ShowPickupWidget (0-0-0-0): size 473 (cls: ShowPickupWidget>Function>/Script/CoreUObject)
+	ShowPickupWidget (0-0-0-0): size 483 (cls: ShowPickupWidget>Function>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	Temp_byte_Variable (0-0-0-0): size 40 (cls: Temp_byte_Variable>EnumProperty>/Script/CoreUObject)
 	ShowBasicInteractionWidget (0-0-0-0): size 635 (cls: ShowBasicInteractionWidget>Function>/Script/CoreUObject)
+	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	UpdateKeybinds (0-0-0-0): size 157 (cls: UpdateKeybinds>Function>/Script/CoreUObject)
+	IsSuppressed (0-0-0-0): size 34 (cls: IsSuppressed>BoolProperty>/Script/CoreUObject)
+	IsInteractionWidgetSuppressed (0-0-0-0): size 129 (cls: IsInteractionWidgetSuppressed>Function>/Script/CoreUObject)
+	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_BooleanAND_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Greater_FloatFloat_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Greater_FloatFloat_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Greater_FloatFloat_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_Greater_FloatFloat_ReturnValue1>BoolProperty>/Script/CoreUObject)
@@ -478,6 +488,9 @@ Serialized exports:
 	CallFunc_GetInteractText_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_GetInteractText_ReturnValue>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable1 (0-0-0-0): size 34 (cls: Temp_bool_Variable1>BoolProperty>/Script/CoreUObject)
+	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
+	UpdateWidgetVisibility (0-0-0-0): size 160 (cls: UpdateWidgetVisibility>Function>/Script/CoreUObject)
+	CallFunc_IsInteractionWidgetSuppressed_IsSuppressed (0-0-0-0): size 34 (cls: CallFunc_IsInteractionWidgetSuppressed_IsSuppressed>BoolProperty>/Script/CoreUObject)
 	Border_0 (0-0-0-0): size 291 (cls: Border_0>Border>/Script/UMG):
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
@@ -510,6 +523,9 @@ Serialized exports:
 			Padding(StructProperty)=System.Byte[] 
 			Parent(ObjectProperty)=RarityBorder=WidgetArchetype 
 			Content(ObjectProperty)=DetailsContainerSlotWidget=WidgetArchetype 
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
@@ -624,6 +640,9 @@ Serialized exports:
 	Temp_byte_Variable1 (0-0-0-0): size 40 (cls: Temp_byte_Variable1>EnumProperty>/Script/CoreUObject)
 	Temp_byte_Variable2 (0-0-0-0): size 40 (cls: Temp_byte_Variable2>EnumProperty>/Script/CoreUObject)
 	Temp_byte_Variable3 (0-0-0-0): size 40 (cls: Temp_byte_Variable3>EnumProperty>/Script/CoreUObject)
+	K2Node_Select_Default (0-0-0-0): size 40 (cls: K2Node_Select_Default>EnumProperty>/Script/CoreUObject)
+	Temp_byte_Variable (0-0-0-0): size 40 (cls: Temp_byte_Variable>EnumProperty>/Script/CoreUObject)
+	Temp_byte_Variable1 (0-0-0-0): size 40 (cls: Temp_byte_Variable1>EnumProperty>/Script/CoreUObject)
 	CategoryIndicator (0-0-0-0): size 193 (cls: CategoryIndicator>FortItemCategoryIndicator>/Script/FortniteUI):
 		Tag array:
 			OrdinalOfCategoryToRepresent(EnumProperty)=EFortItemCategoryOrdinal::Secondary 
@@ -642,10 +661,6 @@ Serialized exports:
 		Tag array:
 			BrushSize(ByteProperty)=EFortBrushSize::Small 
 			Slot(ObjectProperty)=OverlaySlot_2=WidgetArchetype 
-	KeybindWidget (0-0-0-0): size 36 (cls: KeybindWidget>ObjectProperty>/Script/CoreUObject)
-	CallFunc_GetUseActionName_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetUseActionName_ReturnValue>NameProperty>/Script/CoreUObject)
-	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject)
-	UpdateKeybinds (0-0-0-0): size 157 (cls: UpdateKeybinds>Function>/Script/CoreUObject)
 	HorizontalBox_0 (0-0-0-0): size 90 (cls: HorizontalBox_0>HorizontalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -765,6 +780,7 @@ Serialized exports:
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=BorderSlot_0=WidgetArchetype 
+	CallFunc_GetUseActionName_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetUseActionName_ReturnValue>NameProperty>/Script/CoreUObject)
 	CurrentInteraction (0-0-0-0): size 36 (cls: CurrentInteraction>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetContext_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue1>ObjectProperty>/Script/CoreUObject)
@@ -772,6 +788,7 @@ Serialized exports:
 	K2Node_DynamicCast_AsFort_Pickup (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Pickup>ObjectProperty>/Script/CoreUObject)
 	HUD-PickupItemWidget (0-0-0-0): size 36 (cls: HUD-PickupItemWidget>ObjectProperty>/Script/CoreUObject)
 	InteractionKeybindBox (0-0-0-0): size 36 (cls: InteractionKeybindBox>ObjectProperty>/Script/CoreUObject)
+	KeybindWidget (0-0-0-0): size 36 (cls: KeybindWidget>ObjectProperty>/Script/CoreUObject)
 	TextUnderKeybindText (0-0-0-0): size 36 (cls: TextUnderKeybindText>ObjectProperty>/Script/CoreUObject)
 	Overlay_0 (0-0-0-0): size 86 (cls: Overlay_0>Overlay>/Script/UMG):
 		Tag array:

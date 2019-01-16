@@ -24,15 +24,19 @@ Name table:
 	/Script/GameplayAbilities
 	/Script/GameplayTags
 	/Script/GameplayTasks
+	Abilities.Activities.Demobomb
 	Abilities.Ninja.KunaiStorm.DefaultTargeting
 	Abilities.Ninja.KunaiStorm.KunaiBarrageTargeting
 	Abilities.Ninja.KunaiStorm.KunaiBombTargeting
 	Abilities.Ninja.KunaiStorm.KunaiProjectileTargeting
 	Abilities.Ninja.MantisLeap
+	Abilities.Ninja.SmokeBomb
+	Abilities.Ninja.ThrowingStars
 	Ability System
 	Ability.DamageSource.Ranged
 	Ability.Ninja.KunaiStorm
 	Ability.Ninja.KunaiStorm.Cost
+	Ability.Perk.Ninja.MantisLeap
 	AbilityCosts
 	AbilityFunctions_C
 	AbilitySystemBlueprintLibrary
@@ -87,6 +91,7 @@ Name table:
 	BP_GetGameplayEffectContainer
 	BP_Ninja_KunaiStorm_Camera_In_C
 	BP_Ninja_KunaiStorm_Camera_Out_C
+	bPropagateToVehiclePassengers
 	BreakRotator
 	BreakVector
 	bShouldAttachedActorsObstructTarget
@@ -170,8 +175,10 @@ Name table:
 	CallFunc_ReplaceRangeInGameplayEffectContainer_ReturnValue
 	CallFunc_SetHolsterWeaponWithName_IsWeaponHolstered
 	CallFunc_SetHolsterWeaponWithName_IsWeaponHolstered1
+	CallFunc_SetHolsterWeaponWithName_IsWeaponHolstered2
 	CallFunc_SetHolsterWeaponWithName_OperationSuccessful
 	CallFunc_SetHolsterWeaponWithName_OperationSuccessful1
+	CallFunc_SetHolsterWeaponWithName_OperationSuccessful2
 	CallFunc_SpawnProjectile_ReturnValue
 	CallFunc_Subtract_FloatFloat_ReturnValue
 	CallFunc_Throw_Kunais_ReturnValue
@@ -249,6 +256,7 @@ Name table:
 	DegCos
 	Degree
 	DegSin
+	Delay
 	DelegateFunction
 	DelegateProperty
 	DisableInput
@@ -318,16 +326,18 @@ Name table:
 	Function
 	GA_Ninja_KunaiStorm_C
 	GadgetScaling
-	Gameplay.Action.Player.Medium
+	Gameplay.Action.Player.Light
 	Gameplay.DamageSource.Ability
 	GameplayAbility
 	GameplayAbilityTargetDataHandle
 	GameplayCue.Abilities.Ninja.KunaiStorm.ChargeUp
 	GameplayCue.Ninja.KunaiStorm.Leap
 	GameplayEffectContextHandle
+	GameplayEventData
 	GameplayTag
 	GameplayTagAssetInterface
 	GameplayTagContainer
+	GameplayTags
 	GameplayTask
 	GAT_ActiveAbility_C
 	GAT_ActiveAbility_Hero_C
@@ -422,6 +432,7 @@ Name table:
 	Kunaihilation_T02_Radius
 	KunaiSpreadMulti
 	KunaiThrow
+	LatentActionInfo
 	LaunchCharacter
 	LinearColor
 	LineTraceSingle
@@ -546,6 +557,7 @@ Name table:
 	UberGraphFrame
 	UberGraphFunction
 	UInt64Property
+	Unequip_Length
 	UseHeroLoadoutSystem
 	Value
 	Vector
@@ -554,10 +566,10 @@ Name table:
 	ZVelocity
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	GA_Ninja_KunaiStorm_C (0-0-0-0): size 609 (cls: GA_Ninja_KunaiStorm_C>BlueprintGeneratedClass>/Script/Engine):
+	GA_Ninja_KunaiStorm_C (0-0-0-0): size 613 (cls: GA_Ninja_KunaiStorm_C>BlueprintGeneratedClass>/Script/Engine):
 		Tag array:
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_GA_Ninja_KunaiStorm=GA_Ninja_KunaiStorm_C 
-	Default__GA_Ninja_KunaiStorm_C (0-0-0-0): size 14283 (cls: Default__GA_Ninja_KunaiStorm_C>GA_Ninja_KunaiStorm_C):
+	Default__GA_Ninja_KunaiStorm_C (0-0-0-0): size 14466 (cls: Default__GA_Ninja_KunaiStorm_C>GA_Ninja_KunaiStorm_C):
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			SetRotation(StructProperty)=Rotator(0,0,0) 
@@ -591,6 +603,7 @@ Serialized exports:
 			TC_Kunaihilation_T02(StructProperty)=GameplayTagContainer: 
 			EC_Kunaihilation_T01_Targeting(StructProperty)=System.Byte[] 
 			Kunaihilation_T02_Radius(StructProperty)=System.Byte[] 
+			Unequip_Length(FloatProperty)=0.2 
 			EffectContainers(StructProperty)=System.Byte[] 
 			EffectContainers(StructProperty)=System.Byte[] 
 			EffectContainers(StructProperty)=System.Byte[] 
@@ -599,21 +612,21 @@ Serialized exports:
 			DamageStatHandle(StructProperty)=System.Byte[] 
 			AbilityCosts(ArrayProperty)=[object] (inner: StructProperty)
 			Tooltip(ObjectProperty)=TT_Ninja_KunaiStorm_C=/Game/Abilities/Player/Ninja/Actives/KunaiStorm/TT_Ninja_KunaiStorm 
-			AbilityTags(StructProperty)=GameplayTagContainer:Gameplay.DamageSource.Ability,Gameplay.Action.Player.Medium,Ability.Ninja.KunaiStorm,Ability.DamageSource.Ranged 
+			AbilityTags(StructProperty)=GameplayTagContainer:Ability.Ninja.KunaiStorm,Ability.DamageSource.Ranged,Gameplay.DamageSource.Ability,Gameplay.Action.Player.Light 
 			CooldownGameplayEffectClass(ObjectProperty)=GE_Ninja_KunaiStorm_Cooldown_C=/Game/Abilities/Player/Ninja/Actives/KunaiStorm/GE_Ninja_KunaiStorm_Cooldown 
-			BlockAbilitiesWithTag(StructProperty)=GameplayTagContainer:Abilities.Ninja.MantisLeap 
+			BlockAbilitiesWithTag(StructProperty)=GameplayTagContainer:Abilities.Ninja.MantisLeap,Ability.Perk.Ninja.MantisLeap,Abilities.Ninja.SmokeBomb,Abilities.Ninja.ThrowingStars 
 	SetRotation (0-0-0-0): size 36 (cls: SetRotation>StructProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_GA_Ninja_KunaiStorm (0-0-0-0): size 3378 (cls: ExecuteUbergraph_GA_Ninja_KunaiStorm>Function>/Script/CoreUObject)
+	ExecuteUbergraph_GA_Ninja_KunaiStorm (0-0-0-0): size 3617 (cls: ExecuteUbergraph_GA_Ninja_KunaiStorm>Function>/Script/CoreUObject)
 	CallFunc_ApplyGameplayEffectContainer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_ApplyGameplayEffectContainer_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_ApplyGameplayEffectContainer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_ApplyGameplayEffectContainer_ReturnValue>ArrayProperty>/Script/CoreUObject)
 	Temp_object_Variable (0-0-0-0): size 36 (cls: Temp_object_Variable>ObjectProperty>/Script/CoreUObject)
 	Temp_object_Variable (0-0-0-0): size 36 (cls: Temp_object_Variable>ArrayProperty>/Script/CoreUObject)
-	K2_ActivateAbility (0-0-0-0): size 54 (cls: K2_ActivateAbility>Function>/Script/CoreUObject)
 	OverlappedActor (0-0-0-0): size 36 (cls: OverlappedActor>ObjectProperty>/Script/CoreUObject)
 	Event Projectile OnEndOverlap (0-0-0-0): size 82 (cls: Event Projectile OnEndOverlap>Function>/Script/CoreUObject)
 	SelfActor (0-0-0-0): size 36 (cls: SelfActor>ObjectProperty>/Script/CoreUObject)
 	Event Projectile OnHitActor (0-0-0-0): size 110 (cls: Event Projectile OnHitActor>Function>/Script/CoreUObject)
+	K2_ActivateAbility (0-0-0-0): size 54 (cls: K2_ActivateAbility>Function>/Script/CoreUObject)
 	CeilingCheck (0-0-0-0): size 54 (cls: CeilingCheck>Function>/Script/CoreUObject)
 	ClearCamera (0-0-0-0): size 54 (cls: ClearCamera>Function>/Script/CoreUObject)
 	Spawn Projectiles (0-0-0-0): size 54 (cls: Spawn Projectiles>Function>/Script/CoreUObject)
@@ -659,8 +672,10 @@ Serialized exports:
 	CallFunc_LineTraceSingle_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_LineTraceSingle_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_SetHolsterWeaponWithName_IsWeaponHolstered (0-0-0-0): size 34 (cls: CallFunc_SetHolsterWeaponWithName_IsWeaponHolstered>BoolProperty>/Script/CoreUObject)
 	CallFunc_SetHolsterWeaponWithName_IsWeaponHolstered1 (0-0-0-0): size 34 (cls: CallFunc_SetHolsterWeaponWithName_IsWeaponHolstered1>BoolProperty>/Script/CoreUObject)
+	CallFunc_SetHolsterWeaponWithName_IsWeaponHolstered2 (0-0-0-0): size 34 (cls: CallFunc_SetHolsterWeaponWithName_IsWeaponHolstered2>BoolProperty>/Script/CoreUObject)
 	CallFunc_SetHolsterWeaponWithName_OperationSuccessful (0-0-0-0): size 34 (cls: CallFunc_SetHolsterWeaponWithName_OperationSuccessful>BoolProperty>/Script/CoreUObject)
 	CallFunc_SetHolsterWeaponWithName_OperationSuccessful1 (0-0-0-0): size 34 (cls: CallFunc_SetHolsterWeaponWithName_OperationSuccessful1>BoolProperty>/Script/CoreUObject)
+	CallFunc_SetHolsterWeaponWithName_OperationSuccessful2 (0-0-0-0): size 34 (cls: CallFunc_SetHolsterWeaponWithName_OperationSuccessful2>BoolProperty>/Script/CoreUObject)
 	CallFunc_Throw_Kunais_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Throw_Kunais_ReturnValue>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	K2Node_Event_bWasCancelled (0-0-0-0): size 34 (cls: K2Node_Event_bWasCancelled>BoolProperty>/Script/CoreUObject)
@@ -766,6 +781,7 @@ Serialized exports:
 	K2Node_Select2_Default (0-0-0-0): size 32 (cls: K2Node_Select2_Default>FloatProperty>/Script/CoreUObject)
 	K2Node_Select_Default (0-0-0-0): size 32 (cls: K2Node_Select_Default>FloatProperty>/Script/CoreUObject)
 	Temp_float_Variable (0-0-0-0): size 32 (cls: Temp_float_Variable>FloatProperty>/Script/CoreUObject)
+	Unequip_Length (0-0-0-0): size 32 (cls: Unequip_Length>FloatProperty>/Script/CoreUObject)
 	CallFunc_HasAllMatchingGameplayTags_TagContainerInterface1_CastInput (0-0-0-0): size 36 (cls: CallFunc_HasAllMatchingGameplayTags_TagContainerInterface1_CastInput>InterfaceProperty>/Script/CoreUObject)
 	CallFunc_HasAllMatchingGameplayTags_TagContainerInterface_CastInput (0-0-0-0): size 36 (cls: CallFunc_HasAllMatchingGameplayTags_TagContainerInterface_CastInput>InterfaceProperty>/Script/CoreUObject)
 	CallFunc_HasAllMatchingGameplayTags_TagContainerInterface1_CastInput (0-0-0-0): size 36 (cls: CallFunc_HasAllMatchingGameplayTags_TagContainerInterface1_CastInput>InterfaceProperty>/Script/CoreUObject)

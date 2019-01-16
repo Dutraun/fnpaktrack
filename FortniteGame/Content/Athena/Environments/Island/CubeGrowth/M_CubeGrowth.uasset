@@ -2,9 +2,12 @@ Name table:
 	/Engine/Functions/Engine_MaterialFunctions01/Gradient/LinearGradient
 	/Engine/Functions/Engine_MaterialFunctions01/ImageAdjustment/3ColorBlend
 	/Engine/Functions/Engine_MaterialFunctions01/ImageAdjustment/CheapContrast
+	/Engine/Functions/Engine_MaterialFunctions01/Texturing/FlattenNormal
 	/Engine/Functions/Engine_MaterialFunctions02/ObjectLocalBounds
 	/Engine/Functions/Engine_MaterialFunctions02/Texturing/HeightLerp
+	/Engine/Functions/Engine_MaterialFunctions02/Utility/BlendAngleCorrectedNormals
 	/Engine/Functions/Engine_MaterialFunctions02/Utility/BreakOutFloat3Components
+	/Engine/Functions/Engine_MaterialFunctions02/Utility/BreakOutFloat4Components
 	/Engine/Functions/Engine_MaterialFunctions02/Utility/DebugTimeSine
 	/Engine/Functions/Engine_MaterialFunctions02/UVs/BoundingBoxBased_0-1_UVW
 	/Game/Athena/Deimos/Spawners/RiftSpawners/Assets/CubeGrowth/T_CubeGrowth_occlusion
@@ -15,9 +18,19 @@ Name table:
 	/Game/Athena/Environments/Island/CubeGrowth/T_CubeGrowth_normals
 	/Game/Athena/Environments/Island/CubeGrowth/T_CubeNoise01
 	/Game/Athena/Environments/Island/CubeGrowth/T_CubeNoise01_H
+	/Game/Athena/Environments/Landscape/MaterialFunctions/MF_TerrainDistanceFade
+	/Game/Athena/Environments/Landscape/MaterialFunctions/Snow/MF_Athena_Holiday_SnowFall
+	/Game/Athena/Environments/Landscape/MaterialFunctions/Snow/MF_Athena_Snow_01
+	/Game/Athena/Environments/Landscape/MaterialFunctions/Utilities/MF_Athena_Terrain_Coords
+	/Game/Athena/Environments/Landscape/MPC/MPC_Landscape
 	/Game/Athena/Prototype/Blueprints/Cube/Materials/T_CubeNoise
+	/Game/Athena/WinterArt/Materials/MF_SharedWinter
+	/Game/Athena/WinterArt/Textures/T_IceScratch1_M
+	/Game/Athena/WinterArt/Textures/T_IceScratch1_N
+	/Game/Effects/Fort_Effects/Materials/_Functions/Color_Time_of_Day
 	/Game/Effects/Fort_Effects/Materials/_Functions/MF_Smoothstep_01
 	/Game/Effects/Fort_Effects/Materials/_Functions/MF_Smoothstep_EaseOut
+	/Game/Packages/Fortress_SharedMaterials/GlobalMaterialParameters/FortniteMaterialParameters
 	/Script/CoreUObject
 	/Script/Engine
 	3ColorBlend
@@ -27,16 +40,20 @@ Name table:
 	B
 	BaseColor
 	bCanMaskedBeAssumedOpaque
+	BlendAngleCorrectedNormals
 	BoolProperty
 	BoundingBoxBased_0-1_UVW
 	BreakOutFloat3Components
+	BreakOutFloat4Components
 	bUsedWithMeshParticles
 	ByteProperty
 	CachedQualityLevelsUsed
 	CheapContrast
 	Class
+	Color_Time_of_Day
 	ColorMaterialInput
 	Coordinates
+	CoreEmissive
 	CubeNoiseMaskStrength
 	CubeNoiseMaskStrength2
 	CubeNoiseNormal
@@ -53,28 +70,41 @@ Name table:
 	Default__MaterialExpressionVectorParameter
 	DefaultValue
 	DirtColor
+	DistortionICE
 	DitheredLODTransition
 	E1
 	E2
 	EMaterialSamplerType
 	EmissiveColor
+	EmissiveCore
 	EmissiveMasterBrightness
 	ExpressionGUID
 	ExpressionInput
 	Expressions
 	FakeSpecPower
 	FakeSpecularColor
+	FlattenNormal
 	FloatProperty
+	FortniteMaterialParameters
 	FresnelDarkness
 	Function
 	Guid
 	HeightLerp
+	Ice_Color
+	IceFalloffPower
+	IceFalloffPower2
+	IceFalloffPowerEmissive
+	IceFalloffPowerEmissiveCore
+	IceFalloffPowerEmissiveCore2
+	IceHeightOffset
+	IceNormalTiling
 	Inputs
 	LinearColor
 	LinearGradient
 	M_CubeGrowth
 	Material
 	MaterialExpressionAdd
+	MaterialExpressionBumpOffset
 	MaterialExpressionConstant
 	MaterialExpressionLinearInterpolate
 	MaterialExpressionMaterialFunctionCall
@@ -90,10 +120,19 @@ Name table:
 	MaterialFunction
 	MaterialFunctionInfo
 	MaterialFunctionInfos
+	MaterialParameterCollection
+	MaterialParameterCollectionInfo
+	MaterialParameterCollectionInfos
+	MF_Athena_Holiday_SnowFall
+	MF_Athena_Snow_01
+	MF_Athena_Terrain_Coords
 	MF_CubeGrowth_AdditiveFX
 	MF_CubeGrowthTimings
+	MF_SharedWinter
 	MF_Smoothstep_01
 	MF_Smoothstep_EaseOut
+	MF_TerrainDistanceFade
+	MPC_Landscape
 	NameProperty
 	NoiseEmisMask
 	NoisePannerScale
@@ -103,12 +142,14 @@ Name table:
 	ObjectLocalBounds
 	ObjectProperty
 	Package
+	ParameterCollection
 	ParameterName
 	Powerful
 	PowerfulEmis
 	PowerfulIntensity
 	R1
 	R2
+	RoughnessIce
 	RoughnessToAddinAO
 	SamplerType
 	SAMPLERTYPE_LinearColor
@@ -126,15 +167,19 @@ Name table:
 	T_CubeNoise01
 	T_CubeNoise01_H
 	T_Dudebro_Noise_01
+	T_IceScratch1_M
+	T_IceScratch1_N
 	Texture
 	Texture2D
+	Tile N Flatten
 	Unstable_Emissive_Mult
 	Use_Unstable
+	UseIceandSnow
 	VectorMaterialInput
 	ViewExponent
 	WorldPositionOffset
 Serialized exports:
-	M_CubeGrowth (0-0-0-0): size 143337 (cls: M_CubeGrowth>Material>/Script/Engine):
+	M_CubeGrowth (0-0-0-0): size 176665 (cls: M_CubeGrowth>Material>/Script/Engine):
 		Tag array:
 			Specular(StructProperty)=System.Byte[] 
 			Normal(StructProperty)=System.Byte[] 
@@ -144,8 +189,9 @@ Serialized exports:
 			bUsedWithMeshParticles(BoolProperty)=True 
 			Expressions(ArrayProperty)=[object] (inner: ObjectProperty)
 			MaterialFunctionInfos(ArrayProperty)=[object] (inner: StructProperty)
+			MaterialParameterCollectionInfos(ArrayProperty)=[object] (inner: StructProperty)
 			bCanMaskedBeAssumedOpaque(BoolProperty)=True 
-			StateId(StructProperty)=Guid: 4140868500-1203853595-2983897246-2271044012 
+			StateId(StructProperty)=Guid: 2155414868-1282951259-1201628828-3161759969 
 			CachedQualityLevelsUsed(ArrayProperty)=[object] (inner: BoolProperty)
 	MaterialExpressionMaterialFunctionCall_0 (0-0-0-0): size 70 (cls: MaterialExpressionMaterialFunctionCall_0>MaterialExpressionMaterialFunctionCall>/Script/Engine):
 		Tag array:
@@ -190,6 +236,22 @@ Serialized exports:
 	MaterialExpressionMaterialFunctionCall_3 (0-0-0-0): size 70 (cls: MaterialExpressionMaterialFunctionCall_3>MaterialExpressionMaterialFunctionCall>/Script/Engine):
 		Tag array:
 			MaterialFunction(ObjectProperty)=MF_CubeGrowthTimings=/Game/Athena/Environments/Island/CubeGrowth/MF_CubeGrowthTimings 
+			Material(ObjectProperty)=M_CubeGrowth= 
+	MaterialExpressionMaterialFunctionCall_4 (0-0-0-0): size 70 (cls: MaterialExpressionMaterialFunctionCall_4>MaterialExpressionMaterialFunctionCall>/Script/Engine):
+		Tag array:
+			MaterialFunction(ObjectProperty)=MF_Athena_Holiday_SnowFall=/Game/Athena/Environments/Landscape/MaterialFunctions/Snow/MF_Athena_Holiday_SnowFall 
+			Material(ObjectProperty)=M_CubeGrowth= 
+	MaterialExpressionMaterialFunctionCall_5 (0-0-0-0): size 70 (cls: MaterialExpressionMaterialFunctionCall_5>MaterialExpressionMaterialFunctionCall>/Script/Engine):
+		Tag array:
+			MaterialFunction(ObjectProperty)=BlendAngleCorrectedNormals=/Engine/Functions/Engine_MaterialFunctions02/Utility/BlendAngleCorrectedNormals 
+			Material(ObjectProperty)=M_CubeGrowth= 
+	MaterialExpressionMaterialFunctionCall_7 (0-0-0-0): size 70 (cls: MaterialExpressionMaterialFunctionCall_7>MaterialExpressionMaterialFunctionCall>/Script/Engine):
+		Tag array:
+			MaterialFunction(ObjectProperty)=FlattenNormal=/Engine/Functions/Engine_MaterialFunctions01/Texturing/FlattenNormal 
+			Material(ObjectProperty)=M_CubeGrowth= 
+	MaterialExpressionMaterialFunctionCall_8 (0-0-0-0): size 70 (cls: MaterialExpressionMaterialFunctionCall_8>MaterialExpressionMaterialFunctionCall>/Script/Engine):
+		Tag array:
+			MaterialFunction(ObjectProperty)=MF_SharedWinter=/Game/Athena/WinterArt/Materials/MF_SharedWinter 
 			Material(ObjectProperty)=M_CubeGrowth= 
 	MaterialExpressionQualitySwitch_0 (0-0-0-0): size 219 (cls: MaterialExpressionQualitySwitch_0>MaterialExpressionQualitySwitch>/Script/Engine):
 		Tag array:
@@ -283,6 +345,59 @@ Serialized exports:
 			ParameterName(NameProperty)=R2 
 			ExpressionGUID(StructProperty)=Guid: 1242653761-1157527092-1405226159-3014649735 
 			Material(ObjectProperty)=M_CubeGrowth= 
+	MaterialExpressionScalarParameter_20 (0-0-0-0): size 139 (cls: MaterialExpressionScalarParameter_20>MaterialExpressionScalarParameter>/Script/Engine):
+		Tag array:
+			ParameterName(NameProperty)=RoughnessIce 
+			ExpressionGUID(StructProperty)=Guid: 1762735467-1263460504-2686424465-3763835337 
+			Material(ObjectProperty)=M_CubeGrowth= 
+	MaterialExpressionScalarParameter_21 (0-0-0-0): size 168 (cls: MaterialExpressionScalarParameter_21>MaterialExpressionScalarParameter>/Script/Engine):
+		Tag array:
+			DefaultValue(FloatProperty)=524.7871 
+			ParameterName(NameProperty)=IceFalloffPower2 
+			ExpressionGUID(StructProperty)=Guid: 3544077678-1259607679-1490728585-3344389908 
+			Material(ObjectProperty)=M_CubeGrowth= 
+	MaterialExpressionScalarParameter_23 (0-0-0-0): size 168 (cls: MaterialExpressionScalarParameter_23>MaterialExpressionScalarParameter>/Script/Engine):
+		Tag array:
+			DefaultValue(FloatProperty)=0.076667 
+			ParameterName(NameProperty)=IceNormalTiling 
+			ExpressionGUID(StructProperty)=Guid: 3703807752-1221034917-3225632434-2347086141 
+			Material(ObjectProperty)=M_CubeGrowth= 
+	MaterialExpressionScalarParameter_24 (0-0-0-0): size 168 (cls: MaterialExpressionScalarParameter_24>MaterialExpressionScalarParameter>/Script/Engine):
+		Tag array:
+			DefaultValue(FloatProperty)=-0.400432 
+			ParameterName(NameProperty)=IceHeightOffset 
+			ExpressionGUID(StructProperty)=Guid: 920003124-1127085598-307325073-2865424973 
+			Material(ObjectProperty)=M_CubeGrowth= 
+	MaterialExpressionScalarParameter_25 (0-0-0-0): size 168 (cls: MaterialExpressionScalarParameter_25>MaterialExpressionScalarParameter>/Script/Engine):
+		Tag array:
+			DefaultValue(FloatProperty)=0.85 
+			ParameterName(NameProperty)=Tile N Flatten 
+			ExpressionGUID(StructProperty)=Guid: 2194061134-1264049821-239807644-3180734593 
+			Material(ObjectProperty)=M_CubeGrowth= 
+	MaterialExpressionScalarParameter_26 (0-0-0-0): size 168 (cls: MaterialExpressionScalarParameter_26>MaterialExpressionScalarParameter>/Script/Engine):
+		Tag array:
+			DefaultValue(FloatProperty)=5.497066 
+			ParameterName(NameProperty)=IceFalloffPowerEmissive 
+			ExpressionGUID(StructProperty)=Guid: 2015922372-1078803805-2200606602-472122172 
+			Material(ObjectProperty)=M_CubeGrowth= 
+	MaterialExpressionScalarParameter_27 (0-0-0-0): size 168 (cls: MaterialExpressionScalarParameter_27>MaterialExpressionScalarParameter>/Script/Engine):
+		Tag array:
+			DefaultValue(FloatProperty)=86.38387 
+			ParameterName(NameProperty)=DistortionICE 
+			ExpressionGUID(StructProperty)=Guid: 1530929067-1075277566-1360376251-2809894675 
+			Material(ObjectProperty)=M_CubeGrowth= 
+	MaterialExpressionScalarParameter_28 (0-0-0-0): size 168 (cls: MaterialExpressionScalarParameter_28>MaterialExpressionScalarParameter>/Script/Engine):
+		Tag array:
+			DefaultValue(FloatProperty)=0.055859 
+			ParameterName(NameProperty)=IceFalloffPowerEmissiveCore 
+			ExpressionGUID(StructProperty)=Guid: 580953259-1088007920-433451197-779369507 
+			Material(ObjectProperty)=M_CubeGrowth= 
+	MaterialExpressionScalarParameter_29 (0-0-0-0): size 168 (cls: MaterialExpressionScalarParameter_29>MaterialExpressionScalarParameter>/Script/Engine):
+		Tag array:
+			DefaultValue(FloatProperty)=3.246696 
+			ParameterName(NameProperty)=IceFalloffPowerEmissiveCore2 
+			ExpressionGUID(StructProperty)=Guid: 1755830490-1210243302-2435844770-93461089 
+			Material(ObjectProperty)=M_CubeGrowth= 
 	MaterialExpressionScalarParameter_3 (0-0-0-0): size 168 (cls: MaterialExpressionScalarParameter_3>MaterialExpressionScalarParameter>/Script/Engine):
 		Tag array:
 			DefaultValue(FloatProperty)=0.4 
@@ -336,6 +451,18 @@ Serialized exports:
 			ParameterName(NameProperty)=Speed (S)_5 
 			ExpressionGUID(StructProperty)=Guid: 96036169-1160467520-1493761701-689384217 
 			Material(ObjectProperty)=M_CubeGrowth= 
+	MaterialExpressionScalarParameter_38 (0-0-0-0): size 168 (cls: MaterialExpressionScalarParameter_38>MaterialExpressionScalarParameter>/Script/Engine):
+		Tag array:
+			DefaultValue(FloatProperty)=136.7514 
+			ParameterName(NameProperty)=CoreEmissive 
+			ExpressionGUID(StructProperty)=Guid: 551166601-1296454210-714819465-125482240 
+			Material(ObjectProperty)=M_CubeGrowth= 
+	MaterialExpressionScalarParameter_4 (0-0-0-0): size 168 (cls: MaterialExpressionScalarParameter_4>MaterialExpressionScalarParameter>/Script/Engine):
+		Tag array:
+			DefaultValue(FloatProperty)=0.711579 
+			ParameterName(NameProperty)=IceFalloffPower 
+			ExpressionGUID(StructProperty)=Guid: 2272106726-1290902329-2757360059-268644347 
+			Material(ObjectProperty)=M_CubeGrowth= 
 	MaterialExpressionScalarParameter_5 (0-0-0-0): size 168 (cls: MaterialExpressionScalarParameter_5>MaterialExpressionScalarParameter>/Script/Engine):
 		Tag array:
 			DefaultValue(FloatProperty)=2 
@@ -380,6 +507,41 @@ Serialized exports:
 			ParameterName(NameProperty)=Spawner 
 			ExpressionGUID(StructProperty)=Guid: 3216029971-1336066855-2219452340-2120437423 
 			Material(ObjectProperty)=M_CubeGrowth= 
+	MaterialExpressionStaticSwitchParameter_2 (0-0-0-0): size 317 (cls: MaterialExpressionStaticSwitchParameter_2>MaterialExpressionStaticSwitchParameter>/Script/Engine):
+		Tag array:
+			A(StructProperty)=System.Byte[] 
+			B(StructProperty)=System.Byte[] 
+			ParameterName(NameProperty)=UseIceandSnow 
+			ExpressionGUID(StructProperty)=Guid: 1380298317-1165837259-104092315-3454146396 
+			Material(ObjectProperty)=M_CubeGrowth= 
+	MaterialExpressionStaticSwitchParameter_3 (0-0-0-0): size 317 (cls: MaterialExpressionStaticSwitchParameter_3>MaterialExpressionStaticSwitchParameter>/Script/Engine):
+		Tag array:
+			A(StructProperty)=System.Byte[] 
+			B(StructProperty)=System.Byte[] 
+			ParameterName(NameProperty)=UseIceandSnow 
+			ExpressionGUID(StructProperty)=Guid: 3731823875-1169195488-2867348631-2421028350 
+			Material(ObjectProperty)=M_CubeGrowth= 
+	MaterialExpressionStaticSwitchParameter_4 (0-0-0-0): size 317 (cls: MaterialExpressionStaticSwitchParameter_4>MaterialExpressionStaticSwitchParameter>/Script/Engine):
+		Tag array:
+			A(StructProperty)=System.Byte[] 
+			B(StructProperty)=System.Byte[] 
+			ParameterName(NameProperty)=UseIceandSnow 
+			ExpressionGUID(StructProperty)=Guid: 3441211411-1264542360-4134896026-3617509370 
+			Material(ObjectProperty)=M_CubeGrowth= 
+	MaterialExpressionStaticSwitchParameter_5 (0-0-0-0): size 317 (cls: MaterialExpressionStaticSwitchParameter_5>MaterialExpressionStaticSwitchParameter>/Script/Engine):
+		Tag array:
+			A(StructProperty)=System.Byte[] 
+			B(StructProperty)=System.Byte[] 
+			ParameterName(NameProperty)=UseIceandSnow 
+			ExpressionGUID(StructProperty)=Guid: 334821169-1076487765-515470250-2589651417 
+			Material(ObjectProperty)=M_CubeGrowth= 
+	MaterialExpressionStaticSwitchParameter_6 (0-0-0-0): size 317 (cls: MaterialExpressionStaticSwitchParameter_6>MaterialExpressionStaticSwitchParameter>/Script/Engine):
+		Tag array:
+			A(StructProperty)=System.Byte[] 
+			B(StructProperty)=System.Byte[] 
+			ParameterName(NameProperty)=UseIceandSnow 
+			ExpressionGUID(StructProperty)=Guid: 3987705856-1113745212-2233214383-2676909825 
+			Material(ObjectProperty)=M_CubeGrowth= 
 	MaterialExpressionTextureSample_0 (0-0-0-0): size 200 (cls: MaterialExpressionTextureSample_0>MaterialExpressionTextureSample>/Script/Engine):
 		Tag array:
 			Coordinates(StructProperty)=System.Byte[] 
@@ -389,6 +551,12 @@ Serialized exports:
 	MaterialExpressionTextureSample_1 (0-0-0-0): size 111 (cls: MaterialExpressionTextureSample_1>MaterialExpressionTextureSample>/Script/Engine):
 		Tag array:
 			Texture(ObjectProperty)=T_CubeGrowth_normals=/Game/Athena/Environments/Island/CubeGrowth/T_CubeGrowth_normals 
+			SamplerType(ByteProperty)=SAMPLERTYPE_Normal 
+			Material(ObjectProperty)=M_CubeGrowth= 
+	MaterialExpressionTextureSample_2 (0-0-0-0): size 200 (cls: MaterialExpressionTextureSample_2>MaterialExpressionTextureSample>/Script/Engine):
+		Tag array:
+			Coordinates(StructProperty)=System.Byte[] 
+			Texture(ObjectProperty)=T_IceScratch1_N=/Game/Athena/WinterArt/Textures/T_IceScratch1_N 
 			SamplerType(ByteProperty)=SAMPLERTYPE_Normal 
 			Material(ObjectProperty)=M_CubeGrowth= 
 	MaterialExpressionTextureSample_3 (0-0-0-0): size 159 (cls: MaterialExpressionTextureSample_3>MaterialExpressionTextureSample>/Script/Engine):
@@ -407,6 +575,12 @@ Serialized exports:
 			Coordinates(StructProperty)=System.Byte[] 
 			Texture(ObjectProperty)=T_CubeNoise01_H=/Game/Athena/Environments/Island/CubeGrowth/T_CubeNoise01_H 
 			SamplerType(ByteProperty)=SAMPLERTYPE_LinearColor 
+			Material(ObjectProperty)=M_CubeGrowth= 
+	MaterialExpressionTextureSample_6 (0-0-0-0): size 200 (cls: MaterialExpressionTextureSample_6>MaterialExpressionTextureSample>/Script/Engine):
+		Tag array:
+			Coordinates(StructProperty)=System.Byte[] 
+			Texture(ObjectProperty)=T_IceScratch1_M=/Game/Athena/WinterArt/Textures/T_IceScratch1_M 
+			SamplerType(ByteProperty)=SAMPLERTYPE_Masks 
 			Material(ObjectProperty)=M_CubeGrowth= 
 	MaterialExpressionTextureSampleParameter2D_0 (0-0-0-0): size 257 (cls: MaterialExpressionTextureSampleParameter2D_0>MaterialExpressionTextureSampleParameter2D>/Script/Engine):
 		Tag array:
@@ -450,4 +624,16 @@ Serialized exports:
 			DefaultValue(StructProperty)=UE4.FLinearColor 
 			ParameterName(NameProperty)=FakeSpecularColor 
 			ExpressionGUID(StructProperty)=Guid: 4142667529-1084755308-986289041-455831581 
+			Material(ObjectProperty)=M_CubeGrowth= 
+	MaterialExpressionVectorParameter_6 (0-0-0-0): size 204 (cls: MaterialExpressionVectorParameter_6>MaterialExpressionVectorParameter>/Script/Engine):
+		Tag array:
+			DefaultValue(StructProperty)=UE4.FLinearColor 
+			ParameterName(NameProperty)=Ice_Color_1 
+			ExpressionGUID(StructProperty)=Guid: 3551371518-1306101442-3142526629-1678070237 
+			Material(ObjectProperty)=M_CubeGrowth= 
+	MaterialExpressionVectorParameter_9 (0-0-0-0): size 204 (cls: MaterialExpressionVectorParameter_9>MaterialExpressionVectorParameter>/Script/Engine):
+		Tag array:
+			DefaultValue(StructProperty)=UE4.FLinearColor 
+			ParameterName(NameProperty)=EmissiveCore 
+			ExpressionGUID(StructProperty)=Guid: 412191791-1316539514-400890535-3098366074 
 			Material(ObjectProperty)=M_CubeGrowth= 

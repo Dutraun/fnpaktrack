@@ -10,7 +10,6 @@ Name table:
 	/Game/UI/Foundation/Materials/M-Animated-Arrows
 	/Game/UI/Foundation/Shell/Textures/T-Icon-Warning-32
 	/Game/UI/Foundation/Text/Materials/M-FontShadow
-	/Game/UI/Foundation/Text/Materials/M-Header-M-Outline
 	/Game/UI/Foundation/Text/TextScrollStyle-Base
 	/Game/UI/Foundation/Text/TextStyle-Base
 	/Game/UI/Foundation/Text/TextStyle-Base-S-B-Black
@@ -19,6 +18,7 @@ Name table:
 	/Game/UI/Foundation/Text/TextStyle-Header-M-S
 	/Game/UI/Foundation/Text/TextStyle-Header-M-Special-Large
 	/Game/UI/Foundation/Textures/Icons/Upgrade/T-Icon-Upgrade-32
+	/Game/UI/Frontend/ItemInspect/Refunding/ItemInspectRefundRayImage
 	/Game/UI/Frontend/ItemInspect/Upgrade/ItemInspectUpgradeConfirmation
 	/Game/UI/Frontend/ItemInspect/Upgrade/ItemInspectUpgradeConfirmation.WidgetArchetype
 	/Game/UI/Materials/HollowCircularProgressBar
@@ -28,7 +28,9 @@ Name table:
 	/Script/Engine
 	/Script/FortniteGame
 	/Script/FortniteUI
+	/Script/SlateCore
 	/Script/UMG
+	Activate
 	Add_IntInt
 	ArgumentName
 	ArgumentValue
@@ -43,6 +45,7 @@ Name table:
 	bAllowTemplate
 	bApplyOutlineToDropShadows
 	bCookedWidgetTree
+	bEnableItemRefundingInStw
 	bHasScriptImplementedPaint
 	bHasScriptImplementedTick
 	bIsVariable
@@ -57,6 +60,7 @@ Name table:
 	BorderSlot
 	Bottom
 	bOverride_WidthOverride
+	Box2D
 	Brush
 	BrushColor
 	BrushSize
@@ -77,18 +81,21 @@ Name table:
 	CallFunc_CanBeUpgraded_ReturnValue
 	CallFunc_Conv_IntToText_ReturnValue
 	CallFunc_Conv_IntToText_ReturnValue1
+	CallFunc_Create_ReturnValue
 	CallFunc_EqualEqual_ByteByte_ReturnValue
 	CallFunc_Format_ReturnValue
 	CallFunc_GetContext_ReturnValue
 	CallFunc_GetLevel_ReturnValue
 	CallFunc_GetMaxLevel_ReturnValue
 	CallFunc_GetNumInInventory_ReturnValue
+	CallFunc_GetRuntimeOptions_ReturnValue
 	CallFunc_GetType_ReturnValue
 	CallFunc_GetUINavigationManager_ReturnValue
 	CallFunc_GetUpgradeCost_ReturnValue
 	CallFunc_GetUpgradeResourceItemDefinition_ReturnValue
 	CallFunc_GetUpgradeRestrictionReasonText_ReturnValue
 	CallFunc_GreaterEqual_IntInt_ReturnValue
+	CallFunc_IsRefundable_ReturnValue
 	CallFunc_IsUpgradeAvailable_UpgradeAvailable
 	CallFunc_IsUpgradeAvailable_UpgradeAvailable1
 	CallFunc_IsValid_ReturnValue
@@ -96,6 +103,7 @@ Name table:
 	CallFunc_MakeLiteralText_ReturnValue
 	CallFunc_MakeLiteralText_ReturnValue1
 	CallFunc_NotEqual_IntInt_ReturnValue
+	CallFunc_ShowSimpleConfirmationDialog_NUI_ReturnValue
 	CanAfford
 	CanAffordUpgrade
 	CanBeUpgraded
@@ -119,6 +127,7 @@ Name table:
 	Conv_IntToText
 	CountStyle
 	CountText
+	Create
 	CurrentLevelText
 	Default__ArrayProperty
 	Default__BlueprintContextLibrary
@@ -131,10 +140,13 @@ Name table:
 	Default__CommonBorder
 	Default__CommonTextBlock
 	Default__ComponentDelegateBinding
+	Default__DelegateProperty
 	Default__EnumProperty
+	Default__FortAsyncAction_ShowConfirmation_NUI
 	Default__FortItem
 	Default__FortItemCountTextBlock
 	Default__FortItemIcon
+	Default__FortRuntimeOptions
 	Default__FortUIManagerWidget_NUI
 	Default__FortUserWidget
 	Default__Function
@@ -144,12 +156,14 @@ Name table:
 	Default__Image
 	Default__IntProperty
 	Default__ItemCount_C
+	Default__ItemInspectRefundRayImage_C
 	Default__ItemInspectUpgradeConfirmation_C
 	Default__KismetArrayLibrary
 	Default__KismetSystemLibrary
 	Default__KismetTextLibrary
 	Default__MulticastDelegateProperty
 	Default__NamedSlot
+	Default__NameProperty
 	Default__ObjectProperty
 	Default__Overlay
 	Default__OverlaySlot
@@ -168,13 +182,19 @@ Name table:
 	Default__VerticalBox
 	Default__VerticalBoxSlot
 	Default__WidgetBlueprintGeneratedClass
+	Default__WidgetBlueprintLibrary
 	Default__WidgetTree
+	DelegateFunction
+	DelegateProperty
 	DelegatePropertyName
+	DialogResult
+	DialogResult_7CBA8AFE42D6A992B7FAA095E3A769C6
 	DisplayName
 	DrawAs
 	DynamicBindingObjects
 	EFortBrushSize
 	EFortBrushSize::Large
+	EFortDialogResult
 	EFortItemCountStyle
 	EFortItemCountStyle::StackCountOverOverride
 	EFortItemType
@@ -205,11 +225,15 @@ Name table:
 	Format
 	FormatArgumentData
 	fort_SkillPoints_CountupEnd_Cue
+	FortAccountItem
+	FortAsyncAction_ShowConfirmation_NUI
+	FortConfirmationResultDelegate_NUI__DelegateSignature
 	FortInventoryContext
 	FortItem
 	FortItemCountTextBlock
 	FortItemIcon
 	FortPersistentResourceItemDefinition
+	FortRuntimeOptions
 	FortUIManagerWidget_NUI
 	FortUINavigationManager
 	FortUserWidget
@@ -219,6 +243,7 @@ Name table:
 	GetLevel
 	GetMaxLevel
 	GetNumInInventory
+	GetRuntimeOptions
 	GetType
 	GetUINavigationManager
 	GetUpgradeCost
@@ -240,6 +265,7 @@ Name table:
 	ImageSize
 	InputActionWidget
 	IntProperty
+	IsRefundable
 	IsUpgradeAvailable
 	IsValid
 	IsVisible
@@ -247,10 +273,16 @@ Name table:
 	ItemCount_C
 	ItemCountBG
 	ItemCountMaxInterpolateDuration
+	ItemInspectRefundRayImage_C
 	ItemInspectUpgradeConfirmation_C
 	Justification
 	K2Node_ComponentBoundEvent_Button
 	K2Node_ComponentBoundEvent_Button1
+	K2Node_CreateDelegate_OutputDelegate
+	K2Node_CustomEvent_Result
+	K2Node_CustomEvent_ResultName
+	K2Node_DynamicCast_AsFort_Account_Item
+	K2Node_DynamicCast_bSuccess
 	K2Node_MakeArray_Array
 	K2Node_MakeStruct_FormatArgumentData
 	K2Node_Select_Default
@@ -264,7 +296,6 @@ Name table:
 	M-Animated-Arrows
 	M-Border-ItemUpgrade_Active
 	M-FontShadow
-	M-Header-M-Outline
 	MakeLiteralText
 	Margin
 	Material
@@ -307,6 +338,8 @@ Name table:
 	RefreshOnUpgrade
 	ResourceObject
 	RestrictionBorder
+	Result
+	ResultName
 	Right
 	RightExtraContentSlot
 	RootWidget
@@ -320,6 +353,7 @@ Name table:
 	SetText
 	SetVisibility
 	ShadowOffset
+	ShowSimpleConfirmationDialog_NUI
 	Size
 	SizeBox
 	SizeBoxSlot
@@ -340,6 +374,8 @@ Name table:
 	T-Icon-Upgrade-32
 	T-Icon-Warning-32
 	Temp_bool_Variable
+	Temp_byte_Variable
+	Temp_name_Variable
 	TemplateAsset
 	Text
 	TextHelpMessage
@@ -381,12 +417,13 @@ Name table:
 	Widget
 	WidgetArchetype
 	WidgetBlueprintGeneratedClass
+	WidgetBlueprintLibrary
 	WidgetTree
 	WidthOverride
 	WrapTextAt
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	ItemInspectUpgradeConfirmation_C (0-0-0-0): size 564 (cls: ItemInspectUpgradeConfirmation_C>WidgetBlueprintGeneratedClass>/Script/UMG):
+	ItemInspectUpgradeConfirmation_C (0-0-0-0): size 580 (cls: ItemInspectUpgradeConfirmation_C>WidgetBlueprintGeneratedClass>/Script/UMG):
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
@@ -403,12 +440,15 @@ Serialized exports:
 	OnUpgradeConfirm__DelegateSignature (0-0-0-0): size 43 (cls: OnUpgradeConfirm__DelegateSignature>Function>/Script/CoreUObject)
 	OnUpgradeCancel__DelegateSignature (0-0-0-0): size 43 (cls: OnUpgradeCancel__DelegateSignature>Function>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_ItemInspectUpgradeConfirmation (0-0-0-0): size 208 (cls: ExecuteUbergraph_ItemInspectUpgradeConfirmation>Function>/Script/CoreUObject)
+	ExecuteUbergraph_ItemInspectUpgradeConfirmation (0-0-0-0): size 1090 (cls: ExecuteUbergraph_ItemInspectUpgradeConfirmation>Function>/Script/CoreUObject)
 	Construct (0-0-0-0): size 54 (cls: Construct>Function>/Script/CoreUObject)
 	Button (0-0-0-0): size 36 (cls: Button>ObjectProperty>/Script/CoreUObject)
 	BndEvt__UpgradeCancelButton_K2Node_ComponentBoundEvent_0_CommonButtonClicked__DelegateSignature (0-0-0-0): size 68 (cls: BndEvt__UpgradeCancelButton_K2Node_ComponentBoundEvent_0_CommonButtonClicked__DelegateSignature>Function>/Script/CoreUObject)
 	Button (0-0-0-0): size 36 (cls: Button>ObjectProperty>/Script/CoreUObject)
 	BndEvt__UpgradeConfirmButton_K2Node_ComponentBoundEvent_1_CommonButtonClicked__DelegateSignature (0-0-0-0): size 68 (cls: BndEvt__UpgradeConfirmButton_K2Node_ComponentBoundEvent_1_CommonButtonClicked__DelegateSignature>Function>/Script/CoreUObject)
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	Result (0-0-0-0): size 40 (cls: Result>EnumProperty>/Script/CoreUObject)
+	DialogResult_7CBA8AFE42D6A992B7FAA095E3A769C6 (0-0-0-0): size 82 (cls: DialogResult_7CBA8AFE42D6A992B7FAA095E3A769C6>Function>/Script/CoreUObject)
 	CallFunc_GetUpgradeResourceItemDefinition_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetUpgradeResourceItemDefinition_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	Refresh (0-0-0-0): size 409 (cls: Refresh>Function>/Script/CoreUObject)
 	Item (0-0-0-0): size 36 (cls: Item>ObjectProperty>/Script/CoreUObject)
@@ -434,6 +474,11 @@ Serialized exports:
 	K2Node_MakeArray_Array (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array>StructProperty>/Script/CoreUObject)
 	K2Node_MakeArray_Array (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array>ArrayProperty>/Script/CoreUObject)
 	CallFunc_GreaterEqual_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_GreaterEqual_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_BooleanAND_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_EqualEqual_ByteByte_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ByteByte_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_IsRefundable_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsRefundable_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	CallFunc_CanBeUpgraded_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_CanBeUpgraded_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsVisible_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsVisible_ReturnValue>BoolProperty>/Script/CoreUObject)
@@ -461,6 +506,8 @@ Serialized exports:
 			Content(ObjectProperty)=HorizontalBox=WidgetArchetype 
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	InputActionWidget (0-0-0-0): size 339 (cls: InputActionWidget>CommonActionWidget>/Script/CommonUI):
 		Tag array:
 			ProgressMaterialBrush(StructProperty)=System.Byte[] 
@@ -481,16 +528,19 @@ Serialized exports:
 			Slot(ObjectProperty)=OverlaySlot_2=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
 			Visibility(EnumProperty)=ESlateVisibility::Hidden 
-	CommonTextBlock_0 (0-0-0-0): size 148 (cls: CommonTextBlock_0>CommonTextBlock>/Script/CommonUI):
+	CommonTextBlock_0 (0-0-0-0): size 585 (cls: CommonTextBlock_0>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-M-S_C=/Game/UI/Foundation/Text/TextStyle-Header-M-S 
 			Text(TextProperty)=LV (0E78D296421A3000750FFABB35F64F84) 
+			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
-	CurrentLevelText (0-0-0-0): size 527 (cls: CurrentLevelText>CommonTextBlock>/Script/CommonUI):
+	CurrentLevelText (0-0-0-0): size 610 (cls: CurrentLevelText>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Header-M-S_C=/Game/UI/Foundation/Text/TextStyle-Header-M-S 
 			Text(TextProperty)=1 (F660A99A439E0E55B00431905F319B51) 
 			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
 	NextLevelText (0-0-0-0): size 378 (cls: NextLevelText>CommonTextBlock>/Script/CommonUI):
@@ -542,6 +592,9 @@ Serialized exports:
 	ComponentDelegateBinding_0 (0-0-0-0): size 312 (cls: ComponentDelegateBinding_0>ComponentDelegateBinding>/Script/Engine):
 		Tag array:
 			ComponentDelegateBindings(ArrayProperty)=[object] (inner: StructProperty)
+	K2Node_CreateDelegate_OutputDelegate (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate>DelegateProperty>/Script/CoreUObject)
+	K2Node_CustomEvent_Result (0-0-0-0): size 40 (cls: K2Node_CustomEvent_Result>EnumProperty>/Script/CoreUObject)
+	Temp_byte_Variable (0-0-0-0): size 40 (cls: Temp_byte_Variable>EnumProperty>/Script/CoreUObject)
 	CallFunc_Array_Get_Item (0-0-0-0): size 40 (cls: CallFunc_Array_Get_Item>EnumProperty>/Script/CoreUObject)
 	CallFunc_GetType_ReturnValue (0-0-0-0): size 40 (cls: CallFunc_GetType_ReturnValue>EnumProperty>/Script/CoreUObject)
 	CountText (0-0-0-0): size 294 (cls: CountText>FortItemCountTextBlock>/Script/FortniteUI):
@@ -753,10 +806,17 @@ Serialized exports:
 	RightExtraContentSlot (0-0-0-0): size 41 (cls: RightExtraContentSlot>NamedSlot>/Script/UMG):
 		Tag array:
 			Slot(ObjectProperty)=HorizontalBoxSlot_3=WidgetArchetype 
+	ResultName (0-0-0-0): size 32 (cls: ResultName>NameProperty>/Script/CoreUObject)
+	K2Node_CustomEvent_ResultName (0-0-0-0): size 32 (cls: K2Node_CustomEvent_ResultName>NameProperty>/Script/CoreUObject)
+	Temp_name_Variable (0-0-0-0): size 32 (cls: Temp_name_Variable>NameProperty>/Script/CoreUObject)
 	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetUpgradeResourceItemDefinition_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetUpgradeResourceItemDefinition_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_Create_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_Create_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetRuntimeOptions_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetRuntimeOptions_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_ShowSimpleConfirmationDialog_NUI_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_ShowSimpleConfirmationDialog_NUI_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	K2Node_ComponentBoundEvent_Button (0-0-0-0): size 36 (cls: K2Node_ComponentBoundEvent_Button>ObjectProperty>/Script/CoreUObject)
 	K2Node_ComponentBoundEvent_Button1 (0-0-0-0): size 36 (cls: K2Node_ComponentBoundEvent_Button1>ObjectProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_AsFort_Account_Item (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Account_Item>ObjectProperty>/Script/CoreUObject)
 	Image_0 (0-0-0-0): size 36 (cls: Image_0>ObjectProperty>/Script/CoreUObject)
 	Image_1 (0-0-0-0): size 36 (cls: Image_1>ObjectProperty>/Script/CoreUObject)
 	Image_3 (0-0-0-0): size 36 (cls: Image_3>ObjectProperty>/Script/CoreUObject)

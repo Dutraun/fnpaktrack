@@ -1,5 +1,7 @@
 Name table:
 	/Game/Athena/Cosmetics/Blueprints/Gliders/B_Glider_Gingerbread
+	/Game/Gadgets/Assets/VinderTech_GliderChute/Blueprints/VinderTech_GliderChute_AnimBP
+	/Game/Gadgets/Assets/VinderTech_GliderChute/Blueprints/VinderTech_GliderChute_AnimBP_GingerBread
 	/Game/Gadgets/Assets/VinderTech_GliderChute/Glider_Gingerbread/FX/P_Glider_Gingerbread_Idle
 	/Game/Gadgets/Assets/VinderTech_GliderChute/Glider_Gingerbread/FX/P_Glider_Gingerbread_Trails
 	/Game/Gadgets/Assets/VinderTech_GliderChute/Glider_Gingerbread/Materials/MI_Glider_Gingerbread
@@ -19,6 +21,7 @@ Name table:
 	AllNodes
 	AnimBlueprintGeneratedClass
 	AnimClass
+	AnimInstance
 	ArrayIndex
 	ArrayProperty
 	AttachParent
@@ -38,12 +41,11 @@ Name table:
 	bStartWithTickEnabled
 	C_AudioCurve_LinearVolume
 	CallFunc_BooleanAND_ReturnValue
+	CallFunc_GetAnimInstance_ReturnValue
+	CallFunc_GetAnimInstance_ReturnValue1
 	CallFunc_GreaterEqual_FloatFloat_ReturnValue
-	CallFunc_IsActive_ReturnValue
 	CallFunc_IsGliderFullyDeployedAccordingToAnim_ReturnValue
 	CallFunc_IsGliderFullyDeployedAccordingToAnim_ReturnValue1
-	CallFunc_IsGliderFullyDeployedAccordingToAnim_ReturnValue2
-	CallFunc_K2_SetTimerDelegate_ReturnValue
 	ChangedPropertyList
 	ChildNodes
 	Class
@@ -71,10 +73,11 @@ Name table:
 	Default__SK_Glider_Gingerbread_Parts_AnimBP_C
 	Default__SkeletalMeshComponentBudgeted
 	Default__StructProperty
+	Default__VinderTech_GliderChute_AnimBP_C
+	Default__VinderTech_GliderChute_AnimBP_GingerBread_C
 	DefaultSceneRoot
 	DefaultSceneRoot_GEN_VARIABLE
 	DefaultSceneRootNode
-	DelegateFunction
 	DelegateProperty
 	Direction
 	Engine
@@ -84,6 +87,9 @@ Name table:
 	EVehicleAudioTriggerDir::Forward
 	ExecuteUbergraph_B_Glider_Gingerbread
 	FadeWhenOutsideGate
+	FE_IdleCheck
+	FE_IdleStart
+	FE_IdleStart__DelegateSignature
 	FloatProperty
 	FortPlayerParachute
 	FortVehicleAudioOneshotGate
@@ -91,10 +97,10 @@ Name table:
 	FortVehicleAudioVoice
 	FortVehicleAudioVoice_GEN_VARIABLE
 	ForwardDot
-	FrontEnd_Check
 	FrontEndTimer
 	Function
 	GateValue
+	GetAnimInstance
 	Glider_Gingerbread_ThrustLoop_Cue
 	Glider_Gingerbread_ThrustStart_Cue
 	GreaterEqual_FloatFloat
@@ -105,12 +111,13 @@ Name table:
 	InternalVariableName
 	InterruptFadeTime
 	IntProperty
-	IsActive
-	IsCosmeticPreview
 	IsGliderFullyDeployedAccordingToAnim
 	K2_ClearAndInvalidateTimerHandle
-	K2_SetTimerDelegate
 	K2Node_CreateDelegate_OutputDelegate
+	K2Node_DynamicCast_AsVinder_Tech_Glider_Chute_Anim_BP
+	K2Node_DynamicCast_AsVinder_Tech_Glider_Chute_Anim_BP1
+	K2Node_DynamicCast_bSuccess
+	K2Node_DynamicCast_bSuccess1
 	K2Node_Event_ForwardDot
 	K2Node_Event_MovementLengthSquared
 	K2Node_Event_RightDot
@@ -122,6 +129,7 @@ Name table:
 	MI_Glider_Gingerbread
 	MinTimeSinceTrigger
 	MovementLengthSquared
+	MulticastDelegateProperty
 	NameProperty
 	None
 	Object
@@ -144,6 +152,7 @@ Name table:
 	PropertyName
 	PropertyScope
 	ReceiveBeginPlay
+	ReceiveDestroyed
 	RelativeRotation
 	ReleaseSpeed
 	Reset
@@ -163,6 +172,7 @@ Name table:
 	SK_Glider_Gingerbread_Parts_AnimBP_C
 	SK_M_VinderTech_GliderChute
 	SkeletalMesh
+	SkeletalMeshComponent
 	SkeletalMeshComponentBudgeted
 	Sound
 	SoundCue
@@ -172,7 +182,6 @@ Name table:
 	Temp_bool_IsClosed_Variable
 	Temp_bool_IsClosed_Variable1
 	Template
-	TimerDynamicDelegate__DelegateSignature
 	TimerHandle
 	TrailParticles
 	UberGraphFrame
@@ -181,11 +190,13 @@ Name table:
 	UserConstructionScript
 	VariableGuid
 	Vector2D
+	VinderTech_GliderChute_AnimBP_C
+	VinderTech_GliderChute_AnimBP_GingerBread_C
 	VolumeParam
 	Y
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	B_Glider_Gingerbread_C (0-0-0-0): size 292 (cls: B_Glider_Gingerbread_C>BlueprintGeneratedClass>/Script/Engine):
+	B_Glider_Gingerbread_C (0-0-0-0): size 308 (cls: B_Glider_Gingerbread_C>BlueprintGeneratedClass>/Script/Engine):
 		Tag array:
 			bHasCookedComponentInstancingData(BoolProperty)=True 
 			SimpleConstructionScript(ObjectProperty)=SimpleConstructionScript_0=B_Glider_Gingerbread_C 
@@ -199,13 +210,13 @@ Serialized exports:
 			RootComponent(ObjectProperty)=RootComponent0=Default__B_Glider_Gingerbread_C 
 	FortVehicleAudioVoice (0-0-0-0): size 36 (cls: FortVehicleAudioVoice>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_B_Glider_Gingerbread (0-0-0-0): size 793 (cls: ExecuteUbergraph_B_Glider_Gingerbread>Function>/Script/CoreUObject)
+	ExecuteUbergraph_B_Glider_Gingerbread (0-0-0-0): size 835 (cls: ExecuteUbergraph_B_Glider_Gingerbread>Function>/Script/CoreUObject)
 	CallFunc_BooleanAND_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_GreaterEqual_FloatFloat_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_GreaterEqual_FloatFloat_ReturnValue>BoolProperty>/Script/CoreUObject)
-	CallFunc_IsActive_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsActive_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsGliderFullyDeployedAccordingToAnim_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsGliderFullyDeployedAccordingToAnim_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsGliderFullyDeployedAccordingToAnim_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_IsGliderFullyDeployedAccordingToAnim_ReturnValue1>BoolProperty>/Script/CoreUObject)
-	CallFunc_IsGliderFullyDeployedAccordingToAnim_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_IsGliderFullyDeployedAccordingToAnim_ReturnValue2>BoolProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_bSuccess1 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess1>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Has_Been_Initd_Variable (0-0-0-0): size 34 (cls: Temp_bool_Has_Been_Initd_Variable>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Has_Been_Initd_Variable1 (0-0-0-0): size 34 (cls: Temp_bool_Has_Been_Initd_Variable1>BoolProperty>/Script/CoreUObject)
 	Temp_bool_IsClosed_Variable (0-0-0-0): size 34 (cls: Temp_bool_IsClosed_Variable>BoolProperty>/Script/CoreUObject)
@@ -215,7 +226,8 @@ Serialized exports:
 	K2Node_Event_MovementLengthSquared (0-0-0-0): size 32 (cls: K2Node_Event_MovementLengthSquared>FloatProperty>/Script/CoreUObject)
 	K2Node_Event_RightDot (0-0-0-0): size 32 (cls: K2Node_Event_RightDot>FloatProperty>/Script/CoreUObject)
 	K2Node_Event_RotationalMovementAcceleration (0-0-0-0): size 32 (cls: K2Node_Event_RotationalMovementAcceleration>FloatProperty>/Script/CoreUObject)
-	FrontEnd_Check (0-0-0-0): size 54 (cls: FrontEnd_Check>Function>/Script/CoreUObject)
+	ReceiveDestroyed (0-0-0-0): size 54 (cls: ReceiveDestroyed>Function>/Script/CoreUObject)
+	FE_IdleCheck (0-0-0-0): size 54 (cls: FE_IdleCheck>Function>/Script/CoreUObject)
 	ReceiveBeginPlay (0-0-0-0): size 54 (cls: ReceiveBeginPlay>Function>/Script/CoreUObject)
 	ResetIdle (0-0-0-0): size 54 (cls: ResetIdle>Function>/Script/CoreUObject)
 	Reset (0-0-0-0): size 54 (cls: Reset>Function>/Script/CoreUObject)
@@ -232,6 +244,10 @@ Serialized exports:
 			ParamRange(StructProperty)=Vector2D(0,1) 
 	UserConstructionScript (0-0-0-0): size 43 (cls: UserConstructionScript>Function>/Script/CoreUObject)
 	Bits (0-0-0-0): size 36 (cls: Bits>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetAnimInstance_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetAnimInstance_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetAnimInstance_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetAnimInstance_ReturnValue1>ObjectProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_AsVinder_Tech_Glider_Chute_Anim_BP (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsVinder_Tech_Glider_Chute_Anim_BP>ObjectProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_AsVinder_Tech_Glider_Chute_Anim_BP1 (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsVinder_Tech_Glider_Chute_Anim_BP1>ObjectProperty>/Script/CoreUObject)
 	Idle Sugar Sparkles (0-0-0-0): size 36 (cls: Idle Sugar Sparkles>ObjectProperty>/Script/CoreUObject)
 	Idle Sugar Sparkles_GEN_VARIABLE (0-0-0-0): size 150 (cls: Idle Sugar Sparkles_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine):
 		Tag array:
@@ -286,11 +302,11 @@ Serialized exports:
 		Tag array:
 			AnimClass(ObjectProperty)=SK_Glider_Gingerbread_Parts_AnimBP_C=/Game/Gadgets/Assets/VinderTech_GliderChute/Glider_Gingerbread/Meshes/SK_Glider_Gingerbread_Parts_AnimBP 
 			SkeletalMesh(ObjectProperty)=SK_Glider_Gingerbread_Parts=/Game/Gadgets/Assets/VinderTech_GliderChute/Glider_Gingerbread/Meshes/SK_Glider_Gingerbread_Parts 
-	ParachuteMesh0 (0-0-0-0): size 172 (cls: ParachuteMesh0>SkeletalMeshComponentBudgeted>/Script/AnimationBudgetAllocator):
+	ParachuteMesh0 (0-0-0-0): size 201 (cls: ParachuteMesh0>SkeletalMeshComponentBudgeted>/Script/AnimationBudgetAllocator):
 		Tag array:
+			AnimClass(ObjectProperty)=VinderTech_GliderChute_AnimBP_GingerBread_C=/Game/Gadgets/Assets/VinderTech_GliderChute/Blueprints/VinderTech_GliderChute_AnimBP_GingerBread 
 			SkeletalMesh(ObjectProperty)=SK_M_VinderTech_GliderChute=/Game/Gadgets/Assets/VinderTech_GliderChute/Meshes/SK_M_VinderTech_GliderChute 
 			OverrideMaterials(ArrayProperty)=[object] (inner: ObjectProperty)
 			AttachParent(ObjectProperty)=RootComponent0=Default__B_Glider_Gingerbread_C 
 			RelativeRotation(StructProperty)=Rotator(0,90,0) 
-	CallFunc_K2_SetTimerDelegate_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_SetTimerDelegate_ReturnValue>StructProperty>/Script/CoreUObject)
 	FrontEndTimer (0-0-0-0): size 36 (cls: FrontEndTimer>StructProperty>/Script/CoreUObject)

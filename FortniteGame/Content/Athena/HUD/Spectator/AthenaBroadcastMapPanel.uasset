@@ -8,12 +8,11 @@ Name table:
 	/Game/Athena/HUD/Spectator/AthenaBroadcastMapPanel.WidgetArchetype
 	/Game/Athena/HUD/Spectator/AthenaSpectatorMapPlayerList
 	/Game/Athena/HUD/Spectator/AthenaSpectatorMapPlayerListRow
+	/Game/Athena/HUD/Spectator/Map/AthenaBroadcasterMapSettings
 	/Game/UI/Foundation/Border/Border_Navy_VGrad
 	/Game/UI/Foundation/Buttons/ButtonStyles/ButtonStyle-TransparentWithCues-XS-B-White
-	/Game/UI/Foundation/Buttons/ButtonStyles/ButtonStyle-TransparentWithCues-XS-B_OverlayColor
 	/Game/UI/Foundation/Buttons/ButtonStyles/TopBar/ButtonStyle-Outline-MediumBlue
 	/Game/UI/Foundation/Buttons/IconTextButton
-	/Game/UI/Foundation/Buttons/IconTextButtonReplay
 	/Game/UI/Foundation/Buttons/TextStyles/TextStyle-MediumButton
 	/Game/UI/Foundation/Fonts/NotoSans
 	/Game/UI/Foundation/Input/InputActionDataTable
@@ -39,16 +38,18 @@ Name table:
 	/Script/SlateCore
 	/Script/UMG
 	AbsoluteToLocal
-	ActivateNextWidget
+	ActivatePreviousWidget
+	ActiveWidget
+	ActiveWidgetIndex
 	Actor
-	ActorComponent
 	Add_IntInt
-	AddChildToHorizontalBox
+	AddChild
 	AliveIco
 	Angle
 	Array_Get
 	Array_Length
 	ArrayProperty
+	AthenaBroadcasterMapSettings_C
 	AthenaBroadcastMapPanel_C
 	AthenaBroadcastMapPanelBase
 	AthenaGamePhaseWidget
@@ -75,7 +76,9 @@ Name table:
 	BlueprintComponentDelegateBinding
 	BlueprintContextLibrary
 	BlueprintGeneratedClass
-	BlueprintMapLibrary
+	BndEvt__LHSSwitcher_K2Node_ComponentBoundEvent_3_OnActiveWidgetChanged__DelegateSignature
+	BndEvt__PlayerList_K2Node_ComponentBoundEvent_1_OnWidgetActivationChangedDynamic__DelegateSignature
+	BndEvt__PlayerList_K2Node_ComponentBoundEvent_2_OnWidgetActivationChangedDynamic__DelegateSignature
 	BndEvt__ToggleScoreboardButton_K2Node_ComponentBoundEvent_0_CommonButtonClicked__DelegateSignature
 	BooleanAND
 	BoolProperty
@@ -86,11 +89,11 @@ Name table:
 	Bottom
 	BottomBarWidget
 	BottomBarWidget_C
+	bOutroPanelBelow
 	bOverride_HeightOverride
 	bOverride_WidthOverride
 	Box2D
 	bPassthrough
-	bPassThrough
 	BreakVector2D
 	Brush
 	bScoreboardVisible
@@ -105,16 +108,15 @@ Name table:
 	Button-BasicArrowLeft-_normal_
 	Button-BasicArrowRight-_normal_
 	ButtonBox
-	ButtonClicked
 	ButtonStyle-Outline-MediumBlue_C
 	ButtonStyle-TransparentWithCues-XS-B-White_C
-	ButtonStyle-TransparentWithCues-XS-B_OverlayColor_C
 	ButtonText
 	bValidTemplate
+	bWidgetActivationEnabled
 	ByteProperty
 	CallFunc_AbsoluteToLocal_ReturnValue
 	CallFunc_Add_IntInt_ReturnValue
-	CallFunc_AddChildToHorizontalBox_ReturnValue
+	CallFunc_AddChild_ReturnValue
 	CallFunc_Array_Get_Item
 	CallFunc_Array_Length_ReturnValue
 	CallFunc_BooleanAND_ReturnValue
@@ -127,19 +129,21 @@ Name table:
 	CallFunc_BreakVector2D_Y1
 	CallFunc_BreakVector2D_Y2
 	CallFunc_Create_ReturnValue
+	CallFunc_CycleSidebar_passthrough
 	CallFunc_EqualEqual_KeyKey_ReturnValue
 	CallFunc_EqualEqual_KeyKey_ReturnValue1
 	CallFunc_EqualEqual_NameName_ReturnValue
 	CallFunc_EqualEqual_ObjectObject_ReturnValue
+	CallFunc_EqualEqual_ObjectObject_ReturnValue1
 	CallFunc_FollowHoveredPlayer_ReturnValue
+	CallFunc_GetActiveWidget_ReturnValue
 	CallFunc_GetCachedGeometry_ReturnValue
 	CallFunc_GetConsoleVariableIntValue_ReturnValue
 	CallFunc_GetContext_ReturnValue
 	CallFunc_GetDesiredSize_ReturnValue
+	CallFunc_GetIsBroadcastClient_ReturnValue
 	CallFunc_GetLocalSize_ReturnValue
 	CallFunc_GetNextSortMethod_ReturnValue
-	CallFunc_GetObjectClass_ReturnValue
-	CallFunc_GetOwner_ReturnValue
 	CallFunc_GetOwningLocalPlayer_ReturnValue
 	CallFunc_GetOwningPlayer_ReturnValue
 	CallFunc_GetPlayerController_ReturnValue
@@ -150,18 +154,16 @@ Name table:
 	CallFunc_GreaterEqual_FloatFloat_ReturnValue1
 	CallFunc_Handled_ReturnValue
 	CallFunc_HideScoreboard_bPassthrough
+	CallFunc_HideScoreboard_bPassthrough1
 	CallFunc_IsConsolePlatform_ReturnValue
 	CallFunc_IsHovered_ReturnValue
 	CallFunc_IsUsingGamepad_ReturnValue
 	CallFunc_IsVisible_ReturnValue
-	CallFunc_IsVisible_ReturnValue1
 	CallFunc_JumpToHoveredActor_ReturnValue
 	CallFunc_Less_IntInt_ReturnValue
 	CallFunc_LessEqual_FloatFloat_ReturnValue
 	CallFunc_LessEqual_FloatFloat_ReturnValue1
 	CallFunc_MakeVector2D_ReturnValue
-	CallFunc_Map_Find_ReturnValue
-	CallFunc_Map_Find_Value
 	CallFunc_Multiply_FloatFloat_ReturnValue
 	CallFunc_PointerEvent_GetCursorDelta_ReturnValue
 	CallFunc_PointerEvent_GetEffectingButton_ReturnValue
@@ -169,9 +171,9 @@ Name table:
 	CallFunc_PointerEvent_GetWheelDelta_ReturnValue
 	CallFunc_PointerEvent_IsMouseButtonDown_ReturnValue
 	CallFunc_ShowScoreboard_bPassthrough
+	CallFunc_ShowScoreboard_bPassthrough1
 	CallFunc_Subtract_FloatFloat_ReturnValue
 	CallFunc_Subtract_FloatFloat_ReturnValue1
-	CallFunc_ToggleIconVisibility_ReturnValue
 	CallFunc_Unhandled_ReturnValue
 	CenterButtonTextWidget
 	Class
@@ -182,7 +184,6 @@ Name table:
 	CommonActivatablePanel
 	CommonBorder
 	CommonButton
-	CommonButtonClicked__DelegateSignature
 	CommonListView
 	CommonTextBlock
 	CommonVisibilityWidget
@@ -194,9 +195,12 @@ Name table:
 	Content
 	ContentBorder
 	Create
+	CurrentWidget
+	CycleSidebar
 	DataTable
 	DataTableRowHandle
 	Default__ArrayProperty
+	Default__AthenaBroadcasterMapSettings_C
 	Default__AthenaBroadcastMapPanel_C
 	Default__AthenaBroadcastMapPanelBase
 	Default__AthenaGamePhaseWidget_C
@@ -205,7 +209,6 @@ Name table:
 	Default__AthenaSpectatorMapPlayerList_C
 	Default__AthenaSpectatorMapPlayerListRow_C
 	Default__BlueprintContextLibrary
-	Default__BlueprintMapLibrary
 	Default__BoolProperty
 	Default__Border
 	Default__Border_Navy_VGrad_C
@@ -213,7 +216,6 @@ Name table:
 	Default__BottomBarWidget_C
 	Default__ButtonStyle-Outline-MediumBlue_C
 	Default__ButtonStyle-TransparentWithCues-XS-B-White_C
-	Default__ButtonStyle-TransparentWithCues-XS-B_OverlayColor_C
 	Default__ByteProperty
 	Default__ClassProperty
 	Default__CommonActionWidget
@@ -232,7 +234,6 @@ Name table:
 	Default__HorizontalBox
 	Default__HorizontalBoxSlot
 	Default__IconTextButton_C
-	Default__IconTextButtonReplay_C
 	Default__Image
 	Default__InputReflector_C
 	Default__IntProperty
@@ -311,6 +312,7 @@ Name table:
 	ExecuteUbergraph_AthenaBroadcastMapPanel
 	FloatProperty
 	FocusListView
+	FocusOnSettings
 	FollowHoveredPlayer
 	Font
 	FontObject
@@ -319,7 +321,6 @@ Name table:
 	FortKismetLibrary
 	FortLiveBroadcastController
 	FortPlayerControllerSpectating
-	FortReplayContext
 	FortSpectateClickableMapIcon
 	FullScreenMapCursorMoved
 	FullScreenMapCursorStartDrag
@@ -329,14 +330,14 @@ Name table:
 	FunctionNameToBind
 	GameplayStatics
 	Geometry
+	GetActiveWidget
 	GetCachedGeometry
 	GetConsoleVariableIntValue
 	GetContext
 	GetDesiredSize
+	GetIsBroadcastClient
 	GetLocalSize
 	GetNextSortMethod
-	GetObjectClass
-	GetOwner
 	GetOwningLocalPlayer
 	GetOwningPlayer
 	GetPlayerController
@@ -350,7 +351,6 @@ Name table:
 	Handled
 	HeightOverride
 	HideScoreboard
-	HideScoreboardInput
 	HollowCircularProgressBar
 	HorizontalAlignment
 	HorizontalBox
@@ -358,7 +358,6 @@ Name table:
 	Icon
 	IconBrush
 	IconTextButton_C
-	IconTextButtonReplay_C
 	Image
 	ImageSize
 	ImageType
@@ -377,7 +376,11 @@ Name table:
 	IsWidgetLocationVisible
 	JumpToHoveredActor
 	Justification
+	K2Node_ComponentBoundEvent_ActiveWidget
+	K2Node_ComponentBoundEvent_ActiveWidgetIndex
 	K2Node_ComponentBoundEvent_Button
+	K2Node_ComponentBoundEvent_Panel
+	K2Node_ComponentBoundEvent_Panel1
 	K2Node_CreateDelegate_OutputDelegate
 	K2Node_CreateDelegate_OutputDelegate1
 	K2Node_CreateDelegate_OutputDelegate2
@@ -385,8 +388,6 @@ Name table:
 	K2Node_CreateDelegate_OutputDelegate4
 	K2Node_CreateDelegate_OutputDelegate5
 	K2Node_CreateDelegate_OutputDelegate6
-	K2Node_CreateDelegate_OutputDelegate7
-	K2Node_CreateDelegate_OutputDelegate8
 	K2Node_DynamicCast_AsFort_Live_Broadcast_Controller
 	K2Node_DynamicCast_AsFort_Player_Controller_Spectating
 	K2Node_DynamicCast_AsFort_Player_Controller_Spectating1
@@ -395,6 +396,7 @@ Name table:
 	K2Node_Event_bUsingGamepad
 	K2Node_Event_MapIconIn
 	K2Node_MakeArray_Array
+	K2Node_MakeStruct_Margin
 	K2Node_Select1_Default
 	K2Node_Select_Default
 	Key
@@ -409,6 +411,7 @@ Name table:
 	LeftSideImage
 	Less_IntInt
 	LessEqual_FloatFloat
+	LHSSwitcher
 	LinearColor
 	ListView
 	Local_NextSortInput
@@ -416,17 +419,15 @@ Name table:
 	M_GamePhase_StormHolding
 	MakeVector2D
 	Map Icon Added
-	Map_Add
-	Map_Find
-	MapHideScoreboard
+	MapCycleSidebar
+	MapCycleSidebarInput
 	MapIconIn
-	MapIconSwitcher
 	MapIconVisibility
 	MapIconVisibility_Value
 	MapLayer
 	MapMouseScrollSpeed
 	MapProperty
-	MapShowScoreboard
+	MapSettings
 	MapToggleOnlyShowMapPlayers
 	Margin
 	Material
@@ -446,10 +447,10 @@ Name table:
 	Object
 	ObjectProperty
 	OnActivated
+	OnActiveWidgetChanged
 	OnButtonClicked
 	OnInputModeChanged
 	OnMapIconAdded
-	OnMapIconClicked
 	OnMouseButtonDown
 	OnMouseButtonUp
 	OnMouseMove
@@ -460,6 +461,8 @@ Name table:
 	OnSortByStateActionExecuted
 	OnSortMethodChanged
 	OnToggleOnlyShowMapPlayersActionExecuted
+	OnWidgetActivated
+	OnWidgetDeactivated
 	OutlineColor
 	OutlineSettings
 	OutlineSize
@@ -468,7 +471,11 @@ Name table:
 	Package
 	Padding
 	PadTop
+	Panel
+	PanelSlot
+	PanelWidget
 	Parent
+	passthrough
 	Percentage
 	PlayerController
 	PlayerList
@@ -489,6 +496,7 @@ Name table:
 	Previous
 	ProgressMaterialBrush
 	ProgressMaterialParam
+	Refresh Options
 	RemoveInputActionHandler
 	RenderTransform
 	ReplayInputActionDataTable
@@ -512,13 +520,10 @@ Name table:
 	ScrollStyle
 	Set Icon
 	SetActionHandlerStateFromHandle
-	SetClassPropertyByName
 	SetInputActionHandler
 	SetLocalPlayer
-	SetRenderOpacity
-	SetScoreboardInputHandlerStates
+	SetPadding
 	SetSortByInputHandlerStates
-	SetStructurePropertyByName
 	SetVisibility
 	ShadowOffset
 	ShowHoveredPlayersConsoleProfile
@@ -556,7 +561,6 @@ Name table:
 	SortByStateDescending
 	SortMethodDelegate__DelegateSignature
 	SpecifiedColor
-	SpectatorMapIndicatorBrush
 	Stretch
 	StructProperty
 	Style
@@ -565,13 +569,9 @@ Name table:
 	T-Icon-Replay-Exclamation-L
 	T-Icon-Replay-Filter-Kill-L
 	Temp_bool_Variable
-	Temp_bool_Variable1
 	Temp_byte_Variable
 	Temp_byte_Variable1
 	Temp_byte_Variable2
-	Temp_byte_Variable3
-	Temp_float_Variable
-	Temp_float_Variable1
 	Temp_int_Array_Index_Variable
 	Temp_int_Loop_Counter_Variable
 	Temp_struct_Variable
@@ -587,8 +587,6 @@ Name table:
 	Tiling
 	TimeText
 	TintColor
-	ToggleIconVisibility
-	ToggleMapIconVisibility
 	ToggleOnlyShowMapPlayersActionRowHandle
 	ToggleScoreboardButton
 	ToggleSpectatorMapIcons
@@ -600,11 +598,13 @@ Name table:
 	UnderlyingType
 	Unhandled
 	Up
+	UpdateFocus
 	UserWidget
 	UVRegion
 	VAlign_Bottom
 	VAlign_Center
 	VAlign_Fill
+	Value
 	Vector2D
 	VerticalAlignment
 	VerticalBox
@@ -620,13 +620,14 @@ Name table:
 	WidgetLocation
 	WidgetNavigation
 	WidgetNavigationData
+	WidgetSwitcher
 	WidgetSwitcherSlot
 	WidgetTransform
 	WidgetTree
 	WidthOverride
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	AthenaBroadcastMapPanel_C (0-0-0-0): size 742 (cls: AthenaBroadcastMapPanel_C>WidgetBlueprintGeneratedClass>/Script/UMG):
+	AthenaBroadcastMapPanel_C (0-0-0-0): size 758 (cls: AthenaBroadcastMapPanel_C>WidgetBlueprintGeneratedClass>/Script/UMG):
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
@@ -645,7 +646,7 @@ Serialized exports:
 			SortByEliminationsActionRowHandle(StructProperty)=System.Byte[] 
 			SortByStateActionRowHandle(StructProperty)=System.Byte[] 
 			ShowScoreboardInput(StructProperty)=System.Byte[] 
-			HideScoreboardInput(StructProperty)=System.Byte[] 
+			MapCycleSidebarInput(StructProperty)=System.Byte[] 
 			ViewProfileInput(StructProperty)=System.Byte[] 
 			ToggleOnlyShowMapPlayersActionRowHandle(StructProperty)=System.Byte[] 
 			ToggleSpectatorMapIconsRowHandle(StructProperty)=System.Byte[] 
@@ -654,7 +655,13 @@ Serialized exports:
 			Visibility(EnumProperty)=ESlateVisibility::Visible 
 	AthenaGamePhaseWidget (0-0-0-0): size 36 (cls: AthenaGamePhaseWidget>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_AthenaBroadcastMapPanel (0-0-0-0): size 484 (cls: ExecuteUbergraph_AthenaBroadcastMapPanel>Function>/Script/CoreUObject)
+	ExecuteUbergraph_AthenaBroadcastMapPanel (0-0-0-0): size 858 (cls: ExecuteUbergraph_AthenaBroadcastMapPanel>Function>/Script/CoreUObject)
+	ActiveWidget (0-0-0-0): size 36 (cls: ActiveWidget>ObjectProperty>/Script/CoreUObject)
+	BndEvt__LHSSwitcher_K2Node_ComponentBoundEvent_3_OnActiveWidgetChanged__DelegateSignature (0-0-0-0): size 82 (cls: BndEvt__LHSSwitcher_K2Node_ComponentBoundEvent_3_OnActiveWidgetChanged__DelegateSignature>Function>/Script/CoreUObject)
+	Panel (0-0-0-0): size 36 (cls: Panel>ObjectProperty>/Script/CoreUObject)
+	BndEvt__PlayerList_K2Node_ComponentBoundEvent_2_OnWidgetActivationChangedDynamic__DelegateSignature (0-0-0-0): size 68 (cls: BndEvt__PlayerList_K2Node_ComponentBoundEvent_2_OnWidgetActivationChangedDynamic__DelegateSignature>Function>/Script/CoreUObject)
+	Panel (0-0-0-0): size 36 (cls: Panel>ObjectProperty>/Script/CoreUObject)
+	BndEvt__PlayerList_K2Node_ComponentBoundEvent_1_OnWidgetActivationChangedDynamic__DelegateSignature (0-0-0-0): size 68 (cls: BndEvt__PlayerList_K2Node_ComponentBoundEvent_1_OnWidgetActivationChangedDynamic__DelegateSignature>Function>/Script/CoreUObject)
 	MapIconIn (0-0-0-0): size 36 (cls: MapIconIn>ObjectProperty>/Script/CoreUObject)
 	OnMapIconAdded (0-0-0-0): size 68 (cls: OnMapIconAdded>Function>/Script/CoreUObject)
 	OnActivated (0-0-0-0): size 54 (cls: OnActivated>Function>/Script/CoreUObject)
@@ -676,18 +683,17 @@ Serialized exports:
 	WidgetLocation (0-0-0-0): size 36 (cls: WidgetLocation>StructProperty>/Script/CoreUObject)
 	IsWidgetLocationVisible (0-0-0-0): size 375 (cls: IsWidgetLocationVisible>Function>/Script/CoreUObject)
 	K2Node_CreateDelegate_OutputDelegate (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate>DelegateProperty>/Script/CoreUObject)
-	InitializeInputHandlers (0-0-0-0): size 646 (cls: InitializeInputHandlers>Function>/Script/CoreUObject)
+	InitializeInputHandlers (0-0-0-0): size 576 (cls: InitializeInputHandlers>Function>/Script/CoreUObject)
 	K2Node_MakeArray_Array (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array>StructProperty>/Script/CoreUObject)
 	K2Node_MakeArray_Array (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array>ArrayProperty>/Script/CoreUObject)
 	SortByActionRowHandles (0-0-0-0): size 36 (cls: SortByActionRowHandles>StructProperty>/Script/CoreUObject)
 	SortByActionRowHandles (0-0-0-0): size 36 (cls: SortByActionRowHandles>ArrayProperty>/Script/CoreUObject)
-	WidgetArchetype (0-0-0-0): size 270 (cls: WidgetArchetype>AthenaBroadcastMapPanel_C):
+	WidgetArchetype (0-0-0-0): size 241 (cls: WidgetArchetype>AthenaBroadcastMapPanel_C):
 		Tag array:
 			AthenaGamePhaseWidget(ObjectProperty)=AthenaGamePhaseWidget=WidgetArchetype 
 			AthenaMapLayer(ObjectProperty)=AthenaMapLayer=WidgetArchetype 
 			AthenaPlayersLeftWidget(ObjectProperty)=AthenaPlayersLeftWidget=WidgetArchetype 
-			ButtonBox(ObjectProperty)=ButtonBox=WidgetArchetype 
-			MapIconSwitcher(ObjectProperty)=MapIconSwitcher=WidgetArchetype 
+			LHSSwitcher(ObjectProperty)=LHSSwitcher=WidgetArchetype 
 			PlayerList(ObjectProperty)=PlayerList=WidgetArchetype 
 			ToggleScoreboardButton(ObjectProperty)=ToggleScoreboardButton=WidgetArchetype 
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
@@ -726,27 +732,36 @@ Serialized exports:
 			ListView(ObjectProperty)=ListView=WidgetArchetype 
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
-			Slot(ObjectProperty)=HorizontalBoxSlot_2=WidgetArchetype 
-	CallFunc_HideScoreboard_bPassthrough (0-0-0-0): size 34 (cls: CallFunc_HideScoreboard_bPassthrough>BoolProperty>/Script/CoreUObject)
-	CallFunc_IsUsingGamepad_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsUsingGamepad_ReturnValue>BoolProperty>/Script/CoreUObject)
-	CallFunc_IsVisible_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsVisible_ReturnValue>BoolProperty>/Script/CoreUObject)
-	CallFunc_IsVisible_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_IsVisible_ReturnValue1>BoolProperty>/Script/CoreUObject)
-	CallFunc_ShowScoreboard_bPassthrough (0-0-0-0): size 34 (cls: CallFunc_ShowScoreboard_bPassthrough>BoolProperty>/Script/CoreUObject)
-	K2Node_Event_bUsingGamepad (0-0-0-0): size 34 (cls: K2Node_Event_bUsingGamepad>BoolProperty>/Script/CoreUObject)
+			Slot(ObjectProperty)=WidgetSwitcherSlot_0=WidgetArchetype 
 	bScoreboardVisible (0-0-0-0): size 34 (cls: bScoreboardVisible>BoolProperty>/Script/CoreUObject)
 	SetSortByInputHandlerStates (0-0-0-0): size 701 (cls: SetSortByInputHandlerStates>Function>/Script/CoreUObject)
-	HideScoreboard (0-0-0-0): size 182 (cls: HideScoreboard>Function>/Script/CoreUObject)
 	bPassthrough (0-0-0-0): size 34 (cls: bPassthrough>BoolProperty>/Script/CoreUObject)
+	HideScoreboard (0-0-0-0): size 145 (cls: HideScoreboard>Function>/Script/CoreUObject)
+	bPassthrough (0-0-0-0): size 34 (cls: bPassthrough>BoolProperty>/Script/CoreUObject)
+	ShowScoreboard (0-0-0-0): size 169 (cls: ShowScoreboard>Function>/Script/CoreUObject)
+	bUsingGamepad (0-0-0-0): size 34 (cls: bUsingGamepad>BoolProperty>/Script/CoreUObject)
+	InputMethodChanged (0-0-0-0): size 259 (cls: InputMethodChanged>Function>/Script/CoreUObject)
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	InSortMethod (0-0-0-0): size 40 (cls: InSortMethod>EnumProperty>/Script/CoreUObject)
+	OnSortMethodChanged (0-0-0-0): size 92 (cls: OnSortMethodChanged>Function>/Script/CoreUObject)
+	bPassthrough (0-0-0-0): size 34 (cls: bPassthrough>BoolProperty>/Script/CoreUObject)
+	ViewProfile (0-0-0-0): size 172 (cls: ViewProfile>Function>/Script/CoreUObject)
+	CycleSidebar (0-0-0-0): size 75 (cls: CycleSidebar>Function>/Script/CoreUObject)
+	passthrough (0-0-0-0): size 34 (cls: passthrough>BoolProperty>/Script/CoreUObject)
+	CallFunc_CycleSidebar_passthrough (0-0-0-0): size 34 (cls: CallFunc_CycleSidebar_passthrough>BoolProperty>/Script/CoreUObject)
+	CallFunc_EqualEqual_ObjectObject_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ObjectObject_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_EqualEqual_ObjectObject_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ObjectObject_ReturnValue1>BoolProperty>/Script/CoreUObject)
+	CallFunc_GetIsBroadcastClient_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_GetIsBroadcastClient_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_HideScoreboard_bPassthrough (0-0-0-0): size 34 (cls: CallFunc_HideScoreboard_bPassthrough>BoolProperty>/Script/CoreUObject)
+	CallFunc_HideScoreboard_bPassthrough1 (0-0-0-0): size 34 (cls: CallFunc_HideScoreboard_bPassthrough1>BoolProperty>/Script/CoreUObject)
+	CallFunc_IsUsingGamepad_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsUsingGamepad_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_ShowScoreboard_bPassthrough (0-0-0-0): size 34 (cls: CallFunc_ShowScoreboard_bPassthrough>BoolProperty>/Script/CoreUObject)
+	CallFunc_ShowScoreboard_bPassthrough1 (0-0-0-0): size 34 (cls: CallFunc_ShowScoreboard_bPassthrough1>BoolProperty>/Script/CoreUObject)
+	K2Node_Event_bUsingGamepad (0-0-0-0): size 34 (cls: K2Node_Event_bUsingGamepad>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsConsolePlatform_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsConsolePlatform_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Greater_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Greater_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsConsolePlatform_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsConsolePlatform_ReturnValue>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
-	bPassthrough (0-0-0-0): size 34 (cls: bPassthrough>BoolProperty>/Script/CoreUObject)
-	ShowScoreboard (0-0-0-0): size 206 (cls: ShowScoreboard>Function>/Script/CoreUObject)
-	bScoreboardVisible (0-0-0-0): size 34 (cls: bScoreboardVisible>BoolProperty>/Script/CoreUObject)
-	SetScoreboardInputHandlerStates (0-0-0-0): size 279 (cls: SetScoreboardInputHandlerStates>Function>/Script/CoreUObject)
-	InputMethodChanged (0-0-0-0): size 235 (cls: InputMethodChanged>Function>/Script/CoreUObject)
-	bUsingGamepad (0-0-0-0): size 34 (cls: bUsingGamepad>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsVisible_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsVisible_ReturnValue>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
 	CallFunc_BooleanAND_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue>BoolProperty>/Script/CoreUObject)
@@ -757,18 +772,6 @@ Serialized exports:
 	CallFunc_LessEqual_FloatFloat_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_LessEqual_FloatFloat_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_LessEqual_FloatFloat_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_LessEqual_FloatFloat_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	Visible (0-0-0-0): size 34 (cls: Visible>BoolProperty>/Script/CoreUObject)
-	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
-	InSortMethod (0-0-0-0): size 40 (cls: InSortMethod>EnumProperty>/Script/CoreUObject)
-	OnSortMethodChanged (0-0-0-0): size 92 (cls: OnSortMethodChanged>Function>/Script/CoreUObject)
-	bPassthrough (0-0-0-0): size 34 (cls: bPassthrough>BoolProperty>/Script/CoreUObject)
-	ViewProfile (0-0-0-0): size 172 (cls: ViewProfile>Function>/Script/CoreUObject)
-	Icon (0-0-0-0): size 36 (cls: Icon>ObjectProperty>/Script/CoreUObject)
-	Map Icon Added (0-0-0-0): size 379 (cls: Map Icon Added>Function>/Script/CoreUObject)
-	ButtonClicked (0-0-0-0): size 36 (cls: ButtonClicked>ObjectProperty>/Script/CoreUObject)
-	OnMapIconClicked (0-0-0-0): size 332 (cls: OnMapIconClicked>Function>/Script/CoreUObject)
-	CallFunc_Map_Find_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Map_Find_ReturnValue>BoolProperty>/Script/CoreUObject)
-	CallFunc_ToggleIconVisibility_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_ToggleIconVisibility_ReturnValue>BoolProperty>/Script/CoreUObject)
-	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
 	CallFunc_EqualEqual_KeyKey_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_KeyKey_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_EqualEqual_KeyKey_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_KeyKey_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_FollowHoveredPlayer_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_FollowHoveredPlayer_ReturnValue>BoolProperty>/Script/CoreUObject)
@@ -784,8 +787,6 @@ Serialized exports:
 	CallFunc_IsHovered_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsHovered_ReturnValue>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsVisible_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsVisible_ReturnValue>BoolProperty>/Script/CoreUObject)
-	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
-	Temp_bool_Variable1 (0-0-0-0): size 34 (cls: Temp_bool_Variable1>BoolProperty>/Script/CoreUObject)
 	CallFunc_BooleanAND_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_BooleanAND_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_EqualEqual_NameName_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_NameName_ReturnValue>BoolProperty>/Script/CoreUObject)
@@ -793,8 +794,10 @@ Serialized exports:
 	CallFunc_Less_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsConsolePlatform_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsConsolePlatform_ReturnValue>BoolProperty>/Script/CoreUObject)
-	ToggleMapIconVisibility (0-0-0-0): size 75 (cls: ToggleMapIconVisibility>Function>/Script/CoreUObject)
-	bPassThrough (0-0-0-0): size 34 (cls: bPassThrough>BoolProperty>/Script/CoreUObject)
+	CurrentWidget (0-0-0-0): size 36 (cls: CurrentWidget>ObjectProperty>/Script/CoreUObject)
+	UpdateFocus (0-0-0-0): size 169 (cls: UpdateFocus>Function>/Script/CoreUObject)
+	CallFunc_EqualEqual_ObjectObject_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ObjectObject_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_EqualEqual_ObjectObject_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ObjectObject_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	BorderShell (0-0-0-0): size 299 (cls: BorderShell>Border>/Script/UMG):
 		Tag array:
@@ -892,15 +895,7 @@ Serialized exports:
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
-	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
-	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
-	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
-	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
-	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
-	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
-	CallFunc_GetObjectClass_ReturnValue (0-0-0-0): size 40 (cls: CallFunc_GetObjectClass_ReturnValue>ClassProperty>/Script/CoreUObject)
 	MapIconVisibility_Value (0-0-0-0): size 40 (cls: MapIconVisibility_Value>ClassProperty>/Script/CoreUObject)
-	CallFunc_Map_Find_Value (0-0-0-0): size 40 (cls: CallFunc_Map_Find_Value>ClassProperty>/Script/CoreUObject)
 	InputActionWidget (0-0-0-0): size 339 (cls: InputActionWidget>CommonActionWidget>/Script/CommonUI):
 		Tag array:
 			ProgressMaterialBrush(StructProperty)=System.Byte[] 
@@ -1010,11 +1005,13 @@ Serialized exports:
 			Padding(StructProperty)=System.Byte[] 
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=VerticalBoxSlot_1=WidgetArchetype 
-	MapIconSwitcher (0-0-0-0): size 86 (cls: MapIconSwitcher>CommonWidgetSwitcher>/Script/CommonUI):
+	LHSSwitcher (0-0-0-0): size 138 (cls: LHSSwitcher>CommonWidgetSwitcher>/Script/CommonUI):
 		Tag array:
+			bWidgetActivationEnabled(BoolProperty)=False 
+			bOutroPanelBelow(BoolProperty)=False 
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-			Slot(ObjectProperty)=OverlaySlot_2=WidgetArchetype 
-	ComponentDelegateBinding_0 (0-0-0-0): size 205 (cls: ComponentDelegateBinding_0>ComponentDelegateBinding>/Script/Engine):
+			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
+	ComponentDelegateBinding_0 (0-0-0-0): size 526 (cls: ComponentDelegateBinding_0>ComponentDelegateBinding>/Script/Engine):
 		Tag array:
 			ComponentDelegateBindings(ArrayProperty)=[object] (inner: StructProperty)
 	K2Node_CreateDelegate_OutputDelegate (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate>DelegateProperty>/Script/CoreUObject)
@@ -1024,19 +1021,10 @@ Serialized exports:
 	K2Node_CreateDelegate_OutputDelegate4 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate4>DelegateProperty>/Script/CoreUObject)
 	K2Node_CreateDelegate_OutputDelegate5 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate5>DelegateProperty>/Script/CoreUObject)
 	K2Node_CreateDelegate_OutputDelegate6 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate6>DelegateProperty>/Script/CoreUObject)
-	K2Node_CreateDelegate_OutputDelegate7 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate7>DelegateProperty>/Script/CoreUObject)
-	K2Node_CreateDelegate_OutputDelegate8 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate8>DelegateProperty>/Script/CoreUObject)
-	K2Node_CreateDelegate_OutputDelegate (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate>DelegateProperty>/Script/CoreUObject)
 	K2Node_CreateDelegate_OutputDelegate (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate>DelegateProperty>/Script/CoreUObject)
 	K2Node_Select_Default (0-0-0-0): size 40 (cls: K2Node_Select_Default>EnumProperty>/Script/CoreUObject)
 	Temp_byte_Variable (0-0-0-0): size 40 (cls: Temp_byte_Variable>EnumProperty>/Script/CoreUObject)
 	Temp_byte_Variable1 (0-0-0-0): size 40 (cls: Temp_byte_Variable1>EnumProperty>/Script/CoreUObject)
-	K2Node_Select1_Default (0-0-0-0): size 40 (cls: K2Node_Select1_Default>EnumProperty>/Script/CoreUObject)
-	K2Node_Select_Default (0-0-0-0): size 40 (cls: K2Node_Select_Default>EnumProperty>/Script/CoreUObject)
-	Temp_byte_Variable (0-0-0-0): size 40 (cls: Temp_byte_Variable>EnumProperty>/Script/CoreUObject)
-	Temp_byte_Variable1 (0-0-0-0): size 40 (cls: Temp_byte_Variable1>EnumProperty>/Script/CoreUObject)
-	Temp_byte_Variable2 (0-0-0-0): size 40 (cls: Temp_byte_Variable2>EnumProperty>/Script/CoreUObject)
-	Temp_byte_Variable3 (0-0-0-0): size 40 (cls: Temp_byte_Variable3>EnumProperty>/Script/CoreUObject)
 	CallFunc_GetNextSortMethod_ReturnValue (0-0-0-0): size 40 (cls: CallFunc_GetNextSortMethod_ReturnValue>EnumProperty>/Script/CoreUObject)
 	K2Node_Select1_Default (0-0-0-0): size 40 (cls: K2Node_Select1_Default>EnumProperty>/Script/CoreUObject)
 	Temp_byte_Variable (0-0-0-0): size 40 (cls: Temp_byte_Variable>EnumProperty>/Script/CoreUObject)
@@ -1055,9 +1043,6 @@ Serialized exports:
 	CallFunc_BreakVector2D_X1 (0-0-0-0): size 32 (cls: CallFunc_BreakVector2D_X1>FloatProperty>/Script/CoreUObject)
 	CallFunc_BreakVector2D_Y (0-0-0-0): size 32 (cls: CallFunc_BreakVector2D_Y>FloatProperty>/Script/CoreUObject)
 	CallFunc_BreakVector2D_Y1 (0-0-0-0): size 32 (cls: CallFunc_BreakVector2D_Y1>FloatProperty>/Script/CoreUObject)
-	K2Node_Select_Default (0-0-0-0): size 32 (cls: K2Node_Select_Default>FloatProperty>/Script/CoreUObject)
-	Temp_float_Variable (0-0-0-0): size 32 (cls: Temp_float_Variable>FloatProperty>/Script/CoreUObject)
-	Temp_float_Variable1 (0-0-0-0): size 32 (cls: Temp_float_Variable1>FloatProperty>/Script/CoreUObject)
 	CallFunc_Multiply_FloatFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Multiply_FloatFloat_ReturnValue>FloatProperty>/Script/CoreUObject)
 	CallFunc_PointerEvent_GetWheelDelta_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_PointerEvent_GetWheelDelta_ReturnValue>FloatProperty>/Script/CoreUObject)
 	MapMouseScrollSpeed (0-0-0-0): size 32 (cls: MapMouseScrollSpeed>FloatProperty>/Script/CoreUObject)
@@ -1070,10 +1055,6 @@ Serialized exports:
 	ButtonBox (0-0-0-0): size 67 (cls: ButtonBox>HorizontalBox>/Script/UMG):
 		Tag array:
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
-			bIsVariable(BoolProperty)=True 
-	ButtonBox (0-0-0-0): size 67 (cls: ButtonBox>HorizontalBox>/Script/UMG):
-		Tag array:
-			Slot(ObjectProperty)=WidgetSwitcherSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
 	HorizontalBox_0 (0-0-0-0): size 90 (cls: HorizontalBox_0>HorizontalBox>/Script/UMG):
 		Tag array:
@@ -1151,10 +1132,11 @@ Serialized exports:
 			Size(StructProperty)=System.Byte[] 
 			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
 			Content(ObjectProperty)=ScaleBox_0=WidgetArchetype 
-	HorizontalBoxSlot_2 (0-0-0-0): size 70 (cls: HorizontalBoxSlot_2>HorizontalBoxSlot>/Script/UMG):
+	HorizontalBoxSlot_1 (0-0-0-0): size 156 (cls: HorizontalBoxSlot_1>HorizontalBoxSlot>/Script/UMG):
 		Tag array:
+			Size(StructProperty)=System.Byte[] 
 			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
-			Content(ObjectProperty)=PlayerList=WidgetArchetype 
+			Content(ObjectProperty)=LHSSwitcher=WidgetArchetype 
 	HorizontalBoxSlot_4 (0-0-0-0): size 70 (cls: HorizontalBoxSlot_4>HorizontalBoxSlot>/Script/UMG):
 		Tag array:
 			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
@@ -1524,6 +1506,8 @@ Serialized exports:
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=SafeZoneSlot_1=WidgetArchetype 
 			bIsVariable(BoolProperty)=False 
+	ActiveWidgetIndex (0-0-0-0): size 32 (cls: ActiveWidgetIndex>IntProperty>/Script/CoreUObject)
+	K2Node_ComponentBoundEvent_ActiveWidgetIndex (0-0-0-0): size 32 (cls: K2Node_ComponentBoundEvent_ActiveWidgetIndex>IntProperty>/Script/CoreUObject)
 	CallFunc_GetConsoleVariableIntValue_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetConsoleVariableIntValue_ReturnValue>IntProperty>/Script/CoreUObject)
 	CallFunc_Add_IntInt_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue>IntProperty>/Script/CoreUObject)
 	CallFunc_Array_Length_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Array_Length_ReturnValue>IntProperty>/Script/CoreUObject)
@@ -1548,19 +1532,21 @@ Serialized exports:
 			Slot(ObjectProperty)=HorizontalBoxSlot_3=WidgetArchetype 
 	AthenaMapLayer (0-0-0-0): size 36 (cls: AthenaMapLayer>ObjectProperty>/Script/CoreUObject)
 	AthenaPlayersLeftWidget (0-0-0-0): size 36 (cls: AthenaPlayersLeftWidget>ObjectProperty>/Script/CoreUObject)
-	ButtonBox (0-0-0-0): size 36 (cls: ButtonBox>ObjectProperty>/Script/CoreUObject)
+	CallFunc_AddChild_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_AddChild_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_Create_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_Create_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetOwningLocalPlayer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetOwningLocalPlayer_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetOwningPlayer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetOwningPlayer_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	K2Node_ComponentBoundEvent_ActiveWidget (0-0-0-0): size 36 (cls: K2Node_ComponentBoundEvent_ActiveWidget>ObjectProperty>/Script/CoreUObject)
 	K2Node_ComponentBoundEvent_Button (0-0-0-0): size 36 (cls: K2Node_ComponentBoundEvent_Button>ObjectProperty>/Script/CoreUObject)
+	K2Node_ComponentBoundEvent_Panel (0-0-0-0): size 36 (cls: K2Node_ComponentBoundEvent_Panel>ObjectProperty>/Script/CoreUObject)
+	K2Node_ComponentBoundEvent_Panel1 (0-0-0-0): size 36 (cls: K2Node_ComponentBoundEvent_Panel1>ObjectProperty>/Script/CoreUObject)
 	K2Node_Event_MapIconIn (0-0-0-0): size 36 (cls: K2Node_Event_MapIconIn>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetOwningPlayer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetOwningPlayer_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Live_Broadcast_Controller (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Live_Broadcast_Controller>ObjectProperty>/Script/CoreUObject)
-	CallFunc_AddChildToHorizontalBox_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_AddChildToHorizontalBox_ReturnValue>ObjectProperty>/Script/CoreUObject)
-	CallFunc_Create_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_Create_ReturnValue>ObjectProperty>/Script/CoreUObject)
-	CallFunc_GetOwner_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetOwner_ReturnValue>ObjectProperty>/Script/CoreUObject)
-	CallFunc_GetOwningPlayer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetOwningPlayer_ReturnValue>ObjectProperty>/Script/CoreUObject)
-	MapIconSwitcher (0-0-0-0): size 36 (cls: MapIconSwitcher>ObjectProperty>/Script/CoreUObject)
-	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetActiveWidget_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetActiveWidget_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	LHSSwitcher (0-0-0-0): size 36 (cls: LHSSwitcher>ObjectProperty>/Script/CoreUObject)
+	MapSettings (0-0-0-0): size 36 (cls: MapSettings>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetPlayerController_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetPlayerController_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Player_Controller_Spectating (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Player_Controller_Spectating>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetPlayerController_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetPlayerController_ReturnValue>ObjectProperty>/Script/CoreUObject)
@@ -1575,7 +1561,7 @@ Serialized exports:
 	ToggleScoreboardButton (0-0-0-0): size 36 (cls: ToggleScoreboardButton>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetPlayerController_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetPlayerController_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Player_Controller_Spectating (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Player_Controller_Spectating>ObjectProperty>/Script/CoreUObject)
-	Overlay_1 (0-0-0-0): size 90 (cls: Overlay_1>Overlay>/Script/UMG):
+	Overlay_1 (0-0-0-0): size 86 (cls: Overlay_1>Overlay>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=BorderSlot_0=WidgetArchetype 
@@ -1607,12 +1593,6 @@ Serialized exports:
 			HorizontalAlignment(ByteProperty)=HAlign_Right 
 			Parent(ObjectProperty)=Overlay_1=WidgetArchetype 
 			Content(ObjectProperty)=HorizontalBox_1=WidgetArchetype 
-	OverlaySlot_2 (0-0-0-0): size 152 (cls: OverlaySlot_2>OverlaySlot>/Script/UMG):
-		Tag array:
-			HorizontalAlignment(ByteProperty)=HAlign_Right 
-			VerticalAlignment(ByteProperty)=VAlign_Bottom 
-			Parent(ObjectProperty)=Overlay_1=WidgetArchetype 
-			Content(ObjectProperty)=MapIconSwitcher=WidgetArchetype 
 	OverlaySlot_0 (0-0-0-0): size 152 (cls: OverlaySlot_0>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Fill 
@@ -1682,9 +1662,9 @@ Serialized exports:
 			Stretch(ByteProperty)=EStretch::ScaleToFitY 
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
-	ScaleBox_1 (0-0-0-0): size 41 (cls: ScaleBox_1>ScaleBox>/Script/UMG):
+	ScaleBox_12 (0-0-0-0): size 41 (cls: ScaleBox_12>ScaleBox>/Script/UMG):
 		Tag array:
-			Slot(ObjectProperty)=WidgetSwitcherSlot_1=WidgetArchetype 
+			Slot(ObjectProperty)=WidgetSwitcherSlot_2=WidgetArchetype 
 	ScaleBoxSlot_1 (0-0-0-0): size 152 (cls: ScaleBoxSlot_1>ScaleBoxSlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Fill 
@@ -1755,16 +1735,17 @@ Serialized exports:
 		Tag array:
 			Parent(ObjectProperty)=SizeBox_2=WidgetArchetype 
 			Content(ObjectProperty)=ToggleScoreboardButton=WidgetArchetype 
+	K2Node_MakeStruct_Margin (0-0-0-0): size 36 (cls: K2Node_MakeStruct_Margin>StructProperty>/Script/CoreUObject)
 	CallFunc_AbsoluteToLocal_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_AbsoluteToLocal_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_GetCachedGeometry_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetCachedGeometry_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_GetDesiredSize_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetDesiredSize_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_GetLocalSize_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetLocalSize_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_MakeVector2D_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_MakeVector2D_ReturnValue>StructProperty>/Script/CoreUObject)
 	WidgetLocation (0-0-0-0): size 36 (cls: WidgetLocation>StructProperty>/Script/CoreUObject)
-	HideScoreboardInput (0-0-0-0): size 36 (cls: HideScoreboardInput>StructProperty>/Script/CoreUObject)
 	CallFunc_GetCachedGeometry_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetCachedGeometry_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_GetLocalSize_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetLocalSize_ReturnValue>StructProperty>/Script/CoreUObject)
 	LeftArrowBrush (0-0-0-0): size 36 (cls: LeftArrowBrush>StructProperty>/Script/CoreUObject)
+	MapCycleSidebarInput (0-0-0-0): size 36 (cls: MapCycleSidebarInput>StructProperty>/Script/CoreUObject)
 	CallFunc_Handled_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_Handled_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_PointerEvent_GetEffectingButton_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PointerEvent_GetEffectingButton_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_Unhandled_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_Unhandled_ReturnValue>StructProperty>/Script/CoreUObject)
@@ -1787,7 +1768,6 @@ Serialized exports:
 	MouseEvent (0-0-0-0): size 36 (cls: MouseEvent>StructProperty>/Script/CoreUObject)
 	ReturnValue (0-0-0-0): size 36 (cls: ReturnValue>StructProperty>/Script/CoreUObject)
 	RightArrowBrush (0-0-0-0): size 36 (cls: RightArrowBrush>StructProperty>/Script/CoreUObject)
-	Local_NextSortInput (0-0-0-0): size 36 (cls: Local_NextSortInput>StructProperty>/Script/CoreUObject)
 	CallFunc_Array_Get_Item (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item>StructProperty>/Script/CoreUObject)
 	K2Node_Select_Default (0-0-0-0): size 36 (cls: K2Node_Select_Default>StructProperty>/Script/CoreUObject)
 	Local_NextSortInput (0-0-0-0): size 36 (cls: Local_NextSortInput>StructProperty>/Script/CoreUObject)
@@ -1917,12 +1897,12 @@ Serialized exports:
 			Previous(StructProperty)=System.Byte[] 
 	WidgetSwitcherSlot_0 (0-0-0-0): size 70 (cls: WidgetSwitcherSlot_0>WidgetSwitcherSlot>/Script/UMG):
 		Tag array:
-			Parent(ObjectProperty)=MapIconSwitcher=WidgetArchetype 
-			Content(ObjectProperty)=ButtonBox=WidgetArchetype 
-	WidgetSwitcherSlot_1 (0-0-0-0): size 70 (cls: WidgetSwitcherSlot_1>WidgetSwitcherSlot>/Script/UMG):
+			Parent(ObjectProperty)=LHSSwitcher=WidgetArchetype 
+			Content(ObjectProperty)=PlayerList=WidgetArchetype 
+	WidgetSwitcherSlot_2 (0-0-0-0): size 70 (cls: WidgetSwitcherSlot_2>WidgetSwitcherSlot>/Script/UMG):
 		Tag array:
-			Parent(ObjectProperty)=MapIconSwitcher=WidgetArchetype 
-			Content(ObjectProperty)=ScaleBox_1=WidgetArchetype 
+			Parent(ObjectProperty)=LHSSwitcher=WidgetArchetype 
+			Content(ObjectProperty)=ScaleBox_12=WidgetArchetype 
 	WidgetTree_0 (0-0-0-0): size 41 (cls: WidgetTree_0>WidgetTree>/Script/UMG):
 		Tag array:
 			RootWidget(ObjectProperty)=VerticalBox_0=WidgetArchetype 

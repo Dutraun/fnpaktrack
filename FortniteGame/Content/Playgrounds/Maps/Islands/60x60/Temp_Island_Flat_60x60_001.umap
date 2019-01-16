@@ -1,15 +1,16 @@
 Name table:
-	/Game/Athena/Prototype/Blueprints/Slab/BP_BlockSign
 	/Game/Building/ActorBlueprints/ObstacleCourse/Floors/Obstacle_Course_Floor_01
 	/Game/Building/ActorBlueprints/ObstacleCourse/Walls/Obstacle_Course_RailingLong
 	/Game/Building/ActorBlueprints/ObstacleCourse/Walls/Obstacle_Course_RailingShort
 	/Game/Environments/Props/DriveIn/Meshes/S_ConcreteSlab
+	/Game/Environments/Props/DriveIn/Meshes/S_ConcreteSlab_Sign
 	/Game/Environments/Sets/OC/Data_Assets/OC_MatFloor_Black
 	/Game/Environments/Sets/OC/Textures/OC_Trim
 	/Game/Environments/World/Utility/MI_Concrete_PG_BlueGrid
 	/Game/Packages/DS_Fortnight/SM/Mesh/S_Asphalt_1x1
 	/Game/Playgrounds/Items/BGA_IslandPortal
 	/Game/Playgrounds/Maps/Islands/60x60/Temp_Island_Flat_60x60_001
+	/Game/Sounds/Fort_Ambient_Looping/Tile_Mixes/Temperate_Creative_TheBlock_AMB_Cue
 	/Script/CoreUObject
 	/Script/Engine
 	/Script/FortniteGame
@@ -18,19 +19,21 @@ Name table:
 	/Script/Landscape
 	/Script/NavigationSystem
 	/Script/UMG
+	AmbientSound
 	AreaClass
 	ArrayProperty
 	AttachParent
 	Audio_Looping
 	Audio_Looping_GEN_VARIABLE
 	AudioComponent
+	AudioComponent0
 	BadSprite
 	bAllowCullDistanceVolume
 	bAllowInteract
+	bAllowSpatialization
 	BaseMaterial
 	bAutoSpawnMissingNavData
 	bAutoWeld
-	bCanBeDamaged
 	bCanEverAffectNavigation
 	BGA_IslandPortal
 	BGA_IslandPortal_C
@@ -48,7 +51,6 @@ Name table:
 	BoxComponent
 	BoxComponent0
 	BP_BlockSign5
-	BP_BlockSign_C
 	BP_SlabMesh
 	bReturnToCreativeHub
 	BuilderGridPlane1
@@ -69,9 +71,9 @@ Name table:
 	CurveFloat
 	CurveFloat_1
 	DataVersion
+	Default__AmbientSound
 	Default__BGA_IslandPortal_C
 	Default__BlueprintGeneratedClass
-	Default__BP_BlockSign_C
 	Default__FortLevelScriptActor
 	Default__FortPlayerStartCreative
 	Default__FortStaticMeshActor
@@ -88,7 +90,6 @@ Name table:
 	Default__TimelineComponent
 	Default__World
 	DefaultPhysicsVolume
-	DefaultSceneRoot_GEN_VARIABLE
 	DelegateProperty
 	DirectionPropertyName
 	EComponentCreationMethod
@@ -201,12 +202,15 @@ Name table:
 	Rotator
 	S_Asphalt_1x1
 	S_ConcreteSlab
+	S_ConcreteSlab_Sign
 	SceneComponent
 	ScriptStruct
 	SimpleMemberReference
 	SM_Rift
 	SM_Rift_GEN_VARIABLE
 	SoftClassPath
+	Sound
+	SoundCue
 	SpawnCollisionHandlingMethod
 	SphereComponent
 	StaticMesh
@@ -215,11 +219,15 @@ Name table:
 	StructProperty
 	Temp_Island_Flat_60x60_001
 	Temp_Island_Flat_60x60_001_C
+	Temperate_Creative_TheBlock_AMB_Cue
+	Temperate_TheBlock_AMB_Cue
 	TextRender
 	TextRender_GEN_VARIABLE
 	TextRenderComponent
 	TextureData
 	TheTimeline
+	ThumbnailPlane
+	ThumbnailPlane_GEN_VARIABLE
 	Timeline
 	Timeline_0__Direction_D988993744202060C85FC18A08065960
 	Timeline_0__FinishedFunc
@@ -248,13 +256,22 @@ Name table:
 Serialized exports:
 	Temp_Island_Flat_60x60_001_C (0-0-0-0): size 76 (cls: Temp_Island_Flat_60x60_001_C>BlueprintGeneratedClass>/Script/Engine)
 	Default__Temp_Island_Flat_60x60_001_C (0-0-0-0): size 8 (cls: Default__Temp_Island_Flat_60x60_001_C>Temp_Island_Flat_60x60_001_C)
+	Temperate_TheBlock_AMB_Cue_3 (0-0-0-0): size 70 (cls: Temperate_TheBlock_AMB_Cue_3>AmbientSound>/Script/Engine):
+		Tag array:
+			AudioComponent(ObjectProperty)=AudioComponent0=Temp_Island_Flat_60x60_001 
+			RootComponent(ObjectProperty)=AudioComponent0=Temp_Island_Flat_60x60_001 
 	Audio_Looping (0-0-0-0): size 108 (cls: Audio_Looping>AudioComponent>/Script/Engine):
 		Tag array:
 			AttachParent(ObjectProperty)=Capsule=Temp_Island_Flat_60x60_001 
 			bNetAddressable(BoolProperty)=True 
 			CreationMethod(EnumProperty)=EComponentCreationMethod::SimpleConstructionScript 
-	BGA_IslandPortal_5 (0-0-0-0): size 617 (cls: BGA_IslandPortal_5>BGA_IslandPortal_C>/Game/Playgrounds/Items/BGA_IslandPortal):
+	AudioComponent0 (0-0-0-0): size 67 (cls: AudioComponent0>AudioComponent>/Script/Engine):
 		Tag array:
+			Sound(ObjectProperty)=Temperate_Creative_TheBlock_AMB_Cue=/Game/Sounds/Fort_Ambient_Looping/Tile_Mixes/Temperate_Creative_TheBlock_AMB_Cue 
+			bAllowSpatialization(BoolProperty)=False 
+	BGA_IslandPortal_5 (0-0-0-0): size 650 (cls: BGA_IslandPortal_5>BGA_IslandPortal_C>/Game/Playgrounds/Items/BGA_IslandPortal):
+		Tag array:
+			ThumbnailPlane(ObjectProperty)=ThumbnailPlane=Temp_Island_Flat_60x60_001 
 			TextRender(ObjectProperty)=TextRender=Temp_Island_Flat_60x60_001 
 			UI_PortalInfoPlate(ObjectProperty)=UI_PortalInfoPlate=Temp_Island_Flat_60x60_001 
 			P_Rift_Idle_Loop_Gold(ObjectProperty)=P_Rift_Idle_Loop_Gold=Temp_Island_Flat_60x60_001 
@@ -271,23 +288,18 @@ Serialized exports:
 			bReturnToCreativeHub(BoolProperty)=True 
 			bAllowInteract(BoolProperty)=False 
 			DataVersion(IntProperty)=1 
-			CullDistance(FloatProperty)=6089.829 
+			CullDistance(FloatProperty)=14666.03 
 			RootComponent(ObjectProperty)=Capsule=Temp_Island_Flat_60x60_001 
 			BlueprintCreatedComponents(ArrayProperty)=[object] (inner: ObjectProperty)
 	BoxComponent0 (0-0-0-0): size 275 (cls: BoxComponent0>BoxComponent>/Script/Engine):
 		Tag array:
 			AreaClass(ObjectProperty)=FortMetaNavArea_Obstacles=/Script/FortniteGame 
 			BodyInstance(StructProperty)=System.Byte[] 
-			RelativeLocation(StructProperty)=Vector(0.002929688,-1024.004,13448) 
-			RelativeScale3D(StructProperty)=Vector(33280.24,33280.24,29840) 
-	BP_BlockSign5 (0-0-0-0): size 96 (cls: BP_BlockSign5>BP_BlockSign_C>/Game/Athena/Prototype/Blueprints/Slab/BP_BlockSign):
-		Tag array:
-			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Temp_Island_Flat_60x60_001 
-			bCanBeDamaged(BoolProperty)=True 
-			RootComponent(ObjectProperty)=StaticMeshComponent0=Temp_Island_Flat_60x60_001 
+			RelativeLocation(StructProperty)=Vector(0.002929688,-0.002929688,13448) 
+			RelativeScale3D(StructProperty)=Vector(35328.26,35328.26,29840) 
 	Capsule (0-0-0-0): size 668 (cls: Capsule>CapsuleComponent>/Script/Engine):
 		Tag array:
-			CachedMaxDrawDistance(FloatProperty)=6089.829 
+			CachedMaxDrawDistance(FloatProperty)=14666.03 
 			OnComponentBeginOverlap(MulticastDelegateProperty)=[object] 
 			OnComponentEndOverlap(MulticastDelegateProperty)=[object] 
 			RelativeLocation(StructProperty)=Vector(-6.584473,-14357.24,6536.668) 
@@ -297,7 +309,7 @@ Serialized exports:
 			UCSModifiedProperties(ArrayProperty)=[object] (inner: StructProperty)
 	OverlapCapsule (0-0-0-0): size 485 (cls: OverlapCapsule>CapsuleComponent>/Script/Engine):
 		Tag array:
-			CachedMaxDrawDistance(FloatProperty)=6089.829 
+			CachedMaxDrawDistance(FloatProperty)=14666.03 
 			BodyInstance(StructProperty)=System.Byte[] 
 			OnComponentBeginOverlap(MulticastDelegateProperty)=[object] 
 			AttachParent(ObjectProperty)=Capsule=Temp_Island_Flat_60x60_001 
@@ -524,6 +536,10 @@ Serialized exports:
 			BadSprite(ObjectProperty)=[object] 
 			SpawnCollisionHandlingMethod(EnumProperty)=ESpawnActorCollisionHandlingMethod::AlwaysSpawn 
 			RootComponent(ObjectProperty)=CollisionCapsule=Temp_Island_Flat_60x60_001 
+	BP_BlockSign5 (0-0-0-0): size 70 (cls: BP_BlockSign5>FortStaticMeshActor>/Script/FortniteGame):
+		Tag array:
+			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Temp_Island_Flat_60x60_001 
+			RootComponent(ObjectProperty)=StaticMeshComponent0=Temp_Island_Flat_60x60_001 
 	BP_SlabMesh_2 (0-0-0-0): size 70 (cls: BP_SlabMesh_2>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Temp_Island_Flat_60x60_001 
@@ -544,10 +560,10 @@ Serialized exports:
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Temp_Island_Flat_60x60_001 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Temp_Island_Flat_60x60_001 
-	FortWorldSettings (0-0-0-0): size 57940 (cls: FortWorldSettings>FortWorldSettings>/Script/FortniteGame):
+	FortWorldSettings (0-0-0-0): size 66516 (cls: FortWorldSettings>FortWorldSettings>/Script/FortniteGame):
 		Tag array:
 			WorldCells(ArrayProperty)=[object] (inner: IntProperty)
-			WorldCellsOrigin(StructProperty)=Vector(-16384,-17408,-1536) 
+			WorldCellsOrigin(StructProperty)=Vector(-17408,-17408,-1536) 
 			MinCullObjectSize(FloatProperty)=64 
 			MinCullDistance(FloatProperty)=2800 
 			MaxCullObjectSize(FloatProperty)=1000 
@@ -557,10 +573,10 @@ Serialized exports:
 	LandscapeGizmoActiveActor2 (0-0-0-0): size 41 (cls: LandscapeGizmoActiveActor2>LandscapeGizmoActiveActor>/Script/Landscape):
 		Tag array:
 			RootComponent(ObjectProperty)=[object] 
-	PersistentLevel (0-0-0-0): size 448 (cls: PersistentLevel>Level>/Script/Engine):
+	PersistentLevel (0-0-0-0): size 452 (cls: PersistentLevel>Level>/Script/Engine):
 		Tag array:
 			Model(ObjectProperty)=Model_0=Temp_Island_Flat_60x60_001 
-			LevelScriptActor(ObjectProperty)=Temp_Island_Flat_60x60_001_C_2=Temp_Island_Flat_60x60_001 
+			LevelScriptActor(ObjectProperty)=Temp_Island_Flat_60x60_001_C_1=Temp_Island_Flat_60x60_001 
 			LevelBuildDataId(StructProperty)=Guid: 3098292485-1316719968-3078773408-276888764 
 			WorldSettings(ObjectProperty)=FortWorldSettings=Temp_Island_Flat_60x60_001 
 	LevelBounds2 (0-0-0-0): size 41 (cls: LevelBounds2>LevelBounds>/Script/Engine):
@@ -605,20 +621,20 @@ Serialized exports:
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Temp_Island_Flat_60x60_001 
 	P_Rift_Idle_Loop (0-0-0-0): size 137 (cls: P_Rift_Idle_Loop>ParticleSystemComponent>/Script/Engine):
 		Tag array:
-			CachedMaxDrawDistance(FloatProperty)=6089.829 
+			CachedMaxDrawDistance(FloatProperty)=14666.03 
 			AttachParent(ObjectProperty)=SM_Rift=Temp_Island_Flat_60x60_001 
 			bNetAddressable(BoolProperty)=True 
 			CreationMethod(EnumProperty)=EComponentCreationMethod::SimpleConstructionScript 
 	P_Rift_Idle_Loop_Gold (0-0-0-0): size 137 (cls: P_Rift_Idle_Loop_Gold>ParticleSystemComponent>/Script/Engine):
 		Tag array:
-			CachedMaxDrawDistance(FloatProperty)=6089.829 
+			CachedMaxDrawDistance(FloatProperty)=14666.03 
 			AttachParent(ObjectProperty)=SM_Rift=Temp_Island_Flat_60x60_001 
 			bNetAddressable(BoolProperty)=True 
 			CreationMethod(EnumProperty)=EComponentCreationMethod::SimpleConstructionScript 
 	P_RiftClosingUp (0-0-0-0): size 166 (cls: P_RiftClosingUp>ParticleSystemComponent>/Script/Engine):
 		Tag array:
 			LDMaxDrawDistance(FloatProperty)=0 
-			CachedMaxDrawDistance(FloatProperty)=6089.829 
+			CachedMaxDrawDistance(FloatProperty)=14666.03 
 			AttachParent(ObjectProperty)=SM_Rift=Temp_Island_Flat_60x60_001 
 			bNetAddressable(BoolProperty)=True 
 			CreationMethod(EnumProperty)=EComponentCreationMethod::SimpleConstructionScript 
@@ -629,7 +645,7 @@ Serialized exports:
 			CreationMethod(EnumProperty)=EComponentCreationMethod::SimpleConstructionScript 
 	PostProcessRadius (0-0-0-0): size 137 (cls: PostProcessRadius>SphereComponent>/Script/Engine):
 		Tag array:
-			CachedMaxDrawDistance(FloatProperty)=6089.829 
+			CachedMaxDrawDistance(FloatProperty)=14666.03 
 			AttachParent(ObjectProperty)=Capsule=Temp_Island_Flat_60x60_001 
 			bNetAddressable(BoolProperty)=True 
 			CreationMethod(EnumProperty)=EComponentCreationMethod::SimpleConstructionScript 
@@ -639,10 +655,20 @@ Serialized exports:
 			AttachParent(ObjectProperty)=Capsule=Temp_Island_Flat_60x60_001 
 			bNetAddressable(BoolProperty)=True 
 			CreationMethod(EnumProperty)=EComponentCreationMethod::SimpleConstructionScript 
-	StaticMeshComponent0 (0-0-0-0): size 225 (cls: StaticMeshComponent0>StaticMeshComponent>/Script/Engine):
+	ThumbnailPlane (0-0-0-0): size 448 (cls: ThumbnailPlane>StaticMeshComponent>/Script/Engine):
 		Tag array:
+			CachedMaxDrawDistance(FloatProperty)=14666.03 
+			BodyInstance(StructProperty)=System.Byte[] 
+			AttachParent(ObjectProperty)=Capsule=Temp_Island_Flat_60x60_001 
+			bNetAddressable(BoolProperty)=True 
+			CreationMethod(EnumProperty)=EComponentCreationMethod::SimpleConstructionScript 
+			UCSModifiedProperties(ArrayProperty)=[object] (inner: StructProperty)
+	StaticMeshComponent0 (0-0-0-0): size 283 (cls: StaticMeshComponent0>StaticMeshComponent>/Script/Engine):
+		Tag array:
+			StaticMesh(ObjectProperty)=S_ConcreteSlab_Sign=/Game/Environments/Props/DriveIn/Meshes/S_ConcreteSlab_Sign 
+			CachedMaxDrawDistance(FloatProperty)=40000 
 			RelativeLocation(StructProperty)=Vector(0,-9856,6528) 
-			RelativeRotation(StructProperty)=Rotator(1.366038E-05,180,-90) 
+			RelativeRotation(StructProperty)=Rotator(1.366038E-05,-180,-89.99998) 
 			RelativeScale3D(StructProperty)=Vector(2,1,2) 
 			bCanEverAffectNavigation(BoolProperty)=True 
 	StaticMeshComponent0 (0-0-0-0): size 222 (cls: StaticMeshComponent0>StaticMeshComponent>/Script/Engine):
@@ -659,9 +685,9 @@ Serialized exports:
 			CachedMaxDrawDistance(FloatProperty)=40000 
 			bAllowCullDistanceVolume(BoolProperty)=False 
 			BodyInstance(StructProperty)=System.Byte[] 
-			RelativeLocation(StructProperty)=Vector(0,-1024,6528) 
+			RelativeLocation(StructProperty)=Vector(0,0,6528) 
 			RelativeRotation(StructProperty)=Rotator(0,-90.0004,0) 
-			RelativeScale3D(StructProperty)=Vector(32.5,32.5,250) 
+			RelativeScale3D(StructProperty)=Vector(34.5,34.5,250) 
 			bCanEverAffectNavigation(BoolProperty)=True 
 	StaticMeshComponent0 (0-0-0-0): size 433 (cls: StaticMeshComponent0>StaticMeshComponent>/Script/Engine):
 		Tag array:
@@ -670,9 +696,9 @@ Serialized exports:
 			CachedMaxDrawDistance(FloatProperty)=40000 
 			bAllowCullDistanceVolume(BoolProperty)=False 
 			BodyInstance(StructProperty)=System.Byte[] 
-			RelativeLocation(StructProperty)=Vector(0,-1024,6528) 
+			RelativeLocation(StructProperty)=Vector(0,0,6528) 
 			RelativeRotation(StructProperty)=Rotator(0,-180.0004,0) 
-			RelativeScale3D(StructProperty)=Vector(32.5,32.5,250) 
+			RelativeScale3D(StructProperty)=Vector(34.5,34.5,250) 
 			bCanEverAffectNavigation(BoolProperty)=True 
 	StaticMeshComponent0 (0-0-0-0): size 433 (cls: StaticMeshComponent0>StaticMeshComponent>/Script/Engine):
 		Tag array:
@@ -681,9 +707,9 @@ Serialized exports:
 			CachedMaxDrawDistance(FloatProperty)=40000 
 			bAllowCullDistanceVolume(BoolProperty)=False 
 			BodyInstance(StructProperty)=System.Byte[] 
-			RelativeLocation(StructProperty)=Vector(0,-1024,6528) 
+			RelativeLocation(StructProperty)=Vector(0,0,6528) 
 			RelativeRotation(StructProperty)=Rotator(0,-270.0004,0) 
-			RelativeScale3D(StructProperty)=Vector(32.5,32.5,250) 
+			RelativeScale3D(StructProperty)=Vector(34.5,34.5,250) 
 			bCanEverAffectNavigation(BoolProperty)=True 
 	StaticMeshComponent0 (0-0-0-0): size 433 (cls: StaticMeshComponent0>StaticMeshComponent>/Script/Engine):
 		Tag array:
@@ -692,9 +718,9 @@ Serialized exports:
 			CachedMaxDrawDistance(FloatProperty)=40000 
 			bAllowCullDistanceVolume(BoolProperty)=False 
 			BodyInstance(StructProperty)=System.Byte[] 
-			RelativeLocation(StructProperty)=Vector(0,-1024,6528) 
+			RelativeLocation(StructProperty)=Vector(0,0,6528) 
 			RelativeRotation(StructProperty)=Rotator(0,-360.0004,0) 
-			RelativeScale3D(StructProperty)=Vector(32.5,32.5,250) 
+			RelativeScale3D(StructProperty)=Vector(34.5,34.5,250) 
 			bCanEverAffectNavigation(BoolProperty)=True 
 	StaticMeshComponent0 (0-0-0-0): size 208 (cls: StaticMeshComponent0>StaticMeshComponent>/Script/Engine):
 		Tag array:
@@ -722,10 +748,10 @@ Serialized exports:
 			RelativeLocation(StructProperty)=Vector(256,-14336,6528) 
 			RelativeRotation(StructProperty)=Rotator(0,-89.99996,0) 
 			RelativeScale3D(StructProperty)=Vector(-1,1,1) 
-	Temp_Island_Flat_60x60_001_C_2 (0-0-0-0): size 12 (cls: Temp_Island_Flat_60x60_001_C_2>Temp_Island_Flat_60x60_001_C)
+	Temp_Island_Flat_60x60_001_C_1 (0-0-0-0): size 12 (cls: Temp_Island_Flat_60x60_001_C_1>Temp_Island_Flat_60x60_001_C)
 	TextRender (0-0-0-0): size 137 (cls: TextRender>TextRenderComponent>/Script/Engine):
 		Tag array:
-			CachedMaxDrawDistance(FloatProperty)=6089.829 
+			CachedMaxDrawDistance(FloatProperty)=14666.03 
 			AttachParent(ObjectProperty)=Capsule=Temp_Island_Flat_60x60_001 
 			bNetAddressable(BoolProperty)=True 
 			CreationMethod(EnumProperty)=EComponentCreationMethod::SimpleConstructionScript 
@@ -741,7 +767,7 @@ Serialized exports:
 			CreationMethod(EnumProperty)=EComponentCreationMethod::UserConstructionScript 
 	UI_PortalInfoPlate (0-0-0-0): size 137 (cls: UI_PortalInfoPlate>WidgetComponent>/Script/UMG):
 		Tag array:
-			CachedMaxDrawDistance(FloatProperty)=6089.829 
+			CachedMaxDrawDistance(FloatProperty)=14666.03 
 			AttachParent(ObjectProperty)=TextRender=Temp_Island_Flat_60x60_001 
 			bNetAddressable(BoolProperty)=True 
 			CreationMethod(EnumProperty)=EComponentCreationMethod::SimpleConstructionScript 

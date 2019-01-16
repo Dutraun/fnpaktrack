@@ -3,6 +3,7 @@ Name table:
 	/Game/Athena/Effects/Particles/Gliders/P_Glider_Yeti_AnimTrail
 	/Game/Athena/Effects/Particles/Gliders/P_Glider_Yeti_Snow
 	/Game/Athena/Effects/Particles/Gliders/P_Glider_Yeti_Snow_Idle
+	/Game/Gadgets/Assets/VinderTech_GliderChute/Blueprints/Yeti_Glider_AnimBP
 	/Game/Gadgets/Assets/VinderTech_GliderChute/Glider_Yeti/Meshes/Glider_Yeti
 	/Game/Sounds/AudioCurveAssets/C_AudioCurve_LinearVolume
 	/Game/Sounds/AudioCurveAssets/C_AudioCurve_LinearVolumePointFiveStart
@@ -16,6 +17,9 @@ Name table:
 	Actor
 	ActorComponentTickFunction
 	AllNodes
+	AnimBlueprintGeneratedClass
+	AnimClass
+	AnimInstance
 	ArrayIndex
 	ArrayProperty
 	AttachParent
@@ -36,18 +40,18 @@ Name table:
 	C_AudioCurve_LinearVolumePointFiveStart
 	CallFunc_BooleanAND_ReturnValue
 	CallFunc_BooleanAND_ReturnValue1
+	CallFunc_GetAnimInstance_ReturnValue
+	CallFunc_GetAnimInstance_ReturnValue1
 	CallFunc_GreaterEqual_FloatFloat_ReturnValue
 	CallFunc_GreaterEqual_FloatFloat_ReturnValue1
 	CallFunc_IsGliderFullyDeployedAccordingToAnim_ReturnValue
 	CallFunc_IsGliderFullyDeployedAccordingToAnim_ReturnValue1
 	CallFunc_IsGliderFullyDeployedAccordingToAnim_ReturnValue2
-	CallFunc_K2_SetTimerDelegate_ReturnValue
 	ChangedPropertyList
 	Class
 	ComponentClass
 	ComponentTemplate
 	CookedComponentInstancingData
-	Cosmetic
 	Curve
 	CurveFloat
 	Deactivate
@@ -67,10 +71,10 @@ Name table:
 	Default__SCS_Node
 	Default__SimpleConstructionScript
 	Default__StructProperty
+	Default__Yeti_Glider_AnimBP_C
 	DefaultSceneRoot
 	DefaultSceneRoot_GEN_VARIABLE
 	DefaultSceneRootNode
-	DelegateFunction
 	DelegateProperty
 	Direction
 	EndTrails
@@ -81,6 +85,8 @@ Name table:
 	EVehicleAudioTriggerDir::Forward
 	ExecuteUbergraph_B_Glider_Yeti
 	FadeWhenOutsideGate
+	FE_IdleStart
+	FE_IdleStart__DelegateSignature
 	FloatProperty
 	FortPlayerParachute
 	FortVehicleAudioOneshotGate
@@ -88,12 +94,14 @@ Name table:
 	FortVehicleAudioVoice
 	FortVehicleAudioVoice_GEN_VARIABLE
 	ForwardDot
+	FrontEnd
 	Function
 	FX_Trail_L
 	FX_Trail_L1
 	FX_Trail_R
 	FX_Trail_R1
 	GateValue
+	GetAnimInstance
 	Glider_Yeti_poly_01_lp
 	Glider_Yeti_Thrust_Cue
 	GreaterEqual_FloatFloat
@@ -102,11 +110,13 @@ Name table:
 	InternalVariableName
 	InterruptFadeTime
 	IntProperty
-	IsCosmeticPreview
 	IsGliderFullyDeployedAccordingToAnim
 	K2_ClearAndInvalidateTimerHandle
-	K2_SetTimerDelegate
 	K2Node_CreateDelegate_OutputDelegate
+	K2Node_DynamicCast_AsYeti_Glider_Anim_BP
+	K2Node_DynamicCast_AsYeti_Glider_Anim_BP1
+	K2Node_DynamicCast_bSuccess
+	K2Node_DynamicCast_bSuccess1
 	K2Node_Event_ForwardDot
 	K2Node_Event_MovementLengthSquared
 	K2Node_Event_RightDot
@@ -116,6 +126,7 @@ Name table:
 	LoopingSound
 	MinTimeSinceTrigger
 	MovementLengthSquared
+	MulticastDelegateProperty
 	NameProperty
 	None
 	Object
@@ -142,6 +153,7 @@ Name table:
 	PropertyName
 	PropertyScope
 	ReceiveBeginPlay
+	ReceiveDestroyed
 	RelativeRotation
 	ReleaseSpeed
 	Reset
@@ -159,6 +171,7 @@ Name table:
 	SFX_Glider_LittleRed_ThrustLoop_Cue
 	SimpleConstructionScript
 	SkeletalMesh
+	SkeletalMeshComponent
 	SkeletalMeshComponentBudgeted
 	Sound
 	SoundCue
@@ -166,14 +179,10 @@ Name table:
 	Temp_bool_Has_Been_Initd_Variable
 	Temp_bool_Has_Been_Initd_Variable1
 	Temp_bool_Has_Been_Initd_Variable2
-	Temp_bool_Has_Been_Initd_Variable3
 	Temp_bool_IsClosed_Variable
 	Temp_bool_IsClosed_Variable1
 	Temp_bool_IsClosed_Variable2
-	Temp_bool_IsClosed_Variable3
 	Template
-	Timer
-	TimerDynamicDelegate__DelegateSignature
 	TimerHandle
 	TimerVal
 	TrailParticles
@@ -190,6 +199,7 @@ Name table:
 	X
 	Y
 	Yaw
+	Yeti_Glider_AnimBP_C
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
 	B_Glider_Yeti_C (0-0-0-0): size 312 (cls: B_Glider_Yeti_C>BlueprintGeneratedClass>/Script/Engine):
@@ -206,7 +216,7 @@ Serialized exports:
 			RootComponent(ObjectProperty)=RootComponent0=Default__B_Glider_Yeti_C 
 	P_Glider_Yeti_Snow_Idle (0-0-0-0): size 36 (cls: P_Glider_Yeti_Snow_Idle>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_B_Glider_Yeti (0-0-0-0): size 1185 (cls: ExecuteUbergraph_B_Glider_Yeti>Function>/Script/CoreUObject)
+	ExecuteUbergraph_B_Glider_Yeti (0-0-0-0): size 1227 (cls: ExecuteUbergraph_B_Glider_Yeti>Function>/Script/CoreUObject)
 	CallFunc_BooleanAND_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_BooleanAND_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_GreaterEqual_FloatFloat_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_GreaterEqual_FloatFloat_ReturnValue>BoolProperty>/Script/CoreUObject)
@@ -214,21 +224,21 @@ Serialized exports:
 	CallFunc_IsGliderFullyDeployedAccordingToAnim_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsGliderFullyDeployedAccordingToAnim_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsGliderFullyDeployedAccordingToAnim_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_IsGliderFullyDeployedAccordingToAnim_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsGliderFullyDeployedAccordingToAnim_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_IsGliderFullyDeployedAccordingToAnim_ReturnValue2>BoolProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_bSuccess1 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess1>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Has_Been_Initd_Variable (0-0-0-0): size 34 (cls: Temp_bool_Has_Been_Initd_Variable>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Has_Been_Initd_Variable1 (0-0-0-0): size 34 (cls: Temp_bool_Has_Been_Initd_Variable1>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Has_Been_Initd_Variable2 (0-0-0-0): size 34 (cls: Temp_bool_Has_Been_Initd_Variable2>BoolProperty>/Script/CoreUObject)
-	Temp_bool_Has_Been_Initd_Variable3 (0-0-0-0): size 34 (cls: Temp_bool_Has_Been_Initd_Variable3>BoolProperty>/Script/CoreUObject)
 	Temp_bool_IsClosed_Variable (0-0-0-0): size 34 (cls: Temp_bool_IsClosed_Variable>BoolProperty>/Script/CoreUObject)
 	Temp_bool_IsClosed_Variable1 (0-0-0-0): size 34 (cls: Temp_bool_IsClosed_Variable1>BoolProperty>/Script/CoreUObject)
 	Temp_bool_IsClosed_Variable2 (0-0-0-0): size 34 (cls: Temp_bool_IsClosed_Variable2>BoolProperty>/Script/CoreUObject)
-	Temp_bool_IsClosed_Variable3 (0-0-0-0): size 34 (cls: Temp_bool_IsClosed_Variable3>BoolProperty>/Script/CoreUObject)
 	K2Node_CreateDelegate_OutputDelegate (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate>DelegateProperty>/Script/CoreUObject)
 	K2Node_Event_ForwardDot (0-0-0-0): size 32 (cls: K2Node_Event_ForwardDot>FloatProperty>/Script/CoreUObject)
 	K2Node_Event_MovementLengthSquared (0-0-0-0): size 32 (cls: K2Node_Event_MovementLengthSquared>FloatProperty>/Script/CoreUObject)
 	K2Node_Event_RightDot (0-0-0-0): size 32 (cls: K2Node_Event_RightDot>FloatProperty>/Script/CoreUObject)
 	K2Node_Event_RotationalMovementAcceleration (0-0-0-0): size 32 (cls: K2Node_Event_RotationalMovementAcceleration>FloatProperty>/Script/CoreUObject)
-	Cosmetic (0-0-0-0): size 54 (cls: Cosmetic>Function>/Script/CoreUObject)
-	Timer (0-0-0-0): size 54 (cls: Timer>Function>/Script/CoreUObject)
+	ReceiveDestroyed (0-0-0-0): size 54 (cls: ReceiveDestroyed>Function>/Script/CoreUObject)
+	FrontEnd (0-0-0-0): size 54 (cls: FrontEnd>Function>/Script/CoreUObject)
 	ResetIdle (0-0-0-0): size 54 (cls: ResetIdle>Function>/Script/CoreUObject)
 	Reset (0-0-0-0): size 54 (cls: Reset>Function>/Script/CoreUObject)
 	MovementLengthSquared (0-0-0-0): size 32 (cls: MovementLengthSquared>FloatProperty>/Script/CoreUObject)
@@ -246,6 +256,10 @@ Serialized exports:
 			RelativeRotation(StructProperty)=Rotator(0,-89.99999,0) 
 	ReceiveBeginPlay (0-0-0-0): size 54 (cls: ReceiveBeginPlay>Function>/Script/CoreUObject)
 	UserConstructionScript (0-0-0-0): size 49 (cls: UserConstructionScript>Function>/Script/CoreUObject)
+	CallFunc_GetAnimInstance_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetAnimInstance_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetAnimInstance_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetAnimInstance_ReturnValue1>ObjectProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_AsYeti_Glider_Anim_BP (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsYeti_Glider_Anim_BP>ObjectProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_AsYeti_Glider_Anim_BP1 (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsYeti_Glider_Anim_BP1>ObjectProperty>/Script/CoreUObject)
 	FortVehicleAudioVoice (0-0-0-0): size 36 (cls: FortVehicleAudioVoice>ObjectProperty>/Script/CoreUObject)
 	P_Glider_Yeti_Snow (0-0-0-0): size 36 (cls: P_Glider_Yeti_Snow>ObjectProperty>/Script/CoreUObject)
 	TrailParticles2 (0-0-0-0): size 36 (cls: TrailParticles2>ObjectProperty>/Script/CoreUObject)
@@ -320,11 +334,11 @@ Serialized exports:
 			RootNodes(ArrayProperty)=[object] (inner: ObjectProperty)
 			AllNodes(ArrayProperty)=[object] (inner: ObjectProperty)
 			DefaultSceneRootNode(ObjectProperty)=SCS_Node_0=B_Glider_Yeti_C 
-	ParachuteMesh0 (0-0-0-0): size 172 (cls: ParachuteMesh0>SkeletalMeshComponentBudgeted>/Script/AnimationBudgetAllocator):
+	ParachuteMesh0 (0-0-0-0): size 201 (cls: ParachuteMesh0>SkeletalMeshComponentBudgeted>/Script/AnimationBudgetAllocator):
 		Tag array:
+			AnimClass(ObjectProperty)=Yeti_Glider_AnimBP_C=/Game/Gadgets/Assets/VinderTech_GliderChute/Blueprints/Yeti_Glider_AnimBP 
 			SkeletalMesh(ObjectProperty)=Glider_Yeti_poly_01_lp=/Game/Gadgets/Assets/VinderTech_GliderChute/Glider_Yeti/Meshes/Glider_Yeti 
 			OverrideMaterials(ArrayProperty)=[object] (inner: ObjectProperty)
 			AttachParent(ObjectProperty)=RootComponent0=Default__B_Glider_Yeti_C 
 			RelativeRotation(StructProperty)=Rotator(0,90,0) 
-	CallFunc_K2_SetTimerDelegate_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_SetTimerDelegate_ReturnValue>StructProperty>/Script/CoreUObject)
 	TimerVal (0-0-0-0): size 36 (cls: TimerVal>StructProperty>/Script/CoreUObject)

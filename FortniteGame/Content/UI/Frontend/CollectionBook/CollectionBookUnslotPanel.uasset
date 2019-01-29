@@ -16,6 +16,8 @@ Name table:
 	/Game/UI/Foundation/Shell/windowchromebuttons
 	/Game/UI/Foundation/Text/TextScrollStyle-Base
 	/Game/UI/Foundation/Text/TextStyle-Base
+	/Game/UI/Foundation/Text/TextStyle-Base-S-B
+	/Game/UI/Foundation/Text/TextStyle-Base-XS-B-Yellow
 	/Game/UI/Frontend/CollectionBook/ActionWarning
 	/Game/UI/Frontend/CollectionBook/CollectionBookUnslotPanel
 	/Game/UI/Frontend/CollectionBook/CollectionBookUnslotPanel.WidgetArchetype
@@ -110,6 +112,7 @@ Name table:
 	CallFunc_Greater_IntInt_ReturnValue
 	CallFunc_HasGameplayTagContainerExact_ReturnValue
 	CallFunc_HasRequired_bHasRequired
+	CallFunc_IsRefundable_ReturnValue
 	CallFunc_IsValid_ReturnValue
 	CallFunc_Less_IntInt_ReturnValue
 	CallFunc_PopulateCosts_bHasResources
@@ -124,6 +127,7 @@ Name table:
 	CollectionBookUnslotItemConfirm
 	CollectionBookUnslotPanel_C
 	CollectionBookUnslotWidget_C
+	ColorAndOpacity
 	CommonActionWidget
 	CommonBorder
 	CommonButton
@@ -191,6 +195,8 @@ Name table:
 	Default__StructProperty
 	Default__TextProperty
 	Default__TextScrollStyle-Base_C
+	Default__TextStyle-Base-S-B_C
+	Default__TextStyle-Base-XS-B-Yellow_C
 	Default__TextStyle-Base_C
 	Default__TextStyle-MediumButton_C
 	Default__Tooltip-DescriptionText_C
@@ -221,6 +227,8 @@ Name table:
 	ESlateBrushDrawType::NoDrawType
 	ESlateSizeRule
 	ESlateSizeRule::Fill
+	ESlateVisibility
+	ESlateVisibility::Collapsed
 	ETextJustify
 	ETextJustify::Center
 	EUINavigationRule
@@ -280,6 +288,7 @@ Name table:
 	InputActionDataTable
 	InputActionWidget
 	IntProperty
+	IsRefundable
 	IsValid
 	Item
 	ItemCardWidget
@@ -361,6 +370,7 @@ Name table:
 	SetObjectPropertyByName
 	SetOwningUnslotWidget
 	SetTextPropertyByName
+	SetVisibility
 	ShadowOffset
 	ShouldDisplayItemAsReward
 	ShowWindowControlButtons
@@ -387,9 +397,12 @@ Name table:
 	Temp_text_Variable
 	TemplateAsset
 	Text
+	Text_Free
 	TextProperty
 	TextScrollStyle-Base_C
 	TextStyle
+	TextStyle-Base-S-B_C
+	TextStyle-Base-XS-B-Yellow_C
 	TextStyle-Base_C
 	TextStyle-MediumButton_C
 	TintColor
@@ -412,6 +425,7 @@ Name table:
 	VerticalAlignment
 	VerticalBox
 	VerticalBoxSlot
+	Visibility
 	Warning
 	WidgetArchetype
 	WidgetBlueprintGeneratedClass
@@ -426,7 +440,7 @@ Name table:
 	WindowTitleBarArea
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	CollectionBookUnslotPanel_C (0-0-0-0): size 436 (cls: CollectionBookUnslotPanel_C>WidgetBlueprintGeneratedClass>/Script/UMG):
+	CollectionBookUnslotPanel_C (0-0-0-0): size 440 (cls: CollectionBookUnslotPanel_C>WidgetBlueprintGeneratedClass>/Script/UMG):
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
@@ -447,7 +461,7 @@ Serialized exports:
 	Button (0-0-0-0): size 36 (cls: Button>ObjectProperty>/Script/CoreUObject)
 	BndEvt__PurchaseButton_K2Node_ComponentBoundEvent_1_CommonButtonClicked__DelegateSignature (0-0-0-0): size 68 (cls: BndEvt__PurchaseButton_K2Node_ComponentBoundEvent_1_CommonButtonClicked__DelegateSignature>Function>/Script/CoreUObject)
 	Item (0-0-0-0): size 36 (cls: Item>ObjectProperty>/Script/CoreUObject)
-	SetItem (0-0-0-0): size 312 (cls: SetItem>Function>/Script/CoreUObject)
+	SetItem (0-0-0-0): size 525 (cls: SetItem>Function>/Script/CoreUObject)
 	OwningWidget (0-0-0-0): size 36 (cls: OwningWidget>ObjectProperty>/Script/CoreUObject)
 	SetOwningUnslotWidget (0-0-0-0): size 58 (cls: SetOwningUnslotWidget>Function>/Script/CoreUObject)
 	bHasResources (0-0-0-0): size 34 (cls: bHasResources>BoolProperty>/Script/CoreUObject)
@@ -490,7 +504,9 @@ Serialized exports:
 	bIsPerson (0-0-0-0): size 34 (cls: bIsPerson>BoolProperty>/Script/CoreUObject)
 	CallFunc_BooleanAND_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_HasGameplayTagContainerExact_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasGameplayTagContainerExact_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_IsRefundable_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsRefundable_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_PopulateCosts_bHasResources (0-0-0-0): size 34 (cls: CallFunc_PopulateCosts_bHasResources>BoolProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	Border_Darken (0-0-0-0): size 305 (cls: Border_Darken>Border>/Script/UMG):
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
@@ -509,8 +525,9 @@ Serialized exports:
 			Background(StructProperty)=System.Byte[] 
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			bIsVariable(BoolProperty)=True 
-	BorderSlot_0 (0-0-0-0): size 111 (cls: BorderSlot_0>BorderSlot>/Script/UMG):
+	BorderSlot_0 (0-0-0-0): size 284 (cls: BorderSlot_0>BorderSlot>/Script/UMG):
 		Tag array:
+			Padding(StructProperty)=System.Byte[] 
 			HorizontalAlignment(ByteProperty)=HAlign_Center 
 			Parent(ObjectProperty)=CommonBorder_0=WidgetArchetype 
 			Content(ObjectProperty)=HorizontalBox_1=WidgetArchetype 
@@ -529,7 +546,7 @@ Serialized exports:
 			Padding(StructProperty)=System.Byte[] 
 			Parent(ObjectProperty)=ContentBorder=WidgetArchetype 
 			Content(ObjectProperty)=HorizontalBox=WidgetArchetype 
-	WidgetArchetype (0-0-0-0): size 270 (cls: WidgetArchetype>CollectionBookUnslotPanel_C):
+	WidgetArchetype (0-0-0-0): size 299 (cls: WidgetArchetype>CollectionBookUnslotPanel_C):
 		Tag array:
 			Cost0(ObjectProperty)=Cost0=WidgetArchetype 
 			Cost1(ObjectProperty)=Cost1=WidgetArchetype 
@@ -537,6 +554,7 @@ Serialized exports:
 			ItemCardWidget(ObjectProperty)=ItemCardWidget=WidgetArchetype 
 			Lightbox(ObjectProperty)=Lightbox=WidgetArchetype 
 			PurchaseButton(ObjectProperty)=PurchaseButton=WidgetArchetype 
+			Text_Free(ObjectProperty)=Text_Free=WidgetArchetype 
 			UnableToPurchaseReasonBox(ObjectProperty)=UnableToPurchaseReasonBox=WidgetArchetype 
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
@@ -545,10 +563,11 @@ Serialized exports:
 			ProgressMaterialBrush(StructProperty)=System.Byte[] 
 			ProgressMaterialParam(NameProperty)=Percentage 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
-	CommonBorder_0 (0-0-0-0): size 152 (cls: CommonBorder_0>CommonBorder>/Script/CommonUI):
+	CommonBorder_0 (0-0-0-0): size 325 (cls: CommonBorder_0>CommonBorder>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=Border-SolidBG-DkBlue_C=/Game/UI/Foundation/Border/Border-SolidBG-DkBlue 
 			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			Padding(StructProperty)=System.Byte[] 
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
 	CountText (0-0-0-0): size 351 (cls: CountText>CommonNumericTextBlock>/Script/CommonUI):
@@ -625,6 +644,16 @@ Serialized exports:
 			Justification(ByteProperty)=ETextJustify::Center 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
+	Text_Free (0-0-0-0): size 554 (cls: Text_Free>CommonTextBlock>/Script/CommonUI):
+		Tag array:
+			Style(ObjectProperty)=TextStyle-Base-XS-B-Yellow_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B-Yellow 
+			Text(TextProperty)=Free to unslot (5E02CE1846B93E40CF4EDB91980E31DF) 
+			ColorAndOpacity(StructProperty)=System.Byte[] 
+			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
+			Slot(ObjectProperty)=VerticalBoxSlot_2=WidgetArchetype 
+			bIsVariable(BoolProperty)=True 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
 	WIndowButtons (0-0-0-0): size 437 (cls: WIndowButtons>CommonVisibilityWidget>/Script/CommonUI):
 		Tag array:
 			bShowForMac(BoolProperty)=False 
@@ -817,7 +846,7 @@ Serialized exports:
 	Temp_int_Array_Index_Variable (0-0-0-0): size 32 (cls: Temp_int_Array_Index_Variable>IntProperty>/Script/CoreUObject)
 	Temp_int_Loop_Counter_Variable (0-0-0-0): size 32 (cls: Temp_int_Loop_Counter_Variable>IntProperty>/Script/CoreUObject)
 	Temp_int_Variable (0-0-0-0): size 32 (cls: Temp_int_Variable>IntProperty>/Script/CoreUObject)
-	Cost0 (0-0-0-0): size 270 (cls: Cost0>ItemCountOverCost_C>/Game/UI/Foundation/Items/ItemCountOverCost):
+	Cost0 (0-0-0-0): size 299 (cls: Cost0>ItemCountOverCost_C>/Game/UI/Foundation/Items/ItemCountOverCost):
 		Tag array:
 			CountText(ObjectProperty)=CountText=WidgetArchetype 
 			DisplayName(ObjectProperty)=DisplayName=WidgetArchetype 
@@ -825,10 +854,11 @@ Serialized exports:
 			IconRight(ObjectProperty)=IconRight=WidgetArchetype 
 			RequiredCount(ObjectProperty)=RequiredCount=WidgetArchetype 
 			SeperatorText(ObjectProperty)=SeperatorText=WidgetArchetype 
+			TextStyle(ObjectProperty)=TextStyle-Base-S-B_C=/Game/UI/Foundation/Text/TextStyle-Base-S-B 
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=VerticalBoxSlot_0=WidgetArchetype 
-	Cost1 (0-0-0-0): size 270 (cls: Cost1>ItemCountOverCost_C>/Game/UI/Foundation/Items/ItemCountOverCost):
+	Cost1 (0-0-0-0): size 299 (cls: Cost1>ItemCountOverCost_C>/Game/UI/Foundation/Items/ItemCountOverCost):
 		Tag array:
 			CountText(ObjectProperty)=CountText=WidgetArchetype 
 			DisplayName(ObjectProperty)=DisplayName=WidgetArchetype 
@@ -836,6 +866,7 @@ Serialized exports:
 			IconRight(ObjectProperty)=IconRight=WidgetArchetype 
 			RequiredCount(ObjectProperty)=RequiredCount=WidgetArchetype 
 			SeperatorText(ObjectProperty)=SeperatorText=WidgetArchetype 
+			TextStyle(ObjectProperty)=TextStyle-Base-S-B_C=/Game/UI/Foundation/Text/TextStyle-Base-S-B 
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=VerticalBoxSlot_1=WidgetArchetype 
@@ -883,6 +914,8 @@ Serialized exports:
 	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetOwningPlayer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetOwningPlayer_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_AsFort_Account_Item (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Account_Item>ObjectProperty>/Script/CoreUObject)
+	Text_Free (0-0-0-0): size 36 (cls: Text_Free>ObjectProperty>/Script/CoreUObject)
 	UnableToPurchaseReasonBox (0-0-0-0): size 36 (cls: UnableToPurchaseReasonBox>ObjectProperty>/Script/CoreUObject)
 	BottomOverlay (0-0-0-0): size 82 (cls: BottomOverlay>Overlay>/Script/UMG):
 		Tag array:
@@ -991,7 +1024,7 @@ Serialized exports:
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
-	VerticalBox_3 (0-0-0-0): size 90 (cls: VerticalBox_3>VerticalBox>/Script/UMG):
+	VerticalBox_3 (0-0-0-0): size 94 (cls: VerticalBox_3>VerticalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
@@ -1027,6 +1060,11 @@ Serialized exports:
 		Tag array:
 			Parent(ObjectProperty)=VerticalBox_3=WidgetArchetype 
 			Content(ObjectProperty)=UnableToPurchaseReasonBox=WidgetArchetype 
+	VerticalBoxSlot_2 (0-0-0-0): size 111 (cls: VerticalBoxSlot_2>VerticalBoxSlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			Parent(ObjectProperty)=VerticalBox_3=WidgetArchetype 
+			Content(ObjectProperty)=Text_Free=WidgetArchetype 
 	VerticalBoxSlot_5 (0-0-0-0): size 156 (cls: VerticalBoxSlot_5>VerticalBoxSlot>/Script/UMG):
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 

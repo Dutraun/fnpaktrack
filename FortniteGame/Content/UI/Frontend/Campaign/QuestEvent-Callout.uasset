@@ -50,6 +50,7 @@ Name table:
 	bHoveredFinished
 	BindingName
 	BindToAnimationFinished
+	bIsFaded
 	bIsRootWidget
 	bIsVariable
 	BlendType
@@ -236,7 +237,10 @@ Name table:
 	EvaluationTree
 	EVerticalAlignment
 	ExecuteUbergraph_QuestEvent-Callout
+	FadeIn
+	FadeIn_INST
 	FadeOut
+	FadeOut_INST
 	Flags
 	FloatCurve
 	FloatFunction
@@ -271,7 +275,6 @@ Name table:
 	HorizontalBoxSlot
 	Hover
 	Hover_INST
-	HoverEnded
 	IconTextButton_C
 	Image
 	Image-Hittest
@@ -398,6 +401,8 @@ Name table:
 	Percentage
 	PlayAnimationForward
 	PlaybackRange
+	PlayFadeIn
+	PlayFadeOut
 	PointerEvent
 	PointerToUberGraphFrame
 	PopActivatablePanel
@@ -527,7 +532,6 @@ Name table:
 	UMGSequencePlayer
 	UnHover
 	UnHover_INST
-	UnhoverFinished
 	UserWidget
 	VAlign_Bottom
 	VAlign_Center
@@ -561,7 +565,7 @@ Name table:
 	Z
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	QuestEvent-Callout_C (0-0-0-0): size 673 (cls: QuestEvent-Callout_C>WidgetBlueprintGeneratedClass>/Script/UMG):
+	QuestEvent-Callout_C (0-0-0-0): size 693 (cls: QuestEvent-Callout_C>WidgetBlueprintGeneratedClass>/Script/UMG):
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
@@ -581,16 +585,15 @@ Serialized exports:
 			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
 	bExpanded (0-0-0-0): size 34 (cls: bExpanded>BoolProperty>/Script/CoreUObject)
 	bHoveredFinished (0-0-0-0): size 34 (cls: bHoveredFinished>BoolProperty>/Script/CoreUObject)
-	Reset (0-0-0-0): size 36 (cls: Reset>ObjectProperty>/Script/CoreUObject)
+	bIsFaded (0-0-0-0): size 34 (cls: bIsFaded>BoolProperty>/Script/CoreUObject)
+	FadeIn (0-0-0-0): size 36 (cls: FadeIn>ObjectProperty>/Script/CoreUObject)
 	OnCalloutButtonPressed__DelegateSignature (0-0-0-0): size 43 (cls: OnCalloutButtonPressed__DelegateSignature>Function>/Script/CoreUObject)
 	IsExpanding (0-0-0-0): size 34 (cls: IsExpanding>BoolProperty>/Script/CoreUObject)
 	OnCalloutExpandChanged__DelegateSignature (0-0-0-0): size 47 (cls: OnCalloutExpandChanged__DelegateSignature>Function>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_QuestEvent-Callout (0-0-0-0): size 1136 (cls: ExecuteUbergraph_QuestEvent-Callout>Function>/Script/CoreUObject)
+	ExecuteUbergraph_QuestEvent-Callout (0-0-0-0): size 1076 (cls: ExecuteUbergraph_QuestEvent-Callout>Function>/Script/CoreUObject)
 	SetAnimationState-UnHover (0-0-0-0): size 54 (cls: SetAnimationState-UnHover>Function>/Script/CoreUObject)
 	SetAnimationState-Hover (0-0-0-0): size 54 (cls: SetAnimationState-Hover>Function>/Script/CoreUObject)
-	UnhoverFinished (0-0-0-0): size 54 (cls: UnhoverFinished>Function>/Script/CoreUObject)
-	HoverEnded (0-0-0-0): size 54 (cls: HoverEnded>Function>/Script/CoreUObject)
 	Button (0-0-0-0): size 36 (cls: Button>ObjectProperty>/Script/CoreUObject)
 	BndEvt__SwitchQuestMap_K2Node_ComponentBoundEvent_0_CommonButtonClicked__DelegateSignature (0-0-0-0): size 68 (cls: BndEvt__SwitchQuestMap_K2Node_ComponentBoundEvent_0_CommonButtonClicked__DelegateSignature>Function>/Script/CoreUObject)
 	MouseEvent (0-0-0-0): size 36 (cls: MouseEvent>StructProperty>/Script/CoreUObject)
@@ -670,8 +673,6 @@ Serialized exports:
 			ComponentDelegateBindings(ArrayProperty)=[object] (inner: StructProperty)
 	K2Node_CreateDelegate_OutputDelegate1 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate1>DelegateProperty>/Script/CoreUObject)
 	K2Node_CreateDelegate_OutputDelegate1 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate1>DelegateProperty>/Script/CoreUObject)
-	K2Node_CreateDelegate_OutputDelegate (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate>DelegateProperty>/Script/CoreUObject)
-	K2Node_CreateDelegate_OutputDelegate1 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate1>DelegateProperty>/Script/CoreUObject)
 	CallFunc_Add_FloatFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Add_FloatFloat_ReturnValue>FloatProperty>/Script/CoreUObject)
 	CallFunc_Add_FloatFloat_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Add_FloatFloat_ReturnValue1>FloatProperty>/Script/CoreUObject)
 	CallFunc_BreakVector2D_X (0-0-0-0): size 32 (cls: CallFunc_BreakVector2D_X>FloatProperty>/Script/CoreUObject)
@@ -687,6 +688,11 @@ Serialized exports:
 	CallFunc_Subtract_FloatFloat_ReturnValue3 (0-0-0-0): size 32 (cls: CallFunc_Subtract_FloatFloat_ReturnValue3>FloatProperty>/Script/CoreUObject)
 	K2Node_Select_Default (0-0-0-0): size 32 (cls: K2Node_Select_Default>FloatProperty>/Script/CoreUObject)
 	Temp_float_Variable (0-0-0-0): size 32 (cls: Temp_float_Variable>FloatProperty>/Script/CoreUObject)
+	CallFunc_PlayAnimationForward_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlayAnimationForward_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	PlayFadeIn (0-0-0-0): size 76 (cls: PlayFadeIn>Function>/Script/CoreUObject)
+	FadeOut (0-0-0-0): size 36 (cls: FadeOut>ObjectProperty>/Script/CoreUObject)
+	CallFunc_PlayAnimationForward_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlayAnimationForward_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	PlayFadeOut (0-0-0-0): size 76 (cls: PlayFadeOut>Function>/Script/CoreUObject)
 	HorizontalBox_0 (0-0-0-0): size 82 (cls: HorizontalBox_0>HorizontalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -757,6 +763,20 @@ Serialized exports:
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
 			Slot(ObjectProperty)=HorizontalBoxSlot_2=WidgetArchetype 
+	FadeIn (0-0-0-0): size 1222 (cls: FadeIn>MovieScene>/Script/MovieScene):
+		Tag array:
+			Possessables(ArrayProperty)=[object] (inner: StructProperty)
+			ObjectBindings(ArrayProperty)=[object] (inner: StructProperty)
+			PlaybackRange(StructProperty)=System.Byte[] 
+			DisplayRate(StructProperty)=System.Byte[] 
+			Signature(StructProperty)=Guid: 855621008-1131417563-913259950-2033605744 
+	FadeOut (0-0-0-0): size 1222 (cls: FadeOut>MovieScene>/Script/MovieScene):
+		Tag array:
+			Possessables(ArrayProperty)=[object] (inner: StructProperty)
+			ObjectBindings(ArrayProperty)=[object] (inner: StructProperty)
+			PlaybackRange(StructProperty)=System.Byte[] 
+			DisplayRate(StructProperty)=System.Byte[] 
+			Signature(StructProperty)=Guid: 4102950579-1332822849-30780040-2207978409 
 	Hover (0-0-0-0): size 5268 (cls: Hover>MovieScene>/Script/MovieScene):
 		Tag array:
 			Possessables(ArrayProperty)=[object] (inner: StructProperty)
@@ -1099,6 +1119,26 @@ Serialized exports:
 	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
 	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
 	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	MovieSceneByteSection_0 (0-0-0-0): size 470 (cls: MovieSceneByteSection_0>MovieSceneByteSection>/Script/MovieSceneTracks):
+		Tag array:
+			ByteCurve(StructProperty)=System.Byte[] 
+			Easing(StructProperty)=System.Byte[] 
+			SectionRange(StructProperty)=System.Byte[] 
+			Signature(StructProperty)=Guid: 3194844161-1199491737-706455176-1540201634 
+	MovieSceneByteSection_0 (0-0-0-0): size 475 (cls: MovieSceneByteSection_0>MovieSceneByteSection>/Script/MovieSceneTracks):
+		Tag array:
+			ByteCurve(StructProperty)=System.Byte[] 
+			Easing(StructProperty)=System.Byte[] 
+			SectionRange(StructProperty)=System.Byte[] 
+			Signature(StructProperty)=Guid: 2222681494-1101323436-3099143323-796762986 
 	MovieSceneByteSection_0 (0-0-0-0): size 470 (cls: MovieSceneByteSection_0>MovieSceneByteSection>/Script/MovieSceneTracks):
 		Tag array:
 			ByteCurve(StructProperty)=System.Byte[] 
@@ -1116,6 +1156,20 @@ Serialized exports:
 			Easing(StructProperty)=System.Byte[] 
 			SectionRange(StructProperty)=System.Byte[] 
 			Signature(StructProperty)=Guid: 2305958870-1121096056-3479561134-2173383686 
+	MovieSceneByteTrack_1 (0-0-0-0): size 220 (cls: MovieSceneByteTrack_1>MovieSceneByteTrack>/Script/MovieSceneTracks):
+		Tag array:
+			Enum(ObjectProperty)=ESlateVisibility=/Script/UMG 
+			PropertyName(NameProperty)=Visibility 
+			PropertyPath(StrProperty)=Visibility 
+			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
+			Signature(StructProperty)=Guid: 462837940-1160349532-2501940393-2599259977 
+	MovieSceneByteTrack_1 (0-0-0-0): size 220 (cls: MovieSceneByteTrack_1>MovieSceneByteTrack>/Script/MovieSceneTracks):
+		Tag array:
+			Enum(ObjectProperty)=ESlateVisibility=/Script/UMG 
+			PropertyName(NameProperty)=Visibility 
+			PropertyPath(StrProperty)=Visibility 
+			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
+			Signature(StructProperty)=Guid: 3254082695-1113139563-1928689812-525752652 
 	MovieSceneByteTrack_0 (0-0-0-0): size 220 (cls: MovieSceneByteTrack_0>MovieSceneByteTrack>/Script/MovieSceneTracks):
 		Tag array:
 			Enum(ObjectProperty)=ESlateVisibility=/Script/UMG 
@@ -1137,6 +1191,18 @@ Serialized exports:
 			PropertyPath(StrProperty)=Visibility 
 			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
 			Signature(StructProperty)=Guid: 1132079541-1164507510-2044979129-3848523713 
+	MovieSceneFloatSection_0 (0-0-0-0): size 1491 (cls: MovieSceneFloatSection_0>MovieSceneFloatSection>/Script/MovieSceneTracks):
+		Tag array:
+			FloatCurve(StructProperty)=System.Byte[] 
+			Easing(StructProperty)=System.Byte[] 
+			SectionRange(StructProperty)=System.Byte[] 
+			Signature(StructProperty)=Guid: 3219159341-1307302155-660742797-575337659 
+	MovieSceneFloatSection_0 (0-0-0-0): size 1154 (cls: MovieSceneFloatSection_0>MovieSceneFloatSection>/Script/MovieSceneTracks):
+		Tag array:
+			FloatCurve(StructProperty)=System.Byte[] 
+			Easing(StructProperty)=System.Byte[] 
+			SectionRange(StructProperty)=System.Byte[] 
+			Signature(StructProperty)=Guid: 1023743331-1189590679-1730935482-2316691983 
 	MovieSceneFloatSection_0 (0-0-0-0): size 1517 (cls: MovieSceneFloatSection_0>MovieSceneFloatSection>/Script/MovieSceneTracks):
 		Tag array:
 			FloatCurve(StructProperty)=System.Byte[] 
@@ -1239,6 +1305,18 @@ Serialized exports:
 			Easing(StructProperty)=System.Byte[] 
 			SectionRange(StructProperty)=System.Byte[] 
 			Signature(StructProperty)=Guid: 1693727240-1290237249-1609551789-3623265765 
+	MovieSceneFloatTrack_0 (0-0-0-0): size 194 (cls: MovieSceneFloatTrack_0>MovieSceneFloatTrack>/Script/MovieSceneTracks):
+		Tag array:
+			PropertyName(NameProperty)=RenderOpacity 
+			PropertyPath(StrProperty)=RenderOpacity 
+			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
+			Signature(StructProperty)=Guid: 388148074-1136811962-1270038960-332725877 
+	MovieSceneFloatTrack_0 (0-0-0-0): size 194 (cls: MovieSceneFloatTrack_0>MovieSceneFloatTrack>/Script/MovieSceneTracks):
+		Tag array:
+			PropertyName(NameProperty)=RenderOpacity 
+			PropertyPath(StrProperty)=RenderOpacity 
+			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
+			Signature(StructProperty)=Guid: 1817035675-1075457048-3711878578-1377826217 
 	MovieSceneFloatTrack_0 (0-0-0-0): size 194 (cls: MovieSceneFloatTrack_0>MovieSceneFloatTrack>/Script/MovieSceneTracks):
 		Tag array:
 			PropertyName(NameProperty)=WidthOverride 
@@ -1478,6 +1556,7 @@ Serialized exports:
 	Image-Hittest (0-0-0-0): size 36 (cls: Image-Hittest>ObjectProperty>/Script/CoreUObject)
 	Image_0 (0-0-0-0): size 36 (cls: Image_0>ObjectProperty>/Script/CoreUObject)
 	Overlay-Art (0-0-0-0): size 36 (cls: Overlay-Art>ObjectProperty>/Script/CoreUObject)
+	Reset (0-0-0-0): size 36 (cls: Reset>ObjectProperty>/Script/CoreUObject)
 	SwitchQuestMap (0-0-0-0): size 36 (cls: SwitchQuestMap>ObjectProperty>/Script/CoreUObject)
 	UnHover (0-0-0-0): size 36 (cls: UnHover>ObjectProperty>/Script/CoreUObject)
 	Overlay-Art (0-0-0-0): size 112 (cls: Overlay-Art>Overlay>/Script/UMG):
@@ -1609,6 +1688,20 @@ Serialized exports:
 			VerticalAlignment(ByteProperty)=VAlign_Bottom 
 			Parent(ObjectProperty)=VerticalBox_2=WidgetArchetype 
 			Content(ObjectProperty)=CommonTextBlock-BodyCopy=WidgetArchetype 
+	FadeIn_INST (0-0-0-0): size 7931 (cls: FadeIn_INST>WidgetAnimation>/Script/UMG):
+		Tag array:
+			MovieScene(ObjectProperty)=FadeIn=QuestEvent-Callout_C 
+			AnimationBindings(ArrayProperty)=[object] (inner: StructProperty)
+			DisplayLabel(StrProperty)=FadeIn 
+			PrecompiledEvaluationTemplate(StructProperty)=System.Byte[] 
+			Signature(StructProperty)=Guid: 2970088050-1092903646-104862379-1268965805 
+	FadeOut_INST (0-0-0-0): size 7600 (cls: FadeOut_INST>WidgetAnimation>/Script/UMG):
+		Tag array:
+			MovieScene(ObjectProperty)=FadeOut=QuestEvent-Callout_C 
+			AnimationBindings(ArrayProperty)=[object] (inner: StructProperty)
+			DisplayLabel(StrProperty)=FadeOut 
+			PrecompiledEvaluationTemplate(StructProperty)=System.Byte[] 
+			Signature(StructProperty)=Guid: 2211974131-1235480035-3475379338-2287888215 
 	Hover_INST (0-0-0-0): size 77536 (cls: Hover_INST>WidgetAnimation>/Script/UMG):
 		Tag array:
 			MovieScene(ObjectProperty)=Hover=QuestEvent-Callout_C 

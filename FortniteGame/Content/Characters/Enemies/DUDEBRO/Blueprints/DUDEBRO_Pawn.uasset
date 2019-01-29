@@ -616,6 +616,7 @@ Name table:
 	CallFunc_HasAuthority_ReturnValue1
 	CallFunc_HasAuthority_ReturnValue2
 	CallFunc_HasAuthority_ReturnValue3
+	CallFunc_HasAuthority_ReturnValue4
 	CallFunc_IsDedicatedServer_ReturnValue
 	CallFunc_IsDedicatedServer_ReturnValue1
 	CallFunc_IsDedicatedServer_ReturnValue2
@@ -986,6 +987,7 @@ Name table:
 	DUDEBRO SetDebugMenuCollision
 	DUDEBRO SetDebugMenuHighlightVisibility
 	DUDEBRO SetHornMeleeVulnerability
+	DUDEBRO SetOwningPawnOnWeakspot
 	DUDEBRO SetRotationRate
 	DUDEBRO TriggerDBNO
 	DUDEBRO TryToBeginWeakpoints
@@ -1579,6 +1581,7 @@ Name table:
 	OverrideMaterials
 	Owner
 	OwnerClass
+	OwningPawn
 	P_Crystal_BreakFX_GEN_VARIABLE
 	P_Crystal_BreakFX_Horn
 	P_Crystal_BreakSmokeFX_Horn
@@ -1724,6 +1727,7 @@ Name table:
 	SetLifeSpan
 	SetMinimumAILOD
 	SetMinSignificanceForAnimationCurves
+	SetOwningPawnOnActorComponents
 	SetPlayRate
 	SetRelativeScale3D
 	SetScalarParameterValue
@@ -2051,8 +2055,8 @@ Name table:
 	WallAttackGameplayAbilityTags
 	WeakObjectProperty
 	WeakPoint
-	WeakpointDestroyed
 	WeakPointDestroyed
+	WeakpointDestroyed
 	WeakPointDisabled
 	WeakPointDisabledForLowerDifficultyLevels
 	WeakPointID
@@ -2097,8 +2101,8 @@ Name table:
 	WP_SideL_6_GEN_VARIABLE
 	WP_SideR
 	WP_SideR_5_GEN_VARIABLE
-	X-Float
 	X-float
+	X-Float
 	X1
 	X1GrowLoc
 	X2
@@ -2118,7 +2122,7 @@ Name table:
 	YawRate
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	DUDEBRO_Pawn_C (0-0-0-0): size 3079 (cls: DUDEBRO_Pawn_C>BlueprintGeneratedClass>/Script/Engine):
+	DUDEBRO_Pawn_C (0-0-0-0): size 3111 (cls: DUDEBRO_Pawn_C>BlueprintGeneratedClass>/Script/Engine):
 		Tag array:
 			NumReplicatedProperties(IntProperty)=10 
 			DynamicBindingObjects(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -2247,7 +2251,8 @@ Serialized exports:
 	DebugMenuBlackboardKeyList (0-0-0-0): size 36 (cls: DebugMenuBlackboardKeyList>ArrayProperty>/Script/CoreUObject)
 	P_Dudebro_EyeLights (0-0-0-0): size 36 (cls: P_Dudebro_EyeLights>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_DUDEBRO_Pawn (0-0-0-0): size 21535 (cls: ExecuteUbergraph_DUDEBRO_Pawn>Function>/Script/CoreUObject)
+	ExecuteUbergraph_DUDEBRO_Pawn (0-0-0-0): size 21673 (cls: ExecuteUbergraph_DUDEBRO_Pawn>Function>/Script/CoreUObject)
+	SetOwningPawnOnActorComponents (0-0-0-0): size 54 (cls: SetOwningPawnOnActorComponents>Function>/Script/CoreUObject)
 	StormPantsCheckInitialOverlap (0-0-0-0): size 54 (cls: StormPantsCheckInitialOverlap>Function>/Script/CoreUObject)
 	StormPantsCheck (0-0-0-0): size 54 (cls: StormPantsCheck>Function>/Script/CoreUObject)
 	Late Joiners (0-0-0-0): size 36 (cls: Late Joiners>ObjectProperty>/Script/CoreUObject)
@@ -2648,6 +2653,12 @@ Serialized exports:
 	CallFunc_Not_PreBool_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess1 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess1>BoolProperty>/Script/CoreUObject)
+	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
+	OnRep_DUDEBRO Dead (0-0-0-0): size 200 (cls: OnRep_DUDEBRO Dead>Function>/Script/CoreUObject)
+	OnRep_DBNO SafeOverlap (0-0-0-0): size 114 (cls: OnRep_DBNO SafeOverlap>Function>/Script/CoreUObject)
+	Target (0-0-0-0): size 36 (cls: Target>ObjectProperty>/Script/CoreUObject)
+	DUDEBRO SetOwningPawnOnWeakspot (0-0-0-0): size 157 (cls: DUDEBRO SetOwningPawnOnWeakspot>Function>/Script/CoreUObject)
+	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	CallFunc_HasActiveAbilityWithAnyMatchingTag_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasActiveAbilityWithAnyMatchingTag_ReturnValue>BoolProperty>/Script/CoreUObject)
 	TriggeredByHealthThreshold (0-0-0-0): size 34 (cls: TriggeredByHealthThreshold>BoolProperty>/Script/CoreUObject)
 	CallFunc_BooleanAND_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue>BoolProperty>/Script/CoreUObject)
@@ -2721,6 +2732,7 @@ Serialized exports:
 	CallFunc_HasAuthority_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_HasAuthority_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_HasAuthority_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_HasAuthority_ReturnValue2>BoolProperty>/Script/CoreUObject)
 	CallFunc_HasAuthority_ReturnValue3 (0-0-0-0): size 34 (cls: CallFunc_HasAuthority_ReturnValue3>BoolProperty>/Script/CoreUObject)
+	CallFunc_HasAuthority_ReturnValue4 (0-0-0-0): size 34 (cls: CallFunc_HasAuthority_ReturnValue4>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsDedicatedServer_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsDedicatedServer_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsDedicatedServer_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_IsDedicatedServer_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsDedicatedServer_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_IsDedicatedServer_ReturnValue2>BoolProperty>/Script/CoreUObject)
@@ -2809,8 +2821,6 @@ Serialized exports:
 	CallFunc_EqualEqual_ObjectObject_ReturnValue7 (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ObjectObject_ReturnValue7>BoolProperty>/Script/CoreUObject)
 	CallFunc_EqualEqual_ObjectObject_ReturnValue8 (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ObjectObject_ReturnValue8>BoolProperty>/Script/CoreUObject)
 	CallFunc_EqualEqual_ObjectObject_ReturnValue9 (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ObjectObject_ReturnValue9>BoolProperty>/Script/CoreUObject)
-	OnRep_DUDEBRO Dead (0-0-0-0): size 200 (cls: OnRep_DUDEBRO Dead>Function>/Script/CoreUObject)
-	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_K2_IsTimerActive_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_K2_IsTimerActive_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_K2_IsTimerActive_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_K2_IsTimerActive_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	K2Node_SwitchEnum_CmpSuccess (0-0-0-0): size 34 (cls: K2Node_SwitchEnum_CmpSuccess>BoolProperty>/Script/CoreUObject)
@@ -3175,7 +3185,6 @@ Serialized exports:
 			RelativeLocation(StructProperty)=Vector(0,0,-1360) 
 	Collision Prediction Shape Component (0-0-0-0): size 36 (cls: Collision Prediction Shape Component>ObjectProperty>/Script/CoreUObject)
 	GetCollisionPredictionComponent (0-0-0-0): size 54 (cls: GetCollisionPredictionComponent>Function>/Script/CoreUObject)
-	OnRep_DBNO SafeOverlap (0-0-0-0): size 114 (cls: OnRep_DBNO SafeOverlap>Function>/Script/CoreUObject)
 	InheritableComponentHandler (0-0-0-0): size 517 (cls: InheritableComponentHandler>InheritableComponentHandler>/Script/Engine):
 		Tag array:
 			Records(ArrayProperty)=[object] (inner: StructProperty)
@@ -3421,6 +3430,7 @@ Serialized exports:
 	CallFunc_Array_Get_Item (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsBGA_DUDEBRO_Weak_Point (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsBGA_DUDEBRO_Weak_Point>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsChild_Actor_Component (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsChild_Actor_Component>ObjectProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_AsBGA_DUDEBRO_Weak_Point (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsBGA_DUDEBRO_Weak_Point>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetBlackboard_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetBlackboard_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_Array_Get_Item (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item>ObjectProperty>/Script/CoreUObject)
 	CallFunc_Array_Get_Item1 (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item1>ObjectProperty>/Script/CoreUObject)

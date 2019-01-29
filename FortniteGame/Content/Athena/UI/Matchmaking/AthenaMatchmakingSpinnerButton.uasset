@@ -3,10 +3,12 @@ Name table:
 	/Game/Athena/UI/Matchmaking/AthenaMatchmakingSpinnerButton.WidgetArchetype
 	/Game/Athena/UI/Matchmaking/SimpleCommonButton
 	/Game/UI/Foundation/Buttons/ButtonStyles/ButtonStyle-TextOnlyBase_Empty
+	/Game/UI/Foundation/Buttons/ButtonStyles/ButtonStyle-TextOnlyBase_Empty_LightHover
 	/Game/UI/Foundation/Buttons/ButtonStyles/ButtonStyle-TextOnlyBase_EmptyFocus
 	/Game/UI/Foundation/Buttons/ButtonStyles/ButtonStyle_SimpleCycleArrow_Left
 	/Game/UI/Foundation/Buttons/ButtonStyles/ButtonStyle_SimpleCycleArrow_Right
 	/Game/UI/Foundation/Fonts/BurbankSmall
+	/Game/UI/Foundation/Materials/Throbber_Material-Monochrome
 	/Game/UI/Foundation/Text/TextScrollStyle-Base
 	/Script/BlueprintContext
 	/Script/CommonInput
@@ -35,6 +37,7 @@ Name table:
 	bAllowTemplate
 	bClassRequiresNativeTick
 	bCookedWidgetTree
+	bCurrentlyLoading
 	bEvalNearestSection
 	bEvaluateInPostroll
 	bEvaluateInPreroll
@@ -68,10 +71,12 @@ Name table:
 	BP_OnDoubleClicked
 	BP_OnHovered
 	BP_OnUnhovered
+	Brush
 	BurbankSmall
 	bUsingGamepad
 	Button
 	ButtonStyle-TextOnlyBase_Empty_C
+	ButtonStyle-TextOnlyBase_Empty_LightHover_C
 	ButtonStyle-TextOnlyBase_EmptyFocus_C
 	ButtonStyle_SimpleCycleArrow_Left_C
 	ButtonStyle_SimpleCycleArrow_Right_C
@@ -120,6 +125,7 @@ Name table:
 	Default__Border
 	Default__BorderSlot
 	Default__ButtonStyle-TextOnlyBase_Empty_C
+	Default__ButtonStyle-TextOnlyBase_Empty_LightHover_C
 	Default__ButtonStyle-TextOnlyBase_EmptyFocus_C
 	Default__ButtonStyle_SimpleCycleArrow_Left_C
 	Default__ButtonStyle_SimpleCycleArrow_Right_C
@@ -137,6 +143,7 @@ Name table:
 	Default__Function
 	Default__HorizontalBox
 	Default__HorizontalBoxSlot
+	Default__Image
 	Default__IntProperty
 	Default__KismetSystemLibrary
 	Default__MovieScene
@@ -195,6 +202,8 @@ Name table:
 	ESlateBrushDrawType::NoDrawType
 	ESlateSizeRule
 	ESlateSizeRule::Fill
+	ESlateVisibility
+	ESlateVisibility::Collapsed
 	EUINavigationRule
 	EUINavigationRule::Custom
 	EvalOptions
@@ -235,6 +244,8 @@ Name table:
 	HorizontalAlignment
 	HorizontalBox
 	HorizontalBoxSlot
+	Image
+	ImageSize
 	ImplIndex
 	In
 	In_INST
@@ -256,8 +267,10 @@ Name table:
 	K2Node_CustomEvent_bNewInputType
 	K2Node_CustomEvent_GamePad
 	K2Node_CustomEvent_Index
+	K2Node_Event_bCurrentlyLoading
 	K2Node_Event_bUsingGamepad
 	K2Node_Event_IsDesignTime
+	K2Node_Select1_Default
 	K2Node_Select_Default
 	Key
 	KismetMathLibrary
@@ -277,6 +290,7 @@ Name table:
 	MapProperty
 	Margin
 	Mask
+	Material
 	MaxDesiredWidth
 	MetaData
 	MinDesiredWidth
@@ -334,6 +348,7 @@ Name table:
 	ObjectProperty
 	OnButtonClicked
 	OnInputMethodChanged
+	OnLoadingStateChanged
 	OptionDisplayName
 	OptionSelectionArea
 	OutlineColor
@@ -363,6 +378,7 @@ Name table:
 	RCTWM_WeightedNone
 	RenderOpacity
 	RenderTransform
+	ResourceObject
 	Right
 	Right_INST
 	RightButton
@@ -370,6 +386,7 @@ Name table:
 	RootWidget
 	Rotation
 	Rule
+	SaveSpinner
 	Scale
 	ScriptStruct
 	ScrollStyle
@@ -387,6 +404,7 @@ Name table:
 	SetHeightOverride
 	SetRenderOpacity
 	SetStyle
+	SetVisibility
 	SetWidthOverride
 	ShadowColorAndOpacity
 	Shear
@@ -419,6 +437,9 @@ Name table:
 	TangentMode
 	TangentWeightMode
 	Temp_bool_Variable
+	Temp_bool_Variable1
+	Temp_byte_Variable
+	Temp_byte_Variable1
 	Temp_class_Variable
 	Temp_class_Variable1
 	TemplateAsset
@@ -427,6 +448,7 @@ Name table:
 	Text
 	TextProperty
 	TextScrollStyle-Base_C
+	Throbber_Material-Monochrome
 	TickResolution
 	Times
 	TintColor
@@ -446,11 +468,14 @@ Name table:
 	UnderlyingType
 	UserWidget
 	VAlign_Center
+	VAlign_Top
 	Value
 	Values
+	Vector2D
 	VerticalAlignment
 	VerticalBox
 	VerticalBoxSlot
+	Visibility
 	Widget
 	WidgetAnimation
 	WidgetAnimationBinding
@@ -465,7 +490,7 @@ Name table:
 	WidthOverride
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	AthenaMatchmakingSpinnerButton_C (0-0-0-0): size 667 (cls: AthenaMatchmakingSpinnerButton_C>WidgetBlueprintGeneratedClass>/Script/UMG):
+	AthenaMatchmakingSpinnerButton_C (0-0-0-0): size 687 (cls: AthenaMatchmakingSpinnerButton_C>WidgetBlueprintGeneratedClass>/Script/UMG):
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
@@ -482,7 +507,7 @@ Serialized exports:
 			a_0(ArrayProperty)=[object] (inner: StrProperty)
 			DebugOnMobileOrPC(BoolProperty)=True 
 			Mobile Size Override(FloatProperty)=50 
-			Style(ObjectProperty)=ButtonStyle-TextOnlyBase_Empty_C=/Game/UI/Foundation/Buttons/ButtonStyles/ButtonStyle-TextOnlyBase_Empty 
+			Style(ObjectProperty)=ButtonStyle-TextOnlyBase_Empty_LightHover_C=/Game/UI/Foundation/Buttons/ButtonStyles/ButtonStyle-TextOnlyBase_Empty_LightHover 
 			bIsFocusable(BoolProperty)=False 
 			bHasScriptImplementedTick(BoolProperty)=False 
 			bHasScriptImplementedPaint(BoolProperty)=False 
@@ -490,20 +515,23 @@ Serialized exports:
 	a (0-0-0-0): size 36 (cls: a>ArrayProperty>/Script/CoreUObject)
 	a_0 (0-0-0-0): size 32 (cls: a_0>StrProperty>/Script/CoreUObject)
 	a_0 (0-0-0-0): size 36 (cls: a_0>ArrayProperty>/Script/CoreUObject)
-	WidgetArchetype (0-0-0-0): size 270 (cls: WidgetArchetype>AthenaMatchmakingSpinnerButton_C):
+	WidgetArchetype (0-0-0-0): size 299 (cls: WidgetArchetype>AthenaMatchmakingSpinnerButton_C):
 		Tag array:
 			Border_Fill(ObjectProperty)=Border_Fill=WidgetArchetype 
 			LeftButton(ObjectProperty)=LeftButton=WidgetArchetype 
 			LeftButtonSize(ObjectProperty)=LeftButtonSize=WidgetArchetype 
 			RightButton(ObjectProperty)=RightButton=WidgetArchetype 
 			RightButtonSize(ObjectProperty)=RightButtonSize=WidgetArchetype 
+			SaveSpinner(ObjectProperty)=SaveSpinner=WidgetArchetype 
 			OptionDisplayName(ObjectProperty)=OptionDisplayName=WidgetArchetype 
 			MyText(ObjectProperty)=MyText=WidgetArchetype 
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 	In (0-0-0-0): size 36 (cls: In>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_AthenaMatchmakingSpinnerButton (0-0-0-0): size 1183 (cls: ExecuteUbergraph_AthenaMatchmakingSpinnerButton>Function>/Script/CoreUObject)
+	ExecuteUbergraph_AthenaMatchmakingSpinnerButton (0-0-0-0): size 1300 (cls: ExecuteUbergraph_AthenaMatchmakingSpinnerButton>Function>/Script/CoreUObject)
+	bCurrentlyLoading (0-0-0-0): size 34 (cls: bCurrentlyLoading>BoolProperty>/Script/CoreUObject)
+	OnLoadingStateChanged (0-0-0-0): size 68 (cls: OnLoadingStateChanged>Function>/Script/CoreUObject)
 	Index (0-0-0-0): size 32 (cls: Index>IntProperty>/Script/CoreUObject)
 	AnimateIn (0-0-0-0): size 68 (cls: AnimateIn>Function>/Script/CoreUObject)
 	ClearHoverState (0-0-0-0): size 54 (cls: ClearHoverState>Function>/Script/CoreUObject)
@@ -521,9 +549,11 @@ Serialized exports:
 	CallFunc_EqualEqual_ByteByte_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ByteByte_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_EqualEqual_ByteByte_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ByteByte_ReturnValue2>BoolProperty>/Script/CoreUObject)
 	K2Node_CustomEvent_GamePad (0-0-0-0): size 34 (cls: K2Node_CustomEvent_GamePad>BoolProperty>/Script/CoreUObject)
+	K2Node_Event_bCurrentlyLoading (0-0-0-0): size 34 (cls: K2Node_Event_bCurrentlyLoading>BoolProperty>/Script/CoreUObject)
 	K2Node_Event_bUsingGamepad (0-0-0-0): size 34 (cls: K2Node_Event_bUsingGamepad>BoolProperty>/Script/CoreUObject)
 	K2Node_Event_IsDesignTime (0-0-0-0): size 34 (cls: K2Node_Event_IsDesignTime>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
+	Temp_bool_Variable1 (0-0-0-0): size 34 (cls: Temp_bool_Variable1>BoolProperty>/Script/CoreUObject)
 	Button (0-0-0-0): size 36 (cls: Button>ObjectProperty>/Script/CoreUObject)
 	BndEvt__SimpleCommonButton_K2Node_ComponentBoundEvent_3_CommonButtonClicked__DelegateSignature (0-0-0-0): size 68 (cls: BndEvt__SimpleCommonButton_K2Node_ComponentBoundEvent_3_CommonButtonClicked__DelegateSignature>Function>/Script/CoreUObject)
 	Button (0-0-0-0): size 36 (cls: Button>ObjectProperty>/Script/CoreUObject)
@@ -571,6 +601,9 @@ Serialized exports:
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	CanvasPanel_0 (0-0-0-0): size 12 (cls: CanvasPanel_0>CanvasPanel>/Script/UMG)
 	CanvasPanel_0 (0-0-0-0): size 12 (cls: CanvasPanel_0>CanvasPanel>/Script/UMG)
 	K2Node_Select_Default (0-0-0-0): size 40 (cls: K2Node_Select_Default>ClassProperty>/Script/CoreUObject)
@@ -605,9 +638,12 @@ Serialized exports:
 	CallFunc_GetCurrentInputType_ReturnValue (0-0-0-0): size 40 (cls: CallFunc_GetCurrentInputType_ReturnValue>EnumProperty>/Script/CoreUObject)
 	CallFunc_GetCurrentInputType_ReturnValue1 (0-0-0-0): size 40 (cls: CallFunc_GetCurrentInputType_ReturnValue1>EnumProperty>/Script/CoreUObject)
 	K2Node_CustomEvent_bNewInputType (0-0-0-0): size 40 (cls: K2Node_CustomEvent_bNewInputType>EnumProperty>/Script/CoreUObject)
+	K2Node_Select1_Default (0-0-0-0): size 40 (cls: K2Node_Select1_Default>EnumProperty>/Script/CoreUObject)
+	Temp_byte_Variable (0-0-0-0): size 40 (cls: Temp_byte_Variable>EnumProperty>/Script/CoreUObject)
+	Temp_byte_Variable1 (0-0-0-0): size 40 (cls: Temp_byte_Variable1>EnumProperty>/Script/CoreUObject)
 	CallFunc_Multiply_IntFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Multiply_IntFloat_ReturnValue>FloatProperty>/Script/CoreUObject)
 	Mobile Size Override (0-0-0-0): size 32 (cls: Mobile Size Override>FloatProperty>/Script/CoreUObject)
-	HorizontalBox_0 (0-0-0-0): size 86 (cls: HorizontalBox_0>HorizontalBox>/Script/UMG):
+	HorizontalBox_0 (0-0-0-0): size 90 (cls: HorizontalBox_0>HorizontalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=BorderSlot_0=WidgetArchetype 
@@ -620,6 +656,12 @@ Serialized exports:
 			HorizontalAlignment(ByteProperty)=HAlign_Left 
 			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
 			Content(ObjectProperty)=SizeBox_0=WidgetArchetype 
+	HorizontalBoxSlot_1 (0-0-0-0): size 152 (cls: HorizontalBoxSlot_1>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Right 
+			VerticalAlignment(ByteProperty)=VAlign_Top 
+			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
+			Content(ObjectProperty)=SaveSpinner=WidgetArchetype 
 	HorizontalBoxSlot_4 (0-0-0-0): size 295 (cls: HorizontalBoxSlot_4>HorizontalBoxSlot>/Script/UMG):
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
@@ -645,6 +687,11 @@ Serialized exports:
 			VerticalAlignment(ByteProperty)=VAlign_Center 
 			Parent(ObjectProperty)=OptionSelectionArea=WidgetArchetype 
 			Content(ObjectProperty)=LeftButtonSize=WidgetArchetype 
+	SaveSpinner (0-0-0-0): size 225 (cls: SaveSpinner>Image>/Script/UMG):
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
 	K2Node_CustomEvent_Index (0-0-0-0): size 32 (cls: K2Node_CustomEvent_Index>IntProperty>/Script/CoreUObject)
 	In (0-0-0-0): size 798 (cls: In>MovieScene>/Script/MovieScene):
 		Tag array:
@@ -785,6 +832,7 @@ Serialized exports:
 	Right (0-0-0-0): size 36 (cls: Right>ObjectProperty>/Script/CoreUObject)
 	RightButton (0-0-0-0): size 36 (cls: RightButton>ObjectProperty>/Script/CoreUObject)
 	RightButtonSize (0-0-0-0): size 36 (cls: RightButtonSize>ObjectProperty>/Script/CoreUObject)
+	SaveSpinner (0-0-0-0): size 36 (cls: SaveSpinner>ObjectProperty>/Script/CoreUObject)
 	LeftButton (0-0-0-0): size 125 (cls: LeftButton>SimpleCommonButton_C>/Game/Athena/UI/Matchmaking/SimpleCommonButton):
 		Tag array:
 			Style(ObjectProperty)=ButtonStyle_SimpleCycleArrow_Left_C=/Game/UI/Foundation/Buttons/ButtonStyles/ButtonStyle_SimpleCycleArrow_Left 

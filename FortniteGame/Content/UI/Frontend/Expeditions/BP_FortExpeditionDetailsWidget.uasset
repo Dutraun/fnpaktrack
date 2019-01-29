@@ -7,6 +7,7 @@ Name table:
 	/Game/UI/Foundation/Border/Border-TabM-Solid
 	/Game/UI/Foundation/Border/Border_Navy_VGrad
 	/Game/UI/Foundation/Border/Border_Solid_DkBlue
+	/Game/UI/Foundation/Border/Materials/M-Border-Bang
 	/Game/UI/Foundation/Buttons/ButtonStyles/ButtonStyle-Solid-SquareM
 	/Game/UI/Foundation/Fonts/Burbank
 	/Game/UI/Foundation/Fonts/NotoSans
@@ -16,6 +17,8 @@ Name table:
 	/Game/UI/Foundation/PowerRating/BasicRatingWidget
 	/Game/UI/Foundation/ProgressBar/BP_FortMaterialProgressBar
 	/Game/UI/Foundation/ProgressBar/M-ProgressBar-Collections
+	/Game/UI/Foundation/Shell/Textures/T-Icon-Warning-32
+	/Game/UI/Foundation/Text/TextScrollStyle-Base
 	/Game/UI/Foundation/Text/TextStyle-Base
 	/Game/UI/Foundation/Text/TextStyle-Base-M-B
 	/Game/UI/Foundation/Text/TextStyle-Base-S-B
@@ -23,8 +26,11 @@ Name table:
 	/Game/UI/Foundation/Text/TextStyle-Base-XS-70pc
 	/Game/UI/Foundation/Text/TextStyle-Base-XS-B
 	/Game/UI/Foundation/Text/TextStyle-Base-XS-B-70pc
+	/Game/UI/Foundation/Text/TextStyle-Base-XS-B-Black
 	/Game/UI/Foundation/Text/TextStyle-Base-XS-B-Blue
 	/Game/UI/Foundation/Text/TextStyle-Header-M
+	/Game/UI/Foundation/Textures/Icons/HUD/T-Icon-Clock-128
+	/Game/UI/Foundation/Textures/Icons/ItemTypes/T-Icon-Explosive-64
 	/Game/UI/Foundation/Textures/Icons/Shell/T-Icon-Power-64
 	/Game/UI/Foundation/Textures/Rule/Rule-Dotted-HUD
 	/Game/UI/Frontend/Expeditions/BP_FortExpeditionBuildSquadWidget
@@ -92,6 +98,7 @@ Name table:
 	Border-TabM-Solid_C
 	Border-TabM_C
 	Border_Navy_VGrad_C
+	Border_Small
 	Border_Solid_DkBlue_C
 	BorderHeader
 	BorderSlot
@@ -120,6 +127,7 @@ Name table:
 	Brush
 	Brush_M
 	Brush_S
+	BrushColor
 	bSelectableButtons
 	bSlotButtonsRequireSelection
 	Burbank
@@ -195,6 +203,7 @@ Name table:
 	CommonActionWidget
 	CommonBorder
 	CommonButton
+	CommonLazyImage
 	CommonNumberFormattingOptions
 	CommonNumericTextBlock
 	CommonTextBlock
@@ -239,6 +248,7 @@ Name table:
 	Default__ClassProperty
 	Default__CommonActionWidget
 	Default__CommonBorder
+	Default__CommonLazyImage
 	Default__CommonNumericTextBlock
 	Default__CommonTextBlock
 	Default__CommonWidgetSwitcher
@@ -252,6 +262,7 @@ Name table:
 	Default__FortExpeditionUtilities
 	Default__FortItemViewContext_ExpeditionSquadSlotsView
 	Default__FortKismetLibrary
+	Default__FortMultiSizeItemCard
 	Default__FortRarityData
 	Default__FortUIManagerWidget_NUI
 	Default__Function
@@ -274,13 +285,16 @@ Name table:
 	Default__RewardsListEntry_C
 	Default__SizeBox
 	Default__SizeBoxSlot
+	Default__Spacer
 	Default__SquadSlotGroup_C
 	Default__StructProperty
 	Default__TextProperty
+	Default__TextScrollStyle-Base_C
 	Default__TextStyle-Base-M-B_C
 	Default__TextStyle-Base-S-B_C
 	Default__TextStyle-Base-XS-70pc_C
 	Default__TextStyle-Base-XS-B-70pc_C
+	Default__TextStyle-Base-XS-B-Black_C
 	Default__TextStyle-Base-XS-B-Blue_C
 	Default__TextStyle-Base-XS-B_C
 	Default__TextStyle-Base-XS_C
@@ -300,6 +314,7 @@ Name table:
 	DialogResult
 	DialogResult_11B7688B48FDD9A59A2D55A7B4F60124
 	DisplayName
+	DrawAs
 	DynamicBindingObjects
 	ECommonNumericType
 	ECommonNumericType::Percentage
@@ -308,8 +323,11 @@ Name table:
 	EFortDialogResult
 	EFortItemCardSize
 	EFortItemCardSize::S
+	EFortItemType
+	EFortItemType::AccountItem
 	EFortRarity
 	EHorizontalAlignment
+	EmptyItemType
 	EndWaitForConfirmationDialog
 	Engine
 	EntryPoint
@@ -317,12 +335,17 @@ Name table:
 	EnumProperty
 	EqualEqual_ObjectObject
 	ERoundingMode
+	ESlateBrushDrawType
+	ESlateBrushDrawType::Box
 	ESlateBrushTileType
 	ESlateBrushTileType::Horizontal
 	ESlateSizeRule
 	ESlateSizeRule::Fill
 	ESlateVisibility
 	ESlateVisibility::Collapsed
+	ESlateVisibility::SelfHitTestInvisible
+	ETextJustify
+	ETextJustify::Center
 	EVerticalAlignment
 	ExecuteUbergraph_BP_FortExpeditionDetailsWidget
 	ExpeditionBuildSquadWidgetClass
@@ -353,12 +376,14 @@ Name table:
 	FortExpeditionUtilities
 	FortHomebaseUIContext
 	FortItem
+	FortItemCard_XXSSchematicItemCard
 	FortItemDefinition
 	FortItemViewContext_ExpeditionSquadSlotsView
 	FortKismetLibrary
 	FortMaterialProgressBarSectionInfo
 	FortMaterialProgressBarSectionStyle
 	FortMultiSizeBrush
+	FortMultiSizeItemCard
 	FortPlayerController
 	FortRarityData
 	FortRarityItemData
@@ -417,6 +442,8 @@ Name table:
 	Icon
 	IconAndNameWidget_C
 	Image
+	ImageFoundersReward
+	ImageMaxLimitWarning
 	ImageSize
 	InfoAction
 	InfoIcon
@@ -432,6 +459,7 @@ Name table:
 	Item Def
 	ItemDef
 	ItemViewContext_ExpeditionSlotsView
+	Justification
 	K2Node_ComponentBoundEvent_Button
 	K2Node_CreateDelegate_OutputDelegate
 	K2Node_CustomEvent_bWaitingForLatentActionCompletion
@@ -457,10 +485,12 @@ Name table:
 	KismetMathLibrary
 	KismetSystemLibrary
 	KismetTextLibrary
+	LazyImageRewardIcon
 	Left
 	Less_FloatFloat
 	Less_IntInt
 	LinearColor
+	M-Border-Bang
 	M-ProgressBar-Collections
 	Margin
 	MaterialInstanceConstant
@@ -512,14 +542,18 @@ Name table:
 	RatingImageColor
 	RatingValue
 	Refresh Item Data
+	RenderTransform
 	RequiredRarity
 	RequiredTag
 	RequirementSet
 	ResourceObject
 	Result
 	ResultName
+	RewardCount
 	RewardInfoWindow
 	RewardItem
+	RewardName
+	RewardsListEntry
 	RewardsListEntry_C
 	RewardsSet
 	RGBA0
@@ -530,6 +564,7 @@ Name table:
 	RowName
 	Rule-Dotted-HUD
 	ScriptStruct
+	ScrollStyle
 	SectionStyle
 	self2
 	Set Bonus Criteria
@@ -562,6 +597,7 @@ Name table:
 	ShowAdvancedLatentActionConfirmation
 	Size
 	SizeBox
+	SizeBoxMissionAlert
 	SizeBoxSlot
 	SizeBoxWidget
 	SizeRule
@@ -573,6 +609,7 @@ Name table:
 	Slot Size
 	Slots
 	SoftObjectProperty
+	Spacer
 	SpecifiedColor
 	SquadPowerRating
 	SquadSlotBox
@@ -583,7 +620,12 @@ Name table:
 	SubordinatesSquadSlotGroup
 	SuccessChance
 	SuccessProgressText
+	SwitcherRewardType
+	SwitcherSpecialRewardType
+	T-Icon-Clock-128
+	T-Icon-Explosive-64
 	T-Icon-Power-64
+	T-Icon-Warning-32
 	Tag
 	TagBrush
 	TargetPowerRating
@@ -599,12 +641,15 @@ Name table:
 	TemplateAsset
 	Text
 	TextBlock
+	TextCardPackCount
 	TextProperty
+	TextScrollStyle-Base_C
 	TextStyle
 	TextStyle-Base-M-B_C
 	TextStyle-Base-S-B_C
 	TextStyle-Base-XS-70pc_C
 	TextStyle-Base-XS-B-70pc_C
+	TextStyle-Base-XS-B-Black_C
 	TextStyle-Base-XS-B-Blue_C
 	TextStyle-Base-XS-B_C
 	TextStyle-Base-XS_C
@@ -619,6 +664,7 @@ Name table:
 	Top
 	ToZero
 	TransitionDuration
+	Translation
 	TriggeringInputAction
 	TypefaceFontName
 	UberGraphFrame
@@ -648,6 +694,7 @@ Name table:
 	WidgetBlueprintGeneratedClass
 	WidgetBlueprintLibrary
 	WidgetSwitcherSlot
+	WidgetTransform
 	WidgetTree
 	WidthOverride
 	WrapTextAt
@@ -983,6 +1030,70 @@ Serialized exports:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
+	Border_Small (0-0-0-0): size 538 (cls: Border_Small>CommonBorder>/Script/CommonUI):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			Padding(StructProperty)=System.Byte[] 
+			Background(StructProperty)=System.Byte[] 
+			Slot(ObjectProperty)=OverlaySlot_7=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
+	CommonBorder_4 (0-0-0-0): size 717 (cls: CommonBorder_4>CommonBorder>/Script/CommonUI):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			Padding(StructProperty)=System.Byte[] 
+			Background(StructProperty)=System.Byte[] 
+			BrushColor(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=OverlaySlot_13=WidgetArchetype 
+			RenderTransform(StructProperty)=System.Byte[] 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
+	Border_Small (0-0-0-0): size 538 (cls: Border_Small>CommonBorder>/Script/CommonUI):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			Padding(StructProperty)=System.Byte[] 
+			Background(StructProperty)=System.Byte[] 
+			Slot(ObjectProperty)=OverlaySlot_7=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
+	CommonBorder_4 (0-0-0-0): size 717 (cls: CommonBorder_4>CommonBorder>/Script/CommonUI):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			Padding(StructProperty)=System.Byte[] 
+			Background(StructProperty)=System.Byte[] 
+			BrushColor(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=OverlaySlot_13=WidgetArchetype 
+			RenderTransform(StructProperty)=System.Byte[] 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
+	Border_Small (0-0-0-0): size 538 (cls: Border_Small>CommonBorder>/Script/CommonUI):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			Padding(StructProperty)=System.Byte[] 
+			Background(StructProperty)=System.Byte[] 
+			Slot(ObjectProperty)=OverlaySlot_7=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
+	CommonBorder_4 (0-0-0-0): size 717 (cls: CommonBorder_4>CommonBorder>/Script/CommonUI):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			Padding(StructProperty)=System.Byte[] 
+			Background(StructProperty)=System.Byte[] 
+			BrushColor(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=OverlaySlot_13=WidgetArchetype 
+			RenderTransform(StructProperty)=System.Byte[] 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
+	Border_Small (0-0-0-0): size 538 (cls: Border_Small>CommonBorder>/Script/CommonUI):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			Padding(StructProperty)=System.Byte[] 
+			Background(StructProperty)=System.Byte[] 
+			Slot(ObjectProperty)=OverlaySlot_7=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
+	CommonBorder_4 (0-0-0-0): size 717 (cls: CommonBorder_4>CommonBorder>/Script/CommonUI):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			Padding(StructProperty)=System.Byte[] 
+			Background(StructProperty)=System.Byte[] 
+			BrushColor(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=OverlaySlot_13=WidgetArchetype 
+			RenderTransform(StructProperty)=System.Byte[] 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
 	RatingBorder (0-0-0-0): size 310 (cls: RatingBorder>CommonBorder>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=Border-TabM-Solid_C=/Game/UI/Foundation/Border/Border-TabM-Solid 
@@ -997,6 +1108,26 @@ Serialized exports:
 			Padding(StructProperty)=System.Byte[] 
 			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
+	LazyImageRewardIcon (0-0-0-0): size 225 (cls: LazyImageRewardIcon>CommonLazyImage>/Script/CommonUI):
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			Slot(ObjectProperty)=WidgetSwitcherSlot_2=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::SelfHitTestInvisible 
+	LazyImageRewardIcon (0-0-0-0): size 225 (cls: LazyImageRewardIcon>CommonLazyImage>/Script/CommonUI):
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			Slot(ObjectProperty)=WidgetSwitcherSlot_2=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::SelfHitTestInvisible 
+	LazyImageRewardIcon (0-0-0-0): size 225 (cls: LazyImageRewardIcon>CommonLazyImage>/Script/CommonUI):
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			Slot(ObjectProperty)=WidgetSwitcherSlot_2=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::SelfHitTestInvisible 
+	LazyImageRewardIcon (0-0-0-0): size 225 (cls: LazyImageRewardIcon>CommonLazyImage>/Script/CommonUI):
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			Slot(ObjectProperty)=WidgetSwitcherSlot_2=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::SelfHitTestInvisible 
 	ProgressPercentage (0-0-0-0): size 670 (cls: ProgressPercentage>CommonNumericTextBlock>/Script/CommonUI):
 		Tag array:
 			CurrentNumericValue(FloatProperty)=1 
@@ -1008,6 +1139,38 @@ Serialized exports:
 			Font(StructProperty)=System.Byte[] 
 			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_3=WidgetArchetype 
+			bIsVariable(BoolProperty)=True 
+	RewardCount (0-0-0-0): size 369 (cls: RewardCount>CommonNumericTextBlock>/Script/CommonUI):
+		Tag array:
+			Style(ObjectProperty)=TextStyle-Base-XS-B_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B 
+			Text(TextProperty)= () 
+			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
+			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
+			bIsVariable(BoolProperty)=True 
+	RewardCount (0-0-0-0): size 369 (cls: RewardCount>CommonNumericTextBlock>/Script/CommonUI):
+		Tag array:
+			Style(ObjectProperty)=TextStyle-Base-XS-B_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B 
+			Text(TextProperty)= () 
+			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
+			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
+			bIsVariable(BoolProperty)=True 
+	RewardCount (0-0-0-0): size 369 (cls: RewardCount>CommonNumericTextBlock>/Script/CommonUI):
+		Tag array:
+			Style(ObjectProperty)=TextStyle-Base-XS-B_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B 
+			Text(TextProperty)= () 
+			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
+			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
+			bIsVariable(BoolProperty)=True 
+	RewardCount (0-0-0-0): size 369 (cls: RewardCount>CommonNumericTextBlock>/Script/CommonUI):
+		Tag array:
+			Style(ObjectProperty)=TextStyle-Base-XS-B_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B 
+			Text(TextProperty)= () 
+			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
+			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
 	RatingValue (0-0-0-0): size 340 (cls: RatingValue>CommonNumericTextBlock>/Script/CommonUI):
 		Tag array:
@@ -1119,6 +1282,122 @@ Serialized exports:
 			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
+	CommonTextBlock_5 (0-0-0-0): size 655 (cls: CommonTextBlock_5>CommonTextBlock>/Script/CommonUI):
+		Tag array:
+			Style(ObjectProperty)=TextStyle-Base-XS-B-Black_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B-Black 
+			Text(TextProperty)=! (D834F07143DF4B7D14396486FC08F9BC) 
+			ColorAndOpacity(StructProperty)=System.Byte[] 
+			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
+			Justification(ByteProperty)=ETextJustify::Center 
+			Slot(ObjectProperty)=SizeBoxSlot_1=WidgetArchetype 
+			RenderTransform(StructProperty)=System.Byte[] 
+			bIsVariable(BoolProperty)=True 
+	RewardName (0-0-0-0): size 417 (cls: RewardName>CommonTextBlock>/Script/CommonUI):
+		Tag array:
+			Style(ObjectProperty)=TextStyle-Base-XS-B_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B 
+			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
+			Text(TextProperty)=Reward Name (BACF67FD4BA8B27FF03E2E97B7D999AF) 
+			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
+			Slot(ObjectProperty)=HorizontalBoxSlot_3=WidgetArchetype 
+			bIsVariable(BoolProperty)=True 
+	TextCardPackCount (0-0-0-0): size 419 (cls: TextCardPackCount>CommonTextBlock>/Script/CommonUI):
+		Tag array:
+			Style(ObjectProperty)=TextStyle-Base-XS-B_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B 
+			Text(TextProperty)=x (1614C5854E00DB29024582A60FE3DBDC) 
+			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
+			Slot(ObjectProperty)=HorizontalBoxSlot_2=WidgetArchetype 
+			bIsVariable(BoolProperty)=True 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
+	CommonTextBlock_5 (0-0-0-0): size 655 (cls: CommonTextBlock_5>CommonTextBlock>/Script/CommonUI):
+		Tag array:
+			Style(ObjectProperty)=TextStyle-Base-XS-B-Black_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B-Black 
+			Text(TextProperty)=! (D834F07143DF4B7D14396486FC08F9BC) 
+			ColorAndOpacity(StructProperty)=System.Byte[] 
+			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
+			Justification(ByteProperty)=ETextJustify::Center 
+			Slot(ObjectProperty)=SizeBoxSlot_1=WidgetArchetype 
+			RenderTransform(StructProperty)=System.Byte[] 
+			bIsVariable(BoolProperty)=True 
+	RewardName (0-0-0-0): size 417 (cls: RewardName>CommonTextBlock>/Script/CommonUI):
+		Tag array:
+			Style(ObjectProperty)=TextStyle-Base-XS-B_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B 
+			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
+			Text(TextProperty)=Reward Name (BACF67FD4BA8B27FF03E2E97B7D999AF) 
+			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
+			Slot(ObjectProperty)=HorizontalBoxSlot_3=WidgetArchetype 
+			bIsVariable(BoolProperty)=True 
+	TextCardPackCount (0-0-0-0): size 419 (cls: TextCardPackCount>CommonTextBlock>/Script/CommonUI):
+		Tag array:
+			Style(ObjectProperty)=TextStyle-Base-XS-B_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B 
+			Text(TextProperty)=x (1614C5854E00DB29024582A60FE3DBDC) 
+			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
+			Slot(ObjectProperty)=HorizontalBoxSlot_2=WidgetArchetype 
+			bIsVariable(BoolProperty)=True 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
+	CommonTextBlock_5 (0-0-0-0): size 655 (cls: CommonTextBlock_5>CommonTextBlock>/Script/CommonUI):
+		Tag array:
+			Style(ObjectProperty)=TextStyle-Base-XS-B-Black_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B-Black 
+			Text(TextProperty)=! (D834F07143DF4B7D14396486FC08F9BC) 
+			ColorAndOpacity(StructProperty)=System.Byte[] 
+			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
+			Justification(ByteProperty)=ETextJustify::Center 
+			Slot(ObjectProperty)=SizeBoxSlot_1=WidgetArchetype 
+			RenderTransform(StructProperty)=System.Byte[] 
+			bIsVariable(BoolProperty)=True 
+	RewardName (0-0-0-0): size 417 (cls: RewardName>CommonTextBlock>/Script/CommonUI):
+		Tag array:
+			Style(ObjectProperty)=TextStyle-Base-XS-B_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B 
+			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
+			Text(TextProperty)=Reward Name (BACF67FD4BA8B27FF03E2E97B7D999AF) 
+			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
+			Slot(ObjectProperty)=HorizontalBoxSlot_3=WidgetArchetype 
+			bIsVariable(BoolProperty)=True 
+	TextCardPackCount (0-0-0-0): size 419 (cls: TextCardPackCount>CommonTextBlock>/Script/CommonUI):
+		Tag array:
+			Style(ObjectProperty)=TextStyle-Base-XS-B_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B 
+			Text(TextProperty)=x (1614C5854E00DB29024582A60FE3DBDC) 
+			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
+			Slot(ObjectProperty)=HorizontalBoxSlot_2=WidgetArchetype 
+			bIsVariable(BoolProperty)=True 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
+	CommonTextBlock_5 (0-0-0-0): size 655 (cls: CommonTextBlock_5>CommonTextBlock>/Script/CommonUI):
+		Tag array:
+			Style(ObjectProperty)=TextStyle-Base-XS-B-Black_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B-Black 
+			Text(TextProperty)=! (D834F07143DF4B7D14396486FC08F9BC) 
+			ColorAndOpacity(StructProperty)=System.Byte[] 
+			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
+			Justification(ByteProperty)=ETextJustify::Center 
+			Slot(ObjectProperty)=SizeBoxSlot_1=WidgetArchetype 
+			RenderTransform(StructProperty)=System.Byte[] 
+			bIsVariable(BoolProperty)=True 
+	RewardName (0-0-0-0): size 417 (cls: RewardName>CommonTextBlock>/Script/CommonUI):
+		Tag array:
+			Style(ObjectProperty)=TextStyle-Base-XS-B_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B 
+			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
+			Text(TextProperty)=Reward Name (BACF67FD4BA8B27FF03E2E97B7D999AF) 
+			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
+			Slot(ObjectProperty)=HorizontalBoxSlot_3=WidgetArchetype 
+			bIsVariable(BoolProperty)=True 
+	TextCardPackCount (0-0-0-0): size 419 (cls: TextCardPackCount>CommonTextBlock>/Script/CommonUI):
+		Tag array:
+			Style(ObjectProperty)=TextStyle-Base-XS-B_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B 
+			Text(TextProperty)=x (1614C5854E00DB29024582A60FE3DBDC) 
+			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
+			Slot(ObjectProperty)=HorizontalBoxSlot_2=WidgetArchetype 
+			bIsVariable(BoolProperty)=True 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
 	Plus (0-0-0-0): size 349 (cls: Plus>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base_C=/Game/UI/Foundation/Text/TextStyle-Base 
@@ -1148,6 +1427,46 @@ Serialized exports:
 			TransitionDuration(FloatProperty)=0 
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=VerticalBoxSlot_2=WidgetArchetype 
+	SwitcherRewardType (0-0-0-0): size 115 (cls: SwitcherRewardType>CommonWidgetSwitcher>/Script/CommonUI):
+		Tag array:
+			TransitionDuration(FloatProperty)=0 
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=HorizontalBoxSlot_4=WidgetArchetype 
+	SwitcherSpecialRewardType (0-0-0-0): size 115 (cls: SwitcherSpecialRewardType>CommonWidgetSwitcher>/Script/CommonUI):
+		Tag array:
+			TransitionDuration(FloatProperty)=0 
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=HorizontalBoxSlot_6=WidgetArchetype 
+	SwitcherRewardType (0-0-0-0): size 115 (cls: SwitcherRewardType>CommonWidgetSwitcher>/Script/CommonUI):
+		Tag array:
+			TransitionDuration(FloatProperty)=0 
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=HorizontalBoxSlot_4=WidgetArchetype 
+	SwitcherSpecialRewardType (0-0-0-0): size 115 (cls: SwitcherSpecialRewardType>CommonWidgetSwitcher>/Script/CommonUI):
+		Tag array:
+			TransitionDuration(FloatProperty)=0 
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=HorizontalBoxSlot_6=WidgetArchetype 
+	SwitcherRewardType (0-0-0-0): size 115 (cls: SwitcherRewardType>CommonWidgetSwitcher>/Script/CommonUI):
+		Tag array:
+			TransitionDuration(FloatProperty)=0 
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=HorizontalBoxSlot_4=WidgetArchetype 
+	SwitcherSpecialRewardType (0-0-0-0): size 115 (cls: SwitcherSpecialRewardType>CommonWidgetSwitcher>/Script/CommonUI):
+		Tag array:
+			TransitionDuration(FloatProperty)=0 
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=HorizontalBoxSlot_6=WidgetArchetype 
+	SwitcherRewardType (0-0-0-0): size 115 (cls: SwitcherRewardType>CommonWidgetSwitcher>/Script/CommonUI):
+		Tag array:
+			TransitionDuration(FloatProperty)=0 
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=HorizontalBoxSlot_4=WidgetArchetype 
+	SwitcherSpecialRewardType (0-0-0-0): size 115 (cls: SwitcherSpecialRewardType>CommonWidgetSwitcher>/Script/CommonUI):
+		Tag array:
+			TransitionDuration(FloatProperty)=0 
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=HorizontalBoxSlot_6=WidgetArchetype 
 	ComponentDelegateBinding_0 (0-0-0-0): size 205 (cls: ComponentDelegateBinding_0>ComponentDelegateBinding>/Script/Engine):
 		Tag array:
 			ComponentDelegateBindings(ArrayProperty)=[object] (inner: StructProperty)
@@ -1164,6 +1483,22 @@ Serialized exports:
 	CallFunc_CalculateTotalPower_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_CalculateTotalPower_ReturnValue>FloatProperty>/Script/CoreUObject)
 	CallFunc_GetTargetPowerLevel_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetTargetPowerLevel_ReturnValue>FloatProperty>/Script/CoreUObject)
 	ItemViewContext_ExpeditionSlotsView (0-0-0-0): size 12 (cls: ItemViewContext_ExpeditionSlotsView>FortItemViewContext_ExpeditionSquadSlotsView>/Script/FortniteUI)
+	FortItemCard_XXSSchematicItemCard (0-0-0-0): size 82 (cls: FortItemCard_XXSSchematicItemCard>FortMultiSizeItemCard>/Script/FortniteUI):
+		Tag array:
+			EmptyItemType(EnumProperty)=EFortItemType::AccountItem 
+			Slot(ObjectProperty)=WidgetSwitcherSlot_1=WidgetArchetype 
+	FortItemCard_XXSSchematicItemCard (0-0-0-0): size 82 (cls: FortItemCard_XXSSchematicItemCard>FortMultiSizeItemCard>/Script/FortniteUI):
+		Tag array:
+			EmptyItemType(EnumProperty)=EFortItemType::AccountItem 
+			Slot(ObjectProperty)=WidgetSwitcherSlot_1=WidgetArchetype 
+	FortItemCard_XXSSchematicItemCard (0-0-0-0): size 82 (cls: FortItemCard_XXSSchematicItemCard>FortMultiSizeItemCard>/Script/FortniteUI):
+		Tag array:
+			EmptyItemType(EnumProperty)=EFortItemType::AccountItem 
+			Slot(ObjectProperty)=WidgetSwitcherSlot_1=WidgetArchetype 
+	FortItemCard_XXSSchematicItemCard (0-0-0-0): size 82 (cls: FortItemCard_XXSSchematicItemCard>FortMultiSizeItemCard>/Script/FortniteUI):
+		Tag array:
+			EmptyItemType(EnumProperty)=EFortItemType::AccountItem 
+			Slot(ObjectProperty)=WidgetSwitcherSlot_1=WidgetArchetype 
 	HorizontalBox_4 (0-0-0-0): size 57 (cls: HorizontalBox_4>HorizontalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -1202,6 +1537,18 @@ Serialized exports:
 		Tag array:
 			Slot(ObjectProperty)=VerticalBoxSlot_9=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
+	HorizontalBox_0 (0-0-0-0): size 77 (cls: HorizontalBox_0>HorizontalBox>/Script/UMG):
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+	HorizontalBox_0 (0-0-0-0): size 77 (cls: HorizontalBox_0>HorizontalBox>/Script/UMG):
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+	HorizontalBox_0 (0-0-0-0): size 77 (cls: HorizontalBox_0>HorizontalBox>/Script/UMG):
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+	HorizontalBox_0 (0-0-0-0): size 77 (cls: HorizontalBox_0>HorizontalBox>/Script/UMG):
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 	HorizontalBox_0 (0-0-0-0): size 86 (cls: HorizontalBox_0>HorizontalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -1303,6 +1650,174 @@ Serialized exports:
 			VerticalAlignment(ByteProperty)=VAlign_Bottom 
 			Parent(ObjectProperty)=HorizontalBox_4=WidgetArchetype 
 			Content(ObjectProperty)=HorizontalBox_2=WidgetArchetype 
+	HorizontalBoxSlot_0 (0-0-0-0): size 267 (cls: HorizontalBoxSlot_0>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
+			Content(ObjectProperty)=RewardCount=WidgetArchetype 
+	HorizontalBoxSlot_1 (0-0-0-0): size 152 (cls: HorizontalBoxSlot_1>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
+			Content(ObjectProperty)=ImageMaxLimitWarning=WidgetArchetype 
+	HorizontalBoxSlot_2 (0-0-0-0): size 226 (cls: HorizontalBoxSlot_2>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
+			Content(ObjectProperty)=TextCardPackCount=WidgetArchetype 
+	HorizontalBoxSlot_3 (0-0-0-0): size 295 (cls: HorizontalBoxSlot_3>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			Size(StructProperty)=System.Byte[] 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
+			Content(ObjectProperty)=RewardName=WidgetArchetype 
+	HorizontalBoxSlot_4 (0-0-0-0): size 152 (cls: HorizontalBoxSlot_4>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
+			Content(ObjectProperty)=SwitcherRewardType=WidgetArchetype 
+	HorizontalBoxSlot_6 (0-0-0-0): size 152 (cls: HorizontalBoxSlot_6>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
+			Content(ObjectProperty)=SwitcherSpecialRewardType=WidgetArchetype 
+	HorizontalBoxSlot_7 (0-0-0-0): size 70 (cls: HorizontalBoxSlot_7>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
+			Content(ObjectProperty)=Spacer_0=WidgetArchetype 
+	HorizontalBoxSlot_0 (0-0-0-0): size 267 (cls: HorizontalBoxSlot_0>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
+			Content(ObjectProperty)=RewardCount=WidgetArchetype 
+	HorizontalBoxSlot_1 (0-0-0-0): size 152 (cls: HorizontalBoxSlot_1>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
+			Content(ObjectProperty)=ImageMaxLimitWarning=WidgetArchetype 
+	HorizontalBoxSlot_2 (0-0-0-0): size 226 (cls: HorizontalBoxSlot_2>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
+			Content(ObjectProperty)=TextCardPackCount=WidgetArchetype 
+	HorizontalBoxSlot_3 (0-0-0-0): size 295 (cls: HorizontalBoxSlot_3>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			Size(StructProperty)=System.Byte[] 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
+			Content(ObjectProperty)=RewardName=WidgetArchetype 
+	HorizontalBoxSlot_4 (0-0-0-0): size 152 (cls: HorizontalBoxSlot_4>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
+			Content(ObjectProperty)=SwitcherRewardType=WidgetArchetype 
+	HorizontalBoxSlot_6 (0-0-0-0): size 152 (cls: HorizontalBoxSlot_6>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
+			Content(ObjectProperty)=SwitcherSpecialRewardType=WidgetArchetype 
+	HorizontalBoxSlot_7 (0-0-0-0): size 70 (cls: HorizontalBoxSlot_7>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
+			Content(ObjectProperty)=Spacer_0=WidgetArchetype 
+	HorizontalBoxSlot_0 (0-0-0-0): size 267 (cls: HorizontalBoxSlot_0>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
+			Content(ObjectProperty)=RewardCount=WidgetArchetype 
+	HorizontalBoxSlot_1 (0-0-0-0): size 152 (cls: HorizontalBoxSlot_1>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
+			Content(ObjectProperty)=ImageMaxLimitWarning=WidgetArchetype 
+	HorizontalBoxSlot_2 (0-0-0-0): size 226 (cls: HorizontalBoxSlot_2>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
+			Content(ObjectProperty)=TextCardPackCount=WidgetArchetype 
+	HorizontalBoxSlot_3 (0-0-0-0): size 295 (cls: HorizontalBoxSlot_3>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			Size(StructProperty)=System.Byte[] 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
+			Content(ObjectProperty)=RewardName=WidgetArchetype 
+	HorizontalBoxSlot_4 (0-0-0-0): size 152 (cls: HorizontalBoxSlot_4>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
+			Content(ObjectProperty)=SwitcherRewardType=WidgetArchetype 
+	HorizontalBoxSlot_6 (0-0-0-0): size 152 (cls: HorizontalBoxSlot_6>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
+			Content(ObjectProperty)=SwitcherSpecialRewardType=WidgetArchetype 
+	HorizontalBoxSlot_7 (0-0-0-0): size 70 (cls: HorizontalBoxSlot_7>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
+			Content(ObjectProperty)=Spacer_0=WidgetArchetype 
+	HorizontalBoxSlot_0 (0-0-0-0): size 267 (cls: HorizontalBoxSlot_0>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
+			Content(ObjectProperty)=RewardCount=WidgetArchetype 
+	HorizontalBoxSlot_1 (0-0-0-0): size 152 (cls: HorizontalBoxSlot_1>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
+			Content(ObjectProperty)=ImageMaxLimitWarning=WidgetArchetype 
+	HorizontalBoxSlot_2 (0-0-0-0): size 226 (cls: HorizontalBoxSlot_2>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
+			Content(ObjectProperty)=TextCardPackCount=WidgetArchetype 
+	HorizontalBoxSlot_3 (0-0-0-0): size 295 (cls: HorizontalBoxSlot_3>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			Size(StructProperty)=System.Byte[] 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
+			Content(ObjectProperty)=RewardName=WidgetArchetype 
+	HorizontalBoxSlot_4 (0-0-0-0): size 152 (cls: HorizontalBoxSlot_4>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
+			Content(ObjectProperty)=SwitcherRewardType=WidgetArchetype 
+	HorizontalBoxSlot_6 (0-0-0-0): size 152 (cls: HorizontalBoxSlot_6>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
+			Content(ObjectProperty)=SwitcherSpecialRewardType=WidgetArchetype 
+	HorizontalBoxSlot_7 (0-0-0-0): size 70 (cls: HorizontalBoxSlot_7>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
+			Content(ObjectProperty)=Spacer_0=WidgetArchetype 
 	HorizontalBoxSlot_0 (0-0-0-0): size 325 (cls: HorizontalBoxSlot_0>HorizontalBoxSlot>/Script/UMG):
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
@@ -1368,6 +1883,78 @@ Serialized exports:
 			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
 			Slot(ObjectProperty)=VerticalBoxSlot_4=WidgetArchetype 
 			bIsVariable(BoolProperty)=False 
+	Image_3 (0-0-0-0): size 184 (cls: Image_3>Image>/Script/UMG):
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
+	Image_4 (0-0-0-0): size 420 (cls: Image_4>Image>/Script/UMG):
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			Slot(ObjectProperty)=OverlaySlot_2=WidgetArchetype 
+			RenderTransform(StructProperty)=System.Byte[] 
+	ImageFoundersReward (0-0-0-0): size 41 (cls: ImageFoundersReward>Image>/Script/UMG):
+		Tag array:
+			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
+	ImageMaxLimitWarning (0-0-0-0): size 233 (cls: ImageMaxLimitWarning>Image>/Script/UMG):
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
+	Image_3 (0-0-0-0): size 184 (cls: Image_3>Image>/Script/UMG):
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
+	Image_4 (0-0-0-0): size 420 (cls: Image_4>Image>/Script/UMG):
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			Slot(ObjectProperty)=OverlaySlot_2=WidgetArchetype 
+			RenderTransform(StructProperty)=System.Byte[] 
+	ImageFoundersReward (0-0-0-0): size 41 (cls: ImageFoundersReward>Image>/Script/UMG):
+		Tag array:
+			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
+	ImageMaxLimitWarning (0-0-0-0): size 233 (cls: ImageMaxLimitWarning>Image>/Script/UMG):
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
+	Image_3 (0-0-0-0): size 184 (cls: Image_3>Image>/Script/UMG):
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
+	Image_4 (0-0-0-0): size 420 (cls: Image_4>Image>/Script/UMG):
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			Slot(ObjectProperty)=OverlaySlot_2=WidgetArchetype 
+			RenderTransform(StructProperty)=System.Byte[] 
+	ImageFoundersReward (0-0-0-0): size 41 (cls: ImageFoundersReward>Image>/Script/UMG):
+		Tag array:
+			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
+	ImageMaxLimitWarning (0-0-0-0): size 233 (cls: ImageMaxLimitWarning>Image>/Script/UMG):
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
+	Image_3 (0-0-0-0): size 184 (cls: Image_3>Image>/Script/UMG):
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
+	Image_4 (0-0-0-0): size 420 (cls: Image_4>Image>/Script/UMG):
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			Slot(ObjectProperty)=OverlaySlot_2=WidgetArchetype 
+			RenderTransform(StructProperty)=System.Byte[] 
+	ImageFoundersReward (0-0-0-0): size 41 (cls: ImageFoundersReward>Image>/Script/UMG):
+		Tag array:
+			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
+	ImageMaxLimitWarning (0-0-0-0): size 233 (cls: ImageMaxLimitWarning>Image>/Script/UMG):
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			ColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
 	RatingImage (0-0-0-0): size 184 (cls: RatingImage>Image>/Script/UMG):
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
@@ -1458,12 +2045,148 @@ Serialized exports:
 	VBoxSlotBonuses (0-0-0-0): size 36 (cls: VBoxSlotBonuses>ObjectProperty>/Script/CoreUObject)
 	VehicleImage (0-0-0-0): size 36 (cls: VehicleImage>ObjectProperty>/Script/CoreUObject)
 	ViewInfoButton_NoText (0-0-0-0): size 36 (cls: ViewInfoButton_NoText>ObjectProperty>/Script/CoreUObject)
+	Overlay_3 (0-0-0-0): size 98 (cls: Overlay_3>Overlay>/Script/UMG):
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=SizeBoxSlot_4=WidgetArchetype 
+	Overlay_3 (0-0-0-0): size 98 (cls: Overlay_3>Overlay>/Script/UMG):
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=SizeBoxSlot_4=WidgetArchetype 
+	Overlay_3 (0-0-0-0): size 98 (cls: Overlay_3>Overlay>/Script/UMG):
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=SizeBoxSlot_4=WidgetArchetype 
+	Overlay_3 (0-0-0-0): size 98 (cls: Overlay_3>Overlay>/Script/UMG):
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=SizeBoxSlot_4=WidgetArchetype 
 	Overlay_0 (0-0-0-0): size 57 (cls: Overlay_0>Overlay>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 	Overlay_0 (0-0-0-0): size 57 (cls: Overlay_0>Overlay>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+	OverlaySlot_0 (0-0-0-0): size 152 (cls: OverlaySlot_0>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=Overlay_3=WidgetArchetype 
+			Content(ObjectProperty)=Image_3=WidgetArchetype 
+	OverlaySlot_11 (0-0-0-0): size 152 (cls: OverlaySlot_11>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=Overlay_3=WidgetArchetype 
+			Content(ObjectProperty)=SizeBox_3=WidgetArchetype 
+	OverlaySlot_13 (0-0-0-0): size 152 (cls: OverlaySlot_13>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=Overlay_3=WidgetArchetype 
+			Content(ObjectProperty)=CommonBorder_4=WidgetArchetype 
+	OverlaySlot_2 (0-0-0-0): size 152 (cls: OverlaySlot_2>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=Overlay_3=WidgetArchetype 
+			Content(ObjectProperty)=Image_4=WidgetArchetype 
+	OverlaySlot_7 (0-0-0-0): size 152 (cls: OverlaySlot_7>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=Overlay_3=WidgetArchetype 
+			Content(ObjectProperty)=Border_Small=WidgetArchetype 
+	OverlaySlot_0 (0-0-0-0): size 152 (cls: OverlaySlot_0>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=Overlay_3=WidgetArchetype 
+			Content(ObjectProperty)=Image_3=WidgetArchetype 
+	OverlaySlot_11 (0-0-0-0): size 152 (cls: OverlaySlot_11>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=Overlay_3=WidgetArchetype 
+			Content(ObjectProperty)=SizeBox_3=WidgetArchetype 
+	OverlaySlot_13 (0-0-0-0): size 152 (cls: OverlaySlot_13>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=Overlay_3=WidgetArchetype 
+			Content(ObjectProperty)=CommonBorder_4=WidgetArchetype 
+	OverlaySlot_2 (0-0-0-0): size 152 (cls: OverlaySlot_2>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=Overlay_3=WidgetArchetype 
+			Content(ObjectProperty)=Image_4=WidgetArchetype 
+	OverlaySlot_7 (0-0-0-0): size 152 (cls: OverlaySlot_7>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=Overlay_3=WidgetArchetype 
+			Content(ObjectProperty)=Border_Small=WidgetArchetype 
+	OverlaySlot_0 (0-0-0-0): size 152 (cls: OverlaySlot_0>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=Overlay_3=WidgetArchetype 
+			Content(ObjectProperty)=Image_3=WidgetArchetype 
+	OverlaySlot_11 (0-0-0-0): size 152 (cls: OverlaySlot_11>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=Overlay_3=WidgetArchetype 
+			Content(ObjectProperty)=SizeBox_3=WidgetArchetype 
+	OverlaySlot_13 (0-0-0-0): size 152 (cls: OverlaySlot_13>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=Overlay_3=WidgetArchetype 
+			Content(ObjectProperty)=CommonBorder_4=WidgetArchetype 
+	OverlaySlot_2 (0-0-0-0): size 152 (cls: OverlaySlot_2>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=Overlay_3=WidgetArchetype 
+			Content(ObjectProperty)=Image_4=WidgetArchetype 
+	OverlaySlot_7 (0-0-0-0): size 152 (cls: OverlaySlot_7>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=Overlay_3=WidgetArchetype 
+			Content(ObjectProperty)=Border_Small=WidgetArchetype 
+	OverlaySlot_0 (0-0-0-0): size 152 (cls: OverlaySlot_0>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=Overlay_3=WidgetArchetype 
+			Content(ObjectProperty)=Image_3=WidgetArchetype 
+	OverlaySlot_11 (0-0-0-0): size 152 (cls: OverlaySlot_11>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=Overlay_3=WidgetArchetype 
+			Content(ObjectProperty)=SizeBox_3=WidgetArchetype 
+	OverlaySlot_13 (0-0-0-0): size 152 (cls: OverlaySlot_13>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=Overlay_3=WidgetArchetype 
+			Content(ObjectProperty)=CommonBorder_4=WidgetArchetype 
+	OverlaySlot_2 (0-0-0-0): size 152 (cls: OverlaySlot_2>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=Overlay_3=WidgetArchetype 
+			Content(ObjectProperty)=Image_4=WidgetArchetype 
+	OverlaySlot_7 (0-0-0-0): size 152 (cls: OverlaySlot_7>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Fill 
+			Parent(ObjectProperty)=Overlay_3=WidgetArchetype 
+			Content(ObjectProperty)=Border_Small=WidgetArchetype 
 	OverlaySlot_0 (0-0-0-0): size 152 (cls: OverlaySlot_0>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Fill 
@@ -1492,6 +2215,78 @@ Serialized exports:
 		Tag array:
 			Parent(ObjectProperty)=Content=WidgetArchetype 
 			Content(ObjectProperty)=Image_3=WidgetArchetype 
+	RewardsListEntry (0-0-0-0): size 470 (cls: RewardsListEntry>RewardsListEntry_C>/Game/UI/Frontend/RewardsList/RewardsListEntry):
+		Tag array:
+			CommonTextBlock_5(ObjectProperty)=CommonTextBlock_5=WidgetArchetype 
+			FortItemCard_XXSSchematicItemCard(ObjectProperty)=FortItemCard_XXSSchematicItemCard=WidgetArchetype 
+			Image_3(ObjectProperty)=Image_3=WidgetArchetype 
+			Image_4(ObjectProperty)=Image_4=WidgetArchetype 
+			ImageFoundersReward(ObjectProperty)=ImageFoundersReward=WidgetArchetype 
+			ImageMaxLimitWarning(ObjectProperty)=ImageMaxLimitWarning=WidgetArchetype 
+			LazyImageRewardIcon(ObjectProperty)=LazyImageRewardIcon=WidgetArchetype 
+			RewardCount(ObjectProperty)=RewardCount=WidgetArchetype 
+			RewardName(ObjectProperty)=RewardName=WidgetArchetype 
+			SwitcherRewardType(ObjectProperty)=SwitcherRewardType=WidgetArchetype 
+			SwitcherSpecialRewardType(ObjectProperty)=SwitcherSpecialRewardType=WidgetArchetype 
+			TextCardPackCount(ObjectProperty)=TextCardPackCount=WidgetArchetype 
+			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
+			bCookedWidgetTree(BoolProperty)=True 
+			Slot(ObjectProperty)=VerticalBoxSlot_0=WidgetArchetype 
+			bIsVariable(BoolProperty)=False 
+	RewardsListEntry_0 (0-0-0-0): size 470 (cls: RewardsListEntry_0>RewardsListEntry_C>/Game/UI/Frontend/RewardsList/RewardsListEntry):
+		Tag array:
+			CommonTextBlock_5(ObjectProperty)=CommonTextBlock_5=WidgetArchetype 
+			FortItemCard_XXSSchematicItemCard(ObjectProperty)=FortItemCard_XXSSchematicItemCard=WidgetArchetype 
+			Image_3(ObjectProperty)=Image_3=WidgetArchetype 
+			Image_4(ObjectProperty)=Image_4=WidgetArchetype 
+			ImageFoundersReward(ObjectProperty)=ImageFoundersReward=WidgetArchetype 
+			ImageMaxLimitWarning(ObjectProperty)=ImageMaxLimitWarning=WidgetArchetype 
+			LazyImageRewardIcon(ObjectProperty)=LazyImageRewardIcon=WidgetArchetype 
+			RewardCount(ObjectProperty)=RewardCount=WidgetArchetype 
+			RewardName(ObjectProperty)=RewardName=WidgetArchetype 
+			SwitcherRewardType(ObjectProperty)=SwitcherRewardType=WidgetArchetype 
+			SwitcherSpecialRewardType(ObjectProperty)=SwitcherSpecialRewardType=WidgetArchetype 
+			TextCardPackCount(ObjectProperty)=TextCardPackCount=WidgetArchetype 
+			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
+			bCookedWidgetTree(BoolProperty)=True 
+			Slot(ObjectProperty)=VerticalBoxSlot_1=WidgetArchetype 
+			bIsVariable(BoolProperty)=False 
+	RewardsListEntry_1 (0-0-0-0): size 470 (cls: RewardsListEntry_1>RewardsListEntry_C>/Game/UI/Frontend/RewardsList/RewardsListEntry):
+		Tag array:
+			CommonTextBlock_5(ObjectProperty)=CommonTextBlock_5=WidgetArchetype 
+			FortItemCard_XXSSchematicItemCard(ObjectProperty)=FortItemCard_XXSSchematicItemCard=WidgetArchetype 
+			Image_3(ObjectProperty)=Image_3=WidgetArchetype 
+			Image_4(ObjectProperty)=Image_4=WidgetArchetype 
+			ImageFoundersReward(ObjectProperty)=ImageFoundersReward=WidgetArchetype 
+			ImageMaxLimitWarning(ObjectProperty)=ImageMaxLimitWarning=WidgetArchetype 
+			LazyImageRewardIcon(ObjectProperty)=LazyImageRewardIcon=WidgetArchetype 
+			RewardCount(ObjectProperty)=RewardCount=WidgetArchetype 
+			RewardName(ObjectProperty)=RewardName=WidgetArchetype 
+			SwitcherRewardType(ObjectProperty)=SwitcherRewardType=WidgetArchetype 
+			SwitcherSpecialRewardType(ObjectProperty)=SwitcherSpecialRewardType=WidgetArchetype 
+			TextCardPackCount(ObjectProperty)=TextCardPackCount=WidgetArchetype 
+			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
+			bCookedWidgetTree(BoolProperty)=True 
+			Slot(ObjectProperty)=VerticalBoxSlot_2=WidgetArchetype 
+			bIsVariable(BoolProperty)=False 
+	RewardsListEntry_2 (0-0-0-0): size 470 (cls: RewardsListEntry_2>RewardsListEntry_C>/Game/UI/Frontend/RewardsList/RewardsListEntry):
+		Tag array:
+			CommonTextBlock_5(ObjectProperty)=CommonTextBlock_5=WidgetArchetype 
+			FortItemCard_XXSSchematicItemCard(ObjectProperty)=FortItemCard_XXSSchematicItemCard=WidgetArchetype 
+			Image_3(ObjectProperty)=Image_3=WidgetArchetype 
+			Image_4(ObjectProperty)=Image_4=WidgetArchetype 
+			ImageFoundersReward(ObjectProperty)=ImageFoundersReward=WidgetArchetype 
+			ImageMaxLimitWarning(ObjectProperty)=ImageMaxLimitWarning=WidgetArchetype 
+			LazyImageRewardIcon(ObjectProperty)=LazyImageRewardIcon=WidgetArchetype 
+			RewardCount(ObjectProperty)=RewardCount=WidgetArchetype 
+			RewardName(ObjectProperty)=RewardName=WidgetArchetype 
+			SwitcherRewardType(ObjectProperty)=SwitcherRewardType=WidgetArchetype 
+			SwitcherSpecialRewardType(ObjectProperty)=SwitcherSpecialRewardType=WidgetArchetype 
+			TextCardPackCount(ObjectProperty)=TextCardPackCount=WidgetArchetype 
+			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
+			bCookedWidgetTree(BoolProperty)=True 
+			Slot(ObjectProperty)=VerticalBoxSlot_3=WidgetArchetype 
+			bIsVariable(BoolProperty)=False 
 	SizeBoxWidget (0-0-0-0): size 273 (cls: SizeBoxWidget>SizeBox>/Script/UMG):
 		Tag array:
 			bOverride_MinDesiredWidth(BoolProperty)=True 
@@ -1509,6 +2304,94 @@ Serialized exports:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=VerticalBoxSlot_1=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
+	SizeBox_2 (0-0-0-0): size 137 (cls: SizeBox_2>SizeBox>/Script/UMG):
+		Tag array:
+			bOverride_WidthOverride(BoolProperty)=True 
+			WidthOverride(FloatProperty)=32 
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=WidgetSwitcherSlot_1=WidgetArchetype 
+	SizeBox_3 (0-0-0-0): size 233 (cls: SizeBox_3>SizeBox>/Script/UMG):
+		Tag array:
+			bOverride_WidthOverride(BoolProperty)=True 
+			bOverride_HeightOverride(BoolProperty)=True 
+			WidthOverride(FloatProperty)=24 
+			HeightOverride(FloatProperty)=24 
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=OverlaySlot_11=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
+	SizeBoxMissionAlert (0-0-0-0): size 251 (cls: SizeBoxMissionAlert>SizeBox>/Script/UMG):
+		Tag array:
+			bOverride_WidthOverride(BoolProperty)=True 
+			WidthOverride(FloatProperty)=32 
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=WidgetSwitcherSlot_6=WidgetArchetype 
+			RenderTransform(StructProperty)=System.Byte[] 
+	SizeBox_2 (0-0-0-0): size 137 (cls: SizeBox_2>SizeBox>/Script/UMG):
+		Tag array:
+			bOverride_WidthOverride(BoolProperty)=True 
+			WidthOverride(FloatProperty)=32 
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=WidgetSwitcherSlot_1=WidgetArchetype 
+	SizeBox_3 (0-0-0-0): size 233 (cls: SizeBox_3>SizeBox>/Script/UMG):
+		Tag array:
+			bOverride_WidthOverride(BoolProperty)=True 
+			bOverride_HeightOverride(BoolProperty)=True 
+			WidthOverride(FloatProperty)=24 
+			HeightOverride(FloatProperty)=24 
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=OverlaySlot_11=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
+	SizeBoxMissionAlert (0-0-0-0): size 251 (cls: SizeBoxMissionAlert>SizeBox>/Script/UMG):
+		Tag array:
+			bOverride_WidthOverride(BoolProperty)=True 
+			WidthOverride(FloatProperty)=32 
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=WidgetSwitcherSlot_6=WidgetArchetype 
+			RenderTransform(StructProperty)=System.Byte[] 
+	SizeBox_2 (0-0-0-0): size 137 (cls: SizeBox_2>SizeBox>/Script/UMG):
+		Tag array:
+			bOverride_WidthOverride(BoolProperty)=True 
+			WidthOverride(FloatProperty)=32 
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=WidgetSwitcherSlot_1=WidgetArchetype 
+	SizeBox_3 (0-0-0-0): size 233 (cls: SizeBox_3>SizeBox>/Script/UMG):
+		Tag array:
+			bOverride_WidthOverride(BoolProperty)=True 
+			bOverride_HeightOverride(BoolProperty)=True 
+			WidthOverride(FloatProperty)=24 
+			HeightOverride(FloatProperty)=24 
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=OverlaySlot_11=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
+	SizeBoxMissionAlert (0-0-0-0): size 251 (cls: SizeBoxMissionAlert>SizeBox>/Script/UMG):
+		Tag array:
+			bOverride_WidthOverride(BoolProperty)=True 
+			WidthOverride(FloatProperty)=32 
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=WidgetSwitcherSlot_6=WidgetArchetype 
+			RenderTransform(StructProperty)=System.Byte[] 
+	SizeBox_2 (0-0-0-0): size 137 (cls: SizeBox_2>SizeBox>/Script/UMG):
+		Tag array:
+			bOverride_WidthOverride(BoolProperty)=True 
+			WidthOverride(FloatProperty)=32 
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=WidgetSwitcherSlot_1=WidgetArchetype 
+	SizeBox_3 (0-0-0-0): size 233 (cls: SizeBox_3>SizeBox>/Script/UMG):
+		Tag array:
+			bOverride_WidthOverride(BoolProperty)=True 
+			bOverride_HeightOverride(BoolProperty)=True 
+			WidthOverride(FloatProperty)=24 
+			HeightOverride(FloatProperty)=24 
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=OverlaySlot_11=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
+	SizeBoxMissionAlert (0-0-0-0): size 251 (cls: SizeBoxMissionAlert>SizeBox>/Script/UMG):
+		Tag array:
+			bOverride_WidthOverride(BoolProperty)=True 
+			WidthOverride(FloatProperty)=32 
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=WidgetSwitcherSlot_6=WidgetArchetype 
+			RenderTransform(StructProperty)=System.Byte[] 
 	SizeBox_0 (0-0-0-0): size 192 (cls: SizeBox_0>SizeBox>/Script/UMG):
 		Tag array:
 			bOverride_WidthOverride(BoolProperty)=True 
@@ -1563,6 +2446,54 @@ Serialized exports:
 		Tag array:
 			Parent(ObjectProperty)=HeadingSizeBox=WidgetArchetype 
 			Content(ObjectProperty)=BorderHeader=WidgetArchetype 
+	SizeBoxSlot_0 (0-0-0-0): size 70 (cls: SizeBoxSlot_0>SizeBoxSlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=SizeBox_2=WidgetArchetype 
+			Content(ObjectProperty)=ImageFoundersReward=WidgetArchetype 
+	SizeBoxSlot_1 (0-0-0-0): size 70 (cls: SizeBoxSlot_1>SizeBoxSlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=SizeBox_3=WidgetArchetype 
+			Content(ObjectProperty)=CommonTextBlock_5=WidgetArchetype 
+	SizeBoxSlot_4 (0-0-0-0): size 70 (cls: SizeBoxSlot_4>SizeBoxSlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=SizeBoxMissionAlert=WidgetArchetype 
+			Content(ObjectProperty)=Overlay_3=WidgetArchetype 
+	SizeBoxSlot_0 (0-0-0-0): size 70 (cls: SizeBoxSlot_0>SizeBoxSlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=SizeBox_2=WidgetArchetype 
+			Content(ObjectProperty)=ImageFoundersReward=WidgetArchetype 
+	SizeBoxSlot_1 (0-0-0-0): size 70 (cls: SizeBoxSlot_1>SizeBoxSlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=SizeBox_3=WidgetArchetype 
+			Content(ObjectProperty)=CommonTextBlock_5=WidgetArchetype 
+	SizeBoxSlot_4 (0-0-0-0): size 70 (cls: SizeBoxSlot_4>SizeBoxSlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=SizeBoxMissionAlert=WidgetArchetype 
+			Content(ObjectProperty)=Overlay_3=WidgetArchetype 
+	SizeBoxSlot_0 (0-0-0-0): size 70 (cls: SizeBoxSlot_0>SizeBoxSlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=SizeBox_2=WidgetArchetype 
+			Content(ObjectProperty)=ImageFoundersReward=WidgetArchetype 
+	SizeBoxSlot_1 (0-0-0-0): size 70 (cls: SizeBoxSlot_1>SizeBoxSlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=SizeBox_3=WidgetArchetype 
+			Content(ObjectProperty)=CommonTextBlock_5=WidgetArchetype 
+	SizeBoxSlot_4 (0-0-0-0): size 70 (cls: SizeBoxSlot_4>SizeBoxSlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=SizeBoxMissionAlert=WidgetArchetype 
+			Content(ObjectProperty)=Overlay_3=WidgetArchetype 
+	SizeBoxSlot_0 (0-0-0-0): size 70 (cls: SizeBoxSlot_0>SizeBoxSlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=SizeBox_2=WidgetArchetype 
+			Content(ObjectProperty)=ImageFoundersReward=WidgetArchetype 
+	SizeBoxSlot_1 (0-0-0-0): size 70 (cls: SizeBoxSlot_1>SizeBoxSlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=SizeBox_3=WidgetArchetype 
+			Content(ObjectProperty)=CommonTextBlock_5=WidgetArchetype 
+	SizeBoxSlot_4 (0-0-0-0): size 70 (cls: SizeBoxSlot_4>SizeBoxSlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=SizeBoxMissionAlert=WidgetArchetype 
+			Content(ObjectProperty)=Overlay_3=WidgetArchetype 
 	SizeBoxSlot_0 (0-0-0-0): size 152 (cls: SizeBoxSlot_0>SizeBoxSlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Center 
@@ -1596,6 +2527,22 @@ Serialized exports:
 		Tag array:
 			Parent(ObjectProperty)=SizeBox_6=WidgetArchetype 
 			Content(ObjectProperty)=ExpeditionDescription=WidgetArchetype 
+	Spacer_0 (0-0-0-0): size 98 (cls: Spacer_0>Spacer>/Script/UMG):
+		Tag array:
+			Size(StructProperty)=Vector2D(8,1) 
+			Slot(ObjectProperty)=HorizontalBoxSlot_7=WidgetArchetype 
+	Spacer_0 (0-0-0-0): size 98 (cls: Spacer_0>Spacer>/Script/UMG):
+		Tag array:
+			Size(StructProperty)=Vector2D(8,1) 
+			Slot(ObjectProperty)=HorizontalBoxSlot_7=WidgetArchetype 
+	Spacer_0 (0-0-0-0): size 98 (cls: Spacer_0>Spacer>/Script/UMG):
+		Tag array:
+			Size(StructProperty)=Vector2D(8,1) 
+			Slot(ObjectProperty)=HorizontalBoxSlot_7=WidgetArchetype 
+	Spacer_0 (0-0-0-0): size 98 (cls: Spacer_0>Spacer>/Script/UMG):
+		Tag array:
+			Size(StructProperty)=Vector2D(8,1) 
+			Slot(ObjectProperty)=HorizontalBoxSlot_7=WidgetArchetype 
 	SubordinatesSquadSlotGroup (0-0-0-0): size 589 (cls: SubordinatesSquadSlotGroup>SquadSlotGroup_C>/Game/UI/Frontend/SquadManagement/SquadSlotGroup):
 		Tag array:
 			GroupIconImage(ObjectProperty)=GroupIconImage=WidgetArchetype 
@@ -1664,8 +2611,9 @@ Serialized exports:
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=BorderSlot_1=WidgetArchetype 
-	RewardsSet (0-0-0-0): size 67 (cls: RewardsSet>VerticalBox>/Script/UMG):
+	RewardsSet (0-0-0-0): size 120 (cls: RewardsSet>VerticalBox>/Script/UMG):
 		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=VerticalBoxSlot_6=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
 	VBoxSlotBonuses (0-0-0-0): size 112 (cls: VBoxSlotBonuses>VerticalBox>/Script/UMG):
@@ -1730,6 +2678,22 @@ Serialized exports:
 		Tag array:
 			Parent(ObjectProperty)=VerticalBox_1=WidgetArchetype 
 			Content(ObjectProperty)=Image_0=WidgetArchetype 
+	VerticalBoxSlot_0 (0-0-0-0): size 70 (cls: VerticalBoxSlot_0>VerticalBoxSlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=RewardsSet=WidgetArchetype 
+			Content(ObjectProperty)=RewardsListEntry=WidgetArchetype 
+	VerticalBoxSlot_1 (0-0-0-0): size 70 (cls: VerticalBoxSlot_1>VerticalBoxSlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=RewardsSet=WidgetArchetype 
+			Content(ObjectProperty)=RewardsListEntry_0=WidgetArchetype 
+	VerticalBoxSlot_2 (0-0-0-0): size 70 (cls: VerticalBoxSlot_2>VerticalBoxSlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=RewardsSet=WidgetArchetype 
+			Content(ObjectProperty)=RewardsListEntry_1=WidgetArchetype 
+	VerticalBoxSlot_3 (0-0-0-0): size 70 (cls: VerticalBoxSlot_3>VerticalBoxSlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=RewardsSet=WidgetArchetype 
+			Content(ObjectProperty)=RewardsListEntry_2=WidgetArchetype 
 	VerticalBoxSlot_8 (0-0-0-0): size 111 (cls: VerticalBoxSlot_8>VerticalBoxSlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Left 
@@ -1864,6 +2828,94 @@ Serialized exports:
 		Tag array:
 			Parent(ObjectProperty)=ExpeditionProgressSwitcher=WidgetArchetype 
 			Content(ObjectProperty)=VerticalBox_2=WidgetArchetype 
+	WidgetSwitcherSlot_1 (0-0-0-0): size 152 (cls: WidgetSwitcherSlot_1>WidgetSwitcherSlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=SwitcherRewardType=WidgetArchetype 
+			Content(ObjectProperty)=FortItemCard_XXSSchematicItemCard=WidgetArchetype 
+	WidgetSwitcherSlot_2 (0-0-0-0): size 152 (cls: WidgetSwitcherSlot_2>WidgetSwitcherSlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Left 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=SwitcherRewardType=WidgetArchetype 
+			Content(ObjectProperty)=LazyImageRewardIcon=WidgetArchetype 
+	WidgetSwitcherSlot_1 (0-0-0-0): size 70 (cls: WidgetSwitcherSlot_1>WidgetSwitcherSlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=SwitcherSpecialRewardType=WidgetArchetype 
+			Content(ObjectProperty)=SizeBox_2=WidgetArchetype 
+	WidgetSwitcherSlot_6 (0-0-0-0): size 152 (cls: WidgetSwitcherSlot_6>WidgetSwitcherSlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=SwitcherSpecialRewardType=WidgetArchetype 
+			Content(ObjectProperty)=SizeBoxMissionAlert=WidgetArchetype 
+	WidgetSwitcherSlot_1 (0-0-0-0): size 152 (cls: WidgetSwitcherSlot_1>WidgetSwitcherSlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=SwitcherRewardType=WidgetArchetype 
+			Content(ObjectProperty)=FortItemCard_XXSSchematicItemCard=WidgetArchetype 
+	WidgetSwitcherSlot_2 (0-0-0-0): size 152 (cls: WidgetSwitcherSlot_2>WidgetSwitcherSlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Left 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=SwitcherRewardType=WidgetArchetype 
+			Content(ObjectProperty)=LazyImageRewardIcon=WidgetArchetype 
+	WidgetSwitcherSlot_1 (0-0-0-0): size 70 (cls: WidgetSwitcherSlot_1>WidgetSwitcherSlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=SwitcherSpecialRewardType=WidgetArchetype 
+			Content(ObjectProperty)=SizeBox_2=WidgetArchetype 
+	WidgetSwitcherSlot_6 (0-0-0-0): size 152 (cls: WidgetSwitcherSlot_6>WidgetSwitcherSlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=SwitcherSpecialRewardType=WidgetArchetype 
+			Content(ObjectProperty)=SizeBoxMissionAlert=WidgetArchetype 
+	WidgetSwitcherSlot_1 (0-0-0-0): size 152 (cls: WidgetSwitcherSlot_1>WidgetSwitcherSlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=SwitcherRewardType=WidgetArchetype 
+			Content(ObjectProperty)=FortItemCard_XXSSchematicItemCard=WidgetArchetype 
+	WidgetSwitcherSlot_2 (0-0-0-0): size 152 (cls: WidgetSwitcherSlot_2>WidgetSwitcherSlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Left 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=SwitcherRewardType=WidgetArchetype 
+			Content(ObjectProperty)=LazyImageRewardIcon=WidgetArchetype 
+	WidgetSwitcherSlot_1 (0-0-0-0): size 70 (cls: WidgetSwitcherSlot_1>WidgetSwitcherSlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=SwitcherSpecialRewardType=WidgetArchetype 
+			Content(ObjectProperty)=SizeBox_2=WidgetArchetype 
+	WidgetSwitcherSlot_6 (0-0-0-0): size 152 (cls: WidgetSwitcherSlot_6>WidgetSwitcherSlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=SwitcherSpecialRewardType=WidgetArchetype 
+			Content(ObjectProperty)=SizeBoxMissionAlert=WidgetArchetype 
+	WidgetSwitcherSlot_1 (0-0-0-0): size 152 (cls: WidgetSwitcherSlot_1>WidgetSwitcherSlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=SwitcherRewardType=WidgetArchetype 
+			Content(ObjectProperty)=FortItemCard_XXSSchematicItemCard=WidgetArchetype 
+	WidgetSwitcherSlot_2 (0-0-0-0): size 152 (cls: WidgetSwitcherSlot_2>WidgetSwitcherSlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Left 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=SwitcherRewardType=WidgetArchetype 
+			Content(ObjectProperty)=LazyImageRewardIcon=WidgetArchetype 
+	WidgetSwitcherSlot_1 (0-0-0-0): size 70 (cls: WidgetSwitcherSlot_1>WidgetSwitcherSlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=SwitcherSpecialRewardType=WidgetArchetype 
+			Content(ObjectProperty)=SizeBox_2=WidgetArchetype 
+	WidgetSwitcherSlot_6 (0-0-0-0): size 152 (cls: WidgetSwitcherSlot_6>WidgetSwitcherSlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=SwitcherSpecialRewardType=WidgetArchetype 
+			Content(ObjectProperty)=SizeBoxMissionAlert=WidgetArchetype 
 	WidgetTree_0 (0-0-0-0): size 41 (cls: WidgetTree_0>WidgetTree>/Script/UMG):
 		Tag array:
 			RootWidget(ObjectProperty)=VerticalBox_14=WidgetArchetype 
@@ -1882,6 +2934,18 @@ Serialized exports:
 	WidgetTree_0 (0-0-0-0): size 41 (cls: WidgetTree_0>WidgetTree>/Script/UMG):
 		Tag array:
 			RootWidget(ObjectProperty)=VerticalBox_0=WidgetArchetype 
+	WidgetTree_0 (0-0-0-0): size 41 (cls: WidgetTree_0>WidgetTree>/Script/UMG):
+		Tag array:
+			RootWidget(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
+	WidgetTree_0 (0-0-0-0): size 41 (cls: WidgetTree_0>WidgetTree>/Script/UMG):
+		Tag array:
+			RootWidget(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
+	WidgetTree_0 (0-0-0-0): size 41 (cls: WidgetTree_0>WidgetTree>/Script/UMG):
+		Tag array:
+			RootWidget(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
+	WidgetTree_0 (0-0-0-0): size 41 (cls: WidgetTree_0>WidgetTree>/Script/UMG):
+		Tag array:
+			RootWidget(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
 	WidgetTree_0 (0-0-0-0): size 41 (cls: WidgetTree_0>WidgetTree>/Script/UMG):
 		Tag array:
 			RootWidget(ObjectProperty)=Overlay_0=WidgetArchetype 

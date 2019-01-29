@@ -16,6 +16,7 @@ Name table:
 	/Game/UI/Foundation/Input/InputActionDataTable
 	/Game/UI/Foundation/Lightbox/Lightbox
 	/Game/UI/Foundation/Materials/M_Athena_Matchmaking_ShineAnim_Details
+	/Game/UI/Foundation/Materials/Throbber_Material-Monochrome
 	/Game/UI/Foundation/Text/TextScrollStyle-Base
 	/Game/UI/Materials/HollowCircularProgressBar
 	/Script/CommonUI
@@ -33,7 +34,6 @@ Name table:
 	Add_IntInt
 	AlphaCurve
 	AnimateIn
-	Animation
 	AnimationBindings
 	AnimationGuid
 	Animations
@@ -94,12 +94,18 @@ Name table:
 	ButtonStyle_SimpleCycleArrow_Right_C
 	ButtonText
 	bValidTemplate
+	ByteCurve
 	ByteProperty
 	CallFunc_Add_IntInt_ReturnValue
 	CallFunc_Array_Get_Item
 	CallFunc_Array_Length_ReturnValue
+	CallFunc_EqualEqual_ByteByte_ReturnValue
+	CallFunc_EqualEqual_IntInt_ReturnValue
+	CallFunc_EqualEqual_IntInt_ReturnValue1
 	CallFunc_GetDisplayedEntryWidgets_ReturnValue
 	CallFunc_GetUIManagerWidget_ReturnValue
+	CallFunc_GetUINavigationManager_ReturnValue
+	CallFunc_GetVisibility_ReturnValue
 	CallFunc_Handled_ReturnValue
 	CallFunc_IsAnimationPlaying_ReturnValue
 	CallFunc_Less_IntInt_ReturnValue
@@ -109,10 +115,12 @@ Name table:
 	CancelButton
 	CanvasPanel
 	CenterButtonTextWidget
+	CenterWidget
 	ChildTemplates
 	Class
 	Clipping
 	Close
+	CloseDialog
 	ColorAndOpacity
 	ColorParameterNameAndCurves
 	Colors
@@ -136,6 +144,7 @@ Name table:
 	CurrentPermissionsEnum
 	Curves
 	CustomDelegate
+	CustomNavToPermissionsListIfShown
 	DataTable
 	DataTableRowHandle
 	DebugOptions
@@ -174,6 +183,8 @@ Name table:
 	Default__MovieScene
 	Default__MovieScene2DTransformSection
 	Default__MovieScene2DTransformTrack
+	Default__MovieSceneByteSection
+	Default__MovieSceneByteTrack
 	Default__MovieSceneColorSection
 	Default__MovieSceneColorTrack
 	Default__MovieSceneFloatSection
@@ -190,7 +201,6 @@ Name table:
 	Default__SizeBoxSlot
 	Default__StrProperty
 	Default__StructProperty
-	Default__TextBlock
 	Default__TextProperty
 	Default__TextScrollStyle-Base_C
 	Default__TextStyle-MediumButton_C
@@ -233,10 +243,14 @@ Name table:
 	EntryWidgetClass
 	Enum
 	EnumProperty
+	EqualEqual_ByteByte
+	EqualEqual_IntInt
 	ERichCurveExtrapolation
 	ERichCurveInterpMode
 	ERichCurveTangentMode
 	ERichCurveTangentWeightMode
+	Error
+	Error_INST
 	ESectionEvaluationFlags
 	ESectionEvaluationFlags::None
 	ESlateBrushDrawType
@@ -246,10 +260,13 @@ Name table:
 	ESlateSizeRule::Fill
 	ESlateVisibility
 	ESlateVisibility::Collapsed
+	ESlateVisibility::Hidden
 	ESlateVisibility::HitTestInvisible
+	ESlateVisibility::SelfHitTestInvisible
 	ESlateVisibility::Visible
 	ETextJustify
 	ETextJustify::Center
+	EUINavigation
 	EUINavigationRule
 	EUINavigationRule::Custom
 	EUINavigationRule::Stop
@@ -278,6 +295,7 @@ Name table:
 	FortMatchmakingKnobsModal
 	FortMatchmakingKnobsSpinnerButton
 	FortUIManagerWidget_NUI
+	FortUINavigationManager
 	FrameNumber
 	FrameRate
 	Function
@@ -287,6 +305,8 @@ Name table:
 	Geometry
 	GetDisplayedEntryWidgets
 	GetUIManagerWidget
+	GetUINavigationManager
+	GetVisibility
 	GreenCurve
 	Groups
 	Guid
@@ -296,6 +316,7 @@ Name table:
 	HAlign_Right
 	HandleCancelClicked
 	Handled
+	HandleNoOptionsLoaded
 	HeightOverride
 	HollowCircularProgressBar
 	HorizontalAlignment
@@ -322,9 +343,11 @@ Name table:
 	K2Node_CustomEvent_Value
 	K2Node_DynamicCast_AsAthena_Matchmaking_Spinner_Button
 	K2Node_DynamicCast_bSuccess
-	K2Node_Event_Animation
 	K2Node_Event_bUsingGamepad
 	K2Node_MakeArray_Array
+	K2Node_Select1_Default
+	K2Node_Select2_Default
+	K2Node_Select3_Default
 	K2Node_Select_Default
 	Key
 	KismetArrayLibrary
@@ -371,6 +394,9 @@ Name table:
 	MovieScene2DTransformTrack
 	MovieSceneBinding
 	MovieSceneBuiltInEasingFunction
+	MovieSceneByteChannel
+	MovieSceneByteSection
+	MovieSceneByteTrack
 	MovieSceneColorSection
 	MovieSceneColorTrack
 	MovieSceneEasingSettings
@@ -409,8 +435,6 @@ Name table:
 	NameProperty
 	NavigateToIndex
 	Navigation
-	NavLeft
-	NavRight
 	NewAnimation
 	NewAnimation_1_INST
 	None
@@ -430,7 +454,6 @@ Name table:
 	OnAccept__DelegateSignature
 	OnAcceptAnimationComplete
 	OnActivated
-	OnAnimationFinished
 	OnButtonClicked
 	OnCancel
 	OnCancel__DelegateSignature
@@ -457,7 +480,6 @@ Name table:
 	Parent
 	ParentGuid
 	Percentage
-	PlaceHolderWhitelist
 	PlayAnimation
 	PlaybackRange
 	Playgrounds_UserKnobs
@@ -495,7 +517,7 @@ Name table:
 	Rotation
 	RowName
 	Rule
-	SavePermissions
+	SaveSpinner
 	ScalarParameterNameAndCurve
 	ScalarParameterNamesAndCurves
 	Scalars
@@ -512,13 +534,14 @@ Name table:
 	SelectedValue
 	SequenceID
 	SequenceSignature
-	SetSelectedIndex
 	SetSelectedItem
 	SetText
+	SetVisibility
 	ShadowColorAndOpacity
 	ShadowOffset
 	Shear
 	ShineAnim
+	ShowWhitelistLimitError
 	Signature
 	SimpleCommonButton_C
 	Size
@@ -545,20 +568,34 @@ Name table:
 	Tangent
 	TangentMode
 	TangentWeightMode
+	Temp_bool_Variable
+	Temp_bool_Variable1
 	Temp_byte_Variable
+	Temp_byte_Variable1
+	Temp_byte_Variable2
+	Temp_byte_Variable3
+	Temp_byte_Variable4
+	Temp_byte_Variable5
+	Temp_byte_Variable6
+	Temp_byte_Variable7
 	Temp_int_Array_Index_Variable
 	Temp_int_Loop_Counter_Variable
 	Temp_int_Variable
 	Temp_int_Variable1
+	Temp_object_Variable
+	Temp_object_Variable1
+	Temp_object_Variable2
+	Temp_object_Variable3
+	Temp_object_Variable4
 	TemplateAsset
 	TemplateLedger
 	TemplateSerialNumber
 	Text
-	TextBlock
 	TextBlock_HeaderText
 	TextProperty
 	TextScrollStyle-Base_C
 	TextStyle-MediumButton_C
+	Throbber_Material-Monochrome
 	TickResolution
 	Times
 	TintColor
@@ -579,11 +616,11 @@ Name table:
 	UMGSequencePlayer
 	UnbindAllFromAnimationFinished
 	UnderlyingType
-	Up
 	UpdatePermissionSpinner
 	UserWidget
 	VAlign_Center
 	VAlign_Fill
+	VAlign_Top
 	Value
 	Values
 	Vector2D
@@ -593,6 +630,7 @@ Name table:
 	VerticalBox
 	VerticalBoxSlot
 	Visibility
+	Widget
 	WidgetAnimation
 	WidgetAnimationBinding
 	WidgetAnimationDynamicEvent__DelegateSignature
@@ -605,10 +643,9 @@ Name table:
 	WidgetToFocus
 	WidgetTree
 	WidthOverride
-	WrapTextAt
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	CreativePermissionKnobs_C (0-0-0-0): size 643 (cls: CreativePermissionKnobs_C>WidgetBlueprintGeneratedClass>/Script/UMG):
+	CreativePermissionKnobs_C (0-0-0-0): size 687 (cls: CreativePermissionKnobs_C>WidgetBlueprintGeneratedClass>/Script/UMG):
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
@@ -629,43 +666,25 @@ Serialized exports:
 			bHasScriptImplementedPaint(BoolProperty)=False 
 	DebugOptions (0-0-0-0): size 32 (cls: DebugOptions>StrProperty>/Script/CoreUObject)
 	DebugOptions (0-0-0-0): size 36 (cls: DebugOptions>ArrayProperty>/Script/CoreUObject)
-	Out_0 (0-0-0-0): size 36 (cls: Out_0>ObjectProperty>/Script/CoreUObject)
+	Error (0-0-0-0): size 36 (cls: Error>ObjectProperty>/Script/CoreUObject)
 	OnAccept__DelegateSignature (0-0-0-0): size 43 (cls: OnAccept__DelegateSignature>Function>/Script/CoreUObject)
 	OnCancel__DelegateSignature (0-0-0-0): size 43 (cls: OnCancel__DelegateSignature>Function>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_CreativePermissionKnobs (0-0-0-0): size 1437 (cls: ExecuteUbergraph_CreativePermissionKnobs>Function>/Script/CoreUObject)
+	ExecuteUbergraph_CreativePermissionKnobs (0-0-0-0): size 1739 (cls: ExecuteUbergraph_CreativePermissionKnobs>Function>/Script/CoreUObject)
 	CallFunc_GetDisplayedEntryWidgets_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetDisplayedEntryWidgets_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetDisplayedEntryWidgets_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetDisplayedEntryWidgets_ReturnValue>ArrayProperty>/Script/CoreUObject)
 	K2Node_MakeArray_Array (0-0-0-0): size 32 (cls: K2Node_MakeArray_Array>TextProperty>/Script/CoreUObject)
 	K2Node_MakeArray_Array (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array>ArrayProperty>/Script/CoreUObject)
 	ListItems (0-0-0-0): size 36 (cls: ListItems>ObjectProperty>/Script/CoreUObject)
 	ListItems (0-0-0-0): size 36 (cls: ListItems>ArrayProperty>/Script/CoreUObject)
-	Value (0-0-0-0): size 32 (cls: Value>IntProperty>/Script/CoreUObject)
-	OnRotated (0-0-0-0): size 68 (cls: OnRotated>Function>/Script/CoreUObject)
-	UpdatePermissionSpinner (0-0-0-0): size 54 (cls: UpdatePermissionSpinner>Function>/Script/CoreUObject)
-	Animation (0-0-0-0): size 36 (cls: Animation>ObjectProperty>/Script/CoreUObject)
-	OnAnimationFinished (0-0-0-0): size 68 (cls: OnAnimationFinished>Function>/Script/CoreUObject)
-	AnimateIn (0-0-0-0): size 54 (cls: AnimateIn>Function>/Script/CoreUObject)
-	HandleCancelClicked (0-0-0-0): size 54 (cls: HandleCancelClicked>Function>/Script/CoreUObject)
-	Button (0-0-0-0): size 36 (cls: Button>ObjectProperty>/Script/CoreUObject)
-	BndEvt__AcceptButton_K2Node_ComponentBoundEvent_2_CommonButtonClicked__DelegateSignature (0-0-0-0): size 68 (cls: BndEvt__AcceptButton_K2Node_ComponentBoundEvent_2_CommonButtonClicked__DelegateSignature>Function>/Script/CoreUObject)
-	Close (0-0-0-0): size 54 (cls: Close>Function>/Script/CoreUObject)
-	bUsingGamepad (0-0-0-0): size 34 (cls: bUsingGamepad>BoolProperty>/Script/CoreUObject)
-	OnInputModeChanged (0-0-0-0): size 68 (cls: OnInputModeChanged>Function>/Script/CoreUObject)
-	OnActivated (0-0-0-0): size 54 (cls: OnActivated>Function>/Script/CoreUObject)
-	Construct (0-0-0-0): size 54 (cls: Construct>Function>/Script/CoreUObject)
-	MyGeometry (0-0-0-0): size 36 (cls: MyGeometry>StructProperty>/Script/CoreUObject)
-	OnFocusReceived (0-0-0-0): size 158 (cls: OnFocusReceived>Function>/Script/CoreUObject)
-	SavePermissions (0-0-0-0): size 47 (cls: SavePermissions>Function>/Script/CoreUObject)
-	PlaceHolderWhitelist (0-0-0-0): size 32 (cls: PlaceHolderWhitelist>StrProperty>/Script/CoreUObject)
-	PlaceHolderWhitelist (0-0-0-0): size 36 (cls: PlaceHolderWhitelist>ArrayProperty>/Script/CoreUObject)
-	AthenaMatchmakingSpinnerButton (0-0-0-0): size 406 (cls: AthenaMatchmakingSpinnerButton>AthenaMatchmakingSpinnerButton_C>/Game/Athena/UI/Matchmaking/AthenaMatchmakingSpinnerButton):
+	AthenaMatchmakingSpinnerButton (0-0-0-0): size 435 (cls: AthenaMatchmakingSpinnerButton>AthenaMatchmakingSpinnerButton_C>/Game/Athena/UI/Matchmaking/AthenaMatchmakingSpinnerButton):
 		Tag array:
 			Border_Fill(ObjectProperty)=Border_Fill=WidgetArchetype 
 			LeftButton(ObjectProperty)=LeftButton=WidgetArchetype 
 			LeftButtonSize(ObjectProperty)=LeftButtonSize=WidgetArchetype 
 			RightButton(ObjectProperty)=RightButton=WidgetArchetype 
 			RightButtonSize(ObjectProperty)=RightButtonSize=WidgetArchetype 
+			SaveSpinner(ObjectProperty)=SaveSpinner=WidgetArchetype 
 			OptionDisplayName(ObjectProperty)=OptionDisplayName=WidgetArchetype 
 			MyText(ObjectProperty)=MyText=WidgetArchetype 
 			bShouldSelectUponReceivingFocus(BoolProperty)=True 
@@ -674,7 +693,7 @@ Serialized exports:
 			bIsFocusable(BoolProperty)=True 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=VerticalBoxSlot_1=WidgetArchetype 
-			Navigation(ObjectProperty)=WidgetNavigation_0=WidgetArchetype 
+			Navigation(ObjectProperty)=WidgetNavigation_1=WidgetArchetype 
 	BackgroundBlur_0 (0-0-0-0): size 111 (cls: BackgroundBlur_0>BackgroundBlur>/Script/UMG):
 		Tag array:
 			BlurStrength(FloatProperty)=50 
@@ -685,10 +704,36 @@ Serialized exports:
 			Padding(StructProperty)=System.Byte[] 
 			Parent(ObjectProperty)=BackgroundBlur_0=WidgetArchetype 
 			Content(ObjectProperty)=ModalContent=WidgetArchetype 
+	CloseDialog (0-0-0-0): size 54 (cls: CloseDialog>Function>/Script/CoreUObject)
+	ShowWhitelistLimitError (0-0-0-0): size 54 (cls: ShowWhitelistLimitError>Function>/Script/CoreUObject)
+	HandleNoOptionsLoaded (0-0-0-0): size 54 (cls: HandleNoOptionsLoaded>Function>/Script/CoreUObject)
+	Value (0-0-0-0): size 32 (cls: Value>IntProperty>/Script/CoreUObject)
+	OnRotated (0-0-0-0): size 68 (cls: OnRotated>Function>/Script/CoreUObject)
+	UpdatePermissionSpinner (0-0-0-0): size 54 (cls: UpdatePermissionSpinner>Function>/Script/CoreUObject)
+	AnimateIn (0-0-0-0): size 54 (cls: AnimateIn>Function>/Script/CoreUObject)
+	HandleCancelClicked (0-0-0-0): size 54 (cls: HandleCancelClicked>Function>/Script/CoreUObject)
+	Button (0-0-0-0): size 36 (cls: Button>ObjectProperty>/Script/CoreUObject)
+	BndEvt__AcceptButton_K2Node_ComponentBoundEvent_2_CommonButtonClicked__DelegateSignature (0-0-0-0): size 68 (cls: BndEvt__AcceptButton_K2Node_ComponentBoundEvent_2_CommonButtonClicked__DelegateSignature>Function>/Script/CoreUObject)
+	Close (0-0-0-0): size 54 (cls: Close>Function>/Script/CoreUObject)
+	bUsingGamepad (0-0-0-0): size 34 (cls: bUsingGamepad>BoolProperty>/Script/CoreUObject)
+	OnInputModeChanged (0-0-0-0): size 68 (cls: OnInputModeChanged>Function>/Script/CoreUObject)
+	OnActivated (0-0-0-0): size 54 (cls: OnActivated>Function>/Script/CoreUObject)
+	Construct (0-0-0-0): size 54 (cls: Construct>Function>/Script/CoreUObject)
+	MyGeometry (0-0-0-0): size 36 (cls: MyGeometry>StructProperty>/Script/CoreUObject)
+	OnFocusReceived (0-0-0-0): size 164 (cls: OnFocusReceived>Function>/Script/CoreUObject)
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	Navigation (0-0-0-0): size 40 (cls: Navigation>EnumProperty>/Script/CoreUObject)
+	CustomNavToPermissionsListIfShown (0-0-0-0): size 355 (cls: CustomNavToPermissionsListIfShown>Function>/Script/CoreUObject)
+	CallFunc_EqualEqual_ByteByte_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ByteByte_ReturnValue>BoolProperty>/Script/CoreUObject)
+	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
+	CallFunc_EqualEqual_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_EqualEqual_IntInt_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_IntInt_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsAnimationPlaying_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsAnimationPlaying_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Less_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	K2Node_Event_bUsingGamepad (0-0-0-0): size 34 (cls: K2Node_Event_bUsingGamepad>BoolProperty>/Script/CoreUObject)
+	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
+	Temp_bool_Variable1 (0-0-0-0): size 34 (cls: Temp_bool_Variable1>BoolProperty>/Script/CoreUObject)
 	ContentBorder (0-0-0-0): size 350 (cls: ContentBorder>Border>/Script/UMG):
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
@@ -763,6 +808,18 @@ Serialized exports:
 			Padding(StructProperty)=System.Byte[] 
 			Parent(ObjectProperty)=ContentBorder=WidgetArchetype 
 			Content(ObjectProperty)=HorizontalBox=WidgetArchetype 
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	CanvasPanel_0 (0-0-0-0): size 12 (cls: CanvasPanel_0>CanvasPanel>/Script/UMG)
 	CanvasPanel_0 (0-0-0-0): size 12 (cls: CanvasPanel_0>CanvasPanel>/Script/UMG)
@@ -839,6 +896,14 @@ Serialized exports:
 			Justification(ByteProperty)=ETextJustify::Center 
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
+	OptionDisplayName (0-0-0-0): size 559 (cls: OptionDisplayName>CommonTextBlock>/Script/CommonUI):
+		Tag array:
+			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
+			Text(TextProperty)=Error: Too many players with 'edit' permissions (DD4D293946ADF59D6ADD558ABFEF7A8F) 
+			Font(StructProperty)=System.Byte[] 
+			Slot(ObjectProperty)=VerticalBoxSlot_2=WidgetArchetype 
+			bIsVariable(BoolProperty)=True 
+			Visibility(EnumProperty)=ESlateVisibility::Hidden 
 	CenterButtonTextWidget (0-0-0-0): size 453 (cls: CenterButtonTextWidget>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-MediumButton_C=/Game/UI/Foundation/Buttons/TextStyles/TextStyle-MediumButton 
@@ -857,13 +922,14 @@ Serialized exports:
 	ComponentDelegateBinding_0 (0-0-0-0): size 205 (cls: ComponentDelegateBinding_0>ComponentDelegateBinding>/Script/Engine):
 		Tag array:
 			ComponentDelegateBindings(ArrayProperty)=[object] (inner: StructProperty)
-	WidgetArchetype (0-0-0-0): size 357 (cls: WidgetArchetype>CreativePermissionKnobs_C):
+	WidgetArchetype (0-0-0-0): size 386 (cls: WidgetArchetype>CreativePermissionKnobs_C):
 		Tag array:
 			AthenaMatchmakingSpinnerButton(ObjectProperty)=AthenaMatchmakingSpinnerButton=WidgetArchetype 
 			CommonBorder_2(ObjectProperty)=CommonBorder_2=WidgetArchetype 
 			ConfirmSelectionShine(ObjectProperty)=ConfirmSelectionShine=WidgetArchetype 
 			HorizontalBox_3(ObjectProperty)=HorizontalBox_3=WidgetArchetype 
 			ModalContent(ObjectProperty)=ModalContent=WidgetArchetype 
+			OptionDisplayName(ObjectProperty)=OptionDisplayName=WidgetArchetype 
 			OptionsList(ObjectProperty)=OptionsList=WidgetArchetype 
 			AcceptButton(ObjectProperty)=AcceptButton=WidgetArchetype 
 			CancelButton(ObjectProperty)=CancelButton=WidgetArchetype 
@@ -873,12 +939,24 @@ Serialized exports:
 			bCookedWidgetTree(BoolProperty)=True 
 	K2Node_CreateDelegate_OutputDelegate (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate>DelegateProperty>/Script/CoreUObject)
 	K2Node_CreateDelegate_OutputDelegate1 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate1>DelegateProperty>/Script/CoreUObject)
+	CallFunc_GetVisibility_ReturnValue (0-0-0-0): size 40 (cls: CallFunc_GetVisibility_ReturnValue>EnumProperty>/Script/CoreUObject)
 	Temp_byte_Variable (0-0-0-0): size 40 (cls: Temp_byte_Variable>EnumProperty>/Script/CoreUObject)
+	K2Node_Select2_Default (0-0-0-0): size 40 (cls: K2Node_Select2_Default>EnumProperty>/Script/CoreUObject)
+	K2Node_Select3_Default (0-0-0-0): size 40 (cls: K2Node_Select3_Default>EnumProperty>/Script/CoreUObject)
+	K2Node_Select_Default (0-0-0-0): size 40 (cls: K2Node_Select_Default>EnumProperty>/Script/CoreUObject)
+	Temp_byte_Variable (0-0-0-0): size 40 (cls: Temp_byte_Variable>EnumProperty>/Script/CoreUObject)
+	Temp_byte_Variable1 (0-0-0-0): size 40 (cls: Temp_byte_Variable1>EnumProperty>/Script/CoreUObject)
+	Temp_byte_Variable2 (0-0-0-0): size 40 (cls: Temp_byte_Variable2>EnumProperty>/Script/CoreUObject)
+	Temp_byte_Variable3 (0-0-0-0): size 40 (cls: Temp_byte_Variable3>EnumProperty>/Script/CoreUObject)
+	Temp_byte_Variable4 (0-0-0-0): size 40 (cls: Temp_byte_Variable4>EnumProperty>/Script/CoreUObject)
+	Temp_byte_Variable5 (0-0-0-0): size 40 (cls: Temp_byte_Variable5>EnumProperty>/Script/CoreUObject)
+	Temp_byte_Variable6 (0-0-0-0): size 40 (cls: Temp_byte_Variable6>EnumProperty>/Script/CoreUObject)
+	Temp_byte_Variable7 (0-0-0-0): size 40 (cls: Temp_byte_Variable7>EnumProperty>/Script/CoreUObject)
 	HorizontalBox (0-0-0-0): size 94 (cls: HorizontalBox>HorizontalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=BorderSlot_0=WidgetArchetype 
-	HorizontalBox_0 (0-0-0-0): size 86 (cls: HorizontalBox_0>HorizontalBox>/Script/UMG):
+	HorizontalBox_0 (0-0-0-0): size 90 (cls: HorizontalBox_0>HorizontalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=BorderSlot_0=WidgetArchetype 
@@ -930,6 +1008,12 @@ Serialized exports:
 			HorizontalAlignment(ByteProperty)=HAlign_Left 
 			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
 			Content(ObjectProperty)=SizeBox_0=WidgetArchetype 
+	HorizontalBoxSlot_1 (0-0-0-0): size 152 (cls: HorizontalBoxSlot_1>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Right 
+			VerticalAlignment(ByteProperty)=VAlign_Top 
+			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
+			Content(ObjectProperty)=SaveSpinner=WidgetArchetype 
 	HorizontalBoxSlot_4 (0-0-0-0): size 295 (cls: HorizontalBoxSlot_4>HorizontalBoxSlot>/Script/UMG):
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
@@ -1024,7 +1108,7 @@ Serialized exports:
 			Padding(StructProperty)=System.Byte[] 
 			Parent(ObjectProperty)=HorizontalBox=WidgetArchetype 
 			Content(ObjectProperty)=RightExtraContentSlot=WidgetArchetype 
-	AcceptButton (0-0-0-0): size 569 (cls: AcceptButton>IconTextButton_C>/Game/UI/Foundation/Buttons/IconTextButton):
+	AcceptButton (0-0-0-0): size 595 (cls: AcceptButton>IconTextButton_C>/Game/UI/Foundation/Buttons/IconTextButton):
 		Tag array:
 			CenterButtonTextWidget(ObjectProperty)=CenterButtonTextWidget=WidgetArchetype 
 			ContentBorder(ObjectProperty)=ContentBorder=WidgetArchetype 
@@ -1037,6 +1121,7 @@ Serialized exports:
 			TriggeringInputAction(StructProperty)=System.Byte[] 
 			InputActionWidget(ObjectProperty)=InputActionWidget=WidgetArchetype 
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
+			bIsFocusable(BoolProperty)=False 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
 			Navigation(ObjectProperty)=WidgetNavigation_0=WidgetArchetype 
@@ -1077,6 +1162,11 @@ Serialized exports:
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
 			Slot(ObjectProperty)=HorizontalBoxSlot_2=WidgetArchetype 
+	SaveSpinner (0-0-0-0): size 225 (cls: SaveSpinner>Image>/Script/UMG):
+		Tag array:
+			Brush(StructProperty)=System.Byte[] 
+			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
 	LeftSideImage (0-0-0-0): size 196 (cls: LeftSideImage>Image>/Script/UMG):
 		Tag array:
 			Brush(StructProperty)=System.Byte[] 
@@ -1093,18 +1183,25 @@ Serialized exports:
 	CallFunc_Add_IntInt_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue>IntProperty>/Script/CoreUObject)
 	CallFunc_Array_Length_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Array_Length_ReturnValue>IntProperty>/Script/CoreUObject)
 	K2Node_CustomEvent_Value (0-0-0-0): size 32 (cls: K2Node_CustomEvent_Value>IntProperty>/Script/CoreUObject)
-	K2Node_Select_Default (0-0-0-0): size 32 (cls: K2Node_Select_Default>IntProperty>/Script/CoreUObject)
+	K2Node_Select1_Default (0-0-0-0): size 32 (cls: K2Node_Select1_Default>IntProperty>/Script/CoreUObject)
 	Temp_int_Array_Index_Variable (0-0-0-0): size 32 (cls: Temp_int_Array_Index_Variable>IntProperty>/Script/CoreUObject)
 	Temp_int_Loop_Counter_Variable (0-0-0-0): size 32 (cls: Temp_int_Loop_Counter_Variable>IntProperty>/Script/CoreUObject)
 	Temp_int_Variable (0-0-0-0): size 32 (cls: Temp_int_Variable>IntProperty>/Script/CoreUObject)
 	Temp_int_Variable1 (0-0-0-0): size 32 (cls: Temp_int_Variable1>IntProperty>/Script/CoreUObject)
 	SelectedValue (0-0-0-0): size 32 (cls: SelectedValue>IntProperty>/Script/CoreUObject)
-	OptionsList (0-0-0-0): size 128 (cls: OptionsList>ListView>/Script/UMG):
+	OptionsList (0-0-0-0): size 140 (cls: OptionsList>ListView>/Script/UMG):
 		Tag array:
 			EntrySpacing(FloatProperty)=7.5 
 			EntryWidgetClass(ObjectProperty)=AthenaMatchmakingSpinnerButton_C=/Game/Athena/UI/Matchmaking/AthenaMatchmakingSpinnerButton 
 			Slot(ObjectProperty)=SizeBoxSlot_1=WidgetArchetype 
-			Navigation(ObjectProperty)=WidgetNavigation_0=WidgetArchetype 
+			Visibility(EnumProperty)=ESlateVisibility::SelfHitTestInvisible 
+	Error (0-0-0-0): size 810 (cls: Error>MovieScene>/Script/MovieScene):
+		Tag array:
+			Possessables(ArrayProperty)=[object] (inner: StructProperty)
+			ObjectBindings(ArrayProperty)=[object] (inner: StructProperty)
+			PlaybackRange(StructProperty)=System.Byte[] 
+			DisplayRate(StructProperty)=System.Byte[] 
+			Signature(StructProperty)=Guid: 4236143093-1290738176-1855105427-1267565919 
 	In (0-0-0-0): size 790 (cls: In>MovieScene>/Script/MovieScene):
 		Tag array:
 			Possessables(ArrayProperty)=[object] (inner: StructProperty)
@@ -1131,6 +1228,12 @@ Serialized exports:
 			PlaybackRange(StructProperty)=System.Byte[] 
 			DisplayRate(StructProperty)=System.Byte[] 
 			Signature(StructProperty)=Guid: 3815119944-1121258113-833943984-3870650801 
+	MovieScene2DTransformSection_0 (0-0-0-0): size 2839 (cls: MovieScene2DTransformSection_0>MovieScene2DTransformSection>/Script/UMG):
+		Tag array:
+			Translation(StructProperty)=System.Byte[] 
+			Easing(StructProperty)=System.Byte[] 
+			SectionRange(StructProperty)=System.Byte[] 
+			Signature(StructProperty)=Guid: 3930364897-1090735713-2433992597-1357299686 
 	MovieScene2DTransformSection_0 (0-0-0-0): size 9660 (cls: MovieScene2DTransformSection_0>MovieScene2DTransformSection>/Script/UMG):
 		Tag array:
 			Translation(StructProperty)=System.Byte[] 
@@ -1153,6 +1256,12 @@ Serialized exports:
 			Easing(StructProperty)=System.Byte[] 
 			SectionRange(StructProperty)=System.Byte[] 
 			Signature(StructProperty)=Guid: 1769907540-1154920333-1061046970-1024447676 
+	MovieScene2DTransformTrack_0 (0-0-0-0): size 196 (cls: MovieScene2DTransformTrack_0>MovieScene2DTransformTrack>/Script/UMG):
+		Tag array:
+			PropertyName(NameProperty)=RenderTransform 
+			PropertyPath(StrProperty)=RenderTransform 
+			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
+			Signature(StructProperty)=Guid: 1436735775-1235598680-2461629588-3518658496 
 	MovieScene2DTransformTrack_0 (0-0-0-0): size 196 (cls: MovieScene2DTransformTrack_0>MovieScene2DTransformTrack>/Script/UMG):
 		Tag array:
 			PropertyName(NameProperty)=RenderTransform 
@@ -1185,6 +1294,22 @@ Serialized exports:
 	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
 	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
 	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseInFunction (0-0-0-0): size 12 (cls: EaseInFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	EaseOutFunction (0-0-0-0): size 12 (cls: EaseOutFunction>MovieSceneBuiltInEasingFunction>/Script/MovieScene)
+	MovieSceneByteSection_0 (0-0-0-0): size 406 (cls: MovieSceneByteSection_0>MovieSceneByteSection>/Script/MovieSceneTracks):
+		Tag array:
+			ByteCurve(StructProperty)=System.Byte[] 
+			Easing(StructProperty)=System.Byte[] 
+			Signature(StructProperty)=Guid: 882169474-1139454918-3744272557-2699407787 
+	MovieSceneByteTrack_0 (0-0-0-0): size 220 (cls: MovieSceneByteTrack_0>MovieSceneByteTrack>/Script/MovieSceneTracks):
+		Tag array:
+			Enum(ObjectProperty)=ESlateVisibility=/Script/UMG 
+			PropertyName(NameProperty)=Visibility 
+			PropertyPath(StrProperty)=Visibility 
+			Sections(ArrayProperty)=[object] (inner: ObjectProperty)
+			Signature(StructProperty)=Guid: 3299937524-1332951104-842589373-3876843347 
 	MovieSceneColorSection_0 (0-0-0-0): size 3526 (cls: MovieSceneColorSection_0>MovieSceneColorSection>/Script/MovieSceneTracks):
 		Tag array:
 			RedCurve(StructProperty)=System.Byte[] 
@@ -1306,18 +1431,28 @@ Serialized exports:
 	AthenaMatchmakingSpinnerButton (0-0-0-0): size 36 (cls: AthenaMatchmakingSpinnerButton>ObjectProperty>/Script/CoreUObject)
 	CommonBorder_2 (0-0-0-0): size 36 (cls: CommonBorder_2>ObjectProperty>/Script/CoreUObject)
 	ConfirmSelectionShine (0-0-0-0): size 36 (cls: ConfirmSelectionShine>ObjectProperty>/Script/CoreUObject)
+	K2Node_Select1_Default (0-0-0-0): size 36 (cls: K2Node_Select1_Default>ObjectProperty>/Script/CoreUObject)
+	K2Node_Select_Default (0-0-0-0): size 36 (cls: K2Node_Select_Default>ObjectProperty>/Script/CoreUObject)
+	ReturnValue (0-0-0-0): size 36 (cls: ReturnValue>ObjectProperty>/Script/CoreUObject)
+	Temp_object_Variable (0-0-0-0): size 36 (cls: Temp_object_Variable>ObjectProperty>/Script/CoreUObject)
+	Temp_object_Variable1 (0-0-0-0): size 36 (cls: Temp_object_Variable1>ObjectProperty>/Script/CoreUObject)
+	Temp_object_Variable2 (0-0-0-0): size 36 (cls: Temp_object_Variable2>ObjectProperty>/Script/CoreUObject)
+	Temp_object_Variable3 (0-0-0-0): size 36 (cls: Temp_object_Variable3>ObjectProperty>/Script/CoreUObject)
+	Temp_object_Variable4 (0-0-0-0): size 36 (cls: Temp_object_Variable4>ObjectProperty>/Script/CoreUObject)
 	CallFunc_Array_Get_Item (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetUIManagerWidget_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetUIManagerWidget_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_PlayAnimation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlayAnimation_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_PlayAnimation_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_PlayAnimation_ReturnValue1>ObjectProperty>/Script/CoreUObject)
 	K2Node_ComponentBoundEvent_Button (0-0-0-0): size 36 (cls: K2Node_ComponentBoundEvent_Button>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsAthena_Matchmaking_Spinner_Button (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsAthena_Matchmaking_Spinner_Button>ObjectProperty>/Script/CoreUObject)
-	K2Node_Event_Animation (0-0-0-0): size 36 (cls: K2Node_Event_Animation>ObjectProperty>/Script/CoreUObject)
 	HorizontalBox_3 (0-0-0-0): size 36 (cls: HorizontalBox_3>ObjectProperty>/Script/CoreUObject)
 	In (0-0-0-0): size 36 (cls: In>ObjectProperty>/Script/CoreUObject)
 	ModalContent (0-0-0-0): size 36 (cls: ModalContent>ObjectProperty>/Script/CoreUObject)
 	NewAnimation_1 (0-0-0-0): size 36 (cls: NewAnimation_1>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetUINavigationManager_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetUINavigationManager_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	OptionDisplayName (0-0-0-0): size 36 (cls: OptionDisplayName>ObjectProperty>/Script/CoreUObject)
 	Out (0-0-0-0): size 36 (cls: Out>ObjectProperty>/Script/CoreUObject)
+	Out_0 (0-0-0-0): size 36 (cls: Out_0>ObjectProperty>/Script/CoreUObject)
 	ModalOverlay (0-0-0-0): size 86 (cls: ModalOverlay>Overlay>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -1392,7 +1527,7 @@ Serialized exports:
 			WidthOverride(FloatProperty)=1000 
 			HeightOverride(FloatProperty)=720 
 			MinDesiredHeight(FloatProperty)=720 
-			MaxDesiredHeight(FloatProperty)=600 
+			MaxDesiredHeight(FloatProperty)=500 
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=VerticalBoxSlot_0=WidgetArchetype 
 	ModalSize (0-0-0-0): size 140 (cls: ModalSize>SizeBox>/Script/UMG):
@@ -1434,21 +1569,15 @@ Serialized exports:
 	CallFunc_Handled_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_Handled_ReturnValue>StructProperty>/Script/CoreUObject)
 	InFocusEvent (0-0-0-0): size 36 (cls: InFocusEvent>StructProperty>/Script/CoreUObject)
 	ReturnValue (0-0-0-0): size 36 (cls: ReturnValue>StructProperty>/Script/CoreUObject)
-	TextBlock_0 (0-0-0-0): size 358 (cls: TextBlock_0>TextBlock>/Script/UMG):
-		Tag array:
-			Text(TextProperty)=NOTE THIS SCREEN IS WIP AND SUPER BROKEN, NO NEED TO BUG IT YET ITS COVERED BY FORT-137286 (4F2716CB4C2EA80377C06EBD11EAF8E0) 
-			ColorAndOpacity(StructProperty)=System.Byte[] 
-			WrapTextAt(FloatProperty)=980.7068 
-			Slot(ObjectProperty)=VerticalBoxSlot_3=WidgetArchetype 
 	VerticalBox_0 (0-0-0-0): size 82 (cls: VerticalBox_0>VerticalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=BorderSlot_0=WidgetArchetype 
-	VerticalBox_1 (0-0-0-0): size 94 (cls: VerticalBox_1>VerticalBox>/Script/UMG):
+	VerticalBox_1 (0-0-0-0): size 90 (cls: VerticalBox_1>VerticalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=BorderSlot_0=WidgetArchetype 
-	VerticalBox_2 (0-0-0-0): size 86 (cls: VerticalBox_2>VerticalBox>/Script/UMG):
+	VerticalBox_2 (0-0-0-0): size 90 (cls: VerticalBox_2>VerticalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=VerticalBoxSlot_0=WidgetArchetype 
@@ -1472,21 +1601,29 @@ Serialized exports:
 		Tag array:
 			Parent(ObjectProperty)=VerticalBox_1=WidgetArchetype 
 			Content(ObjectProperty)=CommonBorder_2=WidgetArchetype 
-	VerticalBoxSlot_3 (0-0-0-0): size 111 (cls: VerticalBoxSlot_3>VerticalBoxSlot>/Script/UMG):
-		Tag array:
-			HorizontalAlignment(ByteProperty)=HAlign_Center 
-			Parent(ObjectProperty)=VerticalBox_1=WidgetArchetype 
-			Content(ObjectProperty)=TextBlock_0=WidgetArchetype 
 	VerticalBoxSlot_0 (0-0-0-0): size 185 (cls: VerticalBoxSlot_0>VerticalBoxSlot>/Script/UMG):
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
 			Parent(ObjectProperty)=VerticalBox_2=WidgetArchetype 
 			Content(ObjectProperty)=ListSizeBox=WidgetArchetype 
-	VerticalBoxSlot_1 (0-0-0-0): size 243 (cls: VerticalBoxSlot_1>VerticalBoxSlot>/Script/UMG):
+	VerticalBoxSlot_1 (0-0-0-0): size 214 (cls: VerticalBoxSlot_1>VerticalBoxSlot>/Script/UMG):
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
 			Parent(ObjectProperty)=VerticalBox_2=WidgetArchetype 
 			Content(ObjectProperty)=HorizontalBox_3=WidgetArchetype 
+	VerticalBoxSlot_2 (0-0-0-0): size 197 (cls: VerticalBoxSlot_2>VerticalBoxSlot>/Script/UMG):
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			HorizontalAlignment(ByteProperty)=HAlign_Center 
+			Parent(ObjectProperty)=VerticalBox_2=WidgetArchetype 
+			Content(ObjectProperty)=OptionDisplayName=WidgetArchetype 
+	Error_INST (0-0-0-0): size 12948 (cls: Error_INST>WidgetAnimation>/Script/UMG):
+		Tag array:
+			MovieScene(ObjectProperty)=Error=CreativePermissionKnobs_C 
+			AnimationBindings(ArrayProperty)=[object] (inner: StructProperty)
+			DisplayLabel(StrProperty)=Error 
+			PrecompiledEvaluationTemplate(StructProperty)=System.Byte[] 
+			Signature(StructProperty)=Guid: 1100415872-1257964241-2766143650-1051822854 
 	In_INST (0-0-0-0): size 15419 (cls: In_INST>WidgetAnimation>/Script/UMG):
 		Tag array:
 			MovieScene(ObjectProperty)=In=CreativePermissionKnobs_C 
@@ -1514,7 +1651,7 @@ Serialized exports:
 	WidgetNavigation_0 (0-0-0-0): size 110 (cls: WidgetNavigation_0>WidgetNavigation>/Script/UMG):
 		Tag array:
 			Down(StructProperty)=System.Byte[] 
-	WidgetNavigation_0 (0-0-0-0): size 110 (cls: WidgetNavigation_0>WidgetNavigation>/Script/UMG):
+	WidgetNavigation_1 (0-0-0-0): size 180 (cls: WidgetNavigation_1>WidgetNavigation>/Script/UMG):
 		Tag array:
 			Down(StructProperty)=System.Byte[] 
 	WidgetNavigation_0 (0-0-0-0): size 180 (cls: WidgetNavigation_0>WidgetNavigation>/Script/UMG):
@@ -1523,12 +1660,6 @@ Serialized exports:
 	WidgetNavigation_0 (0-0-0-0): size 110 (cls: WidgetNavigation_0>WidgetNavigation>/Script/UMG):
 		Tag array:
 			Down(StructProperty)=System.Byte[] 
-	WidgetNavigation_0 (0-0-0-0): size 388 (cls: WidgetNavigation_0>WidgetNavigation>/Script/UMG):
-		Tag array:
-			Up(StructProperty)=System.Byte[] 
-			Down(StructProperty)=System.Byte[] 
-			Left(StructProperty)=System.Byte[] 
-			Right(StructProperty)=System.Byte[] 
 	WidgetNavigation_0 (0-0-0-0): size 110 (cls: WidgetNavigation_0>WidgetNavigation>/Script/UMG):
 		Tag array:
 			Down(StructProperty)=System.Byte[] 

@@ -49,6 +49,8 @@ Name table:
 	ApplicationTag
 	ArrayProperty
 	AthenaProjectileSpawned
+	AudioComponent
+	AudioComponent_33__D16EF273
 	AvatarActor
 	B_Prj_Athena_FragGrenade_C
 	Base Grenade
@@ -100,6 +102,7 @@ Name table:
 	BroadcastFilterOverride
 	bShouldAttachedActorsObstructTarget
 	bShouldBounce
+	bSpawnOnEquip
 	bStopAtFirstSuccess
 	bTraceComplexCollision
 	bUseMaxYawAngleToTarget
@@ -109,7 +112,7 @@ Name table:
 	bWasCancelled
 	ByteProperty
 	CalcGrenadeSpeedFromPitch
-	CalculateProjectileTrajectorySpline
+	CalculateProjectileTrajectorySplineWithHit
 	CallFunc_AbilityTargetDataFromActor_ReturnValue
 	CallFunc_Add_FloatFloat_ReturnValue
 	CallFunc_Add_VectorVector_ReturnValue
@@ -126,8 +129,9 @@ Name table:
 	CallFunc_BreakRotator_Yaw
 	CallFunc_BreakRotator_Yaw1
 	CallFunc_CalcGrenadeSpeedFromPitch_GrenadeSpeed
-	CallFunc_CalculateProjectileTrajectorySpline_OutSplinePoints
-	CallFunc_CalculateProjectileTrajectorySpline_OutSplineTangents
+	CallFunc_CalculateProjectileTrajectorySplineWithHit_OutHitResult
+	CallFunc_CalculateProjectileTrajectorySplineWithHit_OutSplinePoints
+	CallFunc_CalculateProjectileTrajectorySplineWithHit_OutSplineTangents
 	CallFunc_Conv_RotatorToVector_ReturnValue
 	CallFunc_CreatePlayMontageAndWaitProxy_ReturnValue
 	CallFunc_Divide_FloatFloat_ReturnValue
@@ -143,7 +147,7 @@ Name table:
 	CallFunc_GetOwningPlayer_Player_Pawn2
 	CallFunc_GetOwningPlayer_Player_Pawn3
 	CallFunc_GetOwningPlayer_Player_Pawn4
-	CallFunc_GetOwningPlayer_Player_Pawn5
+	CallFunc_GetProjectileTrajectoryPoints_OutHitResult
 	CallFunc_GetProjectileTrajectoryPoints_OutSplinePoints
 	CallFunc_GetProjectileTrajectoryPoints_OutSplineTangents
 	CallFunc_GetScaledCapsuleSize_OutHalfHeight
@@ -159,13 +163,11 @@ Name table:
 	CallFunc_IsValid_ReturnValue3
 	CallFunc_IsValid_ReturnValue4
 	CallFunc_IsValid_ReturnValue5
-	CallFunc_IsValid_ReturnValue6
 	CallFunc_IsValidClass_ReturnValue
 	CallFunc_K2_CommitAbility_ReturnValue
 	CallFunc_K2_CommitAbility_ReturnValue1
 	CallFunc_K2_GetActorLocation_ReturnValue
 	CallFunc_K2_GetActorRotation_ReturnValue
-	CallFunc_K2_SetTimer_ReturnValue
 	CallFunc_Lerp_ReturnValue
 	CallFunc_MakeGameplayEffectContainerSpec_ReturnValue
 	CallFunc_MakeGameplayEffectContainerSpec_ReturnValue1
@@ -174,6 +176,7 @@ Name table:
 	CallFunc_Multiply_VectorFloat_ReturnValue
 	CallFunc_NormalizeAxis_ReturnValue
 	CallFunc_Not_PreBool_ReturnValue
+	CallFunc_Not_PreBool_ReturnValue1
 	CallFunc_PlayMontageInfoAndWaitForTrigger_ReturnValue
 	CallFunc_RotateAngleAxis_ReturnValue
 	CallFunc_SelectFloat_ReturnValue
@@ -185,6 +188,7 @@ Name table:
 	CallFunc_SpawnLocationAndRotation_OutLoc
 	CallFunc_SpawnLocationAndRotation_OutRot
 	CallFunc_SpawnProjectileAndWait_ReturnValue
+	CallFunc_SpawnTrajectoryIndicator_ReturnValue
 	CallFunc_Subtract_FloatFloat_ReturnValue
 	CallFunc_Subtract_FloatFloat_ReturnValue1
 	CallFunc_Subtract_VectorVector_ReturnValue
@@ -192,7 +196,6 @@ Name table:
 	CallFunc_WaitDelay_ReturnValue
 	CallFunc_WaitDelay_ReturnValue1
 	CallFunc_WaitDelay_ReturnValue2
-	CallFunc_WaitDelay_ReturnValue3
 	Cancelled
 	Cancelled_B08560984B3818F6EECB3C9A92E61ADC
 	CapsuleComponent
@@ -200,7 +203,9 @@ Name table:
 	CharacterPartMontages
 	Class
 	ClassProperty
+	Cleanup Trajectory Display On End
 	CleanupTrajectoryDisplay
+	CleanupTrajectoryIndicatorOnUnequip
 	CollisionCapsule0
 	Completed
 	Completed_B08560984B3818F6EECB3C9A92E61ADC
@@ -374,6 +379,7 @@ Name table:
 	HalfExtents
 	Handle
 	HasAuthority
+	HitResult
 	ImpactCues
 	InitTrajectoryVariables
 	InstancingPolicy
@@ -388,14 +394,12 @@ Name table:
 	ItemDefinition
 	K2_AbilityCompleted
 	K2_ActivateAbility
-	K2_ClearAndInvalidateTimerHandle
 	K2_CommitAbility
 	K2_DestroyActor
 	K2_EndAbility
 	K2_GetActorLocation
 	K2_GetActorRotation
 	K2_OnEndAbility
-	K2_SetTimer
 	K2Node_CreateDelegate_OutputDelegate
 	K2Node_CreateDelegate_OutputDelegate1
 	K2Node_CreateDelegate_OutputDelegate10
@@ -404,7 +408,6 @@ Name table:
 	K2Node_CreateDelegate_OutputDelegate13
 	K2Node_CreateDelegate_OutputDelegate14
 	K2Node_CreateDelegate_OutputDelegate15
-	K2Node_CreateDelegate_OutputDelegate16
 	K2Node_CreateDelegate_OutputDelegate2
 	K2Node_CreateDelegate_OutputDelegate3
 	K2Node_CreateDelegate_OutputDelegate4
@@ -472,13 +475,13 @@ Name table:
 	OnCompleted_758AC809498064C01C71318E141D1E46
 	OnFinish
 	OnFinish_4B1D92B7427697E6BD9D58ACA0F87155
-	OnFinish_C70D988C492A7EF3B105DC8DADDBD86D
 	OnFinish_D7F9D67243A9BA307AFBF7839EC5CA1C
 	OnFinish_E8F8DC5A465F19B633AF0E8888171F5A
 	OnInterrupted
 	OnInterrupted_758AC809498064C01C71318E141D1E46
 	OptionalObject
 	OptionalObject2
+	OutHitResult
 	OutLoc
 	OutRot
 	OutSplinePoints
@@ -523,6 +526,7 @@ Name table:
 	SetCanBeCanceled
 	SetObjectPropertyByName
 	SetShouldBlockOtherAbilities
+	SetShouldUpdateFromOwner
 	SetTrajectorySpline
 	SetupDummyProjectile
 	SetupGrenade
@@ -531,10 +535,12 @@ Name table:
 	Soldier_Proxy_Mine_Activate_Cue
 	SoundBase
 	SoundCue
+	Spawned On Equip
 	SpawnedProjectile
 	SpawnLocationAndRotation
 	SpawnProjectileAndWait
 	SpawnProjectileEventData__DelegateSignature
+	SpawnTrajectoryIndicator
 	Spline_GEN_VARIABLE
 	SplineComponent
 	SplineMeshComponent
@@ -577,6 +583,7 @@ Name table:
 	UberGraphFrame
 	UberGraphFunction
 	UInt64Property
+	UpdateTrajectory
 	UpdateTrajectorySpline
 	UpdateTrajectoryTimerHandle
 	Value
@@ -589,7 +596,7 @@ Name table:
 	WeaponData_M80
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	GA_Athena_Grenade_WithTrajectory_C (0-0-0-0): size 837 (cls: GA_Athena_Grenade_WithTrajectory_C>BlueprintGeneratedClass>/Script/Engine):
+	GA_Athena_Grenade_WithTrajectory_C (0-0-0-0): size 889 (cls: GA_Athena_Grenade_WithTrajectory_C>BlueprintGeneratedClass>/Script/Engine):
 		Tag array:
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_GA_Athena_Grenade_WithTrajectory=GA_Athena_Grenade_WithTrajectory_C 
 	Default__GA_Athena_Grenade_WithTrajectory_C (0-0-0-0): size 8882 (cls: Default__GA_Athena_Grenade_WithTrajectory_C>GA_Athena_Grenade_WithTrajectory_C):
@@ -635,9 +642,12 @@ Serialized exports:
 			InstancingPolicy(ByteProperty)=EGameplayAbilityInstancingPolicy::InstancedPerActor 
 	EventActivation (0-0-0-0): size 36 (cls: EventActivation>StructProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_GA_Athena_Grenade_WithTrajectory (0-0-0-0): size 4717 (cls: ExecuteUbergraph_GA_Athena_Grenade_WithTrajectory>Function>/Script/CoreUObject)
+	ExecuteUbergraph_GA_Athena_Grenade_WithTrajectory (0-0-0-0): size 4408 (cls: ExecuteUbergraph_GA_Athena_Grenade_WithTrajectory>Function>/Script/CoreUObject)
 	CallFunc_BP_ApplyGameplayEffectToTarget_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_BP_ApplyGameplayEffectToTarget_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_BP_ApplyGameplayEffectToTarget_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_BP_ApplyGameplayEffectToTarget_ReturnValue>ArrayProperty>/Script/CoreUObject)
+	UpdateTrajectory (0-0-0-0): size 54 (cls: UpdateTrajectory>Function>/Script/CoreUObject)
+	Cleanup Trajectory Display On End (0-0-0-0): size 54 (cls: Cleanup Trajectory Display On End>Function>/Script/CoreUObject)
+	CleanupTrajectoryIndicatorOnUnequip (0-0-0-0): size 54 (cls: CleanupTrajectoryIndicatorOnUnequip>Function>/Script/CoreUObject)
 	ProjectileReference (0-0-0-0): size 36 (cls: ProjectileReference>ObjectProperty>/Script/CoreUObject)
 	AthenaProjectileSpawned (0-0-0-0): size 68 (cls: AthenaProjectileSpawned>Function>/Script/CoreUObject)
 	InitTrajectoryVariables (0-0-0-0): size 54 (cls: InitTrajectoryVariables>Function>/Script/CoreUObject)
@@ -650,7 +660,6 @@ Serialized exports:
 	Server_SpawnProjectile (0-0-0-0): size 84 (cls: Server_SpawnProjectile>Function>/Script/CoreUObject)
 	K2_ActivateAbility (0-0-0-0): size 54 (cls: K2_ActivateAbility>Function>/Script/CoreUObject)
 	OnFinish_D7F9D67243A9BA307AFBF7839EC5CA1C (0-0-0-0): size 54 (cls: OnFinish_D7F9D67243A9BA307AFBF7839EC5CA1C>Function>/Script/CoreUObject)
-	OnFinish_C70D988C492A7EF3B105DC8DADDBD86D (0-0-0-0): size 54 (cls: OnFinish_C70D988C492A7EF3B105DC8DADDBD86D>Function>/Script/CoreUObject)
 	OnCompleted_758AC809498064C01C71318E141D1E46 (0-0-0-0): size 54 (cls: OnCompleted_758AC809498064C01C71318E141D1E46>Function>/Script/CoreUObject)
 	OnBlendOut_758AC809498064C01C71318E141D1E46 (0-0-0-0): size 54 (cls: OnBlendOut_758AC809498064C01C71318E141D1E46>Function>/Script/CoreUObject)
 	OnInterrupted_758AC809498064C01C71318E141D1E46 (0-0-0-0): size 54 (cls: OnInterrupted_758AC809498064C01C71318E141D1E46>Function>/Script/CoreUObject)
@@ -681,22 +690,22 @@ Serialized exports:
 	SpawnLocationAndRotation (0-0-0-0): size 534 (cls: SpawnLocationAndRotation>Function>/Script/CoreUObject)
 	CallFunc_GetOwningPlayer_Player_Pawn (0-0-0-0): size 36 (cls: CallFunc_GetOwningPlayer_Player_Pawn>ObjectProperty>/Script/CoreUObject)
 	SetupDummyProjectile (0-0-0-0): size 400 (cls: SetupDummyProjectile>Function>/Script/CoreUObject)
-	CallFunc_GetProjectileTrajectoryPoints_OutSplinePoints (0-0-0-0): size 36 (cls: CallFunc_GetProjectileTrajectoryPoints_OutSplinePoints>StructProperty>/Script/CoreUObject)
-	CallFunc_GetProjectileTrajectoryPoints_OutSplinePoints (0-0-0-0): size 36 (cls: CallFunc_GetProjectileTrajectoryPoints_OutSplinePoints>ArrayProperty>/Script/CoreUObject)
-	UpdateTrajectorySpline (0-0-0-0): size 150 (cls: UpdateTrajectorySpline>Function>/Script/CoreUObject)
 	AimPitch (0-0-0-0): size 32 (cls: AimPitch>FloatProperty>/Script/CoreUObject)
 	CalcGrenadeSpeedFromPitch (0-0-0-0): size 251 (cls: CalcGrenadeSpeedFromPitch>Function>/Script/CoreUObject)
 	Player Pawn (0-0-0-0): size 36 (cls: Player Pawn>ObjectProperty>/Script/CoreUObject)
 	GetOwningPlayer (0-0-0-0): size 211 (cls: GetOwningPlayer>Function>/Script/CoreUObject)
+	CallFunc_GetProjectileTrajectoryPoints_OutSplinePoints (0-0-0-0): size 36 (cls: CallFunc_GetProjectileTrajectoryPoints_OutSplinePoints>StructProperty>/Script/CoreUObject)
+	CallFunc_GetProjectileTrajectoryPoints_OutSplinePoints (0-0-0-0): size 36 (cls: CallFunc_GetProjectileTrajectoryPoints_OutSplinePoints>ArrayProperty>/Script/CoreUObject)
+	UpdateTrajectorySpline (0-0-0-0): size 159 (cls: UpdateTrajectorySpline>Function>/Script/CoreUObject)
 	ReturnValue (0-0-0-0): size 40 (cls: ReturnValue>ClassProperty>/Script/CoreUObject)
 	GetProjectileTrajectoryActor (0-0-0-0): size 62 (cls: GetProjectileTrajectoryActor>Function>/Script/CoreUObject)
 	OutSplinePoints (0-0-0-0): size 36 (cls: OutSplinePoints>StructProperty>/Script/CoreUObject)
 	OutSplinePoints (0-0-0-0): size 36 (cls: OutSplinePoints>ArrayProperty>/Script/CoreUObject)
-	GetProjectileTrajectoryPoints (0-0-0-0): size 398 (cls: GetProjectileTrajectoryPoints>Function>/Script/CoreUObject)
-	CallFunc_CalculateProjectileTrajectorySpline_OutSplinePoints (0-0-0-0): size 36 (cls: CallFunc_CalculateProjectileTrajectorySpline_OutSplinePoints>StructProperty>/Script/CoreUObject)
-	CallFunc_CalculateProjectileTrajectorySpline_OutSplinePoints (0-0-0-0): size 36 (cls: CallFunc_CalculateProjectileTrajectorySpline_OutSplinePoints>ArrayProperty>/Script/CoreUObject)
-	CallFunc_CalculateProjectileTrajectorySpline_OutSplineTangents (0-0-0-0): size 36 (cls: CallFunc_CalculateProjectileTrajectorySpline_OutSplineTangents>StructProperty>/Script/CoreUObject)
-	CallFunc_CalculateProjectileTrajectorySpline_OutSplineTangents (0-0-0-0): size 36 (cls: CallFunc_CalculateProjectileTrajectorySpline_OutSplineTangents>ArrayProperty>/Script/CoreUObject)
+	GetProjectileTrajectoryPoints (0-0-0-0): size 426 (cls: GetProjectileTrajectoryPoints>Function>/Script/CoreUObject)
+	CallFunc_CalculateProjectileTrajectorySplineWithHit_OutSplinePoints (0-0-0-0): size 36 (cls: CallFunc_CalculateProjectileTrajectorySplineWithHit_OutSplinePoints>StructProperty>/Script/CoreUObject)
+	CallFunc_CalculateProjectileTrajectorySplineWithHit_OutSplinePoints (0-0-0-0): size 36 (cls: CallFunc_CalculateProjectileTrajectorySplineWithHit_OutSplinePoints>ArrayProperty>/Script/CoreUObject)
+	CallFunc_CalculateProjectileTrajectorySplineWithHit_OutSplineTangents (0-0-0-0): size 36 (cls: CallFunc_CalculateProjectileTrajectorySplineWithHit_OutSplineTangents>StructProperty>/Script/CoreUObject)
+	CallFunc_CalculateProjectileTrajectorySplineWithHit_OutSplineTangents (0-0-0-0): size 36 (cls: CallFunc_CalculateProjectileTrajectorySplineWithHit_OutSplineTangents>ArrayProperty>/Script/CoreUObject)
 	OutSplineTangents (0-0-0-0): size 36 (cls: OutSplineTangents>StructProperty>/Script/CoreUObject)
 	OutSplineTangents (0-0-0-0): size 36 (cls: OutSplineTangents>ArrayProperty>/Script/CoreUObject)
 	CallFunc_GetProjectileTrajectoryPoints_OutSplineTangents (0-0-0-0): size 36 (cls: CallFunc_GetProjectileTrajectoryPoints_OutSplineTangents>StructProperty>/Script/CoreUObject)
@@ -704,11 +713,9 @@ Serialized exports:
 	AbilityKeyPressed (0-0-0-0): size 34 (cls: AbilityKeyPressed>BoolProperty>/Script/CoreUObject)
 	DummyShouldBounce (0-0-0-0): size 34 (cls: DummyShouldBounce>BoolProperty>/Script/CoreUObject)
 	CallFunc_BeginSpawningActor_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BeginSpawningActor_ReturnValue>BoolProperty>/Script/CoreUObject)
-	CallFunc_BooleanAND_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_BooleanOR_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanOR_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_GreaterEqual_FloatFloat_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_GreaterEqual_FloatFloat_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_HasAuthority_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasAuthority_ReturnValue>BoolProperty>/Script/CoreUObject)
-	CallFunc_IsLocallyControlled_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsLocallyControlled_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsStandalone_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsStandalone_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue1>BoolProperty>/Script/CoreUObject)
@@ -716,10 +723,10 @@ Serialized exports:
 	CallFunc_IsValid_ReturnValue3 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue3>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue4 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue4>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue5 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue5>BoolProperty>/Script/CoreUObject)
-	CallFunc_IsValid_ReturnValue6 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue6>BoolProperty>/Script/CoreUObject)
 	CallFunc_K2_CommitAbility_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_K2_CommitAbility_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_K2_CommitAbility_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_K2_CommitAbility_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_Not_PreBool_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_Not_PreBool_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	K2Node_Event_bWasCancelled (0-0-0-0): size 34 (cls: K2Node_Event_bWasCancelled>BoolProperty>/Script/CoreUObject)
 	Flashbang (0-0-0-0): size 34 (cls: Flashbang>BoolProperty>/Script/CoreUObject)
@@ -730,7 +737,14 @@ Serialized exports:
 	PlasmaGrenades (0-0-0-0): size 34 (cls: PlasmaGrenades>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValidClass_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValidClass_ReturnValue>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
+	Spawned On Equip (0-0-0-0): size 34 (cls: Spawned On Equip>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
+	SpawnTrajectoryIndicator (0-0-0-0): size 337 (cls: SpawnTrajectoryIndicator>Function>/Script/CoreUObject)
+	bSpawnOnEquip (0-0-0-0): size 34 (cls: bSpawnOnEquip>BoolProperty>/Script/CoreUObject)
+	CallFunc_BooleanAND_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_BooleanOR_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanOR_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_IsLocallyControlled_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsLocallyControlled_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_SetupGrenade_Base_Grenade (0-0-0-0): size 40 (cls: CallFunc_SetupGrenade_Base_Grenade>ClassProperty>/Script/CoreUObject)
 	Prj_Grenade (0-0-0-0): size 40 (cls: Prj_Grenade>ClassProperty>/Script/CoreUObject)
@@ -744,7 +758,6 @@ Serialized exports:
 	K2Node_CreateDelegate_OutputDelegate13 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate13>DelegateProperty>/Script/CoreUObject)
 	K2Node_CreateDelegate_OutputDelegate14 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate14>DelegateProperty>/Script/CoreUObject)
 	K2Node_CreateDelegate_OutputDelegate15 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate15>DelegateProperty>/Script/CoreUObject)
-	K2Node_CreateDelegate_OutputDelegate16 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate16>DelegateProperty>/Script/CoreUObject)
 	K2Node_CreateDelegate_OutputDelegate2 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate2>DelegateProperty>/Script/CoreUObject)
 	K2Node_CreateDelegate_OutputDelegate3 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate3>DelegateProperty>/Script/CoreUObject)
 	K2Node_CreateDelegate_OutputDelegate4 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate4>DelegateProperty>/Script/CoreUObject)
@@ -822,13 +835,12 @@ Serialized exports:
 	CallFunc_GetOwningPlayer_Player_Pawn2 (0-0-0-0): size 36 (cls: CallFunc_GetOwningPlayer_Player_Pawn2>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetOwningPlayer_Player_Pawn3 (0-0-0-0): size 36 (cls: CallFunc_GetOwningPlayer_Player_Pawn3>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetOwningPlayer_Player_Pawn4 (0-0-0-0): size 36 (cls: CallFunc_GetOwningPlayer_Player_Pawn4>ObjectProperty>/Script/CoreUObject)
-	CallFunc_GetOwningPlayer_Player_Pawn5 (0-0-0-0): size 36 (cls: CallFunc_GetOwningPlayer_Player_Pawn5>ObjectProperty>/Script/CoreUObject)
 	CallFunc_PlayMontageInfoAndWaitForTrigger_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlayMontageInfoAndWaitForTrigger_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_SpawnProjectileAndWait_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_SpawnProjectileAndWait_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_SpawnTrajectoryIndicator_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_SpawnTrajectoryIndicator_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_WaitDelay_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_WaitDelay_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_WaitDelay_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_WaitDelay_ReturnValue1>ObjectProperty>/Script/CoreUObject)
 	CallFunc_WaitDelay_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_WaitDelay_ReturnValue2>ObjectProperty>/Script/CoreUObject)
-	CallFunc_WaitDelay_ReturnValue3 (0-0-0-0): size 36 (cls: CallFunc_WaitDelay_ReturnValue3>ObjectProperty>/Script/CoreUObject)
 	K2Node_CustomEvent_ProjectileReference (0-0-0-0): size 36 (cls: K2Node_CustomEvent_ProjectileReference>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Player_Pawn (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Player_Pawn>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Player_Pawn (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Player_Pawn>ObjectProperty>/Script/CoreUObject)
@@ -841,6 +853,8 @@ Serialized exports:
 	K2Node_DynamicCast_AsBP_Projectile_Trajectory (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsBP_Projectile_Trajectory>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetOwningPlayer_Player_Pawn (0-0-0-0): size 36 (cls: CallFunc_GetOwningPlayer_Player_Pawn>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetOwningPlayer_Player_Pawn1 (0-0-0-0): size 36 (cls: CallFunc_GetOwningPlayer_Player_Pawn1>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetOwningPlayer_Player_Pawn (0-0-0-0): size 36 (cls: CallFunc_GetOwningPlayer_Player_Pawn>ObjectProperty>/Script/CoreUObject)
+	ReturnValue (0-0-0-0): size 36 (cls: ReturnValue>ObjectProperty>/Script/CoreUObject)
 	TrajectoryIndicator (0-0-0-0): size 36 (cls: TrajectoryIndicator>ObjectProperty>/Script/CoreUObject)
 	ApplicationTag (0-0-0-0): size 36 (cls: ApplicationTag>StructProperty>/Script/CoreUObject)
 	ApplicationTag (0-0-0-0): size 36 (cls: ApplicationTag>StructProperty>/Script/CoreUObject)
@@ -853,7 +867,6 @@ Serialized exports:
 	CallFunc_GetActorInfo_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetActorInfo_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_GetTransform_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetTransform_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_K2_GetActorLocation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_GetActorLocation_ReturnValue>StructProperty>/Script/CoreUObject)
-	CallFunc_K2_SetTimer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_SetTimer_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_SetupGrenade_Additional_Explosion_Gameplay_Spec (0-0-0-0): size 36 (cls: CallFunc_SetupGrenade_Additional_Explosion_Gameplay_Spec>StructProperty>/Script/CoreUObject)
 	CallFunc_SetupGrenade_Explosion_Gameplay_Spec (0-0-0-0): size 36 (cls: CallFunc_SetupGrenade_Explosion_Gameplay_Spec>StructProperty>/Script/CoreUObject)
 	CallFunc_SpawnLocationAndRotation_OutLoc (0-0-0-0): size 36 (cls: CallFunc_SpawnLocationAndRotation_OutLoc>StructProperty>/Script/CoreUObject)
@@ -878,10 +891,12 @@ Serialized exports:
 	Temp_struct_Variable1 (0-0-0-0): size 36 (cls: Temp_struct_Variable1>StructProperty>/Script/CoreUObject)
 	Temp_struct_Variable2 (0-0-0-0): size 36 (cls: Temp_struct_Variable2>StructProperty>/Script/CoreUObject)
 	CallFunc_GetActorInfo_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetActorInfo_ReturnValue>StructProperty>/Script/CoreUObject)
+	CallFunc_CalculateProjectileTrajectorySplineWithHit_OutHitResult (0-0-0-0): size 36 (cls: CallFunc_CalculateProjectileTrajectorySplineWithHit_OutHitResult>StructProperty>/Script/CoreUObject)
 	CallFunc_Conv_RotatorToVector_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_Conv_RotatorToVector_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_Multiply_VectorFloat_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_Multiply_VectorFloat_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_SpawnLocationAndRotation_OutLoc (0-0-0-0): size 36 (cls: CallFunc_SpawnLocationAndRotation_OutLoc>StructProperty>/Script/CoreUObject)
 	CallFunc_SpawnLocationAndRotation_OutRot (0-0-0-0): size 36 (cls: CallFunc_SpawnLocationAndRotation_OutRot>StructProperty>/Script/CoreUObject)
+	OutHitResult (0-0-0-0): size 36 (cls: OutHitResult>StructProperty>/Script/CoreUObject)
 	GrenadeDialogFeedback (0-0-0-0): size 36 (cls: GrenadeDialogFeedback>StructProperty>/Script/CoreUObject)
 	GrenadeTargetingOriginOffset (0-0-0-0): size 36 (cls: GrenadeTargetingOriginOffset>StructProperty>/Script/CoreUObject)
 	GrenadeTargetingOriginOffset_Crouched (0-0-0-0): size 36 (cls: GrenadeTargetingOriginOffset_Crouched>StructProperty>/Script/CoreUObject)
@@ -901,4 +916,5 @@ Serialized exports:
 	OutRot (0-0-0-0): size 36 (cls: OutRot>StructProperty>/Script/CoreUObject)
 	ThrowWindupMontage (0-0-0-0): size 36 (cls: ThrowWindupMontage>StructProperty>/Script/CoreUObject)
 	ApplicationTag (0-0-0-0): size 36 (cls: ApplicationTag>StructProperty>/Script/CoreUObject)
+	CallFunc_GetProjectileTrajectoryPoints_OutHitResult (0-0-0-0): size 36 (cls: CallFunc_GetProjectileTrajectoryPoints_OutHitResult>StructProperty>/Script/CoreUObject)
 	UpdateTrajectoryTimerHandle (0-0-0-0): size 36 (cls: UpdateTrajectoryTimerHandle>StructProperty>/Script/CoreUObject)

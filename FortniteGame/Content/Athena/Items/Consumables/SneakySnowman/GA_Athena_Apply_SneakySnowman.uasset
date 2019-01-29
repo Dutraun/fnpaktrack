@@ -59,6 +59,7 @@ Name table:
 	CallFunc_FinishSpawningActor_ReturnValue
 	CallFunc_GetActorInfo_ReturnValue
 	CallFunc_GetController_ReturnValue
+	CallFunc_GetQuestManager_ReturnValue
 	CallFunc_HasMatchingGameplayTag_ReturnValue
 	CallFunc_HasMatchingGameplayTag_self_CastInput
 	CallFunc_IsDedicatedServer_ReturnValue
@@ -73,6 +74,8 @@ Name table:
 	CallFunc_MakeVector_ReturnValue
 	CallFunc_Not_PreBool_ReturnValue
 	CallFunc_PlayMontageInfoAndWaitForTrigger_ReturnValue
+	CallFunc_SendComplexCustomStatEvent_QuestActive
+	CallFunc_SendComplexCustomStatEvent_QuestCompleted
 	CallFunc_Subtract_FloatFloat_ReturnValue
 	Cancelled
 	Cancelled_B326DD1943168A618B4EC399CC7213B2
@@ -128,12 +131,15 @@ Name table:
 	FortCharacterPartMontageInfo
 	FortGameplayAbility
 	FortGameplayAbilityMontageInfo
+	FortPC
 	FortPlayerController
 	FortPlayerPawn
 	FortPlayerPawnAthena
+	FortQuestManager
 	Function
 	GA_Athena_Apply_SneakySnowman_C
 	Gameplay.Action.Player.InterruptibleHealingItem
+	Gameplay.Athena.Quests.UseSneakySnowman
 	GameplayAbility
 	GameplayAbilityActorInfo
 	GameplayAbilityTargetDataHandle
@@ -152,6 +158,7 @@ Name table:
 	GE_Generic_StaminaRegenLockout_C
 	GetActorInfo
 	GetController
+	GetQuestManager
 	HasMatchingGameplayTag
 	Instigator
 	InterfaceProperty
@@ -212,6 +219,7 @@ Name table:
 	PlayerSnowman
 	PlayMontageInfoAndWaitForTrigger
 	PointerToUberGraphFrame
+	QuestUpdate
 	RawMagnitude
 	ReadyForActivation
 	RelevantTags
@@ -220,8 +228,10 @@ Name table:
 	RowName
 	SafeHolsterWeapon
 	ScalableFloat
+	Scene_GEN_VARIABLE
 	SceneComponent
 	ScriptStruct
+	SendComplexCustomStatEvent
 	SetObjectPropertyByName
 	SM_SneakySnowman_GEN_VARIABLE
 	SnowmanHolsterSelf
@@ -250,7 +260,7 @@ Name table:
 	WeakObjectProperty
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	GA_Athena_Apply_SneakySnowman_C (0-0-0-0): size 249 (cls: GA_Athena_Apply_SneakySnowman_C>BlueprintGeneratedClass>/Script/Engine):
+	GA_Athena_Apply_SneakySnowman_C (0-0-0-0): size 265 (cls: GA_Athena_Apply_SneakySnowman_C>BlueprintGeneratedClass>/Script/Engine):
 		Tag array:
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_GA_Athena_Apply_SneakySnowman=GA_Athena_Apply_SneakySnowman_C 
 	Default__GA_Athena_Apply_SneakySnowman_C (0-0-0-0): size 1242 (cls: Default__GA_Athena_Apply_SneakySnowman_C>GA_Athena_Apply_SneakySnowman_C):
@@ -268,7 +278,7 @@ Serialized exports:
 			AbilityTags(StructProperty)=GameplayTagContainer:Abilities.Generic.Athena.Bush,Gameplay.Action.Player.InterruptibleHealingItem 
 	AnimMontageInfo (0-0-0-0): size 36 (cls: AnimMontageInfo>StructProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_GA_Athena_Apply_SneakySnowman (0-0-0-0): size 2188 (cls: ExecuteUbergraph_GA_Athena_Apply_SneakySnowman>Function>/Script/CoreUObject)
+	ExecuteUbergraph_GA_Athena_Apply_SneakySnowman (0-0-0-0): size 2203 (cls: ExecuteUbergraph_GA_Athena_Apply_SneakySnowman>Function>/Script/CoreUObject)
 	CallFunc_BP_ApplyGameplayEffectToTarget_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_BP_ApplyGameplayEffectToTarget_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_BP_ApplyGameplayEffectToTarget_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_BP_ApplyGameplayEffectToTarget_ReturnValue>ArrayProperty>/Script/CoreUObject)
 	CallFunc_DoesTargetHaveTags_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_DoesTargetHaveTags_ReturnValue>BoolProperty>/Script/CoreUObject)
@@ -296,6 +306,10 @@ Serialized exports:
 	CallFunc_HasMatchingGameplayTag_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasMatchingGameplayTag_ReturnValue>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	ReturnValue (0-0-0-0): size 34 (cls: ReturnValue>BoolProperty>/Script/CoreUObject)
+	FortPC (0-0-0-0): size 36 (cls: FortPC>ObjectProperty>/Script/CoreUObject)
+	QuestUpdate (0-0-0-0): size 186 (cls: QuestUpdate>Function>/Script/CoreUObject)
+	CallFunc_SendComplexCustomStatEvent_QuestActive (0-0-0-0): size 34 (cls: CallFunc_SendComplexCustomStatEvent_QuestActive>BoolProperty>/Script/CoreUObject)
+	CallFunc_SendComplexCustomStatEvent_QuestCompleted (0-0-0-0): size 34 (cls: CallFunc_SendComplexCustomStatEvent_QuestCompleted>BoolProperty>/Script/CoreUObject)
 	K2Node_CreateDelegate_OutputDelegate (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate>DelegateProperty>/Script/CoreUObject)
 	K2Node_CreateDelegate_OutputDelegate1 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate1>DelegateProperty>/Script/CoreUObject)
 	K2Node_CreateDelegate_OutputDelegate2 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate2>DelegateProperty>/Script/CoreUObject)
@@ -315,6 +329,7 @@ Serialized exports:
 	K2Node_DynamicCast_AsFort_Player_Pawn_Athena (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Player_Pawn_Athena>ObjectProperty>/Script/CoreUObject)
 	PlayerPawn (0-0-0-0): size 36 (cls: PlayerPawn>ObjectProperty>/Script/CoreUObject)
 	PlayerSnowman (0-0-0-0): size 36 (cls: PlayerSnowman>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetQuestManager_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetQuestManager_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	ApplicationTag (0-0-0-0): size 36 (cls: ApplicationTag>StructProperty>/Script/CoreUObject)
 	ApplicationTag (0-0-0-0): size 36 (cls: ApplicationTag>StructProperty>/Script/CoreUObject)
 	CallFunc_AbilityTargetDataFromActor_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_AbilityTargetDataFromActor_ReturnValue>StructProperty>/Script/CoreUObject)

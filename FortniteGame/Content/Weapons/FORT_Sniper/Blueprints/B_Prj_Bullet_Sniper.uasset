@@ -18,8 +18,8 @@ Name table:
 	AthenaProjectiles
 	B_Prj_Bullet_Sniper_C
 	bAddOwnerVelocity
+	bGenerateOverlapEvents
 	bHasCookedComponentInstancingData
-	bIsOverlap
 	bIsParentComponentNative
 	bIsValid
 	BlueprintComponentChangedPropertyInfo
@@ -107,7 +107,6 @@ Name table:
 	EntryPoint
 	ExecuteUbergraph_B_Prj_Bullet_Sniper
 	FloatProperty
-	FortGameplayEffectDeliveryActor
 	FortKismetLibrary
 	FortPawn
 	FortProjectileAthena
@@ -118,6 +117,7 @@ Name table:
 	GameplayStatics
 	GetValueAtLevel
 	Guid
+	Hit
 	HitResult
 	InitialSpeed
 	InternalVariableName
@@ -127,10 +127,7 @@ Name table:
 	K2_DetachFromComponent
 	K2Node_DynamicCast_AsFort_Pawn
 	K2Node_DynamicCast_bSuccess
-	K2Node_Event_bIsOverlap
-	K2Node_Event_HitResult
-	K2Node_Event_OtherActor
-	K2Node_Event_OtherComp
+	K2Node_Event_Hit
 	K2Node_Select_Default
 	KismetMathLibrary
 	KismetSystemLibrary
@@ -143,9 +140,7 @@ Name table:
 	None
 	Object
 	ObjectProperty
-	OnTouched
-	OtherActor
-	OtherComp
+	OnStop
 	P_Sniper_Bullet_Trail
 	P_Sniper_Bullet_Trail_GEN_VARIABLE
 	Package
@@ -221,28 +216,27 @@ Serialized exports:
 			RootComponent(ObjectProperty)=CollisionCapsule0=Default__B_Prj_Bullet_Sniper_C 
 	P_Sniper_Bullet_Trail (0-0-0-0): size 36 (cls: P_Sniper_Bullet_Trail>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_B_Prj_Bullet_Sniper (0-0-0-0): size 1017 (cls: ExecuteUbergraph_B_Prj_Bullet_Sniper>Function>/Script/CoreUObject)
+	ExecuteUbergraph_B_Prj_Bullet_Sniper (0-0-0-0): size 994 (cls: ExecuteUbergraph_B_Prj_Bullet_Sniper>Function>/Script/CoreUObject)
 	CallFunc_BooleanOR_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanOR_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_bBlockingHit (0-0-0-0): size 34 (cls: CallFunc_BreakHitResult_bBlockingHit>BoolProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_bInitialOverlap (0-0-0-0): size 34 (cls: CallFunc_BreakHitResult_bInitialOverlap>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsDedicatedServer_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsDedicatedServer_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsMobilePlatform_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsMobilePlatform_ReturnValue>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
-	K2Node_Event_bIsOverlap (0-0-0-0): size 34 (cls: K2Node_Event_bIsOverlap>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
-	OtherActor (0-0-0-0): size 36 (cls: OtherActor>ObjectProperty>/Script/CoreUObject)
-	OnTouched (0-0-0-0): size 110 (cls: OnTouched>Function>/Script/CoreUObject)
-	bIsOverlap (0-0-0-0): size 34 (cls: bIsOverlap>BoolProperty>/Script/CoreUObject)
-	CollisionCapsule0 (0-0-0-0): size 311 (cls: CollisionCapsule0>CapsuleComponent>/Script/Engine):
+	CollisionCapsule0 (0-0-0-0): size 337 (cls: CollisionCapsule0>CapsuleComponent>/Script/Engine):
 		Tag array:
 			CapsuleHalfHeight(FloatProperty)=1 
 			CapsuleRadius(FloatProperty)=1 
 			ShapeColor(StructProperty)=System.Byte[] 
+			bGenerateOverlapEvents(BoolProperty)=False 
 			CanCharacterStepUpOn(ByteProperty)=ECB_No 
 			BodyInstance(StructProperty)=System.Byte[] 
 			RelativeRotation(StructProperty)=Rotator(0,0,90) 
 	CallFunc_BreakHitResult_Distance (0-0-0-0): size 32 (cls: CallFunc_BreakHitResult_Distance>FloatProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_Time (0-0-0-0): size 32 (cls: CallFunc_BreakHitResult_Time>FloatProperty>/Script/CoreUObject)
+	Hit (0-0-0-0): size 36 (cls: Hit>StructProperty>/Script/CoreUObject)
+	OnStop (0-0-0-0): size 68 (cls: OnStop>Function>/Script/CoreUObject)
 	UserConstructionScript (0-0-0-0): size 98 (cls: UserConstructionScript>Function>/Script/CoreUObject)
 	CallFunc_GetValueAtLevel_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetValueAtLevel_ReturnValue>FloatProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_FaceIndex (0-0-0-0): size 32 (cls: CallFunc_BreakHitResult_FaceIndex>IntProperty>/Script/CoreUObject)
@@ -253,10 +247,7 @@ Serialized exports:
 	CallFunc_BreakHitResult_PhysMat (0-0-0-0): size 36 (cls: CallFunc_BreakHitResult_PhysMat>ObjectProperty>/Script/CoreUObject)
 	CallFunc_SpawnDecalAtLocation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_SpawnDecalAtLocation_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Pawn (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Pawn>ObjectProperty>/Script/CoreUObject)
-	K2Node_Event_OtherActor (0-0-0-0): size 36 (cls: K2Node_Event_OtherActor>ObjectProperty>/Script/CoreUObject)
-	K2Node_Event_OtherComp (0-0-0-0): size 36 (cls: K2Node_Event_OtherComp>ObjectProperty>/Script/CoreUObject)
 	K2Node_Select_Default (0-0-0-0): size 36 (cls: K2Node_Select_Default>ObjectProperty>/Script/CoreUObject)
-	OtherComp (0-0-0-0): size 36 (cls: OtherComp>ObjectProperty>/Script/CoreUObject)
 	Sniper_Rifle_PlayerImpactSound (0-0-0-0): size 36 (cls: Sniper_Rifle_PlayerImpactSound>ObjectProperty>/Script/CoreUObject)
 	Sniper_Rifle_SurfaceImpactSound (0-0-0-0): size 36 (cls: Sniper_Rifle_SurfaceImpactSound>ObjectProperty>/Script/CoreUObject)
 	P_Sniper_Bullet_Trail_GEN_VARIABLE (0-0-0-0): size 246 (cls: P_Sniper_Bullet_Trail_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine):
@@ -302,6 +293,5 @@ Serialized exports:
 	CallFunc_BreakHitResult_TraceStart (0-0-0-0): size 36 (cls: CallFunc_BreakHitResult_TraceStart>StructProperty>/Script/CoreUObject)
 	CallFunc_Conv_VectorToRotator_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_Conv_VectorToRotator_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_Multiply_VectorFloat_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_Multiply_VectorFloat_ReturnValue>StructProperty>/Script/CoreUObject)
-	K2Node_Event_HitResult (0-0-0-0): size 36 (cls: K2Node_Event_HitResult>StructProperty>/Script/CoreUObject)
-	HitResult (0-0-0-0): size 36 (cls: HitResult>StructProperty>/Script/CoreUObject)
+	K2Node_Event_Hit (0-0-0-0): size 36 (cls: K2Node_Event_Hit>StructProperty>/Script/CoreUObject)
 	ProjectileGravityScale (0-0-0-0): size 36 (cls: ProjectileGravityScale>StructProperty>/Script/CoreUObject)

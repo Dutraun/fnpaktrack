@@ -131,6 +131,7 @@ Name table:
 	ActiveEntities
 	ActiveSequences
 	ActiveWidgetIndex
+	Add_IntInt
 	AlphaCurve
 	AnalyticsTimeStart
 	Anim_CommanderXPIntro
@@ -272,6 +273,7 @@ Name table:
 	bWindowButtonsEnabled
 	ByteCurve
 	ByteProperty
+	CallFunc_Add_IntInt_ReturnValue
 	CallFunc_BooleanAND_ReturnValue
 	CallFunc_EqualEqual_ByteByte_ReturnValue
 	CallFunc_GetActiveWidgetIndex_ReturnValue
@@ -279,6 +281,7 @@ Name table:
 	CallFunc_GetCurrentBasicMissionInfo_BasicMissionInfo
 	CallFunc_GetCurrentBasicMissionInfo_ReturnValue
 	CallFunc_GetCurrentUIStateWidget_ReturnValue
+	CallFunc_GetEmptyText_ReturnValue
 	CallFunc_GetFeatureState_OutFeatureState
 	CallFunc_GetFeatureState_OutReason
 	CallFunc_GetInputManager_ReturnValue
@@ -305,7 +308,10 @@ Name table:
 	CallFunc_IsVisible_ReturnValue
 	CallFunc_IsVisible_ReturnValue1
 	CallFunc_IsVisible_ReturnValue2
+	CallFunc_K2_IsValidTimerHandle_ReturnValue
 	CallFunc_K2_SetTimerDelegate_ReturnValue
+	CallFunc_K2_SetTimerDelegate_ReturnValue1
+	CallFunc_K2_SetTimerDelegate_ReturnValue2
 	CallFunc_Not_PreBool_ReturnValue
 	CallFunc_Play_ReturnValue
 	CallFunc_PlayAnimation_ReturnValue
@@ -405,6 +411,7 @@ Name table:
 	Default__IntProperty
 	Default__InvitePopupMenu_C
 	Default__KismetSystemLibrary
+	Default__KismetTextLibrary
 	Default__LoadGuardSlot
 	Default__MenuAnchor
 	Default__MicIndicator_C
@@ -626,6 +633,7 @@ Name table:
 	GetContext
 	GetCurrentBasicMissionInfo
 	GetCurrentUIStateWidget
+	GetEmptyText
 	GetFeatureState
 	GetInputManager
 	GetMediaPlayer
@@ -647,6 +655,7 @@ Name table:
 	HAlign_Fill
 	HAlign_Left
 	HAlign_Right
+	Handle
 	HandleClientEvent_PlayerLeftEvent
 	HandleReceivedRewardData
 	HasInputActionHandler
@@ -713,6 +722,7 @@ Name table:
 	ItemDefinition
 	Justification
 	K2_ClearAndInvalidateTimerHandle
+	K2_IsValidTimerHandle
 	K2_SetTimerDelegate
 	K2Node_ComponentBoundEvent_TargetId
 	K2Node_ComponentBoundEvent_TargetId1
@@ -720,6 +730,8 @@ Name table:
 	K2Node_ComponentBoundEvent_TargetName1
 	K2Node_CreateDelegate_OutputDelegate
 	K2Node_CreateDelegate_OutputDelegate1
+	K2Node_CreateDelegate_OutputDelegate2
+	K2Node_CreateDelegate_OutputDelegate3
 	K2Node_DynamicCast_AsHUD
 	K2Node_DynamicCast_bSuccess
 	K2Node_HandleClientEvent_ClientEvent
@@ -731,6 +743,7 @@ Name table:
 	Key
 	KismetMathLibrary
 	KismetSystemLibrary
+	KismetTextLibrary
 	LastTrackIdentifier
 	LatentActionInfo
 	LeaveTangent
@@ -922,6 +935,7 @@ Name table:
 	PreResults Sequence
 	Previous
 	PrintString
+	ProcessingResultsIndex
 	ProgressBar
 	ProgressBarNew
 	ProgressBarStyle
@@ -1044,6 +1058,7 @@ Name table:
 	ShouldShowMissionResultsMovies
 	Show
 	ShowDualPower
+	ShowProcessingText
 	ShowProgress
 	Signature
 	Size
@@ -1119,6 +1134,12 @@ Name table:
 	Temp_bool_IsClosed_Variable
 	Temp_bool_Variable
 	Temp_byte_Variable
+	Temp_int_Variable
+	Temp_int_Variable1
+	Temp_text_Variable
+	Temp_text_Variable1
+	Temp_text_Variable2
+	Temp_text_Variable3
 	TemplateAsset
 	TemplateLedger
 	TemplateSerialNumber
@@ -1140,6 +1161,7 @@ Name table:
 	TextName
 	TextOpenReward
 	TextPlayerName
+	TextProcessingResults
 	TextProperty
 	TextScore
 	TextScrollStyle-Base_C
@@ -1203,11 +1225,15 @@ Name table:
 	UberGraphFunction
 	UInt16Property
 	UInt32Property
+	UInt64Property
 	UMGSequencePlayer
 	UnderlyingType
 	UniformGridPanel
 	UniqueNetIdRepl
 	Up
+	UpdateProcessingResultsText
+	UpdateProcessingText
+	UpdateProcessingTextHandle
 	UseLargeStyle
 	UserTag
 	UserWidget
@@ -1262,7 +1288,7 @@ Name table:
 	ZoneCompletionResult
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	Results_Widget_C (0-0-0-0): size 1311 (cls: Results_Widget_C>WidgetBlueprintGeneratedClass>/Script/UMG):
+	Results_Widget_C (0-0-0-0): size 1371 (cls: Results_Widget_C>WidgetBlueprintGeneratedClass>/Script/UMG):
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
@@ -1272,7 +1298,7 @@ Serialized exports:
 			TemplateAsset(SoftObjectProperty)=/Game/UI/ZoneCompletion/NewVersion/Results_Widget.WidgetArchetype 
 			DynamicBindingObjects(ArrayProperty)=[object] (inner: ObjectProperty)
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_Results_Widget=Results_Widget_C 
-	Default__Results_Widget_C (0-0-0-0): size 526 (cls: Default__Results_Widget_C>Results_Widget_C):
+	Default__Results_Widget_C (0-0-0-0): size 616 (cls: Default__Results_Widget_C>Results_Widget_C):
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			ResultsStartVictory(ObjectProperty)=fort_rewardscreen_Music_FirstLoop_Cue=/Game/Sounds/Fort_UI_Sounds/Rewards/fort_rewardscreen_Music_FirstLoop_Cue 
@@ -1286,11 +1312,14 @@ Serialized exports:
 			TeamScoreWhoosh(ObjectProperty)=Fort_RewardScreen_TeamScore_XPTotal_Whoosh_Cue=/Game/Sounds/Fort_UI_Sounds/Rewards/Fort_RewardScreen_TeamScore_XPTotal_Whoosh_Cue 
 			CommanderXPWhoosh(ObjectProperty)=Fort_RewardScreen_TeamScore_XPTotal_Whoosh_Cue=/Game/Sounds/Fort_UI_Sounds/Rewards/Fort_RewardScreen_TeamScore_XPTotal_Whoosh_Cue 
 			InputSkip(StructProperty)=System.Byte[] 
+			UpdateProcessingTextHandle(StructProperty)=System.Byte[] 
 			bHasScriptImplementedTick(BoolProperty)=False 
 			bHasScriptImplementedPaint(BoolProperty)=False 
 	Anim_TeleportPadIntro (0-0-0-0): size 36 (cls: Anim_TeleportPadIntro>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_Results_Widget (0-0-0-0): size 3499 (cls: ExecuteUbergraph_Results_Widget>Function>/Script/CoreUObject)
+	ExecuteUbergraph_Results_Widget (0-0-0-0): size 3829 (cls: ExecuteUbergraph_Results_Widget>Function>/Script/CoreUObject)
+	UpdateProcessingText (0-0-0-0): size 54 (cls: UpdateProcessingText>Function>/Script/CoreUObject)
+	ShowProcessingText (0-0-0-0): size 54 (cls: ShowProcessingText>Function>/Script/CoreUObject)
 	Wait for Replication (0-0-0-0): size 54 (cls: Wait for Replication>Function>/Script/CoreUObject)
 	OnActivated (0-0-0-0): size 54 (cls: OnActivated>Function>/Script/CoreUObject)
 	Destruct (0-0-0-0): size 54 (cls: Destruct>Function>/Script/CoreUObject)
@@ -1492,6 +1521,7 @@ Serialized exports:
 	CallFunc_IsDataFinalized_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsDataFinalized_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsDataFinalized_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_IsDataFinalized_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_K2_IsValidTimerHandle_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_K2_IsValidTimerHandle_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Play_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Play_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_ShouldDisplayEndOfZoneCinematic_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_ShouldDisplayEndOfZoneCinematic_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_UseVideos_bVideos (0-0-0-0): size 34 (cls: CallFunc_UseVideos_bVideos>BoolProperty>/Script/CoreUObject)
@@ -1515,6 +1545,10 @@ Serialized exports:
 	CallFunc_EqualEqual_ByteByte_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ByteByte_ReturnValue>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
+	Temp_text_Variable (0-0-0-0): size 32 (cls: Temp_text_Variable>TextProperty>/Script/CoreUObject)
+	UpdateProcessingResultsText (0-0-0-0): size 659 (cls: UpdateProcessingResultsText>Function>/Script/CoreUObject)
+	CallFunc_Greater_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Greater_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_IsVisible_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsVisible_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_GetCurrentBasicMissionInfo_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_GetCurrentBasicMissionInfo_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Not_PreBool_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_ShouldShowMissionResultsMovies_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_ShouldShowMissionResultsMovies_ReturnValue>BoolProperty>/Script/CoreUObject)
@@ -3286,6 +3320,8 @@ Serialized exports:
 			ComponentDelegateBindings(ArrayProperty)=[object] (inner: StructProperty)
 	K2Node_CreateDelegate_OutputDelegate (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate>DelegateProperty>/Script/CoreUObject)
 	K2Node_CreateDelegate_OutputDelegate1 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate1>DelegateProperty>/Script/CoreUObject)
+	K2Node_CreateDelegate_OutputDelegate2 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate2>DelegateProperty>/Script/CoreUObject)
+	K2Node_CreateDelegate_OutputDelegate3 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate3>DelegateProperty>/Script/CoreUObject)
 	K2Node_CreateDelegate_OutputDelegate (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate>DelegateProperty>/Script/CoreUObject)
 	K2Node_CreateDelegate_OutputDelegate1 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate1>DelegateProperty>/Script/CoreUObject)
 	CallFunc_GetZoneCompletionResult_ReturnValue (0-0-0-0): size 40 (cls: CallFunc_GetZoneCompletionResult_ReturnValue>EnumProperty>/Script/CoreUObject)
@@ -5991,6 +6027,10 @@ Serialized exports:
 	CallFunc_GetTotalMissionPointsEarned_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetTotalMissionPointsEarned_ReturnValue>IntProperty>/Script/CoreUObject)
 	CallFunc_GetActiveWidgetIndex_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetActiveWidgetIndex_ReturnValue>IntProperty>/Script/CoreUObject)
 	CallFunc_GetTotalMissionPointsEarned_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetTotalMissionPointsEarned_ReturnValue>IntProperty>/Script/CoreUObject)
+	ProcessingResultsIndex (0-0-0-0): size 32 (cls: ProcessingResultsIndex>IntProperty>/Script/CoreUObject)
+	CallFunc_Add_IntInt_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue>IntProperty>/Script/CoreUObject)
+	Temp_int_Variable (0-0-0-0): size 32 (cls: Temp_int_Variable>IntProperty>/Script/CoreUObject)
+	Temp_int_Variable1 (0-0-0-0): size 32 (cls: Temp_int_Variable1>IntProperty>/Script/CoreUObject)
 	LoadGuardSlot_0 (0-0-0-0): size 70 (cls: LoadGuardSlot_0>LoadGuardSlot>/Script/CommonUI):
 		Tag array:
 			Parent(ObjectProperty)=LoadGuard=WidgetArchetype 
@@ -6588,6 +6628,7 @@ Serialized exports:
 	TeamScoreWhoosh (0-0-0-0): size 36 (cls: TeamScoreWhoosh>ObjectProperty>/Script/CoreUObject)
 	TeamTotalScore (0-0-0-0): size 36 (cls: TeamTotalScore>ObjectProperty>/Script/CoreUObject)
 	TeleportPad (0-0-0-0): size 36 (cls: TeleportPad>ObjectProperty>/Script/CoreUObject)
+	TextProcessingResults (0-0-0-0): size 36 (cls: TextProcessingResults>ObjectProperty>/Script/CoreUObject)
 	TextZoneCompletion (0-0-0-0): size 36 (cls: TextZoneCompletion>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetCurrentUIStateWidget_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetCurrentUIStateWidget_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetUIManagerWidget_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetUIManagerWidget_ReturnValue>ObjectProperty>/Script/CoreUObject)
@@ -6696,7 +6737,7 @@ Serialized exports:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=WidgetSwitcherSlot_1=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	OverlayRoot (0-0-0-0): size 130 (cls: OverlayRoot>Overlay>/Script/UMG):
+	OverlayRoot (0-0-0-0): size 134 (cls: OverlayRoot>Overlay>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Visibility(EnumProperty)=ESlateVisibility::Visible 
@@ -7469,6 +7510,12 @@ Serialized exports:
 			VerticalAlignment(ByteProperty)=VAlign_Fill 
 			Parent(ObjectProperty)=OverlayRoot=WidgetArchetype 
 			Content(ObjectProperty)=BorderVideo=WidgetArchetype 
+	OverlaySlot_2 (0-0-0-0): size 152 (cls: OverlaySlot_2>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=OverlayRoot=WidgetArchetype 
+			Content(ObjectProperty)=TextProcessingResults=WidgetArchetype 
 	OverlaySlot_26 (0-0-0-0): size 111 (cls: OverlaySlot_26>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Center 
@@ -9771,7 +9818,7 @@ Serialized exports:
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=OverlaySlot_35=WidgetArchetype 
 			Visibility(EnumProperty)=ESlateVisibility::Hidden 
-	WidgetArchetype (0-0-0-0): size 531 (cls: WidgetArchetype>Results_Widget_C):
+	WidgetArchetype (0-0-0-0): size 560 (cls: WidgetArchetype>Results_Widget_C):
 		Tag array:
 			BadgeLoot(ObjectProperty)=BadgeLoot=WidgetArchetype 
 			BorderVideo(ObjectProperty)=BorderVideo=WidgetArchetype 
@@ -9785,6 +9832,7 @@ Serialized exports:
 			TeamScore(ObjectProperty)=TeamScore=WidgetArchetype 
 			TeamTotalScore(ObjectProperty)=TeamTotalScore=WidgetArchetype 
 			TeleportPad(ObjectProperty)=TeleportPad=WidgetArchetype 
+			TextProcessingResults(ObjectProperty)=TextProcessingResults=WidgetArchetype 
 			TextZoneCompletion(ObjectProperty)=TextZoneCompletion=WidgetArchetype 
 			TopPanel(ObjectProperty)=TopPanel=WidgetArchetype 
 			WaitingText(ObjectProperty)=WaitingText=WidgetArchetype 
@@ -11961,12 +12009,15 @@ Serialized exports:
 	K2Node_ComponentBoundEvent_TargetName (0-0-0-0): size 32 (cls: K2Node_ComponentBoundEvent_TargetName>StrProperty>/Script/CoreUObject)
 	K2Node_ComponentBoundEvent_TargetName1 (0-0-0-0): size 32 (cls: K2Node_ComponentBoundEvent_TargetName1>StrProperty>/Script/CoreUObject)
 	CallFunc_K2_SetTimerDelegate_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_SetTimerDelegate_ReturnValue>StructProperty>/Script/CoreUObject)
+	CallFunc_K2_SetTimerDelegate_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_K2_SetTimerDelegate_ReturnValue1>StructProperty>/Script/CoreUObject)
+	CallFunc_K2_SetTimerDelegate_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_K2_SetTimerDelegate_ReturnValue2>StructProperty>/Script/CoreUObject)
 	K2Node_ComponentBoundEvent_TargetId (0-0-0-0): size 36 (cls: K2Node_ComponentBoundEvent_TargetId>StructProperty>/Script/CoreUObject)
 	K2Node_ComponentBoundEvent_TargetId1 (0-0-0-0): size 36 (cls: K2Node_ComponentBoundEvent_TargetId1>StructProperty>/Script/CoreUObject)
 	K2Node_HandleClientEvent_ClientEvent (0-0-0-0): size 36 (cls: K2Node_HandleClientEvent_ClientEvent>StructProperty>/Script/CoreUObject)
 	ClientEvent (0-0-0-0): size 36 (cls: ClientEvent>StructProperty>/Script/CoreUObject)
 	CallFunc_GetCurrentBasicMissionInfo_BasicMissionInfo (0-0-0-0): size 36 (cls: CallFunc_GetCurrentBasicMissionInfo_BasicMissionInfo>StructProperty>/Script/CoreUObject)
 	InputSkip (0-0-0-0): size 36 (cls: InputSkip>StructProperty>/Script/CoreUObject)
+	UpdateProcessingTextHandle (0-0-0-0): size 36 (cls: UpdateProcessingTextHandle>StructProperty>/Script/CoreUObject)
 	CallFunc_GetCurrentBasicMissionInfo_BasicMissionInfo (0-0-0-0): size 36 (cls: CallFunc_GetCurrentBasicMissionInfo_BasicMissionInfo>StructProperty>/Script/CoreUObject)
 	TeamMicStack (0-0-0-0): size 154 (cls: TeamMicStack>TeamMicStack_C>/Game/UI/Foundation/MicIndicator/TeamMicStack):
 		Tag array:
@@ -11975,6 +12026,17 @@ Serialized exports:
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=SafeZoneSlot_0=WidgetArchetype 
+	TextProcessingResults (0-0-0-0): size 541 (cls: TextProcessingResults>TextBlock>/Script/UMG):
+		Tag array:
+			Text(TextProperty)=Gathering results... (25FFB94342B964BAE08A93934E4D2D94) 
+			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(4,8) 
+			ShadowColorAndOpacity(StructProperty)=UE4.FLinearColor 
+			Justification(ByteProperty)=ETextJustify::Center 
+			AutoWrapText(BoolProperty)=True 
+			Slot(ObjectProperty)=OverlaySlot_2=WidgetArchetype 
+			bIsVariable(BoolProperty)=True 
+			Visibility(EnumProperty)=ESlateVisibility::Hidden 
 	TextZoneCompletion (0-0-0-0): size 527 (cls: TextZoneCompletion>TextBlock>/Script/UMG):
 		Tag array:
 			Text(TextProperty)=Result (B4FFB61F4926D6202DB856994A830A69) 
@@ -11986,7 +12048,12 @@ Serialized exports:
 			Slot(ObjectProperty)=OverlaySlot_27=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
 			Visibility(EnumProperty)=ESlateVisibility::Hidden 
+	CallFunc_GetEmptyText_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetEmptyText_ReturnValue>TextProperty>/Script/CoreUObject)
 	CallFunc_GetZoneCompletionResultText_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetZoneCompletionResultText_ReturnValue>TextProperty>/Script/CoreUObject)
+	K2Node_Select_Default (0-0-0-0): size 32 (cls: K2Node_Select_Default>TextProperty>/Script/CoreUObject)
+	Temp_text_Variable1 (0-0-0-0): size 32 (cls: Temp_text_Variable1>TextProperty>/Script/CoreUObject)
+	Temp_text_Variable2 (0-0-0-0): size 32 (cls: Temp_text_Variable2>TextProperty>/Script/CoreUObject)
+	Temp_text_Variable3 (0-0-0-0): size 32 (cls: Temp_text_Variable3>TextProperty>/Script/CoreUObject)
 	GridBadges (0-0-0-0): size 67 (cls: GridBadges>UniformGridPanel>/Script/UMG):
 		Tag array:
 			Slot(ObjectProperty)=ScrollBoxSlot_0=WidgetArchetype 

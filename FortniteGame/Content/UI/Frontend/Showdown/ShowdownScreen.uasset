@@ -53,8 +53,10 @@ Name table:
 	bClassRequiresNativeTick
 	bConsumePointerInput
 	bCookedWidgetTree
+	bEndIsSelected
 	bEvaluateInPostroll
 	bEvaluateInPreroll
+	bFrontIsSelected
 	bHasDefaultValue
 	bHasScriptImplementedPaint
 	BindingName
@@ -211,6 +213,7 @@ Name table:
 	Default__SizeBoxSlot
 	Default__StrProperty
 	Default__StructProperty
+	Default__TextBlock
 	Default__VerticalBox
 	Default__VerticalBoxSlot
 	Default__WidgetAnimation
@@ -283,6 +286,8 @@ Name table:
 	ETextJustify
 	ETextJustify::Center
 	ETextJustify::Right
+	ETextWrappingPolicy
+	ETextWrappingPolicy::AllowPerCharacterWrapping
 	ETimespanAsTextFormat
 	ETimespanAsTextFormat::Approximate
 	EUINavigationRule
@@ -376,6 +381,8 @@ Name table:
 	K2Node_DynamicCast_AsShowdown_Tournament_Tile1
 	K2Node_DynamicCast_bSuccess
 	K2Node_DynamicCast_bSuccess1
+	K2Node_Event_bEndIsSelected
+	K2Node_Event_bFrontIsSelected
 	K2Node_Event_bUsingGamepad
 	K2Node_Event_InDeltaTime
 	K2Node_Event_IsDesignTime
@@ -571,6 +578,8 @@ Name table:
 	SegmentIdentifierToIndex
 	SegmentPtrLUT
 	Segments
+	SelectedEndTournament
+	SelectedFrontTournament
 	SelectedTile
 	SelectedTournament
 	SequenceID
@@ -638,6 +647,7 @@ Name table:
 	TemplateLedger
 	TemplateSerialNumber
 	Text
+	Text_DebugId
 	Text_TimeRemaining
 	TextBlock
 	TextProperty
@@ -707,13 +717,14 @@ Name table:
 	WidgetTransform
 	WidgetTree
 	WidthOverride
+	WrappingPolicy
 	WrapTextAt
 	X
 	Y
 	Z
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	ShowdownScreen_C (0-0-0-0): size 619 (cls: ShowdownScreen_C>WidgetBlueprintGeneratedClass>/Script/UMG):
+	ShowdownScreen_C (0-0-0-0): size 651 (cls: ShowdownScreen_C>WidgetBlueprintGeneratedClass>/Script/UMG):
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
@@ -733,7 +744,7 @@ Serialized exports:
 			bHasScriptImplementedPaint(BoolProperty)=False 
 	Outro (0-0-0-0): size 36 (cls: Outro>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_ShowdownScreen (0-0-0-0): size 1802 (cls: ExecuteUbergraph_ShowdownScreen>Function>/Script/CoreUObject)
+	ExecuteUbergraph_ShowdownScreen (0-0-0-0): size 1943 (cls: ExecuteUbergraph_ShowdownScreen>Function>/Script/CoreUObject)
 	CallFunc_BooleanOR_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanOR_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Greater_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Greater_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Greater_IntInt_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_Greater_IntInt_ReturnValue1>BoolProperty>/Script/CoreUObject)
@@ -742,10 +753,16 @@ Serialized exports:
 	CallFunc_LessEqual_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_LessEqual_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess1 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess1>BoolProperty>/Script/CoreUObject)
+	K2Node_Event_bEndIsSelected (0-0-0-0): size 34 (cls: K2Node_Event_bEndIsSelected>BoolProperty>/Script/CoreUObject)
+	K2Node_Event_bFrontIsSelected (0-0-0-0): size 34 (cls: K2Node_Event_bFrontIsSelected>BoolProperty>/Script/CoreUObject)
 	K2Node_Event_bUsingGamepad (0-0-0-0): size 34 (cls: K2Node_Event_bUsingGamepad>BoolProperty>/Script/CoreUObject)
 	K2Node_Event_IsDesignTime (0-0-0-0): size 34 (cls: K2Node_Event_IsDesignTime>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable1 (0-0-0-0): size 34 (cls: Temp_bool_Variable1>BoolProperty>/Script/CoreUObject)
+	bEndIsSelected (0-0-0-0): size 34 (cls: bEndIsSelected>BoolProperty>/Script/CoreUObject)
+	SelectedEndTournament (0-0-0-0): size 68 (cls: SelectedEndTournament>Function>/Script/CoreUObject)
+	bFrontIsSelected (0-0-0-0): size 34 (cls: bFrontIsSelected>BoolProperty>/Script/CoreUObject)
+	SelectedFrontTournament (0-0-0-0): size 68 (cls: SelectedFrontTournament>Function>/Script/CoreUObject)
 	MyGeometry (0-0-0-0): size 36 (cls: MyGeometry>StructProperty>/Script/CoreUObject)
 	Tick (0-0-0-0): size 82 (cls: Tick>Function>/Script/CoreUObject)
 	CurrentWidget (0-0-0-0): size 36 (cls: CurrentWidget>ObjectProperty>/Script/CoreUObject)
@@ -1767,7 +1784,7 @@ Please try back later. (AC35E95A452317CB8F53B88A9D072AB2)
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
-	Overlay_0 (0-0-0-0): size 94 (cls: Overlay_0>Overlay>/Script/UMG):
+	Overlay_0 (0-0-0-0): size 98 (cls: Overlay_0>Overlay>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=BorderSlot_0=WidgetArchetype 
@@ -1806,7 +1823,7 @@ Please try back later. (AC35E95A452317CB8F53B88A9D072AB2)
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
-	Overlay_0 (0-0-0-0): size 94 (cls: Overlay_0>Overlay>/Script/UMG):
+	Overlay_0 (0-0-0-0): size 98 (cls: Overlay_0>Overlay>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=BorderSlot_0=WidgetArchetype 
@@ -1845,7 +1862,7 @@ Please try back later. (AC35E95A452317CB8F53B88A9D072AB2)
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
-	Overlay_0 (0-0-0-0): size 94 (cls: Overlay_0>Overlay>/Script/UMG):
+	Overlay_0 (0-0-0-0): size 98 (cls: Overlay_0>Overlay>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=BorderSlot_0=WidgetArchetype 
@@ -2018,6 +2035,12 @@ Please try back later. (AC35E95A452317CB8F53B88A9D072AB2)
 			VerticalAlignment(ByteProperty)=VAlign_Fill 
 			Parent(ObjectProperty)=Overlay_0=WidgetArchetype 
 			Content(ObjectProperty)=Image_PosterShadow=WidgetArchetype 
+	OverlaySlot_2 (0-0-0-0): size 152 (cls: OverlaySlot_2>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=Overlay_0=WidgetArchetype 
+			Content(ObjectProperty)=Text_DebugId=WidgetArchetype 
 	OverlaySlot_3 (0-0-0-0): size 152 (cls: OverlaySlot_3>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Fill 
@@ -2149,6 +2172,12 @@ Please try back later. (AC35E95A452317CB8F53B88A9D072AB2)
 			VerticalAlignment(ByteProperty)=VAlign_Fill 
 			Parent(ObjectProperty)=Overlay_0=WidgetArchetype 
 			Content(ObjectProperty)=Image_PosterShadow=WidgetArchetype 
+	OverlaySlot_2 (0-0-0-0): size 152 (cls: OverlaySlot_2>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=Overlay_0=WidgetArchetype 
+			Content(ObjectProperty)=Text_DebugId=WidgetArchetype 
 	OverlaySlot_3 (0-0-0-0): size 152 (cls: OverlaySlot_3>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Fill 
@@ -2280,6 +2309,12 @@ Please try back later. (AC35E95A452317CB8F53B88A9D072AB2)
 			VerticalAlignment(ByteProperty)=VAlign_Fill 
 			Parent(ObjectProperty)=Overlay_0=WidgetArchetype 
 			Content(ObjectProperty)=Image_PosterShadow=WidgetArchetype 
+	OverlaySlot_2 (0-0-0-0): size 152 (cls: OverlaySlot_2>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=Overlay_0=WidgetArchetype 
+			Content(ObjectProperty)=Text_DebugId=WidgetArchetype 
 	OverlaySlot_3 (0-0-0-0): size 152 (cls: OverlaySlot_3>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Fill 
@@ -2700,7 +2735,7 @@ Please try back later. (AC35E95A452317CB8F53B88A9D072AB2)
 			CommonTextBlock_RegionText(ObjectProperty)=CommonTextBlock_RegionText=WidgetArchetype 
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
-	ShowdownDetailView_Poster (0-0-0-0): size 392 (cls: ShowdownDetailView_Poster>ShowdownTournamentPosterFront_C>/Game/UI/Frontend/Showdown/ShowdownTournamentPosterFront):
+	ShowdownDetailView_Poster (0-0-0-0): size 421 (cls: ShowdownDetailView_Poster>ShowdownTournamentPosterFront_C>/Game/UI/Frontend/Showdown/ShowdownTournamentPosterFront):
 		Tag array:
 			Image_PosterShadow(ObjectProperty)=Image_PosterShadow=WidgetArchetype 
 			ShowdownPin(ObjectProperty)=ShowdownPin=WidgetArchetype 
@@ -2708,11 +2743,12 @@ Please try back later. (AC35E95A452317CB8F53B88A9D072AB2)
 			TournamentTitle1(ObjectProperty)=TournamentTitle1=WidgetArchetype 
 			TournamentTitle2(ObjectProperty)=TournamentTitle2=WidgetArchetype 
 			TitleColor(StructProperty)=System.Byte[] 
+			Text_DebugId(ObjectProperty)=Text_DebugId=WidgetArchetype 
 			Image_PosterFront(ObjectProperty)=Image_PosterFront=WidgetArchetype 
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
-	ShowdownDetailView_Poster (0-0-0-0): size 392 (cls: ShowdownDetailView_Poster>ShowdownTournamentPosterFront_C>/Game/UI/Frontend/Showdown/ShowdownTournamentPosterFront):
+	ShowdownDetailView_Poster (0-0-0-0): size 421 (cls: ShowdownDetailView_Poster>ShowdownTournamentPosterFront_C>/Game/UI/Frontend/Showdown/ShowdownTournamentPosterFront):
 		Tag array:
 			Image_PosterShadow(ObjectProperty)=Image_PosterShadow=WidgetArchetype 
 			ShowdownPin(ObjectProperty)=ShowdownPin=WidgetArchetype 
@@ -2720,11 +2756,12 @@ Please try back later. (AC35E95A452317CB8F53B88A9D072AB2)
 			TournamentTitle1(ObjectProperty)=TournamentTitle1=WidgetArchetype 
 			TournamentTitle2(ObjectProperty)=TournamentTitle2=WidgetArchetype 
 			TitleColor(StructProperty)=System.Byte[] 
+			Text_DebugId(ObjectProperty)=Text_DebugId=WidgetArchetype 
 			Image_PosterFront(ObjectProperty)=Image_PosterFront=WidgetArchetype 
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
-	ShowdownDetailView_Poster (0-0-0-0): size 392 (cls: ShowdownDetailView_Poster>ShowdownTournamentPosterFront_C>/Game/UI/Frontend/Showdown/ShowdownTournamentPosterFront):
+	ShowdownDetailView_Poster (0-0-0-0): size 421 (cls: ShowdownDetailView_Poster>ShowdownTournamentPosterFront_C>/Game/UI/Frontend/Showdown/ShowdownTournamentPosterFront):
 		Tag array:
 			Image_PosterShadow(ObjectProperty)=Image_PosterShadow=WidgetArchetype 
 			ShowdownPin(ObjectProperty)=ShowdownPin=WidgetArchetype 
@@ -2732,6 +2769,7 @@ Please try back later. (AC35E95A452317CB8F53B88A9D072AB2)
 			TournamentTitle1(ObjectProperty)=TournamentTitle1=WidgetArchetype 
 			TournamentTitle2(ObjectProperty)=TournamentTitle2=WidgetArchetype 
 			TitleColor(StructProperty)=System.Byte[] 
+			Text_DebugId(ObjectProperty)=Text_DebugId=WidgetArchetype 
 			Image_PosterFront(ObjectProperty)=Image_PosterFront=WidgetArchetype 
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
@@ -2877,6 +2915,36 @@ Please try back later. (AC35E95A452317CB8F53B88A9D072AB2)
 	Input_ShowAbout (0-0-0-0): size 36 (cls: Input_ShowAbout>StructProperty>/Script/CoreUObject)
 	Input_ShowDetails (0-0-0-0): size 36 (cls: Input_ShowDetails>StructProperty>/Script/CoreUObject)
 	PrimaryColor (0-0-0-0): size 36 (cls: PrimaryColor>StructProperty>/Script/CoreUObject)
+	Text_DebugId (0-0-0-0): size 654 (cls: Text_DebugId>TextBlock>/Script/UMG):
+		Tag array:
+			Text(TextProperty)=EventId: Event EventWindowId: EventWindow (D04302C84426C7EF7C08B7B3D757AAAC) 
+			ColorAndOpacity(StructProperty)=System.Byte[] 
+			Font(StructProperty)=System.Byte[] 
+			Justification(ByteProperty)=ETextJustify::Center 
+			WrappingPolicy(EnumProperty)=ETextWrappingPolicy::AllowPerCharacterWrapping 
+			AutoWrapText(BoolProperty)=True 
+			WrapTextAt(FloatProperty)=210 
+			Slot(ObjectProperty)=OverlaySlot_2=WidgetArchetype 
+	Text_DebugId (0-0-0-0): size 654 (cls: Text_DebugId>TextBlock>/Script/UMG):
+		Tag array:
+			Text(TextProperty)=EventId: Event EventWindowId: EventWindow (D04302C84426C7EF7C08B7B3D757AAAC) 
+			ColorAndOpacity(StructProperty)=System.Byte[] 
+			Font(StructProperty)=System.Byte[] 
+			Justification(ByteProperty)=ETextJustify::Center 
+			WrappingPolicy(EnumProperty)=ETextWrappingPolicy::AllowPerCharacterWrapping 
+			AutoWrapText(BoolProperty)=True 
+			WrapTextAt(FloatProperty)=210 
+			Slot(ObjectProperty)=OverlaySlot_2=WidgetArchetype 
+	Text_DebugId (0-0-0-0): size 654 (cls: Text_DebugId>TextBlock>/Script/UMG):
+		Tag array:
+			Text(TextProperty)=EventId: Event EventWindowId: EventWindow (D04302C84426C7EF7C08B7B3D757AAAC) 
+			ColorAndOpacity(StructProperty)=System.Byte[] 
+			Font(StructProperty)=System.Byte[] 
+			Justification(ByteProperty)=ETextJustify::Center 
+			WrappingPolicy(EnumProperty)=ETextWrappingPolicy::AllowPerCharacterWrapping 
+			AutoWrapText(BoolProperty)=True 
+			WrapTextAt(FloatProperty)=210 
+			Slot(ObjectProperty)=OverlaySlot_2=WidgetArchetype 
 	VerticalBox_PointValuesProgress (0-0-0-0): size 226 (cls: VerticalBox_PointValuesProgress>VerticalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)

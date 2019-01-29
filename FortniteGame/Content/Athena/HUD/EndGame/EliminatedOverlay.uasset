@@ -83,6 +83,7 @@ Name table:
 	CallFunc_GetActorTeam_ReturnValue
 	CallFunc_GetContext_ReturnValue
 	CallFunc_GetContext_ReturnValue1
+	CallFunc_GetDebugStringForUniqueId_ReturnValue
 	CallFunc_GetEndTime_ReturnValue
 	CallFunc_GetFollowedPlayer_ReturnValue
 	CallFunc_GetGameState_ReturnValue
@@ -93,7 +94,9 @@ Name table:
 	CallFunc_GetPlayerName_PlayerName
 	CallFunc_GetPlayerName_ReturnValue
 	CallFunc_GetPlayerState_PlayerState
+	CallFunc_GetSettingsFilteredPlayerName_ReturnValue
 	CallFunc_GetSpectatingPlayerName_ReturnValue
+	CallFunc_GetUniqueID_ReturnValue
 	CallFunc_GetViewTarget_ReturnValue
 	CallFunc_GetWinnerText_ReturnText
 	CallFunc_Greater_FloatFloat_ReturnValue
@@ -116,7 +119,6 @@ Name table:
 	CallFunc_ShouldDisplayScoreUI_ReturnValue
 	CallFunc_Subtract_IntInt_ReturnValue
 	CallFunc_ToDeathCause_ReturnValue
-	CallFunc_TryToFilterNameOfPlayerForStreamerMode_ReturnValue
 	CanDisplayMultiWinners
 	CapsuleComponent
 	ChannelsUsed
@@ -269,6 +271,7 @@ Name table:
 	Geometry
 	GetActorTeam
 	GetContext
+	GetDebugStringForUniqueId
 	GetEndTime
 	GetFollowedPlayer
 	GetGameState
@@ -276,7 +279,9 @@ Name table:
 	GetOwningPlayer
 	GetPlayerName
 	GetPlayerState
+	GetSettingsFilteredPlayerName
 	GetSpectatingPlayerName
+	GetUniqueID
 	GetViewTarget
 	GetWinnerText
 	Greater_FloatFloat
@@ -501,6 +506,7 @@ Name table:
 	SetColorAndOpacity
 	SetFont
 	SetKillsSourcePlayerState
+	SetSpectatingPlayerUniqueId
 	SetText
 	SetVisibility
 	Shear
@@ -517,6 +523,7 @@ Name table:
 	SourceTrack
 	SpawnObjects
 	SpecifiedColor
+	Spectated PS
 	SpectatingIntroPlayed
 	SpectatorChanged
 	SpectatorName
@@ -588,6 +595,11 @@ Name table:
 	Temp_text_Variable40
 	Temp_text_Variable41
 	Temp_text_Variable42
+	Temp_text_Variable43
+	Temp_text_Variable44
+	Temp_text_Variable45
+	Temp_text_Variable46
+	Temp_text_Variable47
 	Temp_text_Variable5
 	Temp_text_Variable6
 	Temp_text_Variable7
@@ -612,7 +624,6 @@ Name table:
 	TrackTemplate
 	TransformComponent0
 	Translation
-	TryToFilterNameOfPlayerForStreamerMode
 	TypefaceFontName
 	UberGraphFrame
 	UberGraphFunction
@@ -620,11 +631,13 @@ Name table:
 	UInt32Property
 	UMGSequencePlayer
 	UnderlyingType
+	UniqueNetIdRepl
 	UpdateMultiwinner
 	UpdatePlace
 	UpdatePlayerLost
 	UpdateViewTarget
 	UpdateYouPlacedBoxVisibility
+	UserId
 	UserWidget
 	ValidatedPosition
 	Value
@@ -650,7 +663,7 @@ Name table:
 	YouPlacedText
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	EliminatedOverlay_C (0-0-0-0): size 747 (cls: EliminatedOverlay_C>WidgetBlueprintGeneratedClass>/Script/UMG):
+	EliminatedOverlay_C (0-0-0-0): size 767 (cls: EliminatedOverlay_C>WidgetBlueprintGeneratedClass>/Script/UMG):
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
@@ -665,7 +678,7 @@ Serialized exports:
 			bHasScriptImplementedPaint(BoolProperty)=False 
 	MultiWinnerSwap (0-0-0-0): size 36 (cls: MultiWinnerSwap>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_EliminatedOverlay (0-0-0-0): size 1185 (cls: ExecuteUbergraph_EliminatedOverlay>Function>/Script/CoreUObject)
+	ExecuteUbergraph_EliminatedOverlay (0-0-0-0): size 1200 (cls: ExecuteUbergraph_EliminatedOverlay>Function>/Script/CoreUObject)
 	K2Node_MakeArray_Array (0-0-0-0): size 32 (cls: K2Node_MakeArray_Array>TextProperty>/Script/CoreUObject)
 	K2Node_MakeArray_Array (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array>ArrayProperty>/Script/CoreUObject)
 	WinnerSwapComplete (0-0-0-0): size 54 (cls: WinnerSwapComplete>Function>/Script/CoreUObject)
@@ -674,7 +687,7 @@ Serialized exports:
 	MyGeometry (0-0-0-0): size 36 (cls: MyGeometry>StructProperty>/Script/CoreUObject)
 	Tick (0-0-0-0): size 82 (cls: Tick>Function>/Script/CoreUObject)
 	InKillerPlayerState (0-0-0-0): size 36 (cls: InKillerPlayerState>ObjectProperty>/Script/CoreUObject)
-	OnPawnDied (0-0-0-0): size 2358 (cls: OnPawnDied>Function>/Script/CoreUObject)
+	OnPawnDied (0-0-0-0): size 2508 (cls: OnPawnDied>Function>/Script/CoreUObject)
 	Temp_struct_Variable (0-0-0-0): size 36 (cls: Temp_struct_Variable>StructProperty>/Script/CoreUObject)
 	UpdatePlace (0-0-0-0): size 2225 (cls: UpdatePlace>Function>/Script/CoreUObject)
 	K2Node_MakeArray_Array (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array>StructProperty>/Script/CoreUObject)
@@ -814,6 +827,12 @@ Serialized exports:
 	CallFunc_GetEndTime_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetEndTime_ReturnValue>FloatProperty>/Script/CoreUObject)
 	InDeltaTime (0-0-0-0): size 32 (cls: InDeltaTime>FloatProperty>/Script/CoreUObject)
 	CallFunc_DisplayPlayerWonTime_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_DisplayPlayerWonTime_ReturnValue>FloatProperty>/Script/CoreUObject)
+	UserId (0-0-0-0): size 36 (cls: UserId>ObjectProperty>/Script/CoreUObject)
+	CallFunc_Conv_StringToText_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Conv_StringToText_ReturnValue>TextProperty>/Script/CoreUObject)
+	CallFunc_GetDebugStringForUniqueId_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetDebugStringForUniqueId_ReturnValue>StrProperty>/Script/CoreUObject)
+	CallFunc_GetUniqueID_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetUniqueID_ReturnValue>StructProperty>/Script/CoreUObject)
+	Spectated PS (0-0-0-0): size 36 (cls: Spectated PS>ObjectProperty>/Script/CoreUObject)
+	SetSpectatingPlayerUniqueId (0-0-0-0): size 188 (cls: SetSpectatingPlayerUniqueId>Function>/Script/CoreUObject)
 	CallFunc_Array_Length_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Array_Length_ReturnValue>IntProperty>/Script/CoreUObject)
 	CallFunc_Subtract_IntInt_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Subtract_IntInt_ReturnValue>IntProperty>/Script/CoreUObject)
 	K2Node_Select_Default (0-0-0-0): size 32 (cls: K2Node_Select_Default>IntProperty>/Script/CoreUObject)
@@ -1214,7 +1233,7 @@ Serialized exports:
 	CallFunc_GetSpectatingPlayerName_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetSpectatingPlayerName_ReturnValue>StrProperty>/Script/CoreUObject)
 	CallFunc_Conv_IntToString_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Conv_IntToString_ReturnValue>StrProperty>/Script/CoreUObject)
 	CallFunc_GetPlayerName_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetPlayerName_ReturnValue>StrProperty>/Script/CoreUObject)
-	CallFunc_TryToFilterNameOfPlayerForStreamerMode_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_TryToFilterNameOfPlayerForStreamerMode_ReturnValue>StrProperty>/Script/CoreUObject)
+	CallFunc_GetSettingsFilteredPlayerName_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetSettingsFilteredPlayerName_ReturnValue>StrProperty>/Script/CoreUObject)
 	Local_PlayerName (0-0-0-0): size 32 (cls: Local_PlayerName>StrProperty>/Script/CoreUObject)
 	PlayerName (0-0-0-0): size 32 (cls: PlayerName>StrProperty>/Script/CoreUObject)
 	CallFunc_GetPlayerName_PlayerName (0-0-0-0): size 32 (cls: CallFunc_GetPlayerName_PlayerName>StrProperty>/Script/CoreUObject)
@@ -1277,6 +1296,11 @@ Serialized exports:
 	Temp_text_Variable40 (0-0-0-0): size 32 (cls: Temp_text_Variable40>TextProperty>/Script/CoreUObject)
 	Temp_text_Variable41 (0-0-0-0): size 32 (cls: Temp_text_Variable41>TextProperty>/Script/CoreUObject)
 	Temp_text_Variable42 (0-0-0-0): size 32 (cls: Temp_text_Variable42>TextProperty>/Script/CoreUObject)
+	Temp_text_Variable43 (0-0-0-0): size 32 (cls: Temp_text_Variable43>TextProperty>/Script/CoreUObject)
+	Temp_text_Variable44 (0-0-0-0): size 32 (cls: Temp_text_Variable44>TextProperty>/Script/CoreUObject)
+	Temp_text_Variable45 (0-0-0-0): size 32 (cls: Temp_text_Variable45>TextProperty>/Script/CoreUObject)
+	Temp_text_Variable46 (0-0-0-0): size 32 (cls: Temp_text_Variable46>TextProperty>/Script/CoreUObject)
+	Temp_text_Variable47 (0-0-0-0): size 32 (cls: Temp_text_Variable47>TextProperty>/Script/CoreUObject)
 	Temp_text_Variable5 (0-0-0-0): size 32 (cls: Temp_text_Variable5>TextProperty>/Script/CoreUObject)
 	Temp_text_Variable6 (0-0-0-0): size 32 (cls: Temp_text_Variable6>TextProperty>/Script/CoreUObject)
 	Temp_text_Variable7 (0-0-0-0): size 32 (cls: Temp_text_Variable7>TextProperty>/Script/CoreUObject)

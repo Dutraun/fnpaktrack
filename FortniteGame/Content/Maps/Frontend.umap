@@ -4,6 +4,7 @@ Name table:
 	/Game/Environments/FrontEnd/Blueprints/FortnitePartyHeroSelect_Camera
 	/Game/Environments/FrontEnd/Blueprints/Frontend_Command_Hero_Camera
 	/Game/Environments/FrontEnd/Blueprints/Frontend_CommanderNew_Camera1
+	/Game/Environments/FrontEnd/Blueprints/Frontend_HeroLoadout2
 	/Game/Environments/FrontEnd/Blueprints/Frontend_Manage_Camera
 	/Game/Environments/FrontEnd/Blueprints/Frontend_Research_Camera
 	/Game/Environments/FrontEnd/Blueprints/Frontend_SurvivorSquadBuildings_Camera
@@ -69,7 +70,6 @@ Name table:
 	/Game/Maps/UI/Frontend_Upgrades.Frontend_Upgrades
 	/Game/Maps/WorldLightingMenu
 	/Game/Maps/WorldLightingMenu.WorldLightingMenu
-	/Game/Packages/FortNite_Gameplay_Props/FORT_Bear
 	/Game/Packages/Fortress_Sky/TexturesHDR/FrontendCubeMap_output
 	/Game/Sounds/Fort_Audio_Blueprints/Fort_Entry_Music_Controller_BP
 	/Game/TimeOfDay/TODM/TODM_Disabled
@@ -123,6 +123,7 @@ Name table:
 	bAffectDynamicIndirectLighting
 	bAutoSpawnMissingNavData
 	bAutoWeld
+	bCanBeInCluster
 	bCanEverAffectNavigation
 	bConstrainAspectRatio
 	bContributeToMass
@@ -365,7 +366,6 @@ Name table:
 	Default__CameraBlockingVolume
 	Default__FoliageInstancedStaticMeshComponent
 	Default__Fort_Entry_Music_Controller_BP_C
-	Default__FortCameraBase
 	Default__FortGlobals
 	Default__FortLevelScriptActor
 	Default__FortnitePartyBackdrop_Camera_C
@@ -375,6 +375,7 @@ Name table:
 	Default__Frontend_C
 	Default__Frontend_Command_Hero_Camera_C
 	Default__Frontend_CommanderNew_Camera1_C
+	Default__Frontend_HeroLoadout2_C
 	Default__Frontend_Manage_Camera_C
 	Default__Frontend_Research_Camera_C
 	Default__Frontend_SurvivorSquadBuildings_Camera_C
@@ -425,6 +426,7 @@ Name table:
 	DefaultSceneRootD682F6D34AAA06B8404A2593DB63D0ED
 	DefaultTextMaterialOpaque
 	DelegateProperty
+	DepthOfFieldDepthBlurAmount
 	DepthOfFieldDepthBlurRadius
 	DepthOfFieldFarBlurSize
 	DepthOfFieldFarTransitionRegion
@@ -471,13 +473,14 @@ Name table:
 	Effect translucency
 	EFrontEndCamera
 	EFrontEndCamera::Command
-	EFrontEndCamera::Command_Hero
+	EFrontEndCamera::Command_HeroLoadout
 	EFrontEndCamera::Cosmetics
 	EFrontEndCamera::FrontendDefault
 	EFrontEndCamera::Heroes
 	EFrontEndCamera::HeroLoadout
 	EFrontEndCamera::HeroSelect
 	EFrontEndCamera::Home
+	EFrontEndCamera::LegacyHeroLoadout
 	EFrontEndCamera::LobbyCentered
 	EFrontEndCamera::Login
 	EFrontEndCamera::Manage1
@@ -550,11 +553,8 @@ Name table:
 	FocusTimeline_Float_Curve_ADC98EA5D14E24EC78DD4F80C5102578
 	FoliageInstancedStaticMeshComponent
 	FoliageType_InstancedStaticMesh
-	FORT_Bear
-	FORT_Bear2
 	Fort_Entry_Music_Controller_BP
 	Fort_Entry_Music_Controller_BP_C
-	FortCameraBase
 	FortGameModeFrontEnd
 	FortGlobals
 	FortGlobalUIContext
@@ -573,12 +573,15 @@ Name table:
 	Frontend
 	Frontend_BuiltData
 	Frontend_C
-	Frontend_Command_Hero_Camera
 	Frontend_Command_Hero_Camera_C
 	Frontend_Commander
-	Frontend_CommanderNew_Camera1
+	Frontend_Commander_v1
+	Frontend_Commander_v2
 	Frontend_CommanderNew_Camera1_C
 	Frontend_HeroLoadout
+	Frontend_HeroLoadout2_C
+	Frontend_HeroLoadout_v1
+	Frontend_HeroLoadout_v2
 	Frontend_Lobby
 	Frontend_Lobby_Layout2
 	Frontend_Manage
@@ -599,7 +602,6 @@ Name table:
 	Frontend_Upgrades_Camera_C
 	FrontendBackgroundZone
 	FrontendCamera_Cosmetics
-	FrontendCamera_HeroLoadout
 	FrontendCamera_Inspect
 	FrontendCamera_Inspect_C
 	FrontendCamera_Main
@@ -1475,9 +1477,19 @@ Serialized exports:
 			PostProcessBlendWeight(FloatProperty)=0 
 			PostProcessSettings(StructProperty)=System.Byte[] 
 			AttachParent(ObjectProperty)=SceneComponent=Frontend 
-	CameraComponent (0-0-0-0): size 414 (cls: CameraComponent>CameraComponent>/Script/Engine):
+	CameraComponent (0-0-0-0): size 356 (cls: CameraComponent>CameraComponent>/Script/Engine):
 		Tag array:
 			FieldOfView(FloatProperty)=38 
+			PostProcessSettings(StructProperty)=System.Byte[] 
+			AttachParent(ObjectProperty)=SceneComponent=Frontend 
+	CameraComponent (0-0-0-0): size 550 (cls: CameraComponent>CameraComponent>/Script/Engine):
+		Tag array:
+			FieldOfView(FloatProperty)=38 
+			PostProcessBlendWeight(FloatProperty)=0 
+			PostProcessSettings(StructProperty)=System.Byte[] 
+			AttachParent(ObjectProperty)=SceneComponent=Frontend 
+	CameraComponent (0-0-0-0): size 356 (cls: CameraComponent>CameraComponent>/Script/Engine):
+		Tag array:
 			PostProcessSettings(StructProperty)=System.Byte[] 
 			AttachParent(ObjectProperty)=SceneComponent=Frontend 
 	CameraComponent (0-0-0-0): size 86 (cls: CameraComponent>CameraComponent>/Script/Engine):
@@ -1520,10 +1532,6 @@ Serialized exports:
 			AttachParent(ObjectProperty)=CameraComponent=Frontend 
 			bNetAddressable(BoolProperty)=True 
 			CreationMethod(EnumProperty)=EComponentCreationMethod::SimpleConstructionScript 
-	CameraComponent (0-0-0-0): size 70 (cls: CameraComponent>CameraComponent>/Script/Engine):
-		Tag array:
-			FieldOfView(FloatProperty)=60 
-			AttachParent(ObjectProperty)=SceneComponent=Frontend 
 	CameraComponent (0-0-0-0): size 70 (cls: CameraComponent>CameraComponent>/Script/Engine):
 		Tag array:
 			FieldOfView(FloatProperty)=55 
@@ -1612,7 +1620,7 @@ Serialized exports:
 			AttachParent(ObjectProperty)=CameraComponent=Frontend 
 			bNetAddressable(BoolProperty)=True 
 			CreationMethod(EnumProperty)=EComponentCreationMethod::SimpleConstructionScript 
-	CameraComponent (0-0-0-0): size 57 (cls: CameraComponent>CameraComponent>/Script/Engine):
+	CameraComponent (0-0-0-0): size 41 (cls: CameraComponent>CameraComponent>/Script/Engine):
 		Tag array:
 			AttachParent(ObjectProperty)=SceneComponent=Frontend 
 	CameraComponent (0-0-0-0): size 70 (cls: CameraComponent>CameraComponent>/Script/Engine):
@@ -1687,11 +1695,6 @@ Serialized exports:
 			LoginMusic(ObjectProperty)=LoginMusic=Frontend 
 			RootComponent(ObjectProperty)=LoginMusic=Frontend 
 			BlueprintCreatedComponents(ArrayProperty)=[object] (inner: ObjectProperty)
-	FrontendCamera_HeroLoadout (0-0-0-0): size 99 (cls: FrontendCamera_HeroLoadout>FortCameraBase>/Script/FortniteGame):
-		Tag array:
-			CameraComponent(ObjectProperty)=CameraComponent=Frontend 
-			SceneComponent(ObjectProperty)=SceneComponent=Frontend 
-			RootComponent(ObjectProperty)=SceneComponent=Frontend 
 	Camer_Lobby_NewKairos (0-0-0-0): size 352 (cls: Camer_Lobby_NewKairos>FortnitePartyBackdrop_Camera_C>/Game/Environments/FrontEnd/Blueprints/FortnitePartyBackdrop_Camera):
 		Tag array:
 			Arrow(ObjectProperty)=[object] 
@@ -1722,19 +1725,16 @@ Serialized exports:
 			SceneComponent(ObjectProperty)=SceneComponent=Frontend 
 			RootComponent(ObjectProperty)=SceneComponent=Frontend 
 			BlueprintCreatedComponents(ArrayProperty)=[object] (inner: ObjectProperty)
-	FORT_Bear2 (0-0-0-0): size 70 (cls: FORT_Bear2>FortStaticMeshActor>/Script/FortniteGame):
-		Tag array:
-			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Frontend 
-			RootComponent(ObjectProperty)=StaticMeshComponent0=Frontend 
-	M_MED_Director_Demo_2 (0-0-0-0): size 96 (cls: M_MED_Director_Demo_2>FortStaticMeshActor>/Script/FortniteGame):
+	M_MED_Director_Demo_2 (0-0-0-0): size 122 (cls: M_MED_Director_Demo_2>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Frontend 
 			bHidden(BoolProperty)=True 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Frontend 
 	FortWorldSettings (0-0-0-0): size 458 (cls: FortWorldSettings>FortWorldSettings>/Script/FortniteGame):
 		Tag array:
 			WorldCells(ArrayProperty)=[object] (inner: IntProperty)
-			WorldCellsOrigin(StructProperty)=Vector(-310272,124928,-384) 
+			WorldCellsOrigin(StructProperty)=Vector(512,512,0) 
 			bUseProceduralFoliage(BoolProperty)=False 
 			MinCullObjectSize(FloatProperty)=64 
 			MinCullDistance(FloatProperty)=2800 
@@ -1745,15 +1745,29 @@ Serialized exports:
 			NavigationSystemConfig(ObjectProperty)=NavigationSystemConfig_0=Frontend 
 			DefaultGameMode(ObjectProperty)=FortGameModeFrontEnd=/Script/FortniteGame 
 			BookmarkArray(ArrayProperty)=[object] (inner: ObjectProperty)
-	Frontend_C_6 (0-0-0-0): size 12 (cls: Frontend_C_6>Frontend_C)
-	Frontend_Command_Hero_Camera (0-0-0-0): size 169 (cls: Frontend_Command_Hero_Camera>Frontend_Command_Hero_Camera_C>/Game/Environments/FrontEnd/Blueprints/Frontend_Command_Hero_Camera):
+	Frontend_C_2 (0-0-0-0): size 12 (cls: Frontend_C_2>Frontend_C)
+	Frontend_Commander_v1 (0-0-0-0): size 169 (cls: Frontend_Commander_v1>Frontend_Command_Hero_Camera_C>/Game/Environments/FrontEnd/Blueprints/Frontend_Command_Hero_Camera):
 		Tag array:
 			Arrow(ObjectProperty)=[object] 
 			CameraComponent(ObjectProperty)=CameraComponent=Frontend 
 			SceneComponent(ObjectProperty)=SceneComponent=Frontend 
 			RootComponent(ObjectProperty)=SceneComponent=Frontend 
 			BlueprintCreatedComponents(ArrayProperty)=[object] (inner: ObjectProperty)
-	Frontend_CommanderNew_Camera1_2 (0-0-0-0): size 169 (cls: Frontend_CommanderNew_Camera1_2>Frontend_CommanderNew_Camera1_C>/Game/Environments/FrontEnd/Blueprints/Frontend_CommanderNew_Camera1):
+	Frontend_HeroLoadout_v1 (0-0-0-0): size 169 (cls: Frontend_HeroLoadout_v1>Frontend_Command_Hero_Camera_C>/Game/Environments/FrontEnd/Blueprints/Frontend_Command_Hero_Camera):
+		Tag array:
+			Arrow(ObjectProperty)=[object] 
+			CameraComponent(ObjectProperty)=CameraComponent=Frontend 
+			SceneComponent(ObjectProperty)=SceneComponent=Frontend 
+			RootComponent(ObjectProperty)=SceneComponent=Frontend 
+			BlueprintCreatedComponents(ArrayProperty)=[object] (inner: ObjectProperty)
+	Frontend_Commander_v2 (0-0-0-0): size 169 (cls: Frontend_Commander_v2>Frontend_CommanderNew_Camera1_C>/Game/Environments/FrontEnd/Blueprints/Frontend_CommanderNew_Camera1):
+		Tag array:
+			Arrow(ObjectProperty)=[object] 
+			CameraComponent(ObjectProperty)=CameraComponent=Frontend 
+			SceneComponent(ObjectProperty)=SceneComponent=Frontend 
+			RootComponent(ObjectProperty)=SceneComponent=Frontend 
+			BlueprintCreatedComponents(ArrayProperty)=[object] (inner: ObjectProperty)
+	Frontend_HeroLoadout_v2 (0-0-0-0): size 169 (cls: Frontend_HeroLoadout_v2>Frontend_HeroLoadout2_C>/Game/Environments/FrontEnd/Blueprints/Frontend_HeroLoadout2):
 		Tag array:
 			Arrow(ObjectProperty)=[object] 
 			CameraComponent(ObjectProperty)=CameraComponent=Frontend 
@@ -1862,7 +1876,7 @@ Serialized exports:
 			SceneComponent(ObjectProperty)=SceneComponent=Frontend 
 			RootComponent(ObjectProperty)=SceneComponent=Frontend 
 			BlueprintCreatedComponents(ArrayProperty)=[object] (inner: ObjectProperty)
-	FrontEndSettingsBP_31 (0-0-0-0): size 2459 (cls: FrontEndSettingsBP_31>FrontEndSettingsBP_C>/Game/FrontEnd/FrontEndSettingsBP):
+	FrontEndSettingsBP_31 (0-0-0-0): size 2537 (cls: FrontEndSettingsBP_31>FrontEndSettingsBP_C>/Game/FrontEnd/FrontEndSettingsBP):
 		Tag array:
 			DefaultSceneRoot(ObjectProperty)=DefaultSceneRoot=Frontend 
 			Cameras(ArrayProperty)=[object] (inner: StructProperty)
@@ -1885,7 +1899,7 @@ Serialized exports:
 	PersistentLevel (0-0-0-0): size 1164 (cls: PersistentLevel>Level>/Script/Engine):
 		Tag array:
 			Model(ObjectProperty)=Model_0=Frontend 
-			LevelScriptActor(ObjectProperty)=Frontend_C_6=Frontend 
+			LevelScriptActor(ObjectProperty)=Frontend_C_2=Frontend 
 			StreamingTextureGuids(ArrayProperty)=[object] (inner: StructProperty)
 			LevelBuildDataId(StructProperty)=Guid: 3902075951-1100897788-1421528462-1484546314 
 			MapBuildData(ObjectProperty)=Frontend_BuiltData=/Game/Maps/Frontend_BuiltData 
@@ -2132,12 +2146,20 @@ Serialized exports:
 			RelativeRotation(StructProperty)=Rotator(0.599875,-88.80362,6E-06) 
 	SceneComponent (0-0-0-0): size 134 (cls: SceneComponent>SceneComponent>/Script/Engine):
 		Tag array:
+			RelativeLocation(StructProperty)=Vector(-62347.21,125481.6,133.6964) 
+			RelativeRotation(StructProperty)=Rotator(0,-35.5,0) 
+	SceneComponent (0-0-0-0): size 134 (cls: SceneComponent>SceneComponent>/Script/Engine):
+		Tag array:
+			RelativeLocation(StructProperty)=Vector(-309841.5,125507.6,-3.772122) 
+			RelativeRotation(StructProperty)=Rotator(-1.999415,-110.4978,5.018975E-06) 
+	SceneComponent (0-0-0-0): size 134 (cls: SceneComponent>SceneComponent>/Script/Engine):
+		Tag array:
 			RelativeLocation(StructProperty)=Vector(-62322.82,125427,136.9607) 
 			RelativeRotation(StructProperty)=Rotator(0,-35.5,0) 
 	SceneComponent (0-0-0-0): size 134 (cls: SceneComponent>SceneComponent>/Script/Engine):
 		Tag array:
-			RelativeLocation(StructProperty)=Vector(-62347.21,125481.6,133.6964) 
-			RelativeRotation(StructProperty)=Rotator(0,-35.5,0) 
+			RelativeLocation(StructProperty)=Vector(-310040.4,125129.5,1.215811) 
+			RelativeRotation(StructProperty)=Rotator(-3.799832,-103.9832,6.417409E-07) 
 	SceneComponent (0-0-0-0): size 150 (cls: SceneComponent>SceneComponent>/Script/Engine):
 		Tag array:
 			RelativeLocation(StructProperty)=Vector(-10,125992.5,6.257866) 
@@ -2174,10 +2196,6 @@ Serialized exports:
 		Tag array:
 			RelativeLocation(StructProperty)=Vector(249,30759,97) 
 			RelativeRotation(StructProperty)=Rotator(-10,178,3) 
-	SceneComponent (0-0-0-0): size 134 (cls: SceneComponent>SceneComponent>/Script/Engine):
-		Tag array:
-			RelativeLocation(StructProperty)=Vector(-310057,125124.9,-16.06249) 
-			RelativeRotation(StructProperty)=Rotator(-0.9999943,-98.18165,0) 
 	SceneComponent (0-0-0-0): size 134 (cls: SceneComponent>SceneComponent>/Script/Engine):
 		Tag array:
 			RelativeLocation(StructProperty)=Vector(-196.9392,30703.7,54) 
@@ -2248,7 +2266,7 @@ Serialized exports:
 			bNetAddressable(BoolProperty)=True 
 			CreationMethod(EnumProperty)=EComponentCreationMethod::SimpleConstructionScript 
 			UCSModifiedProperties(ArrayProperty)=[object] (inner: StructProperty)
-	SceneComponent (0-0-0-0): size 28 (cls: SceneComponent>SceneComponent>/Script/Engine)
+	SceneComponent (0-0-0-0): size 12 (cls: SceneComponent>SceneComponent>/Script/Engine)
 	SceneComponent (0-0-0-0): size 134 (cls: SceneComponent>SceneComponent>/Script/Engine):
 		Tag array:
 			RelativeLocation(StructProperty)=Vector(-125.8516,153458.9,117.9657) 
@@ -2397,15 +2415,6 @@ Serialized exports:
 			AttachParent(ObjectProperty)=SharedRoot=Frontend 
 			bNetAddressable(BoolProperty)=True 
 			CreationMethod(EnumProperty)=EComponentCreationMethod::SimpleConstructionScript 
-	StaticMeshComponent0 (0-0-0-0): size 366 (cls: StaticMeshComponent0>StaticMeshComponent>/Script/Engine):
-		Tag array:
-			StaticMesh(ObjectProperty)=FORT_Bear=/Game/Packages/FortNite_Gameplay_Props/FORT_Bear 
-			CachedMaxDrawDistance(FloatProperty)=2800 
-			BodyInstance(StructProperty)=System.Byte[] 
-			RelativeLocation(StructProperty)=Vector(-310392.8,124780.5,-140.4931) 
-			RelativeRotation(StructProperty)=Rotator(0,-97.38686,0) 
-			RelativeScale3D(StructProperty)=Vector(0.3,0.3,0.3) 
-			bCanEverAffectNavigation(BoolProperty)=True 
 	StaticMesh (0-0-0-0): size 112 (cls: StaticMesh>StaticMeshComponent>/Script/Engine):
 		Tag array:
 			AttachParent(ObjectProperty)=SceneComponent=Frontend 

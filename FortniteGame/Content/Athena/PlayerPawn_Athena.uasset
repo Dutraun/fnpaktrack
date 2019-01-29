@@ -8,9 +8,8 @@ Name table:
 	/Game/Athena/Balance/Movement/BallooningDirectionalSpeedMultiplierCurve
 	/Game/Athena/Balance/Movement/ParachuteDirectionalSpeedMultiplierCurve
 	/Game/Athena/Balance/Movement/SkydivingDirectionalSpeedMultiplierCurve
-	/Game/Athena/Effects/Blueprints/ColdBreath/GE_ColdBreathActivate
 	/Game/Athena/Effects/Particles/PFX_FallingVapor
-	/Game/Athena/Environments/Blueprints/SurfaceEffects/GE_SurfaceChange_Snow_Event
+	/Game/Athena/Environments/Festivus/Blueprints/GE_FestivusAudioSetup
 	/Game/Athena/HUD/Art/cross_Shadow
 	/Game/Athena/Items/Weapons/AthenaRangedWeapons_ShootingModel2
 	/Game/Athena/MappedEffects/GE_Athena_Revive_Self
@@ -56,6 +55,8 @@ Name table:
 	/Game/Packages/Fortress_SharedMaterials/Base_Material/CharacterDeRezShader
 	/Game/Sounds/Fort_GamePlay_Sounds/Player/Revive_Player_Athena_Cue
 	/Game/Spectating/Effects/P_Player_Relevance_Res
+	/Game/UI/Foundation/Textures/Icons/Navigation/balloon_visualizer_icon
+	/Game/UI/Foundation/Textures/Icons/Navigation/t_icon_nav_mobile_audioviz_glider
 	/Game/VisualThreatManager/StormVisuals/Materials/M_Screen_Storm_Overlay
 	/Game/WaterAndWind/Particles/WaterInteraction/P_WaterSplash_athena
 	/Script/AnimationBudgetAllocator
@@ -135,6 +136,7 @@ Name table:
 	AutoExposureSpeedUp
 	B
 	B_SoundIndicator_01_C
+	balloon_visualizer_icon
 	BalloonControlParams
 	BalloonFallDamageThresholdVelocityZ
 	BallooningDirectionalSpeedMultiplierCurve
@@ -147,7 +149,6 @@ Name table:
 	bGunTrue
 	bHasBeenOutsideSafeZone
 	bHasCookedComponentInstancingData
-	BindToCalendarEvents
 	bInterruptCurrentLine
 	bIsExternalCurve
 	bIsOutsideSafeZone
@@ -220,6 +221,7 @@ Name table:
 	BreakTransform
 	BreakVector
 	BroadcastFilter
+	bSkeletalArrayReady
 	bSpawnGameplayCue
 	bStormAudioCleanedUp
 	bUseInverseSquaredFalloff
@@ -249,7 +251,6 @@ Name table:
 	CallFunc_BooleanAND_ReturnValue1
 	CallFunc_BooleanOR_ReturnValue
 	CallFunc_BP_ApplyGameplayEffectToSelf_ReturnValue
-	CallFunc_BP_ApplyGameplayEffectToSelf_ReturnValue1
 	CallFunc_BreakTransform_Location
 	CallFunc_BreakTransform_Location1
 	CallFunc_BreakTransform_Rotation
@@ -273,15 +274,12 @@ Name table:
 	CallFunc_Divide_FloatFloat_ReturnValue1
 	CallFunc_EqualEqual_ByteByte_ReturnValue
 	CallFunc_EqualEqual_ByteByte_ReturnValue1
+	CallFunc_EqualEqual_IntInt_ReturnValue
 	CallFunc_FinishSpawningActor_ReturnValue
 	CallFunc_FinishSpawningActor_ReturnValue1
 	CallFunc_GetAbilitySystemComponent_ReturnValue
 	CallFunc_GetActorBounds_BoxExtent
 	CallFunc_GetActorBounds_Origin
-	CallFunc_GetCalendarEventInformation_bIsEventActive
-	CallFunc_GetCalendarEventInformation_TimeSinceBegin
-	CallFunc_GetCalendarEventInformation_TimeSpanRatio
-	CallFunc_GetCalendarEventInformation_TimeUntilEnd
 	CallFunc_GetContext_ReturnValue
 	CallFunc_GetContrailParticleSystem_ReturnValue
 	CallFunc_GetDataTableRowFromName_OutRow
@@ -290,7 +288,6 @@ Name table:
 	CallFunc_GetDissolveValues_DissolveGradientDirectionColor
 	CallFunc_GetDissolveValues_DissolveGradientDistance
 	CallFunc_GetDissolveValues_WorldDissolveLocation
-	CallFunc_GetGameMode_ReturnValue
 	CallFunc_GetGameState_ReturnValue
 	CallFunc_GetGameState_ReturnValue1
 	CallFunc_GetLocationInCircle_XY_LocationLocalSpace
@@ -304,6 +301,7 @@ Name table:
 	CallFunc_GetVelocity_ReturnValue
 	CallFunc_Greater_FloatFloat_ReturnValue
 	CallFunc_Greater_FloatFloat_ReturnValue1
+	CallFunc_Greater_IntInt_ReturnValue
 	CallFunc_GreaterEqual_FloatFloat_ReturnValue
 	CallFunc_HasAllMatchingGameplayTags_ReturnValue
 	CallFunc_HasAllMatchingGameplayTags_TagContainerInterface_CastInput
@@ -332,6 +330,7 @@ Name table:
 	CallFunc_IsValid_ReturnValue1
 	CallFunc_IsValid_ReturnValue2
 	CallFunc_IsValid_ReturnValue3
+	CallFunc_IsValid_ReturnValue4
 	CallFunc_K2_GetActorLocation_ReturnValue
 	CallFunc_K2_GetActorLocation_ReturnValue1
 	CallFunc_K2_GetComponentLocation_ReturnValue
@@ -389,6 +388,7 @@ Name table:
 	CallFunc_Subtract_VectorVector_ReturnValue1
 	CallFunc_VLerp_ReturnValue
 	CallFunc_VSize_ReturnValue
+	CallFunc_WatchCalendarEvent_ReturnValue
 	CapsuleComponent
 	CastShadows
 	ChangedPropertyList
@@ -424,11 +424,13 @@ Name table:
 	CosmeticPetInstance
 	CreateDynamicMaterialInstance
 	cross_Shadow
+	CurDissolveSetupAttempt
 	CurrentSpokenLine
 	Curve
 	CurveFloat
 	CurveTable
 	CurveTableRowHandle
+	CustomMovementIndicators
 	D
 	Damage
 	DamageCauser
@@ -506,14 +508,14 @@ Name table:
 	Default__DuplicateResOutMesh_C
 	Default__EnumProperty
 	Default__FloatProperty
+	Default__FortAsyncAction_CalendarEventWatcher
 	Default__FortGameplayCueFunctionLibrary
 	Default__FortKismetLibrary
 	Default__FortScalableFloatUtils
 	Default__Function
 	Default__GameplayStatics
 	Default__GE_Athena_Revive_Self_C
-	Default__GE_ColdBreathActivate_C
-	Default__GE_SurfaceChange_Snow_Event_C
+	Default__GE_FestivusAudioSetup_C
 	Default__InheritableComponentHandler
 	Default__InterfaceProperty
 	Default__IntProperty
@@ -531,6 +533,7 @@ Name table:
 	Default__SceneComponent
 	Default__SCS_Node
 	Default__SimpleConstructionScript
+	Default__StrProperty
 	Default__StructProperty
 	Default__TimelineTemplate
 	DefaultCrouchedFootstepSound
@@ -576,6 +579,8 @@ Name table:
 	Effect_WaterInteraction_FX_GEN_VARIABLE
 	EffectCauser
 	EffectContext
+	EFortCustomMovement::Ballooning
+	EFortCustomMovement::Parachuting
 	EFortFeedbackBroadcastFilter
 	EGameplayCueEvent
 	EItemInteractionType
@@ -587,11 +592,13 @@ Name table:
 	Enum
 	EnumProperty
 	EqualEqual_ByteByte
+	EqualEqual_IntInt
 	ETimelineDirection
 	ETimelineLengthMode
 	ETraceTypeQuery
 	Event Data
 	EventMagnitude
+	EventName
 	EventSpawnEffect
 	EventTag
 	EventType
@@ -602,6 +609,7 @@ Name table:
 	FallingRainParticles
 	FeedbackAudioComp0
 	FeedbackAudioComponent
+	FestivusAudioGE
 	FFBF_None_Max
 	FilmToe
 	FilmWhitePoint
@@ -615,8 +623,9 @@ Name table:
 	FlyingBus_Drop_Teammate_Cue
 	FootstepBank
 	FootstepTraceTypeQuery
+	FortAsyncAction_CalendarEventWatcher
+	FortAsyncAction_CalendarEventWatcherBase
 	FortFootstepAudioBank
-	FortGameModeZone
 	FortGameplayCueFunctionLibrary
 	FortGameStateAthena
 	FortGlobalUIContext
@@ -638,7 +647,6 @@ Name table:
 	FX_Head
 	G
 	Game
-	GameModeBase
 	GamePhase
 	GameplayAbilityTargetDataHandle
 	GameplayCue.Abilities.Activation.DBNOResurrect
@@ -661,16 +669,13 @@ Name table:
 	GameplayTags
 	GameStateBase
 	GE_Athena_Revive_Self_C
-	GE_ColdBreathActivate_C
-	GE_SurfaceChange_Snow_Event_C
+	GE_FestivusAudioSetup_C
 	GetAbilitySystemComponent
 	GetActorBounds
-	GetCalendarEventInformation
 	GetContext
 	GetContrailParticleSystem
 	GetDataTableRowFromName
 	GetDissolveValues
-	GetGameMode
 	GetGameState
 	GetLocationInCircle_XY
 	GetMaterials
@@ -690,6 +695,7 @@ Name table:
 	GlowScalar
 	GravityScalar
 	Greater_FloatFloat
+	Greater_IntInt
 	GreaterEqual_FloatFloat
 	GroundFriction
 	Guid
@@ -703,6 +709,7 @@ Name table:
 	HitNotifyAudioBank_Default
 	HitResult
 	Homebase.Class.IsCommando
+	HUD.Event.HideForSpecialEvent
 	InAirAudioComp
 	InheritableComponentHandler
 	InitAthenaFoleyAudio
@@ -744,21 +751,33 @@ Name table:
 	K2_SetWorldLocation
 	K2Node_CreateDelegate_OutputDelegate
 	K2Node_CreateDelegate_OutputDelegate1
+	K2Node_CreateDelegate_OutputDelegate2
+	K2Node_CreateDelegate_OutputDelegate3
 	K2Node_CustomEvent_bSpawnGameplayCue
 	K2Node_CustomEvent_bSpawnGameplayCue1
+	K2Node_CustomEvent_EventName
+	K2Node_CustomEvent_EventName1
+	K2Node_CustomEvent_EventName2
 	K2Node_CustomEvent_GameplayTag
 	K2Node_CustomEvent_InSafeZonePhase
 	K2Node_CustomEvent_Location
 	K2Node_CustomEvent_NewWhichSafeZoneTag
 	K2Node_CustomEvent_Pawn
+	K2Node_CustomEvent_TimeSinceBegin
+	K2Node_CustomEvent_TimeSinceBegin1
+	K2Node_CustomEvent_TimeSinceBegin2
+	K2Node_CustomEvent_TimeSpanRatio
+	K2Node_CustomEvent_TimeSpanRatio1
+	K2Node_CustomEvent_TimeSpanRatio2
+	K2Node_CustomEvent_TimeUntilEnd
+	K2Node_CustomEvent_TimeUntilEnd1
+	K2Node_CustomEvent_TimeUntilEnd2
 	K2Node_DynamicCast_AsAthena_Game_State
-	K2Node_DynamicCast_AsFort_Game_Mode_Zone
 	K2Node_DynamicCast_AsFort_Game_State_Athena
 	K2Node_DynamicCast_AsFort_Game_State_Athena1
 	K2Node_DynamicCast_AsFort_Player_Pawn_Athena
 	K2Node_DynamicCast_bSuccess
 	K2Node_DynamicCast_bSuccess1
-	K2Node_DynamicCast_bSuccess2
 	K2Node_Event_Damage
 	K2Node_Event_DamageCauser
 	K2Node_Event_DamageTags
@@ -805,8 +824,8 @@ Name table:
 	LateralFriction
 	LaunchPadParachuteDeployTraceForGroundDistance
 	LengthMode
-	Lerp
 	LERP
+	Lerp
 	Less_FloatFloat
 	Less_IntInt
 	LessEqual_FloatFloat
@@ -857,6 +876,8 @@ Name table:
 	MaxLightIntensity
 	MaxTrailsLOD
 	MaxVerticalLaunchSpeed
+	MeleeSwingLeft
+	MeleeSwingRight
 	MenuGoingCommandowWeapon
 	Mesh
 	MIDParam_DissolveBaseLoc
@@ -900,14 +921,19 @@ Name table:
 	Object
 	ObjectProperty
 	OnCharacterCustomizationCompleted
+	OnClientEventFlagChanged__DelegateSignature
 	OnDeathPlayEffects
 	OnEnteredReplayRelevancy
 	OnEnteredWaterVolume
+	OnEventActive
+	OnEventActive_4BF68D6E40D33DFCDB2E6785A77F4B1B
+	OnEventEnded
+	OnEventEnded_4BF68D6E40D33DFCDB2E6785A77F4B1B
+	OnEventUpdated
+	OnEventUpdated_4BF68D6E40D33DFCDB2E6785A77F4B1B
 	OnExitedWaterVolume
 	OnFinishedCharacterCustomization
 	OnFinishedCharacterCustomization__DelegateSignature
-	OnHandleMatchHasStarted
-	OnHandleMatchHasStarted__DelegateSignature
 	OnLeftReplayRelevancy
 	OnLockOnSearchCompleted
 	OnOutsideSafeZonePhaseChanged
@@ -1003,6 +1029,7 @@ Name table:
 	ReceiveEndPlay
 	ReceivePossessed
 	ReceivingActor
+	RemoveActiveGameplayEffectBySourceEffect
 	RemoveGameplayCueLocal
 	RemoveSafeZoneGameplayCue
 	RemoveStormFX
@@ -1016,6 +1043,7 @@ Name table:
 	ResOutMaterials
 	RestoreCharacterMats
 	RetriggerableDelay
+	ReTrySetupDissolveFx
 	Reverse
 	ReverseFromEnd
 	Revive_Player_Athena_Cue
@@ -1097,6 +1125,7 @@ Name table:
 	Sound
 	SoundBase
 	SoundCue
+	SoundTrackingVisibilityTags
 	SourceObject
 	SourceRadius
 	SpawnEffect_GEN_VARIABLE
@@ -1124,10 +1153,16 @@ Name table:
 	StormAudioVolume
 	StormAuraParticles
 	StormCap_Lightning_Strike_Cue
+	StrProperty
 	StructProperty
 	Subtract_FloatFloat
 	Subtract_IntInt
 	Subtract_VectorVector
+	SwingLeft
+	SwingLeft__DelegateSignature
+	SwingRight
+	SwingRight__DelegateSignature
+	t_icon_nav_mobile_audioviz_glider
 	T_LUT_Test_Cloudt
 	TagName
 	Target
@@ -1156,6 +1191,7 @@ Name table:
 	Temp_bool_Variable5
 	Temp_bool_Variable6
 	Temp_float_Variable
+	Temp_float_Variable1
 	Temp_int_Array_Index_Variable
 	Temp_int_Array_Index_Variable1
 	Temp_int_Loop_Counter_Variable
@@ -1175,12 +1211,15 @@ Name table:
 	Temp_object_Variable7
 	Temp_object_Variable8
 	Temp_object_Variable9
+	Temp_string_Variable
 	Temp_struct_Variable
 	Temp_struct_Variable1
 	Temp_struct_Variable2
 	Temp_struct_Variable3
 	Temp_struct_Variable4
 	Temp_struct_Variable5
+	Temp_struct_Variable6
+	Temp_struct_Variable7
 	TerminalVelocity
 	Texture2D
 	TFX_GlowCharacterMesh
@@ -1210,7 +1249,10 @@ Name table:
 	Timelines
 	TimelineTemplate
 	TimerHandle
+	TimeSinceBegin
 	Timespan
+	TimeSpanRatio
+	TimeUntilEnd
 	TL_LastKeyFrame
 	TraceTypeQuery10
 	TrackName
@@ -1249,6 +1291,7 @@ Name table:
 	VortexSkydivingControlParamsActiveUpward
 	VortexSkydivingControlParamsPassive
 	VSize
+	WatchCalendarEvent
 	WeakObjectProperty
 	WeaponHitNotifyAudioBank
 	Weight
@@ -1265,7 +1308,7 @@ Name table:
 	ZiplineJumpStrength
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	PlayerPawn_Athena_C (0-0-0-0): size 6038 (cls: PlayerPawn_Athena_C>BlueprintGeneratedClass>/Script/Engine):
+	PlayerPawn_Athena_C (0-0-0-0): size 6182 (cls: PlayerPawn_Athena_C>BlueprintGeneratedClass>/Script/Engine):
 		Tag array:
 			bHasCookedComponentInstancingData(BoolProperty)=True 
 			ComponentTemplates(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -1274,7 +1317,7 @@ Serialized exports:
 			InheritableComponentHandler(ObjectProperty)=InheritableComponentHandler=PlayerPawn_Athena_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_PlayerPawn_Athena=PlayerPawn_Athena_C 
 			CookedComponentInstancingData(MapProperty)=[object] (inner: NameProperty)
-	Default__PlayerPawn_Athena_C (0-0-0-0): size 8755 (cls: Default__PlayerPawn_Athena_C>PlayerPawn_Athena_C):
+	Default__PlayerPawn_Athena_C (0-0-0-0): size 8889 (cls: Default__PlayerPawn_Athena_C>PlayerPawn_Athena_C):
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			TC_FlakVest(StructProperty)=GameplayTagContainer:Abilities.Commando.FlakVest 
@@ -1328,6 +1371,7 @@ Serialized exports:
 			ZiplineJumpStrength(StructProperty)=System.Byte[] 
 			DBNOMiniMapIconBrush(StructProperty)=System.Byte[] 
 			MinimapIconColorSelf(StructProperty)=UE4.FLinearColor 
+			CustomMovementIndicators(MapProperty)=[object] (inner: ByteProperty)
 			SlipperySlopeParams(StructProperty)=System.Byte[] 
 			ParachuteDeployTraceForGroundDistance(StructProperty)=System.Byte[] 
 			LaunchPadParachuteDeployTraceForGroundDistance(StructProperty)=System.Byte[] 
@@ -1351,6 +1395,7 @@ Serialized exports:
 			FootstepBank(ObjectProperty)=DefaultFootstepBankAthena=/Game/Athena/Sounds/Character/Footsteps/DefaultFootstepBankAthena 
 			FootstepTraceTypeQuery(ByteProperty)=TraceTypeQuery10 
 			DefaultSoundTrackingVisual(ObjectProperty)=B_SoundIndicator_01_C=/Game/Effects/Fort_Effects/Camera_Effects/B_SoundIndicator_01 
+			SoundTrackingVisibilityTags(StructProperty)=GameplayTagContainer:HUD.Event.HideForSpecialEvent 
 			VocalChords(ArrayProperty)=[object] (inner: StructProperty)
 			GameplayTags(StructProperty)=GameplayTagContainer:Class.IsCommando,NPC.EnemyType.Pawn,Homebase.Class.IsCommando,Pawn.Athena.Player,Athena.AI.NoiseMaker 
 			Mesh(ObjectProperty)=CharacterMesh0=Default__PlayerPawn_Athena_C 
@@ -1368,10 +1413,15 @@ Serialized exports:
 	TFX_ResOutCharacterMesh_LightIntensity_742226E94F2087597CFE2FAE7DCC91EA (0-0-0-0): size 32 (cls: TFX_ResOutCharacterMesh_LightIntensity_742226E94F2087597CFE2FAE7DCC91EA>FloatProperty>/Script/CoreUObject)
 	ResIn__DelegateSignature (0-0-0-0): size 43 (cls: ResIn__DelegateSignature>Function>/Script/CoreUObject)
 	ResOut__DelegateSignature (0-0-0-0): size 43 (cls: ResOut__DelegateSignature>Function>/Script/CoreUObject)
+	SwingRight__DelegateSignature (0-0-0-0): size 43 (cls: SwingRight__DelegateSignature>Function>/Script/CoreUObject)
+	SwingLeft__DelegateSignature (0-0-0-0): size 43 (cls: SwingLeft__DelegateSignature>Function>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_PlayerPawn_Athena (0-0-0-0): size 9681 (cls: ExecuteUbergraph_PlayerPawn_Athena>Function>/Script/CoreUObject)
+	ExecuteUbergraph_PlayerPawn_Athena (0-0-0-0): size 10231 (cls: ExecuteUbergraph_PlayerPawn_Athena>Function>/Script/CoreUObject)
+	FestivusAudioGE (0-0-0-0): size 54 (cls: FestivusAudioGE>Function>/Script/CoreUObject)
+	ReTrySetupDissolveFx (0-0-0-0): size 54 (cls: ReTrySetupDissolveFx>Function>/Script/CoreUObject)
+	MeleeSwingRight (0-0-0-0): size 54 (cls: MeleeSwingRight>Function>/Script/CoreUObject)
+	MeleeSwingLeft (0-0-0-0): size 54 (cls: MeleeSwingLeft>Function>/Script/CoreUObject)
 	SetupColdTag (0-0-0-0): size 54 (cls: SetupColdTag>Function>/Script/CoreUObject)
-	BindToCalendarEvents (0-0-0-0): size 54 (cls: BindToCalendarEvents>Function>/Script/CoreUObject)
 	OnReceivedStormSurgeDamage (0-0-0-0): size 54 (cls: OnReceivedStormSurgeDamage>Function>/Script/CoreUObject)
 	RemoveSafeZoneGameplayCue (0-0-0-0): size 54 (cls: RemoveSafeZoneGameplayCue>Function>/Script/CoreUObject)
 	SafeZonePhase (0-0-0-0): size 32 (cls: SafeZonePhase>IntProperty>/Script/CoreUObject)
@@ -1402,6 +1452,8 @@ Serialized exports:
 	UpdateInvulnerableVisuals (0-0-0-0): size 54 (cls: UpdateInvulnerableVisuals>Function>/Script/CoreUObject)
 	EventType (0-0-0-0): size 36 (cls: EventType>ByteProperty>/Script/CoreUObject)
 	GameplayCue.Abilities.Activation.DBNOResurrect (0-0-0-0): size 82 (cls: GameplayCue.Abilities.Activation.DBNOResurrect>Function>/Script/CoreUObject)
+	EventType (0-0-0-0): size 36 (cls: EventType>ByteProperty>/Script/CoreUObject)
+	GameplayCue.Abilities.Activation.Generic.HarvestBuff.Tier1 (0-0-0-0): size 82 (cls: GameplayCue.Abilities.Activation.Generic.HarvestBuff.Tier1>Function>/Script/CoreUObject)
 	RandomLightningFlashesRepeat (0-0-0-0): size 54 (cls: RandomLightningFlashesRepeat>Function>/Script/CoreUObject)
 	StartRandomLightningFlashes (0-0-0-0): size 54 (cls: StartRandomLightningFlashes>Function>/Script/CoreUObject)
 	RemoveStormFX (0-0-0-0): size 54 (cls: RemoveStormFX>Function>/Script/CoreUObject)
@@ -1414,13 +1466,17 @@ Serialized exports:
 	GameplayCue.Athena.Equipping (0-0-0-0): size 82 (cls: GameplayCue.Athena.Equipping>Function>/Script/CoreUObject)
 	SafeZoneStatusChanged (0-0-0-0): size 54 (cls: SafeZoneStatusChanged>Function>/Script/CoreUObject)
 	ReceiveDestroyed (0-0-0-0): size 54 (cls: ReceiveDestroyed>Function>/Script/CoreUObject)
-	EventType (0-0-0-0): size 36 (cls: EventType>ByteProperty>/Script/CoreUObject)
-	GameplayCue.Abilities.Activation.Generic.HarvestBuff.Tier1 (0-0-0-0): size 82 (cls: GameplayCue.Abilities.Activation.Generic.HarvestBuff.Tier1>Function>/Script/CoreUObject)
-	EventType (0-0-0-0): size 36 (cls: EventType>ByteProperty>/Script/CoreUObject)
-	GameplayCue.Abilities.Activation.Generic.HarvestBuff.Tier2 (0-0-0-0): size 82 (cls: GameplayCue.Abilities.Activation.Generic.HarvestBuff.Tier2>Function>/Script/CoreUObject)
 	ReceiveBeginPlay (0-0-0-0): size 54 (cls: ReceiveBeginPlay>Function>/Script/CoreUObject)
 	NewController (0-0-0-0): size 36 (cls: NewController>ObjectProperty>/Script/CoreUObject)
 	ReceivePossessed (0-0-0-0): size 68 (cls: ReceivePossessed>Function>/Script/CoreUObject)
+	EventType (0-0-0-0): size 36 (cls: EventType>ByteProperty>/Script/CoreUObject)
+	GameplayCue.Abilities.Activation.Generic.HarvestBuff.Tier2 (0-0-0-0): size 82 (cls: GameplayCue.Abilities.Activation.Generic.HarvestBuff.Tier2>Function>/Script/CoreUObject)
+	EventName (0-0-0-0): size 32 (cls: EventName>StrProperty>/Script/CoreUObject)
+	OnEventActive_4BF68D6E40D33DFCDB2E6785A77F4B1B (0-0-0-0): size 110 (cls: OnEventActive_4BF68D6E40D33DFCDB2E6785A77F4B1B>Function>/Script/CoreUObject)
+	EventName (0-0-0-0): size 32 (cls: EventName>StrProperty>/Script/CoreUObject)
+	OnEventUpdated_4BF68D6E40D33DFCDB2E6785A77F4B1B (0-0-0-0): size 110 (cls: OnEventUpdated_4BF68D6E40D33DFCDB2E6785A77F4B1B>Function>/Script/CoreUObject)
+	EventName (0-0-0-0): size 32 (cls: EventName>StrProperty>/Script/CoreUObject)
+	OnEventEnded_4BF68D6E40D33DFCDB2E6785A77F4B1B (0-0-0-0): size 110 (cls: OnEventEnded_4BF68D6E40D33DFCDB2E6785A77F4B1B>Function>/Script/CoreUObject)
 	TFX_ResOutCharacterMesh__UpdateFunc (0-0-0-0): size 54 (cls: TFX_ResOutCharacterMesh__UpdateFunc>Function>/Script/CoreUObject)
 	TFX_ResOutCharacterMesh__FinishedFunc (0-0-0-0): size 54 (cls: TFX_ResOutCharacterMesh__FinishedFunc>Function>/Script/CoreUObject)
 	TFX_GlowCharacterMesh__UpdateFunc (0-0-0-0): size 54 (cls: TFX_GlowCharacterMesh__UpdateFunc>Function>/Script/CoreUObject)
@@ -1459,7 +1515,7 @@ Serialized exports:
 	NewWorldLoc (0-0-0-0): size 36 (cls: NewWorldLoc>StructProperty>/Script/CoreUObject)
 	UpdateTeleportationPointLight (0-0-0-0): size 192 (cls: UpdateTeleportationPointLight>Function>/Script/CoreUObject)
 	Temp_int_Array_Index_Variable (0-0-0-0): size 32 (cls: Temp_int_Array_Index_Variable>IntProperty>/Script/CoreUObject)
-	SetupDissolveFX (0-0-0-0): size 763 (cls: SetupDissolveFX>Function>/Script/CoreUObject)
+	SetupDissolveFX (0-0-0-0): size 865 (cls: SetupDissolveFX>Function>/Script/CoreUObject)
 	Itr (0-0-0-0): size 32 (cls: Itr>IntProperty>/Script/CoreUObject)
 	RestoreCharacterMats (0-0-0-0): size 809 (cls: RestoreCharacterMats>Function>/Script/CoreUObject)
 	CallFunc_GetMaterials_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetMaterials_ReturnValue>ObjectProperty>/Script/CoreUObject)
@@ -1480,6 +1536,7 @@ Serialized exports:
 	bOutsideSafeZoneGameplayCueActive (0-0-0-0): size 34 (cls: bOutsideSafeZoneGameplayCueActive>BoolProperty>/Script/CoreUObject)
 	bQueueRezIn (0-0-0-0): size 34 (cls: bQueueRezIn>BoolProperty>/Script/CoreUObject)
 	bQueueRezOut (0-0-0-0): size 34 (cls: bQueueRezOut>BoolProperty>/Script/CoreUObject)
+	bSkeletalArrayReady (0-0-0-0): size 34 (cls: bSkeletalArrayReady>BoolProperty>/Script/CoreUObject)
 	bStormAudioCleanedUp (0-0-0-0): size 34 (cls: bStormAudioCleanedUp>BoolProperty>/Script/CoreUObject)
 	bUseNewTeleportFX (0-0-0-0): size 34 (cls: bUseNewTeleportFX>BoolProperty>/Script/CoreUObject)
 	bWasEverInWarmUp (0-0-0-0): size 34 (cls: bWasEverInWarmUp>BoolProperty>/Script/CoreUObject)
@@ -1493,10 +1550,11 @@ Serialized exports:
 	Temp_bool_Variable1 (0-0-0-0): size 34 (cls: Temp_bool_Variable1>BoolProperty>/Script/CoreUObject)
 	CallFunc_BooleanAND_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_BooleanAND_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue1>BoolProperty>/Script/CoreUObject)
+	CallFunc_BooleanOR_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanOR_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_EqualEqual_ByteByte_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ByteByte_ReturnValue>BoolProperty>/Script/CoreUObject)
-	CallFunc_GetCalendarEventInformation_bIsEventActive (0-0-0-0): size 34 (cls: CallFunc_GetCalendarEventInformation_bIsEventActive>BoolProperty>/Script/CoreUObject)
 	CallFunc_Greater_FloatFloat_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Greater_FloatFloat_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Greater_FloatFloat_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_Greater_FloatFloat_ReturnValue1>BoolProperty>/Script/CoreUObject)
+	CallFunc_Greater_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Greater_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_GreaterEqual_FloatFloat_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_GreaterEqual_FloatFloat_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_HasAllMatchingGameplayTags_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasAllMatchingGameplayTags_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_HasAuthority_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasAuthority_ReturnValue>BoolProperty>/Script/CoreUObject)
@@ -1522,6 +1580,7 @@ Serialized exports:
 	CallFunc_IsValid_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue2>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue3 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue3>BoolProperty>/Script/CoreUObject)
+	CallFunc_IsValid_ReturnValue4 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue4>BoolProperty>/Script/CoreUObject)
 	CallFunc_Less_FloatFloat_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Less_FloatFloat_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Less_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_LessEqual_FloatFloat_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_LessEqual_FloatFloat_ReturnValue>BoolProperty>/Script/CoreUObject)
@@ -1534,7 +1593,6 @@ Serialized exports:
 	K2Node_CustomEvent_bSpawnGameplayCue1 (0-0-0-0): size 34 (cls: K2Node_CustomEvent_bSpawnGameplayCue1>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess1 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess1>BoolProperty>/Script/CoreUObject)
-	K2Node_DynamicCast_bSuccess2 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess2>BoolProperty>/Script/CoreUObject)
 	K2Node_SwitchEnum1_CmpSuccess (0-0-0-0): size 34 (cls: K2Node_SwitchEnum1_CmpSuccess>BoolProperty>/Script/CoreUObject)
 	K2Node_SwitchEnum2_CmpSuccess (0-0-0-0): size 34 (cls: K2Node_SwitchEnum2_CmpSuccess>BoolProperty>/Script/CoreUObject)
 	K2Node_SwitchEnum3_CmpSuccess (0-0-0-0): size 34 (cls: K2Node_SwitchEnum3_CmpSuccess>BoolProperty>/Script/CoreUObject)
@@ -1585,8 +1643,10 @@ Serialized exports:
 	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
 	bSpawnGameplayCue (0-0-0-0): size 34 (cls: bSpawnGameplayCue>BoolProperty>/Script/CoreUObject)
 	bSpawnGameplayCue (0-0-0-0): size 34 (cls: bSpawnGameplayCue>BoolProperty>/Script/CoreUObject)
+	CallFunc_EqualEqual_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Less_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_LessEqual_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_LessEqual_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_Not_PreBool_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue>BoolProperty>/Script/CoreUObject)
 	ShowInvulnerableVisuals (0-0-0-0): size 34 (cls: ShowInvulnerableVisuals>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsMobilePlatform_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsMobilePlatform_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue1>BoolProperty>/Script/CoreUObject)
@@ -1633,6 +1693,8 @@ Serialized exports:
 			FloatCurve(StructProperty)=System.Byte[] 
 	K2Node_CreateDelegate_OutputDelegate (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate>DelegateProperty>/Script/CoreUObject)
 	K2Node_CreateDelegate_OutputDelegate1 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate1>DelegateProperty>/Script/CoreUObject)
+	K2Node_CreateDelegate_OutputDelegate2 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate2>DelegateProperty>/Script/CoreUObject)
+	K2Node_CreateDelegate_OutputDelegate3 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate3>DelegateProperty>/Script/CoreUObject)
 	Out_ItemInteractionType (0-0-0-0): size 40 (cls: Out_ItemInteractionType>EnumProperty>/Script/CoreUObject)
 	%ChanceOfLightningMesh (0-0-0-0): size 32 (cls: %ChanceOfLightningMesh>FloatProperty>/Script/CoreUObject)
 	BoundsRadius (0-0-0-0): size 32 (cls: BoundsRadius>FloatProperty>/Script/CoreUObject)
@@ -1645,7 +1707,6 @@ Serialized exports:
 	CallFunc_Conv_IntToFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Conv_IntToFloat_ReturnValue>FloatProperty>/Script/CoreUObject)
 	CallFunc_Divide_FloatFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Divide_FloatFloat_ReturnValue>FloatProperty>/Script/CoreUObject)
 	CallFunc_Divide_FloatFloat_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Divide_FloatFloat_ReturnValue1>FloatProperty>/Script/CoreUObject)
-	CallFunc_GetCalendarEventInformation_TimeSpanRatio (0-0-0-0): size 32 (cls: CallFunc_GetCalendarEventInformation_TimeSpanRatio>FloatProperty>/Script/CoreUObject)
 	CallFunc_GetValueAtLevel_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetValueAtLevel_ReturnValue>FloatProperty>/Script/CoreUObject)
 	CallFunc_Lerp_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Lerp_ReturnValue>FloatProperty>/Script/CoreUObject)
 	CallFunc_MapRangeClamped_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_MapRangeClamped_ReturnValue>FloatProperty>/Script/CoreUObject)
@@ -1656,9 +1717,13 @@ Serialized exports:
 	CallFunc_RandomFloatInRange_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_RandomFloatInRange_ReturnValue1>FloatProperty>/Script/CoreUObject)
 	CallFunc_RandomFloatInRange_ReturnValue2 (0-0-0-0): size 32 (cls: CallFunc_RandomFloatInRange_ReturnValue2>FloatProperty>/Script/CoreUObject)
 	CallFunc_VSize_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_VSize_ReturnValue>FloatProperty>/Script/CoreUObject)
+	K2Node_CustomEvent_TimeSpanRatio (0-0-0-0): size 32 (cls: K2Node_CustomEvent_TimeSpanRatio>FloatProperty>/Script/CoreUObject)
+	K2Node_CustomEvent_TimeSpanRatio1 (0-0-0-0): size 32 (cls: K2Node_CustomEvent_TimeSpanRatio1>FloatProperty>/Script/CoreUObject)
+	K2Node_CustomEvent_TimeSpanRatio2 (0-0-0-0): size 32 (cls: K2Node_CustomEvent_TimeSpanRatio2>FloatProperty>/Script/CoreUObject)
 	K2Node_Event_Damage (0-0-0-0): size 32 (cls: K2Node_Event_Damage>FloatProperty>/Script/CoreUObject)
 	K2Node_Select_Default (0-0-0-0): size 32 (cls: K2Node_Select_Default>FloatProperty>/Script/CoreUObject)
 	Temp_float_Variable (0-0-0-0): size 32 (cls: Temp_float_Variable>FloatProperty>/Script/CoreUObject)
+	Temp_float_Variable1 (0-0-0-0): size 32 (cls: Temp_float_Variable1>FloatProperty>/Script/CoreUObject)
 	CallFunc_BreakVector_X (0-0-0-0): size 32 (cls: CallFunc_BreakVector_X>FloatProperty>/Script/CoreUObject)
 	CallFunc_BreakVector_Y (0-0-0-0): size 32 (cls: CallFunc_BreakVector_Y>FloatProperty>/Script/CoreUObject)
 	CallFunc_BreakVector_Z (0-0-0-0): size 32 (cls: CallFunc_BreakVector_Z>FloatProperty>/Script/CoreUObject)
@@ -1687,6 +1752,9 @@ Serialized exports:
 	LightningTimelinePlaySpeedMax (0-0-0-0): size 32 (cls: LightningTimelinePlaySpeedMax>FloatProperty>/Script/CoreUObject)
 	LightningTimelinePlaySpeedMin (0-0-0-0): size 32 (cls: LightningTimelinePlaySpeedMin>FloatProperty>/Script/CoreUObject)
 	MaxLightIntensity (0-0-0-0): size 32 (cls: MaxLightIntensity>FloatProperty>/Script/CoreUObject)
+	TimeSpanRatio (0-0-0-0): size 32 (cls: TimeSpanRatio>FloatProperty>/Script/CoreUObject)
+	TimeSpanRatio (0-0-0-0): size 32 (cls: TimeSpanRatio>FloatProperty>/Script/CoreUObject)
+	TimeSpanRatio (0-0-0-0): size 32 (cls: TimeSpanRatio>FloatProperty>/Script/CoreUObject)
 	PlayerAttributes_Speed_Run (0-0-0-0): size 32 (cls: PlayerAttributes_Speed_Run>FloatProperty>/Script/CoreUObject)
 	PlayerAttributes_Speed_Sprint (0-0-0-0): size 32 (cls: PlayerAttributes_Speed_Sprint>FloatProperty>/Script/CoreUObject)
 	PlayerAttributes_Speed_Walk (0-0-0-0): size 32 (cls: PlayerAttributes_Speed_Walk>FloatProperty>/Script/CoreUObject)
@@ -1720,7 +1788,9 @@ Serialized exports:
 	InheritableComponentHandler (0-0-0-0): size 12 (cls: InheritableComponentHandler>InheritableComponentHandler>/Script/Engine)
 	CallFunc_HasAllMatchingGameplayTags_TagContainerInterface_CastInput (0-0-0-0): size 36 (cls: CallFunc_HasAllMatchingGameplayTags_TagContainerInterface_CastInput>InterfaceProperty>/Script/CoreUObject)
 	CallFunc_HasMatchingGameplayTag_self_CastInput (0-0-0-0): size 36 (cls: CallFunc_HasMatchingGameplayTag_self_CastInput>InterfaceProperty>/Script/CoreUObject)
+	CurDissolveSetupAttempt (0-0-0-0): size 32 (cls: CurDissolveSetupAttempt>IntProperty>/Script/CoreUObject)
 	CallFunc_Add_IntInt_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue>IntProperty>/Script/CoreUObject)
+	CallFunc_Add_IntInt_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue1>IntProperty>/Script/CoreUObject)
 	CallFunc_Array_Length_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Array_Length_ReturnValue>IntProperty>/Script/CoreUObject)
 	CallFunc_Conv_ByteToInt_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Conv_ByteToInt_ReturnValue>IntProperty>/Script/CoreUObject)
 	CallFunc_Conv_ByteToInt_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Conv_ByteToInt_ReturnValue1>IntProperty>/Script/CoreUObject)
@@ -1729,6 +1799,7 @@ Serialized exports:
 	K2Node_Event_SafeZonePhase (0-0-0-0): size 32 (cls: K2Node_Event_SafeZonePhase>IntProperty>/Script/CoreUObject)
 	Temp_int_Array_Index_Variable (0-0-0-0): size 32 (cls: Temp_int_Array_Index_Variable>IntProperty>/Script/CoreUObject)
 	Temp_int_Loop_Counter_Variable (0-0-0-0): size 32 (cls: Temp_int_Loop_Counter_Variable>IntProperty>/Script/CoreUObject)
+	Temp_int_Variable (0-0-0-0): size 32 (cls: Temp_int_Variable>IntProperty>/Script/CoreUObject)
 	MaxTrailsLOD (0-0-0-0): size 32 (cls: MaxTrailsLOD>IntProperty>/Script/CoreUObject)
 	CallFunc_Add_IntInt_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue>IntProperty>/Script/CoreUObject)
 	CallFunc_Add_IntInt_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue1>IntProperty>/Script/CoreUObject)
@@ -1746,6 +1817,7 @@ Serialized exports:
 	CallFunc_Add_IntInt_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue1>IntProperty>/Script/CoreUObject)
 	CallFunc_Array_Add_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Array_Add_ReturnValue>IntProperty>/Script/CoreUObject)
 	CallFunc_Array_Length_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Array_Length_ReturnValue>IntProperty>/Script/CoreUObject)
+	CallFunc_Array_Length_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Array_Length_ReturnValue1>IntProperty>/Script/CoreUObject)
 	CallFunc_GetNumMaterials_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetNumMaterials_ReturnValue>IntProperty>/Script/CoreUObject)
 	CallFunc_Subtract_IntInt_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Subtract_IntInt_ReturnValue>IntProperty>/Script/CoreUObject)
 	Temp_int_Loop_Counter_Variable (0-0-0-0): size 32 (cls: Temp_int_Loop_Counter_Variable>IntProperty>/Script/CoreUObject)
@@ -1765,6 +1837,8 @@ Serialized exports:
 	WhichSafeZoneTag (0-0-0-0): size 32 (cls: WhichSafeZoneTag>IntProperty>/Script/CoreUObject)
 	ResIn (0-0-0-0): size 36 (cls: ResIn>MulticastDelegateProperty>/Script/CoreUObject)
 	ResOut (0-0-0-0): size 36 (cls: ResOut>MulticastDelegateProperty>/Script/CoreUObject)
+	SwingLeft (0-0-0-0): size 36 (cls: SwingLeft>MulticastDelegateProperty>/Script/CoreUObject)
+	SwingRight (0-0-0-0): size 36 (cls: SwingRight>MulticastDelegateProperty>/Script/CoreUObject)
 	MIDParam_DissolveBaseLoc (0-0-0-0): size 32 (cls: MIDParam_DissolveBaseLoc>NameProperty>/Script/CoreUObject)
 	MIDParam_DissolveDirection (0-0-0-0): size 32 (cls: MIDParam_DissolveDirection>NameProperty>/Script/CoreUObject)
 	MIDParam_DissolveDistance (0-0-0-0): size 32 (cls: MIDParam_DissolveDistance>NameProperty>/Script/CoreUObject)
@@ -1791,7 +1865,6 @@ Serialized exports:
 	CallFunc_GetAbilitySystemComponent_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetAbilitySystemComponent_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetContrailParticleSystem_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContrailParticleSystem_ReturnValue>ObjectProperty>/Script/CoreUObject)
-	CallFunc_GetGameMode_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetGameMode_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetGameState_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetGameState_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetGameState_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetGameState_ReturnValue1>ObjectProperty>/Script/CoreUObject)
 	CallFunc_K2_GetRootComponent_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_GetRootComponent_ReturnValue>ObjectProperty>/Script/CoreUObject)
@@ -1804,8 +1877,8 @@ Serialized exports:
 	CallFunc_SpawnSoundAttached_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_SpawnSoundAttached_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_SpawnSoundAttached_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_SpawnSoundAttached_ReturnValue1>ObjectProperty>/Script/CoreUObject)
 	CallFunc_SpawnSoundAttached_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_SpawnSoundAttached_ReturnValue2>ObjectProperty>/Script/CoreUObject)
+	CallFunc_WatchCalendarEvent_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_WatchCalendarEvent_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	K2Node_CustomEvent_Pawn (0-0-0-0): size 36 (cls: K2Node_CustomEvent_Pawn>ObjectProperty>/Script/CoreUObject)
-	K2Node_DynamicCast_AsFort_Game_Mode_Zone (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Game_Mode_Zone>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Game_State_Athena (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Game_State_Athena>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Game_State_Athena1 (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Game_State_Athena1>ObjectProperty>/Script/CoreUObject)
 	K2Node_Event_DamageCauser (0-0-0-0): size 36 (cls: K2Node_Event_DamageCauser>ObjectProperty>/Script/CoreUObject)
@@ -1934,6 +2007,10 @@ Serialized exports:
 	CharacterMesh0 (0-0-0-0): size 41 (cls: CharacterMesh0>SkeletalMeshComponentBudgeted>/Script/AnimationBudgetAllocator):
 		Tag array:
 			AttachParent(ObjectProperty)=CollisionCylinder=Default__PlayerPawn_Athena_C 
+	K2Node_CustomEvent_EventName (0-0-0-0): size 32 (cls: K2Node_CustomEvent_EventName>StrProperty>/Script/CoreUObject)
+	K2Node_CustomEvent_EventName1 (0-0-0-0): size 32 (cls: K2Node_CustomEvent_EventName1>StrProperty>/Script/CoreUObject)
+	K2Node_CustomEvent_EventName2 (0-0-0-0): size 32 (cls: K2Node_CustomEvent_EventName2>StrProperty>/Script/CoreUObject)
+	Temp_string_Variable (0-0-0-0): size 32 (cls: Temp_string_Variable>StrProperty>/Script/CoreUObject)
 	Box Local Transform (0-0-0-0): size 36 (cls: Box Local Transform>StructProperty>/Script/CoreUObject)
 	CallFunc_Add_VectorVector_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_Add_VectorVector_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_Add_VectorVector_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_Add_VectorVector_ReturnValue1>StructProperty>/Script/CoreUObject)
@@ -1943,9 +2020,6 @@ Serialized exports:
 	EventSpawnEffect (0-0-0-0): size 36 (cls: EventSpawnEffect>StructProperty>/Script/CoreUObject)
 	CallFunc_Add_VectorVector_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_Add_VectorVector_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_BP_ApplyGameplayEffectToSelf_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_BP_ApplyGameplayEffectToSelf_ReturnValue>StructProperty>/Script/CoreUObject)
-	CallFunc_BP_ApplyGameplayEffectToSelf_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_BP_ApplyGameplayEffectToSelf_ReturnValue1>StructProperty>/Script/CoreUObject)
-	CallFunc_GetCalendarEventInformation_TimeSinceBegin (0-0-0-0): size 36 (cls: CallFunc_GetCalendarEventInformation_TimeSinceBegin>StructProperty>/Script/CoreUObject)
-	CallFunc_GetCalendarEventInformation_TimeUntilEnd (0-0-0-0): size 36 (cls: CallFunc_GetCalendarEventInformation_TimeUntilEnd>StructProperty>/Script/CoreUObject)
 	CallFunc_GetLocationInCircle_XY_LocationLocalSpace (0-0-0-0): size 36 (cls: CallFunc_GetLocationInCircle_XY_LocationLocalSpace>StructProperty>/Script/CoreUObject)
 	CallFunc_GetVelocity_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetVelocity_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_K2_GetActorLocation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_GetActorLocation_ReturnValue>StructProperty>/Script/CoreUObject)
@@ -1961,6 +2035,12 @@ Serialized exports:
 	CallFunc_MakeVector_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_MakeVector_ReturnValue1>StructProperty>/Script/CoreUObject)
 	K2Node_CustomEvent_GameplayTag (0-0-0-0): size 36 (cls: K2Node_CustomEvent_GameplayTag>StructProperty>/Script/CoreUObject)
 	K2Node_CustomEvent_Location (0-0-0-0): size 36 (cls: K2Node_CustomEvent_Location>StructProperty>/Script/CoreUObject)
+	K2Node_CustomEvent_TimeSinceBegin (0-0-0-0): size 36 (cls: K2Node_CustomEvent_TimeSinceBegin>StructProperty>/Script/CoreUObject)
+	K2Node_CustomEvent_TimeSinceBegin1 (0-0-0-0): size 36 (cls: K2Node_CustomEvent_TimeSinceBegin1>StructProperty>/Script/CoreUObject)
+	K2Node_CustomEvent_TimeSinceBegin2 (0-0-0-0): size 36 (cls: K2Node_CustomEvent_TimeSinceBegin2>StructProperty>/Script/CoreUObject)
+	K2Node_CustomEvent_TimeUntilEnd (0-0-0-0): size 36 (cls: K2Node_CustomEvent_TimeUntilEnd>StructProperty>/Script/CoreUObject)
+	K2Node_CustomEvent_TimeUntilEnd1 (0-0-0-0): size 36 (cls: K2Node_CustomEvent_TimeUntilEnd1>StructProperty>/Script/CoreUObject)
+	K2Node_CustomEvent_TimeUntilEnd2 (0-0-0-0): size 36 (cls: K2Node_CustomEvent_TimeUntilEnd2>StructProperty>/Script/CoreUObject)
 	K2Node_Event_DamageTags (0-0-0-0): size 36 (cls: K2Node_Event_DamageTags>StructProperty>/Script/CoreUObject)
 	K2Node_Event_EffectContext (0-0-0-0): size 36 (cls: K2Node_Event_EffectContext>StructProperty>/Script/CoreUObject)
 	K2Node_Event_HitInfo (0-0-0-0): size 36 (cls: K2Node_Event_HitInfo>StructProperty>/Script/CoreUObject)
@@ -1982,6 +2062,8 @@ Serialized exports:
 	Temp_struct_Variable3 (0-0-0-0): size 36 (cls: Temp_struct_Variable3>StructProperty>/Script/CoreUObject)
 	Temp_struct_Variable4 (0-0-0-0): size 36 (cls: Temp_struct_Variable4>StructProperty>/Script/CoreUObject)
 	Temp_struct_Variable5 (0-0-0-0): size 36 (cls: Temp_struct_Variable5>StructProperty>/Script/CoreUObject)
+	Temp_struct_Variable6 (0-0-0-0): size 36 (cls: Temp_struct_Variable6>StructProperty>/Script/CoreUObject)
+	Temp_struct_Variable7 (0-0-0-0): size 36 (cls: Temp_struct_Variable7>StructProperty>/Script/CoreUObject)
 	CallFunc_BreakTransform_Location (0-0-0-0): size 36 (cls: CallFunc_BreakTransform_Location>StructProperty>/Script/CoreUObject)
 	CallFunc_BreakTransform_Location1 (0-0-0-0): size 36 (cls: CallFunc_BreakTransform_Location1>StructProperty>/Script/CoreUObject)
 	CallFunc_BreakTransform_Rotation (0-0-0-0): size 36 (cls: CallFunc_BreakTransform_Rotation>StructProperty>/Script/CoreUObject)
@@ -2024,6 +2106,12 @@ Serialized exports:
 	EffectContext (0-0-0-0): size 36 (cls: EffectContext>StructProperty>/Script/CoreUObject)
 	HitInfo (0-0-0-0): size 36 (cls: HitInfo>StructProperty>/Script/CoreUObject)
 	Momentum (0-0-0-0): size 36 (cls: Momentum>StructProperty>/Script/CoreUObject)
+	TimeSinceBegin (0-0-0-0): size 36 (cls: TimeSinceBegin>StructProperty>/Script/CoreUObject)
+	TimeUntilEnd (0-0-0-0): size 36 (cls: TimeUntilEnd>StructProperty>/Script/CoreUObject)
+	TimeSinceBegin (0-0-0-0): size 36 (cls: TimeSinceBegin>StructProperty>/Script/CoreUObject)
+	TimeUntilEnd (0-0-0-0): size 36 (cls: TimeUntilEnd>StructProperty>/Script/CoreUObject)
+	TimeSinceBegin (0-0-0-0): size 36 (cls: TimeSinceBegin>StructProperty>/Script/CoreUObject)
+	TimeUntilEnd (0-0-0-0): size 36 (cls: TimeUntilEnd>StructProperty>/Script/CoreUObject)
 	CallFunc_K2_SetTimer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_K2_SetTimer_ReturnValue>StructProperty>/Script/CoreUObject)
 	OutsideSafeZoneGameplayCueTag (0-0-0-0): size 36 (cls: OutsideSafeZoneGameplayCueTag>StructProperty>/Script/CoreUObject)
 	SafeZoneDamageScalableFloat (0-0-0-0): size 36 (cls: SafeZoneDamageScalableFloat>StructProperty>/Script/CoreUObject)

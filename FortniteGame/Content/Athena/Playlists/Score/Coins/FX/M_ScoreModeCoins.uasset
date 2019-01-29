@@ -5,8 +5,11 @@ Name table:
 	/Game/Athena/Playlists/Score/Coins/Textures/T_Coin_D
 	/Game/Athena/Playlists/Score/Coins/Textures/T_Coin_N
 	/Game/Athena/Playlists/Score/Coins/Textures/T_Coin_S
+	/Game/Effects/Fort_Effects/Effects/Atlas/Materials/MF_Timestamp_InOut_01
 	/Game/Effects/Fort_Effects/Gameplay/SmokeDustExplosions/Textures/T_NoisePack_01
 	/Game/Effects/Fort_Effects/Materials/_Functions/MF_Fresnel_FX
+	/Game/Effects/Fort_Effects/Materials/_Functions/MF_Smoothstep_01
+	/Game/Weapons/Prototype/ObjectMover/Materials/MF_CreativeMoveTool
 	/Script/CoreUObject
 	/Script/Engine
 	A
@@ -19,10 +22,10 @@ Name table:
 	BobHeightMin
 	BoolProperty
 	bTangentSpaceNormal
+	bUseMaterialAttributes
 	ByteProperty
 	CachedQualityLevelsUsed
 	Class
-	ColorMaterialInput
 	ComponentPivotLocation
 	Default__Material
 	Default__MaterialExpressionMaterialFunctionCall
@@ -32,10 +35,10 @@ Name table:
 	Default__MaterialExpressionTextureSampleParameter2D
 	Default__MaterialExpressionVectorParameter
 	DefaultValue
+	Diffuse
 	DiffuseToEmissiveExponent
 	EBlendMode
 	EMaterialSamplerType
-	EmissiveColor
 	ExpressionGUID
 	ExpressionInput
 	Expressions
@@ -48,7 +51,8 @@ Name table:
 	LinearColor
 	M_ScoreModeCoins
 	Material
-	MaterialExpressionAdd
+	MaterialAttributes
+	MaterialAttributesInput
 	MaterialExpressionConstant
 	MaterialExpressionConstant3Vector
 	MaterialExpressionMaterialFunctionCall
@@ -61,12 +65,13 @@ Name table:
 	MaterialFunction
 	MaterialFunctionInfo
 	MaterialFunctionInfos
-	Metallic
+	MF_CreativeMoveTool
 	MF_Fresnel_FX
+	MF_Smoothstep_01
+	MF_Timestamp_InOut_01
 	NameProperty
 	None
 	Normal
-	Normal Texture
 	ObjectProperty
 	Opacity
 	Package
@@ -77,8 +82,6 @@ Name table:
 	SamplerType
 	SAMPLERTYPE_Masks
 	SAMPLERTYPE_Normal
-	ScalarMaterialInput
-	Specular
 	Specular Mask
 	StateId
 	StructProperty
@@ -96,21 +99,18 @@ Name table:
 	UseOuterGlow
 	UseSweep
 	VectorMaterialInput
-	WorldPositionOffset
 	WorldTileScale
 Serialized exports:
-	M_ScoreModeCoins (0-0-0-0): size 68600 (cls: M_ScoreModeCoins>Material>/Script/Engine):
+	M_ScoreModeCoins (0-0-0-0): size 108437 (cls: M_ScoreModeCoins>Material>/Script/Engine):
 		Tag array:
-			Metallic(StructProperty)=System.Byte[] 
-			Specular(StructProperty)=System.Byte[] 
 			Normal(StructProperty)=System.Byte[] 
-			EmissiveColor(StructProperty)=System.Byte[] 
 			BlendMode(ByteProperty)=BLEND_Masked 
-			WorldPositionOffset(StructProperty)=System.Byte[] 
+			MaterialAttributes(StructProperty)=System.Byte[] 
 			bTangentSpaceNormal(BoolProperty)=False 
 			Expressions(ArrayProperty)=[object] (inner: ObjectProperty)
 			MaterialFunctionInfos(ArrayProperty)=[object] (inner: StructProperty)
-			StateId(StructProperty)=Guid: 4135970531-1102476026-2570503837-3988794502 
+			bUseMaterialAttributes(BoolProperty)=True 
+			StateId(StructProperty)=Guid: 804869747-1286104240-528557221-868498410 
 			CachedQualityLevelsUsed(ArrayProperty)=[object] (inner: BoolProperty)
 	MaterialExpressionMaterialFunctionCall_0 (0-0-0-0): size 70 (cls: MaterialExpressionMaterialFunctionCall_0>MaterialExpressionMaterialFunctionCall>/Script/Engine):
 		Tag array:
@@ -119,6 +119,10 @@ Serialized exports:
 	MaterialExpressionMaterialFunctionCall_1 (0-0-0-0): size 70 (cls: MaterialExpressionMaterialFunctionCall_1>MaterialExpressionMaterialFunctionCall>/Script/Engine):
 		Tag array:
 			MaterialFunction(ObjectProperty)=MF_Fresnel_FX=/Game/Effects/Fort_Effects/Materials/_Functions/MF_Fresnel_FX 
+			Material(ObjectProperty)=M_ScoreModeCoins= 
+	MaterialExpressionMaterialFunctionCall_2 (0-0-0-0): size 70 (cls: MaterialExpressionMaterialFunctionCall_2>MaterialExpressionMaterialFunctionCall>/Script/Engine):
+		Tag array:
+			MaterialFunction(ObjectProperty)=MF_CreativeMoveTool=/Game/Weapons/Prototype/ObjectMover/Materials/MF_CreativeMoveTool 
 			Material(ObjectProperty)=M_ScoreModeCoins= 
 	MaterialExpressionMaterialFunctionCall_3 (0-0-0-0): size 70 (cls: MaterialExpressionMaterialFunctionCall_3>MaterialExpressionMaterialFunctionCall>/Script/Engine):
 		Tag array:
@@ -216,10 +220,6 @@ Serialized exports:
 		Tag array:
 			Texture(ObjectProperty)=T_NoisePack_01=/Game/Effects/Fort_Effects/Gameplay/SmokeDustExplosions/Textures/T_NoisePack_01 
 			Material(ObjectProperty)=M_ScoreModeCoins= 
-	MaterialExpressionTextureSample_2 (0-0-0-0): size 70 (cls: MaterialExpressionTextureSample_2>MaterialExpressionTextureSample>/Script/Engine):
-		Tag array:
-			Texture(ObjectProperty)=T_Coin_D=/Game/Athena/Playlists/Score/Coins/Textures/T_Coin_D 
-			Material(ObjectProperty)=M_ScoreModeCoins= 
 	MaterialExpressionTextureSampleParameter2D_0 (0-0-0-0): size 209 (cls: MaterialExpressionTextureSampleParameter2D_0>MaterialExpressionTextureSampleParameter2D>/Script/Engine):
 		Tag array:
 			ParameterName(NameProperty)=Specular Mask 
@@ -229,10 +229,16 @@ Serialized exports:
 			Material(ObjectProperty)=M_ScoreModeCoins= 
 	MaterialExpressionTextureSampleParameter2D_1 (0-0-0-0): size 209 (cls: MaterialExpressionTextureSampleParameter2D_1>MaterialExpressionTextureSampleParameter2D>/Script/Engine):
 		Tag array:
-			ParameterName(NameProperty)=Normal Texture 
+			ParameterName(NameProperty)=Normal 
 			ExpressionGUID(StructProperty)=Guid: 2179902455-1097042858-3062902421-467485223 
 			Texture(ObjectProperty)=T_Coin_N=/Game/Athena/Playlists/Score/Coins/Textures/T_Coin_N 
 			SamplerType(ByteProperty)=SAMPLERTYPE_Normal 
+			Material(ObjectProperty)=M_ScoreModeCoins= 
+	MaterialExpressionTextureSampleParameter2D_2 (0-0-0-0): size 168 (cls: MaterialExpressionTextureSampleParameter2D_2>MaterialExpressionTextureSampleParameter2D>/Script/Engine):
+		Tag array:
+			ParameterName(NameProperty)=Diffuse 
+			ExpressionGUID(StructProperty)=Guid: 2476470688-1244757342-2827871648-1585116894 
+			Texture(ObjectProperty)=T_Coin_D=/Game/Athena/Playlists/Score/Coins/Textures/T_Coin_D 
 			Material(ObjectProperty)=M_ScoreModeCoins= 
 	MaterialExpressionVectorParameter_0 (0-0-0-0): size 204 (cls: MaterialExpressionVectorParameter_0>MaterialExpressionVectorParameter>/Script/Engine):
 		Tag array:

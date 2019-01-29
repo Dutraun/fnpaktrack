@@ -1,4 +1,5 @@
 Name table:
+	/Game/Effects/Fort_Effects/UI/Transition/P_FrontEndCharacterTransition_SingleCharRadius
 	/Game/Environments/FrontEnd/Blueprints/HeroLoadoutItemPedestal
 	/Script/CoreUObject
 	/Script/Engine
@@ -16,9 +17,16 @@ Name table:
 	bIsParentComponentNative
 	BlueprintGeneratedClass
 	BoolProperty
+	BreakTransform
 	ByteProperty
+	CallFunc_BreakTransform_Location
+	CallFunc_BreakTransform_Rotation
+	CallFunc_BreakTransform_Scale
+	CallFunc_GetTransform_ReturnValue
+	CallFunc_SpawnEmitterAtLocation_ReturnValue
 	ChildActorComponent
 	Class
+	CommandScreenTransform
 	ComponentClass
 	ComponentTemplate
 	CurrentPawn
@@ -27,6 +35,7 @@ Name table:
 	Default__BoolProperty
 	Default__FortHeroLoadoutPedestal
 	Default__Function
+	Default__GameplayStatics
 	Default__HeroLoadoutItemPedestal_C
 	Default__InterfaceProperty
 	Default__IntProperty
@@ -44,23 +53,30 @@ Name table:
 	FortHeroLoadoutPedestal
 	FortItemPlacementActor
 	Function
+	GameplayStatics
 	GameplayTag
 	GameplayTagQuery
+	GetTransform
 	Guid
 	HandleSlotFocusInUIChanged
 	HeroLoadoutItemPedestal_C
+	HeroLoadoutScreenTransform
 	InterfaceProperty
 	InternalVariableName
 	IntProperty
 	K2Node_DynamicCast_AsCustom_Character_Part_Owner_Interface
 	K2Node_DynamicCast_bSuccess
+	KismetMathLibrary
 	NameProperty
 	None
 	Object
 	ObjectProperty
 	OnHeroPawnSetupCompleted
+	P_FrontEndCharacterTransition_SingleCharRadius
 	Package
 	ParentComponentOrVariableName
+	ParticleSystem
+	ParticleSystemComponent
 	PlayAnimationsMatchingQuery
 	PointerToUberGraphFrame
 	PreviewActor
@@ -69,37 +85,47 @@ Name table:
 	PreviewSkelMeshComponent
 	PreviewStaticMesh
 	PreviewStaticMeshComponent
+	Quat
 	QueryTokenStream
 	Root
 	RootComponent
 	RootNodes
+	Rotation
+	Rotator
+	Scale3D
 	SceneComponent
 	ScriptStruct
 	SCS_Node
 	SimpleConstructionScript
 	SkeletalMeshComponent
+	SpawnEmitterAtLocation
 	StaticMeshComponent
 	StrProperty
 	StructProperty
 	TagDictionary
 	TokenStreamVersion
+	Transform
+	Translation
 	UberGraphFrame
 	UberGraphFunction
 	UserConstructionScript
 	UserDescription
 	VariableGuid
+	Vector
 	WeaponPlacementComponent
 	WeaponPlacementHelper
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	HeroLoadoutItemPedestal_C (0-0-0-0): size 210 (cls: HeroLoadoutItemPedestal_C>BlueprintGeneratedClass>/Script/Engine):
+	HeroLoadoutItemPedestal_C (0-0-0-0): size 218 (cls: HeroLoadoutItemPedestal_C>BlueprintGeneratedClass>/Script/Engine):
 		Tag array:
 			SimpleConstructionScript(ObjectProperty)=SimpleConstructionScript_0=HeroLoadoutItemPedestal_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_HeroLoadoutItemPedestal=HeroLoadoutItemPedestal_C 
-	Default__HeroLoadoutItemPedestal_C (0-0-0-0): size 477 (cls: Default__HeroLoadoutItemPedestal_C>HeroLoadoutItemPedestal_C):
+	Default__HeroLoadoutItemPedestal_C (0-0-0-0): size 965 (cls: Default__HeroLoadoutItemPedestal_C>HeroLoadoutItemPedestal_C):
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			AnimationTagQuery_Idle(StructProperty)=System.Byte[] 
+			CommandScreenTransform(StructProperty)=System.Byte[] 
+			HeroLoadoutScreenTransform(StructProperty)=System.Byte[] 
 			WeaponPlacementComponent(ObjectProperty)=WeaponPlacementHelper=Default__HeroLoadoutItemPedestal_C 
 			PreviewActorComponent(ObjectProperty)=PreviewActor=Default__HeroLoadoutItemPedestal_C 
 			PreviewStaticMeshComponent(ObjectProperty)=PreviewStaticMesh=Default__HeroLoadoutItemPedestal_C 
@@ -107,7 +133,7 @@ Serialized exports:
 			RootComponent(ObjectProperty)=Root=Default__HeroLoadoutItemPedestal_C 
 	Arrow (0-0-0-0): size 36 (cls: Arrow>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_HeroLoadoutItemPedestal (0-0-0-0): size 143 (cls: ExecuteUbergraph_HeroLoadoutItemPedestal>Function>/Script/CoreUObject)
+	ExecuteUbergraph_HeroLoadoutItemPedestal (0-0-0-0): size 277 (cls: ExecuteUbergraph_HeroLoadoutItemPedestal>Function>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	PreviewActor (0-0-0-0): size 41 (cls: PreviewActor>ChildActorComponent>/Script/Engine):
 		Tag array:
@@ -116,6 +142,7 @@ Serialized exports:
 	OnHeroPawnSetupCompleted (0-0-0-0): size 54 (cls: OnHeroPawnSetupCompleted>Function>/Script/CoreUObject)
 	UserConstructionScript (0-0-0-0): size 43 (cls: UserConstructionScript>Function>/Script/CoreUObject)
 	K2Node_DynamicCast_AsCustom_Character_Part_Owner_Interface (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsCustom_Character_Part_Owner_Interface>InterfaceProperty>/Script/CoreUObject)
+	CallFunc_SpawnEmitterAtLocation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_SpawnEmitterAtLocation_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	Root (0-0-0-0): size 12 (cls: Root>SceneComponent>/Script/Engine)
 	WeaponPlacementHelper (0-0-0-0): size 41 (cls: WeaponPlacementHelper>SceneComponent>/Script/Engine):
 		Tag array:
@@ -147,3 +174,9 @@ Serialized exports:
 		Tag array:
 			AttachParent(ObjectProperty)=Root=Default__HeroLoadoutItemPedestal_C 
 	AnimationTagQuery_Idle (0-0-0-0): size 36 (cls: AnimationTagQuery_Idle>StructProperty>/Script/CoreUObject)
+	CommandScreenTransform (0-0-0-0): size 36 (cls: CommandScreenTransform>StructProperty>/Script/CoreUObject)
+	CallFunc_BreakTransform_Location (0-0-0-0): size 36 (cls: CallFunc_BreakTransform_Location>StructProperty>/Script/CoreUObject)
+	CallFunc_BreakTransform_Rotation (0-0-0-0): size 36 (cls: CallFunc_BreakTransform_Rotation>StructProperty>/Script/CoreUObject)
+	CallFunc_BreakTransform_Scale (0-0-0-0): size 36 (cls: CallFunc_BreakTransform_Scale>StructProperty>/Script/CoreUObject)
+	CallFunc_GetTransform_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetTransform_ReturnValue>StructProperty>/Script/CoreUObject)
+	HeroLoadoutScreenTransform (0-0-0-0): size 36 (cls: HeroLoadoutScreenTransform>StructProperty>/Script/CoreUObject)

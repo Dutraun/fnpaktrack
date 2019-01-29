@@ -7,6 +7,7 @@ Name table:
 	/Game/Athena/Items/QuestInteractables/Generic/FX/P_Athena_QuestItem_PickupSuccess
 	/Game/Athena/Items/Quests/14DaysFortnite/Quest_BR_FDF_Use_Porta_Gift
 	/Game/Athena/Items/Quests/AthenaObjectiveStatTable
+	/Game/Athena/Items/Quests/BattlePass/Quest_BR_Hit_Enemies_Boogie_ChillerGrenade
 	/Game/Athena/Sounds/DanceGrenade/DanceGrenade_Explosion_Athena_Cue
 	/Game/Athena/Sounds/Quests/Athena_CollectHiddenStarReward_Cue
 	/Game/Weapons/Grenades/Grenade_Disco/Materials/MI_DiscoBall_Grenade_03
@@ -36,6 +37,7 @@ Name table:
 	AudioComponent_33__D16EF273
 	B_Prj_Athena_DanceGrenade_C
 	B_Prj_Athena_Grenade_Base_C
+	battlepass_athena_hit_opponent_chiller_or_boogie
 	bAutoWeld
 	bDummyProjectile
 	bFromSweep
@@ -110,6 +112,7 @@ Name table:
 	CallFunc_Not_PreBool_ReturnValue1
 	CallFunc_NotEqual_ObjectObject_ReturnValue
 	CallFunc_NotEqual_ObjectObject_ReturnValue1
+	CallFunc_OnSameTeam_ReturnValue
 	CallFunc_SpawnEmitterAttached_ReturnValue
 	CallFunc_TryActivateAbilitiesByTag_ReturnValue
 	CapsuleComponent
@@ -197,10 +200,12 @@ Name table:
 	Guid
 	HasAuthority
 	Hit
+	hit_player_with_chillergrenade
 	HitActors
 	HitResult
 	HitResults
 	InheritableComponentHandler
+	Instigator
 	InternalVariableName
 	IntProperty
 	IsValid
@@ -245,6 +250,7 @@ Name table:
 	OnBounce
 	OnComponentBeginOverlap
 	OnExploded
+	OnSameTeam
 	OtherActor
 	OtherBodyIndex
 	OtherComp
@@ -272,9 +278,11 @@ Name table:
 	PropertyName
 	PropertyScope
 	Quest_BR_FDF_Use_Porta_Gift
+	Quest_BR_Hit_Enemies_Boogie_ChillerGrenade
 	QuestItem
 	QuestSuccessEmitter
 	QuestSuccessSound
+	QuestUpdate
 	ReceiveBeginPlay
 	Records
 	RelativeLocation
@@ -301,6 +309,7 @@ Name table:
 	StructProperty
 	StunAbility
 	SweepResult
+	Target
 	Temp_int_Array_Index_Variable
 	Temp_int_Loop_Counter_Variable
 	Template
@@ -316,14 +325,14 @@ Name table:
 	Z
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	B_Prj_Athena_DanceGrenade_C (0-0-0-0): size 406 (cls: B_Prj_Athena_DanceGrenade_C>BlueprintGeneratedClass>/Script/Engine):
+	B_Prj_Athena_DanceGrenade_C (0-0-0-0): size 438 (cls: B_Prj_Athena_DanceGrenade_C>BlueprintGeneratedClass>/Script/Engine):
 		Tag array:
 			bHasCookedComponentInstancingData(BoolProperty)=True 
 			DynamicBindingObjects(ArrayProperty)=[object] (inner: ObjectProperty)
 			SimpleConstructionScript(ObjectProperty)=SimpleConstructionScript_309=B_Prj_Athena_DanceGrenade_C 
 			InheritableComponentHandler(ObjectProperty)=InheritableComponentHandler=B_Prj_Athena_DanceGrenade_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_B_Prj_Athena_DanceGrenade=B_Prj_Athena_DanceGrenade_C 
-	Default__B_Prj_Athena_DanceGrenade_C (0-0-0-0): size 626 (cls: Default__B_Prj_Athena_DanceGrenade_C>B_Prj_Athena_DanceGrenade_C):
+	Default__B_Prj_Athena_DanceGrenade_C (0-0-0-0): size 807 (cls: Default__B_Prj_Athena_DanceGrenade_C>B_Prj_Athena_DanceGrenade_C):
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			StunAbility(StructProperty)=GameplayTagContainer:Gameplay.Action.Player.DanceStunned 
@@ -332,6 +341,9 @@ Serialized exports:
 			ObjStat(StructProperty)=System.Byte[] 
 			QuestSuccessSound(ObjectProperty)=Athena_CollectHiddenStarReward_Cue=/Game/Athena/Sounds/Quests/Athena_CollectHiddenStarReward_Cue 
 			QuestSuccessEmitter(ObjectProperty)=P_Athena_QuestItem_PickupSuccess=/Game/Athena/Items/QuestInteractables/Generic/FX/P_Athena_QuestItem_PickupSuccess 
+			QuestItem_2(ObjectProperty)=Quest_BR_Hit_Enemies_Boogie_ChillerGrenade=/Game/Athena/Items/Quests/BattlePass/Quest_BR_Hit_Enemies_Boogie_ChillerGrenade 
+			ObjBackendName_2(NameProperty)=battlepass_athena_hit_opponent_chiller_or_boogie 
+			ObjStat_2(StructProperty)=System.Byte[] 
 			P_Explosion(ObjectProperty)=P_DiscoGrenadeExplode=/Game/Abilities/Player/Generic/Gadgets/DiscoGrenade/P_DiscoGrenadeExplode 
 			Cue_DistantSound(ObjectProperty)=DanceGrenade_Explosion_Athena_Cue=/Game/Athena/Sounds/DanceGrenade/DanceGrenade_Explosion_Athena_Cue 
 			Cue_CloseSound(ObjectProperty)=DanceGrenade_Explosion_Athena_Cue=/Game/Athena/Sounds/DanceGrenade/DanceGrenade_Explosion_Athena_Cue 
@@ -343,7 +355,7 @@ Serialized exports:
 			RootComponent(ObjectProperty)=CollisionCapsule0=Default__B_Prj_Athena_DanceGrenade_C 
 	StunAbility (0-0-0-0): size 36 (cls: StunAbility>StructProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_B_Prj_Athena_DanceGrenade (0-0-0-0): size 1949 (cls: ExecuteUbergraph_B_Prj_Athena_DanceGrenade>Function>/Script/CoreUObject)
+	ExecuteUbergraph_B_Prj_Athena_DanceGrenade (0-0-0-0): size 1980 (cls: ExecuteUbergraph_B_Prj_Athena_DanceGrenade>Function>/Script/CoreUObject)
 	K2Node_Event_HitActors (0-0-0-0): size 36 (cls: K2Node_Event_HitActors>ObjectProperty>/Script/CoreUObject)
 	K2Node_Event_HitActors (0-0-0-0): size 36 (cls: K2Node_Event_HitActors>ArrayProperty>/Script/CoreUObject)
 	K2Node_Event_HitResults (0-0-0-0): size 36 (cls: K2Node_Event_HitResults>StructProperty>/Script/CoreUObject)
@@ -363,6 +375,11 @@ Serialized exports:
 	HitActors (0-0-0-0): size 36 (cls: HitActors>ArrayProperty>/Script/CoreUObject)
 	HitResults (0-0-0-0): size 36 (cls: HitResults>StructProperty>/Script/CoreUObject)
 	HitResults (0-0-0-0): size 36 (cls: HitResults>ArrayProperty>/Script/CoreUObject)
+	UserConstructionScript (0-0-0-0): size 49 (cls: UserConstructionScript>Function>/Script/CoreUObject)
+	CallFunc_GetFortPlayerControllerFromActor_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetFortPlayerControllerFromActor_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	QuestUpdate (0-0-0-0): size 450 (cls: QuestUpdate>Function>/Script/CoreUObject)
+	K2Node_MakeArray_Array (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array>ObjectProperty>/Script/CoreUObject)
+	K2Node_MakeArray_Array (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array>ArrayProperty>/Script/CoreUObject)
 	bFromSweep (0-0-0-0): size 34 (cls: bFromSweep>BoolProperty>/Script/CoreUObject)
 	CallFunc_Athena_CheckCreativeMode_CanCompleteQuest (0-0-0-0): size 34 (cls: CallFunc_Athena_CheckCreativeMode_CanCompleteQuest>BoolProperty>/Script/CoreUObject)
 	CallFunc_Athena_CheckQuestAndObjectiveCompletion_ObjectiveCompleted (0-0-0-0): size 34 (cls: CallFunc_Athena_CheckQuestAndObjectiveCompletion_ObjectiveCompleted>BoolProperty>/Script/CoreUObject)
@@ -388,6 +405,14 @@ Serialized exports:
 	K2Node_DynamicCast_bSuccess1 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess1>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess2 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess2>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess3 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess3>BoolProperty>/Script/CoreUObject)
+	CallFunc_Athena_CheckCreativeMode_CanCompleteQuest (0-0-0-0): size 34 (cls: CallFunc_Athena_CheckCreativeMode_CanCompleteQuest>BoolProperty>/Script/CoreUObject)
+	CallFunc_Athena_CheckQuestAndObjectiveCompletion_ObjectiveCompleted (0-0-0-0): size 34 (cls: CallFunc_Athena_CheckQuestAndObjectiveCompletion_ObjectiveCompleted>BoolProperty>/Script/CoreUObject)
+	CallFunc_Athena_CheckQuestAndObjectiveCompletion_QuestCompleted (0-0-0-0): size 34 (cls: CallFunc_Athena_CheckQuestAndObjectiveCompletion_QuestCompleted>BoolProperty>/Script/CoreUObject)
+	CallFunc_Athena_CheckQuestAndObjectiveCompletion_QuestIsValid (0-0-0-0): size 34 (cls: CallFunc_Athena_CheckQuestAndObjectiveCompletion_QuestIsValid>BoolProperty>/Script/CoreUObject)
+	CallFunc_BooleanAND_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_HasAuthority_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasAuthority_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_Not_PreBool_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_OnSameTeam_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_OnSameTeam_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CollisionCapsule0 (0-0-0-0): size 98 (cls: CollisionCapsule0>CapsuleComponent>/Script/Engine):
 		Tag array:
 			BodyInstance(StructProperty)=System.Byte[] 
@@ -398,7 +423,6 @@ Serialized exports:
 	CallFunc_BreakHitResult_Distance1 (0-0-0-0): size 32 (cls: CallFunc_BreakHitResult_Distance1>FloatProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_Time (0-0-0-0): size 32 (cls: CallFunc_BreakHitResult_Time>FloatProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_Time1 (0-0-0-0): size 32 (cls: CallFunc_BreakHitResult_Time1>FloatProperty>/Script/CoreUObject)
-	UserConstructionScript (0-0-0-0): size 49 (cls: UserConstructionScript>Function>/Script/CoreUObject)
 	InheritableComponentHandler (0-0-0-0): size 3906 (cls: InheritableComponentHandler>InheritableComponentHandler>/Script/Engine):
 		Tag array:
 			Records(ArrayProperty)=[object] (inner: StructProperty)
@@ -415,6 +439,7 @@ Serialized exports:
 	CallFunc_BreakHitResult_HitBoneName (0-0-0-0): size 32 (cls: CallFunc_BreakHitResult_HitBoneName>NameProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_HitBoneName1 (0-0-0-0): size 32 (cls: CallFunc_BreakHitResult_HitBoneName1>NameProperty>/Script/CoreUObject)
 	ObjBackendName (0-0-0-0): size 32 (cls: ObjBackendName>NameProperty>/Script/CoreUObject)
+	ObjBackendName_2 (0-0-0-0): size 32 (cls: ObjBackendName_2>NameProperty>/Script/CoreUObject)
 	OtherActor (0-0-0-0): size 36 (cls: OtherActor>ObjectProperty>/Script/CoreUObject)
 	OtherComp (0-0-0-0): size 36 (cls: OtherComp>ObjectProperty>/Script/CoreUObject)
 	ControllerWhoThrew (0-0-0-0): size 36 (cls: ControllerWhoThrew>ObjectProperty>/Script/CoreUObject)
@@ -441,8 +466,11 @@ Serialized exports:
 	K2Node_DynamicCast_AsPawn (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsPawn>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsPawn1 (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsPawn1>ObjectProperty>/Script/CoreUObject)
 	QuestItem (0-0-0-0): size 36 (cls: QuestItem>ObjectProperty>/Script/CoreUObject)
+	QuestItem_2 (0-0-0-0): size 36 (cls: QuestItem_2>ObjectProperty>/Script/CoreUObject)
 	QuestSuccessEmitter (0-0-0-0): size 36 (cls: QuestSuccessEmitter>ObjectProperty>/Script/CoreUObject)
 	QuestSuccessSound (0-0-0-0): size 36 (cls: QuestSuccessSound>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetGameState_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetGameState_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	Target (0-0-0-0): size 36 (cls: Target>ObjectProperty>/Script/CoreUObject)
 	ParticleSystemComponent_9119__FC156DAD (0-0-0-0): size 41 (cls: ParticleSystemComponent_9119__FC156DAD>ParticleSystemComponent>/Script/Engine):
 		Tag array:
 			Template(ObjectProperty)=P_DanceGrenade_Trail=/Game/Athena/Items/Consumables/DanceGrenade/P_DanceGrenade_Trail 
@@ -478,3 +506,4 @@ Serialized exports:
 	K2Node_ComponentBoundEvent_SweepResult (0-0-0-0): size 36 (cls: K2Node_ComponentBoundEvent_SweepResult>StructProperty>/Script/CoreUObject)
 	K2Node_Event_Hit (0-0-0-0): size 36 (cls: K2Node_Event_Hit>StructProperty>/Script/CoreUObject)
 	ObjStat (0-0-0-0): size 36 (cls: ObjStat>StructProperty>/Script/CoreUObject)
+	ObjStat_2 (0-0-0-0): size 36 (cls: ObjStat_2>StructProperty>/Script/CoreUObject)

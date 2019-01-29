@@ -41,6 +41,7 @@ Name table:
 	/Game/Effects/Fort_Effects/BluePrints/CameraShakes/B_Small_Vertical_Jolt_CameraShake
 	/Game/Sounds/AudioCurveAssets/C_AudioCurve_ExpVolume
 	/Game/Sounds/AudioCurveAssets/C_AudioCurve_LinearVolume
+	/Game/Sounds/Fort_Cinematics/10_seconds_silence_Cinematic_Cue
 	/Game/Sounds/Fort_Gadgets/HoverBoard/HoverBoard_Start_Cue
 	/Game/WaterAndWind/Particles/WaterInteraction/P_Vehicle_In_Water_Athena
 	/Game/WaterAndWind/Particles/WaterInteraction/P_WaterSplash_Athena_Vehicle
@@ -54,6 +55,7 @@ Name table:
 	/Script/FortniteUI
 	/Script/GameplayAbilities
 	/Script/GameplayTags
+	10_seconds_silence_Cinematic_Cue
 	Abilities.Grapple.RopeActive
 	AbilitySystemBlueprintLibrary
 	AbilitySystemComponent
@@ -168,11 +170,15 @@ Name table:
 	BreakHitResult
 	BreakTransform
 	BreakVector
+	BroadcastAbilityImpactAtLocation
 	bShowVehicleHealthBarOnPlayerHUD
 	bSimulatePhysics
 	bStartWithTickEnabled
 	BuildingActor
 	BuildingProp
+	Bump
+	BumpForce
+	BumpForceAngle
 	bUpdateOverlapsOnAnimationFinalize
 	bUseExitTimer
 	bUseGroundMotion
@@ -220,6 +226,7 @@ Name table:
 	CallFunc_BreakVector_X
 	CallFunc_BreakVector_Y
 	CallFunc_BreakVector_Z
+	CallFunc_ContainsPlayers_ReturnValue
 	CallFunc_Conv_VectorToRotator_ReturnValue
 	CallFunc_CreateDynamicMaterialInstance_ReturnValue
 	CallFunc_Dot_VectorVector_ReturnValue
@@ -302,11 +309,14 @@ Name table:
 	CallFunc_MapRangeClamped_ReturnValue1
 	CallFunc_Multiply_FloatFloat_ReturnValue
 	CallFunc_Multiply_VectorFloat_ReturnValue
+	CallFunc_Multiply_VectorFloat_ReturnValue1
 	CallFunc_Normal_ReturnValue
+	CallFunc_Not_PreBool_ReturnValue
 	CallFunc_NotEqual_IntInt_ReturnValue
 	CallFunc_OnCollision_OutMagnitude
 	CallFunc_OnCollision_OutResult
 	CallFunc_PlayCameraShake_ReturnValue
+	CallFunc_ShouldBump_Bump
 	CallFunc_ShouldDestroyProp__ReturnValue
 	CallFunc_SpawnEmitterAtLocation_ReturnValue
 	CallFunc_SpawnEmitterAtLocation_ReturnValue1
@@ -327,6 +337,7 @@ Name table:
 	CameraAssistBaseHeight
 	CameraAssistForwardScale
 	CameraAssistSteerScaler
+	CameraAssistStrength
 	CameraAssistUpHillScaler
 	CameraPushVelocityDelta
 	CameraShake
@@ -362,6 +373,7 @@ Name table:
 	ComponentPropertyName
 	ComponentTags
 	ComponentTemplate
+	ContainsPlayers
 	ContextHandle
 	Controller
 	Conv_VectorToRotator
@@ -512,6 +524,7 @@ Name table:
 	ForceApplicationPoint
 	ForceFeedbackEffect
 	FortAthenaJackalVehicle
+	FortAthenaJackalVehicleConfigs
 	FortAthenaSKVehicle
 	FortAthenaVehicle
 	FortAttributeInitializationKey
@@ -522,6 +535,7 @@ Name table:
 	FortDamageSet
 	FortGlobalUIContext
 	FortInteractInterface
+	FortJackalVehicleConfigs
 	FortJackalVehicleConfigsClass
 	FortKismetLibrary
 	FortMetaNavArea_Obstacles
@@ -538,8 +552,9 @@ Name table:
 	FortVehicleTrickSet
 	FortWeapon
 	Frame
-	FrameCenter
 	framecenter
+	FrameCenter
+	FrontExit
 	FrontLight
 	FrontLight_GEN_VARIABLE
 	FrontWheels
@@ -604,6 +619,7 @@ Name table:
 	HapticsOnTick
 	HeadLights
 	Hit
+	Hit Normal
 	HitActor
 	HitComponent
 	HitDelta
@@ -669,10 +685,12 @@ Name table:
 	K2Node_CreateDelegate_OutputDelegate
 	K2Node_DynamicCast_AsBuilding_Prop
 	K2Node_DynamicCast_AsFort_Pawn
+	K2Node_DynamicCast_AsFort_Player_Pawn
 	K2Node_DynamicCast_AsPlayer_Controller
 	K2Node_DynamicCast_bSuccess
 	K2Node_DynamicCast_bSuccess1
 	K2Node_DynamicCast_bSuccess2
+	K2Node_DynamicCast_bSuccess3
 	K2Node_Event_Charge
 	K2Node_Event_Charge1
 	K2Node_Event_Damage
@@ -757,6 +775,7 @@ Name table:
 	None
 	Normal
 	NormalImpulse
+	Not_PreBool
 	NotEqual_IntInt
 	NoVehicleDamage
 	Object
@@ -895,6 +914,7 @@ Name table:
 	SetVolumeMultiplier
 	ShootingCone
 	ShoppingCartWheels
+	ShouldBump
 	ShouldDestroyProp?
 	SimpleConstructionScript
 	SK_Jackal_Athena
@@ -994,13 +1014,13 @@ Name table:
 	Z
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	JackalVehicle_Athena_C (0-0-0-0): size 1081 (cls: JackalVehicle_Athena_C>BlueprintGeneratedClass>/Script/Engine):
+	JackalVehicle_Athena_C (0-0-0-0): size 1101 (cls: JackalVehicle_Athena_C>BlueprintGeneratedClass>/Script/Engine):
 		Tag array:
 			bHasCookedComponentInstancingData(BoolProperty)=True 
 			DynamicBindingObjects(ArrayProperty)=[object] (inner: ObjectProperty)
 			SimpleConstructionScript(ObjectProperty)=SimpleConstructionScript_0=JackalVehicle_Athena_C 
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_JackalVehicle_Athena=JackalVehicle_Athena_C 
-	Default__JackalVehicle_Athena_C (0-0-0-0): size 6353 (cls: Default__JackalVehicle_Athena_C>JackalVehicle_Athena_C):
+	Default__JackalVehicle_Athena_C (0-0-0-0): size 6419 (cls: Default__JackalVehicle_Athena_C>JackalVehicle_Athena_C):
 		Tag array:
 			UberGraphFrame(StructProperty)=System.Byte[] 
 			MountSound(ObjectProperty)=Hoverboard_Mount_Cue=/Game/Athena/Sounds/Vehicles/Hoverboard/Hoverboard_Mount_Cue 
@@ -1016,6 +1036,7 @@ Serialized exports:
 			LandingFXImpactThreshold(FloatProperty)=20000 
 			LandingFX(ObjectProperty)=P_Hoverboard_Athena_Land=/Game/Athena/DrivableVehicles/FX/Hoverboard/P_Hoverboard_Athena_Land 
 			OnDeathSound(ObjectProperty)=Hoverboard_Destroy_Cue=/Game/Athena/Sounds/Vehicles/Hoverboard/Hoverboard_Destroy_Cue 
+			BumpForceAngle(FloatProperty)=0.5 
 			FortJackalVehicleConfigsClass(ObjectProperty)=VehicleConfigsJackal_C=/Game/Athena/DrivableVehicles/VehicleConfigsJackal 
 			BoostTimers(ArrayProperty)=[object] (inner: StructProperty)
 			AbortSprintPlayerTags(StructProperty)=GameplayTagContainer:Gameplay.Status.IsTargeting,Abilities.Grapple.RopeActive 
@@ -1033,10 +1054,11 @@ Serialized exports:
 			Springs(ArrayProperty)=[object] (inner: StructProperty)
 			Gears(ArrayProperty)=[object] (inner: StructProperty)
 			ReverseGears(ArrayProperty)=[object] (inner: StructProperty)
+			CameraAssistStrength(FloatProperty)=0.75 
 			CameraAssistBaseHeight(FloatProperty)=0 
 			CameraAssistUpHillScaler(FloatProperty)=50 
 			CameraAssistSteerScaler(FloatProperty)=20 
-			CameraAssistForwardScale(FloatProperty)=200 
+			CameraAssistForwardScale(FloatProperty)=70 
 			VehicleMinHorSpeedDamage(FloatProperty)=2 
 			VehicleMaxHorSpeedDamage(FloatProperty)=5 
 			BrakeAboveTopSpeedDelta(FloatProperty)=9999 
@@ -1056,7 +1078,7 @@ Serialized exports:
 			RootComponent(ObjectProperty)=SkeletalMeshComponent=Default__JackalVehicle_Athena_C 
 	AudioWind (0-0-0-0): size 36 (cls: AudioWind>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_JackalVehicle_Athena (0-0-0-0): size 6097 (cls: ExecuteUbergraph_JackalVehicle_Athena>Function>/Script/CoreUObject)
+	ExecuteUbergraph_JackalVehicle_Athena (0-0-0-0): size 6499 (cls: ExecuteUbergraph_JackalVehicle_Athena>Function>/Script/CoreUObject)
 	SetupCosmetics (0-0-0-0): size 54 (cls: SetupCosmetics>Function>/Script/CoreUObject)
 	ReceiveBeginPlay (0-0-0-0): size 54 (cls: ReceiveBeginPlay>Function>/Script/CoreUObject)
 	OnBoostBegin (0-0-0-0): size 54 (cls: OnBoostBegin>Function>/Script/CoreUObject)
@@ -1193,10 +1215,12 @@ Serialized exports:
 	CallFunc_IsValid_ReturnValue9 (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue9>BoolProperty>/Script/CoreUObject)
 	CallFunc_NotEqual_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_NotEqual_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_OnCollision_OutResult (0-0-0-0): size 34 (cls: CallFunc_OnCollision_OutResult>BoolProperty>/Script/CoreUObject)
+	CallFunc_ShouldBump_Bump (0-0-0-0): size 34 (cls: CallFunc_ShouldBump_Bump>BoolProperty>/Script/CoreUObject)
 	CallFunc_ShouldDestroyProp__ReturnValue (0-0-0-0): size 34 (cls: CallFunc_ShouldDestroyProp__ReturnValue>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess1 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess1>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess2 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess2>BoolProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_bSuccess3 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess3>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
 	CallFunc_Greater_FloatFloat_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Greater_FloatFloat_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Greater_FloatFloat_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_Greater_FloatFloat_ReturnValue1>BoolProperty>/Script/CoreUObject)
@@ -1207,6 +1231,13 @@ Serialized exports:
 	Jumped (0-0-0-0): size 34 (cls: Jumped>BoolProperty>/Script/CoreUObject)
 	HitNormal (0-0-0-0): size 36 (cls: HitNormal>StructProperty>/Script/CoreUObject)
 	ShouldDestroyProp? (0-0-0-0): size 283 (cls: ShouldDestroyProp?>Function>/Script/CoreUObject)
+	Hit Normal (0-0-0-0): size 36 (cls: Hit Normal>StructProperty>/Script/CoreUObject)
+	ShouldBump (0-0-0-0): size 230 (cls: ShouldBump>Function>/Script/CoreUObject)
+	Bump (0-0-0-0): size 34 (cls: Bump>BoolProperty>/Script/CoreUObject)
+	CallFunc_BooleanAND_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_ContainsPlayers_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_ContainsPlayers_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_Less_FloatFloat_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Less_FloatFloat_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_Not_PreBool_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_BooleanAND_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_BooleanAND_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_BooleanAND_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_GreaterEqual_FloatFloat_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_GreaterEqual_FloatFloat_ReturnValue>BoolProperty>/Script/CoreUObject)
@@ -1240,6 +1271,7 @@ Serialized exports:
 	OverrideInputType (0-0-0-0): size 40 (cls: OverrideInputType>EnumProperty>/Script/CoreUObject)
 	BoostTImelineAlpha (0-0-0-0): size 32 (cls: BoostTImelineAlpha>FloatProperty>/Script/CoreUObject)
 	BoostTimeValueForMID (0-0-0-0): size 32 (cls: BoostTimeValueForMID>FloatProperty>/Script/CoreUObject)
+	BumpForceAngle (0-0-0-0): size 32 (cls: BumpForceAngle>FloatProperty>/Script/CoreUObject)
 	Delta (0-0-0-0): size 32 (cls: Delta>FloatProperty>/Script/CoreUObject)
 	CallFunc_GetMaxHealth_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetMaxHealth_ReturnValue>FloatProperty>/Script/CoreUObject)
 	DestroyThreshold (0-0-0-0): size 32 (cls: DestroyThreshold>FloatProperty>/Script/CoreUObject)
@@ -1276,6 +1308,8 @@ Serialized exports:
 	RumbleIntensity (0-0-0-0): size 32 (cls: RumbleIntensity>FloatProperty>/Script/CoreUObject)
 	SavedDamageValueForMID (0-0-0-0): size 32 (cls: SavedDamageValueForMID>FloatProperty>/Script/CoreUObject)
 	SavedHeadlightValueForMID (0-0-0-0): size 32 (cls: SavedHeadlightValueForMID>FloatProperty>/Script/CoreUObject)
+	CallFunc_Abs_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Abs_ReturnValue>FloatProperty>/Script/CoreUObject)
+	CallFunc_Dot_VectorVector_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Dot_VectorVector_ReturnValue>FloatProperty>/Script/CoreUObject)
 	CallFunc_Dot_VectorVector_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Dot_VectorVector_ReturnValue>FloatProperty>/Script/CoreUObject)
 	CallFunc_GetPreviousForwardSpeedKmh_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetPreviousForwardSpeedKmh_ReturnValue>FloatProperty>/Script/CoreUObject)
 	FortCollisionAudioImpacts_GEN_VARIABLE (0-0-0-0): size 416 (cls: FortCollisionAudioImpacts_GEN_VARIABLE>FortCollisionAudioComponent>/Script/FortniteGame):
@@ -1380,6 +1414,7 @@ Serialized exports:
 	K2Node_ComponentBoundEvent_OtherComp (0-0-0-0): size 36 (cls: K2Node_ComponentBoundEvent_OtherComp>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsBuilding_Prop (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsBuilding_Prop>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Pawn (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Pawn>ObjectProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_AsFort_Player_Pawn (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Player_Pawn>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsPlayer_Controller (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsPlayer_Controller>ObjectProperty>/Script/CoreUObject)
 	K2Node_Event_DamageCauser (0-0-0-0): size 36 (cls: K2Node_Event_DamageCauser>ObjectProperty>/Script/CoreUObject)
 	K2Node_Event_ExitingPawn (0-0-0-0): size 36 (cls: K2Node_Event_ExitingPawn>ObjectProperty>/Script/CoreUObject)
@@ -1628,6 +1663,7 @@ Serialized exports:
 	CallFunc_MakeVector_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_MakeVector_ReturnValue1>StructProperty>/Script/CoreUObject)
 	CallFunc_MakeVector_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_MakeVector_ReturnValue2>StructProperty>/Script/CoreUObject)
 	CallFunc_Multiply_VectorFloat_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_Multiply_VectorFloat_ReturnValue>StructProperty>/Script/CoreUObject)
+	CallFunc_Multiply_VectorFloat_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_Multiply_VectorFloat_ReturnValue1>StructProperty>/Script/CoreUObject)
 	CallFunc_Normal_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_Normal_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_Subtract_VectorVector_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_Subtract_VectorVector_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_Subtract_VectorVector_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_Subtract_VectorVector_ReturnValue1>StructProperty>/Script/CoreUObject)
@@ -1663,6 +1699,7 @@ Serialized exports:
 	EffectContext (0-0-0-0): size 36 (cls: EffectContext>StructProperty>/Script/CoreUObject)
 	HitInfo (0-0-0-0): size 36 (cls: HitInfo>StructProperty>/Script/CoreUObject)
 	Momentum (0-0-0-0): size 36 (cls: Momentum>StructProperty>/Script/CoreUObject)
+	CallFunc_GetActorUpVector_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetActorUpVector_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_GetPreviousLinearVelocity_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetPreviousLinearVelocity_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_Normal_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_Normal_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_MakeLiteralText_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_MakeLiteralText_ReturnValue>TextProperty>/Script/CoreUObject)

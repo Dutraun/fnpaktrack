@@ -5,18 +5,22 @@ Name table:
 	/Game/Athena/Items/Traps/Campfire/Effects/M_Fire_Campfire_Mesh
 	/Game/Athena/Items/Traps/Campfire/Effects/P_Athena_Campfire
 	/Game/Effects/Fort_Effects/Materials/Fire/M_FireSubUV2
+	/Game/Effects/Fort_Effects/Materials/ParticleDecals/M_Energy_Glow_Particle_Decal_CampfireDoused
 	/Game/Effects/Fort_Effects/Mesh/Husk/SM_HuskLobberProjFlame
 	/Game/Effects/VectorFields/Noisy_Turbulence
 	/Game/Weapons/FORT_Rifles/Effects/Materials/M_Spark_01
 	/Script/CoreUObject
 	/Script/Engine
 	Acceleration
+	Alpha
 	AlphaOverLife
 	AlphaScaleOverLife
 	ArrayProperty
+	b3DDrawMode
 	bAlwaysInWorldSpace
 	bApplyGlobalSpawnRateScale
 	bEnabled
+	bKillOnDeactivate
 	BlackBodyTemp
 	BoolProperty
 	Box
@@ -53,7 +57,9 @@ Name table:
 	CurveEdSetup
 	CustomOcclusionBounds
 	Default__DistributionFloatConstant
+	Default__DistributionFloatParticleParameter
 	Default__ParticleLODLevel
+	Default__ParticleModuleAcceleration
 	Default__ParticleModuleAccelerationConstant
 	Default__ParticleModuleAccelerationDrag
 	Default__ParticleModuleCameraOffset
@@ -63,6 +69,7 @@ Name table:
 	Default__ParticleModuleLifetime
 	Default__ParticleModuleLight
 	Default__ParticleModuleLocation
+	Default__ParticleModuleLocationPrimitiveCylinder
 	Default__ParticleModuleLocationPrimitiveSphere
 	Default__ParticleModuleMeshMaterial
 	Default__ParticleModuleMeshRotation
@@ -71,6 +78,7 @@ Name table:
 	Default__ParticleModuleRotation
 	Default__ParticleModuleSize
 	Default__ParticleModuleSizeMultiplyLife
+	Default__ParticleModuleSizeScale
 	Default__ParticleModuleSizeScaleBySpeed
 	Default__ParticleModuleSpawn
 	Default__ParticleModuleSubUV
@@ -84,13 +92,17 @@ Name table:
 	DetailModeBitmask
 	Distribution
 	DistributionFloatConstant
+	DistributionFloatParticleParameter
 	DistributionLookupTable
+	DistributionParamMode
+	DPM_Direct
 	DragCoefficientBias
 	DragCoefficientRaw
 	DynamicParams
 	EDPV_UserSet
 	EEmitterDynamicParameterValue
 	EEmitterRenderMode
+	Ember Decals
 	Embers_Center
 	EmitterDynamicParameter
 	EmitterInfo
@@ -104,6 +116,8 @@ Name table:
 	EParticleSignificanceLevel
 	EParticleSignificanceLevel::Low
 	EParticleSubUVInterpMethod
+	EParticleUVFlipMode
+	EParticleUVFlipMode::RandomFlipUV
 	ERM_LightsOnly
 	Field
 	FireGlow
@@ -131,6 +145,7 @@ Name table:
 	LODSettings
 	LODValidity
 	M_CampfireGlow
+	M_Energy_Glow_Particle_Decal_CampfireDoused
 	M_Fire_Campfire_Mesh
 	M_FireSubUV2
 	M_Spark_01
@@ -160,10 +175,13 @@ Name table:
 	Param2
 	Param3
 	Param4
+	ParameterName
+	ParamMode
 	ParamName
 	ParamValue
 	ParticleBurst
 	ParticleLODLevel
+	ParticleModuleAcceleration
 	ParticleModuleAccelerationConstant
 	ParticleModuleAccelerationDrag
 	ParticleModuleCameraOffset
@@ -173,6 +191,7 @@ Name table:
 	ParticleModuleLifetime
 	ParticleModuleLight
 	ParticleModuleLocation
+	ParticleModuleLocationPrimitiveCylinder
 	ParticleModuleLocationPrimitiveSphere
 	ParticleModuleMeshMaterial
 	ParticleModuleMeshRotation
@@ -181,6 +200,7 @@ Name table:
 	ParticleModuleRotation
 	ParticleModuleSize
 	ParticleModuleSizeMultiplyLife
+	ParticleModuleSizeScale
 	ParticleModuleSizeScaleBySpeed
 	ParticleModuleSpawn
 	ParticleModuleSubUV
@@ -215,6 +235,7 @@ Name table:
 	SignificanceLevel
 	SimulationAttrCurveBias
 	SizeBySpeed
+	SizeScale
 	SM_HuskLobberProjFlame
 	SpawnModule
 	SpawnModules
@@ -222,6 +243,7 @@ Name table:
 	SpeedScale
 	StartAlpha
 	StartColor
+	StartHeight
 	StartLocation
 	StartRadius
 	StartRotation
@@ -235,6 +257,7 @@ Name table:
 	SubImages_Horizontal
 	SubImages_Vertical
 	SubImageSize
+	SurfaceOnly
 	Table
 	Tightness
 	Time
@@ -244,6 +267,7 @@ Name table:
 	TypeDataModule
 	UInt32Property
 	UpdateFlags
+	UVFlippingMode
 	UVOffset
 	ValueMethod
 	Values
@@ -262,6 +286,7 @@ Serialized exports:
 	RequiredDistributionSpawnRate (0-0-0-0): size 12 (cls: RequiredDistributionSpawnRate>DistributionFloatConstant>/Script/Engine)
 	RequiredDistributionSpawnRate (0-0-0-0): size 12 (cls: RequiredDistributionSpawnRate>DistributionFloatConstant>/Script/Engine)
 	RequiredDistributionSpawnRate (0-0-0-0): size 12 (cls: RequiredDistributionSpawnRate>DistributionFloatConstant>/Script/Engine)
+	RequiredDistributionSpawnRate (0-0-0-0): size 12 (cls: RequiredDistributionSpawnRate>DistributionFloatConstant>/Script/Engine)
 	BurstScaleDistribution (0-0-0-0): size 41 (cls: BurstScaleDistribution>DistributionFloatConstant>/Script/Engine):
 		Tag array:
 			Constant(FloatProperty)=1 
@@ -282,13 +307,18 @@ Serialized exports:
 			Constant(FloatProperty)=1 
 	BurstScaleDistribution (0-0-0-0): size 41 (cls: BurstScaleDistribution>DistributionFloatConstant>/Script/Engine):
 		Tag array:
+			Constant(FloatProperty)=1 
+	DistributionFloatParticleParameter_0 (0-0-0-0): size 115 (cls: DistributionFloatParticleParameter_0>DistributionFloatParticleParameter>/Script/Engine):
+		Tag array:
+			ParameterName(NameProperty)=Alpha 
+			ParamMode(ByteProperty)=DPM_Direct 
 			Constant(FloatProperty)=1 
 	ParticleLODLevel_2 (0-0-0-0): size 152 (cls: ParticleLODLevel_2>ParticleLODLevel>/Script/Engine):
 		Tag array:
 			RequiredModule(ObjectProperty)=ParticleModuleRequired_0=P_Athena_Campfire 
 			Modules(ArrayProperty)=[object] (inner: ObjectProperty)
 			SpawnModule(ObjectProperty)=ParticleModuleSpawn_0=P_Athena_Campfire 
-			PeakActiveParticles(IntProperty)=2 
+			PeakActiveParticles(IntProperty)=4 
 	ParticleLODLevel_3 (0-0-0-0): size 181 (cls: ParticleLODLevel_3>ParticleLODLevel>/Script/Engine):
 		Tag array:
 			Level(IntProperty)=1 
@@ -303,41 +333,61 @@ Serialized exports:
 			Modules(ArrayProperty)=[object] (inner: ObjectProperty)
 			SpawnModule(ObjectProperty)=ParticleModuleSpawn_3=P_Athena_Campfire 
 			PeakActiveParticles(IntProperty)=3 
-	ParticleLODLevel_0 (0-0-0-0): size 160 (cls: ParticleLODLevel_0>ParticleLODLevel>/Script/Engine):
+	ParticleLODLevel_0 (0-0-0-0): size 176 (cls: ParticleLODLevel_0>ParticleLODLevel>/Script/Engine):
+		Tag array:
+			RequiredModule(ObjectProperty)=ParticleModuleRequired_2=P_Athena_Campfire 
+			Modules(ArrayProperty)=[object] (inner: ObjectProperty)
+			SpawnModule(ObjectProperty)=ParticleModuleSpawn_4=P_Athena_Campfire 
+			PeakActiveParticles(IntProperty)=9 
+	ParticleLODLevel_1 (0-0-0-0): size 205 (cls: ParticleLODLevel_1>ParticleLODLevel>/Script/Engine):
+		Tag array:
+			Level(IntProperty)=1 
+			RequiredModule(ObjectProperty)=ParticleModuleRequired_2=P_Athena_Campfire 
+			Modules(ArrayProperty)=[object] (inner: ObjectProperty)
+			SpawnModule(ObjectProperty)=ParticleModuleSpawn_4=P_Athena_Campfire 
+			PeakActiveParticles(IntProperty)=8 
+	ParticleLODLevel_2 (0-0-0-0): size 205 (cls: ParticleLODLevel_2>ParticleLODLevel>/Script/Engine):
+		Tag array:
+			Level(IntProperty)=2 
+			RequiredModule(ObjectProperty)=ParticleModuleRequired_2=P_Athena_Campfire 
+			Modules(ArrayProperty)=[object] (inner: ObjectProperty)
+			SpawnModule(ObjectProperty)=ParticleModuleSpawn_8=P_Athena_Campfire 
+			PeakActiveParticles(IntProperty)=2 
+	ParticleLODLevel_0 (0-0-0-0): size 164 (cls: ParticleLODLevel_0>ParticleLODLevel>/Script/Engine):
 		Tag array:
 			RequiredModule(ObjectProperty)=ParticleModuleRequired_1=P_Athena_Campfire 
 			Modules(ArrayProperty)=[object] (inner: ObjectProperty)
 			SpawnModule(ObjectProperty)=ParticleModuleSpawn_1=P_Athena_Campfire 
 			PeakActiveParticles(IntProperty)=5 
-	ParticleLODLevel_1 (0-0-0-0): size 189 (cls: ParticleLODLevel_1>ParticleLODLevel>/Script/Engine):
+	ParticleLODLevel_1 (0-0-0-0): size 193 (cls: ParticleLODLevel_1>ParticleLODLevel>/Script/Engine):
 		Tag array:
 			Level(IntProperty)=1 
 			RequiredModule(ObjectProperty)=ParticleModuleRequired_1=P_Athena_Campfire 
 			Modules(ArrayProperty)=[object] (inner: ObjectProperty)
 			SpawnModule(ObjectProperty)=ParticleModuleSpawn_2=P_Athena_Campfire 
 			PeakActiveParticles(IntProperty)=2 
-	ParticleLODLevel_5 (0-0-0-0): size 215 (cls: ParticleLODLevel_5>ParticleLODLevel>/Script/Engine):
+	ParticleLODLevel_5 (0-0-0-0): size 219 (cls: ParticleLODLevel_5>ParticleLODLevel>/Script/Engine):
 		Tag array:
 			Level(IntProperty)=2 
 			bEnabled(BoolProperty)=False 
 			RequiredModule(ObjectProperty)=ParticleModuleRequired_1=P_Athena_Campfire 
 			Modules(ArrayProperty)=[object] (inner: ObjectProperty)
 			SpawnModule(ObjectProperty)=ParticleModuleSpawn_2=P_Athena_Campfire 
-			PeakActiveParticles(IntProperty)=2 
-	ParticleLODLevel_0 (0-0-0-0): size 192 (cls: ParticleLODLevel_0>ParticleLODLevel>/Script/Engine):
+			PeakActiveParticles(IntProperty)=1 
+	ParticleLODLevel_0 (0-0-0-0): size 196 (cls: ParticleLODLevel_0>ParticleLODLevel>/Script/Engine):
 		Tag array:
 			RequiredModule(ObjectProperty)=ParticleModuleRequired_3=P_Athena_Campfire 
 			Modules(ArrayProperty)=[object] (inner: ObjectProperty)
 			SpawnModule(ObjectProperty)=ParticleModuleSpawn_6=P_Athena_Campfire 
 			PeakActiveParticles(IntProperty)=10 
-	ParticleLODLevel_1 (0-0-0-0): size 221 (cls: ParticleLODLevel_1>ParticleLODLevel>/Script/Engine):
+	ParticleLODLevel_1 (0-0-0-0): size 225 (cls: ParticleLODLevel_1>ParticleLODLevel>/Script/Engine):
 		Tag array:
 			Level(IntProperty)=1 
 			RequiredModule(ObjectProperty)=ParticleModuleRequired_3=P_Athena_Campfire 
 			Modules(ArrayProperty)=[object] (inner: ObjectProperty)
 			SpawnModule(ObjectProperty)=ParticleModuleSpawn_6=P_Athena_Campfire 
 			PeakActiveParticles(IntProperty)=10 
-	ParticleLODLevel_2 (0-0-0-0): size 221 (cls: ParticleLODLevel_2>ParticleLODLevel>/Script/Engine):
+	ParticleLODLevel_2 (0-0-0-0): size 225 (cls: ParticleLODLevel_2>ParticleLODLevel>/Script/Engine):
 		Tag array:
 			Level(IntProperty)=2 
 			RequiredModule(ObjectProperty)=ParticleModuleRequired_3=P_Athena_Campfire 
@@ -367,14 +417,14 @@ Serialized exports:
 			TypeDataModule(ObjectProperty)=ParticleModuleTypeDataGpu_0=P_Athena_Campfire 
 			SpawnModule(ObjectProperty)=ParticleModuleSpawn_9=P_Athena_Campfire 
 			PeakActiveParticles(IntProperty)=102 
-	ParticleLODLevel_0 (0-0-0-0): size 217 (cls: ParticleLODLevel_0>ParticleLODLevel>/Script/Engine):
+	ParticleLODLevel_0 (0-0-0-0): size 221 (cls: ParticleLODLevel_0>ParticleLODLevel>/Script/Engine):
 		Tag array:
 			RequiredModule(ObjectProperty)=ParticleModuleRequired_4=P_Athena_Campfire 
 			Modules(ArrayProperty)=[object] (inner: ObjectProperty)
 			TypeDataModule(ObjectProperty)=ParticleModuleTypeDataMesh_1=P_Athena_Campfire 
 			SpawnModule(ObjectProperty)=ParticleModuleSpawn_7=P_Athena_Campfire 
 			PeakActiveParticles(IntProperty)=5 
-	ParticleLODLevel_1 (0-0-0-0): size 246 (cls: ParticleLODLevel_1>ParticleLODLevel>/Script/Engine):
+	ParticleLODLevel_1 (0-0-0-0): size 250 (cls: ParticleLODLevel_1>ParticleLODLevel>/Script/Engine):
 		Tag array:
 			Level(IntProperty)=1 
 			RequiredModule(ObjectProperty)=ParticleModuleRequired_4=P_Athena_Campfire 
@@ -382,7 +432,7 @@ Serialized exports:
 			TypeDataModule(ObjectProperty)=ParticleModuleTypeDataMesh_1=P_Athena_Campfire 
 			SpawnModule(ObjectProperty)=ParticleModuleSpawn_7=P_Athena_Campfire 
 			PeakActiveParticles(IntProperty)=5 
-	ParticleLODLevel_2 (0-0-0-0): size 246 (cls: ParticleLODLevel_2>ParticleLODLevel>/Script/Engine):
+	ParticleLODLevel_2 (0-0-0-0): size 250 (cls: ParticleLODLevel_2>ParticleLODLevel>/Script/Engine):
 		Tag array:
 			Level(IntProperty)=2 
 			RequiredModule(ObjectProperty)=ParticleModuleRequired_4=P_Athena_Campfire 
@@ -390,6 +440,11 @@ Serialized exports:
 			TypeDataModule(ObjectProperty)=ParticleModuleTypeDataMesh_1=P_Athena_Campfire 
 			SpawnModule(ObjectProperty)=ParticleModuleSpawn_7=P_Athena_Campfire 
 			PeakActiveParticles(IntProperty)=5 
+	ParticleModuleAcceleration_0 (0-0-0-0): size 517 (cls: ParticleModuleAcceleration_0>ParticleModuleAcceleration>/Script/Engine):
+		Tag array:
+			Acceleration(StructProperty)=System.Byte[] 
+			bAlwaysInWorldSpace(BoolProperty)=True 
+			LODValidity(ByteProperty)=[object] 
 	ParticleModuleAccelerationConstant_2 (0-0-0-0): size 133 (cls: ParticleModuleAccelerationConstant_2>ParticleModuleAccelerationConstant>/Script/Engine):
 		Tag array:
 			Acceleration(StructProperty)=Vector(0,0,30) 
@@ -403,6 +458,11 @@ Serialized exports:
 	ParticleModuleAccelerationConstant_4 (0-0-0-0): size 133 (cls: ParticleModuleAccelerationConstant_4>ParticleModuleAccelerationConstant>/Script/Engine):
 		Tag array:
 			Acceleration(StructProperty)=Vector(0,0,500) 
+			bAlwaysInWorldSpace(BoolProperty)=True 
+			LODValidity(ByteProperty)=[object] 
+	ParticleModuleAccelerationDrag_0 (0-0-0-0): size 416 (cls: ParticleModuleAccelerationDrag_0>ParticleModuleAccelerationDrag>/Script/Engine):
+		Tag array:
+			DragCoefficientRaw(StructProperty)=System.Byte[] 
 			bAlwaysInWorldSpace(BoolProperty)=True 
 			LODValidity(ByteProperty)=[object] 
 	ParticleModuleAccelerationDrag_1 (0-0-0-0): size 416 (cls: ParticleModuleAccelerationDrag_1>ParticleModuleAccelerationDrag>/Script/Engine):
@@ -420,9 +480,18 @@ Serialized exports:
 			DragCoefficientRaw(StructProperty)=System.Byte[] 
 			bAlwaysInWorldSpace(BoolProperty)=True 
 			LODValidity(ByteProperty)=[object] 
+	ParticleModuleCameraOffset_0 (0-0-0-0): size 390 (cls: ParticleModuleCameraOffset_0>ParticleModuleCameraOffset>/Script/Engine):
+		Tag array:
+			CameraOffset(StructProperty)=System.Byte[] 
+			LODValidity(ByteProperty)=[object] 
 	ParticleModuleCameraOffset_1 (0-0-0-0): size 390 (cls: ParticleModuleCameraOffset_1>ParticleModuleCameraOffset>/Script/Engine):
 		Tag array:
 			CameraOffset(StructProperty)=System.Byte[] 
+			LODValidity(ByteProperty)=[object] 
+	ParticleModuleColor_0 (0-0-0-0): size 873 (cls: ParticleModuleColor_0>ParticleModuleColor>/Script/Engine):
+		Tag array:
+			StartColor(StructProperty)=System.Byte[] 
+			StartAlpha(StructProperty)=System.Byte[] 
 			LODValidity(ByteProperty)=[object] 
 	ParticleModuleColor_11 (0-0-0-0): size 864 (cls: ParticleModuleColor_11>ParticleModuleColor>/Script/Engine):
 		Tag array:
@@ -449,7 +518,17 @@ Serialized exports:
 			ColorOverLife(StructProperty)=System.Byte[] 
 			AlphaOverLife(StructProperty)=System.Byte[] 
 			LODValidity(ByteProperty)=[object] 
+	ParticleModuleColorScaleOverLife_0 (0-0-0-0): size 988 (cls: ParticleModuleColorScaleOverLife_0>ParticleModuleColorScaleOverLife>/Script/Engine):
+		Tag array:
+			ColorScaleOverLife(StructProperty)=System.Byte[] 
+			AlphaScaleOverLife(StructProperty)=System.Byte[] 
+			LODValidity(ByteProperty)=[object] 
 	ParticleModuleColorScaleOverLife_1 (0-0-0-0): size 936 (cls: ParticleModuleColorScaleOverLife_1>ParticleModuleColorScaleOverLife>/Script/Engine):
+		Tag array:
+			ColorScaleOverLife(StructProperty)=System.Byte[] 
+			AlphaScaleOverLife(StructProperty)=System.Byte[] 
+			LODValidity(ByteProperty)=[object] 
+	ParticleModuleColorScaleOverLife_2 (0-0-0-0): size 762 (cls: ParticleModuleColorScaleOverLife_2>ParticleModuleColorScaleOverLife>/Script/Engine):
 		Tag array:
 			ColorScaleOverLife(StructProperty)=System.Byte[] 
 			AlphaScaleOverLife(StructProperty)=System.Byte[] 
@@ -481,6 +560,10 @@ Serialized exports:
 		Tag array:
 			Lifetime(StructProperty)=System.Byte[] 
 			LODValidity(ByteProperty)=[object] 
+	ParticleModuleLifetime_2 (0-0-0-0): size 390 (cls: ParticleModuleLifetime_2>ParticleModuleLifetime>/Script/Engine):
+		Tag array:
+			Lifetime(StructProperty)=System.Byte[] 
+			LODValidity(ByteProperty)=[object] 
 	ParticleModuleLifetime_3 (0-0-0-0): size 428 (cls: ParticleModuleLifetime_3>ParticleModuleLifetime>/Script/Engine):
 		Tag array:
 			Lifetime(StructProperty)=System.Byte[] 
@@ -509,7 +592,7 @@ Serialized exports:
 		Tag array:
 			StartLocation(StructProperty)=System.Byte[] 
 			LODValidity(ByteProperty)=[object] 
-	ParticleModuleLocation_5 (0-0-0-0): size 491 (cls: ParticleModuleLocation_5>ParticleModuleLocation>/Script/Engine):
+	ParticleModuleLocation_5 (0-0-0-0): size 340 (cls: ParticleModuleLocation_5>ParticleModuleLocation>/Script/Engine):
 		Tag array:
 			StartLocation(StructProperty)=System.Byte[] 
 			LODValidity(ByteProperty)=[object] 
@@ -521,20 +604,30 @@ Serialized exports:
 		Tag array:
 			StartLocation(StructProperty)=System.Byte[] 
 			LODValidity(ByteProperty)=[object] 
+	ParticleModuleLocationPrimitiveCylinder_1 (0-0-0-0): size 1601 (cls: ParticleModuleLocationPrimitiveCylinder_1>ParticleModuleLocationPrimitiveCylinder>/Script/Engine):
+		Tag array:
+			StartRadius(StructProperty)=System.Byte[] 
+			StartHeight(StructProperty)=System.Byte[] 
+			SurfaceOnly(BoolProperty)=True 
+			Velocity(BoolProperty)=True 
+			VelocityScale(StructProperty)=System.Byte[] 
+			StartLocation(StructProperty)=System.Byte[] 
+			b3DDrawMode(BoolProperty)=True 
+			LODValidity(ByteProperty)=[object] 
 	ParticleModuleLocationPrimitiveSphere_2 (0-0-0-0): size 1028 (cls: ParticleModuleLocationPrimitiveSphere_2>ParticleModuleLocationPrimitiveSphere>/Script/Engine):
 		Tag array:
 			StartRadius(StructProperty)=System.Byte[] 
 			VelocityScale(StructProperty)=System.Byte[] 
 			StartLocation(StructProperty)=System.Byte[] 
 			LODValidity(ByteProperty)=[object] 
-	ParticleModuleLocationPrimitiveSphere_4 (0-0-0-0): size 1054 (cls: ParticleModuleLocationPrimitiveSphere_4>ParticleModuleLocationPrimitiveSphere>/Script/Engine):
+	ParticleModuleLocationPrimitiveSphere_4 (0-0-0-0): size 1205 (cls: ParticleModuleLocationPrimitiveSphere_4>ParticleModuleLocationPrimitiveSphere>/Script/Engine):
 		Tag array:
 			StartRadius(StructProperty)=System.Byte[] 
 			Velocity(BoolProperty)=True 
 			VelocityScale(StructProperty)=System.Byte[] 
 			StartLocation(StructProperty)=System.Byte[] 
 			LODValidity(ByteProperty)=[object] 
-	ParticleModuleLocationPrimitiveSphere_7 (0-0-0-0): size 1054 (cls: ParticleModuleLocationPrimitiveSphere_7>ParticleModuleLocationPrimitiveSphere>/Script/Engine):
+	ParticleModuleLocationPrimitiveSphere_7 (0-0-0-0): size 1205 (cls: ParticleModuleLocationPrimitiveSphere_7>ParticleModuleLocationPrimitiveSphere>/Script/Engine):
 		Tag array:
 			StartRadius(StructProperty)=System.Byte[] 
 			Velocity(BoolProperty)=True 
@@ -583,6 +676,15 @@ Serialized exports:
 			InterpolationMethod(ByteProperty)=PSUVIM_Linear_Blend 
 			RandomImageTime(FloatProperty)=1 
 			LODValidity(ByteProperty)=[object] 
+	ParticleModuleRequired_2 (0-0-0-0): size 291 (cls: ParticleModuleRequired_2>ParticleModuleRequired>/Script/Engine):
+		Tag array:
+			Material(ObjectProperty)=M_Energy_Glow_Particle_Decal_CampfireDoused=/Game/Effects/Fort_Effects/Materials/ParticleDecals/M_Energy_Glow_Particle_Decal_CampfireDoused 
+			bKillOnDeactivate(BoolProperty)=True 
+			bUseLegacyEmitterTime(BoolProperty)=False 
+			SpawnRate(StructProperty)=System.Byte[] 
+			RandomImageTime(FloatProperty)=1 
+			UVFlippingMode(EnumProperty)=EParticleUVFlipMode::RandomFlipUV 
+			LODValidity(ByteProperty)=[object] 
 	ParticleModuleRequired_3 (0-0-0-0): size 323 (cls: ParticleModuleRequired_3>ParticleModuleRequired>/Script/Engine):
 		Tag array:
 			Material(ObjectProperty)=M_FireSubUV2=/Game/Effects/Fort_Effects/Materials/Fire/M_FireSubUV2 
@@ -617,6 +719,10 @@ Serialized exports:
 		Tag array:
 			StartSize(StructProperty)=System.Byte[] 
 			LODValidity(ByteProperty)=[object] 
+	ParticleModuleSize_2 (0-0-0-0): size 600 (cls: ParticleModuleSize_2>ParticleModuleSize>/Script/Engine):
+		Tag array:
+			StartSize(StructProperty)=System.Byte[] 
+			LODValidity(ByteProperty)=[object] 
 	ParticleModuleSize_3 (0-0-0-0): size 566 (cls: ParticleModuleSize_3>ParticleModuleSize>/Script/Engine):
 		Tag array:
 			StartSize(StructProperty)=System.Byte[] 
@@ -636,6 +742,34 @@ Serialized exports:
 	ParticleModuleSizeMultiplyLife_5 (0-0-0-0): size 921 (cls: ParticleModuleSizeMultiplyLife_5>ParticleModuleSizeMultiplyLife>/Script/Engine):
 		Tag array:
 			LifeMultiplier(StructProperty)=System.Byte[] 
+			LODValidity(ByteProperty)=[object] 
+	ParticleModuleSizeScale_0 (0-0-0-0): size 520 (cls: ParticleModuleSizeScale_0>ParticleModuleSizeScale>/Script/Engine):
+		Tag array:
+			SizeScale(StructProperty)=System.Byte[] 
+			LODValidity(ByteProperty)=[object] 
+	ParticleModuleSizeScale_4 (0-0-0-0): size 520 (cls: ParticleModuleSizeScale_4>ParticleModuleSizeScale>/Script/Engine):
+		Tag array:
+			SizeScale(StructProperty)=System.Byte[] 
+			LODValidity(ByteProperty)=[object] 
+	ParticleModuleSizeScale_5 (0-0-0-0): size 520 (cls: ParticleModuleSizeScale_5>ParticleModuleSizeScale>/Script/Engine):
+		Tag array:
+			SizeScale(StructProperty)=System.Byte[] 
+			LODValidity(ByteProperty)=[object] 
+	ParticleModuleSizeScale_6 (0-0-0-0): size 520 (cls: ParticleModuleSizeScale_6>ParticleModuleSizeScale>/Script/Engine):
+		Tag array:
+			SizeScale(StructProperty)=System.Byte[] 
+			LODValidity(ByteProperty)=[object] 
+	ParticleModuleSizeScale_7 (0-0-0-0): size 520 (cls: ParticleModuleSizeScale_7>ParticleModuleSizeScale>/Script/Engine):
+		Tag array:
+			SizeScale(StructProperty)=System.Byte[] 
+			LODValidity(ByteProperty)=[object] 
+	ParticleModuleSizeScale_8 (0-0-0-0): size 520 (cls: ParticleModuleSizeScale_8>ParticleModuleSizeScale>/Script/Engine):
+		Tag array:
+			SizeScale(StructProperty)=System.Byte[] 
+			LODValidity(ByteProperty)=[object] 
+	ParticleModuleSizeScale_9 (0-0-0-0): size 520 (cls: ParticleModuleSizeScale_9>ParticleModuleSizeScale>/Script/Engine):
+		Tag array:
+			SizeScale(StructProperty)=System.Byte[] 
 			LODValidity(ByteProperty)=[object] 
 	ParticleModuleSizeScaleBySpeed_0 (0-0-0-0): size 160 (cls: ParticleModuleSizeScaleBySpeed_0>ParticleModuleSizeScaleBySpeed>/Script/Engine):
 		Tag array:
@@ -673,6 +807,12 @@ Serialized exports:
 			RateScale(StructProperty)=System.Byte[] 
 			BurstScale(StructProperty)=System.Byte[] 
 			LODValidity(ByteProperty)=[object] 
+	ParticleModuleSpawn_4 (0-0-0-0): size 1078 (cls: ParticleModuleSpawn_4>ParticleModuleSpawn>/Script/Engine):
+		Tag array:
+			Rate(StructProperty)=System.Byte[] 
+			RateScale(StructProperty)=System.Byte[] 
+			BurstScale(StructProperty)=System.Byte[] 
+			LODValidity(ByteProperty)=[object] 
 	ParticleModuleSpawn_6 (0-0-0-0): size 846 (cls: ParticleModuleSpawn_6>ParticleModuleSpawn>/Script/Engine):
 		Tag array:
 			Rate(StructProperty)=System.Byte[] 
@@ -681,6 +821,12 @@ Serialized exports:
 			bApplyGlobalSpawnRateScale(BoolProperty)=False 
 			LODValidity(ByteProperty)=[object] 
 	ParticleModuleSpawn_7 (0-0-0-0): size 820 (cls: ParticleModuleSpawn_7>ParticleModuleSpawn>/Script/Engine):
+		Tag array:
+			Rate(StructProperty)=System.Byte[] 
+			RateScale(StructProperty)=System.Byte[] 
+			BurstScale(StructProperty)=System.Byte[] 
+			LODValidity(ByteProperty)=[object] 
+	ParticleModuleSpawn_8 (0-0-0-0): size 1020 (cls: ParticleModuleSpawn_8>ParticleModuleSpawn>/Script/Engine):
 		Tag array:
 			Rate(StructProperty)=System.Byte[] 
 			RateScale(StructProperty)=System.Byte[] 
@@ -716,6 +862,11 @@ Serialized exports:
 			bTileY(BoolProperty)=True 
 			bTileZ(BoolProperty)=True 
 			LODValidity(ByteProperty)=[object] 
+	ParticleModuleVelocity_0 (0-0-0-0): size 823 (cls: ParticleModuleVelocity_0>ParticleModuleVelocity>/Script/Engine):
+		Tag array:
+			StartVelocity(StructProperty)=System.Byte[] 
+			StartVelocityRadial(StructProperty)=System.Byte[] 
+			LODValidity(ByteProperty)=[object] 
 	ParticleModuleVelocity_3 (0-0-0-0): size 777 (cls: ParticleModuleVelocity_3>ParticleModuleVelocity>/Script/Engine):
 		Tag array:
 			StartVelocity(StructProperty)=System.Byte[] 
@@ -735,6 +886,11 @@ Serialized exports:
 		Tag array:
 			EmitterName(NameProperty)=FireGlow 
 			bUseLegacySpawningBehavior(BoolProperty)=True 
+			LODLevels(ArrayProperty)=[object] (inner: ObjectProperty)
+			DetailModeBitmask(UInt32Property)=[object] 
+	ParticleSpriteEmitter_1 (0-0-0-0): size 123 (cls: ParticleSpriteEmitter_1>ParticleSpriteEmitter>/Script/Engine):
+		Tag array:
+			EmitterName(NameProperty)=Ember Decals 
 			LODLevels(ArrayProperty)=[object] (inner: ObjectProperty)
 			DetailModeBitmask(UInt32Property)=[object] 
 	ParticleSpriteEmitter_3 (0-0-0-0): size 231 (cls: ParticleSpriteEmitter_3>ParticleSpriteEmitter>/Script/Engine):
@@ -760,13 +916,13 @@ Serialized exports:
 			EmitterName(NameProperty)=Mesh Flames 
 			LODLevels(ArrayProperty)=[object] (inner: ObjectProperty)
 			DetailModeBitmask(UInt32Property)=[object] 
-	P_Athena_Campfire (0-0-0-0): size 457 (cls: P_Athena_Campfire>ParticleSystem>/Script/Engine):
+	P_Athena_Campfire (0-0-0-0): size 461 (cls: P_Athena_Campfire>ParticleSystem>/Script/Engine):
 		Tag array:
 			Emitters(ArrayProperty)=[object] (inner: ObjectProperty)
 			CurveEdSetup(ObjectProperty)=[object] 
 			LODDistances(ArrayProperty)=0.000,2500.000,3600.000 (inner: FloatProperty)
 			LODSettings(ArrayProperty)=[object] (inner: StructProperty)
 			bUseFixedRelativeBoundingBox(BoolProperty)=True 
-			FixedRelativeBoundingBox(StructProperty)=Box(Min(Vector(-30,-30,-15)) Max(Vector(50,30,75)),5889) 
+			FixedRelativeBoundingBox(StructProperty)=Box(Min(Vector(-30,-30,-15)) Max(Vector(50,30,75)),6913) 
 			bShouldResetPeakCounts(BoolProperty)=True 
-			CustomOcclusionBounds(StructProperty)=Box(Min(Vector(0,0,0)) Max(Vector(0,0,0)),38913) 
+			CustomOcclusionBounds(StructProperty)=Box(Min(Vector(0,0,0)) Max(Vector(0,0,0)),42753) 

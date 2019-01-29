@@ -4,7 +4,6 @@ Name table:
 	/Game/Athena/BuildingActors/Props/Building/ActorBlueprints/Containers/Athena_Prop_Plant_Shrub_06
 	/Game/Athena/BuildingActors/Props/Building/ActorBlueprints/Containers/Athena_Prop_Plant_Shrub_09
 	/Game/Athena/BuildingActors/Props/Building/ActorBlueprints/Containers/Athena_Prop_Recreation_Camp_Tent_01
-	/Game/Athena/BuildingActors/Props/Building/ActorBlueprints/Containers/Athena_Prop_Recreation_CampFire_01
 	/Game/Athena/BuildingActors/Props/Building/ActorBlueprints/Containers/Athena_Prop_Storage_Barrel_02
 	/Game/Athena/BuildingActors/Props/Building/ActorBlueprints/Containers/Athena_Prop_Storage_Crate_Small01
 	/Game/Athena/Environments/Blueprints/Athena_Prop_Rocks_StoneLarge01
@@ -15,6 +14,7 @@ Name table:
 	/Game/Athena/Environments/Landscape/Material/Athena_Terrain_Mat_Biome_Cliff
 	/Game/Athena/Environments/Landscape/Material/Athena_Terrain_Mat_Biome_NoAsphalt_Inst
 	/Game/Athena/Environments/Meshes/S_FORT_Sign_NoDancing
+	/Game/Athena/Items/ForagedItems/EnvCampFire/B_BGA_Athena_EnvCampFire
 	/Game/Athena/Maps/POI/Athena_POI_Mesa_002
 	/Game/Athena/Maps/POI/HLOD/Athena_POI_Mesa_002_0_HLOD
 	/Game/Building/ActorBlueprints/Containers/Tiered_Chest_Athena
@@ -43,9 +43,10 @@ Name table:
 	/Script/FortniteGame
 	/Script/FortniteGame.FortNavSystem
 	/Script/NavigationSystem
-	76927B120C6645ACB9200E7FB8896AC3_FC64D4F24F330402C00B2593CEBA3DE5_4EC1D4D4_B01D5777_4D3F45A4_ProxyLODMeshReduction
+	76927B120C6645ACB9200E7FB8896AC3_FC64D4F24F330402C00B2593CEBA3DE5_DD477D99_B01D5777_2FA456D5_ProxyLODMeshReduction
 	AreaClass
 	ArrayProperty
+	ArrowComponent
 	Athena_POI_Mesa_002
 	Athena_POI_Mesa_002_0_HLOD
 	Athena_POI_Mesa_002_C
@@ -53,7 +54,6 @@ Name table:
 	Athena_Prop_Plant_Shrub_06_C
 	Athena_Prop_Plant_Shrub_09_C
 	Athena_Prop_Recreation_Camp_Tent_01_C
-	Athena_Prop_Recreation_CampFire_01_C
 	Athena_Prop_Rocks_StoneLarge01_C
 	Athena_Prop_Storage_Barrel_02_C
 	Athena_Prop_Storage_Crate_Small01_C
@@ -66,10 +66,12 @@ Name table:
 	AthenaSearchSpeed
 	AttachParent
 	AudioComponent
+	B_BGA_Athena_EnvCampFire_C
 	bAffectDistanceFieldLighting
 	bAffectDynamicIndirectLighting
 	bAutoSpawnMissingNavData
 	bAutoWeld
+	bCanBeInCluster
 	bCanEverAffectNavigation
 	bCastStaticShadow
 	bEnableDensityScaling
@@ -108,18 +110,20 @@ Name table:
 	CurveFloat_0
 	CurveTable
 	CurveTableRowHandle
+	Cylinder
+	Cylinder_GEN_VARIABLE
 	DataVersion
 	Default__Athena_POI_Mesa_002_C
 	Default__Athena_Prop_Plant_Shrub_03_C
 	Default__Athena_Prop_Plant_Shrub_06_C
 	Default__Athena_Prop_Plant_Shrub_09_C
 	Default__Athena_Prop_Recreation_Camp_Tent_01_C
-	Default__Athena_Prop_Recreation_CampFire_01_C
 	Default__Athena_Prop_Rocks_StoneLarge01_C
 	Default__Athena_Prop_Storage_Barrel_02_C
 	Default__Athena_Prop_Storage_Crate_Small01_C
 	Default__Athena_Tree_Pine_01_C
 	Default__Athena_Tree_Pine_3_C
+	Default__B_BGA_Athena_EnvCampFire_C
 	Default__BlueprintGeneratedClass
 	Default__FoliageInstancedStaticMeshComponent
 	Default__FortLevelScriptActor
@@ -140,6 +144,8 @@ Name table:
 	Default__Tree_04_C
 	Default__World
 	DefaultPhysicsVolume
+	DefaultSceneRoot
+	DefaultSceneRoot_GEN_VARIABLE
 	DelegateProperty
 	DirectionPropertyName
 	ECanBeCharacterBase
@@ -158,6 +164,10 @@ Name table:
 	Engine
 	EnumProperty
 	ETimelineLengthMode
+	FireLoc
+	FireLoc_GEN_VARIABLE
+	FirePitEmpty
+	FirePitEmpty_GEN_VARIABLE
 	FloatCurve
 	FloatProperty
 	FloatPropertyName
@@ -208,6 +218,9 @@ Name table:
 	MaxCullObjectSize
 	MaxDistanceFadeRange
 	MaxDrawDistance
+	MemberGuid
+	MemberName
+	MemberParent
 	MinCullDistance
 	MinCullObjectSize
 	MinDrawDistance
@@ -244,6 +257,7 @@ Name table:
 	PersistentLevel
 	Plant_Shrub
 	PointLightComponent
+	PrimitiveComponent
 	Prop_Rocks_03
 	Prop_Rocks_03_C
 	Prop_Rocks_Piles
@@ -312,6 +326,7 @@ Name table:
 	SearchSpeedVeryFast
 	SearchSpeedVerySlow
 	Sign_NoDancing
+	SimpleMemberReference
 	SM_Athena_POI_Mesa_002_0_S_Cliff_Outer
 	SoftClassPath
 	SortedInstances
@@ -344,8 +359,11 @@ Name table:
 	Tree_04
 	Tree_04_C
 	Tree__2
+	UCSModifiedProperties
 	Vector
 	Visibility
+	Wood
+	Wood_GEN_VARIABLE
 	World
 	WorldCells
 	WorldCellsOrigin
@@ -354,7 +372,13 @@ Name table:
 Serialized exports:
 	Athena_POI_Mesa_002_C (0-0-0-0): size 76 (cls: Athena_POI_Mesa_002_C>BlueprintGeneratedClass>/Script/Engine)
 	Default__Athena_POI_Mesa_002_C (0-0-0-0): size 8 (cls: Default__Athena_POI_Mesa_002_C>Athena_POI_Mesa_002_C)
-	Athena_POI_Mesa_002_C_0 (0-0-0-0): size 12 (cls: Athena_POI_Mesa_002_C_0>Athena_POI_Mesa_002_C)
+	FireLoc (0-0-0-0): size 137 (cls: FireLoc>ArrowComponent>/Script/Engine):
+		Tag array:
+			CachedMaxDrawDistance(FloatProperty)=11789.57 
+			AttachParent(ObjectProperty)=DefaultSceneRoot=Athena_POI_Mesa_002 
+			bNetAddressable(BoolProperty)=True 
+			CreationMethod(EnumProperty)=EComponentCreationMethod::SimpleConstructionScript 
+	Athena_POI_Mesa_002_C_1 (0-0-0-0): size 12 (cls: Athena_POI_Mesa_002_C_1>Athena_POI_Mesa_002_C)
 	Plant_Shrub_5 (0-0-0-0): size 193 (cls: Plant_Shrub_5>Athena_Prop_Plant_Shrub_03_C>/Game/Athena/BuildingActors/Props/Building/ActorBlueprints/Containers/Athena_Prop_Plant_Shrub_03):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
@@ -401,13 +425,6 @@ Serialized exports:
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
 			MyGuid(StructProperty)=Guid: 16348871-1144978390-3247588526-3531966735 
-			DataVersion(IntProperty)=1 
-			CullDistance(FloatProperty)=0 
-			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	LCD_Camp_Fire_01_4 (0-0-0-0): size 193 (cls: LCD_Camp_Fire_01_4>Athena_Prop_Recreation_CampFire_01_C>/Game/Athena/BuildingActors/Props/Building/ActorBlueprints/Containers/Athena_Prop_Recreation_CampFire_01):
-		Tag array:
-			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-			MyGuid(StructProperty)=Guid: 1545295722-1172656037-2240966588-3923715076 
 			DataVersion(IntProperty)=1 
 			CullDistance(FloatProperty)=0 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
@@ -505,17 +522,28 @@ Serialized exports:
 			AttachParent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
 			bNetAddressable(BoolProperty)=True 
 			CreationMethod(EnumProperty)=EComponentCreationMethod::SimpleConstructionScript 
+	LCD_Camp_Fire_01_4 (0-0-0-0): size 301 (cls: LCD_Camp_Fire_01_4>B_BGA_Athena_EnvCampFire_C>/Game/Athena/Items/ForagedItems/EnvCampFire/B_BGA_Athena_EnvCampFire):
+		Tag array:
+			Cylinder(ObjectProperty)=Cylinder=Athena_POI_Mesa_002 
+			FireLoc(ObjectProperty)=FireLoc=Athena_POI_Mesa_002 
+			Wood(ObjectProperty)=Wood=Athena_POI_Mesa_002 
+			FirePitEmpty(ObjectProperty)=FirePitEmpty=Athena_POI_Mesa_002 
+			DefaultSceneRoot(ObjectProperty)=DefaultSceneRoot=Athena_POI_Mesa_002 
+			DataVersion(IntProperty)=1 
+			CullDistance(FloatProperty)=11789.57 
+			RootComponent(ObjectProperty)=DefaultSceneRoot=Athena_POI_Mesa_002 
+			BlueprintCreatedComponents(ArrayProperty)=[object] (inner: ObjectProperty)
 	BoxComponent0 (0-0-0-0): size 265 (cls: BoxComponent0>BoxComponent>/Script/Engine):
 		Tag array:
 			AreaClass(ObjectProperty)=FortMetaNavArea_Obstacles=/Script/FortniteGame 
 			BodyInstance(StructProperty)=System.Byte[] 
-			RelativeLocation(StructProperty)=Vector(332.4414,-328.3086,1142.348) 
-			RelativeScale3D(StructProperty)=Vector(4285.119,4243.031,5082.172) 
+			RelativeLocation(StructProperty)=Vector(332.4431,-328.3091,1142.348) 
+			RelativeScale3D(StructProperty)=Vector(4285.12,4243.031,5082.171) 
 	FoliageInstancedStaticMeshComponent_0 (0-0-0-0): size 24384 (cls: FoliageInstancedStaticMeshComponent_0>FoliageInstancedStaticMeshComponent>/Script/Foliage):
 		Tag array:
 			SortedInstances(ArrayProperty)=[object] (inner: IntProperty)
 			NumBuiltInstances(IntProperty)=174 
-			BuiltInstanceBounds(StructProperty)=Box(Min(Vector(-1654.448,-2258.009,-389.4702)) Max(Vector(2262.477,1652.664,2716.792)),18689) 
+			BuiltInstanceBounds(StructProperty)=Box(Min(Vector(-1654.448,-2258.009,-389.4702)) Max(Vector(2262.477,1652.664,2716.792)),19201) 
 			bEnableDensityScaling(BoolProperty)=True 
 			CacheMeshExtendedBounds(StructProperty)=System.Byte[] 
 			InstanceCountToRender(IntProperty)=174 
@@ -534,321 +562,400 @@ Serialized exports:
 			BodyInstance(StructProperty)=System.Byte[] 
 			AttachParent(ObjectProperty)=RootComponent0=Athena_POI_Mesa_002 
 			Mobility(ByteProperty)=EComponentMobility::Static 
-	S_Cliff_1x1_A300 (0-0-0-0): size 70 (cls: S_Cliff_1x1_A300>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_1x1_A300 (0-0-0-0): size 96 (cls: S_Cliff_1x1_A300>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_1x1_A301 (0-0-0-0): size 70 (cls: S_Cliff_1x1_A301>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_1x1_A301 (0-0-0-0): size 96 (cls: S_Cliff_1x1_A301>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_1x1_A302 (0-0-0-0): size 70 (cls: S_Cliff_1x1_A302>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_1x1_A302 (0-0-0-0): size 96 (cls: S_Cliff_1x1_A302>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_1x1_A311 (0-0-0-0): size 70 (cls: S_Cliff_1x1_A311>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_1x1_A311 (0-0-0-0): size 96 (cls: S_Cliff_1x1_A311>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_1x1_A322 (0-0-0-0): size 70 (cls: S_Cliff_1x1_A322>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_1x1_A322 (0-0-0-0): size 96 (cls: S_Cliff_1x1_A322>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_1x1_A324 (0-0-0-0): size 70 (cls: S_Cliff_1x1_A324>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_1x1_A324 (0-0-0-0): size 96 (cls: S_Cliff_1x1_A324>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer298 (0-0-0-0): size 70 (cls: S_Cliff_Outer298>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer298 (0-0-0-0): size 96 (cls: S_Cliff_Outer298>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer303 (0-0-0-0): size 70 (cls: S_Cliff_Outer303>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer303 (0-0-0-0): size 96 (cls: S_Cliff_Outer303>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer312 (0-0-0-0): size 70 (cls: S_Cliff_Outer312>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer312 (0-0-0-0): size 96 (cls: S_Cliff_Outer312>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer314 (0-0-0-0): size 70 (cls: S_Cliff_Outer314>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer314 (0-0-0-0): size 96 (cls: S_Cliff_Outer314>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer319 (0-0-0-0): size 70 (cls: S_Cliff_Outer319>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer319 (0-0-0-0): size 96 (cls: S_Cliff_Outer319>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer320 (0-0-0-0): size 70 (cls: S_Cliff_Outer320>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer320 (0-0-0-0): size 96 (cls: S_Cliff_Outer320>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer326 (0-0-0-0): size 70 (cls: S_Cliff_Outer326>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer326 (0-0-0-0): size 96 (cls: S_Cliff_Outer326>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer_103 (0-0-0-0): size 70 (cls: S_Cliff_Outer_103>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer_103 (0-0-0-0): size 96 (cls: S_Cliff_Outer_103>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer_115 (0-0-0-0): size 70 (cls: S_Cliff_Outer_115>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer_115 (0-0-0-0): size 96 (cls: S_Cliff_Outer_115>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer_12 (0-0-0-0): size 70 (cls: S_Cliff_Outer_12>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer_12 (0-0-0-0): size 96 (cls: S_Cliff_Outer_12>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer_128 (0-0-0-0): size 70 (cls: S_Cliff_Outer_128>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer_128 (0-0-0-0): size 96 (cls: S_Cliff_Outer_128>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer_131 (0-0-0-0): size 70 (cls: S_Cliff_Outer_131>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer_131 (0-0-0-0): size 96 (cls: S_Cliff_Outer_131>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer_132 (0-0-0-0): size 70 (cls: S_Cliff_Outer_132>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer_132 (0-0-0-0): size 96 (cls: S_Cliff_Outer_132>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer_140 (0-0-0-0): size 70 (cls: S_Cliff_Outer_140>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer_140 (0-0-0-0): size 96 (cls: S_Cliff_Outer_140>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer_143 (0-0-0-0): size 70 (cls: S_Cliff_Outer_143>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer_143 (0-0-0-0): size 96 (cls: S_Cliff_Outer_143>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer_151 (0-0-0-0): size 70 (cls: S_Cliff_Outer_151>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer_151 (0-0-0-0): size 96 (cls: S_Cliff_Outer_151>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer_155 (0-0-0-0): size 70 (cls: S_Cliff_Outer_155>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer_155 (0-0-0-0): size 96 (cls: S_Cliff_Outer_155>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer_161 (0-0-0-0): size 70 (cls: S_Cliff_Outer_161>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer_161 (0-0-0-0): size 96 (cls: S_Cliff_Outer_161>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer_162 (0-0-0-0): size 70 (cls: S_Cliff_Outer_162>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer_162 (0-0-0-0): size 96 (cls: S_Cliff_Outer_162>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer_163 (0-0-0-0): size 70 (cls: S_Cliff_Outer_163>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer_163 (0-0-0-0): size 96 (cls: S_Cliff_Outer_163>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer_168 (0-0-0-0): size 70 (cls: S_Cliff_Outer_168>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer_168 (0-0-0-0): size 96 (cls: S_Cliff_Outer_168>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer_176 (0-0-0-0): size 70 (cls: S_Cliff_Outer_176>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer_176 (0-0-0-0): size 96 (cls: S_Cliff_Outer_176>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer_179 (0-0-0-0): size 70 (cls: S_Cliff_Outer_179>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer_179 (0-0-0-0): size 96 (cls: S_Cliff_Outer_179>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer_189 (0-0-0-0): size 70 (cls: S_Cliff_Outer_189>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer_189 (0-0-0-0): size 96 (cls: S_Cliff_Outer_189>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer_192 (0-0-0-0): size 70 (cls: S_Cliff_Outer_192>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer_192 (0-0-0-0): size 96 (cls: S_Cliff_Outer_192>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer_195 (0-0-0-0): size 70 (cls: S_Cliff_Outer_195>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer_195 (0-0-0-0): size 96 (cls: S_Cliff_Outer_195>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer_198 (0-0-0-0): size 70 (cls: S_Cliff_Outer_198>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer_198 (0-0-0-0): size 96 (cls: S_Cliff_Outer_198>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer_201 (0-0-0-0): size 70 (cls: S_Cliff_Outer_201>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer_201 (0-0-0-0): size 96 (cls: S_Cliff_Outer_201>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer_204 (0-0-0-0): size 70 (cls: S_Cliff_Outer_204>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer_204 (0-0-0-0): size 96 (cls: S_Cliff_Outer_204>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer_207 (0-0-0-0): size 70 (cls: S_Cliff_Outer_207>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer_207 (0-0-0-0): size 96 (cls: S_Cliff_Outer_207>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer_21 (0-0-0-0): size 70 (cls: S_Cliff_Outer_21>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer_21 (0-0-0-0): size 96 (cls: S_Cliff_Outer_21>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer_211 (0-0-0-0): size 70 (cls: S_Cliff_Outer_211>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer_211 (0-0-0-0): size 96 (cls: S_Cliff_Outer_211>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer_219 (0-0-0-0): size 70 (cls: S_Cliff_Outer_219>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer_219 (0-0-0-0): size 96 (cls: S_Cliff_Outer_219>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer_270 (0-0-0-0): size 70 (cls: S_Cliff_Outer_270>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer_270 (0-0-0-0): size 96 (cls: S_Cliff_Outer_270>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer_271 (0-0-0-0): size 70 (cls: S_Cliff_Outer_271>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer_271 (0-0-0-0): size 96 (cls: S_Cliff_Outer_271>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer_272 (0-0-0-0): size 70 (cls: S_Cliff_Outer_272>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer_272 (0-0-0-0): size 96 (cls: S_Cliff_Outer_272>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer_273 (0-0-0-0): size 70 (cls: S_Cliff_Outer_273>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer_273 (0-0-0-0): size 96 (cls: S_Cliff_Outer_273>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer_275 (0-0-0-0): size 70 (cls: S_Cliff_Outer_275>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer_275 (0-0-0-0): size 96 (cls: S_Cliff_Outer_275>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer_276 (0-0-0-0): size 70 (cls: S_Cliff_Outer_276>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer_276 (0-0-0-0): size 96 (cls: S_Cliff_Outer_276>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer_277 (0-0-0-0): size 70 (cls: S_Cliff_Outer_277>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer_277 (0-0-0-0): size 96 (cls: S_Cliff_Outer_277>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer_278 (0-0-0-0): size 70 (cls: S_Cliff_Outer_278>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer_278 (0-0-0-0): size 96 (cls: S_Cliff_Outer_278>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer_280 (0-0-0-0): size 70 (cls: S_Cliff_Outer_280>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer_280 (0-0-0-0): size 96 (cls: S_Cliff_Outer_280>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer_281 (0-0-0-0): size 70 (cls: S_Cliff_Outer_281>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer_281 (0-0-0-0): size 96 (cls: S_Cliff_Outer_281>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer_282 (0-0-0-0): size 70 (cls: S_Cliff_Outer_282>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer_282 (0-0-0-0): size 96 (cls: S_Cliff_Outer_282>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer_284 (0-0-0-0): size 70 (cls: S_Cliff_Outer_284>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer_284 (0-0-0-0): size 96 (cls: S_Cliff_Outer_284>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer_285 (0-0-0-0): size 70 (cls: S_Cliff_Outer_285>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer_285 (0-0-0-0): size 96 (cls: S_Cliff_Outer_285>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer_286 (0-0-0-0): size 70 (cls: S_Cliff_Outer_286>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer_286 (0-0-0-0): size 96 (cls: S_Cliff_Outer_286>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer_288 (0-0-0-0): size 70 (cls: S_Cliff_Outer_288>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer_288 (0-0-0-0): size 96 (cls: S_Cliff_Outer_288>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer_289 (0-0-0-0): size 70 (cls: S_Cliff_Outer_289>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer_289 (0-0-0-0): size 96 (cls: S_Cliff_Outer_289>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer_290 (0-0-0-0): size 70 (cls: S_Cliff_Outer_290>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer_290 (0-0-0-0): size 96 (cls: S_Cliff_Outer_290>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer_291 (0-0-0-0): size 70 (cls: S_Cliff_Outer_291>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer_291 (0-0-0-0): size 96 (cls: S_Cliff_Outer_291>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer_33 (0-0-0-0): size 70 (cls: S_Cliff_Outer_33>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer_33 (0-0-0-0): size 96 (cls: S_Cliff_Outer_33>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer_4 (0-0-0-0): size 70 (cls: S_Cliff_Outer_4>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer_4 (0-0-0-0): size 96 (cls: S_Cliff_Outer_4>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer_6 (0-0-0-0): size 70 (cls: S_Cliff_Outer_6>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer_6 (0-0-0-0): size 96 (cls: S_Cliff_Outer_6>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer_7 (0-0-0-0): size 70 (cls: S_Cliff_Outer_7>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer_7 (0-0-0-0): size 96 (cls: S_Cliff_Outer_7>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer_75 (0-0-0-0): size 70 (cls: S_Cliff_Outer_75>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer_75 (0-0-0-0): size 96 (cls: S_Cliff_Outer_75>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer_79 (0-0-0-0): size 70 (cls: S_Cliff_Outer_79>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer_79 (0-0-0-0): size 96 (cls: S_Cliff_Outer_79>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer_83 (0-0-0-0): size 70 (cls: S_Cliff_Outer_83>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer_83 (0-0-0-0): size 96 (cls: S_Cliff_Outer_83>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer_92 (0-0-0-0): size 70 (cls: S_Cliff_Outer_92>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer_92 (0-0-0-0): size 96 (cls: S_Cliff_Outer_92>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Cliff_Outer_99 (0-0-0-0): size 70 (cls: S_Cliff_Outer_99>FortStaticMeshActor>/Script/FortniteGame):
+	S_Cliff_Outer_99 (0-0-0-0): size 96 (cls: S_Cliff_Outer_99>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Elevation_Ground_Z_High289 (0-0-0-0): size 70 (cls: S_Elevation_Ground_Z_High289>FortStaticMeshActor>/Script/FortniteGame):
+	S_Elevation_Ground_Z_High289 (0-0-0-0): size 96 (cls: S_Elevation_Ground_Z_High289>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Elevation_Ground_Z_High291 (0-0-0-0): size 70 (cls: S_Elevation_Ground_Z_High291>FortStaticMeshActor>/Script/FortniteGame):
+	S_Elevation_Ground_Z_High291 (0-0-0-0): size 96 (cls: S_Elevation_Ground_Z_High291>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Elevation_Ground_Z_High293 (0-0-0-0): size 70 (cls: S_Elevation_Ground_Z_High293>FortStaticMeshActor>/Script/FortniteGame):
+	S_Elevation_Ground_Z_High293 (0-0-0-0): size 96 (cls: S_Elevation_Ground_Z_High293>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Elevation_Ground_Z_High295 (0-0-0-0): size 70 (cls: S_Elevation_Ground_Z_High295>FortStaticMeshActor>/Script/FortniteGame):
+	S_Elevation_Ground_Z_High295 (0-0-0-0): size 96 (cls: S_Elevation_Ground_Z_High295>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Elevation_Ground_Z_High297 (0-0-0-0): size 70 (cls: S_Elevation_Ground_Z_High297>FortStaticMeshActor>/Script/FortniteGame):
+	S_Elevation_Ground_Z_High297 (0-0-0-0): size 96 (cls: S_Elevation_Ground_Z_High297>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Elevation_Ground_Z_High306 (0-0-0-0): size 70 (cls: S_Elevation_Ground_Z_High306>FortStaticMeshActor>/Script/FortniteGame):
+	S_Elevation_Ground_Z_High306 (0-0-0-0): size 96 (cls: S_Elevation_Ground_Z_High306>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Elevation_Ground_Z_High328 (0-0-0-0): size 70 (cls: S_Elevation_Ground_Z_High328>FortStaticMeshActor>/Script/FortniteGame):
+	S_Elevation_Ground_Z_High328 (0-0-0-0): size 96 (cls: S_Elevation_Ground_Z_High328>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Elevation_Ground_Z_High329 (0-0-0-0): size 70 (cls: S_Elevation_Ground_Z_High329>FortStaticMeshActor>/Script/FortniteGame):
+	S_Elevation_Ground_Z_High329 (0-0-0-0): size 96 (cls: S_Elevation_Ground_Z_High329>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Elevation_Ground_Z_High330 (0-0-0-0): size 70 (cls: S_Elevation_Ground_Z_High330>FortStaticMeshActor>/Script/FortniteGame):
+	S_Elevation_Ground_Z_High330 (0-0-0-0): size 96 (cls: S_Elevation_Ground_Z_High330>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Elevation_Ground_Z_High331 (0-0-0-0): size 70 (cls: S_Elevation_Ground_Z_High331>FortStaticMeshActor>/Script/FortniteGame):
+	S_Elevation_Ground_Z_High331 (0-0-0-0): size 96 (cls: S_Elevation_Ground_Z_High331>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Elevation_Ground_Z_High332 (0-0-0-0): size 70 (cls: S_Elevation_Ground_Z_High332>FortStaticMeshActor>/Script/FortniteGame):
+	S_Elevation_Ground_Z_High332 (0-0-0-0): size 96 (cls: S_Elevation_Ground_Z_High332>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	S_Elevation_Ground_Z_High333 (0-0-0-0): size 70 (cls: S_Elevation_Ground_Z_High333>FortStaticMeshActor>/Script/FortniteGame):
+	S_Elevation_Ground_Z_High333 (0-0-0-0): size 96 (cls: S_Elevation_Ground_Z_High333>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-	Sign_NoDancing_13 (0-0-0-0): size 70 (cls: Sign_NoDancing_13>FortStaticMeshActor>/Script/FortniteGame):
+	Sign_NoDancing_13 (0-0-0-0): size 96 (cls: Sign_NoDancing_13>FortStaticMeshActor>/Script/FortniteGame):
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
+			bCanBeInCluster(BoolProperty)=True 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
 	FortWorldSettings_11 (0-0-0-0): size 942 (cls: FortWorldSettings_11>FortWorldSettings>/Script/FortniteGame):
 		Tag array:
@@ -867,7 +974,7 @@ Serialized exports:
 	PersistentLevel (0-0-0-0): size 809 (cls: PersistentLevel>Level>/Script/Engine):
 		Tag array:
 			Model(ObjectProperty)=Model_13=Athena_POI_Mesa_002 
-			LevelScriptActor(ObjectProperty)=Athena_POI_Mesa_002_C_0=Athena_POI_Mesa_002 
+			LevelScriptActor(ObjectProperty)=Athena_POI_Mesa_002_C_1=Athena_POI_Mesa_002 
 			LevelBuildDataId(StructProperty)=Guid: 4107366287-1249468569-503111087-2149751224 
 			WorldSettings(ObjectProperty)=FortWorldSettings_11=Athena_POI_Mesa_002 
 	LevelBounds_2 (0-0-0-0): size 41 (cls: LevelBounds_2>LevelBounds>/Script/Engine):
@@ -877,7 +984,7 @@ Serialized exports:
 		Tag array:
 			StaticMeshComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
 			Proxy(ObjectProperty)=Athena_POI_Mesa_002_0_HLOD=/Game/Athena/Maps/POI/HLOD/Athena_POI_Mesa_002_0_HLOD 
-			Key(NameProperty)=76927B120C6645ACB9200E7FB8896AC3_FC64D4F24F330402C00B2593CEBA3DE5_4EC1D4D4_B01D5777_4D3F45A4_ProxyLODMeshReduction 
+			Key(NameProperty)=76927B120C6645ACB9200E7FB8896AC3_FC64D4F24F330402C00B2593CEBA3DE5_DD477D99_B01D5777_2FA456D5_ProxyLODMeshReduction 
 			LODDrawDistance(FloatProperty)=13742.55 
 			LODLevel(IntProperty)=1 
 			SubActors(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -961,6 +1068,13 @@ Serialized exports:
 			CullDistance(FloatProperty)=0 
 			RootComponent(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
 	RootComponent0 (0-0-0-0): size 12 (cls: RootComponent0>SceneComponent>/Script/Engine)
+	DefaultSceneRoot (0-0-0-0): size 557 (cls: DefaultSceneRoot>SceneComponent>/Script/Engine):
+		Tag array:
+			RelativeLocation(StructProperty)=Vector(-252,928,388) 
+			RelativeRotation(StructProperty)=Rotator(0,-33.75598,0) 
+			bNetAddressable(BoolProperty)=True 
+			CreationMethod(EnumProperty)=EComponentCreationMethod::SimpleConstructionScript 
+			UCSModifiedProperties(ArrayProperty)=[object] (inner: StructProperty)
 	StaticMeshComponent0 (0-0-0-0): size 298 (cls: StaticMeshComponent0>StaticMeshComponent>/Script/Engine):
 		Tag array:
 			OverrideMaterials(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -1003,12 +1117,26 @@ Serialized exports:
 			CachedMaxDrawDistance(FloatProperty)=2800 
 			RelativeLocation(StructProperty)=Vector(-783.4648,1133.631,388) 
 			RelativeRotation(StructProperty)=Rotator(0,-73.52528,0) 
-	StaticMeshComponent0 (0-0-0-0): size 208 (cls: StaticMeshComponent0>StaticMeshComponent>/Script/Engine):
+	Cylinder (0-0-0-0): size 141 (cls: Cylinder>StaticMeshComponent>/Script/Engine):
 		Tag array:
-			OverrideMaterials(ArrayProperty)=[object] (inner: ObjectProperty)
-			LODParentPrimitive(ObjectProperty)=StaticMeshComponent0=Athena_POI_Mesa_002 
-			RelativeLocation(StructProperty)=Vector(-252.4512,928.5059,388) 
-			RelativeRotation(StructProperty)=Rotator(0,-33.75597,0) 
+			CachedMaxDrawDistance(FloatProperty)=11789.57 
+			AttachParent(ObjectProperty)=DefaultSceneRoot=Athena_POI_Mesa_002 
+			bNetAddressable(BoolProperty)=True 
+			CreationMethod(EnumProperty)=EComponentCreationMethod::SimpleConstructionScript 
+	FirePitEmpty (0-0-0-0): size 141 (cls: FirePitEmpty>StaticMeshComponent>/Script/Engine):
+		Tag array:
+			CachedMaxDrawDistance(FloatProperty)=11789.57 
+			AttachParent(ObjectProperty)=DefaultSceneRoot=Athena_POI_Mesa_002 
+			bNetAddressable(BoolProperty)=True 
+			CreationMethod(EnumProperty)=EComponentCreationMethod::SimpleConstructionScript 
+	Wood (0-0-0-0): size 448 (cls: Wood>StaticMeshComponent>/Script/Engine):
+		Tag array:
+			CachedMaxDrawDistance(FloatProperty)=11789.57 
+			BodyInstance(StructProperty)=System.Byte[] 
+			AttachParent(ObjectProperty)=DefaultSceneRoot=Athena_POI_Mesa_002 
+			bNetAddressable(BoolProperty)=True 
+			CreationMethod(EnumProperty)=EComponentCreationMethod::SimpleConstructionScript 
+			UCSModifiedProperties(ArrayProperty)=[object] (inner: StructProperty)
 	StaticMeshComponent0 (0-0-0-0): size 208 (cls: StaticMeshComponent0>StaticMeshComponent>/Script/Engine):
 		Tag array:
 			OverrideMaterials(ArrayProperty)=[object] (inner: ObjectProperty)

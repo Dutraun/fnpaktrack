@@ -3,8 +3,10 @@ Name table:
 	/Game/Athena/HUD/LTM/Playground/PerformanceHUD.PerformanceHUD_C
 	/Game/Athena/HUD/LTM/Playground/PlaygroundHUD_Radio
 	/Game/Athena/HUD/LTM/Playground/PlaygroundHUD_Radio.PlaygroundHUD_Radio_C
+	/Game/Athena/Items/Traps/GameInventoryToy/TID_Floor_GameStartingInventory
 	/Game/Athena/Items/Traps/MinigameSpawner/TID_Floor_Minigame_Spawner
 	/Game/Athena/Items/Traps/TID_Floor_Backup
+	/Game/Athena/Items/Traps/TID_Floor_BarrierDevice
 	/Game/Athena/Items/Traps/TID_Floor_BiplaneSpawner
 	/Game/Athena/Items/Traps/TID_Floor_DamageRailFull
 	/Game/Athena/Items/Traps/TID_Floor_DamageRailHalf
@@ -17,6 +19,7 @@ Name table:
 	/Game/Athena/Items/Traps/TID_Floor_Scoreboard
 	/Game/Athena/Items/Traps/TID_Floor_ShoppingCartSpawner
 	/Game/Athena/Items/Traps/TID_Floor_SpeedBoost
+	/Game/Athena/Items/Traps/TID_Floor_SpeedIncrease
 	/Game/Athena/Items/Traps/TID_Floor_Toy_Siren
 	/Game/Athena/Items/Traps/TID_Floor_VehicleSpawner
 	/Game/Athena/Items/Traps/TID_Floor_WaypointDispenser
@@ -28,6 +31,10 @@ Name table:
 	/Game/Athena/Maps/Athena_Playground.Athena_Playground
 	/Game/Athena/Playlists/Creative/AthenaCompositeGD_Creative
 	/Game/Athena/Playlists/Creative/AthenaCompositeGD_Creative.AthenaCompositeGD_Creative
+	/Game/Athena/Playlists/Creative/AthenaCompositeLPCreative
+	/Game/Athena/Playlists/Creative/AthenaCompositeLPCreative.AthenaCompositeLPCreative
+	/Game/Athena/Playlists/Creative/AthenaCompositeLTDCreative
+	/Game/Athena/Playlists/Creative/AthenaCompositeLTDCreative.AthenaCompositeLTDCreative
 	/Game/Athena/Playlists/Creative/Creative_UserKnobsModifier
 	/Game/Athena/Playlists/Creative/Creative_UserKnobsModifier.Creative_UserKnobsModifier
 	/Game/Athena/Playlists/Creative/CreativeModifiers
@@ -35,10 +42,6 @@ Name table:
 	/Game/Athena/Playlists/Creative/MissionGen_CreativeTestIsland
 	/Game/Athena/Playlists/Creative/Playlist_PlaygroundV2
 	/Game/Athena/Playlists/Creative/UserKnobs/Creative_UserKnobsV2
-	/Game/Athena/Playlists/Playground/AthenaLootPackages_Client
-	/Game/Athena/Playlists/Playground/AthenaLootPackages_Client.AthenaLootPackages_Client
-	/Game/Athena/Playlists/Playground/AthenaLootTierData_Client
-	/Game/Athena/Playlists/Playground/AthenaLootTierData_Client.AthenaLootTierData_Client
 	/Game/Athena/Playlists/Playground/AthenaResourceRates
 	/Game/Athena/Playlists/Playground/AthenaResourceRates.AthenaResourceRates
 	/Game/Athena/Playlists/Playground/ResourceCapModifier
@@ -62,6 +65,7 @@ Name table:
 	bAllowTeamSwitching
 	bDrawLineToStormCircleIfOutside
 	bEnableCreativeMode
+	bForceCameraFadeOnRespawn
 	bIgnoreDefaultQuests
 	BlueprintGeneratedClass
 	BoolProperty
@@ -118,6 +122,7 @@ Name table:
 	MaxTeamCount
 	MaxTeamSize
 	MinPlayers
+	MinTimeBeforeRespawnCameraFade
 	MissionGen_CreativeTestIsland_C
 	ModifierList
 	NameProperty
@@ -135,6 +140,8 @@ Name table:
 	PlaylistUserOptions
 	ResourceRates
 	RespawnHeight
+	RespawnLevelStreamDistanceToForceSceenFade
+	RespawnTime
 	RespawnType
 	RewardPlacementBonusType
 	RewardsPlacementThreshold
@@ -148,10 +155,12 @@ Name table:
 	StructProperty
 	TextProperty
 	TID_Floor_Backup
+	TID_Floor_BarrierDevice
 	TID_Floor_BiplaneSpawner
 	TID_Floor_DamageRailFull
 	TID_Floor_DamageRailHalf
 	TID_Floor_EliminationZone
+	TID_Floor_GameStartingInventory
 	TID_Floor_GolfCartSpawner
 	TID_Floor_Minigame_Spawner
 	TID_Floor_Minigame_Start_Plate
@@ -161,6 +170,7 @@ Name table:
 	TID_Floor_Scoreboard
 	TID_Floor_ShoppingCartSpawner
 	TID_Floor_SpeedBoost
+	TID_Floor_SpeedIncrease
 	TID_Floor_Toy_Siren
 	TID_Floor_VehicleSpawner
 	TID_Floor_WaypointDispenser
@@ -176,7 +186,7 @@ Name table:
 	WidgetClass
 	WinConditionType
 Serialized exports:
-	Playlist_PlaygroundV2 (0-0-0-0): size 2559 (cls: Playlist_PlaygroundV2>FortPlaylistAthena>/Script/FortniteGame):
+	Playlist_PlaygroundV2 (0-0-0-0): size 2798 (cls: Playlist_PlaygroundV2>FortPlaylistAthena>/Script/FortniteGame):
 		Tag array:
 			bRewardsTrackPlacement(BoolProperty)=False 
 			bRewardsAllowXPProgression(BoolProperty)=False 
@@ -188,9 +198,13 @@ Serialized exports:
 			WinConditionType(EnumProperty)=EAthenaWinCondition::LastManStandingIncludingAllies 
 			bShouldSpreadTeams(BoolProperty)=False 
 			bIgnoreDefaultQuests(BoolProperty)=True 
+			bForceCameraFadeOnRespawn(BoolProperty)=False 
+			MinTimeBeforeRespawnCameraFade(FloatProperty)=0.1 
 			RespawnType(EnumProperty)=EAthenaRespawnType::InfiniteRespawnExceptStorm 
 			RespawnHeight(StructProperty)=System.Byte[] 
 			MaxRespawnHeight(StructProperty)=System.Byte[] 
+			RespawnTime(StructProperty)=System.Byte[] 
+			RespawnLevelStreamDistanceToForceSceenFade(StructProperty)=System.Byte[] 
 			PlaylistMissionGen(ObjectProperty)=MissionGen_CreativeTestIsland_C=/Game/Athena/Playlists/Creative/MissionGen_CreativeTestIsland 
 			UIExtensions(ArrayProperty)=[object] (inner: StructProperty)
 			StormEffectDelay(FloatProperty)=3240 
@@ -222,8 +236,8 @@ Serialized exports:
 			UIDisplayName(TextProperty)=Creative (F98FE95A467ADC16FD7C86819BEDA448) 
 			UIDescription(TextProperty)=Design games with friends, race around your island or build your dream Fortnite. Your island. Your friends. Your rules. (0E109D114BA66D2D32B7CE8C9C4BA4AA) 
 			HUDElementsToHide(StructProperty)=GameplayTagContainer:HUD.Athena.PlayersLeft 
-			LootTierData(SoftObjectProperty)=/Game/Athena/Playlists/Playground/AthenaLootTierData_Client.AthenaLootTierData_Client 
-			LootPackages(SoftObjectProperty)=/Game/Athena/Playlists/Playground/AthenaLootPackages_Client.AthenaLootPackages_Client 
+			LootTierData(SoftObjectProperty)=/Game/Athena/Playlists/Creative/AthenaCompositeLTDCreative.AthenaCompositeLTDCreative 
+			LootPackages(SoftObjectProperty)=/Game/Athena/Playlists/Creative/AthenaCompositeLPCreative.AthenaCompositeLPCreative 
 			GameData(SoftObjectProperty)=/Game/Athena/Playlists/Creative/AthenaCompositeGD_Creative.AthenaCompositeGD_Creative 
 			ResourceRates(SoftObjectProperty)=/Game/Athena/Playlists/Playground/AthenaResourceRates.AthenaResourceRates 
 			GarbageCollectionFrequency(FloatProperty)=900 

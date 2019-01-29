@@ -36,6 +36,7 @@ Name table:
 	Add_VectorVector
 	AllNodes
 	AlmostLanded
+	Analytics
 	AreaClass
 	Array_Get
 	Array_Length
@@ -138,6 +139,7 @@ Name table:
 	CallFunc_EvaluateCurveTableRow_OutXY1
 	CallFunc_EvaluateCurveTableRow_ReturnValue
 	CallFunc_EvaluateCurveTableRow_ReturnValue1
+	CallFunc_GetController_ReturnValue
 	CallFunc_GetLootLevel_ReturnValue
 	CallFunc_GetLootSpawnLocation_LootSpawnLocation
 	CallFunc_GetSupplyDropSpawnData_MaxSpawnHeight
@@ -346,6 +348,7 @@ Name table:
 	FortMetaNavArea_Obstacles
 	FortPawn
 	FortPickup
+	FortPlayerController
 	FortProjectileBase
 	FortRemoteControlledPawnAthena
 	FortSpectateClickableMapIcon
@@ -359,6 +362,7 @@ Name table:
 	GameplayStatics
 	GameplayTag
 	GameplayTagContainer
+	GetController
 	GetLootLevel
 	GetLootSpawnLocation
 	GetSupplyDropSpawnData
@@ -385,6 +389,7 @@ Name table:
 	IsDedicatedServer
 	IsValid
 	ItemDefinition
+	ItemsToSpawn
 	K2_AttachToComponent
 	K2_ClearTimer
 	K2_DestroyActor
@@ -412,6 +417,7 @@ Name table:
 	K2Node_CustomEvent_Momentum
 	K2Node_DynamicCast_AsAthena_Supply_Drop_Balloon
 	K2Node_DynamicCast_AsBuilding_Actor
+	K2Node_DynamicCast_AsFort_Player_Controller
 	K2Node_DynamicCast_AsFort_Projectile_Base
 	K2Node_DynamicCast_AsFort_Remote_Controlled_Pawn_Athena
 	K2Node_DynamicCast_AsFort_World_Item_Definition
@@ -553,6 +559,7 @@ Name table:
 	SearchSpeed
 	SearchSpeedNormal
 	SelectRotator
+	SendSpawnLootAnalytics
 	ServoAudio_GEN_VARIABLE
 	SetActorEnableCollision
 	SetActorHiddenInGame
@@ -624,7 +631,7 @@ Name table:
 	Z
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	AthenaSupplyDrop_C (0-0-0-0): size 910 (cls: AthenaSupplyDrop_C>BlueprintGeneratedClass>/Script/Engine):
+	AthenaSupplyDrop_C (0-0-0-0): size 926 (cls: AthenaSupplyDrop_C>BlueprintGeneratedClass>/Script/Engine):
 		Tag array:
 			NumReplicatedProperties(IntProperty)=5 
 			bHasCookedComponentInstancingData(BoolProperty)=True 
@@ -695,7 +702,7 @@ Serialized exports:
 	InteractingPawn (0-0-0-0): size 36 (cls: InteractingPawn>ObjectProperty>/Script/CoreUObject)
 	BlueprintCanInteract (0-0-0-0): size 152 (cls: BlueprintCanInteract>Function>/Script/CoreUObject)
 	Temp_int_Loop_Counter_Variable (0-0-0-0): size 32 (cls: Temp_int_Loop_Counter_Variable>IntProperty>/Script/CoreUObject)
-	SpawnLoot (0-0-0-0): size 696 (cls: SpawnLoot>Function>/Script/CoreUObject)
+	SpawnLoot (0-0-0-0): size 711 (cls: SpawnLoot>Function>/Script/CoreUObject)
 	LootSpawnLocation (0-0-0-0): size 36 (cls: LootSpawnLocation>StructProperty>/Script/CoreUObject)
 	GetLootSpawnLocation (0-0-0-0): size 236 (cls: GetLootSpawnLocation>Function>/Script/CoreUObject)
 	InteractingPawn (0-0-0-0): size 36 (cls: InteractingPawn>ObjectProperty>/Script/CoreUObject)
@@ -727,9 +734,12 @@ Serialized exports:
 	ForceSetLocationOnLanding (0-0-0-0): size 240 (cls: ForceSetLocationOnLanding>Function>/Script/CoreUObject)
 	ImpactResult (0-0-0-0): size 36 (cls: ImpactResult>StructProperty>/Script/CoreUObject)
 	HandleProjectileMovementStop (0-0-0-0): size 1393 (cls: HandleProjectileMovementStop>Function>/Script/CoreUObject)
-	OnSetCustomDepthStencilValue (0-0-0-0): size 518 (cls: OnSetCustomDepthStencilValue>Function>/Script/CoreUObject)
 	PrimComponents (0-0-0-0): size 36 (cls: PrimComponents>ObjectProperty>/Script/CoreUObject)
 	PrimComponents (0-0-0-0): size 36 (cls: PrimComponents>ArrayProperty>/Script/CoreUObject)
+	OnSetCustomDepthStencilValue (0-0-0-0): size 518 (cls: OnSetCustomDepthStencilValue>Function>/Script/CoreUObject)
+	Analytics (0-0-0-0): size 193 (cls: Analytics>Function>/Script/CoreUObject)
+	ItemsToSpawn (0-0-0-0): size 36 (cls: ItemsToSpawn>StructProperty>/Script/CoreUObject)
+	ItemsToSpawn (0-0-0-0): size 36 (cls: ItemsToSpawn>ArrayProperty>/Script/CoreUObject)
 	CallFunc_PickLootDrops_OutLootToDrop (0-0-0-0): size 36 (cls: CallFunc_PickLootDrops_OutLootToDrop>StructProperty>/Script/CoreUObject)
 	CallFunc_PickLootDrops_OutLootToDrop (0-0-0-0): size 36 (cls: CallFunc_PickLootDrops_OutLootToDrop>ArrayProperty>/Script/CoreUObject)
 	ChildActor_GEN_VARIABLE_AthenaSupplyDropBalloon_C_CAT (0-0-0-0): size 164 (cls: ChildActor_GEN_VARIABLE_AthenaSupplyDropBalloon_C_CAT>AthenaSupplyDropBalloon_C>/Game/Athena/SupplyDrops/AthenaSupplyDropBalloon):
@@ -751,6 +761,8 @@ Serialized exports:
 		Tag array:
 			Sound(ObjectProperty)=Fort_SupplyDrop_Reticle_Loop_Athena_Cue=/Game/Athena/Sounds/SupplyDrops/Fort_SupplyDrop_Reticle_Loop_Athena_Cue 
 			bAutoManageAttachment(BoolProperty)=True 
+	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	AutoOpen (0-0-0-0): size 34 (cls: AutoOpen>BoolProperty>/Script/CoreUObject)
 	BalloonPopped (0-0-0-0): size 34 (cls: BalloonPopped>BoolProperty>/Script/CoreUObject)
 	bGroundLocationInitialized (0-0-0-0): size 34 (cls: bGroundLocationInitialized>BoolProperty>/Script/CoreUObject)
@@ -901,6 +913,8 @@ Serialized exports:
 	LootTableNameToUse (0-0-0-0): size 32 (cls: LootTableNameToUse>NameProperty>/Script/CoreUObject)
 	BoneName (0-0-0-0): size 32 (cls: BoneName>NameProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_HitBoneName (0-0-0-0): size 32 (cls: CallFunc_BreakHitResult_HitBoneName>NameProperty>/Script/CoreUObject)
+	CallFunc_GetController_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetController_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	K2Node_DynamicCast_AsFort_Player_Controller (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Player_Controller>ObjectProperty>/Script/CoreUObject)
 	ChildActor (0-0-0-0): size 36 (cls: ChildActor>ObjectProperty>/Script/CoreUObject)
 	CrateCollision (0-0-0-0): size 36 (cls: CrateCollision>ObjectProperty>/Script/CoreUObject)
 	CrateStaticMesh (0-0-0-0): size 36 (cls: CrateStaticMesh>ObjectProperty>/Script/CoreUObject)

@@ -61,16 +61,14 @@ Name table:
 	BP_ProjectileTrajectory_C
 	bPropagateToVehiclePassengers
 	BreakHitResult
-	BreakRotator
 	bShouldAttachedActorsObstructTarget
+	bSpawnOnEquip
 	bTraceComplexCollision
 	Building_GEN_VARIABLE
 	BuildingProp
 	bUseProjectileRotationForDamageZones
 	bUseTrapsOwningPawnAsInstigator
 	ByteProperty
-	CalcGrenadeSpeedFromPitch
-	CalculateProjectileTrajectorySplineWithHit
 	CallFunc_BeginDeferredActorSpawnFromClass_ReturnValue
 	CallFunc_BooleanOR_ReturnValue
 	CallFunc_BooleanOR_ReturnValue1
@@ -92,27 +90,20 @@ Name table:
 	CallFunc_BreakHitResult_Time
 	CallFunc_BreakHitResult_TraceEnd
 	CallFunc_BreakHitResult_TraceStart
-	CallFunc_BreakRotator_Pitch
-	CallFunc_BreakRotator_Roll
-	CallFunc_BreakRotator_Yaw
-	CallFunc_CalcGrenadeSpeedFromPitch_GrenadeSpeed
-	CallFunc_CalculateProjectileTrajectorySplineWithHit_OutHitResult
-	CallFunc_CalculateProjectileTrajectorySplineWithHit_OutSplinePoints
-	CallFunc_CalculateProjectileTrajectorySplineWithHit_OutSplineTangents
-	CallFunc_Conv_RotatorToVector_ReturnValue
 	CallFunc_FinishSpawningActor_ReturnValue
-	CallFunc_FMax_ReturnValue
 	CallFunc_GetAthenaPlaylistContextTags_ReturnValue
 	CallFunc_GetController_ReturnValue
 	CallFunc_GetGameState_ReturnValue
+	CallFunc_GetOwningPlayer_Player_Pawn
+	CallFunc_GetProjectileTrajectoryPoints_OutHitResult
+	CallFunc_GetProjectileTrajectoryPoints_OutSplinePoints
+	CallFunc_GetProjectileTrajectoryPoints_OutSplineTangents
 	CallFunc_GetTransform_ReturnValue
 	CallFunc_HasTag_ReturnValue
 	CallFunc_IsLocallyControlled_ReturnValue
-	CallFunc_Multiply_VectorFloat_ReturnValue
+	CallFunc_IsValid_ReturnValue
 	CallFunc_Not_PreBool_ReturnValue
-	CallFunc_SelectFloat_ReturnValue
-	CallFunc_SpawnLocationAndRotation_OutLoc
-	CallFunc_SpawnLocationAndRotation_OutRot
+	CallFunc_SpawnTrajectoryIndicator_ReturnValue
 	CapsuleComponent
 	Class
 	ClassProperty
@@ -122,7 +113,6 @@ Name table:
 	ConePitchAngle
 	ConeYawAngle
 	Controller
-	Conv_RotatorToVector
 	Curve
 	CurveTable
 	CurveTableRowHandle
@@ -154,13 +144,6 @@ Name table:
 	Default__StructProperty
 	DefaultSceneRoot_GEN_VARIABLE
 	Direction
-	DummyBounciness
-	DummyExtent
-	DummyFriction
-	DummyGravity
-	DummyMaxSpeed
-	DummyShouldBounce
-	DummyTimeStep
 	EffectContainers
 	EFortAbilityTargetingSource
 	EFortAbilityTargetingSource::Max_None
@@ -180,11 +163,9 @@ Name table:
 	ExecuteUbergraph_GA_Athena_SuperTowerGrenadeWithTrajectory
 	FinishSpawningActor
 	FloatProperty
-	FMax
 	FortAbilityTargetSelection
 	FortAbilityTargetSelectionList
 	FortAthenaSupplyDrop
-	FortGameplayAbility
 	FortGameplayAbilityMontageInfo
 	FortGameplayEffectContainer
 	FortGameStateAthena
@@ -192,6 +173,8 @@ Name table:
 	FortHealthBarComponent
 	FortPawn
 	FortPlayerController
+	FortPlayerPawn
+	FortProjectileTrajectory
 	FortQuestItemDefinition
 	FortTargetFilter
 	Function
@@ -206,16 +189,17 @@ Name table:
 	GetAthenaPlaylistContextTags
 	GetController
 	GetGameState
+	GetOwningPlayer
+	GetProjectileTrajectoryPoints
 	GetTransform
 	GiveQuestUpdateToPlayers
 	GrenadeTargetingOriginOffset
 	HalfExtents
 	HasTag
 	HitResult
-	Instigator
 	IntProperty
 	IsLocallyControlled
-	K2_ActivateAbility
+	IsValid
 	K2_DestroyActor
 	K2Node_DynamicCast_AsAthena_Supply_Drop_Balloon
 	K2Node_DynamicCast_AsBP_Projectile_Trajectory
@@ -240,12 +224,10 @@ Name table:
 	List
 	Location
 	MaxTargets
-	MaxTrajectoryBounces
 	Mesh_GEN_VARIABLE
 	MissionBlueprintFunctionLibrary_C
 	MontageInfo
 	MontageToPlay
-	Multiply_VectorFloat
 	NameProperty
 	NODE_AddSplineMeshComponent-0
 	None
@@ -258,7 +240,6 @@ Name table:
 	ParticleSystemComponent
 	Pawn
 	PhysicalMaterial
-	PlayerPawn
 	PointerToUberGraphFrame
 	PostThrowCancelDelay
 	PrimarySource
@@ -271,6 +252,7 @@ Name table:
 	Quest_BR_Use_PortaFort
 	QuestItemUsePortafort
 	Range
+	ReturnValue
 	RotatingMovement_GEN_VARIABLE
 	RotatingMovementComponent
 	Rotator
@@ -279,15 +261,13 @@ Name table:
 	SceneComponent
 	ScriptStruct
 	SecondarySource
-	SelectFloat
 	Server_SpawnProjectile
 	SetActorHiddenInGame
-	SetObjectPropertyByName
 	SetTrajectorySpline
 	SetupDummyProjectileRed
 	Shape
 	SM_BuildingPreview_GEN_VARIABLE
-	SpawnLocationAndRotation
+	SpawnTrajectoryIndicator
 	Spline_GEN_VARIABLE
 	SplineComponent
 	SplineMeshComponent
@@ -338,11 +318,11 @@ Serialized exports:
 			MontageInfo(StructProperty)=System.Byte[] 
 	ProjectileTrajectoryRed (0-0-0-0): size 36 (cls: ProjectileTrajectoryRed>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_GA_Athena_SuperTowerGrenadeWithTrajectory (0-0-0-0): size 2258 (cls: ExecuteUbergraph_GA_Athena_SuperTowerGrenadeWithTrajectory>Function>/Script/CoreUObject)
-	CallFunc_CalculateProjectileTrajectorySplineWithHit_OutSplinePoints (0-0-0-0): size 36 (cls: CallFunc_CalculateProjectileTrajectorySplineWithHit_OutSplinePoints>StructProperty>/Script/CoreUObject)
-	CallFunc_CalculateProjectileTrajectorySplineWithHit_OutSplinePoints (0-0-0-0): size 36 (cls: CallFunc_CalculateProjectileTrajectorySplineWithHit_OutSplinePoints>ArrayProperty>/Script/CoreUObject)
-	CallFunc_CalculateProjectileTrajectorySplineWithHit_OutSplineTangents (0-0-0-0): size 36 (cls: CallFunc_CalculateProjectileTrajectorySplineWithHit_OutSplineTangents>StructProperty>/Script/CoreUObject)
-	CallFunc_CalculateProjectileTrajectorySplineWithHit_OutSplineTangents (0-0-0-0): size 36 (cls: CallFunc_CalculateProjectileTrajectorySplineWithHit_OutSplineTangents>ArrayProperty>/Script/CoreUObject)
+	ExecuteUbergraph_GA_Athena_SuperTowerGrenadeWithTrajectory (0-0-0-0): size 1992 (cls: ExecuteUbergraph_GA_Athena_SuperTowerGrenadeWithTrajectory>Function>/Script/CoreUObject)
+	CallFunc_GetProjectileTrajectoryPoints_OutSplinePoints (0-0-0-0): size 36 (cls: CallFunc_GetProjectileTrajectoryPoints_OutSplinePoints>StructProperty>/Script/CoreUObject)
+	CallFunc_GetProjectileTrajectoryPoints_OutSplinePoints (0-0-0-0): size 36 (cls: CallFunc_GetProjectileTrajectoryPoints_OutSplinePoints>ArrayProperty>/Script/CoreUObject)
+	CallFunc_GetProjectileTrajectoryPoints_OutSplineTangents (0-0-0-0): size 36 (cls: CallFunc_GetProjectileTrajectoryPoints_OutSplineTangents>StructProperty>/Script/CoreUObject)
+	CallFunc_GetProjectileTrajectoryPoints_OutSplineTangents (0-0-0-0): size 36 (cls: CallFunc_GetProjectileTrajectoryPoints_OutSplineTangents>ArrayProperty>/Script/CoreUObject)
 	K2Node_MakeArray_Array (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array>ObjectProperty>/Script/CoreUObject)
 	K2Node_MakeArray_Array (0-0-0-0): size 36 (cls: K2Node_MakeArray_Array>ArrayProperty>/Script/CoreUObject)
 	CallFunc_BooleanOR_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanOR_ReturnValue>BoolProperty>/Script/CoreUObject)
@@ -352,7 +332,6 @@ Serialized exports:
 	CallFunc_BreakHitResult_bBlockingHit (0-0-0-0): size 34 (cls: CallFunc_BreakHitResult_bBlockingHit>BoolProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_bInitialOverlap (0-0-0-0): size 34 (cls: CallFunc_BreakHitResult_bInitialOverlap>BoolProperty>/Script/CoreUObject)
 	CallFunc_HasTag_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasTag_ReturnValue>BoolProperty>/Script/CoreUObject)
-	CallFunc_IsLocallyControlled_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsLocallyControlled_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Not_PreBool_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Not_PreBool_ReturnValue>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess1 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess1>BoolProperty>/Script/CoreUObject)
@@ -362,23 +341,20 @@ Serialized exports:
 	K2Node_DynamicCast_bSuccess5 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess5>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable1 (0-0-0-0): size 34 (cls: Temp_bool_Variable1>BoolProperty>/Script/CoreUObject)
+	CleanupTrajectoryDisplay (0-0-0-0): size 54 (cls: CleanupTrajectoryDisplay>Function>/Script/CoreUObject)
 	UpdateTrajectorySpline (0-0-0-0): size 54 (cls: UpdateTrajectorySpline>Function>/Script/CoreUObject)
 	Location (0-0-0-0): size 36 (cls: Location>StructProperty>/Script/CoreUObject)
 	Server_SpawnProjectile (0-0-0-0): size 84 (cls: Server_SpawnProjectile>Function>/Script/CoreUObject)
-	CleanupTrajectoryDisplay (0-0-0-0): size 54 (cls: CleanupTrajectoryDisplay>Function>/Script/CoreUObject)
-	K2_ActivateAbility (0-0-0-0): size 54 (cls: K2_ActivateAbility>Function>/Script/CoreUObject)
-	CallFunc_GetTransform_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetTransform_ReturnValue>StructProperty>/Script/CoreUObject)
-	SetupDummyProjectileRed (0-0-0-0): size 296 (cls: SetupDummyProjectileRed>Function>/Script/CoreUObject)
+	CallFunc_GetOwningPlayer_Player_Pawn (0-0-0-0): size 36 (cls: CallFunc_GetOwningPlayer_Player_Pawn>ObjectProperty>/Script/CoreUObject)
+	SetupDummyProjectileRed (0-0-0-0): size 341 (cls: SetupDummyProjectileRed>Function>/Script/CoreUObject)
+	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
+	SpawnTrajectoryIndicator (0-0-0-0): size 160 (cls: SpawnTrajectoryIndicator>Function>/Script/CoreUObject)
+	bSpawnOnEquip (0-0-0-0): size 34 (cls: bSpawnOnEquip>BoolProperty>/Script/CoreUObject)
+	CallFunc_IsLocallyControlled_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsLocallyControlled_ReturnValue>BoolProperty>/Script/CoreUObject)
 	TrajectoryIndicatorRedClass (0-0-0-0): size 40 (cls: TrajectoryIndicatorRedClass>ClassProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_Distance (0-0-0-0): size 32 (cls: CallFunc_BreakHitResult_Distance>FloatProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_Time (0-0-0-0): size 32 (cls: CallFunc_BreakHitResult_Time>FloatProperty>/Script/CoreUObject)
-	CallFunc_BreakRotator_Pitch (0-0-0-0): size 32 (cls: CallFunc_BreakRotator_Pitch>FloatProperty>/Script/CoreUObject)
-	CallFunc_BreakRotator_Roll (0-0-0-0): size 32 (cls: CallFunc_BreakRotator_Roll>FloatProperty>/Script/CoreUObject)
-	CallFunc_BreakRotator_Yaw (0-0-0-0): size 32 (cls: CallFunc_BreakRotator_Yaw>FloatProperty>/Script/CoreUObject)
-	CallFunc_CalcGrenadeSpeedFromPitch_GrenadeSpeed (0-0-0-0): size 32 (cls: CallFunc_CalcGrenadeSpeedFromPitch_GrenadeSpeed>FloatProperty>/Script/CoreUObject)
-	CallFunc_FMax_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_FMax_ReturnValue>FloatProperty>/Script/CoreUObject)
-	CallFunc_SelectFloat_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_SelectFloat_ReturnValue>FloatProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_FaceIndex (0-0-0-0): size 32 (cls: CallFunc_BreakHitResult_FaceIndex>IntProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_HitItem (0-0-0-0): size 32 (cls: CallFunc_BreakHitResult_HitItem>IntProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_HitBoneName (0-0-0-0): size 32 (cls: CallFunc_BreakHitResult_HitBoneName>NameProperty>/Script/CoreUObject)
@@ -387,6 +363,7 @@ Serialized exports:
 	CallFunc_BreakHitResult_PhysMat (0-0-0-0): size 36 (cls: CallFunc_BreakHitResult_PhysMat>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetController_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetController_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetGameState_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetGameState_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetOwningPlayer_Player_Pawn (0-0-0-0): size 36 (cls: CallFunc_GetOwningPlayer_Player_Pawn>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsAthena_Supply_Drop_Balloon (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsAthena_Supply_Drop_Balloon>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsBuilding_Prop (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsBuilding_Prop>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Athena_Supply_Drop (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Athena_Supply_Drop>ObjectProperty>/Script/CoreUObject)
@@ -399,19 +376,19 @@ Serialized exports:
 	CallFunc_BeginDeferredActorSpawnFromClass_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_BeginDeferredActorSpawnFromClass_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_FinishSpawningActor_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_FinishSpawningActor_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsBP_Projectile_Trajectory (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsBP_Projectile_Trajectory>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetOwningPlayer_Player_Pawn (0-0-0-0): size 36 (cls: CallFunc_GetOwningPlayer_Player_Pawn>ObjectProperty>/Script/CoreUObject)
+	CallFunc_SpawnTrajectoryIndicator_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_SpawnTrajectoryIndicator_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	ReturnValue (0-0-0-0): size 36 (cls: ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_ImpactNormal (0-0-0-0): size 36 (cls: CallFunc_BreakHitResult_ImpactNormal>StructProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_ImpactPoint (0-0-0-0): size 36 (cls: CallFunc_BreakHitResult_ImpactPoint>StructProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_Location (0-0-0-0): size 36 (cls: CallFunc_BreakHitResult_Location>StructProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_Normal (0-0-0-0): size 36 (cls: CallFunc_BreakHitResult_Normal>StructProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_TraceEnd (0-0-0-0): size 36 (cls: CallFunc_BreakHitResult_TraceEnd>StructProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_TraceStart (0-0-0-0): size 36 (cls: CallFunc_BreakHitResult_TraceStart>StructProperty>/Script/CoreUObject)
-	CallFunc_CalculateProjectileTrajectorySplineWithHit_OutHitResult (0-0-0-0): size 36 (cls: CallFunc_CalculateProjectileTrajectorySplineWithHit_OutHitResult>StructProperty>/Script/CoreUObject)
-	CallFunc_Conv_RotatorToVector_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_Conv_RotatorToVector_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_GetAthenaPlaylistContextTags_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetAthenaPlaylistContextTags_ReturnValue>StructProperty>/Script/CoreUObject)
-	CallFunc_Multiply_VectorFloat_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_Multiply_VectorFloat_ReturnValue>StructProperty>/Script/CoreUObject)
-	CallFunc_SpawnLocationAndRotation_OutLoc (0-0-0-0): size 36 (cls: CallFunc_SpawnLocationAndRotation_OutLoc>StructProperty>/Script/CoreUObject)
-	CallFunc_SpawnLocationAndRotation_OutRot (0-0-0-0): size 36 (cls: CallFunc_SpawnLocationAndRotation_OutRot>StructProperty>/Script/CoreUObject)
+	CallFunc_GetProjectileTrajectoryPoints_OutHitResult (0-0-0-0): size 36 (cls: CallFunc_GetProjectileTrajectoryPoints_OutHitResult>StructProperty>/Script/CoreUObject)
 	K2Node_Event_Direction (0-0-0-0): size 36 (cls: K2Node_Event_Direction>StructProperty>/Script/CoreUObject)
 	K2Node_Event_Location (0-0-0-0): size 36 (cls: K2Node_Event_Location>StructProperty>/Script/CoreUObject)
 	ObjectiveStat (0-0-0-0): size 36 (cls: ObjectiveStat>StructProperty>/Script/CoreUObject)
 	Direction (0-0-0-0): size 36 (cls: Direction>StructProperty>/Script/CoreUObject)
+	CallFunc_GetTransform_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetTransform_ReturnValue>StructProperty>/Script/CoreUObject)

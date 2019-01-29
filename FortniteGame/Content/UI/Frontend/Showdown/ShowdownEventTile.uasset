@@ -34,6 +34,7 @@ Name table:
 	ArrayProperty
 	ArriveTangent
 	ArriveTangentWeight
+	AutoWrapText
 	bAllowTemplate
 	bCookedWidgetTree
 	bEvaluateInPostroll
@@ -225,6 +226,7 @@ Name table:
 	Default__SizeBoxSlot
 	Default__StrProperty
 	Default__StructProperty
+	Default__TextBlock
 	Default__VerticalBox
 	Default__VerticalBoxSlot
 	Default__WidgetAnimation
@@ -281,6 +283,8 @@ Name table:
 	ETextJustify
 	ETextJustify::Center
 	ETextJustify::Right
+	ETextWrappingPolicy
+	ETextWrappingPolicy::AllowPerCharacterWrapping
 	ETimespanAsTextFormat
 	ETimespanAsTextFormat::Approximate
 	ETransitionCurve
@@ -620,7 +624,9 @@ Name table:
 	TemplateLedger
 	TemplateSerialNumber
 	Text
+	Text_DebugId
 	Text_TimeRemaining
+	TextBlock
 	TextProperty
 	TickResolution
 	TimeDescriptionText
@@ -681,6 +687,8 @@ Name table:
 	WidgetTransform
 	WidgetTree
 	WidthOverride
+	WrappingPolicy
+	WrapTextAt
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
 	ShowdownEventTile_C (0-0-0-0): size 604 (cls: ShowdownEventTile_C>WidgetBlueprintGeneratedClass>/Script/UMG):
@@ -746,8 +754,9 @@ Serialized exports:
 	Temp_bool_Variable6 (0-0-0-0): size 34 (cls: Temp_bool_Variable6>BoolProperty>/Script/CoreUObject)
 	isEnded (0-0-0-0): size 34 (cls: isEnded>BoolProperty>/Script/CoreUObject)
 	isLive (0-0-0-0): size 34 (cls: isLive>BoolProperty>/Script/CoreUObject)
-	BorderSlot_0 (0-0-0-0): size 70 (cls: BorderSlot_0>BorderSlot>/Script/UMG):
+	BorderSlot_0 (0-0-0-0): size 243 (cls: BorderSlot_0>BorderSlot>/Script/UMG):
 		Tag array:
+			Padding(StructProperty)=System.Byte[] 
 			Parent(ObjectProperty)=CommonFocusBorder=WidgetArchetype 
 			Content(ObjectProperty)=Overlay_InnerContainer=WidgetArchetype 
 	BorderSlot_0 (0-0-0-0): size 243 (cls: BorderSlot_0>BorderSlot>/Script/UMG):
@@ -782,8 +791,9 @@ Serialized exports:
 			Slot(ObjectProperty)=OverlaySlot_3=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
 			Visibility(EnumProperty)=ESlateVisibility::Collapsed 
-	CommonFocusBorder (0-0-0-0): size 82 (cls: CommonFocusBorder>CommonBorder>/Script/CommonUI):
+	CommonFocusBorder (0-0-0-0): size 255 (cls: CommonFocusBorder>CommonBorder>/Script/CommonUI):
 		Tag array:
+			Padding(StructProperty)=System.Byte[] 
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=OverlaySlot_0=WidgetArchetype 
 	CommonBorder_1 (0-0-0-0): size 255 (cls: CommonBorder_1>CommonBorder>/Script/CommonUI):
@@ -1476,7 +1486,7 @@ Serialized exports:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
 			RenderTransform(StructProperty)=System.Byte[] 
-	Overlay_0 (0-0-0-0): size 82 (cls: Overlay_0>Overlay>/Script/UMG):
+	Overlay_0 (0-0-0-0): size 86 (cls: Overlay_0>Overlay>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
@@ -1571,6 +1581,12 @@ Serialized exports:
 			VerticalAlignment(ByteProperty)=VAlign_Fill 
 			Parent(ObjectProperty)=OverlayBGPlate=WidgetArchetype 
 			Content(ObjectProperty)=Image_Ended=WidgetArchetype 
+	OverlaySlot_1 (0-0-0-0): size 152 (cls: OverlaySlot_1>OverlaySlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Fill 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=Overlay_0=WidgetArchetype 
+			Content(ObjectProperty)=Text_DebugId=WidgetArchetype 
 	OverlaySlot_3 (0-0-0-0): size 152 (cls: OverlaySlot_3>OverlaySlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Fill 
@@ -1735,7 +1751,7 @@ Serialized exports:
 			InputActionWidget(ObjectProperty)=InputActionWidget=WidgetArchetype 
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
-	ShowdownEventTileInfo (0-0-0-0): size 734 (cls: ShowdownEventTileInfo>ShowdownEventTileInfo_C>/Game/UI/Frontend/Showdown/ShowdownEventTileInfo):
+	ShowdownEventTileInfo (0-0-0-0): size 763 (cls: ShowdownEventTileInfo>ShowdownEventTileInfo_C>/Game/UI/Frontend/Showdown/ShowdownEventTileInfo):
 		Tag array:
 			CommonBorder_Date(ObjectProperty)=CommonBorder_Date=WidgetArchetype 
 			CommonBorder_Score(ObjectProperty)=CommonBorder_Score=WidgetArchetype 
@@ -1751,6 +1767,7 @@ Serialized exports:
 			TimeDescriptionText(ObjectProperty)=TimeDescriptionText=WidgetArchetype 
 			TimeDescriptionTextRelative(ObjectProperty)=TimeDescriptionTextRelative=WidgetArchetype 
 			Text_TimeRemaining(ObjectProperty)=Text_TimeRemaining=WidgetArchetype 
+			Text_DebugId(ObjectProperty)=Text_DebugId=WidgetArchetype 
 			TimeRemainingFormat(TextProperty)={0} (84B10A2346841C711155EABC15DB166D) 
 			bTimeRemainingShowSeconds(BoolProperty)=True 
 			TimeRemainingFormatType(EnumProperty)=ETimespanAsTextFormat::Approximate 
@@ -1859,6 +1876,16 @@ Serialized exports:
 	K2Node_CustomEvent_DisplayInfo1 (0-0-0-0): size 36 (cls: K2Node_CustomEvent_DisplayInfo1>StructProperty>/Script/CoreUObject)
 	K2Node_Event_InFocusEvent (0-0-0-0): size 36 (cls: K2Node_Event_InFocusEvent>StructProperty>/Script/CoreUObject)
 	K2Node_Event_InFocusEvent1 (0-0-0-0): size 36 (cls: K2Node_Event_InFocusEvent1>StructProperty>/Script/CoreUObject)
+	Text_DebugId (0-0-0-0): size 654 (cls: Text_DebugId>TextBlock>/Script/UMG):
+		Tag array:
+			Text(TextProperty)=EventId: Event EventWindowId: EventWindow (66ACE3BE42FAE2A615AA7BBA23715C42) 
+			ColorAndOpacity(StructProperty)=System.Byte[] 
+			Font(StructProperty)=System.Byte[] 
+			Justification(ByteProperty)=ETextJustify::Center 
+			WrappingPolicy(EnumProperty)=ETextWrappingPolicy::AllowPerCharacterWrapping 
+			AutoWrapText(BoolProperty)=True 
+			WrapTextAt(FloatProperty)=110 
+			Slot(ObjectProperty)=OverlaySlot_1=WidgetArchetype 
 	VerticalBox_PointValuesProgress (0-0-0-0): size 226 (cls: VerticalBox_PointValuesProgress>VerticalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)

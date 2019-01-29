@@ -30,6 +30,7 @@ Name table:
 	/Game/UI/Foundation/Items/Details/ItemDescriptionDetailWidget
 	/Game/UI/Foundation/Items/Details/ItemDetailsHeader
 	/Game/UI/Foundation/Items/Details/ItemDetailsHeaderItemDisplayText
+	/Game/UI/Foundation/Items/Details/ItemDetailsHeaderKeywordsListText
 	/Game/UI/Foundation/Items/Details/ItemDetailsHeaderRarityTypeText
 	/Game/UI/Foundation/Items/Details/ItemDetailsHeaderTagListText
 	/Game/UI/Foundation/Items/Details/ItemPerksListDetailWidget
@@ -51,11 +52,11 @@ Name table:
 	/Game/UI/Foundation/Text/TextStyle-Base-S-B-S
 	/Game/UI/Foundation/Text/TextStyle-Base-XS-70pc
 	/Game/UI/Foundation/Text/TextStyle-Base-XS-B
+	/Game/UI/Foundation/Text/TextStyle-Base-XS-B-40pc
 	/Game/UI/Foundation/Text/TextStyle-Base-XS-B-70pc
 	/Game/UI/Foundation/Text/TextStyle-Base-XS-B-Black
 	/Game/UI/Foundation/Text/TextStyle-Base-XS-Black
 	/Game/UI/Foundation/Text/TextStyle-Base-XS-I-40pc
-	/Game/UI/Foundation/Text/TextStyle-Header-M
 	/Game/UI/Foundation/Text/TextStyle-Header-S
 	/Game/UI/Foundation/Textures/Buttons/T-SlotIcon-Recycle-64
 	/Game/UI/Foundation/Textures/Icons/PS4Buttons/T_PS4_LStick_Pan
@@ -91,7 +92,6 @@ Name table:
 	01-Summary_SizeBox
 	02-CardSummary_Overlay
 	[SizeBox]
-	Action
 	ActionWidgetSelectPrompt
 	ActiveEntities
 	ActiveSequences
@@ -108,7 +108,6 @@ Name table:
 	AnimationBindings
 	AnimationGuid
 	Animations
-	AnimationToBind
 	ArgumentName
 	ArgumentValue
 	ArgumentValueFloat
@@ -154,7 +153,6 @@ Name table:
 	BlockInput
 	BlueprintContextLibrary
 	BlueprintGeneratedClass
-	BlueprintWidgetAnimationDelegateBinding
 	BlurStrength
 	BooleanAND
 	BooleanOR
@@ -226,6 +224,7 @@ Name table:
 	CallFunc_GetChildrenCount_ReturnValue
 	CallFunc_GetContext_ReturnValue
 	CallFunc_GetContext_ReturnValue1
+	CallFunc_GetContext_ReturnValue2
 	CallFunc_GetCurrentInputType_ReturnValue
 	CallFunc_GetEndTime_ReturnValue
 	CallFunc_GetNumUnopenedCardPacksRemaining_ReturnValue
@@ -235,6 +234,7 @@ Name table:
 	CallFunc_HasAnyChildren_ReturnValue
 	CallFunc_InvertCardArray_MultiplePacks_outStoreCardArray
 	CallFunc_IsAnimationPlaying_ReturnValue
+	CallFunc_IsOpeningDirectPack_ReturnValue
 	CallFunc_Less_IntInt_ReturnValue
 	CallFunc_LessEqual_IntInt_ReturnValue
 	CallFunc_LessEqual_IntInt_ReturnValue1
@@ -267,13 +267,13 @@ Name table:
 	CommonActionWidget
 	CommonActivatablePanel
 	CommonBorder
+	CommonBorderHeading
 	CommonButton
 	CommonInputSubsystem
 	CommonLoadGuard
 	CommonNumericTextBlock
 	CommonTextBlock
 	CommonTileView
-	CommonUISubsystem
 	CommonWidgetSwitcher
 	ComparisonArrowImage
 	CompletionMode
@@ -348,6 +348,7 @@ Name table:
 	Default__ItemDescriptionDetailWidget_C
 	Default__ItemDetailsHeader_C
 	Default__ItemDetailsHeaderItemDisplayText_C
+	Default__ItemDetailsHeaderKeywordsListText_C
 	Default__ItemDetailsHeaderRarityTypeText_C
 	Default__ItemDetailsHeaderTagListText_C
 	Default__ItemDetailsStackCounter_C
@@ -402,20 +403,19 @@ Name table:
 	Default__TextStyle-Base-S-B-S_C
 	Default__TextStyle-Base-S-B_C
 	Default__TextStyle-Base-XS-70pc_C
+	Default__TextStyle-Base-XS-B-40pc_C
 	Default__TextStyle-Base-XS-B-70pc_C
 	Default__TextStyle-Base-XS-B-Black_C
 	Default__TextStyle-Base-XS-B_C
 	Default__TextStyle-Base-XS-Black_C
 	Default__TextStyle-Base-XS-I-40pc_C
 	Default__TextStyle-Base_C
-	Default__TextStyle-Header-M_C
 	Default__TextStyle-Header-S_C
 	Default__TextStyle-MediumButton_C
 	Default__TooltipLibrary_C
 	Default__VerticalBox
 	Default__VerticalBoxSlot
 	Default__WidgetAnimation
-	Default__WidgetAnimationDelegateBinding
 	Default__WidgetBlueprintGeneratedClass
 	Default__WidgetBlueprintLibrary
 	Default__WidgetNavigation
@@ -430,6 +430,7 @@ Name table:
 	DelegateRuntimeBinding
 	Denominator
 	Description Padding
+	Destruct
 	DetailsContainerSlotWidget
 	DisableButtonWithReason
 	DisableReason
@@ -438,7 +439,6 @@ Name table:
 	DotRule
 	Down
 	DrawAs
-	DynamicBindingObjects
 	DynamicPropertyPath
 	EaseIn
 	EaseInFunction
@@ -517,8 +517,6 @@ Name table:
 	EVerticalAlignment
 	EvolutionAndTierBox
 	EvolveIndicator
-	EWidgetAnimationEvent
-	EWidgetAnimationEvent::Finished
 	EWidgetClipping
 	EWidgetClipping::ClipToBounds
 	EWidgetClipping::OnDemand
@@ -527,6 +525,7 @@ Name table:
 	ExtraIndicatorSlot
 	FavoriteIndicator
 	Fill
+	FinishDestroyPack
 	Flags
 	FloatProperty
 	FlyDown
@@ -557,7 +556,6 @@ Name table:
 	FrameRate
 	Function
 	FunctionName
-	FunctionNameToBind
 	Get_CardCount_SizeBox_ToolTipWidget
 	Get_CardPackCount_SizeBox_ToolTipWidget
 	GetCard
@@ -580,9 +578,10 @@ Name table:
 	Handle CardExit State
 	Handle Error State
 	Handle Pack Open State
-	Handle PackDestroy State
 	Handle Summary State
 	Handle SummaryAdd State
+	HandlePackDestroy
+	HandleSummaryAdd
 	HasAnyChildren
 	HasChildren
 	HBoxLStickPlus
@@ -625,7 +624,6 @@ Name table:
 	InputActionDataRow
 	InputActionDataTable
 	InputActionWidget
-	InputMethodChangedDelegate__DelegateSignature
 	inShow
 	InterfaceProperty
 	InterpMode
@@ -635,6 +633,7 @@ Name table:
 	InvertCardArray_MultiplePacks
 	InvertedCardArray
 	IsAnimationPlaying
+	IsOpeningDirectPack
 	ItemAlterationsListDetailWidget
 	ItemAlterationsListDetailWidget_C
 	ItemCalledOutAttributesDetailWidget
@@ -646,6 +645,8 @@ Name table:
 	ItemDetailsHeader_C
 	ItemDetailsHeaderItemDisplayText
 	ItemDetailsHeaderItemDisplayText_C
+	ItemDetailsHeaderKeywordsListText
+	ItemDetailsHeaderKeywordsListText_C
 	ItemDetailsHeaderRarityTypeText
 	ItemDetailsHeaderRarityTypeText_C
 	ItemDetailsHeaderTagListText
@@ -660,12 +661,12 @@ Name table:
 	Justification
 	K2Node_CreateDelegate_OutputDelegate
 	K2Node_CreateDelegate_OutputDelegate1
-	K2Node_CustomEvent_bUsingGamepad
 	K2Node_CustomEvent_NewStoreState
 	K2Node_DynamicCast_AsStore_Item_Card
 	K2Node_DynamicCast_AsStore_Item_Card1
 	K2Node_DynamicCast_bSuccess
 	K2Node_DynamicCast_bSuccess1
+	K2Node_Event_bUsingGamepad
 	K2Node_MakeArray_Array
 	K2Node_MakeStruct_FormatArgumentData
 	K2Node_Select_Default
@@ -795,10 +796,9 @@ Name table:
 	OnBlockInput__DelegateSignature
 	OnFlyUpAndDownFinished
 	OnFlyUpAndDownFinished__DelegateSignature
-	OnInputMethodChanged
-	OnInputMethodChanged_Event
+	OnInputModeChanged
 	OnStoreStateChange
-	OnStoreStateChanged_CustomEvent
+	OnStoreStateChanged
 	OpenAll
 	OrdinalOfCategoryToRepresent
 	OutlineColor
@@ -932,6 +932,7 @@ Name table:
 	Signature
 	Size
 	SizeBox
+	SizeBoxHorizontalLayout
 	SizeBoxSlot
 	SizeRule
 	SlateBrush
@@ -1011,13 +1012,13 @@ Name table:
 	TextStyle-Base-S-B-S_C
 	TextStyle-Base-S-B_C
 	TextStyle-Base-XS-70pc_C
+	TextStyle-Base-XS-B-40pc_C
 	TextStyle-Base-XS-B-70pc_C
 	TextStyle-Base-XS-B-Black_C
 	TextStyle-Base-XS-B_C
 	TextStyle-Base-XS-Black_C
 	TextStyle-Base-XS-I-40pc_C
 	TextStyle-Base_C
-	TextStyle-Header-M_C
 	TextStyle-Header-S_C
 	TextStyle-MediumButton_C
 	TextTertiaryHeader
@@ -1059,7 +1060,6 @@ Name table:
 	UpgradeAndLevelBox
 	UpgradeIndicator
 	UserSpecifiedScale
-	UserTag
 	UserWidget
 	VAlign_Bottom
 	VAlign_Center
@@ -1079,9 +1079,6 @@ Name table:
 	Widget
 	WidgetAnimation
 	WidgetAnimationBinding
-	WidgetAnimationDelegateBinding
-	WidgetAnimationDelegateBindings
-	WidgetAnimationEvt_PackCounter_Appear_Ani_K2Node_WidgetAnimationEvent
 	WidgetArchetype
 	WidgetBlueprintGeneratedClass
 	WidgetBlueprintLibrary
@@ -1096,7 +1093,7 @@ Name table:
 	WrapBox
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	StoreOpeningCardPack_C (0-0-0-0): size 1859 (cls: StoreOpeningCardPack_C>WidgetBlueprintGeneratedClass>/Script/UMG):
+	StoreOpeningCardPack_C (0-0-0-0): size 1850 (cls: StoreOpeningCardPack_C>WidgetBlueprintGeneratedClass>/Script/UMG):
 		Tag array:
 			WidgetTree(ObjectProperty)=[object] 
 			bAllowTemplate(BoolProperty)=True 
@@ -1104,7 +1101,6 @@ Serialized exports:
 			Bindings(ArrayProperty)=[object] (inner: StructProperty)
 			Animations(ArrayProperty)=[object] (inner: ObjectProperty)
 			TemplateAsset(SoftObjectProperty)=/Game/UI/Frontend/Store/StoreOpeningCardPack.WidgetArchetype 
-			DynamicBindingObjects(ArrayProperty)=[object] (inner: ObjectProperty)
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_StoreOpeningCardPack=StoreOpeningCardPack_C 
 	Default__StoreOpeningCardPack_C (0-0-0-0): size 202 (cls: Default__StoreOpeningCardPack_C>StoreOpeningCardPack_C):
 		Tag array:
@@ -1127,15 +1123,17 @@ Serialized exports:
 	IntroDescription (0-0-0-0): size 36 (cls: IntroDescription>ObjectProperty>/Script/CoreUObject)
 	OnBlockInput__DelegateSignature (0-0-0-0): size 43 (cls: OnBlockInput__DelegateSignature>Function>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_StoreOpeningCardPack (0-0-0-0): size 1091 (cls: ExecuteUbergraph_StoreOpeningCardPack>Function>/Script/CoreUObject)
-	WidgetAnimationEvt_PackCounter_Appear_Ani_K2Node_WidgetAnimationEvent_0 (0-0-0-0): size 54 (cls: WidgetAnimationEvt_PackCounter_Appear_Ani_K2Node_WidgetAnimationEvent_0>Function>/Script/CoreUObject)
-	Construct (0-0-0-0): size 54 (cls: Construct>Function>/Script/CoreUObject)
+	ExecuteUbergraph_StoreOpeningCardPack (0-0-0-0): size 1180 (cls: ExecuteUbergraph_StoreOpeningCardPack>Function>/Script/CoreUObject)
+	HandlePackDestroy (0-0-0-0): size 54 (cls: HandlePackDestroy>Function>/Script/CoreUObject)
+	HandleSummaryAdd (0-0-0-0): size 54 (cls: HandleSummaryAdd>Function>/Script/CoreUObject)
 	bUsingGamepad (0-0-0-0): size 34 (cls: bUsingGamepad>BoolProperty>/Script/CoreUObject)
-	OnInputMethodChanged_Event_0 (0-0-0-0): size 68 (cls: OnInputMethodChanged_Event_0>Function>/Script/CoreUObject)
+	OnInputModeChanged (0-0-0-0): size 68 (cls: OnInputModeChanged>Function>/Script/CoreUObject)
+	Destruct (0-0-0-0): size 54 (cls: Destruct>Function>/Script/CoreUObject)
 	OnActivated (0-0-0-0): size 54 (cls: OnActivated>Function>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	NewStoreState (0-0-0-0): size 40 (cls: NewStoreState>EnumProperty>/Script/CoreUObject)
-	OnStoreStateChanged_CustomEvent (0-0-0-0): size 68 (cls: OnStoreStateChanged_CustomEvent>Function>/Script/CoreUObject)
+	OnStoreStateChanged (0-0-0-0): size 68 (cls: OnStoreStateChanged>Function>/Script/CoreUObject)
+	Construct (0-0-0-0): size 54 (cls: Construct>Function>/Script/CoreUObject)
 	inCurrentCard (0-0-0-0): size 36 (cls: inCurrentCard>ObjectProperty>/Script/CoreUObject)
 	AddCardToSummary (0-0-0-0): size 1026 (cls: AddCardToSummary>Function>/Script/CoreUObject)
 	newCardArray (0-0-0-0): size 36 (cls: newCardArray>ObjectProperty>/Script/CoreUObject)
@@ -1164,16 +1162,16 @@ Serialized exports:
 	Get_CardCount_SizeBox_ToolTipWidget (0-0-0-0): size 177 (cls: Get_CardCount_SizeBox_ToolTipWidget>Function>/Script/CoreUObject)
 	BlockInput (0-0-0-0): size 43 (cls: BlockInput>Function>/Script/CoreUObject)
 	AllowInput (0-0-0-0): size 43 (cls: AllowInput>Function>/Script/CoreUObject)
-	Init (0-0-0-0): size 133 (cls: Init>Function>/Script/CoreUObject)
+	Init (0-0-0-0): size 144 (cls: Init>Function>/Script/CoreUObject)
 	OpenAll (0-0-0-0): size 34 (cls: OpenAll>BoolProperty>/Script/CoreUObject)
-	Handle Pack Open State (0-0-0-0): size 296 (cls: Handle Pack Open State>Function>/Script/CoreUObject)
+	Handle Pack Open State (0-0-0-0): size 474 (cls: Handle Pack Open State>Function>/Script/CoreUObject)
 	CallFunc_GetEndTime_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetEndTime_ReturnValue>FloatProperty>/Script/CoreUObject)
 	Handle CardEnter State (0-0-0-0): size 170 (cls: Handle CardEnter State>Function>/Script/CoreUObject)
 	Handle CardExit State (0-0-0-0): size 53 (cls: Handle CardExit State>Function>/Script/CoreUObject)
 	CallFunc_PlayAnimation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlayAnimation_ReturnValue>ObjectProperty>/Script/CoreUObject)
-	Handle PackDestroy State (0-0-0-0): size 136 (cls: Handle PackDestroy State>Function>/Script/CoreUObject)
-	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject)
-	Handle SummaryAdd State (0-0-0-0): size 839 (cls: Handle SummaryAdd State>Function>/Script/CoreUObject)
+	FinishDestroyPack (0-0-0-0): size 136 (cls: FinishDestroyPack>Function>/Script/CoreUObject)
+	CallFunc_GetOwningPlayer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetOwningPlayer_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	Handle SummaryAdd State (0-0-0-0): size 991 (cls: Handle SummaryAdd State>Function>/Script/CoreUObject)
 	Handle Summary State (0-0-0-0): size 533 (cls: Handle Summary State>Function>/Script/CoreUObject)
 	CallFunc_InvertCardArray_MultiplePacks_outStoreCardArray (0-0-0-0): size 36 (cls: CallFunc_InvertCardArray_MultiplePacks_outStoreCardArray>ObjectProperty>/Script/CoreUObject)
 	CallFunc_InvertCardArray_MultiplePacks_outStoreCardArray (0-0-0-0): size 36 (cls: CallFunc_InvertCardArray_MultiplePacks_outStoreCardArray>ArrayProperty>/Script/CoreUObject)
@@ -1245,16 +1243,20 @@ Serialized exports:
 	CallFunc_EqualEqual_ByteByte_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_ByteByte_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsAnimationPlaying_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsAnimationPlaying_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_UnopenedPacksExist_outUnopenedPacksExist (0-0-0-0): size 34 (cls: CallFunc_UnopenedPacksExist_outUnopenedPacksExist>BoolProperty>/Script/CoreUObject)
-	K2Node_CustomEvent_bUsingGamepad (0-0-0-0): size 34 (cls: K2Node_CustomEvent_bUsingGamepad>BoolProperty>/Script/CoreUObject)
+	K2Node_Event_bUsingGamepad (0-0-0-0): size 34 (cls: K2Node_Event_bUsingGamepad>BoolProperty>/Script/CoreUObject)
 	K2Node_SwitchEnum_CmpSuccess (0-0-0-0): size 34 (cls: K2Node_SwitchEnum_CmpSuccess>BoolProperty>/Script/CoreUObject)
+	CallFunc_IsOpeningDirectPack_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsOpeningDirectPack_ReturnValue>BoolProperty>/Script/CoreUObject)
+	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
 	CallFunc_Greater_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Greater_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
 	CallFunc_BooleanOR_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_BooleanOR_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_CardAddedToSummaryComplete_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_CardAddedToSummaryComplete_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_GetCard_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_GetCard_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Greater_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Greater_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_IsOpeningDirectPack_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsOpeningDirectPack_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_UnopenedPacksExist_outUnopenedPacksExist (0-0-0-0): size 34 (cls: CallFunc_UnopenedPacksExist_outUnopenedPacksExist>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
+	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
 	CallFunc_Less_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Greater_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Greater_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Greater_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Greater_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
@@ -1343,6 +1345,11 @@ Serialized exports:
 			Padding(StructProperty)=System.Byte[] 
 			Parent(ObjectProperty)=RarityBorder=WidgetArchetype 
 			Content(ObjectProperty)=DetailsContainerSlotWidget=WidgetArchetype 
+	BorderSlot_0 (0-0-0-0): size 243 (cls: BorderSlot_0>BorderSlot>/Script/UMG):
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			Parent(ObjectProperty)=CommonBorderHeading=WidgetArchetype 
+			Content(ObjectProperty)=CommonTextBlock_2=WidgetArchetype 
 	BorderSlot_0 (0-0-0-0): size 185 (cls: BorderSlot_0>BorderSlot>/Script/UMG):
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
@@ -1423,6 +1430,12 @@ Serialized exports:
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
+	UnderlyingType (0-0-0-0): size 36 (cls: UnderlyingType>ByteProperty>/Script/CoreUObject)
 	ActionWidgetSelectPrompt (0-0-0-0): size 160 (cls: ActionWidgetSelectPrompt>CommonActionWidget>/Script/CommonUI):
 		Tag array:
 			InputActionDataRow(StructProperty)=System.Byte[] 
@@ -1486,6 +1499,12 @@ Serialized exports:
 			Style(ObjectProperty)=Border-ItemInfo-Header_C=/Game/UI/Foundation/Border/Border-ItemInfo-Header 
 			Padding(StructProperty)=System.Byte[] 
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			bIsVariable(BoolProperty)=True 
+	CommonBorderHeading (0-0-0-0): size 281 (cls: CommonBorderHeading>CommonBorder>/Script/CommonUI):
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=VerticalBoxSlot_2=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
 	HighRarityBorder (0-0-0-0): size 554 (cls: HighRarityBorder>CommonBorder>/Script/CommonUI):
 		Tag array:
@@ -1679,15 +1698,23 @@ Serialized exports:
 			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	ItemDisplayName (0-0-0-0): size 428 (cls: ItemDisplayName>CommonTextBlock>/Script/CommonUI):
+	ItemDisplayName (0-0-0-0): size 399 (cls: ItemDisplayName>CommonTextBlock>/Script/CommonUI):
 		Tag array:
-			Style(ObjectProperty)=TextStyle-Header-M_C=/Game/UI/Foundation/Text/TextStyle-Header-M 
+			Style(ObjectProperty)=TextStyle-Header-S_C=/Game/UI/Foundation/Text/TextStyle-Header-S 
 			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
 			Text(TextProperty)={ItemName} (C07A45474B5FAAE811D5138A157F0AE9) 
 			Font(StructProperty)=System.Byte[] 
 			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			bIsVariable(BoolProperty)=True 
 			Clipping(EnumProperty)=EWidgetClipping::ClipToBounds 
+	TagListTextBlock (0-0-0-0): size 386 (cls: TagListTextBlock>CommonTextBlock>/Script/CommonUI):
+		Tag array:
+			Style(ObjectProperty)=TextStyle-Base-XS-70pc_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-70pc 
+			ScrollStyle(ObjectProperty)=TextScrollStyle-Base_C=/Game/UI/Foundation/Text/TextScrollStyle-Base 
+			Text(TextProperty)={TagList} (27190C0F496E1AB26CD837B0E5935376) 
+			Font(StructProperty)=System.Byte[] 
+			ShadowOffset(StructProperty)=Vector2D(0,0) 
+			bIsVariable(BoolProperty)=True 
 	RarityTextBlock (0-0-0-0): size 418 (cls: RarityTextBlock>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B 
@@ -1733,13 +1760,14 @@ Serialized exports:
 			ShadowOffset(StructProperty)=Vector2D(0,0) 
 			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	CommonTextBlock_1 (0-0-0-0): size 336 (cls: CommonTextBlock_1>CommonTextBlock>/Script/CommonUI):
+	CommonTextBlock_2 (0-0-0-0): size 487 (cls: CommonTextBlock_2>CommonTextBlock>/Script/CommonUI):
 		Tag array:
-			Style(ObjectProperty)=TextStyle-Header-S_C=/Game/UI/Foundation/Text/TextStyle-Header-S 
-			Text(TextProperty)=Hero Abilities (E3400865442370E38E6F6B9A1EDF8886) 
+			Style(ObjectProperty)=TextStyle-Base-XS-B-40pc_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B-40pc 
+			Text(TextProperty)=HERO ABILITIES (BB183C394FB31DEA08C90A9E5F18156B) 
+			ColorAndOpacity(StructProperty)=System.Byte[] 
 			Font(StructProperty)=System.Byte[] 
 			ShadowOffset(StructProperty)=Vector2D(0,0) 
-			Slot(ObjectProperty)=HorizontalBoxSlot_2=WidgetArchetype 
+			Slot(ObjectProperty)=BorderSlot_0=WidgetArchetype 
 	EmptyText (0-0-0-0): size 463 (cls: EmptyText>CommonTextBlock>/Script/CommonUI):
 		Tag array:
 			Style(ObjectProperty)=TextStyle-Base-XS-B_C=/Game/UI/Foundation/Text/TextStyle-Base-XS-B 
@@ -1807,6 +1835,12 @@ Serialized exports:
 	K2Node_CreateDelegate_OutputDelegate (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate>DelegateProperty>/Script/CoreUObject)
 	K2Node_CreateDelegate_OutputDelegate1 (0-0-0-0): size 36 (cls: K2Node_CreateDelegate_OutputDelegate1>DelegateProperty>/Script/CoreUObject)
 	K2Node_CustomEvent_NewStoreState (0-0-0-0): size 40 (cls: K2Node_CustomEvent_NewStoreState>EnumProperty>/Script/CoreUObject)
+	K2Node_Select_Default (0-0-0-0): size 40 (cls: K2Node_Select_Default>EnumProperty>/Script/CoreUObject)
+	Temp_byte_Variable (0-0-0-0): size 40 (cls: Temp_byte_Variable>EnumProperty>/Script/CoreUObject)
+	Temp_byte_Variable1 (0-0-0-0): size 40 (cls: Temp_byte_Variable1>EnumProperty>/Script/CoreUObject)
+	K2Node_Select_Default (0-0-0-0): size 40 (cls: K2Node_Select_Default>EnumProperty>/Script/CoreUObject)
+	Temp_byte_Variable (0-0-0-0): size 40 (cls: Temp_byte_Variable>EnumProperty>/Script/CoreUObject)
+	Temp_byte_Variable1 (0-0-0-0): size 40 (cls: Temp_byte_Variable1>EnumProperty>/Script/CoreUObject)
 	StoreState (0-0-0-0): size 40 (cls: StoreState>EnumProperty>/Script/CoreUObject)
 	CallFunc_GetCurrentInputType_ReturnValue (0-0-0-0): size 40 (cls: CallFunc_GetCurrentInputType_ReturnValue>EnumProperty>/Script/CoreUObject)
 	K2Node_Select_Default (0-0-0-0): size 40 (cls: K2Node_Select_Default>EnumProperty>/Script/CoreUObject)
@@ -1910,13 +1944,15 @@ Serialized exports:
 	PulseCardCount_Ani (0-0-0-0): size 36 (cls: PulseCardCount_Ani>ObjectProperty>/Script/CoreUObject)
 	CallFunc_PlayAnimation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlayAnimation_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	StartCardPulse (0-0-0-0): size 81 (cls: StartCardPulse>Function>/Script/CoreUObject)
-	HeroLoadoutActiveAbilitiesDetailWidget (0-0-0-0): size 270 (cls: HeroLoadoutActiveAbilitiesDetailWidget>HeroLoadoutActiveAbilitiesDetailWidget_C>/Game/UI/Foundation/Items/Details/HeroLoadoutActiveAbilitiesDetailWidget):
+	HeroLoadoutActiveAbilitiesDetailWidget (0-0-0-0): size 328 (cls: HeroLoadoutActiveAbilitiesDetailWidget>HeroLoadoutActiveAbilitiesDetailWidget_C>/Game/UI/Foundation/Items/Details/HeroLoadoutActiveAbilitiesDetailWidget):
 		Tag array:
 			ColumnContainer(ObjectProperty)=ColumnContainer=WidgetArchetype 
+			CommonBorderHeading(ObjectProperty)=CommonBorderHeading=WidgetArchetype 
 			HorizontalLayoutBox(ObjectProperty)=HorizontalLayoutBox=WidgetArchetype 
 			LayoutSwitcher(ObjectProperty)=LayoutSwitcher=WidgetArchetype 
 			RootBox(ObjectProperty)=RootBox=WidgetArchetype 
 			RowContainer(ObjectProperty)=RowContainer=WidgetArchetype 
+			SizeBoxHorizontalLayout(ObjectProperty)=SizeBoxHorizontalLayout=WidgetArchetype 
 			VerticalLayoutBox(ObjectProperty)=VerticalLayoutBox=WidgetArchetype 
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
@@ -1953,6 +1989,10 @@ Serialized exports:
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=OverlaySlot_2=WidgetArchetype 
+	HorizontalBox_0 (0-0-0-0): size 86 (cls: HorizontalBox_0>HorizontalBox>/Script/UMG):
+		Tag array:
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 	HorizontalBox_3 (0-0-0-0): size 94 (cls: HorizontalBox_3>HorizontalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -1993,10 +2033,10 @@ Serialized exports:
 		Tag array:
 			Slot(ObjectProperty)=HorizontalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	HorizontalLayoutBox (0-0-0-0): size 112 (cls: HorizontalLayoutBox>HorizontalBox>/Script/UMG):
+	HorizontalLayoutBox (0-0-0-0): size 108 (cls: HorizontalLayoutBox>HorizontalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
-			Slot(ObjectProperty)=WidgetSwitcherSlot_1=WidgetArchetype 
+			Slot(ObjectProperty)=SizeBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
 	HorizontalBox_0 (0-0-0-0): size 86 (cls: HorizontalBox_0>HorizontalBox>/Script/UMG):
 		Tag array:
@@ -2128,6 +2168,17 @@ Serialized exports:
 			VerticalAlignment(ByteProperty)=VAlign_Center 
 			Parent(ObjectProperty)=EvolutionAndTierBox=WidgetArchetype 
 			Content(ObjectProperty)=EvolveIndicator=WidgetArchetype 
+	HorizontalBoxSlot_0 (0-0-0-0): size 111 (cls: HorizontalBoxSlot_0>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
+			Content(ObjectProperty)=ItemDetailsHeaderTagListText=WidgetArchetype 
+	HorizontalBoxSlot_1 (0-0-0-0): size 197 (cls: HorizontalBoxSlot_1>HorizontalBoxSlot>/Script/UMG):
+		Tag array:
+			Padding(StructProperty)=System.Byte[] 
+			VerticalAlignment(ByteProperty)=VAlign_Center 
+			Parent(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
+			Content(ObjectProperty)=ItemDetailsHeaderKeywordsListText=WidgetArchetype 
 	HorizontalBoxSlot_1 (0-0-0-0): size 152 (cls: HorizontalBoxSlot_1>HorizontalBoxSlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Center 
@@ -2204,7 +2255,7 @@ Serialized exports:
 		Tag array:
 			Size(StructProperty)=System.Byte[] 
 			Parent(ObjectProperty)=TagListBox=WidgetArchetype 
-			Content(ObjectProperty)=ItemDetailsHeaderTagListText=WidgetArchetype 
+			Content(ObjectProperty)=HorizontalBox_0=WidgetArchetype 
 	HorizontalBoxSlot_1 (0-0-0-0): size 152 (cls: HorizontalBoxSlot_1>HorizontalBoxSlot>/Script/UMG):
 		Tag array:
 			HorizontalAlignment(ByteProperty)=HAlign_Center 
@@ -2233,17 +2284,11 @@ Serialized exports:
 			VerticalAlignment(ByteProperty)=VAlign_Center 
 			Parent(ObjectProperty)=UpgradeAndLevelBox=WidgetArchetype 
 			Content(ObjectProperty)=UpgradeIndicator=WidgetArchetype 
-	HorizontalBoxSlot_0 (0-0-0-0): size 209 (cls: HorizontalBoxSlot_0>HorizontalBoxSlot>/Script/UMG):
+	HorizontalBoxSlot_0 (0-0-0-0): size 111 (cls: HorizontalBoxSlot_0>HorizontalBoxSlot>/Script/UMG):
 		Tag array:
-			Size(StructProperty)=System.Byte[] 
 			HorizontalAlignment(ByteProperty)=HAlign_Right 
 			Parent(ObjectProperty)=HorizontalLayoutBox=WidgetArchetype 
 			Content(ObjectProperty)=ColumnContainer=WidgetArchetype 
-	HorizontalBoxSlot_2 (0-0-0-0): size 111 (cls: HorizontalBoxSlot_2>HorizontalBoxSlot>/Script/UMG):
-		Tag array:
-			VerticalAlignment(ByteProperty)=VAlign_Center 
-			Parent(ObjectProperty)=HorizontalLayoutBox=WidgetArchetype 
-			Content(ObjectProperty)=CommonTextBlock_1=WidgetArchetype 
 	HorizontalBoxSlot_0 (0-0-0-0): size 238 (cls: HorizontalBoxSlot_0>HorizontalBoxSlot>/Script/UMG):
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
@@ -2478,7 +2523,7 @@ Serialized exports:
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=VerticalBoxSlot_3=WidgetArchetype 
-	HeaderWidget (0-0-0-0): size 919 (cls: HeaderWidget>ItemDetailsHeader_C>/Game/UI/Foundation/Items/Details/ItemDetailsHeader):
+	HeaderWidget (0-0-0-0): size 948 (cls: HeaderWidget>ItemDetailsHeader_C>/Game/UI/Foundation/Items/Details/ItemDetailsHeader):
 		Tag array:
 			AmmoLoadedText(ObjectProperty)=AmmoLoadedText=WidgetArchetype 
 			CategoryIndicator(ObjectProperty)=CategoryIndicator=WidgetArchetype 
@@ -2489,6 +2534,7 @@ Serialized exports:
 			IconSpacer(ObjectProperty)=IconSpacer=WidgetArchetype 
 			IconSpacerTertiary(ObjectProperty)=IconSpacerTertiary=WidgetArchetype 
 			ItemDetailsHeaderItemDisplayText(ObjectProperty)=ItemDetailsHeaderItemDisplayText=WidgetArchetype 
+			ItemDetailsHeaderKeywordsListText(ObjectProperty)=ItemDetailsHeaderKeywordsListText=WidgetArchetype 
 			ItemDetailsHeaderRarityTypeText(ObjectProperty)=ItemDetailsHeaderRarityTypeText=WidgetArchetype 
 			ItemDetailsHeaderTagListText(ObjectProperty)=ItemDetailsHeaderTagListText=WidgetArchetype 
 			ItemDetailsStackCounter(ObjectProperty)=ItemDetailsStackCounter=WidgetArchetype 
@@ -2513,6 +2559,12 @@ Serialized exports:
 			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
 			bCookedWidgetTree(BoolProperty)=True 
 			Slot(ObjectProperty)=VerticalBoxSlot_3=WidgetArchetype 
+	ItemDetailsHeaderKeywordsListText (0-0-0-0): size 125 (cls: ItemDetailsHeaderKeywordsListText>ItemDetailsHeaderKeywordsListText_C>/Game/UI/Foundation/Items/Details/ItemDetailsHeaderKeywordsListText):
+		Tag array:
+			TagListTextBlock(ObjectProperty)=TagListTextBlock=WidgetArchetype 
+			WidgetTree(ObjectProperty)=WidgetTree_0=WidgetArchetype 
+			bCookedWidgetTree(BoolProperty)=True 
+			Slot(ObjectProperty)=HorizontalBoxSlot_1=WidgetArchetype 
 	ItemDetailsHeaderRarityTypeText (0-0-0-0): size 154 (cls: ItemDetailsHeaderRarityTypeText>ItemDetailsHeaderRarityTypeText_C>/Game/UI/Foundation/Items/Details/ItemDetailsHeaderRarityTypeText):
 		Tag array:
 			RarityTextBlock(ObjectProperty)=RarityTextBlock=WidgetArchetype 
@@ -2885,6 +2937,7 @@ Serialized exports:
 	CallFunc_Create_Basic_Tooltip_Output (0-0-0-0): size 36 (cls: CallFunc_Create_Basic_Tooltip_Output>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetOwningPlayer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetOwningPlayer_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_PlayAnimation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlayAnimation_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_PlayAnimation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlayAnimation_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_PlayAnimation_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_PlayAnimation_ReturnValue1>ObjectProperty>/Script/CoreUObject)
 	CallFunc_PlayAnimation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlayAnimation_ReturnValue>ObjectProperty>/Script/CoreUObject)
@@ -2892,8 +2945,9 @@ Serialized exports:
 	CallFunc_PlayAnimation_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_PlayAnimation_ReturnValue2>ObjectProperty>/Script/CoreUObject)
 	CallFunc_Create_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_Create_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetChildAt_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetChildAt_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetContext_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetContext_ReturnValue1 (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue1>ObjectProperty>/Script/CoreUObject)
-	CallFunc_GetOwningPlayer_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetOwningPlayer_ReturnValue>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetContext_ReturnValue2 (0-0-0-0): size 36 (cls: CallFunc_GetContext_ReturnValue2>ObjectProperty>/Script/CoreUObject)
 	CallFunc_PlayAnimation_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_PlayAnimation_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsStore_Item_Card (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsStore_Item_Card>ObjectProperty>/Script/CoreUObject)
 	HBoxLStickPlus (0-0-0-0): size 36 (cls: HBoxLStickPlus>ObjectProperty>/Script/CoreUObject)
@@ -3504,6 +3558,12 @@ Serialized exports:
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			bIsVariable(BoolProperty)=True 
+	SizeBoxHorizontalLayout (0-0-0-0): size 137 (cls: SizeBoxHorizontalLayout>SizeBox>/Script/UMG):
+		Tag array:
+			WidthOverride(FloatProperty)=512 
+			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
+			Slot(ObjectProperty)=WidgetSwitcherSlot_1=WidgetArchetype 
+			bIsVariable(BoolProperty)=True 
 	SizeBox_2 (0-0-0-0): size 53 (cls: SizeBox_2>SizeBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
@@ -3612,6 +3672,11 @@ Serialized exports:
 		Tag array:
 			Parent(ObjectProperty)=RootBox=WidgetArchetype 
 			Content(ObjectProperty)=LayoutSwitcher=WidgetArchetype 
+	SizeBoxSlot_0 (0-0-0-0): size 111 (cls: SizeBoxSlot_0>SizeBoxSlot>/Script/UMG):
+		Tag array:
+			HorizontalAlignment(ByteProperty)=HAlign_Right 
+			Parent(ObjectProperty)=SizeBoxHorizontalLayout=WidgetArchetype 
+			Content(ObjectProperty)=HorizontalLayoutBox=WidgetArchetype 
 	SizeBoxSlot_1 (0-0-0-0): size 243 (cls: SizeBoxSlot_1>SizeBoxSlot>/Script/UMG):
 		Tag array:
 			Padding(StructProperty)=System.Byte[] 
@@ -3771,7 +3836,7 @@ Serialized exports:
 		Tag array:
 			Slot(ObjectProperty)=VerticalBoxSlot_0=WidgetArchetype 
 			bIsVariable(BoolProperty)=True 
-	VerticalLayoutBox (0-0-0-0): size 108 (cls: VerticalLayoutBox>VerticalBox>/Script/UMG):
+	VerticalLayoutBox (0-0-0-0): size 112 (cls: VerticalLayoutBox>VerticalBox>/Script/UMG):
 		Tag array:
 			Slots(ArrayProperty)=[object] (inner: ObjectProperty)
 			Slot(ObjectProperty)=WidgetSwitcherSlot_0=WidgetArchetype 
@@ -3890,6 +3955,10 @@ Serialized exports:
 		Tag array:
 			Parent(ObjectProperty)=VerticalLayoutBox=WidgetArchetype 
 			Content(ObjectProperty)=RowContainer=WidgetArchetype 
+	VerticalBoxSlot_2 (0-0-0-0): size 70 (cls: VerticalBoxSlot_2>VerticalBoxSlot>/Script/UMG):
+		Tag array:
+			Parent(ObjectProperty)=VerticalLayoutBox=WidgetArchetype 
+			Content(ObjectProperty)=CommonBorderHeading=WidgetArchetype 
 	VerticalBoxSlot_2 (0-0-0-0): size 70 (cls: VerticalBoxSlot_2>VerticalBoxSlot>/Script/UMG):
 		Tag array:
 			Parent(ObjectProperty)=VerticalBox_0=WidgetArchetype 
@@ -4104,9 +4173,6 @@ Serialized exports:
 			bLegacyFinishOnStop(BoolProperty)=False 
 			PrecompiledEvaluationTemplate(StructProperty)=System.Byte[] 
 			Signature(StructProperty)=Guid: 399853523-1238240520-241841548-3652007929 
-	WidgetAnimationDelegateBinding_0 (0-0-0-0): size 246 (cls: WidgetAnimationDelegateBinding_0>WidgetAnimationDelegateBinding>/Script/UMG):
-		Tag array:
-			WidgetAnimationDelegateBindings(ArrayProperty)=[object] (inner: StructProperty)
 	WidgetNavigation_0 (0-0-0-0): size 600 (cls: WidgetNavigation_0>WidgetNavigation>/Script/UMG):
 		Tag array:
 			Up(StructProperty)=System.Byte[] 
@@ -4163,7 +4229,7 @@ Serialized exports:
 	WidgetSwitcherSlot_1 (0-0-0-0): size 70 (cls: WidgetSwitcherSlot_1>WidgetSwitcherSlot>/Script/UMG):
 		Tag array:
 			Parent(ObjectProperty)=LayoutSwitcher=WidgetArchetype 
-			Content(ObjectProperty)=HorizontalLayoutBox=WidgetArchetype 
+			Content(ObjectProperty)=SizeBoxHorizontalLayout=WidgetArchetype 
 	WidgetSwitcherSlot_0 (0-0-0-0): size 70 (cls: WidgetSwitcherSlot_0>WidgetSwitcherSlot>/Script/UMG):
 		Tag array:
 			Parent(ObjectProperty)=PerkTierSwitcher=WidgetArchetype 
@@ -4211,6 +4277,9 @@ Serialized exports:
 	WidgetTree_0 (0-0-0-0): size 41 (cls: WidgetTree_0>WidgetTree>/Script/UMG):
 		Tag array:
 			RootWidget(ObjectProperty)=ItemDisplayName=WidgetArchetype 
+	WidgetTree_0 (0-0-0-0): size 41 (cls: WidgetTree_0>WidgetTree>/Script/UMG):
+		Tag array:
+			RootWidget(ObjectProperty)=TagListTextBlock=WidgetArchetype 
 	WidgetTree_0 (0-0-0-0): size 41 (cls: WidgetTree_0>WidgetTree>/Script/UMG):
 		Tag array:
 			RootWidget(ObjectProperty)=HorizontalBox_0=WidgetArchetype 

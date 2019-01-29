@@ -27,6 +27,7 @@ Name table:
 	Add_IntInt
 	AllNodes
 	ApplyGlobalEnvironmentGameplayEffectToActor
+	Array_Clear
 	Array_Get
 	Array_Length
 	ArrayIndex
@@ -59,6 +60,7 @@ Name table:
 	BooleanAND
 	BoolProperty
 	Bounciness
+	BP_FindItemInstancesFromDefinition
 	BreakHitResult
 	BreakRotator
 	bRenderCustomDepth
@@ -69,11 +71,14 @@ Name table:
 	ByteProperty
 	CallFunc_Add_FloatFloat_ReturnValue
 	CallFunc_Add_IntInt_ReturnValue
+	CallFunc_Add_IntInt_ReturnValue1
 	CallFunc_ApplyGlobalEnvironmentGameplayEffectToActor_ReturnValue
 	CallFunc_ApplyGlobalEnvironmentGameplayEffectToActor_ReturnValue1
 	CallFunc_Array_Get_Item
+	CallFunc_Array_Get_Item1
 	CallFunc_Array_Length_ReturnValue
 	CallFunc_Array_Length_ReturnValue1
+	CallFunc_Array_Length_ReturnValue2
 	CallFunc_BeginDeferredActorSpawnFromClass_ReturnValue
 	CallFunc_BooleanAND_ReturnValue
 	CallFunc_BreakHitResult_bBlockingHit
@@ -118,6 +123,8 @@ Name table:
 	CallFunc_GetController_ReturnValue
 	CallFunc_GetInstigator_ReturnValue
 	CallFunc_GetInstigator_ReturnValue1
+	CallFunc_GetNumInStack_ReturnValue
+	CallFunc_GetQuestManager_ReturnValue
 	CallFunc_GetUpVector_ReturnValue
 	CallFunc_GetValueAtLevel_ReturnValue
 	CallFunc_Greater_FloatFloat_ReturnValue
@@ -131,13 +138,16 @@ Name table:
 	CallFunc_IsDedicatedServer_ReturnValue
 	CallFunc_IsValid_ReturnValue
 	CallFunc_K2_GetActorRotation_ReturnValue
-	CallFunc_K2_GetItemQuantityOnPlayer_ReturnValue
+	CallFunc_K2_RemoveFortItemFromPlayer_ReturnValue
 	CallFunc_K2_RemoveItemFromPlayer_ReturnValue
 	CallFunc_Less_IntInt_ReturnValue
+	CallFunc_Less_IntInt_ReturnValue1
 	CallFunc_MakeRotator_ReturnValue
 	CallFunc_MakeTransform_ReturnValue
 	CallFunc_Not_PreBool_ReturnValue
 	CallFunc_NotEqual_ObjectObject_ReturnValue
+	CallFunc_SendComplexCustomStatEvent_QuestActive
+	CallFunc_SendComplexCustomStatEvent_QuestCompleted
 	CallFunc_ShouldApplySnowman__ReturnValue
 	CallFunc_ShouldApplySnowman__ReturnValue1
 	CallFunc_ShouldApplySnowman__ReturnValue2
@@ -229,10 +239,13 @@ Name table:
 	FortCollisionAudioComponent
 	FortCollisionAudioTriggerData
 	FortGameplayEffectDeliveryActor
+	FortItem
 	FortKismetLibrary
+	FortPC
 	FortPlayerController
 	FortPlayerPawn
 	FortProjectileBase
+	FortQuestManager
 	FortScalableFloatUtils
 	FortWeaponRangedItemDefinition
 	FortWorldItemDefinition
@@ -240,6 +253,7 @@ Name table:
 	Function
 	FX_Trail
 	FX_Trail_GEN_VARIABLE
+	Gameplay.Athena.Quests.UseSneakySnowman
 	GameplayAbilityTargetDataHandle
 	GameplayEffect
 	GameplayEffectContextHandle
@@ -254,6 +268,8 @@ Name table:
 	GetAllPassengers
 	GetController
 	GetInstigator
+	GetNumInStack
+	GetQuestManager
 	GetUpVector
 	GetValueAtLevel
 	Greater_FloatFloat
@@ -280,7 +296,7 @@ Name table:
 	IsValid
 	K2_DestroyActor
 	K2_GetActorRotation
-	K2_GetItemQuantityOnPlayer
+	K2_RemoveFortItemFromPlayer
 	K2_RemoveItemFromPlayer
 	K2Node_DynamicCast_AsFort_Athena_Vehicle
 	K2Node_DynamicCast_AsFort_Player_Controller
@@ -325,6 +341,7 @@ Name table:
 	OptionalObject2
 	OtherActor
 	OtherComp
+	OverlapCheck_GEN_VARIABLE
 	P_SneakySnowman_Prj_Trail
 	P_SneakySnowman_Spawn
 	Package
@@ -368,6 +385,7 @@ Name table:
 	SceneComponent
 	ScriptStruct
 	SCS_Node
+	SendComplexCustomStatEvent
 	SendGameplayEventToActor
 	SetCollisionSoundAtIndex
 	SetHiddenInGame
@@ -384,6 +402,7 @@ Name table:
 	SkeletalMeshComponent
 	SneakySnowman_Spawn_Cue
 	SnowmanItemDef
+	SnowmanItemInstances
 	SnowmanSpawnFX
 	Soldier_Grenade_VertDirOffset
 	Sound
@@ -399,13 +418,16 @@ Name table:
 	TargetTags
 	Temp_bool_Variable
 	Temp_int_Array_Index_Variable
+	Temp_int_Array_Index_Variable1
 	Temp_int_Loop_Counter_Variable
+	Temp_int_Loop_Counter_Variable1
 	Template
 	Toy_Snowball_Impact_Cue
 	Toy_Snowball_InAirLoop_Cue
 	Transform
 	UberGraphFrame
 	UberGraphFunction
+	UpdateQuest
 	UserConstructionScript
 	Value
 	VariableGuid
@@ -420,7 +442,7 @@ Name table:
 	Z
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	B_Prj_Athena_SneakySnowman_C (0-0-0-0): size 364 (cls: B_Prj_Athena_SneakySnowman_C>BlueprintGeneratedClass>/Script/Engine):
+	B_Prj_Athena_SneakySnowman_C (0-0-0-0): size 384 (cls: B_Prj_Athena_SneakySnowman_C>BlueprintGeneratedClass>/Script/Engine):
 		Tag array:
 			bHasCookedComponentInstancingData(BoolProperty)=True 
 			SimpleConstructionScript(ObjectProperty)=SimpleConstructionScript_309=B_Prj_Athena_SneakySnowman_C 
@@ -446,7 +468,7 @@ Serialized exports:
 			RootComponent(ObjectProperty)=CollisionCapsule0=Default__B_Prj_Athena_SneakySnowman_C 
 	SK_Sneaky_Snowman_Throw (0-0-0-0): size 36 (cls: SK_Sneaky_Snowman_Throw>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_B_Prj_Athena_SneakySnowman (0-0-0-0): size 3494 (cls: ExecuteUbergraph_B_Prj_Athena_SneakySnowman>Function>/Script/CoreUObject)
+	ExecuteUbergraph_B_Prj_Athena_SneakySnowman (0-0-0-0): size 3877 (cls: ExecuteUbergraph_B_Prj_Athena_SneakySnowman>Function>/Script/CoreUObject)
 	CallFunc_GetAllPassengers_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetAllPassengers_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetAllPassengers_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetAllPassengers_ReturnValue>ArrayProperty>/Script/CoreUObject)
 	K2Node_Event_HitActors (0-0-0-0): size 36 (cls: K2Node_Event_HitActors>ObjectProperty>/Script/CoreUObject)
@@ -461,6 +483,8 @@ Serialized exports:
 	HitActors (0-0-0-0): size 36 (cls: HitActors>ArrayProperty>/Script/CoreUObject)
 	HitResults (0-0-0-0): size 36 (cls: HitResults>StructProperty>/Script/CoreUObject)
 	HitResults (0-0-0-0): size 36 (cls: HitResults>ArrayProperty>/Script/CoreUObject)
+	SnowmanItemInstances (0-0-0-0): size 36 (cls: SnowmanItemInstances>ObjectProperty>/Script/CoreUObject)
+	SnowmanItemInstances (0-0-0-0): size 36 (cls: SnowmanItemInstances>ArrayProperty>/Script/CoreUObject)
 	Audio_InAir_GEN_VARIABLE (0-0-0-0): size 41 (cls: Audio_InAir_GEN_VARIABLE>AudioComponent>/Script/Engine):
 		Tag array:
 			Sound(ObjectProperty)=Toy_Snowball_InAirLoop_Cue=/Game/Athena/Sounds/Toys/Toy_Snowball_InAirLoop_Cue 
@@ -479,6 +503,7 @@ Serialized exports:
 	CallFunc_IsDedicatedServer_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsDedicatedServer_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Less_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_Less_IntInt_ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_ShouldApplySnowman__ReturnValue (0-0-0-0): size 34 (cls: CallFunc_ShouldApplySnowman__ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_ShouldApplySnowman__ReturnValue1 (0-0-0-0): size 34 (cls: CallFunc_ShouldApplySnowman__ReturnValue1>BoolProperty>/Script/CoreUObject)
 	CallFunc_ShouldApplySnowman__ReturnValue2 (0-0-0-0): size 34 (cls: CallFunc_ShouldApplySnowman__ReturnValue2>BoolProperty>/Script/CoreUObject)
@@ -507,6 +532,11 @@ Serialized exports:
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	ReturnValue (0-0-0-0): size 34 (cls: ReturnValue>BoolProperty>/Script/CoreUObject)
 	Temp_bool_Variable (0-0-0-0): size 34 (cls: Temp_bool_Variable>BoolProperty>/Script/CoreUObject)
+	FortPC (0-0-0-0): size 36 (cls: FortPC>ObjectProperty>/Script/CoreUObject)
+	UpdateQuest (0-0-0-0): size 212 (cls: UpdateQuest>Function>/Script/CoreUObject)
+	CallFunc_HasAuthority_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_HasAuthority_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_SendComplexCustomStatEvent_QuestActive (0-0-0-0): size 34 (cls: CallFunc_SendComplexCustomStatEvent_QuestActive>BoolProperty>/Script/CoreUObject)
+	CallFunc_SendComplexCustomStatEvent_QuestCompleted (0-0-0-0): size 34 (cls: CallFunc_SendComplexCustomStatEvent_QuestCompleted>BoolProperty>/Script/CoreUObject)
 	CollisionCapsule0 (0-0-0-0): size 891 (cls: CollisionCapsule0>CapsuleComponent>/Script/Engine):
 		Tag array:
 			CapsuleHalfHeight(FloatProperty)=12 
@@ -532,21 +562,27 @@ Serialized exports:
 	CallFunc_HasMatchingGameplayTag_self_CastInput (0-0-0-0): size 36 (cls: CallFunc_HasMatchingGameplayTag_self_CastInput>InterfaceProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsGameplay_Tag_Asset_Interface (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsGameplay_Tag_Asset_Interface>InterfaceProperty>/Script/CoreUObject)
 	CallFunc_Add_IntInt_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue>IntProperty>/Script/CoreUObject)
+	CallFunc_Add_IntInt_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue1>IntProperty>/Script/CoreUObject)
 	CallFunc_Array_Length_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Array_Length_ReturnValue>IntProperty>/Script/CoreUObject)
 	CallFunc_Array_Length_ReturnValue1 (0-0-0-0): size 32 (cls: CallFunc_Array_Length_ReturnValue1>IntProperty>/Script/CoreUObject)
+	CallFunc_Array_Length_ReturnValue2 (0-0-0-0): size 32 (cls: CallFunc_Array_Length_ReturnValue2>IntProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_FaceIndex (0-0-0-0): size 32 (cls: CallFunc_BreakHitResult_FaceIndex>IntProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_FaceIndex1 (0-0-0-0): size 32 (cls: CallFunc_BreakHitResult_FaceIndex1>IntProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_HitItem (0-0-0-0): size 32 (cls: CallFunc_BreakHitResult_HitItem>IntProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_HitItem1 (0-0-0-0): size 32 (cls: CallFunc_BreakHitResult_HitItem1>IntProperty>/Script/CoreUObject)
-	CallFunc_K2_GetItemQuantityOnPlayer_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_K2_GetItemQuantityOnPlayer_ReturnValue>IntProperty>/Script/CoreUObject)
+	CallFunc_GetNumInStack_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetNumInStack_ReturnValue>IntProperty>/Script/CoreUObject)
+	CallFunc_K2_RemoveFortItemFromPlayer_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_K2_RemoveFortItemFromPlayer_ReturnValue>IntProperty>/Script/CoreUObject)
 	CallFunc_K2_RemoveItemFromPlayer_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_K2_RemoveItemFromPlayer_ReturnValue>IntProperty>/Script/CoreUObject)
 	Temp_int_Array_Index_Variable (0-0-0-0): size 32 (cls: Temp_int_Array_Index_Variable>IntProperty>/Script/CoreUObject)
+	Temp_int_Array_Index_Variable1 (0-0-0-0): size 32 (cls: Temp_int_Array_Index_Variable1>IntProperty>/Script/CoreUObject)
 	Temp_int_Loop_Counter_Variable (0-0-0-0): size 32 (cls: Temp_int_Loop_Counter_Variable>IntProperty>/Script/CoreUObject)
+	Temp_int_Loop_Counter_Variable1 (0-0-0-0): size 32 (cls: Temp_int_Loop_Counter_Variable1>IntProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_HitBoneName (0-0-0-0): size 32 (cls: CallFunc_BreakHitResult_HitBoneName>NameProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_HitBoneName1 (0-0-0-0): size 32 (cls: CallFunc_BreakHitResult_HitBoneName1>NameProperty>/Script/CoreUObject)
 	Audio_InAir (0-0-0-0): size 36 (cls: Audio_InAir>ObjectProperty>/Script/CoreUObject)
 	Cue_HitPlayer (0-0-0-0): size 36 (cls: Cue_HitPlayer>ObjectProperty>/Script/CoreUObject)
 	CallFunc_Array_Get_Item (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item>ObjectProperty>/Script/CoreUObject)
+	CallFunc_Array_Get_Item1 (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item1>ObjectProperty>/Script/CoreUObject)
 	CallFunc_BeginDeferredActorSpawnFromClass_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_BeginDeferredActorSpawnFromClass_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_HitActor (0-0-0-0): size 36 (cls: CallFunc_BreakHitResult_HitActor>ObjectProperty>/Script/CoreUObject)
 	CallFunc_BreakHitResult_HitActor1 (0-0-0-0): size 36 (cls: CallFunc_BreakHitResult_HitActor1>ObjectProperty>/Script/CoreUObject)
@@ -575,6 +611,7 @@ Serialized exports:
 	SnowmanItemDef (0-0-0-0): size 36 (cls: SnowmanItemDef>ObjectProperty>/Script/CoreUObject)
 	SnowmanSpawnFX (0-0-0-0): size 36 (cls: SnowmanSpawnFX>ObjectProperty>/Script/CoreUObject)
 	SoundOnExplo (0-0-0-0): size 36 (cls: SoundOnExplo>ObjectProperty>/Script/CoreUObject)
+	CallFunc_GetQuestManager_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetQuestManager_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	FX_Trail_GEN_VARIABLE (0-0-0-0): size 176 (cls: FX_Trail_GEN_VARIABLE>ParticleSystemComponent>/Script/Engine):
 		Tag array:
 			Template(ObjectProperty)=P_SneakySnowman_Prj_Trail=/Game/Athena/Items/Consumables/SneakySnowman/FX/P_SneakySnowman_Prj_Trail 

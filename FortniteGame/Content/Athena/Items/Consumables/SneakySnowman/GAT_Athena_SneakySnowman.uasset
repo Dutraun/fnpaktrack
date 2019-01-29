@@ -17,6 +17,7 @@ Name table:
 	ActiveGameplayEffectHandle
 	Actor
 	Add_IntInt
+	Array_Clear
 	Array_Get
 	Array_Length
 	ArrayProperty
@@ -27,6 +28,7 @@ Name table:
 	BlueprintGeneratedClass
 	BoolProperty
 	BP_ApplyGameplayEffectToTarget
+	BP_FindItemInstancesFromDefinition
 	BP_RemoveGameplayEffectFromOwnerWithGrantedTags
 	ByteProperty
 	CallFunc_AbilityTargetDataFromActor_ReturnValue
@@ -38,9 +40,10 @@ Name table:
 	CallFunc_GetActorInfo_ReturnValue
 	CallFunc_GetAttachedActors_OutActors
 	CallFunc_GetController_ReturnValue
+	CallFunc_GetNumInStack_ReturnValue
 	CallFunc_IsValid_ReturnValue
 	CallFunc_K2_CommitAbility_ReturnValue
-	CallFunc_K2_GetItemQuantityOnPlayer_ReturnValue
+	CallFunc_K2_RemoveFortItemFromPlayer_ReturnValue
 	CallFunc_K2_RemoveItemFromPlayer_ReturnValue
 	CallFunc_Less_IntInt_ReturnValue
 	Class
@@ -67,6 +70,7 @@ Name table:
 	EqualEqual_IntInt
 	ExecuteUbergraph_GAT_Athena_SneakySnowman
 	ForceNetUpdate
+	FortItem
 	FortKismetLibrary
 	FortPlayerController
 	FortPlayerPawn
@@ -85,13 +89,14 @@ Name table:
 	GetActorInfo
 	GetAttachedActors
 	GetController
+	GetNumInStack
 	IntProperty
 	IsValid
 	K2_ActivateAbility
 	K2_CommitAbility
 	K2_DestroyActor
 	K2_EndAbility
-	K2_GetItemQuantityOnPlayer
+	K2_RemoveFortItemFromPlayer
 	K2_RemoveItemFromPlayer
 	K2Node_DynamicCast_AsAthena_Player_Sneaky_Snowman
 	K2Node_DynamicCast_AsFort_Player_Controller
@@ -111,11 +116,12 @@ Name table:
 	PlayerPawn
 	PointerToUberGraphFrame
 	Remove Snowman
-	RemoveItemIfNoCharges
+	Scene_GEN_VARIABLE
 	SceneComponent
 	ScriptStruct
 	SM_SneakySnowman_GEN_VARIABLE
 	SnowmanItemDef
+	SnowmanItemInstances
 	StaticMeshComponent
 	StructProperty
 	TagName
@@ -129,7 +135,7 @@ Name table:
 	WeakObjectProperty
 Serialized exports:
 	UberGraphFrame (0-0-0-0): size 36 (cls: UberGraphFrame>StructProperty>/Script/CoreUObject)
-	GAT_Athena_SneakySnowman_C (0-0-0-0): size 181 (cls: GAT_Athena_SneakySnowman_C>BlueprintGeneratedClass>/Script/Engine):
+	GAT_Athena_SneakySnowman_C (0-0-0-0): size 169 (cls: GAT_Athena_SneakySnowman_C>BlueprintGeneratedClass>/Script/Engine):
 		Tag array:
 			UberGraphFunction(ObjectProperty)=ExecuteUbergraph_GAT_Athena_SneakySnowman=GAT_Athena_SneakySnowman_C 
 	Default__GAT_Athena_SneakySnowman_C (0-0-0-0): size 409 (cls: Default__GAT_Athena_SneakySnowman_C>GAT_Athena_SneakySnowman_C):
@@ -140,7 +146,7 @@ Serialized exports:
 			AbilityTriggers(ArrayProperty)=[object] (inner: StructProperty)
 	PlayerPawn (0-0-0-0): size 36 (cls: PlayerPawn>ObjectProperty>/Script/CoreUObject)
 	EntryPoint (0-0-0-0): size 32 (cls: EntryPoint>IntProperty>/Script/CoreUObject)
-	ExecuteUbergraph_GAT_Athena_SneakySnowman (0-0-0-0): size 655 (cls: ExecuteUbergraph_GAT_Athena_SneakySnowman>Function>/Script/CoreUObject)
+	ExecuteUbergraph_GAT_Athena_SneakySnowman (0-0-0-0): size 1011 (cls: ExecuteUbergraph_GAT_Athena_SneakySnowman>Function>/Script/CoreUObject)
 	CallFunc_BP_ApplyGameplayEffectToTarget_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_BP_ApplyGameplayEffectToTarget_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_BP_ApplyGameplayEffectToTarget_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_BP_ApplyGameplayEffectToTarget_ReturnValue>ArrayProperty>/Script/CoreUObject)
 	K2_ActivateAbility (0-0-0-0): size 54 (cls: K2_ActivateAbility>Function>/Script/CoreUObject)
@@ -148,33 +154,34 @@ Serialized exports:
 	Remove Snowman (0-0-0-0): size 470 (cls: Remove Snowman>Function>/Script/CoreUObject)
 	CallFunc_GetAttachedActors_OutActors (0-0-0-0): size 36 (cls: CallFunc_GetAttachedActors_OutActors>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetAttachedActors_OutActors (0-0-0-0): size 36 (cls: CallFunc_GetAttachedActors_OutActors>ArrayProperty>/Script/CoreUObject)
+	SnowmanItemInstances (0-0-0-0): size 36 (cls: SnowmanItemInstances>ObjectProperty>/Script/CoreUObject)
+	SnowmanItemInstances (0-0-0-0): size 36 (cls: SnowmanItemInstances>ArrayProperty>/Script/CoreUObject)
 	CallFunc_EqualEqual_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_K2_CommitAbility_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_K2_CommitAbility_ReturnValue>BoolProperty>/Script/CoreUObject)
+	CallFunc_Less_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess1 (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess1>BoolProperty>/Script/CoreUObject)
 	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
 	CallFunc_Less_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_Less_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
-	CallFunc_IsValid_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_IsValid_ReturnValue>BoolProperty>/Script/CoreUObject)
-	RemoveItemIfNoCharges (0-0-0-0): size 303 (cls: RemoveItemIfNoCharges>Function>/Script/CoreUObject)
-	CallFunc_EqualEqual_IntInt_ReturnValue (0-0-0-0): size 34 (cls: CallFunc_EqualEqual_IntInt_ReturnValue>BoolProperty>/Script/CoreUObject)
-	K2Node_DynamicCast_bSuccess (0-0-0-0): size 34 (cls: K2Node_DynamicCast_bSuccess>BoolProperty>/Script/CoreUObject)
-	CallFunc_K2_GetItemQuantityOnPlayer_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_K2_GetItemQuantityOnPlayer_ReturnValue>IntProperty>/Script/CoreUObject)
+	CallFunc_Add_IntInt_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue>IntProperty>/Script/CoreUObject)
+	CallFunc_Array_Length_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Array_Length_ReturnValue>IntProperty>/Script/CoreUObject)
+	CallFunc_GetNumInStack_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_GetNumInStack_ReturnValue>IntProperty>/Script/CoreUObject)
+	CallFunc_K2_RemoveFortItemFromPlayer_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_K2_RemoveFortItemFromPlayer_ReturnValue>IntProperty>/Script/CoreUObject)
 	CallFunc_K2_RemoveItemFromPlayer_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_K2_RemoveItemFromPlayer_ReturnValue>IntProperty>/Script/CoreUObject)
+	Temp_int_Array_Index_Variable (0-0-0-0): size 32 (cls: Temp_int_Array_Index_Variable>IntProperty>/Script/CoreUObject)
+	Temp_int_Loop_Counter_Variable (0-0-0-0): size 32 (cls: Temp_int_Loop_Counter_Variable>IntProperty>/Script/CoreUObject)
 	CallFunc_Add_IntInt_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Add_IntInt_ReturnValue>IntProperty>/Script/CoreUObject)
 	CallFunc_Array_Length_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_Array_Length_ReturnValue>IntProperty>/Script/CoreUObject)
 	Temp_int_Array_Index_Variable (0-0-0-0): size 32 (cls: Temp_int_Array_Index_Variable>IntProperty>/Script/CoreUObject)
 	Temp_int_Loop_Counter_Variable (0-0-0-0): size 32 (cls: Temp_int_Loop_Counter_Variable>IntProperty>/Script/CoreUObject)
-	CallFunc_K2_GetItemQuantityOnPlayer_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_K2_GetItemQuantityOnPlayer_ReturnValue>IntProperty>/Script/CoreUObject)
-	CallFunc_K2_RemoveItemFromPlayer_ReturnValue (0-0-0-0): size 32 (cls: CallFunc_K2_RemoveItemFromPlayer_ReturnValue>IntProperty>/Script/CoreUObject)
+	CallFunc_Array_Get_Item (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item>ObjectProperty>/Script/CoreUObject)
 	CallFunc_GetController_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetController_ReturnValue>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Player_Controller (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Player_Controller>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsFort_Player_Pawn (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Player_Pawn>ObjectProperty>/Script/CoreUObject)
 	CallFunc_Array_Get_Item (0-0-0-0): size 36 (cls: CallFunc_Array_Get_Item>ObjectProperty>/Script/CoreUObject)
 	K2Node_DynamicCast_AsAthena_Player_Sneaky_Snowman (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsAthena_Player_Sneaky_Snowman>ObjectProperty>/Script/CoreUObject)
-	CallFunc_GetController_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetController_ReturnValue>ObjectProperty>/Script/CoreUObject)
-	K2Node_DynamicCast_AsFort_Player_Controller (0-0-0-0): size 36 (cls: K2Node_DynamicCast_AsFort_Player_Controller>ObjectProperty>/Script/CoreUObject)
 	SnowmanItemDef (0-0-0-0): size 36 (cls: SnowmanItemDef>ObjectProperty>/Script/CoreUObject)
 	CallFunc_AbilityTargetDataFromActor_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_AbilityTargetDataFromActor_ReturnValue>StructProperty>/Script/CoreUObject)
 	CallFunc_GetActorInfo_ReturnValue (0-0-0-0): size 36 (cls: CallFunc_GetActorInfo_ReturnValue>StructProperty>/Script/CoreUObject)
